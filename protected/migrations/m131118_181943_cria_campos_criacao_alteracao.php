@@ -66,8 +66,8 @@ class m131118_181943_cria_campos_criacao_alteracao extends CDbMigration
 		Yii::app()->db->createCommand('alter table tblbaseremota add alteracao TIMESTAMP WITHOUT TIME ZONE')->execute();
 		Yii::app()->db->createCommand('alter table tbltipotitulo add alteracao TIMESTAMP WITHOUT TIME ZONE')->execute();
 		Yii::app()->db->createCommand('alter table tblcontacontabil add alteracao TIMESTAMP WITHOUT TIME ZONE')->execute();
-		Yii::app()->db->createCommand('alter table tblauditoriaexcecao add alteracao TIMESTAMP WITHOUT TIME ZONE')->execute();
-		Yii::app()->db->createCommand('alter table tblauditoria add alteracao TIMESTAMP WITHOUT TIME ZONE')->execute();
+		//Yii::app()->db->createCommand('alter table tblauditoriaexcecao add alteracao TIMESTAMP WITHOUT TIME ZONE')->execute();
+		//Yii::app()->db->createCommand('alter table tblauditoria add alteracao TIMESTAMP WITHOUT TIME ZONE')->execute();
 		Yii::app()->db->createCommand('alter table tblsubgrupoproduto add alteracao TIMESTAMP WITHOUT TIME ZONE')->execute();
 		Yii::app()->db->createCommand('alter table tblprodutohistoricopreco add alteracao TIMESTAMP WITHOUT TIME ZONE')->execute();
 	
@@ -134,8 +134,8 @@ class m131118_181943_cria_campos_criacao_alteracao extends CDbMigration
 		Yii::app()->db->createCommand('alter table tblbaseremota add codusuarioalteracao BIGINT')->execute();
 		Yii::app()->db->createCommand('alter table tbltipotitulo add codusuarioalteracao BIGINT')->execute();
 		Yii::app()->db->createCommand('alter table tblcontacontabil add codusuarioalteracao BIGINT')->execute();
-		Yii::app()->db->createCommand('alter table tblauditoriaexcecao add codusuarioalteracao BIGINT')->execute();
-		Yii::app()->db->createCommand('alter table tblauditoria add codusuarioalteracao BIGINT')->execute();
+		//Yii::app()->db->createCommand('alter table tblauditoriaexcecao add codusuarioalteracao BIGINT')->execute();
+		//Yii::app()->db->createCommand('alter table tblauditoria add codusuarioalteracao BIGINT')->execute();
 		Yii::app()->db->createCommand('alter table tblsubgrupoproduto add codusuarioalteracao BIGINT')->execute();
 		Yii::app()->db->createCommand('alter table tblprodutohistoricopreco add codusuarioalteracao BIGINT')->execute();
 		
@@ -202,8 +202,8 @@ class m131118_181943_cria_campos_criacao_alteracao extends CDbMigration
 		Yii::app()->db->createCommand('alter table tblbaseremota add foreign key (codusuarioalteracao) references tblusuario (codusuario)')->execute();
 		Yii::app()->db->createCommand('alter table tbltipotitulo add foreign key (codusuarioalteracao) references tblusuario (codusuario)')->execute();
 		Yii::app()->db->createCommand('alter table tblcontacontabil add foreign key (codusuarioalteracao) references tblusuario (codusuario)')->execute();
-		Yii::app()->db->createCommand('alter table tblauditoriaexcecao add foreign key (codusuarioalteracao) references tblusuario (codusuario)')->execute();
-		Yii::app()->db->createCommand('alter table tblauditoria add foreign key (codusuarioalteracao) references tblusuario (codusuario)')->execute();
+		//Yii::app()->db->createCommand('alter table tblauditoriaexcecao add foreign key (codusuarioalteracao) references tblusuario (codusuario)')->execute();
+		//Yii::app()->db->createCommand('alter table tblauditoria add foreign key (codusuarioalteracao) references tblusuario (codusuario)')->execute();
 		Yii::app()->db->createCommand('alter table tblsubgrupoproduto add foreign key (codusuarioalteracao) references tblusuario (codusuario)')->execute();
 		Yii::app()->db->createCommand('alter table tblprodutohistoricopreco add foreign key (codusuarioalteracao) references tblusuario (codusuario)')->execute();
 
@@ -270,8 +270,8 @@ class m131118_181943_cria_campos_criacao_alteracao extends CDbMigration
 		Yii::app()->db->createCommand('alter table tblbaseremota add criacao TIMESTAMP WITHOUT TIME ZONE')->execute();
 		Yii::app()->db->createCommand('alter table tbltipotitulo add criacao TIMESTAMP WITHOUT TIME ZONE')->execute();
 		Yii::app()->db->createCommand('alter table tblcontacontabil add criacao TIMESTAMP WITHOUT TIME ZONE')->execute();
-		Yii::app()->db->createCommand('alter table tblauditoriaexcecao add criacao TIMESTAMP WITHOUT TIME ZONE')->execute();
-		Yii::app()->db->createCommand('alter table tblauditoria add criacao TIMESTAMP WITHOUT TIME ZONE')->execute();
+		//Yii::app()->db->createCommand('alter table tblauditoriaexcecao add criacao TIMESTAMP WITHOUT TIME ZONE')->execute();
+		//Yii::app()->db->createCommand('alter table tblauditoria add criacao TIMESTAMP WITHOUT TIME ZONE')->execute();
 		Yii::app()->db->createCommand('alter table tblsubgrupoproduto add criacao TIMESTAMP WITHOUT TIME ZONE')->execute();
 		Yii::app()->db->createCommand('alter table tblprodutohistoricopreco add criacao TIMESTAMP WITHOUT TIME ZONE')->execute();
 
@@ -338,8 +338,8 @@ class m131118_181943_cria_campos_criacao_alteracao extends CDbMigration
 		Yii::app()->db->createCommand('alter table tblbaseremota add codusuariocriacao BIGINT')->execute();
 		Yii::app()->db->createCommand('alter table tbltipotitulo add codusuariocriacao BIGINT')->execute();
 		Yii::app()->db->createCommand('alter table tblcontacontabil add codusuariocriacao BIGINT')->execute();
-		Yii::app()->db->createCommand('alter table tblauditoriaexcecao add codusuariocriacao BIGINT')->execute();
-		Yii::app()->db->createCommand('alter table tblauditoria add codusuariocriacao BIGINT')->execute();
+		//Yii::app()->db->createCommand('alter table tblauditoriaexcecao add codusuariocriacao BIGINT')->execute();
+		//Yii::app()->db->createCommand('alter table tblauditoria add codusuariocriacao BIGINT')->execute();
 		Yii::app()->db->createCommand('alter table tblsubgrupoproduto add codusuariocriacao BIGINT')->execute();
 		Yii::app()->db->createCommand('alter table tblprodutohistoricopreco add codusuariocriacao BIGINT')->execute();
 		
@@ -406,8 +406,8 @@ class m131118_181943_cria_campos_criacao_alteracao extends CDbMigration
 		Yii::app()->db->createCommand('alter table tblbaseremota add foreign key (codusuariocriacao) references tblusuario (codusuario)')->execute();
 		Yii::app()->db->createCommand('alter table tbltipotitulo add foreign key (codusuariocriacao) references tblusuario (codusuario)')->execute();
 		Yii::app()->db->createCommand('alter table tblcontacontabil add foreign key (codusuariocriacao) references tblusuario (codusuario)')->execute();
-		Yii::app()->db->createCommand('alter table tblauditoriaexcecao add foreign key (codusuariocriacao) references tblusuario (codusuario)')->execute();
-		Yii::app()->db->createCommand('alter table tblauditoria add foreign key (codusuariocriacao) references tblusuario (codusuario)')->execute();
+		//Yii::app()->db->createCommand('alter table tblauditoriaexcecao add foreign key (codusuariocriacao) references tblusuario (codusuario)')->execute();
+		//Yii::app()->db->createCommand('alter table tblauditoria add foreign key (codusuariocriacao) references tblusuario (codusuario)')->execute();
 		Yii::app()->db->createCommand('alter table tblsubgrupoproduto add foreign key (codusuariocriacao) references tblusuario (codusuario)')->execute();
 		Yii::app()->db->createCommand('alter table tblprodutohistoricopreco add foreign key (codusuariocriacao) references tblusuario (codusuario)')->execute();
 		
@@ -478,8 +478,8 @@ class m131118_181943_cria_campos_criacao_alteracao extends CDbMigration
 		Yii::app()->db->createCommand('alter table tblbaseremota drop column alteracao')->execute();
 		Yii::app()->db->createCommand('alter table tbltipotitulo drop column alteracao')->execute();
 		Yii::app()->db->createCommand('alter table tblcontacontabil drop column alteracao')->execute();
-		Yii::app()->db->createCommand('alter table tblauditoriaexcecao drop column alteracao')->execute();
-		Yii::app()->db->createCommand('alter table tblauditoria drop column alteracao')->execute();
+		//Yii::app()->db->createCommand('alter table tblauditoriaexcecao drop column alteracao')->execute();
+		//Yii::app()->db->createCommand('alter table tblauditoria drop column alteracao')->execute();
 		Yii::app()->db->createCommand('alter table tblsubgrupoproduto drop column alteracao')->execute();
 		Yii::app()->db->createCommand('alter table tblprodutohistoricopreco drop column alteracao')->execute();
 		
@@ -546,8 +546,8 @@ class m131118_181943_cria_campos_criacao_alteracao extends CDbMigration
 		Yii::app()->db->createCommand('alter table tblbaseremota drop column codusuarioalteracao')->execute();
 		Yii::app()->db->createCommand('alter table tbltipotitulo drop column codusuarioalteracao')->execute();
 		Yii::app()->db->createCommand('alter table tblcontacontabil drop column codusuarioalteracao')->execute();
-		Yii::app()->db->createCommand('alter table tblauditoriaexcecao drop column codusuarioalteracao')->execute();
-		Yii::app()->db->createCommand('alter table tblauditoria drop column codusuarioalteracao')->execute();
+		//Yii::app()->db->createCommand('alter table tblauditoriaexcecao drop column codusuarioalteracao')->execute();
+		//Yii::app()->db->createCommand('alter table tblauditoria drop column codusuarioalteracao')->execute();
 		Yii::app()->db->createCommand('alter table tblsubgrupoproduto drop column codusuarioalteracao')->execute();
 		Yii::app()->db->createCommand('alter table tblprodutohistoricopreco drop column codusuarioalteracao')->execute();
 
@@ -614,8 +614,8 @@ class m131118_181943_cria_campos_criacao_alteracao extends CDbMigration
 		Yii::app()->db->createCommand('alter table tblbaseremota drop column criacao')->execute();
 		Yii::app()->db->createCommand('alter table tbltipotitulo drop column criacao')->execute();
 		Yii::app()->db->createCommand('alter table tblcontacontabil drop column criacao')->execute();
-		Yii::app()->db->createCommand('alter table tblauditoriaexcecao drop column criacao')->execute();
-		Yii::app()->db->createCommand('alter table tblauditoria drop column criacao')->execute();
+		//Yii::app()->db->createCommand('alter table tblauditoriaexcecao drop column criacao')->execute();
+		//Yii::app()->db->createCommand('alter table tblauditoria drop column criacao')->execute();
 		Yii::app()->db->createCommand('alter table tblsubgrupoproduto drop column criacao')->execute();
 		Yii::app()->db->createCommand('alter table tblprodutohistoricopreco drop column criacao')->execute();
 		
@@ -682,8 +682,8 @@ class m131118_181943_cria_campos_criacao_alteracao extends CDbMigration
 		Yii::app()->db->createCommand('alter table tblbaseremota drop column codusuariocriacao')->execute();
 		Yii::app()->db->createCommand('alter table tbltipotitulo drop column codusuariocriacao')->execute();
 		Yii::app()->db->createCommand('alter table tblcontacontabil drop column codusuariocriacao')->execute();
-		Yii::app()->db->createCommand('alter table tblauditoriaexcecao drop column codusuariocriacao')->execute();
-		Yii::app()->db->createCommand('alter table tblauditoria drop column codusuariocriacao')->execute();
+		//Yii::app()->db->createCommand('alter table tblauditoriaexcecao drop column codusuariocriacao')->execute();
+		//Yii::app()->db->createCommand('alter table tblauditoria drop column codusuariocriacao')->execute();
 		Yii::app()->db->createCommand('alter table tblsubgrupoproduto drop column codusuariocriacao')->execute();
 		Yii::app()->db->createCommand('alter table tblprodutohistoricopreco drop column codusuariocriacao')->execute();
 		
