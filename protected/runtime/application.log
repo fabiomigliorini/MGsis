@@ -1,0 +1,624 @@
+2013/11/18 13:43:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=gii
+---
+2013/11/18 13:43:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=gii
+---
+2013/11/18 13:43:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/?r=gii
+---
+2013/11/18 13:43:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=gii
+---
+2013/11/18 13:44:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=gii
+---
+2013/11/18 13:44:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=gii
+---
+2013/11/18 13:44:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=gii
+---
+2013/11/18 13:44:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=gii
+---
+2013/11/18 13:44:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=gii
+---
+2013/11/18 13:44:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=gii
+---
+2013/11/18 13:44:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=gii
+---
+2013/11/18 13:44:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=gii
+---
+2013/11/18 13:44:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=gii
+---
+2013/11/18 13:44:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=gii
+---
+2013/11/18 14:37:52 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+).
+2013/11/18 14:37:52 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(471): CDbCommand->createTable('tbl_migration', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(454): MigrateCommand->createMigrationHistoryTable()
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(482): MigrateCommand->getMigrationHistory(-1)
+#4 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(84): MigrateCommand->getNewMigrations()
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#10 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#11 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#12 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#13 {main}
+---
+2013/11/18 14:38:04 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+).
+2013/11/18 14:38:04 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(471): CDbCommand->createTable('tbl_migration', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(454): MigrateCommand->createMigrationHistoryTable()
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(128): MigrateCommand->getMigrationHistory(1)
+#4 [internal function]: MigrateCommand->actionDown(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#9 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#10 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#11 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#12 {main}
+---
+2013/11/18 14:38:05 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+).
+2013/11/18 14:38:05 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(471): CDbCommand->createTable('tbl_migration', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(454): MigrateCommand->createMigrationHistoryTable()
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(128): MigrateCommand->getMigrationHistory(1)
+#4 [internal function]: MigrateCommand->actionDown(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#9 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#10 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#11 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#12 {main}
+---
+2013/11/18 14:38:06 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+).
+2013/11/18 14:38:06 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(471): CDbCommand->createTable('tbl_migration', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(454): MigrateCommand->createMigrationHistoryTable()
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(482): MigrateCommand->getMigrationHistory(-1)
+#4 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(84): MigrateCommand->getNewMigrations()
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#10 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#11 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#12 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#13 {main}
+---
+2013/11/18 14:38:50 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+).
+2013/11/18 14:38:50 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(471): CDbCommand->createTable('tbl_migration', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(454): MigrateCommand->createMigrationHistoryTable()
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(482): MigrateCommand->getMigrationHistory(-1)
+#4 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(84): MigrateCommand->getNewMigrations()
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#10 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#11 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#12 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#13 {main}
+---
+2013/11/18 14:39:16 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+).
+2013/11/18 14:39:16 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(471): CDbCommand->createTable('tbl_migration', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(454): MigrateCommand->createMigrationHistoryTable()
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(310): MigrateCommand->getMigrationHistory(-1)
+#4 [internal function]: MigrateCommand->actionHistory(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#9 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#10 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#11 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#12 {main}
+---
+2013/11/18 14:39:46 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+).
+2013/11/18 14:39:46 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(471): CDbCommand->createTable('tbl_migration', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(454): MigrateCommand->createMigrationHistoryTable()
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(310): MigrateCommand->getMigrationHistory(-1)
+#4 [internal function]: MigrateCommand->actionHistory(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#9 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#10 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#11 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#12 {main}
+---
+2013/11/18 14:39:47 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+).
+2013/11/18 14:39:47 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(471): CDbCommand->createTable('tbl_migration', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(454): MigrateCommand->createMigrationHistoryTable()
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(310): MigrateCommand->getMigrationHistory(-1)
+#4 [internal function]: MigrateCommand->actionHistory(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#9 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#10 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#11 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#12 {main}
+---
+2013/11/18 14:39:48 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+).
+2013/11/18 14:39:48 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(471): CDbCommand->createTable('tbl_migration', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(454): MigrateCommand->createMigrationHistoryTable()
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(310): MigrateCommand->getMigrationHistory(-1)
+#4 [internal function]: MigrateCommand->actionHistory(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#9 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#10 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#11 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#12 {main}
+---
+2013/11/18 14:39:52 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+).
+2013/11/18 14:39:52 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(471): CDbCommand->createTable('tbl_migration', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(454): MigrateCommand->createMigrationHistoryTable()
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(482): MigrateCommand->getMigrationHistory(-1)
+#4 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(84): MigrateCommand->getNewMigrations()
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#10 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#11 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#12 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#13 {main}
+---
+2013/11/18 14:39:58 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+).
+2013/11/18 14:39:58 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(471): CDbCommand->createTable('tbl_migration', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(454): MigrateCommand->createMigrationHistoryTable()
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(128): MigrateCommand->getMigrationHistory(1)
+#4 [internal function]: MigrateCommand->actionDown(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#9 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#10 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#11 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#12 {main}
+---
+2013/11/18 14:43:09 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+).
+2013/11/18 14:43:09 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(471): CDbCommand->createTable('tbl_migration', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(454): MigrateCommand->createMigrationHistoryTable()
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(482): MigrateCommand->getMigrationHistory(-1)
+#4 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(84): MigrateCommand->getNewMigrations()
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#10 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#11 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#12 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#13 {main}
+---
+2013/11/18 14:46:35 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+).
+2013/11/18 14:46:35 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(471): CDbCommand->createTable('tbl_migration', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(454): MigrateCommand->createMigrationHistoryTable()
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(482): MigrateCommand->getMigrationHistory(-1)
+#4 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(84): MigrateCommand->getNewMigrations()
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#10 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#11 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#12 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#13 {main}
+---
+2013/11/18 14:47:04 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+).
+2013/11/18 14:47:04 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(471): CDbCommand->createTable('tbl_migration', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(454): MigrateCommand->createMigrationHistoryTable()
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(482): MigrateCommand->getMigrationHistory(-1)
+#4 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(84): MigrateCommand->getNewMigrations()
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#10 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#11 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#12 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#13 {main}
+---
+2013/11/18 14:47:10 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+).
+2013/11/18 14:47:10 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(471): CDbCommand->createTable('tbl_migration', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(454): MigrateCommand->createMigrationHistoryTable()
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(482): MigrateCommand->getMigrationHistory(-1)
+#4 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(84): MigrateCommand->getNewMigrations()
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#10 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#11 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#12 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#13 {main}
+---
+2013/11/18 14:49:36 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+).
+2013/11/18 14:49:36 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(471): CDbCommand->createTable('tbl_migration', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(454): MigrateCommand->createMigrationHistoryTable()
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(482): MigrateCommand->getMigrationHistory(-1)
+#4 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(84): MigrateCommand->getNewMigrations()
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#10 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#11 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#12 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#13 {main}
+---
+2013/11/18 14:50:10 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+).
+2013/11/18 14:50:10 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(471): CDbCommand->createTable('tbl_migration', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(454): MigrateCommand->createMigrationHistoryTable()
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(128): MigrateCommand->getMigrationHistory(1)
+#4 [internal function]: MigrateCommand->actionDown(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#9 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#10 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#11 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#12 {main}
+---
+2013/11/18 14:50:44 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+).
+2013/11/18 14:50:44 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(471): CDbCommand->createTable('tbl_migration', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(454): MigrateCommand->createMigrationHistoryTable()
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(482): MigrateCommand->getMigrationHistory(-1)
+#4 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(84): MigrateCommand->getNewMigrations()
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#10 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#11 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#12 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#13 {main}
+---
+2013/11/18 14:51:04 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+).
+2013/11/18 14:51:04 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(471): CDbCommand->createTable('tbl_migration', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(454): MigrateCommand->createMigrationHistoryTable()
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(482): MigrateCommand->getMigrationHistory(-1)
+#4 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(84): MigrateCommand->getNewMigrations()
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#10 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#11 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#12 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#13 {main}
+---
+2013/11/18 14:51:30 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+).
+2013/11/18 14:51:30 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(471): CDbCommand->createTable('tbl_migration', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(454): MigrateCommand->createMigrationHistoryTable()
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(482): MigrateCommand->getMigrationHistory(-1)
+#4 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(84): MigrateCommand->getNewMigrations()
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#10 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#11 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#12 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#13 {main}
+---
+2013/11/18 14:51:38 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+).
+2013/11/18 14:51:38 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(471): CDbCommand->createTable('tbl_migration', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(454): MigrateCommand->createMigrationHistoryTable()
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(482): MigrateCommand->getMigrationHistory(-1)
+#4 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(84): MigrateCommand->getNewMigrations()
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#10 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#11 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#12 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#13 {main}
+---
+2013/11/18 14:55:40 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42703]: Undefined column: 7 ERROR:  column "alteracao" of relation "tblfilial" does not exist. The SQL statement executed was: alter table tblfilial drop column alteracao.
+2013/11/18 14:55:40 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42703]: Undefined column: 7 ERROR:  column "alteracao" of relation "tblfilial" does not exist. The SQL statement executed was: alter table tblfilial drop column alteracao' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/MGsis/protected/migrations/m131118_181943_cria_campos_criacao_alteracao.php(420): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(410): m131118_181943_cria_campos_criacao_alteracao->down()
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(145): MigrateCommand->migrateDown('m131118_181943_...')
+#3 [internal function]: MigrateCommand->actionDown(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#8 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#9 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#10 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#11 {main}
+---
