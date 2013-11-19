@@ -30,5 +30,9 @@ $this->menu=array(
 		'codpessoa',
 		'impressoratelanegocio',
 		'codportador',
+		'alteracao',
+		'codusuarioalteracao',
+		'criacao',
+		'codusuariocriacao',
 	),
 )); ?>

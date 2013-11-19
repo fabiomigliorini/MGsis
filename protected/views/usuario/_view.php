@@ -42,6 +42,22 @@
 	<?php echo CHtml::encode($data->codportador); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('alteracao')); ?>:</b>
+	<?php echo CHtml::encode($data->alteracao); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('codusuarioalteracao')); ?>:</b>
+	<?php echo CHtml::encode($data->codusuarioalteracao); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('criacao')); ?>:</b>
+	<?php echo CHtml::encode($data->criacao); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('codusuariocriacao')); ?>:</b>
+	<?php echo CHtml::encode($data->codusuariocriacao); ?>
+	<br />
+
 	*/ ?>
 
 </div>

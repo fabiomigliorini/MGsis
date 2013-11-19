@@ -622,3 +622,1738 @@ Stack trace:
 #10 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
 #11 {main}
 ---
+2013/11/18 17:05:46 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ..., "usuario"='Chicago - OLD', "senha"='', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=:yp9, "codusuarioalteracao"=:yp10, "criacao"=:yp11, "codusuariocriacao"=:yp12 WHERE "mgsis"."tblusuario"."codusuario"='1'.
+in /var/www/MGsis/protected/controllers/UsuarioController.php (97)
+in /var/www/MGsis/index.php (13)
+2013/11/18 17:05:46 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ..., "usuario"='Chicago - OLD', "senha"='', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=:yp9, "codusuarioalteracao"=:yp10, "criacao"=:yp11, "codusuariocriacao"=:yp12 WHERE "mgsis"."tblusuario"."codusuario"='1'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1748): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1124): CActiveRecord->updateByPk(1, Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->update(NULL)
+#3 /var/www/MGsis/protected/controllers/UsuarioController.php(97): CActiveRecord->save()
+#4 [internal function]: UsuarioController->actionUpdate('1')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php/usuario/update/1
+HTTP_REFERER=http://localhost/MGsis/index.php/usuario/update/1
+---
+2013/11/18 17:06:18 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ..., "usuario"='Chicago - OLD', "senha"='', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=:yp9, "codusuarioalteracao"=:yp10, "criacao"=:yp11, "codusuariocriacao"=:yp12 WHERE "mgsis"."tblusuario"."codusuario"='1'.
+in /var/www/MGsis/protected/controllers/UsuarioController.php (97)
+in /var/www/MGsis/index.php (13)
+2013/11/18 17:06:18 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ..., "usuario"='Chicago - OLD', "senha"='', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=:yp9, "codusuarioalteracao"=:yp10, "criacao"=:yp11, "codusuariocriacao"=:yp12 WHERE "mgsis"."tblusuario"."codusuario"='1'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1748): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1124): CActiveRecord->updateByPk(1, Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->update(NULL)
+#3 /var/www/MGsis/protected/controllers/UsuarioController.php(97): CActiveRecord->save()
+#4 [internal function]: UsuarioController->actionUpdate('1')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php/usuario/update/1
+HTTP_REFERER=http://localhost/MGsis/index.php/usuario/update/1
+---
+2013/11/18 17:07:45 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...o"='1', "usuario"='Chicago', "senha"='', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=:yp9, "codusuarioalteracao"=:yp10, "criacao"=:yp11, "codusuariocriacao"=:yp12 WHERE "mgsis"."tblusuario"."codusuario"='1'.
+in /var/www/MGsis/protected/controllers/UsuarioController.php (97)
+in /var/www/MGsis/index.php (13)
+2013/11/18 17:07:45 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...o"='1', "usuario"='Chicago', "senha"='', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=:yp9, "codusuarioalteracao"=:yp10, "criacao"=:yp11, "codusuariocriacao"=:yp12 WHERE "mgsis"."tblusuario"."codusuario"='1'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1748): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1124): CActiveRecord->updateByPk(1, Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->update(NULL)
+#3 /var/www/MGsis/protected/controllers/UsuarioController.php(97): CActiveRecord->save()
+#4 [internal function]: UsuarioController->actionUpdate('1')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php/usuario/update/1
+HTTP_REFERER=http://localhost/MGsis/index.php/usuario/update/1
+---
+2013/11/18 17:08:03 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...o"='1', "usuario"='Chicago', "senha"='', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=:yp9, "codusuarioalteracao"=:yp10, "criacao"=:yp11, "codusuariocriacao"=:yp12 WHERE "mgsis"."tblusuario"."codusuario"='1'.
+in /var/www/MGsis/protected/controllers/UsuarioController.php (97)
+in /var/www/MGsis/index.php (13)
+2013/11/18 17:08:03 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...o"='1', "usuario"='Chicago', "senha"='', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=:yp9, "codusuarioalteracao"=:yp10, "criacao"=:yp11, "codusuariocriacao"=:yp12 WHERE "mgsis"."tblusuario"."codusuario"='1'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1748): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1124): CActiveRecord->updateByPk(1, Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->update(NULL)
+#3 /var/www/MGsis/protected/controllers/UsuarioController.php(97): CActiveRecord->save()
+#4 [internal function]: UsuarioController->actionUpdate('1')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php/usuario/update/1
+HTTP_REFERER=http://localhost/MGsis/index.php/usuario/update/1
+---
+2013/11/18 17:09:30 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...o"='1', "usuario"='Chicago', "senha"='', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=:yp9, "codusuarioalteracao"=:yp10, "criacao"=:yp11, "codusuariocriacao"=:yp12 WHERE "mgsis"."tblusuario"."codusuario"='1'.
+in /var/www/MGsis/protected/controllers/UsuarioController.php (97)
+in /var/www/MGsis/index.php (13)
+2013/11/18 17:09:30 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...o"='1', "usuario"='Chicago', "senha"='', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=:yp9, "codusuarioalteracao"=:yp10, "criacao"=:yp11, "codusuariocriacao"=:yp12 WHERE "mgsis"."tblusuario"."codusuario"='1'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1748): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1124): CActiveRecord->updateByPk(1, Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->update(NULL)
+#3 /var/www/MGsis/protected/controllers/UsuarioController.php(97): CActiveRecord->save()
+#4 [internal function]: UsuarioController->actionUpdate('1')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php/usuario/update/1
+HTTP_REFERER=http://localhost/MGsis/index.php/usuario/update/1
+---
+2013/11/18 17:10:02 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...o"='1', "usuario"='Chicago', "senha"='', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=:yp9, "codusuarioalteracao"=:yp10, "criacao"=:yp11, "codusuariocriacao"=:yp12 WHERE "mgsis"."tblusuario"."codusuario"='1'.
+in /var/www/MGsis/protected/controllers/UsuarioController.php (97)
+in /var/www/MGsis/index.php (13)
+2013/11/18 17:10:02 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...o"='1', "usuario"='Chicago', "senha"='', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=:yp9, "codusuarioalteracao"=:yp10, "criacao"=:yp11, "codusuariocriacao"=:yp12 WHERE "mgsis"."tblusuario"."codusuario"='1'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1748): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1124): CActiveRecord->updateByPk(1, Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->update(NULL)
+#3 /var/www/MGsis/protected/controllers/UsuarioController.php(97): CActiveRecord->save()
+#4 [internal function]: UsuarioController->actionUpdate('1')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php/usuario/update/1
+HTTP_REFERER=http://localhost/MGsis/index.php/usuario/update/1
+---
+2013/11/18 17:10:58 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[22007]: Invalid datetime format: 7 ERROR:  invalid input syntax for type timestamp: "1384809058"
+LINE 1: ...egocio"='LPT1:', "codportador"='100', "alteracao"='138480905...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=:yp9, "codusuarioalteracao"=:yp10, "criacao"=:yp11, "codusuariocriacao"=:yp12 WHERE "mgsis"."tblusuario"."codusuario"='1'.
+in /var/www/MGsis/protected/controllers/UsuarioController.php (97)
+in /var/www/MGsis/index.php (13)
+2013/11/18 17:10:58 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[22007]: Invalid datetime format: 7 ERROR:  invalid input syntax for type timestamp: "1384809058"
+LINE 1: ...egocio"='LPT1:', "codportador"='100', "alteracao"='138480905...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=:yp9, "codusuarioalteracao"=:yp10, "criacao"=:yp11, "codusuariocriacao"=:yp12 WHERE "mgsis"."tblusuario"."codusuario"='1'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1748): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1124): CActiveRecord->updateByPk(1, Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->update(NULL)
+#3 /var/www/MGsis/protected/controllers/UsuarioController.php(97): CActiveRecord->save()
+#4 [internal function]: UsuarioController->actionUpdate('1')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php/usuario/update/1
+HTTP_REFERER=http://localhost/MGsis/index.php/usuario/update/1
+---
+2013/11/18 17:18:44 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ..."='1', "usuario"='Chicago0', "senha"='', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=:yp9, "codusuarioalteracao"=:yp10, "criacao"=null, "codusuariocriacao"=:yp11 WHERE "mgsis"."tblusuario"."codusuario"='1'.
+in /var/www/MGsis/protected/controllers/UsuarioController.php (97)
+in /var/www/MGsis/index.php (13)
+2013/11/18 17:18:44 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ..."='1', "usuario"='Chicago0', "senha"='', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=:yp9, "codusuarioalteracao"=:yp10, "criacao"=null, "codusuariocriacao"=:yp11 WHERE "mgsis"."tblusuario"."codusuario"='1'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1748): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1124): CActiveRecord->updateByPk(1, Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->update(NULL)
+#3 /var/www/MGsis/protected/controllers/UsuarioController.php(97): CActiveRecord->save()
+#4 [internal function]: UsuarioController->actionUpdate('1')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php/usuario/update/1
+HTTP_REFERER=http://localhost/MGsis/index.php/usuario/update/1
+---
+2013/11/18 17:18:55 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[22007]: Invalid datetime format: 7 ERROR:  invalid input syntax for type timestamp: "1384809535"
+LINE 1: ...egocio"='LPT1:', "codportador"='100', "alteracao"='138480953...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=:yp9, "codusuarioalteracao"=:yp10, "criacao"=null, "codusuariocriacao"=:yp11 WHERE "mgsis"."tblusuario"."codusuario"='1'.
+in /var/www/MGsis/protected/controllers/UsuarioController.php (97)
+in /var/www/MGsis/index.php (13)
+2013/11/18 17:18:55 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[22007]: Invalid datetime format: 7 ERROR:  invalid input syntax for type timestamp: "1384809535"
+LINE 1: ...egocio"='LPT1:', "codportador"='100', "alteracao"='138480953...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=:yp9, "codusuarioalteracao"=:yp10, "criacao"=null, "codusuariocriacao"=:yp11 WHERE "mgsis"."tblusuario"."codusuario"='1'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1748): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1124): CActiveRecord->updateByPk(1, Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->update(NULL)
+#3 /var/www/MGsis/protected/controllers/UsuarioController.php(97): CActiveRecord->save()
+#4 [internal function]: UsuarioController->actionUpdate('1')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php/usuario/update/1
+HTTP_REFERER=http://localhost/MGsis/index.php/usuario/update/1
+---
+2013/11/18 17:20:07 [error] [php] Invalid argument supplied for foreach() (/var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:297)
+Stack trace:
+#0 /var/www/MGsis/protected/controllers/UsuarioController.php(155): model()
+#1 /var/www/MGsis/protected/controllers/UsuarioController.php(89): UsuarioController->loadModel()
+#2 unknown(0): UsuarioController->actionUpdate()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): UsuarioController->runAction()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): UsuarioController->filterAccessControl()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): UsuarioController->runActionWithFilters()
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): UsuarioController->run()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#15 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php/usuario/update/1
+in /var/www/MGsis/protected/models/Usuario.php (411)
+in /var/www/MGsis/protected/controllers/UsuarioController.php (155)
+in /var/www/MGsis/protected/controllers/UsuarioController.php (89)
+2013/11/18 17:20:29 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "admin"
+LINE 1: ..."='100', "alteracao"=now(), "codusuarioalteracao"='admin', "...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=now(), "codusuarioalteracao"=:yp9, "criacao"=:yp10, "codusuariocriacao"=:yp11 WHERE "mgsis"."tblusuario"."codusuario"='1'.
+in /var/www/MGsis/protected/controllers/UsuarioController.php (97)
+in /var/www/MGsis/index.php (13)
+2013/11/18 17:20:29 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "admin"
+LINE 1: ..."='100', "alteracao"=now(), "codusuarioalteracao"='admin', "...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=now(), "codusuarioalteracao"=:yp9, "criacao"=:yp10, "codusuariocriacao"=:yp11 WHERE "mgsis"."tblusuario"."codusuario"='1'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1748): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1124): CActiveRecord->updateByPk(1, Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->update(NULL)
+#3 /var/www/MGsis/protected/controllers/UsuarioController.php(97): CActiveRecord->save()
+#4 [internal function]: UsuarioController->actionUpdate('1')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php/usuario/update/1
+HTTP_REFERER=http://localhost/MGsis/index.php/usuario/update/1
+---
+2013/11/18 17:20:50 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  insert or update on table "tblusuario" violates foreign key constraint "tblusuario_codecf_fkey"
+DETAIL:  Key (codecf)=(1) is not present in table "tblecf".. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=now(), "codusuarioalteracao"=:yp9, "criacao"=:yp10, "codusuariocriacao"=:yp11 WHERE "mgsis"."tblusuario"."codusuario"='1'.
+in /var/www/MGsis/protected/controllers/UsuarioController.php (97)
+in /var/www/MGsis/index.php (13)
+2013/11/18 17:20:50 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  insert or update on table "tblusuario" violates foreign key constraint "tblusuario_codecf_fkey"
+DETAIL:  Key (codecf)=(1) is not present in table "tblecf".. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=now(), "codusuarioalteracao"=:yp9, "criacao"=:yp10, "codusuariocriacao"=:yp11 WHERE "mgsis"."tblusuario"."codusuario"='1'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1748): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1124): CActiveRecord->updateByPk(1, Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->update(NULL)
+#3 /var/www/MGsis/protected/controllers/UsuarioController.php(97): CActiveRecord->save()
+#4 [internal function]: UsuarioController->actionUpdate('1')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php/usuario/update/1
+HTTP_REFERER=http://localhost/MGsis/index.php/usuario/update/1
+---
+2013/11/18 17:21:41 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  insert or update on table "tblusuario" violates foreign key constraint "tblusuario_codecf_fkey"
+DETAIL:  Key (codecf)=(10101) is not present in table "tblecf".. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=now(), "codusuarioalteracao"=:yp9, "criacao"=:yp10, "codusuariocriacao"=:yp11 WHERE "mgsis"."tblusuario"."codusuario"='1'.
+in /var/www/MGsis/protected/controllers/UsuarioController.php (97)
+in /var/www/MGsis/index.php (13)
+2013/11/18 17:21:41 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  insert or update on table "tblusuario" violates foreign key constraint "tblusuario_codecf_fkey"
+DETAIL:  Key (codecf)=(10101) is not present in table "tblecf".. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=now(), "codusuarioalteracao"=:yp9, "criacao"=:yp10, "codusuariocriacao"=:yp11 WHERE "mgsis"."tblusuario"."codusuario"='1'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1748): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1124): CActiveRecord->updateByPk(1, Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->update(NULL)
+#3 /var/www/MGsis/protected/controllers/UsuarioController.php(97): CActiveRecord->save()
+#4 [internal function]: UsuarioController->actionUpdate('1')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php/usuario/update/1
+HTTP_REFERER=http://localhost/MGsis/index.php/usuario/update/1
+---
+2013/11/18 17:21:58 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...='1', "usuario"='Chicago', "senha"='11', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=now(), "codusuarioalteracao"=:yp9, "criacao"=:yp10, "codusuariocriacao"=:yp11 WHERE "mgsis"."tblusuario"."codusuario"='1'.
+in /var/www/MGsis/protected/controllers/UsuarioController.php (97)
+in /var/www/MGsis/index.php (13)
+2013/11/18 17:21:58 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...='1', "usuario"='Chicago', "senha"='11', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=now(), "codusuarioalteracao"=:yp9, "criacao"=:yp10, "codusuariocriacao"=:yp11 WHERE "mgsis"."tblusuario"."codusuario"='1'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1748): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1124): CActiveRecord->updateByPk(1, Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->update(NULL)
+#3 /var/www/MGsis/protected/controllers/UsuarioController.php(97): CActiveRecord->save()
+#4 [internal function]: UsuarioController->actionUpdate('1')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php/usuario/update/1
+HTTP_REFERER=http://localhost/MGsis/index.php/usuario/update/1
+---
+2013/11/18 17:25:21 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...='1', "usuario"='Chicago', "senha"='11', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=now(), "codusuarioalteracao"=:yp9, "criacao"=:yp10, "codusuariocriacao"=:yp11 WHERE "mgsis"."tblusuario"."codusuario"='1'.
+in /var/www/MGsis/protected/controllers/UsuarioController.php (97)
+in /var/www/MGsis/index.php (13)
+2013/11/18 17:25:21 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...='1', "usuario"='Chicago', "senha"='11', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=now(), "codusuarioalteracao"=:yp9, "criacao"=:yp10, "codusuariocriacao"=:yp11 WHERE "mgsis"."tblusuario"."codusuario"='1'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1748): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1124): CActiveRecord->updateByPk(1, Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->update(NULL)
+#3 /var/www/MGsis/protected/controllers/UsuarioController.php(97): CActiveRecord->save()
+#4 [internal function]: UsuarioController->actionUpdate('1')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php/usuario/update/1
+HTTP_REFERER=http://localhost/MGsis/index.php/usuario/update/1
+---
+2013/11/18 17:25:25 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...='1', "usuario"='Chicago', "senha"='11', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=now(), "codusuarioalteracao"=:yp9, "criacao"=:yp10, "codusuariocriacao"=:yp11 WHERE "mgsis"."tblusuario"."codusuario"='1'.
+in /var/www/MGsis/protected/controllers/UsuarioController.php (97)
+in /var/www/MGsis/index.php (13)
+2013/11/18 17:25:25 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...='1', "usuario"='Chicago', "senha"='11', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=now(), "codusuarioalteracao"=:yp9, "criacao"=:yp10, "codusuariocriacao"=:yp11 WHERE "mgsis"."tblusuario"."codusuario"='1'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1748): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1124): CActiveRecord->updateByPk(1, Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->update(NULL)
+#3 /var/www/MGsis/protected/controllers/UsuarioController.php(97): CActiveRecord->save()
+#4 [internal function]: UsuarioController->actionUpdate('1')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php/usuario/update/1
+HTTP_REFERER=http://localhost/MGsis/index.php/usuario/update/1
+---
+2013/11/18 17:25:32 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...='1', "usuario"='Chicago', "senha"='11', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=now(), "codusuarioalteracao"=:yp9, "criacao"=:yp10, "codusuariocriacao"=:yp11 WHERE "mgsis"."tblusuario"."codusuario"='1'.
+in /var/www/MGsis/protected/controllers/UsuarioController.php (97)
+in /var/www/MGsis/index.php (13)
+2013/11/18 17:25:32 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...='1', "usuario"='Chicago', "senha"='11', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=now(), "codusuarioalteracao"=:yp9, "criacao"=:yp10, "codusuariocriacao"=:yp11 WHERE "mgsis"."tblusuario"."codusuario"='1'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1748): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1124): CActiveRecord->updateByPk(1, Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->update(NULL)
+#3 /var/www/MGsis/protected/controllers/UsuarioController.php(97): CActiveRecord->save()
+#4 [internal function]: UsuarioController->actionUpdate('1')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php/usuario/update/1
+HTTP_REFERER=http://localhost/MGsis/index.php/usuario/update/1
+---
+2013/11/18 17:26:37 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...='1', "usuario"='Chicago', "senha"='11', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=now(), "codusuarioalteracao"=:yp9, "criacao"=:yp10, "codusuariocriacao"=:yp11 WHERE "mgsis"."tblusuario"."codusuario"='1'.
+in /var/www/MGsis/protected/controllers/UsuarioController.php (97)
+in /var/www/MGsis/index.php (13)
+2013/11/18 17:26:37 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...='1', "usuario"='Chicago', "senha"='11', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=now(), "codusuarioalteracao"=:yp9, "criacao"=:yp10, "codusuariocriacao"=:yp11 WHERE "mgsis"."tblusuario"."codusuario"='1'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1748): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1124): CActiveRecord->updateByPk(1, Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->update(NULL)
+#3 /var/www/MGsis/protected/controllers/UsuarioController.php(97): CActiveRecord->save()
+#4 [internal function]: UsuarioController->actionUpdate('1')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php/usuario/update/1
+HTTP_REFERER=http://localhost/MGsis/index.php/usuario/update/1
+---
+2013/11/19 12:00:22 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...'1', "usuario"='Chicago1', "senha"='11', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=now(), "codusuarioalteracao"=:yp9, "criacao"=:yp10, "codusuariocriacao"=:yp11 WHERE "mgsis"."tblusuario"."codusuario"='1'.
+in /var/www/MGsis/protected/controllers/UsuarioController.php (97)
+in /var/www/MGsis/index.php (13)
+2013/11/19 12:00:22 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...'1', "usuario"='Chicago1', "senha"='11', "codecf"='', "codfi...
+                                                             ^. The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=now(), "codusuarioalteracao"=:yp9, "criacao"=:yp10, "codusuariocriacao"=:yp11 WHERE "mgsis"."tblusuario"."codusuario"='1'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1748): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1124): CActiveRecord->updateByPk(1, Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->update(NULL)
+#3 /var/www/MGsis/protected/controllers/UsuarioController.php(97): CActiveRecord->save()
+#4 [internal function]: UsuarioController->actionUpdate('1')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php/usuario/update/1
+HTTP_REFERER=http://localhost/MGsis/index.php/usuario/update/1
+---
+2013/11/19 12:07:53 [error] [exception.CException] exception 'CException' with message 'Usuario has an invalid validation rule. The rule must specify attributes to be validated and the validator name.' in /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php:289
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(260): CModel->createValidators()
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(304): CModel->getValidators('codusuario')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/helpers/CHtml.php(1414): CModel->isAttributeRequired('codusuario')
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(597): CHtml::activeLabelEx(Object(Usuario), 'codusuario', Array)
+#4 /var/www/MGsis/protected/views/usuario/_form.php(23): CActiveForm->labelEx(Object(Usuario), 'codusuario')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#8 /var/www/MGsis/protected/views/usuario/update.php(21): CController->renderPartial('_form', Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('update', Array, true)
+#13 /var/www/MGsis/protected/controllers/UsuarioController.php(103): CController->render('update', Array)
+#14 [internal function]: UsuarioController->actionUpdate('1')
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#22 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#23 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#24 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#25 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#26 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#27 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#28 /var/www/MGsis/index.php(13): CApplication->run()
+#29 {main}
+REQUEST_URI=/MGsis/index.php/usuario/update/1
+HTTP_REFERER=http://localhost/MGsis/index.php/usuario/1
+---
+2013/11/19 12:07:54 [error] [exception.CException] exception 'CException' with message 'Usuario has an invalid validation rule. The rule must specify attributes to be validated and the validator name.' in /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php:289
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(260): CModel->createValidators()
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(304): CModel->getValidators('codusuario')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/helpers/CHtml.php(1414): CModel->isAttributeRequired('codusuario')
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(597): CHtml::activeLabelEx(Object(Usuario), 'codusuario', Array)
+#4 /var/www/MGsis/protected/views/usuario/_form.php(23): CActiveForm->labelEx(Object(Usuario), 'codusuario')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#8 /var/www/MGsis/protected/views/usuario/update.php(21): CController->renderPartial('_form', Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('update', Array, true)
+#13 /var/www/MGsis/protected/controllers/UsuarioController.php(103): CController->render('update', Array)
+#14 [internal function]: UsuarioController->actionUpdate('1')
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#22 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#23 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#24 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#25 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#26 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#27 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#28 /var/www/MGsis/index.php(13): CApplication->run()
+#29 {main}
+REQUEST_URI=/MGsis/index.php/usuario/update/1
+HTTP_REFERER=http://localhost/MGsis/index.php/usuario/1
+---
+2013/11/19 12:07:55 [error] [exception.CException] exception 'CException' with message 'Usuario has an invalid validation rule. The rule must specify attributes to be validated and the validator name.' in /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php:289
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(260): CModel->createValidators()
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(304): CModel->getValidators('codusuario')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/helpers/CHtml.php(1414): CModel->isAttributeRequired('codusuario')
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(597): CHtml::activeLabelEx(Object(Usuario), 'codusuario', Array)
+#4 /var/www/MGsis/protected/views/usuario/_form.php(23): CActiveForm->labelEx(Object(Usuario), 'codusuario')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#8 /var/www/MGsis/protected/views/usuario/update.php(21): CController->renderPartial('_form', Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('update', Array, true)
+#13 /var/www/MGsis/protected/controllers/UsuarioController.php(103): CController->render('update', Array)
+#14 [internal function]: UsuarioController->actionUpdate('1')
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#22 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#23 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#24 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#25 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#26 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#27 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#28 /var/www/MGsis/index.php(13): CApplication->run()
+#29 {main}
+REQUEST_URI=/MGsis/index.php/usuario/update/1
+HTTP_REFERER=http://localhost/MGsis/index.php/usuario/1
+---
+2013/11/19 12:07:57 [error] [exception.CException] exception 'CException' with message 'Usuario has an invalid validation rule. The rule must specify attributes to be validated and the validator name.' in /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php:289
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(260): CModel->createValidators()
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(304): CModel->getValidators('codusuario')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/helpers/CHtml.php(1414): CModel->isAttributeRequired('codusuario')
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(597): CHtml::activeLabelEx(Object(Usuario), 'codusuario', Array)
+#4 /var/www/MGsis/protected/views/usuario/_form.php(23): CActiveForm->labelEx(Object(Usuario), 'codusuario')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#8 /var/www/MGsis/protected/views/usuario/update.php(21): CController->renderPartial('_form', Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('update', Array, true)
+#13 /var/www/MGsis/protected/controllers/UsuarioController.php(103): CController->render('update', Array)
+#14 [internal function]: UsuarioController->actionUpdate('1')
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#22 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#23 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#24 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#25 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#26 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#27 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#28 /var/www/MGsis/index.php(13): CApplication->run()
+#29 {main}
+REQUEST_URI=/MGsis/index.php/usuario/update/1
+---
+2013/11/19 12:24:58 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:336
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update/...')
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/MGsis/index.php/usuario/update/8
+HTTP_REFERER=http://localhost/MGsis/index.php/usuario/8
+---
+2013/11/19 12:25:00 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:336
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update/...')
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/MGsis/index.php/usuario/update/8
+HTTP_REFERER=http://localhost/MGsis/index.php/usuario/8
+---
+2013/11/19 12:25:00 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:336
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update/...')
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/MGsis/index.php/usuario/update/8
+HTTP_REFERER=http://localhost/MGsis/index.php/usuario/8
+---
+2013/11/19 12:27:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "usuario".' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('usuario')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('usuario')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('site/usuario')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/site/usuario
+---
+2013/11/19 12:34:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "codAuditoriaExcecao".' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('codAuditoriaExc...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('codAuditoriaExc...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('codigo/codAudit...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/codigo/codAuditoriaExcecao
+HTTP_REFERER=http://localhost/MGsis/codigo
+---
+2013/11/19 12:34:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "codEstado".' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('codEstado')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('codEstado')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('codigo/codEstad...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/codigo/codEstado
+HTTP_REFERER=http://localhost/MGsis/codigo
+---
+2013/11/19 12:34:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "codFormaPagamento".' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('codFormaPagamen...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('codFormaPagamen...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('codigo/codForma...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/codigo/codFormaPagamento
+HTTP_REFERER=http://localhost/MGsis/codigo
+---
+2013/11/19 12:35:03 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:336
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('view')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('codigo/view/cod...')
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/MGsis/codigo/view/codFormaPagamento
+---
+2013/11/19 12:35:08 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:336
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('codigo/update/c...')
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/MGsis/codigo/update/codFormaPagamento
+---
+2013/11/19 12:35:11 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:336
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('view')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('codigo/view/cod...')
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/MGsis/codigo/view/codFormaPagamento
+---
+2013/11/19 12:35:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "codFormaPagamento".' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('codFormaPagamen...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('codFormaPagamen...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('codigo/codForma...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/codigo/codFormaPagamento
+HTTP_REFERER=http://localhost/MGsis/codigo
+---
+2013/11/19 12:35:12 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:336
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('view')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('codigo/view/cod...')
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/MGsis/codigo/view/codFormaPagamento
+---
+2013/11/19 12:35:13 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:336
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('codigo/update/c...')
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/MGsis/codigo/update/codFormaPagamento
+---
+2013/11/19 12:35:14 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:336
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('view')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('codigo/view/cod...')
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/MGsis/codigo/view/codFormaPagamento
+---
+2013/11/19 12:35:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "codFormaPagamento".' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('codFormaPagamen...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('codFormaPagamen...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('codigo/codForma...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/codigo/codFormaPagamento
+HTTP_REFERER=http://localhost/MGsis/codigo
+---
+2013/11/19 12:35:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/MGsis/protected/controllers/CodigoController.php:157
+Stack trace:
+#0 /var/www/MGsis/protected/controllers/CodigoController.php(89): CodigoController->loadModel('1')
+#1 [internal function]: CodigoController->actionUpdate('1')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(CodigoController), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(CodigoController), Object(ReflectionMethod), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('codigo/update')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/codigo/update/1
+---
+2013/11/19 12:35:34 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:336
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('codigo/update')
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/MGsis/codigo/update
+---
+2013/11/19 13:07:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "1".' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('1')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('1')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/1')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/1
+---
+2013/11/19 13:07:30 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(1) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12).
+in /var/www/MGsis/protected/controllers/UsuarioController.php (73)
+in /var/www/MGsis/index.php (13)
+2013/11/19 13:07:30 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(1) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/MGsis/protected/controllers/UsuarioController.php(73): CActiveRecord->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): UsuarioController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/create
+---
+2013/11/19 13:07:48 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(2) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12).
+in /var/www/MGsis/protected/controllers/UsuarioController.php (73)
+in /var/www/MGsis/index.php (13)
+2013/11/19 13:07:48 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(2) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/MGsis/protected/controllers/UsuarioController.php(73): CActiveRecord->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): UsuarioController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/create
+---
+2013/11/19 13:07:57 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(3) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12).
+in /var/www/MGsis/protected/controllers/UsuarioController.php (73)
+in /var/www/MGsis/index.php (13)
+2013/11/19 13:07:57 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(3) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/MGsis/protected/controllers/UsuarioController.php(73): CActiveRecord->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): UsuarioController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/create
+---
+2013/11/19 13:08:03 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(4) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12).
+in /var/www/MGsis/protected/controllers/UsuarioController.php (73)
+in /var/www/MGsis/index.php (13)
+2013/11/19 13:08:03 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(4) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/MGsis/protected/controllers/UsuarioController.php(73): CActiveRecord->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): UsuarioController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/create
+---
+2013/11/19 13:08:06 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(5) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12).
+in /var/www/MGsis/protected/controllers/UsuarioController.php (73)
+in /var/www/MGsis/index.php (13)
+2013/11/19 13:08:06 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(5) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/MGsis/protected/controllers/UsuarioController.php(73): CActiveRecord->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): UsuarioController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/create
+---
+2013/11/19 13:08:07 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(6) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12).
+in /var/www/MGsis/protected/controllers/UsuarioController.php (73)
+in /var/www/MGsis/index.php (13)
+2013/11/19 13:08:07 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(6) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/MGsis/protected/controllers/UsuarioController.php(73): CActiveRecord->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): UsuarioController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/create
+---
+2013/11/19 13:08:09 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(7) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12).
+in /var/www/MGsis/protected/controllers/UsuarioController.php (73)
+in /var/www/MGsis/index.php (13)
+2013/11/19 13:08:09 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(7) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/MGsis/protected/controllers/UsuarioController.php(73): CActiveRecord->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): UsuarioController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/create
+---
+2013/11/19 13:08:11 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(8) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12).
+in /var/www/MGsis/protected/controllers/UsuarioController.php (73)
+in /var/www/MGsis/index.php (13)
+2013/11/19 13:08:11 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(8) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/MGsis/protected/controllers/UsuarioController.php(73): CActiveRecord->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): UsuarioController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/create
+---
+2013/11/19 13:08:12 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(9) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12).
+in /var/www/MGsis/protected/controllers/UsuarioController.php (73)
+in /var/www/MGsis/index.php (13)
+2013/11/19 13:08:12 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(9) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/MGsis/protected/controllers/UsuarioController.php(73): CActiveRecord->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): UsuarioController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/create
+---
+2013/11/19 13:08:14 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(10) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12).
+in /var/www/MGsis/protected/controllers/UsuarioController.php (73)
+in /var/www/MGsis/index.php (13)
+2013/11/19 13:08:14 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(10) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/MGsis/protected/controllers/UsuarioController.php(73): CActiveRecord->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): UsuarioController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/create
+---
+2013/11/19 13:08:15 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(11) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12).
+in /var/www/MGsis/protected/controllers/UsuarioController.php (73)
+in /var/www/MGsis/index.php (13)
+2013/11/19 13:08:15 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(11) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/MGsis/protected/controllers/UsuarioController.php(73): CActiveRecord->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): UsuarioController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/create
+---
+2013/11/19 13:08:17 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(12) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12).
+in /var/www/MGsis/protected/controllers/UsuarioController.php (73)
+in /var/www/MGsis/index.php (13)
+2013/11/19 13:08:17 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(12) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/MGsis/protected/controllers/UsuarioController.php(73): CActiveRecord->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): UsuarioController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/create
+---
+2013/11/19 13:08:18 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(13) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12).
+in /var/www/MGsis/protected/controllers/UsuarioController.php (73)
+in /var/www/MGsis/index.php (13)
+2013/11/19 13:08:18 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(13) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/MGsis/protected/controllers/UsuarioController.php(73): CActiveRecord->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): UsuarioController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/create
+---
+2013/11/19 13:08:20 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(14) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12).
+in /var/www/MGsis/protected/controllers/UsuarioController.php (73)
+in /var/www/MGsis/index.php (13)
+2013/11/19 13:08:20 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(14) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/MGsis/protected/controllers/UsuarioController.php(73): CActiveRecord->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): UsuarioController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/create
+---
+2013/11/19 13:11:30 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...*) FROM "mgsis"."tblusuario" "t" WHERE codusuario LIKE '%18%...
+                                                             ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. The SQL statement executed was: SELECT COUNT(*) FROM "mgsis"."tblusuario" "t" WHERE codusuario LIKE :ycp0.
+in /var/www/MGsis/protected/views/usuario/admin.php (67)
+in /var/www/MGsis/protected/controllers/UsuarioController.php (143)
+in /var/www/MGsis/index.php (13)
+2013/11/19 13:11:30 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...*) FROM "mgsis"."tblusuario" "t" WHERE codusuario LIKE '%18%...
+                                                             ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. The SQL statement executed was: SELECT COUNT(*) FROM "mgsis"."tblusuario" "t" WHERE codusuario LIKE :ycp0' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1601): CDbCommand->queryScalar()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(111): CDataProvider->getData()
+#7 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/grid/CGridView.php(339): CBaseListView->init()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(147): CGridView->init()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#10 /var/www/MGsis/protected/views/usuario/admin.php(67): CBaseController->widget('zii.widgets.gri...', Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('admin', Array, true)
+#15 /var/www/MGsis/protected/controllers/UsuarioController.php(143): CController->render('admin', Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): UsuarioController->actionAdmin()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#22 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#23 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#24 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#25 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('admin')
+#26 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/admin')
+#27 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#28 /var/www/MGsis/index.php(13): CApplication->run()
+#29 {main}
+REQUEST_URI=/MGsis/index.php?Usuario%5Bcodusuario%5D=18&Usuario%5Busuario%5D=&Usuario%5Bsenha%5D=&Usuario%5Bcodecf%5D=&Usuario%5Bcodfilial%5D=&Usuario%5Bcodoperacao%5D=&Usuario_page=1&ajax=usuario-grid&r=usuario%2Fadmin
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/admin
+---
+2013/11/19 13:11:48 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...*) FROM "mgsis"."tblusuario" "t" WHERE codusuario LIKE '%16%...
+                                                             ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. The SQL statement executed was: SELECT COUNT(*) FROM "mgsis"."tblusuario" "t" WHERE codusuario LIKE :ycp0.
+in /var/www/MGsis/protected/views/usuario/admin.php (67)
+in /var/www/MGsis/protected/controllers/UsuarioController.php (143)
+in /var/www/MGsis/index.php (13)
+2013/11/19 13:11:48 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...*) FROM "mgsis"."tblusuario" "t" WHERE codusuario LIKE '%16%...
+                                                             ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. The SQL statement executed was: SELECT COUNT(*) FROM "mgsis"."tblusuario" "t" WHERE codusuario LIKE :ycp0' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1601): CDbCommand->queryScalar()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(111): CDataProvider->getData()
+#7 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/grid/CGridView.php(339): CBaseListView->init()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(147): CGridView->init()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#10 /var/www/MGsis/protected/views/usuario/admin.php(67): CBaseController->widget('zii.widgets.gri...', Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('admin', Array, true)
+#15 /var/www/MGsis/protected/controllers/UsuarioController.php(143): CController->render('admin', Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): UsuarioController->actionAdmin()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#22 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#23 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#24 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#25 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('admin')
+#26 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/admin')
+#27 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#28 /var/www/MGsis/index.php(13): CApplication->run()
+#29 {main}
+REQUEST_URI=/MGsis/index.php?Usuario%5Bcodusuario%5D=16&Usuario%5Busuario%5D=&Usuario%5Bsenha%5D=&Usuario%5Bcodecf%5D=&Usuario%5Bcodfilial%5D=&Usuario%5Bcodoperacao%5D=&Usuario_page=1&Usuario_sort=codusuario&ajax=usuario-grid&r=usuario%2Fadmin
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/admin
+---
+2013/11/19 13:17:13 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(22) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12).
+in /var/www/MGsis/protected/controllers/UsuarioController.php (73)
+in /var/www/MGsis/index.php (13)
+2013/11/19 13:17:13 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblusuario_pkey"
+DETAIL:  Key (codusuario)=(22) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblusuario" ("codusuario", "usuario", "senha", "codecf", "codfilial", "codoperacao", "codpessoa", "impressoratelanegocio", "codportador", "codusuarioalteracao", "alteracao", "codusuariocriacao", "criacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/MGsis/protected/controllers/UsuarioController.php(73): CActiveRecord->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): UsuarioController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/create
+---
+2013/11/19 13:19:29 [error] [php] include(constraint.php): failed to open stream: No such file or directory (/var/www/yii-1.1.14.f0fee9/framework/YiiBase.php:427)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(186): import()
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(287): createValidator()
+#2 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(260): Usuario->createValidators()
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(304): Usuario->getValidators()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/helpers/CHtml.php(1414): Usuario->isAttributeRequired()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(597): activeLabelEx()
+#6 /var/www/MGsis/protected/views/usuario/_form.php(23): CActiveForm->labelEx()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): UsuarioController->renderInternal()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): UsuarioController->renderFile()
+#10 /var/www/MGsis/protected/views/usuario/update.php(21): UsuarioController->renderPartial()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require()
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): UsuarioController->renderInternal()
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): UsuarioController->renderFile()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): UsuarioController->renderPartial()
+#15 /var/www/MGsis/protected/controllers/UsuarioController.php(103): UsuarioController->render()
+#16 unknown(0): UsuarioController->actionUpdate()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): UsuarioController->runAction()
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#22 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#23 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): UsuarioController->filterAccessControl()
+#24 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#25 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#26 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): UsuarioController->runActionWithFilters()
+#27 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): UsuarioController->run()
+#28 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#29 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#30 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=usuario/update&id=15
+in /var/www/MGsis/protected/views/usuario/_form.php (23)
+in /var/www/MGsis/protected/views/usuario/update.php (21)
+in /var/www/MGsis/protected/controllers/UsuarioController.php (103)
+2013/11/19 13:24:49 [error] [php] include(contraints.php): failed to open stream: No such file or directory (/var/www/yii-1.1.14.f0fee9/framework/YiiBase.php:427)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(186): import()
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(287): createValidator()
+#2 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(260): Usuario->createValidators()
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(304): Usuario->getValidators()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/helpers/CHtml.php(1414): Usuario->isAttributeRequired()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(597): activeLabelEx()
+#6 /var/www/MGsis/protected/views/usuario/_form.php(23): CActiveForm->labelEx()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): UsuarioController->renderInternal()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): UsuarioController->renderFile()
+#10 /var/www/MGsis/protected/views/usuario/update.php(21): UsuarioController->renderPartial()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require()
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): UsuarioController->renderInternal()
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): UsuarioController->renderFile()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): UsuarioController->renderPartial()
+#15 /var/www/MGsis/protected/controllers/UsuarioController.php(103): UsuarioController->render()
+#16 unknown(0): UsuarioController->actionUpdate()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): UsuarioController->runAction()
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#22 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#23 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): UsuarioController->filterAccessControl()
+#24 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#25 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#26 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): UsuarioController->runActionWithFilters()
+#27 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): UsuarioController->run()
+#28 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#29 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#30 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=usuario/update&id=99
+in /var/www/MGsis/protected/views/usuario/_form.php (23)
+in /var/www/MGsis/protected/views/usuario/update.php (21)
+in /var/www/MGsis/protected/controllers/UsuarioController.php (103)
+2013/11/19 13:27:12 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblusuario" violates foreign key constraint "tblliquidacaotitulo_codusuario_fkey" on table "tblliquidacaotitulo"
+DETAIL:  Key (codusuario)=(14) is still referenced from table "tblliquidacaotitulo".. The SQL statement executed was: DELETE FROM "mgsis"."tblusuario" WHERE "mgsis"."tblusuario"."codusuario"='14'.
+in /var/www/MGsis/protected/controllers/UsuarioController.php (113)
+in /var/www/MGsis/index.php (13)
+2013/11/19 13:27:12 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblusuario" violates foreign key constraint "tblliquidacaotitulo_codusuario_fkey" on table "tblliquidacaotitulo"
+DETAIL:  Key (codusuario)=(14) is still referenced from table "tblliquidacaotitulo".. The SQL statement executed was: DELETE FROM "mgsis"."tblusuario" WHERE "mgsis"."tblusuario"."codusuario"='14'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1802): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1222): CActiveRecord->deleteByPk(14)
+#2 /var/www/MGsis/protected/controllers/UsuarioController.php(113): CActiveRecord->delete()
+#3 [internal function]: UsuarioController->actionDelete('14')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1116): CFilterChain->run()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterPostOnly(Object(CFilterChain))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/delete')
+#19 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /var/www/MGsis/index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/MGsis/index.php?ajax=usuario-grid&id=14&r=usuario%2Fdelete
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/admin
+---
+2013/11/19 13:27:21 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblusuario" violates foreign key constraint "tblcobrancahistorico_codusuario_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codusuario)=(1) is still referenced from table "tblcobrancahistorico".. The SQL statement executed was: DELETE FROM "mgsis"."tblusuario" WHERE "mgsis"."tblusuario"."codusuario"='1'.
+in /var/www/MGsis/protected/controllers/UsuarioController.php (113)
+in /var/www/MGsis/index.php (13)
+2013/11/19 13:27:21 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblusuario" violates foreign key constraint "tblcobrancahistorico_codusuario_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codusuario)=(1) is still referenced from table "tblcobrancahistorico".. The SQL statement executed was: DELETE FROM "mgsis"."tblusuario" WHERE "mgsis"."tblusuario"."codusuario"='1'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1802): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1222): CActiveRecord->deleteByPk(1)
+#2 /var/www/MGsis/protected/controllers/UsuarioController.php(113): CActiveRecord->delete()
+#3 [internal function]: UsuarioController->actionDelete('1')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1116): CFilterChain->run()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterPostOnly(Object(CFilterChain))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/delete')
+#19 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /var/www/MGsis/index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/MGsis/index.php?ajax=usuario-grid&id=1&r=usuario%2Fdelete
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/admin
+---
+2013/11/19 13:29:38 [error] [php] Object of class Usuario could not be converted to string (/var/www/MGsis/protected/views/usuario/_form.php:24)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): UsuarioController->renderFile()
+#1 /var/www/MGsis/protected/views/usuario/update.php(21): UsuarioController->renderPartial()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): UsuarioController->renderInternal()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): UsuarioController->renderFile()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): UsuarioController->renderPartial()
+#6 /var/www/MGsis/protected/controllers/UsuarioController.php(103): UsuarioController->render()
+#7 unknown(0): UsuarioController->actionUpdate()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): UsuarioController->runAction()
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): UsuarioController->filterAccessControl()
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): UsuarioController->runActionWithFilters()
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): UsuarioController->run()
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#20 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#21 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=usuario/update&id=8
+in /var/www/MGsis/protected/views/usuario/_form.php (24)
+in /var/www/MGsis/protected/views/usuario/update.php (21)
+in /var/www/MGsis/protected/controllers/UsuarioController.php (103)
+2013/11/19 15:10:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "USUARIO".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('USUARIO')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=USUARIO
+---
+2013/11/19 17:41:27 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('admin')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/admin')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/admin
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/index
+---
+2013/11/19 17:41:32 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('admin')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/admin')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/admin
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/index
+---
+2013/11/19 17:51:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "user".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('user')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=user
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/index
+---
+2013/11/19 17:51:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "user".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('user')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=user
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/index
+---
+2013/11/19 18:26:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "usuario".' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('usuario')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('usuario')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('site/usuario')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=site/usuario
+HTTP_REFERER=http://localhost/MGsis/index.php?r=site/index
+---

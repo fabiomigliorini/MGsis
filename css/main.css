@@ -43,8 +43,9 @@ body
 
 #logo
 {
-	padding: 10px 20px;
+	padding: 0px;
 	font-size: 200%;
+	background-color: #fff500;
 }
 
 #mainmenu
@@ -226,4 +227,23 @@ div.search-form
 .operations li a:hover
 {
 	background: #80CFFF;
+}
+
+.menuicones {
+	border: 27px solid transparent; 
+	float: left; 
+	width: 128px; 
+	height: 155px;
+	text-align: center;
+	display:table-cell;
+	vertical-align: middle;
+}
+
+.menuicones:hover {
+	border-color: yellow;
+	background-color: yellow;
+}
+
+img.menuicones:hover {
+	oppacity: 50;
 }
