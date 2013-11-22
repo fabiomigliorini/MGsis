@@ -3771,3 +3771,31 @@ Stack trace:
 REQUEST_URI=/MGsis/index.php?r=titulo/update&id=2122
 HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/update&id=2122
 ---
+2013/11/21 21:04:42 [error] [php] Trying to get property of non-object (/var/www/MGsis/protected/views/titulo/_form.php:68)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): TituloController->renderFile()
+#1 /var/www/MGsis/protected/views/titulo/update.php(21): TituloController->renderPartial()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): TituloController->renderInternal()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): TituloController->renderFile()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): TituloController->renderPartial()
+#6 /var/www/MGsis/protected/controllers/TituloController.php(103): TituloController->render()
+#7 unknown(0): TituloController->actionUpdate()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): TituloController->runAction()
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): TituloController->filterAccessControl()
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#20 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#21 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/update&id=2122
+in /var/www/MGsis/protected/views/titulo/_form.php (68)
+in /var/www/MGsis/protected/views/titulo/update.php (21)
+in /var/www/MGsis/protected/controllers/TituloController.php (103)

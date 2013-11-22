@@ -82,7 +82,10 @@ class Titulo extends MGActiveRecord
 			// @todo Please remove those attributes that should not be searched.
 			array('transacao','date','format'=>Yii::app()->locale->getDateFormat('medium')),
 			//array('sistema','datetime'),
-			array('sistema','date','format'=>Yii::app()->locale->getDateFormat('medium') . ' ' . Yii::app()->locale->getTimeFormat('medium')),
+			array('sistema','date','format'=> strtr(Yii::app()->locale->getDateTimeFormat()
+													, array("{0}" => Yii::app()->locale->getTimeFormat('medium')
+															, "{1}" => Yii::app()->locale->getDateFormat('medium')))
+				),
 			
 			array('codtitulo, codtipotitulo, codfilial, codportador, codpessoa, codcontacontabil, numero, fatura, transacao, sistema, emissao, vencimento, vencimentooriginal, debito, credito, gerencial, observacao, boleto, nossonumero, debitototal, creditototal, saldo, debitosaldo, creditosaldo, transacaoliquidacao, codnegocioformapagamento, codtituloagrupamento, remessa, estornado, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
 		);

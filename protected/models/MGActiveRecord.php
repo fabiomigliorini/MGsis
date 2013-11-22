@@ -19,7 +19,10 @@ abstract class MGActiveRecord extends CActiveRecord
 			{
 				$this->$columnName = date('Y-m-d H:i:s',
 					CDateTimeParser::parse($this->$columnName,
-					Yii::app()->locale->getDateFormat('medium') . ' ' . Yii::app()->locale->getTimeFormat('medium')));
+						strtr(Yii::app()->locale->getDateTimeFormat()
+								, array("{0}" => Yii::app()->locale->getTimeFormat('medium')
+										, "{1}" => Yii::app()->locale->getDateFormat('medium')))
+					));
 			}
 		}
 		
