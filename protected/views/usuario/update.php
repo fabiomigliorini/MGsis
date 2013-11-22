@@ -3,19 +3,19 @@
 /* @var $model Usuario */
 
 $this->breadcrumbs=array(
-	'Usuarios'=>array('index'),
+	'Usuario'=>array('index'),
 	$model->codusuario=>array('view','id'=>$model->codusuario),
-	'Update',
+	'Alterar',
 );
 
 $this->menu=array(
-	array('label'=>'List Usuario', 'url'=>array('index')),
-	array('label'=>'Create Usuario', 'url'=>array('create')),
-	array('label'=>'View Usuario', 'url'=>array('view', 'id'=>$model->codusuario)),
-	array('label'=>'Manage Usuario', 'url'=>array('admin')),
+	array('label'=>'Listagem de Usuario', 'url'=>array('index')),
+	array('label'=>'Novo Usuario', 'url'=>array('create')),
+	array('label'=>'Detalhes do Usuario', 'url'=>array('view', 'id'=>$model->codusuario)),
+	array('label'=>'Gerenciar Usuario', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Update Usuario <?php echo $model->codusuario; ?></h1>
+<h1>Alterar Usuario #<?php echo $model->codusuario; ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

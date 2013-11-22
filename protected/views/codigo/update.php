@@ -3,19 +3,19 @@
 /* @var $model Codigo */
 
 $this->breadcrumbs=array(
-	'Codigos'=>array('index'),
+	'Codigo'=>array('index'),
 	$model->tabela=>array('view','id'=>$model->tabela),
-	'Update',
+	'Alterar',
 );
 
 $this->menu=array(
-	array('label'=>'List Codigo', 'url'=>array('index')),
-	array('label'=>'Create Codigo', 'url'=>array('create')),
-	array('label'=>'View Codigo', 'url'=>array('view', 'id'=>$model->tabela)),
-	array('label'=>'Manage Codigo', 'url'=>array('admin')),
+	array('label'=>'Listagem de Codigo', 'url'=>array('index')),
+	array('label'=>'Novo Codigo', 'url'=>array('create')),
+	array('label'=>'Detalhes do Codigo', 'url'=>array('view', 'id'=>$model->tabela)),
+	array('label'=>'Gerenciar Codigo', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Update Codigo <?php echo $model->tabela; ?></h1>
+<h1>Alterar Codigo #<?php echo $model->tabela; ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

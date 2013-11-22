@@ -3,16 +3,16 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Codigos',
+	'Codigo',
 );
 
 $this->menu=array(
-	array('label'=>'Create Codigo', 'url'=>array('create')),
-	array('label'=>'Manage Codigo', 'url'=>array('admin')),
+	array('label'=>'Novo Codigo', 'url'=>array('create')),
+	array('label'=>'Gerenciar Codigo', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Codigos</h1>
+<h1>Codigo</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

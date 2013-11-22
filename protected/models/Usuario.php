@@ -183,6 +183,7 @@ class Usuario extends MGActiveRecord
 			array('usuario', 'length', 'max'=>20),
 			array('senha, impressoratelanegocio', 'length', 'max'=>50),
 			array('codusuario, codecf, codfilial, codoperacao, codpessoa, codportador', 'numerical'),
+			array('criacao','date','format'=>Yii::app()->locale->getDateFormat('short')),
 			array('senha, codecf, codfilial, codpessoa, impressoratelanegocio, codportador', 'default', 'setOnEmpty' => true, 'value' => null),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.

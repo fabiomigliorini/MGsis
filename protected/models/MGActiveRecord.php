@@ -6,6 +6,22 @@ abstract class MGActiveRecord extends CActiveRecord
 	*/
 	protected function beforeSave()
 	{
+		//volta data do formato brasileiro para formato Y-m-d
+		foreach($this->metadata->tableSchema->columns as $columnName => $column)
+		{
+			if ($column->dbType == 'date')
+			{
+				$this->$columnName = date('Y-m-d',
+					CDateTimeParser::parse($this->$columnName,
+					Yii::app()->locale->getDateFormat('medium')));
+			}
+			elseif ($column->dbType == 'timestamp without time zone')
+			{
+				$this->$columnName = date('Y-m-d H:i:s',
+					CDateTimeParser::parse($this->$columnName,
+					Yii::app()->locale->getDateFormat('medium') . ' ' . Yii::app()->locale->getTimeFormat('medium')));
+			}
+		}
 		
 		//descobre codigo do usuario conectado
 		if(null !== Yii::app()->user)
@@ -28,6 +44,38 @@ abstract class MGActiveRecord extends CActiveRecord
 		}
 
 		return parent::beforeSave();
+
 	}
+
+	protected function afterFind()
+	{
+		// Formata datas no formato brasileiro
+		foreach($this->metadata->tableSchema->columns as $columnName => $column)
+		{           
+			if (!strlen($this->$columnName)) continue;
+
+			if ($column->dbType == 'date')
+			{ 
+				$this->$columnName = Yii::app()->dateFormatter->formatDateTime(
+						CDateTimeParser::parse(
+							$this->$columnName, 
+							'yyyy-MM-dd'
+						),
+						'medium',null
+					);
+			}
+			elseif ($column->dbType == 'timestamp without time zone')
+			{
+				$this->$columnName = Yii::app()->dateFormatter->formatDateTime(
+						CDateTimeParser::parse(
+							$this->$columnName, 
+							'yyyy-MM-dd hh:mm:ss'
+						),
+						'medium','medium'
+					);
+			}
+		}
+		return parent::afterFind();
+	}	
 	
 }

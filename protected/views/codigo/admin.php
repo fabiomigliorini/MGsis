@@ -3,13 +3,13 @@
 /* @var $model Codigo */
 
 $this->breadcrumbs=array(
-	'Codigos'=>array('index'),
-	'Manage',
+	'Codigo'=>array('index'),
+	'Gerenciar',
 );
 
 $this->menu=array(
-	array('label'=>'List Codigo', 'url'=>array('index')),
-	array('label'=>'Create Codigo', 'url'=>array('create')),
+	array('label'=>'Listagem de Codigo', 'url'=>array('index')),
+	array('label'=>'Novo Codigo', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,14 +26,9 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Codigos</h1>
+<h1>Gerenciar Codigo</h1>
 
-<p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
-
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<?php echo CHtml::link('Busca Avançada','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,

@@ -17,9 +17,9 @@
         </overridden-day-type>
       </overridden-day-types>
       <days>
-        <day date="20140101" type="day-type" id="1"/>
-        <day date="20131225" type="day-type" id="1"/>
         <day date="20131120" type="day-type" id="1"/>
+        <day date="20131225" type="day-type" id="1"/>
+        <day date="20140101" type="day-type" id="1"/>
       </days>
     </calendar>
   </calendars>
@@ -53,12 +53,12 @@
         <predecessor id="1" predecessor-id="1" type="FS"/>
       </predecessors>
       <task id="9" name="Controle C&#xF3;digos" note="" work="28800" start="20131122T090000Z" end="20131123T090000Z" work-start="20131122T090000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work"/>
-      <task id="10" name="Layout" note="" work="86400" duration="57600" start="20131123T090000Z" end="20131126T090000Z" work-start="20131123T090000Z" percent-complete="0" priority="500" type="normal" scheduling="fixed-duration">
+      <task id="10" name="Layout" note="" work="86400" duration="57600" start="20131123T090000Z" end="20131126T090000Z" work-start="20131123T090000Z" percent-complete="100" priority="500" type="normal" scheduling="fixed-duration">
         <predecessors>
           <predecessor id="1" predecessor-id="9" type="FS"/>
         </predecessors>
         <task id="11" name="Inserir logotipos e &#xED;cones tela inicial" note="" work="57600" duration="28800" start="20131123T090000Z" end="20131125T090000Z" work-start="20131123T090000Z" percent-complete="100" priority="500" type="normal" scheduling="fixed-duration"/>
-        <task id="12" name="Menu" note="" work="28800" start="20131125T090000Z" end="20131126T090000Z" work-start="20131125T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="12" name="Menu" note="" work="28800" start="20131125T090000Z" end="20131126T090000Z" work-start="20131125T090000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
             <predecessor id="1" predecessor-id="11" type="FS"/>
           </predecessors>
@@ -76,12 +76,12 @@
             <predecessor id="1" predecessor-id="14" type="FS"/>
           </predecessors>
         </task>
-        <task id="16" name="Traduzir mensagens Yii" note="" work="14400" duration="28800" start="20131128T090000Z" end="20131129T090000Z" work-start="20131128T090000Z" percent-complete="0" priority="500" type="normal" scheduling="fixed-duration">
+        <task id="16" name="Traduzir mensagens Yii" note="" work="14400" duration="28800" start="20131128T090000Z" end="20131129T090000Z" work-start="20131128T090000Z" percent-complete="100" priority="500" type="normal" scheduling="fixed-duration">
           <predecessors>
             <predecessor id="1" predecessor-id="15" type="FS"/>
           </predecessors>
         </task>
-        <task id="17" name="Traduzir templates" note="" work="14400" duration="28800" start="20131129T090000Z" end="20131130T090000Z" work-start="20131129T090000Z" percent-complete="0" priority="500" type="normal" scheduling="fixed-duration">
+        <task id="17" name="Traduzir templates" note="" work="14400" duration="28800" start="20131129T090000Z" end="20131130T090000Z" work-start="20131129T090000Z" percent-complete="100" priority="500" type="normal" scheduling="fixed-duration">
           <predecessors>
             <predecessor id="1" predecessor-id="16" type="FS"/>
           </predecessors>
@@ -309,6 +309,37 @@
       <task id="68" name="Cadastro Tributacao x Natureza de Operacao" note="" work="28800" start="20140321T160000Z" end="20140322T160000Z" work-start="20140321T160000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <predecessors>
           <predecessor id="1" predecessor-id="67" type="FS"/>
+        </predecessors>
+      </task>
+    </task>
+    <task id="69" name="Dashboard" note="" work="345600" start="20140322T160000Z" end="20140405T160000Z" work-start="20140322T160000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="61" type="FS"/>
+      </predecessors>
+      <task id="70" name="Vendas em aberto" note="" work="57600" start="20140322T160000Z" end="20140325T160000Z" work-start="20140322T160000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+      <task id="71" name="Notas por emitir" note="" work="57600" start="20140325T160000Z" end="20140327T160000Z" work-start="20140325T160000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="70" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="72" name="Compras por lan&#xE7;ar" note="" work="57600" start="20140327T160000Z" end="20140329T160000Z" work-start="20140327T160000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="71" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="73" name="Mensagens administrativas" note="" work="57600" start="20140329T160000Z" end="20140401T160000Z" work-start="20140329T160000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="72" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="74" name="Resumo Contas &#xE0; Receber" note="" work="57600" start="20140401T160000Z" end="20140403T160000Z" work-start="20140401T160000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="73" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="75" name="Resumo Contas &#xE0; Pagar" note="" work="57600" start="20140403T160000Z" end="20140405T160000Z" work-start="20140403T160000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="74" type="FS"/>
         </predecessors>
       </task>
     </task>

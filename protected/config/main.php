@@ -8,7 +8,10 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'MGsis',
-
+    'theme'=>'mgsis',
+	'sourceLanguage'=>'pt_br',
+	'language'=>'pt_br',
+	
 	// preloading 'log' component
 	'preload'=>array('log'),
 
@@ -65,7 +68,7 @@ return array(
 		*/
 		'db'=>array(
 			'connectionString' => 'pgsql:host=localhost;dbname=mgsis',
-			'emulatePrepare' => true,
+			//'emulatePrepare' => true,
 			'username' => 'mgsis_yii',
 			'password' => 'mgsis_yii',
 			'charset' => 'utf8',
