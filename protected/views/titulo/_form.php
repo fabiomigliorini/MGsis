@@ -64,9 +64,6 @@
 		<?php echo $form->textField($model,'transacao'); ?>
 		<?php echo $form->error($model,'transacao'); ?>
 	</div>
-	<?
-	print_r($model->sistema);
-	?>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'sistema'); ?>
