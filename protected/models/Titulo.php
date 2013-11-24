@@ -76,6 +76,7 @@ class Titulo extends MGActiveRecord
 			array('numero, nossonumero', 'length', 'max'=>20),
 			array('fatura', 'length', 'max'=>50),
 			array('debito, credito, debitototal, creditototal, saldo, debitosaldo, creditosaldo', 'length', 'max'=>14),
+			array('vencimento', 'date', 'format'=>Yii::app()->locale->getDateFormat('medium')),
 			array('observacao', 'length', 'max'=>255),
 			array('codportador, gerencial, boleto, transacaoliquidacao, codnegocioformapagamento, codtituloagrupamento, remessa, estornado, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().

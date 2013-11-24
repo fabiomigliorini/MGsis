@@ -2,14 +2,16 @@
 /* @var $this UsuarioController */
 /* @var $model Usuario */
 
+$this->pagetitle = Yii::app()->name . ' - Novo Usuario';
+
 $this->breadcrumbs=array(
 	'Usuario'=>array('index'),
 	'Novo',
 );
 
 $this->menu=array(
-	array('label'=>'Listagem de Usuario', 'url'=>array('index')),
-	array('label'=>'Gerenciar Usuario', 'url'=>array('admin')),
+	array('label'=>'Listagem', 'url'=>array('index')),
+	array('label'=>'Gerenciar', 'url'=>array('admin')),
 );
 ?>
 

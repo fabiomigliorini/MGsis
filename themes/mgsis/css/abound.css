@@ -556,3 +556,18 @@ div.form span.required
 {
 	color: red;
 }
+
+input.date {
+	text-align: center;
+	width: 80px;
+}
+
+input.timestamp {
+	text-align: center;
+	width: 140px;
+}
+
+input.money {
+	text-align: right;
+	width: 100px;
+}

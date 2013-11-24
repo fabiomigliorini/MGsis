@@ -1,6 +1,7 @@
 <?php
 /* @var $this UsuarioController */
 /* @var $model Usuario */
+$this->pagetitle = Yii::app()->name . ' - Alterar Usuario #' . $model->codusuario;
 
 $this->breadcrumbs=array(
 	'Usuario'=>array('index'),
@@ -9,10 +10,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listagem de Usuario', 'url'=>array('index')),
-	array('label'=>'Novo Usuario', 'url'=>array('create')),
-	array('label'=>'Detalhes do Usuario', 'url'=>array('view', 'id'=>$model->codusuario)),
-	array('label'=>'Gerenciar Usuario', 'url'=>array('admin')),
+	array('label'=>'Listagem', 'url'=>array('index')),
+	array('label'=>'Novo', 'url'=>array('create')),
+	array('label'=>'Detalhes', 'url'=>array('view', 'id'=>$model->codusuario)),
+	array('label'=>'Gerenciar', 'url'=>array('admin')),
 );
 ?>
 

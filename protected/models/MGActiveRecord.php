@@ -6,6 +6,16 @@ abstract class MGActiveRecord extends CActiveRecord
 	*/
 	protected function beforeSave()
 	{
+
+		if($this->isNewRecord)
+		{
+			$codcoluna = $this->tableSchema->primaryKey;
+			if (empty($this->$codcoluna))
+			{
+				$this->$codcoluna = Codigo::PegaProximo($codcoluna);
+			}
+		}
+                		
 		//volta data do formato brasileiro para formato Y-m-d
 		foreach($this->metadata->tableSchema->columns as $columnName => $column)
 		{
@@ -80,5 +90,25 @@ abstract class MGActiveRecord extends CActiveRecord
 		}
 		return parent::afterFind();
 	}	
+
+	public function setAttributes($values,$safeOnly=true) 
+	{
+		if(!is_array($values)) return;
+		$attributes=array_flip($safeOnly ? $this->getSafeAttributeNames() : $this->attributeNames());
+		foreach($values as $name=>$value) 
+		{
+			if(isset($attributes[$name])) 
+			{
+				if ($column = $this->getTableSchema()->getColumn($name))
+				{
+					if (($column->dbType == 'double precision') or (stripos($column->dbType, 'numeric') !== false))
+						$value = Yii::app()->format->unformatNumber($value); // new
+				}
+				$this->$name=$value;
+			}
+			elseif($safeOnly)
+				$this->onUnsafeAttribute($name,$value);
+		}
+	}
 	
 }

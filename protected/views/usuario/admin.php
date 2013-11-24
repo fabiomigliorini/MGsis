@@ -2,14 +2,16 @@
 /* @var $this UsuarioController */
 /* @var $model Usuario */
 
+$this->pagetitle = Yii::app()->name . ' - Gerenciar Usuario';
+
 $this->breadcrumbs=array(
 	'Usuario'=>array('index'),
 	'Gerenciar',
 );
 
 $this->menu=array(
-	array('label'=>'Listagem de Usuario', 'url'=>array('index')),
-	array('label'=>'Novo Usuario', 'url'=>array('create')),
+	array('label'=>'Listagem', 'url'=>array('index')),
+	array('label'=>'Novo', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "

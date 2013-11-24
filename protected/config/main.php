@@ -8,19 +8,22 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'MGsis',
-    'theme'=>'mgsis',
+    //'theme'=>'mgsis',
 	'sourceLanguage'=>'pt_br',
 	'language'=>'pt_br',
 	
 	// preloading 'log' component
-	'preload'=>array('log'),
+	'preload'=>array(
+		'log',
+		'bootstrap'
+		),
 
 	// autoloading model and component classes
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
 	),
-
+	
 	'modules'=>array(
 		// uncomment the following to enable the Gii tool
 		'gii'=>array(
@@ -37,6 +40,15 @@ return array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
+
+		'format'=>array(
+			'class'=>'application.components.MGFormatter',
+		),
+
+		'bootstrap' => array(
+			'class' => 'application.extensions.yiibooster.components.Bootstrap',
+		),		
+
 		// uncomment the following to enable URLs in path-format
 		/*
 		'urlManager'=>array(

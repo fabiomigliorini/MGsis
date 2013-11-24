@@ -22,6 +22,7 @@
 			$cs->registerCssFile($baseUrl.'/css/style-blue.css');
 			$cs->registerCssFile($baseUrl.'/css/form.css');
 			$cs->registerScriptFile($baseUrl.'/js/bootstrap.min.js');
+			$cs->registerScriptFile($baseUrl.'/js/plugins/autoNumeric.js');
 		?>
 	</head>
 <body>

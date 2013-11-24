@@ -17,9 +17,9 @@
         </overridden-day-type>
       </overridden-day-types>
       <days>
-        <day date="20131120" type="day-type" id="1"/>
-        <day date="20131225" type="day-type" id="1"/>
         <day date="20140101" type="day-type" id="1"/>
+        <day date="20131225" type="day-type" id="1"/>
+        <day date="20131120" type="day-type" id="1"/>
       </days>
     </calendar>
   </calendars>
@@ -64,14 +64,14 @@
           </predecessors>
         </task>
       </task>
-      <task id="13" name="Localiza&#xE7;&#xE3;o" note="" work="57600" duration="115200" start="20131126T090000Z" end="20131130T090000Z" work-start="20131126T090000Z" percent-complete="0" priority="500" type="normal" scheduling="fixed-duration">
+      <task id="13" name="Localiza&#xE7;&#xE3;o" note="" work="57600" duration="115200" start="20131126T090000Z" end="20131130T090000Z" work-start="20131126T090000Z" percent-complete="100" priority="500" type="normal" scheduling="fixed-duration">
         <predecessors>
           <predecessor id="1" predecessor-id="10" type="FS"/>
         </predecessors>
-        <task id="14" name="Fazer exemplo manuten&#xE7;&#xE3;o com n&#xFA;meros formatados" note="" work="14400" duration="28800" start="20131126T090000Z" end="20131127T090000Z" work-start="20131126T090000Z" percent-complete="0" priority="500" type="normal" scheduling="fixed-duration">
+        <task id="14" name="Fazer exemplo manuten&#xE7;&#xE3;o com n&#xFA;meros formatados" note="" work="14400" duration="28800" start="20131126T090000Z" end="20131127T090000Z" work-start="20131126T090000Z" percent-complete="100" priority="500" type="normal" scheduling="fixed-duration">
           <constraint type="start-no-earlier-than" time="20131118T080000Z"/>
         </task>
-        <task id="15" name="Fazer exemplo manuten&#xE7;&#xE3;o com datas formatadas" note="" work="14400" duration="28800" start="20131127T090000Z" end="20131128T090000Z" work-start="20131127T090000Z" percent-complete="0" priority="500" type="normal" scheduling="fixed-duration">
+        <task id="15" name="Fazer exemplo manuten&#xE7;&#xE3;o com datas formatadas" note="" work="14400" duration="28800" start="20131127T090000Z" end="20131128T090000Z" work-start="20131127T090000Z" percent-complete="100" priority="500" type="normal" scheduling="fixed-duration">
           <predecessors>
             <predecessor id="1" predecessor-id="14" type="FS"/>
           </predecessors>

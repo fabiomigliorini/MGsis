@@ -1,14 +1,15 @@
 <?php
 /* @var $this UsuarioController */
 /* @var $dataProvider CActiveDataProvider */
+$this->pagetitle = Yii::app()->name . ' - Usuario';
 
 $this->breadcrumbs=array(
 	'Usuario',
 );
 
 $this->menu=array(
-	array('label'=>'Novo Usuario', 'url'=>array('create')),
-	array('label'=>'Gerenciar Usuario', 'url'=>array('admin')),
+	array('label'=>'Novo', 'url'=>array('create')),
+	array('label'=>'Gerenciar', 'url'=>array('admin')),
 );
 ?>
 

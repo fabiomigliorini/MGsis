@@ -163,6 +163,10 @@
  */
 class Usuario extends MGActiveRecord
 {
+	
+	public $senha_tela;
+	public $senha_tela_repeat;
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -180,14 +184,30 @@ class Usuario extends MGActiveRecord
 		// will receive user inputs.
 		return array(
 			array('usuario, codoperacao', 'required'),
-			array('usuario', 'length', 'max'=>20),
-			array('senha, impressoratelanegocio', 'length', 'max'=>50),
-			array('codusuario, codecf, codfilial, codoperacao, codpessoa, codportador', 'numerical'),
-			array('criacao','date','format'=>Yii::app()->locale->getDateFormat('short')),
+			array('usuario', 'length', 'max'=>50),
+			array('usuario', 'length', 'min'=>4),
+			array('usuario', 'unique', 'caseSensitive' => false),
+
+			array('senha, senha_tela, impressoratelanegocio', 'length', 'max'=>100),
+			
+			array('senha_tela', 'length', 'max'=>20),
+			array('senha_tela', 'length', 'min'=>6),
+			array('senha_tela', 'required', 'on'=>'insert'),
+			array('senha_tela_repeat', 'compare', 'compareAttribute'=>'senha_tela'),
+			
+			array('codecf, codfilial, codpessoa, codportador, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
+			
 			array('senha, codecf, codfilial, codpessoa, impressoratelanegocio, codportador', 'default', 'setOnEmpty' => true, 'value' => null),
+
+			array('codecf', 'exist', 'className'=>'Ecf'),
+			array('codfilial', 'exist', 'className'=>'Filial'),
+			array('codoperacao', 'exist', 'className'=>'Operacao'),
+            array('codpessoa', 'exist', 'className'=>'Pessoa'),
+            array('codportador', 'exist', 'className'=>'Portador'),
+			
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('codusuario, usuario, senha, codecf, codfilial, codoperacao, codpessoa, impressoratelanegocio, codportador', 'safe', 'on'=>'search'),
+			array('codusuario, usuario, senha, codecf, codfilial, codoperacao, codpessoa, impressoratelanegocio, codportador, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -199,6 +219,15 @@ class Usuario extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'Ecf' => array(self::BELONGS_TO, 'Ecf', 'codecf'),
+			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
+			'Operacao' => array(self::BELONGS_TO, 'Operacao', 'codoperacao'),
+			'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
+			'Portador' => array(self::BELONGS_TO, 'Portador', 'codportador'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			
+			/*
 			'movimentotitulos' => array(self::HAS_MANY, 'Movimentotitulo', 'codusuarioalteracao'),
 			'movimentotitulos1' => array(self::HAS_MANY, 'Movimentotitulo', 'codusuariocriacao'),
 			'titulos' => array(self::HAS_MANY, 'Titulo', 'codusuarioalteracao'),
@@ -208,14 +237,7 @@ class Usuario extends MGActiveRecord
 			'filials2' => array(self::HAS_MANY, 'Filial', 'codusuariocriacao'),
 			'portadors' => array(self::HAS_MANY, 'Portador', 'codusuarioalteracao'),
 			'portadors1' => array(self::HAS_MANY, 'Portador', 'codusuariocriacao'),
-			'codecf' => array(self::BELONGS_TO, 'Ecf', 'codecf'),
-			'codfilial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
-			'codoperacao' => array(self::BELONGS_TO, 'Operacao', 'codoperacao'),
-			'codpessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
-			'codportador' => array(self::BELONGS_TO, 'Portador', 'codportador'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'usuarios' => array(self::HAS_MANY, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 			'usuarios1' => array(self::HAS_MANY, 'Usuario', 'codusuariocriacao'),
 			'empresas' => array(self::HAS_MANY, 'Empresa', 'codusuarioalteracao'),
 			'empresas1' => array(self::HAS_MANY, 'Empresa', 'codusuariocriacao'),
@@ -340,6 +362,8 @@ class Usuario extends MGActiveRecord
 			'produtohistoricoprecos' => array(self::HAS_MANY, 'Produtohistoricopreco', 'codusuario'),
 			'produtohistoricoprecos1' => array(self::HAS_MANY, 'Produtohistoricopreco', 'codusuarioalteracao'),
 			'produtohistoricoprecos2' => array(self::HAS_MANY, 'Produtohistoricopreco', 'codusuariocriacao'),
+			 * 
+			 */
 		);
 	}
 
@@ -349,19 +373,20 @@ class Usuario extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codusuario' => 'Codusuario',
-			'usuario' => 'Usuario',
+			'codusuario' => '# Usuário',
+			'usuario' => 'Usuário',
 			'senha' => 'Senha',
-			'codecf' => 'Codecf',
-			'codfilial' => 'Codfilial',
-			'codoperacao' => 'Codoperacao',
-			'codpessoa' => 'Codpessoa',
-			'impressoratelanegocio' => 'Impressoratelanegocio',
-			'codportador' => 'Codportador',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'senha_repeat' => 'Confirmação',
+			'codecf' => '# ECF',
+			'codfilial' => '# Filial',
+			'codoperacao' => '# Operação',
+			'codpessoa' => '# Pessoa',
+			'impressoratelanegocio' => 'Impressora Tela Negócio',
+			'codportador' => '# Portador',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => '# Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => '# Usuário Criação',
 		);
 	}
 
@@ -413,14 +438,16 @@ class Usuario extends MGActiveRecord
 		return parent::model($className);
 	}
 	
-	public function beforeSave()
+	public function hashSenha($senha)
 	{
-		if($this->isNewRecord)
-		{
-			$this->codusuario = Codigo::PegaProximo('codusuario');
-		}
-		
-		return parent::beforeSave();
-		
+		//if ($password_hash === crypt($form->password, $password_hash))
+		return crypt($senha);
+	}
+	
+	protected function afterValidate()
+	{
+		parent::afterValidate();
+		if (!$this->hasErrors() and !empty($this->senha_tela))
+			$this->senha = $this->hashSenha($this->senha_tela);
 	}
 }
