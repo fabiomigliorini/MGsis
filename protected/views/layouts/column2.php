@@ -1,11 +1,16 @@
 <?php /* @var $this Controller */ ?>
 <?php $this->beginContent('//layouts/main'); ?>
-<div class="span3">
+<div class="row-fluid">
+<div class="span10">
+	<?php require 'breadcrumbs.php'; ?>
+	<?php echo $content; ?>
+</div>
+<div class="span2 ">
 	<?php
 		$box = $this->beginWidget('bootstrap.widgets.TbBox',
 				array(
 					'title' => 'Operações',
-					'headerIcon' => 'icon-th-list',
+					/*'headerIcon' => 'icon-th-list',*/
 					'htmlOptions' => array('class' => 'bootstrap-widget-table')
 					)
 				);
@@ -32,8 +37,5 @@
 		$this->endWidget();
 	?>
 </div>
-<div class="span9">
-	<?php require 'breadcrumbs.php'; ?>
-	<?php echo $content; ?>
-</div>
+    </div>
 <?php $this->endContent(); ?>

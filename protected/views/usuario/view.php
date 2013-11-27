@@ -11,11 +11,11 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listagem', 'url'=>array('index')),
-	array('label'=>'Novo', 'url'=>array('create')),
-	array('label'=>'Alterar', 'url'=>array('update', 'id'=>$model->codusuario)),
-	array('label'=>'Excluir', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->codusuario),'confirm'=>'Tem certeza que deseja excluir este registro?')),
-	array('label'=>'Gerenciar', 'url'=>array('admin')),
+	array('label'=>'Listagem', 'icon' => 'icon-list-alt', 'url'=>array('index')),
+	array('label'=>'Novo', 'icon' => 'icon-plus', 'url'=>array('create')),
+	array('label'=>'Alterar', 'icon' => 'icon-pencil', 'url'=>array('update', 'id'=>$model->codusuario)),
+	array('label'=>'Excluir', 'icon' => 'icon-trash', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->codusuario),'confirm'=>'Tem certeza que deseja excluir este registro?')),
+	array('label'=>'Gerenciar', 'icon' => 'icon-briefcase', 'url'=>array('admin')),
 );
 ?>
 

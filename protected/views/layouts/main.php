@@ -37,9 +37,7 @@
 	);
 ?>
 <div class="container-fluid">
-	<div class="row-fluid">
-		<?php echo $content; ?>
-	</div>
+    <?php echo $content; ?>
 </div>
 	
 </body>

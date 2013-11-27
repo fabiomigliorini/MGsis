@@ -1,20 +1,26 @@
 <?php
-/* @var $this CodigoController */
-/* @var $dataProvider CActiveDataProvider */
-
 $this->breadcrumbs=array(
-	'Codigo',
+	'Codigos',
 );
 
 $this->menu=array(
-	array('label'=>'Novo Codigo', 'url'=>array('create')),
-	array('label'=>'Gerenciar Codigo', 'url'=>array('admin')),
+array('label'=>'Create Codigo','url'=>array('create')),
+array('label'=>'Manage Codigo','url'=>array('admin')),
 );
 ?>
 
-<h1>Codigo</h1>
+<h1>Codigos</h1>
 
-<?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
-)); ?>
+<hr>
+--------------------------------------------------------------------------------------------
+<hr>
+
+<?php $this->widget('bootstrap.widgets.TbListView',array(
+    'dataProvider'=>$dataProvider,
+    'itemView'=>'_view',
+    )); 
+?>
+
+<hr>
+--------------------------------------------------------------------------------------------
+<hr>

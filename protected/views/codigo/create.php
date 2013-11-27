@@ -1,18 +1,15 @@
 <?php
-/* @var $this CodigoController */
-/* @var $model Codigo */
-
 $this->breadcrumbs=array(
-	'Codigo'=>array('index'),
-	'Novo',
+	'Codigos'=>array('index'),
+	'Create',
 );
 
 $this->menu=array(
-	array('label'=>'Listagem de Codigo', 'url'=>array('index')),
-	array('label'=>'Gerenciar Codigo', 'url'=>array('admin')),
+array('label'=>'List Codigo','url'=>array('index')),
+array('label'=>'Manage Codigo','url'=>array('admin')),
 );
 ?>
 
-<h1>Novo Codigo</h1>
+<h1>Create Codigo</h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -26,121 +26,83 @@ $form = $this->beginWidget(
 		'enableAjaxValidation'=>true,
     )
 ); 
+
 ?>
    
-	<?php echo $form->errorSummary($model); ?>
-	
-	<fieldset>
-		<?php 
-			echo $form->textFieldRow(
-				$model,
-				'usuario',
-				array('hint' => 'Preencha o nome do usuário')
-				); 
+    <?php echo $form->errorSummary($model); ?>
 
-			echo $form->passwordFieldRow($model, 'senha_tela');
-			
-			echo $form->passwordFieldRow($model, 'senha_tela_repeat');
-			
-			echo $form->select2Row(
-				$model,
-				'codecf',
-				array(
-					'asDropDownList' => false,
-					'options' => array(
-						'data' => CHtml::listData(Filial::model()->findAll(), 'codfilial', 'filial'),
-						'placeholder' => 'type clever, or is, or just type!',
-						'width' => '40%',
-						)
-					)
-				);		
-			
-		?>
-	</fieldset>
-		
-	
-	<div class="row">
-		<?php //echo $form->labelEx($model,'codecf'); ?>
-		<?
-		/*
-			$this->widget('ext.select2.ESelect2', array(
-				'model' => $model,
- ,				'attribute' => 'codecf',
-				'options' => array('allowClear'=>true),
-				'htmlOptions' => array('style' => 'width:200px;'),
-			));
-		 * 
-		 */
-		?>
-		<?php //echo $form->error($model,'codecf'); ?>
-	</div>
+    <fieldset>
+        <?php 
+            echo $form->textFieldRow(
+                    $model,
+                    'usuario',
+                    array('class' => 'span6')
+                    ); 
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'codfilial'); ?>
-		<?
-		/*
-			$this->widget('ext.select2.ESelect2', array(
-				'model' => $model,
-				'attribute' => 'codfilial',
-				'data' => CHtml::listData(Filial::model()->findAll(), 'codfilial', 'filial'),
-				'options' => array('allowClear'=>true),
-				'htmlOptions' => array('style' => 'width:200px;'),
-			));
-		 * 
-		 */
-		?>
-		<?php echo $form->error($model,'codfilial'); ?>
-	</div>
+            echo $form->passwordFieldRow($model, 'senha_tela');
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'codoperacao'); ?>
-		<?
-			/*
-			$this->widget('ext.select2.ESelect2', array(
-				'model' => $model,
-				'attribute' => 'codoperacao',
-				'data' => CHtml::listData(Operacao::model()->findAll(), 'codoperacao', 'operacao'),
-				'options' => array('allowClear'=>true),
-				'htmlOptions' => array('style' => 'width:200px;'),
-			));
-			 * 
-			 */
-		?>
-		<?php echo $form->error($model,'codoperacao'); ?>
-	</div>
+            echo $form->passwordFieldRow($model, 'senha_tela_repeat');
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'codpessoa'); ?>
-		<?php echo $form->textField($model,'codpessoa'); ?>
-		<?php echo $form->error($model,'codpessoa'); ?>
-	</div>
+            echo $form->dropDownListRow(
+                    $model,
+                    'codecf',
+                    CHtml::listData(Ecf::model()->findAll(), 'codecf', 'ecf'),
+                    array('prompt'=>'', 'class' => 'span2')                    
+                    );	
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'impressoratelanegocio'); ?>
-		<?php echo $form->textField($model,'impressoratelanegocio',array('size'=>60,'maxlength'=>100)); ?>
-		<?php echo $form->error($model,'impressoratelanegocio'); ?>
-	</div>
+            echo $form->dropDownListRow(
+                    $model,
+                    'codfilial',
+                    CHtml::listData(Filial::model()->findAll(), 'codfilial', 'filial'),
+                    array('prompt'=>'', 'class' => 'span2')                    
+                    );	
+            echo $form->dropDownListRow(
+                    $model,
+                    'codoperacao',
+                    CHtml::listData(Operacao::model()->findAll(), 'codoperacao', 'operacao'),
+                    array('prompt'=>'', 'class' => 'span2')                    
+                    );	
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'codportador'); ?>
-		<?
-		/*
-			$this->widget('ext.select2.ESelect2', array(
-				'model' => $model,
-				'attribute' => 'codportador',
-				'data' => CHtml::listData(Portador::model()->findAll(), 'codportador', 'portador'),
-				'options' => array('allowClear'=>true),
-				'htmlOptions' => array('style' => 'width:200px;'),
-			));
-		 * 
-		 */
-		?>
-		<?php echo $form->error($model,'codportador'); ?>
-	</div>
+            echo $form->textFieldRow(
+                    $model,
+                    'codpessoa',
+                    array('class' => 'span2')                    
+                    ); 
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Salvar Novo' : 'Salvar Alterações'); ?>
-	</div>
+            echo $form->textFieldRow(
+                    $model,
+                    'impressoratelanegocio',
+                    array('class' => 'span2')                    
+                    ); 
+
+            echo $form->dropDownListRow(
+                    $model,
+                    'codportador',
+                    CHtml::listData(Portador::model()->findAll(), 'codportador', 'portador'),
+                    array('prompt'=>'', 'class' => 'span3')                    
+                    );	
+        ?>
+    </fieldset>
+
+    <div class="form-actions">
+        <?php $this->widget(
+            'bootstrap.widgets.TbButton',
+            array(
+                'buttonType' => 'submit',
+                'type' => 'primary',
+                'label' => 'Salvar',
+                'icon' => 'icon-ok',
+            )
+        ); ?>
+        <?php $this->widget(
+            'bootstrap.widgets.TbButton',
+            array(
+                'buttonType' => 'reset',
+                'label' => 'Limpar',
+                'icon' => 'icon-refresh'
+                )
+        ); ?>
+    </div>
 
 <?php $this->endWidget(); ?>
 
