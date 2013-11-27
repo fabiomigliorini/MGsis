@@ -1,18 +1,20 @@
 <?php
+$this->pagetitle = Yii::app()->name . ' - Alterar Codigo';
 $this->breadcrumbs=array(
-	'Codigos'=>array('index'),
+	'Codigo'=>array('index'),
 	$model->tabela=>array('view','id'=>$model->tabela),
-	'Update',
+	'Alterar',
 );
 
 	$this->menu=array(
-	array('label'=>'List Codigo','url'=>array('index')),
-	array('label'=>'Create Codigo','url'=>array('create')),
-	array('label'=>'View Codigo','url'=>array('view','id'=>$model->tabela)),
-	array('label'=>'Manage Codigo','url'=>array('admin')),
+	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
+	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
+	array('label'=>'Detalhes', 'icon'=>'icon-eye-open', 'url'=>array('view','id'=>$model->tabela)),
+	array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 	);
 	?>
 
-	<h1>Update Codigo <?php echo $model->tabela; ?></h1>
+	<h1>Alterar Codigo #<?php echo $model->tabela; ?></h1>
 
-<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>
+	<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>	
+	<?php $this->widget('UsuarioCriacao', array('model'=>$model)); ?>

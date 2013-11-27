@@ -19,12 +19,18 @@ abstract class MGActiveRecord extends CActiveRecord
 		//volta data do formato brasileiro para formato Y-m-d
 		foreach($this->metadata->tableSchema->columns as $columnName => $column)
 		{
+			/* se campo estiver vazio, vai para proximo */
+			if (empty($this->{$column->name}))
+				continue;
+			
+			/* DATA */
 			if ($column->dbType == 'date')
 			{
 				$this->$columnName = date('Y-m-d',
 					CDateTimeParser::parse($this->$columnName,
 					Yii::app()->locale->getDateFormat('medium')));
 			}
+			/* DATA HORA */
 			elseif ($column->dbType == 'timestamp without time zone')
 			{
 				$this->$columnName = date('Y-m-d H:i:s',
@@ -67,6 +73,7 @@ abstract class MGActiveRecord extends CActiveRecord
 		{           
 			if (!strlen($this->$columnName)) continue;
 
+			/* DATA */
 			if ($column->dbType == 'date')
 			{ 
 				$this->$columnName = Yii::app()->dateFormatter->formatDateTime(
@@ -77,6 +84,7 @@ abstract class MGActiveRecord extends CActiveRecord
 						'medium',null
 					);
 			}
+			/* DATA HORA */
 			elseif ($column->dbType == 'timestamp without time zone')
 			{
 				$this->$columnName = Yii::app()->dateFormatter->formatDateTime(
@@ -95,6 +103,8 @@ abstract class MGActiveRecord extends CActiveRecord
 	{
 		if(!is_array($values)) return;
 		$attributes=array_flip($safeOnly ? $this->getSafeAttributeNames() : $this->attributeNames());
+		
+		/* Volta Formato dos números */
 		foreach($values as $name=>$value) 
 		{
 			if(isset($attributes[$name])) 

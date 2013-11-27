@@ -167,6 +167,8 @@ class Usuario extends MGActiveRecord
 	public $senha_tela;
 	public $senha_tela_repeat;
 	
+	public $fantasia_busca;
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -207,7 +209,7 @@ class Usuario extends MGActiveRecord
 			
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('codusuario, usuario, senha, codecf, codfilial, codoperacao, codpessoa, impressoratelanegocio, codportador, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
+			array('codusuario, usuario, fantasia_busca, codecf, codfilial, codoperacao, codportador, impressoratelanegocio', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -373,20 +375,21 @@ class Usuario extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codusuario' => '# Usuário',
+			'codusuario' => '#',
 			'usuario' => 'Usuário',
 			'senha' => 'Senha',
-			'senha_repeat' => 'Confirmação',
-			'codecf' => '# ECF',
-			'codfilial' => '# Filial',
-			'codoperacao' => '# Operação',
-			'codpessoa' => '# Pessoa',
+			'senha_tela' => 'Senha',
+			'senha_tela_repeat' => 'Confirmação',
+			'codecf' => 'ECF',
+			'codfilial' => 'Filial',
+			'codoperacao' => 'Operação',
+			'codpessoa' => 'Pessoa',
 			'impressoratelanegocio' => 'Impressora Tela Negócio',
-			'codportador' => '# Portador',
+			'codportador' => 'Portador',
 			'alteracao' => 'Alteração',
-			'codusuarioalteracao' => '# Usuário Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
-			'codusuariocriacao' => '# Usuário Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 
@@ -408,20 +411,20 @@ class Usuario extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codusuario',$this->codusuario,true);
-		$criteria->compare('usuario',$this->usuario,true);
-		$criteria->compare('senha',$this->senha,true);
-		$criteria->compare('codecf',$this->codecf,true);
-		$criteria->compare('codfilial',$this->codfilial,true);
-		$criteria->compare('codoperacao',$this->codoperacao,true);
-		$criteria->compare('codpessoa',$this->codpessoa,true);
-		$criteria->compare('impressoratelanegocio',$this->impressoratelanegocio,true);
-		$criteria->compare('codportador',$this->codportador,true);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('codusuario','='.$this->codusuario,true);
+		$criteria->compare('codecf','='.$this->codecf,true);
+		$criteria->compare('codfilial','='.$this->codfilial,true);
+		$criteria->compare('codoperacao','='.$this->codoperacao,true);
+		$criteria->compare('codportador','='.$this->codportador,true);
+		$criteria->compare('LOWER(usuario)',strtolower($this->usuario),true);
+		$criteria->compare('LOWER(impressoratelanegocio)',$this->impressoratelanegocio,true);
 
+		if (!empty($this->fantasia_busca))
+		{
+			$criteria->compare('LOWER(fantasia)',strtolower($this->fantasia_busca),true);
+			$criteria->with = array('Pessoa');
+		}
+		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

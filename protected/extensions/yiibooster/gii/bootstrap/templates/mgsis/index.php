@@ -1,8 +1,19 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Usuario';
-$this->breadcrumbs=array(
-	'Usuario',
-);
+/**
+ * The following variables are available in this template:
+ * - $this: the BootCrudCode object
+ */
+?>
+<?php
+echo "<?php\n";
+$label = $this->class2name($this->modelClass);
+
+echo "\$this->pagetitle = Yii::app()->name . ' - $label';\n";
+
+echo "\$this->breadcrumbs=array(
+	'$label',
+);\n";
+?>
 
 $this->menu=array(
 	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
@@ -10,9 +21,9 @@ $this->menu=array(
 	);
 ?>
 
-<h1>Usuario</h1>
+<h1><?php echo $label; ?></h1>
 
-<?php 
+<?php echo "<?php"; ?> 
 $this->widget('bootstrap.widgets.TbListView',array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',

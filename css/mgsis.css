@@ -3,3 +3,32 @@ body {
   padding-top: 60px;
   /* padding-left: 70px; */
 }
+
+.codigo {
+    /*background: blue;*/
+    font-weight: bold;
+}
+
+.detalhes {
+    font-size: 80%;
+    color: #999999;
+}
+
+.registro {
+    border-bottom: 1px solid #eeeeee;
+    padding: 7px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px; 
+  
+}
+
+.registro:hover {
+    background-color: #eeeeee;
+}
+
+.usuario {
+    font-size: 90%;
+    color: #999999;
+    padding-bottom: 20px;
+}

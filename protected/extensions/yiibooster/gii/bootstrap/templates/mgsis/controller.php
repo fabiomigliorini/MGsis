@@ -1,6 +1,13 @@
 <?php
+/**
+ * This is the template for generating a controller class file for CRUD feature.
+ * The following variables are available in this template:
+ * - $this: the BootCrudCode object
+ */
+?>
+<?php echo "<?php\n"; ?>
 
-class UsuarioController extends Controller
+class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseControllerClass . "\n"; ?>
 {
 	/**
 	* @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -61,16 +68,16 @@ class UsuarioController extends Controller
 	*/
 	public function actionCreate()
 	{
-		$model=new Usuario;
+		$model=new <?php echo $this->modelClass; ?>;
 
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
 
-		if(isset($_POST['Usuario']))
+		if(isset($_POST['<?php echo $this->modelClass; ?>']))
 		{
-			$model->attributes=$_POST['Usuario'];
+			$model->attributes=$_POST['<?php echo $this->modelClass; ?>'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->codusuario));
+				$this->redirect(array('view','id'=>$model-><?php echo $this->tableSchema->primaryKey; ?>));
 		}
 
 		$this->render('create',array(
@@ -90,11 +97,11 @@ class UsuarioController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
 
-		if(isset($_POST['Usuario']))
+		if(isset($_POST['<?php echo $this->modelClass; ?>']))
 		{
-			$model->attributes=$_POST['Usuario'];
+			$model->attributes=$_POST['<?php echo $this->modelClass; ?>'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->codusuario));
+				$this->redirect(array('view','id'=>$model-><?php echo $this->tableSchema->primaryKey; ?>));
 		}
 
 		$this->render('update',array(
@@ -127,9 +134,9 @@ class UsuarioController extends Controller
 	*/
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Usuario', array(
+		$dataProvider=new CActiveDataProvider('<?php echo $this->modelClass; ?>', array(
 			'criteria'=>array(
-					'order'=>'usuario ASC',
+					'order'=>'<?php echo $this->tableSchema->primaryKey; ?> ASC',
 				),
 			));
 		$this->render('index',array(
@@ -143,12 +150,12 @@ class UsuarioController extends Controller
 	public function actionAdmin()
 	{
 	
-		$model=new Usuario('search');
+		$model=new <?php echo $this->modelClass; ?>('search');
 		
 		$model->unsetAttributes();  // clear any default values
 		
-		if(isset($_GET['Usuario']))
-			$model->attributes=$_GET['Usuario'];
+		if(isset($_GET['<?php echo $this->modelClass; ?>']))
+			$model->attributes=$_GET['<?php echo $this->modelClass; ?>'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -162,7 +169,7 @@ class UsuarioController extends Controller
 	*/
 	public function loadModel($id)
 	{
-		$model=Usuario::model()->findByPk($id);
+		$model=<?php echo $this->modelClass; ?>::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -174,7 +181,7 @@ class UsuarioController extends Controller
 	*/
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='usuario-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='<?php echo $this->class2id($this->modelClass); ?>-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

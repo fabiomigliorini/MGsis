@@ -1,85 +1,36 @@
-<?php
-/* @var $this UsuarioController */
-/* @var $model Usuario */
-/* @var $form CActiveForm */
-?>
-
-<div class="wide form">
-
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 	'action'=>Yii::app()->createUrl($this->route),
+	'type' => 'horizontal',
 	'method'=>'get',
 )); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'codusuario'); ?>
-		<?php echo $form->textField($model,'codusuario'); ?>
-	</div>
+<hr>
 
-	<div class="row">
-		<?php echo $form->label($model,'usuario'); ?>
-		<?php echo $form->textField($model,'usuario',array('size'=>50,'maxlength'=>50)); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'codusuario',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'senha'); ?>
-		<?php echo $form->textField($model,'senha',array('size'=>60,'maxlength'=>100)); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'usuario',array('class'=>'span5','maxlength'=>50)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'codecf'); ?>
-		<?php echo $form->textField($model,'codecf'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'senha',array('class'=>'span5','maxlength'=>100)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'codfilial'); ?>
-		<?php echo $form->textField($model,'codfilial'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'codecf',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'codoperacao'); ?>
-		<?php echo $form->textField($model,'codoperacao'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'codfilial',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'codpessoa'); ?>
-		<?php echo $form->textField($model,'codpessoa'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'codoperacao',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'impressoratelanegocio'); ?>
-		<?php echo $form->textField($model,'impressoratelanegocio',array('size'=>60,'maxlength'=>100)); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'codpessoa',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'codportador'); ?>
-		<?php echo $form->textField($model,'codportador'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'impressoratelanegocio',array('class'=>'span5','maxlength'=>100)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'alteracao'); ?>
-		<?php echo $form->textField($model,'alteracao'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'codportador',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'codusuarioalteracao'); ?>
-		<?php echo $form->textField($model,'codusuarioalteracao'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'criacao'); ?>
-		<?php echo $form->textField($model,'criacao'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'codusuariocriacao'); ?>
-		<?php echo $form->textField($model,'codusuariocriacao'); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+					<div class="form-actions">
+		<?php $this->widget('bootstrap.widgets.TbButton', array(
+			'buttonType' => 'submit',
+			'type'=>'primary',
+			'icon'=>'icon-search',
+			'label'=>'Buscar',
+		)); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
-
-</div><!-- search-form -->
