@@ -1,6 +1,7 @@
 <?php
 abstract class MGActiveRecord extends CActiveRecord
 {
+	
 	/**
 	* seta campos de alteracao e criacao automaticamente
 	*/

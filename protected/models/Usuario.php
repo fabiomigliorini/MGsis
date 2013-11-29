@@ -384,7 +384,7 @@ class Usuario extends MGActiveRecord
 			'codfilial' => 'Filial',
 			'codoperacao' => 'Operação',
 			'codpessoa' => 'Pessoa',
-			'impressoratelanegocio' => 'Impressora Tela Negócio',
+			'impressoratelanegocio' => 'Impressora Negócio',
 			'codportador' => 'Portador',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',

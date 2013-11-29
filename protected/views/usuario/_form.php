@@ -1,7 +1,5 @@
-<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
+<?php $form=$this->beginWidget('MGActiveForm',array(
 	'id'=>'usuario-form',
-	'type' => 'horizontal',
-	'enableAjaxValidation'=>true,
 )); ?>
 
 <?php echo $form->errorSummary($model); ?>
@@ -21,29 +19,29 @@
 		echo $form->dropDownListRow(
 				$model,
 				'codecf',
-				CHtml::listData(Ecf::model()->findAll(), 'codecf', 'ecf'),
+				Ecf::getListaCombo(),
 				array('prompt'=>'', 'class' => 'span2')                    
 				);	
-
+		
 		echo $form->dropDownListRow(
 				$model,
 				'codfilial',
-				CHtml::listData(Filial::model()->findAll(), 'codfilial', 'filial'),
+				Filial::getListaCombo(),
 				array('prompt'=>'', 'class' => 'span2')                    
 				);	
+		
 		echo $form->dropDownListRow(
 				$model,
 				'codoperacao',
-				CHtml::listData(Operacao::model()->findAll(), 'codoperacao', 'operacao'),
+				Operacao::getListaCombo(),
 				array('prompt'=>'', 'class' => 'span2')                    
 				);	
 
-		echo $form->textFieldRow(
-				$model,
-				'codpessoa',
-				array('class' => 'span2')                    
-				); 
-
+		echo $form->select2PessoaRow(
+				$model, 
+				'codpessoa'
+				);
+		
 		echo $form->textFieldRow(
 				$model,
 				'impressoratelanegocio',
@@ -53,14 +51,12 @@
 		echo $form->dropDownListRow(
 				$model,
 				'codportador',
-				CHtml::listData(Portador::model()->findAll(), 'codportador', 'portador'),
+				Portador::getListaCombo(),
 				array('prompt'=>'', 'class' => 'span3')                    
 				);	
-	
 	?>
 
 <div class="form-actions">
-    
     
     <?php 
 	
@@ -85,6 +81,6 @@
                 )
             );
     ?>
-    </div>
+</div>
 
 <?php $this->endWidget(); ?>

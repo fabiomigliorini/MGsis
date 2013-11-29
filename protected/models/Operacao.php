@@ -116,4 +116,21 @@ class Operacao extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public function scopes () 
+	{
+		return array(
+			'combo'=>array(
+				'select'=>array('codoperacao', 'operacao'),
+				'order'=>'codoperacao ASC',
+				),
+			);
+	}
+
+	public function getListaCombo ()
+	{
+		$lista = self::model()->combo()->findAll();
+		return CHtml::listData($lista, 'codoperacao', 'operacao');
+	}	
+	
 }

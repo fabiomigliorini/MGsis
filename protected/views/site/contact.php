@@ -9,6 +9,21 @@ $this->breadcrumbs=array(
 );
 ?>
 
+
+<table class='combo-pessoa'><tr>
+<td colspan=2 class='combo-pessoa-fantasia'> + item.fantasiafantasia + </td>
+</tr><tr>
+<td class='combo-pessoa-pessoa'> + item.pessoa + </td>
+<td class='combo-pessoa-cnpj'> + item.cnpj + </td>
+</tr></table>
+
+<div class='div-combo-pessoa'>
+<div class='div-combo-pessoa-fantasia'> + item.fantasiafantasia + </div>
+<div class='div-combo-pessoa-pessoa'> + item.pessoa + </div>
+<div class='div-combo-pessoa-cnpj'> + item.cnpj + </div>
+</div>
+
+
 <h1>Contact Us</h1>
 
 <?php if(Yii::app()->user->hasFlash('contact')): ?>

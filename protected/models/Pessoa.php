@@ -264,4 +264,5 @@ class Pessoa extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
+	
 }

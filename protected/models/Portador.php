@@ -162,4 +162,21 @@ class Portador extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
+	
+	public function scopes () 
+	{
+		return array(
+			'combo'=>array(
+				'select'=>array('codportador', 'portador'),
+				'order'=>'portador ASC',
+				),
+			);
+	}
+
+	public function getListaCombo ()
+	{
+		$lista = self::model()->combo()->findAll();
+		return CHtml::listData($lista, 'codportador', 'portador');
+	}	
+
 }

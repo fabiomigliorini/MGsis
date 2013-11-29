@@ -166,4 +166,21 @@ class Filial extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public function scopes () 
+	{
+		return array(
+			'combo'=>array(
+				'select'=>array('codfilial', 'filial'),
+				'order'=>'filial ASC',
+				),
+			);
+	}
+	
+	public function getListaCombo ()
+	{
+		$lista = self::model()->combo()->findAll();
+		return CHtml::listData($lista, 'codfilial', 'filial');
+	}	
+	
 }

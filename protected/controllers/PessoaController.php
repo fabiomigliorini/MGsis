@@ -1,6 +1,6 @@
 <?php
 
-class UsuarioController extends Controller
+class PessoaController extends Controller
 {
 	/**
 	* @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -27,7 +27,7 @@ class UsuarioController extends Controller
 	{
 	return array(
 		array('allow',  // allow all users to perform 'index' and 'view' actions
-			'actions'=>array('index','view'),
+			'actions'=>array('index','view', 'ajaxbuscapessoa', 'ajaxinicializapessoa'),
 			'users'=>array('*'),
 			),
 		array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -61,16 +61,16 @@ class UsuarioController extends Controller
 	*/
 	public function actionCreate()
 	{
-		$model=new Usuario;
+		$model=new Pessoa;
 
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
 
-		if(isset($_POST['Usuario']))
+		if(isset($_POST['Pessoa']))
 		{
-			$model->attributes=$_POST['Usuario'];
+			$model->attributes=$_POST['Pessoa'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->codusuario));
+				$this->redirect(array('view','id'=>$model->codpessoa));
 		}
 
 		$this->render('create',array(
@@ -90,11 +90,11 @@ class UsuarioController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
 
-		if(isset($_POST['Usuario']))
+		if(isset($_POST['Pessoa']))
 		{
-			$model->attributes=$_POST['Usuario'];
+			$model->attributes=$_POST['Pessoa'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->codusuario));
+				$this->redirect(array('view','id'=>$model->codpessoa));
 		}
 
 		$this->render('update',array(
@@ -127,9 +127,9 @@ class UsuarioController extends Controller
 	*/
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Usuario', array(
+		$dataProvider=new CActiveDataProvider('Pessoa', array(
 			'criteria'=>array(
-					'order'=>'usuario ASC',
+					'order'=>'codpessoa ASC',
 				),
 			));
 		$this->render('index',array(
@@ -143,12 +143,12 @@ class UsuarioController extends Controller
 	public function actionAdmin()
 	{
 	
-		$model=new Usuario('search');
+		$model=new Pessoa('search');
 		
 		$model->unsetAttributes();  // clear any default values
 		
-		if(isset($_GET['Usuario']))
-			$model->attributes=$_GET['Usuario'];
+		if(isset($_GET['Pessoa']))
+			$model->attributes=$_GET['Pessoa'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -162,7 +162,7 @@ class UsuarioController extends Controller
 	*/
 	public function loadModel($id)
 	{
-		$model=Usuario::model()->findByPk($id);
+		$model=Pessoa::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -174,11 +174,107 @@ class UsuarioController extends Controller
 	*/
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='usuario-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='pessoa-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
 	}
+	
+	public function actionAjaxBuscaPessoa() 
+	{
+
+		// variaveis _GET 
+		$texto  = isset($_GET['texto'])?$_GET['texto']:'';
+		$limite = isset($_GET['limite'])?$_GET['limite']:20;
+		$pagina = isset($_GET['pagina'])?$_GET['pagina']:1;
+
+		// corrige pagina se veio sujeira
+		if ($pagina < 1) $pagina = 1;
+
+		// calcula de onde continuar a consulta
+		$offset = ($pagina-1)*$limite;
+		
+		// inicializa array com resultados
+		$resultados = array();
+
+		// se o texto foi preenchido
+		if (strlen($texto)>=3)
+		{
+			
+			// busca pelos campos "fantasia" e "pessoa" 
+			$condition = 'inativo is null and (fantasia ILIKE :fantasia OR pessoa ILIKE :pessoa ';
+			$params = array(
+				':fantasia'=>'%'.$texto.'%',
+				':pessoa'=>'%'.$texto.'%',
+				);
+			
+			// se o texto for um numero busca pelo "codpessoa" e "cnpj"
+			if ((int)$texto <> 0) 
+			{
+				$condition .= ' OR codpessoa = :codpessoa OR cast(Cnpj as char(20)) ILIKE :cnpj';
+				$params = array_merge(
+						$params, 
+						array(
+							':codpessoa'=>(int)$texto,
+							':cnpj'=>(int)$texto.'%',
+							)
+						);
+			}
+			$condition .= ')';
+			
+			// busca pessoas
+			$pessoas = Pessoa::model()->findAll(
+					array(
+						'select'=>'codpessoa, fantasia, pessoa, cnpj', 
+						'order'=>'fantasia', 
+						'condition'=>$condition, 
+						'params'=>$params,
+						'limit'=>$limite,
+						'offset'=>$offset,
+						)
+					);
+			
+			//monta array com resultados
+			foreach ($pessoas as $pessoa) 
+			{
+				$resultados[] = array(
+					'id' => $pessoa->codpessoa,
+					'fantasia' => $pessoa->fantasia,
+					'pessoa' => $pessoa->pessoa,
+					'cnpj' => $pessoa->cnpj,
+					);
+			}
+			
+		} 
+		
+		// transforma o array em JSON
+		echo CJSON::encode(
+				array(
+					'mais' => count($resultados)==$limite?true:false, 
+					'pagina' => (int) $pagina, 
+					'itens' => $resultados
+					)
+				);
+		
+		// FIM
+		Yii::app()->end();
+	} 
+	
+	public function actionAjaxInicializaPessoa() 
+	{
+		if (isset($_GET['cod']))
+		{
+			$pessoa = Pessoa::model()->findByPk(
+					$_GET['cod'],
+					array(
+						'select'=>'codpessoa, fantasia', 
+						'order'=>'fantasia', 
+						)
+					);
+			echo CJSON::encode(array('id' => $pessoa->codpessoa,'fantasia' => $pessoa->fantasia));
+		}
+		Yii::app()->end();
+	} 
 	
 }

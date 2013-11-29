@@ -1,6 +1,7 @@
 body {
   /*padding: 30px;*/
   padding-top: 60px;
+  padding-bottom: 30px;
   /* padding-left: 70px; */
 }
 
@@ -10,7 +11,7 @@ body {
 }
 
 .detalhes {
-    font-size: 80%;
+    font-size: .8em;
     color: #999999;
 }
 
@@ -28,7 +29,56 @@ body {
 }
 
 .usuario {
-    font-size: 90%;
+    font-size: .9em;
     color: #999999;
     padding-bottom: 20px;
+}
+
+.div-combo-pessoa {
+    display:table-cell;
+    width:500px;
+}
+
+.div-combo-pessoa-fantasia {
+    font-weight: bold;
+    float: left;
+    clear: left;
+}
+
+.div-combo-pessoa-codigo {
+    color: #999999;
+    font-size: .8em;
+    text-align: right;
+    float: right;
+    clear: right;
+}
+
+.div-combo-pessoa-pessoa {
+    color: #999999;
+    font-size: .8em;
+    float: left;
+    clear: left;
+}
+.div-combo-pessoa-cnpj {
+    color: #999999;
+    font-size: .8em;
+    text-align: right;
+    float: right;
+    clear: right;
+}
+
+.select2-highlighted .div-combo-pessoa-fantasia { 
+/*    color: yellow; */
+}
+
+.select2-highlighted .div-combo-pessoa-codigo { 
+    color: #eeeeee; 
+}
+
+.select2-highlighted .div-combo-pessoa-pessoa { 
+    color: #eeeeee; 
+}
+
+.select2-highlighted .div-combo-pessoa-cnpj { 
+    color: #eeeeee; 
 }
