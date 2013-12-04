@@ -185,7 +185,7 @@ class PessoaController extends Controller
 	{
 
 		// variaveis _GET 
-		$texto  = isset($_GET['texto'])?$_GET['texto']:'';
+		$texto  = str_replace(' ', '%', trim(isset($_GET['texto'])?$_GET['texto']:''));
 		$limite = isset($_GET['limite'])?$_GET['limite']:20;
 		$pagina = isset($_GET['pagina'])?$_GET['pagina']:1;
 

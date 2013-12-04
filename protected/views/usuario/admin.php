@@ -9,7 +9,7 @@ $this->menu=array(
 	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
 	);
-
+/*
 Yii::app()->clientScript->registerScript('search', "
 	$('.search-button').click(function(){
 	$('.search-form').toggle();
@@ -22,6 +22,8 @@ Yii::app()->clientScript->registerScript('search', "
 		return false;
 		});
 ");
+ * 
+ */
 ?>
 
 <h1>Gerenciar Usuario</h1>

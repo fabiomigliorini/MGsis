@@ -167,7 +167,6 @@ class Usuario extends MGActiveRecord
 	public $senha_tela;
 	public $senha_tela_repeat;
 	
-	public $fantasia_busca;
 	
 	/**
 	 * @return string the associated database table name
@@ -209,7 +208,8 @@ class Usuario extends MGActiveRecord
 			
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('codusuario, usuario, fantasia_busca, codecf, codfilial, codoperacao, codportador, impressoratelanegocio', 'safe', 'on'=>'search'),
+			array('codusuario', 'numerical', 'on'=>'search'),
+			array('codusuario, usuario, codecf, codfilial, codoperacao, codportador, impressoratelanegocio', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -411,19 +411,31 @@ class Usuario extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codusuario','='.$this->codusuario,true);
-		$criteria->compare('codecf','='.$this->codecf,true);
-		$criteria->compare('codfilial','='.$this->codfilial,true);
-		$criteria->compare('codoperacao','='.$this->codoperacao,true);
-		$criteria->compare('codportador','='.$this->codportador,true);
-		$criteria->compare('LOWER(usuario)',strtolower($this->usuario),true);
-		$criteria->compare('LOWER(impressoratelanegocio)',$this->impressoratelanegocio,true);
+		if ((int)$this->codusuario <> 0) 
+			$criteria->compare('codusuario', (int)$this->codusuario, false);
+		
+		if ((int)$this->codecf <> 0) 
+			$criteria->compare('codecf', (int)$this->codecf, false);
+		
+		if ((int)$this->codfilial <> 0) 
+			$criteria->compare('codfilial', (int)$this->codfilial, false);
 
-		if (!empty($this->fantasia_busca))
-		{
-			$criteria->compare('LOWER(fantasia)',strtolower($this->fantasia_busca),true);
-			$criteria->with = array('Pessoa');
-		}
+		if ((int)$this->codoperacao <> 0) 
+			$criteria->compare('codoperacao', (int)$this->codoperacao, false);
+
+		if ((int)$this->codportador <> 0) 
+			$criteria->compare('codportador', (int)$this->codportador, false);
+		
+		if ((int)$this->codpessoa <> 0) 
+			$criteria->compare('codpessoa', (int)$this->codpessoa, false);
+		
+		if (!empty($this->usuario))
+			$criteria->addSearchCondition('usuario', '%'.$this->usuario.'%', false, 'AND', 'ILIKE');
+		
+		if (!empty($this->impressoratelanegocio))
+			$criteria->addSearchCondition('impressoratelanegocio', '%'.$this->impressoratelanegocio.'%', false, 'AND', 'ILIKE');
+		
+		$criteria->order = 'usuario ASC';
 		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -127,13 +127,17 @@ class UsuarioController extends Controller
 	*/
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Usuario', array(
-			'criteria'=>array(
-					'order'=>'usuario ASC',
-				),
-			));
+		
+		$model=new Usuario('search');
+		
+		$model->unsetAttributes();  // clear any default values
+		
+		if(isset($_GET['Usuario']))
+			$model->attributes=$_GET['Usuario'];
+		
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'dataProvider'=>$model->search(),
+			'model'=>$model,
 			));
 	}
 
