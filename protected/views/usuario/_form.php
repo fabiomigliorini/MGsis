@@ -3,18 +3,18 @@
 )); ?>
 
 <?php echo $form->errorSummary($model); ?>
-
+<fieldset>
 	<?php
 	
 		echo $form->textFieldRow(
 				$model,
 				'usuario',
-				array('class' => 'span6')
+				array('class' => 'span2')
 				); 
 
-		echo $form->passwordFieldRow($model, 'senha_tela');
+		echo $form->passwordFieldRow($model, 'senha_tela', array('class' => 'span2'));
 
-		echo $form->passwordFieldRow($model, 'senha_tela_repeat');
+		echo $form->passwordFieldRow($model, 'senha_tela_repeat', array('class' => 'span2'));
 
 		echo $form->dropDownListRow(
 				$model,
@@ -54,8 +54,22 @@
 				Portador::getListaCombo(),
 				array('prompt'=>'', 'class' => 'span3')                    
 				);	
-	?>
 
+		echo $form->datepickerRow(
+				$model,
+				'inativo',
+				array(
+					'class' => 'span2', 
+					'options' => array(
+						'language' => 'es',
+						'format' => 'dd/mm/yyyy'
+						),
+					'prepend' => '<i class="icon-calendar"></i>',
+					)
+				); 
+
+	?>
+</fieldset>
 <div class="form-actions">
     
     <?php 

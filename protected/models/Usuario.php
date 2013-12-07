@@ -205,6 +205,7 @@ class Usuario extends MGActiveRecord
 			array('codoperacao', 'exist', 'className'=>'Operacao'),
             array('codpessoa', 'exist', 'className'=>'Pessoa'),
             array('codportador', 'exist', 'className'=>'Portador'),
+			array('inativo', 'date', 'format'=>Yii::app()->locale->getDateFormat('medium')),
 			
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -390,6 +391,8 @@ class Usuario extends MGActiveRecord
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
 			'codusuariocriacao' => 'Usuário Criação',
+			'ultimoacesso' => 'Último Acesso',
+			'inativo' => 'Inativado em',
 		);
 	}
 
@@ -453,9 +456,8 @@ class Usuario extends MGActiveRecord
 		return parent::model($className);
 	}
 	
-	public function hashSenha($senha)
+	public function cryptSenha($senha)
 	{
-		//if ($password_hash === crypt($form->password, $password_hash))
 		return crypt($senha);
 	}
 	
@@ -463,6 +465,11 @@ class Usuario extends MGActiveRecord
 	{
 		parent::afterValidate();
 		if (!$this->hasErrors() and !empty($this->senha_tela))
-			$this->senha = $this->hashSenha($this->senha_tela);
+			$this->senha = $this->cryptSenha($this->senha_tela);
+	}
+	
+	public function validaSenha($senha)
+	{
+		return crypt($senha, $this->senha) == $this->senha;
 	}
 }

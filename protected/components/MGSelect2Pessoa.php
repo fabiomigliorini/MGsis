@@ -5,6 +5,7 @@ Yii::import("bootstrap.widgets.TbSelect2");
 class MGSelect2Pessoa extends TbSelect2
 {
 
+	
 	public function init()
 	{
 		
@@ -14,7 +15,7 @@ class MGSelect2Pessoa extends TbSelect2
 			$this->htmlOptions['class'] = 'span6';
 		
 		if (!isset($this->htmlOptions['placeholder'])) 
-			$this->htmlOptions['placeholder'] = ' ';
+			$this->htmlOptions['placeholder'] = ' -- Pessoa -- ';
 		
 		$this->options = array(
 					'minimumInputLength'=>3,

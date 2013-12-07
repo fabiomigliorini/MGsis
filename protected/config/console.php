@@ -9,15 +9,23 @@ return array(
 	// preloading 'log' component
 	'preload'=>array('log'),
 
+	'commandMap' => array(
+		'migrate' => array(
+			'class' => 'system.cli.commands.MigrateCommand',
+			'migrationTable' => 'mgsis.tbl_migration'
+		)
+	),
+	/*
     'commandMap'=>array(
-        'migrate'=>array(
-            'class'=>'system.cli.commands.MigrateCommand',
-            'migrationPath'=>'application.migrations',
-            'migrationTable'=>'mgsis.tbl_migration',
-            'connectionID'=>'db',
-            'templateFile'=>'application.migrations.template',
-        ),
+        //'migrate'=>array(
+            //'class'=>'system.cli.commands.MigrateCommand',
+            //'migrationPath'=>'application.migrations',
+            //'migrationTable'=>'mgsis.tbl_migration',
+            //'connectionID'=>'db',
+            //'templateFile'=>'application.migrations.template',
+        //),
     ),
+	*/
 	
 	// application components
 	'components'=>array(
@@ -32,9 +40,6 @@ return array(
 			'username' => 'mgsis_yii',
 			'password' => 'mgsis_yii',
 			'charset' => 'utf8',
-		),
-		'migrateCommand'=>array(
-			'migrationTable'=>'mgsis.yii_tblmigration',
 		),
 		'log'=>array(
 			'class'=>'CLogRouter',

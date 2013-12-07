@@ -22,7 +22,10 @@ abstract class MGActiveRecord extends CActiveRecord
 		{
 			/* se campo estiver vazio, vai para proximo */
 			if (empty($this->{$column->name}))
+			{
+				$this->{$column->name} = null;
 				continue;
+			}
 			
 			/* DATA */
 			if ($column->dbType == 'date')
@@ -45,21 +48,18 @@ abstract class MGActiveRecord extends CActiveRecord
 		
 		//descobre codigo do usuario conectado
 		if(null !== Yii::app()->user)
-			$id=Yii::app()->user->id;
+			$codusuario=Yii::app()->user->id;
 		else
-			$id=1;
-		
-		//forca 1 ate configurar o login
-		$id = 1;
+			$codusuario=null;
 
 		//seta campos de alteracao
-		$this->codusuarioalteracao=$id;
+		$this->codusuarioalteracao = $codusuario;
 		$this->alteracao = date('Y-m-d H:i:s');
 
 		//se for novo registro seta campos de criacao
 		if($this->isNewRecord)
 		{
-			$this->codusuariocriacao=$id;
+			$this->codusuariocriacao = $this->codusuarioalteracao;
 			$this->criacao = $this->alteracao;
 		}
 

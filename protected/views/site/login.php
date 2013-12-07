@@ -4,50 +4,58 @@
 /* @var $form CActiveForm  */
 
 $this->pageTitle=Yii::app()->name . ' - Login';
-$this->breadcrumbs=array(
-	'Login',
-);
+$this->breadcrumbs=array('Login');
+
+$this->layout = "//layouts/main"
 ?>
 
-<h1>Login</h1>
 
-<p>Please fill out the following form with your login credentials:</p>
+<h1>Identifique-se</h1>
+<br>
 
-<div class="form">
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'login-form',
-	'enableClientValidation'=>true,
-	'clientOptions'=>array(
-		'validateOnSubmit'=>true,
-	),
+<?php $form=$this->beginWidget('MGActiveForm',array(
+	'id'=>'usuario-form',
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+<fieldset>
+	<?php 
+	echo $form->errorSummary($model); 
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'username'); ?>
-		<?php echo $form->textField($model,'username'); ?>
-		<?php echo $form->error($model,'username'); ?>
-	</div>
+	echo $form->textFieldRow(
+			$model,
+			'username',
+			array('class' => 'span2')
+			); 
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'password'); ?>
-		<?php echo $form->passwordField($model,'password'); ?>
-		<?php echo $form->error($model,'password'); ?>
-		<p class="hint">
-			Hint: You may login with <kbd>demo</kbd>/<kbd>demo</kbd> or <kbd>admin</kbd>/<kbd>admin</kbd>.
-		</p>
-	</div>
+	echo $form->passwordFieldRow($model, 'password', array('class' => 'span2'));
+	
+	echo $form->checkBoxRow($model, 'rememberMe')
+	?>
 
-	<div class="row rememberMe">
-		<?php echo $form->checkBox($model,'rememberMe'); ?>
-		<?php echo $form->label($model,'rememberMe'); ?>
-		<?php echo $form->error($model,'rememberMe'); ?>
-	</div>
+	</fieldset>
+	<div class="form-actions">
+	
+    <?php 
+        $this->widget(
+            'bootstrap.widgets.TbButton',
+            array(
+                'buttonType' => 'submit',
+                'type' => 'primary',
+                'label' => 'Entrar',
+                'icon' => 'icon-ok',
+                )
+            ); 
+	?>
+	<?php
+		$this->widget(
+            'bootstrap.widgets.TbButton',
+            array(
+                'buttonType' => 'reset',
+                'label' => 'Limpar',
+                'icon' => 'icon-refresh'
+                )
+            );
+    ?>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Login'); ?>
-	</div>
-
-<?php $this->endWidget(); ?>
-</div><!-- form -->
+	</div><!-- form -->
+	<?php $this->endWidget(); ?>

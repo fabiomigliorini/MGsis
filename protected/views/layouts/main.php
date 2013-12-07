@@ -25,17 +25,27 @@
 			'items' => array(
 				array(
 					'class' => 'bootstrap.widgets.TbMenu',
+					/*
 					'items' => array(
 						array('label' => 'Usuarios', 'url' => Yii::app()->createUrl('usuario')),
 						array('label' => 'Titulos', 'url' => Yii::app()->createUrl('titulo')),
 						array('label' => 'Codigos', 'url' => Yii::app()->createUrl('codigo')),
 						array('label' => Yii::app()->user->name.' (sair)', 'url' => Yii::app()->createUrl('/site/logout'), 'visible' => !Yii::app()->user->isGuest),
 						array('label' => 'Entrar', 'url' => Yii::app()->createUrl('/site/login'), 'visible' => Yii::app()->user->isGuest),
+						)
+					 * 
+					 */
+					'items' => array_merge(
+							$this->menu, 
+							array(
+								array('label' => Yii::app()->user->name.' (sair)', 'url' => Yii::app()->createUrl('/site/logout'), 'visible' => !Yii::app()->user->isGuest),
+								array('label' => 'Entrar', 'url' => Yii::app()->createUrl('/site/login'), 'visible' => Yii::app()->user->isGuest),
+								)
+							),
 					)
 				)
 			)
-		)
-	);
+		);
 ?>
 <div class="container-fluid">
     <?php echo $content; ?>

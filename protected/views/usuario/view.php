@@ -1,16 +1,16 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Detalhes Usuarios';
+$this->pagetitle = Yii::app()->name . ' - Detalhes Usuario';
 $this->breadcrumbs=array(
 	'Usuarios'=>array('index'),
 	$model->codusuario,
 );
 
 $this->menu=array(
-array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
+array('label'=>'Lista', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
 array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codusuario)),
 array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->codusuario),'confirm'=>'Tem Certeza que deseja excluir este item?')),
-array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
+//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
 ?>
 
@@ -44,6 +44,8 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 			'name'=>'codportador',
 			'value'=>isset($model->codportador)?CHtml::encode($model->Portador->portador):Null,
 			),
+		'ultimoacesso',
+		'inativo',
 		),
 	)); 
 

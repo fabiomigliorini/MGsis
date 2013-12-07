@@ -5096,3 +5096,717 @@ REQUEST_URI=/MGsis/index.php?r=usuario
 in /var/www/MGsis/protected/views/usuario/index.php (21)
 in /var/www/MGsis/protected/controllers/UsuarioController.php (141)
 in /var/www/MGsis/index.php (13)
+2013/12/07 06:21:00 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblusuario" violates foreign key constraint "tblnegocio_codusuario_fkey" on table "tblnegocio"
+DETAIL:  Key (codusuario)=(301201) is still referenced from table "tblnegocio".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblusuario" WHERE "mgsis"."tblusuario"."codusuario"='301201'.
+in /var/www/MGsis/protected/controllers/UsuarioController.php (115)
+in /var/www/MGsis/index.php (13)
+2013/12/07 06:21:00 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblusuario" violates foreign key constraint "tblnegocio_codusuario_fkey" on table "tblnegocio"
+DETAIL:  Key (codusuario)=(301201) is still referenced from table "tblnegocio".. The SQL statement executed was: DELETE FROM "mgsis"."tblusuario" WHERE "mgsis"."tblusuario"."codusuario"='301201'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1802): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1222): CActiveRecord->deleteByPk(301201)
+#2 /var/www/MGsis/protected/controllers/UsuarioController.php(115): CActiveRecord->delete()
+#3 [internal function]: UsuarioController->actionDelete('301201')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/delete')
+#16 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#17 /var/www/MGsis/index.php(13): CApplication->run()
+#18 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/delete&id=301201
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/view&id=301201
+---
+2013/12/07 06:21:22 [error] [exception.CException] exception 'CException' with message 'A propriedade "Usuario.fantasia_busca" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('fantasia_busca')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/helpers/CHtml.php(2529): CActiveRecord->__get('fantasia_busca')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/helpers/CHtml.php(2252): CHtml::resolveValue(Object(Usuario), 'fantasia_busca')
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/helpers/CHtml.php(1434): CHtml::activeInputField('text', Object(Usuario), 'fantasia_busca', Array)
+#4 /var/www/MGsis/protected/extensions/yiibooster/widgets/TbDataColumn.php(109): CHtml::activeTextField(Object(Usuario), 'fantasia_busca', Array)
+#5 /var/www/MGsis/protected/extensions/yiibooster/widgets/TbDataColumn.php(74): TbDataColumn->renderFilterCellContent()
+#6 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/grid/CGridView.php(532): TbDataColumn->renderFilterCell()
+#7 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/grid/CGridView.php(510): CGridView->renderFilter()
+#8 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/grid/CGridView.php(480): CGridView->renderTableHeader()
+#9 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(167): CGridView->renderItems()
+#10 [internal function]: CBaseListView->renderSection(Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{items} {pager}')
+#12 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(135): CBaseListView->renderContent()
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(173): CBaseListView->run()
+#14 /var/www/MGsis/protected/views/usuario/admin.php(96): CBaseController->widget('bootstrap.widge...', Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('admin', Array, true)
+#19 /var/www/MGsis/protected/controllers/UsuarioController.php(159): CController->render('admin', Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): UsuarioController->actionAdmin()
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#22 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#23 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#24 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#25 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#26 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#27 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#28 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#29 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('admin')
+#30 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/admin')
+#31 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#32 /var/www/MGsis/index.php(13): CApplication->run()
+#33 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/admin
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/view&id=22
+---
+2013/12/07 06:29:44 [error] [exception.CException] exception 'CException' with message 'UsuarioController contém tags widgets aninhadas incorretamente na sua visualização "/var/www/MGsis/protected/views//layouts/column2.php". O widget CContentDecorator não possui uma chamada endWidget().' in /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php:101
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(784): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#1 /var/www/MGsis/protected/controllers/UsuarioController.php(55): CController->render('view', Array)
+#2 [internal function]: UsuarioController->actionView('301201')
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('view')
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/view')
+#15 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/MGsis/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/view&id=301201
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/index
+---
+2013/12/07 07:37:31 [error] [php] include(TbHtml.php): failed to open stream: No such file or directory (/var/www/yii-1.1.14.f0fee9/framework/YiiBase.php:427)
+Stack trace:
+#0 /var/www/MGsis/protected/views/site/index.php(6): spl_autoload_call()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): SiteController->renderInternal()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): SiteController->renderFile()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): SiteController->renderPartial()
+#5 /var/www/MGsis/protected/controllers/SiteController.php(32): SiteController->render()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): SiteController->runAction()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): SiteController->runActionWithFilters()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): SiteController->run()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#12 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=site/index
+in /var/www/MGsis/protected/views/site/index.php (6)
+in /var/www/MGsis/protected/controllers/SiteController.php (32)
+in /var/www/MGsis/index.php (13)
+2013/12/07 08:46:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "Códigos".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('C??digos')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=C%C3%B3digos
+HTTP_REFERER=http://localhost/MGsis/index.php?r=site/index
+---
+2013/12/07 08:46:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "Usuários".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('Usu??rios')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=Usu%C3%A1rios
+HTTP_REFERER=http://localhost/MGsis/index.php?r=site/index
+---
+2013/12/07 08:47:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "Usuários".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('Usu??rios')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=Usu%C3%A1rios
+HTTP_REFERER=http://localhost/MGsis/index.php?r=site/index
+---
+2013/12/07 10:19:52 [error] [exception.CException] exception 'CException' with message 'A propriedade "Usuario.validaSenha" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('validaSenha')
+#1 /var/www/MGsis/protected/components/UserIdentity.php(44): CActiveRecord->__get('validaSenha')
+#2 /var/www/MGsis/protected/models/LoginForm.php(54): UserIdentity->authenticate()
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#5 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#6 /var/www/MGsis/protected/controllers/SiteController.php(94): CModel->validate()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('login')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#13 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/MGsis/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/MGsis/index.php?r=site/login
+HTTP_REFERER=http://localhost/MGsis/index.php?r=site/login
+---
+2013/12/07 10:26:33 [error] [php] file_get_contents(/var/www/MGsis/protected/migrations/template.php): failed to open stream: No such file or directory (/var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php:555)
+Stack trace:
+#0 unknown(0): MigrateCommand->actionCreate()
+#1 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs()
+#2 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): MigrateCommand->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run()
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#5 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CConsoleApplication->run()
+#6 /var/www/MGsis/protected/yiic.php(7): require_once()
+#7 /var/www/MGsis/protected/yiic(4): require_once()
+
+2013/12/07 10:27:11 [error] [php] file_get_contents(/var/www/MGsis/protected/migrations/template.php): failed to open stream: No such file or directory (/var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php:555)
+Stack trace:
+#0 unknown(0): MigrateCommand->actionCreate()
+#1 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs()
+#2 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): MigrateCommand->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run()
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#5 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CConsoleApplication->run()
+#6 /var/www/MGsis/protected/yiic.php(7): require_once()
+#7 /var/www/MGsis/protected/yiic(4): require_once()
+
+2013/12/07 10:30:16 [error] [php] file_get_contents(/var/www/MGsis/protected/migrations/template.php): failed to open stream: No such file or directory (/var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php:555)
+Stack trace:
+#0 unknown(0): MigrateCommand->actionCreate()
+#1 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs()
+#2 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): MigrateCommand->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run()
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#5 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CConsoleApplication->run()
+#6 /var/www/MGsis/protected/yiic.php(7): require_once()
+#7 /var/www/MGsis/protected/yiic(4): require_once()
+
+2013/12/07 10:33:07 [error] [php] file_get_contents(/var/www/MGsis/protected/migrations/template.php): failed to open stream: No such file or directory (/var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php:555)
+Stack trace:
+#0 unknown(0): MigrateCommand->actionCreate()
+#1 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs()
+#2 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): MigrateCommand->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run()
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#5 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CConsoleApplication->run()
+#6 /var/www/MGsis/protected/yiic.php(7): require_once()
+#7 /var/www/MGsis/protected/yiic(4): require_once()
+
+2013/12/07 10:34:10 [error] [php] file_get_contents(/var/www/MGsis/protected/migrations/template.php): failed to open stream: No such file or directory (/var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php:555)
+Stack trace:
+#0 unknown(0): MigrateCommand->actionCreate()
+#1 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs()
+#2 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): MigrateCommand->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run()
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#5 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CConsoleApplication->run()
+#6 /var/www/MGsis/protected/yiic.php(7): require_once()
+#7 /var/www/MGsis/protected/yiic(4): require_once()
+
+2013/12/07 10:39:52 [error] [exception.CException] exception 'CException' with message 'Object configuration must be an array containing a "class" element.' in /var/www/yii-1.1.14.f0fee9/framework/YiiBase.php:193
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(173): YiiBase::createComponent(Array, 'migrate', Object(CConsoleCommandRunner))
+#1 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(67): CConsoleCommandRunner->createCommand('migrate')
+#2 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#4 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#5 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#6 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#7 {main}
+---
+2013/12/07 10:40:20 [error] [exception.CException] exception 'CException' with message 'Object configuration must be an array containing a "class" element.' in /var/www/yii-1.1.14.f0fee9/framework/YiiBase.php:193
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(173): YiiBase::createComponent(Array, 'migrate', Object(CConsoleCommandRunner))
+#1 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(67): CConsoleCommandRunner->createCommand('migrate')
+#2 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#4 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#5 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#6 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#7 {main}
+---
+2013/12/07 10:40:23 [error] [exception.CException] exception 'CException' with message 'Object configuration must be an array containing a "class" element.' in /var/www/yii-1.1.14.f0fee9/framework/YiiBase.php:193
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(173): YiiBase::createComponent(Array, 'migrate', Object(CConsoleCommandRunner))
+#1 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(67): CConsoleCommandRunner->createCommand('migrate')
+#2 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#4 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#5 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#6 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#7 {main}
+---
+2013/12/07 10:43:30 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+).
+2013/12/07 10:43:30 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(471): CDbCommand->createTable('tbl_migration', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(454): MigrateCommand->createMigrationHistoryTable()
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(482): MigrateCommand->getMigrationHistory(-1)
+#4 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(84): MigrateCommand->getNewMigrations()
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#10 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#11 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#12 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#13 {main}
+---
+2013/12/07 10:43:32 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+).
+2013/12/07 10:43:32 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tbl_migration" already exists. The SQL statement executed was: CREATE TABLE "tbl_migration" (
+	"version" character varying (255) NOT NULL PRIMARY KEY,
+	"apply_time" integer
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(471): CDbCommand->createTable('tbl_migration', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(454): MigrateCommand->createMigrationHistoryTable()
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(482): MigrateCommand->getMigrationHistory(-1)
+#4 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(84): MigrateCommand->getNewMigrations()
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#10 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#11 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#12 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#13 {main}
+---
+2013/12/07 10:51:38 [error] [exception.CException] exception 'CException' with message 'A propriedade "TbDetailView.0" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWidgetFactory.php(161): CComponent->__set('0', 'ultimoacesso')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(146): CWidgetFactory->createWidget(Object(UsuarioController), 'bootstrap.widge...', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('bootstrap.widge...', Array)
+#3 /var/www/MGsis/protected/views/usuario/view.php(50): CBaseController->widget('bootstrap.widge...', Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('view', Array, true)
+#8 /var/www/MGsis/protected/controllers/UsuarioController.php(55): CController->render('view', Array)
+#9 [internal function]: UsuarioController->actionView('301201')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('view')
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/view')
+#22 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/MGsis/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/view&id=301201
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario
+---
+2013/12/07 10:51:45 [error] [exception.CException] exception 'CException' with message 'A propriedade "TbDetailView.0" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWidgetFactory.php(161): CComponent->__set('0', 'ultimoacesso')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(146): CWidgetFactory->createWidget(Object(UsuarioController), 'bootstrap.widge...', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('bootstrap.widge...', Array)
+#3 /var/www/MGsis/protected/views/usuario/view.php(50): CBaseController->widget('bootstrap.widge...', Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('view', Array, true)
+#8 /var/www/MGsis/protected/controllers/UsuarioController.php(55): CController->render('view', Array)
+#9 [internal function]: UsuarioController->actionView('301202')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('view')
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/view')
+#22 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/MGsis/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/view&id=301202
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario
+---
+2013/12/07 13:26:01 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Login requerido' in /var/www/yii-1.1.14.f0fee9/framework/web/auth/CWebUser.php:394
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php(180): CWebUser->loginRequired()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'Voc?? n??o est?...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/update&id=301201
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/update&id=301201
+---
+2013/12/07 13:26:03 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Login requerido' in /var/www/yii-1.1.14.f0fee9/framework/web/auth/CWebUser.php:394
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php(180): CWebUser->loginRequired()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'Voc?? n??o est?...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/update&id=301201
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/update&id=301201
+---
+2013/12/07 13:29:29 [error] [exception.CException] exception 'CException' with message 'A propriedade "Usuario.last_login_time" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(161): CComponent->__set('last_login_time', 'now()')
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1162): CActiveRecord->__set('last_login_time', 'now()')
+#2 /var/www/MGsis/protected/components/UserIdentity.php(51): CActiveRecord->saveAttributes(Array)
+#3 /var/www/MGsis/protected/models/LoginForm.php(54): UserIdentity->authenticate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#7 /var/www/MGsis/protected/controllers/SiteController.php(94): CModel->validate()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('login')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=site/login
+HTTP_REFERER=http://localhost/MGsis/index.php?r=site/login
+---
+2013/12/07 13:30:49 [error] [exception.CException] exception 'CException' with message 'A propriedade "UserIdentity.ultimoacesso" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/MGsis/protected/components/UserIdentity.php(51): CComponent->__get('ultimoacesso')
+#1 /var/www/MGsis/protected/models/LoginForm.php(54): UserIdentity->authenticate()
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#5 /var/www/MGsis/protected/controllers/SiteController.php(94): CModel->validate()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('login')
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#12 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/MGsis/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/MGsis/index.php?r=site/login
+HTTP_REFERER=http://localhost/MGsis/index.php?r=site/login
+---
+2013/12/07 13:31:04 [error] [exception.CException] exception 'CException' with message 'A propriedade "UserIdentity.ultimoacesso" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/MGsis/protected/components/UserIdentity.php(51): CComponent->__get('ultimoacesso')
+#1 /var/www/MGsis/protected/models/LoginForm.php(54): UserIdentity->authenticate()
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#5 /var/www/MGsis/protected/controllers/SiteController.php(94): CModel->validate()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('login')
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#12 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/MGsis/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/MGsis/index.php?r=site/login
+HTTP_REFERER=http://localhost/MGsis/index.php?r=site/login
+---
+2013/12/07 13:36:06 [error] [exception.CException] exception 'CException' with message 'UserIdentity and its behaviors do not have a method or closure named "setFlash".' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/MGsis/protected/components/UserIdentity.php(57): CComponent->__call('setFlash', Array)
+#1 /var/www/MGsis/protected/components/UserIdentity.php(57): UserIdentity->setFlash('info', '<strong>Heads u...')
+#2 /var/www/MGsis/protected/models/LoginForm.php(54): UserIdentity->authenticate()
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#5 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#6 /var/www/MGsis/protected/controllers/SiteController.php(94): CModel->validate()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('login')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#13 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/MGsis/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/MGsis/index.php?r=site/login
+HTTP_REFERER=http://localhost/MGsis/index.php?r=site/login
+---
+2013/12/07 13:42:36 [error] [php] Undefined variable: user (/var/www/MGsis/protected/components/UserIdentity.php:51)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CInlineValidator->validate()
+#2 /var/www/MGsis/protected/controllers/SiteController.php(94): LoginForm->validate()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): SiteController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): SiteController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): SiteController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=site/login
+in /var/www/MGsis/protected/components/UserIdentity.php (51)
+in /var/www/MGsis/protected/models/LoginForm.php (54)
+in /var/www/MGsis/protected/controllers/SiteController.php (94)
+2013/12/07 13:43:16 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[22007]: Invalid datetime format: 7 ERROR:  invalid input syntax for type date: "". A declaração SQL executada foi: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=:yp9, "codusuarioalteracao"=:yp10, "criacao"=:yp11, "codusuariocriacao"=:yp12, "ultimoacesso"=:yp13, "inativo"=:yp14 WHERE "mgsis"."tblusuario"."codusuario"='10'.
+in /var/www/MGsis/protected/controllers/UsuarioController.php (96)
+in /var/www/MGsis/index.php (13)
+2013/12/07 13:43:16 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22007]: Invalid datetime format: 7 ERROR:  invalid input syntax for type date: "". The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=:yp9, "codusuarioalteracao"=:yp10, "criacao"=:yp11, "codusuariocriacao"=:yp12, "ultimoacesso"=:yp13, "inativo"=:yp14 WHERE "mgsis"."tblusuario"."codusuario"='10'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1748): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1124): CActiveRecord->updateByPk(10, Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->update(NULL)
+#3 /var/www/MGsis/protected/controllers/UsuarioController.php(96): CActiveRecord->save()
+#4 [internal function]: UsuarioController->actionUpdate('10')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/update&id=10
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/update&id=10
+---
+2013/12/07 13:44:12 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[22007]: Invalid datetime format: 7 ERROR:  invalid input syntax for type date: "". A declaração SQL executada foi: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=:yp9, "codusuarioalteracao"=:yp10, "criacao"=:yp11, "codusuariocriacao"=:yp12, "ultimoacesso"=:yp13, "inativo"=:yp14 WHERE "mgsis"."tblusuario"."codusuario"='10'.
+in /var/www/MGsis/protected/controllers/UsuarioController.php (96)
+in /var/www/MGsis/index.php (13)
+2013/12/07 13:44:12 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22007]: Invalid datetime format: 7 ERROR:  invalid input syntax for type date: "". The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "codusuario"=:yp0, "usuario"=:yp1, "senha"=:yp2, "codecf"=:yp3, "codfilial"=:yp4, "codoperacao"=:yp5, "codpessoa"=:yp6, "impressoratelanegocio"=:yp7, "codportador"=:yp8, "alteracao"=:yp9, "codusuarioalteracao"=:yp10, "criacao"=:yp11, "codusuariocriacao"=:yp12, "ultimoacesso"=:yp13, "inativo"=:yp14 WHERE "mgsis"."tblusuario"."codusuario"='10'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1748): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1124): CActiveRecord->updateByPk(10, Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->update(NULL)
+#3 /var/www/MGsis/protected/controllers/UsuarioController.php(96): CActiveRecord->save()
+#4 [internal function]: UsuarioController->actionUpdate('10')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/update&id=10
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/update&id=10
+---
+2013/12/07 13:49:41 [error] [exception.CException] exception 'CException' with message 'A propriedade "UserIdentity.ultimoAcesso" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/MGsis/protected/components/UserIdentity.php(54): CComponent->__get('ultimoAcesso')
+#1 /var/www/MGsis/protected/models/LoginForm.php(54): UserIdentity->authenticate()
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#5 /var/www/MGsis/protected/controllers/SiteController.php(94): CModel->validate()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('login')
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#12 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/MGsis/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/MGsis/index.php?r=site/login
+HTTP_REFERER=http://localhost/MGsis/index.php?r=site/login
+---
+2013/12/07 14:04:33 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[22007]: Invalid datetime format: 7 ERROR:  invalid input syntax for type timestamp: "1386439473". A declaração SQL executada foi: UPDATE "mgsis"."tblusuario" SET "ultimoacesso"=:yp0 WHERE "mgsis"."tblusuario"."codusuario"='2'.
+in /var/www/MGsis/protected/components/UserIdentity.php (59)
+in /var/www/MGsis/protected/models/LoginForm.php (54)
+in /var/www/MGsis/protected/controllers/SiteController.php (94)
+2013/12/07 14:04:33 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22007]: Invalid datetime format: 7 ERROR:  invalid input syntax for type timestamp: "1386439473". The SQL statement executed was: UPDATE "mgsis"."tblusuario" SET "ultimoacesso"=:yp0 WHERE "mgsis"."tblusuario"."codusuario"='2'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1748): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1166): CActiveRecord->updateByPk(2, Array)
+#2 /var/www/MGsis/protected/components/UserIdentity.php(59): CActiveRecord->saveAttributes(Array)
+#3 /var/www/MGsis/protected/models/LoginForm.php(54): UserIdentity->authenticate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#7 /var/www/MGsis/protected/controllers/SiteController.php(94): CModel->validate()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('login')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=site/login
+HTTP_REFERER=http://localhost/MGsis/index.php?r=site/login
+---
+2013/12/07 14:10:09 [error] [php] Undefined variable: ultimoacesso (/var/www/MGsis/protected/components/UserIdentity.php:51)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CInlineValidator->validate()
+#2 /var/www/MGsis/protected/controllers/SiteController.php(94): LoginForm->validate()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): SiteController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): SiteController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): SiteController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=site/login
+in /var/www/MGsis/protected/components/UserIdentity.php (51)
+in /var/www/MGsis/protected/models/LoginForm.php (54)
+in /var/www/MGsis/protected/controllers/SiteController.php (94)
+2013/12/07 14:24:16 [error] [exception.CException] exception 'CException' with message 'A propriedade "CWebUser.codusuario" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/auth/CWebUser.php(146): CComponent->__get('codusuario')
+#1 /var/www/MGsis/protected/models/MGActiveRecord.php(51): CWebUser->__get('codusuario')
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1119): MGActiveRecord->beforeSave()
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->update(NULL)
+#4 /var/www/MGsis/protected/controllers/UsuarioController.php(96): CActiveRecord->save()
+#5 [internal function]: UsuarioController->actionUpdate('301201')
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#18 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/MGsis/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/update&id=301201
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/update&id=301201
+---
+2013/12/07 14:24:50 [error] [exception.CException] exception 'CException' with message 'CWebUser and its behaviors do not have a method or closure named "getCodUsuario".' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/MGsis/protected/models/MGActiveRecord.php(51): CComponent->__call('getCodUsuario', Array)
+#1 /var/www/MGsis/protected/models/MGActiveRecord.php(51): CWebUser->getCodUsuario()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1119): MGActiveRecord->beforeSave()
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->update(NULL)
+#4 /var/www/MGsis/protected/controllers/UsuarioController.php(96): CActiveRecord->save()
+#5 [internal function]: UsuarioController->actionUpdate('301201')
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#18 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/MGsis/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/update&id=301201
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/update&id=301201
+---
+2013/12/07 14:26:16 [error] [exception.CException] exception 'CException' with message 'CWebUser and its behaviors do not have a method or closure named "getCodUsuario".' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/MGsis/protected/models/MGActiveRecord.php(51): CComponent->__call('getCodUsuario', Array)
+#1 /var/www/MGsis/protected/models/MGActiveRecord.php(51): CWebUser->getCodUsuario()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1119): MGActiveRecord->beforeSave()
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->update(NULL)
+#4 /var/www/MGsis/protected/controllers/UsuarioController.php(96): CActiveRecord->save()
+#5 [internal function]: UsuarioController->actionUpdate('301201')
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#18 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/MGsis/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/update&id=301201
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/update&id=301201
+---
+2013/12/07 14:26:28 [error] [exception.CException] exception 'CException' with message 'CWebUser and its behaviors do not have a method or closure named "getCodUsuario".' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/MGsis/protected/models/MGActiveRecord.php(51): CComponent->__call('getCodUsuario', Array)
+#1 /var/www/MGsis/protected/models/MGActiveRecord.php(51): CWebUser->getCodUsuario()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1119): MGActiveRecord->beforeSave()
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->update(NULL)
+#4 /var/www/MGsis/protected/controllers/UsuarioController.php(96): CActiveRecord->save()
+#5 [internal function]: UsuarioController->actionUpdate('301201')
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(UsuarioController), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsuarioController), Object(ReflectionMethod), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#18 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/MGsis/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/update&id=301201
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/update&id=301201
+---

@@ -6,7 +6,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
-	array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
+	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 	);
 ?>
 
@@ -32,17 +32,15 @@ $this->menu=array(
 		echo $form->select2Pessoa(
 				$model, 
 				'codpessoa',
-				array('class' => 'span4', 'placeholder' => '-- Pessoa --')
+				array('class' => 'span4')
 				);
-		
 
 		echo $form->dropDownList(
 				$model,
 				'codfilial',
 				Filial::getListaCombo(),
-				array('prompt'=>'-- Filial --', 'class' => 'span2')                    
+				array('prompt'=>'Filial', 'class' => 'span2', 'placeholder' => 'Filial')
 				);	
-	 
 
 	?>
 	</div>
@@ -53,7 +51,8 @@ $this->menu=array(
 		, array(
 			'buttonType' => 'submit',
 			'icon'=>'icon-search',
-			'label'=>'',
+			//'label'=>'',
+			'htmlOptions' => array('class'=>'btn btn-info')
 			)
 		); 
 	

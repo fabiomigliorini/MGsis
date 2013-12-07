@@ -82,3 +82,11 @@ body {
 .select2-highlighted .div-combo-pessoa-cnpj { 
     color: #eeeeee; 
 }
+
+.menuthumbnails a {
+    text-align:center;
+}
+
+.menuthumbnails a:hover {
+    background-color: #eeeeee;
+}
