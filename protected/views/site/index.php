@@ -23,8 +23,13 @@ echo TbHtml::thumbnails(
 			array(
 				'image' => Yii::app()->request->baseUrl . '/images/icones/usuario.png', 
 				'url' => Yii::app()->createUrl('usuario'), 
-				'span' => '1', 
+				'span' => '2', 
 				'caption' => '<small>Usuários</small>'),
+			array(
+				'image' => Yii::app()->request->baseUrl . '/images/icones/roles.png', 
+				'url' => Yii::app()->createUrl('srbac/authitem/frontpage'), 
+				'span' => '2', 
+				'caption' => '<small>Permissões</small>'),
 		),
 		array('class' => 'menuthumbnails')
 		);

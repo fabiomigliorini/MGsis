@@ -5810,3 +5810,963 @@ Stack trace:
 REQUEST_URI=/MGsis/index.php?r=usuario/update&id=301201
 HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario/update&id=301201
 ---
+2013/12/09 09:17:21 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P01]: Undefined table: 7 ERROR:  relation "tblauthitem_child" does not exist. The SQL statement executed was: ALTER TABLE "tblauthitem_child" ADD CONSTRAINT "fk_auth_item_child_parent" FOREIGN KEY ("parent") REFERENCES "tblauthitem" ("name") ON DELETE CASCADE ON UPDATE CASCADE.
+2013/12/09 09:17:21 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P01]: Undefined table: 7 ERROR:  relation "tblauthitem_child" does not exist. The SQL statement executed was: ALTER TABLE "tblauthitem_child" ADD CONSTRAINT "fk_auth_item_child_parent" FOREIGN KEY ("parent") REFERENCES "tblauthitem" ("name") ON DELETE CASCADE ON UPDATE CASCADE' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1435): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/CDbMigration.php(348): CDbCommand->addForeignKey('fk_auth_item_ch...', 'tblauthitem_chi...', 'parent', 'tblauthitem', 'name', 'CASCADE', 'CASCADE')
+#2 /var/www/MGsis/protected/migrations/m131209_130759_cria_tabelas_rbac.php(31): CDbMigration->addForeignKey('fk_auth_item_ch...', 'tblauthitem_chi...', 'parent', 'tblauthitem', 'name', 'CASCADE', 'CASCADE')
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(385): m131209_130759_cria_tabelas_rbac->up()
+#4 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(109): MigrateCommand->migrateUp('m131209_130759_...')
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#10 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#11 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#12 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#13 {main}
+---
+2013/12/09 09:18:09 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tblauthitem" already exists. The SQL statement executed was: CREATE TABLE "tblauthitem" (
+	"name" varchar(64) NOT NULL,
+	"type" integer NOT NULL,
+	"description" text,
+	"bizrule" text,
+	"data" text,
+	PRIMARY KEY (name)
+).
+2013/12/09 09:18:09 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tblauthitem" already exists. The SQL statement executed was: CREATE TABLE "tblauthitem" (
+	"name" varchar(64) NOT NULL,
+	"type" integer NOT NULL,
+	"description" text,
+	"bizrule" text,
+	"data" text,
+	PRIMARY KEY (name)
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/CDbMigration.php(233): CDbCommand->createTable('tblauthitem', Array, NULL)
+#2 /var/www/MGsis/protected/migrations/m131209_130759_cria_tabelas_rbac.php(18): CDbMigration->createTable('tblauthitem', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(385): m131209_130759_cria_tabelas_rbac->up()
+#4 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(109): MigrateCommand->migrateUp('m131209_130759_...')
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#10 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#11 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#12 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#13 {main}
+---
+2013/12/09 09:19:09 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42703]: Undefined column: 7 ERROR:  column "id" referenced in foreign key constraint does not exist. The SQL statement executed was: ALTER TABLE "tblauthassignment" ADD CONSTRAINT "fk_auth_assignment_codusuario" FOREIGN KEY ("codusuario") REFERENCES "tblusuario" ("id") ON DELETE CASCADE ON UPDATE CASCADE.
+2013/12/09 09:19:09 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42703]: Undefined column: 7 ERROR:  column "id" referenced in foreign key constraint does not exist. The SQL statement executed was: ALTER TABLE "tblauthassignment" ADD CONSTRAINT "fk_auth_assignment_codusuario" FOREIGN KEY ("codusuario") REFERENCES "tblusuario" ("id") ON DELETE CASCADE ON UPDATE CASCADE' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1435): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/CDbMigration.php(348): CDbCommand->addForeignKey('fk_auth_assignm...', 'tblauthassignme...', 'codusuario', 'tblusuario', 'id', 'CASCADE', 'CASCADE')
+#2 /var/www/MGsis/protected/migrations/m131209_130759_cria_tabelas_rbac.php(70): CDbMigration->addForeignKey('fk_auth_assignm...', 'tblauthassignme...', 'codusuario', 'tblusuario', 'id', 'CASCADE', 'CASCADE')
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(385): m131209_130759_cria_tabelas_rbac->up()
+#4 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(109): MigrateCommand->migrateUp('m131209_130759_...')
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#10 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#11 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#12 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#13 {main}
+---
+2013/12/09 09:22:27 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[0A000]: Feature not supported: 7 ERROR:  cannot truncate a table referenced in a foreign key constraint
+DETAIL:  Table "tblauthitemchild" references "tblauthitem".
+HINT:  Truncate table "tblauthitemchild" at the same time, or use TRUNCATE ... CASCADE.. The SQL statement executed was: TRUNCATE TABLE "tblauthitem".
+2013/12/09 09:22:27 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[0A000]: Feature not supported: 7 ERROR:  cannot truncate a table referenced in a foreign key constraint
+DETAIL:  Table "tblauthitemchild" references "tblauthitem".
+HINT:  Truncate table "tblauthitemchild" at the same time, or use TRUNCATE ... CASCADE.. The SQL statement executed was: TRUNCATE TABLE "tblauthitem"' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1359): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/CDbMigration.php(270): CDbCommand->truncateTable('tblauthitem')
+#2 /var/www/MGsis/protected/migrations/m131209_130759_cria_tabelas_rbac.php(77): CDbMigration->truncateTable('tblauthitem')
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(410): m131209_130759_cria_tabelas_rbac->down()
+#4 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(145): MigrateCommand->migrateDown('m131209_130759_...')
+#5 [internal function]: MigrateCommand->actionDown(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#10 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#11 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#12 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#13 {main}
+---
+2013/12/09 09:23:24 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42703]: Undefined column: 7 ERROR:  column "codusuario" named in key does not exist
+LINE 6:  PRIMARY KEY (itemname,codusuario)
+         ^. The SQL statement executed was: CREATE TABLE "tblauthassignment" (
+	"itemname" varchar(64) NOT NULL,
+	"userid" bigint NOT NULL,
+	"bizrule" text,
+	"data" text,
+	PRIMARY KEY (itemname,codusuario)
+).
+2013/12/09 09:23:24 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42703]: Undefined column: 7 ERROR:  column "codusuario" named in key does not exist
+LINE 6:  PRIMARY KEY (itemname,codusuario)
+         ^. The SQL statement executed was: CREATE TABLE "tblauthassignment" (
+	"itemname" varchar(64) NOT NULL,
+	"userid" bigint NOT NULL,
+	"bizrule" text,
+	"data" text,
+	PRIMARY KEY (itemname,codusuario)
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/CDbMigration.php(233): CDbCommand->createTable('tblauthassignme...', Array, NULL)
+#2 /var/www/MGsis/protected/migrations/m131209_130759_cria_tabelas_rbac.php(46): CDbMigration->createTable('tblauthassignme...', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(385): m131209_130759_cria_tabelas_rbac->up()
+#4 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(109): MigrateCommand->migrateUp('m131209_130759_...')
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#10 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#11 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#12 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#13 {main}
+---
+2013/12/09 10:33:17 [error] [exception.CException] exception 'CException' with message 'A propriedade "AuthitemController.menu" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/MGsis/protected/views/layouts/main.php(39): CComponent->__get('menu')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(784): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#4 /var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php(499): CController->render('install/install')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): AuthitemController->actionInstall()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('install')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('srbac/authitem/...')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=srbac/authitem/install
+---
+2013/12/09 10:34:33 [error] [exception.CException] exception 'CException' with message 'A propriedade "AuthitemController.menu" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/MGsis/protected/views/layouts/main.php(18): CComponent->__set('menu', Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(784): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#4 /var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php(499): CController->render('install/install')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): AuthitemController->actionInstall()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('install')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('srbac/authitem/...')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=srbac/authitem/install
+---
+2013/12/09 10:36:25 [error] [exception.CException] exception 'CException' with message 'AuthitemController não pôde encontrar a visualização "install/install" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:878
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('install/install', NULL, true)
+#1 /var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php(499): CController->render('install/install')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): AuthitemController->actionInstall()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('install')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('srbac/authitem/...')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=srbac/authitem/install
+---
+2013/12/09 10:36:32 [error] [exception.CException] exception 'CException' with message 'AuthitemController não pôde encontrar a visualização "install/install" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:878
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('install/install', NULL, true)
+#1 /var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php(499): CController->render('install/install')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): AuthitemController->actionInstall()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('install')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('srbac/authitem/...')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=srbac/authitem/install
+---
+2013/12/09 10:47:24 [error] [exception.CException] exception 'CException' with message 'AuthitemController não pôde encontrar a visualização "install/install" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:878
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('install/install', NULL, true)
+#1 /var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php(499): CController->render('install/install')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): AuthitemController->actionInstall()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('install')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('srbac/authitem/...')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=srbac/authitem/install
+---
+2013/12/09 10:51:31 [error] [php] include(Usuario2.php): failed to open stream: No such file or directory (/var/www/yii-1.1.14.f0fee9/framework/YiiBase.php:427)
+Stack trace:
+#0 /var/www/MGsis/protected/modules/srbac/SrbacModule.php(277): spl_autoload_call()
+#1 /var/www/MGsis/protected/modules/srbac/components/Helper.php(423): SrbacModule->getUserModel()
+#2 /var/www/MGsis/protected/modules/srbac/views/authitem/install/install.php(103): checkInstall()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): AuthitemController->renderInternal()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): AuthitemController->renderFile()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): AuthitemController->renderPartial()
+#7 /var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php(499): AuthitemController->render()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): AuthitemController->actionInstall()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): AuthitemController->runAction()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): AuthitemController->runActionWithFilters()
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): AuthitemController->run()
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=srbac/authitem/install
+in /var/www/MGsis/protected/modules/srbac/SrbacModule.php (277)
+in /var/www/MGsis/protected/modules/srbac/components/Helper.php (423)
+in /var/www/MGsis/protected/modules/srbac/views/authitem/install/install.php (103)
+2013/12/09 11:01:31 [error] [exception.CException] exception 'CException' with message 'AuthitemController não pôde encontrar a visualização "install/install" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:878
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('install/install', NULL, true)
+#1 /var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php(495): CController->render('install/install')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): AuthitemController->actionInstall()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('install')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('srbac/authitem/...')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=srbac/authitem/install
+---
+2013/12/09 11:01:36 [error] [exception.CException] exception 'CException' with message 'AuthitemController não pôde encontrar a visualização "install/install" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:878
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('install/install', NULL, true)
+#1 /var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php(495): CController->render('install/install')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): AuthitemController->actionInstall()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('install')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('srbac/authitem/...')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=srbac/authitem/install
+---
+2013/12/09 11:02:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "srbac/frontpage".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('srbac/frontpage')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=srbac/frontpage
+---
+2013/12/09 11:02:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "srbac/admin".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('srbac/admin')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=srbac/admin
+---
+2013/12/09 11:03:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "admin" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('admin')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('admin')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('srbac/authitem/...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=srbac/authitem/admin
+---
+2013/12/09 11:05:23 [error] [php] include(User.php): failed to open stream: No such file or directory (/var/www/yii-1.1.14.f0fee9/framework/YiiBase.php:427)
+Stack trace:
+#0 /var/www/MGsis/protected/modules/srbac/SrbacModule.php(277): spl_autoload_call()
+#1 /var/www/MGsis/protected/modules/srbac/components/Helper.php(423): SrbacModule->getUserModel()
+#2 /var/www/MGsis/protected/modules/srbac/views/authitem/install/install.php(103): checkInstall()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): AuthitemController->renderInternal()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): AuthitemController->renderFile()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): AuthitemController->renderPartial()
+#7 /var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php(495): AuthitemController->render()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): AuthitemController->actionInstall()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): AuthitemController->runAction()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): AuthitemController->runActionWithFilters()
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): AuthitemController->run()
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=srbac/authitem/install
+in /var/www/MGsis/protected/modules/srbac/SrbacModule.php (277)
+in /var/www/MGsis/protected/modules/srbac/components/Helper.php (423)
+in /var/www/MGsis/protected/modules/srbac/views/authitem/install/install.php (103)
+2013/12/09 12:59:31 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tblauthitem" already exists. The SQL statement executed was: CREATE TABLE "tblauthitem" (
+	"name" varchar(64) NOT NULL,
+	"type" integer NOT NULL,
+	"description" text,
+	"bizrule" text,
+	"data" text,
+	PRIMARY KEY (name)
+).
+2013/12/09 12:59:31 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "tblauthitem" already exists. The SQL statement executed was: CREATE TABLE "tblauthitem" (
+	"name" varchar(64) NOT NULL,
+	"type" integer NOT NULL,
+	"description" text,
+	"bizrule" text,
+	"data" text,
+	PRIMARY KEY (name)
+)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(1324): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/CDbMigration.php(233): CDbCommand->createTable('tblauthitem', Array, NULL)
+#2 /var/www/MGsis/protected/migrations/m131209_130759_cria_tabelas_rbac.php(18): CDbMigration->createTable('tblauthitem', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(385): m131209_130759_cria_tabelas_rbac->up()
+#4 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(109): MigrateCommand->migrateUp('m131209_130759_...')
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#10 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#11 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#12 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#13 {main}
+---
+2013/12/09 13:31:21 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Você não está autorizado a realizar essa operação.' in /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'Voc?? n??o est?...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/index
+---
+2013/12/09 13:32:10 [error] [exception.CException] exception 'CException' with message 'A propriedade "CAccessRule.role" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php(115): CComponent->__set('role', Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1144): CAccessControlFilter->setRules(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/index
+---
+2013/12/09 13:34:36 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Você não está autorizado a realizar essa operação.' in /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'Voc?? n??o est?...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php
+---
+2013/12/09 13:34:41 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Você não está autorizado a realizar essa operação.' in /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'Voc?? n??o est?...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/index
+---
+2013/12/09 13:34:48 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Você não está autorizado a realizar essa operação.' in /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'Voc?? n??o est?...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/index
+---
+2013/12/09 13:36:29 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Você não está autorizado a realizar essa operação.' in /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'Voc?? n??o est?...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/index
+---
+2013/12/09 13:37:49 [error] [exception.CException] exception 'CException' with message 'AuthitemController não pôde encontrar a visualização "site.error" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:878
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('site.error', Array, true)
+#1 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(111): CController->render('site.error', Array)
+#2 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(77): SBaseController->onUnauthorizedAccess()
+#3 /var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php(54): SBaseController->beforeAction(Object(CInlineAction))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(306): AuthitemController->beforeAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('frontpage')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('srbac/authitem/...')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=srbac/authitem/frontpage
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/index
+---
+2013/12/09 13:37:59 [error] [exception.CException] exception 'CException' with message 'AuthitemController não pôde encontrar a visualização "view.site.error" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:878
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('view.site.error', Array, true)
+#1 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(111): CController->render('view.site.error', Array)
+#2 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(77): SBaseController->onUnauthorizedAccess()
+#3 /var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php(54): SBaseController->beforeAction(Object(CInlineAction))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(306): AuthitemController->beforeAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('frontpage')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('srbac/authitem/...')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=srbac/authitem/frontpage
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/index
+---
+2013/12/09 13:39:40 [error] [exception.CException] exception 'CException' with message 'AuthitemController não pôde encontrar a visualização "view.site.error" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:878
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('view.site.error', Array, true)
+#1 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(111): CController->render('view.site.error', Array)
+#2 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(77): SBaseController->onUnauthorizedAccess()
+#3 /var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php(54): SBaseController->beforeAction(Object(CInlineAction))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(306): AuthitemController->beforeAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('frontpage')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('srbac/authitem/...')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=srbac/authitem/frontpage
+---
+2013/12/09 13:39:45 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Você não está autorizado a realizar essa operação.' in /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'Voc?? n??o est?...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/index
+---
+2013/12/09 13:39:48 [error] [exception.CException] exception 'CException' with message 'AuthitemController não pôde encontrar a visualização "view.site.error" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:878
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('view.site.error', Array, true)
+#1 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(111): CController->render('view.site.error', Array)
+#2 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(77): SBaseController->onUnauthorizedAccess()
+#3 /var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php(54): SBaseController->beforeAction(Object(CInlineAction))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(306): AuthitemController->beforeAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('frontpage')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('srbac/authitem/...')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=srbac/authitem/frontpage
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/index
+---
+2013/12/09 13:40:05 [error] [exception.CException] exception 'CException' with message 'AuthitemController não pôde encontrar a visualização "views.site.error" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:878
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('views.site.erro...', Array, true)
+#1 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(111): CController->render('views.site.erro...', Array)
+#2 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(77): SBaseController->onUnauthorizedAccess()
+#3 /var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php(54): SBaseController->beforeAction(Object(CInlineAction))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(306): AuthitemController->beforeAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('frontpage')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('srbac/authitem/...')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=srbac/authitem/frontpage
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/index
+---
+2013/12/09 13:40:06 [error] [exception.CException] exception 'CException' with message 'AuthitemController não pôde encontrar a visualização "views.site.error" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:878
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('views.site.erro...', Array, true)
+#1 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(111): CController->render('views.site.erro...', Array)
+#2 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(77): SBaseController->onUnauthorizedAccess()
+#3 /var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php(54): SBaseController->beforeAction(Object(CInlineAction))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(306): AuthitemController->beforeAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('frontpage')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('srbac/authitem/...')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=srbac/authitem/frontpage
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/index
+---
+2013/12/09 13:40:06 [error] [exception.CException] exception 'CException' with message 'AuthitemController não pôde encontrar a visualização "views.site.error" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:878
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('views.site.erro...', Array, true)
+#1 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(111): CController->render('views.site.erro...', Array)
+#2 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(77): SBaseController->onUnauthorizedAccess()
+#3 /var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php(54): SBaseController->beforeAction(Object(CInlineAction))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(306): AuthitemController->beforeAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('frontpage')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('srbac/authitem/...')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=srbac/authitem/frontpage
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/index
+---
+2013/12/09 13:40:14 [error] [exception.CException] exception 'CException' with message 'AuthitemController não pôde encontrar a visualização "site/error" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:878
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('site/error', Array, true)
+#1 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(111): CController->render('site/error', Array)
+#2 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(77): SBaseController->onUnauthorizedAccess()
+#3 /var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php(54): SBaseController->beforeAction(Object(CInlineAction))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(306): AuthitemController->beforeAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('frontpage')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('srbac/authitem/...')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=srbac/authitem/frontpage
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/index
+---
+2013/12/09 13:40:17 [error] [exception.CException] exception 'CException' with message 'AuthitemController não pôde encontrar a visualização "siteerror" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:878
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('siteerror', Array, true)
+#1 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(111): CController->render('siteerror', Array)
+#2 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(77): SBaseController->onUnauthorizedAccess()
+#3 /var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php(54): SBaseController->beforeAction(Object(CInlineAction))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(306): AuthitemController->beforeAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('frontpage')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('srbac/authitem/...')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=srbac/authitem/frontpage
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/index
+---
+2013/12/09 13:50:41 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Você não está autorizado a realizar essa operação.' in /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'Voc?? n??o est?...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/index
+---
+2013/12/09 13:52:14 [error] [php] Undefined variable: valuesArray (/var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php:575)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): AuthitemController->runAction()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): AuthitemController->runActionWithFilters()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): AuthitemController->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#5 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=srbac/authitem/autocomplete&q=pulibo&limit=10&timestamp=1386611534873
+in /var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php (575)
+in /var/www/MGsis/index.php (13)
+2013/12/09 13:52:17 [error] [php] Undefined variable: valuesArray (/var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php:575)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): AuthitemController->runAction()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): AuthitemController->runActionWithFilters()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): AuthitemController->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#5 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=srbac/authitem/autocomplete&q=pu&limit=10&timestamp=1386611536969
+in /var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php (575)
+in /var/www/MGsis/index.php (13)
+2013/12/09 13:52:17 [error] [php] Undefined variable: valuesArray (/var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php:575)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): AuthitemController->runAction()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): AuthitemController->runActionWithFilters()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): AuthitemController->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#5 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=srbac/authitem/autocomplete&q=publi&limit=10&timestamp=1386611537912
+in /var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php (575)
+in /var/www/MGsis/index.php (13)
+2013/12/09 13:52:18 [error] [php] Undefined variable: valuesArray (/var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php:575)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): AuthitemController->runAction()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): AuthitemController->runActionWithFilters()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): AuthitemController->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#5 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=srbac/authitem/autocomplete&q=publico&limit=10&timestamp=1386611538416
+in /var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php (575)
+in /var/www/MGsis/index.php (13)
+2013/12/09 13:53:04 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Você não está autorizado a realizar essa operação.' in /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'Voc?? n??o est?...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario
+---
+2013/12/09 13:53:06 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Você não está autorizado a realizar essa operação.' in /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'Voc?? n??o est?...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/index
+---
+2013/12/09 13:54:53 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Você não está autorizado a realizar essa operação.' in /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'Voc?? n??o est?...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php
+---
+2013/12/09 13:56:09 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Você não está autorizado a realizar essa operação.' in /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'Voc?? n??o est?...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/index
+---
+2013/12/09 13:56:16 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Você não está autorizado a realizar essa operação.' in /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'Voc?? n??o est?...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/index
+---
+2013/12/09 13:56:45 [error] [exception.CException] exception 'CException' with message 'A propriedade "UsuarioController.breadcrumbs" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/MGsis/protected/views/usuario/index.php(3): CComponent->__set('breadcrumbs', Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#5 /var/www/MGsis/protected/controllers/UsuarioController.php(158): CController->render('index', Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): UsuarioController->actionIndex()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario')
+#12 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/MGsis/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/index
+---
+2013/12/09 14:02:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "admin" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('admin')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('admin')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('site/admin')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=site/admin
+---
+2013/12/09 14:02:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "admin" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('admin')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('admin')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('site/admin')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=site/admin
+---
+2013/12/09 14:12:35 [error] [php] Undefined variable: code (/var/www/MGsis/protected/modules/srbac/views/authitem/unauthorized.php:11)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): UsuarioController->renderFile()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): UsuarioController->renderPartial()
+#2 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(111): UsuarioController->render()
+#3 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(77): UsuarioController->onUnauthorizedAccess()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(306): UsuarioController->beforeAction()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): UsuarioController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): UsuarioController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): UsuarioController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=usuario/update&id=301201
+in /var/www/MGsis/protected/modules/srbac/views/authitem/unauthorized.php (11)
+in /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php (111)
+in /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php (77)
+2013/12/09 14:18:52 [error] [exception.CException] exception 'CException' with message 'A propriedade "SrbacModule.language" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/base/CModule.php(513): CComponent->__set('language', 'pt_br')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CModule.php(86): CModule->configure(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/YiiBase.php(206): CModule->__construct('srbac', NULL, Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CModule.php(282): YiiBase::createComponent('srbac.SrbacModu...', 'srbac', NULL, Array)
+#4 /var/www/MGsis/protected/modules/srbac/components/Helper.php(339): CModule->getModule('srbac')
+#5 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(32): Helper::findModule('srbac')
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(306): SBaseController->beforeAction(Object(CInlineAction))
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/update')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario/update&id=301201
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=usuario/view&id=301201
+---
+2013/12/09 14:25:54 [error] [php] Undefined index: Usuario (/var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php:248)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): AuthitemController->runAction()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): AuthitemController->runActionWithFilters()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): AuthitemController->run()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#5 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#6 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=srbac/authitem/getRoles
+in /var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php (248)
+in /var/www/MGsis/protected/modules/srbac/controllers/AuthitemController.php (240)
+in /var/www/MGsis/index.php (13)
+2013/12/09 14:54:44 [error] [php] include(SDbAuthManager.php): failed to open stream: No such file or directory (/var/www/yii-1.1.14.f0fee9/framework/YiiBase.php:427)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/YiiBase.php(196): import()
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CModule.php(386): createComponent()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(185): CWebApplication->getComponent()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/auth/CWebUser.php(815): CWebApplication->getAuthManager()
+#4 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(79): CWebUser->checkAccess()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(306): PessoaController->beforeAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): PessoaController->runAction()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): PessoaController->runActionWithFilters()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): PessoaController->run()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=pessoa/ajaxbuscapessoa&texto=fab&limite=20&pagina=1&_=1386613794825
+in /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php (79)
+in /var/www/MGsis/index.php (13)
+2013/12/09 15:22:43 [error] [exception.CException] exception 'CException' with message 'A propriedade "UserIdentity.ERROR_USERNAME_INVALID" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/MGsis/protected/models/LoginForm.php(58): CComponent->__get('ERROR_USERNAME_...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#4 /var/www/MGsis/protected/controllers/SiteController.php(119): CModel->validate()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('login')
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#16 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#17 /var/www/MGsis/index.php(13): CApplication->run()
+#18 {main}
+REQUEST_URI=/MGsis/index.php?r=site/login
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/login
+---
+2013/12/09 15:23:05 [error] [exception.CException] exception 'CException' with message 'A propriedade "UserIdentity.ERROR_PASSWORD_INVALID" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/MGsis/protected/models/LoginForm.php(61): CComponent->__get('ERROR_PASSWORD_...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#4 /var/www/MGsis/protected/controllers/SiteController.php(119): CModel->validate()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('login')
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#16 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#17 /var/www/MGsis/index.php(13): CApplication->run()
+#18 {main}
+REQUEST_URI=/MGsis/index.php?r=site/login
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/login
+---
+2013/12/09 15:25:44 [error] [exception.CException] exception 'CException' with message 'A propriedade "UserIdentity.ERROR_PASSWORD_INVALID" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/MGsis/protected/models/LoginForm.php(60): CComponent->__get('ERROR_PASSWORD_...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#4 /var/www/MGsis/protected/controllers/SiteController.php(119): CModel->validate()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('login')
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#16 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#17 /var/www/MGsis/index.php(13): CApplication->run()
+#18 {main}
+REQUEST_URI=/MGsis/index.php?r=site/login
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/login
+---
+2013/12/09 15:35:44 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not allowed to access this page.' in /var/www/yii-1.1.14.f0fee9/framework/gii/GiiModule.php:170
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(263): GiiModule->beforeControllerAction(Object(DefaultController), Object(CInlineAction))
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=gii
+---
+2013/12/09 15:35:52 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not allowed to access this page.' in /var/www/yii-1.1.14.f0fee9/framework/gii/GiiModule.php:170
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(263): GiiModule->beforeControllerAction(Object(DefaultController), Object(CInlineAction))
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=gii
+---
+2013/12/09 15:35:55 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not allowed to access this page.' in /var/www/yii-1.1.14.f0fee9/framework/gii/GiiModule.php:170
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(263): GiiModule->beforeControllerAction(Object(DefaultController), Object(CInlineAction))
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=gii
+---

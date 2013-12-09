@@ -14,6 +14,22 @@
 <body style>
 	
 <?php
+
+	$items_menu = 
+		array(
+			array('label' => Yii::app()->user->name.' (sair)', 'url' => Yii::app()->createUrl('/site/logout'), 'visible' => !Yii::app()->user->isGuest),
+			array('label' => 'Entrar', 'url' => Yii::app()->createUrl('/site/login'), 'visible' => Yii::app()->user->isGuest),
+			);
+
+	if (isset($this->menu))
+	{
+		$items_menu = 
+			array_merge(
+				$items_menu ,
+				$this->menu 
+				);
+	}
+	
 	$this->widget(
 		'bootstrap.widgets.TbNavbar',
 		array(
@@ -35,17 +51,12 @@
 						)
 					 * 
 					 */
-					'items' => array_merge(
-							$this->menu, 
-							array(
-								array('label' => Yii::app()->user->name.' (sair)', 'url' => Yii::app()->createUrl('/site/logout'), 'visible' => !Yii::app()->user->isGuest),
-								array('label' => 'Entrar', 'url' => Yii::app()->createUrl('/site/login'), 'visible' => Yii::app()->user->isGuest),
-								)
-							),
+					'items' => $items_menu,
 					)
 				)
 			)
 		);
+	
 ?>
 <div class="container-fluid">
     <?php echo $content; ?>

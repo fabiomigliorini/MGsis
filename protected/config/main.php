@@ -9,7 +9,7 @@ return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'MGsis',
     //'theme'=>'mgsis',
-	'sourceLanguage'=>'pt_br',
+	//'sourceLanguage'=>'pt_br',
 	'language'=>'pt_br',
 	
 	// preloading 'log' component
@@ -22,6 +22,7 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		'application.modules.srbac.controllers.SBaseController'
 	),
 	
 	'modules'=>array(
@@ -35,8 +36,43 @@ return array(
                             'bootstrap.gii',
                         ),                    
 		),
-	),
-
+		'srbac'=>
+			array(
+				"userclass"=>"Usuario",
+				"userid"=>"codusuario",
+				"username"=>"usuario",
+				"debug"=>false,
+				"pageSize"=>30,
+				"superUser" =>"Administrador",
+				"alwaysAllowed"=>array(
+					'SiteLogin',
+					'SiteLogout',
+					//'SiteIndex',
+					//'SiteAdmin',
+					'SitePage',
+					'SiteCaptcha',
+					'SiteError',
+					'SiteContact',
+					//'PessoaAjaxBuscaPessoa',
+					//'PessoaAjaxInicializaPessoa',
+				),
+				'notAuthorizedView'=> 'srbac.views.authitem.unauthorized', // default:
+				//'notAuthorizedView'=> 'siteerror', // default:
+				// The operation assigned to users
+				"userActions"=>array(
+					"Index",
+					"View",
+				),
+				// The number of lines of the listboxes
+				//"listBoxNumberOfLines" => 10,
+				// The path to the custom images relative to basePath (default the srbac images path)
+				//"imagesPath"=>"../images",
+				//The icons pack to use (noia, tango)
+				//"imagesPack"=>"noia",
+				// Whether to show text next to the menu icons (default false)
+				"iconText"	=>true,
+			)		
+		),
 	// application components
 	'components'=>array(
 		'user'=>array(
@@ -47,7 +83,13 @@ return array(
 		'format'=>array(
 			'class'=>'application.components.MGFormatter',
 		),
-
+		'authManager'=>array(
+			'class'=>'application.modules.srbac.components.SDbAuthManager',
+			'connectionID'=>'db',
+			'itemTable'=>'mgsis.tblauthitem',
+			'assignmentTable'=>'mgsis.tblauthassignment',
+			'itemChildTable'=>'mgsis.tblauthitemchild',
+		),
 		'bootstrap' => array(
 			'class' => 'application.extensions.yiibooster.components.Bootstrap',
 		),		
