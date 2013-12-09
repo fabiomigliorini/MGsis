@@ -81,7 +81,7 @@ class PessoaController extends Controller
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
@@ -92,13 +92,16 @@ class PessoaController extends Controller
 	*/
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Pessoa', array(
-			'criteria'=>array(
-					'order'=>'codpessoa ASC',
-				),
-			));
+		$model=new Pessoa('search');
+		
+		$model->unsetAttributes();  // clear any default values
+		
+		if(isset($_GET['Pessoa']))
+			$model->attributes=$_GET['Pessoa'];
+		
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'dataProvider'=>$model->search(),
+			'model'=>$model,
 			));
 	}
 

@@ -1,7 +1,7 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Detalhes Usuario';
 $this->breadcrumbs=array(
-	'Usuarios'=>array('index'),
+	'Usuario'=>array('index'),
 	$model->codusuario,
 );
 

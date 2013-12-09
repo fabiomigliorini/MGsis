@@ -17,9 +17,9 @@
         </overridden-day-type>
       </overridden-day-types>
       <days>
-        <day date="20140101" type="day-type" id="1"/>
-        <day date="20131225" type="day-type" id="1"/>
         <day date="20131120" type="day-type" id="1"/>
+        <day date="20131225" type="day-type" id="1"/>
+        <day date="20140101" type="day-type" id="1"/>
       </days>
     </calendar>
   </calendars>
@@ -48,7 +48,7 @@
         </task>
       </task>
     </task>
-    <task id="8" name="Controles B&#xE1;sicos" note="" work="172800" start="20131122T090000Z" end="20131130T090000Z" work-start="20131122T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="8" name="Controles B&#xE1;sicos" note="" work="172800" start="20131122T090000Z" end="20131130T090000Z" work-start="20131122T090000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="1" type="FS"/>
       </predecessors>
@@ -88,26 +88,26 @@
         </task>
       </task>
     </task>
-    <task id="18" name="Seguran&#xE7;a" note="" work="72000" duration="115200" start="20131130T090000Z" end="20131205T090000Z" work-start="20131130T090000Z" percent-complete="18" priority="500" type="normal" scheduling="fixed-duration">
+    <task id="18" name="Seguran&#xE7;a" note="" work="72000" duration="115200" start="20131130T090000Z" end="20131205T090000Z" work-start="20131130T090000Z" percent-complete="100" priority="500" type="normal" scheduling="fixed-duration">
       <predecessors>
         <predecessor id="1" predecessor-id="8" type="FS"/>
       </predecessors>
-      <task id="19" name="Criar Manuten&#xE7;&#xE3;o Usu&#xE1;rio" note="" work="14400" duration="28800" start="20131130T090000Z" end="20131202T090000Z" work-start="20131130T090000Z" percent-complete="20" priority="500" type="normal" scheduling="fixed-duration">
+      <task id="19" name="Criar Manuten&#xE7;&#xE3;o Usu&#xE1;rio" note="" work="14400" duration="28800" start="20131130T090000Z" end="20131202T090000Z" work-start="20131130T090000Z" percent-complete="100" priority="500" type="normal" scheduling="fixed-duration">
         <predecessors>
           <predecessor id="1" predecessor-id="9" type="FS"/>
         </predecessors>
       </task>
-      <task id="20" name="Adicionar Funcionalidade Login" note="" work="14400" duration="28800" start="20131202T090000Z" end="20131203T090000Z" work-start="20131202T090000Z" percent-complete="0" priority="500" type="normal" scheduling="fixed-duration">
+      <task id="20" name="Adicionar Funcionalidade Login" note="" work="14400" duration="28800" start="20131202T090000Z" end="20131203T090000Z" work-start="20131202T090000Z" percent-complete="100" priority="500" type="normal" scheduling="fixed-duration">
         <predecessors>
           <predecessor id="1" predecessor-id="19" type="FS"/>
         </predecessors>
       </task>
-      <task id="21" name="Campos alteracao/criacao" note="" work="14400" duration="28800" start="20131203T090000Z" end="20131204T090000Z" work-start="20131203T090000Z" percent-complete="50" priority="500" type="normal" scheduling="fixed-duration">
+      <task id="21" name="Campos alteracao/criacao" note="" work="14400" duration="28800" start="20131203T090000Z" end="20131204T090000Z" work-start="20131203T090000Z" percent-complete="100" priority="500" type="normal" scheduling="fixed-duration">
         <predecessors>
           <predecessor id="1" predecessor-id="20" type="FS"/>
         </predecessors>
       </task>
-      <task id="22" name="Instalar m&#xF3;dulo SRBAC" note="" work="28800" duration="28800" start="20131204T090000Z" end="20131205T090000Z" work-start="20131204T090000Z" percent-complete="0" priority="500" type="normal" scheduling="fixed-duration">
+      <task id="22" name="Instalar m&#xF3;dulo SRBAC" note="" work="28800" duration="28800" start="20131204T090000Z" end="20131205T090000Z" work-start="20131204T090000Z" percent-complete="100" priority="500" type="normal" scheduling="fixed-duration">
         <predecessors>
           <predecessor id="1" predecessor-id="21" type="FS"/>
         </predecessors>

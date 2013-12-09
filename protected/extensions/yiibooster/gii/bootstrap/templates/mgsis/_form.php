@@ -4,14 +4,15 @@
  * - $this: the BootCrudCode object
  */
 ?>
-<?php echo "<?php \$form=\$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
+<?php echo "<?php \$form=\$this->beginWidget('MGActiveForm',array(
 	'id'=>'" . $this->class2id($this->modelClass) . "-form',
-	'type' => 'horizontal',
-	'enableAjaxValidation'=>true,
 )); ?>\n"; ?>
 
 <?php echo "<?php echo \$form->errorSummary(\$model); ?>\n"; ?>
 
+<fieldset>
+	<?php echo "<?php "; ?>
+	
 <?php
 foreach ($this->tableSchema->columns as $column) {
 	if (($column->autoIncrement) 
@@ -21,13 +22,16 @@ foreach ($this->tableSchema->columns as $column) {
 		continue;
 	}
 	?>
-	<?php echo "<?php echo " . $this->generateActiveRow($this->modelClass, $column) . "; ?>\n"; ?>
+		<?php echo "echo " . $this->generateActiveRow($this->modelClass, $column) . ";"; ?>
 
 <?php
 }
 ?>
+	<?php echo "?>"; ?>
+
+</fieldset>
 <div class="form-actions">
-    
+
     <?php echo "
     <?php 
 	
@@ -53,6 +57,7 @@ foreach ($this->tableSchema->columns as $column) {
             );
     ?>
     "; ?>
+
 </div>
 
 <?php echo "<?php \$this->endWidget(); ?>\n"; ?>

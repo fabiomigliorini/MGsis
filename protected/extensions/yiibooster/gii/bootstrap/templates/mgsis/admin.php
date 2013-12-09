@@ -17,7 +17,7 @@ echo "\$this->breadcrumbs=array(
 ?>
 
 $this->menu=array(
-	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
+	array('label'=>'Lista', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
 	);
 
@@ -50,9 +50,9 @@ Yii::app()->clientScript->registerScript('search', "
 $this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'<?php echo $this->class2id($this->modelClass); ?>-grid',
 	'dataProvider'=>$model->search(),
-	'type'=>'striped condensed hover',
+	'type'=>'striped condensed hover bordered',
 	'filter'=>$model,
-	'template'=>'{pager} {items} {pager}',
+	'template'=>'{items} {pager}',
 	'columns'=>array(
 <?php
 $count = 0;
@@ -62,7 +62,13 @@ foreach ($this->tableSchema->columns as $column) {
 	if (++$count == 7) {
 		echo "\t\t/*\n";
 	}
-	echo "\t\t'" . $column->name . "',\n";
+	?>
+		array(
+			'name'=>'<?php echo $column->name ?>',
+			'htmlOptions'=> array('class'=>'span1'),
+			),	
+	<?
+	//echo "\t\t'" . $column->name . "',\n";
 }
 if ($count >= 7) {
 	echo "\t\t*/\n";
@@ -70,6 +76,7 @@ if ($count >= 7) {
 ?>
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
+			'htmlOptions'=> array('class'=>'span1'),
 			),
 		),
 	)); 

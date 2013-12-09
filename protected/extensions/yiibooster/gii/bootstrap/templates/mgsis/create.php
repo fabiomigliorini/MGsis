@@ -18,8 +18,8 @@ echo "\$this->breadcrumbs=array(
 ?>
 
 $this->menu=array(
-array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
-array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
+array('label'=>'Lista', 'icon'=>'icon-list-alt', 'url'=>array('index')),
+//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
 ?>
 

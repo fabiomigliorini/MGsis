@@ -1,10 +1,20 @@
-<div class="registro">
-
-	<div class="codigo">
-		<?php echo CHtml::encode($data->getAttributeLabel('codpessoa')); ?>:
+<div class="row-fluid registro">
+	<div class="span1" style="text-align: right">
 		<?php echo CHtml::link(CHtml::encode($data->codpessoa),array('view','id'=>$data->codpessoa)); ?>
 	</div>
-	<div class="detalhes">
+	<div class="span4">
+		<?php echo CHtml::link(CHtml::encode($data->fantasia),array('view','id'=>$data->codpessoa)); ?>
+	</div>
+	<div class="span3">
+		<?php echo CHtml::encode($data->pessoa); ?>
+	</div>
+	<div class="span1">
+		<?php echo CHtml::encode($data->cnpj); ?>
+	</div>
+	<div class="span1">
+		<?php echo CHtml::encode($data->ie); ?>
+	</div>
+	<div class="span12">
 	
 		<?php echo CHtml::encode($data->getAttributeLabel('pessoa')); ?>:
 		<b><?php echo CHtml::encode($data->pessoa); ?></b>
