@@ -12,7 +12,7 @@ body {
 
 .detalhes {
     font-size: .8em;
-    color: #999999;
+    color: #888888;
 }
 
 .registro {
@@ -21,6 +21,7 @@ body {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px; 
+    margin-bottom: 0px;
   
 }
 
@@ -66,6 +67,27 @@ body {
     float: right;
     clear: right;
 }
+
+.div-combo-cidade {
+    display:table-cell;
+    width:500px;
+}
+
+.div-combo-cidade-cidade {
+    /*font-weight: bold;*/
+    float: left;
+    clear: left;
+}
+.div-combo-cidade-uf {
+    /*
+    color: #999999;
+    font-size: .8em;
+    */
+    text-align: right;
+    float: right;
+    clear: right;
+}
+
 
 .select2-highlighted .div-combo-pessoa-fantasia { 
 /*    color: yellow; */

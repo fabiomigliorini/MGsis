@@ -15,44 +15,60 @@
 	
 <?php
 
-	$items_menu = 
-		array(
-			array('label' => Yii::app()->user->name.' (sair)', 'url' => Yii::app()->createUrl('/site/logout'), 'visible' => !Yii::app()->user->isGuest),
-			array('label' => 'Entrar', 'url' => Yii::app()->createUrl('/site/login'), 'visible' => Yii::app()->user->isGuest),
-			);
-
-	if (isset($this->menu))
+	/*
+	if (Yii::app()->user->isGuest) 
 	{
-		$items_menu = 
-			array_merge(
-				$items_menu ,
-				$this->menu 
-				);
+		$usuario = '
+			<form class="navbar-form pull-right" id="usuario-form" action="/MGsis/index.php?r=site/login" method="post" style="padding-left:15px;padding-right:15px;">
+				<input name="LoginForm[username]" type="text" class="input-small" placeholder="Usuário">
+				<input name="LoginForm[password]" type="password" class="input-small" placeholder="Senha">
+				<button type="submit" class="btn btn-primary">OK</button>
+			</form>';
 	}
+	else
+	 * 
+	 */
+	if (!Yii::app()->user->isGuest) 
+	{
+		$usuario = '
+				<ul class="nav pull-right">
+                   <li class="divider-vertical"></li>
+                   <li><a href="' . Yii::app()->createUrl('/usuario/view', array('id'=>Yii::app()->user->id)) . '">Conectado como ' . Yii::app()->user->name . '</a></li>
+                   <li class="divider-vertical"></li>
+                   <li><a href="' . Yii::app()->createUrl('/site/logout') . '">Sair</a></li>
+               </ul>';
+	}
+	else
+	{
+		$usuario = '';
+	}
+	
+	$logo  = '<div class="nav">' . CHtml::image(Yii::app()->getBaseUrl().'/images/icones/mgsis.ico', 'MGsis', array('width'=>'20px')) . '</div>';
+	$logo .= '<div class="nav">MGsis</div>';
 	
 	$this->widget(
 		'bootstrap.widgets.TbNavbar',
 		array(
-			'brand' => 'MGsis',
+			//'brand' => 'MGsis',
+			//'brand' => CHtml::image(Yii::app()->getBaseUrl().'/images/icones/mgsis.ico', 'MGsis', array('width'=>'20px')) . "MGsis",
+			'brand' => $logo,			
 			'brandUrl' => Yii::app()->createUrl('site/index'),
-			'brandOptions' => array('style' => 'width:auto;margin-left: 0px;'),
+			'brandOptions' => array('style' => 'width:100px;margin-left: 0px;'),
 			'collapse' => true,
 			'fixed' => 'top',
 			'items' => array(
+				'<ul class="nav">
+                   <li class="divider-vertical"></li>
+               </ul>',
 				array(
 					'class' => 'bootstrap.widgets.TbMenu',
-					/*
 					'items' => array(
-						array('label' => 'Usuarios', 'url' => Yii::app()->createUrl('usuario')),
+						array('label' => 'Pessoas', 'url' => Yii::app()->createUrl('pessoa')),
 						array('label' => 'Titulos', 'url' => Yii::app()->createUrl('titulo')),
 						array('label' => 'Codigos', 'url' => Yii::app()->createUrl('codigo')),
-						array('label' => Yii::app()->user->name.' (sair)', 'url' => Yii::app()->createUrl('/site/logout'), 'visible' => !Yii::app()->user->isGuest),
-						array('label' => 'Entrar', 'url' => Yii::app()->createUrl('/site/login'), 'visible' => Yii::app()->user->isGuest),
 						)
-					 * 
-					 */
-					'items' => $items_menu,
-					)
+					),
+				$usuario,
 				)
 			)
 		);

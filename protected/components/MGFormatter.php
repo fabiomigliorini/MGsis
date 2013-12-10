@@ -47,4 +47,106 @@ class MGFormatter extends CFormatter
 		
         return (float) $value;
     }
+	
+	public function numeroLimpo($string)
+	{
+		 return preg_replace( '/[^0-9]/', '', $string);
+	}
+	
+	function formataCnpjCpf ($string, $fisica = 9)
+	{
+		
+		if ($fisica == 9) {
+			$string = self::numeroLimpo($string);
+			if (strlen($string) <= 11)
+				$fisica = true;
+			else
+				$fisica = false;
+		}
+
+		if ($fisica)
+			return self::formataPorMascara($string, '###.###.###-##');
+		else
+			return self::formataPorMascara($string, '##.###.###/####-##');
+	}
+	
+	function formataPorMascara($string, $mascara)
+	{
+		$string = self::numeroLimpo($string);
+		/* @var $caracteres int */
+		$caracteres = substr_count($mascara, '#');
+		$string = str_pad($string, $caracteres, "0", STR_PAD_LEFT);
+		$indice = -1;
+		for ($i=0; $i < strlen($mascara); $i++):
+			if ($mascara[$i]=='#') $mascara[$i] = $string[++$indice];
+		endfor;
+		return $mascara;
+		
+	}
+	
+	function formataInscricaoEstadual ($string, $siglaestado)
+	{
+		$mascara = array(
+			'AC' => '##.###.###/###-##',
+			'AL' => '#########',
+			'AP' => '#########',
+			'AM' => '##.###.###-#',
+			'BA' => '#######-##',
+			'CE' => '########-#',
+			'DF' => '###########-##',
+			'ES' => '###.###.##-#',
+			'GO' => '##.###.###-#',
+			'MA' => '#########',
+			'MT' => '##.###.###-#',
+			'MS' => '#########',
+			'MG' => '###.###.###/####',
+			'PA' => '##-######-#',
+			'PB' => '########-#',
+			'PR' => '########-##',
+			'PE' => '##.#.###.#######-#',
+			'PI' => '#########',
+			'RJ' => '##.###.##-#',
+			'RN' => '##.###.###-#',
+			'RS' => '###-#######',
+			'RO' => '###.#####-#',
+			'RR' => '########-#',
+			'SC' => '###.###.###',
+			'SP' => '###.###.###.###',
+			'SE' => '#########-#',
+			'TO' => '###########',			
+		);
+		
+		if (!array_key_exists($siglaestado, $mascara))
+			return $string;
+		else
+			return self::formataPorMascara($string, $mascara[$siglaestado]);
+	}
+	
+	public function formataCep ($string)
+	{
+		return self::formataPorMascara($string, "##.###-###");
+	}
+	
+	public function formataCodigo ($string, $digitos = 8)
+	{
+		return "#" . str_pad($string, $digitos, "0", STR_PAD_LEFT);
+	}
+	
+	public function formataEndereco($endereco = null, $numero = null, $complemento = null, $bairro = null, $cidade = null, $estado = null, $cep = null)
+	{
+		$retorno = $endereco;
+		if (!empty($numero))
+			$retorno .= ', ' . $numero;
+		if (!empty($complemento))
+			$retorno .= ' - ' . $complemento;
+		if (!empty($bairro))
+			$retorno .= ' - ' . $bairro;
+		if (!empty($cidade))
+			$retorno .= ' - ' . $cidade;
+		if (!empty($estado))
+			$retorno .= ' / ' . $estado;
+		if (!empty($cep))
+			$retorno .= ' - ' . self::formataCep($cep);
+		return $retorno;
+	}
 }

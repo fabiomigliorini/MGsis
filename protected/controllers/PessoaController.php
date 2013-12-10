@@ -6,7 +6,7 @@ class PessoaController extends Controller
 	* @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	* using two-column layout. See 'protected/views/layouts/column2.php'.
 	*/
-	public $layout='//layouts/column1';
+	public $layout='//layouts/column2';
 
 
 	/**
@@ -178,14 +178,15 @@ class PessoaController extends Controller
 				);
 			
 			// se o texto for um numero busca pelo "codpessoa" e "cnpj"
-			if ((int)$texto <> 0) 
+			$numero = (int)MGFormatter::numeroLimpo($texto);
+			if ($numero > 0) 
 			{
 				$condition .= ' OR codpessoa = :codpessoa OR cast(Cnpj as char(20)) ILIKE :cnpj';
 				$params = array_merge(
 						$params, 
 						array(
-							':codpessoa'=>(int)$texto,
-							':cnpj'=>(int)$texto.'%',
+							':codpessoa'=>$numero,
+							':cnpj'=>$numero.'%',
 							)
 						);
 			}

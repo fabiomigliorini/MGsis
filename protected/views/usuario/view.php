@@ -21,7 +21,6 @@ array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#','linkOptions'=>array(
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-		'codusuario',
 		'usuario',
 		array(
 			'name'=>'codecf',

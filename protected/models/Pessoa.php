@@ -57,7 +57,7 @@
  * @property Usuario[] $usuarios
  * @property Cidade $codcidade
  * @property Cidade $codcidadecobranca
- * @property Estadocivil $codestadocivil
+ * @property EstadoCivil $codestadocivil
  * @property Formapagamento $codformapagamento
  * @property Sexo $codsexo
  * @property Usuario $codusuarioalteracao
@@ -69,6 +69,14 @@
  */
 class Pessoa extends MGActiveRecord
 {
+	/* @property boolean $enderecosdiferentes */
+ 	public $enderecosdiferentes;
+	
+	const NOTAFISCAL_TRATAMENTOPADRAO = 0;
+	const NOTAFISCAL_SEMPRE = 1;
+	const NOTAFISCAL_SOMENTE_FECHAMENTO = 2;
+	const NOTAFISCAL_NUNCA = 9;
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -85,7 +93,7 @@ class Pessoa extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codpessoa, pessoa, fantasia, cadastro, notafiscal', 'required'),
+			array('pessoa, fantasia, cadastro, notafiscal', 'required'),
 			array('notafiscal', 'numerical', 'integerOnly'=>true),
 			array('pessoa, contato, conjuge, endereco, enderecocobranca, email, emailnfe, emailcobranca', 'length', 'max'=>100),
 			array('fantasia, complemento, bairro, complementocobranca, bairrocobranca, telefone1, telefone2, telefone3', 'length', 'max'=>50),
@@ -97,10 +105,11 @@ class Pessoa extends MGActiveRecord
 			array('mensagemvenda', 'length', 'max'=>500),
 			array('rg', 'length', 'max'=>30),
 			array('desconto', 'length', 'max'=>4),
+			array('notafiscal', 'in', 'range' => self::getNotaFiscalRange()),
 			array('inativo, cliente, fornecedor, fisica, codsexo, consumidor, codestadocivil, codcidade, codcidadecobranca, codformapagamento, creditobloqueado, vendedor, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('codpessoa, pessoa, fantasia, cadastro, inativo, cliente, fornecedor, fisica, codsexo, cnpj, ie, consumidor, contato, codestadocivil, conjuge, endereco, numero, complemento, codcidade, bairro, cep, enderecocobranca, numerocobranca, complementocobranca, codcidadecobranca, bairrocobranca, cepcobranca, telefone1, telefone2, telefone3, email, emailnfe, emailcobranca, codformapagamento, credito, creditobloqueado, observacoes, mensagemvenda, vendedor, rg, desconto, notafiscal, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
+			array('codpessoa, pessoa, fantasia, inativo, cnpj, codcidade, email, telefone1', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -115,13 +124,13 @@ class Pessoa extends MGActiveRecord
 			'titulos' => array(self::HAS_MANY, 'Titulo', 'codpessoa'),
 			'filials' => array(self::HAS_MANY, 'Filial', 'codpessoa'),
 			'usuarios' => array(self::HAS_MANY, 'Usuario', 'codpessoa'),
-			'codcidade' => array(self::BELONGS_TO, 'Cidade', 'codcidade'),
-			'codcidadecobranca' => array(self::BELONGS_TO, 'Cidade', 'codcidadecobranca'),
-			'codestadocivil' => array(self::BELONGS_TO, 'Estadocivil', 'codestadocivil'),
-			'codformapagamento' => array(self::BELONGS_TO, 'Formapagamento', 'codformapagamento'),
-			'codsexo' => array(self::BELONGS_TO, 'Sexo', 'codsexo'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'Cidade' => array(self::BELONGS_TO, 'Cidade', 'codcidade'),
+			'CidadeCobranca' => array(self::BELONGS_TO, 'Cidade', 'codcidadecobranca'),
+			'EstadoCivil' => array(self::BELONGS_TO, 'EstadoCivil', 'codestadocivil'),
+			'FormaPagamento' => array(self::BELONGS_TO, 'FormaPagamento', 'codformapagamento'),
+			'Sexo' => array(self::BELONGS_TO, 'Sexo', 'codsexo'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 			'cupomfiscals' => array(self::HAS_MANY, 'Cupomfiscal', 'codpessoa'),
 			'cobrancahistoricos' => array(self::HAS_MANY, 'Cobrancahistorico', 'codpessoa'),
 			'negocios' => array(self::HAS_MANY, 'Negocio', 'codpessoa'),
@@ -135,52 +144,52 @@ class Pessoa extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codpessoa' => 'Codpessoa',
-			'pessoa' => 'Pessoa',
-			'fantasia' => 'Fantasia',
-			'cadastro' => 'Cadastro',
-			'inativo' => 'Inativo',
+			'codpessoa' => '#',
+			'pessoa' => 'Razão Social',
+			'fantasia' => 'Nome Fantasia',
+			'cadastro' => 'Data do Cadastro',
+			'inativo' => 'Inativo desde',
 			'cliente' => 'Cliente',
 			'fornecedor' => 'Fornecedor',
-			'fisica' => 'Fisica',
-			'codsexo' => 'Codsexo',
-			'cnpj' => 'Cnpj',
-			'ie' => 'Ie',
-			'consumidor' => 'Consumidor',
+			'fisica' => 'Pessoa Física',
+			'codsexo' => 'Sexo',
+			'cnpj' => 'CNPJ/CPF',
+			'ie' => 'Inscrição Estadual',
+			'consumidor' => 'Consumidor Final',
 			'contato' => 'Contato',
-			'codestadocivil' => 'Codestadocivil',
+			'codestadocivil' => 'Estado Civil',
 			'conjuge' => 'Conjuge',
-			'endereco' => 'Endereco',
-			'numero' => 'Numero',
-			'complemento' => 'Complemento',
-			'codcidade' => 'Codcidade',
+			'endereco' => 'Endereço',
+			'numero' => 'Número do Endereço',
+			'complemento' => 'Complemento do Endereço',
+			'codcidade' => 'Cidade',
 			'bairro' => 'Bairro',
-			'cep' => 'Cep',
-			'enderecocobranca' => 'Enderecocobranca',
-			'numerocobranca' => 'Numerocobranca',
-			'complementocobranca' => 'Complementocobranca',
-			'codcidadecobranca' => 'Codcidadecobranca',
-			'bairrocobranca' => 'Bairrocobranca',
-			'cepcobranca' => 'Cepcobranca',
-			'telefone1' => 'Telefone1',
-			'telefone2' => 'Telefone2',
-			'telefone3' => 'Telefone3',
+			'cep' => 'CEP',
+			'enderecocobranca' => 'Endereço de Cobranca',
+			'numerocobranca' => 'Número do Endereço de Cobranca',
+			'complementocobranca' => 'Complemento do Endereço de Cobranca',
+			'codcidadecobranca' => 'Cidade Cobranca',
+			'bairrocobranca' => 'Bairro de Cobranca',
+			'cepcobranca' => 'Cep de Cobranca',
+			'telefone1' => 'Telefone',
+			'telefone2' => 'Telefone 2',
+			'telefone3' => 'Telefone 3',
 			'email' => 'Email',
-			'emailnfe' => 'Emailnfe',
-			'emailcobranca' => 'Emailcobranca',
-			'codformapagamento' => 'Codformapagamento',
-			'credito' => 'Credito',
-			'creditobloqueado' => 'Creditobloqueado',
-			'observacoes' => 'Observacoes',
-			'mensagemvenda' => 'Mensagemvenda',
+			'emailnfe' => 'Email para NFe',
+			'emailcobranca' => 'Email para Cobranca',
+			'codformapagamento' => 'Forma de Pagamento',
+			'credito' => 'Limite de Credito',
+			'creditobloqueado' => 'Credito Bloqueado',
+			'observacoes' => 'Observações',
+			'mensagemvenda' => 'Mensagem de Venda',
 			'vendedor' => 'Vendedor',
-			'rg' => 'Rg',
+			'rg' => 'RG',
 			'desconto' => 'Desconto',
-			'notafiscal' => 'Notafiscal',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'notafiscal' => 'Nota Fiscal',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuario Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuario Criação',
 		);
 	}
 
@@ -202,56 +211,60 @@ class Pessoa extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codpessoa',$this->codpessoa,true);
-		$criteria->compare('pessoa',$this->pessoa,true);
-		$criteria->compare('fantasia',$this->fantasia,true);
-		$criteria->compare('cadastro',$this->cadastro,true);
-		$criteria->compare('inativo',$this->inativo,true);
-		$criteria->compare('cliente',$this->cliente);
-		$criteria->compare('fornecedor',$this->fornecedor);
-		$criteria->compare('fisica',$this->fisica);
-		$criteria->compare('codsexo',$this->codsexo,true);
-		$criteria->compare('cnpj',$this->cnpj,true);
-		$criteria->compare('ie',$this->ie,true);
-		$criteria->compare('consumidor',$this->consumidor);
-		$criteria->compare('contato',$this->contato,true);
-		$criteria->compare('codestadocivil',$this->codestadocivil,true);
-		$criteria->compare('conjuge',$this->conjuge,true);
-		$criteria->compare('endereco',$this->endereco,true);
-		$criteria->compare('numero',$this->numero,true);
-		$criteria->compare('complemento',$this->complemento,true);
-		$criteria->compare('codcidade',$this->codcidade,true);
-		$criteria->compare('bairro',$this->bairro,true);
-		$criteria->compare('cep',$this->cep,true);
-		$criteria->compare('enderecocobranca',$this->enderecocobranca,true);
-		$criteria->compare('numerocobranca',$this->numerocobranca,true);
-		$criteria->compare('complementocobranca',$this->complementocobranca,true);
-		$criteria->compare('codcidadecobranca',$this->codcidadecobranca,true);
-		$criteria->compare('bairrocobranca',$this->bairrocobranca,true);
-		$criteria->compare('cepcobranca',$this->cepcobranca,true);
-		$criteria->compare('telefone1',$this->telefone1,true);
-		$criteria->compare('telefone2',$this->telefone2,true);
-		$criteria->compare('telefone3',$this->telefone3,true);
-		$criteria->compare('email',$this->email,true);
-		$criteria->compare('emailnfe',$this->emailnfe,true);
-		$criteria->compare('emailcobranca',$this->emailcobranca,true);
-		$criteria->compare('codformapagamento',$this->codformapagamento,true);
-		$criteria->compare('credito',$this->credito,true);
-		$criteria->compare('creditobloqueado',$this->creditobloqueado);
-		$criteria->compare('observacoes',$this->observacoes,true);
-		$criteria->compare('mensagemvenda',$this->mensagemvenda,true);
-		$criteria->compare('vendedor',$this->vendedor);
-		$criteria->compare('rg',$this->rg,true);
-		$criteria->compare('desconto',$this->desconto,true);
-		$criteria->compare('notafiscal',$this->notafiscal);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('codpessoa',$this->codpessoa,false);
+		
+		if (!empty($this->fantasia))
+		{
+			$texto  = str_replace(' ', '%', trim($this->fantasia));
+			$criteria->addCondition('t.fantasia ILIKE :fantasia OR t.pessoa ILIKE :fantasia');
+			$criteria->params = array_merge($criteria->params, array(':fantasia' => '%'.$texto.'%'));
+		}
+		
+		if (!empty($this->cnpj))
+		{
+			$criteria->addCondition('cast(t.Cnpj as char(20)) ILIKE :cnpj');
+			$criteria->params = array_merge($criteria->params, array(':cnpj' => (int)MGFormatter::numeroLimpo($this->cnpj) .'%'));
+		}
 
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
+		switch ($this->inativo)
+		{
+			case 9:
+				break;
+			
+			case 1:
+				$criteria->addCondition('t.inativo is not null');
+				break;
+			
+			default:
+				$criteria->addCondition('t.inativo is null');
+				break;
+		}
+		
+		if (!empty($this->email))
+		{
+			$criteria->addCondition('t.email ILIKE :email OR t.emailnfe ILIKE :email OR t.emailcobranca ILIKE :email');
+			$criteria->params = array_merge($criteria->params, array(':email' => '%'.$this->email.'%'));
+		}
+
+		if (!empty($this->telefone1))
+		{
+			$criteria->addCondition('t.telefone1 ILIKE :telefone OR t.telefone2 ILIKE :telefone OR t.telefone3 ILIKE :telefone');
+			$criteria->params = array_merge($criteria->params, array(':telefone' => '%'.$this->telefone1.'%'));
+		}
+
+		if (!empty($this->codcidade))
+		{
+			$criteria->addCondition('t.codcidade = :codcidade OR t.codcidadecobranca = :codcidade');
+			$criteria->params = array_merge($criteria->params, array(':codcidade' => $this->codcidade));
+		}
+		
+		
+		return new CActiveDataProvider($this, 
+				array(
+					'criteria'=>$criteria,
+					'sort'=>array('defaultOrder'=>'fantasia ASC'),
+				)
+			);
 	}
 
 	/**
@@ -264,5 +277,51 @@ class Pessoa extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
+	
+	protected function afterFind()
+	{
+		if (
+			($this->enderecocobranca    <>  $this->endereco   ) or 
+			($this->numerocobranca      <>  $this->numero     ) or 
+			($this->complementocobranca <>  $this->complemento) or 
+			($this->bairrocobranca      <>  $this->bairro     ) or 
+			($this->codcidadecobranca   <>  $this->codcidade  ) or 
+			($this->cepcobranca         <>  $this->cep        ) 
+		   )
+			$this->enderecosdiferentes = true;
+		else
+			$this->enderecosdiferentes = false;
+		
+		return parent::afterFind();
+	}
+	
+	public function getNotaFiscalOpcoes()
+	{
+		return array(
+			self::NOTAFISCAL_TRATAMENTOPADRAO => "Tratamento Padrão",
+			self::NOTAFISCAL_SEMPRE => "Sempre",
+			self::NOTAFISCAL_SOMENTE_FECHAMENTO => "Somente no Fechamento",
+			self::NOTAFISCAL_NUNCA => "Nunca Emitir",
+		);
+	}
+
+	public function getNotaFiscalRange()
+	{
+		return array(
+			self::NOTAFISCAL_TRATAMENTOPADRAO,
+			self::NOTAFISCAL_SEMPRE,
+			self::NOTAFISCAL_SOMENTE_FECHAMENTO,
+			self::NOTAFISCAL_NUNCA,
+		);
+	}
+	
+	public function getNotaFiscalDescricao()
+	{
+		$opcoes=$this->getNotaFiscalOpcoes();
+		if (!isset($this->notafiscal))
+			return null;
+		return isset($opcoes[$this->notafiscal]) ? $opcoes[$this->notafiscal] : "Tipo Desconhecido ({$this->notafiscal})";
+	}
+
 	
 }

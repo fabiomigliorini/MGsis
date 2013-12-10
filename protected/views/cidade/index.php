@@ -1,7 +1,7 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Pessoa';
+$this->pagetitle = Yii::app()->name . ' - Cidade';
 $this->breadcrumbs=array(
-	'Pessoa',
+	'Cidade',
 );
 
 $this->menu=array(
@@ -10,35 +10,38 @@ $this->menu=array(
 	);
 ?>
 
-<h1>Pessoa</h1>
+<h1>Cidade</h1>
 
 <br>
 
 <?php $form=$this->beginWidget('MGActiveForm',array(
 	'action'=>Yii::app()->createUrl($this->route),
-	'type' => 'inline',
+	'type' => 'search',
 	'method'=>'get',
 )); 
 
 ?>
-<div class="well well-small">
-	<?php echo $form->textField($model, 'codpessoa', array('placeholder' => '#', 'class'=>'input-mini')); ?>
-	<?php echo $form->textField($model, 'fantasia', array('placeholder' => 'Nome', 'class'=>'input-large')); ?>
-	<?php echo $form->textField($model, 'cnpj', array('placeholder' => 'Cnpj/Cpf', 'class'=>'input-small')); ?>
-	<?php echo $form->textField($model, 'email', array('placeholder' => 'Email', 'class'=>'input-small')); ?>
-	<?php echo $form->textField($model, 'telefone1', array('placeholder' => 'Fone', 'class'=>'input-small')); ?>
-	<?php echo $form->dropDownList($model, 'inativo', array('' => 'Ativos', 1 => 'Inativos', 9 => 'Todos'), array('placeholder' => 'Inativo', 'class'=>'input-small')); ?>
-	<?php echo $form->select2Cidade($model, 'codcidade', array('class' => 'input-large') );?>
+<div class="controls-row well well-small">
+	<div class="span11">
 	<?php
+		echo $form->textField($model, 'codusuariocriacao', array('placeholder' => '#', 'class'=>'span1')); 
+	?>
+	</div>
+	<div class="span1 right">
+	<?php
+
 	$this->widget('bootstrap.widgets.TbButton'
 		, array(
 			'buttonType' => 'submit',
 			'icon'=>'icon-search',
 			//'label'=>'',
-			'htmlOptions' => array('class'=>'pull-right btn btn-info')
+			'htmlOptions' => array('class'=>'btn btn-info')
 			)
 		); 
+	
 	?>
+	</div>
+		
 </div>
 
 <?php $this->endWidget(); ?>

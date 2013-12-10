@@ -1,13 +1,12 @@
 <?php
 
-class UsuarioController extends Controller
+class CidadeController extends Controller
 {
 	/**
 	* @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	* using two-column layout. See 'protected/views/layouts/column2.php'.
 	*/
-	public $layout='//layouts/column2';
-
+	public $layout='//layouts/column1';
 
 	/**
 	* Displays a particular model.
@@ -26,16 +25,16 @@ class UsuarioController extends Controller
 	*/
 	public function actionCreate()
 	{
-		$model=new Usuario;
+		$model=new Cidade;
 
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
 
-		if(isset($_POST['Usuario']))
+		if(isset($_POST['Cidade']))
 		{
-			$model->attributes=$_POST['Usuario'];
+			$model->attributes=$_POST['Cidade'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->codusuario));
+				$this->redirect(array('view','id'=>$model->codcidade));
 		}
 
 		$this->render('create',array(
@@ -55,11 +54,11 @@ class UsuarioController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
 
-		if(isset($_POST['Usuario']))
+		if(isset($_POST['Cidade']))
 		{
-			$model->attributes=$_POST['Usuario'];
+			$model->attributes=$_POST['Cidade'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->codusuario));
+				$this->redirect(array('view','id'=>$model->codcidade));
 		}
 
 		$this->render('update',array(
@@ -93,13 +92,13 @@ class UsuarioController extends Controller
 	public function actionIndex()
 	{
 		
-		$model=new Usuario('search');
+		$model=new Cidade('search');
 		
 		$model->unsetAttributes();  // clear any default values
 		
-		if(isset($_GET['Usuario']))
-			$model->attributes=$_GET['Usuario'];
-		
+		if(isset($_GET['Cidade']))
+			$model->attributes=$_GET['Cidade'];
+
 		$this->render('index',array(
 			'dataProvider'=>$model->search(),
 			'model'=>$model,
@@ -112,12 +111,12 @@ class UsuarioController extends Controller
 	public function actionAdmin()
 	{
 	
-		$model=new Usuario('search');
+		$model=new Cidade('search');
 		
 		$model->unsetAttributes();  // clear any default values
 		
-		if(isset($_GET['Usuario']))
-			$model->attributes=$_GET['Usuario'];
+		if(isset($_GET['Cidade']))
+			$model->attributes=$_GET['Cidade'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -131,7 +130,7 @@ class UsuarioController extends Controller
 	*/
 	public function loadModel($id)
 	{
-		$model=Usuario::model()->findByPk($id);
+		$model=Cidade::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -143,11 +142,92 @@ class UsuarioController extends Controller
 	*/
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='usuario-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='cidade-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
 	}
+	
+	public function actionAjaxBuscaCidade() 
+	{
+
+		// variaveis _GET 
+		$texto  = str_replace(' ', '%', trim(isset($_GET['texto'])?$_GET['texto']:''));
+		$limite = isset($_GET['limite'])?$_GET['limite']:20;
+		$pagina = isset($_GET['pagina'])?$_GET['pagina']:1;
+
+		// corrige pagina se veio sujeira
+		if ($pagina < 1) $pagina = 1;
+
+		// calcula de onde continuar a consulta
+		$offset = ($pagina-1)*$limite;
+		
+		// inicializa array com resultados
+		$resultados = array();
+
+		// se o texto foi preenchido
+		if (strlen($texto)>=3)
+		{
+			
+			// busca pelos campos "fantasia" e "pessoa" 
+			$condition = 'cidade ILIKE :cidade';
+			$params = array(
+				':cidade'=>'%'.$texto.'%',
+				);
+			
+			// busca pessoas
+			$registros = Cidade::model()->findAll(
+					array(
+						'select'=>'codcidade, cidade', 
+						'order'=>'cidade', 
+						'condition'=>$condition, 
+						'with'=>array("Estado"=>array("select"=>"sigla")),
+						'params'=>$params,
+						'limit'=>$limite,
+						'offset'=>$offset,
+						)
+					);
+			
+			//monta array com resultados
+			foreach ($registros as $registro) 
+			{
+				$resultados[] = array(
+					'id' => $registro->codcidade,
+					'cidade' => $registro->cidade,
+					'uf' => $registro->Estado->sigla,
+					);
+			}
+			
+		} 
+		
+		// transforma o array em JSON
+		echo CJSON::encode(
+				array(
+					'mais' => count($resultados)==$limite?true:false, 
+					'pagina' => (int) $pagina, 
+					'itens' => $resultados
+					)
+				);
+		
+		// FIM
+		Yii::app()->end();
+	} 
+	
+	public function actionAjaxInicializaCidade() 
+	{
+		if (isset($_GET['cod']))
+		{
+			$model = Cidade::model()->findByPk(
+					$_GET['cod'],
+					array(
+						'select'=>'codcidade, cidade', 
+						'with'=>'Estado',
+						)
+					);
+			echo CJSON::encode(array('id' => $model->codcidade,'cidade' => $model->cidade,'uf' => $model->Estado->sigla));
+		}
+		Yii::app()->end();
+	} 
 	
 }

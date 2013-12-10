@@ -36,6 +36,11 @@ $menu_admin = TbHtml::thumbnails(
 				'span' => '2', 
 				'caption' => '<small>Perm</small>'),
 			array(
+				'image' => Yii::app()->request->baseUrl . '/images/icones/cidade.png', 
+				'url' => Yii::app()->createUrl('cidade'), 
+				'span' => '1', 
+				'caption' => '<small>Cidades</small>'),
+			array(
 				'image' => Yii::app()->request->baseUrl . '/images/icones/portador.png', 
 				'url' => Yii::app()->createUrl('codigo'), 
 				'span' => '1', 

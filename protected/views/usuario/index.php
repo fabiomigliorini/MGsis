@@ -22,43 +22,32 @@ $this->menu=array(
 
 ?>
 
-<div class="controls-row well well-small">
-	<div class="span11">
-	<?php
-		echo $form->textField($model, 'codusuario', array('placeholder' => '#', 'class'=>'span1')); 
-
-		echo $form->textField($model, 'usuario', array('class' => 'span2', 'placeholder' => 'usuario')); 
-
-		echo $form->select2Pessoa(
+<div class="well well-small">
+	<?php echo $form->textField($model, 'codusuario', array('placeholder' => '#', 'class'=>'input-mini')); ?>
+	<?php echo $form->textField($model, 'usuario', array('class' => 'input-large', 'placeholder' => 'usuario'));  ?>
+	<?php echo $form->select2Pessoa(
 				$model, 
 				'codpessoa',
-				array('class' => 'span4')
-				);
-
-		echo $form->dropDownList(
+				array('class' => 'input-xxlarge')
+				); 
+	?>
+	<?php echo $form->dropDownList(
 				$model,
 				'codfilial',
 				Filial::getListaCombo(),
-				array('prompt'=>'', 'class' => 'span2', 'placeholder' => 'Filial')
+				array('prompt'=>'', 'class' => 'input-small', 'placeholder' => 'Filial')
 				);	
 
 	?>
-	</div>
-	<div class="span1 right">
-	<?php
-
-	$this->widget('bootstrap.widgets.TbButton'
-		, array(
-			'buttonType' => 'submit',
-			'icon'=>'icon-search',
-			//'label'=>'',
-			'htmlOptions' => array('class'=>'btn btn-info')
-			)
-		); 
-	
-	?>
-	</div>
-		
+	<?php $this->widget('bootstrap.widgets.TbButton'
+				, array(
+					'buttonType' => 'submit',
+					'icon'=>'icon-search',
+					//'label'=>'',
+					'htmlOptions' => array('class'=>'btn btn-info pull-right')
+					)
+				); 
+	?>	
 </div>
 
 <?php $this->endWidget(); ?>
