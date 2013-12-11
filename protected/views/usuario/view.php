@@ -36,7 +36,8 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 			),
 		array(
 			'name'=>'codpessoa',
-			'value'=>isset($model->codpessoa)?CHtml::encode($model->Pessoa->fantasia):Null,
+			'value'=>isset($model->codpessoa)?CHtml::link(CHtml::encode($model->Pessoa->fantasia), array('pessoa/view', 'id'=>$model->codpessoa)):Null,
+			'type'=>'raw'
 			),
 		'impressoratelanegocio',
 		array(

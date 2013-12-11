@@ -134,19 +134,37 @@ class MGFormatter extends CFormatter
 	
 	public function formataEndereco($endereco = null, $numero = null, $complemento = null, $bairro = null, $cidade = null, $estado = null, $cep = null)
 	{
+		
 		$retorno = $endereco;
+		
 		if (!empty($numero))
 			$retorno .= ', ' . $numero;
+		
+		$q = $retorno;
+		
 		if (!empty($complemento))
 			$retorno .= ' - ' . $complemento;
+		
 		if (!empty($bairro))
 			$retorno .= ' - ' . $bairro;
+		
 		if (!empty($cidade))
+		{
 			$retorno .= ' - ' . $cidade;
+			$q .= ' - ' . $cidade;
+		}
+		
 		if (!empty($estado))
+		{
 			$retorno .= ' / ' . $estado;
+			$q .= ' / ' . $estado;
+		}
+		
 		if (!empty($cep))
 			$retorno .= ' - ' . self::formataCep($cep);
-		return $retorno;
+		
+		$q = urlencode($q);
+		
+		return "<a href='http://maps.google.com/maps?q=$q' target='_blank'>" . CHtml::encode($retorno) . "</a>";
 	}
 }

@@ -21,3 +21,27 @@ Stack trace:
 REQUEST_URI=/MGsis/index.php?r=pessoa/view&id=30010175
 HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa
 ---
+2013/12/10 21:25:14 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblnegocio_codpessoa_fkey" on table "tblnegocio"
+DETAIL:  Key (codpessoa)=(20000058) is still referenced from table "tblnegocio".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='20000058'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (80)
+in /var/www/MGsis/index.php (13)
+2013/12/10 21:25:14 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblnegocio_codpessoa_fkey" on table "tblnegocio"
+DETAIL:  Key (codpessoa)=(20000058) is still referenced from table "tblnegocio".. The SQL statement executed was: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='20000058'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1802): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1222): CActiveRecord->deleteByPk(20000058)
+#2 /var/www/MGsis/protected/controllers/PessoaController.php(80): CActiveRecord->delete()
+#3 [internal function]: PessoaController->actionDelete('20000058')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=20000058
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=20000058
+---

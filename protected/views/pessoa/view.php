@@ -1,8 +1,8 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Detalhes Pessoas';
+$this->pagetitle = Yii::app()->name . ' - Detalhes Pessoa';
 $this->breadcrumbs=array(
-	'Pessoas'=>array('index'),
-	CHtml::encode(Yii::app()->format->formataCodigo($model->codpessoa)),
+	'Pessoa'=>array('index'),
+	CHtml::encode($model->fantasia),
 );
 
 $this->menu=array(
@@ -13,28 +13,28 @@ array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#','linkOptions'=>array(
 );
 ?>
 
-<h1>Detalhes Pessoa <?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codpessoa)); ?></h1>
+<h1><?php echo CHtml::encode($model->fantasia); ?></h1>
+<br>
 
 <?php if (!empty($model->inativo)): ?>
-	<span class="span12 label label-warning">
-		<center>
-		Inativado em 
-		<?php echo CHtml::encode($model->inativo); ?> 
-		</center>
-	</span>
-	<br>
-	<br>
+	<div class="alert alert-danger">
+		<b>Inativado em <?php echo CHtml::encode($model->inativo); ?> </b>
+	</div>
 <?php endif; ?>
 
 <?php 
 
 $attributes = 
 	array(
-		'fantasia',
+		array(
+			'name'=>'codpessoa',
+			'value'=>Yii::app()->format->formataCodigo($model->codpessoa),
+			),
 		'pessoa',
 		array(
 			'name'=>'telefone1',
-			'value'=>"{$model->telefone1} {$model->telefone2} {$model->telefone3}",
+			'value'=>"<a href='tel:{$model->telefone1}'>{$model->telefone1}</a> <a href='tel:{$model->telefone2}'>{$model->telefone2}</a> <a href='tel:{$model->telefone3}'>{$model->telefone3}</a>",
+			'type'=>'raw'
 			),
 		'contato',
 		array(
@@ -48,10 +48,12 @@ $attributes =
 		array(
 			'name'=>'endereco',
 			'value'=>Yii::app()->format->formataEndereco($model->endereco, $model->numero, $model->complemento, $model->bairro, $model->Cidade->cidade, $model->Cidade->Estado->sigla, $model->cep),
+			'type'=>'raw'
 			),
 		array(
 			'name'=>'enderecocobranca',
 			'value'=>Yii::app()->format->formataEndereco($model->enderecocobranca, $model->numerocobranca, $model->complementocobranca, $model->bairrocobranca, $model->CidadeCobranca->cidade, $model->CidadeCobranca->Estado->sigla, $model->cepcobranca),
+			'type'=>'raw'
 			),
 		array(
 			'name'=>'email',

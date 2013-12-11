@@ -1,8 +1,8 @@
-<div class="registro">
+<div class="registro <?php echo (!empty($data->inativo))?"alert-danger":""; ?>">
 	<div class="row-fluid">
 		<div class="span4">
 			<?php if (!empty($data->inativo)): ?>
-				<span class="label label-warning">Inativado em <?php echo CHtml::encode($data->inativo); ?></span>
+				<span class="label label-important">Inativado em <?php echo CHtml::encode($data->inativo); ?></span>
 			<?php endif; ?>
 			<div class="codigo">
 				<a href="<?php echo Yii::app()->createUrl('pessoa/view', array('id'=>$data->codpessoa)); ?>">
@@ -21,17 +21,23 @@
 		<div class="span6">
 			<div>
 				<b>
-					<?php echo CHtml::encode($data->telefone1); ?>
-					<?php echo CHtml::encode($data->telefone2); ?>
-					<?php echo CHtml::encode($data->telefone3); ?>
+					<a href='tel:<?php echo CHtml::encode($data->telefone1); ?>'>
+						<?php echo CHtml::encode($data->telefone1); ?>
+					</a>
+					<a href='tel:<?php echo CHtml::encode($data->telefone2); ?>'>
+						<?php echo CHtml::encode($data->telefone2); ?>
+					</a>
+					<a href='tel:<?php echo CHtml::encode($data->telefone3); ?>'>
+						<?php echo CHtml::encode($data->telefone3); ?>
+					</a>
 				</b>
 			</div>
 			<div class="detalhes">
-				<?php echo CHtml::encode(Yii::app()->format->formataEndereco($data->endereco, $data->numero, $data->complemento, $data->bairro, $data->Cidade->cidade, $data->Cidade->Estado->sigla, $data->cep)); ?>
+				<?php echo Yii::app()->format->formataEndereco($data->endereco, $data->numero, $data->complemento, $data->bairro, $data->Cidade->cidade, $data->Cidade->Estado->sigla, $data->cep); ?>
 			</div>
 			<?php if ($data->enderecosdiferentes): ?>
 				<div class="detalhes">
-					<?php echo CHtml::encode(Yii::app()->format->formataEndereco($data->enderecocobranca, $data->numerocobranca, $data->complementocobranca, $data->bairrocobranca, $data->CidadeCobranca->cidade, $data->CidadeCobranca->Estado->sigla, $data->cepcobranca)); ?>
+					<?php echo Yii::app()->format->formataEndereco($data->enderecocobranca, $data->numerocobranca, $data->complementocobranca, $data->bairrocobranca, $data->CidadeCobranca->cidade, $data->CidadeCobranca->Estado->sigla, $data->cepcobranca); ?>
 				</div>
 			<?php endif; ?>
 			<?php if (!empty($data->contato) or !empty($data->email) or !empty($data->emailnfe) or !empty($data->emailcobranca)): ?>

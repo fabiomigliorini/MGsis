@@ -2,7 +2,7 @@
 $this->pagetitle = Yii::app()->name . ' - Alterar Pessoa';
 $this->breadcrumbs=array(
 	'Pessoa'=>array('index'),
-	CHtml::encode(Yii::app()->format->formataCodigo($model->codpessoa)) =>array('view','id'=>$model->codpessoa),
+	CHtml::encode($model->fantasia) =>array('view','id'=>$model->codpessoa),
 	'Alterar',
 );
 
@@ -14,7 +14,8 @@ $this->breadcrumbs=array(
 	);
 	?>
 
-	<h1>Alterar Pessoa <?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codpessoa)); ?></h1>
+	<h1>Alterando Pessoa <?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codpessoa)); ?></h1>
+	<br>
 
 	<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>	
 	<?php $this->widget('UsuarioCriacao', array('model'=>$model)); ?>
