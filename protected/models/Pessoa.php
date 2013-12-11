@@ -93,22 +93,27 @@ class Pessoa extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('pessoa, fantasia, cadastro, notafiscal', 'required'),
-			array('notafiscal', 'numerical', 'integerOnly'=>true),
+			
+			array('cnpj', 'ext.validators.CnpjCpfValidator'),
+			array('ie', 'ext.validators.InscricaoEstadualValidator'),
+			
+			array('pessoa, fantasia, cadastro, notafiscal, cnpj', 'required'),
+			array('fantasia', 'unique', 'caseSensitive' => false),
+			array('fantasia, pessoa', 'length', 'min' => 5),
 			array('pessoa, contato, conjuge, endereco, enderecocobranca, email, emailnfe, emailcobranca', 'length', 'max'=>100),
 			array('fantasia, complemento, bairro, complementocobranca, bairrocobranca, telefone1, telefone2, telefone3', 'length', 'max'=>50),
-			array('cnpj, credito', 'length', 'max'=>14),
+			array('notafiscal', 'numerical', 'integerOnly'=>true),
+			array('credito', 'length', 'max'=>14),
 			array('ie', 'length', 'max'=>20),
 			array('numero, numerocobranca', 'length', 'max'=>10),
 			array('cep, cepcobranca', 'length', 'max'=>8),
 			array('observacoes', 'length', 'max'=>255),
 			array('mensagemvenda', 'length', 'max'=>500),
 			array('rg', 'length', 'max'=>30),
-			array('desconto', 'length', 'max'=>4),
+			array('desconto', 'numerical', 'max'=>50),
 			array('notafiscal', 'in', 'range' => self::getNotaFiscalRange()),
 			array('inativo, cliente, fornecedor, fisica, codsexo, consumidor, codestadocivil, codcidade, codcidadecobranca, codformapagamento, creditobloqueado, vendedor, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
 			array('codpessoa, pessoa, fantasia, inativo, cnpj, codcidade, email, telefone1', 'safe', 'on'=>'search'),
 		);
 	}
@@ -322,6 +327,5 @@ class Pessoa extends MGActiveRecord
 			return null;
 		return isset($opcoes[$this->notafiscal]) ? $opcoes[$this->notafiscal] : "Tipo Desconhecido ({$this->notafiscal})";
 	}
-
 	
 }

@@ -112,4 +112,21 @@ class Sexo extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
+	
+	public function scopes () 
+	{
+		return array(
+			'combo'=>array(
+				'select'=>array('codsexo', 'sexo'),
+				'order'=>'codsexo ASC',
+				),
+			);
+	}
+
+	public function getListaCombo ()
+	{
+		$lista = self::model()->combo()->findAll();
+		return CHtml::listData($lista, 'codsexo', 'sexo');
+	}	
+	
 }

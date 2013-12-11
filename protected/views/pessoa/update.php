@@ -8,13 +8,13 @@ $this->breadcrumbs=array(
 
 	$this->menu=array(
 	array('label'=>'Lista', 'icon'=>'icon-list-alt', 'url'=>array('index')),
-	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
+	array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create')),
 	array('label'=>'Detalhes', 'icon'=>'icon-eye-open', 'url'=>array('view','id'=>$model->codpessoa)),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 	);
 	?>
 
-	<h1>Alterando Pessoa <?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codpessoa)); ?></h1>
+	<h1>Alterar Pessoa <?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codpessoa)); ?></h1>
 	<br>
 
 	<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>	

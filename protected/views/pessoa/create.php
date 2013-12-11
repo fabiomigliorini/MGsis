@@ -1,8 +1,8 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Novo Pessoa';
+$this->pagetitle = Yii::app()->name . ' - Nova Pessoa';
 $this->breadcrumbs=array(
 	'Pessoa'=>array('index'),
-	'Novo',
+	'Nova',
 );
 
 $this->menu=array(
@@ -11,6 +11,6 @@ array('label'=>'Lista', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 );
 ?>
 
-<h1>Novo Pessoa</h1>
+<h1>Nova Pessoa</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

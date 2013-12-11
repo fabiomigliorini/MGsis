@@ -113,7 +113,12 @@ abstract class MGActiveRecord extends CActiveRecord
 				if ($column = $this->getTableSchema()->getColumn($name))
 				{
 					if (($column->dbType == 'double precision') or (stripos($column->dbType, 'numeric') !== false))
-						$value = Yii::app()->format->unformatNumber($value); // new
+					{
+						if ($column->name == 'cnpj')
+							$value = Yii::app()->format->numeroLimpo($value); 
+						else
+							$value = Yii::app()->format->unformatNumber($value); 
+					}
 				}
 				$this->$name=$value;
 			}

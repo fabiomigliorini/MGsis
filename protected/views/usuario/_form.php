@@ -59,9 +59,9 @@
 				$model,
 				'inativo',
 				array(
-					'class' => 'span2', 
+					'class' => 'input-small', 
 					'options' => array(
-						'language' => 'es',
+						'language' => 'pt',
 						'format' => 'dd/mm/yyyy'
 						),
 					'prepend' => '<i class="icon-calendar"></i>',
