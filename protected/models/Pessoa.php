@@ -69,8 +69,8 @@
  */
 class Pessoa extends MGActiveRecord
 {
-	/* @property boolean $enderecosdiferentes */
- 	public $enderecosdiferentes;
+	/* @property boolean $cobrancanomesmoendereco */
+ 	public $cobrancanomesmoendereco;
 	
 	const NOTAFISCAL_TRATAMENTOPADRAO = 0;
 	const NOTAFISCAL_SEMPRE = 1;
@@ -96,26 +96,92 @@ class Pessoa extends MGActiveRecord
 			
 			array('cnpj', 'ext.validators.CnpjCpfValidator'),
 			array('ie', 'ext.validators.InscricaoEstadualValidator'),
-			
-			array('pessoa, fantasia, cadastro, notafiscal, cnpj', 'required'),
+			array('cnpj', 'validaCnpjDuplicado'),
+			array('ie, cep, cepcobranca','filter','filter'=>array($this, 'numeroLimpo')),
+			array('email, codcidade, endereco, numero, bairro, cep, codcidadecobranca, enderecocobranca, numerocobranca, bairrocobranca, cepcobranca, pessoa, fantasia, cadastro, notafiscal, cnpj, telefone1', 'required'),
 			array('fantasia', 'unique', 'caseSensitive' => false),
 			array('fantasia, pessoa', 'length', 'min' => 5),
 			array('pessoa, contato, conjuge, endereco, enderecocobranca, email, emailnfe, emailcobranca', 'length', 'max'=>100),
+			array('email, emailnfe, emailcobranca', 'email'),
 			array('fantasia, complemento, bairro, complementocobranca, bairrocobranca, telefone1, telefone2, telefone3', 'length', 'max'=>50),
 			array('notafiscal', 'numerical', 'integerOnly'=>true),
 			array('credito', 'length', 'max'=>14),
+			array('telefone1, telefone2, telefone3', 'validaTelefone'),
 			array('ie', 'length', 'max'=>20),
 			array('numero, numerocobranca', 'length', 'max'=>10),
-			array('cep, cepcobranca', 'length', 'max'=>8),
+			array('cep, cepcobranca', 'length', 'max'=>10),
 			array('observacoes', 'length', 'max'=>255),
 			array('mensagemvenda', 'length', 'max'=>500),
 			array('rg', 'length', 'max'=>30),
 			array('desconto', 'numerical', 'max'=>50),
 			array('notafiscal', 'in', 'range' => self::getNotaFiscalRange()),
-			array('inativo, cliente, fornecedor, fisica, codsexo, consumidor, codestadocivil, codcidade, codcidadecobranca, codformapagamento, creditobloqueado, vendedor, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
+			array('inativo, cliente, cobrancanomesmoendereco, fornecedor, fisica, codsexo, consumidor, codestadocivil, codcidade, codcidadecobranca, codformapagamento, creditobloqueado, vendedor, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			array('codpessoa, pessoa, fantasia, inativo, cnpj, codcidade, email, telefone1', 'safe', 'on'=>'search'),
 		);
+	}
+
+	//verifica se o numero tem pelo menos 10 digitos
+	public function validaTelefone($attribute,$params)
+	{
+		if (!empty($this->$attribute))
+			if (strlen(MGFormatter::numeroLimpo($this->$attribute)) < 10)
+				$this->addError($attribute,'Telefone inválido, não esqueça do DDD.');
+	}
+
+	//verifica se a combinacao de CNPJ e IE já não estão cadastrados
+	public function validaCnpjDuplicado($attribute,$params)
+	{
+		if (!empty($this->cnpj))
+		{
+			$validar = true;
+			
+			if (!$this->isNewRecord)
+			{
+				$pessoa = Pessoa::model()->findByPk($this->codpessoa);
+				if ($this->cnpj == $pessoa->cnpj && (int) MGFormatter::numeroLimpo($this->ie) == (int) MGFormatter::numeroLimpo($pessoa->ie))
+				{
+					$validar = false;
+				}
+			}
+			
+			if ($validar)
+			{
+				$pessoas = Pessoa::model()->findAll(
+					array(
+						'select' => 'codpessoa, fantasia, ie, cnpj', 
+						'condition' => 'cnpj = :cnpj', 
+						'params' => 
+							array(
+								'cnpj' => $this->cnpj,
+							)
+					)
+				);
+
+				foreach($pessoas as $pessoa)
+				{
+					if ($pessoa->codpessoa == $this->codpessoa)
+						continue;
+
+					if ((int) MGFormatter::numeroLimpo($this->ie) == (int) MGFormatter::numeroLimpo($pessoa->ie))
+					{
+						$erro = sprintf(
+							'CNPJ/CPF e Inscrição Estadual já cadastrados para "%s" (%s).', 
+							$pessoa->fantasia,
+							MGFormatter::formataCodigo($pessoa->codpessoa)
+							);
+						$this->addError($attribute, $erro);
+						break;
+					}
+				}
+			}
+		}
+	}
+	
+	//retorna numero limpo
+	public function numeroLimpo($str)
+	{
+		return MGFormatter::numeroLimpo($str);
 	}
 
 	/**
@@ -165,17 +231,17 @@ class Pessoa extends MGActiveRecord
 			'codestadocivil' => 'Estado Civil',
 			'conjuge' => 'Conjuge',
 			'endereco' => 'Endereço',
-			'numero' => 'Número do Endereço',
-			'complemento' => 'Complemento do Endereço',
+			'numero' => 'Número',
+			'complemento' => 'Complemento',
 			'codcidade' => 'Cidade',
 			'bairro' => 'Bairro',
 			'cep' => 'CEP',
-			'enderecocobranca' => 'Endereço de Cobranca',
-			'numerocobranca' => 'Número do Endereço de Cobranca',
-			'complementocobranca' => 'Complemento do Endereço de Cobranca',
-			'codcidadecobranca' => 'Cidade Cobranca',
-			'bairrocobranca' => 'Bairro de Cobranca',
-			'cepcobranca' => 'Cep de Cobranca',
+			'enderecocobranca' => 'Endereço',
+			'numerocobranca' => 'Número',
+			'complementocobranca' => 'Complemento',
+			'codcidadecobranca' => 'Cidade',
+			'bairrocobranca' => 'Bairro',
+			'cepcobranca' => 'Cep',
 			'telefone1' => 'Telefone',
 			'telefone2' => 'Telefone 2',
 			'telefone3' => 'Telefone 3',
@@ -195,6 +261,7 @@ class Pessoa extends MGActiveRecord
 			'codusuarioalteracao' => 'Usuario Alteração',
 			'criacao' => 'Criação',
 			'codusuariocriacao' => 'Usuario Criação',
+			'cobrancanomesmoendereco' => 'Cobrança no Mesmo Endereço.',
 		);
 	}
 
@@ -293,9 +360,9 @@ class Pessoa extends MGActiveRecord
 			($this->codcidadecobranca   <>  $this->codcidade  ) or 
 			($this->cepcobranca         <>  $this->cep        ) 
 		   )
-			$this->enderecosdiferentes = true;
+			$this->cobrancanomesmoendereco = false;
 		else
-			$this->enderecosdiferentes = false;
+			$this->cobrancanomesmoendereco = true;
 		
 		return parent::afterFind();
 	}
@@ -328,4 +395,25 @@ class Pessoa extends MGActiveRecord
 		return isset($opcoes[$this->notafiscal]) ? $opcoes[$this->notafiscal] : "Tipo Desconhecido ({$this->notafiscal})";
 	}
 	
+	protected function beforeValidate()
+	{
+		if (empty($this->cadastro))
+			$this->cadastro = date('Y-m-d H:i:s');
+		
+		if ($this->cobrancanomesmoendereco == true)
+		{
+			$this->enderecocobranca    = $this->endereco;
+			$this->numerocobranca      = $this->numero;
+			$this->complementocobranca = $this->complemento;
+			$this->bairrocobranca      = $this->bairro;
+			$this->codcidadecobranca   = $this->codcidade;
+			$this->cepcobranca         = $this->cep;
+		}
+		
+		if (empty($this->notafiscal))
+			$this->notafiscal = self::NOTAFISCAL_TRATAMENTOPADRAO;
+		
+		return parent::beforeValidate();
+	}
+
 }

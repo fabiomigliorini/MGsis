@@ -21,9 +21,14 @@ abstract class MGActiveRecord extends CActiveRecord
 		foreach($this->metadata->tableSchema->columns as $columnName => $column)
 		{
 			/* se campo estiver vazio, vai para proximo */
-			if (empty($this->{$column->name}))
+			if (empty($this->$columnName) and ($this->$columnName <> "0"))
 			{
-				$this->{$column->name} = null;
+				
+				//if ($column->name == 'fornecedor') die($column->dbType);
+				if ($column->dbType == 'boolean') 
+					$this->$columnName = false;
+				else
+					$this->$columnName = null;
 				continue;
 			}
 			

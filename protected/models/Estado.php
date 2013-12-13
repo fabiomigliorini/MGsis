@@ -16,7 +16,7 @@
  *
  * The followings are the available model relations:
  * @property Tributacaonaturezaoperacao[] $tributacaonaturezaoperacaos
- * @property Cidade[] $cidades
+ * @property Cidade[] $Cidades
  * @property Pais $codpais
  * @property Usuario $codusuarioalteracao
  * @property Usuario $codusuariocriacao
@@ -58,7 +58,7 @@ class Estado extends MGActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'tributacaonaturezaoperacaos' => array(self::HAS_MANY, 'Tributacaonaturezaoperacao', 'codestado'),
-			'cidades' => array(self::HAS_MANY, 'Cidade', 'codestado'),
+			'Cidades' => array(self::HAS_MANY, 'Cidade', 'codestado'),
 			'codpais' => array(self::BELONGS_TO, 'Pais', 'codpais'),
 			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),

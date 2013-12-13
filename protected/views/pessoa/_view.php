@@ -35,7 +35,7 @@
 			<div class="detalhes">
 				<?php echo Yii::app()->format->formataEndereco($data->endereco, $data->numero, $data->complemento, $data->bairro, $data->Cidade->cidade, $data->Cidade->Estado->sigla, $data->cep); ?>
 			</div>
-			<?php if ($data->enderecosdiferentes): ?>
+			<?php if (!$data->cobrancanomesmoendereco): ?>
 				<div class="detalhes">
 					<?php echo Yii::app()->format->formataEndereco($data->enderecocobranca, $data->numerocobranca, $data->complementocobranca, $data->bairrocobranca, $data->CidadeCobranca->cidade, $data->CidadeCobranca->Estado->sigla, $data->cepcobranca); ?>
 				</div>

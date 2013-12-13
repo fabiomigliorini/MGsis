@@ -12,8 +12,7 @@
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
-<body style>
-	
+<body style>	
 <?php
 
 	/*
@@ -78,6 +77,5 @@
 <div class="container-fluid">
     <?php echo $content; ?>
 </div>
-	
 </body>
 </html>

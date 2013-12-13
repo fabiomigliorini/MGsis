@@ -45,7 +45,7 @@ class InscricaoEstadualValidator extends CValidator
 		
 	public function validar(){
 		
-		if(strtoupper($this->ie)=="ISENTO"){
+		if(strtoupper($this->ie)=="ISENTO" or empty($this->ie)){
 			return true;
 		}
 		

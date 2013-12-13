@@ -216,17 +216,43 @@ class CidadeController extends Controller
 	
 	public function actionAjaxInicializaCidade() 
 	{
+		$id = null;
+		$cidade = null;
+		$uf = null;
+		
 		if (isset($_GET['cod']))
 		{
-			$model = Cidade::model()->findByPk(
-					$_GET['cod'],
-					array(
-						'select'=>'codcidade, cidade', 
-						'with'=>'Estado',
-						)
-					);
-			echo CJSON::encode(array('id' => $model->codcidade,'cidade' => $model->cidade,'uf' => $model->Estado->sigla));
+			try {
+				$model = Cidade::model()->findByPk(
+						$_GET['cod'],
+						array(
+							'select'=>'codcidade, cidade', 
+							'with'=>'Estado',
+							)
+						);
+				$id = $model->codcidade;
+				$cidade = $model->cidade;
+				$uf = $model->Estado->sigla;
+			} catch (Exception $e) {
+			}			
 		}
+		echo CJSON::encode(array('id' => $id,'cidade' => $cidade,'uf' => $uf));
+		Yii::app()->end();
+	} 
+
+	public function actionAjaxBuscaPeloNome() 
+	{
+		$codcidade = null;
+		if (isset($_GET['uf']) and isset($_GET['cidade']))
+		{
+			if ($estado = Estado::model()->find(array('select' => 'codestado', 'condition'=>'sigla ilike :uf', 'params'=>array(':uf'=>$_GET['uf']))))
+			{
+				$cidades = $estado->Cidades(array('select' => 'codcidade', 'condition'=>'cidade ilike :cidade', 'params'=>array(':cidade'=>MGFormatter::removeAcentos($_GET['cidade']))));
+				if (isset($cidades[0]->codcidade))
+					$codcidade = $cidades[0]->codcidade;
+			}
+		}
+		echo CJSON::encode(array('codcidade' => $codcidade));
 		Yii::app()->end();
 	} 
 	

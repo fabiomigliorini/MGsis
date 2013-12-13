@@ -54,3 +54,35 @@ function formataCnpjCpf(numero)
 
     return numero;
 }
+
+var mensagemModalChamada = 1;
+
+function mensagemModal (titulo, mensagem)
+{
+	mensagemModalChamada++;
+	
+	var htmlModal = '<div class="modal hide fade" id="MensagemModal-' + mensagemModalChamada + '" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-header"><h3 id="MensagemModalTitulo-' + mensagemModalChamada + '"> XXXX </h3><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button></div><div class="modal-body"><p id="MensagemModalTexto-' + mensagemModalChamada + '"></div><div class="modal-footer"><button class="btn" data-dismiss="modal">Close</button></div></div>';
+	
+    $('body').append(htmlModal);
+	$('#MensagemModalTitulo-' + mensagemModalChamada).html(titulo);
+	$('#MensagemModalTexto-' + mensagemModalChamada).html(mensagem);
+    $('#MensagemModal-' + mensagemModalChamada).modal();
+}
+
+
+$(document).ready(function(){
+	$("input").not( $(":button") ).keypress(function (evt) {
+		if (evt.keyCode == 13) {
+			iname = $(this).val();
+			if (iname !== 'Submit'){
+				var fields = $(this).parents('form:eq(0),body').find('button, input, select, button, textarea').filter(':visible');
+				//var fields = $(this).parents('form:eq(0),body').find('button, input, textarea, select');
+				var index = fields.index( this );
+				if ( index > -1 && ( index + 1 ) < fields.length ) {
+					fields.eq( index + 1 ).focus();
+				}
+				return false;
+			}
+		}
+	});
+});
