@@ -244,6 +244,7 @@ function consultaCep(cobranca)
 		campo = "#Pessoa_cepcobranca";
 		
 	if($.trim($(campo).val()) != ""){
+		$.notify("Consultando Cep!", "info");
 		$.getScript("http://cep.republicavirtual.com.br/web_cep.php?formato=javascript&cep="+$(campo).val(), function(){
 			if(resultadoCEP["resultado"]){
 				if (resultadoCEP["resultado"] == 1 || resultadoCEP["resultado"] == 2) {
@@ -286,8 +287,6 @@ function escondeCamposPessoaFisica()
 }
 
 $(document).ready(function() {
-		
-	bootbox.setLocale("br");
 	
     escondeCamposPessoaFisica();
 	escondeCamposCliente();
@@ -320,10 +319,21 @@ $(document).ready(function() {
 	$(":reset").on("click", function(){
 		escondeCamposPessoaFisica();
 		escondeCamposCliente();
+		escondeCamposEnderecoCobranca();
 	});	
 	
     $("#btnConsultaCep").click(function(e){ consultaCep (false); })
     $("#btnConsultaCepCobranca").click(function(e){ consultaCep (true); })
+
+	$('#pessoa-form').submit(function(e) {
+        var currentForm = this;
+        e.preventDefault();
+        bootbox.confirm("Tem certeza que deseja salvar?", function(result) {
+            if (result) {
+                currentForm.submit();
+            }
+        });
+    });
 	
 });
 

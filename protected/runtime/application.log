@@ -2823,3 +2823,1014 @@ Stack trace:
 REQUEST_URI=/MGsis/index.php?r=pessoa/update&id=879
 HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/update&id=879
 ---
+2013/12/14 14:03:33 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (80)
+in /var/www/MGsis/index.php (13)
+2013/12/14 14:03:33 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. The SQL statement executed was: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1802): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1222): CActiveRecord->deleteByPk(224)
+#2 /var/www/MGsis/protected/controllers/PessoaController.php(80): CActiveRecord->delete()
+#3 [internal function]: PessoaController->actionDelete('224')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=224
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=224
+---
+2013/12/14 14:04:43 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (80)
+in /var/www/MGsis/index.php (13)
+2013/12/14 14:04:43 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. The SQL statement executed was: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1802): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1222): CActiveRecord->deleteByPk(224)
+#2 /var/www/MGsis/protected/controllers/PessoaController.php(80): CActiveRecord->delete()
+#3 [internal function]: PessoaController->actionDelete('224')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=224
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=224
+---
+2013/12/14 14:04:47 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (80)
+in /var/www/MGsis/index.php (13)
+2013/12/14 14:04:47 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. The SQL statement executed was: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1802): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1222): CActiveRecord->deleteByPk(224)
+#2 /var/www/MGsis/protected/controllers/PessoaController.php(80): CActiveRecord->delete()
+#3 [internal function]: PessoaController->actionDelete('224')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=224
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=224
+---
+2013/12/14 14:05:04 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (80)
+in /var/www/MGsis/index.php (13)
+2013/12/14 14:05:04 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. The SQL statement executed was: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1802): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1222): CActiveRecord->deleteByPk(224)
+#2 /var/www/MGsis/protected/controllers/PessoaController.php(80): CActiveRecord->delete()
+#3 [internal function]: PessoaController->actionDelete('224')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=224
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=224
+---
+2013/12/14 14:20:46 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (80)
+in /var/www/MGsis/index.php (13)
+2013/12/14 14:20:46 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. The SQL statement executed was: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1802): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1222): CActiveRecord->deleteByPk(224)
+#2 /var/www/MGsis/protected/controllers/PessoaController.php(80): CActiveRecord->delete()
+#3 [internal function]: PessoaController->actionDelete('224')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=224
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=224
+---
+2013/12/14 14:22:14 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (80)
+in /var/www/MGsis/index.php (13)
+2013/12/14 14:22:14 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. The SQL statement executed was: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1802): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1222): CActiveRecord->deleteByPk(224)
+#2 /var/www/MGsis/protected/controllers/PessoaController.php(80): CActiveRecord->delete()
+#3 [internal function]: PessoaController->actionDelete('224')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=224
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=224
+---
+2013/12/14 14:22:16 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Invalid request. Please do not repeat this request again.' in /var/www/MGsis/protected/controllers/PessoaController.php:87
+Stack trace:
+#0 [internal function]: PessoaController->actionDelete('224')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=224
+---
+2013/12/14 14:31:58 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (80)
+in /var/www/MGsis/index.php (13)
+2013/12/14 14:31:58 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. The SQL statement executed was: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1802): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1222): CActiveRecord->deleteByPk(224)
+#2 /var/www/MGsis/protected/controllers/PessoaController.php(80): CActiveRecord->delete()
+#3 [internal function]: PessoaController->actionDelete('224')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=224
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=224
+---
+2013/12/14 14:44:24 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (80)
+in /var/www/MGsis/index.php (13)
+2013/12/14 14:44:24 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. The SQL statement executed was: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1802): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1222): CActiveRecord->deleteByPk(224)
+#2 /var/www/MGsis/protected/controllers/PessoaController.php(80): CActiveRecord->delete()
+#3 [internal function]: PessoaController->actionDelete('224')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=224
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=224
+---
+2013/12/14 14:44:49 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (80)
+in /var/www/MGsis/index.php (13)
+2013/12/14 14:44:49 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. The SQL statement executed was: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1802): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1222): CActiveRecord->deleteByPk(224)
+#2 /var/www/MGsis/protected/controllers/PessoaController.php(80): CActiveRecord->delete()
+#3 [internal function]: PessoaController->actionDelete('224')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=224
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=224
+---
+2013/12/14 14:47:57 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (80)
+in /var/www/MGsis/index.php (13)
+2013/12/14 14:47:57 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. The SQL statement executed was: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1802): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1222): CActiveRecord->deleteByPk(224)
+#2 /var/www/MGsis/protected/controllers/PessoaController.php(80): CActiveRecord->delete()
+#3 [internal function]: PessoaController->actionDelete('224')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=224
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=224
+---
+2013/12/14 14:48:11 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (80)
+in /var/www/MGsis/index.php (13)
+2013/12/14 14:48:11 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. The SQL statement executed was: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1802): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1222): CActiveRecord->deleteByPk(224)
+#2 /var/www/MGsis/protected/controllers/PessoaController.php(80): CActiveRecord->delete()
+#3 [internal function]: PessoaController->actionDelete('224')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=224
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=224
+---
+2013/12/14 14:48:36 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (80)
+in /var/www/MGsis/index.php (13)
+2013/12/14 14:48:36 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. The SQL statement executed was: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1802): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1222): CActiveRecord->deleteByPk(224)
+#2 /var/www/MGsis/protected/controllers/PessoaController.php(80): CActiveRecord->delete()
+#3 [internal function]: PessoaController->actionDelete('224')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=224
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=224
+---
+2013/12/14 14:52:37 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (80)
+in /var/www/MGsis/index.php (13)
+2013/12/14 14:52:37 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. The SQL statement executed was: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1802): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1222): CActiveRecord->deleteByPk(224)
+#2 /var/www/MGsis/protected/controllers/PessoaController.php(80): CActiveRecord->delete()
+#3 [internal function]: PessoaController->actionDelete('224')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=224
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=224
+---
+2013/12/14 14:54:01 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (80)
+in /var/www/MGsis/index.php (13)
+2013/12/14 14:54:01 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. The SQL statement executed was: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1802): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1222): CActiveRecord->deleteByPk(224)
+#2 /var/www/MGsis/protected/controllers/PessoaController.php(80): CActiveRecord->delete()
+#3 [internal function]: PessoaController->actionDelete('224')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=224
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=224
+---
+2013/12/14 14:54:06 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (80)
+in /var/www/MGsis/index.php (13)
+2013/12/14 14:54:06 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. The SQL statement executed was: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1802): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1222): CActiveRecord->deleteByPk(224)
+#2 /var/www/MGsis/protected/controllers/PessoaController.php(80): CActiveRecord->delete()
+#3 [internal function]: PessoaController->actionDelete('224')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=224
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=224
+---
+2013/12/14 14:55:10 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (80)
+in /var/www/MGsis/index.php (13)
+2013/12/14 14:55:10 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. The SQL statement executed was: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1802): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1222): CActiveRecord->deleteByPk(224)
+#2 /var/www/MGsis/protected/controllers/PessoaController.php(80): CActiveRecord->delete()
+#3 [internal function]: PessoaController->actionDelete('224')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=224
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=224
+---
+2013/12/14 14:55:17 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (80)
+in /var/www/MGsis/index.php (13)
+2013/12/14 14:55:17 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. The SQL statement executed was: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1802): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1222): CActiveRecord->deleteByPk(224)
+#2 /var/www/MGsis/protected/controllers/PessoaController.php(80): CActiveRecord->delete()
+#3 [internal function]: PessoaController->actionDelete('224')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=224
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=224
+---
+2013/12/14 14:59:22 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (83)
+in /var/www/MGsis/index.php (13)
+2013/12/14 14:59:22 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. The SQL statement executed was: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1802): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1222): CActiveRecord->deleteByPk(224)
+#2 /var/www/MGsis/protected/controllers/PessoaController.php(83): CActiveRecord->delete()
+#3 [internal function]: PessoaController->actionDelete('224')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=224
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=224
+---
+2013/12/14 14:59:59 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (83)
+in /var/www/MGsis/index.php (13)
+2013/12/14 15:00:30 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (83)
+in /var/www/MGsis/index.php (13)
+2013/12/14 15:00:42 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (83)
+in /var/www/MGsis/index.php (13)
+2013/12/14 15:01:11 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (83)
+in /var/www/MGsis/index.php (13)
+2013/12/14 15:02:06 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (83)
+in /var/www/MGsis/index.php (13)
+2013/12/14 15:02:06 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Registro em uso, você não pode excluir.' in /var/www/MGsis/protected/controllers/PessoaController.php:96
+Stack trace:
+#0 [internal function]: PessoaController->actionDelete('224')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=224
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=224
+---
+2013/12/14 15:02:15 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (83)
+in /var/www/MGsis/index.php (13)
+2013/12/14 15:02:15 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Registro em uso, você não pode excluir.' in /var/www/MGsis/protected/controllers/PessoaController.php:96
+Stack trace:
+#0 [internal function]: PessoaController->actionDelete('224')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=224
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=224
+---
+2013/12/14 15:02:41 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (82)
+in /var/www/MGsis/index.php (13)
+2013/12/14 15:02:41 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Registro em uso, você não pode excluir.' in /var/www/MGsis/protected/controllers/PessoaController.php:92
+Stack trace:
+#0 [internal function]: PessoaController->actionDelete('224')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=224
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=224
+---
+2013/12/14 15:06:04 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (82)
+in /var/www/MGsis/index.php (13)
+2013/12/14 15:06:04 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Registro em uso, você não pode excluir.' in /var/www/MGsis/protected/controllers/PessoaController.php:92
+Stack trace:
+#0 [internal function]: PessoaController->actionDelete('224')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=224
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=224
+---
+2013/12/14 15:06:11 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (82)
+in /var/www/MGsis/index.php (13)
+2013/12/14 15:06:11 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Registro em uso, você não pode excluir.' in /var/www/MGsis/protected/controllers/PessoaController.php:92
+Stack trace:
+#0 [internal function]: PessoaController->actionDelete('224')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=224
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=224
+---
+2013/12/14 15:08:46 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcobrancahistorico_codpessoa_fkey" on table "tblcobrancahistorico"
+DETAIL:  Key (codpessoa)=(224) is still referenced from table "tblcobrancahistorico".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='224'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (82)
+in /var/www/MGsis/index.php (13)
+2013/12/14 15:08:46 [error] [exception.CHttpException.409] exception 'CHttpException' with message 'Registro em uso, você não pode excluir.' in /var/www/MGsis/protected/controllers/PessoaController.php:92
+Stack trace:
+#0 [internal function]: PessoaController->actionDelete('224')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=224
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=224
+---
+2013/12/14 16:33:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to find the code you requested.' in /var/www/yii-1.1.14.f0fee9/framework/gii/CCodeGenerator.php:119
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): CCodeGenerator->actionDiff()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('diff')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('gii/bootstrap/d...')
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/MGsis/index.php?r=gii/bootstrap/diff&id=1
+HTTP_REFERER=http://localhost/MGsis/index.php?r=gii/bootstrap/index
+---
+2013/12/14 16:53:54 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchColumn(): SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...OM "mgsis"."tblportador" "t" WHERE codusuariocriacao LIKE $1
+                                                                ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. A declaração SQL executada foi: SELECT COUNT(*) FROM "mgsis"."tblportador" "t" WHERE codusuariocriacao LIKE :ycp0.
+in /var/www/MGsis/protected/views/portador/index.php (75)
+in /var/www/MGsis/protected/controllers/PortadorController.php (119)
+in /var/www/MGsis/index.php (13)
+2013/12/14 16:53:54 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...OM "mgsis"."tblportador" "t" WHERE codusuariocriacao LIKE $1
+                                                                ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. The SQL statement executed was: SELECT COUNT(*) FROM "mgsis"."tblportador" "t" WHERE codusuariocriacao LIKE :ycp0' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1601): CDbCommand->queryScalar()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(111): CDataProvider->getData()
+#7 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(211): CBaseListView->init()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(147): CListView->init()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.CLi...', Array)
+#10 /var/www/MGsis/protected/views/portador/index.php(75): CBaseController->widget('zii.widgets.CLi...', Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#15 /var/www/MGsis/protected/controllers/PortadorController.php(119): CController->render('index', Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): PortadorController->actionIndex()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('index')
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('portador/index')
+#22 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/MGsis/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/MGsis/index.php?Portador%5Bcodusuariocriacao%5D=100&ajax=Listagem&r=portador%2Findex
+HTTP_REFERER=http://localhost/MGsis/index.php?r=portador/index
+---
+2013/12/14 16:53:58 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchColumn(): SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...OM "mgsis"."tblportador" "t" WHERE codusuariocriacao LIKE $1
+                                                                ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. A declaração SQL executada foi: SELECT COUNT(*) FROM "mgsis"."tblportador" "t" WHERE codusuariocriacao LIKE :ycp0.
+in /var/www/MGsis/protected/views/portador/index.php (75)
+in /var/www/MGsis/protected/controllers/PortadorController.php (119)
+in /var/www/MGsis/index.php (13)
+2013/12/14 16:53:58 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...OM "mgsis"."tblportador" "t" WHERE codusuariocriacao LIKE $1
+                                                                ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. The SQL statement executed was: SELECT COUNT(*) FROM "mgsis"."tblportador" "t" WHERE codusuariocriacao LIKE :ycp0' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1601): CDbCommand->queryScalar()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(111): CDataProvider->getData()
+#7 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(211): CBaseListView->init()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(147): CListView->init()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.CLi...', Array)
+#10 /var/www/MGsis/protected/views/portador/index.php(75): CBaseController->widget('zii.widgets.CLi...', Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#15 /var/www/MGsis/protected/controllers/PortadorController.php(119): CController->render('index', Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): PortadorController->actionIndex()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('index')
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('portador/index')
+#22 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/MGsis/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/MGsis/index.php?Portador%5Bcodusuariocriacao%5D=999&ajax=Listagem&r=portador%2Findex
+HTTP_REFERER=http://localhost/MGsis/index.php?r=portador/index
+---
+2013/12/14 16:54:04 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchColumn(): SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...OM "mgsis"."tblportador" "t" WHERE codusuariocriacao LIKE $1
+                                                                ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. A declaração SQL executada foi: SELECT COUNT(*) FROM "mgsis"."tblportador" "t" WHERE codusuariocriacao LIKE :ycp0.
+in /var/www/MGsis/protected/views/portador/index.php (75)
+in /var/www/MGsis/protected/controllers/PortadorController.php (119)
+in /var/www/MGsis/index.php (13)
+2013/12/14 16:54:04 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...OM "mgsis"."tblportador" "t" WHERE codusuariocriacao LIKE $1
+                                                                ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. The SQL statement executed was: SELECT COUNT(*) FROM "mgsis"."tblportador" "t" WHERE codusuariocriacao LIKE :ycp0' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1601): CDbCommand->queryScalar()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(111): CDataProvider->getData()
+#7 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(211): CBaseListView->init()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(147): CListView->init()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.CLi...', Array)
+#10 /var/www/MGsis/protected/views/portador/index.php(75): CBaseController->widget('zii.widgets.CLi...', Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#15 /var/www/MGsis/protected/controllers/PortadorController.php(119): CController->render('index', Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): PortadorController->actionIndex()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('index')
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('portador/index')
+#22 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/MGsis/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/MGsis/index.php?r=portador%2Findex&Portador%5Bcodusuariocriacao%5D=999&yt0=
+HTTP_REFERER=http://localhost/MGsis/index.php?r=portador/index
+---
+2013/12/14 16:54:07 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchColumn(): SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...OM "mgsis"."tblportador" "t" WHERE codusuariocriacao LIKE $1
+                                                                ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. A declaração SQL executada foi: SELECT COUNT(*) FROM "mgsis"."tblportador" "t" WHERE codusuariocriacao LIKE :ycp0.
+in /var/www/MGsis/protected/views/portador/index.php (75)
+in /var/www/MGsis/protected/controllers/PortadorController.php (119)
+in /var/www/MGsis/index.php (13)
+2013/12/14 16:54:07 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...OM "mgsis"."tblportador" "t" WHERE codusuariocriacao LIKE $1
+                                                                ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. The SQL statement executed was: SELECT COUNT(*) FROM "mgsis"."tblportador" "t" WHERE codusuariocriacao LIKE :ycp0' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1601): CDbCommand->queryScalar()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(111): CDataProvider->getData()
+#7 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(211): CBaseListView->init()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(147): CListView->init()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.CLi...', Array)
+#10 /var/www/MGsis/protected/views/portador/index.php(75): CBaseController->widget('zii.widgets.CLi...', Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#15 /var/www/MGsis/protected/controllers/PortadorController.php(119): CController->render('index', Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): PortadorController->actionIndex()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('index')
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('portador/index')
+#22 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/MGsis/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/MGsis/index.php?r=portador/index
+HTTP_REFERER=http://localhost/MGsis/index.php?r=portador/view&id=999
+---
+2013/12/14 17:04:22 [error] [php] Undefined variable: model (/var/www/MGsis/protected/extensions/yiibooster/gii/bootstrap/templates/mgsis/view.php:37)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/gii/CCodeGenerator.php(162): BootstrapCode->prepare()
+#1 /var/www/yii-1.1.14.f0fee9/framework/gii/CCodeGenerator.php(63): BootstrapGenerator->prepare()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): BootstrapGenerator->actionIndex()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): BootstrapGenerator->runAction()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): BootstrapGenerator->runActionWithFilters()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): BootstrapGenerator->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=gii/bootstrap/index
+in /var/www/MGsis/protected/extensions/yiibooster/gii/bootstrap/templates/mgsis/view.php (37)
+in /var/www/MGsis/index.php (13)
+2013/12/14 17:12:41 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchColumn(): SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...OM "mgsis"."tblportador" "t" WHERE codusuariocriacao LIKE $1
+                                                                ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. A declaração SQL executada foi: SELECT COUNT(*) FROM "mgsis"."tblportador" "t" WHERE codusuariocriacao LIKE :ycp0.
+in /var/www/MGsis/protected/views/portador/index.php (75)
+in /var/www/MGsis/protected/controllers/PortadorController.php (119)
+in /var/www/MGsis/index.php (13)
+2013/12/14 17:12:41 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...OM "mgsis"."tblportador" "t" WHERE codusuariocriacao LIKE $1
+                                                                ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. The SQL statement executed was: SELECT COUNT(*) FROM "mgsis"."tblportador" "t" WHERE codusuariocriacao LIKE :ycp0' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1601): CDbCommand->queryScalar()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(111): CDataProvider->getData()
+#7 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(211): CBaseListView->init()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(147): CListView->init()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.CLi...', Array)
+#10 /var/www/MGsis/protected/views/portador/index.php(75): CBaseController->widget('zii.widgets.CLi...', Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#15 /var/www/MGsis/protected/controllers/PortadorController.php(119): CController->render('index', Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): PortadorController->actionIndex()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('portador')
+#22 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/MGsis/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/MGsis/index.php?r=portador
+HTTP_REFERER=http://localhost/MGsis/index.php?r=gii/bootstrap/index
+---
+2013/12/14 17:12:49 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchColumn(): SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...OM "mgsis"."tblportador" "t" WHERE codusuariocriacao LIKE $1
+                                                                ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. A declaração SQL executada foi: SELECT COUNT(*) FROM "mgsis"."tblportador" "t" WHERE codusuariocriacao LIKE :ycp0.
+in /var/www/MGsis/protected/views/portador/index.php (75)
+in /var/www/MGsis/protected/controllers/PortadorController.php (119)
+in /var/www/MGsis/index.php (13)
+2013/12/14 17:12:49 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...OM "mgsis"."tblportador" "t" WHERE codusuariocriacao LIKE $1
+                                                                ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. The SQL statement executed was: SELECT COUNT(*) FROM "mgsis"."tblportador" "t" WHERE codusuariocriacao LIKE :ycp0' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1601): CDbCommand->queryScalar()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(111): CDataProvider->getData()
+#7 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(211): CBaseListView->init()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(147): CListView->init()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.CLi...', Array)
+#10 /var/www/MGsis/protected/views/portador/index.php(75): CBaseController->widget('zii.widgets.CLi...', Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#15 /var/www/MGsis/protected/controllers/PortadorController.php(119): CController->render('index', Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): PortadorController->actionIndex()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('portador')
+#22 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/MGsis/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/MGsis/index.php?r=portador
+---
+2013/12/14 17:15:27 [error] [exception.CException] exception 'CException' with message 'A propriedade "Portador.UsuarioAlteracao" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('UsuarioAlteraca...')
+#1 /var/www/MGsis/protected/components/UsuarioCriacao.php(20): CActiveRecord->__get('UsuarioAlteraca...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(173): UsuarioCriacao->run()
+#3 /var/www/MGsis/protected/views/portador/view.php(54): CBaseController->widget('UsuarioCriacao', Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('view', Array, true)
+#8 /var/www/MGsis/protected/controllers/PortadorController.php(19): CController->render('view', Array)
+#9 [internal function]: PortadorController->actionView('999')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PortadorController), Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PortadorController), Object(ReflectionMethod), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('view')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('portador/view')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php?r=portador/view&id=999
+HTTP_REFERER=http://localhost/MGsis/index.php?r=portador/update&id=999
+---
+2013/12/14 17:15:31 [error] [exception.CException] exception 'CException' with message 'A propriedade "Portador.UsuarioAlteracao" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('UsuarioAlteraca...')
+#1 /var/www/MGsis/protected/components/UsuarioCriacao.php(20): CActiveRecord->__get('UsuarioAlteraca...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(173): UsuarioCriacao->run()
+#3 /var/www/MGsis/protected/views/portador/update.php(21): CBaseController->widget('UsuarioCriacao', Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('update', Array, true)
+#8 /var/www/MGsis/protected/controllers/PortadorController.php(66): CController->render('update', Array)
+#9 [internal function]: PortadorController->actionUpdate('999')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PortadorController), Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PortadorController), Object(ReflectionMethod), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('portador/update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php?r=portador/update&id=999
+HTTP_REFERER=http://localhost/MGsis/index.php?r=portador/view&id=999
+---
+2013/12/14 17:15:32 [error] [exception.CException] exception 'CException' with message 'A propriedade "Portador.UsuarioAlteracao" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('UsuarioAlteraca...')
+#1 /var/www/MGsis/protected/components/UsuarioCriacao.php(20): CActiveRecord->__get('UsuarioAlteraca...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(173): UsuarioCriacao->run()
+#3 /var/www/MGsis/protected/views/portador/view.php(54): CBaseController->widget('UsuarioCriacao', Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('view', Array, true)
+#8 /var/www/MGsis/protected/controllers/PortadorController.php(19): CController->render('view', Array)
+#9 [internal function]: PortadorController->actionView('999')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PortadorController), Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PortadorController), Object(ReflectionMethod), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('view')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('portador/view')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php?r=portador/view&id=999
+HTTP_REFERER=http://localhost/MGsis/index.php?r=portador/index
+---
+2013/12/14 17:15:45 [error] [exception.CException] exception 'CException' with message 'A propriedade "Portador.UsuarioAlteracao" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('UsuarioAlteraca...')
+#1 /var/www/MGsis/protected/components/UsuarioCriacao.php(20): CActiveRecord->__get('UsuarioAlteraca...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(173): UsuarioCriacao->run()
+#3 /var/www/MGsis/protected/views/portador/view.php(54): CBaseController->widget('UsuarioCriacao', Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('view', Array, true)
+#8 /var/www/MGsis/protected/controllers/PortadorController.php(19): CController->render('view', Array)
+#9 [internal function]: PortadorController->actionView('999')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PortadorController), Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PortadorController), Object(ReflectionMethod), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('view')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('portador/view')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php?r=portador/view&id=999
+HTTP_REFERER=http://localhost/MGsis/index.php?r=portador/index
+---
+2013/12/14 17:15:54 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblportador" violates foreign key constraint "tblliquidacaotitulo_codPortador_fkey" on table "tblliquidacaotitulo"
+DETAIL:  Key (codportador)=(101001) is still referenced from table "tblliquidacaotitulo".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblportador" WHERE "mgsis"."tblportador"."codportador"='101001'.
+in /var/www/MGsis/protected/controllers/PortadorController.php (81)
+in /var/www/MGsis/index.php (13)
+2013/12/14 17:15:54 [error] [exception.CHttpException.409] exception 'CHttpException' with message 'Registro em uso, você não pode excluir.' in /var/www/MGsis/protected/controllers/PortadorController.php:91
+Stack trace:
+#0 [internal function]: PortadorController->actionDelete('101001')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PortadorController), Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PortadorController), Object(ReflectionMethod), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('portador/delete')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=portador/delete&id=101001
+HTTP_REFERER=http://localhost/MGsis/index.php?r=portador/view&id=101001
+---
+2013/12/14 17:15:59 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblportador" violates foreign key constraint "tblliquidacaotitulo_codPortador_fkey" on table "tblliquidacaotitulo"
+DETAIL:  Key (codportador)=(101001) is still referenced from table "tblliquidacaotitulo".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblportador" WHERE "mgsis"."tblportador"."codportador"='101001'.
+in /var/www/MGsis/protected/controllers/PortadorController.php (81)
+in /var/www/MGsis/index.php (13)
+2013/12/14 17:15:59 [error] [exception.CHttpException.409] exception 'CHttpException' with message 'Registro em uso, você não pode excluir.' in /var/www/MGsis/protected/controllers/PortadorController.php:91
+Stack trace:
+#0 [internal function]: PortadorController->actionDelete('101001')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PortadorController), Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PortadorController), Object(ReflectionMethod), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('portador/delete')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=portador/delete&id=101001
+HTTP_REFERER=http://localhost/MGsis/index.php?r=portador/view&id=101001
+---
+2013/12/14 17:16:04 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblportador" violates foreign key constraint "tblliquidacaotitulo_codPortador_fkey" on table "tblliquidacaotitulo"
+DETAIL:  Key (codportador)=(101001) is still referenced from table "tblliquidacaotitulo".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblportador" WHERE "mgsis"."tblportador"."codportador"='101001'.
+in /var/www/MGsis/protected/controllers/PortadorController.php (81)
+in /var/www/MGsis/index.php (13)
+2013/12/14 17:16:04 [error] [exception.CHttpException.409] exception 'CHttpException' with message 'Registro em uso, você não pode excluir.' in /var/www/MGsis/protected/controllers/PortadorController.php:91
+Stack trace:
+#0 [internal function]: PortadorController->actionDelete('101001')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PortadorController), Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PortadorController), Object(ReflectionMethod), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('portador/delete')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=portador/delete&id=101001
+HTTP_REFERER=http://localhost/MGsis/index.php?r=portador/view&id=101001
+---

@@ -9,9 +9,25 @@ $this->menu=array(
 array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create')),
 array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codpessoa)),
-array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->codpessoa),'confirm'=>'Tem Certeza que deseja excluir este item?')),
+array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
 );
+
+Yii::app()->clientScript->registerCoreScript('yii');
+
 ?>
+
+<script type="text/javascript">
+/*<![CDATA[*/
+$(document).ready(function(){
+	jQuery('body').on('click','#btnExcluir',function() {
+		bootbox.confirm("Excluir este registro?", function(result) {
+			if (result)
+				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('pessoa/delete', array('id' => $model->codpessoa))?>",{});
+		});
+	});
+});
+/*]]>*/
+</script>
 
 <h1><?php echo CHtml::encode($model->fantasia); ?></h1>
 <br>

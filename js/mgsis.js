@@ -69,8 +69,13 @@ function mensagemModal (titulo, mensagem)
     $('#MensagemModal-' + mensagemModalChamada).modal();
 }
 
-
+/*
+ * 
+ * Funcao para fazer o ENTER funcionar como TAB
+ * 
+ * 
 $(document).ready(function(){
+	bootbox.setLocale("br");
 	$("input").not( $(":button") ).keypress(function (evt) {
 		if (evt.keyCode == 13) {
 			iname = $(this).val();
@@ -86,3 +91,4 @@ $(document).ready(function(){
 		}
 	});
 });
+*/

@@ -1,13 +1,12 @@
 <?php
 
-class PessoaController extends Controller
+class PortadorController extends Controller
 {
 	/**
 	* @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	* using two-column layout. See 'protected/views/layouts/column2.php'.
 	*/
 	public $layout='//layouts/column2';
-
 
 	/**
 	* Displays a particular model.
@@ -26,16 +25,16 @@ class PessoaController extends Controller
 	*/
 	public function actionCreate()
 	{
-		$model=new Pessoa;
+		$model=new Portador;
 
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
 
-		if(isset($_POST['Pessoa']))
+		if(isset($_POST['Portador']))
 		{
-			$model->attributes=$_POST['Pessoa'];
+			$model->attributes=$_POST['Portador'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->codpessoa));
+				$this->redirect(array('view','id'=>$model->codportador));
 		}
 
 		$this->render('create',array(
@@ -55,11 +54,11 @@ class PessoaController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
 
-		if(isset($_POST['Pessoa']))
+		if(isset($_POST['Portador']))
 		{
-			$model->attributes=$_POST['Pessoa'];
+			$model->attributes=$_POST['Portador'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->codpessoa));
+				$this->redirect(array('view','id'=>$model->codportador));
 		}
 
 		$this->render('update',array(
@@ -104,15 +103,15 @@ class PessoaController extends Controller
 	*/
 	public function actionIndex()
 	{
-		$model=new Pessoa('search');
+		$model=new Portador('search');
 		
 		$model->unsetAttributes();  // clear any default values
 		
-		if(isset($_GET['Pessoa']))
-			Yii::app()->session['FiltroPessoaIndex'] = $_GET['Pessoa'];
+		if(isset($_GET['Portador']))
+			Yii::app()->session['FiltroPortadorIndex'] = $_GET['Portador'];
 		
-		if (isset(Yii::app()->session['FiltroPessoaIndex']))
-			$model->attributes=Yii::app()->session['FiltroPessoaIndex'];
+		if (isset(Yii::app()->session['FiltroPortadorIndex']))
+			$model->attributes=Yii::app()->session['FiltroPortadorIndex'];
 		
 		$this->render('index',array(
 			'dataProvider'=>$model->search(),
@@ -126,12 +125,12 @@ class PessoaController extends Controller
 	public function actionAdmin()
 	{
 	
-		$model=new Pessoa('search');
+		$model=new Portador('search');
 		
 		$model->unsetAttributes();  // clear any default values
 		
-		if(isset($_GET['Pessoa']))
-			$model->attributes=$_GET['Pessoa'];
+		if(isset($_GET['Portador']))
+			$model->attributes=$_GET['Portador'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -145,7 +144,7 @@ class PessoaController extends Controller
 	*/
 	public function loadModel($id)
 	{
-		$model=Pessoa::model()->findByPk($id);
+		$model=Portador::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -157,108 +156,10 @@ class PessoaController extends Controller
 	*/
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='pessoa-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='portador-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
 	}
-	
-	public function actionAjaxBuscaPessoa() 
-	{
-
-		// variaveis _GET 
-		$texto  = str_replace(' ', '%', trim(isset($_GET['texto'])?$_GET['texto']:''));
-		$limite = isset($_GET['limite'])?$_GET['limite']:20;
-		$pagina = isset($_GET['pagina'])?$_GET['pagina']:1;
-
-		// corrige pagina se veio sujeira
-		if ($pagina < 1) $pagina = 1;
-
-		// calcula de onde continuar a consulta
-		$offset = ($pagina-1)*$limite;
-		
-		// inicializa array com resultados
-		$resultados = array();
-
-		// se o texto foi preenchido
-		if (strlen($texto)>=3)
-		{
-			
-			// busca pelos campos "fantasia" e "pessoa" 
-			$condition = 'inativo is null and (fantasia ILIKE :fantasia OR pessoa ILIKE :pessoa ';
-			$params = array(
-				':fantasia'=>'%'.$texto.'%',
-				':pessoa'=>'%'.$texto.'%',
-				);
-			
-			// se o texto for um numero busca pelo "codpessoa" e "cnpj"
-			$numero = (int)MGFormatter::numeroLimpo($texto);
-			if ($numero > 0) 
-			{
-				$condition .= ' OR codpessoa = :codpessoa OR cast(Cnpj as char(20)) ILIKE :cnpj';
-				$params = array_merge(
-						$params, 
-						array(
-							':codpessoa'=>$numero,
-							':cnpj'=>$numero.'%',
-							)
-						);
-			}
-			$condition .= ')';
-			
-			// busca pessoas
-			$pessoas = Pessoa::model()->findAll(
-					array(
-						'select'=>'codpessoa, fantasia, pessoa, cnpj', 
-						'order'=>'fantasia', 
-						'condition'=>$condition, 
-						'params'=>$params,
-						'limit'=>$limite,
-						'offset'=>$offset,
-						)
-					);
-			
-			//monta array com resultados
-			foreach ($pessoas as $pessoa) 
-			{
-				$resultados[] = array(
-					'id' => $pessoa->codpessoa,
-					'fantasia' => $pessoa->fantasia,
-					'pessoa' => $pessoa->pessoa,
-					'cnpj' => $pessoa->cnpj,
-					);
-			}
-			
-		} 
-		
-		// transforma o array em JSON
-		echo CJSON::encode(
-				array(
-					'mais' => count($resultados)==$limite?true:false, 
-					'pagina' => (int) $pagina, 
-					'itens' => $resultados
-					)
-				);
-		
-		// FIM
-		Yii::app()->end();
-	} 
-	
-	public function actionAjaxInicializaPessoa() 
-	{
-		if (isset($_GET['cod']))
-		{
-			$pessoa = Pessoa::model()->findByPk(
-					$_GET['cod'],
-					array(
-						'select'=>'codpessoa, fantasia', 
-						'order'=>'fantasia', 
-						)
-					);
-			echo CJSON::encode(array('id' => $pessoa->codpessoa,'fantasia' => $pessoa->fantasia));
-		}
-		Yii::app()->end();
-	} 
-	
 }

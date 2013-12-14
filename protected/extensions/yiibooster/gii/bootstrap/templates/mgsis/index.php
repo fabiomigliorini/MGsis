@@ -21,39 +21,46 @@ $this->menu=array(
 	);
 ?>
 
+<script type='text/javascript'>
+
+$(document).ready(function(){
+	$('#search-form').change(function(){
+		var ajaxRequest = $("#search-form").serialize();
+		$.fn.yiiListView.update(
+			// this is the id of the CListView
+			'Listagem',
+			{data: ajaxRequest}
+		);
+    });
+});
+
+</script>
+
 <h1><?php echo $label; ?></h1>
 
 <br>
 
 <?php echo "<?php \$form=\$this->beginWidget('MGActiveForm',array(\n"; ?>
 	'action'=>Yii::app()->createUrl($this->route),
-	'type' => 'search',
+	'id' => 'search-form',
+	'type' => 'inline',
 	'method'=>'get',
 )); 
 
 <?php echo "?>"; ?>
 
-<div class="controls-row well well-small">
-	<div class="span11">
+<div class="well well-small">
+	<?php echo "<?php"; ?> echo $form->textField($model, 'codusuariocriacao', array('placeholder' => '#', 'class'=>'input-mini')); <?php echo "?>\n"; ?>
 	<?php echo "<?php\n"; ?>
-		echo $form->textField($model, 'codusuariocriacao', array('placeholder' => '#', 'class'=>'span1')); 
-	<?php echo "?>\n"; ?>
-	</div>
-	<div class="span1 right">
-	<?php echo "<?php\n"; ?>
-
 	$this->widget('bootstrap.widgets.TbButton'
 		, array(
 			'buttonType' => 'submit',
 			'icon'=>'icon-search',
 			//'label'=>'',
-			'htmlOptions' => array('class'=>'btn btn-info')
+			'htmlOptions' => array('class'=>'pull-right btn btn-info')
 			)
 		); 
-	
 	?>
-	</div>
-		
 </div>
 
 <?php echo "<?php \$this->endWidget(); ?>\n";?>

@@ -13,7 +13,7 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
 	* @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	* using two-column layout. See 'protected/views/layouts/column2.php'.
 	*/
-	public $layout='//layouts/column1';
+	public $layout='//layouts/column2';
 
 	/**
 	* Displays a particular model.
@@ -83,11 +83,23 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
-			$this->loadModel($id)->delete();
-
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
+			try
+			{
+				$this->loadModel($id)->delete();
+				// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+				if(!isset($_GET['ajax']))
+					$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
+			}
+			catch(CDbException $e)
+			{
+				// Cannot delete or update a parent row: a foreign key constraint fails
+				if($e->errorInfo[1] == 7)
+				{
+					throw new CHttpException(409, 'Registro em uso, você não pode excluir.');
+				}
+				else
+					throw $e;
+			}
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
@@ -98,14 +110,16 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
 	*/
 	public function actionIndex()
 	{
-		
 		$model=new <?php echo $this->modelClass; ?>('search');
 		
 		$model->unsetAttributes();  // clear any default values
 		
 		if(isset($_GET['<?php echo $this->modelClass; ?>']))
-			$model->attributes=$_GET['<?php echo $this->modelClass; ?>'];
-
+			Yii::app()->session['Filtro<?php echo $this->modelClass; ?>Index'] = $_GET['<?php echo $this->modelClass; ?>'];
+		
+		if (isset(Yii::app()->session['Filtro<?php echo $this->modelClass; ?>Index']))
+			$model->attributes=Yii::app()->session['Filtro<?php echo $this->modelClass; ?>Index'];
+		
 		$this->render('index',array(
 			'dataProvider'=>$model->search(),
 			'model'=>$model,

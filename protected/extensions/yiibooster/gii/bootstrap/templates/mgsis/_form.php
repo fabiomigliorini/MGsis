@@ -61,3 +61,23 @@ foreach ($this->tableSchema->columns as $column) {
 </div>
 
 <?php echo "<?php \$this->endWidget(); ?>\n"; ?>
+
+<script type='text/javascript'>
+	
+$(document).ready(function() {
+
+	//$("#Pessoa_fantasia").Setcase();
+
+	$('#<?php echo $this->class2id($this->modelClass); ?>-form').submit(function(e) {
+        var currentForm = this;
+        e.preventDefault();
+        bootbox.confirm("Tem certeza que deseja salvar?", function(result) {
+            if (result) {
+                currentForm.submit();
+            }
+        });
+    });
+	
+});
+
+</script>
