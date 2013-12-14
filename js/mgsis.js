@@ -55,20 +55,6 @@ function formataCnpjCpf(numero)
     return numero;
 }
 
-var mensagemModalChamada = 1;
-
-function mensagemModal (titulo, mensagem)
-{
-	mensagemModalChamada++;
-	
-	var htmlModal = '<div class="modal hide fade" id="MensagemModal-' + mensagemModalChamada + '" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-header"><h3 id="MensagemModalTitulo-' + mensagemModalChamada + '"> XXXX </h3><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button></div><div class="modal-body"><p id="MensagemModalTexto-' + mensagemModalChamada + '"></div><div class="modal-footer"><button class="btn" data-dismiss="modal">Close</button></div></div>';
-	
-    $('body').append(htmlModal);
-	$('#MensagemModalTitulo-' + mensagemModalChamada).html(titulo);
-	$('#MensagemModalTexto-' + mensagemModalChamada).html(mensagem);
-    $('#MensagemModal-' + mensagemModalChamada).modal();
-}
-
 /*
  * 
  * Funcao para fazer o ENTER funcionar como TAB
