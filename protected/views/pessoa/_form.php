@@ -234,6 +234,7 @@ function alteraEndereco(cobranca, endereco, bairro, cidade, uf)
 			}
 		}
 	});
+	$.notify("Endereço alterado!", "success");
 	
 }
 
@@ -242,12 +243,17 @@ function consultaCep(cobranca)
 	var campo = "#Pessoa_cep";
 	if (cobranca)
 		campo = "#Pessoa_cepcobranca";
-		
+	
+	$.ytLoad('destroy');
+	$.ytLoad({registerAjaxHandlers: false});
+	$.ytLoad('start');
+                        		
 	if($.trim($(campo).val()) != ""){
 		$.notify("Consultando Cep!", "info");
 		$.getScript("http://cep.republicavirtual.com.br/web_cep.php?formato=javascript&cep="+$(campo).val(), function(){
 			if(resultadoCEP["resultado"]){
 				if (resultadoCEP["resultado"] == 1 || resultadoCEP["resultado"] == 2) {
+					$.notify("Consulta de cep ok!", "success");
 					bootbox.confirm("Alterar para o endereço abaixo? <br><br> <b>" + unescape(resultadoCEP["tipo_logradouro"])+" "+unescape(resultadoCEP["logradouro"]) + " - " + unescape(resultadoCEP["bairro"]) + " - " + unescape(resultadoCEP["cidade"]) + "/" + unescape(resultadoCEP["uf"]) + "</b>", function(result) {
 						if (result)
 							alteraEndereco(
@@ -256,17 +262,23 @@ function consultaCep(cobranca)
 								unescape(resultadoCEP["bairro"]), 
 								unescape(resultadoCEP["cidade"]), 
 								unescape(resultadoCEP["uf"])
-							);
+							) 
+						else 
+							$.notify("Consulta de cep ignorada!", "info");
 					}); 						
 				} else {
 					bootbox.alert("Cep Inválido!");
+					$.notify("Cep Inválido!", "error");
 				}
 			}else{
+				$.notify("Não foi possivel contactar com Web Service!", "error");
 				bootbox.alert("Não foi possivel contactar com Web Service!");
 			}
+			$.ytLoad('complete');	
+			$.ytLoad('destroy');
+			$.ytLoad();
 		});
-	}
-	
+	}	
 }
 	
 

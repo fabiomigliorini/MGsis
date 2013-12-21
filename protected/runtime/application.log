@@ -3834,3 +3834,711 @@ Stack trace:
 REQUEST_URI=/MGsis/index.php?r=portador/delete&id=101001
 HTTP_REFERER=http://localhost/MGsis/index.php?r=portador/view&id=101001
 ---
+2013/12/17 12:04:14 [error] [exception.CException] exception 'CException' with message 'A propriedade "TbNavbar.class" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWidgetFactory.php(161): CComponent->__set('class', 'navbar-inverse')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(146): CWidgetFactory->createWidget(Object(PessoaController), 'bootstrap.widge...', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('bootstrap.widge...', Array)
+#3 /var/www/MGsis/protected/views/layouts/main.php(113): CBaseController->widget('bootstrap.widge...', Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CContentDecorator.php(76): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CContentDecorator.php(54): CContentDecorator->decorate('<div class="row...')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/COutputProcessor.php(44): CContentDecorator->processOutput('<div class="row...')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(206): COutputProcessor->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(300): CBaseController->endWidget('CContentDecorat...')
+#11 /var/www/MGsis/protected/views/layouts/column2.php(29): CBaseController->endContent()
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(784): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#15 /var/www/MGsis/protected/controllers/PessoaController.php(120): CController->render('index', Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): PessoaController->actionIndex()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa')
+#22 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/MGsis/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa
+HTTP_REFERER=http://localhost/MGsis/index.php?r=codigo
+---
+2013/12/17 14:07:31 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Login requerido' in /var/www/yii-1.1.14.f0fee9/framework/web/auth/CWebUser.php:394
+Stack trace:
+#0 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(100): CWebUser->loginRequired()
+#1 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(77): SBaseController->onUnauthorizedAccess()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(306): SBaseController->beforeAction(Object(CInlineAction))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('index')
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/index')
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CApplication->run()
+#9 {main}
+REQUEST_URI=/MGsis/index.php?Pessoa%5Bcodpessoa%5D=&Pessoa%5Bfantasia%5D=fabio&Pessoa%5Bcnpj%5D=&Pessoa%5Bemail%5D=&Pessoa%5Btelefone1%5D=&Pessoa%5Binativo%5D=&Pessoa%5Bcodcidade%5D=&ajax=Listagem&r=pessoa%2Findex
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=pessoa
+---
+2013/12/17 14:07:34 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Login requerido' in /var/www/yii-1.1.14.f0fee9/framework/web/auth/CWebUser.php:394
+Stack trace:
+#0 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(100): CWebUser->loginRequired()
+#1 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(77): SBaseController->onUnauthorizedAccess()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(306): SBaseController->beforeAction(Object(CInlineAction))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('index')
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/index')
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CApplication->run()
+#9 {main}
+REQUEST_URI=/MGsis/index.php?Pessoa%5Bcodpessoa%5D=&Pessoa%5Bfantasia%5D=fab&Pessoa%5Bcnpj%5D=&Pessoa%5Bemail%5D=&Pessoa%5Btelefone1%5D=&Pessoa%5Binativo%5D=&Pessoa%5Bcodcidade%5D=&ajax=Listagem&r=pessoa%2Findex
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=pessoa
+---
+2013/12/17 14:07:40 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Login requerido' in /var/www/yii-1.1.14.f0fee9/framework/web/auth/CWebUser.php:394
+Stack trace:
+#0 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(100): CWebUser->loginRequired()
+#1 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(77): SBaseController->onUnauthorizedAccess()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(306): SBaseController->beforeAction(Object(CInlineAction))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('index')
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/index')
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CApplication->run()
+#9 {main}
+REQUEST_URI=/MGsis/index.php?Pessoa%5Bcodpessoa%5D=&Pessoa%5Bfantasia%5D=&Pessoa%5Bcnpj%5D=&Pessoa%5Bemail%5D=&Pessoa%5Btelefone1%5D=&Pessoa%5Binativo%5D=&Pessoa%5Bcodcidade%5D=&ajax=Listagem&r=pessoa%2Findex
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=pessoa
+---
+2013/12/17 14:07:50 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Login requerido' in /var/www/yii-1.1.14.f0fee9/framework/web/auth/CWebUser.php:394
+Stack trace:
+#0 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(100): CWebUser->loginRequired()
+#1 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(77): SBaseController->onUnauthorizedAccess()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(306): SBaseController->beforeAction(Object(CInlineAction))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('index')
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/index')
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CApplication->run()
+#9 {main}
+REQUEST_URI=/MGsis/index.php?Pessoa%5Bcodpessoa%5D=&Pessoa%5Bfantasia%5D=fab&Pessoa%5Bcnpj%5D=&Pessoa%5Bemail%5D=&Pessoa%5Btelefone1%5D=&Pessoa%5Binativo%5D=&Pessoa%5Bcodcidade%5D=&ajax=Listagem&r=pessoa%2Findex
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=pessoa
+---
+2013/12/19 13:05:17 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblnegocio_codpessoa_fkey" on table "tblnegocio"
+DETAIL:  Key (codpessoa)=(1368) is still referenced from table "tblnegocio".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='1368'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (82)
+in /var/www/MGsis/index.php (13)
+2013/12/19 13:05:17 [error] [exception.CHttpException.409] exception 'CHttpException' with message 'Registro em uso, você não pode excluir.' in /var/www/MGsis/protected/controllers/PessoaController.php:92
+Stack trace:
+#0 [internal function]: PessoaController->actionDelete('1368')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=1368
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=pessoa/view&id=1368
+---
+2013/12/19 13:07:22 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchColumn(): SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...FROM "mgsis"."tblcidade" "t" WHERE codusuariocriacao LIKE $1
+                                                                ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. A declaração SQL executada foi: SELECT COUNT(*) FROM "mgsis"."tblcidade" "t" WHERE codusuariocriacao LIKE :ycp0.
+in /var/www/MGsis/protected/views/cidade/index.php (68)
+in /var/www/MGsis/protected/controllers/CidadeController.php (105)
+in /var/www/MGsis/index.php (13)
+2013/12/19 13:07:22 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...FROM "mgsis"."tblcidade" "t" WHERE codusuariocriacao LIKE $1
+                                                                ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. The SQL statement executed was: SELECT COUNT(*) FROM "mgsis"."tblcidade" "t" WHERE codusuariocriacao LIKE :ycp0' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1601): CDbCommand->queryScalar()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(111): CDataProvider->getData()
+#7 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(211): CBaseListView->init()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(147): CListView->init()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.CLi...', Array)
+#10 /var/www/MGsis/protected/views/cidade/index.php(68): CBaseController->widget('zii.widgets.CLi...', Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#15 /var/www/MGsis/protected/controllers/CidadeController.php(105): CController->render('index', Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): CidadeController->actionIndex()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('index')
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('cidade/index')
+#22 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/MGsis/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/MGsis/index.php?r=cidade%2Findex&Cidade%5Bcodusuariocriacao%5D=1&yt0=
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=cidade%2Findex&Cidade%5Bcodusuariocriacao%5D=&yt0=
+---
+2013/12/21 15:04:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/MGsis/protected/controllers/TituloController.php:149
+Stack trace:
+#0 /var/www/MGsis/protected/controllers/TituloController.php(18): TituloController->loadModel('10041831')
+#1 [internal function]: TituloController->actionView('10041831')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('view')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/view')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/view&id=10041831
+---
+2013/12/21 15:21:30 [error] [php] include(MGEscPrint.php): failed to open stream: No such file or directory (/var/www/yii-1.1.14.f0fee9/framework/YiiBase.php:427)
+Stack trace:
+#0 /var/www/MGsis/protected/controllers/TituloController.php(170): spl_autoload_call()
+#1 unknown(0): TituloController->actionImprimeVale()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/controllers/TituloController.php (170)
+in /var/www/MGsis/index.php (13)
+2013/12/21 15:22:49 [error] [php] include(/var/www/MGsis/protected/extensions/MGEscPrint.php): failed to open stream: No such file or directory (/var/www/yii-1.1.14.f0fee9/framework/YiiBase.php:401)
+Stack trace:
+#0 /var/www/MGsis/protected/controllers/TituloController.php(170): spl_autoload_call()
+#1 unknown(0): TituloController->actionImprimeVale()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/controllers/TituloController.php (170)
+in /var/www/MGsis/index.php (13)
+2013/12/21 15:22:50 [error] [php] include(/var/www/MGsis/protected/extensions/MGEscPrint.php): failed to open stream: No such file or directory (/var/www/yii-1.1.14.f0fee9/framework/YiiBase.php:401)
+Stack trace:
+#0 /var/www/MGsis/protected/controllers/TituloController.php(170): spl_autoload_call()
+#1 unknown(0): TituloController->actionImprimeVale()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/controllers/TituloController.php (170)
+in /var/www/MGsis/index.php (13)
+2013/12/21 15:22:50 [error] [php] include(/var/www/MGsis/protected/extensions/MGEscPrint.php): failed to open stream: No such file or directory (/var/www/yii-1.1.14.f0fee9/framework/YiiBase.php:401)
+Stack trace:
+#0 /var/www/MGsis/protected/controllers/TituloController.php(170): spl_autoload_call()
+#1 unknown(0): TituloController->actionImprimeVale()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/controllers/TituloController.php (170)
+in /var/www/MGsis/index.php (13)
+2013/12/21 15:22:51 [error] [php] include(/var/www/MGsis/protected/extensions/MGEscPrint.php): failed to open stream: No such file or directory (/var/www/yii-1.1.14.f0fee9/framework/YiiBase.php:401)
+Stack trace:
+#0 /var/www/MGsis/protected/controllers/TituloController.php(170): spl_autoload_call()
+#1 unknown(0): TituloController->actionImprimeVale()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/controllers/TituloController.php (170)
+in /var/www/MGsis/index.php (13)
+2013/12/21 15:22:51 [error] [php] include(/var/www/MGsis/protected/extensions/MGEscPrint.php): failed to open stream: No such file or directory (/var/www/yii-1.1.14.f0fee9/framework/YiiBase.php:401)
+Stack trace:
+#0 /var/www/MGsis/protected/controllers/TituloController.php(170): spl_autoload_call()
+#1 unknown(0): TituloController->actionImprimeVale()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/controllers/TituloController.php (170)
+in /var/www/MGsis/index.php (13)
+2013/12/21 15:42:25 [error] [php] Undefined index: EscEscDblStrikeOn (/var/www/MGsis/protected/components/MGEscPrint.php:165)
+Stack trace:
+#0 unknown(0): TituloController->actionImprimeVale()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/components/MGEscPrint.php (165)
+in /var/www/MGsis/protected/components/MGEscPrint.php (188)
+in /var/www/MGsis/protected/controllers/TituloController.php (177)
+2013/12/21 15:52:06 [error] [php] str_pad() expects parameter 4 to be long, string given (/var/www/MGsis/protected/components/MGEscPrint.php:162)
+Stack trace:
+#0 unknown(0): TituloController->actionImprimeVale()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/components/MGEscPrint.php (162)
+in /var/www/MGsis/protected/controllers/TituloController.php (179)
+in /var/www/MGsis/index.php (13)
+2013/12/21 15:53:33 [error] [php] str_pad() expects parameter 4 to be long, string given (/var/www/MGsis/protected/components/MGEscPrint.php:162)
+Stack trace:
+#0 unknown(0): TituloController->actionImprimeVale()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/components/MGEscPrint.php (162)
+in /var/www/MGsis/protected/controllers/TituloController.php (179)
+in /var/www/MGsis/index.php (13)
+2013/12/21 15:53:34 [error] [php] str_pad() expects parameter 4 to be long, string given (/var/www/MGsis/protected/components/MGEscPrint.php:162)
+Stack trace:
+#0 unknown(0): TituloController->actionImprimeVale()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/components/MGEscPrint.php (162)
+in /var/www/MGsis/protected/controllers/TituloController.php (179)
+in /var/www/MGsis/index.php (13)
+2013/12/21 15:53:34 [error] [php] str_pad() expects parameter 4 to be long, string given (/var/www/MGsis/protected/components/MGEscPrint.php:162)
+Stack trace:
+#0 unknown(0): TituloController->actionImprimeVale()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/components/MGEscPrint.php (162)
+in /var/www/MGsis/protected/controllers/TituloController.php (179)
+in /var/www/MGsis/index.php (13)
+2013/12/21 15:53:34 [error] [php] str_pad() expects parameter 4 to be long, string given (/var/www/MGsis/protected/components/MGEscPrint.php:162)
+Stack trace:
+#0 unknown(0): TituloController->actionImprimeVale()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/components/MGEscPrint.php (162)
+in /var/www/MGsis/protected/controllers/TituloController.php (179)
+in /var/www/MGsis/index.php (13)
+2013/12/21 15:53:35 [error] [php] str_pad() expects parameter 4 to be long, string given (/var/www/MGsis/protected/components/MGEscPrint.php:162)
+Stack trace:
+#0 unknown(0): TituloController->actionImprimeVale()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/components/MGEscPrint.php (162)
+in /var/www/MGsis/protected/controllers/TituloController.php (179)
+in /var/www/MGsis/index.php (13)
+2013/12/21 15:57:22 [error] [php] str_pad() expects parameter 4 to be long, string given (/var/www/MGsis/protected/components/MGEscPrint.php:171)
+Stack trace:
+#0 unknown(0): TituloController->actionImprimeVale()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/components/MGEscPrint.php (171)
+in /var/www/MGsis/protected/controllers/TituloController.php (179)
+in /var/www/MGsis/index.php (13)
+2013/12/21 15:58:19 [error] [php] str_pad() expects parameter 4 to be long, string given (/var/www/MGsis/protected/components/MGEscPrint.php:171)
+Stack trace:
+#0 unknown(0): TituloController->actionImprimeVale()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/components/MGEscPrint.php (171)
+in /var/www/MGsis/protected/controllers/TituloController.php (179)
+in /var/www/MGsis/index.php (13)
+2013/12/21 16:08:26 [error] [exception.CException] exception 'CException' with message 'A propriedade "Titulo.Filial" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('Filial')
+#1 /var/www/MGsis/protected/controllers/TituloController.php(180): CActiveRecord->__get('Filial')
+#2 [internal function]: TituloController->actionImprimeVale('10040249')
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('imprimevale')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/imprimev...')
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+---
+2013/12/21 16:09:00 [error] [exception.CException] exception 'CException' with message 'A propriedade "Filial.Pessoa" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('Pessoa')
+#1 /var/www/MGsis/protected/controllers/TituloController.php(180): CActiveRecord->__get('Pessoa')
+#2 [internal function]: TituloController->actionImprimeVale('10040249')
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('imprimevale')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/imprimev...')
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+---
+2013/12/21 16:16:45 [error] [php] Trying to get property of non-object (/var/www/MGsis/protected/controllers/TituloController.php:184)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/controllers/TituloController.php (184)
+in /var/www/MGsis/index.php (13)
+2013/12/21 17:12:44 [error] [exception.CException] exception 'CException' with message 'A propriedade "Titulo.CreditoSaldo" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('CreditoSaldo')
+#1 /var/www/MGsis/protected/controllers/TituloController.php(238): CActiveRecord->__get('CreditoSaldo')
+#2 [internal function]: TituloController->actionImprimeVale('10040249')
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('imprimevale')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/imprimev...')
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+---
+2013/12/21 17:16:56 [error] [php] Undefined variable: rt (/var/www/MGsis/protected/components/MGFormatter.php:211)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/components/MGFormatter.php (211)
+in /var/www/MGsis/protected/controllers/TituloController.php (244)
+in /var/www/MGsis/index.php (13)
+2013/12/21 17:19:02 [error] [php] Undefined index: , (/var/www/MGsis/protected/components/MGFormatter.php:205)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/components/MGFormatter.php (205)
+in /var/www/MGsis/protected/controllers/TituloController.php (244)
+in /var/www/MGsis/index.php (13)
+2013/12/21 17:21:59 [error] [php] Undefined index:   (/var/www/MGsis/protected/components/MGFormatter.php:209)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/components/MGFormatter.php (209)
+in /var/www/MGsis/protected/controllers/TituloController.php (244)
+in /var/www/MGsis/index.php (13)
+2013/12/21 17:22:04 [error] [php] Undefined index: , (/var/www/MGsis/protected/components/MGFormatter.php:209)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/components/MGFormatter.php (209)
+in /var/www/MGsis/protected/controllers/TituloController.php (244)
+in /var/www/MGsis/index.php (13)
+2013/12/21 17:22:21 [error] [php] Undefined index: , (/var/www/MGsis/protected/components/MGFormatter.php:209)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/components/MGFormatter.php (209)
+in /var/www/MGsis/protected/controllers/TituloController.php (244)
+in /var/www/MGsis/index.php (13)
+2013/12/21 17:22:22 [error] [php] Undefined index: , (/var/www/MGsis/protected/components/MGFormatter.php:209)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/components/MGFormatter.php (209)
+in /var/www/MGsis/protected/controllers/TituloController.php (244)
+in /var/www/MGsis/index.php (13)
+2013/12/21 17:27:31 [error] [php] Undefined variable: linha (/var/www/MGsis/protected/controllers/TituloController.php:245)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/controllers/TituloController.php (245)
+in /var/www/MGsis/index.php (13)
+2013/12/21 17:27:44 [error] [php] Invalid argument supplied for foreach() (/var/www/MGsis/protected/controllers/TituloController.php:245)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/controllers/TituloController.php (245)
+in /var/www/MGsis/index.php (13)
+2013/12/21 17:30:39 [error] [php] str_pad() expects parameter 4 to be long, string given (/var/www/MGsis/protected/components/MGEscPrint.php:137)
+Stack trace:
+#0 unknown(0): TituloController->actionImprimeVale()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/components/MGEscPrint.php (137)
+in /var/www/MGsis/protected/controllers/TituloController.php (249)
+in /var/www/MGsis/index.php (13)
+2013/12/21 17:44:16 [error] [exception.CException] exception 'CException' with message 'A propriedade "Titulo.titulo" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('titulo')
+#1 /var/www/MGsis/protected/controllers/TituloController.php(227): CActiveRecord->__get('titulo')
+#2 [internal function]: TituloController->actionImprimeVale('10040249')
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('imprimevale')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/imprimev...')
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+---
+2013/12/21 17:46:06 [error] [exception.CException] exception 'CException' with message 'A propriedade "Titulo.telefone1" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('telefone1')
+#1 /var/www/MGsis/protected/controllers/TituloController.php(233): CActiveRecord->__get('telefone1')
+#2 [internal function]: TituloController->actionImprimeVale('10040249')
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('imprimevale')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/imprimev...')
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+---
+2013/12/21 17:55:22 [error] [php] Object of class Cidade could not be converted to string (/var/www/MGsis/protected/components/MGEscPrint.php:140)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/components/MGEscPrint.php (140)
+in /var/www/MGsis/protected/controllers/TituloController.php (271)
+in /var/www/MGsis/index.php (13)
+2013/12/21 17:59:50 [error] [php] Undefined variable: titulo (/var/www/MGsis/protected/controllers/TituloController.php:276)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/controllers/TituloController.php (276)
+in /var/www/MGsis/index.php (13)
+2013/12/21 18:00:51 [error] [php] Missing argument 1 for MGEscPrint::adicionaTexto(), called in /var/www/MGsis/protected/controllers/TituloController.php on line 277 and defined (/var/www/MGsis/protected/components/MGEscPrint.php:122)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/components/MGEscPrint.php (122)
+in /var/www/MGsis/protected/controllers/TituloController.php (277)
+in /var/www/MGsis/index.php (13)
+2013/12/21 18:14:02 [error] [php] Undefined variable: extenso (/var/www/MGsis/protected/controllers/TituloController.php:255)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/controllers/TituloController.php (255)
+in /var/www/MGsis/index.php (13)
+2013/12/21 18:18:22 [error] [php] str_pad(): Padding string cannot be empty (/var/www/MGsis/protected/components/MGEscPrint.php:137)
+Stack trace:
+#0 unknown(0): TituloController->actionImprimeVale()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10040249
+in /var/www/MGsis/protected/components/MGEscPrint.php (137)
+in /var/www/MGsis/protected/controllers/TituloController.php (258)
+in /var/www/MGsis/index.php (13)

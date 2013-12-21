@@ -1,99 +1,88 @@
-<?php
-/* @var $this TituloController */
-/* @var $model Titulo */
-/* @var $form CActiveForm */
-?>
-
-<div class="form">
-
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('MGActiveForm',array(
 	'id'=>'titulo-form',
-	// Please note: When you enable ajax validation, make sure the corresponding
-	// controller action is handling ajax validation correctly.
-	// There is a call to performAjaxValidation() commented in generated controller code.
-	// See class documentation of CActiveForm for details on this.
-	'enableAjaxValidation'=>false,
-	'htmlOptions'=>array(
-		'class'=>'form-horizontal'
-	),
 )); ?>
 
-	<?php echo $form->errorSummary($model); ?>
-	<div class="control-group">
-		<?php echo $form->labelEx($model,'sistema', array('class'=>'control-label')); ?>
-		<div class="controls">
-			<?php
-				$this->widget('CMaskedTextField',array(
-					'model'=>$model,
-					'attribute'=>'sistema',
-					'mask'=>'99/99/9999\ 99:99:99',
-					'htmlOptions'=>array(
-						'class'=>'timestamp'
-					),
-				));
-				?>
-			<?php echo $form->error($model,'sistema'); ?>
-		</div>
-	</div>
-		
-	<div class="control-group">
-		<?php echo $form->labelEx($model,'emissao', array('class'=>'control-label')); ?>
-		<div class="controls">
-			<?php
-				$this->widget('zii.widgets.jui.CJuiDatePicker',array(
-					'model'=>$model,
-					'attribute'=>'emissao',
-					'language'=>'pt-BR',
-					'htmlOptions'=>array(
-						'class'=>'date',
-						),
-				));		
-			?>
-			<?php echo $form->error($model,'emissao'); ?>
-		</div>
-	</div>
+<?php echo $form->errorSummary($model); ?>
+
+<fieldset>
+	<?php 	
+		echo $form->textFieldRow($model,'codtipotitulo',array('class'=>'span5'));
+		echo $form->textFieldRow($model,'codfilial',array('class'=>'span5'));
+		echo $form->textFieldRow($model,'codportador',array('class'=>'span5'));
+		echo $form->textFieldRow($model,'codpessoa',array('class'=>'span5'));
+		echo $form->textFieldRow($model,'codcontacontabil',array('class'=>'span5'));
+		echo $form->textFieldRow($model,'numero',array('class'=>'span5','maxlength'=>20));
+		echo $form->textFieldRow($model,'fatura',array('class'=>'span5','maxlength'=>50));
+		echo $form->textFieldRow($model,'transacao',array('class'=>'span5'));
+		echo $form->textFieldRow($model,'sistema',array('class'=>'span5'));
+		echo $form->textFieldRow($model,'emissao',array('class'=>'span5'));
+		echo $form->textFieldRow($model,'vencimento',array('class'=>'span5'));
+		echo $form->textFieldRow($model,'vencimentooriginal',array('class'=>'span5'));
+		echo $form->textFieldRow($model,'debito',array('class'=>'span5','maxlength'=>14));
+		echo $form->textFieldRow($model,'credito',array('class'=>'span5','maxlength'=>14));
+		echo $form->checkBoxRow($model,'gerencial');
+		echo $form->textFieldRow($model,'observacao',array('class'=>'span5','maxlength'=>255));
+		echo $form->checkBoxRow($model,'boleto');
+		echo $form->textFieldRow($model,'nossonumero',array('class'=>'span5','maxlength'=>20));
+		echo $form->textFieldRow($model,'debitototal',array('class'=>'span5','maxlength'=>14));
+		echo $form->textFieldRow($model,'creditototal',array('class'=>'span5','maxlength'=>14));
+		echo $form->textFieldRow($model,'saldo',array('class'=>'span5','maxlength'=>14));
+		echo $form->textFieldRow($model,'debitosaldo',array('class'=>'span5','maxlength'=>14));
+		echo $form->textFieldRow($model,'creditosaldo',array('class'=>'span5','maxlength'=>14));
+		echo $form->textFieldRow($model,'transacaoliquidacao',array('class'=>'span5'));
+		echo $form->textFieldRow($model,'codnegocioformapagamento',array('class'=>'span5'));
+		echo $form->textFieldRow($model,'codtituloagrupamento',array('class'=>'span5'));
+		echo $form->textFieldRow($model,'remessa',array('class'=>'span5'));
+		echo $form->textFieldRow($model,'estornado',array('class'=>'span5'));
+	?>
+</fieldset>
+<div class="form-actions">
+
+    
+    <?php 
 	
-	<div class="control-group">
-		<?php echo $form->labelEx($model,'vencimento', array('class'=>'control-label')); ?>
-		<div class="controls">
-			<?php
-				$this->widget('zii.widgets.jui.CJuiDatePicker',array(
-					'model'=>$model,
-					'attribute'=>'vencimento',
-					'language'=>'pt-BR',
-					'htmlOptions'=>array(
-						'class'=>'date',
-						),
-				));		
-			?>
-			<?php echo $form->error($model,'vencimento'); ?>
-		</div>
-	</div>
 
-	<div class="control-group">
-		<?php echo $form->labelEx($model,'debito', array('class'=>'control-label')); ?>
-		<div class="controls">
-			<?php echo $form->textField($model,'debito',array('class'=>'money')); ?>
-			<?php echo $form->error($model,'debito'); ?>
-		</div>
-	</div>
-
-	<div class="controls">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Salvar Novo' : 'Salvar Alterações'); ?>
-	</div>
+        $this->widget(
+            'bootstrap.widgets.TbButton',
+            array(
+                'buttonType' => 'submit',
+                'type' => 'primary',
+                'label' => 'Salvar',
+                'icon' => 'icon-ok',
+                )
+            ); 
+	?>
+	<?php
+        $this->widget(
+            'bootstrap.widgets.TbButton',
+            array(
+                'buttonType' => 'reset',
+                'label' => 'Limpar',
+                'icon' => 'icon-refresh'
+                )
+            );
+    ?>
+    
+</div>
 
 <?php $this->endWidget(); ?>
 
-<input type="text" name="demoEuro" id="demoEuro2" class="demo">
+<script type='text/javascript'>
+	
+$(document).ready(function() {
 
-<script type="text/javascript">
-	$(document).ready(
-		function()
-			{
-				$('#Titulo_debito').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+	//$("#Pessoa_fantasia").Setcase();
 
-			}
-		);
+	$('#titulo-form').submit(function(e) {
+        var currentForm = this;
+        e.preventDefault();
+        bootbox.confirm("Tem certeza que deseja salvar?", function(result) {
+            if (result) {
+                currentForm.submit();
+            }
+        });
+    });
+	
+});
+
 </script>
-
-</div><!-- form -->

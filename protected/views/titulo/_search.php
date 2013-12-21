@@ -1,185 +1,76 @@
-<?php
-/* @var $this TituloController */
-/* @var $model Titulo */
-/* @var $form CActiveForm */
-?>
-
-<div class="wide form">
-
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 	'action'=>Yii::app()->createUrl($this->route),
+	'type' => 'horizontal',
 	'method'=>'get',
 )); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'codtitulo'); ?>
-		<?php echo $form->textField($model,'codtitulo'); ?>
-	</div>
+<hr>
 
-	<div class="row">
-		<?php echo $form->label($model,'codtipotitulo'); ?>
-		<?php echo $form->textField($model,'codtipotitulo'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'codtitulo',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'codfilial'); ?>
-		<?php echo $form->textField($model,'codfilial'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'codtipotitulo',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'codportador'); ?>
-		<?php echo $form->textField($model,'codportador'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'codfilial',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'codpessoa'); ?>
-		<?php echo $form->textField($model,'codpessoa'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'codportador',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'codcontacontabil'); ?>
-		<?php echo $form->textField($model,'codcontacontabil'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'codpessoa',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'numero'); ?>
-		<?php echo $form->textField($model,'numero',array('size'=>20,'maxlength'=>20)); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'codcontacontabil',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'fatura'); ?>
-		<?php echo $form->textField($model,'fatura',array('size'=>50,'maxlength'=>50)); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'numero',array('class'=>'span5','maxlength'=>20)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'transacao'); ?>
-		<?php echo $form->textField($model,'transacao'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'fatura',array('class'=>'span5','maxlength'=>50)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'sistema'); ?>
-		<?php echo $form->textField($model,'sistema'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'transacao',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'emissao'); ?>
-		<?php echo $form->textField($model,'emissao'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'sistema',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'vencimento'); ?>
-		<?php echo $form->textField($model,'vencimento'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'emissao',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'vencimentooriginal'); ?>
-		<?php echo $form->textField($model,'vencimentooriginal'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'vencimento',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'debito'); ?>
-		<?php echo $form->textField($model,'debito',array('size'=>14,'maxlength'=>14)); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'vencimentooriginal',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'credito'); ?>
-		<?php echo $form->textField($model,'credito',array('size'=>14,'maxlength'=>14)); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'debito',array('class'=>'span5','maxlength'=>14)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'gerencial'); ?>
-		<?php echo $form->checkBox($model,'gerencial'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'credito',array('class'=>'span5','maxlength'=>14)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'observacao'); ?>
-		<?php echo $form->textField($model,'observacao',array('size'=>60,'maxlength'=>255)); ?>
-	</div>
+		<?php echo $form->checkBoxRow($model,'gerencial'); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'boleto'); ?>
-		<?php echo $form->checkBox($model,'boleto'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'observacao',array('class'=>'span5','maxlength'=>255)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'nossonumero'); ?>
-		<?php echo $form->textField($model,'nossonumero',array('size'=>20,'maxlength'=>20)); ?>
-	</div>
+		<?php echo $form->checkBoxRow($model,'boleto'); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'debitototal'); ?>
-		<?php echo $form->textField($model,'debitototal',array('size'=>14,'maxlength'=>14)); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'nossonumero',array('class'=>'span5','maxlength'=>20)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'creditototal'); ?>
-		<?php echo $form->textField($model,'creditototal',array('size'=>14,'maxlength'=>14)); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'debitototal',array('class'=>'span5','maxlength'=>14)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'saldo'); ?>
-		<?php echo $form->textField($model,'saldo',array('size'=>14,'maxlength'=>14)); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'creditototal',array('class'=>'span5','maxlength'=>14)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'debitosaldo'); ?>
-		<?php echo $form->textField($model,'debitosaldo',array('size'=>14,'maxlength'=>14)); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'saldo',array('class'=>'span5','maxlength'=>14)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'creditosaldo'); ?>
-		<?php echo $form->textField($model,'creditosaldo',array('size'=>14,'maxlength'=>14)); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'debitosaldo',array('class'=>'span5','maxlength'=>14)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'transacaoliquidacao'); ?>
-		<?php echo $form->textField($model,'transacaoliquidacao'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'creditosaldo',array('class'=>'span5','maxlength'=>14)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'codnegocioformapagamento'); ?>
-		<?php echo $form->textField($model,'codnegocioformapagamento'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'transacaoliquidacao',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'codtituloagrupamento'); ?>
-		<?php echo $form->textField($model,'codtituloagrupamento'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'codnegocioformapagamento',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'remessa'); ?>
-		<?php echo $form->textField($model,'remessa'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'codtituloagrupamento',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'estornado'); ?>
-		<?php echo $form->textField($model,'estornado'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'remessa',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'alteracao'); ?>
-		<?php echo $form->textField($model,'alteracao'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'estornado',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'codusuarioalteracao'); ?>
-		<?php echo $form->textField($model,'codusuarioalteracao'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'criacao'); ?>
-		<?php echo $form->textField($model,'criacao'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'codusuariocriacao'); ?>
-		<?php echo $form->textField($model,'codusuariocriacao'); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+					<div class="form-actions">
+		<?php $this->widget('bootstrap.widgets.TbButton', array(
+			'buttonType' => 'submit',
+			'type'=>'primary',
+			'icon'=>'icon-search',
+			'label'=>'Buscar',
+		)); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
-
-</div><!-- search-form -->

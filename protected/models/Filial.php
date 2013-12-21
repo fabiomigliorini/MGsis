@@ -77,7 +77,7 @@ class Filial extends MGActiveRecord
 			'titulos' => array(self::HAS_MANY, 'Titulo', 'codfilial'),
 			'acbrnfemonitorcodusuario' => array(self::BELONGS_TO, 'Usuario', 'acbrnfemonitorcodusuario'),
 			'codempresa' => array(self::BELONGS_TO, 'Empresa', 'codempresa'),
-			'codpessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
+			'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
 			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 			'portadors' => array(self::HAS_MANY, 'Portador', 'codfilial'),
