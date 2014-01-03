@@ -166,23 +166,20 @@ class TituloController extends Controller
 	public function actionImprimeVale($id)
 	{
 		
-		echo "<pre>";
 		$model = $this->loadModel($id);
 		
 		//inicializa
 		$teste = new MGEscPrint();
-		$teste->comando("6lpp", "cabecalho");
-		$teste->comando("Draft", "cabecalho");
-		$teste->comando("CondensedOff", "cabecalho");
+		$teste->adicionaTexto("<Reset><6lpp><Draft><CondensedOff>", "cabecalho");
 		
 		//linha divisoria
 		$teste->adicionaLinha("", "cabecalho", 80, STR_PAD_RIGHT, "=");
 		
 		// Fantasia e NUMERO do Vale
-		$teste->comando("DblStrikeOn", "cabecalho");
+		$teste->adicionaTexto("<DblStrikeOn>", "cabecalho");
 		$teste->adicionaTexto($model->Filial->Pessoa->fantasia . " " . $model->Filial->Pessoa->telefone1, "cabecalho", 56);
 		$teste->adicionaTexto("Titulo:        " . Yii::app()->format->formataCodigo($model->codtitulo), "cabecalho", 24);
-		$teste->comando("DblStrikeOff", "cabecalho");
+		$teste->adicionaTexto("<DblStrikeOff>", "cabecalho");
 		$teste->adicionaLinha("", "cabecalho");
 		
 		// Usuario e Data
@@ -198,72 +195,57 @@ class TituloController extends Controller
 		$teste->adicionaLinha("", "cabecalho", 80, STR_PAD_RIGHT, "=");
 
 		//forca impressao cabecalho primeira pagina
-		$teste->cabecalho();
+		//$teste->cabecalho();
 
 		//Rodape
 		$teste->adicionaTexto("", "rodape", 80, STR_PAD_RIGHT, "=");
-		/*
-		$teste->adicionaLinha("");
-		$teste->adicionaLinha("");
-		$teste->adicionaLinha("");
-		$teste->adicionaLinha("");
-		$teste->adicionaLinha("");
-		$teste->adicionaLinha("");
-		$teste->adicionaLinha("");
-		$teste->adicionaLinha("");
-		$teste->adicionaLinha("");
-		$teste->adicionaLinha("");
-		$teste->adicionaLinha("");
-		$teste->adicionaLinha("");
-		$teste->adicionaLinha("");
 		
 		//titulo
 		$teste->adicionaLinha("");
-		$teste->adicionaLinha("");
-		$teste->comando("LargeOn");
-		$teste->comando("DblStrikeOn");
-		$teste->adicionaLinha("V A L E", "documento", 40, STR_PAD_BOTH);
-		$teste->comando("DblStrikeOff");
-		$teste->comando("LargeOff");
+		$teste->adicionaTexto("<LargeOn>");
+		$teste->adicionaTexto("<DblStrikeOn>");
+		$teste->adicionaTexto("V A L E", "documento", 40, STR_PAD_BOTH);
+		$teste->adicionaTexto("<DblStrikeOff>");
+		$teste->adicionaTexto("<LargeOff>");
 		$teste->adicionaLinha("");
 
 		//Numero titulo
 		$teste->adicionaTexto("Numero....:", "documento", 12);
 		$teste->adicionaTexto($model->numero, "documento", 68);
-		$teste->comando("LF");
+		$teste->adicionaLinha();
 		
 		//Espaco
-		$teste->comando("LF");
+		$teste->adicionaLinha();
 		
 		//Fantasia
-		$teste->comando("DblStrikeOn");
+		$teste->adicionaTexto("<DblStrikeOn>");
 		$teste->adicionaTexto("Favorecido: ");
 		$teste->adicionaTexto($model->Pessoa->fantasia . " (" .Yii::app()->format->formataCodigo($model->codpessoa) . ")", "documento", 68);
-		$teste->comando("DblStrikeOff");
-		$teste->comando("LF");
+		$teste->adicionaTexto("<DblStrikeOff>");
+		$teste->adicionaLinha();
 
 		//Telefone
 		$teste->adicionaTexto("", "documento", 12);
 		$teste->adicionaTexto("{$model->Pessoa->telefone1} / {$model->Pessoa->telefone2} / {$model->Pessoa->telefone3}", "documento", 68);
-		$teste->comando("LF");
+		$teste->adicionaLinha();
 		
 		//Razao Social
 		$teste->adicionaTexto("", "documento", 12);
 		$teste->adicionaTexto($model->Pessoa->pessoa, "documento", 68);
-		$teste->comando("LF");
+		$teste->adicionaLinha();
 		
 		//Cnpj
 		$teste->adicionaTexto("", "documento", 12);
 		$teste->adicionaTexto("CNPJ/CPF: " . Yii::app()->format->formataCnpjCpf($model->Pessoa->cnpj, $model->Pessoa->fisica), "documento", 29);
-		if (empty($model->Pessoa->ie))
+		if (!empty($model->Pessoa->ie))
 			$teste->adicionaTexto("- Inscricao Estadual: " .Yii::app()->format->formataInscricaoEstadual($model->Pessoa->ie, $model->Pessoa->Cidade->Estado->sigla), "documento", 38);
-		$teste->comando("LF");
+		$teste->adicionaLinha();
 
 		//Espaco
-		$teste->comando("LF");
+		$teste->adicionaLinha();
 		
 		//Extenso
-		$teste->comando("DblStrikeOn");
+		$teste->adicionaTexto("<DblStrikeOn>");
 		$linhas = Yii::app()->format->formataValorPorExtenso($model->creditosaldo, true);
 		$linhas = "R$ " . Yii::app()->format->formatNumber($model->creditosaldo) . " ($linhas)";
 		$linhas = str_split($linhas, 68);
@@ -272,13 +254,13 @@ class TituloController extends Controller
 		{
 			$teste->adicionaTexto($label, "documento", 12);
 			$teste->adicionaTexto(trim($linha), "documento", 68);
-			$teste->comando("LF");
+			$teste->adicionaLinha();
 			$label = "";
 		}
-		$teste->comando("DblStrikeOff");
+		$teste->adicionaTexto("<DblStrikeOff>");
 		
 		// Espaco
-		$teste->comando("LF");
+		$teste->adicionaLinha();
 
 		//Observacao
 		if (!empty($model->observacao))
@@ -289,12 +271,12 @@ class TituloController extends Controller
 			{
 				$teste->adicionaTexto($label, "documento", 12);
 				$teste->adicionaTexto(trim($linha), "documento", 68);
-				$teste->comando("LF");
+				$teste->adicionaLinha();
 				$label = "";
 			}
 			
 			// Espaco
-			$teste->comando("LF");
+			$teste->adicionaLinha();
 		}
 		
 
@@ -306,36 +288,26 @@ class TituloController extends Controller
 		$teste->adicionaTexto(", ");
 		$teste->adicionaTexto(Yii::app()->format->formataDataPorExtenso($model->emissao));
 		$teste->adicionaTexto(".");
-		$teste->comando("LF");
+		$teste->adicionaLinha();
 
 		// Espaco
-		$teste->comando("LF");
-		$teste->comando("LF");
-		$teste->comando("LF");
-		*/
+		$teste->adicionaLinha();
+		$teste->adicionaLinha();
+		$teste->adicionaLinha();
 
 		//Assinatura
 		$teste->adicionaTexto("", "documento", 12);
 		$teste->adicionaTexto("", "documento", 50, STR_PAD_RIGHT, "-");
-		$teste->comando("LF");
+		$teste->adicionaLinha();
 		$teste->adicionaTexto("", "documento", 12);
 		$teste->adicionaTexto($model->Filial->Pessoa->pessoa, "documento", 50);
+		$teste->adicionaLinha();
 		
-		/*
-		//Linhas
-		for ($i=1; $i <= 20; $i++)
-		{
-			$teste->adicionaLinha("                        Linha " . $i);
-		}
-		//$teste->limpaSecao("documento");
-		 * 
-		 * 
-		 * 
-		 */
-		
-		$teste->finaliza();
+		$teste->prepara();
 		//echo $teste->imprimir();
+		echo "<pre>";
 		echo $teste->converteHtml();
+		echo "</pre>";
 	}
 	
 }

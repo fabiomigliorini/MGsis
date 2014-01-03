@@ -50,32 +50,7 @@ $menu_admin = TbHtml::thumbnails(
 	);
 
 ?>
-<!--
-<div class="accordion" id="accordion2">
-    <div class="accordion-group">
-        <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-                Financeiro
-            </a>
-        </div>
-        <div id="collapseOne" class="accordion-body collapse in">
-            <div class="accordion-inner">
-            </div>
-        </div>
-    </div>
-    <div class="accordion-group">
-        <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-                Administração
-            </a>
-        </div>
-        <div id="collapseTwo" class="accordion-body collapse in">
-            <div class="accordion-inner">
-            </div>
-        </div>
-    </div>
-</div>
--->
+
 <?php $collapse = $this->beginWidget('bootstrap.widgets.TbCollapse'); ?>
 <div class="accordion" id="accordion2">
   <div class="accordion-group">

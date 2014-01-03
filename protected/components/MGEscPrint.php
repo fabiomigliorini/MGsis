@@ -10,15 +10,13 @@
 class MGEscPrint
 {
 	
-	private $_conteudoSecao;
-	private $_impressora = "EscritorioEpson";
+	private $_conteudoSecao = array();
+	private $_impressora = "impressoraMatricial";
 	private $_comandos = array();
-	private $_colunas = 137;
 	private $_linhas = 31;
-	private $_linhaSecao;
-	private $_cabecalho = "";
+	private $_textoFinal = "";
 	
-	function __construct($impressora = null, $colunas = null, $linhas = null) 
+	function __construct($impressora = null, $linhas = null) 
 	{
 		$this->_conteudoSecao =
 			array(
@@ -27,104 +25,126 @@ class MGEscPrint
 				"rodape"    => "",
 			);
 		
-		$this->_linhaSecao = 
-			array(
-				"documento" => 1,
-				"cabecalho" => 1,
-				"rodape"    => 1,
-			);
-		
 		if ($impressora != null)
 			$this->_impressora = $impressora;
-		
-		if ($colunas != null)
-			$this->_colunas = $colunas;
+		else
+			$this->_impressora = Yii::app()->user->impressoraMatricial;
 		
 		if ($linhas != null)
 			$this->_linhas = $linhas;
 		
 		$this->_comandos = 
 			array(
-				"EscDraft"           => array(Chr(27)."x0",   ""     ), //Modo Draft
-				"EscNLQ"             => array(Chr(27)."x1",   ""     ), //Modo NLQ
-				"EscNLQRoman"        => array(Chr(27)."k0",   ""     ), //Fonte NLQ "Roman"
-				"EscNLQSansSerif"    => array(Chr(27)."k1",   ""     ), //Fonte NLQ "SansSerif"
-				"Esc10cpp"           => array(Chr(27)."P",    ""     ), //Espaçamento horizontal em 10cpp
-				"Esc12cpp"           => array(Chr(27)."M",    ""     ), //Espaçamento horizontal em 12cpp
-				"EscCondensedOn"     => array(Chr(15),        ""     ), //Ativa o modo condensado
-				"EscCondensedOff"    => array(Chr(18),        ""     ), //Desativa o modo condensado
-				"EscLargeOn"         => array(Chr(27)."W1",   "<p style='font-size:200%'>"     ), //Ativa o modo expandido
-				"EscLargeOff"        => array(Chr(27)."W0",   "</p>"     ), //Desativa o modo expandido
-				"EscBoldOn"          => array(Chr(27)."E",   "<b>"   ), //Ativa o modo negrito
-				"EscBoldOff"         => array(Chr(27)."F",   "</b>"  ), //Desativa o modo negrito
-				"EscItalicOn"        => array(Chr(27)."4",   "<i>"   ), //Ativa o modo itálico
-				"EscItalicOff"       => array(Chr(27)."5",   "</i>"  ), //Desativa o modo itálico
-				"EscUnderlineOn"     => array(Chr(27)."-1",  "<u>"   ), //Ativa o modo sublinhado
-				"EscUnderlineOff"    => array(Chr(27)."-0",  "</u>"  ), //Desativa o modo sublinhado
-				"EscDblStrikeOn"     => array(Chr(27)."G",   "<b>"   ), //Ativa o modo de passada dupla
-				"EscDblStrikeOff"    => array(Chr(27)."H",   "</b>"  ), //Desativa o modo de passada dupla
-				"EscSupScriptOn"     => array(Chr(27)."S1",  ""      ), //Ativa o modo sobrescrito
-				"EscSubScriptOn"     => array(Chr(27)."S0",  ""      ), //Ativa o modo subescrito
-				"EscScriptOff"       => array(Chr(27)."T",   ""      ), //Desativa os modos sobrescrito e subescrito
+				"Draft"           => array(Chr(27)."x0",   ""     ), //Modo Draft
+				"NLQ"             => array(Chr(27)."x1",   ""     ), //Modo NLQ
+				"NLQRoman"        => array(Chr(27)."k0",   ""     ), //Fonte NLQ "Roman"
+				"NLQSansSerif"    => array(Chr(27)."k1",   ""     ), //Fonte NLQ "SansSerif"
+				"10cpp"           => array(Chr(27)."P",    ""     ), //Espaçamento horizontal em 10cpp
+				"12cpp"           => array(Chr(27)."M",    ""     ), //Espaçamento horizontal em 12cpp
+				"CondensedOn"     => array(Chr(15),        "<p style='font-size:0.58em'>"     ), //Ativa o modo condensado
+				"CondensedOff"    => array(Chr(18),        "</p>"     ), //Desativa o modo condensado
+				"LargeOn"         => array(Chr(27)."W1",   "<p style='font-size:2em'>"     ), //Ativa o modo expandido
+				"LargeOff"        => array(Chr(27)."W0",   "</p>"     ), //Desativa o modo expandido
+				"BoldOn"          => array(Chr(27)."E",   "<b>"   ), //Ativa o modo negrito
+				"BoldOff"         => array(Chr(27)."F",   "</b>"  ), //Desativa o modo negrito
+				"ItalicOn"        => array(Chr(27)."4",   "<i>"   ), //Ativa o modo itálico
+				"ItalicOff"       => array(Chr(27)."5",   "</i>"  ), //Desativa o modo itálico
+				"UnderlineOn"     => array(Chr(27)."-1",  "<u>"   ), //Ativa o modo sublinhado
+				"UnderlineOff"    => array(Chr(27)."-0",  "</u>"  ), //Desativa o modo sublinhado
+				"DblStrikeOn"     => array(Chr(27)."G",   "<b>"   ), //Ativa o modo de passada dupla
+				"DblStrikeOff"    => array(Chr(27)."H",   "</b>"  ), //Desativa o modo de passada dupla
+				"SupScriptOn"     => array(Chr(27)."S1",  ""      ), //Ativa o modo sobrescrito
+				"SubScriptOn"     => array(Chr(27)."S0",  ""      ), //Ativa o modo subescrito
+				"ScriptOff"       => array(Chr(27)."T",   ""      ), //Desativa os modos sobrescrito e subescrito
 				
 				//Controle de página 
-				"Esc6lpp"            => array(Chr(27)."2",   ""      ), //Espaçamento vertical de 6 linhas por polegada
-				"Esc8lpp"            => array(Chr(27)."0",   ""      ), //Espaçamento vertical de 8 linhas por polegada
-				"EscMarginLeft"      => array(Chr(27)."l",   ""      ), //Margem esquerda, onde "?"
-				"EscMarginRight"     => array(Chr(27)."Q",   ""      ), //Margem direita, onde "?"
-				"EscPaperSize"       => array(Chr(27)."C",   ""      ), //Tamanho da página, onde "?"
-				"EscAutoNewPageOn"   => array(Chr(27)."N",   ""      ), //Ativa o salto sobre o picote, onde "?"
-				"EscAutoNewPageOff"  => array(Chr(27)."O",   ""      ), //Desativa o salto sobre o picote
+				"6lpp"            => array(Chr(27)."2",   ""      ), //Espaçamento vertical de 6 linhas por polegada
+				"8lpp"            => array(Chr(27)."0",   ""      ), //Espaçamento vertical de 8 linhas por polegada
+				"MarginLeft"      => array(Chr(27)."l",   ""      ), //Margem esquerda, onde "?"
+				"MarginRight"     => array(Chr(27)."Q",   ""      ), //Margem direita, onde "?"
+				"PaperSize"       => array(Chr(27)."C",   ""      ), //Tamanho da página, onde "?"
+				"AutoNewPageOn"   => array(Chr(27)."N",   ""      ), //Ativa o salto sobre o picote, onde "?"
+				"AutoNewPageOff"  => array(Chr(27)."O",   ""      ), //Desativa o salto sobre o picote
 				
 				//Controle da impressora
-				"EscReset"           => array(Chr(27)."@",   ""  ), //Inicializa a impressora (Reset)
-				"EscLF"              => array(Chr(10),       "\n"    ), //Avança uma linha
-				"EscFF"              => array(Chr(12),       "<hr style='page-break-before: always;'>"  ), //Avança uma página
-				"EscCR"              => array(Chr(13),       ""      ), //Retorno do carro
+				"Reset"           => array(Chr(27)."@",   ""  ), //Inicializa a impressora (Reset)
+				"LF"              => array(Chr(10),       "\n"    ), //Avança uma linha
+				"FF"              => array(Chr(12),       "<hr style='page-break-before: always;'>"  ), //Avança uma página
+				"CR"              => array(Chr(13),       ""      ), //Retorno do carro
 				
 			);
-		$this->comando("Reset");
+		
 	}
 	
+	/* 
+	 * Limpa Conteudo de uma secao
+	 */
 	public function limpaSecao($secao)
 	{
 		$this->_conteudoSecao[$secao] = "";
-		$this->_linhaSecao[$secao] = "";
 	}
 	
+	/*
+	 * Imprime na matricial
+	 */
 	public function imprimir()
 	{
-		$this->comando("FF");
 		$arquivo = tempnam(sys_get_temp_dir(), "MGEscPrint");
 		$handle = fopen($arquivo, "w");
-		fwrite($handle, $this->_conteudoSecao["documento"]);
+		fwrite($handle, $this->converteEsc());
 		fclose($handle);
 		return exec("lpr -P {$this->_impressora} {$arquivo}");		
-		unlink($file);
-	}
-	
-	public function converteHtml()
-	{
-		$html = htmlentities($this->_conteudoSecao["documento"]);
-		foreach ($this->_comandos as $key => $value)
-		{
-			$html = str_replace($value[0], $value[1], $html);
-		}
-		return $html;
-	}
-	
-	public function adicionaLinha($texto, $secao = "documento", $pad_length = null, $pad_type = STR_PAD_RIGHT, $pad_string = " ")
-	{
-		$this->adicionaTexto($texto, $secao, $pad_length, $pad_type, $pad_string);
-		$this->comando("LF", $secao);
+		//unlink($file);
 	}
 
+	/*
+	 * Converte as <TAGS> em Comandos ESC ou <HTML>
+	 */
+	public function converte($tipo = 0)
+	{
+		$texto = $this->_textoFinal;
+		foreach ($this->_comandos as $key => $value)
+		{
+			$texto = str_replace("<" . $key . ">", $value[$tipo], $texto);
+		}
+		return $texto;
+	}
+	
+	/*
+	 * Alias para converte()
+	 */
+	public function converteHtml()
+	{
+		return $this->converte(1);
+	}
+	
+	/*
+	 * Alias para converte()
+	 */
+	public function converteEsc()
+	{
+		return $this->converte(0);
+	}
+	
+	/*
+	 * Adiciona Texto e depois quebra de linha
+	 */
+	public function adicionaLinha($texto = "", $secao = "documento", $pad_length = null, $pad_type = STR_PAD_RIGHT, $pad_string = " ")
+	{
+		$this->adicionaTexto($texto, $secao, $pad_length, $pad_type, $pad_string);
+		$this->adicionaTexto("\n", $secao);
+	}
+
+	/*
+	 * Adiciona Texto a Secao
+	 */
 	public function adicionaTexto($texto, $secao = "documento", $pad_length = null, $pad_type = STR_PAD_RIGHT, $pad_string = " ")
 	{
+		//inicializa secão caso necessario
 		if (empty($this->_conteudoSecao[$secao]))
 			$this->_conteudoSecao[$secao] = "";
 		
-		//adiciona espacos
+		//faz o PAD
 		if ($pad_length != null)
 		{
 			//se a string for maior que o tamanho corta
@@ -137,99 +157,77 @@ class MGEscPrint
 				$texto = str_pad ($texto, $pad_length, $pad_string, $pad_type);
 		}
 		
+		//concatena
 		$this->_conteudoSecao[$secao] .= $texto;
 	}
 	
-	public function codigoComando ($comando)
+	/*
+	 * monta os cabecalhos e rodapes
+	 */
+	public function prepara()
 	{
-		return $this->_comandos["Esc" . $comando][0];		
-	}
-	
-	public function copiaSecao ($origem, $destino)
-	{
-		$this->_conteudoSecao[$destino] .= $this->_conteudoSecao[$origem];
-		$this->_linhaSecao[$destino] += $this->_linhaSecao[$origem];
-	}
-	
-	public function cabecalho()
-	{
-		$this->copiaSecao("cabecalho", "documento");
-	}
-	
-	
-	public function finaliza()
-	{
-		//enche de espaco em branco ate chegar fim da pagina
-		while ($this->_linhaSecao["documento"] <= ($this->_linhas - $this->_linhaSecao["rodape"]))
+		
+		// pega codigo do comando LF
+		$lf = "\n";
+		
+		// conta linhas de cabecalho e Rodape
+		if (empty($this->_conteudoSecao["cabecalho"]))
 		{
-			$this->adicionaLinha("", "documento");
+			$linhasCabecalho = 0;
 		}
-		$this->rodape();
-	}
+		else
+		{
+			// se ultimo caracter do cabecalho nao for quebra de linha, adiciona
+			if (substr($this->_conteudoSecao["cabecalho"], -1) <> $lf)
+				$this->_conteudoSecao["cabecalho"] .= $lf;
+			$linhasCabecalho = substr_count($this->_conteudoSecao["cabecalho"], $lf);
+		}
+		
+		if (empty($this->_conteudoSecao["rodape"]))
+		{
+			$linhasRodape = 0;
+		}
+		else
+		{
+			//remove quebra de linha se houver no final do rodape
+			$this->_conteudoSecao["rodape"] = trim($this->_conteudoSecao["rodape"], $lf);
+			$this->_conteudoSecao["rodape"] .= "<FF>";
+			$linhasRodape = substr_count($this->_conteudoSecao["rodape"], $lf);
+			$linhasRodape++;
+		}
+		
+		$textoLinhas = explode($lf, $this->_conteudoSecao["documento"]);
+		
+		$linha = 1;
+		$textoFinal = "";
+		$linhasDocumento = $this->_linhas - $linhasCabecalho - $linhasRodape;
+		foreach ($textoLinhas as $textoLinha)
+		{
+			//adiciona cabecalho na primeira linha
+			if ($linha == 1)
+				$textoFinal .= $this->_conteudoSecao["cabecalho"];
 
-	public function rodape()
-	{
-		$this->adicionaLinha("", "documento");
-		$this->copiaSecao("rodape", "documento");
-	}
-	
-	
-	public function comando($comando, $secao = "documento")
-	{
-		//controle de numera da linha
-		switch ($comando)
-		{
-			case "FF":
-				$this->_linhaSecao[$secao] = 1;
-				break;
-			case "LF":
-				$this->_linhaSecao[$secao]++;
-				break;	
+			// concatena linha
+			$textoFinal .= $textoLinha . $lf;
+			$linha++;
+			
+			// se estourou adiciona rodape
+			if ($linha >= $linhasDocumento)
+			{
+				$textoFinal .= $this->_conteudoSecao["rodape"];
+				$textoFinal .= "<FF>";
+				$linha = 1;
+			}
 		}
 		
-		//adiciona comando
-		$this->adicionaTexto($this->codigoComando($comando), $secao);
+		for ($linha = $linha - 1; $linha < $linhasDocumento; $linha++)
+			$textoFinal .= $lf;
 		
-		//se estourou linhas da pagina faz quebra de pagina
-		if ($this->_linhaSecao[$secao] + $this->_linhaSecao["rodape"] >= $this->_linhas +1)
-		{
-			//echo "quebrando antes da linha {$this->_linhaSecao[$secao]} \n";
-			//$this->rodape();
-			//$this->comando("FF");
-			//$this->cabecalho();
-			echo "<hr>";
-			echo "entrou \n";
-			echo "\$secao = " . $secao . "\n";
-			echo "\$this->_linhaSecao[\$secao] = " . $this->_linhaSecao[$secao] . "\n";
-			echo "\$this->_linhaSecao[\"rodape\"] = " . $this->_linhaSecao["rodape"] . "\n";
-			echo "\$this->_linhas = " . $this->_linhas . "\n";
-			echo "<hr>";
-		}
+		//adiciona rodape ultima pagina
+		$textoFinal .= $this->_conteudoSecao["rodape"];
+
+		
+		$this->_textoFinal = $textoFinal;
 	}
 	
 }
-
-/*
-echo "<pre>\n\nTeste:\n\n";
-$teste = new MGEscPrint();
-
-$teste->comando("6lpp");
-$teste->comando("Draft");
-$teste->comando("CondensedOn");
-
-$teste->adicionaLinha("                        Cabecalho 1", "cabecalho");
-$teste->adicionaLinha("                        Cabecalho 2", "cabecalho");
-$teste->cabecalho();
-$teste->limpaSecao("cabecalho");
-$teste->adicionaLinha("                        Cabecalho 3", "cabecalho");
-$teste->cabecalho();
-
-
-for ($i=1; $i <= 100; $i++)
-{
-	$teste->adicionaLinha("                        Linha " . $i);
-}
-//$teste->limpaSecao("documento");
-//echo $teste->imprimir();
-echo $teste->converteHtml();
-*/
