@@ -145,11 +145,34 @@ class MGEscPrint
 		return $this->_comandos["Esc" . $comando][0];		
 	}
 	
+	public function copiaSecao ($origem, $destino)
+	{
+		$this->_conteudoSecao[$destino] .= $this->_conteudoSecao[$origem];
+		$this->_linhaSecao[$destino] += $this->_linhaSecao[$origem];
+	}
+	
 	public function cabecalho()
 	{
-		$this->_conteudoSecao["documento"] .= $this->_conteudoSecao["cabecalho"];
-		$this->_linhaSecao["documento"] += $this->_linhaSecao["cabecalho"];
+		$this->copiaSecao("cabecalho", "documento");
 	}
+	
+	
+	public function finaliza()
+	{
+		//enche de espaco em branco ate chegar fim da pagina
+		while ($this->_linhaSecao["documento"] <= ($this->_linhas - $this->_linhaSecao["rodape"]))
+		{
+			$this->adicionaLinha("", "documento");
+		}
+		$this->rodape();
+	}
+
+	public function rodape()
+	{
+		$this->adicionaLinha("", "documento");
+		$this->copiaSecao("rodape", "documento");
+	}
+	
 	
 	public function comando($comando, $secao = "documento")
 	{
@@ -168,11 +191,19 @@ class MGEscPrint
 		$this->adicionaTexto($this->codigoComando($comando), $secao);
 		
 		//se estourou linhas da pagina faz quebra de pagina
-		if ($this->_linhaSecao[$secao] > $this->_linhas+1)
+		if ($this->_linhaSecao[$secao] + $this->_linhaSecao["rodape"] >= $this->_linhas +1)
 		{
 			//echo "quebrando antes da linha {$this->_linhaSecao[$secao]} \n";
-			$this->comando("FF");
-			$this->cabecalho();
+			//$this->rodape();
+			//$this->comando("FF");
+			//$this->cabecalho();
+			echo "<hr>";
+			echo "entrou \n";
+			echo "\$secao = " . $secao . "\n";
+			echo "\$this->_linhaSecao[\$secao] = " . $this->_linhaSecao[$secao] . "\n";
+			echo "\$this->_linhaSecao[\"rodape\"] = " . $this->_linhaSecao["rodape"] . "\n";
+			echo "\$this->_linhas = " . $this->_linhas . "\n";
+			echo "<hr>";
 		}
 	}
 	

@@ -200,6 +200,23 @@ class TituloController extends Controller
 		//forca impressao cabecalho primeira pagina
 		$teste->cabecalho();
 
+		//Rodape
+		$teste->adicionaTexto("", "rodape", 80, STR_PAD_RIGHT, "=");
+		/*
+		$teste->adicionaLinha("");
+		$teste->adicionaLinha("");
+		$teste->adicionaLinha("");
+		$teste->adicionaLinha("");
+		$teste->adicionaLinha("");
+		$teste->adicionaLinha("");
+		$teste->adicionaLinha("");
+		$teste->adicionaLinha("");
+		$teste->adicionaLinha("");
+		$teste->adicionaLinha("");
+		$teste->adicionaLinha("");
+		$teste->adicionaLinha("");
+		$teste->adicionaLinha("");
+		
 		//titulo
 		$teste->adicionaLinha("");
 		$teste->adicionaLinha("");
@@ -241,7 +258,6 @@ class TituloController extends Controller
 		if (empty($model->Pessoa->ie))
 			$teste->adicionaTexto("- Inscricao Estadual: " .Yii::app()->format->formataInscricaoEstadual($model->Pessoa->ie, $model->Pessoa->Cidade->Estado->sigla), "documento", 38);
 		$teste->comando("LF");
-
 
 		//Espaco
 		$teste->comando("LF");
@@ -296,7 +312,7 @@ class TituloController extends Controller
 		$teste->comando("LF");
 		$teste->comando("LF");
 		$teste->comando("LF");
-		
+		*/
 
 		//Assinatura
 		$teste->adicionaTexto("", "documento", 12);
@@ -313,8 +329,12 @@ class TituloController extends Controller
 		}
 		//$teste->limpaSecao("documento");
 		 * 
+		 * 
+		 * 
 		 */
-		echo $teste->imprimir();
+		
+		$teste->finaliza();
+		//echo $teste->imprimir();
 		echo $teste->converteHtml();
 	}
 	
