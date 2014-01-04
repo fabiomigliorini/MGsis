@@ -12,10 +12,10 @@ class MGSelect2Cidade extends TbSelect2
 		$this->asDropDownList = false;
 
 		if (!isset($this->htmlOptions['class'])) 
-			$this->htmlOptions['class'] = 'span3';
+			$this->htmlOptions['class'] = 'input-large';
 		
 		if (!isset($this->htmlOptions['placeholder'])) 
-			$this->htmlOptions['placeholder'] = ' -- Cidade -- ';
+			$this->htmlOptions['placeholder'] = 'Cidade';
 		
 		$this->options = array(
 					'minimumInputLength'=>3,

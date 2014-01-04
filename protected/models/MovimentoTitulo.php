@@ -1,0 +1,166 @@
+<?php
+
+/**
+ * This is the model class for table "mgsis.tblmovimentotitulo".
+ *
+ * The followings are the available columns in table 'mgsis.tblmovimentotitulo':
+ * @property string $codmovimentotitulo
+ * @property string $codtipomovimentotitulo
+ * @property string $codtitulo
+ * @property string $codportador
+ * @property string $codtitulorelacionado
+ * @property string $debito
+ * @property string $credito
+ * @property string $historico
+ * @property string $transacao
+ * @property string $sistema
+ * @property string $codliquidacaotitulo
+ * @property string $codtituloagrupamento
+ * @property string $codboletoretorno
+ * @property string $codcobranca
+ * @property string $alteracao
+ * @property string $codusuarioalteracao
+ * @property string $criacao
+ * @property string $codusuariocriacao
+ *
+ * The followings are the available model relations:
+ * @property Boletoretorno $codboletoretorno
+ * @property Cobranca $codcobranca
+ * @property Liquidacaotitulo $codliquidacaotitulo
+ * @property Portador $codportador
+ * @property Tipomovimentotitulo $codtipomovimentotitulo
+ * @property Titulo $codtitulo
+ * @property Tituloagrupamento $codtituloagrupamento
+ * @property Titulo $codtitulorelacionado
+ * @property Usuario $codusuarioalteracao
+ * @property Usuario $codusuariocriacao
+ */
+class MovimentoTitulo extends MGActiveRecord
+{
+	/**
+	 * @return string the associated database table name
+	 */
+	public function tableName()
+	{
+		return 'mgsis.tblmovimentotitulo';
+	}
+
+	/**
+	 * @return array validation rules for model attributes.
+	 */
+	public function rules()
+	{
+		// NOTE: you should only define rules for those attributes that
+		// will receive user inputs.
+		return array(
+			array('codmovimentotitulo', 'required'),
+			array('debito, credito', 'length', 'max'=>14),
+			array('historico', 'length', 'max'=>255),
+			array('codtipomovimentotitulo, codtitulo, codportador, codtitulorelacionado, transacao, sistema, codliquidacaotitulo, codtituloagrupamento, codboletoretorno, codcobranca, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
+			// The following rule is used by search().
+			// @todo Please remove those attributes that should not be searched.
+			array('codmovimentotitulo, codtipomovimentotitulo, codtitulo, codportador, codtitulorelacionado, debito, credito, historico, transacao, sistema, codliquidacaotitulo, codtituloagrupamento, codboletoretorno, codcobranca, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
+		);
+	}
+
+	/**
+	 * @return array relational rules.
+	 */
+	public function relations()
+	{
+		// NOTE: you may need to adjust the relation name and the related
+		// class name for the relations automatically generated below.
+		return array(
+			'codboletoretorno' => array(self::BELONGS_TO, 'Boletoretorno', 'codboletoretorno'),
+			'codcobranca' => array(self::BELONGS_TO, 'Cobranca', 'codcobranca'),
+			'codliquidacaotitulo' => array(self::BELONGS_TO, 'Liquidacaotitulo', 'codliquidacaotitulo'),
+			'codportador' => array(self::BELONGS_TO, 'Portador', 'codportador'),
+			'codtipomovimentotitulo' => array(self::BELONGS_TO, 'Tipomovimentotitulo', 'codtipomovimentotitulo'),
+			'codtitulo' => array(self::BELONGS_TO, 'Titulo', 'codtitulo'),
+			'codtituloagrupamento' => array(self::BELONGS_TO, 'Tituloagrupamento', 'codtituloagrupamento'),
+			'codtitulorelacionado' => array(self::BELONGS_TO, 'Titulo', 'codtitulorelacionado'),
+			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+		);
+	}
+
+	/**
+	 * @return array customized attribute labels (name=>label)
+	 */
+	public function attributeLabels()
+	{
+		return array(
+			'codmovimentotitulo' => 'Codmovimentotitulo',
+			'codtipomovimentotitulo' => 'Codtipomovimentotitulo',
+			'codtitulo' => 'Codtitulo',
+			'codportador' => 'Codportador',
+			'codtitulorelacionado' => 'Codtitulorelacionado',
+			'debito' => 'Debito',
+			'credito' => 'Credito',
+			'historico' => 'Historico',
+			'transacao' => 'Transacao',
+			'sistema' => 'Sistema',
+			'codliquidacaotitulo' => 'Codliquidacaotitulo',
+			'codtituloagrupamento' => 'Codtituloagrupamento',
+			'codboletoretorno' => 'Codboletoretorno',
+			'codcobranca' => 'Codcobranca',
+			'alteracao' => 'Alteracao',
+			'codusuarioalteracao' => 'Codusuarioalteracao',
+			'criacao' => 'Criacao',
+			'codusuariocriacao' => 'Codusuariocriacao',
+		);
+	}
+
+	/**
+	 * Retrieves a list of models based on the current search/filter conditions.
+	 *
+	 * Typical usecase:
+	 * - Initialize the model fields with values from filter form.
+	 * - Execute this method to get CActiveDataProvider instance which will filter
+	 * models according to data in model fields.
+	 * - Pass data provider to CGridView, CListView or any similar widget.
+	 *
+	 * @return CActiveDataProvider the data provider that can return the models
+	 * based on the search/filter conditions.
+	 */
+	public function search()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('codmovimentotitulo',$this->codmovimentotitulo,true);
+		$criteria->compare('codtipomovimentotitulo',$this->codtipomovimentotitulo,true);
+		$criteria->compare('codtitulo',$this->codtitulo,true);
+		$criteria->compare('codportador',$this->codportador,true);
+		$criteria->compare('codtitulorelacionado',$this->codtitulorelacionado,true);
+		$criteria->compare('debito',$this->debito,true);
+		$criteria->compare('credito',$this->credito,true);
+		$criteria->compare('historico',$this->historico,true);
+		$criteria->compare('transacao',$this->transacao,true);
+		$criteria->compare('sistema',$this->sistema,true);
+		$criteria->compare('codliquidacaotitulo',$this->codliquidacaotitulo,true);
+		$criteria->compare('codtituloagrupamento',$this->codtituloagrupamento,true);
+		$criteria->compare('codboletoretorno',$this->codboletoretorno,true);
+		$criteria->compare('codcobranca',$this->codcobranca,true);
+		$criteria->compare('alteracao',$this->alteracao,true);
+		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
+		$criteria->compare('criacao',$this->criacao,true);
+		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
+
+	/**
+	 * Returns the static model of the specified AR class.
+	 * Please note that you should have this exact method in all your CActiveRecord descendants!
+	 * @param string $className active record class name.
+	 * @return MovimentoTitulo the static model class
+	 */
+	public static function model($className=__CLASS__)
+	{
+		return parent::model($className);
+	}
+}

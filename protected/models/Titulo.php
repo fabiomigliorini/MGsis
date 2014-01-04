@@ -56,6 +56,13 @@
  */
 class Titulo extends MGActiveRecord
 {
+	
+	public $vencimento_de;
+	public $vencimento_ate;
+	public $emissao_de;
+	public $emissao_ate;
+	public $criacao_de;
+	public $criacao_ate;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -88,7 +95,7 @@ class Titulo extends MGActiveRecord
 															, "{1}" => Yii::app()->locale->getDateFormat('medium')))
 				),
 			
-			array('codtitulo, codtipotitulo, codfilial, codportador, codpessoa, codcontacontabil, numero, fatura, transacao, sistema, emissao, vencimento, vencimentooriginal, debito, credito, gerencial, observacao, boleto, nossonumero, debitototal, creditototal, saldo, debitosaldo, creditosaldo, transacaoliquidacao, codnegocioformapagamento, codtituloagrupamento, remessa, estornado, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
+			array('codtitulo, vencimento_de, vencimento_ate, emissao_de, emissao_ate, criacao_de, criacao_ate, codtipotitulo, codfilial, codportador, codpessoa, codcontacontabil, numero, emissao, vencimento, credito, gerencial, boleto, nossonumero, saldo, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -100,20 +107,20 @@ class Titulo extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'movimentotitulos' => array(self::HAS_MANY, 'Movimentotitulo', 'codtitulo'),
-			'movimentotitulos1' => array(self::HAS_MANY, 'Movimentotitulo', 'codtitulorelacionado'),
-			'codcontacontabil' => array(self::BELONGS_TO, 'Contacontabil', 'codcontacontabil'),
+			'MovimentoTitulos' => array(self::HAS_MANY, 'MovimentoTitulo', 'codtitulo'),
+			'MovimentoTitulosRelacionado' => array(self::HAS_MANY, 'MovimentoTitulo', 'codtitulorelacionado'),
+			'ContaContabil' => array(self::BELONGS_TO, 'ContaContabil', 'codcontacontabil'),
 			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
-			'codnegocioformapagamento' => array(self::BELONGS_TO, 'Negocioformapagamento', 'codnegocioformapagamento'),
+			'NegocioFormaPagamento' => array(self::BELONGS_TO, 'NegocioFormaPagamento', 'codnegocioformapagamento'),
 			'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
-			'codportador' => array(self::BELONGS_TO, 'Portador', 'codportador'),
-			'codtipotitulo' => array(self::BELONGS_TO, 'Tipotitulo', 'codtipotitulo'),
-			'codtituloagrupamento' => array(self::BELONGS_TO, 'Tituloagrupamento', 'codtituloagrupamento'),
+			'Portador' => array(self::BELONGS_TO, 'Portador', 'codportador'),
+			'TipoTitulo' => array(self::BELONGS_TO, 'TipoTitulo', 'codtipotitulo'),
+			'TituloAgrupamento' => array(self::BELONGS_TO, 'TituloAgrupamento', 'codtituloagrupamento'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
-			'boletoretornos' => array(self::HAS_MANY, 'Boletoretorno', 'codtitulo'),
-			'cobrancas' => array(self::HAS_MANY, 'Cobranca', 'codtitulo'),
-			'cobrancahistoricotitulos' => array(self::HAS_MANY, 'Cobrancahistoricotitulo', 'codtitulo'),
+			'BoletoRetornos' => array(self::HAS_MANY, 'BoletoRetorno', 'codtitulo'),
+			'Cobrancas' => array(self::HAS_MANY, 'Cobranca', 'codtitulo'),
+			'CobrancaHistoricoTitulos' => array(self::HAS_MANY, 'CobrancaHistoricoTitulo', 'codtitulo'),
 		);
 	}
 
@@ -177,42 +184,116 @@ class Titulo extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codtitulo',$this->codtitulo,true);
-		$criteria->compare('codtipotitulo',$this->codtipotitulo,true);
-		$criteria->compare('codfilial',$this->codfilial,true);
-		$criteria->compare('codportador',$this->codportador,true);
-		$criteria->compare('codpessoa',$this->codpessoa,true);
-		$criteria->compare('codcontacontabil',$this->codcontacontabil,true);
-		$criteria->compare('numero',$this->numero,true);
-		$criteria->compare('fatura',$this->fatura,true);
-		$criteria->compare('transacao',$this->transacao,true);
-		$criteria->compare('sistema',$this->sistema,true);
-		$criteria->compare('emissao',$this->emissao,true);
-		$criteria->compare('vencimento',$this->vencimento,true);
-		$criteria->compare('vencimentooriginal',$this->vencimentooriginal,true);
-		$criteria->compare('debito',$this->debito,true);
-		$criteria->compare('credito',$this->credito,true);
-		$criteria->compare('gerencial',$this->gerencial);
-		$criteria->compare('observacao',$this->observacao,true);
-		$criteria->compare('boleto',$this->boleto);
-		$criteria->compare('nossonumero',$this->nossonumero,true);
-		$criteria->compare('debitototal',$this->debitototal,true);
-		$criteria->compare('creditototal',$this->creditototal,true);
-		$criteria->compare('saldo',$this->saldo,true);
-		$criteria->compare('debitosaldo',$this->debitosaldo,true);
-		$criteria->compare('creditosaldo',$this->creditosaldo,true);
-		$criteria->compare('transacaoliquidacao',$this->transacaoliquidacao,true);
-		$criteria->compare('codnegocioformapagamento',$this->codnegocioformapagamento,true);
-		$criteria->compare('codtituloagrupamento',$this->codtituloagrupamento,true);
-		$criteria->compare('remessa',$this->remessa,true);
-		$criteria->compare('estornado',$this->estornado,true);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('t.codtitulo', $this->codtitulo, false);
+		$criteria->compare('t.codfilial', $this->codfilial, false);
+		$criteria->compare('t.codpessoa', $this->codpessoa, false);
+		if (!empty($this->numero))
+		{
+			$texto  = str_replace(' ', '%', trim($this->numero));
+			$criteria->addCondition('t.numero ILIKE :numero');
+			$criteria->params = array_merge($criteria->params, array(':numero' => '%'.$texto.'%'));
+		}
+		if ($vencimento_de = DateTime::createFromFormat("d/m/y",$this->vencimento_de))
+		{
+			$criteria->addCondition('t.vencimento >= :vencimento_de');
+			$criteria->params = array_merge($criteria->params, array(':vencimento_de' => $vencimento_de->format('Y-m-d').' 00:00:00.0'));
+		}
+		if ($vencimento_ate = DateTime::createFromFormat("d/m/y",$this->vencimento_ate))
+		{
+			$criteria->addCondition('t.vencimento <= :vencimento_ate');
+			$criteria->params = array_merge($criteria->params, array(':vencimento_ate' => $vencimento_ate->format('Y-m-d').' 23:59:59.9'));
+		}
+		if ($emissao_de = DateTime::createFromFormat("d/m/y",$this->emissao_de))
+		{
+			$criteria->addCondition('t.emissao >= :emissao_de');
+			$criteria->params = array_merge($criteria->params, array(':emissao_de' => $emissao_de->format('Y-m-d').' 00:00:00.0'));
+		}
+		if ($emissao_ate = DateTime::createFromFormat("d/m/y",$this->emissao_ate))
+		{
+			$criteria->addCondition('t.emissao <= :emissao_ate');
+			$criteria->params = array_merge($criteria->params, array(':emissao_ate' => $emissao_ate->format('Y-m-d').' 23:59:59.9'));
+		}
+		if ($criacao_de = DateTime::createFromFormat("d/m/y",$this->criacao_de))
+		{
+			$criteria->addCondition('t.criacao >= :criacao_de');
+			$criteria->params = array_merge($criteria->params, array(':criacao_de' => $criacao_de->format('Y-m-d').' 00:00:00.0'));
+		}
+		if ($criacao_ate = DateTime::createFromFormat("d/m/y",$this->criacao_ate))
+		{
+			$criteria->addCondition('t.criacao <= :criacao_ate');
+			$criteria->params = array_merge($criteria->params, array(':criacao_ate' => $criacao_ate->format('Y-m-d').' 23:59:59.9'));
+		}
+		
+		
+		switch ($this->saldo) 
+		{
+			case 9:
+				break;
+			case 1:
+				$criteria->addCondition('t.saldo = 0');
+				break;
+			default:
+				$criteria->addCondition('t.saldo <> 0');
+				break;
+		}		
+		
+		switch ($this->credito) 
+		{
+			case 2:
+				$criteria->addCondition('t.debito > 0');
+				break;
+			case 1:
+				$criteria->addCondition('t.credito > 0');
+				break;
+		}
+		
+		switch ($this->boleto)
+		{
+			case 2:
+				$criteria->addCondition('t.boleto = false');
+				break;
+			case 1:
+				$criteria->addCondition('t.boleto = true');
+				break;
+		}
+
+		if (!empty($this->nossonumero))
+		{
+			$texto  = str_replace(' ', '%', trim($this->nossonumero));
+			$criteria->addCondition('t.nossonumero ILIKE :nossonumero');
+			$criteria->params = array_merge($criteria->params, array(':nossonumero' => '%'.$texto.'%'));
+		}
+		
+		$criteria->compare('t.codportador',$this->codportador,false);
+		$criteria->compare('t.codcontacontabil',$this->codcontacontabil,false);
+		$criteria->compare('t.codtipotitulo',$this->codtipotitulo,false);
+		
+		switch ($this->gerencial)
+		{
+			case 2:
+				$criteria->addCondition('t.gerencial = false');
+				break;
+			case 1:
+				$criteria->addCondition('t.gerencial = true');
+				break;
+		}
+		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,false);
+		
+        $criteria->with = array(
+				'Pessoa' => array('select' => '"Pessoa".fantasia'),
+				'Filial' => array('select' => '"Filial".filial'),
+				'Portador' => array('select' => '"Portador".portador'),
+				'UsuarioCriacao' => array('select' => '"UsuarioCriacao".usuario'),
+				'UsuarioAlteracao' => array('select' => '"UsuarioAlteracao".usuario'),
+				'ContaContabil' => array('select' => '"ContaContabil".contacontabil'),
+				'TipoTitulo' => array('select' => '"TipoTitulo".tipotitulo'),
+			);
+	
+		$criteria->select = 't.codtitulo, t.vencimento, t.emissao, t.codfilial, t.numero, t.codportador, t.credito, t.debito, t.saldo, t.codtipotitulo, t.codcontacontabil, t.codusuariocriacao, t.nossonumero, t.gerencial, t.codpessoa, t.codusuarioalteracao';
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array('defaultOrder'=>'"Pessoa".fantasia ASC, t.vencimento ASC, t.saldo ASC'),
 		));
 	}
 

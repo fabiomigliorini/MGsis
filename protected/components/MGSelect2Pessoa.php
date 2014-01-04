@@ -12,10 +12,10 @@ class MGSelect2Pessoa extends TbSelect2
 		$this->asDropDownList = false;
 
 		if (!isset($this->htmlOptions['class'])) 
-			$this->htmlOptions['class'] = 'span6';
+			$this->htmlOptions['class'] = 'input-xxlarge';
 		
 		if (!isset($this->htmlOptions['placeholder'])) 
-			$this->htmlOptions['placeholder'] = ' -- Pessoa -- ';
+			$this->htmlOptions['placeholder'] = 'Pessoa';
 		
 		$this->options = array(
 					'minimumInputLength'=>3,

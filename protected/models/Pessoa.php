@@ -192,9 +192,9 @@ class Pessoa extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'titulos' => array(self::HAS_MANY, 'Titulo', 'codpessoa'),
-			'filials' => array(self::HAS_MANY, 'Filial', 'codpessoa'),
-			'usuarios' => array(self::HAS_MANY, 'Usuario', 'codpessoa'),
+			'Titulos' => array(self::HAS_MANY, 'Titulo', 'codpessoa'),
+			'Filials' => array(self::HAS_MANY, 'Filial', 'codpessoa'),
+			'Usuarios' => array(self::HAS_MANY, 'Usuario', 'codpessoa'),
 			'Cidade' => array(self::BELONGS_TO, 'Cidade', 'codcidade'),
 			'CidadeCobranca' => array(self::BELONGS_TO, 'Cidade', 'codcidadecobranca'),
 			'EstadoCivil' => array(self::BELONGS_TO, 'EstadoCivil', 'codestadocivil'),
@@ -202,10 +202,10 @@ class Pessoa extends MGActiveRecord
 			'Sexo' => array(self::BELONGS_TO, 'Sexo', 'codsexo'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
-			'cupomfiscals' => array(self::HAS_MANY, 'Cupomfiscal', 'codpessoa'),
-			'cobrancahistoricos' => array(self::HAS_MANY, 'Cobrancahistorico', 'codpessoa'),
-			'negocios' => array(self::HAS_MANY, 'Negocio', 'codpessoa'),
-			'negocios1' => array(self::HAS_MANY, 'Negocio', 'codpessoavendedor'),
+			'CupomFiscals' => array(self::HAS_MANY, 'Cupomfiscal', 'codpessoa'),
+			'CobrancaHistoricos' => array(self::HAS_MANY, 'Cobrancahistorico', 'codpessoa'),
+			'Negocios' => array(self::HAS_MANY, 'Negocio', 'codpessoa'),
+			'NegociosVendedor' => array(self::HAS_MANY, 'Negocio', 'codpessoavendedor'),
 		);
 	}
 

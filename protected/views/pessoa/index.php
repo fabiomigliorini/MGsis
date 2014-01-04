@@ -24,7 +24,7 @@ $(document).ready(function(){
 
 </script>
 
-<h1>Pessoa</h1>
+<h1>Pessoas</h1>
 
 <br>
 

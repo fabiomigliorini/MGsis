@@ -10,7 +10,7 @@ return array(
 	'name'=>'MGsis',
     //'theme'=>'mgsis',
 	//'sourceLanguage'=>'pt_br',
-	'language'=>'pt_br',
+	'language'=>'pt-BR',
 	
 	// preloading 'log' component
 	'preload'=>array(

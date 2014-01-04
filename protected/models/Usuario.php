@@ -472,4 +472,21 @@ class Usuario extends MGActiveRecord
 	{
 		return crypt($senha, $this->senha) == $this->senha;
 	}
+	
+	public function scopes () 
+	{
+		return array(
+			'combo'=>array(
+				'select'=>array('codusuario', 'usuario'),
+				'order'=>'usuario ASC',
+				),
+			);
+	}
+	
+	public function getListaCombo ()
+	{
+		$lista = self::model()->combo()->findAll();
+		return CHtml::listData($lista, 'codusuario', 'usuario');
+	}	
+	
 }
