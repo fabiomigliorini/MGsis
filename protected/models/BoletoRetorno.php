@@ -35,6 +35,7 @@
  * @property Titulo $codtitulo
  * @property Usuario $codusuarioalteracao
  * @property Usuario $codusuariocriacao
+ * @property BoletoMotivoOcorrencia $codboletomotivoocorrencia
  */
 class BoletoRetorno extends MGActiveRecord
 {
@@ -76,11 +77,12 @@ class BoletoRetorno extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'movimentotitulos' => array(self::HAS_MANY, 'Movimentotitulo', 'codboletoretorno'),
-			'codportador' => array(self::BELONGS_TO, 'Portador', 'codportador'),
-			'codtitulo' => array(self::BELONGS_TO, 'Titulo', 'codtitulo'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'MovimenTotitulos' => array(self::HAS_MANY, 'Movimentotitulo', 'codboletoretorno'),
+			'Portador' => array(self::BELONGS_TO, 'Portador', 'codportador'),
+			'Titulo' => array(self::BELONGS_TO, 'Titulo', 'codtitulo'),
+			'BoletoMotivoOcorrencia' => array(self::BELONGS_TO, 'BoletoMotivoOcorrencia', 'codboletomotivoocorrencia'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 

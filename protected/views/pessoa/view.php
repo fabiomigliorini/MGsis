@@ -10,6 +10,7 @@ array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create')),
 array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codpessoa)),
 array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
+array('label'=>'Títulos', 'icon'=>'icon-pencil', 'url'=>array('titulo/index','Titulo[codpessoa]'=>$model->codpessoa)),
 );
 
 Yii::app()->clientScript->registerCoreScript('yii');
@@ -30,7 +31,6 @@ $(document).ready(function(){
 </script>
 
 <h1><?php echo CHtml::encode($model->fantasia); ?></h1>
-<br>
 
 <?php if (!empty($model->inativo)): ?>
 	<div class="alert alert-danger">

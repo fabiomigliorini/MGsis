@@ -71,16 +71,16 @@ class MovimentoTitulo extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'codboletoretorno' => array(self::BELONGS_TO, 'Boletoretorno', 'codboletoretorno'),
-			'codcobranca' => array(self::BELONGS_TO, 'Cobranca', 'codcobranca'),
-			'codliquidacaotitulo' => array(self::BELONGS_TO, 'Liquidacaotitulo', 'codliquidacaotitulo'),
-			'codportador' => array(self::BELONGS_TO, 'Portador', 'codportador'),
-			'codtipomovimentotitulo' => array(self::BELONGS_TO, 'Tipomovimentotitulo', 'codtipomovimentotitulo'),
-			'codtitulo' => array(self::BELONGS_TO, 'Titulo', 'codtitulo'),
-			'codtituloagrupamento' => array(self::BELONGS_TO, 'Tituloagrupamento', 'codtituloagrupamento'),
-			'codtitulorelacionado' => array(self::BELONGS_TO, 'Titulo', 'codtitulorelacionado'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'BoletoRetorno' => array(self::BELONGS_TO, 'BoletoRetorno', 'codboletoretorno'),
+			'Cobranca' => array(self::BELONGS_TO, 'Cobranca', 'codcobranca'),
+			'LiquidacaoTitulo' => array(self::BELONGS_TO, 'LiquidacaoTitulo', 'codliquidacaotitulo'),
+			'Portador' => array(self::BELONGS_TO, 'Portador', 'codportador'),
+			'TipoMovimentoTitulo' => array(self::BELONGS_TO, 'TipoMovimentoTitulo', 'codtipomovimentotitulo'),
+			'Titulo' => array(self::BELONGS_TO, 'Titulo', 'codtitulo'),
+			'TituloAgrupamento' => array(self::BELONGS_TO, 'TitulAgrupamento', 'codtituloagrupamento'),
+			'TituloRelacionado' => array(self::BELONGS_TO, 'Titulo', 'codtitulorelacionado'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 
