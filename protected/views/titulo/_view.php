@@ -84,13 +84,3 @@ else
 	</div>
 </div>
 
-
-<!--
-
-
-
-			<small class="row-fluid muted">
-			</small>
-
-
--->

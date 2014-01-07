@@ -6,19 +6,76 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
-array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
-array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codtitulo)),
-array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
-//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
+	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
+	array(
+		'label'=>'Imprimir Vale', 
+		'icon'=>'icon-print', 
+		'url'=>array('imprimevale','id'=>$model->codtitulo), 
+		'linkOptions'=>array('id'=>'btnMostrarVale'),
+		'visible'=>$model->saldo < 0
+		),
+		array(
+			'label'=>'Imprimir Boleto', 
+			'icon'=>'icon-print', 
+			'url'=>array('imprimeboleto', 'id'=>$model->codtitulo), 
+			'linkOptions'=>array('id'=>'btnMostrarBoleto'),
+			'visible'=>($model->boleto && ($model->saldo>0))
+		),
+	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
+	array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codtitulo)),
+	array('label'=>'Estornar', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>array('id'=>'btnExcluir')),
+	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
 
 Yii::app()->clientScript->registerCoreScript('yii');
 
 ?>
+
+	
 <script type="text/javascript">
 /*<![CDATA[*/
 $(document).ready(function(){
+	
+	//abre janela boleto
+	var frameSrcBoleto = $('#btnMostrarBoleto').attr('href');
+	$('#btnMostrarBoleto').click(function(event){
+		event.preventDefault();
+		$('#modalBoleto').on('show', function () {
+			$('#frameBoleto').attr("src",frameSrcBoleto);
+		});
+		$('#modalBoleto').modal({show:true})
+		$('#modalBoleto').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
+	});	
+
+	//abre janela boleto
+	var frameSrcVale = $('#btnMostrarVale').attr('href');
+	$('#btnMostrarVale').click(function(event){
+		event.preventDefault();
+		$('#modalVale').on('show', function () {
+			$('#frameVale').attr("src",frameSrcVale);
+		});
+		$('#modalVale').modal({show:true})
+		$('#modalVale').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
+	});	
+		
+	//imprimir Boleto
+	$('#btnImprimirBoleto').click(function(event){
+		window.frames["frameBoleto"].focus();
+		window.frames["frameBoleto"].print();
+	});
+	
+	//imprimir Vale
+	$('#btnImprimirVale').click(function(event){
+		window.frames["frameVale"].focus();
+		window.frames["frameVale"].print();
+	});
+	
+	//imprimir Vale Matricial
+	$('#btnImprimirValeMatricial').click(function(event){
+		$('#frameVale').attr("src",frameSrcVale + "&imprimir=true");
+	});
+	
+	//botao excluir
 	jQuery('body').on('click','#btnExcluir',function() {
 		bootbox.confirm("Excluir este registro?", function(result) {
 			if (result)
@@ -28,6 +85,38 @@ $(document).ready(function(){
 });
 /*]]>*/
 </script>
+
+<div id="modalBoleto" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">  
+		<div class="pull-right">
+			<button class="btn btn-primary" id="btnImprimirBoleto">Imprimir</button>
+			<button class="btn" data-dismiss="modal">Fechar</button>
+		</div>
+		<h3>Boleto</h3>  
+	</div>  
+	<div class="modal-body">
+      <iframe src="" id="frameBoleto" width="99.6%" height="400" frameborder="0"></iframe>
+	</div>
+</div>
+
+<div id="modalVale" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">
+		<div class="pull-right">
+			<div class="btn-group">
+                <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">Imprimir <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+					<li ><a id="btnImprimirVale" href="#">Na Impressora Laser</a></button>
+					<li ><a id="btnImprimirValeMatricial" href="#">Na Impressora Matricial</a></button>
+                </ul>
+              </div>			
+			<button class="btn" data-dismiss="modal">Fechar</button>
+		</div>
+		<h3>Vale</h3>  
+	</div>
+	<div class="modal-body">
+      <iframe src="" id="frameVale" width="99.6%" height="400" frameborder="0"></iframe>
+	</div>
+</div>
 
 <h1>Título <?php echo $model->numero; ?></h1>
 

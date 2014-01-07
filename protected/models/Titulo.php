@@ -307,4 +307,6 @@ class Titulo extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
+	
+	
 }

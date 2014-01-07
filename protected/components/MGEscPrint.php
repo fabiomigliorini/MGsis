@@ -11,7 +11,7 @@ class MGEscPrint
 {
 	
 	private $_conteudoSecao = array();
-	private $_impressora = "impressoraMatricial";
+	public $impressora = "impressoraMatricial";
 	private $_comandos = array();
 	private $_linhas = 31;
 	private $_textoFinal = "";
@@ -25,10 +25,10 @@ class MGEscPrint
 				"rodape"    => "",
 			);
 		
-		if ($impressora != null)
-			$this->_impressora = $impressora;
+		if (!empty($impressora))
+			$this->impressora = $impressora;
 		else
-			$this->_impressora = Yii::app()->user->impressoraMatricial;
+			$this->impressora = Yii::app()->user->impressoraMatricial;
 		
 		if ($linhas != null)
 			$this->_linhas = $linhas;
@@ -93,7 +93,7 @@ class MGEscPrint
 		$handle = fopen($arquivo, "w");
 		fwrite($handle, $this->converteEsc());
 		fclose($handle);
-		return exec("lpr -P {$this->_impressora} {$arquivo}");		
+		return exec("lpr -P {$this->impressora} {$arquivo}");		
 		//unlink($file);
 	}
 
