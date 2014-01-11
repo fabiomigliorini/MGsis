@@ -1,17 +1,22 @@
 <div class="registro <?php echo (!empty($data->inativo))?"alert-danger":""; ?>">
+	<h4>
+		<a href="<?php echo Yii::app()->createUrl('pessoa/view', array('id'=>$data->codpessoa)); ?>">
+		<?php echo CHtml::encode($data->fantasia); ?>
+		</a>
+			<?php if (!empty($data->inativo)): ?>
+				<span class="label label-important pull-right">Inativado em <?php echo CHtml::encode($data->inativo); ?></span>
+			<?php endif; ?>
+	</h4>
 	<div class="row-fluid">
 		<div class="span4">
-			<?php if (!empty($data->inativo)): ?>
-				<span class="label label-important">Inativado em <?php echo CHtml::encode($data->inativo); ?></span>
-			<?php endif; ?>
-			<div class="codigo">
-				<a href="<?php echo Yii::app()->createUrl('pessoa/view', array('id'=>$data->codpessoa)); ?>">
-				<?php echo CHtml::encode($data->fantasia); ?>
-				</a>
-			</div>
 			<div class="detalhes ">
 				<b><?php echo CHtml::encode($data->pessoa); ?></b>
 			</div>
+			<small class="muted">
+				<a href="<?php echo Yii::app()->createUrl('pessoa/view', array('id'=>$data->codpessoa)); ?>">
+				<?php echo CHtml::encode(Yii::app()->format->formataCodigo($data->codpessoa)); ?>
+				</a>
+			</small>
 			<?php if (!empty($data->contato)): ?>
 				<div class="detalhes">
 					<?php echo CHtml::encode($data->contato); ?>
@@ -62,9 +67,6 @@
 					echo CHtml::encode(Yii::app()->format->formataInscricaoEstadual($data->ie, $data->Cidade->Estado->sigla)); 
 				?>
 				<?php echo CHtml::encode($data->rg); ?>
-			</div>
-			<div>
-				<b><?php echo CHtml::encode(Yii::app()->format->formataCodigo($data->codpessoa)); ?></b>
 			</div>
 		</div>
 	</div>

@@ -5,7 +5,7 @@
 	<?php require 'breadcrumbs.php'; ?>
 	<?php echo $content; ?>
 </div>
-<div class="span2">
+<div class="span2 hidden-print">
 	<?php
 		$box = $this->beginWidget('bootstrap.widgets.TbBox',
 				array(

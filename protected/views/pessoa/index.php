@@ -37,7 +37,7 @@ $(document).ready(function(){
 
 ?>
 
-<div class="well well-small">
+<div class="well well-small hidden-print">
 	<?php echo $form->textField($model, 'codpessoa', array('placeholder' => '#', 'class'=>'input-mini')); ?>
 	<?php echo $form->textField($model, 'fantasia', array('placeholder' => 'Nome', 'class'=>'input-large')); ?>
 	<?php echo $form->textField($model, 'cnpj', array('placeholder' => 'Cnpj/Cpf', 'class'=>'input-small')); ?>

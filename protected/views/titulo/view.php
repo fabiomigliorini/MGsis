@@ -16,7 +16,7 @@ $this->menu=array(
 		),
 		array(
 			'label'=>'Imprimir Boleto', 
-			'icon'=>'icon-print', 
+			'icon'=>'icon-barcode', 
 			'url'=>array('imprimeboleto', 'id'=>$model->codtitulo), 
 			'linkOptions'=>array('id'=>'btnMostrarBoleto'),
 			'visible'=>($model->boleto && ($model->saldo>0))
@@ -31,7 +31,6 @@ Yii::app()->clientScript->registerCoreScript('yii');
 
 ?>
 
-	
 <script type="text/javascript">
 /*<![CDATA[*/
 $(document).ready(function(){
@@ -47,7 +46,7 @@ $(document).ready(function(){
 		$('#modalBoleto').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
 	});	
 
-	//abre janela boleto
+	//abre janela vale
 	var frameSrcVale = $('#btnMostrarVale').attr('href');
 	$('#btnMostrarVale').click(function(event){
 		event.preventDefault();

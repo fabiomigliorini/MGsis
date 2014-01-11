@@ -63,6 +63,9 @@ class Titulo extends MGActiveRecord
 	public $emissao_ate;
 	public $criacao_de;
 	public $criacao_ate;
+	public $Juros;
+	public $operacao;
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -178,7 +181,7 @@ class Titulo extends MGActiveRecord
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
-	public function search()
+	public function search($pagination = true)
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
@@ -277,7 +280,7 @@ class Titulo extends MGActiveRecord
 				$criteria->addCondition('t.gerencial = true');
 				break;
 		}
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,false);
+		$criteria->compare('t.codusuariocriacao',$this->codusuariocriacao,false);
 		
         $criteria->with = array(
 				'Pessoa' => array('select' => '"Pessoa".fantasia'),
@@ -291,10 +294,18 @@ class Titulo extends MGActiveRecord
 	
 		$criteria->select = 't.codtitulo, t.vencimento, t.emissao, t.codfilial, t.numero, t.codportador, t.credito, t.debito, t.saldo, t.codtipotitulo, t.codcontacontabil, t.codusuariocriacao, t.nossonumero, t.gerencial, t.codpessoa, t.codusuarioalteracao';
 
-		return new CActiveDataProvider($this, array(
+		$params = array(
 			'criteria'=>$criteria,
 			'sort'=>array('defaultOrder'=>'"Pessoa".fantasia ASC, t.vencimento ASC, t.saldo ASC'),
-		));
+		);
+		
+		if (!$pagination)
+		{
+			$params = array_merge($params, array('pagination'=>false));
+		}
+		
+		return new CActiveDataProvider($this, $params);
+		
 	}
 
 	/**
@@ -307,6 +318,13 @@ class Titulo extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
-	
+
+	protected function afterFind()
+	{
+		$ret = parent::afterFind();
+		$this->Juros = new MGJuros(array("de" => $this->vencimento,	"valorOriginal" => $this->saldo));
+		$this->operacao = ($this->saldo<0 || $this->credito>$this->debito)?"CR":"DB";
+		return $ret;
+	}
 	
 }

@@ -23,9 +23,16 @@
 		});
 
 	</script>	
+	<style>
+		@media print {
+			a[href]:after {
+			  content: none;
+			}
+		  }
+	</style>
 </head>
 
-<body style>
+<body>
 
 <?php
 
@@ -89,11 +96,12 @@
 		array(
 			//'brand' => 'MGsis',
 			//'brand' => CHtml::image(Yii::app()->getBaseUrl().'/images/icones/mgsis.ico', 'MGsis', array('width'=>'20px')) . "MGsis",
-			'brand' => $logo,			
+			'brand' => $logo,
 			'brandUrl' => Yii::app()->createUrl('site/index'),
 			'brandOptions' => array('style' => 'width:100px;margin-left: 0px;'),
 			'collapse' => true,
 			'fixed' => 'top',
+			'htmlOptions' => array('class' => 'hidden-print'),
 			'items' => array(
 				'<ul class="nav">
                    <li class="divider-vertical"></li>

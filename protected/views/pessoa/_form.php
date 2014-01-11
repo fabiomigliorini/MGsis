@@ -12,7 +12,8 @@
 		
 		echo $form->select2CidadeRow($model,'codcidade',array('class'=>'input-large'));
 
-		echo $form->checkBoxRow($model,'fisica');
+		//echo $form->checkBoxRow($model,'fisica');
+		echo $form->toggleButtonRow($model,'fisica', array('options' => array('width' => 150,  'enabledLabel' => 'Física', 'disabledLabel' => 'Jurídica')));
 
 		if (!empty($model->cnpj))
 			$model->cnpj = Yii::app()->format->formataCnpjCpf($model->cnpj, $model->fisica);
@@ -51,7 +52,8 @@
 	</div>
 			
 	<?php
-		echo $form->checkBoxRow($model,'cliente');
+		//echo $form->checkBoxRow($model,'cliente');
+		echo $form->toggleButtonRow($model,'cliente', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 	?>
 	<div class="bootstrap-widget bootstrap-widget-table" id="CamposCliente">
 		<div class="bootstrap-widget-header">
@@ -61,7 +63,8 @@
 			<br>
 			<?php
 			
-				echo $form->checkBoxRow($model,'consumidor');
+				//echo $form->checkBoxRow($model,'consumidor');
+				echo $form->toggleButtonRow($model,'consumidor', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 				
 				echo $form->dropDownListRow(
 						$model,
@@ -72,7 +75,8 @@
 				
 				
 				echo $form->textFieldRow($model,'credito',array('prepend' => 'R$', 'class'=>'input-small','style'=>'text-align: right','maxlength'=>14));
-				echo $form->checkBoxRow($model,'creditobloqueado');
+				//echo $form->checkBoxRow($model,'creditobloqueado');
+				echo $form->toggleButtonRow($model,'creditobloqueado', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 				echo $form->textAreaRow($model,'mensagemvenda',array('class'=>'input-xxlarge', 'rows'=>'5','maxlength'=>500));
 
 				echo $form->textFieldRow($model,'desconto',array('append' => '%', 'class'=>'input-small','style'=>'text-align: right','maxlength'=>5));
@@ -94,7 +98,8 @@
 		echo $form->textFieldRow($model,'complemento',array('class'=>'input-medium','maxlength'=>50));
 		echo $form->textFieldRow($model,'bairro',array('class'=>'input-medium','maxlength'=>50));
 
-		echo $form->checkBoxRow($model, "cobrancanomesmoendereco");
+		//echo $form->checkBoxRow($model, "cobrancanomesmoendereco");
+		echo $form->toggleButtonRow($model, "cobrancanomesmoendereco", array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 	?>
 	<div class="bootstrap-widget bootstrap-widget-table" id="CamposEnderecoCobranca">
 		<div class="bootstrap-widget-header">
@@ -126,8 +131,10 @@
 		
 		echo $form->textAreaRow($model,'observacoes',array('class'=>'input-xxlarge', 'rows'=>'5','maxlength'=>255));
 		
-		echo $form->checkBoxRow($model,'fornecedor');
-		echo $form->checkBoxRow($model,'vendedor');
+		//echo $form->checkBoxRow($model,'fornecedor');
+		echo $form->toggleButtonRow($model,'fornecedor', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
+		//echo $form->checkBoxRow($model,'vendedor');
+		echo $form->toggleButtonRow($model,'vendedor', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 
 		echo $form->datepickerRow(
 				$model,

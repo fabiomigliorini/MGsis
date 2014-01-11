@@ -1472,3 +1472,1471 @@ Stack trace:
 #10 {main}
 REQUEST_URI=/MGsis/index.php?r=titulo/imprimevale&id=10024730
 ---
+2014/01/08 09:04:00 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchColumn(): SQLSTATE[42702]: Ambiguous column: 7 ERROR:  column reference "codusuariocriacao" is ambiguous
+LINE 1: ...WHERE (((t.codfilial=$1) AND (t.saldo <> 0)) AND (codusuario...
+                                                             ^. A declaração SQL executada foi: SELECT COUNT(DISTINCT "t"."codtitulo") FROM "mgsis"."tbltitulo" "t"  LEFT OUTER JOIN "mgsis"."tblpessoa" "Pessoa" ON ("t"."codpessoa"="Pessoa"."codpessoa")  LEFT OUTER JOIN "mgsis"."tblfilial" "Filial" ON ("t"."codfilial"="Filial"."codfilial")  LEFT OUTER JOIN "mgsis"."tblportador" "Portador" ON ("t"."codportador"="Portador"."codportador")  LEFT OUTER JOIN "mgsis"."tblusuario" "UsuarioCriacao" ON ("t"."codusuariocriacao"="UsuarioCriacao"."codusuario")  LEFT OUTER JOIN "mgsis"."tblusuario" "UsuarioAlteracao" ON ("t"."codusuarioalteracao"="UsuarioAlteracao"."codusuario")  LEFT OUTER JOIN "mgsis"."tblcontacontabil" "ContaContabil" ON ("t"."codcontacontabil"="ContaContabil"."codcontacontabil")  LEFT OUTER JOIN "mgsis"."tbltipotitulo" "TipoTitulo" ON ("t"."codtipotitulo"="TipoTitulo"."codtipotitulo")  WHERE (((t.codfilial=:ycp0) AND (t.saldo <> 0)) AND (codusuariocriacao=:ycp1)).
+in /var/www/MGsis/protected/views/titulo/index.php (254)
+in /var/www/MGsis/protected/controllers/TituloController.php (124)
+in /var/www/MGsis/index.php (13)
+2014/01/08 09:04:00 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[42702]: Ambiguous column: 7 ERROR:  column reference "codusuariocriacao" is ambiguous
+LINE 1: ...WHERE (((t.codfilial=$1) AND (t.saldo <> 0)) AND (codusuario...
+                                                             ^. The SQL statement executed was: SELECT COUNT(DISTINCT "t"."codtitulo") FROM "mgsis"."tbltitulo" "t"  LEFT OUTER JOIN "mgsis"."tblpessoa" "Pessoa" ON ("t"."codpessoa"="Pessoa"."codpessoa")  LEFT OUTER JOIN "mgsis"."tblfilial" "Filial" ON ("t"."codfilial"="Filial"."codfilial")  LEFT OUTER JOIN "mgsis"."tblportador" "Portador" ON ("t"."codportador"="Portador"."codportador")  LEFT OUTER JOIN "mgsis"."tblusuario" "UsuarioCriacao" ON ("t"."codusuariocriacao"="UsuarioCriacao"."codusuario")  LEFT OUTER JOIN "mgsis"."tblusuario" "UsuarioAlteracao" ON ("t"."codusuarioalteracao"="UsuarioAlteracao"."codusuario")  LEFT OUTER JOIN "mgsis"."tblcontacontabil" "ContaContabil" ON ("t"."codcontacontabil"="ContaContabil"."codcontacontabil")  LEFT OUTER JOIN "mgsis"."tbltipotitulo" "TipoTitulo" ON ("t"."codtipotitulo"="TipoTitulo"."codtipotitulo")  WHERE (((t.codfilial=:ycp0) AND (t.saldo <> 0)) AND (codusuariocriacao=:ycp1))' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(759): CDbCommand->queryScalar()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(151): CJoinElement->count(Object(CDbCriteria))
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1605): CActiveFinder->count(Object(CDbCriteria))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#8 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(111): CDataProvider->getData()
+#9 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(211): CBaseListView->init()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(147): CListView->init()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.CLi...', Array)
+#12 /var/www/MGsis/protected/views/titulo/index.php(254): CBaseController->widget('zii.widgets.CLi...', Array)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#17 /var/www/MGsis/protected/controllers/TituloController.php(124): CController->render('index', Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionIndex()
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#22 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('index')
+#23 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/index')
+#24 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#25 /var/www/MGsis/index.php(13): CApplication->run()
+#26 {main}
+REQUEST_URI=/MGsis/index.php?Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=&Titulo%5Bcodfilial%5D=201&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=2&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=&ajax=Listagem&r=titulo%2Findex&yt0=
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=2222&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=&Titulo%5Bcodfilial%5D=&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+---
+2014/01/08 10:48:22 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Login requerido' in /var/www/yii-1.1.14.f0fee9/framework/web/auth/CWebUser.php:394
+Stack trace:
+#0 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(100): CWebUser->loginRequired()
+#1 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(77): SBaseController->onUnauthorizedAccess()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(306): SBaseController->beforeAction(Object(CInlineAction))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('ajaxbuscapessoa')
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/ajaxbusc...')
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CApplication->run()
+#9 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/ajaxbuscapessoa&texto=sinal&limite=20&pagina=1&_=1389188902675
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=titulo
+---
+2014/01/08 11:04:56 [error] [php] include(Parent.php): failed to open stream: No such file or directory (/var/www/yii-1.1.14.f0fee9/framework/YiiBase.php:427)
+Stack trace:
+#0 /var/www/MGsis/protected/models/Titulo.php(313): spl_autoload_call()
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php(152): Titulo->setAttributes()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(161): Titulo->__set()
+#3 /var/www/MGsis/protected/controllers/TituloController.php(119): Titulo->__set()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionIndex()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=&Titulo%5Bcodfilial%5D=&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=&ajax=Listagem&r=titulo%2Findex
+in /var/www/MGsis/protected/models/Titulo.php (313)
+in /var/www/MGsis/protected/controllers/TituloController.php (119)
+in /var/www/MGsis/index.php (13)
+2014/01/08 11:04:59 [error] [php] include(Parent.php): failed to open stream: No such file or directory (/var/www/yii-1.1.14.f0fee9/framework/YiiBase.php:427)
+Stack trace:
+#0 /var/www/MGsis/protected/models/Titulo.php(313): spl_autoload_call()
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php(152): Titulo->setAttributes()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(161): Titulo->__set()
+#3 /var/www/MGsis/protected/controllers/TituloController.php(119): Titulo->__set()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionIndex()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=&Titulo%5Bcodfilial%5D=&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+in /var/www/MGsis/protected/models/Titulo.php (313)
+in /var/www/MGsis/protected/controllers/TituloController.php (119)
+in /var/www/MGsis/index.php (13)
+2014/01/08 11:05:06 [error] [php] include(Parent.php): failed to open stream: No such file or directory (/var/www/yii-1.1.14.f0fee9/framework/YiiBase.php:427)
+Stack trace:
+#0 /var/www/MGsis/protected/models/Titulo.php(313): spl_autoload_call()
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php(152): Titulo->setAttributes()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(161): Titulo->__set()
+#3 /var/www/MGsis/protected/controllers/TituloController.php(119): Titulo->__set()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionIndex()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=&Titulo%5Bcodfilial%5D=&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+in /var/www/MGsis/protected/models/Titulo.php (313)
+in /var/www/MGsis/protected/controllers/TituloController.php (119)
+in /var/www/MGsis/index.php (13)
+2014/01/08 11:05:16 [error] [exception.CException] exception 'CException' with message 'A propriedade "Titulo.Juros" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(161): CComponent->__set('Juros', 777)
+#1 /var/www/MGsis/protected/models/Titulo.php(314): CActiveRecord->__set('Juros', 777)
+#2 /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php(152): Titulo->setAttributes(Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(161): CComponent->__set('attributes', Array)
+#4 /var/www/MGsis/protected/controllers/TituloController.php(119): CActiveRecord->__set('attributes', Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionIndex()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('index')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/index')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=&Titulo%5Bcodfilial%5D=&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=titulo
+---
+2014/01/08 11:11:17 [error] [php] Undefined variable: model (/var/www/MGsis/protected/views/titulo/_view.php:25)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(291): TituloController->renderFile()
+#1 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(167): CListView->renderItems()
+#2 unknown(0): CListView->renderSection()
+#3 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback()
+#4 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(135): CListView->renderContent()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(173): CListView->run()
+#6 /var/www/MGsis/protected/views/titulo/index.php(254): TituloController->widget()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): TituloController->renderInternal()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): TituloController->renderFile()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): TituloController->renderPartial()
+#11 /var/www/MGsis/protected/controllers/TituloController.php(124): TituloController->render()
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionIndex()
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#18 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=&Titulo%5Bcodfilial%5D=&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+in /var/www/MGsis/protected/views/titulo/_view.php (25)
+in /var/www/MGsis/protected/views/titulo/index.php (254)
+in /var/www/MGsis/protected/controllers/TituloController.php (124)
+2014/01/08 11:12:54 [error] [php] Undefined variable: atraso (/var/www/MGsis/protected/views/titulo/_view.php:10)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(291): TituloController->renderFile()
+#1 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(167): CListView->renderItems()
+#2 unknown(0): CListView->renderSection()
+#3 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback()
+#4 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(135): CListView->renderContent()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(173): CListView->run()
+#6 /var/www/MGsis/protected/views/titulo/index.php(254): TituloController->widget()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): TituloController->renderInternal()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): TituloController->renderFile()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): TituloController->renderPartial()
+#11 /var/www/MGsis/protected/controllers/TituloController.php(124): TituloController->render()
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionIndex()
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#18 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=&Titulo%5Bcodfilial%5D=&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+in /var/www/MGsis/protected/views/titulo/_view.php (10)
+in /var/www/MGsis/protected/views/titulo/index.php (254)
+in /var/www/MGsis/protected/controllers/TituloController.php (124)
+2014/01/08 14:06:32 [error] [exception.CException] exception 'CException' with message 'A propriedade "TbNavbar.class" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWidgetFactory.php(161): CComponent->__set('class', 'hidden-print')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(146): CWidgetFactory->createWidget(Object(TituloController), 'bootstrap.widge...', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('bootstrap.widge...', Array)
+#3 /var/www/MGsis/protected/views/layouts/main.php(113): CBaseController->widget('bootstrap.widge...', Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CContentDecorator.php(76): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CContentDecorator.php(54): CContentDecorator->decorate('<div class="row...')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/COutputProcessor.php(44): CContentDecorator->processOutput('<div class="row...')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(206): COutputProcessor->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(300): CBaseController->endWidget('CContentDecorat...')
+#11 /var/www/MGsis/protected/views/layouts/column2.php(29): CBaseController->endContent()
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(784): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#15 /var/www/MGsis/protected/controllers/TituloController.php(124): CController->render('index', Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionIndex()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('index')
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/index')
+#22 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/MGsis/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=&Titulo%5Bcodfilial%5D=&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=01%2F01%2F14&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=&Titulo%5Bcodfilial%5D=&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=01%2F01%2F14&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+---
+2014/01/08 14:29:46 [error] [php] Undefined variable: texto_vencimento (/var/www/MGsis/protected/views/titulo/_view.php:112)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(291): TituloController->renderFile()
+#1 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(167): CListView->renderItems()
+#2 unknown(0): CListView->renderSection()
+#3 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback()
+#4 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(135): CListView->renderContent()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(173): CListView->run()
+#6 /var/www/MGsis/protected/views/titulo/index.php(250): TituloController->widget()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): TituloController->renderInternal()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): TituloController->renderFile()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): TituloController->renderPartial()
+#11 /var/www/MGsis/protected/controllers/TituloController.php(124): TituloController->render()
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionIndex()
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#18 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=&Titulo%5Bcodfilial%5D=&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=01%2F01%2F14&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+in /var/www/MGsis/protected/views/titulo/_view.php (112)
+in /var/www/MGsis/protected/views/titulo/index.php (250)
+in /var/www/MGsis/protected/controllers/TituloController.php (124)
+2014/01/08 15:47:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "relatorio" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('relatorio')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('relatorio')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/relatori...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+---
+2014/01/08 15:55:29 [error] [php] Trying to get property of non-object (/var/www/MGsis/protected/views/titulo/_view.php:9)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(291): TituloController->renderFile()
+#1 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(167): CListView->renderItems()
+#2 unknown(0): CListView->renderSection()
+#3 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback()
+#4 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(135): CListView->renderContent()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(173): CListView->run()
+#6 /var/www/MGsis/protected/views/titulo/index.php(250): TituloController->widget()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): TituloController->renderInternal()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): TituloController->renderFile()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): TituloController->renderPartial()
+#11 /var/www/MGsis/protected/controllers/TituloController.php(124): TituloController->render()
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionIndex()
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#18 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=1&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=&Titulo%5Bcodfilial%5D=&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+in /var/www/MGsis/protected/views/titulo/_view.php (9)
+in /var/www/MGsis/protected/views/titulo/index.php (250)
+in /var/www/MGsis/protected/controllers/TituloController.php (124)
+2014/01/08 16:50:44 [error] [exception.CException] exception 'CException' with message 'TituloController possui uma chamada endWidget() extra em sua visualização.' in /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php:210
+Stack trace:
+#0 /var/www/MGsis/protected/views/titulo/relatorio.php(21): CBaseController->endWidget()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('relatorio', Array, true)
+#5 /var/www/MGsis/protected/controllers/TituloController.php(444): CController->render('relatorio', Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('relatorio')
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/relatori...')
+#12 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/MGsis/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/login
+---
+2014/01/09 12:10:26 [error] [php] date() expects at least 1 parameter, 0 given (/var/www/MGsis/protected/views/layouts/relatorio.php:33)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): TituloController->renderInternal()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(784): TituloController->renderFile()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(446): TituloController->render()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/views/layouts/relatorio.php (33)
+in /var/www/MGsis/protected/controllers/TituloController.php (446)
+in /var/www/MGsis/index.php (13)
+2014/01/09 14:30:54 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Login requerido' in /var/www/yii-1.1.14.f0fee9/framework/web/auth/CWebUser.php:394
+Stack trace:
+#0 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(100): CWebUser->loginRequired()
+#1 /var/www/MGsis/protected/modules/srbac/controllers/SBaseController.php(77): SBaseController->onUnauthorizedAccess()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(306): SBaseController->beforeAction(Object(CInlineAction))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('index')
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/index')
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CApplication->run()
+#9 {main}
+REQUEST_URI=/MGsis/index.php?Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=1&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=&Titulo%5Bcodfilial%5D=201&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=01%2F01%2F14&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=&ajax=Listagem&r=titulo%2Findex&yt0=
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=&Titulo%5Bcodfilial%5D=201&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=01%2F01%2F14&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+---
+2014/01/09 14:35:04 [error] [php] Missing argument 1 for MGBoleto::__construct(), called in /var/www/MGsis/protected/controllers/TituloController.php on line 171 and defined (/var/www/MGsis/protected/components/MGBoleto.php:13)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimeboleto&id=30044179
+in /var/www/MGsis/protected/components/MGBoleto.php (13)
+in /var/www/MGsis/protected/controllers/TituloController.php (171)
+in /var/www/MGsis/index.php (13)
+2014/01/09 15:02:29 [error] [php] require_once(/html2pdf.class.php): failed to open stream: No such file or directory (/var/www/MGsis/protected/components/MGBoleto.php:6)
+Stack trace:
+#0 unknown(0): autoload()
+#1 /var/www/MGsis/protected/controllers/TituloController.php(178): spl_autoload_call()
+#2 unknown(0): TituloController->actionImprimeBoleto()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimeboleto&id=30044179
+in /var/www/MGsis/protected/components/MGBoleto.php (6)
+in /var/www/MGsis/protected/components/MGBoleto.php (6)
+in /var/www/MGsis/protected/controllers/TituloController.php (178)
+2014/01/09 15:04:04 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°7</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Linha : 5524<br><br>O conteúdo de uma tag TD não se encaixa em apenas uma página
+REQUEST_URI=/MGsis/index.php?r=titulo/imprimeboleto&id=30044179
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=titulo/view&id=30044179
+---
+2014/01/09 15:11:58 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERREUR n°5</span><br>Fichier : /var/www/MGsis/protected/vendors/html2pdf/_class/parsingHtml.class.php<br>Ligne : 218<br><br>Code HTML non valide, toutes les balises doivent être fermées.<br>Etat : <pre>Array
+(
+    [0] => h1
+)
+</pre>
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/login
+---
+2014/01/09 15:12:23 [error] [php] Cannot modify header information - headers already sent by (output started at /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:793) (/var/www/MGsis/protected/vendors/html2pdf/_tcpdf_5.0.002/tcpdf.php:6122)
+Stack trace:
+#0 /var/www/MGsis/protected/components/MGRelatorio.php(20): HTML2PDF->Output()
+#1 /var/www/MGsis/protected/controllers/TituloController.php(364): MGRelatorio->getPDF()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/vendors/html2pdf/_tcpdf_5.0.002/tcpdf.php (6122)
+in /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php (374)
+in /var/www/MGsis/protected/components/MGRelatorio.php (20)
+2014/01/09 15:14:42 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERREUR n°6</span><br>Fichier : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Ligne : 1319<br><br>Impossible de charger l'image <b>logo.gif</b>
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/login
+---
+2014/01/09 15:15:14 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERREUR n°6</span><br>Fichier : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Ligne : 1319<br><br>Impossible de charger l'image <b>/MGsis/images/MGPapelaria.jpg</b>
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/login
+---
+2014/01/09 15:18:23 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERREUR n°1</span><br>Fichier : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Ligne : 1251<br><br>La balise <b>&lt;SCRIPT&gt;</b> n'existe pas encore.<br><br>Si vous voulez la rajouter, vous devez créer les méthodes <b>o_SCRIPT</b> (pour l'ouverture) et <b>c_SCRIPT</b> (pour la fermeture) en suivant le modèle des balises existantes.<br><br>De plus, si vous créez ces méthodes, n'hésitez pas à en faire profiter tout le monde en m'écrivant sur webmaster@html2pdf.fr afin qu'elles se retrouvent dans la prochaine version d'HTML2PDF.
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/login
+---
+2014/01/09 15:20:11 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERREUR n°6</span><br>Fichier : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Ligne : 1319<br><br>Impossible de charger l'image <b>/MGsis/images/MGPapelaria.jpg</b>
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/login
+---
+2014/01/09 15:20:41 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERREUR n°6</span><br>Fichier : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Ligne : 1319<br><br>Impossible de charger l'image <b>/MGsis/images/MGPapelaria.jpg</b>
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/login
+---
+2014/01/09 15:23:12 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERREUR n°6</span><br>Fichier : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Ligne : 1319<br><br>Impossible de charger l'image <b>http://192.168.254.190http://192.168.254.190/MGsis/images/MGPapelaria.jpg</b>
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+HTTP_REFERER=http://192.168.254.190/MGsis/index.php?r=site/login
+---
+2014/01/09 15:43:13 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERREUR n°4</span><br>Fichier : /var/www/MGsis/protected/vendors/html2pdf/_class/parsingHtml.class.php<br>Ligne : 119<br><br>Code HTML non valide, les balises ne sont pas fermées dans le bon ordre.<br>Etat : <pre>Array
+(
+    [0] => page
+    [1] => div
+    [2] => div
+)
+</pre><br><br>HTML : ...in:0px&quot;&gt;
+			Base URL: /MGsis		&lt;/h3&gt;
+	&lt;/div&gt;
+	&lt;br&gt;
+	&lt;br&gt;
+	&lt;br&gt;
+	&lt;div id...
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 15:58:21 [error] [php] Use of undefined constant __CLASS_HTML2PDF__ - assumed '__CLASS_HTML2PDF__' (/var/www/MGsis/protected/views/layouts/relatorio.php:31)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(784): TituloController->renderFile()
+#1 /var/www/MGsis/protected/controllers/TituloController.php(360): TituloController->render()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+in /var/www/MGsis/protected/views/layouts/relatorio.php (31)
+in /var/www/MGsis/protected/controllers/TituloController.php (360)
+in /var/www/MGsis/index.php (13)
+2014/01/09 15:59:10 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERREUR n°4</span><br>Fichier : /var/www/MGsis/protected/vendors/html2pdf/_class/parsingHtml.class.php<br>Ligne : 119<br><br>Code HTML non valide, les balises ne sont pas fermées dans le bon ordre.<br>Etat : <pre>Array
+(
+    [0] => page
+)
+</pre><br><br>HTML : ...&lt;h1&gt;T&Atilde;&shy;tulos&lt;/h1&gt;
+&lt;hr&gt;
+
+&lt;/div&gt;
+&lt;/page&gt;...
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:14:14 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERREUR n°1</span><br>Fichier : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Ligne : 1251<br><br>La balise <b>&lt;META&gt;</b> n'existe pas encore.<br><br>Si vous voulez la rajouter, vous devez créer les méthodes <b>o_META</b> (pour l'ouverture) et <b>c_META</b> (pour la fermeture) en suivant le modèle des balises existantes.<br><br>De plus, si vous créez ces méthodes, n'hésitez pas à en faire profiter tout le monde en m'écrivant sur webmaster@html2pdf.fr afin qu'elles se retrouvent dans la prochaine version d'HTML2PDF.
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:14:40 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERREUR n°1</span><br>Fichier : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Ligne : 1251<br><br>La balise <b>&lt;META&gt;</b> n'existe pas encore.<br><br>Si vous voulez la rajouter, vous devez créer les méthodes <b>o_META</b> (pour l'ouverture) et <b>c_META</b> (pour la fermeture) en suivant le modèle des balises existantes.<br><br>De plus, si vous créez ces méthodes, n'hésitez pas à en faire profiter tout le monde en m'écrivant sur webmaster@html2pdf.fr afin qu'elles se retrouvent dans la prochaine version d'HTML2PDF.
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:14:41 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERREUR n°1</span><br>Fichier : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Ligne : 1251<br><br>La balise <b>&lt;META&gt;</b> n'existe pas encore.<br><br>Si vous voulez la rajouter, vous devez créer les méthodes <b>o_META</b> (pour l'ouverture) et <b>c_META</b> (pour la fermeture) en suivant le modèle des balises existantes.<br><br>De plus, si vous créez ces méthodes, n'hésitez pas à en faire profiter tout le monde en m'écrivant sur webmaster@html2pdf.fr afin qu'elles se retrouvent dans la prochaine version d'HTML2PDF.
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:15:17 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERREUR n°1</span><br>Fichier : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Ligne : 1251<br><br>La balise <b>&lt;META&gt;</b> n'existe pas encore.<br><br>Si vous voulez la rajouter, vous devez créer les méthodes <b>o_META</b> (pour l'ouverture) et <b>c_META</b> (pour la fermeture) en suivant le modèle des balises existantes.<br><br>De plus, si vous créez ces méthodes, n'hésitez pas à en faire profiter tout le monde en m'écrivant sur webmaster@html2pdf.fr afin qu'elles se retrouvent dans la prochaine version d'HTML2PDF.
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:15:18 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERREUR n°1</span><br>Fichier : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Ligne : 1251<br><br>La balise <b>&lt;META&gt;</b> n'existe pas encore.<br><br>Si vous voulez la rajouter, vous devez créer les méthodes <b>o_META</b> (pour l'ouverture) et <b>c_META</b> (pour la fermeture) en suivant le modèle des balises existantes.<br><br>De plus, si vous créez ces méthodes, n'hésitez pas à en faire profiter tout le monde en m'écrivant sur webmaster@html2pdf.fr afin qu'elles se retrouvent dans la prochaine version d'HTML2PDF.
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:17:16 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERREUR n°1</span><br>Fichier : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Ligne : 1251<br><br>La balise <b>&lt;META&gt;</b> n'existe pas encore.<br><br>Si vous voulez la rajouter, vous devez créer les méthodes <b>o_META</b> (pour l'ouverture) et <b>c_META</b> (pour la fermeture) en suivant le modèle des balises existantes.<br><br>De plus, si vous créez ces méthodes, n'hésitez pas à en faire profiter tout le monde en m'écrivant sur webmaster@html2pdf.fr afin qu'elles se retrouvent dans la prochaine version d'HTML2PDF.
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:17:18 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERREUR n°1</span><br>Fichier : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Ligne : 1251<br><br>La balise <b>&lt;META&gt;</b> n'existe pas encore.<br><br>Si vous voulez la rajouter, vous devez créer les méthodes <b>o_META</b> (pour l'ouverture) et <b>c_META</b> (pour la fermeture) en suivant le modèle des balises existantes.<br><br>De plus, si vous créez ces méthodes, n'hésitez pas à en faire profiter tout le monde en m'écrivant sur webmaster@html2pdf.fr afin qu'elles se retrouvent dans la prochaine version d'HTML2PDF.
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:17:19 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERREUR n°1</span><br>Fichier : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Ligne : 1251<br><br>La balise <b>&lt;META&gt;</b> n'existe pas encore.<br><br>Si vous voulez la rajouter, vous devez créer les méthodes <b>o_META</b> (pour l'ouverture) et <b>c_META</b> (pour la fermeture) en suivant le modèle des balises existantes.<br><br>De plus, si vous créez ces méthodes, n'hésitez pas à en faire profiter tout le monde en m'écrivant sur webmaster@html2pdf.fr afin qu'elles se retrouvent dans la prochaine version d'HTML2PDF.
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:20:33 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERREUR n°5</span><br>Fichier : /var/www/MGsis/protected/vendors/html2pdf/_class/parsingHtml.class.php<br>Ligne : 218<br><br>Code HTML non valide, toutes les balises doivent être fermées.<br>Etat : <pre>Array
+(
+    [0] => page
+)
+</pre>
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:41:58 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°5</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/_class/parsingHtml.class.php<br>Linha : 218<br><br>Código HTML não válido, todas as tags devem ser fechadas.<br>Estado : <pre>Array
+(
+    [0] => html
+)
+</pre>
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:42:15 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°1</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Linha : 1251<br><br>A tag <b>&lt;HTML&gt;</b> ainda não existe.<br><br>Se você quer inserí-la, deve criar os métodos <b>o_HTML</b> (para abrí-la) e <b>c_HTML</b> (para fechá-la) seguindo o modelo das tags existentes.<br><br>Se você criar novos métodos, os envie para webmaster@html2pdf.fr para que as próximas versões de HTML2PDF, e o restante do mundo se beneficie com isso.
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:42:16 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°1</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Linha : 1251<br><br>A tag <b>&lt;HTML&gt;</b> ainda não existe.<br><br>Se você quer inserí-la, deve criar os métodos <b>o_HTML</b> (para abrí-la) e <b>c_HTML</b> (para fechá-la) seguindo o modelo das tags existentes.<br><br>Se você criar novos métodos, os envie para webmaster@html2pdf.fr para que as próximas versões de HTML2PDF, e o restante do mundo se beneficie com isso.
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:42:17 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°1</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Linha : 1251<br><br>A tag <b>&lt;HTML&gt;</b> ainda não existe.<br><br>Se você quer inserí-la, deve criar os métodos <b>o_HTML</b> (para abrí-la) e <b>c_HTML</b> (para fechá-la) seguindo o modelo das tags existentes.<br><br>Se você criar novos métodos, os envie para webmaster@html2pdf.fr para que as próximas versões de HTML2PDF, e o restante do mundo se beneficie com isso.
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:42:18 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°1</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Linha : 1251<br><br>A tag <b>&lt;HTML&gt;</b> ainda não existe.<br><br>Se você quer inserí-la, deve criar os métodos <b>o_HTML</b> (para abrí-la) e <b>c_HTML</b> (para fechá-la) seguindo o modelo das tags existentes.<br><br>Se você criar novos métodos, os envie para webmaster@html2pdf.fr para que as próximas versões de HTML2PDF, e o restante do mundo se beneficie com isso.
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:42:31 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°1</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Linha : 1251<br><br>A tag <b>&lt;META&gt;</b> ainda não existe.<br><br>Se você quer inserí-la, deve criar os métodos <b>o_META</b> (para abrí-la) e <b>c_META</b> (para fechá-la) seguindo o modelo das tags existentes.<br><br>Se você criar novos métodos, os envie para webmaster@html2pdf.fr para que as próximas versões de HTML2PDF, e o restante do mundo se beneficie com isso.
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:42:32 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°1</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Linha : 1251<br><br>A tag <b>&lt;META&gt;</b> ainda não existe.<br><br>Se você quer inserí-la, deve criar os métodos <b>o_META</b> (para abrí-la) e <b>c_META</b> (para fechá-la) seguindo o modelo das tags existentes.<br><br>Se você criar novos métodos, os envie para webmaster@html2pdf.fr para que as próximas versões de HTML2PDF, e o restante do mundo se beneficie com isso.
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:42:55 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°1</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Linha : 1251<br><br>A tag <b>&lt;META&gt;</b> ainda não existe.<br><br>Se você quer inserí-la, deve criar os métodos <b>o_META</b> (para abrí-la) e <b>c_META</b> (para fechá-la) seguindo o modelo das tags existentes.<br><br>Se você criar novos métodos, os envie para webmaster@html2pdf.fr para que as próximas versões de HTML2PDF, e o restante do mundo se beneficie com isso.
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:43:25 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°1</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Linha : 1251<br><br>A tag <b>&lt;META&gt;</b> ainda não existe.<br><br>Se você quer inserí-la, deve criar os métodos <b>o_META</b> (para abrí-la) e <b>c_META</b> (para fechá-la) seguindo o modelo das tags existentes.<br><br>Se você criar novos métodos, os envie para webmaster@html2pdf.fr para que as próximas versões de HTML2PDF, e o restante do mundo se beneficie com isso.
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:43:25 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°1</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Linha : 1251<br><br>A tag <b>&lt;META&gt;</b> ainda não existe.<br><br>Se você quer inserí-la, deve criar os métodos <b>o_META</b> (para abrí-la) e <b>c_META</b> (para fechá-la) seguindo o modelo das tags existentes.<br><br>Se você criar novos métodos, os envie para webmaster@html2pdf.fr para que as próximas versões de HTML2PDF, e o restante do mundo se beneficie com isso.
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:43:26 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°1</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Linha : 1251<br><br>A tag <b>&lt;META&gt;</b> ainda não existe.<br><br>Se você quer inserí-la, deve criar os métodos <b>o_META</b> (para abrí-la) e <b>c_META</b> (para fechá-la) seguindo o modelo das tags existentes.<br><br>Se você criar novos métodos, os envie para webmaster@html2pdf.fr para que as próximas versões de HTML2PDF, e o restante do mundo se beneficie com isso.
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:43:27 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°1</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Linha : 1251<br><br>A tag <b>&lt;META&gt;</b> ainda não existe.<br><br>Se você quer inserí-la, deve criar os métodos <b>o_META</b> (para abrí-la) e <b>c_META</b> (para fechá-la) seguindo o modelo das tags existentes.<br><br>Se você criar novos métodos, os envie para webmaster@html2pdf.fr para que as próximas versões de HTML2PDF, e o restante do mundo se beneficie com isso.
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:43:28 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°1</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Linha : 1251<br><br>A tag <b>&lt;META&gt;</b> ainda não existe.<br><br>Se você quer inserí-la, deve criar os métodos <b>o_META</b> (para abrí-la) e <b>c_META</b> (para fechá-la) seguindo o modelo das tags existentes.<br><br>Se você criar novos métodos, os envie para webmaster@html2pdf.fr para que as próximas versões de HTML2PDF, e o restante do mundo se beneficie com isso.
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:43:28 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°1</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Linha : 1251<br><br>A tag <b>&lt;META&gt;</b> ainda não existe.<br><br>Se você quer inserí-la, deve criar os métodos <b>o_META</b> (para abrí-la) e <b>c_META</b> (para fechá-la) seguindo o modelo das tags existentes.<br><br>Se você criar novos métodos, os envie para webmaster@html2pdf.fr para que as próximas versões de HTML2PDF, e o restante do mundo se beneficie com isso.
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:43:29 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°1</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Linha : 1251<br><br>A tag <b>&lt;META&gt;</b> ainda não existe.<br><br>Se você quer inserí-la, deve criar os métodos <b>o_META</b> (para abrí-la) e <b>c_META</b> (para fechá-la) seguindo o modelo das tags existentes.<br><br>Se você criar novos métodos, os envie para webmaster@html2pdf.fr para que as próximas versões de HTML2PDF, e o restante do mundo se beneficie com isso.
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:43:30 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°1</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Linha : 1251<br><br>A tag <b>&lt;META&gt;</b> ainda não existe.<br><br>Se você quer inserí-la, deve criar os métodos <b>o_META</b> (para abrí-la) e <b>c_META</b> (para fechá-la) seguindo o modelo das tags existentes.<br><br>Se você criar novos métodos, os envie para webmaster@html2pdf.fr para que as próximas versões de HTML2PDF, e o restante do mundo se beneficie com isso.
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:43:37 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°1</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Linha : 1251<br><br>A tag <b>&lt;HTML&gt;</b> ainda não existe.<br><br>Se você quer inserí-la, deve criar os métodos <b>o_HTML</b> (para abrí-la) e <b>c_HTML</b> (para fechá-la) seguindo o modelo das tags existentes.<br><br>Se você criar novos métodos, os envie para webmaster@html2pdf.fr para que as próximas versões de HTML2PDF, e o restante do mundo se beneficie com isso.<br><br>HTML : ...os&lt;/h1&gt;
+&lt;hr&gt;
+
+
+&lt;/page&gt;
+&lt;/html&gt;...
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 16:44:47 [error] [php] html_entity_decode(): charset `ANSI_X3.4-1968' not supported, assuming iso-8859-1 (/var/www/MGsis/protected/vendors/html2pdf/_class/parsingHtml.class.php:236)
+Stack trace:
+#0 /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php(407): HTML2PDF_parsingHtml->parse()
+#1 /var/www/MGsis/protected/components/MGRelatorio.php(22): HTML2PDF->writeHTML()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(366): MGRelatorio->getPDF()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+in /var/www/MGsis/protected/vendors/html2pdf/_class/parsingHtml.class.php (236)
+in /var/www/MGsis/protected/vendors/html2pdf/_class/parsingHtml.class.php (157)
+in /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php (407)
+2014/01/09 16:44:48 [error] [php] html_entity_decode(): charset `ANSI_X3.4-1968' not supported, assuming iso-8859-1 (/var/www/MGsis/protected/vendors/html2pdf/_class/parsingHtml.class.php:236)
+Stack trace:
+#0 /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php(407): HTML2PDF_parsingHtml->parse()
+#1 /var/www/MGsis/protected/components/MGRelatorio.php(22): HTML2PDF->writeHTML()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(366): MGRelatorio->getPDF()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+in /var/www/MGsis/protected/vendors/html2pdf/_class/parsingHtml.class.php (236)
+in /var/www/MGsis/protected/vendors/html2pdf/_class/parsingHtml.class.php (157)
+in /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php (407)
+2014/01/09 16:44:49 [error] [php] html_entity_decode(): charset `ANSI_X3.4-1968' not supported, assuming iso-8859-1 (/var/www/MGsis/protected/vendors/html2pdf/_class/parsingHtml.class.php:236)
+Stack trace:
+#0 /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php(407): HTML2PDF_parsingHtml->parse()
+#1 /var/www/MGsis/protected/components/MGRelatorio.php(22): HTML2PDF->writeHTML()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(366): MGRelatorio->getPDF()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+in /var/www/MGsis/protected/vendors/html2pdf/_class/parsingHtml.class.php (236)
+in /var/www/MGsis/protected/vendors/html2pdf/_class/parsingHtml.class.php (157)
+in /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php (407)
+2014/01/09 17:11:46 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°1</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/html2pdf.class.php<br>Linha : 1251<br><br>A tag <b>&lt;SCRIPT&gt;</b> ainda não existe.<br><br>Se você quer inserí-la, deve criar os métodos <b>o_SCRIPT</b> (para abrí-la) e <b>c_SCRIPT</b> (para fechá-la) seguindo o modelo das tags existentes.<br><br>Se você criar novos métodos, os envie para webmaster@html2pdf.fr para que as próximas versões de HTML2PDF, e o restante do mundo se beneficie com isso.
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 17:26:10 [error] [php] Undefined variable: codpessoa (/var/www/MGsis/protected/views/titulo/relatorio.php:14)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): TituloController->renderFile()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): TituloController->renderPartial()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(360): TituloController->render()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/views/titulo/relatorio.php (14)
+in /var/www/MGsis/protected/controllers/TituloController.php (360)
+in /var/www/MGsis/index.php (13)
+2014/01/09 17:29:34 [error] [php] Undefined variable: data (/var/www/MGsis/protected/views/titulo/relatorio.php:15)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): TituloController->renderFile()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): TituloController->renderPartial()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(360): TituloController->render()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/views/titulo/relatorio.php (15)
+in /var/www/MGsis/protected/controllers/TituloController.php (360)
+in /var/www/MGsis/index.php (13)
+2014/01/09 17:29:35 [error] [php] Undefined variable: data (/var/www/MGsis/protected/views/titulo/relatorio.php:15)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): TituloController->renderFile()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): TituloController->renderPartial()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(360): TituloController->render()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/views/titulo/relatorio.php (15)
+in /var/www/MGsis/protected/controllers/TituloController.php (360)
+in /var/www/MGsis/index.php (13)
+2014/01/09 17:37:10 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°4</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/_class/parsingHtml.class.php<br>Linha : 119<br><br>Código HTML não válido, as tags não estão fechadas na ordem correta.<br>Estado : <pre>Array
+(
+    [0] => page
+    [1] => table
+    [2] => tbody
+)
+</pre><br><br>HTML : ...&lt;th&gt;Total&lt;/th&gt;
+			&lt;/tr&gt;			
+
+&lt;/page&gt;...
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 17:38:38 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°4</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/_class/parsingHtml.class.php<br>Linha : 119<br><br>Código HTML não válido, as tags não estão fechadas na ordem correta.<br>Estado : <pre>Array
+(
+    [0] => page
+    [1] => table
+    [2] => tbody
+)
+</pre><br><br>HTML : ...&lt;th&gt;Total&lt;/th&gt;
+			&lt;/tr&gt;
+			
+
+&lt;/page&gt;...
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/09 17:46:54 [error] [php] Undefined property: MGJuros::$multa (/var/www/MGsis/protected/views/titulo/relatorio.php:44)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): TituloController->renderFile()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): TituloController->renderPartial()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(360): TituloController->render()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+in /var/www/MGsis/protected/views/titulo/relatorio.php (44)
+in /var/www/MGsis/protected/controllers/TituloController.php (360)
+in /var/www/MGsis/index.php (13)
+2014/01/10 15:56:47 [error] [php] Undefined variable: data (/var/www/MGsis/protected/views/titulo/relatorio.php:13)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): TituloController->renderFile()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): TituloController->renderPartial()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(360): TituloController->render()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+in /var/www/MGsis/protected/views/titulo/relatorio.php (13)
+in /var/www/MGsis/protected/controllers/TituloController.php (360)
+in /var/www/MGsis/index.php (13)
+2014/01/10 16:01:53 [error] [php] Undefined variable: oper (/var/www/MGsis/protected/views/titulo/_view.php:55)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(291): TituloController->renderFile()
+#1 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(167): CListView->renderItems()
+#2 unknown(0): CListView->renderSection()
+#3 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback()
+#4 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(135): CListView->renderContent()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(173): CListView->run()
+#6 /var/www/MGsis/protected/views/titulo/index.php(250): TituloController->widget()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): TituloController->renderInternal()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): TituloController->renderFile()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): TituloController->renderPartial()
+#11 /var/www/MGsis/protected/controllers/TituloController.php(119): TituloController->render()
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionIndex()
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#18 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=&Titulo%5Bcodfilial%5D=101&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=1&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=01%2F01%2F14&Titulo%5Bvencimento_ate%5D=10%2F01%2F14&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+in /var/www/MGsis/protected/views/titulo/_view.php (55)
+in /var/www/MGsis/protected/views/titulo/index.php (250)
+in /var/www/MGsis/protected/controllers/TituloController.php (119)
+2014/01/10 16:04:45 [error] [exception.CException] exception 'CException' with message 'A propriedade "Titulo.valorTotal" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('valorTotal')
+#1 /var/www/MGsis/protected/views/titulo/_view.php(55): CActiveRecord->__get('valorTotal')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(130): require('/var/www/MGsis/...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, false)
+#4 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(291): CBaseController->renderFile('/var/www/MGsis/...', Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(167): CListView->renderItems()
+#6 [internal function]: CBaseListView->renderSection(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{items} {pager}')
+#8 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(135): CBaseListView->renderContent()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(173): CBaseListView->run()
+#10 /var/www/MGsis/protected/views/titulo/index.php(250): CBaseController->widget('zii.widgets.CLi...', Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#15 /var/www/MGsis/protected/controllers/TituloController.php(119): CController->render('index', Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionIndex()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('index')
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/index')
+#22 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/MGsis/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=&Titulo%5Bcodfilial%5D=101&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=1&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=01%2F01%2F14&Titulo%5Bvencimento_ate%5D=10%2F01%2F14&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo
+---
+2014/01/10 16:06:54 [error] [php] Undefined variable: oper (/var/www/MGsis/protected/views/titulo/relatorio.php:122)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): TituloController->renderFile()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): TituloController->renderPartial()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(360): TituloController->render()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+in /var/www/MGsis/protected/views/titulo/relatorio.php (122)
+in /var/www/MGsis/protected/controllers/TituloController.php (360)
+in /var/www/MGsis/index.php (13)
+2014/01/10 16:13:01 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°4</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/_class/parsingHtml.class.php<br>Linha : 119<br><br>Código HTML não válido, as tags não estão fechadas na ordem correta.<br>Estado : <pre>Array
+(
+    [0] => page
+    [1] => table
+    [2] => tbody
+)
+</pre><br><br>HTML : ...t-error&quot;&gt;CR&lt;/td&gt;
+			&lt;/tr&gt;
+		
+
+&lt;/page&gt;...
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/10 16:13:31 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°4</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/_class/parsingHtml.class.php<br>Linha : 119<br><br>Código HTML não válido, as tags não estão fechadas na ordem correta.<br>Estado : <pre>Array
+(
+    [0] => page
+    [1] => table
+    [2] => tbody
+)
+</pre><br><br>HTML : ...error&quot;&gt;CR&lt;/td&gt;
+			&lt;/tr&gt;
+				
+
+&lt;/page&gt;...
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/10 16:13:32 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°4</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/_class/parsingHtml.class.php<br>Linha : 119<br><br>Código HTML não válido, as tags não estão fechadas na ordem correta.<br>Estado : <pre>Array
+(
+    [0] => page
+    [1] => table
+    [2] => tbody
+)
+</pre><br><br>HTML : ...error&quot;&gt;CR&lt;/td&gt;
+			&lt;/tr&gt;
+				
+
+&lt;/page&gt;...
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/10 16:13:49 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°4</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/_class/parsingHtml.class.php<br>Linha : 119<br><br>Código HTML não válido, as tags não estão fechadas na ordem correta.<br>Estado : <pre>Array
+(
+    [0] => page
+    [1] => table
+    [2] => tbody
+)
+</pre><br><br>HTML : ...error&quot;&gt;CR&lt;/td&gt;
+			&lt;/tr&gt;
+				
+
+&lt;/page&gt;...
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/10 16:13:51 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°4</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/_class/parsingHtml.class.php<br>Linha : 119<br><br>Código HTML não válido, as tags não estão fechadas na ordem correta.<br>Estado : <pre>Array
+(
+    [0] => page
+    [1] => table
+    [2] => tbody
+)
+</pre><br><br>HTML : ...error&quot;&gt;CR&lt;/td&gt;
+			&lt;/tr&gt;
+				
+
+&lt;/page&gt;...
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/10 16:13:55 [error] [exception.HTML2PDF_exception] <span style="color: #AA0000; font-weight: bold;">ERRO n°4</span><br>Arquivo : /var/www/MGsis/protected/vendors/html2pdf/_class/parsingHtml.class.php<br>Linha : 119<br><br>Código HTML não válido, as tags não estão fechadas na ordem correta.<br>Estado : <pre>Array
+(
+    [0] => page
+    [1] => table
+    [2] => tbody
+)
+</pre><br><br>HTML : ...error&quot;&gt;CR&lt;/td&gt;
+			&lt;/tr&gt;
+				
+
+&lt;/page&gt;...
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+---
+2014/01/10 16:41:22 [error] [php] Missing argument 1 for MGRelatorioTitulos::__construct(), called in /var/www/MGsis/protected/controllers/TituloController.php on line 355 and defined (/var/www/MGsis/protected/components/MGRelatorioTitulos.php:11)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#5 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#6 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (11)
+in /var/www/MGsis/protected/controllers/TituloController.php (355)
+in /var/www/MGsis/index.php (13)
+2014/01/10 16:41:23 [error] [php] Missing argument 1 for MGRelatorioTitulos::__construct(), called in /var/www/MGsis/protected/controllers/TituloController.php on line 355 and defined (/var/www/MGsis/protected/components/MGRelatorioTitulos.php:11)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#5 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#6 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (11)
+in /var/www/MGsis/protected/controllers/TituloController.php (355)
+in /var/www/MGsis/index.php (13)
+2014/01/10 16:42:40 [error] [php] Invalid argument supplied for foreach() (/var/www/MGsis/protected/vendors/fpdf/fpdf.php:1528)
+Stack trace:
+#0 /var/www/MGsis/protected/vendors/fpdf/fpdf.php(302): MGRelatorioTitulos->_enddoc()
+#1 /var/www/MGsis/protected/vendors/fpdf/fpdf.php(987): MGRelatorioTitulos->Close()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(356): MGRelatorioTitulos->Output()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1528)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1701)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1764)
+2014/01/10 16:42:41 [error] [php] Invalid argument supplied for foreach() (/var/www/MGsis/protected/vendors/fpdf/fpdf.php:1528)
+Stack trace:
+#0 /var/www/MGsis/protected/vendors/fpdf/fpdf.php(302): MGRelatorioTitulos->_enddoc()
+#1 /var/www/MGsis/protected/vendors/fpdf/fpdf.php(987): MGRelatorioTitulos->Close()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(356): MGRelatorioTitulos->Output()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1528)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1701)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1764)
+2014/01/10 16:42:43 [error] [php] Invalid argument supplied for foreach() (/var/www/MGsis/protected/vendors/fpdf/fpdf.php:1528)
+Stack trace:
+#0 /var/www/MGsis/protected/vendors/fpdf/fpdf.php(302): MGRelatorioTitulos->_enddoc()
+#1 /var/www/MGsis/protected/vendors/fpdf/fpdf.php(987): MGRelatorioTitulos->Close()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(356): MGRelatorioTitulos->Output()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1528)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1701)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1764)
+2014/01/10 16:42:43 [error] [php] Invalid argument supplied for foreach() (/var/www/MGsis/protected/vendors/fpdf/fpdf.php:1528)
+Stack trace:
+#0 /var/www/MGsis/protected/vendors/fpdf/fpdf.php(302): MGRelatorioTitulos->_enddoc()
+#1 /var/www/MGsis/protected/vendors/fpdf/fpdf.php(987): MGRelatorioTitulos->Close()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(356): MGRelatorioTitulos->Output()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1528)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1701)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1764)
+2014/01/10 16:42:44 [error] [php] Invalid argument supplied for foreach() (/var/www/MGsis/protected/vendors/fpdf/fpdf.php:1528)
+Stack trace:
+#0 /var/www/MGsis/protected/vendors/fpdf/fpdf.php(302): MGRelatorioTitulos->_enddoc()
+#1 /var/www/MGsis/protected/vendors/fpdf/fpdf.php(987): MGRelatorioTitulos->Close()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(356): MGRelatorioTitulos->Output()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1528)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1701)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1764)
+2014/01/10 16:42:48 [error] [php] Invalid argument supplied for foreach() (/var/www/MGsis/protected/vendors/fpdf/fpdf.php:1528)
+Stack trace:
+#0 /var/www/MGsis/protected/vendors/fpdf/fpdf.php(302): MGRelatorioTitulos->_enddoc()
+#1 /var/www/MGsis/protected/vendors/fpdf/fpdf.php(987): MGRelatorioTitulos->Close()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(356): MGRelatorioTitulos->Output()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1528)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1701)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1764)
+2014/01/10 16:42:49 [error] [php] Invalid argument supplied for foreach() (/var/www/MGsis/protected/vendors/fpdf/fpdf.php:1528)
+Stack trace:
+#0 /var/www/MGsis/protected/vendors/fpdf/fpdf.php(302): MGRelatorioTitulos->_enddoc()
+#1 /var/www/MGsis/protected/vendors/fpdf/fpdf.php(987): MGRelatorioTitulos->Close()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(356): MGRelatorioTitulos->Output()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1528)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1701)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1764)
+2014/01/10 16:42:49 [error] [php] Invalid argument supplied for foreach() (/var/www/MGsis/protected/vendors/fpdf/fpdf.php:1528)
+Stack trace:
+#0 /var/www/MGsis/protected/vendors/fpdf/fpdf.php(302): MGRelatorioTitulos->_enddoc()
+#1 /var/www/MGsis/protected/vendors/fpdf/fpdf.php(987): MGRelatorioTitulos->Close()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(356): MGRelatorioTitulos->Output()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1528)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1701)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1764)
+2014/01/10 16:42:49 [error] [php] Invalid argument supplied for foreach() (/var/www/MGsis/protected/vendors/fpdf/fpdf.php:1528)
+Stack trace:
+#0 /var/www/MGsis/protected/vendors/fpdf/fpdf.php(302): MGRelatorioTitulos->_enddoc()
+#1 /var/www/MGsis/protected/vendors/fpdf/fpdf.php(987): MGRelatorioTitulos->Close()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(356): MGRelatorioTitulos->Output()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1528)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1701)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1764)
+2014/01/10 16:51:14 [error] [php] fopen(logo.png): failed to open stream: No such file or directory (/var/www/MGsis/protected/vendors/fpdf/fpdf.php:1232)
+Stack trace:
+#0 /var/www/MGsis/protected/components/MGRelatorioTitulos.php(21): MGRelatorioTitulos->Image()
+#1 /var/www/MGsis/protected/vendors/fpdf/fpdf.php(348): MGRelatorioTitulos->Header()
+#2 /var/www/MGsis/protected/components/MGRelatorioTitulos.php(45): MGRelatorioTitulos->AddPage()
+#3 /var/www/MGsis/protected/controllers/TituloController.php(356): MGRelatorioTitulos->montaRelatorio()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1232)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (901)
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (21)
+2014/01/10 16:51:38 [error] [php] getimagesize(/var/www/MGsis/protected/images/MGPapelariaRelatorio.jpg): failed to open stream: No such file or directory (/var/www/MGsis/protected/vendors/fpdf/fpdf.php:1213)
+Stack trace:
+#0 /var/www/MGsis/protected/components/MGRelatorioTitulos.php(46): MGRelatorioTitulos->Image()
+#1 /var/www/MGsis/protected/controllers/TituloController.php(356): MGRelatorioTitulos->montaRelatorio()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1213)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (901)
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (46)
+2014/01/10 16:52:08 [error] [php] getimagesize(/var/www/MGsis/protected../images/MGPapelariaRelatorio.jpg): failed to open stream: No such file or directory (/var/www/MGsis/protected/vendors/fpdf/fpdf.php:1213)
+Stack trace:
+#0 /var/www/MGsis/protected/components/MGRelatorioTitulos.php(46): MGRelatorioTitulos->Image()
+#1 /var/www/MGsis/protected/controllers/TituloController.php(356): MGRelatorioTitulos->montaRelatorio()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1213)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (901)
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (46)
+2014/01/10 16:58:41 [error] [php] Undefined variable: pdf (/var/www/MGsis/protected/components/MGRelatorioTitulos.php:49)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#5 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#6 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (49)
+in /var/www/MGsis/protected/controllers/TituloController.php (356)
+in /var/www/MGsis/index.php (13)
+2014/01/10 16:59:48 [error] [php] include(/var/www/MGsis/protected/vendors/fpdf/font/helveticar.php): failed to open stream: No such file or directory (/var/www/MGsis/protected/vendors/fpdf/fpdf.php:1145)
+Stack trace:
+#0 /var/www/MGsis/protected/vendors/fpdf/fpdf.php(532): MGRelatorioTitulos->AddFont()
+#1 /var/www/MGsis/protected/components/MGRelatorioTitulos.php(47): MGRelatorioTitulos->SetFont()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(356): MGRelatorioTitulos->montaRelatorio()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1145)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1145)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (473)
+2014/01/10 16:59:52 [error] [php] include(/var/www/MGsis/protected/vendors/fpdf/font/helvetican.php): failed to open stream: No such file or directory (/var/www/MGsis/protected/vendors/fpdf/fpdf.php:1145)
+Stack trace:
+#0 /var/www/MGsis/protected/vendors/fpdf/fpdf.php(532): MGRelatorioTitulos->AddFont()
+#1 /var/www/MGsis/protected/components/MGRelatorioTitulos.php(47): MGRelatorioTitulos->SetFont()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(356): MGRelatorioTitulos->montaRelatorio()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1145)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (1145)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (473)
+2014/01/10 17:20:33 [error] [php] Undefined offset: 1 (/var/www/MGsis/protected/components/MGRelatorioTitulos.php:66)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (66)
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (82)
+in /var/www/MGsis/protected/controllers/TituloController.php (356)
+2014/01/10 17:22:00 [error] [php] number_format() expects parameter 1 to be double, string given (/var/www/MGsis/protected/components/MGRelatorioTitulos.php:67)
+Stack trace:
+#0 /var/www/MGsis/protected/controllers/TituloController.php(356): MGRelatorioTitulos->montaRelatorio()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (67)
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (82)
+in /var/www/MGsis/protected/controllers/TituloController.php (356)
+2014/01/10 17:28:57 [error] [php] Undefined variable: pdf (/var/www/MGsis/protected/components/MGRelatorioTitulos.php:29)
+Stack trace:
+#0 /var/www/MGsis/protected/controllers/TituloController.php(356): MGRelatorioTitulos->montaRelatorio()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (29)
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (348)
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (79)
+2014/01/10 17:56:05 [error] [php] Undefined variable: i (/var/www/MGsis/protected/components/MGRelatorioTitulos.php:94)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#5 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#6 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio&pdf=1
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (94)
+in /var/www/MGsis/protected/controllers/TituloController.php (356)
+in /var/www/MGsis/index.php (13)
+2014/01/11 10:31:24 [error] [php] Undefined variable: dataProvider (/var/www/MGsis/protected/components/MGRelatorioTitulos.php:83)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#5 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#6 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (83)
+in /var/www/MGsis/protected/controllers/TituloController.php (356)
+in /var/www/MGsis/index.php (13)
+2014/01/11 10:40:52 [error] [php] Undefined variable: fill (/var/www/MGsis/protected/components/MGRelatorioTitulos.php:79)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (79)
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (107)
+in /var/www/MGsis/protected/controllers/TituloController.php (356)
+2014/01/11 10:48:23 [error] [exception.CException] exception 'CException' with message 'A propriedade "Titulo.Emissão" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('Emiss??o')
+#1 /var/www/MGsis/protected/components/MGRelatorioTitulos.php(99): CActiveRecord->__get('Emiss??o')
+#2 /var/www/MGsis/protected/components/MGRelatorioTitulos.php(126): MGRelatorioTitulos->imprimeLinhaTitulo()
+#3 /var/www/MGsis/protected/controllers/TituloController.php(356): MGRelatorioTitulos->montaRelatorio()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('relatorio')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/relatori...')
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+---
+2014/01/11 10:52:25 [error] [exception.CException] exception 'CException' with message 'A propriedade "Titulo.Emissão" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('Emiss??o')
+#1 /var/www/MGsis/protected/components/MGRelatorioTitulos.php(99): CActiveRecord->__get('Emiss??o')
+#2 /var/www/MGsis/protected/components/MGRelatorioTitulos.php(126): MGRelatorioTitulos->imprimeLinhaTitulo()
+#3 /var/www/MGsis/protected/controllers/TituloController.php(356): MGRelatorioTitulos->montaRelatorio()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('relatorio')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/relatori...')
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+---
+2014/01/11 10:52:46 [error] [exception.CException] exception 'CException' with message 'A propriedade "Titulo.Venc" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('Venc')
+#1 /var/www/MGsis/protected/components/MGRelatorioTitulos.php(101): CActiveRecord->__get('Venc')
+#2 /var/www/MGsis/protected/components/MGRelatorioTitulos.php(126): MGRelatorioTitulos->imprimeLinhaTitulo()
+#3 /var/www/MGsis/protected/controllers/TituloController.php(356): MGRelatorioTitulos->montaRelatorio()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('relatorio')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/relatori...')
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+---
+2014/01/11 10:59:34 [error] [php] number_format() expects parameter 1 to be double, string given (/var/www/MGsis/protected/components/MGFormatter.php:26)
+Stack trace:
+#0 /var/www/MGsis/protected/components/MGRelatorioTitulos.php(134): MGRelatorioTitulos->imprimeLinhaTitulo()
+#1 /var/www/MGsis/protected/controllers/TituloController.php(356): MGRelatorioTitulos->montaRelatorio()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/components/MGFormatter.php (26)
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (102)
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (134)
+2014/01/11 10:59:43 [error] [php] number_format() expects parameter 1 to be double, string given (/var/www/MGsis/protected/components/MGFormatter.php:26)
+Stack trace:
+#0 /var/www/MGsis/protected/components/MGRelatorioTitulos.php(134): MGRelatorioTitulos->imprimeLinhaTitulo()
+#1 /var/www/MGsis/protected/controllers/TituloController.php(356): MGRelatorioTitulos->montaRelatorio()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/components/MGFormatter.php (26)
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (102)
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (134)
+2014/01/11 11:52:30 [error] [php] Undefined property: MGJuros::$multa (/var/www/MGsis/protected/components/MGRelatorioTitulos.php:107)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (107)
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (135)
+in /var/www/MGsis/protected/controllers/TituloController.php (356)
+2014/01/11 12:38:45 [error] [php] Undefined variable: titulo (/var/www/MGsis/protected/components/MGRelatorioTitulos.php:219)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (219)
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (242)
+in /var/www/MGsis/protected/controllers/TituloController.php (356)
+2014/01/11 12:39:24 [error] [php] Undefined variable: titulo (/var/www/MGsis/protected/components/MGRelatorioTitulos.php:219)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (219)
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (248)
+in /var/www/MGsis/protected/controllers/TituloController.php (356)
+2014/01/11 12:41:03 [error] [php] Undefined variable: titulo (/var/www/MGsis/protected/components/MGRelatorioTitulos.php:103)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (103)
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (259)
+in /var/www/MGsis/protected/controllers/TituloController.php (356)
+2014/01/11 12:41:04 [error] [php] Undefined variable: titulo (/var/www/MGsis/protected/components/MGRelatorioTitulos.php:103)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (103)
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (259)
+in /var/www/MGsis/protected/controllers/TituloController.php (356)
+2014/01/11 12:43:52 [error] [php] Undefined offset: 15 (/var/www/MGsis/protected/components/MGRelatorioTitulos.php:296)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (296)
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (330)
+in /var/www/MGsis/protected/controllers/TituloController.php (356)
+2014/01/11 12:44:28 [error] [php] Undefined offset: 15 (/var/www/MGsis/protected/components/MGRelatorioTitulos.php:296)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (296)
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (330)
+in /var/www/MGsis/protected/controllers/TituloController.php (356)
+2014/01/11 12:47:29 [error] [php] Undefined offset: 15 (/var/www/MGsis/protected/components/MGRelatorioTitulos.php:248)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (248)
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (313)
+in /var/www/MGsis/protected/controllers/TituloController.php (356)
+2014/01/11 12:47:50 [error] [php] Undefined offset: 15 (/var/www/MGsis/protected/components/MGRelatorioTitulos.php:248)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (248)
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (313)
+in /var/www/MGsis/protected/controllers/TituloController.php (356)
+2014/01/11 12:47:51 [error] [php] Undefined offset: 15 (/var/www/MGsis/protected/components/MGRelatorioTitulos.php:248)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (248)
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (313)
+in /var/www/MGsis/protected/controllers/TituloController.php (356)
+2014/01/11 14:34:00 [error] [php] Undefined index:  (/var/www/MGsis/protected/components/MGRelatorioTitulos.php:175)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (175)
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (217)
+in /var/www/MGsis/protected/controllers/TituloController.php (356)
+2014/01/11 14:34:09 [error] [php] Undefined index:  (/var/www/MGsis/protected/components/MGRelatorioTitulos.php:175)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionRelatorio()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/relatorio
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (175)
+in /var/www/MGsis/protected/components/MGRelatorioTitulos.php (217)
+in /var/www/MGsis/protected/controllers/TituloController.php (356)
