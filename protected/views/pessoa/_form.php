@@ -74,12 +74,12 @@
 						);	
 				
 				
-				echo $form->textFieldRow($model,'credito',array('prepend' => 'R$', 'class'=>'input-small','style'=>'text-align: right','maxlength'=>14));
+				echo $form->textFieldRow($model,'credito',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14));
 				//echo $form->checkBoxRow($model,'creditobloqueado');
 				echo $form->toggleButtonRow($model,'creditobloqueado', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 				echo $form->textAreaRow($model,'mensagemvenda',array('class'=>'input-xxlarge', 'rows'=>'5','maxlength'=>500));
 
-				echo $form->textFieldRow($model,'desconto',array('append' => '%', 'class'=>'input-small','style'=>'text-align: right','maxlength'=>5));
+				echo $form->textFieldRow($model,'desconto',array('append' => '%', 'class'=>'input-small text-right','maxlength'=>5));
 
 				echo $form->dropDownListRow(
 						$model,
@@ -140,7 +140,7 @@
 				$model,
 				'inativo',
 				array(
-					'class' => 'input-small', 
+					'class' => 'input-small text-center', 
 					'options' => array(
 						'language' => 'pt',
 						'format' => 'dd/mm/yyyy'

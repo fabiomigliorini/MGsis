@@ -65,6 +65,7 @@ class Titulo extends MGActiveRecord
 	public $criacao_ate;
 	public $Juros;
 	public $operacao;
+	public $valor;
 	
 	/**
 	 * @return string the associated database table name
@@ -82,7 +83,7 @@ class Titulo extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codtitulo, codtipotitulo, codfilial, codpessoa, codcontacontabil, numero, transacao, sistema, emissao, vencimento, vencimentooriginal', 'required'),
+			array('codtipotitulo, valor, codfilial, codpessoa, codcontacontabil, numero, transacao, emissao, vencimento, vencimentooriginal', 'required'),
 			array('numero, nossonumero', 'length', 'max'=>20),
 			array('fatura', 'length', 'max'=>50),
 			array('debito, credito, debitototal, creditototal, saldo, debitosaldo, creditosaldo', 'length', 'max'=>14),
@@ -146,6 +147,7 @@ class Titulo extends MGActiveRecord
 			'emissao' => 'Emissão',
 			'vencimento' => 'Vencimento',
 			'vencimentooriginal' => 'Vencimento Original',
+			'valor' => 'Valor',
 			'debito' => 'Débito',
 			'credito' => 'Crédito',
 			'gerencial' => 'Gerencial',
@@ -324,7 +326,24 @@ class Titulo extends MGActiveRecord
 		$ret = parent::afterFind();
 		$this->Juros = new MGJuros(array("de" => $this->vencimento,	"valorOriginal" => $this->saldo));
 		$this->operacao = ($this->saldo<0 || $this->credito>$this->debito)?"CR":"DB";
+		$this->valor = abs($this->debito-$this->credito);
 		return $ret;
+	}
+	
+	protected function beforeSave()
+	{
+		$ret = parent::beforeSave();
+		
+		if (empty($this->sistema))
+			$this->sistema = $this->criacao;
+		
+		if ($this->TipoTitulo->credito)
+			$this->credito = Yii::app()->format->unformatNumber($this->valor);
+		else
+			$this->debito = Yii::app()->format->unformatNumber($this->valor);
+		
+		return $ret;
+		
 	}
 	
 }

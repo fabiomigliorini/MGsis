@@ -32,7 +32,7 @@ else
 		<span class="span1">
 			<?php echo $data->transacao; ?>
 		</span>
-		<b class="span2 <?php echo $css_valor; ?>" style="text-align:right">
+		<b class="span2 text-right <?php echo $css_valor; ?>">
 			<?php echo Yii::app()->format->formatNumber($valor); ?> <?php echo $sigla; ?>
 		</b>
 		<span class="span3">

@@ -1,8 +1,8 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Alterar Titulo';
+$this->pagetitle = Yii::app()->name . ' - Alterar Título';
 $this->breadcrumbs=array(
 	'Titulo'=>array('index'),
-	$model->codtitulo=>array('view','id'=>$model->codtitulo),
+	$model->numero=>array('view','id'=>$model->codtitulo),
 	'Alterar',
 );
 
@@ -14,7 +14,7 @@ $this->breadcrumbs=array(
 	);
 	?>
 
-	<h1>Alterar Titulo <?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codtitulo)); ?></h1>
+	<h1>Alterar Título <?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codtitulo)); ?></h1>
 	<br>
 
 	<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>	

@@ -155,7 +155,7 @@ $(document).ready(function(){
 							$model,
 							'vencimento_de',
 							array(
-								'class' => 'input-mini', 
+								'class' => 'input-mini text-center', 
 								'options' => array(
 									'format' => 'dd/mm/yy'
 									),
@@ -169,7 +169,7 @@ $(document).ready(function(){
 							$model,
 							'vencimento_ate',
 							array(
-								'class' => 'input-mini', 
+								'class' => 'input-mini text-center', 
 								'options' => array(
 									'format' => 'dd/mm/yy'
 									),
@@ -185,7 +185,7 @@ $(document).ready(function(){
 							$model,
 							'emissao_de',
 							array(
-								'class' => 'input-mini', 
+								'class' => 'input-mini text-center', 
 								'options' => array(
 									'format' => 'dd/mm/yy'
 									),
@@ -199,7 +199,7 @@ $(document).ready(function(){
 							$model,
 							'emissao_ate',
 							array(
-								'class' => 'input-mini', 
+								'class' => 'input-mini text-center', 
 								'options' => array(
 									'format' => 'dd/mm/yy'
 									),
@@ -215,7 +215,7 @@ $(document).ready(function(){
 							$model,
 							'criacao_de',
 							array(
-								'class' => 'input-mini', 
+								'class' => 'input-mini text-center', 
 								'options' => array(
 									'format' => 'dd/mm/yy'
 									),
@@ -229,7 +229,7 @@ $(document).ready(function(){
 							$model,
 							'criacao_ate',
 							array(
-								'class' => 'input-mini', 
+								'class' => 'input-mini text-center', 
 								'options' => array(
 									'format' => 'dd/mm/yy'
 									),

@@ -59,7 +59,7 @@
 				$model,
 				'inativo',
 				array(
-					'class' => 'input-small', 
+					'class' => 'input-small text-center', 
 					'options' => array(
 						'language' => 'pt',
 						'format' => 'dd/mm/yyyy'
