@@ -36,10 +36,40 @@ class TituloController extends Controller
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->codtitulo));
 		}
+		else
+		{
+			if (isset($_GET["duplicar"]))
+			{
+				$original = $this->loadModel($_GET["duplicar"]);
+				//$model->attributes = $original->attributes;
+				$model->codtitulo = null;
+				$model->codnegocioformapagamento = null;
+				$model->codtituloagrupamento = null;
+				
+				$model->codfilial = $original->codfilial;
+				$model->codpessoa = $original->codpessoa;
+				$model->numero = $original->numero;
+				$model->fatura = $original->fatura;
+				$model->codtipotitulo = $original->codtipotitulo;
+				$model->valor = $original->valor;
+				$model->boleto = $original->boleto;
+				$model->vencimento = $original->vencimento;
+				$model->vencimentooriginal = $original->vencimentooriginal;
+				$model->emissao = $original->emissao;
+				$model->transacao = $original->transacao;
+				$model->gerencial = $original->gerencial;
+				$model->codcontacontabil = $original->codcontacontabil;
+				$model->observacao = $original->observacao;
+				
+			}
+			else
+			{
+				$model->emissao = date('d/m/Y');
+				$model->transacao = date('d/m/Y');
+			}
+		}
 
-		$this->render('create',array(
-			'model'=>$model,
-			));
+		$this->render('create',array('model'=>$model,));
 	}
 
 	/**
@@ -355,6 +385,26 @@ class TituloController extends Controller
 		$rel = new MGRelatorioTitulos($model->search(false));
 		$rel->montaRelatorio();
 		$rel->Output();
+		
+	}
+	
+	public function actionBuscaOperacaoTipoTitulo ()
+	{
+		if (!empty($_GET["codtipotitulo"]))
+			$codtipotitulo = $_GET["codtipotitulo"];
+		else
+			throw new CHttpException(400,'codtipotitulo não informado.');
+		
+		$model=TipoTitulo::model()->findByPk($codtipotitulo);
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		
+		if ($model->credito)
+			$retorno = array("operacao" => "CR");
+		else
+			$retorno = array("operacao" => "DB");
+
+		echo json_encode($retorno);
 		
 	}
 }

@@ -1,22 +1,15 @@
-<div class="registro">
+<div class="registro row-fluid">
 
-	<div class="codigo">
-		<?php echo CHtml::encode($data->getAttributeLabel('codcidade')); ?>:
-		<?php echo CHtml::link(CHtml::encode($data->codcidade),array('view','id'=>$data->codcidade)); ?>
-	</div>
-	<div class="detalhes">
-	
-		<?php echo CHtml::encode($data->getAttributeLabel('codestado')); ?>:
-		<b><?php echo CHtml::encode($data->codestado); ?></b>
-
-		<?php echo CHtml::encode($data->getAttributeLabel('cidade')); ?>:
-		<b><?php echo CHtml::encode($data->cidade); ?></b>
-
-		<?php echo CHtml::encode($data->getAttributeLabel('sigla')); ?>:
-		<b><?php echo CHtml::encode($data->sigla); ?></b>
-
-		<?php echo CHtml::encode($data->getAttributeLabel('codigooficial')); ?>:
-		<b><?php echo CHtml::encode($data->codigooficial); ?></b>
-
-	</div>
+	<b class="span2">
+		<?php echo CHtml::link(CHtml::encode($data->cidade),array('view','id'=>$data->codcidade)); ?>
+	</b>
+	<small class="span1 muted">
+		<?php echo CHtml::encode($data->Estado->sigla); ?>
+	</small>
+	<small class="span1 muted">
+		<?php echo CHtml::encode($data->sigla); ?>
+	</small>
+	<small class="span1 muted">
+		<?php echo CHtml::encode($data->codigooficial); ?>
+	</small>
 </div>

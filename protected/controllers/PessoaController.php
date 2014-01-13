@@ -185,8 +185,16 @@ class PessoaController extends Controller
 		if (strlen($texto)>=3)
 		{
 			
-			// busca pelos campos "fantasia" e "pessoa" 
-			$condition = 'inativo is null and (fantasia ILIKE :fantasia OR pessoa ILIKE :pessoa ';
+			// somente pessoas ativas
+			$condition = 'inativo is null and ';
+			
+			// se quiser inativas limpa o filtro de ativas
+			if (isset($_GET['inativo']) && $_GET['inativo'])
+					$condition = '';
+			
+			// busca pelos campos "fantasia" e "pessoa" 			
+			$condition .= '(fantasia ILIKE :fantasia OR pessoa ILIKE :pessoa ';
+			
 			$params = array(
 				':fantasia'=>'%'.$texto.'%',
 				':pessoa'=>'%'.$texto.'%',
@@ -210,7 +218,7 @@ class PessoaController extends Controller
 			// busca pessoas
 			$pessoas = Pessoa::model()->findAll(
 					array(
-						'select'=>'codpessoa, fantasia, pessoa, cnpj', 
+						'select'=>'codpessoa, fantasia, pessoa, cnpj, inativo', 
 						'order'=>'fantasia', 
 						'condition'=>$condition, 
 						'params'=>$params,
@@ -227,6 +235,7 @@ class PessoaController extends Controller
 					'fantasia' => $pessoa->fantasia,
 					'pessoa' => $pessoa->pessoa,
 					'cnpj' => $pessoa->cnpj,
+					'inativo' => !empty($pessoa->inativo),
 					);
 			}
 			

@@ -24,6 +24,7 @@ $this->menu=array(
 	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
 	array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codtitulo)),
 	array('label'=>'Estornar', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>array('id'=>'btnExcluir')),
+	array('label'=>'Duplicar', 'icon'=>'icon-retweet', 'url'=>array('create','duplicar'=>$model->codtitulo)),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
 

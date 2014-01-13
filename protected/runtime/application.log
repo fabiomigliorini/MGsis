@@ -3408,3 +3408,1838 @@ Stack trace:
 REQUEST_URI=/MGsis/index.php?r=titulo/create
 HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
 ---
+2014/01/13 11:04:10 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'codtipotitulo não informado.' in /var/www/MGsis/protected/controllers/TituloController.php:366
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionBuscaOperacaoTipoTitulo()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('buscaoperacaoti...')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/buscaope...')
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/buscaoperacaotipotitulo
+---
+2014/01/13 11:05:23 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'codtipotitulo não informado.' in /var/www/MGsis/protected/controllers/TituloController.php:366
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionBuscaOperacaoTipoTitulo()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('buscaoperacaoti...')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/buscaope...')
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/buscaoperacaotipotitulo
+---
+2014/01/13 11:05:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/MGsis/protected/controllers/TituloController.php:370
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionBuscaOperacaoTipoTitulo()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('buscaoperacaoti...')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/buscaope...')
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/buscaoperacaotipotitulo&codtipotitulo=199
+---
+2014/01/13 11:06:35 [error] [php] Use of undefined constant retorno - assumed 'retorno' (/var/www/MGsis/protected/controllers/TituloController.php:377)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#5 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/buscaoperacaotipotitulo&codtipotitulo=100
+in /var/www/MGsis/protected/controllers/TituloController.php (377)
+in /var/www/MGsis/index.php (13)
+2014/01/13 11:06:44 [error] [php] Use of undefined constant retorno - assumed 'retorno' (/var/www/MGsis/protected/controllers/TituloController.php:377)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#5 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/buscaoperacaotipotitulo&codtipotitulo=100
+in /var/www/MGsis/protected/controllers/TituloController.php (377)
+in /var/www/MGsis/index.php (13)
+2014/01/13 11:06:45 [error] [php] Use of undefined constant retorno - assumed 'retorno' (/var/www/MGsis/protected/controllers/TituloController.php:377)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#5 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/buscaoperacaotipotitulo&codtipotitulo=100
+in /var/www/MGsis/protected/controllers/TituloController.php (377)
+in /var/www/MGsis/index.php (13)
+2014/01/13 11:06:45 [error] [php] Use of undefined constant retorno - assumed 'retorno' (/var/www/MGsis/protected/controllers/TituloController.php:377)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#5 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/buscaoperacaotipotitulo&codtipotitulo=100
+in /var/www/MGsis/protected/controllers/TituloController.php (377)
+in /var/www/MGsis/index.php (13)
+2014/01/13 11:06:46 [error] [php] Use of undefined constant retorno - assumed 'retorno' (/var/www/MGsis/protected/controllers/TituloController.php:377)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#5 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/buscaoperacaotipotitulo&codtipotitulo=100
+in /var/www/MGsis/protected/controllers/TituloController.php (377)
+in /var/www/MGsis/index.php (13)
+2014/01/13 11:14:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "buscaoperacaotipotitulo" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('buscaoperacaoti...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('buscaoperacaoti...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/buscaope...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/buscaoperacaotipotitulo&codtipotitulo=220
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 11:14:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "buscaoperacaotipotitulo" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('buscaoperacaoti...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('buscaoperacaoti...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/buscaope...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/buscaoperacaotipotitulo&codtipotitulo=220
+---
+2014/01/13 11:22:33 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'codtipotitulo não informado.' in /var/www/MGsis/protected/controllers/TituloController.php:366
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionBuscaOperacaoTipoTitulo()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('buscaoperacaoti...')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/buscaope...')
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/buscaoperacaotipotitulo&codtipotitulo=
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 11:22:49 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'codtipotitulo não informado.' in /var/www/MGsis/protected/controllers/TituloController.php:366
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionBuscaOperacaoTipoTitulo()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('buscaoperacaoti...')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/buscaope...')
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/buscaoperacaotipotitulo&codtipotitulo=
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 11:23:08 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'codtipotitulo não informado.' in /var/www/MGsis/protected/controllers/TituloController.php:366
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionBuscaOperacaoTipoTitulo()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('buscaoperacaoti...')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/buscaope...')
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/buscaoperacaotipotitulo&codtipotitulo=
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 11:23:11 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'codtipotitulo não informado.' in /var/www/MGsis/protected/controllers/TituloController.php:366
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionBuscaOperacaoTipoTitulo()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('buscaoperacaoti...')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/buscaope...')
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/buscaoperacaotipotitulo&codtipotitulo=
+---
+2014/01/13 11:23:58 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'codtipotitulo não informado.' in /var/www/MGsis/protected/controllers/TituloController.php:366
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionBuscaOperacaoTipoTitulo()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('buscaoperacaoti...')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/buscaope...')
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/buscaoperacaotipotitulo&codtipotitulo=
+---
+2014/01/13 11:38:28 [error] [exception.CException] exception 'CException' with message 'Titulo and its behaviors do not have a method or closure named "isNewRecord".' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(227): CComponent->__call('isNewRecord', Array)
+#1 /var/www/MGsis/protected/models/Titulo.php(105): CActiveRecord->__call('isNewRecord', Array)
+#2 /var/www/MGsis/protected/models/Titulo.php(105): Titulo->isNewRecord()
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->podeAlterarValor('valor', Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'valor')
+#5 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#7 /var/www/MGsis/protected/controllers/TituloController.php(161): CActiveForm::validate(Object(Titulo))
+#8 /var/www/MGsis/protected/controllers/TituloController.php(55): TituloController->performAjaxValidation(Object(Titulo))
+#9 [internal function]: TituloController->actionUpdate('30044639')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/update')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/update&id=30044639
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/update&id=30044639
+---
+2014/01/13 11:38:28 [error] [exception.CException] exception 'CException' with message 'Titulo and its behaviors do not have a method or closure named "isNewRecord".' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(227): CComponent->__call('isNewRecord', Array)
+#1 /var/www/MGsis/protected/models/Titulo.php(105): CActiveRecord->__call('isNewRecord', Array)
+#2 /var/www/MGsis/protected/models/Titulo.php(105): Titulo->isNewRecord()
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->podeAlterarValor('valor', Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'valor')
+#5 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#6 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(805): CModel->validate(NULL)
+#7 /var/www/MGsis/protected/controllers/TituloController.php(60): CActiveRecord->save()
+#8 [internal function]: TituloController->actionUpdate('30044639')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/update')
+#16 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#17 /var/www/MGsis/index.php(13): CApplication->run()
+#18 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/update&id=30044639
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/update&id=30044639
+---
+2014/01/13 11:45:45 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'codtipotitulo não informado.' in /var/www/MGsis/protected/controllers/TituloController.php:366
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionBuscaOperacaoTipoTitulo()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('buscaoperacaoti...')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/buscaope...')
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/buscaoperacaotipotitulo&codtipotitulo=
+---
+2014/01/13 12:13:58 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchAll(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "". A declaração SQL executada foi: SELECT "TipoTitulo"."codtipotitulo" AS "t1_c0", "TipoTitulo"."tipotitulo" AS "t1_c1", "TipoTitulo"."pagar" AS "t1_c2", "TipoTitulo"."receber" AS "t1_c3", "TipoTitulo"."observacoes" AS "t1_c4", "TipoTitulo"."codtipomovimentotitulo" AS "t1_c5", "TipoTitulo"."debito" AS "t1_c6", "TipoTitulo"."credito" AS "t1_c7", "TipoTitulo"."alteracao" AS "t1_c8", "TipoTitulo"."codusuarioalteracao" AS "t1_c9", "TipoTitulo"."criacao" AS "t1_c10", "TipoTitulo"."codusuariocriacao" AS "t1_c11" FROM "mgsis"."tbltipotitulo" "TipoTitulo"  WHERE ("TipoTitulo"."codtipotitulo"=:ypl0).
+in /var/www/MGsis/protected/models/Titulo.php (125)
+in /var/www/MGsis/protected/controllers/TituloController.php (161)
+in /var/www/MGsis/protected/controllers/TituloController.php (55)
+2014/01/13 12:13:58 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "". The SQL statement executed was: SELECT "TipoTitulo"."codtipotitulo" AS "t1_c0", "TipoTitulo"."tipotitulo" AS "t1_c1", "TipoTitulo"."pagar" AS "t1_c2", "TipoTitulo"."receber" AS "t1_c3", "TipoTitulo"."observacoes" AS "t1_c4", "TipoTitulo"."codtipomovimentotitulo" AS "t1_c5", "TipoTitulo"."debito" AS "t1_c6", "TipoTitulo"."credito" AS "t1_c7", "TipoTitulo"."alteracao" AS "t1_c8", "TipoTitulo"."codusuarioalteracao" AS "t1_c9", "TipoTitulo"."criacao" AS "t1_c10", "TipoTitulo"."codusuariocriacao" AS "t1_c11" FROM "mgsis"."tbltipotitulo" "TipoTitulo"  WHERE ("TipoTitulo"."codtipotitulo"=:ypl0)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(507): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(163): CJoinElement->lazyFind(Object(Titulo))
+#4 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(281): CActiveFinder->lazyFind(Object(Titulo))
+#5 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(143): CActiveRecord->getRelated('TipoTitulo')
+#6 /var/www/MGsis/protected/models/Titulo.php(125): CActiveRecord->__get('TipoTitulo')
+#7 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->podeAlterarTipoTitulo('codtipotitulo', Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'codtipotitulo')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#11 /var/www/MGsis/protected/controllers/TituloController.php(161): CActiveForm::validate(Object(Titulo))
+#12 /var/www/MGsis/protected/controllers/TituloController.php(55): TituloController->performAjaxValidation(Object(Titulo))
+#13 [internal function]: TituloController->actionUpdate('10040059')
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/update')
+#21 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#22 /var/www/MGsis/index.php(13): CApplication->run()
+#23 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/update&id=10040059
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/update&id=10040059
+---
+2014/01/13 12:14:04 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchAll(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "". A declaração SQL executada foi: SELECT "TipoTitulo"."codtipotitulo" AS "t1_c0", "TipoTitulo"."tipotitulo" AS "t1_c1", "TipoTitulo"."pagar" AS "t1_c2", "TipoTitulo"."receber" AS "t1_c3", "TipoTitulo"."observacoes" AS "t1_c4", "TipoTitulo"."codtipomovimentotitulo" AS "t1_c5", "TipoTitulo"."debito" AS "t1_c6", "TipoTitulo"."credito" AS "t1_c7", "TipoTitulo"."alteracao" AS "t1_c8", "TipoTitulo"."codusuarioalteracao" AS "t1_c9", "TipoTitulo"."criacao" AS "t1_c10", "TipoTitulo"."codusuariocriacao" AS "t1_c11" FROM "mgsis"."tbltipotitulo" "TipoTitulo"  WHERE ("TipoTitulo"."codtipotitulo"=:ypl0).
+in /var/www/MGsis/protected/models/Titulo.php (125)
+in /var/www/MGsis/protected/controllers/TituloController.php (161)
+in /var/www/MGsis/protected/controllers/TituloController.php (55)
+2014/01/13 12:14:04 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "". The SQL statement executed was: SELECT "TipoTitulo"."codtipotitulo" AS "t1_c0", "TipoTitulo"."tipotitulo" AS "t1_c1", "TipoTitulo"."pagar" AS "t1_c2", "TipoTitulo"."receber" AS "t1_c3", "TipoTitulo"."observacoes" AS "t1_c4", "TipoTitulo"."codtipomovimentotitulo" AS "t1_c5", "TipoTitulo"."debito" AS "t1_c6", "TipoTitulo"."credito" AS "t1_c7", "TipoTitulo"."alteracao" AS "t1_c8", "TipoTitulo"."codusuarioalteracao" AS "t1_c9", "TipoTitulo"."criacao" AS "t1_c10", "TipoTitulo"."codusuariocriacao" AS "t1_c11" FROM "mgsis"."tbltipotitulo" "TipoTitulo"  WHERE ("TipoTitulo"."codtipotitulo"=:ypl0)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(507): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(163): CJoinElement->lazyFind(Object(Titulo))
+#4 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(281): CActiveFinder->lazyFind(Object(Titulo))
+#5 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(143): CActiveRecord->getRelated('TipoTitulo')
+#6 /var/www/MGsis/protected/models/Titulo.php(125): CActiveRecord->__get('TipoTitulo')
+#7 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->podeAlterarTipoTitulo('codtipotitulo', Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'codtipotitulo')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#11 /var/www/MGsis/protected/controllers/TituloController.php(161): CActiveForm::validate(Object(Titulo))
+#12 /var/www/MGsis/protected/controllers/TituloController.php(55): TituloController->performAjaxValidation(Object(Titulo))
+#13 [internal function]: TituloController->actionUpdate('10040059')
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/update')
+#21 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#22 /var/www/MGsis/index.php(13): CApplication->run()
+#23 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/update&id=10040059
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/update&id=10040059
+---
+2014/01/13 12:14:08 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchAll(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "". A declaração SQL executada foi: SELECT "TipoTitulo"."codtipotitulo" AS "t1_c0", "TipoTitulo"."tipotitulo" AS "t1_c1", "TipoTitulo"."pagar" AS "t1_c2", "TipoTitulo"."receber" AS "t1_c3", "TipoTitulo"."observacoes" AS "t1_c4", "TipoTitulo"."codtipomovimentotitulo" AS "t1_c5", "TipoTitulo"."debito" AS "t1_c6", "TipoTitulo"."credito" AS "t1_c7", "TipoTitulo"."alteracao" AS "t1_c8", "TipoTitulo"."codusuarioalteracao" AS "t1_c9", "TipoTitulo"."criacao" AS "t1_c10", "TipoTitulo"."codusuariocriacao" AS "t1_c11" FROM "mgsis"."tbltipotitulo" "TipoTitulo"  WHERE ("TipoTitulo"."codtipotitulo"=:ypl0).
+in /var/www/MGsis/protected/models/Titulo.php (125)
+in /var/www/MGsis/protected/controllers/TituloController.php (60)
+in /var/www/MGsis/index.php (13)
+2014/01/13 12:14:08 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "". The SQL statement executed was: SELECT "TipoTitulo"."codtipotitulo" AS "t1_c0", "TipoTitulo"."tipotitulo" AS "t1_c1", "TipoTitulo"."pagar" AS "t1_c2", "TipoTitulo"."receber" AS "t1_c3", "TipoTitulo"."observacoes" AS "t1_c4", "TipoTitulo"."codtipomovimentotitulo" AS "t1_c5", "TipoTitulo"."debito" AS "t1_c6", "TipoTitulo"."credito" AS "t1_c7", "TipoTitulo"."alteracao" AS "t1_c8", "TipoTitulo"."codusuarioalteracao" AS "t1_c9", "TipoTitulo"."criacao" AS "t1_c10", "TipoTitulo"."codusuariocriacao" AS "t1_c11" FROM "mgsis"."tbltipotitulo" "TipoTitulo"  WHERE ("TipoTitulo"."codtipotitulo"=:ypl0)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(507): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(163): CJoinElement->lazyFind(Object(Titulo))
+#4 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(281): CActiveFinder->lazyFind(Object(Titulo))
+#5 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(143): CActiveRecord->getRelated('TipoTitulo')
+#6 /var/www/MGsis/protected/models/Titulo.php(125): CActiveRecord->__get('TipoTitulo')
+#7 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->podeAlterarTipoTitulo('codtipotitulo', Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'codtipotitulo')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#10 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(805): CModel->validate(NULL)
+#11 /var/www/MGsis/protected/controllers/TituloController.php(60): CActiveRecord->save()
+#12 [internal function]: TituloController->actionUpdate('10040059')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/update')
+#20 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#21 /var/www/MGsis/index.php(13): CApplication->run()
+#22 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/update&id=10040059
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/update&id=10040059
+---
+2014/01/13 12:18:53 [error] [exception.CException] exception 'CException' with message 'A propriedade "Titulo._attributes" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('_attributes')
+#1 /var/www/MGsis/protected/views/titulo/_form.php(10): CActiveRecord->__get('_attributes')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#5 /var/www/MGsis/protected/views/titulo/update.php(20): CController->renderPartial('_form', Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('update', Array, true)
+#10 /var/www/MGsis/protected/controllers/TituloController.php(66): CController->render('update', Array)
+#11 [internal function]: TituloController->actionUpdate('30044670')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/update')
+#19 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /var/www/MGsis/index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/update&id=30044670
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/view&id=30044670
+---
+2014/01/13 12:56:03 [error] [php] Undefined index: inativo (/var/www/MGsis/protected/controllers/PessoaController.php:192)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): PessoaController->runAction()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): PessoaController->runActionWithFilters()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): PessoaController->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#5 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=pessoa/ajaxbuscapessoa&texto=cachimbo+ina&limite=20&pagina=1&_=1389628252750
+in /var/www/MGsis/protected/controllers/PessoaController.php (192)
+in /var/www/MGsis/index.php (13)
+2014/01/13 14:17:25 [error] [php] Missing argument 1 for CHtml::encode(), called in /var/www/MGsis/protected/views/cidade/_view.php on line 8 and defined (/var/www/yii-1.1.14.f0fee9/framework/web/helpers/CHtml.php:101)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CidadeController->renderInternal()
+#1 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(291): CidadeController->renderFile()
+#2 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(167): CListView->renderItems()
+#3 unknown(0): CListView->renderSection()
+#4 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback()
+#5 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(135): CListView->renderContent()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(173): CListView->run()
+#7 /var/www/MGsis/protected/views/cidade/index.php(68): CidadeController->widget()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CidadeController->renderInternal()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CidadeController->renderFile()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CidadeController->renderPartial()
+#12 /var/www/MGsis/protected/controllers/CidadeController.php(105): CidadeController->render()
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): CidadeController->actionIndex()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CidadeController->runAction()
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CidadeController->runActionWithFilters()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CidadeController->run()
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#19 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=cidade
+in /var/www/MGsis/protected/views/cidade/_view.php (8)
+in /var/www/MGsis/protected/views/cidade/index.php (68)
+in /var/www/MGsis/protected/controllers/CidadeController.php (105)
+2014/01/13 14:25:02 [error] [exception.CException] exception 'CException' with message 'A propriedade "Portador.Filial" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('Filial')
+#1 /var/www/MGsis/protected/views/portador/_view.php(12): CActiveRecord->__get('Filial')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(130): require('/var/www/MGsis/...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, false)
+#4 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(291): CBaseController->renderFile('/var/www/MGsis/...', Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(167): CListView->renderItems()
+#6 [internal function]: CBaseListView->renderSection(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{items} {pager}')
+#8 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(135): CBaseListView->renderContent()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(173): CBaseListView->run()
+#10 /var/www/MGsis/protected/views/portador/index.php(75): CBaseController->widget('zii.widgets.CLi...', Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#15 /var/www/MGsis/protected/controllers/PortadorController.php(119): CController->render('index', Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): PortadorController->actionIndex()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('portador')
+#22 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/MGsis/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/MGsis/index.php?r=portador
+---
+2014/01/13 14:26:41 [error] [php] Trying to get property of non-object (/var/www/MGsis/protected/views/portador/_view.php:12)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(291): PortadorController->renderFile()
+#1 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(167): CListView->renderItems()
+#2 unknown(0): CListView->renderSection()
+#3 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback()
+#4 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(135): CListView->renderContent()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(173): CListView->run()
+#6 /var/www/MGsis/protected/views/portador/index.php(75): PortadorController->widget()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): PortadorController->renderInternal()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): PortadorController->renderFile()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): PortadorController->renderPartial()
+#11 /var/www/MGsis/protected/controllers/PortadorController.php(119): PortadorController->render()
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): PortadorController->actionIndex()
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): PortadorController->runAction()
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): PortadorController->runActionWithFilters()
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): PortadorController->run()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#18 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=portador
+in /var/www/MGsis/protected/views/portador/_view.php (12)
+in /var/www/MGsis/protected/views/portador/index.php (75)
+in /var/www/MGsis/protected/controllers/PortadorController.php (119)
+2014/01/13 14:27:57 [error] [php] include(Banco.php): failed to open stream: No such file or directory (/var/www/yii-1.1.14.f0fee9/framework/YiiBase.php:427)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(395): spl_autoload_call()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(182): model()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(230): CActiveFinder->getModel()
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(48): CActiveFinder->buildJoinTree()
+#4 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(909): CActiveFinder->__construct()
+#5 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(280): Portador->getActiveFinder()
+#6 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(181): Portador->getRelated()
+#7 /var/www/MGsis/protected/views/portador/_view.php(7): Portador->__isset()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(130): require()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): PortadorController->renderInternal()
+#10 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(291): PortadorController->renderFile()
+#11 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(167): CListView->renderItems()
+#12 unknown(0): CListView->renderSection()
+#13 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback()
+#14 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(135): CListView->renderContent()
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(173): CListView->run()
+#16 /var/www/MGsis/protected/views/portador/index.php(75): PortadorController->widget()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require()
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): PortadorController->renderInternal()
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): PortadorController->renderFile()
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): PortadorController->renderPartial()
+#21 /var/www/MGsis/protected/controllers/PortadorController.php(119): PortadorController->render()
+#22 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): PortadorController->actionIndex()
+#23 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#24 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): PortadorController->runAction()
+#25 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): PortadorController->runActionWithFilters()
+#26 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): PortadorController->run()
+#27 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#28 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#29 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=portador
+in /var/www/MGsis/protected/views/portador/_view.php (7)
+in /var/www/MGsis/protected/views/portador/index.php (75)
+in /var/www/MGsis/protected/controllers/PortadorController.php (119)
+2014/01/13 15:12:18 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchAll(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "". A declaração SQL executada foi: SELECT "Portador"."codportador" AS "t1_c0", "Portador"."portador" AS "t1_c1", "Portador"."codbanco" AS "t1_c2", "Portador"."agencia" AS "t1_c3", "Portador"."agenciadigito" AS "t1_c4", "Portador"."conta" AS "t1_c5", "Portador"."contadigito" AS "t1_c6", "Portador"."emiteboleto" AS "t1_c7", "Portador"."codfilial" AS "t1_c8", "Portador"."convenio" AS "t1_c9", "Portador"."diretorioremessa" AS "t1_c10", "Portador"."diretorioretorno" AS "t1_c11", "Portador"."carteira" AS "t1_c12", "Portador"."alteracao" AS "t1_c13", "Portador"."codusuarioalteracao" AS "t1_c14", "Portador"."criacao" AS "t1_c15", "Portador"."codusuariocriacao" AS "t1_c16" FROM "mgsis"."tblportador" "Portador"  WHERE ("Portador"."codportador"=:ypl0).
+in /var/www/MGsis/protected/models/Titulo.php (136)
+in /var/www/MGsis/protected/controllers/TituloController.php (161)
+in /var/www/MGsis/protected/controllers/TituloController.php (55)
+2014/01/13 15:12:18 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "". The SQL statement executed was: SELECT "Portador"."codportador" AS "t1_c0", "Portador"."portador" AS "t1_c1", "Portador"."codbanco" AS "t1_c2", "Portador"."agencia" AS "t1_c3", "Portador"."agenciadigito" AS "t1_c4", "Portador"."conta" AS "t1_c5", "Portador"."contadigito" AS "t1_c6", "Portador"."emiteboleto" AS "t1_c7", "Portador"."codfilial" AS "t1_c8", "Portador"."convenio" AS "t1_c9", "Portador"."diretorioremessa" AS "t1_c10", "Portador"."diretorioretorno" AS "t1_c11", "Portador"."carteira" AS "t1_c12", "Portador"."alteracao" AS "t1_c13", "Portador"."codusuarioalteracao" AS "t1_c14", "Portador"."criacao" AS "t1_c15", "Portador"."codusuariocriacao" AS "t1_c16" FROM "mgsis"."tblportador" "Portador"  WHERE ("Portador"."codportador"=:ypl0)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(507): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(163): CJoinElement->lazyFind(Object(Titulo))
+#4 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(281): CActiveFinder->lazyFind(Object(Titulo))
+#5 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(181): CActiveRecord->getRelated('Portador')
+#6 /var/www/MGsis/protected/models/Titulo.php(136): CActiveRecord->__isset('Portador')
+#7 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaFilialPortador('codportador', Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'codportador')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#11 /var/www/MGsis/protected/controllers/TituloController.php(161): CActiveForm::validate(Object(Titulo))
+#12 /var/www/MGsis/protected/controllers/TituloController.php(55): TituloController->performAjaxValidation(Object(Titulo))
+#13 [internal function]: TituloController->actionUpdate('30044670')
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/update')
+#21 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#22 /var/www/MGsis/index.php(13): CApplication->run()
+#23 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/update&id=30044670
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/update&id=30044670
+---
+2014/01/13 15:14:14 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchAll(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "". A declaração SQL executada foi: SELECT "Portador"."codportador" AS "t1_c0", "Portador"."portador" AS "t1_c1", "Portador"."codbanco" AS "t1_c2", "Portador"."agencia" AS "t1_c3", "Portador"."agenciadigito" AS "t1_c4", "Portador"."conta" AS "t1_c5", "Portador"."contadigito" AS "t1_c6", "Portador"."emiteboleto" AS "t1_c7", "Portador"."codfilial" AS "t1_c8", "Portador"."convenio" AS "t1_c9", "Portador"."diretorioremessa" AS "t1_c10", "Portador"."diretorioretorno" AS "t1_c11", "Portador"."carteira" AS "t1_c12", "Portador"."alteracao" AS "t1_c13", "Portador"."codusuarioalteracao" AS "t1_c14", "Portador"."criacao" AS "t1_c15", "Portador"."codusuariocriacao" AS "t1_c16" FROM "mgsis"."tblportador" "Portador"  WHERE ("Portador"."codportador"=:ypl0).
+in /var/www/MGsis/protected/models/Titulo.php (136)
+in /var/www/MGsis/protected/controllers/TituloController.php (161)
+in /var/www/MGsis/protected/controllers/TituloController.php (55)
+2014/01/13 15:14:14 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "". The SQL statement executed was: SELECT "Portador"."codportador" AS "t1_c0", "Portador"."portador" AS "t1_c1", "Portador"."codbanco" AS "t1_c2", "Portador"."agencia" AS "t1_c3", "Portador"."agenciadigito" AS "t1_c4", "Portador"."conta" AS "t1_c5", "Portador"."contadigito" AS "t1_c6", "Portador"."emiteboleto" AS "t1_c7", "Portador"."codfilial" AS "t1_c8", "Portador"."convenio" AS "t1_c9", "Portador"."diretorioremessa" AS "t1_c10", "Portador"."diretorioretorno" AS "t1_c11", "Portador"."carteira" AS "t1_c12", "Portador"."alteracao" AS "t1_c13", "Portador"."codusuarioalteracao" AS "t1_c14", "Portador"."criacao" AS "t1_c15", "Portador"."codusuariocriacao" AS "t1_c16" FROM "mgsis"."tblportador" "Portador"  WHERE ("Portador"."codportador"=:ypl0)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(507): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(163): CJoinElement->lazyFind(Object(Titulo))
+#4 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(281): CActiveFinder->lazyFind(Object(Titulo))
+#5 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(181): CActiveRecord->getRelated('Portador')
+#6 /var/www/MGsis/protected/models/Titulo.php(136): CActiveRecord->__isset('Portador')
+#7 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaFilialPortador('codportador', Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'codportador')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#11 /var/www/MGsis/protected/controllers/TituloController.php(161): CActiveForm::validate(Object(Titulo))
+#12 /var/www/MGsis/protected/controllers/TituloController.php(55): TituloController->performAjaxValidation(Object(Titulo))
+#13 [internal function]: TituloController->actionUpdate('30044670')
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/update')
+#21 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#22 /var/www/MGsis/index.php(13): CApplication->run()
+#23 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/update&id=30044670
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/update&id=30044670
+---
+2014/01/13 15:14:34 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchAll(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "". A declaração SQL executada foi: SELECT "Portador"."codportador" AS "t1_c0", "Portador"."portador" AS "t1_c1", "Portador"."codbanco" AS "t1_c2", "Portador"."agencia" AS "t1_c3", "Portador"."agenciadigito" AS "t1_c4", "Portador"."conta" AS "t1_c5", "Portador"."contadigito" AS "t1_c6", "Portador"."emiteboleto" AS "t1_c7", "Portador"."codfilial" AS "t1_c8", "Portador"."convenio" AS "t1_c9", "Portador"."diretorioremessa" AS "t1_c10", "Portador"."diretorioretorno" AS "t1_c11", "Portador"."carteira" AS "t1_c12", "Portador"."alteracao" AS "t1_c13", "Portador"."codusuarioalteracao" AS "t1_c14", "Portador"."criacao" AS "t1_c15", "Portador"."codusuariocriacao" AS "t1_c16" FROM "mgsis"."tblportador" "Portador"  WHERE ("Portador"."codportador"=:ypl0).
+in /var/www/MGsis/protected/models/Titulo.php (136)
+in /var/www/MGsis/protected/controllers/TituloController.php (161)
+in /var/www/MGsis/protected/controllers/TituloController.php (55)
+2014/01/13 15:14:34 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "". The SQL statement executed was: SELECT "Portador"."codportador" AS "t1_c0", "Portador"."portador" AS "t1_c1", "Portador"."codbanco" AS "t1_c2", "Portador"."agencia" AS "t1_c3", "Portador"."agenciadigito" AS "t1_c4", "Portador"."conta" AS "t1_c5", "Portador"."contadigito" AS "t1_c6", "Portador"."emiteboleto" AS "t1_c7", "Portador"."codfilial" AS "t1_c8", "Portador"."convenio" AS "t1_c9", "Portador"."diretorioremessa" AS "t1_c10", "Portador"."diretorioretorno" AS "t1_c11", "Portador"."carteira" AS "t1_c12", "Portador"."alteracao" AS "t1_c13", "Portador"."codusuarioalteracao" AS "t1_c14", "Portador"."criacao" AS "t1_c15", "Portador"."codusuariocriacao" AS "t1_c16" FROM "mgsis"."tblportador" "Portador"  WHERE ("Portador"."codportador"=:ypl0)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(507): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(163): CJoinElement->lazyFind(Object(Titulo))
+#4 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(281): CActiveFinder->lazyFind(Object(Titulo))
+#5 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(181): CActiveRecord->getRelated('Portador')
+#6 /var/www/MGsis/protected/models/Titulo.php(136): CActiveRecord->__isset('Portador')
+#7 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaFilialPortador('codportador', Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'codportador')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#11 /var/www/MGsis/protected/controllers/TituloController.php(161): CActiveForm::validate(Object(Titulo))
+#12 /var/www/MGsis/protected/controllers/TituloController.php(55): TituloController->performAjaxValidation(Object(Titulo))
+#13 [internal function]: TituloController->actionUpdate('30044670')
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/update')
+#21 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#22 /var/www/MGsis/index.php(13): CApplication->run()
+#23 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/update&id=30044670
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/update&id=30044670
+---
+2014/01/13 15:53:42 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchAll(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "". A declaração SQL executada foi: SELECT "Portador"."codportador" AS "t1_c0", "Portador"."portador" AS "t1_c1", "Portador"."codbanco" AS "t1_c2", "Portador"."agencia" AS "t1_c3", "Portador"."agenciadigito" AS "t1_c4", "Portador"."conta" AS "t1_c5", "Portador"."contadigito" AS "t1_c6", "Portador"."emiteboleto" AS "t1_c7", "Portador"."codfilial" AS "t1_c8", "Portador"."convenio" AS "t1_c9", "Portador"."diretorioremessa" AS "t1_c10", "Portador"."diretorioretorno" AS "t1_c11", "Portador"."carteira" AS "t1_c12", "Portador"."alteracao" AS "t1_c13", "Portador"."codusuarioalteracao" AS "t1_c14", "Portador"."criacao" AS "t1_c15", "Portador"."codusuariocriacao" AS "t1_c16" FROM "mgsis"."tblportador" "Portador"  WHERE ("Portador"."codportador"=:ypl0).
+in /var/www/MGsis/protected/models/Titulo.php (136)
+in /var/www/MGsis/protected/controllers/TituloController.php (36)
+in /var/www/MGsis/index.php (13)
+2014/01/13 15:53:42 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "". The SQL statement executed was: SELECT "Portador"."codportador" AS "t1_c0", "Portador"."portador" AS "t1_c1", "Portador"."codbanco" AS "t1_c2", "Portador"."agencia" AS "t1_c3", "Portador"."agenciadigito" AS "t1_c4", "Portador"."conta" AS "t1_c5", "Portador"."contadigito" AS "t1_c6", "Portador"."emiteboleto" AS "t1_c7", "Portador"."codfilial" AS "t1_c8", "Portador"."convenio" AS "t1_c9", "Portador"."diretorioremessa" AS "t1_c10", "Portador"."diretorioretorno" AS "t1_c11", "Portador"."carteira" AS "t1_c12", "Portador"."alteracao" AS "t1_c13", "Portador"."codusuarioalteracao" AS "t1_c14", "Portador"."criacao" AS "t1_c15", "Portador"."codusuariocriacao" AS "t1_c16" FROM "mgsis"."tblportador" "Portador"  WHERE ("Portador"."codportador"=:ypl0)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(507): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(163): CJoinElement->lazyFind(Object(Titulo))
+#4 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(281): CActiveFinder->lazyFind(Object(Titulo))
+#5 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(181): CActiveRecord->getRelated('Portador')
+#6 /var/www/MGsis/protected/models/Titulo.php(136): CActiveRecord->__isset('Portador')
+#7 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaFilialPortador('codportador', Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'codportador')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#10 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(805): CModel->validate(NULL)
+#11 /var/www/MGsis/protected/controllers/TituloController.php(36): CActiveRecord->save()
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#18 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/MGsis/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 15:54:46 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchAll(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "". A declaração SQL executada foi: SELECT "Portador"."codportador" AS "t1_c0", "Portador"."portador" AS "t1_c1", "Portador"."codbanco" AS "t1_c2", "Portador"."agencia" AS "t1_c3", "Portador"."agenciadigito" AS "t1_c4", "Portador"."conta" AS "t1_c5", "Portador"."contadigito" AS "t1_c6", "Portador"."emiteboleto" AS "t1_c7", "Portador"."codfilial" AS "t1_c8", "Portador"."convenio" AS "t1_c9", "Portador"."diretorioremessa" AS "t1_c10", "Portador"."diretorioretorno" AS "t1_c11", "Portador"."carteira" AS "t1_c12", "Portador"."alteracao" AS "t1_c13", "Portador"."codusuarioalteracao" AS "t1_c14", "Portador"."criacao" AS "t1_c15", "Portador"."codusuariocriacao" AS "t1_c16" FROM "mgsis"."tblportador" "Portador"  WHERE ("Portador"."codportador"=:ypl0).
+in /var/www/MGsis/protected/models/Titulo.php (137)
+in /var/www/MGsis/protected/controllers/TituloController.php (161)
+in /var/www/MGsis/protected/controllers/TituloController.php (31)
+2014/01/13 15:54:46 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "". The SQL statement executed was: SELECT "Portador"."codportador" AS "t1_c0", "Portador"."portador" AS "t1_c1", "Portador"."codbanco" AS "t1_c2", "Portador"."agencia" AS "t1_c3", "Portador"."agenciadigito" AS "t1_c4", "Portador"."conta" AS "t1_c5", "Portador"."contadigito" AS "t1_c6", "Portador"."emiteboleto" AS "t1_c7", "Portador"."codfilial" AS "t1_c8", "Portador"."convenio" AS "t1_c9", "Portador"."diretorioremessa" AS "t1_c10", "Portador"."diretorioretorno" AS "t1_c11", "Portador"."carteira" AS "t1_c12", "Portador"."alteracao" AS "t1_c13", "Portador"."codusuarioalteracao" AS "t1_c14", "Portador"."criacao" AS "t1_c15", "Portador"."codusuariocriacao" AS "t1_c16" FROM "mgsis"."tblportador" "Portador"  WHERE ("Portador"."codportador"=:ypl0)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(507): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(163): CJoinElement->lazyFind(Object(Titulo))
+#4 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(281): CActiveFinder->lazyFind(Object(Titulo))
+#5 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(181): CActiveRecord->getRelated('Portador')
+#6 /var/www/MGsis/protected/models/Titulo.php(137): CActiveRecord->__isset('Portador')
+#7 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaFilialPortador('codportador', Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'codportador')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#11 /var/www/MGsis/protected/controllers/TituloController.php(161): CActiveForm::validate(Object(Titulo))
+#12 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation(Object(Titulo))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#19 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /var/www/MGsis/index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 15:54:48 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchAll(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "". A declaração SQL executada foi: SELECT "Portador"."codportador" AS "t1_c0", "Portador"."portador" AS "t1_c1", "Portador"."codbanco" AS "t1_c2", "Portador"."agencia" AS "t1_c3", "Portador"."agenciadigito" AS "t1_c4", "Portador"."conta" AS "t1_c5", "Portador"."contadigito" AS "t1_c6", "Portador"."emiteboleto" AS "t1_c7", "Portador"."codfilial" AS "t1_c8", "Portador"."convenio" AS "t1_c9", "Portador"."diretorioremessa" AS "t1_c10", "Portador"."diretorioretorno" AS "t1_c11", "Portador"."carteira" AS "t1_c12", "Portador"."alteracao" AS "t1_c13", "Portador"."codusuarioalteracao" AS "t1_c14", "Portador"."criacao" AS "t1_c15", "Portador"."codusuariocriacao" AS "t1_c16" FROM "mgsis"."tblportador" "Portador"  WHERE ("Portador"."codportador"=:ypl0).
+in /var/www/MGsis/protected/models/Titulo.php (137)
+in /var/www/MGsis/protected/controllers/TituloController.php (161)
+in /var/www/MGsis/protected/controllers/TituloController.php (31)
+2014/01/13 15:54:48 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "". The SQL statement executed was: SELECT "Portador"."codportador" AS "t1_c0", "Portador"."portador" AS "t1_c1", "Portador"."codbanco" AS "t1_c2", "Portador"."agencia" AS "t1_c3", "Portador"."agenciadigito" AS "t1_c4", "Portador"."conta" AS "t1_c5", "Portador"."contadigito" AS "t1_c6", "Portador"."emiteboleto" AS "t1_c7", "Portador"."codfilial" AS "t1_c8", "Portador"."convenio" AS "t1_c9", "Portador"."diretorioremessa" AS "t1_c10", "Portador"."diretorioretorno" AS "t1_c11", "Portador"."carteira" AS "t1_c12", "Portador"."alteracao" AS "t1_c13", "Portador"."codusuarioalteracao" AS "t1_c14", "Portador"."criacao" AS "t1_c15", "Portador"."codusuariocriacao" AS "t1_c16" FROM "mgsis"."tblportador" "Portador"  WHERE ("Portador"."codportador"=:ypl0)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(507): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(163): CJoinElement->lazyFind(Object(Titulo))
+#4 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(281): CActiveFinder->lazyFind(Object(Titulo))
+#5 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(181): CActiveRecord->getRelated('Portador')
+#6 /var/www/MGsis/protected/models/Titulo.php(137): CActiveRecord->__isset('Portador')
+#7 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaFilialPortador('codportador', Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'codportador')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#11 /var/www/MGsis/protected/controllers/TituloController.php(161): CActiveForm::validate(Object(Titulo))
+#12 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation(Object(Titulo))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#19 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /var/www/MGsis/index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 15:54:48 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchAll(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "". A declaração SQL executada foi: SELECT "Portador"."codportador" AS "t1_c0", "Portador"."portador" AS "t1_c1", "Portador"."codbanco" AS "t1_c2", "Portador"."agencia" AS "t1_c3", "Portador"."agenciadigito" AS "t1_c4", "Portador"."conta" AS "t1_c5", "Portador"."contadigito" AS "t1_c6", "Portador"."emiteboleto" AS "t1_c7", "Portador"."codfilial" AS "t1_c8", "Portador"."convenio" AS "t1_c9", "Portador"."diretorioremessa" AS "t1_c10", "Portador"."diretorioretorno" AS "t1_c11", "Portador"."carteira" AS "t1_c12", "Portador"."alteracao" AS "t1_c13", "Portador"."codusuarioalteracao" AS "t1_c14", "Portador"."criacao" AS "t1_c15", "Portador"."codusuariocriacao" AS "t1_c16" FROM "mgsis"."tblportador" "Portador"  WHERE ("Portador"."codportador"=:ypl0).
+in /var/www/MGsis/protected/models/Titulo.php (137)
+in /var/www/MGsis/protected/controllers/TituloController.php (36)
+in /var/www/MGsis/index.php (13)
+2014/01/13 15:54:48 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "". The SQL statement executed was: SELECT "Portador"."codportador" AS "t1_c0", "Portador"."portador" AS "t1_c1", "Portador"."codbanco" AS "t1_c2", "Portador"."agencia" AS "t1_c3", "Portador"."agenciadigito" AS "t1_c4", "Portador"."conta" AS "t1_c5", "Portador"."contadigito" AS "t1_c6", "Portador"."emiteboleto" AS "t1_c7", "Portador"."codfilial" AS "t1_c8", "Portador"."convenio" AS "t1_c9", "Portador"."diretorioremessa" AS "t1_c10", "Portador"."diretorioretorno" AS "t1_c11", "Portador"."carteira" AS "t1_c12", "Portador"."alteracao" AS "t1_c13", "Portador"."codusuarioalteracao" AS "t1_c14", "Portador"."criacao" AS "t1_c15", "Portador"."codusuariocriacao" AS "t1_c16" FROM "mgsis"."tblportador" "Portador"  WHERE ("Portador"."codportador"=:ypl0)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(507): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(163): CJoinElement->lazyFind(Object(Titulo))
+#4 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(281): CActiveFinder->lazyFind(Object(Titulo))
+#5 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(181): CActiveRecord->getRelated('Portador')
+#6 /var/www/MGsis/protected/models/Titulo.php(137): CActiveRecord->__isset('Portador')
+#7 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaFilialPortador('codportador', Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'codportador')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#10 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(805): CModel->validate(NULL)
+#11 /var/www/MGsis/protected/controllers/TituloController.php(36): CActiveRecord->save()
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#18 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/MGsis/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 15:58:01 [error] [php] Missing argument 2 for Titulo::validaDataTransacao(), called in /var/www/MGsis/protected/models/Titulo.php on line 152 and defined (/var/www/MGsis/protected/models/Titulo.php:143)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CInlineValidator->validate()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): Titulo->validate()
+#3 /var/www/MGsis/protected/controllers/TituloController.php(161): validate()
+#4 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+in /var/www/MGsis/protected/models/Titulo.php (143)
+in /var/www/MGsis/protected/models/Titulo.php (152)
+in /var/www/MGsis/protected/controllers/TituloController.php (161)
+2014/01/13 15:58:02 [error] [php] Missing argument 2 for Titulo::validaDataTransacao(), called in /var/www/MGsis/protected/models/Titulo.php on line 152 and defined (/var/www/MGsis/protected/models/Titulo.php:143)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CInlineValidator->validate()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): Titulo->validate()
+#3 /var/www/MGsis/protected/controllers/TituloController.php(161): validate()
+#4 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+in /var/www/MGsis/protected/models/Titulo.php (143)
+in /var/www/MGsis/protected/models/Titulo.php (152)
+in /var/www/MGsis/protected/controllers/TituloController.php (161)
+2014/01/13 15:58:03 [error] [php] Missing argument 2 for Titulo::validaDataTransacao(), called in /var/www/MGsis/protected/models/Titulo.php on line 152 and defined (/var/www/MGsis/protected/models/Titulo.php:143)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CInlineValidator->validate()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): Titulo->validate()
+#3 /var/www/MGsis/protected/controllers/TituloController.php(161): validate()
+#4 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+in /var/www/MGsis/protected/models/Titulo.php (143)
+in /var/www/MGsis/protected/models/Titulo.php (152)
+in /var/www/MGsis/protected/controllers/TituloController.php (161)
+2014/01/13 15:58:33 [error] [php] Missing argument 2 for Titulo::validaDataTransacao(), called in /var/www/MGsis/protected/models/Titulo.php on line 152 and defined (/var/www/MGsis/protected/models/Titulo.php:143)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CInlineValidator->validate()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): Titulo->validate()
+#3 /var/www/MGsis/protected/controllers/TituloController.php(161): validate()
+#4 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+in /var/www/MGsis/protected/models/Titulo.php (143)
+in /var/www/MGsis/protected/models/Titulo.php (152)
+in /var/www/MGsis/protected/controllers/TituloController.php (161)
+2014/01/13 15:58:46 [error] [php] Missing argument 2 for Titulo::validaDataTransacao(), called in /var/www/MGsis/protected/models/Titulo.php on line 152 and defined (/var/www/MGsis/protected/models/Titulo.php:143)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CInlineValidator->validate()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): Titulo->validate()
+#3 /var/www/MGsis/protected/controllers/TituloController.php(161): validate()
+#4 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+in /var/www/MGsis/protected/models/Titulo.php (143)
+in /var/www/MGsis/protected/models/Titulo.php (152)
+in /var/www/MGsis/protected/controllers/TituloController.php (161)
+2014/01/13 15:59:21 [error] [php] Missing argument 2 for Titulo::validaDataTransacao(), called in /var/www/MGsis/protected/models/Titulo.php on line 152 and defined (/var/www/MGsis/protected/models/Titulo.php:143)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CInlineValidator->validate()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): Titulo->validate()
+#3 /var/www/MGsis/protected/controllers/TituloController.php(161): validate()
+#4 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+in /var/www/MGsis/protected/models/Titulo.php (143)
+in /var/www/MGsis/protected/models/Titulo.php (152)
+in /var/www/MGsis/protected/controllers/TituloController.php (161)
+2014/01/13 15:59:26 [error] [php] Missing argument 2 for Titulo::validaDataTransacao(), called in /var/www/MGsis/protected/models/Titulo.php on line 152 and defined (/var/www/MGsis/protected/models/Titulo.php:143)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CInlineValidator->validate()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): Titulo->validate()
+#3 /var/www/MGsis/protected/controllers/TituloController.php(161): validate()
+#4 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+in /var/www/MGsis/protected/models/Titulo.php (143)
+in /var/www/MGsis/protected/models/Titulo.php (152)
+in /var/www/MGsis/protected/controllers/TituloController.php (161)
+2014/01/13 16:00:29 [error] [php] Missing argument 2 for Titulo::validaDataTransacao(), called in /var/www/MGsis/protected/models/Titulo.php on line 152 and defined (/var/www/MGsis/protected/models/Titulo.php:143)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CInlineValidator->validate()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): Titulo->validate()
+#3 /var/www/MGsis/protected/controllers/TituloController.php(161): validate()
+#4 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+in /var/www/MGsis/protected/models/Titulo.php (143)
+in /var/www/MGsis/protected/models/Titulo.php (152)
+in /var/www/MGsis/protected/controllers/TituloController.php (161)
+2014/01/13 16:02:38 [error] [php] Missing argument 2 for Titulo::validaDataTransacao(), called in /var/www/MGsis/protected/models/Titulo.php on line 152 and defined (/var/www/MGsis/protected/models/Titulo.php:143)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CInlineValidator->validate()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): Titulo->validate()
+#3 /var/www/MGsis/protected/controllers/TituloController.php(161): validate()
+#4 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+in /var/www/MGsis/protected/models/Titulo.php (143)
+in /var/www/MGsis/protected/models/Titulo.php (152)
+in /var/www/MGsis/protected/controllers/TituloController.php (161)
+2014/01/13 16:04:02 [error] [php] Missing argument 2 for Titulo::validaDataTransacao(), called in /var/www/MGsis/protected/models/Titulo.php on line 152 and defined (/var/www/MGsis/protected/models/Titulo.php:143)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CInlineValidator->validate()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): Titulo->validate()
+#3 /var/www/MGsis/protected/controllers/TituloController.php(161): validate()
+#4 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+in /var/www/MGsis/protected/models/Titulo.php (143)
+in /var/www/MGsis/protected/models/Titulo.php (152)
+in /var/www/MGsis/protected/controllers/TituloController.php (161)
+2014/01/13 16:05:35 [error] [php] Missing argument 2 for Titulo::validaDataTransacao(), called in /var/www/MGsis/protected/models/Titulo.php on line 152 and defined (/var/www/MGsis/protected/models/Titulo.php:143)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CInlineValidator->validate()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): Titulo->validate()
+#3 /var/www/MGsis/protected/controllers/TituloController.php(161): validate()
+#4 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+in /var/www/MGsis/protected/models/Titulo.php (143)
+in /var/www/MGsis/protected/models/Titulo.php (152)
+in /var/www/MGsis/protected/controllers/TituloController.php (161)
+2014/01/13 16:05:43 [error] [php] Missing argument 2 for Titulo::validaDataTransacao(), called in /var/www/MGsis/protected/models/Titulo.php on line 152 and defined (/var/www/MGsis/protected/models/Titulo.php:143)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CInlineValidator->validate()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): Titulo->validate()
+#3 /var/www/MGsis/protected/controllers/TituloController.php(161): validate()
+#4 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+in /var/www/MGsis/protected/models/Titulo.php (143)
+in /var/www/MGsis/protected/models/Titulo.php (152)
+in /var/www/MGsis/protected/controllers/TituloController.php (161)
+2014/01/13 16:17:25 [error] [php] Missing argument 2 for Titulo::validaDataTransacao(), called in /var/www/MGsis/protected/models/Titulo.php on line 152 and defined (/var/www/MGsis/protected/models/Titulo.php:143)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CInlineValidator->validate()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): Titulo->validate()
+#3 /var/www/MGsis/protected/controllers/TituloController.php(161): validate()
+#4 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+in /var/www/MGsis/protected/models/Titulo.php (143)
+in /var/www/MGsis/protected/models/Titulo.php (152)
+in /var/www/MGsis/protected/controllers/TituloController.php (161)
+2014/01/13 16:34:03 [error] [exception.CException] exception 'CException' with message 'A propriedade "ParametrosGerais.findAll" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('findAll')
+#1 /var/www/MGsis/protected/models/Titulo.php(148): CActiveRecord->__get('findAll')
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaDataTransacao('transacao', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'transacao')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#5 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(805): CModel->validate(NULL)
+#6 /var/www/MGsis/protected/controllers/TituloController.php(36): CActiveRecord->save()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/MGsis/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 16:37:53 [error] [php] Undefined variable: data (/var/www/MGsis/protected/models/Titulo.php:161)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CInlineValidator->validate()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(805): Titulo->validate()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(36): Titulo->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+in /var/www/MGsis/protected/models/Titulo.php (161)
+in /var/www/MGsis/protected/controllers/TituloController.php (36)
+in /var/www/MGsis/index.php (13)
+2014/01/13 16:38:38 [error] [php] Undefined variable: data (/var/www/MGsis/protected/models/Titulo.php:163)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CInlineValidator->validate()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(805): Titulo->validate()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(36): Titulo->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+in /var/www/MGsis/protected/models/Titulo.php (163)
+in /var/www/MGsis/protected/controllers/TituloController.php (36)
+in /var/www/MGsis/index.php (13)
+2014/01/13 16:52:19 [error] [php] Undefined variable: i (/var/www/MGsis/protected/models/Titulo.php:160)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CInlineValidator->validate()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(805): Titulo->validate()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(36): Titulo->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+in /var/www/MGsis/protected/models/Titulo.php (160)
+in /var/www/MGsis/protected/controllers/TituloController.php (36)
+in /var/www/MGsis/index.php (13)
+2014/01/13 18:01:02 [error] [exception.CException] exception 'CException' with message 'A propriedade "TituloController.vencimento" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/MGsis/protected/views/titulo/_form.php(187): CComponent->__get('vencimento')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#4 /var/www/MGsis/protected/views/titulo/create.php(16): CController->renderPartial('_form', Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('create', Array, true)
+#9 /var/www/MGsis/protected/controllers/TituloController.php(47): CController->render('create', Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#16 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#17 /var/www/MGsis/index.php(13): CApplication->run()
+#18 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/13 18:10:36 [warning] [application] Failed to set unsafe attribute "codtitulo" of "Titulo".
+in /var/www/MGsis/protected/models/MGActiveRecord.php (131)
+in /var/www/MGsis/protected/controllers/TituloController.php (44)
+in /var/www/MGsis/index.php (13)
+2014/01/13 18:10:38 [warning] [application] Failed to set unsafe attribute "codtitulo" of "Titulo".
+in /var/www/MGsis/protected/models/MGActiveRecord.php (131)
+in /var/www/MGsis/protected/controllers/TituloController.php (44)
+in /var/www/MGsis/index.php (13)
+2014/01/13 18:10:39 [warning] [application] Failed to set unsafe attribute "codtitulo" of "Titulo".
+in /var/www/MGsis/protected/models/MGActiveRecord.php (131)
+in /var/www/MGsis/protected/controllers/TituloController.php (44)
+in /var/www/MGsis/index.php (13)
+2014/01/13 18:10:42 [warning] [application] Failed to set unsafe attribute "codtitulo" of "Titulo".
+in /var/www/MGsis/protected/models/MGActiveRecord.php (131)
+in /var/www/MGsis/protected/controllers/TituloController.php (44)
+in /var/www/MGsis/index.php (13)
+2014/01/13 18:11:26 [warning] [application] Failed to set unsafe attribute "codtitulo" of "Titulo".
+in /var/www/MGsis/protected/models/MGActiveRecord.php (131)
+in /var/www/MGsis/protected/controllers/TituloController.php (44)
+in /var/www/MGsis/index.php (13)
+2014/01/13 18:12:16 [warning] [application] Failed to set unsafe attribute "codtitulo" of "Titulo".
+in /var/www/MGsis/protected/models/MGActiveRecord.php (131)
+in /var/www/MGsis/protected/controllers/TituloController.php (44)
+in /var/www/MGsis/index.php (13)
+2014/01/13 18:12:55 [error] [php] Undefined variable: original (/var/www/MGsis/protected/controllers/TituloController.php:44)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#5 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create&duplicar=189
+in /var/www/MGsis/protected/controllers/TituloController.php (44)
+in /var/www/MGsis/index.php (13)
+2014/01/13 18:12:59 [error] [php] Undefined variable: original (/var/www/MGsis/protected/controllers/TituloController.php:44)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#5 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create&duplicar=189
+in /var/www/MGsis/protected/controllers/TituloController.php (44)
+in /var/www/MGsis/index.php (13)
+2014/01/13 18:17:42 [error] [exception.CException] exception 'CException' with message 'A propriedade "CDefaultValueValidator.0" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(189): CComponent->__set('0', '13/01/2014')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(287): CValidator::createValidator('default', Object(Titulo), 'emissao, transa...', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(260): CModel->createValidators()
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(547): CModel->getValidators()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(564): CModel->getSafeAttributeNames()
+#5 /var/www/MGsis/protected/extensions/yiibooster/widgets/TbActiveForm.php(980): CActiveForm->errorSummary(Object(Titulo), NULL, NULL, Array)
+#6 /var/www/MGsis/protected/views/titulo/_form.php(7): TbActiveForm->errorSummary(Object(Titulo))
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#10 /var/www/MGsis/protected/views/titulo/update.php(20): CController->renderPartial('_form', Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('update', Array, true)
+#15 /var/www/MGsis/protected/controllers/TituloController.php(98): CController->render('update', Array)
+#16 [internal function]: TituloController->actionUpdate('30044639')
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#22 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#23 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/update')
+#24 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#25 /var/www/MGsis/index.php(13): CApplication->run()
+#26 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/update&id=30044639
+---
+2014/01/13 18:17:50 [error] [exception.CException] exception 'CException' with message 'A propriedade "CDefaultValueValidator.0" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(189): CComponent->__set('0', '13/01/2014')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(287): CValidator::createValidator('default', Object(Titulo), 'emissao, transa...', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(260): CModel->createValidators()
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(547): CModel->getValidators()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(564): CModel->getSafeAttributeNames()
+#5 /var/www/MGsis/protected/extensions/yiibooster/widgets/TbActiveForm.php(980): CActiveForm->errorSummary(Object(Titulo), NULL, NULL, Array)
+#6 /var/www/MGsis/protected/views/titulo/_form.php(7): TbActiveForm->errorSummary(Object(Titulo))
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#10 /var/www/MGsis/protected/views/titulo/update.php(20): CController->renderPartial('_form', Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('update', Array, true)
+#15 /var/www/MGsis/protected/controllers/TituloController.php(98): CController->render('update', Array)
+#16 [internal function]: TituloController->actionUpdate('30044639')
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#22 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#23 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/update')
+#24 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#25 /var/www/MGsis/index.php(13): CApplication->run()
+#26 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/update&id=30044639
+---
+2014/01/13 18:29:51 [error] [exception.CDbException] exception 'CDbException' with message 'A tabela "tbltitulo" não possui uma coluna chamada "codtitulo <> ".' in /var/www/yii-1.1.14.f0fee9/framework/db/schema/CDbCommandBuilder.php:694
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1518): CDbCommandBuilder->createColumnCriteria(Object(CPgsqlTableSchema), Array, '', Array, '"t".')
+#1 /var/www/MGsis/protected/models/Titulo.php(154): CActiveRecord->findByAttributes(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaNumero('numero', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'numero')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#6 /var/www/MGsis/protected/controllers/TituloController.php(191): CActiveForm::validate(Object(Titulo))
+#7 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation(Object(Titulo))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 18:29:53 [error] [exception.CDbException] exception 'CDbException' with message 'A tabela "tbltitulo" não possui uma coluna chamada "codtitulo <> ".' in /var/www/yii-1.1.14.f0fee9/framework/db/schema/CDbCommandBuilder.php:694
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1518): CDbCommandBuilder->createColumnCriteria(Object(CPgsqlTableSchema), Array, '', Array, '"t".')
+#1 /var/www/MGsis/protected/models/Titulo.php(154): CActiveRecord->findByAttributes(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaNumero('numero', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'numero')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#6 /var/www/MGsis/protected/controllers/TituloController.php(191): CActiveForm::validate(Object(Titulo))
+#7 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation(Object(Titulo))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 18:29:54 [error] [exception.CDbException] exception 'CDbException' with message 'A tabela "tbltitulo" não possui uma coluna chamada "codtitulo <> ".' in /var/www/yii-1.1.14.f0fee9/framework/db/schema/CDbCommandBuilder.php:694
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1518): CDbCommandBuilder->createColumnCriteria(Object(CPgsqlTableSchema), Array, '', Array, '"t".')
+#1 /var/www/MGsis/protected/models/Titulo.php(154): CActiveRecord->findByAttributes(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaNumero('numero', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'numero')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#6 /var/www/MGsis/protected/controllers/TituloController.php(191): CActiveForm::validate(Object(Titulo))
+#7 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation(Object(Titulo))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 18:29:57 [error] [exception.CDbException] exception 'CDbException' with message 'A tabela "tbltitulo" não possui uma coluna chamada "codtitulo <> ".' in /var/www/yii-1.1.14.f0fee9/framework/db/schema/CDbCommandBuilder.php:694
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1518): CDbCommandBuilder->createColumnCriteria(Object(CPgsqlTableSchema), Array, '', Array, '"t".')
+#1 /var/www/MGsis/protected/models/Titulo.php(154): CActiveRecord->findByAttributes(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaNumero('numero', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'numero')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#6 /var/www/MGsis/protected/controllers/TituloController.php(191): CActiveForm::validate(Object(Titulo))
+#7 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation(Object(Titulo))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 18:29:59 [error] [exception.CDbException] exception 'CDbException' with message 'A tabela "tbltitulo" não possui uma coluna chamada "codtitulo <> ".' in /var/www/yii-1.1.14.f0fee9/framework/db/schema/CDbCommandBuilder.php:694
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1518): CDbCommandBuilder->createColumnCriteria(Object(CPgsqlTableSchema), Array, '', Array, '"t".')
+#1 /var/www/MGsis/protected/models/Titulo.php(154): CActiveRecord->findByAttributes(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaNumero('numero', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'numero')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#6 /var/www/MGsis/protected/controllers/TituloController.php(191): CActiveForm::validate(Object(Titulo))
+#7 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation(Object(Titulo))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 18:30:02 [error] [exception.CDbException] exception 'CDbException' with message 'A tabela "tbltitulo" não possui uma coluna chamada "codtitulo <> ".' in /var/www/yii-1.1.14.f0fee9/framework/db/schema/CDbCommandBuilder.php:694
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1518): CDbCommandBuilder->createColumnCriteria(Object(CPgsqlTableSchema), Array, '', Array, '"t".')
+#1 /var/www/MGsis/protected/models/Titulo.php(154): CActiveRecord->findByAttributes(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaNumero('numero', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'numero')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#6 /var/www/MGsis/protected/controllers/TituloController.php(191): CActiveForm::validate(Object(Titulo))
+#7 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation(Object(Titulo))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 18:30:03 [error] [exception.CDbException] exception 'CDbException' with message 'A tabela "tbltitulo" não possui uma coluna chamada "codtitulo <> ".' in /var/www/yii-1.1.14.f0fee9/framework/db/schema/CDbCommandBuilder.php:694
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1518): CDbCommandBuilder->createColumnCriteria(Object(CPgsqlTableSchema), Array, '', Array, '"t".')
+#1 /var/www/MGsis/protected/models/Titulo.php(154): CActiveRecord->findByAttributes(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaNumero('numero', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'numero')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#6 /var/www/MGsis/protected/controllers/TituloController.php(191): CActiveForm::validate(Object(Titulo))
+#7 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation(Object(Titulo))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 18:30:04 [error] [exception.CDbException] exception 'CDbException' with message 'A tabela "tbltitulo" não possui uma coluna chamada "codtitulo <> ".' in /var/www/yii-1.1.14.f0fee9/framework/db/schema/CDbCommandBuilder.php:694
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1518): CDbCommandBuilder->createColumnCriteria(Object(CPgsqlTableSchema), Array, '', Array, '"t".')
+#1 /var/www/MGsis/protected/models/Titulo.php(154): CActiveRecord->findByAttributes(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaNumero('numero', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'numero')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#6 /var/www/MGsis/protected/controllers/TituloController.php(191): CActiveForm::validate(Object(Titulo))
+#7 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation(Object(Titulo))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 18:30:05 [error] [exception.CDbException] exception 'CDbException' with message 'A tabela "tbltitulo" não possui uma coluna chamada "codtitulo <> ".' in /var/www/yii-1.1.14.f0fee9/framework/db/schema/CDbCommandBuilder.php:694
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1518): CDbCommandBuilder->createColumnCriteria(Object(CPgsqlTableSchema), Array, '', Array, '"t".')
+#1 /var/www/MGsis/protected/models/Titulo.php(154): CActiveRecord->findByAttributes(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaNumero('numero', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'numero')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#6 /var/www/MGsis/protected/controllers/TituloController.php(191): CActiveForm::validate(Object(Titulo))
+#7 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation(Object(Titulo))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 18:30:06 [error] [exception.CDbException] exception 'CDbException' with message 'A tabela "tbltitulo" não possui uma coluna chamada "codtitulo <> ".' in /var/www/yii-1.1.14.f0fee9/framework/db/schema/CDbCommandBuilder.php:694
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1518): CDbCommandBuilder->createColumnCriteria(Object(CPgsqlTableSchema), Array, '', Array, '"t".')
+#1 /var/www/MGsis/protected/models/Titulo.php(154): CActiveRecord->findByAttributes(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaNumero('numero', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'numero')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#6 /var/www/MGsis/protected/controllers/TituloController.php(191): CActiveForm::validate(Object(Titulo))
+#7 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation(Object(Titulo))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 18:30:07 [error] [exception.CDbException] exception 'CDbException' with message 'A tabela "tbltitulo" não possui uma coluna chamada "codtitulo <> ".' in /var/www/yii-1.1.14.f0fee9/framework/db/schema/CDbCommandBuilder.php:694
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1518): CDbCommandBuilder->createColumnCriteria(Object(CPgsqlTableSchema), Array, '', Array, '"t".')
+#1 /var/www/MGsis/protected/models/Titulo.php(154): CActiveRecord->findByAttributes(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaNumero('numero', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'numero')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#6 /var/www/MGsis/protected/controllers/TituloController.php(191): CActiveForm::validate(Object(Titulo))
+#7 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation(Object(Titulo))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 18:30:08 [error] [exception.CDbException] exception 'CDbException' with message 'A tabela "tbltitulo" não possui uma coluna chamada "codtitulo <> ".' in /var/www/yii-1.1.14.f0fee9/framework/db/schema/CDbCommandBuilder.php:694
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1518): CDbCommandBuilder->createColumnCriteria(Object(CPgsqlTableSchema), Array, '', Array, '"t".')
+#1 /var/www/MGsis/protected/models/Titulo.php(154): CActiveRecord->findByAttributes(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaNumero('numero', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'numero')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#6 /var/www/MGsis/protected/controllers/TituloController.php(191): CActiveForm::validate(Object(Titulo))
+#7 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation(Object(Titulo))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 18:30:09 [error] [exception.CDbException] exception 'CDbException' with message 'A tabela "tbltitulo" não possui uma coluna chamada "codtitulo <> ".' in /var/www/yii-1.1.14.f0fee9/framework/db/schema/CDbCommandBuilder.php:694
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1518): CDbCommandBuilder->createColumnCriteria(Object(CPgsqlTableSchema), Array, '', Array, '"t".')
+#1 /var/www/MGsis/protected/models/Titulo.php(154): CActiveRecord->findByAttributes(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaNumero('numero', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'numero')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#6 /var/www/MGsis/protected/controllers/TituloController.php(191): CActiveForm::validate(Object(Titulo))
+#7 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation(Object(Titulo))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 18:30:09 [error] [exception.CDbException] exception 'CDbException' with message 'A tabela "tbltitulo" não possui uma coluna chamada "codtitulo <> ".' in /var/www/yii-1.1.14.f0fee9/framework/db/schema/CDbCommandBuilder.php:694
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1518): CDbCommandBuilder->createColumnCriteria(Object(CPgsqlTableSchema), Array, '', Array, '"t".')
+#1 /var/www/MGsis/protected/models/Titulo.php(154): CActiveRecord->findByAttributes(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaNumero('numero', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'numero')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#6 /var/www/MGsis/protected/controllers/TituloController.php(191): CActiveForm::validate(Object(Titulo))
+#7 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation(Object(Titulo))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 18:30:11 [error] [exception.CDbException] exception 'CDbException' with message 'A tabela "tbltitulo" não possui uma coluna chamada "codtitulo <> ".' in /var/www/yii-1.1.14.f0fee9/framework/db/schema/CDbCommandBuilder.php:694
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1518): CDbCommandBuilder->createColumnCriteria(Object(CPgsqlTableSchema), Array, '', Array, '"t".')
+#1 /var/www/MGsis/protected/models/Titulo.php(154): CActiveRecord->findByAttributes(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaNumero('numero', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'numero')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#6 /var/www/MGsis/protected/controllers/TituloController.php(191): CActiveForm::validate(Object(Titulo))
+#7 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation(Object(Titulo))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 18:30:11 [error] [exception.CDbException] exception 'CDbException' with message 'A tabela "tbltitulo" não possui uma coluna chamada "codtitulo <> ".' in /var/www/yii-1.1.14.f0fee9/framework/db/schema/CDbCommandBuilder.php:694
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1518): CDbCommandBuilder->createColumnCriteria(Object(CPgsqlTableSchema), Array, '', Array, '"t".')
+#1 /var/www/MGsis/protected/models/Titulo.php(154): CActiveRecord->findByAttributes(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaNumero('numero', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'numero')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#6 /var/www/MGsis/protected/controllers/TituloController.php(191): CActiveForm::validate(Object(Titulo))
+#7 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation(Object(Titulo))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 18:30:12 [error] [exception.CDbException] exception 'CDbException' with message 'A tabela "tbltitulo" não possui uma coluna chamada "codtitulo <> ".' in /var/www/yii-1.1.14.f0fee9/framework/db/schema/CDbCommandBuilder.php:694
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1518): CDbCommandBuilder->createColumnCriteria(Object(CPgsqlTableSchema), Array, '', Array, '"t".')
+#1 /var/www/MGsis/protected/models/Titulo.php(154): CActiveRecord->findByAttributes(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaNumero('numero', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'numero')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#6 /var/www/MGsis/protected/controllers/TituloController.php(191): CActiveForm::validate(Object(Titulo))
+#7 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation(Object(Titulo))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 18:30:12 [error] [exception.CDbException] exception 'CDbException' with message 'A tabela "tbltitulo" não possui uma coluna chamada "codtitulo <> ".' in /var/www/yii-1.1.14.f0fee9/framework/db/schema/CDbCommandBuilder.php:694
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1518): CDbCommandBuilder->createColumnCriteria(Object(CPgsqlTableSchema), Array, '', Array, '"t".')
+#1 /var/www/MGsis/protected/models/Titulo.php(154): CActiveRecord->findByAttributes(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaNumero('numero', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'numero')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#6 /var/www/MGsis/protected/controllers/TituloController.php(191): CActiveForm::validate(Object(Titulo))
+#7 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation(Object(Titulo))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 18:30:12 [error] [exception.CDbException] exception 'CDbException' with message 'A tabela "tbltitulo" não possui uma coluna chamada "codtitulo <> ".' in /var/www/yii-1.1.14.f0fee9/framework/db/schema/CDbCommandBuilder.php:694
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1518): CDbCommandBuilder->createColumnCriteria(Object(CPgsqlTableSchema), Array, '', Array, '"t".')
+#1 /var/www/MGsis/protected/models/Titulo.php(154): CActiveRecord->findByAttributes(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaNumero('numero', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'numero')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#6 /var/www/MGsis/protected/controllers/TituloController.php(191): CActiveForm::validate(Object(Titulo))
+#7 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation(Object(Titulo))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 18:30:14 [error] [exception.CDbException] exception 'CDbException' with message 'A tabela "tbltitulo" não possui uma coluna chamada "codtitulo <> ".' in /var/www/yii-1.1.14.f0fee9/framework/db/schema/CDbCommandBuilder.php:694
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1518): CDbCommandBuilder->createColumnCriteria(Object(CPgsqlTableSchema), Array, '', Array, '"t".')
+#1 /var/www/MGsis/protected/models/Titulo.php(154): CActiveRecord->findByAttributes(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaNumero('numero', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'numero')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): CModel->validate(NULL)
+#6 /var/www/MGsis/protected/controllers/TituloController.php(191): CActiveForm::validate(Object(Titulo))
+#7 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation(Object(Titulo))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 18:30:24 [error] [exception.CDbException] exception 'CDbException' with message 'A tabela "tbltitulo" não possui uma coluna chamada "codtitulo <> ".' in /var/www/yii-1.1.14.f0fee9/framework/db/schema/CDbCommandBuilder.php:694
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1518): CDbCommandBuilder->createColumnCriteria(Object(CPgsqlTableSchema), Array, '', Array, '"t".')
+#1 /var/www/MGsis/protected/models/Titulo.php(154): CActiveRecord->findByAttributes(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaNumero('numero', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'numero')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#5 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(805): CModel->validate(NULL)
+#6 /var/www/MGsis/protected/controllers/TituloController.php(36): CActiveRecord->save()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/MGsis/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 18:31:08 [error] [exception.CDbException] exception 'CDbException' with message 'A tabela "tbltitulo" não possui uma coluna chamada "codtitulo <> ".' in /var/www/yii-1.1.14.f0fee9/framework/db/schema/CDbCommandBuilder.php:694
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1518): CDbCommandBuilder->createColumnCriteria(Object(CPgsqlTableSchema), Array, '', Array, '"t".')
+#1 /var/www/MGsis/protected/models/Titulo.php(154): CActiveRecord->findByAttributes(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaNumero('numero', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'numero')
+#4 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#5 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(805): CModel->validate(NULL)
+#6 /var/www/MGsis/protected/controllers/TituloController.php(36): CActiveRecord->save()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#13 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/MGsis/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/13 18:33:28 [error] [php] Attempt to assign property of non-object (/var/www/MGsis/protected/models/Titulo.php:159)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CInlineValidator->validate()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(805): Titulo->validate()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(90): Titulo->save()
+#3 unknown(0): TituloController->actionUpdate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/update&id=10040485
+in /var/www/MGsis/protected/models/Titulo.php (159)
+in /var/www/MGsis/protected/controllers/TituloController.php (90)
+in /var/www/MGsis/index.php (13)
+2014/01/13 18:45:09 [error] [php] Trying to get property of non-object (/var/www/MGsis/protected/models/Titulo.php:165)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CInlineValidator->validate()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/widgets/CActiveForm.php(920): Titulo->validate()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(191): validate()
+#3 /var/www/MGsis/protected/controllers/TituloController.php(31): TituloController->performAjaxValidation()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create&duplicar=10040488
+in /var/www/MGsis/protected/models/Titulo.php (165)
+in /var/www/MGsis/protected/controllers/TituloController.php (191)
+in /var/www/MGsis/protected/controllers/TituloController.php (31)
+2014/01/13 18:45:09 [error] [php] Trying to get property of non-object (/var/www/MGsis/protected/models/Titulo.php:165)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CInlineValidator->validate()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(805): Titulo->validate()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(36): Titulo->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create&duplicar=10040488
+in /var/www/MGsis/protected/models/Titulo.php (165)
+in /var/www/MGsis/protected/controllers/TituloController.php (36)
+in /var/www/MGsis/index.php (13)
+2014/01/13 18:47:35 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetch(): SQLSTATE[08P01]: <<Unknown error>>: 7 ERROR:  bind message supplies 0 parameters, but prepared statement "pdo_stmt_0000000f" requires 3. A declaração SQL executada foi: SELECT codtitulo FROM "mgsis"."tbltitulo" "t" WHERE codtitulo<>:codtitulo AND codpessoa = :codpessoa AND numero = :numero LIMIT 1.
+in /var/www/MGsis/protected/models/Titulo.php (161)
+in /var/www/MGsis/protected/controllers/TituloController.php (36)
+in /var/www/MGsis/index.php (13)
+2014/01/13 18:47:35 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[08P01]: <<Unknown error>>: 7 ERROR:  bind message supplies 0 parameters, but prepared statement "pdo_stmt_0000000f" requires 3. The SQL statement executed was: SELECT codtitulo FROM "mgsis"."tbltitulo" "t" WHERE codtitulo<>:codtitulo AND codpessoa = :codpessoa AND numero = :numero LIMIT 1' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/MGsis/protected/models/Titulo.php(161): CActiveRecord->find(Array, Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaNumero('numero', Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'numero')
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#7 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(805): CModel->validate(NULL)
+#8 /var/www/MGsis/protected/controllers/TituloController.php(36): CActiveRecord->save()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#15 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/MGsis/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create&duplicar=10040488
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create&duplicar=10040488
+---
+2014/01/13 18:48:22 [error] [exception.CException] exception 'CException' with message 'A propriedade "CDbCriteria.parameters" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/schema/CDbCriteria.php(160): CComponent->__set('parameters', Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/schema/CDbCommandBuilder.php(585): CDbCriteria->__construct(Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1455): CDbCommandBuilder->createCriteria(Array, Array)
+#3 /var/www/MGsis/protected/models/Titulo.php(161): CActiveRecord->find(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaNumero('numero', Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'numero')
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#7 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(805): CModel->validate(NULL)
+#8 /var/www/MGsis/protected/controllers/TituloController.php(36): CActiveRecord->save()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#15 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/MGsis/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create&duplicar=10040488
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create&duplicar=10040488
+---
+2014/01/13 18:51:42 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetch(): SQLSTATE[08P01]: <<Unknown error>>: 7 ERROR:  bind message supplies 2 parameters, but prepared statement "pdo_stmt_0000000f" requires 3. A declaração SQL executada foi: SELECT codtitulo FROM "mgsis"."tbltitulo" "t" WHERE codpessoa = :codpessoa AND numero = :numero AND codtitulo <> :codtitulo LIMIT 1.
+in /var/www/MGsis/protected/models/Titulo.php (169)
+in /var/www/MGsis/protected/controllers/TituloController.php (36)
+in /var/www/MGsis/index.php (13)
+2014/01/13 18:51:42 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[08P01]: <<Unknown error>>: 7 ERROR:  bind message supplies 2 parameters, but prepared statement "pdo_stmt_0000000f" requires 3. The SQL statement executed was: SELECT codtitulo FROM "mgsis"."tbltitulo" "t" WHERE codpessoa = :codpessoa AND numero = :numero AND codtitulo <> :codtitulo LIMIT 1' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/MGsis/protected/models/Titulo.php(169): CActiveRecord->find(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaNumero('numero', Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'numero')
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#7 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(805): CModel->validate(NULL)
+#8 /var/www/MGsis/protected/controllers/TituloController.php(36): CActiveRecord->save()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#15 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/MGsis/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create&duplicar=10040488
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create&duplicar=10040488
+---
+2014/01/13 18:57:24 [error] [php] Undefined variable: data (/var/www/MGsis/protected/models/Titulo.php:165)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CInlineValidator->validate()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(805): Titulo->validate()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(36): Titulo->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create&duplicar=10040488
+in /var/www/MGsis/protected/models/Titulo.php (165)
+in /var/www/MGsis/protected/controllers/TituloController.php (36)
+in /var/www/MGsis/index.php (13)
+2014/01/13 18:57:39 [error] [php] Undefined variable: data (/var/www/MGsis/protected/models/Titulo.php:165)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CInlineValidator->validate()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(805): Titulo->validate()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(36): Titulo->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create&duplicar=10040488
+in /var/www/MGsis/protected/models/Titulo.php (165)
+in /var/www/MGsis/protected/controllers/TituloController.php (36)
+in /var/www/MGsis/index.php (13)
+2014/01/13 18:58:41 [error] [php] Undefined variable: data (/var/www/MGsis/protected/models/Titulo.php:165)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CInlineValidator->validate()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(805): Titulo->validate()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(36): Titulo->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create&duplicar=10040488
+in /var/www/MGsis/protected/models/Titulo.php (165)
+in /var/www/MGsis/protected/controllers/TituloController.php (36)
+in /var/www/MGsis/index.php (13)

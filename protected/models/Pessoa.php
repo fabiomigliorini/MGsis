@@ -96,9 +96,9 @@ class Pessoa extends MGActiveRecord
 			
 			array('cnpj', 'ext.validators.CnpjCpfValidator'),
 			array('ie', 'ext.validators.InscricaoEstadualValidator'),
-			array('cnpj', 'validaCnpjDuplicado'),
+			array('ie', 'validaCnpjDuplicado'),
 			array('ie, cep, cepcobranca','filter','filter'=>array($this, 'numeroLimpo')),
-			array('email, codcidade, endereco, numero, bairro, cep, codcidadecobranca, enderecocobranca, numerocobranca, bairrocobranca, cepcobranca, pessoa, fantasia, cadastro, notafiscal, cnpj, telefone1', 'required'),
+			array('email, codcidade, endereco, bairro, cep, codcidadecobranca, enderecocobranca, numerocobranca, bairrocobranca, cepcobranca, pessoa, fantasia, cadastro, notafiscal, cnpj, telefone1', 'required'),
 			array('fantasia', 'unique', 'caseSensitive' => false),
 			array('fantasia, pessoa', 'length', 'min' => 5),
 			array('pessoa, contato, conjuge, endereco, enderecocobranca, email, emailnfe, emailcobranca', 'length', 'max'=>100),
@@ -168,7 +168,7 @@ class Pessoa extends MGActiveRecord
 						$erro = sprintf(
 							'CNPJ/CPF e Inscrição Estadual já cadastrados para "%s" (%s).', 
 							$pessoa->fantasia,
-							MGFormatter::formataCodigo($pessoa->codpessoa)
+							CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($pessoa->codpessoa)),array('view','id'=>$pessoa->codpessoa))
 							);
 						$this->addError($attribute, $erro);
 						break;

@@ -9,101 +9,119 @@ $form = $this->beginWidget('MGActiveForm', array(
 <fieldset>
 	<?php
 	
+	// codfilial
+	$op = array('prompt' => '', 'class' => 'input-medium');
+	if ($model->gerado_automaticamente)
+		$op = array_merge($op, array("readOnly"=>true));	
+	echo $form->dropDownListRow($model, 'codfilial', Filial::getListaCombo(), $op);
+	
+	// codpessoa
 	echo $form->select2PessoaRow(
 			$model, 
 			'codpessoa'
 			);
 	
-	echo $form->textFieldRow($model,'numero',array('class'=>'input-medium','maxlength'=>20));
+	// numero
+	$op = array('class'=>'input-medium','maxlength'=>20);
+	if ((!$model->isNewRecord) || $model->gerado_automaticamente)
+		$op = array_merge($op, array("readOnly"=>true));
+	echo $form->textFieldRow($model,'numero', $op);
+	
+	// fatura
 	echo $form->textFieldRow($model,'fatura',array('class'=>'input-medium','maxlength'=>50));
-	  
-	echo $form->dropDownListRow(
-		$model, 'codfilial', Filial::getListaCombo(), array('prompt' => '', 'class' => 'input-medium')
-	);
-	echo $form->dropDownListRow(
-		$model, 'codtipotitulo', TipoTitulo::getListaCombo(), array('prompt' => '', 'class' => 'input-large')
-	);
-	echo $form->dropDownListRow(
-		$model, 'codcontacontabil', ContaContabil::getListaCombo(), array('prompt' => '', 'class' => 'input-large')
-	);
+	
+
+	// codtipotitulo
+	$op = array('prompt' => '', 'class' => 'input-large');
+	if (!empty($model->codnegocioformapagamento))
+		$op = array_merge($op, array("readOnly"=>true));
+	echo $form->dropDownListRow($model, 'codtipotitulo', TipoTitulo::getListaCombo(), $op);
+	
+	//valor
+	$operacao = "??";
+	if (!empty($model->codtipotitulo))
+		if (isset($model->TipoTitulo))
+			$operacao = ($model->TipoTitulo->credito)?"CR":"DB";
+	$op = array('prepend' => 'R$', 'append'=>$operacao, 'appendOptions'=>array('id'=>'operacao'), 'class'=>'input-small text-right','maxlength'=>14);
+	if (($model->saldo == 0 and !$model->isNewRecord) || $model->gerado_automaticamente)
+		$op = array_merge($op, array("readOnly"=>true));
+	echo $form->textFieldRow($model,'valor', $op);
+	
+	
+	
+	// codportador
 	echo $form->dropDownListRow(
 		$model, 'codportador', Portador::getListaCombo(), array('prompt' => '', 'class' => 'input-large')
 	);
+
+	// boleto
+	echo $form->toggleButtonRow($model,'boleto', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 	
-	echo $form->datepickerRow(
-			$model,
-			'emissao',
-			array(
+	// vencimento
+	$op = 
+		array(
+				'class' => 'input-small text-center', 
+				'options' => array(
+					'language' => 'pt',
+					'format' => 'dd/mm/yyyy'
+				),
+				'prepend' => '<i class="icon-calendar"></i>',
+			);
+	if ($model->saldo == 0 and !$model->isNewRecord)
+		$op = array_merge($op, array("readOnly"=>true));
+	echo $form->datepickerRow($model, 'vencimento', $op); 
+
+	// vencimento original
+	$op = 
+		array(
+				'class' => 'input-small text-center', 
+				'options' => array(
+					'language' => 'pt',
+					'format' => 'dd/mm/yyyy'
+				),
+				'prepend' => '<i class="icon-calendar"></i>',
+			);
+	if ($model->gerado_automaticamente || ($model->saldo == 0 and !$model->isNewRecord))
+		$op = array_merge($op, array("readOnly"=>true));
+	echo $form->datepickerRow($model, 'vencimentooriginal', $op); 
+	
+	// emissao
+	$op = array(
 				'class' => 'input-small  text-center', 
 				'options' => array(
 					'language' => 'pt',
 					'format' => 'dd/mm/yyyy'
 				),
 				'prepend' => '<i class="icon-calendar"></i>',
-			)
-	); 
+			);
+	if ($model->gerado_automaticamente || ($model->saldo == 0 and !$model->isNewRecord))
+		$op = array_merge($op, array("readOnly"=>true));
+	echo $form->datepickerRow($model, 'emissao', $op); 
 	
-	echo $form->datepickerRow(
-			$model,
-			'transacao',
-			array(
+	// transacao
+	$op = 
+		array(
 				'class' => 'input-small text-center', 
 				'options' => array(
 					'language' => 'pt',
 					'format' => 'dd/mm/yyyy'
 				),
 				'prepend' => '<i class="icon-calendar"></i>',
-			)
-	); 
-	
-	echo $form->datepickerRow(
-			$model,
-			'vencimento',
-			array(
-				'class' => 'input-small text-center', 
-				'options' => array(
-					'language' => 'pt',
-					'format' => 'dd/mm/yyyy'
-				),
-				'prepend' => '<i class="icon-calendar"></i>',
-			)
-	); 
-	
-	echo $form->datepickerRow(
-			$model,
-			'vencimentooriginal',
-			array(
-				'class' => 'input-small text-center', 
-				'options' => array(
-					'language' => 'pt',
-					'format' => 'dd/mm/yyyy'
-				),
-				'prepend' => '<i class="icon-calendar"></i>',
-			)
-	); 
+			);
+	if ($model->gerado_automaticamente || ($model->saldo == 0 and !$model->isNewRecord))
+		$op = array_merge($op, array("readOnly"=>true));
+	echo $form->datepickerRow($model, 'transacao', $op); 
 
-	$operacao = "??";
-	if (!empty($model->codtipotitulo))
-		if (isset($model->TipoTitulo))
-			$operacao = ($model->TipoTitulo->credito)?"CR":"DB";
-	
-	echo $form->textFieldRow($model,'valor',array('prepend' => 'R$', 'append'=>$operacao, 'appendOptions'=>array('id'=>'operacao'), 'class'=>'input-small text-right','maxlength'=>14));
-	
+	// gerencial
 	echo $form->toggleButtonRow($model,'gerencial', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 	
+	// codcontacontabil
+	echo $form->dropDownListRow($model, 'codcontacontabil', ContaContabil::getListaCombo(), array('prompt' => '', 'class' => 'input-large'));
+	
+	// observacao
 	echo $form->textAreaRow($model,'observacao',array('class'=>'input-xxlarge', 'rows'=>'5','maxlength'=>500));
 	
-	echo $form->toggleButtonRow($model,'boleto', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 	
-	echo $form->textFieldRow($model,'nossonumero',array('class'=>'input-small','maxlength'=>20));
-	echo $form->textFieldRow($model,'remessa',array('class'=>'input-small text-right'));
-	
-	/*
-	echo $form->customRow($model,'codnegocioformapagamento',array('class'=>'span5'));
-	echo $form->textFieldRow($model,'codtituloagrupamento',array('class'=>'span5'));
-	echo $form->textFieldRow($model,'estornado',array('class'=>'span5'));
-	 * 
-	 */
 	?>
 </fieldset>
 <div class="form-actions">
@@ -147,6 +165,36 @@ $form = $this->beginWidget('MGActiveForm', array(
 			});
 		});
 
+	});
+	
+	$('#Titulo_codtipotitulo').change( function() {
+		if ($('#Titulo_codtipotitulo').val() != 0)
+		{
+			$.ajax({
+				url: "<?php echo Yii::app()->createUrl('titulo/buscaoperacaotipotitulo') ?>&codtipotitulo="+$('#Titulo_codtipotitulo').val(),
+				dataType: "text",
+				success: function(data) {
+					var retorno = $.parseJSON(data);
+					$('#operacao').text(retorno.operacao);
+				}
+			});	
+		}
+		else
+			$('#operacao').text("??");
+		
+	});
+	
+	altera_vencimentooriginal = <?php echo ($model->vencimento == $model->vencimentooriginal && $model->isNewRecord)?"true":"false"; ?>;
+	altera_transacao = <?php echo ($model->emissao == $model->transacao && $model->isNewRecord)?"true":"false"; ?>;
+	
+	$('#Titulo_vencimento').change( function() {
+		if (altera_vencimentooriginal)
+			$('#Titulo_vencimentooriginal').val($('#Titulo_vencimento').val());
+	});
+	
+	$('#Titulo_emissao').change( function() {
+		if (altera_transacao)
+			$('#Titulo_transacao').val($('#Titulo_emissao').val());
 	});
 
 </script>

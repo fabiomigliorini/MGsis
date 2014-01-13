@@ -74,8 +74,8 @@ class Portador extends MGActiveRecord
 		return array(
 			'movimentotitulos' => array(self::HAS_MANY, 'Movimentotitulo', 'codportador'),
 			'titulos' => array(self::HAS_MANY, 'Titulo', 'codportador'),
-			'codfilial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
-			'codbanco' => array(self::BELONGS_TO, 'Banco', 'codbanco'),
+			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
+			'Banco' => array(self::BELONGS_TO, 'Banco', 'codbanco'),
 			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 			'usuarios' => array(self::HAS_MANY, 'Usuario', 'codportador'),

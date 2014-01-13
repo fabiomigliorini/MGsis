@@ -28,7 +28,7 @@ else
 	$css_filial = "text-success";
 
 ?>
-<div class="registro">
+<div class="registro row-fluid">
 	<div class="row-fluid">
 		<b class="span2">
 			<?php echo CHtml::link(CHtml::encode($data->numero),array('view','id'=>$data->codtitulo)); ?> 

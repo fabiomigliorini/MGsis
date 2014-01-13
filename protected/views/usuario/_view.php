@@ -1,9 +1,11 @@
-<div class="registro">
-	<div class="codigo">
+<div class="registro row-fluid">
+	<b class="span2">
 		<?php echo CHtml::link(CHtml::encode($data->usuario),array('view','id'=>$data->codusuario)); ?>
-	</div>
-	<div class="detalhes">
+	</b>
+	<small class="muted span2">
 		<b><?php echo isset($data->codfilial)?CHtml::encode($data->Filial->filial):'&nbsp;'; ?></b>
-		<b><?php echo isset($data->codpessoa)?'&ndash; ' . CHtml::encode($data->Pessoa->fantasia):'&nbsp;'; ?></b>
-	</div>
+	</small>
+	<small class="muted span2">
+		<b><?php echo isset($data->Pessoa)?CHtml::encode($data->Pessoa->fantasia):'&nbsp;'; ?></b>
+	</small>
 </div>

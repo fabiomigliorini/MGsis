@@ -95,7 +95,7 @@ $(document).ready(function(){
 		</div>
 		<div class="span6">
 			<div class="row-fluid">
-				<?php echo $form->select2Pessoa($model, 'codpessoa', array('class' => 'span12'));?>
+				<?php echo $form->select2Pessoa($model, 'codpessoa', array('class' => 'span12', 'inativo'=>true));?>
 			</div>
 			<div class="row-fluid" style="padding-top: 4px">
 				<?php

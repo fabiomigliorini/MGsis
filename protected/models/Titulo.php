@@ -66,6 +66,7 @@ class Titulo extends MGActiveRecord
 	public $Juros;
 	public $operacao;
 	public $valor;
+	public $gerado_automaticamente;
 	
 	/**
 	 * @return string the associated database table name
@@ -83,7 +84,12 @@ class Titulo extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codtipotitulo, valor, codfilial, codpessoa, codcontacontabil, numero, transacao, emissao, vencimento, vencimentooriginal', 'required'),
+			array('codtipotitulo, valor, codfilial, codpessoa, codcontacontabil, transacao, emissao, vencimento, vencimentooriginal', 'required'),
+			array('valor', 'validaPodeAlterarValor'),
+			array('codtipotitulo', 'validaPodeAlterarTipoTitulo'),
+			array('codportador', 'validaFilialPortador'),
+			array('transacao', 'validaDataTransacao'),
+			array('numero', 'validaNumero'),
 			array('numero, nossonumero', 'length', 'max'=>20),
 			array('fatura', 'length', 'max'=>50),
 			array('debito, credito, debitototal, creditototal, saldo, debitosaldo, creditosaldo', 'length', 'max'=>14),
@@ -94,15 +100,100 @@ class Titulo extends MGActiveRecord
 			// @todo Please remove those attributes that should not be searched.
 			array('transacao','date','format'=>Yii::app()->locale->getDateFormat('medium')),
 			//array('sistema','datetime'),
-			array('sistema','date','format'=> strtr(Yii::app()->locale->getDateTimeFormat()
-													, array("{0}" => Yii::app()->locale->getTimeFormat('medium')
-															, "{1}" => Yii::app()->locale->getDateFormat('medium')))
-				),
-			
+			array('sistema','date','format'=> strtr(Yii::app()->locale->getDateTimeFormat(), array("{0}" => Yii::app()->locale->getTimeFormat('medium'), "{1}" => Yii::app()->locale->getDateFormat('medium')))),
 			array('codtitulo, vencimento_de, vencimento_ate, emissao_de, emissao_ate, criacao_de, criacao_ate, codtipotitulo, codfilial, codportador, codpessoa, codcontacontabil, numero, emissao, vencimento, credito, gerencial, boleto, nossonumero, saldo, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
 		);
 	}
 
+	public function validaPodeAlterarValor($attribute, $params)
+	{
+		if (!$this->isNewRecord)
+		{
+			$old = self::findByPk($this->codtitulo);
+			if ($old->saldo == 0)
+			{
+				if ($old->valor <> $this->valor)
+					$this->addError($attribute, 'Impossível alterar o valor de um título baixado ou estornado!');
+			}
+		}
+	}
+
+	public function validaPodeAlterarTipoTitulo($attribute, $params)
+	{
+		if (!$this->isNewRecord)
+		{
+			$old = self::findByPk($this->codtitulo);
+			if ($this->codtipotitulo <> $old->codtipotitulo and !empty($this->codtipotitulo))
+			{
+				if (($this->TipoTitulo->debito <> $old->TipoTitulo->debito) || ($this->TipoTitulo->credito <> $old->TipoTitulo->credito))
+				{
+					$this->addError($attribute, 'Impossível alterar o tipo de título de DB para CR, e vice-versa!');
+				}
+			}
+		}
+	}
+	
+	public function validaFilialPortador($attribute, $params)
+	{
+		if (!empty($this->codfilial))
+			if (!empty($this->codportador))
+				if (($this->codfilial <> $this->Portador->codfilial) && !empty($this->Portador->codfilial))
+					$this->addError($attribute, "Este portador só é válido para a filial {$this->Portador->Filial->filial}!");
+	}
+	
+	public function validaNumero($attribute, $params)
+	{
+		if (empty($this->numero))
+			return;
+		
+		if (empty($this->codtipotitulo))
+			return;
+
+		$outro = false;
+		if ($this->TipoTitulo->pagar)
+		{
+			$outro = Titulo::model()->find(
+				array(
+					'select'=>'codtitulo',
+					'condition'=>'codpessoa = :codpessoa AND numero = :numero AND codtitulo <> :codtitulo',
+					'params'=>array(':codpessoa'=>$this->codpessoa, ':numero'=>$this->numero, ':codtitulo' => (empty($this->codtitulo)?-1:$this->codtitulo))
+				)
+			);
+			
+		}
+		elseif ($this->TipoTitulo->receber)
+		{
+			$outro = Titulo::model()->find(
+				array(
+					'select'=>'codtitulo',
+					'condition'=>'codfilial = :codfilial AND numero = :numero AND codtitulo <> :codtitulo',
+					'params'=>array(':codfilial'=>$this->codfilial, ':numero'=>$this->numero, ':codtitulo' => (empty($this->codtitulo)?-1:$this->codtitulo))
+				)
+			);
+		}
+		
+		if ($outro)
+		{
+			$this->addError($attribute, "Numero {$this->numero} já utilizado no título " . CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($outro->codtitulo)),array('view','id'=>$outro->codtitulo)) . "!");
+		}
+	}
+	
+	public function validaDataTransacao ($attribute, $params)
+	{
+		if (!$this->isNewRecord)
+			return;
+		
+		$pg = ParametrosGerais::model()->findByPK(1);
+		
+		if($pg===null)
+			return;
+		
+		if ($pg->validaDataTransacao($this->transacao))
+			return;
+		
+		$this->addError($attribute, "Data de transação inválida, deve ser entre '{$pg->transacaoinicial}' e '{$pg->transacaofinal}'!");
+	}
+	
 	/**
 	 * @return array relational rules.
 	 */
@@ -327,6 +418,12 @@ class Titulo extends MGActiveRecord
 		$this->Juros = new MGJuros(array("de" => $this->vencimento,	"valorOriginal" => $this->saldo));
 		$this->operacao = ($this->saldo<0 || $this->credito>$this->debito)?"CR":"DB";
 		$this->valor = abs($this->debito-$this->credito);
+		
+		if (!empty($this->codnegocioformapagamento) || !empty($this->codtituloagrupamento))
+			$this->gerado_automaticamente = true;
+		else
+			$this->gerado_automaticamente = false;
+			
 		return $ret;
 	}
 	
@@ -337,10 +434,19 @@ class Titulo extends MGActiveRecord
 		if (empty($this->sistema))
 			$this->sistema = $this->criacao;
 		
+		if (empty($this->numero))
+			$this->numero = $this->codtitulo;
+		
 		if ($this->TipoTitulo->credito)
+		{
 			$this->credito = Yii::app()->format->unformatNumber($this->valor);
+			$this->debito = 0;
+		}
 		else
+		{
+			$this->credito = 0;
 			$this->debito = Yii::app()->format->unformatNumber($this->valor);
+		}
 		
 		return $ret;
 		

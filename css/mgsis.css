@@ -3,15 +3,6 @@ body {
   padding-bottom: 30px;
 }
 
-.codigo {
-    font-weight: bold;
-}
-
-.detalhes {
-    font-size: .8em;
-    color: #888888;
-}
-
 .registro {
 	position: relative;
 	margin: 7px 0;
@@ -21,18 +12,6 @@ body {
 	-webkit-border-radius: 4px;
 	   -moz-border-radius: 4px;
 			border-radius: 4px;
-	/*
-		  padding: 0px;
-	margin: 15px;
-    border-bottom: 1px solid #eeeeee;
-    padding-bottom: 15px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px; 
-	
-    margin: 0px;
-	padding-bottom: 0px;
-	*/
 }
 
 .registro:hover {
@@ -43,75 +22,6 @@ body {
     font-size: .9em;
     color: #999999;
     padding-bottom: 20px;
-}
-
-.div-combo-pessoa {
-    display:table-cell;
-    width:500px;
-}
-
-.div-combo-pessoa-fantasia {
-    font-weight: bold;
-    float: left;
-    clear: left;
-}
-
-.div-combo-pessoa-codigo {
-    color: #999999;
-    font-size: .8em;
-    text-align: right;
-    float: right;
-    clear: right;
-}
-
-.div-combo-pessoa-pessoa {
-    color: #999999;
-    font-size: .8em;
-    float: left;
-    clear: left;
-}
-.div-combo-pessoa-cnpj {
-    color: #999999;
-    font-size: .8em;
-    text-align: right;
-    float: right;
-    clear: right;
-}
-
-.div-combo-cidade {
-    display:table-cell;
-    width:500px;
-}
-
-.div-combo-cidade-cidade {
-    /*font-weight: bold;*/
-    float: left;
-    clear: left;
-}
-.div-combo-cidade-uf {
-    /*
-    color: #999999;
-    font-size: .8em;
-    */
-    text-align: right;
-    float: right;
-    clear: right;
-}
-
-.select2-highlighted .div-combo-pessoa-fantasia { 
-/*    color: yellow; */
-}
-
-.select2-highlighted .div-combo-pessoa-codigo { 
-    color: #eeeeee; 
-}
-
-.select2-highlighted .div-combo-pessoa-pessoa { 
-    color: #eeeeee; 
-}
-
-.select2-highlighted .div-combo-pessoa-cnpj { 
-    color: #eeeeee; 
 }
 
 .menuthumbnails a {

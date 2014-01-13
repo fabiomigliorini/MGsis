@@ -10,7 +10,7 @@
 		echo $form->textFieldRow($model,'pessoa',array('class'=>'input-xxlarge','maxlength'=>100));
 		echo $form->textFieldRow($model,'contato',array('class'=>'input-large','maxlength'=>100));
 		
-		echo $form->select2CidadeRow($model,'codcidade',array('class'=>'input-large'));
+		echo $form->select2CidadeRow($model,'codcidade');
 
 		//echo $form->checkBoxRow($model,'fisica');
 		echo $form->toggleButtonRow($model,'fisica', array('options' => array('width' => 150,  'enabledLabel' => 'Física', 'disabledLabel' => 'Jurídica')));
@@ -114,7 +114,7 @@
 				echo $form->textFieldRow($model,'numerocobranca',array('class'=>'input-mini','maxlength'=>10));
 				echo $form->textFieldRow($model,'complementocobranca',array('class'=>'input-medium','maxlength'=>50));
 				echo $form->textFieldRow($model,'bairrocobranca',array('class'=>'input-medium','maxlength'=>50));
-				echo $form->select2CidadeRow($model,'codcidadecobranca',array('class'=>'input-large'));
+				echo $form->select2CidadeRow($model,'codcidadecobranca');
 			
 			?>
 		</div>

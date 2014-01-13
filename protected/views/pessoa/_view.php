@@ -1,4 +1,4 @@
-<div class="registro <?php echo (!empty($data->inativo))?"alert-danger":""; ?>">
+<div class="registro row-fluid <?php echo (!empty($data->inativo))?"alert-danger":""; ?>">
 	<h4>
 		<a href="<?php echo Yii::app()->createUrl('pessoa/view', array('id'=>$data->codpessoa)); ?>">
 		<?php echo CHtml::encode($data->fantasia); ?>
@@ -9,18 +9,19 @@
 	</h4>
 	<div class="row-fluid">
 		<div class="span4">
-			<div class="detalhes ">
+			<small class="muted">
 				<b><?php echo CHtml::encode($data->pessoa); ?></b>
-			</div>
+			</small><br>
 			<small class="muted">
 				<a href="<?php echo Yii::app()->createUrl('pessoa/view', array('id'=>$data->codpessoa)); ?>">
 				<?php echo CHtml::encode(Yii::app()->format->formataCodigo($data->codpessoa)); ?>
 				</a>
 			</small>
 			<?php if (!empty($data->contato)): ?>
-				<div class="detalhes">
+				<br>
+				<small class="muted">
 					<?php echo CHtml::encode($data->contato); ?>
-				</div>
+				</small>
 			<?php endif; ?>
 		</div>
 		<div class="span6">
@@ -37,16 +38,18 @@
 					</a>
 				</b>
 			</div>
-			<div class="detalhes">
+			<small class="muted">
 				<?php echo Yii::app()->format->formataEndereco($data->endereco, $data->numero, $data->complemento, $data->bairro, $data->Cidade->cidade, $data->Cidade->Estado->sigla, $data->cep); ?>
-			</div>
+			</small>
 			<?php if (!$data->cobrancanomesmoendereco): ?>
-				<div class="detalhes">
+				<br>
+				<small class="muted">
 					<?php echo Yii::app()->format->formataEndereco($data->enderecocobranca, $data->numerocobranca, $data->complementocobranca, $data->bairrocobranca, $data->CidadeCobranca->cidade, $data->CidadeCobranca->Estado->sigla, $data->cepcobranca); ?>
-				</div>
+				</small>
 			<?php endif; ?>
 			<?php if (!empty($data->contato) or !empty($data->email) or !empty($data->emailnfe) or !empty($data->emailcobranca)): ?>
-				<div class="detalhes">
+				<br>
+				<small class="muted">
 					<a href="mailto:<?php echo CHtml::encode($data->email); ?>"><?php echo CHtml::encode($data->email); ?></a>
 					<?php if ($data->email <> $data->emailnfe): ?>
 						<a href="mailto:<?php echo CHtml::encode($data->emailnfe); ?>"><?php echo CHtml::encode($data->emailnfe); ?></a>
@@ -54,10 +57,10 @@
 					<?php if ($data->email <> $data->emailcobranca and $data->emailnfe <> $data->emailcobranca): ?>
 						<a href="mailto:<?php echo CHtml::encode($data->emailcobranca); ?>"><?php echo CHtml::encode($data->emailcobranca); ?></a>
 					<?php endif; ?>
-				</div>
+				</small>
 			<?php endif; ?>
 		</div>
-		<div class="span2 detalhes">
+		<small class="span2 muted text-right">
 			<div>
 				<b><?php echo CHtml::encode(Yii::app()->format->formataCnpjCpf($data->cnpj, $data->fisica)); ?> </b>
 			</div>
@@ -68,7 +71,7 @@
 				?>
 				<?php echo CHtml::encode($data->rg); ?>
 			</div>
-		</div>
+		</small>
 	</div>
 		
 		<?php /*

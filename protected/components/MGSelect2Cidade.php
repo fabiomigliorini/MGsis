@@ -12,7 +12,7 @@ class MGSelect2Cidade extends TbSelect2
 		$this->asDropDownList = false;
 
 		if (!isset($this->htmlOptions['class'])) 
-			$this->htmlOptions['class'] = 'input-large';
+			$this->htmlOptions['class'] = 'input-xlarge';
 		
 		if (!isset($this->htmlOptions['placeholder'])) 
 			$this->htmlOptions['placeholder'] = 'Cidade';
@@ -24,9 +24,9 @@ class MGSelect2Cidade extends TbSelect2
 					'placeholder' => 'Cidade',
 					'formatResult' => 'js:function(item) 
 						{
-							var markup = "<div class=\'div-combo-cidade\'>";
-							markup    += "<div class=\'div-combo-cidade-cidade\'>" + item.cidade + "</div>";
-							markup    += "<div class=\'div-combo-cidade-uf\'>" + item.uf + "</div>";
+							var markup = "<div class=\'row-fluid\'>";
+							markup    += "<b>" + item.cidade + "</b>";
+							markup    += "<span style=\'width:25px\' class=\'pull-right\'>" + item.uf + "</span>";
 							markup    += "</div>";
 							return markup;
 						}',
