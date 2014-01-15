@@ -59,7 +59,7 @@ $(document).ready(function(){
 
 <?php $this->endWidget(); ?>
 
-
+<div class="row-fluid">
 <?php
  
 $this->widget(
@@ -80,3 +80,4 @@ $this->widget(
 	)
 );
 ?>
+</div>

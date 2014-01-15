@@ -5,8 +5,6 @@ Yii::import('bootstrap.helpers.TbHtml');
 
 $this->pageTitle = Yii::app()->name;
 
-$this->widget('bootstrap.widgets.TbAlert', array('userComponentId' => 'user'));
-
 $menu_financeiro = TbHtml::thumbnails(
 		array(
 			array(

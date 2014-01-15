@@ -62,10 +62,9 @@ $this->widget(
 		'itemView' => '_view',
 		'template' => '{items} {pager}',
 		'pager' => array(
-			'class' => 'ext.infiniteScroll.IasPager', 
+		 	'class' => 'ext.infiniteScroll.IasPager', 
 			'rowSelector'=>'.registro', 
 			'listViewId' => 'Listagem', 
-			'header' => '',
 			'loaderText'=>'Carregando...',
 			'options' => array('history' => false, 'triggerPageTreshold' => 10, 'trigger'=>'Carregar mais registros'),
 		)

@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 );
 
 	$this->menu=array(
-	array('label'=>'Lista', 'icon'=>'icon-list-alt', 'url'=>array('index')),
+	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
 	array('label'=>'Detalhes', 'icon'=>'icon-eye-open', 'url'=>array('view','id'=>$model->codcidade)),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),

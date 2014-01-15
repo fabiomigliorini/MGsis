@@ -8,7 +8,7 @@ class UsuarioCriacao extends CWidget
 	public function run()
 	{
 		?>
-		<div class="usuario">
+		<small class="muted">
 			<?php if (isset($this->model->criacao) || isset($this->model->codusuariocriacao)): ?>
 				Criado
 				<?php echo isset($this->model->criacao)?CHtml::encode('em ' .$this->model->criacao):''; ?>
@@ -19,7 +19,7 @@ class UsuarioCriacao extends CWidget
 				<?php echo (isset($this->model->alteracao) && ($this->model->criacao <> $this->model->alteracao))?CHtml::encode('em ' .$this->model->alteracao):''; ?>
 				<?php echo (isset($this->model->codusuarioalteracao))?'por ' . CHtml::link($this->model->UsuarioAlteracao->usuario, array('usuario/view', 'id'=>$this->model->codusuarioalteracao)):''; ?> 
 			<?php endif;?>
-		</div>
+		</small>
 		<?
 	}
 	

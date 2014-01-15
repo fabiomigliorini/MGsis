@@ -121,6 +121,9 @@
 	
 ?>
 <div class="container-fluid">
+	<?php
+	$this->widget('bootstrap.widgets.TbAlert', array('userComponentId' => 'user'));
+	?>
     <?php echo $content; ?>
 </div>
 </body>

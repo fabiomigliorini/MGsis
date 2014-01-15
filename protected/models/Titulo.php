@@ -87,6 +87,7 @@ class Titulo extends MGActiveRecord
 			array('codtipotitulo, valor, codfilial, codpessoa, codcontacontabil, transacao, emissao, vencimento, vencimentooriginal', 'required'),
 			array('valor', 'validaPodeAlterarValor'),
 			array('codtipotitulo', 'validaPodeAlterarTipoTitulo'),
+			array('boleto', 'validaBoleto'),
 			array('codportador', 'validaFilialPortador'),
 			array('transacao', 'validaDataTransacao'),
 			array('numero', 'validaNumero'),
@@ -139,6 +140,21 @@ class Titulo extends MGActiveRecord
 			if (!empty($this->codportador))
 				if (($this->codfilial <> $this->Portador->codfilial) && !empty($this->Portador->codfilial))
 					$this->addError($attribute, "Este portador só é válido para a filial {$this->Portador->Filial->filial}!");
+	}
+
+	public function validaBoleto($attribute, $params)
+	{
+		if (!$this->boleto)
+			return;
+		
+		if (empty($this->codportador))
+		{
+			$this->addError($attribute, "Selecione um portador!");
+			return;
+		}
+		
+		if (!$this->Portador->emiteboleto)
+			$this->addError($attribute, "O portador selecionado não permite boletos!");
 	}
 	
 	public function validaNumero($attribute, $params)
@@ -250,11 +266,11 @@ class Titulo extends MGActiveRecord
 			'saldo' => 'Saldo',
 			'debitosaldo' => 'Saldo Débito',
 			'creditosaldo' => 'Saldo Crédito',
-			'transacaoliquidacao' => 'Transação Liquidacao',
+			'transacaoliquidacao' => 'Liquidação',
 			'codnegocioformapagamento' => 'Negócio Forma Pagamento',
 			'codtituloagrupamento' => 'Título Agrupamento',
 			'remessa' => 'Remessa',
-			'estornado' => 'Estornado',
+			'estornado' => 'Estorno',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
@@ -385,7 +401,7 @@ class Titulo extends MGActiveRecord
 				'TipoTitulo' => array('select' => '"TipoTitulo".tipotitulo'),
 			);
 	
-		$criteria->select = 't.codtitulo, t.vencimento, t.emissao, t.codfilial, t.numero, t.codportador, t.credito, t.debito, t.saldo, t.codtipotitulo, t.codcontacontabil, t.codusuariocriacao, t.nossonumero, t.gerencial, t.codpessoa, t.codusuarioalteracao';
+		$criteria->select = 't.codtitulo, t.vencimento, t.emissao, t.codfilial, t.numero, t.codportador, t.credito, t.debito, t.saldo, t.codtipotitulo, t.codcontacontabil, t.codusuariocriacao, t.nossonumero, t.gerencial, t.codpessoa, t.codusuarioalteracao, t.estornado';
 
 		$params = array(
 			'criteria'=>$criteria,
@@ -447,9 +463,206 @@ class Titulo extends MGActiveRecord
 			$this->credito = 0;
 			$this->debito = Yii::app()->format->unformatNumber($this->valor);
 		}
+
+		//preenche nossonumero quando for boleto
+		if (!empty($this->codportador) && $this->boleto)
+		{
+			if ($this->isNewRecord)
+				$codportador_antigo = $this->codportador;
+			else
+			{
+				$old = Titulo::model()->findByPk($this->codtitulo);
+				$codportador_antigo = $old->codportador;
+			}
+			if (empty($this->nossonumero) || $this->codportador <> $codportador_antigo)
+				$this->nossonumero = Codigo::PegaProximo ("NossoNumero-#{$this->codportador}");
+		}
 		
 		return $ret;
 		
+	}
+	
+
+	protected function afterSave()
+	{
+		$ret = parent::afterSave();
+		
+		/*
+		 * 
+		 */
+		return $ret;
+	}
+	
+	public function save($runValidation=true, $attributes=NULL)
+	{
+		//variaveis do registro novo x antigo
+		$novo = $this->isNewRecord;
+		if (!$novo)
+			$old = Titulo::model()->findByPk($this->codtitulo);
+		
+		//comeca transacao
+		/*
+		try
+		{
+			$trans = $this->dbConnection->beginTransaction();
+		} catch (Exception $ex) {
+			if ($ex->getMessage() != "There is already an active transaction")
+			{
+				throw new $ex;
+			}
+		}
+		*/
+		
+		//salva registro do titulo
+		$ret = parent::save($runValidation, $attributes);
+		
+		//se salvou o titulo
+		if ($ret)
+		{
+			//inicializa variaveis
+			$debito = 0;
+			$credito = 0;
+			$data = date('d/m/Y');
+			
+			//se registro novo
+			if ($novo)
+			{
+				//os valores do movimento sao iguais ao do novo registro
+				$debito = $this->debito;
+				$credito = $this->credito;
+				$codtipomovimento = $this->TipoTitulo->codtipomovimentotitulo;
+				if ($data = DateTime::createFromFormat('Y-m-d', $this->transacao))
+					$data = $data->format('d/m/Y');
+			}
+			else
+			{
+				//senao, pega a diferenca dos valores
+				if ($this->debito > $old->debito)
+					$debito = $this->debito - $old->debito;
+				if ($this->debito < $old->debito)
+					$credito = $old->debito - $this->debito;
+				if ($this->credito > $old->credito)
+					$credito = $this->credito - $old->credito;
+				if ($this->credito < $old->credito)
+					$debito = $old->credito - $this->credito;
+				$codtipomovimento = 200;
+			}
+
+			//se teve diferenca, um registro de movimento
+			if ($debito >0 || $credito >0)
+			{
+				$mov = new MovimentoTitulo('insert');
+				$mov->codtitulo = $this->codtitulo;
+				$mov->codtipomovimentotitulo = $codtipomovimento;
+				$mov->codportador = $this->codportador;
+				$mov->debito = $debito;
+				$mov->credito = $credito;
+				$mov->codtituloagrupamento = $this->codtituloagrupamento;
+				$mov->transacao = $data;
+
+				//se deu erro ao salvar, registra erro do movimento no titulo
+				if (!$mov->save())
+				{
+					$this->addError($this->tableSchema->primaryKey, 'Erro ao gerar movimento do título!');
+					$this->addErrors($mov->getErrors());
+					$ret = false;
+				}
+			}
+		}
+
+		//se deu erro desfaz transacao, senao commit
+		/*
+		if (isset($trans))
+		{
+			if (!$ret)
+				$trans->rollback();
+			else
+				$trans->commit();
+		}
+		*/
+		
+		//retorna
+		return $ret;
+	}
+	
+	public function atualizaSaldo()
+	{
+		$debito = 0;
+		$credito = 0;
+		$datatit = DateTime::createFromFormat('d/m/Y', $this->transacao);
+		$dataestorno = false;
+		foreach ($this->MovimentoTitulos as $mov)
+		{
+			$debito += $mov->debito;
+			$credito += $mov->credito;
+			if ($datamov = DateTime::createFromFormat('d/m/Y', $mov->transacao))
+			{
+				if ($datamov > $datatit)
+					$datatit = $datamov;
+			}
+			if ($mov->codtipomovimentotitulo == 900)
+			{
+				if (!$dataestorno = DateTime::createFromFormat('d/m/Y H:i:s', $mov->criacao))
+				{
+					if (!$dataestorno = DateTime::createFromFormat('d/m/Y H:i:s', $mov->sistema))
+						$dataestorno = new DateTime();
+				}
+			}
+		}
+		$this->debitototal = $debito;
+		$this->creditototal = $credito;
+		$this->saldo = $debito - $credito;
+		if ($this->saldo >= 0)
+		{
+			$this->debitosaldo = abs($this->saldo);
+			$this->creditosaldo = 0;
+		}
+		else
+		{
+			$this->debitosaldo = 0;
+			$this->creditosaldo = abs($this->saldo);
+		}
+		if ($this->saldo == 0)
+			$this->transacaoliquidacao = $datatit->format('d/m/Y');
+		else
+			$this->transacaoliquidacao = null;
+		
+		if ($this->saldo == 0 && $dataestorno)
+			$this->estornado = $dataestorno->format('d/m/Y H:i:s');
+		else
+			$this->estornado = null;
+		
+		return $this->save();
+	}
+
+	public function estorna()
+	{
+		$ret = false;
+		
+		$trans = $this->dbConnection->beginTransaction();
+		
+		if ($this->saldo == ($this->debito - $this->credito))
+		{
+			$mov = new MovimentoTitulo('insert');
+			$mov->codtipomovimentotitulo = 900;
+			$mov->codtitulo = $this->codtitulo;
+			$mov->codportador = $this->codportador;
+			$mov->debito = $this->creditosaldo;
+			$mov->credito = $this->debitosaldo;
+			$mov->transacao = date('d/m/Y');
+			$mov->sistema = date("d/m/Y H:i:s");
+			if ($mov->save())
+			{
+				$ret = true;
+			}
+		}
+		
+		if ($ret)
+			$trans->commit();
+		else
+			$trans->rollback();
+		
+		return $ret;
 	}
 	
 }

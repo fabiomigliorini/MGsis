@@ -17,7 +17,7 @@ echo "\$this->breadcrumbs=array(
 ?>
 
 $this->menu=array(
-	array('label'=>'Lista', 'icon'=>'icon-list-alt', 'url'=>array('index')),
+	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
 	);
 

@@ -8,12 +8,18 @@ $this->menu=array(
 	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 	array(
+		'label'=>'Agrupar', 
+		'icon'=>'icon-print', 
+		'url'=>array('agrupar'), 
+		'linkOptions'=>array('id'=>'btnAgrupar'),
+	),
+	array(
 		'label'=>'Relatório', 
 		'icon'=>'icon-print', 
 		'url'=>array('relatorio'), 
 		'linkOptions'=>array('id'=>'btnMostrarRelatorio'),
 	),
-	);
+);
 ?>
 
 <script type='text/javascript'>
@@ -39,7 +45,55 @@ $(document).ready(function(){
 			{data: ajaxRequest}
 		);
     });
+
+	$("#Titulo_saldo").select2();
+	$("#Titulo_codportador").select2({allowClear: true});
+	$("#Titulo_boleto").select2({allowClear: true});
+	$("#Titulo_codusuariocriacao").select2({allowClear: true});
+	$("#Titulo_credito").select2({allowClear: true});
+	$("#Titulo_gerencial").select2({allowClear: true});
+	$("#Titulo_codcontacontabil").select2({allowClear: true});
+	$("#Titulo_codtipotitulo").select2({allowClear: true});
+	$("#Titulo_codfilial").select2({allowClear: true});
+	
+	$(document.body).bind('DOMNodeInserted', function(event) {
+		$(".registro").unbind("click");
+		$('.registro').click(function() {
+			$(this).toggleClass("selecionado");
+			atualizaIdsSelecionados();
+		});		
+	});
+	
+	$('#btnAgrupar').click(function (event) {
+		event.preventDefault();
+		console.clear();
+		if (ids_selecionados == "")
+		{
+			bootbox.alert("Selecione pelo menos um título!");
+		}
+		else
+		{
+			window.location = $('#btnAgrupar').attr('href') + '&id=' + ids_selecionados;
+		}
+	});
 });
+
+var ids_selecionados = "";
+
+function atualizaIdsSelecionados()
+{
+	ids_selecionados = "";
+	$("div.selecionado").each(function() {
+		ids_selecionados += this.id + ",";
+	});
+	$.getJSON("<?php echo Yii::app()->createUrl('titulo/totalselecionado', array('id'=>''))?>"+ids_selecionados, function( data ) {
+		$("#totaloperacao").text(data.operacao);
+		$("#totalsaldo").text(data.saldo);
+		$("#totaljuros").text(data.juros);
+		$("#totalmulta").text(data.multa);
+		$("#totaltotal").text(data.total);
+	});
+}
 
 </script>
 
@@ -242,26 +296,26 @@ $(document).ready(function(){
 		</div>
 	</div>
 </div>
-
-<script>
-	$( document ).ready(function() {
-		$("#Titulo_saldo").select2();
-		$("#Titulo_codportador").select2({allowClear: true});
-		$("#Titulo_boleto").select2({allowClear: true});
-		$("#Titulo_codusuariocriacao").select2({allowClear: true});
-		$("#Titulo_credito").select2({allowClear: true});
-		$("#Titulo_gerencial").select2({allowClear: true});
-		$("#Titulo_codcontacontabil").select2({allowClear: true});
-		$("#Titulo_codtipotitulo").select2({allowClear: true});
-		$("#Titulo_codfilial").select2({allowClear: true});
-	});
-</script>
-
+ 
 <?php $this->endWidget(); ?>
-
+<div id="totais" class="well well-small">
+	<div class="span2">	
+		Total Selecionado
+	</div>
+	<span class="span1 text-right">Saldo:</span>
+	<b id="totalsaldo" class="span2 text-right"></b>
+	<span class="span1 text-right">Multa:</span>
+	<b id="totalmulta" class="span1 text-right"></b>
+	<span class="span1 text-right">Juros:</span>
+	<b id="totaljuros" class="span1 text-right"></b>
+	<span class="span1 text-right">Total:</span>
+	<b class="span2 text-right">
+		<span id="totaltotal"></span> &nbsp;
+		<span id="totaloperacao" class="pull-right"></span>
+	</b>
+</div>
 
 <?php
- 
 $this->widget(
 	'zii.widgets.CListView', 
 	array(

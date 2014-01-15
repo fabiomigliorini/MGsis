@@ -23,12 +23,36 @@ $this->menu=array(
 		),
 	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
 	array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codtitulo)),
-	array('label'=>'Estornar', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>array('id'=>'btnExcluir')),
+	array('label'=>'Estornar', 'icon'=>'icon-thumbs-down', 'url'=>'#', 'linkOptions'=>array('id'=>'btnExcluir')),
 	array('label'=>'Duplicar', 'icon'=>'icon-retweet', 'url'=>array('create','duplicar'=>$model->codtitulo)),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
 
 Yii::app()->clientScript->registerCoreScript('yii');
+
+if ($model->saldo == 0) 
+	$css_vencimento = "muted";
+else
+	if ($model->Juros->diasAtraso > 0)
+	{
+		if ($model->Juros->diasAtraso <= $model->Juros->diasTolerancia) 
+		{
+			$css_vencimento = "text-warning";
+		}
+		else 
+		{
+			$css_vencimento = "text-error";
+		}
+	}
+	else
+	{
+		$css_vencimento = "text-success";
+	}
+
+if ($model->gerencial)
+	$css_filial = "text-warning";
+else
+	$css_filial = "text-success";
 
 ?>
 
@@ -77,9 +101,9 @@ $(document).ready(function(){
 	
 	//botao excluir
 	jQuery('body').on('click','#btnExcluir',function() {
-		bootbox.confirm("Excluir este registro?", function(result) {
+		bootbox.confirm("Estornar este título?", function(result) {
 			if (result)
-				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('titulo/delete', array('id' => $model->codtitulo))?>",{});
+				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('titulo/estorna', array('id' => $model->codtitulo))?>",{});
 		});
 	});
 });
@@ -118,87 +142,119 @@ $(document).ready(function(){
 	</div>
 </div>
 
-<h1>Título <?php echo $model->numero; ?></h1>
+<h2><?php echo $model->numero; ?> - <?php echo CHtml::link(CHtml::encode($model->Pessoa->fantasia),array('pessoa/view','id'=>$model->codpessoa)); ?></h2>
 
-<?php 
-$this->widget('bootstrap.widgets.TbDetailView',array(
-	'data'=>$model,
-	'attributes'=>array(
-		array(
-			'name'=>'codtitulo',
-			'value'=>Yii::app()->format->formataCodigo($model->codtitulo),
+<div class="row-fluid">
+	<div class="span4">
+	<?php 
+	$this->widget('bootstrap.widgets.TbDetailView',array(
+		'data'=>$model,
+		'attributes'=>array(
+			array(
+				'name'=>'codtitulo',
+				'value'=>Yii::app()->format->formataCodigo($model->codtitulo),
+				),
+			array(
+				'name'=>'codfilial',
+				'value'=>(isset($model->Filial))?$model->Filial->filial:null,
+				'cssClass'=>$css_filial
+				),
+			'fatura',
+			array(
+				'name'=>'codtipotitulo',
+				'value'=>(isset($model->TipoTitulo))?$model->TipoTitulo->tipotitulo:null,
+				),
+			array(
+				'name'=>'codcontacontabil',
+				'value'=>(isset($model->ContaContabil))?$model->ContaContabil->contacontabil:null,
+				),
+			array(
+				'name'=>'observacao',
+				'value'=>(!empty($model->observacao))?nl2br($model->observacao):null,
+				),
+			array(
+				'label'=>'Negócio',
+				'value'=>(isset($model->NegocioFormaPagamento))?Yii::app()->format->formataCodigo($model->NegocioFormaPagamento->codnegocio):"Não",
+				),
+			array(
+				'label'=>'Agrupamento',
+				'value'=>(!empty($model->codtituloagrupamento))?"Sim":"Não",
+				),
 			),
-		array(
-			'name'=>'codpessoa',
-			'value'=>(isset($model->Pessoa))?CHtml::link(CHtml::encode($model->Pessoa->fantasia),array('pessoa/view','id'=>$model->codpessoa)):null,
-			'type'=>'raw',			
-			),
-		'numero',
-		'vencimento',
-		array(
-			'name'=>'saldo',
-			'value'=>Yii::app()->format->formatNumber($model->saldo),
-			),
-		'emissao',
-		array(
-			'name'=>'debito',
-			'value'=>Yii::app()->format->formatNumber($model->debito),
-			),
-		array(
-			'name'=>'credito',
-			'value'=>Yii::app()->format->formatNumber($model->credito),
-			),
-		
-		array(
-			'name'=>'codtipotitulo',
-			'value'=>(isset($model->TipoTitulo))?$model->TipoTitulo->tipotitulo:null,
-			),
-		array(
-			'name'=>'codcontacontabil',
-			'value'=>(isset($model->ContaContabil))?$model->ContaContabil->contacontabil:null,
-			),
-		array(
-			'name'=>'codfilial',
-			'value'=>(isset($model->Filial))?$model->Filial->filial:null,
-			),
-		'fatura',
-		'transacao',
-		'sistema',
-		'vencimentooriginal',
-		array(
-			'name'=>'gerencial',
-			'value'=>($model->gerencial)?"Gerencial":"Fiscal",
-			),
-		array(
-			'name'=>'observacao',
-			'value'=>(!empty($model->observacao))?nl2br($model->observacao):null,
-			),
-		array(
-			'name'=>'codportador',
-			'value'=>(isset($model->Portador))?$model->Portador->portador:null,
-			),
-		array(
-			'name'=>'boleto',
-			'value'=>($model->boleto)?"Com Boleto":"Sem Boleto",
-			),
-		'nossonumero',
-		'remessa',
-		array(
-			'label'=>'Negócio',
-			'value'=>(isset($model->NegocioFormaPagamento))?Yii::app()->format->formataCodigo($model->NegocioFormaPagamento->codnegocio):null,
-			),
-		array(
-			'label'=>'Agrupamento',
-			'value'=>(!empty($model->codtituloagrupamento))?"Sim":"Não",
-			),
-		'transacaoliquidacao',
-		'estornado',
-		
+	)); 
+	?>
+	</div>
+	<div class="span4">
+	<?php 
+	$this->widget('bootstrap.widgets.TbDetailView',array(
+		'data'=>$model,
+		'attributes'=>array(
+			'emissao',
+			'transacao',
+			array(
+				'name'=>'valor',
+				'value'=>Yii::app()->format->formatNumber($model->valor) . " " . $model->operacao,
+				),
+			array(
+				'name'=>'codportador',
+				'value'=>(isset($model->Portador))?$model->Portador->portador:null,
+				),
+			array(
+				'name'=>'boleto',
+				'value'=>($model->boleto)?$model->nossonumero:"Sem Boleto",
+				),
+			'remessa',
+			'transacaoliquidacao',
+			'estornado',
 		),
 	)); 
-
+	?>		
+	</div>
+	<div class="span4">
+	<?php
+	$this->widget('bootstrap.widgets.TbDetailView',array(
+		'data'=>$model,
+		'attributes'=>array(
+			array(
+				'name'=>'vencimento',
+				'cssClass' => $css_vencimento 
+			),
+			array(
+				'name'=>'vencimentooriginal',
+				'cssClass' => $css_vencimento
+			),
+			array(
+				'name'=>'saldo',
+				'value'=>Yii::app()->format->formatNumber(abs($model->saldo)) . " " . $model->operacao,
+				'cssClass' => $css_vencimento,
+				),
+			array(
+				'label'=>'Juros',
+				'value'=>Yii::app()->format->formatNumber(abs($model->Juros->valorJuros)) . " " . $model->operacao,
+				'cssClass' => $css_vencimento
+				),
+			array(
+				'label'=>'Multa',
+				'value'=>Yii::app()->format->formatNumber(abs($model->Juros->valorMulta)) . " " . $model->operacao,
+				'cssClass' => $css_vencimento
+				),
+			array(
+				'label'=>'Total',
+				'value'=>Yii::app()->format->formatNumber(abs($model->Juros->valorTotal)) . " " . $model->operacao,
+				'cssClass' => $css_vencimento
+				),
+			)
+		)
+	);
+	?>
+	</div>
+</div>
+	<?php
 	$this->widget('UsuarioCriacao', array('model'=>$model));
-
+	?>
+	<br>
+	<br>
+	<?php
 	$box = $this->beginWidget('bootstrap.widgets.TbBox',
 			array(
 				'title' => 'Movimento',

@@ -6,7 +6,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'Lista', 'icon'=>'icon-list-alt', 'url'=>array('index')),
+array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
 array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codcidade)),
 array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->codcidade),'confirm'=>'Tem Certeza que deseja excluir este item?')),

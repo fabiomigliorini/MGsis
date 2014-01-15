@@ -5243,3 +5243,1832 @@ REQUEST_URI=/MGsis/index.php?r=titulo/create&duplicar=10040488
 in /var/www/MGsis/protected/models/Titulo.php (165)
 in /var/www/MGsis/protected/controllers/TituloController.php (36)
 in /var/www/MGsis/index.php (13)
+2014/01/14 10:54:06 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchAll(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "". A declaração SQL executada foi: SELECT "Portador"."codportador" AS "t1_c0", "Portador"."portador" AS "t1_c1", "Portador"."codbanco" AS "t1_c2", "Portador"."agencia" AS "t1_c3", "Portador"."agenciadigito" AS "t1_c4", "Portador"."conta" AS "t1_c5", "Portador"."contadigito" AS "t1_c6", "Portador"."emiteboleto" AS "t1_c7", "Portador"."codfilial" AS "t1_c8", "Portador"."convenio" AS "t1_c9", "Portador"."diretorioremessa" AS "t1_c10", "Portador"."diretorioretorno" AS "t1_c11", "Portador"."carteira" AS "t1_c12", "Portador"."alteracao" AS "t1_c13", "Portador"."codusuarioalteracao" AS "t1_c14", "Portador"."criacao" AS "t1_c15", "Portador"."codusuariocriacao" AS "t1_c16" FROM "mgsis"."tblportador" "Portador"  WHERE ("Portador"."codportador"=:ypl0).
+in /var/www/MGsis/protected/models/Titulo.php (156)
+in /var/www/MGsis/protected/controllers/TituloController.php (90)
+in /var/www/MGsis/index.php (13)
+2014/01/14 10:54:06 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "". The SQL statement executed was: SELECT "Portador"."codportador" AS "t1_c0", "Portador"."portador" AS "t1_c1", "Portador"."codbanco" AS "t1_c2", "Portador"."agencia" AS "t1_c3", "Portador"."agenciadigito" AS "t1_c4", "Portador"."conta" AS "t1_c5", "Portador"."contadigito" AS "t1_c6", "Portador"."emiteboleto" AS "t1_c7", "Portador"."codfilial" AS "t1_c8", "Portador"."convenio" AS "t1_c9", "Portador"."diretorioremessa" AS "t1_c10", "Portador"."diretorioretorno" AS "t1_c11", "Portador"."carteira" AS "t1_c12", "Portador"."alteracao" AS "t1_c13", "Portador"."codusuarioalteracao" AS "t1_c14", "Portador"."criacao" AS "t1_c15", "Portador"."codusuariocriacao" AS "t1_c16" FROM "mgsis"."tblportador" "Portador"  WHERE ("Portador"."codportador"=:ypl0)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(507): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(163): CJoinElement->lazyFind(Object(Titulo))
+#4 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(281): CActiveFinder->lazyFind(Object(Titulo))
+#5 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(143): CActiveRecord->getRelated('Portador')
+#6 /var/www/MGsis/protected/models/Titulo.php(156): CActiveRecord->__get('Portador')
+#7 /var/www/yii-1.1.14.f0fee9/framework/validators/CInlineValidator.php(42): Titulo->validaBoleto('boleto', Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(Titulo), 'boleto')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CModel.php(159): CValidator->validate(Object(Titulo), NULL)
+#10 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(805): CModel->validate(NULL)
+#11 /var/www/MGsis/protected/controllers/TituloController.php(90): CActiveRecord->save()
+#12 [internal function]: TituloController->actionUpdate('10036659')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('update')
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/update')
+#20 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#21 /var/www/MGsis/index.php(13): CApplication->run()
+#22 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/update&id=10036659
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/update&id=10036659
+---
+2014/01/14 12:03:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/MGsis/protected/controllers/TituloController.php:180
+Stack trace:
+#0 /var/www/MGsis/protected/controllers/TituloController.php(18): TituloController->loadModel('10040498')
+#1 [internal function]: TituloController->actionView('10040498')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('view')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/view')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/view&id=10040498
+---
+2014/01/14 12:08:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/MGsis/protected/controllers/TituloController.php:180
+Stack trace:
+#0 /var/www/MGsis/protected/controllers/TituloController.php(18): TituloController->loadModel('10040503')
+#1 [internal function]: TituloController->actionView('10040503')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('view')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/view')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/view&id=10040503
+---
+2014/01/14 14:09:26 [error] [php] mb_strlen() expects parameter 1 to be string, object given (/var/www/yii-1.1.14.f0fee9/framework/utils/CDateTimeParser.php:87)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1071): MovimentoTitulo->beforeSave()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): MovimentoTitulo->insert()
+#2 /var/www/MGsis/protected/models/Titulo.php(513): MovimentoTitulo->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1097): Titulo->afterSave()
+#4 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): Titulo->insert()
+#5 /var/www/MGsis/protected/controllers/TituloController.php(36): Titulo->save()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#12 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+in /var/www/MGsis/protected/models/MGActiveRecord.php (40)
+in /var/www/MGsis/protected/models/Titulo.php (513)
+in /var/www/MGsis/protected/controllers/TituloController.php (36)
+2014/01/14 14:15:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/MGsis/protected/controllers/TituloController.php:180
+Stack trace:
+#0 /var/www/MGsis/protected/controllers/TituloController.php(18): TituloController->loadModel('100514')
+#1 [internal function]: TituloController->actionView('100514')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('view')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/view')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/view&id=100514
+---
+2014/01/14 14:16:36 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Erro ao gerar movimento do titulo.' in /var/www/MGsis/protected/models/Titulo.php:512
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1097): Titulo->afterSave()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/MGsis/protected/controllers/TituloController.php(36): CActiveRecord->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/14 14:21:49 [error] [exception.CException] exception 'CException' with message 'A propriedade "Titulo.db" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('db')
+#1 /var/www/MGsis/protected/models/Titulo.php(521): CActiveRecord->__get('db')
+#2 /var/www/MGsis/protected/controllers/TituloController.php(36): Titulo->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/14 14:24:07 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Erro ao gerar movimento do titulo.' in /var/www/MGsis/protected/models/Titulo.php:512
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1097): Titulo->afterSave()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/MGsis/protected/models/Titulo.php(523): CActiveRecord->save(true, NULL)
+#3 /var/www/MGsis/protected/controllers/TituloController.php(36): Titulo->save()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/14 14:24:22 [error] [php] Undefined variable: transaction (/var/www/MGsis/protected/models/Titulo.php:527)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#5 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#6 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+in /var/www/MGsis/protected/models/Titulo.php (527)
+in /var/www/MGsis/protected/controllers/TituloController.php (36)
+in /var/www/MGsis/index.php (13)
+2014/01/14 14:24:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/MGsis/protected/controllers/TituloController.php:180
+Stack trace:
+#0 /var/www/MGsis/protected/controllers/TituloController.php(18): TituloController->loadModel('10040517')
+#1 [internal function]: TituloController->actionView('10040517')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('view')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/view')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/view&id=10040517
+---
+2014/01/14 14:29:15 [error] [exception.CException] exception 'CException' with message 'A propriedade "Titulo.pri" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('pri')
+#1 /var/www/MGsis/protected/models/Titulo.php(524): CActiveRecord->__get('pri')
+#2 /var/www/MGsis/protected/controllers/TituloController.php(36): Titulo->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/14 14:30:49 [error] [php] Missing argument 2 for CModel::addError(), called in /var/www/MGsis/protected/models/Titulo.php on line 524 and defined (/var/www/yii-1.1.14.f0fee9/framework/base/CModel.php:381)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+in /var/www/MGsis/protected/models/Titulo.php (524)
+in /var/www/MGsis/protected/controllers/TituloController.php (36)
+in /var/www/MGsis/index.php (13)
+2014/01/14 15:58:13 [error] [exception.PDOException] exception 'PDOException' with message 'There is already an active transaction' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbConnection.php:506
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbConnection.php(506): PDO->beginTransaction()
+#1 /var/www/MGsis/protected/models/Titulo.php(504): CDbConnection->beginTransaction()
+#2 /var/www/MGsis/protected/models/Titulo.php(606): Titulo->save()
+#3 /var/www/MGsis/protected/models/MovimentoTitulo.php(170): Titulo->atualizaSaldo()
+#4 /var/www/MGsis/protected/models/Titulo.php(554): MovimentoTitulo->save()
+#5 /var/www/MGsis/protected/controllers/TituloController.php(36): Titulo->save()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#12 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/MGsis/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/14 16:07:42 [error] [php] Undefined variable: trans (/var/www/MGsis/protected/models/Titulo.php:575)
+Stack trace:
+#0 /var/www/MGsis/protected/models/Titulo.php(562): MovimentoTitulo->save()
+#1 /var/www/MGsis/protected/controllers/TituloController.php(36): Titulo->save()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+in /var/www/MGsis/protected/models/Titulo.php (575)
+in /var/www/MGsis/protected/models/Titulo.php (614)
+in /var/www/MGsis/protected/models/MovimentoTitulo.php (170)
+2014/01/14 16:08:48 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetch(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tblpessoa" "t" WHERE "t"."codpessoa"='' ORDER B...
+                                                             ^. A declaração SQL executada foi: SELECT codpessoa, fantasia FROM "mgsis"."tblpessoa" "t" WHERE "t"."codpessoa"='' ORDER BY fantasia LIMIT 1.
+in /var/www/MGsis/protected/controllers/PessoaController.php (267)
+in /var/www/MGsis/index.php (13)
+2014/01/14 16:08:48 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tblpessoa" "t" WHERE "t"."codpessoa"='' ORDER B...
+                                                             ^. The SQL statement executed was: SELECT codpessoa, fantasia FROM "mgsis"."tblpessoa" "t" WHERE "t"."codpessoa"='' ORDER BY fantasia LIMIT 1' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1486): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/MGsis/protected/controllers/PessoaController.php(267): CActiveRecord->findByPk('', Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): PessoaController->actionAjaxInicializaPessoa()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('ajaxinicializap...')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/ajaxinic...')
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/ajaxinicializapessoa&cod=
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/14 16:09:33 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetch(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tblpessoa" "t" WHERE "t"."codpessoa"='' ORDER B...
+                                                             ^. A declaração SQL executada foi: SELECT codpessoa, fantasia FROM "mgsis"."tblpessoa" "t" WHERE "t"."codpessoa"='' ORDER BY fantasia LIMIT 1.
+in /var/www/MGsis/protected/controllers/PessoaController.php (267)
+in /var/www/MGsis/index.php (13)
+2014/01/14 16:09:33 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tblpessoa" "t" WHERE "t"."codpessoa"='' ORDER B...
+                                                             ^. The SQL statement executed was: SELECT codpessoa, fantasia FROM "mgsis"."tblpessoa" "t" WHERE "t"."codpessoa"='' ORDER BY fantasia LIMIT 1' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1486): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/MGsis/protected/controllers/PessoaController.php(267): CActiveRecord->findByPk('', Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): PessoaController->actionAjaxInicializaPessoa()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('ajaxinicializap...')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/ajaxinic...')
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/ajaxinicializapessoa&cod=
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/14 16:13:23 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetch(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tblpessoa" "t" WHERE "t"."codpessoa"='' ORDER B...
+                                                             ^. A declaração SQL executada foi: SELECT codpessoa, fantasia FROM "mgsis"."tblpessoa" "t" WHERE "t"."codpessoa"='' ORDER BY fantasia LIMIT 1.
+in /var/www/MGsis/protected/controllers/PessoaController.php (267)
+in /var/www/MGsis/index.php (13)
+2014/01/14 16:13:23 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tblpessoa" "t" WHERE "t"."codpessoa"='' ORDER B...
+                                                             ^. The SQL statement executed was: SELECT codpessoa, fantasia FROM "mgsis"."tblpessoa" "t" WHERE "t"."codpessoa"='' ORDER BY fantasia LIMIT 1' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1486): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/MGsis/protected/controllers/PessoaController.php(267): CActiveRecord->findByPk('', Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): PessoaController->actionAjaxInicializaPessoa()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('ajaxinicializap...')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/ajaxinic...')
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/ajaxinicializapessoa&cod=
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/14 16:26:38 [error] [exception.CException] exception 'CException' with message 'A propriedade "MovimentoTitulo.valor" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(161): CComponent->__set('valor', -600)
+#1 /var/www/MGsis/protected/models/MovimentoTitulo.php(184): CActiveRecord->__set('valor', -600)
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1866): MovimentoTitulo->afterFind()
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1887): CActiveRecord->populateRecord(Array, true)
+#4 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1351): CActiveRecord->populateRecords(Array, true, NULL)
+#5 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(199): CActiveRecord->findAll(Object(CDbCriteria))
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#8 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(111): CDataProvider->getData()
+#9 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(211): CBaseListView->init()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(147): CListView->init()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.CLi...', Array)
+#12 /var/www/MGsis/protected/views/titulo/view.php(234): CBaseController->widget('zii.widgets.CLi...', Array)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('view', Array, true)
+#17 /var/www/MGsis/protected/controllers/TituloController.php(19): CController->render('view', Array)
+#18 [internal function]: TituloController->actionView('10040531')
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#22 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#23 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#24 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('view')
+#25 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/view')
+#26 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#27 /var/www/MGsis/index.php(13): CApplication->run()
+#28 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/view&id=10040531
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/14 16:27:03 [error] [exception.CException] exception 'CException' with message 'A propriedade "MovimentoTitulo.operacao" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(161): CComponent->__set('operacao', 'CR')
+#1 /var/www/MGsis/protected/models/MovimentoTitulo.php(188): CActiveRecord->__set('operacao', 'CR')
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1866): MovimentoTitulo->afterFind()
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1887): CActiveRecord->populateRecord(Array, true)
+#4 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1351): CActiveRecord->populateRecords(Array, true, NULL)
+#5 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(199): CActiveRecord->findAll(Object(CDbCriteria))
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#8 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(111): CDataProvider->getData()
+#9 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(211): CBaseListView->init()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(147): CListView->init()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.CLi...', Array)
+#12 /var/www/MGsis/protected/views/titulo/view.php(234): CBaseController->widget('zii.widgets.CLi...', Array)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('view', Array, true)
+#17 /var/www/MGsis/protected/controllers/TituloController.php(19): CController->render('view', Array)
+#18 [internal function]: TituloController->actionView('10040531')
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#22 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#23 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#24 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('view')
+#25 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/view')
+#26 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#27 /var/www/MGsis/index.php(13): CApplication->run()
+#28 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/view&id=10040531
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/14 16:39:44 [error] [php] Undefined variable: titulo (/var/www/MGsis/protected/views/titulo/view.php:125)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): TituloController->renderFile()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): TituloController->renderPartial()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(19): TituloController->render()
+#3 unknown(0): TituloController->actionView()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/view&id=10040531
+in /var/www/MGsis/protected/views/titulo/view.php (125)
+in /var/www/MGsis/protected/controllers/TituloController.php (19)
+in /var/www/MGsis/index.php (13)
+2014/01/14 17:09:17 [error] [exception.CException] exception 'CException' with message 'A propriedade "TbDetailView.class" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWidgetFactory.php(161): CComponent->__set('class', 'span4')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(146): CWidgetFactory->createWidget(Object(TituloController), 'bootstrap.widge...', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('bootstrap.widge...', Array)
+#3 /var/www/MGsis/protected/views/titulo/view.php(230): CBaseController->widget('bootstrap.widge...', Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('view', Array, true)
+#8 /var/www/MGsis/protected/controllers/TituloController.php(19): CController->render('view', Array)
+#9 [internal function]: TituloController->actionView('10040531')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('view')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/view')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/view&id=10040531
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/create
+---
+2014/01/14 17:35:45 [error] [php] Undefined variable: data (/var/www/MGsis/protected/views/titulo/view.php:33)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): TituloController->renderFile()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): TituloController->renderPartial()
+#2 /var/www/MGsis/protected/controllers/TituloController.php(19): TituloController->render()
+#3 unknown(0): TituloController->actionView()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/view&id=10036659
+in /var/www/MGsis/protected/views/titulo/view.php (33)
+in /var/www/MGsis/protected/controllers/TituloController.php (19)
+in /var/www/MGsis/index.php (13)
+2014/01/14 17:47:55 [error] [exception.CException] exception 'CException' with message 'A propriedade "TbDetailView.0" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWidgetFactory.php(161): CComponent->__set('0', Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(146): CWidgetFactory->createWidget(Object(TituloController), 'bootstrap.widge...', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('bootstrap.widge...', Array)
+#3 /var/www/MGsis/protected/views/titulo/view.php(210): CBaseController->widget('bootstrap.widge...', Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('view', Array, true)
+#8 /var/www/MGsis/protected/controllers/TituloController.php(19): CController->render('view', Array)
+#9 [internal function]: TituloController->actionView('10036659')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('view')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/view')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/view&id=10036659
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/update&id=10036659
+---
+2014/01/14 17:48:10 [error] [exception.CException] exception 'CException' with message 'A propriedade "TbDetailView.0" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWidgetFactory.php(161): CComponent->__set('0', Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(146): CWidgetFactory->createWidget(Object(TituloController), 'bootstrap.widge...', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('bootstrap.widge...', Array)
+#3 /var/www/MGsis/protected/views/titulo/view.php(210): CBaseController->widget('bootstrap.widge...', Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('view', Array, true)
+#8 /var/www/MGsis/protected/controllers/TituloController.php(19): CController->render('view', Array)
+#9 [internal function]: TituloController->actionView('10036659')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('view')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/view')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/view&id=10036659
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/update&id=10036659
+---
+2014/01/14 17:48:11 [error] [exception.CException] exception 'CException' with message 'A propriedade "TbDetailView.0" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWidgetFactory.php(161): CComponent->__set('0', Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(146): CWidgetFactory->createWidget(Object(TituloController), 'bootstrap.widge...', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('bootstrap.widge...', Array)
+#3 /var/www/MGsis/protected/views/titulo/view.php(210): CBaseController->widget('bootstrap.widge...', Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('view', Array, true)
+#8 /var/www/MGsis/protected/controllers/TituloController.php(19): CController->render('view', Array)
+#9 [internal function]: TituloController->actionView('10036659')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('view')
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/view')
+#17 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/MGsis/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/view&id=10036659
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/update&id=10036659
+---
+2014/01/14 18:02:14 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcupomfiscal_codpessoa_fkey" on table "tblcupomfiscal"
+DETAIL:  Key (codpessoa)=(893) is still referenced from table "tblcupomfiscal".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='893'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (82)
+in /var/www/MGsis/index.php (13)
+2014/01/14 18:02:14 [error] [exception.CHttpException.409] exception 'CHttpException' with message 'Registro em uso, você não pode excluir.' in /var/www/MGsis/protected/controllers/PessoaController.php:92
+Stack trace:
+#0 [internal function]: PessoaController->actionDelete('893')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=893
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=893
+---
+2014/01/14 18:27:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "estorna" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('estorna')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('estorna')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/estorna')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/estorna&id=468
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/view&id=468
+---
+2014/01/14 18:30:20 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tbltitulo" violates foreign key constraint "tblmovimentotitulo_codtitulo_fkey" on table "tblmovimentotitulo"
+DETAIL:  Key (codtitulo)=(468) is still referenced from table "tblmovimentotitulo".. A declaração SQL executada foi: DELETE FROM "mgsis"."tbltitulo" WHERE "mgsis"."tbltitulo"."codtitulo"='468'.
+in /var/www/MGsis/protected/controllers/TituloController.php (140)
+in /var/www/MGsis/index.php (13)
+2014/01/14 18:30:20 [error] [exception.CHttpException.409] exception 'CHttpException' with message 'Registro em uso, você não pode excluir.' in /var/www/MGsis/protected/controllers/TituloController.php:150
+Stack trace:
+#0 [internal function]: TituloController->actionEstorna('468')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('estorna')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/estorna')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/estorna&id=468
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/view&id=468
+---
+2014/01/14 18:30:48 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Invalid request. Please do not repeat this request again.' in /var/www/MGsis/protected/controllers/TituloController.php:157
+Stack trace:
+#0 [internal function]: TituloController->actionEstorna('468')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('estorna')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/estorna')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/estorna&id=468
+---
+2014/01/14 18:36:13 [error] [php] Undefined variable: model (/var/www/MGsis/protected/controllers/TituloController.php:143)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#6 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/estorna&id=468
+in /var/www/MGsis/protected/controllers/TituloController.php (143)
+in /var/www/MGsis/index.php (13)
+2014/01/14 18:41:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "delete" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('delete')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/delete')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/delete&id=10036659
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/view&id=10036659
+---
+2014/01/14 18:41:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "delete" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('delete')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/delete')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/delete&id=10036659
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/view&id=10036659
+---
+2014/01/14 20:03:01 [error] [exception.CException] exception 'CException' with message 'A propriedade "CLinkPager.rowSelector" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWidgetFactory.php(161): CComponent->__set('rowSelector', '.registro')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(146): CWidgetFactory->createWidget(Object(CListView), 'CLinkPager', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('CLinkPager', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(271): CBaseController->widget('CLinkPager', Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(167): CBaseListView->renderPager()
+#5 [internal function]: CBaseListView->renderSection(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{items} {pager}')
+#7 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(135): CBaseListView->renderContent()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(173): CBaseListView->run()
+#9 /var/www/MGsis/protected/views/usuario/index.php(73): CBaseController->widget('zii.widgets.CLi...', Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#14 /var/www/MGsis/protected/controllers/UsuarioController.php(106): CController->render('index', Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): UsuarioController->actionIndex()
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('index')
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/index')
+#21 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#22 /var/www/MGsis/index.php(13): CApplication->run()
+#23 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario%2Findex&Usuario%5Bcodusuario%5D=&Usuario%5Busuario%5D=&Usuario%5Bcodpessoa%5D=&Usuario%5Bcodfilial%5D=&yt0=
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario%2Findex&Usuario%5Bcodusuario%5D=&Usuario%5Busuario%5D=&Usuario%5Bcodpessoa%5D=&Usuario%5Bcodfilial%5D=201&yt0=
+---
+2014/01/14 20:03:07 [error] [exception.CException] exception 'CException' with message 'A propriedade "CLinkPager.listViewId" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWidgetFactory.php(161): CComponent->__set('listViewId', 'Listagem')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(146): CWidgetFactory->createWidget(Object(CListView), 'CLinkPager', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('CLinkPager', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(271): CBaseController->widget('CLinkPager', Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(167): CBaseListView->renderPager()
+#5 [internal function]: CBaseListView->renderSection(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{items} {pager}')
+#7 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(135): CBaseListView->renderContent()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(173): CBaseListView->run()
+#9 /var/www/MGsis/protected/views/usuario/index.php(73): CBaseController->widget('zii.widgets.CLi...', Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#14 /var/www/MGsis/protected/controllers/UsuarioController.php(106): CController->render('index', Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): UsuarioController->actionIndex()
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('index')
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/index')
+#21 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#22 /var/www/MGsis/index.php(13): CApplication->run()
+#23 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario%2Findex&Usuario%5Bcodusuario%5D=&Usuario%5Busuario%5D=&Usuario%5Bcodpessoa%5D=&Usuario%5Bcodfilial%5D=&yt0=
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario%2Findex&Usuario%5Bcodusuario%5D=&Usuario%5Busuario%5D=&Usuario%5Bcodpessoa%5D=&Usuario%5Bcodfilial%5D=201&yt0=
+---
+2014/01/14 20:03:11 [error] [exception.CException] exception 'CException' with message 'A propriedade "CLinkPager.loaderText" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWidgetFactory.php(161): CComponent->__set('loaderText', 'Carregando...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(146): CWidgetFactory->createWidget(Object(CListView), 'CLinkPager', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('CLinkPager', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(271): CBaseController->widget('CLinkPager', Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(167): CBaseListView->renderPager()
+#5 [internal function]: CBaseListView->renderSection(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{items} {pager}')
+#7 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(135): CBaseListView->renderContent()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(173): CBaseListView->run()
+#9 /var/www/MGsis/protected/views/usuario/index.php(73): CBaseController->widget('zii.widgets.CLi...', Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#14 /var/www/MGsis/protected/controllers/UsuarioController.php(106): CController->render('index', Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): UsuarioController->actionIndex()
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('index')
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/index')
+#21 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#22 /var/www/MGsis/index.php(13): CApplication->run()
+#23 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario%2Findex&Usuario%5Bcodusuario%5D=&Usuario%5Busuario%5D=&Usuario%5Bcodpessoa%5D=&Usuario%5Bcodfilial%5D=&yt0=
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario%2Findex&Usuario%5Bcodusuario%5D=&Usuario%5Busuario%5D=&Usuario%5Bcodpessoa%5D=&Usuario%5Bcodfilial%5D=201&yt0=
+---
+2014/01/14 20:03:15 [error] [exception.CException] exception 'CException' with message 'A propriedade "CLinkPager.loaderText" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWidgetFactory.php(161): CComponent->__set('loaderText', 'Carregando...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(146): CWidgetFactory->createWidget(Object(CListView), 'CLinkPager', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('CLinkPager', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(271): CBaseController->widget('CLinkPager', Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(167): CBaseListView->renderPager()
+#5 [internal function]: CBaseListView->renderSection(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{items} {pager}')
+#7 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(135): CBaseListView->renderContent()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(173): CBaseListView->run()
+#9 /var/www/MGsis/protected/views/usuario/index.php(73): CBaseController->widget('zii.widgets.CLi...', Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#14 /var/www/MGsis/protected/controllers/UsuarioController.php(106): CController->render('index', Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): UsuarioController->actionIndex()
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('index')
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/index')
+#21 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#22 /var/www/MGsis/index.php(13): CApplication->run()
+#23 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario%2Findex&Usuario%5Bcodusuario%5D=&Usuario%5Busuario%5D=&Usuario%5Bcodpessoa%5D=&Usuario%5Bcodfilial%5D=&yt0=
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario%2Findex&Usuario%5Bcodusuario%5D=&Usuario%5Busuario%5D=&Usuario%5Bcodpessoa%5D=&Usuario%5Bcodfilial%5D=201&yt0=
+---
+2014/01/14 20:03:18 [error] [exception.CException] exception 'CException' with message 'A propriedade "CLinkPager.options" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWidgetFactory.php(161): CComponent->__set('options', Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(146): CWidgetFactory->createWidget(Object(CListView), 'CLinkPager', Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('CLinkPager', Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(271): CBaseController->widget('CLinkPager', Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(167): CBaseListView->renderPager()
+#5 [internal function]: CBaseListView->renderSection(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{items} {pager}')
+#7 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(135): CBaseListView->renderContent()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(173): CBaseListView->run()
+#9 /var/www/MGsis/protected/views/usuario/index.php(73): CBaseController->widget('zii.widgets.CLi...', Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#14 /var/www/MGsis/protected/controllers/UsuarioController.php(106): CController->render('index', Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): UsuarioController->actionIndex()
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('index')
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('usuario/index')
+#21 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#22 /var/www/MGsis/index.php(13): CApplication->run()
+#23 {main}
+REQUEST_URI=/MGsis/index.php?r=usuario%2Findex&Usuario%5Bcodusuario%5D=&Usuario%5Busuario%5D=&Usuario%5Bcodpessoa%5D=&Usuario%5Bcodfilial%5D=&yt0=
+HTTP_REFERER=http://localhost/MGsis/index.php?r=usuario%2Findex&Usuario%5Bcodusuario%5D=&Usuario%5Busuario%5D=&Usuario%5Bcodpessoa%5D=&Usuario%5Bcodfilial%5D=201&yt0=
+---
+2014/01/14 20:24:49 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblcupomfiscal_codpessoa_fkey" on table "tblcupomfiscal"
+DETAIL:  Key (codpessoa)=(893) is still referenced from table "tblcupomfiscal".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='893'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (82)
+in /var/www/MGsis/index.php (13)
+2014/01/14 20:24:49 [error] [exception.CHttpException.409] exception 'CHttpException' with message 'Registro em uso, você não pode excluir.' in /var/www/MGsis/protected/controllers/PessoaController.php:92
+Stack trace:
+#0 [internal function]: PessoaController->actionDelete('893')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=893
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=893
+---
+2014/01/14 20:25:05 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblnegocio_codpessoa_fkey" on table "tblnegocio"
+DETAIL:  Key (codpessoa)=(20000058) is still referenced from table "tblnegocio".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='20000058'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (82)
+in /var/www/MGsis/index.php (13)
+2014/01/14 20:25:05 [error] [exception.CHttpException.409] exception 'CHttpException' with message 'Registro em uso, você não pode excluir.' in /var/www/MGsis/protected/controllers/PessoaController.php:92
+Stack trace:
+#0 [internal function]: PessoaController->actionDelete('20000058')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=20000058
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=20000058
+---
+2014/01/14 20:25:15 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tblnegocio_codpessoa_fkey" on table "tblnegocio"
+DETAIL:  Key (codpessoa)=(3034) is still referenced from table "tblnegocio".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='3034'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (82)
+in /var/www/MGsis/index.php (13)
+2014/01/14 20:25:15 [error] [exception.CHttpException.409] exception 'CHttpException' with message 'Registro em uso, você não pode excluir.' in /var/www/MGsis/protected/controllers/PessoaController.php:92
+Stack trace:
+#0 [internal function]: PessoaController->actionDelete('3034')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=3034
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=3034
+---
+2014/01/14 20:25:29 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblpessoa" violates foreign key constraint "tbltitulo_codpessoa_fkey" on table "tbltitulo"
+DETAIL:  Key (codpessoa)=(574) is still referenced from table "tbltitulo".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblpessoa" WHERE "mgsis"."tblpessoa"."codpessoa"='574'.
+in /var/www/MGsis/protected/controllers/PessoaController.php (82)
+in /var/www/MGsis/index.php (13)
+2014/01/14 20:25:29 [error] [exception.CHttpException.409] exception 'CHttpException' with message 'Registro em uso, você não pode excluir.' in /var/www/MGsis/protected/controllers/PessoaController.php:92
+Stack trace:
+#0 [internal function]: PessoaController->actionDelete('574')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PessoaController), Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PessoaController), Object(ReflectionMethod), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/delete')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/delete&id=574
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa/view&id=574
+---
+2014/01/14 21:23:05 [error] [exception.CException] exception 'CException' with message 'A propriedade "Pessoa.codtitulo" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('codtitulo')
+#1 /var/www/MGsis/protected/views/pessoa/_view.php(1): CActiveRecord->__get('codtitulo')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(130): require('/var/www/MGsis/...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, false)
+#4 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(291): CBaseController->renderFile('/var/www/MGsis/...', Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(167): CListView->renderItems()
+#6 [internal function]: CBaseListView->renderSection(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{items} {pager}')
+#8 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(135): CBaseListView->renderContent()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(173): CBaseListView->run()
+#10 /var/www/MGsis/protected/views/pessoa/index.php(81): CBaseController->widget('zii.widgets.CLi...', Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#15 /var/www/MGsis/protected/controllers/PessoaController.php(120): CController->render('index', Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): PessoaController->actionIndex()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('index')
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/index')
+#22 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/MGsis/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa%2Findex&Pessoa%5Bcodpessoa%5D=&Pessoa%5Bfantasia%5D=migliorini&Pessoa%5Bcnpj%5D=&Pessoa%5Bemail%5D=&Pessoa%5Btelefone1%5D=&Pessoa%5Binativo%5D=9&Pessoa%5Bcodcidade%5D=&yt0=
+HTTP_REFERER=http://localhost/MGsis/index.php?r=pessoa%2Findex&Pessoa%5Bcodpessoa%5D=&Pessoa%5Bfantasia%5D=&Pessoa%5Bcnpj%5D=&Pessoa%5Bemail%5D=&Pessoa%5Btelefone1%5D=&Pessoa%5Binativo%5D=1&Pessoa%5Bcodcidade%5D=&yt0=
+---
+2014/01/14 23:21:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "agrupar" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('agrupar')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('agrupar')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/agrupar')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/agrupar
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=&Titulo%5Bcodfilial%5D=&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+---
+2014/01/14 23:22:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "agrupar" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('agrupar')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('agrupar')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/agrupar')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/agrupar
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=&Titulo%5Bcodfilial%5D=&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+---
+2014/01/14 23:22:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "agrupar" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('agrupar')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('agrupar')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/agrupar')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/agrupar
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=&Titulo%5Bcodfilial%5D=&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+---
+2014/01/14 23:23:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "agrupar" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('agrupar')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('agrupar')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/agrupar')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/agrupar
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=&Titulo%5Bcodfilial%5D=&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+---
+2014/01/14 23:41:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "agrupar" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('agrupar')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('agrupar')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/agrupar')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/agrupar
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=224&Titulo%5Bcodfilial%5D=&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+---
+2014/01/14 23:41:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "agruparundefined" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('agruparundefine...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('agruparundefine...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/agruparu...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/agruparundefined
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=224&Titulo%5Bcodfilial%5D=&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+---
+2014/01/14 23:41:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "agruparundefined" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('agruparundefine...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('agruparundefine...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/agruparu...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/agruparundefined
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=224&Titulo%5Bcodfilial%5D=&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+---
+2014/01/14 23:42:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "agruparundefined" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('agruparundefine...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('agruparundefine...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/agruparu...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/agruparundefined
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=224&Titulo%5Bcodfilial%5D=&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+---
+2014/01/14 23:42:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "agruparundefined" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('agruparundefine...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('agruparundefine...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/agruparu...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/agruparundefined
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=224&Titulo%5Bcodfilial%5D=&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+---
+2014/01/14 23:42:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "agruparundefined" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('agruparundefine...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('agruparundefine...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/agruparu...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/agruparundefined
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=224&Titulo%5Bcodfilial%5D=&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+---
+2014/01/14 23:42:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "agrupar" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('agrupar')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('agrupar')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/agrupar')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/agrupar&id=
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=224&Titulo%5Bcodfilial%5D=&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+---
+2014/01/14 23:42:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "agrupar" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('agrupar')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('agrupar')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/agrupar')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/agrupar&id=10007601,10007618,10017673,
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=224&Titulo%5Bcodfilial%5D=&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+---
+2014/01/14 23:43:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "agrupar" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('agrupar')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('agrupar')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/agrupar')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/agrupar&id=10007601,10007618,10017673,
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=224&Titulo%5Bcodfilial%5D=&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+---
+2014/01/14 23:44:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "agrupar" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('agrupar')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('agrupar')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/agrupar')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/agrupar&id=
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo%2Findex&Titulo%5Bcodtitulo%5D=&Titulo%5Bnumero%5D=&Titulo%5Bcodportador%5D=&Titulo%5Bboleto%5D=&Titulo%5Bnossonumero%5D=&Titulo%5Bcodpessoa%5D=224&Titulo%5Bcodfilial%5D=&Titulo%5Bgerencial%5D=&Titulo%5Bcodcontacontabil%5D=&Titulo%5Bcodtipotitulo%5D=&Titulo%5Bcredito%5D=&Titulo%5Bcodusuariocriacao%5D=&yt0=&Titulo%5Bsaldo%5D=0&Titulo%5Bvencimento_de%5D=&Titulo%5Bvencimento_ate%5D=&Titulo%5Bemissao_de%5D=&Titulo%5Bemissao_ate%5D=&Titulo%5Bcriacao_de%5D=&Titulo%5Bcriacao_ate%5D=
+---
+2014/01/14 23:52:10 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetch(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "zzz"
+LINE 1: ...ROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='zzz' LIMI...
+                                                             ^. A declaração SQL executada foi: SELECT * FROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='zzz' LIMIT 1.
+in /var/www/MGsis/protected/controllers/TituloController.php (210)
+in /var/www/MGsis/protected/controllers/TituloController.php (158)
+in /var/www/MGsis/index.php (13)
+2014/01/14 23:52:10 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: "zzz"
+LINE 1: ...ROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='zzz' LIMI...
+                                                             ^. The SQL statement executed was: SELECT * FROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='zzz' LIMIT 1' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1486): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/MGsis/protected/controllers/TituloController.php(210): CActiveRecord->findByPk('zzz')
+#4 /var/www/MGsis/protected/controllers/TituloController.php(158): TituloController->loadModel('zzz')
+#5 [internal function]: TituloController->actionAgrupar('10007601,100076...')
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('agrupar')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/agrupar')
+#13 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/MGsis/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/agrupar&id=10007601,10007618,zzz
+---
+2014/01/14 23:52:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/MGsis/protected/controllers/TituloController.php:212
+Stack trace:
+#0 /var/www/MGsis/protected/controllers/TituloController.php(158): TituloController->loadModel('0')
+#1 [internal function]: TituloController->actionAgrupar('10007601,100076...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('agrupar')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/agrupar')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/agrupar&id=10007601,10007618,0
+---
+2014/01/14 23:52:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/MGsis/protected/controllers/TituloController.php:212
+Stack trace:
+#0 /var/www/MGsis/protected/controllers/TituloController.php(158): TituloController->loadModel('99999999')
+#1 [internal function]: TituloController->actionAgrupar('10007601,100076...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('agrupar')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/agrupar')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/agrupar&id=10007601,10007618,99999999
+---
+2014/01/15 00:00:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/MGsis/protected/controllers/TituloController.php:212
+Stack trace:
+#0 /var/www/MGsis/protected/controllers/TituloController.php(158): TituloController->loadModel('99999999')
+#1 [internal function]: TituloController->actionAgrupar('10007601,100076...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('agrupar')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/agrupar')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/agrupar&id=10007601,10007618,99999999
+---
+2014/01/15 00:02:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/MGsis/protected/controllers/TituloController.php:212
+Stack trace:
+#0 /var/www/MGsis/protected/controllers/TituloController.php(158): TituloController->loadModel('0')
+#1 [internal function]: TituloController->actionAgrupar('10007601,100076...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('agrupar')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/agrupar')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/agrupar&id=10007601,10007618,0
+---
+2014/01/15 00:24:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "totalselecionado".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=totalselecionado
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:24:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:24:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:25:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado10036659," solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado10036659,
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:25:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:25:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado10036659," solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado10036659,
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:25:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado10036659,10038935," solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado10036659,10038935,
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:25:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado10036659,10038935,10038562," solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado10036659,10038935,10038562,
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:25:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=10038935,
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:25:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:25:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=10038935,
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:25:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=10036659,10038935,
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:25:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=10036659,
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:25:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=10036659,10038562,
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:26:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=10036659,10038935,10038562,
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:26:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=10038935,10038562,
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:26:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=10038562,
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:26:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:26:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=10036659,
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:26:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=10036659,10038935,
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:26:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=10036659,10038935,10038562,
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:26:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=10036659,10038935,10038562,30044629,
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:26:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=10038935,10038562,30044629,
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:26:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=10038562,30044629,
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:26:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=30044629,
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:26:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:26:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=10036659,
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:26:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=10036659,10038935,
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:26:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=10036659,10038935,10038562,
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:26:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "totalselecionado" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('totalselecionad...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=10036659,10038935,10038562,
+---
+2014/01/15 00:28:58 [error] [php] Undefined variable: id (/var/www/MGsis/protected/controllers/TituloController.php:225)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=10036659,10038935,10038562,
+in /var/www/MGsis/protected/controllers/TituloController.php (225)
+in /var/www/MGsis/protected/controllers/TituloController.php (166)
+in /var/www/MGsis/index.php (13)
+2014/01/15 00:32:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/MGsis/protected/controllers/TituloController.php:221
+Stack trace:
+#0 /var/www/MGsis/protected/controllers/TituloController.php(231): TituloController->loadModel('9999999')
+#1 /var/www/MGsis/protected/controllers/TituloController.php(158): TituloController->loadModels('10036659,100389...')
+#2 [internal function]: TituloController->actionTotalSelecionado('10036659,100389...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#10 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/MGsis/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=10036659,10038935,10038562,9999999
+---
+2014/01/15 00:33:29 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetch(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1
+                                                             ^. A declaração SQL executada foi: SELECT * FROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1.
+in /var/www/MGsis/protected/controllers/TituloController.php (219)
+in /var/www/MGsis/protected/controllers/TituloController.php (231)
+in /var/www/MGsis/protected/controllers/TituloController.php (158)
+2014/01/15 00:33:29 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1
+                                                             ^. The SQL statement executed was: SELECT * FROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1486): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/MGsis/protected/controllers/TituloController.php(219): CActiveRecord->findByPk('')
+#4 /var/www/MGsis/protected/controllers/TituloController.php(231): TituloController->loadModel('')
+#5 /var/www/MGsis/protected/controllers/TituloController.php(158): TituloController->loadModels('')
+#6 [internal function]: TituloController->actionTotalSelecionado('')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:33:33 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetch(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1
+                                                             ^. A declaração SQL executada foi: SELECT * FROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1.
+in /var/www/MGsis/protected/controllers/TituloController.php (219)
+in /var/www/MGsis/protected/controllers/TituloController.php (231)
+in /var/www/MGsis/protected/controllers/TituloController.php (158)
+2014/01/15 00:33:33 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1
+                                                             ^. The SQL statement executed was: SELECT * FROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1486): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/MGsis/protected/controllers/TituloController.php(219): CActiveRecord->findByPk('')
+#4 /var/www/MGsis/protected/controllers/TituloController.php(231): TituloController->loadModel('')
+#5 /var/www/MGsis/protected/controllers/TituloController.php(158): TituloController->loadModels('')
+#6 [internal function]: TituloController->actionTotalSelecionado('')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:33:46 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetch(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1
+                                                             ^. A declaração SQL executada foi: SELECT * FROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1.
+in /var/www/MGsis/protected/controllers/TituloController.php (219)
+in /var/www/MGsis/protected/controllers/TituloController.php (231)
+in /var/www/MGsis/protected/controllers/TituloController.php (158)
+2014/01/15 00:33:46 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1
+                                                             ^. The SQL statement executed was: SELECT * FROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1486): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/MGsis/protected/controllers/TituloController.php(219): CActiveRecord->findByPk('')
+#4 /var/www/MGsis/protected/controllers/TituloController.php(231): TituloController->loadModel('')
+#5 /var/www/MGsis/protected/controllers/TituloController.php(158): TituloController->loadModels('')
+#6 [internal function]: TituloController->actionTotalSelecionado('')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:33:48 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetch(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1
+                                                             ^. A declaração SQL executada foi: SELECT * FROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1.
+in /var/www/MGsis/protected/controllers/TituloController.php (219)
+in /var/www/MGsis/protected/controllers/TituloController.php (231)
+in /var/www/MGsis/protected/controllers/TituloController.php (158)
+2014/01/15 00:33:48 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1
+                                                             ^. The SQL statement executed was: SELECT * FROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1486): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/MGsis/protected/controllers/TituloController.php(219): CActiveRecord->findByPk('')
+#4 /var/www/MGsis/protected/controllers/TituloController.php(231): TituloController->loadModel('')
+#5 /var/www/MGsis/protected/controllers/TituloController.php(158): TituloController->loadModels('')
+#6 [internal function]: TituloController->actionTotalSelecionado('')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:33:55 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetch(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1
+                                                             ^. A declaração SQL executada foi: SELECT * FROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1.
+in /var/www/MGsis/protected/controllers/TituloController.php (219)
+in /var/www/MGsis/protected/controllers/TituloController.php (231)
+in /var/www/MGsis/protected/controllers/TituloController.php (158)
+2014/01/15 00:33:55 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1
+                                                             ^. The SQL statement executed was: SELECT * FROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1486): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/MGsis/protected/controllers/TituloController.php(219): CActiveRecord->findByPk('')
+#4 /var/www/MGsis/protected/controllers/TituloController.php(231): TituloController->loadModel('')
+#5 /var/www/MGsis/protected/controllers/TituloController.php(158): TituloController->loadModels('')
+#6 [internal function]: TituloController->actionTotalSelecionado('')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=
+HTTP_REFERER=http://localhost/MGsis/index.php?r=titulo/index
+---
+2014/01/15 00:33:58 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetch(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1
+                                                             ^. A declaração SQL executada foi: SELECT * FROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1.
+in /var/www/MGsis/protected/controllers/TituloController.php (219)
+in /var/www/MGsis/protected/controllers/TituloController.php (231)
+in /var/www/MGsis/protected/controllers/TituloController.php (158)
+2014/01/15 00:33:58 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1
+                                                             ^. The SQL statement executed was: SELECT * FROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1486): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/MGsis/protected/controllers/TituloController.php(219): CActiveRecord->findByPk('')
+#4 /var/www/MGsis/protected/controllers/TituloController.php(231): TituloController->loadModel('')
+#5 /var/www/MGsis/protected/controllers/TituloController.php(158): TituloController->loadModels('')
+#6 [internal function]: TituloController->actionTotalSelecionado('')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=
+---
+2014/01/15 00:34:23 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetch(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1
+                                                             ^. A declaração SQL executada foi: SELECT * FROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1.
+in /var/www/MGsis/protected/controllers/TituloController.php (219)
+in /var/www/MGsis/protected/controllers/TituloController.php (231)
+in /var/www/MGsis/protected/controllers/TituloController.php (158)
+2014/01/15 00:34:23 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1
+                                                             ^. The SQL statement executed was: SELECT * FROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1486): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/MGsis/protected/controllers/TituloController.php(219): CActiveRecord->findByPk('')
+#4 /var/www/MGsis/protected/controllers/TituloController.php(231): TituloController->loadModel('')
+#5 /var/www/MGsis/protected/controllers/TituloController.php(158): TituloController->loadModels('')
+#6 [internal function]: TituloController->actionTotalSelecionado('')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=
+---
+2014/01/15 00:35:14 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetch(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1
+                                                             ^. A declaração SQL executada foi: SELECT * FROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1.
+in /var/www/MGsis/protected/controllers/TituloController.php (219)
+in /var/www/MGsis/protected/controllers/TituloController.php (232)
+in /var/www/MGsis/protected/controllers/TituloController.php (158)
+2014/01/15 00:35:14 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1
+                                                             ^. The SQL statement executed was: SELECT * FROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1486): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/MGsis/protected/controllers/TituloController.php(219): CActiveRecord->findByPk('')
+#4 /var/www/MGsis/protected/controllers/TituloController.php(232): TituloController->loadModel('')
+#5 /var/www/MGsis/protected/controllers/TituloController.php(158): TituloController->loadModels('')
+#6 [internal function]: TituloController->actionTotalSelecionado('')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=
+---
+2014/01/15 00:35:16 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetch(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1
+                                                             ^. A declaração SQL executada foi: SELECT * FROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1.
+in /var/www/MGsis/protected/controllers/TituloController.php (219)
+in /var/www/MGsis/protected/controllers/TituloController.php (232)
+in /var/www/MGsis/protected/controllers/TituloController.php (158)
+2014/01/15 00:35:16 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1
+                                                             ^. The SQL statement executed was: SELECT * FROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1486): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/MGsis/protected/controllers/TituloController.php(219): CActiveRecord->findByPk('')
+#4 /var/www/MGsis/protected/controllers/TituloController.php(232): TituloController->loadModel('')
+#5 /var/www/MGsis/protected/controllers/TituloController.php(158): TituloController->loadModels('')
+#6 [internal function]: TituloController->actionTotalSelecionado('')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=
+---
+2014/01/15 00:35:21 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetch(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1
+                                                             ^. A declaração SQL executada foi: SELECT * FROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1.
+in /var/www/MGsis/protected/controllers/TituloController.php (219)
+in /var/www/MGsis/protected/controllers/TituloController.php (232)
+in /var/www/MGsis/protected/controllers/TituloController.php (158)
+2014/01/15 00:35:21 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1
+                                                             ^. The SQL statement executed was: SELECT * FROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1486): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/MGsis/protected/controllers/TituloController.php(219): CActiveRecord->findByPk('')
+#4 /var/www/MGsis/protected/controllers/TituloController.php(232): TituloController->loadModel('')
+#5 /var/www/MGsis/protected/controllers/TituloController.php(158): TituloController->loadModels('')
+#6 [internal function]: TituloController->actionTotalSelecionado('')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=
+---
+2014/01/15 00:35:22 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetch(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1
+                                                             ^. A declaração SQL executada foi: SELECT * FROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1.
+in /var/www/MGsis/protected/controllers/TituloController.php (219)
+in /var/www/MGsis/protected/controllers/TituloController.php (232)
+in /var/www/MGsis/protected/controllers/TituloController.php (158)
+2014/01/15 00:35:22 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...ROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1
+                                                             ^. The SQL statement executed was: SELECT * FROM "mgsis"."tbltitulo" "t" WHERE "t"."codtitulo"='' LIMIT 1' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1486): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/MGsis/protected/controllers/TituloController.php(219): CActiveRecord->findByPk('')
+#4 /var/www/MGsis/protected/controllers/TituloController.php(232): TituloController->loadModel('')
+#5 /var/www/MGsis/protected/controllers/TituloController.php(158): TituloController->loadModels('')
+#6 [internal function]: TituloController->actionTotalSelecionado('')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('totalselecionad...')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/totalsel...')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=
+---
+2014/01/15 00:36:22 [error] [php] Undefined variable: models (/var/www/MGsis/protected/controllers/TituloController.php:233)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloController->runAction()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloController->runActionWithFilters()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloController->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=titulo/totalselecionado&id=
+in /var/www/MGsis/protected/controllers/TituloController.php (233)
+in /var/www/MGsis/protected/controllers/TituloController.php (158)
+in /var/www/MGsis/index.php (13)

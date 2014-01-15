@@ -1,14 +1,16 @@
-<div class="registro row-fluid <?php echo (!empty($data->inativo))?"alert-danger":""; ?>">
+<div class="registro <?php echo (!empty($data->inativo))?"alert-danger":""; ?>">
 	<h4>
-		<a href="<?php echo Yii::app()->createUrl('pessoa/view', array('id'=>$data->codpessoa)); ?>">
-		<?php echo CHtml::encode($data->fantasia); ?>
-		</a>
-			<?php if (!empty($data->inativo)): ?>
-				<span class="label label-important pull-right">Inativado em <?php echo CHtml::encode($data->inativo); ?></span>
-			<?php endif; ?>
 	</h4>
 	<div class="row-fluid">
 		<div class="span4">
+			<b class="row">
+				<a href="<?php echo Yii::app()->createUrl('pessoa/view', array('id'=>$data->codpessoa)); ?>">
+					<?php echo CHtml::encode($data->fantasia); ?>
+				</a>
+				<?php if (!empty($data->inativo)): ?>
+					<span class="label label-important pull-right">Inativado em <?php echo CHtml::encode($data->inativo); ?></span>
+				<?php endif; ?>
+			</b>
 			<small class="muted">
 				<b><?php echo CHtml::encode($data->pessoa); ?></b>
 			</small><br>
@@ -73,12 +75,5 @@
 			</div>
 		</small>
 	</div>
-		
-		<?php /*
-
-		<?php echo CHtml::encode($data->getAttributeLabel('inativo')); ?>:
-		<b><?php echo CHtml::encode($data->inativo); ?></b>
-
-
-		*/ ?>
+	<br>
 </div>

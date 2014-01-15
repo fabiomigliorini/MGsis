@@ -8,12 +8,12 @@ else
 ?>
 
 
-<li>
-	<div class="row-fluid">
+<li class="registro">
+	<small class="row-fluid">
 		<span class="span1">
 			<?php echo $data->dataretorno; ?>
 		</span>
-		<b class="span11 <?php echo $css_valor; ?>">
+		<b class="span8 <?php echo $css_valor; ?>">
 			<?php echo (!empty($data->valor))?"Valor: " . Yii::app()->format->formatNumber($data->valor):""; ?>
 			<?php echo (!empty($data->pagamento))?"Pagamento: " . Yii::app()->format->formatNumber($data->pagamento):""; ?>
 			<?php echo (!empty($data->despesas))?"Despesas: " . Yii::app()->format->formatNumber($data->despesas):""; ?>
@@ -24,8 +24,13 @@ else
 			<?php echo (!empty($data->abatimento))?"Abatimento: " . Yii::app()->format->formatNumber($data->abatimento):""; ?>
 			<?php echo (!empty($data->protesto))?"Protesto: " . $data->protesto:""; ?>
 		</b>
-	</div>
-	<div class="row-fluid">
+		<div class="span3 pull-right">
+			<?php
+				$this->widget('UsuarioCriacao', array('model'=>$data));
+			?>
+		</div>		
+	</small>
+	<small class="row-fluid">
 		<small class="span4 muted">
 			<?php echo (isset($data->BoletoMotivoOcorrencia->BoletoTipoOcorrencia))?$data->BoletoMotivoOcorrencia->BoletoTipoOcorrencia->ocorrencia:null; ?>
 			>
@@ -48,22 +53,5 @@ else
 			Bco <?php echo $data->codbancocobrador; ?>
 			Ag <?php echo $data->agenciacobradora; ?>
 		</small>
-	</div>
-	<?php if(isset($data->UsuarioCriacao) || isset($data->UsuarioAlteracao)): ?>
-	<div class="row-fluid">
-		<small class="muted">
-			<?php
-				if (isset($data->UsuarioCriacao))
-					echo CHtml::link(CHtml::encode($data->UsuarioCriacao->usuario),array('usuario/view','id'=>$data->codusuariocriacao));
-			?> 
-			<?php echo $data->criacao; ?> 
-			/
-			<?php
-				if (isset($data->UsuarioAlteracao))
-					echo CHtml::link(CHtml::encode($data->UsuarioAlteracao->usuario),array('usuario/view','id'=>$data->codusuarioalteracao));
-			?>		
-			<?php echo $data->alteracao; ?> 
-		</small>
-	</div>
-	<?php endif; ?>
+	</small>
 </li>

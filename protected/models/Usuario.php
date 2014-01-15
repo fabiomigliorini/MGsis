@@ -442,6 +442,9 @@ class Usuario extends MGActiveRecord
 		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+             'Pagination' => array (
+                  'PageSize' => 20
+              ),			
 		));
 	}
 

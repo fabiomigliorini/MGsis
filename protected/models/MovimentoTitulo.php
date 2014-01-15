@@ -37,6 +37,10 @@
  */
 class MovimentoTitulo extends MGActiveRecord
 {
+	
+	public $valor;
+	public $operacao;
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -53,7 +57,7 @@ class MovimentoTitulo extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codmovimentotitulo', 'required'),
+			array('codtitulo, codtipomovimentotitulo', 'required'),
 			array('debito, credito', 'length', 'max'=>14),
 			array('historico', 'length', 'max'=>255),
 			array('codtipomovimentotitulo, codtitulo, codportador, codtitulorelacionado, transacao, sistema, codliquidacaotitulo, codtituloagrupamento, codboletoretorno, codcobranca, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
@@ -163,4 +167,28 @@ class MovimentoTitulo extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
+	
+	public function save($runValidation=true, $attributes=NULL)
+	{
+		$ret = parent::save($runValidation, $attributes);
+		$this->Titulo->atualizaSaldo();
+		return $ret;
+	}
+	
+	protected function afterDelete()
+	{
+		$ret = parent::afterDelete();
+		$this->Titulo->atualizaSaldo();
+		return $ret;
+	}
+	
+	protected function afterFind()
+	{
+		$ret = parent::afterFind();
+		$this->valor = $this->debito-$this->credito;
+		$this->operacao = ($this->valor<0)?"CR":"DB";
+		$this->valor = abs($this->valor);
+		return $ret;
+	}
+	
 }

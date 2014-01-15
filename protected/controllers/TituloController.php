@@ -101,6 +101,7 @@ class TituloController extends Controller
 	* If deletion is successful, the browser will be redirected to the 'admin' page.
 	* @param integer $id the ID of the model to be deleted
 	*/
+	/*
 	public function actionDelete($id)
 	{
 		if(Yii::app()->request->isPostRequest)
@@ -127,7 +128,57 @@ class TituloController extends Controller
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
+	 * 
+	 */
+	public function actionEstorna($id)
+	{
+		if(Yii::app()->request->isPostRequest)
+		{
+			// we only allow estorna via POST request
+			$model = $this->loadModel($id);
+			if (!$model->estorna())
+				Yii::app()->user->setFlash("error", "Impossível estornar Título!");
+			else
+				Yii::app()->user->setFlash("success", "Título estornado!");
+			
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('view','id'=>$model->codtitulo));
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+	}
+	
+	public function actionAgrupar($id)
+	{
+		$models = $this->loadModels($id);
+		print_r($models);
+	}
 
+	public function actionTotalSelecionado($id)
+	{
+		$models = $this->loadModels($id);
+		$retorno["saldo"] = 0;
+		$retorno["juros"] = 0;
+		$retorno["multa"] = 0;
+		$retorno["total"] = 0;
+		foreach ($models as $model)
+		{
+			$retorno["saldo"] += $model->saldo;
+			$retorno["juros"] += $model->Juros->valorJuros;
+			$retorno["multa"] += $model->Juros->valorMulta;
+			$retorno["total"] += $model->Juros->valorTotal;
+		}
+		if ($retorno["saldo"]<0)
+			$retorno["operacao"] = "CR";
+		else
+			$retorno["operacao"] = "DB";
+		
+		$retorno["saldo"] = Yii::app()->format->formatNumber(abs($retorno["saldo"]));
+		$retorno["juros"] = Yii::app()->format->formatNumber(abs($retorno["juros"]));
+		$retorno["multa"] = Yii::app()->format->formatNumber(abs($retorno["multa"]));
+		$retorno["total"] = Yii::app()->format->formatNumber(abs($retorno["total"]));
+		echo json_encode($retorno);
+	}
+	
 	/**
 	* Lists all models.
 	*/
@@ -179,6 +230,18 @@ class TituloController extends Controller
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
+	
+	//carrega varios modelos passados como ids separados por virgula
+	public function loadModels($ids)
+	{
+		$ids = explode(",", $ids);
+		$models = array();
+		foreach ($ids as $id)
+			if (!empty($id))
+				$models[] = $this->loadModel($id);
+		return $models;
+	}
+		
 
 	/**
 	* Performs the AJAX validation.

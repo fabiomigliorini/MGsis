@@ -68,6 +68,7 @@ $attributes =
 			),
 		array(
 			'name'=>'enderecocobranca',
+			'label'=>'Cobrança',
 			'value'=>Yii::app()->format->formataEndereco($model->enderecocobranca, $model->numerocobranca, $model->complementocobranca, $model->bairrocobranca, $model->CidadeCobranca->cidade, $model->CidadeCobranca->Estado->sigla, $model->cepcobranca),
 			'type'=>'raw'
 			),
