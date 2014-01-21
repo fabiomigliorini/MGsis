@@ -1,9 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 function formataCodigo(numero)
 {
     if (numero > 99999999)
@@ -78,3 +72,9 @@ $(document).ready(function(){
 	});
 });
 */
+
+function arredondar(value, places) {
+    var multiplier = Math.pow(10, places);
+
+    return (Math.round(value * multiplier) / multiplier);
+}

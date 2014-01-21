@@ -147,38 +147,6 @@ class TituloController extends Controller
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 	
-	public function actionAgrupar($id)
-	{
-		$models = $this->loadModels($id);
-		print_r($models);
-	}
-
-	public function actionTotalSelecionado($id)
-	{
-		$models = $this->loadModels($id);
-		$retorno["saldo"] = 0;
-		$retorno["juros"] = 0;
-		$retorno["multa"] = 0;
-		$retorno["total"] = 0;
-		foreach ($models as $model)
-		{
-			$retorno["saldo"] += $model->saldo;
-			$retorno["juros"] += $model->Juros->valorJuros;
-			$retorno["multa"] += $model->Juros->valorMulta;
-			$retorno["total"] += $model->Juros->valorTotal;
-		}
-		if ($retorno["saldo"]<0)
-			$retorno["operacao"] = "CR";
-		else
-			$retorno["operacao"] = "DB";
-		
-		$retorno["saldo"] = Yii::app()->format->formatNumber(abs($retorno["saldo"]));
-		$retorno["juros"] = Yii::app()->format->formatNumber(abs($retorno["juros"]));
-		$retorno["multa"] = Yii::app()->format->formatNumber(abs($retorno["multa"]));
-		$retorno["total"] = Yii::app()->format->formatNumber(abs($retorno["total"]));
-		echo json_encode($retorno);
-	}
-	
 	/**
 	* Lists all models.
 	*/
@@ -229,17 +197,6 @@ class TituloController extends Controller
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
-	}
-	
-	//carrega varios modelos passados como ids separados por virgula
-	public function loadModels($ids)
-	{
-		$ids = explode(",", $ids);
-		$models = array();
-		foreach ($ids as $id)
-			if (!empty($id))
-				$models[] = $this->loadModel($id);
-		return $models;
 	}
 		
 
@@ -445,7 +402,9 @@ class TituloController extends Controller
 		if (isset(Yii::app()->session['FiltroTituloIndex']))
 			$model->attributes=Yii::app()->session['FiltroTituloIndex'];
 		
-		$rel = new MGRelatorioTitulos($model->search(false));
+		$titulos = $model->search(false);
+		
+		$rel = new MGRelatorioTitulos($titulos);
 		$rel->montaRelatorio();
 		$rel->Output();
 		
@@ -470,4 +429,28 @@ class TituloController extends Controller
 		echo json_encode($retorno);
 		
 	}
+	
+	public function actionAjaxBuscaTitulo(
+		$codpessoa=0, 
+		array $codtitulos = null,
+		array $saldo = null,
+		array $multa = null,
+		array $juros = null,
+		array $desconto = null,
+		array $total = null
+		) 
+	{
+		
+		$this->widget('MGGridTitulos', array(
+			'codpessoa' => $codpessoa,
+			'codtitulos' => $codtitulos,
+			'saldo' => $saldo,
+			'multa' => $multa,
+			'juros' => $juros,
+			'desconto' => $desconto,
+			'total' => $total,
+		));
+		
+	} 
+	
 }

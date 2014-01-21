@@ -1,6 +1,6 @@
 body {
-  padding-top: 60px;
-  padding-bottom: 30px;
+  padding-top: 100px;
+  padding-bottom: 60px;
 }
 
 .registro {
@@ -28,4 +28,8 @@ body {
 
 .menuthumbnails a:hover {
     background-color: #eeeeee;
+}
+.subnav.navbar-fixed-top { 
+	top:40px; 
+    z-index: 1020; // make z-index smaller than .mainnav	
 }

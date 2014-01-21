@@ -6,14 +6,14 @@ require_once('fpdf.php');
 
 class MGRelatorioTitulos extends FPDF
 {
-	private $_dataProvider;
+	private $_titulos;
 	private $_titulo;
 	private $_fill = false;
 	private $_totais = array();
 	
-	public function __construct($dataProvider)
+	public function __construct($titulos)
 	{
-		$this->_dataProvider = $dataProvider;
+		$this->_titulos = $titulos;
 		return parent::__construct();
 	}
 	
@@ -194,12 +194,12 @@ class MGRelatorioTitulos extends FPDF
 		$this->AddPage();
 		$this->SetFont('Arial','',14);
 		
-		$titulos = $this->_dataProvider->getData();
+		//$titulos = $this->_dataProvider->getData();
 
 		$codpessoa = null;
 		$linha = 0;
 
-		foreach ($titulos as $this->_titulo)
+		foreach ($this->_titulos as $this->_titulo)
 		{
 			if ($codpessoa <> $this->_titulo->codpessoa)
 			{

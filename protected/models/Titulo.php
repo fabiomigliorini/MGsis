@@ -218,7 +218,7 @@ class Titulo extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'MovimentoTitulos' => array(self::HAS_MANY, 'MovimentoTitulo', 'codtitulo'),
+			'MovimentoTitulos' => array(self::HAS_MANY, 'MovimentoTitulo', 'codtitulo', 'order'=>'criacao asc, transacao asc'),
 			'MovimentoTitulosRelacionado' => array(self::HAS_MANY, 'MovimentoTitulo', 'codtitulorelacionado'),
 			'ContaContabil' => array(self::BELONGS_TO, 'ContaContabil', 'codcontacontabil'),
 			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
@@ -229,7 +229,7 @@ class Titulo extends MGActiveRecord
 			'TituloAgrupamento' => array(self::BELONGS_TO, 'TituloAgrupamento', 'codtituloagrupamento'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
-			'BoletoRetornos' => array(self::HAS_MANY, 'BoletoRetorno', 'codtitulo'),
+			'BoletoRetornos' => array(self::HAS_MANY, 'BoletoRetorno', 'codtitulo', 'order'=>'criacao asc, codboletoretorno ASC'),
 			'Cobrancas' => array(self::HAS_MANY, 'Cobranca', 'codtitulo'),
 			'CobrancaHistoricoTitulos' => array(self::HAS_MANY, 'CobrancaHistoricoTitulo', 'codtitulo'),
 		);
@@ -290,7 +290,7 @@ class Titulo extends MGActiveRecord
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
-	public function search($pagination = true)
+	public function search($comoDataProvider = true)
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
@@ -403,17 +403,19 @@ class Titulo extends MGActiveRecord
 	
 		$criteria->select = 't.codtitulo, t.vencimento, t.emissao, t.codfilial, t.numero, t.codportador, t.credito, t.debito, t.saldo, t.codtipotitulo, t.codcontacontabil, t.codusuariocriacao, t.nossonumero, t.gerencial, t.codpessoa, t.codusuarioalteracao, t.estornado';
 
-		$params = array(
-			'criteria'=>$criteria,
-			'sort'=>array('defaultOrder'=>'"Pessoa".fantasia ASC, t.vencimento ASC, t.saldo ASC'),
-		);
+		$criteria->order = '"Pessoa".fantasia ASC, t.vencimento ASC, t.saldo ASC';
 		
-		if (!$pagination)
+		if ($comoDataProvider)
 		{
-			$params = array_merge($params, array('pagination'=>false));
+			$params = array(
+				'criteria'=>$criteria,
+			);
+			return new CActiveDataProvider($this, $params);
 		}
-		
-		return new CActiveDataProvider($this, $params);
+		else
+		{
+			return $this->findAll($criteria);
+		}
 		
 	}
 
@@ -664,5 +666,5 @@ class Titulo extends MGActiveRecord
 		
 		return $ret;
 	}
-	
+		
 }

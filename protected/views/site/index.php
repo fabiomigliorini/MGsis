@@ -1,6 +1,6 @@
 <?php
 /* @var $this SiteController */
-
+/*
 Yii::import('bootstrap.helpers.TbHtml');
 
 $this->pageTitle = Yii::app()->name;
@@ -77,3 +77,6 @@ $menu_admin = TbHtml::thumbnails(
   </div>
 </div>
 <?php $this->endWidget(); ?>
+ * 
+ * 
+ */

@@ -42,14 +42,14 @@ else
 		<small class="span1 text-right muted">
 			<?php echo CHtml::encode(Yii::app()->format->formatNumber(abs($data->debito - $data->credito))); ?>		
 		</small>
-		<b class="span3">
-			<span class="span4 <?php echo $css_vencimento?>">
+		<b class="span3 <?php echo $css_vencimento?> ">
+			<span class="span4">
 				<?php echo CHtml::encode($data->vencimento); ?>
 			</span>
-			<span class="span2 text-right <?php echo $css_vencimento?>">
+			<span class="span2 text-right">
 				<?php echo $data->Juros->diasAtraso; ?>
 			</span>
-			<span class="span6 text-right <?php echo ($data->operacao == "CR")?"text-warning":"text-success"; ?>">
+			<span class="span6 text-right">
 				<?php echo CHtml::encode(Yii::app()->format->formatNumber(abs($data->Juros->valorTotal))); ?>
 				<span class="pull-right">
 					&nbsp;<?php echo CHtml::encode($data->operacao); ?>

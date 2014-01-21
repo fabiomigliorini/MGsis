@@ -26,8 +26,6 @@ $(document).ready(function(){
 
 <h1>Pessoas</h1>
 
-<br>
-
 <?php $form=$this->beginWidget('MGActiveForm',array(
 	'action'=>Yii::app()->createUrl($this->route),
 	'id' => 'search-form',

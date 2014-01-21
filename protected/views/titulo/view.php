@@ -13,18 +13,25 @@ $this->menu=array(
 		'url'=>array('imprimevale','id'=>$model->codtitulo), 
 		'linkOptions'=>array('id'=>'btnMostrarVale'),
 		'visible'=>$model->saldo < 0
-		),
-		array(
-			'label'=>'Imprimir Boleto', 
-			'icon'=>'icon-barcode', 
-			'url'=>array('imprimeboleto', 'id'=>$model->codtitulo), 
-			'linkOptions'=>array('id'=>'btnMostrarBoleto'),
-			'visible'=>($model->boleto && ($model->saldo>0))
-		),
+	),
+	array(
+		'label'=>'Imprimir Boleto', 
+		'icon'=>'icon-barcode', 
+		'url'=>array('imprimeboleto', 'id'=>$model->codtitulo), 
+		'linkOptions'=>array('id'=>'btnMostrarBoleto'),
+		'visible'=>($model->boleto && ($model->saldo>0))
+	),
 	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
 	array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codtitulo)),
-	array('label'=>'Estornar', 'icon'=>'icon-thumbs-down', 'url'=>'#', 'linkOptions'=>array('id'=>'btnExcluir')),
+	array(
+		'label'=>'Estornar', 
+		'icon'=>'icon-thumbs-down', 
+		'url'=>'#', 
+		'linkOptions'=>array('id'=>'btnExcluir'),
+		'visible'=>empty($model->codtituloagrupamento)
+		),
 	array('label'=>'Duplicar', 'icon'=>'icon-retweet', 'url'=>array('create','duplicar'=>$model->codtitulo)),
+	//array('label'=>'Agrupar', 'icon'=>'icon-tasks', 'url'=>array('agrupar','id'=>$model->codtitulo)),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
 
@@ -106,10 +113,10 @@ $(document).ready(function(){
 				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('titulo/estorna', array('id' => $model->codtitulo))?>",{});
 		});
 	});
+	
 });
 /*]]>*/
 </script>
-
 <div id="modalBoleto" class="modal hide fade" tabindex="-1" role="dialog">
 	<div class="modal-header">  
 		<div class="pull-right">
@@ -142,7 +149,7 @@ $(document).ready(function(){
 	</div>
 </div>
 
-<h2><?php echo $model->numero; ?> - <?php echo CHtml::link(CHtml::encode($model->Pessoa->fantasia),array('pessoa/view','id'=>$model->codpessoa)); ?></h2>
+<h1><?php echo $model->numero; ?> - <?php echo CHtml::link(CHtml::encode($model->Pessoa->fantasia),array('pessoa/view','id'=>$model->codpessoa)); ?></h1>
 
 <div class="row-fluid">
 	<div class="span4">
@@ -178,7 +185,8 @@ $(document).ready(function(){
 				),
 			array(
 				'label'=>'Agrupamento',
-				'value'=>(!empty($model->codtituloagrupamento))?"Sim":"Não",
+				'value'=>(!empty($model->codtituloagrupamento))?CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($model->codtituloagrupamento)),array('tituloAgrupamento/view','id'=>$model->codtituloagrupamento)):null,
+				'type'=>'raw'
 				),
 			),
 	)); 
@@ -249,87 +257,115 @@ $(document).ready(function(){
 	?>
 	</div>
 </div>
-	<?php
-	$this->widget('UsuarioCriacao', array('model'=>$model));
-	?>
-	<br>
-	<br>
-	<?php
-	$box = $this->beginWidget('bootstrap.widgets.TbBox',
-			array(
-				'title' => 'Movimento',
-				/*'headerIcon' => 'icon-th-list',*/
-				'htmlOptions' => array('class' => 'bootstrap-widget-table')
-				)
-			);
-	
-	$criteria=new CDbCriteria;
-	$criteria->compare('codtitulo', $model->codtitulo, false);
-	$criteria->order = 'criacao ASC, sistema ASC, debito ASC, credito ASC';
-	$criteria->limit = 50;
-	
-    $dataProvider = new CActiveDataProvider(
-		MovimentoTitulo::model(), 
-		array(
-			'criteria' => $criteria,
-			'pagination' => false,
-			)
-		);
-
-	?>
-	<ul id="yw3" class="nav nav-list">
-	<?php
-	$this->widget(
-		'zii.widgets.CListView', 
-		array(
-			'id' => 'Listagem',
-			'dataProvider' => $dataProvider,
-			'itemView' => '_view_movimento',
-			'template' => '{items}',
-		)
-	);
-	?>
-	</ul>
-	<?php
-	
-	$this->endWidget();
-	
-	$box = $this->beginWidget('bootstrap.widgets.TbBox',
-			array(
-				'title' => 'Retorno Boleto',
-				/*'headerIcon' => 'icon-th-list',*/
-				'htmlOptions' => array('class' => 'bootstrap-widget-table')
-				)
-			);
-	
-	$criteria=new CDbCriteria;
-	$criteria->compare('codtitulo', $model->codtitulo, false);
-	$criteria->order = 'codboletoretorno ASC';
-	$criteria->limit = 50;
-	
-    $dataProvider = new CActiveDataProvider(
-		BoletoRetorno::model(), 
-		array(
-			'criteria' => $criteria,
-			'pagination' => false,
-			)
-		);
-
-	?>
-	<ul id="yw3" class="nav nav-list">
-	<?php
-	$this->widget(
-		'zii.widgets.CListView', 
-		array(
-			'id' => 'Listagem',
-			'dataProvider' => $dataProvider,
-			'itemView' => '_view_boleto_retorno',
-			'template' => '{items}',
-		)
-	);
-	?>
-	</ul>
-	<?php
-	
-	$this->endWidget();
+<?php
+$this->widget('UsuarioCriacao', array('model'=>$model));
 ?>
+<br>
+<h2>Movimentos do Título</h2>
+<?php
+
+foreach ($model->MovimentoTitulos as $mov)
+{
+	$css_valor = ($mov->operacao <> $mov->Titulo->operacao)?"text-success":"text-warning";
+	?>
+	<div class="registro">
+		<small class="row-fluid">
+			<span class="span1">
+				<?php echo $mov->transacao; ?>
+			</span>
+			<b class="span2 text-right <?php echo $css_valor; ?>">
+				<?php echo Yii::app()->format->formatNumber($mov->valor); ?> <?php echo $mov->operacao; ?>
+			</b>
+			<span class="span6 muted">
+				<span class="span4">
+					<?php echo (isset($mov->TipoMovimentoTitulo))?$mov->TipoMovimentoTitulo->tipomovimentotitulo:null; ?>
+				</span>
+				<span class="span4">
+					<?php echo (isset($mov->Portador))?$mov->Portador->portador:null; ?>
+				</span>
+				<span class="span4">
+					<?php echo (!empty($mov->codboletoretorno)) ? "Retorno Boleto" :""?>
+					<?php echo (!empty($mov->codcobranca)) ? "Cobranca" :""?>
+					<?php echo (!empty($mov->codliquidacaotitulo)) ? "Liquidação" :""?>
+					<?php echo (!empty($mov->codtituloagrupamento)) ? "Agrupamento " . CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($mov->codtituloagrupamento)),array('tituloAgrupamento/view','id'=>$mov->codtituloagrupamento)) :""?>
+				</span>
+			</span>
+			<div class="span3 pull-right">
+				<?php
+					$this->widget('UsuarioCriacao', array('model'=>$mov));
+				?>
+			</div>
+		</small>
+	</div>	
+	<?php
+}
+
+//Retornos do Boleto
+if (!empty($model->BoletoRetornos))
+{
+	?>
+	<br>
+	<h2>Retornos do Boleto</h2>
+	<?php
+}
+
+foreach ($model->BoletoRetornos as $ret)
+{
+	if (!empty($ret->pagamento))
+		$css_valor = "text-success";
+	elseif (!empty($ret->protesto))
+		$css_valor = "text-error";
+	else
+		$css_valor = "text-warning";
+	?>
+
+
+	<div class="registro">
+		<small class="row-fluid">
+			<span class="span1">
+				<?php echo $ret->dataretorno; ?>
+			</span>
+			<b class="span8 <?php echo $css_valor; ?>">
+				<?php echo (!empty($ret->valor))?"Valor: " . Yii::app()->format->formatNumber($ret->valor):""; ?>
+				<?php echo (!empty($ret->pagamento))?"Pagamento: " . Yii::app()->format->formatNumber($ret->pagamento):""; ?>
+				<?php echo (!empty($ret->despesas))?"Despesas: " . Yii::app()->format->formatNumber($ret->despesas):""; ?>
+				<?php echo (!empty($ret->outrasdespesas))?"Outras Despesas: " . Yii::app()->format->formatNumber($ret->outrasdespesas):""; ?>
+				<?php echo (!empty($ret->jurosatraso))?"Juros Atraso: " . Yii::app()->format->formatNumber($ret->jurosatraso):""; ?>
+				<?php echo (!empty($ret->jurosmora))?"Juros Mora: " . Yii::app()->format->formatNumber($ret->jurosmora):""; ?>
+				<?php echo (!empty($ret->desconto))?"Desconto: " . Yii::app()->format->formatNumber($ret->desconto):""; ?>
+				<?php echo (!empty($ret->abatimento))?"Abatimento: " . Yii::app()->format->formatNumber($ret->abatimento):""; ?>
+				<?php echo (!empty($ret->protesto))?"Protesto: " . $ret->protesto:""; ?>
+			</b>
+			<div class="span3 pull-right">
+				<?php
+					$this->widget('UsuarioCriacao', array('model'=>$ret));
+				?>
+			</div>		
+		</small>
+		<small class="row-fluid">
+			<small class="span4 muted">
+				<?php echo (isset($ret->BoletoMotivoOcorrencia->BoletoTipoOcorrencia))?$ret->BoletoMotivoOcorrencia->BoletoTipoOcorrencia->ocorrencia:null; ?>
+				>
+				<?php echo (isset($ret->BoletoMotivoOcorrencia))?$ret->BoletoMotivoOcorrencia->motivo:null; ?>
+			</small>
+
+			<small class="span1 muted">
+				<?php echo (isset($ret->Portador))?$ret->Portador->portador:null; ?>
+			</small>
+			<small class="span1 muted">
+				<?php echo $ret->nossonumero; ?>
+			</small>
+			<small class="span2 muted">
+				<?php echo $ret->arquivo; ?>:L<?php echo $ret->linha; ?>
+			</small>
+			<small class="span2 muted">
+				<?php echo $ret->numero; ?>
+			</small>
+			<small class="span2 muted">
+				Bco <?php echo $ret->codbancocobrador; ?>
+				Ag <?php echo $ret->agenciacobradora; ?>
+			</small>
+		</small>
+	</div>
+	<?php
+}

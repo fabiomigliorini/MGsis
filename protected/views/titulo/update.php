@@ -7,12 +7,12 @@ $this->breadcrumbs=array(
 );
 
 	$this->menu=array(
-	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
-	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
-	array('label'=>'Detalhes', 'icon'=>'icon-eye-open', 'url'=>array('view','id'=>$model->codtitulo)),
-	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
+		array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
+		array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
+		array('label'=>'Detalhes', 'icon'=>'icon-eye-open', 'url'=>array('view','id'=>$model->codtitulo)),
+		//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 	);
-	?>
+?>
 
 	<h1>Alterar Título <?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codtitulo)); ?></h1>
 	<br>

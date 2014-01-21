@@ -98,7 +98,7 @@ class Pessoa extends MGActiveRecord
 			array('ie', 'ext.validators.InscricaoEstadualValidator'),
 			array('ie', 'validaCnpjDuplicado'),
 			array('ie, cep, cepcobranca','filter','filter'=>array($this, 'numeroLimpo')),
-			array('email, codcidade, endereco, bairro, cep, codcidadecobranca, enderecocobranca, numerocobranca, bairrocobranca, cepcobranca, pessoa, fantasia, cadastro, notafiscal, cnpj, telefone1', 'required'),
+			array('numero, email, codcidade, endereco, bairro, cep, codcidadecobranca, enderecocobranca, numerocobranca, bairrocobranca, cepcobranca, pessoa, fantasia, cadastro, notafiscal, cnpj, telefone1', 'required'),
 			array('fantasia', 'unique', 'caseSensitive' => false),
 			array('fantasia, pessoa', 'length', 'min' => 5),
 			array('pessoa, contato, conjuge, endereco, enderecocobranca, email, emailnfe, emailcobranca', 'length', 'max'=>100),

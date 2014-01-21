@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ytLoad.jquery.css" >
 		
 	<?php Yii::app()->getClientScript()->registerScriptFile(Yii::app()->request->baseUrl.'/js/autoNumeric.js'); ?>
+	<?php Yii::app()->getClientScript()->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery.number.min.js'); ?>
 	<?php Yii::app()->getClientScript()->registerScriptFile(Yii::app()->request->baseUrl.'/js/mgsis.js'); ?>
 	<?php Yii::app()->getClientScript()->registerScriptFile(Yii::app()->request->baseUrl.'/js/setCase.js'); ?>
 	<?php Yii::app()->getClientScript()->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery.transit.js'); ?>
@@ -31,99 +32,111 @@
 		  }
 	</style>
 </head>
-
 <body>
-
 <?php
 
-	/*
-	if (Yii::app()->user->isGuest) 
-	{
-		$usuario = '
-			<form class="navbar-form pull-right" id="usuario-form" action="/MGsis/index.php?r=site/login" method="post" style="padding-left:15px;padding-right:15px;">
-				<input name="LoginForm[username]" type="text" class="input-small" placeholder="Usuário">
-				<input name="LoginForm[password]" type="password" class="input-small" placeholder="Senha">
-				<button type="submit" class="btn btn-primary">OK</button>
-			</form>';
-	}
-	else
-	 * 
-	 */
-	 /*
-	if (!Yii::app()->user->isGuest) 
-	{
-		$usuario = '
-				<ul class="nav pull-right">
-                   <li class="divider-vertical"></li>
-                   <li><a href="' . Yii::app()->createUrl('/usuario/view', array('id'=>Yii::app()->user->id)) . '">Conectado como ' . Yii::app()->user->name . '</a></li>
-                   <li class="divider-vertical"></li>
-                   <li><a href="' . Yii::app()->createUrl('/site/logout') . '">Sair</a></li>
-               </ul>';
-	}
-	  * 
-	  */
-	$usuario = '';
 	
-	if (!Yii::app()->user->isGuest) 
-	{
-		$usuario = '
-			<ul class="nav navbar-nav navbar-right pull-right">
-				<li class="dropdown">
-
-					<a href="javscript:;" class="dropdown-toggle" data-toggle="dropdown">
-						<i class="icon-user"></i> 
-						' . Yii::app()->user->name  . '
-						<b class="caret"></b>
-					</a>
-
-					<ul class="dropdown-menu">
-						<li><a href="' . Yii::app()->createUrl('/usuario/view', array('id'=>Yii::app()->user->id)) . '">Perfil</a></li>
-						<li><a href="' . Yii::app()->createUrl('/site/logout') . '">Sair</a></li>
-					</ul>
-
-				</li>
-			</ul>
-			';
-	}
-	
-
-	
-	$logo  = '<div class="nav">' . CHtml::image(Yii::app()->getBaseUrl().'/images/icones/mgsis.ico', 'MGsis', array('width'=>'20px')) . '</div>';
+	$logo  = '<div class="nav">' . CHtml::image(Yii::app()->getBaseUrl().'/images/icones/mgsis-20px.ico', 'MGsis', array('width'=>'20px')) . '</div>';
 	$logo .= '<div class="nav">MGsis</div>';
 	
-	$this->widget(
-		'bootstrap.widgets.TbNavbar',
-		array(
-			//'brand' => 'MGsis',
-			//'brand' => CHtml::image(Yii::app()->getBaseUrl().'/images/icones/mgsis.ico', 'MGsis', array('width'=>'20px')) . "MGsis",
-			'brand' => $logo,
-			'brandUrl' => Yii::app()->createUrl('site/index'),
-			'brandOptions' => array('style' => 'width:100px;margin-left: 0px;'),
-			'collapse' => true,
-			'fixed' => 'top',
-			'htmlOptions' => array('class' => 'hidden-print'),
-			'items' => array(
-				'<ul class="nav">
-                   <li class="divider-vertical"></li>
-               </ul>',
-				array(
-					'class' => 'bootstrap.widgets.TbMenu',
-					'items' => array(
-						array('label' => 'Pessoas', 'url' => Yii::app()->createUrl('pessoa')),
-						array('label' => 'Titulos', 'url' => Yii::app()->createUrl('titulo')),
-						array('label' => 'Codigos', 'url' => Yii::app()->createUrl('codigo')),
+	$this->widget('bootstrap.widgets.TbNavbar', array(
+		'type'=>'inverse', // null or 'inverse'
+		'brand' => $logo,
+		'brandUrl'=>Yii::app()->createUrl('site/index'),
+		'brandOptions' => array('style' => 'width:100px;margin-left: 0px;'),
+		'htmlOptions' => array('class' => 'hidden-print'),
+		'fixed' => 'top',
+		'collapse'=>true,
+		'items'=>array(
+			array(
+				'class'=>'bootstrap.widgets.TbMenu',
+				'items'=>array(
+					array('label' => 'Pessoas', 'url' => Yii::app()->createUrl('pessoa')),
+
+					array(
+						'label' => 'Títulos', 
+						'url'=>'#', 
+						'items'=>array(
+							array('label' => 'Titulos', 'url' => Yii::app()->createUrl('titulo')),
+							array('label' => 'Agrupamentos', 'url' => Yii::app()->createUrl('tituloAgrupamento')),
 						)
 					),
-				$usuario,
+					
+					
+					// Admin
+					array(
+						'label' => 'Admin', 
+						'url'=>'#', 
+						'items'=>array(
+							array('label' => 'Usuários', 'url' => Yii::app()->createUrl('usuario')),
+							array('label' => 'Permissões', 'url' => Yii::app()->createUrl('srbac/authitem/frontpage')),
+							'---',
+							array('label' => 'Codigos', 'url' => Yii::app()->createUrl('codigo')),
+							array('label' => 'Cidades', 'url' => Yii::app()->createUrl('cidade')),
+						)
+					),
+				),
+			),
+			array(
+				'class'=>'bootstrap.widgets.TbMenu',
+				'htmlOptions'=>array('class'=>'pull-right'),
+				'items'=>array(
+					array(
+						'label'=> Yii::app()->user->name, 
+						'url'=>'#', 
+						'icon'=>'icon-user icon-white', 
+						'visible'=>!Yii::app()->user->isGuest,
+						'items'=>
+							array(
+								array('label'=>'Perfil', 'url'=>array('usuario/view', 'id'=>Yii::app()->user->id)),
+								array('label'=>'Sair', 'url'=>array('site/logout')),
+							)
+					),
+				),
+			),
+		),
+	)); 	
+	
+	if (!empty($this->menu))
+	{
+		$this->widget(
+			'bootstrap.widgets.TbNavbar',
+			array(
+				'brand' => '',
+				'brandOptions' => array('style' => 'width:0px;margin:0px;padding:0px;'),
+				'collapse' => true,
+				'htmlOptions' => array('class' => 'hidden-print subnav'),
+				'fixed' => 'top',
+				'items' => array(
+					array(
+						'class' => 'bootstrap.widgets.TbMenu',
+						'items' => $this->menu
+						),
+					),
 				)
-			)
-		);
+			);
+	}
 	
 ?>
-<div class="container-fluid">
+<div class="affix" style="right: 0px; bottom:0px;">
 	<?php
-	$this->widget('bootstrap.widgets.TbAlert', array('userComponentId' => 'user'));
+	
+	if (isset($this->breadcrumbs))
+	{
+		$this->widget(
+			'bootstrap.widgets.TbBreadcrumbs',
+			array(
+				'homeLink'=>CHtml::link('Início', array('site/index')),
+				'links'=>$this->breadcrumbs,
+			)
+		);	
+	}
+
+	
 	?>
+</div>	
+<div class="container-fluid">
+	<?php $this->widget('bootstrap.widgets.TbAlert', array('userComponentId' => 'user')); ?>
     <?php echo $content; ?>
 </div>
 </body>
