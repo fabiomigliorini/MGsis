@@ -151,6 +151,12 @@ $(document).ready(function(){
 
 <h1><?php echo $model->numero; ?> - <?php echo CHtml::link(CHtml::encode($model->Pessoa->fantasia),array('pessoa/view','id'=>$model->codpessoa)); ?></h1>
 
+<?php if (!empty($model->estornado)): ?>
+	<div class="alert alert-danger">
+		<b>Estornado em <?php echo CHtml::encode($model->estornado); ?> </b>
+	</div>
+<?php endif; ?>
+
 <div class="row-fluid">
 	<div class="span4">
 	<?php 
@@ -160,11 +166,6 @@ $(document).ready(function(){
 			array(
 				'name'=>'codtitulo',
 				'value'=>Yii::app()->format->formataCodigo($model->codtitulo),
-				),
-			array(
-				'name'=>'codfilial',
-				'value'=>(isset($model->Filial))?$model->Filial->filial:null,
-				'cssClass'=>$css_filial
 				),
 			'fatura',
 			array(
@@ -197,23 +198,23 @@ $(document).ready(function(){
 	$this->widget('bootstrap.widgets.TbDetailView',array(
 		'data'=>$model,
 		'attributes'=>array(
+			array(
+				'name'=>'codfilial',
+				'value'=>(isset($model->Filial))?$model->Filial->filial:null,
+				'cssClass'=>$css_filial
+				),
 			'emissao',
 			'transacao',
-			array(
-				'name'=>'valor',
-				'value'=>Yii::app()->format->formatNumber($model->valor) . " " . $model->operacao,
-				),
 			array(
 				'name'=>'codportador',
 				'value'=>(isset($model->Portador))?$model->Portador->portador:null,
 				),
 			array(
 				'name'=>'boleto',
-				'value'=>($model->boleto)?$model->nossonumero:"Sem Boleto",
+				'value'=>($model->boleto)?(!empty($model->nossonumero)?$model->nossonumero:"Sim"):"Sem Boleto",
 				),
 			'remessa',
 			'transacaoliquidacao',
-			'estornado',
 		),
 	)); 
 	?>		
@@ -223,6 +224,10 @@ $(document).ready(function(){
 	$this->widget('bootstrap.widgets.TbDetailView',array(
 		'data'=>$model,
 		'attributes'=>array(
+			array(
+				'name'=>'valor',
+				'value'=>Yii::app()->format->formatNumber($model->valor) . " " . $model->operacao,
+				),
 			array(
 				'name'=>'vencimento',
 				'cssClass' => $css_vencimento 

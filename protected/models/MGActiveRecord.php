@@ -23,8 +23,6 @@ abstract class MGActiveRecord extends CActiveRecord
 			/* se campo estiver vazio, vai para proximo */
 			if (empty($this->$columnName) and ($this->$columnName <> "0"))
 			{
-				
-				//if ($column->name == 'fornecedor') die($column->dbType);
 				if ($column->dbType == 'boolean') 
 					$this->$columnName = false;
 				else

@@ -88,16 +88,3 @@ class MGJuros
 	}
 	
 }
-
-/*
-echo "<pre>\n";
-$juro = new MGJuros(array(
-"de" => "01/01/2014",
-"ate" => "10/01/2014",
-"valorOriginal" => 100000,
-"diasTolerancia" => 1,
-));
-print_r($juro);
-echo "Total " .$juro->valorTotal;
-echo "<hr>";
-*/

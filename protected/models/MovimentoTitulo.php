@@ -201,4 +201,68 @@ class MovimentoTitulo extends MGActiveRecord
 		return $ret;
 	}
 	
+	public function estorna()
+	{
+		$mov = new MovimentoTitulo('insert');
+		
+		switch ($this->codtipomovimentotitulo)
+		{
+			case TipoMovimentoTitulo::TIPO_IMPLANTACAO:
+				$mov->codtipomovimentotitulo = TipoMovimentoTitulo::TIPO_ESTORNO_IMPLANTACAO;
+				break;
+			
+			case TipoMovimentoTitulo::TIPO_AJUSTE:
+				$mov->codtipomovimentotitulo = TipoMovimentoTitulo::TIPO_ESTORNO_AJUSTE;
+				break;
+			
+			case TipoMovimentoTitulo::TIPO_AMORTIZACAO:
+				$mov->codtipomovimentotitulo = TipoMovimentoTitulo::TIPO_ESTORNO_AMORTIZACAO;
+				break;
+			
+			case TipoMovimentoTitulo::TIPO_JUROS:
+				$mov->codtipomovimentotitulo = TipoMovimentoTitulo::TIPO_ESTORNO_JUROS;
+				break;
+			
+			case TipoMovimentoTitulo::TIPO_DESCONTO:
+				$mov->codtipomovimentotitulo = TipoMovimentoTitulo::TIPO_ESTORNO_DESCONTO;
+				break;
+			
+			case TipoMovimentoTitulo::TIPO_LIQUIDACAO:
+				$mov->codtipomovimentotitulo = TipoMovimentoTitulo::TIPO_ESTORNO_LIQUIDACAO;
+				break;
+			
+			case TipoMovimentoTitulo::TIPO_AGRUPAMENTO:
+				$mov->codtipomovimentotitulo = TipoMovimentoTitulo::TIPO_ESTORNO_AGRUPAMENTO;
+				break;
+			
+			case TipoMovimentoTitulo::TIPO_LIQUIDACAO_COBRANCA:
+				$mov->codtipomovimentotitulo = TipoMovimentoTitulo::TIPO_ESTORNO_LIQUIDACAO_COBRANCA;
+				break;
+			
+			case TipoMovimentoTitulo::TIPO_MULTA:
+				$mov->codtipomovimentotitulo = TipoMovimentoTitulo::TIPO_ESTORNO_MULTA;
+				break;
+		}
+	
+  		$mov->codtitulo = $this->codtitulo;
+ 		$mov->codportador = $this->codportador;
+  		$mov->codtitulorelacionado = $this->codtitulorelacionado;
+  		$mov->debito = $this->credito;
+  		$mov->credito = $this->debito;
+  		$mov->historico = $this->historico;
+  		$mov->transacao = date('d/m/Y');
+  		$mov->sistema = date('d/m/Y H:i:s');
+  		$mov->codliquidacaotitulo = $this->codliquidacaotitulo;
+  		$mov->codtituloagrupamento = $this->codtituloagrupamento;
+  		$mov->codboletoretorno = $this->codboletoretorno;
+  		$mov->codcobranca = $this->codcobranca;
+		
+		$ret = $mov->save();
+		
+		if (!$ret)
+			$this->addErrors($mov->getErrors());
+		
+		return $ret;
+	}
+	
 }

@@ -213,10 +213,8 @@ class TituloController extends Controller
 		}
 	}
 	
-	public function actionImprimeBoleto($id)
+	public function geraBoleto($model)
 	{
-		
-		$model = $this->loadModel($id);
 		
 		if (!$model->boleto)
 			throw new CHttpException(400,'Este título não é um boleto.');
@@ -228,6 +226,25 @@ class TituloController extends Controller
 		
 		echo $boleto->getOutput();
 		
+	}
+	
+	public function actionImprimeBoleto($id = null, $codtituloagrupamento = null)
+	{	
+		if (!empty($id))
+		{
+			$model = $this->loadModel($id);
+			$this->geraBoleto($model);
+		}
+		elseif (!empty($codtituloagrupamento))
+		{
+			$ta = TituloAgrupamento::model()->findByPk($codtituloagrupamento);
+			
+			if($ta===null)
+				throw new CHttpException(404,'The requested page does not exist.');
+			
+			foreach($ta->Titulos as $model)
+				$this->geraBoleto($model);
+		}
 		
 	}
 	

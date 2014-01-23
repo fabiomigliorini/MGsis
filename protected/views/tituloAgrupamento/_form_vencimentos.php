@@ -1,8 +1,8 @@
 <?php
 
 echo $form->dropDownListRow($model, 'codfilial', Filial::getListaCombo(), array('prompt' => '', 'class' => 'input-small'));
-echo $form->toggleButtonRow($model, 'boleto', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 echo $form->dropDownListRow($model, 'codportador', Portador::getListaCombo(), array('prompt' => '', 'class' => 'input-large'));
+echo $form->toggleButtonRow($model, 'boleto', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 
 
 echo $form->textFieldRow($model, 'parcelas', array('class' => 'input-mini text-right'));

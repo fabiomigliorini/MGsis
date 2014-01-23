@@ -57,11 +57,13 @@ class TituloAgrupamento extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('emissao, codpessoa, GridTitulos, vencimentos, valores, codfilial', 'required'),
-			array('GridTitulos', 'validaGridTitulos'),
-			array('vencimentos', 'validaVencimentos'),
-			array('codportador', 'validaFilialPortador'),
-			array('boleto', 'validaBoleto'),
+			array('emissao, codpessoa, GridTitulos, vencimentos, valores, codfilial', 'required', 'on'=>'insert'),
+			array('GridTitulos', 'validaGridTitulos', 'on'=>'insert'),
+			array('vencimentos', 'validaVencimentos', 'on'=>'insert'),
+			array('codportador', 'validaFilialPortador', 'on'=>'insert'),
+			array('emissao','date','format'=>Yii::app()->locale->getDateFormat('medium')),
+			array('cancelamento','date','format'=>Yii::app()->locale->getDateFormat('medium')),
+			array('boleto', 'validaBoleto', 'on'=>'insert'),
 			array('parcelas, codportador, boleto, primeira, demais', 'safe', 'on'=>'insert'),
 			array('observacao', 'length', 'max'=>200),
 			array('cancelamento, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
@@ -132,7 +134,7 @@ class TituloAgrupamento extends MGActiveRecord
 		
 		$total = 0;
 		foreach($this->GridTitulos["codtitulo"] as $codtitulo)
-			$total += (double) Yii::app()->format->unformatNumber($this->GridTitulos["total"][$codtitulo]) * (($this->GridTitulos["operacao"][$codtitulo] == "CR")?-1:1);
+			$total += Yii::app()->format->unformatNumber($this->GridTitulos["total"][$codtitulo]) * (($this->GridTitulos["operacao"][$codtitulo] == "CR")?-1:1);
 		
 		return $total;
 	}
@@ -144,7 +146,7 @@ class TituloAgrupamento extends MGActiveRecord
 		
 		$total = 0;
 		foreach($this->valores as $valor)
-			$total += (double) Yii::app()->format->unformatNumber($valor);
+			$total += Yii::app()->format->unformatNumber($valor);
 		
 		return $total;
 	}
@@ -169,7 +171,7 @@ class TituloAgrupamento extends MGActiveRecord
 		return array(
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
-			'MovimentoTitulos' => array(self::HAS_MANY, 'MovimentoTitulo', 'codtituloagrupamento', 'order'=>'credito asc, debito asc'),
+			'MovimentoTitulos' => array(self::HAS_MANY, 'MovimentoTitulo', 'codtituloagrupamento', 'order'=>'criacao DESC, sistema DESC'),
 			'Titulos' => array(self::HAS_MANY, 'Titulo', 'codtituloagrupamento', 'order'=>'vencimento asc, saldo asc'),
 			//'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
 		);
@@ -185,7 +187,7 @@ class TituloAgrupamento extends MGActiveRecord
 			'codpessoa' => 'Pessoa',
 			'GridTitulos' => 'Titulos',
 			'emissao' => 'Emissão',
-			'cancelamento' => 'Cancelamento',
+			'cancelamento' => 'Estornado',
 			'observacao' => 'Observação',
 			
 			'parcelas' => 'Número de Parcelas',
@@ -220,7 +222,6 @@ class TituloAgrupamento extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 		
-		$criteria->compare('"Titulos".codpessoa', $this->codpessoa, false);
 		$criteria->compare('t.codtituloagrupamento', $this->codtituloagrupamento, false);
 		if ($emissao_de = DateTime::createFromFormat("d/m/y",$this->emissao_de))
 		{
@@ -243,6 +244,8 @@ class TituloAgrupamento extends MGActiveRecord
 			$criteria->params = array_merge($criteria->params, array(':criacao_ate' => $criacao_ate->format('Y-m-d').' 23:59:59.9'));
 		}
 		
+		$criteria->compare('"Titulos".codpessoa', $this->codpessoa, false);
+		
 		$criteria->with = array(
 				'Titulos' => array(
 					'together' => true,
@@ -252,11 +255,17 @@ class TituloAgrupamento extends MGActiveRecord
 						)
 					)
 			),
-		);		
-		
+		);
+		/*
+		$criteria->select='t.codtituloagrupamento, t.emissao, t.criacao, t.codusuario';
+		$criteria->join="LEFT JOIN adressen t1 ON t.plink = t1.nr ";
+		*/
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
-			'sort'=>array('defaultOrder'=>'t.criacao DESC, t.emissao DESC, "Pessoa".fantasia ASC'),
+			'sort'=>array('defaultOrder'=>'t.emissao DESC, t.criacao DESC, "Pessoa".fantasia ASC'),
+			'Pagination' => array (
+				'PageSize' => 200
+			 ),			
 			//'sort'=>array('defaultOrder'=>'"Pessoa".fantasia ASC, t.codtituloagrupamento ASC'),
 		));
 	}
@@ -286,95 +295,99 @@ class TituloAgrupamento extends MGActiveRecord
 	{
 		//comeca transacao
 		$trans = $this->dbConnection->beginTransaction();
+		$novo = $this->isNewRecord;
 		
 		$ret = parent::save($runValidation, $attributes);
-		
-		$titulos = array();
-		
-		$total = $this->calculaTotalGridTitulos();
-		$gerencial = false;
-		$fatura = array();
-		
-		$emissao = DateTime::createFromFormat('Y-m-d', $this->emissao);
-		
-		foreach($this->GridTitulos["codtitulo"] as $codtitulo)
+
+		if ($novo)
 		{
-			$titulo = Titulo::model()->findByPk($codtitulo);
-			if ($titulo->gerencial)
-				$gerencial = true;
-			
-			if (!empty($titulo->fatura))
-				$fatura[] = $titulo->fatura;
+		
+			$titulos = array();
 
-			$ret = $titulo->adicionaMultaJurosDesconto(
-				(double) Yii::app()->format->unformatNumber($this->GridTitulos["multa"][$codtitulo]), 
-				(double) Yii::app()->format->unformatNumber($this->GridTitulos["juros"][$codtitulo]), 
-				(double) Yii::app()->format->unformatNumber($this->GridTitulos["desconto"][$codtitulo]), 
-				$emissao->format('d/m/Y'), 
-				$this->codportador,
-				$this->codtituloagrupamento
-			);
+			$total = $this->calculaTotalGridTitulos();
+			$gerencial = false;
+			$fatura = array();
 
-			if ($ret)
-				$ret = $titulo->adicionaMovimento(
-					TipoMovimentoTitulo::TIPO_AGRUPAMENTO,
-					($titulo->operacao == "CR")?(double) Yii::app()->format->unformatNumber($this->GridTitulos["total"][$codtitulo]):null,
-					($titulo->operacao == "DB")?(double) Yii::app()->format->unformatNumber($this->GridTitulos["total"][$codtitulo]):null,
+			$emissao = DateTime::createFromFormat('Y-m-d', $this->emissao);
+			if (!$emissao)
+				$emissao = DateTime::createFromFormat('d/m/Y', $this->emissao);
+
+			foreach($this->GridTitulos["codtitulo"] as $codtitulo)
+			{
+				$titulo = Titulo::model()->findByPk($codtitulo);
+				if ($titulo->gerencial)
+					$gerencial = true;
+
+				if (!empty($titulo->fatura))
+					$fatura[] = $titulo->fatura;
+
+				$ret = $titulo->adicionaMultaJurosDesconto(
+					Yii::app()->format->unformatNumber($this->GridTitulos["multa"][$codtitulo]), 
+					Yii::app()->format->unformatNumber($this->GridTitulos["juros"][$codtitulo]), 
+					Yii::app()->format->unformatNumber($this->GridTitulos["desconto"][$codtitulo]), 
 					$emissao->format('d/m/Y'), 
 					$this->codportador,
 					$this->codtituloagrupamento
-				);	
-			
+				);
 
-			if (!$ret)
-			{
-				$this->addError($this->tableSchema->primaryKey, 'Erro ao lancar multa no título!');
-				$this->addErrors($titulo->getErrors());
-				break;
+				if ($ret)
+					$ret = $titulo->adicionaMovimento(
+						TipoMovimentoTitulo::TIPO_AGRUPAMENTO,
+						($titulo->operacao == "CR")?Yii::app()->format->unformatNumber($this->GridTitulos["total"][$codtitulo]):null,
+						($titulo->operacao == "DB")?Yii::app()->format->unformatNumber($this->GridTitulos["total"][$codtitulo]):null,
+						$emissao->format('d/m/Y'), 
+						$this->codportador,
+						$this->codtituloagrupamento
+					);	
+
+
+				if (!$ret)
+				{
+					$this->addError($this->tableSchema->primaryKey, 'Erro ao lancar multa no título!');
+					$this->addErrors($titulo->getErrors());
+					break;
+				}
+
 			}
-			
+
+			for ($i = 1; ($i <= sizeof($this->vencimentos)) && $ret; $i++)
+			{
+
+				$titulo = new Titulo('insert');
+				$titulo->codtituloagrupamento = $this->codtituloagrupamento;
+				$titulo->codtipotitulo = ($total<0)?TipoTitulo::TIPO_AGRUPAMENTO_CREDITO:TipoTitulo::TIPO_AGRUPAMENTO_DEBITO;
+				$titulo->codfilial = $this->codfilial;
+				$titulo->codportador = $this->codportador;
+				$titulo->codpessoa = $this->codpessoa;
+				$titulo->codcontacontabil = ContaContabil::CONTA_AGRUPAMENTO;
+				$titulo->numero = "A" . str_pad($this->codtituloagrupamento, 8, "0", STR_PAD_LEFT) . "-$i/" . sizeof($this->vencimentos);
+				$titulo->fatura = implode(", ", $fatura);
+				$titulo->emissao = $emissao->format('d/m/Y');
+				$titulo->transacao = $titulo->emissao;
+				$titulo->vencimento = $this->vencimentos[$i-1];
+				$titulo->vencimentooriginal = $titulo->vencimento;
+				$titulo->valor = Yii::app()->format->unformatNumber($this->valores[$i-1]);
+				$titulo->gerencial = $gerencial;
+				$titulo->observacao = $this->observacao;
+				$titulo->boleto = $this->boleto;
+
+				$ret = $titulo->save();
+
+
+				if (!$ret)
+				{
+					$this->addError($this->tableSchema->primaryKey, 'Erro ao gerar título!');
+					$this->addErrors($titulo->getErrors());
+					break;
+				}
+				else
+				{
+					$titulos[$i] =  $titulo;
+					echo "<h3>Gerou Titulo {$titulo->codtitulo}</h3>";
+				}
+			}
+
 		}
-		
-		for ($i = 1; ($i <= sizeof($this->vencimentos)) && $ret; $i++)
-		{
-			
-			$titulo = new Titulo('insert');
-			$titulo->codtituloagrupamento = $this->codtituloagrupamento;
-			$titulo->codtipotitulo = ($total<0)?TipoTitulo::TIPO_AGRUPAMENTO_CREDITO:TipoTitulo::TIPO_AGRUPAMENTO_DEBITO;
-			$titulo->codfilial = $this->codfilial;
-			$titulo->codportador = $this->codportador;
-			$titulo->codpessoa = $this->codpessoa;
-			$titulo->codcontacontabil = ContaContabil::CONTA_AGRUPAMENTO;
-			$titulo->numero = "A" . str_pad($this->codtituloagrupamento, 8, "0", STR_PAD_LEFT) . "-$i/" . sizeof($this->vencimentos);
-			$titulo->fatura = implode(", ", $fatura);
-			$titulo->emissao = $emissao->format('d/m/Y');
-			$titulo->transacao = $titulo->emissao;
-			$titulo->vencimento = $this->vencimentos[$i-1];
-			$titulo->vencimentooriginal = $titulo->vencimento;
-			$titulo->valor = (double) Yii::app()->format->unformatNumber($this->valores[$i-1]) * (($total<0)?-1:1);
-			$titulo->gerencial = $gerencial;
-			$titulo->observacao = $this->observacao;
-			$titulo->boleto = $this->boleto;
-			
-			$ret = $titulo->save();
-			
-			
-			if (!$ret)
-			{
-				$this->addError($this->tableSchema->primaryKey, 'Erro ao gerar título!');
-				$this->addErrors($titulo->getErrors());
-				break;
-			}
-			else
-			{
-				$titulos[$i] =  $titulo;
-				echo "<h3>Gerou Titulo {$titulo->codtitulo}</h3>";
-			}
-		}
-		
-		// força falso para testar
-		//$ret = false;
-		//echo "<h1>{$this->codtituloagrupamento}</h1>";
 		
 		//faz commit
 		if ($ret)
@@ -383,6 +396,40 @@ class TituloAgrupamento extends MGActiveRecord
 			$trans->rollback();
 		
 		//retorna
+		return $ret;
+	}
+	
+	public function estorna()
+	{
+		$trans = $this->dbConnection->beginTransaction();
+
+		$ret = true;
+		
+		//cancela todos os movimentos de titulo
+		foreach ($this->MovimentoTitulos as $mov)
+		{
+			$ret = $mov->estorna();
+			if (!$ret)
+			{
+				$this->addError("codmovimentotitulo", "Erro ao estornar movimento!");
+				$this->addErrors($mov->getErrors());
+				break;
+			}
+		}
+		
+		//se cancelou todos os movimentos, marca agrupamento como cancelado
+		if ($ret)
+		{
+			$this->cancelamento = date('d/m/Y');
+			$ret = $this->save();
+		}
+		
+		//grava transacao em caso de sucesso
+		if ($ret)
+			$trans->commit();
+		else
+			$trans->rollback();
+		
 		return $ret;
 	}
 	

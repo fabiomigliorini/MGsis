@@ -6,11 +6,24 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
-array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
-//array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codtituloagrupamento)),
-//array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
-//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
+	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
+	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
+	array(
+		'label'=>'Imprimir Boletos', 
+		'icon'=>'icon-barcode', 
+		'url'=>array('titulo/imprimeboleto', 'codtituloagrupamento'=>$model->codtituloagrupamento), 
+		'linkOptions'=>array('id'=>'btnMostrarBoleto'),
+	),
+	//array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codtituloagrupamento)),
+	//array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
+	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
+	array(
+		'label'=>'Estornar', 
+		'icon'=>'icon-thumbs-down', 
+		'url'=>'#', 
+		'linkOptions'=>array('id'=>'btnExcluir'),
+		'visible'=>(empty($model->cancelamento))
+		),
 );
 
 Yii::app()->clientScript->registerCoreScript('yii');
@@ -19,17 +32,56 @@ Yii::app()->clientScript->registerCoreScript('yii');
 <script type="text/javascript">
 /*<![CDATA[*/
 $(document).ready(function(){
+
+
+	var frameSrcBoleto = $('#btnMostrarBoleto').attr('href');
+	$('#btnMostrarBoleto').click(function(event){
+		event.preventDefault();
+		$('#modalBoleto').on('show', function () {
+			$('#frameBoleto').attr("src",frameSrcBoleto);
+		});
+		$('#modalBoleto').modal({show:true})
+		$('#modalBoleto').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
+	});	
+
+	//imprimir Boleto
+	$('#btnImprimirBoleto').click(function(event){
+		window.frames["frameBoleto"].focus();
+		window.frames["frameBoleto"].print();
+	});
+
 	jQuery('body').on('click','#btnExcluir',function() {
-		bootbox.confirm("Excluir este registro?", function(result) {
+		bootbox.confirm("Estornar este Agrupamento?", function(result) {
 			if (result)
-				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('titulo-agrupamento/delete', array('id' => $model->codtituloagrupamento))?>",{});
+				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('tituloAgrupamento/estorna', array('id' => $model->codtituloagrupamento))?>",{});
 		});
 	});
+	
 });
 /*]]>*/
 </script>
 
+<div id="modalBoleto" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">  
+		<div class="pull-right">
+			<button class="btn btn-primary" id="btnImprimirBoleto">Imprimir</button>
+			<button class="btn" data-dismiss="modal">Fechar</button>
+		</div>
+		<h3>Boleto</h3>  
+	</div>  
+	<div class="modal-body">
+      <iframe src="" id="frameBoleto" width="99.6%" height="400" frameborder="0"></iframe>
+	</div>
+</div>
+
+
 <h1>Agrupamento de Títulos <?php echo Yii::app()->format->formataCodigo($model->codtituloagrupamento); ?></h1>
+
+<?php if (!empty($model->cancelamento)): ?>
+	<div class="alert alert-danger">
+		<b>Estornado em <?php echo CHtml::encode($model->cancelamento); ?> </b>
+	</div>
+<?php endif; ?>
 
 <?php 
 
@@ -38,11 +90,10 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
 		'emissao',
-		'cancelamento',
 		'observacao',
 		array(
 			'label'=>'Total',
-			'value'=>Yii::app()->format->formatNumber($total) . " " . (($total<0)?"CR":"DB"),
+			'value'=>Yii::app()->format->formatNumber(abs($total)) . " " . (($total<0)?"CR":"DB"),
 		),
 	),
 )); 
@@ -98,7 +149,12 @@ foreach ($model->MovimentoTitulos as $mov)
 {
 	if ($mov->Titulo->codtituloagrupamento == $model->codtituloagrupamento)
 		continue;
-	$css_valor = ($mov->Titulo->operacao == "DB")?"text-success":"text-warning";	
+	
+	if ($mov->TipoMovimentoTitulo->estorno)
+		continue;
+	
+	$operacao = ($mov->credito > $mov->debito)?"CR":"DB";
+	$css_valor = ($operacao == "DB")?"text-success":"text-warning";	
 	?>
 	<div class="registro">
 		<small class="row-fluid">
@@ -108,9 +164,12 @@ foreach ($model->MovimentoTitulos as $mov)
 			<span class="span2 muted">
 				<?php echo CHtml::link(CHtml::encode($mov->Titulo->numero),array('titulo/view','id'=>$mov->Titulo->codtitulo)); ?> 
 			</span>
-			<b class="span2 text-right <?php echo $css_valor; ?>">
+			<small class="span1 muted text-right">
+				<?php echo CHtml::encode($mov->TipoMovimentoTitulo->tipomovimentotitulo); ?> 
+			</small>
+			<b class="span1 text-right <?php echo $css_valor; ?>">
 				<?php echo Yii::app()->format->formatNumber(abs($mov->debito-$mov->credito)); ?>
-				<?php echo $mov->Titulo->operacao; ?>
+				<?php echo $operacao; ?>
 			</b>
 			<b class="span1">
 				<?php echo $mov->Titulo->vencimento; ?>

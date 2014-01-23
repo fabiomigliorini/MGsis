@@ -32,8 +32,10 @@ class TipoMovimentoTitulo extends MGActiveRecord
 	const TIPO_ESTORNO_IMPLANTACAO = 900;
 	
 	const TIPO_AJUSTE = 200;
+	const TIPO_ESTORNO_AJUSTE = 920;
 	
 	const TIPO_AMORTIZACAO = 300;
+	const TIPO_ESTORNO_AMORTIZACAO = 933;
 	
 	const TIPO_JUROS = 400;
 	const TIPO_ESTORNO_JUROS = 940;
@@ -45,6 +47,7 @@ class TipoMovimentoTitulo extends MGActiveRecord
 	const TIPO_ESTORNO_LIQUIDACAO = 930;
 	
 	const TIPO_AGRUPAMENTO = 901;
+	const TIPO_ESTORNO_AGRUPAMENTO = 991;
 	
 	const TIPO_LIQUIDACAO_COBRANCA = 610;
 	const TIPO_ESTORNO_LIQUIDACAO_COBRANCA = 910;

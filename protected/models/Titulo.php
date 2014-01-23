@@ -95,11 +95,13 @@ class Titulo extends MGActiveRecord
 			array('fatura', 'length', 'max'=>50),
 			array('debito, credito, debitototal, creditototal, saldo, debitosaldo, creditosaldo', 'length', 'max'=>14),
 			array('vencimento', 'date', 'format'=>Yii::app()->locale->getDateFormat('medium')),
+			array('vencimentooriginal', 'date', 'format'=>Yii::app()->locale->getDateFormat('medium')),
+			array('transacao','date','format'=>Yii::app()->locale->getDateFormat('medium')),
+			array('emissao','date','format'=>Yii::app()->locale->getDateFormat('medium')),
 			array('observacao', 'length', 'max'=>255),
 			array('codportador, gerencial, boleto, transacaoliquidacao, codnegocioformapagamento, codtituloagrupamento, remessa, estornado, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('transacao','date','format'=>Yii::app()->locale->getDateFormat('medium')),
 			//array('sistema','datetime'),
 			array('sistema','date','format'=> strtr(Yii::app()->locale->getDateTimeFormat(), array("{0}" => Yii::app()->locale->getTimeFormat('medium'), "{1}" => Yii::app()->locale->getDateFormat('medium')))),
 			array('codtitulo, vencimento_de, vencimento_ate, emissao_de, emissao_ate, criacao_de, criacao_ate, codtipotitulo, codfilial, codportador, codpessoa, codcontacontabil, numero, emissao, vencimento, credito, gerencial, boleto, nossonumero, saldo, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
@@ -159,12 +161,22 @@ class Titulo extends MGActiveRecord
 	
 	public function validaNumero($attribute, $params)
 	{
+		//se nao tem numero
 		if (empty($this->numero))
 			return;
 		
+		//se nao tem tipo
 		if (empty($this->codtipotitulo))
 			return;
-
+		
+		//se nao alterou numero
+		if (!$this->isNewRecord)
+		{
+			$old = Titulo::model()->findByPk($this->codtitulo);
+			if ($old->numero == $this->numero)
+				return;
+		}
+		
 		$outro = false;
 		if ($this->TipoTitulo->pagar)
 		{
@@ -218,7 +230,7 @@ class Titulo extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'MovimentoTitulos' => array(self::HAS_MANY, 'MovimentoTitulo', 'codtitulo', 'order'=>'criacao asc, transacao asc'),
+			'MovimentoTitulos' => array(self::HAS_MANY, 'MovimentoTitulo', 'codtitulo', 'order'=>'criacao DESC, sistema DESC'),
 			'MovimentoTitulosRelacionado' => array(self::HAS_MANY, 'MovimentoTitulo', 'codtitulorelacionado'),
 			'ContaContabil' => array(self::BELONGS_TO, 'ContaContabil', 'codcontacontabil'),
 			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
@@ -597,8 +609,8 @@ class Titulo extends MGActiveRecord
 			$this->debito = Yii::app()->format->unformatNumber($this->valor);
 		}
 
-		//preenche nossonumero quando for boleto
-		if (!empty($this->codportador) && $this->boleto)
+		//preenche nossonumero quando for boleto, debito
+		if (!empty($this->codportador) && $this->boleto && empty($this->credito))
 		{
 			if ($this->isNewRecord)
 				$codportador_antigo = $this->codportador;
@@ -658,7 +670,7 @@ class Titulo extends MGActiveRecord
 					$credito = $this->credito - $old->credito;
 				if ($this->credito < $old->credito)
 					$debito = $old->credito - $this->credito;
-				$codtipomovimento = 200;
+				$codtipomovimento = TipoMovimentoTitulo::TIPO_AJUSTE;
 			}
 
 			//se teve diferenca, um registro de movimento

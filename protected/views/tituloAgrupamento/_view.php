@@ -1,3 +1,7 @@
+<?php 
+$total = $data->calculaTotal();
+$css_valor =  ($total<0)?"text-warning":"text-success"; 
+?>
 <div class="registro <?php echo (!empty($data->cancelamento))?"alert-danger":""; ?>">
 	<div class="row-fluid">
 		<small class="span1">
@@ -12,17 +16,11 @@
 			}
 			?>
 		</b>
-		<b class="span2 text-right">
-			<?php 
-			$total = Yii::app()->format->formatNumber($data->calculaTotal());
-			echo CHtml::encode($total);
-			?>
+		<b class="span2 text-right <?php echo $css_valor; ?>">
+			<?php echo CHtml::encode(Yii::app()->format->formatNumber(abs($total))); ?>
+			&nbsp;
+			<?php echo ($total<0)?"CR":"DB"; ?>
 		</b>
-		<small class="span1 muted">
-			<?php 
-			echo ($total<0)?"CR":"DB";
-			?>
-		</small>
-		<small class="span3 muted"><?php echo CHtml::encode($data->observacao); ?></small>
+		<small class="span4 muted"><?php echo CHtml::encode($data->observacao); ?></small>
 	</div>
 </div>

@@ -49,13 +49,6 @@ class TituloAgrupamentoController extends Controller
 			'model'=>$model,
 			));
 		
-		if(isset($_POST['TituloAgrupamento']))
-		{
-			echo "<pre>";
-			print_r($_POST['TituloAgrupamento']);
-			echo "</pre>";
-			
-		}
 	}
 
 	/**
@@ -118,6 +111,24 @@ class TituloAgrupamentoController extends Controller
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 	*/
+	
+	public function actionEstorna($id)
+	{
+		if(Yii::app()->request->isPostRequest)
+		{
+			// we only allow estorna via POST request
+			$model = $this->loadModel($id);
+			if (!$model->estorna())
+				Yii::app()->user->setFlash("error", "Erro ao estornar Agrupamento de Títulos!");
+			else
+				Yii::app()->user->setFlash("success", "Agrupamento de Títulos Estornado!");
+			
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('view','id'=>$model->codtituloagrupamento));
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+	}
+	
 	/**
 	* Lists all models.
 	*/
