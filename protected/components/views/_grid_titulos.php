@@ -1,5 +1,4 @@
 <?
-
 //decide o css pra utilizar nos campos de vencimento e valor
 //baseado no saldo e atraso
 
@@ -9,18 +8,12 @@ else
 	if ($data->Juros->diasAtraso > 0)
 	{
 		if ($data->Juros->diasAtraso <= $data->Juros->diasTolerancia) 
-		{
 			$css_vencimento = "text-warning";
-		}
 		else 
-		{
 			$css_vencimento = "text-error";
-		}
 	}
 	else
-	{
 		$css_vencimento = "text-success";
-	}
 
 if ($data->gerencial)
 	$css_filial = "text-warning";
@@ -50,15 +43,15 @@ else
 				<input 
 					type="hidden" 
 					value="<?php echo $data->operacao; ?>" 
-					name="TituloAgrupamento[operacao][<?php echo $data->codtitulo; ?>]" 
-					id="TituloAgrupamento_operacao_<?php echo $data->codtitulo; ?>" 
+					name="<?php echo $namePrefix; ?>[operacao][<?php echo $data->codtitulo; ?>]" 
+					id="<?php echo $idPrefix; ?>_operacao_<?php echo $data->codtitulo; ?>" 
 					>
 				<input 
 					type="text" 
-					value="<?php echo (isset($saldo[$data->codtitulo]))?$saldo[$data->codtitulo]:abs($data->saldo); ?>" 
+					value="<?php echo (isset($GridTitulos["saldo"][$data->codtitulo]))?$GridTitulos["saldo"][$data->codtitulo]:abs($data->saldo); ?>" 
 					data-calculado="<?php echo abs($data->saldo); ?>" 
-					name="TituloAgrupamento[saldo][<?php echo $data->codtitulo; ?>]" 
-					id="TituloAgrupamento_saldo_<?php echo $data->codtitulo; ?>" 
+					name="<?php echo $namePrefix; ?>[saldo][<?php echo $data->codtitulo; ?>]" 
+					id="<?php echo $idPrefix; ?>_saldo_<?php echo $data->codtitulo; ?>" 
 					class="span12 text-right numero saldo" 
 					style="font-size: 0.9em"
 					>
@@ -66,10 +59,10 @@ else
 			<div class="span2">
 				<input 
 					type="text" 
-					value="<?php echo (isset($multa[$data->codtitulo]))?$multa[$data->codtitulo]:abs($data->Juros->valorMulta); ?>" 
+					value="<?php echo (isset($GridTitulos["multa"][$data->codtitulo]))?$GridTitulos["multa"][$data->codtitulo]:abs($data->Juros->valorMulta); ?>" 
 					data-calculado="<?php echo abs($data->Juros->valorMulta); ?>" 
-					name="TituloAgrupamento[multa][<?php echo $data->codtitulo; ?>]" 
-					id="TituloAgrupamento_multa_<?php echo $data->codtitulo; ?>" 
+					name="<?php echo $namePrefix; ?>[multa][<?php echo $data->codtitulo; ?>]" 
+					id="<?php echo $idPrefix; ?>_multa_<?php echo $data->codtitulo; ?>" 
 					class="span12 text-right numero multa" 
 					style="font-size: 0.9em"
 					>
@@ -77,10 +70,10 @@ else
 			<div class="span2">
 				<input 
 					type="text" 
-					value="<?php echo (isset($juros[$data->codtitulo]))?$juros[$data->codtitulo]:abs($data->Juros->valorJuros); ?>" 
+					value="<?php echo (isset($GridTitulos["juros"][$data->codtitulo]))?$GridTitulos["juros"][$data->codtitulo]:abs($data->Juros->valorJuros); ?>" 
 					data-calculado="<?php echo abs($data->Juros->valorJuros); ?>" 
-					name="TituloAgrupamento[juros][<?php echo $data->codtitulo; ?>]" 
-					id="TituloAgrupamento_juros_<?php echo $data->codtitulo; ?>" 
+					name="<?php echo $namePrefix; ?>[juros][<?php echo $data->codtitulo; ?>]" 
+					id="<?php echo $idPrefix; ?>_juros_<?php echo $data->codtitulo; ?>" 
 					class="span12 text-right numero juros" 
 					style="font-size: 0.9em"
 					>
@@ -88,10 +81,10 @@ else
 			<div class="span2">
 				<input 
 					type="text" 
-					value="<?php echo (isset($desconto[$data->codtitulo]))?$desconto[$data->codtitulo]:0; ?>" 
+					value="<?php echo (isset($GridTitulos["desconto"][$data->codtitulo]))?$GridTitulos["desconto"][$data->codtitulo]:0; ?>" 
 					data-calculado="0" 
-					name="TituloAgrupamento[desconto][<?php echo $data->codtitulo; ?>]" 
-					id="TituloAgrupamento_desconto_<?php echo $data->codtitulo; ?>" 
+					name="<?php echo $namePrefix; ?>[desconto][<?php echo $data->codtitulo; ?>]" 
+					id="<?php echo $idPrefix; ?>_desconto_<?php echo $data->codtitulo; ?>" 
 					class="span12 text-right numero desconto" 
 					style="font-size: 0.9em"
 					>
@@ -99,10 +92,10 @@ else
 			<div class="span2">
 				<input 
 					type="text" 
-					value="<?php echo (isset($total[$data->codtitulo]))?$total[$data->codtitulo]:abs($data->Juros->valorTotal); ?>" 
+					value="<?php echo (isset($GridTitulos["total"][$data->codtitulo]))?$GridTitulos["total"][$data->codtitulo]:abs($data->Juros->valorTotal); ?>" 
 					data-calculado="<?php echo abs($data->Juros->valorTotal); ?>" 
-					name="TituloAgrupamento[total][<?php echo $data->codtitulo; ?>]" 
-					id="TituloAgrupamento_total_<?php echo $data->codtitulo; ?>" 
+					name="<?php echo $namePrefix; ?>[total][<?php echo $data->codtitulo; ?>]" 
+					id="<?php echo $idPrefix; ?>_total_<?php echo $data->codtitulo; ?>" 
 					class="span12 text-right numero total" 
 					style="font-size: 0.9em"
 					>
@@ -113,10 +106,10 @@ else
 				<input 
 					type="checkbox" 
 					class="codtitulo" 
-					name="TituloAgrupamento[codtitulos][]" 
-					id="TituloAgrupamento_codtitulo_<?php echo $data->codtitulo; ?>" 
+					name="<?php echo $namePrefix; ?>[codtitulo][]" 
+					id="<?php echo $idPrefix; ?>_codtitulo_<?php echo $data->codtitulo; ?>" 
 					value="<?php echo $data->codtitulo; ?>"
-					<?php echo (in_array($data->codtitulo, $codtitulos))?"checked":""; ?>
+					<?php echo (in_array($data->codtitulo, $GridTitulos['codtitulo']))?"checked":""; ?>
 				>
 			</div>
 			<div class="span3 <?php echo $css_filial; ?>">

@@ -445,6 +445,137 @@ class Titulo extends MGActiveRecord
 		return $ret;
 	}
 	
+	public function adicionaMultaJurosDesconto(
+		$multa = 0, 
+		$juros = 0, 
+		$desconto = 0, 
+		$transacao = null,
+		$codportador = null,
+		$codtituloagrupamento = null,
+		$codliquidacaotitulo = null,
+		$codboletoretorno = null,
+		$codcobranca =null,
+		$codtitulorelacionado = null,
+		$historico = null
+		)
+	{
+		
+		$ret = true;
+		
+		if ($ret && ($juros > 0))
+		{
+			$ret = $this->adicionaMovimento(
+				TipoMovimentoTitulo::TIPO_JUROS,
+				($this->operacao == "DB")?$juros:null,
+				($this->operacao == "CR")?$juros:null,
+				$transacao,
+				$codportador,
+				$codtituloagrupamento,
+				$codliquidacaotitulo,
+				$codboletoretorno,
+				$codcobranca,
+				$codtitulorelacionado,
+				$historico
+			);	
+		}
+		
+		if ($ret && ($multa > 0))
+		{
+			$ret = $this->adicionaMovimento(
+				TipoMovimentoTitulo::TIPO_MULTA,
+				($this->operacao == "DB")?$multa:null,
+				($this->operacao == "CR")?$multa:null,
+				$transacao,
+				$codportador,
+				$codtituloagrupamento,
+				$codliquidacaotitulo,
+				$codboletoretorno,
+				$codcobranca,
+				$codtitulorelacionado,
+				$historico
+			);
+		}
+		
+		if ($ret && ($desconto > 0))
+		{
+			$ret = $this->adicionaMovimento(
+				TipoMovimentoTitulo::TIPO_DESCONTO,
+				($this->operacao == "CR")?$desconto:null,
+				($this->operacao == "DB")?$desconto:null,
+				$transacao,
+				$codportador,
+				$codtituloagrupamento,
+				$codliquidacaotitulo,
+				$codboletoretorno,
+				$codcobranca,
+				$codtitulorelacionado,
+				$historico
+			);	
+		}
+		
+		return $ret;
+	}
+	
+	public function adicionaMovimento(
+		$codtipomovimentotitulo,
+		$debito = null,
+		$credito = null,
+		$transacao = null,
+		$codportador = null,
+		$codtituloagrupamento = null,
+		$codliquidacaotitulo = null,
+		$codboletoretorno = null,
+		$codcobranca =null,
+		$codtitulorelacionado = null,
+		$historico = null
+		)
+	{
+
+		//inicializa transacao
+		$trans = $this->dbConnection->beginTransaction();
+		
+		// preenche data de transacao
+		if ($transacao == null)
+			$transacao = date('d/m/Y');
+			
+		//instancia 
+		$mov = new MovimentoTitulo('insert');
+		
+		//passa parametros
+		$mov->codtitulo              = $this->codtitulo;
+		$mov->codtipomovimentotitulo = $codtipomovimentotitulo;
+		$mov->debito                 = $debito;
+		$mov->credito                = $credito;
+		$mov->transacao              = $transacao;
+		$mov->codtituloagrupamento   = $codtituloagrupamento;
+		$mov->codliquidacaotitulo    = $codliquidacaotitulo;
+		$mov->codboletoretorno       = $codboletoretorno;
+		$mov->codcobranca            = $codcobranca;
+		$mov->codportador            = $codportador;
+		$mov->codtitulorelacionado   = $codtitulorelacionado;
+		$mov->historico              = $historico;
+		$mov->sistema                = date('Y-m-d H:i:s');
+		
+		//salva
+		$ret = $mov->save();
+		
+		//se deu erro adiciona erro
+		if ($ret)
+		{
+			$trans->commit();
+		}
+		else
+		{
+			//se deu erro
+			$this->addError($this->tableSchema->primaryKey, 'Erro ao gerar movimento do título!');
+			$this->addErrors($mov->getErrors());
+			$trans->rollback();
+		}
+		
+		//retorna
+		return $ret;
+	}
+	
 	protected function beforeSave()
 	{
 		$ret = parent::beforeSave();
@@ -484,16 +615,6 @@ class Titulo extends MGActiveRecord
 		
 	}
 	
-
-	protected function afterSave()
-	{
-		$ret = parent::afterSave();
-		
-		/*
-		 * 
-		 */
-		return $ret;
-	}
 	
 	public function save($runValidation=true, $attributes=NULL)
 	{
@@ -503,17 +624,7 @@ class Titulo extends MGActiveRecord
 			$old = Titulo::model()->findByPk($this->codtitulo);
 		
 		//comeca transacao
-		/*
-		try
-		{
-			$trans = $this->dbConnection->beginTransaction();
-		} catch (Exception $ex) {
-			if ($ex->getMessage() != "There is already an active transaction")
-			{
-				throw new $ex;
-			}
-		}
-		*/
+		$trans = $this->dbConnection->beginTransaction();
 		
 		//salva registro do titulo
 		$ret = parent::save($runValidation, $attributes);
@@ -532,7 +643,7 @@ class Titulo extends MGActiveRecord
 				//os valores do movimento sao iguais ao do novo registro
 				$debito = $this->debito;
 				$credito = $this->credito;
-				$codtipomovimento = $this->TipoTitulo->codtipomovimentotitulo;
+				$codtipomovimento = TipoMovimentoTitulo::TIPO_IMPLANTACAO;
 				if ($data = DateTime::createFromFormat('Y-m-d', $this->transacao))
 					$data = $data->format('d/m/Y');
 			}
@@ -553,35 +664,23 @@ class Titulo extends MGActiveRecord
 			//se teve diferenca, um registro de movimento
 			if ($debito >0 || $credito >0)
 			{
-				$mov = new MovimentoTitulo('insert');
-				$mov->codtitulo = $this->codtitulo;
-				$mov->codtipomovimentotitulo = $codtipomovimento;
-				$mov->codportador = $this->codportador;
-				$mov->debito = $debito;
-				$mov->credito = $credito;
-				$mov->codtituloagrupamento = $this->codtituloagrupamento;
-				$mov->transacao = $data;
-
-				//se deu erro ao salvar, registra erro do movimento no titulo
-				if (!$mov->save())
-				{
-					$this->addError($this->tableSchema->primaryKey, 'Erro ao gerar movimento do título!');
-					$this->addErrors($mov->getErrors());
-					$ret = false;
-				}
+				
+				$ret = $this->adicionamovimento(
+					$codtipomovimento, 
+					$debito, 
+					$credito,
+					$data,
+					$this->codportador,
+					$this->codtituloagrupamento
+				);
 			}
 		}
 
-		//se deu erro desfaz transacao, senao commit
-		/*
-		if (isset($trans))
-		{
-			if (!$ret)
-				$trans->rollback();
-			else
-				$trans->commit();
-		}
-		*/
+		//faz commit
+		if ($ret)
+			$trans->commit();
+		else
+			$trans->rollback();
 		
 		//retorna
 		return $ret;
@@ -589,10 +688,17 @@ class Titulo extends MGActiveRecord
 	
 	public function atualizaSaldo()
 	{
+		
+		// carrega valores de saldo / movimento
+		$this->refresh();
+		
+		// valores
 		$debito = 0;
 		$credito = 0;
 		$datatit = DateTime::createFromFormat('d/m/Y', $this->transacao);
 		$dataestorno = false;
+		
+		// percorre movimento somando
 		foreach ($this->MovimentoTitulos as $mov)
 		{
 			$debito += $mov->debito;
@@ -611,6 +717,8 @@ class Titulo extends MGActiveRecord
 				}
 			}
 		}
+		
+		// passa soma para modelo
 		$this->debitototal = $debito;
 		$this->creditototal = $credito;
 		$this->saldo = $debito - $credito;
@@ -634,37 +742,23 @@ class Titulo extends MGActiveRecord
 		else
 			$this->estornado = null;
 		
+		//salva
 		return $this->save();
 	}
 
 	public function estorna()
 	{
-		$ret = false;
+		if ($this->saldo == 0)
+			return false;
 		
-		$trans = $this->dbConnection->beginTransaction();
-		
-		if ($this->saldo == ($this->debito - $this->credito))
-		{
-			$mov = new MovimentoTitulo('insert');
-			$mov->codtipomovimentotitulo = 900;
-			$mov->codtitulo = $this->codtitulo;
-			$mov->codportador = $this->codportador;
-			$mov->debito = $this->creditosaldo;
-			$mov->credito = $this->debitosaldo;
-			$mov->transacao = date('d/m/Y');
-			$mov->sistema = date("d/m/Y H:i:s");
-			if ($mov->save())
-			{
-				$ret = true;
-			}
-		}
-		
-		if ($ret)
-			$trans->commit();
-		else
-			$trans->rollback();
-		
-		return $ret;
+		return $this->adicionaMovimento(
+			TipoMovimentoTitulo::TIPO_ESTORNO_IMPLANTACAO,
+			$this->creditosaldo, 
+			$this->debitosaldo, 
+			date('d/m/Y'), 
+			$this->codportador, 
+			$this->codtituloagrupamento
+		);
 	}
 		
 }

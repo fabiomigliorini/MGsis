@@ -23,12 +23,19 @@ class TituloAgrupamento extends MGActiveRecord
 {
 	
 	public $codpessoa;
-	public $codtitulos;
-	public $saldo;
-	public $multa;
-	public $juros;
-	public $desconto;
-	public $total;
+	
+	public $codportador;
+	public $codfilial;
+	public $boleto;
+	
+	public $GridTitulos;
+	public $vencimentos;
+	public $valores;
+	
+	public $parcelas;
+	public $primeira;
+	public $demais;
+	
 	public $emissao_de;
 	public $emissao_ate;
 	public $criacao_de;
@@ -50,14 +57,106 @@ class TituloAgrupamento extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codtituloagrupamento, emissao, codpessoa, codtitulos', 'required'),
-			array('saldo, multa, juros, desconto, total', 'safe', 'on'=>'insert'),
+			array('emissao, codpessoa, GridTitulos, vencimentos, valores, codfilial', 'required'),
+			array('GridTitulos', 'validaGridTitulos'),
+			array('vencimentos', 'validaVencimentos'),
+			array('codportador', 'validaFilialPortador'),
+			array('boleto', 'validaBoleto'),
+			array('parcelas, codportador, boleto, primeira, demais', 'safe', 'on'=>'insert'),
 			array('observacao', 'length', 'max'=>200),
 			array('cancelamento, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('emissao_de, emissao_ate, criacao_de, criacao_ate, codpessoa, codtituloagrupamento, emissao', 'safe', 'on'=>'search'),
 		);
+	}
+
+	public function validaBoleto($attribute, $params)
+	{
+		if (!$this->boleto)
+			return;
+		
+		if (empty($this->codportador))
+		{
+			$this->addError($attribute, "Selecione um portador!");
+			return;
+		}
+		
+		$portador = Portador::model()->findByPk($this->codportador);
+		if (!$portador->emiteboleto)
+			$this->addError($attribute, "O portador selecionado não permite boletos!");
+	}
+
+	
+	public function validaFilialPortador($attribute, $params)
+	{
+		if (!empty($this->codfilial))
+			if (!empty($this->codportador))
+			{
+				$portador = Portador::model()->findByPk($this->codportador);
+				if (($this->codfilial <> $portador->codfilial) && !empty($portador->codfilial))
+					$this->addError($attribute, "Este portador só é válido para a filial {$portador->Filial->filial}!");
+			}
+	}
+	
+	public function validaGridTitulos($attribute, $params)
+	{
+
+		//se nao marcou nenhum título no grid
+		if (empty($this->GridTitulos) || !is_array($this->GridTitulos) || empty($this->GridTitulos["codtitulo"]))
+		{
+			$this->addError($attribute, 'Selecione os títulos à serem baixados!');
+			return;
+		}
+		
+		//percorre todos títulos selecionados, verificando se os valores calculados estão corretos
+		foreach($this->GridTitulos["codtitulo"] as $codtitulo)
+		{
+			//valida total selecionado
+			if (($this->GridTitulos["saldo"][$codtitulo] + 
+				 $this->GridTitulos["multa"][$codtitulo] + 
+				 $this->GridTitulos["juros"][$codtitulo] - 
+				 $this->GridTitulos["desconto"][$codtitulo] - 
+				 $this->GridTitulos["total"][$codtitulo])
+				> 0.005
+				)
+				$this->addError($attribute, 'Total incorreto para o título ' . CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($codtitulo)),array('titulo/view','id'=>$codtitulo)) . "!");
+			
+		}
+	}
+	
+	public function calculaTotalGridTitulos()
+	{
+		if (empty($this->GridTitulos["codtitulo"]))
+			return 0;
+		
+		$total = 0;
+		foreach($this->GridTitulos["codtitulo"] as $codtitulo)
+			$total += (double) Yii::app()->format->unformatNumber($this->GridTitulos["total"][$codtitulo]) * (($this->GridTitulos["operacao"][$codtitulo] == "CR")?-1:1);
+		
+		return $total;
+	}
+
+	public function calculaTotalValores()
+	{
+		if (empty($this->valores))
+			return 0;
+		
+		$total = 0;
+		foreach($this->valores as $valor)
+			$total += (double) Yii::app()->format->unformatNumber($valor);
+		
+		return $total;
+	}
+	
+	public function validaVencimentos($attribute, $params)
+	{
+		$titulos = abs($this->calculaTotalGridTitulos());
+		$parcelas = $this->calculaTotalValores();
+		if (abs($titulos - $parcelas) > 0.005)
+		{
+			$this->addError($attribute, "O valor total das parcelas ($parcelas) não bate com o total dos títulos selecionados ($titulos)!");
+		}
 	}
 
 	/**
@@ -84,10 +183,18 @@ class TituloAgrupamento extends MGActiveRecord
 		return array(
 			'codtituloagrupamento' => '#',
 			'codpessoa' => 'Pessoa',
-			'codtitulos' => 'Titulos',
+			'GridTitulos' => 'Titulos',
 			'emissao' => 'Emissão',
 			'cancelamento' => 'Cancelamento',
 			'observacao' => 'Observação',
+			
+			'parcelas' => 'Número de Parcelas',
+			'primeira' => 'Dias Primeira Parcela',
+			'demais'   => 'Dias Demais Parcelas',
+			'codportador'   => 'Portador',
+			'codfilial'   => 'Filial',
+			'boleto'   => 'Emitir Boleto',
+			
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
@@ -174,4 +281,109 @@ class TituloAgrupamento extends MGActiveRecord
 		}
 		return $total;
 	}
+	
+	public function save($runValidation=true, $attributes=NULL)
+	{
+		//comeca transacao
+		$trans = $this->dbConnection->beginTransaction();
+		
+		$ret = parent::save($runValidation, $attributes);
+		
+		$titulos = array();
+		
+		$total = $this->calculaTotalGridTitulos();
+		$gerencial = false;
+		$fatura = array();
+		
+		$emissao = DateTime::createFromFormat('Y-m-d', $this->emissao);
+		
+		foreach($this->GridTitulos["codtitulo"] as $codtitulo)
+		{
+			$titulo = Titulo::model()->findByPk($codtitulo);
+			if ($titulo->gerencial)
+				$gerencial = true;
+			
+			if (!empty($titulo->fatura))
+				$fatura[] = $titulo->fatura;
+
+			$ret = $titulo->adicionaMultaJurosDesconto(
+				(double) Yii::app()->format->unformatNumber($this->GridTitulos["multa"][$codtitulo]), 
+				(double) Yii::app()->format->unformatNumber($this->GridTitulos["juros"][$codtitulo]), 
+				(double) Yii::app()->format->unformatNumber($this->GridTitulos["desconto"][$codtitulo]), 
+				$emissao->format('d/m/Y'), 
+				$this->codportador,
+				$this->codtituloagrupamento
+			);
+
+			if ($ret)
+				$ret = $titulo->adicionaMovimento(
+					TipoMovimentoTitulo::TIPO_AGRUPAMENTO,
+					($titulo->operacao == "CR")?(double) Yii::app()->format->unformatNumber($this->GridTitulos["total"][$codtitulo]):null,
+					($titulo->operacao == "DB")?(double) Yii::app()->format->unformatNumber($this->GridTitulos["total"][$codtitulo]):null,
+					$emissao->format('d/m/Y'), 
+					$this->codportador,
+					$this->codtituloagrupamento
+				);	
+			
+
+			if (!$ret)
+			{
+				$this->addError($this->tableSchema->primaryKey, 'Erro ao lancar multa no título!');
+				$this->addErrors($titulo->getErrors());
+				break;
+			}
+			
+		}
+		
+		for ($i = 1; ($i <= sizeof($this->vencimentos)) && $ret; $i++)
+		{
+			
+			$titulo = new Titulo('insert');
+			$titulo->codtituloagrupamento = $this->codtituloagrupamento;
+			$titulo->codtipotitulo = ($total<0)?TipoTitulo::TIPO_AGRUPAMENTO_CREDITO:TipoTitulo::TIPO_AGRUPAMENTO_DEBITO;
+			$titulo->codfilial = $this->codfilial;
+			$titulo->codportador = $this->codportador;
+			$titulo->codpessoa = $this->codpessoa;
+			$titulo->codcontacontabil = ContaContabil::CONTA_AGRUPAMENTO;
+			$titulo->numero = "A" . str_pad($this->codtituloagrupamento, 8, "0", STR_PAD_LEFT) . "-$i/" . sizeof($this->vencimentos);
+			$titulo->fatura = implode(", ", $fatura);
+			$titulo->emissao = $emissao->format('d/m/Y');
+			$titulo->transacao = $titulo->emissao;
+			$titulo->vencimento = $this->vencimentos[$i-1];
+			$titulo->vencimentooriginal = $titulo->vencimento;
+			$titulo->valor = (double) Yii::app()->format->unformatNumber($this->valores[$i-1]) * (($total<0)?-1:1);
+			$titulo->gerencial = $gerencial;
+			$titulo->observacao = $this->observacao;
+			$titulo->boleto = $this->boleto;
+			
+			$ret = $titulo->save();
+			
+			
+			if (!$ret)
+			{
+				$this->addError($this->tableSchema->primaryKey, 'Erro ao gerar título!');
+				$this->addErrors($titulo->getErrors());
+				break;
+			}
+			else
+			{
+				$titulos[$i] =  $titulo;
+				echo "<h3>Gerou Titulo {$titulo->codtitulo}</h3>";
+			}
+		}
+		
+		// força falso para testar
+		//$ret = false;
+		//echo "<h1>{$this->codtituloagrupamento}</h1>";
+		
+		//faz commit
+		if ($ret)
+			$trans->commit();
+		else
+			$trans->rollback();
+		
+		//retorna
+		return $ret;
+	}
+	
 }

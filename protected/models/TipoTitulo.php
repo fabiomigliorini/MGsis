@@ -25,6 +25,10 @@
  */
 class TipoTitulo extends MGActiveRecord
 {
+	
+	const TIPO_AGRUPAMENTO_CREDITO = 911;
+	const TIPO_AGRUPAMENTO_DEBITO = 921;
+	
 	/**
 	 * @return string the associated database table name
 	 */

@@ -431,24 +431,18 @@ class TituloController extends Controller
 	}
 	
 	public function actionAjaxBuscaTitulo(
-		$codpessoa=0, 
-		array $codtitulos = null,
-		array $saldo = null,
-		array $multa = null,
-		array $juros = null,
-		array $desconto = null,
-		array $total = null
+		$modelname = null,
+		$campo = null,
+		array $GridTitulos = null,
+		$codpessoa=0
 		) 
 	{
 		
 		$this->widget('MGGridTitulos', array(
-			'codpessoa' => $codpessoa,
-			'codtitulos' => $codtitulos,
-			'saldo' => $saldo,
-			'multa' => $multa,
-			'juros' => $juros,
-			'desconto' => $desconto,
-			'total' => $total,
+			'modelname'   => $modelname,
+			'campo'		  => $campo,
+			'GridTitulos' => $GridTitulos,
+			'codpessoa'   => $codpessoa,
 		));
 		
 	} 

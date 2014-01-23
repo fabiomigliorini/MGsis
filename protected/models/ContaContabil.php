@@ -20,6 +20,9 @@
  */
 class ContaContabil extends MGActiveRecord
 {
+	
+	const CONTA_AGRUPAMENTO = 7;
+	
 	/**
 	 * @return string the associated database table name
 	 */

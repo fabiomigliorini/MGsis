@@ -33,21 +33,22 @@ class TituloAgrupamentoController extends Controller
 		if(isset($_POST['TituloAgrupamento']))
 		{
 			$model->attributes=$_POST['TituloAgrupamento'];
-			
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->codtituloagrupamento));
 			
 		}
 		else
 		{
-			$model->emissao = date('d/m/Y');			
+			$model->emissao  = date('d/m/Y');	
+			$model->parcelas = 1;
+			$model->primeira = 15;
+			$model->demais   = 30;
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
 			));
 		
-		/*
 		if(isset($_POST['TituloAgrupamento']))
 		{
 			echo "<pre>";
@@ -55,8 +56,6 @@ class TituloAgrupamentoController extends Controller
 			echo "</pre>";
 			
 		}
-		 * 
-		 */
 	}
 
 	/**

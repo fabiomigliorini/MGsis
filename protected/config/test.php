@@ -8,6 +8,7 @@ return CMap::mergeArray(
 				'class'=>'system.test.CDbFixtureManager',
 			),
 			'db'=>array(
+				'pdoClass' => 'NestedPDO',			
 				'connectionString' => 'pgsql:host=localhost;dbname=mgsis',
 				'emulatePrepare' => true,
 				'username' => 'mgsis_yii',

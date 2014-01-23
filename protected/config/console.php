@@ -35,6 +35,7 @@ return array(
 		),
 		*/
 		'db'=>array(
+			'pdoClass' => 'NestedPDO',			
 			'connectionString' => 'pgsql:host=localhost;dbname=mgsis',
 			'emulatePrepare' => true,
 			'username' => 'mgsis_yii',

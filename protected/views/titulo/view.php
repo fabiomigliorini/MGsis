@@ -28,7 +28,7 @@ $this->menu=array(
 		'icon'=>'icon-thumbs-down', 
 		'url'=>'#', 
 		'linkOptions'=>array('id'=>'btnExcluir'),
-		'visible'=>empty($model->codtituloagrupamento)
+		'visible'=>(empty($model->codtituloagrupamento) && ($model->saldo > 0))
 		),
 	array('label'=>'Duplicar', 'icon'=>'icon-retweet', 'url'=>array('create','duplicar'=>$model->codtitulo)),
 	//array('label'=>'Agrupar', 'icon'=>'icon-tasks', 'url'=>array('agrupar','id'=>$model->codtitulo)),

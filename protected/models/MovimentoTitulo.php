@@ -170,8 +170,18 @@ class MovimentoTitulo extends MGActiveRecord
 	
 	public function save($runValidation=true, $attributes=NULL)
 	{
+		$trans = $this->dbConnection->beginTransaction();
+		
 		$ret = parent::save($runValidation, $attributes);
-		$this->Titulo->atualizaSaldo();
+		
+		if ($ret)
+			$ret = $this->Titulo->atualizaSaldo();
+		
+		if ($ret)
+			$trans->commit();
+		else
+			$trans->rollback();
+		
 		return $ret;
 	}
 	
