@@ -46,7 +46,7 @@ class MGRelatorioTitulos extends FPDF
 		$this->SetTextColor(100, 100, 100);
 		$this->Cell(63,3, 'MGsis',"",0,'L');
 		$this->Cell(64,3, utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'C');
-		$this->Cell(63,3, date('d/m/Y h:i:s'),"",0,'R');
+		$this->Cell(63,3, date('d/m/Y H:i:s'),"",0,'R');
 	}	
 	
 	public function imprimeCabecalhoPessoa()

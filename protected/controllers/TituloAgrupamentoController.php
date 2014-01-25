@@ -193,4 +193,12 @@ class TituloAgrupamentoController extends Controller
 			Yii::app()->end();
 		}
 	}
+	
+	public function actionRelatorio($id)
+	{
+		$model = $this->loadModel($id);
+		$rel = new MGRelatorioTituloAgrupamento($model);
+		$rel->montaRelatorio();
+		$rel->Output();
+	}
 }

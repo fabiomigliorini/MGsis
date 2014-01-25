@@ -407,8 +407,6 @@ class TituloController extends Controller
 	public function actionRelatorio()
 	{
 		
-		$this->layout='//layouts/relatorio';
-		
 		$model=new Titulo('search');
 		
 		$model->unsetAttributes();  // clear any default values

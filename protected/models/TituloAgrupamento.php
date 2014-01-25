@@ -172,7 +172,7 @@ class TituloAgrupamento extends MGActiveRecord
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 			'MovimentoTitulos' => array(self::HAS_MANY, 'MovimentoTitulo', 'codtituloagrupamento', 'order'=>'codmovimentotitulo ASC'),
-			'Titulos' => array(self::HAS_MANY, 'Titulo', 'codtituloagrupamento', 'order'=>'vencimento asc, debito asc, credito asc'),
+			'Titulos' => array(self::HAS_MANY, 'Titulo', 'codtituloagrupamento', 'order'=>'vencimento asc'),
 			//'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
 		);
 	}

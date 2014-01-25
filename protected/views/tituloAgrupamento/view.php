@@ -13,6 +13,7 @@ $this->menu=array(
 		'icon'=>'icon-barcode', 
 		'url'=>array('titulo/imprimeboleto', 'codtituloagrupamento'=>$model->codtituloagrupamento), 
 		'linkOptions'=>array('id'=>'btnMostrarBoleto'),
+		'visible'=>(empty($model->cancelamento))
 	),
 	//array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codtituloagrupamento)),
 	//array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
@@ -24,6 +25,13 @@ $this->menu=array(
 		'linkOptions'=>array('id'=>'btnExcluir'),
 		'visible'=>(empty($model->cancelamento))
 		),
+	array(
+		'label'=>'Relatório', 
+		'icon'=>'icon-print', 
+		'url'=>array('relatorio', 'id'=>$model->codtituloagrupamento), 
+		'linkOptions'=>array('id'=>'btnMostrarRelatorio'),
+		'visible'=>(empty($model->cancelamento))
+	),
 );
 
 Yii::app()->clientScript->registerCoreScript('yii');
@@ -43,6 +51,18 @@ $(document).ready(function(){
 		$('#modalBoleto').modal({show:true})
 		$('#modalBoleto').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
 	});	
+	
+	//abre janela boleto
+	var frameSrcRelatorio = $('#btnMostrarRelatorio').attr('href');
+	$('#btnMostrarRelatorio').click(function(event){
+		event.preventDefault();
+		$('#modalRelatorio').on('show', function () {
+			$('#frameRelatorio').attr("src",frameSrcRelatorio);
+		});
+		$('#modalRelatorio').modal({show:true})
+		$('#modalRelatorio').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
+	});	
+	
 
 	//imprimir Boleto
 	$('#btnImprimirBoleto').click(function(event){
@@ -71,6 +91,18 @@ $(document).ready(function(){
 	</div>  
 	<div class="modal-body">
       <iframe src="" id="frameBoleto" width="99.6%" height="400" frameborder="0"></iframe>
+	</div>
+</div>
+
+<div id="modalRelatorio" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">  
+		<div class="pull-right">
+			<button class="btn" data-dismiss="modal">Fechar</button>
+		</div>
+		<h3>Relatório de Fechamento</h3>  
+	</div>  
+	<div class="modal-body">
+      <iframe src="" id="frameRelatorio" width="99.6%" height="400" frameborder="0"></iframe>
 	</div>
 </div>
 

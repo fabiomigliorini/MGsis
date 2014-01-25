@@ -7518,3 +7518,551 @@ Stack trace:
 REQUEST_URI=/MGsis/index.php?r=titulo/view&id=10040606
 HTTP_REFERER=http://10.0.1.199/MGsis/index.php?r=tituloAgrupamento/view&id=10006618
 ---
+2014/01/25 17:46:36 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchAll(): SQLSTATE[42702]: Ambiguous column: 7 ERROR:  column reference "credito" is ambiguous
+LINE 1: ...Pessoa".fantasia ASC, vencimento asc, debito asc, credito as...
+                                                             ^. A declaração SQL executada foi: SELECT "t"."codtituloagrupamento" AS "t0_c0", "t"."emissao" AS "t0_c1", "t"."cancelamento" AS "t0_c2", "t"."observacao" AS "t0_c3", "t"."alteracao" AS "t0_c4", "t"."codusuarioalteracao" AS "t0_c5", "t"."criacao" AS "t0_c6", "t"."codusuariocriacao" AS "t0_c7", "Titulos"."codtitulo" AS "t1_c0", "Titulos"."codtipotitulo" AS "t1_c1", "Titulos"."codfilial" AS "t1_c2", "Titulos"."codportador" AS "t1_c3", "Titulos"."codpessoa" AS "t1_c4", "Titulos"."codcontacontabil" AS "t1_c5", "Titulos"."numero" AS "t1_c6", "Titulos"."fatura" AS "t1_c7", "Titulos"."transacao" AS "t1_c8", "Titulos"."sistema" AS "t1_c9", "Titulos"."emissao" AS "t1_c10", "Titulos"."vencimento" AS "t1_c11", "Titulos"."vencimentooriginal" AS "t1_c12", "Titulos"."debito" AS "t1_c13", "Titulos"."credito" AS "t1_c14", "Titulos"."gerencial" AS "t1_c15", "Titulos"."observacao" AS "t1_c16", "Titulos"."boleto" AS "t1_c17", "Titulos"."nossonumero" AS "t1_c18", "Titulos"."debitototal" AS "t1_c19", "Titulos"."creditototal" AS "t1_c20", "Titulos"."saldo" AS "t1_c21", "Titulos"."debitosaldo" AS "t1_c22", "Titulos"."creditosaldo" AS "t1_c23", "Titulos"."transacaoliquidacao" AS "t1_c24", "Titulos"."codnegocioformapagamento" AS "t1_c25", "Titulos"."codtituloagrupamento" AS "t1_c26", "Titulos"."remessa" AS "t1_c27", "Titulos"."estornado" AS "t1_c28", "Titulos"."alteracao" AS "t1_c29", "Titulos"."codusuarioalteracao" AS "t1_c30", "Titulos"."criacao" AS "t1_c31", "Titulos"."codusuariocriacao" AS "t1_c32", "Pessoa"."fantasia" AS "t2_c2", "Pessoa"."codpessoa" AS "t2_c0" FROM "mgsis"."tbltituloagrupamento" "t"  LEFT OUTER JOIN "mgsis"."tbltitulo" "Titulos" ON ("Titulos"."codtituloagrupamento"="t"."codtituloagrupamento")  LEFT OUTER JOIN "mgsis"."tblpessoa" "Pessoa" ON ("Titulos"."codpessoa"="Pessoa"."codpessoa")  ORDER BY t.emissao DESC, t.criacao DESC, "Pessoa".fantasia ASC, vencimento asc, debito asc, credito asc LIMIT 200.
+in /var/www/MGsis/protected/views/tituloAgrupamento/index.php (135)
+in /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php (150)
+in /var/www/MGsis/index.php (13)
+2014/01/25 17:46:36 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[42702]: Ambiguous column: 7 ERROR:  column reference "credito" is ambiguous
+LINE 1: ...Pessoa".fantasia ASC, vencimento asc, debito asc, credito as...
+                                                             ^. The SQL statement executed was: SELECT "t"."codtituloagrupamento" AS "t0_c0", "t"."emissao" AS "t0_c1", "t"."cancelamento" AS "t0_c2", "t"."observacao" AS "t0_c3", "t"."alteracao" AS "t0_c4", "t"."codusuarioalteracao" AS "t0_c5", "t"."criacao" AS "t0_c6", "t"."codusuariocriacao" AS "t0_c7", "Titulos"."codtitulo" AS "t1_c0", "Titulos"."codtipotitulo" AS "t1_c1", "Titulos"."codfilial" AS "t1_c2", "Titulos"."codportador" AS "t1_c3", "Titulos"."codpessoa" AS "t1_c4", "Titulos"."codcontacontabil" AS "t1_c5", "Titulos"."numero" AS "t1_c6", "Titulos"."fatura" AS "t1_c7", "Titulos"."transacao" AS "t1_c8", "Titulos"."sistema" AS "t1_c9", "Titulos"."emissao" AS "t1_c10", "Titulos"."vencimento" AS "t1_c11", "Titulos"."vencimentooriginal" AS "t1_c12", "Titulos"."debito" AS "t1_c13", "Titulos"."credito" AS "t1_c14", "Titulos"."gerencial" AS "t1_c15", "Titulos"."observacao" AS "t1_c16", "Titulos"."boleto" AS "t1_c17", "Titulos"."nossonumero" AS "t1_c18", "Titulos"."debitototal" AS "t1_c19", "Titulos"."creditototal" AS "t1_c20", "Titulos"."saldo" AS "t1_c21", "Titulos"."debitosaldo" AS "t1_c22", "Titulos"."creditosaldo" AS "t1_c23", "Titulos"."transacaoliquidacao" AS "t1_c24", "Titulos"."codnegocioformapagamento" AS "t1_c25", "Titulos"."codtituloagrupamento" AS "t1_c26", "Titulos"."remessa" AS "t1_c27", "Titulos"."estornado" AS "t1_c28", "Titulos"."alteracao" AS "t1_c29", "Titulos"."codusuarioalteracao" AS "t1_c30", "Titulos"."criacao" AS "t1_c31", "Titulos"."codusuariocriacao" AS "t1_c32", "Pessoa"."fantasia" AS "t2_c2", "Pessoa"."codpessoa" AS "t2_c0" FROM "mgsis"."tbltituloagrupamento" "t"  LEFT OUTER JOIN "mgsis"."tbltitulo" "Titulos" ON ("Titulos"."codtituloagrupamento"="t"."codtituloagrupamento")  LEFT OUTER JOIN "mgsis"."tblpessoa" "Pessoa" ON ("Titulos"."codpessoa"="Pessoa"."codpessoa")  ORDER BY t.emissao DESC, t.criacao DESC, "Pessoa".fantasia ASC, vencimento asc, debito asc, credito asc LIMIT 200' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(437): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1356): CActiveFinder->query(Object(CDbCriteria), true)
+#5 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(199): CActiveRecord->findAll(Object(CDbCriteria))
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#8 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(111): CDataProvider->getData()
+#9 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(211): CBaseListView->init()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(147): CListView->init()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.CLi...', Array)
+#12 /var/www/MGsis/protected/views/tituloAgrupamento/index.php(135): CBaseController->widget('zii.widgets.CLi...', Array)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#17 /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php(150): CController->render('index', Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloAgrupamentoController->actionIndex()
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#22 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#23 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tituloAgrupamen...')
+#24 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#25 /var/www/MGsis/index.php(13): CApplication->run()
+#26 {main}
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento
+HTTP_REFERER=http://10.0.1.199/MGsis/index.php?r=tituloAgrupamento/view&id=10006618
+---
+2014/01/25 17:48:31 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchAll(): SQLSTATE[42P01]: Undefined table: 7 ERROR:  missing FROM-clause entry for table "Titulo"
+LINE 1: ...ssao DESC, t.criacao DESC, "Pessoa".fantasia ASC, "Titulo".v...
+                                                             ^. A declaração SQL executada foi: SELECT "t"."codtituloagrupamento" AS "t0_c0", "t"."emissao" AS "t0_c1", "t"."cancelamento" AS "t0_c2", "t"."observacao" AS "t0_c3", "t"."alteracao" AS "t0_c4", "t"."codusuarioalteracao" AS "t0_c5", "t"."criacao" AS "t0_c6", "t"."codusuariocriacao" AS "t0_c7", "Titulos"."codtitulo" AS "t1_c0", "Titulos"."codtipotitulo" AS "t1_c1", "Titulos"."codfilial" AS "t1_c2", "Titulos"."codportador" AS "t1_c3", "Titulos"."codpessoa" AS "t1_c4", "Titulos"."codcontacontabil" AS "t1_c5", "Titulos"."numero" AS "t1_c6", "Titulos"."fatura" AS "t1_c7", "Titulos"."transacao" AS "t1_c8", "Titulos"."sistema" AS "t1_c9", "Titulos"."emissao" AS "t1_c10", "Titulos"."vencimento" AS "t1_c11", "Titulos"."vencimentooriginal" AS "t1_c12", "Titulos"."debito" AS "t1_c13", "Titulos"."credito" AS "t1_c14", "Titulos"."gerencial" AS "t1_c15", "Titulos"."observacao" AS "t1_c16", "Titulos"."boleto" AS "t1_c17", "Titulos"."nossonumero" AS "t1_c18", "Titulos"."debitototal" AS "t1_c19", "Titulos"."creditototal" AS "t1_c20", "Titulos"."saldo" AS "t1_c21", "Titulos"."debitosaldo" AS "t1_c22", "Titulos"."creditosaldo" AS "t1_c23", "Titulos"."transacaoliquidacao" AS "t1_c24", "Titulos"."codnegocioformapagamento" AS "t1_c25", "Titulos"."codtituloagrupamento" AS "t1_c26", "Titulos"."remessa" AS "t1_c27", "Titulos"."estornado" AS "t1_c28", "Titulos"."alteracao" AS "t1_c29", "Titulos"."codusuarioalteracao" AS "t1_c30", "Titulos"."criacao" AS "t1_c31", "Titulos"."codusuariocriacao" AS "t1_c32", "Pessoa"."fantasia" AS "t2_c2", "Pessoa"."codpessoa" AS "t2_c0" FROM "mgsis"."tbltituloagrupamento" "t"  LEFT OUTER JOIN "mgsis"."tbltitulo" "Titulos" ON ("Titulos"."codtituloagrupamento"="t"."codtituloagrupamento")  LEFT OUTER JOIN "mgsis"."tblpessoa" "Pessoa" ON ("Titulos"."codpessoa"="Pessoa"."codpessoa")  ORDER BY t.emissao DESC, t.criacao DESC, "Pessoa".fantasia ASC, "Titulo".vencimento asc, "Titulo".debito asc, "Titulo".credito asc LIMIT 200.
+in /var/www/MGsis/protected/views/tituloAgrupamento/index.php (135)
+in /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php (150)
+in /var/www/MGsis/index.php (13)
+2014/01/25 17:48:31 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[42P01]: Undefined table: 7 ERROR:  missing FROM-clause entry for table "Titulo"
+LINE 1: ...ssao DESC, t.criacao DESC, "Pessoa".fantasia ASC, "Titulo".v...
+                                                             ^. The SQL statement executed was: SELECT "t"."codtituloagrupamento" AS "t0_c0", "t"."emissao" AS "t0_c1", "t"."cancelamento" AS "t0_c2", "t"."observacao" AS "t0_c3", "t"."alteracao" AS "t0_c4", "t"."codusuarioalteracao" AS "t0_c5", "t"."criacao" AS "t0_c6", "t"."codusuariocriacao" AS "t0_c7", "Titulos"."codtitulo" AS "t1_c0", "Titulos"."codtipotitulo" AS "t1_c1", "Titulos"."codfilial" AS "t1_c2", "Titulos"."codportador" AS "t1_c3", "Titulos"."codpessoa" AS "t1_c4", "Titulos"."codcontacontabil" AS "t1_c5", "Titulos"."numero" AS "t1_c6", "Titulos"."fatura" AS "t1_c7", "Titulos"."transacao" AS "t1_c8", "Titulos"."sistema" AS "t1_c9", "Titulos"."emissao" AS "t1_c10", "Titulos"."vencimento" AS "t1_c11", "Titulos"."vencimentooriginal" AS "t1_c12", "Titulos"."debito" AS "t1_c13", "Titulos"."credito" AS "t1_c14", "Titulos"."gerencial" AS "t1_c15", "Titulos"."observacao" AS "t1_c16", "Titulos"."boleto" AS "t1_c17", "Titulos"."nossonumero" AS "t1_c18", "Titulos"."debitototal" AS "t1_c19", "Titulos"."creditototal" AS "t1_c20", "Titulos"."saldo" AS "t1_c21", "Titulos"."debitosaldo" AS "t1_c22", "Titulos"."creditosaldo" AS "t1_c23", "Titulos"."transacaoliquidacao" AS "t1_c24", "Titulos"."codnegocioformapagamento" AS "t1_c25", "Titulos"."codtituloagrupamento" AS "t1_c26", "Titulos"."remessa" AS "t1_c27", "Titulos"."estornado" AS "t1_c28", "Titulos"."alteracao" AS "t1_c29", "Titulos"."codusuarioalteracao" AS "t1_c30", "Titulos"."criacao" AS "t1_c31", "Titulos"."codusuariocriacao" AS "t1_c32", "Pessoa"."fantasia" AS "t2_c2", "Pessoa"."codpessoa" AS "t2_c0" FROM "mgsis"."tbltituloagrupamento" "t"  LEFT OUTER JOIN "mgsis"."tbltitulo" "Titulos" ON ("Titulos"."codtituloagrupamento"="t"."codtituloagrupamento")  LEFT OUTER JOIN "mgsis"."tblpessoa" "Pessoa" ON ("Titulos"."codpessoa"="Pessoa"."codpessoa")  ORDER BY t.emissao DESC, t.criacao DESC, "Pessoa".fantasia ASC, "Titulo".vencimento asc, "Titulo".debito asc, "Titulo".credito asc LIMIT 200' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(437): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1356): CActiveFinder->query(Object(CDbCriteria), true)
+#5 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(199): CActiveRecord->findAll(Object(CDbCriteria))
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#8 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(111): CDataProvider->getData()
+#9 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(211): CBaseListView->init()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(147): CListView->init()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.CLi...', Array)
+#12 /var/www/MGsis/protected/views/tituloAgrupamento/index.php(135): CBaseController->widget('zii.widgets.CLi...', Array)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#17 /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php(150): CController->render('index', Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloAgrupamentoController->actionIndex()
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#22 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#23 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tituloAgrupamen...')
+#24 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#25 /var/www/MGsis/index.php(13): CApplication->run()
+#26 {main}
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento
+HTTP_REFERER=http://10.0.1.199/MGsis/index.php?r=tituloAgrupamento/view&id=10006618
+---
+2014/01/25 17:48:31 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchAll(): SQLSTATE[42P01]: Undefined table: 7 ERROR:  missing FROM-clause entry for table "Titulo"
+LINE 1: ...ssao DESC, t.criacao DESC, "Pessoa".fantasia ASC, "Titulo".v...
+                                                             ^. A declaração SQL executada foi: SELECT "t"."codtituloagrupamento" AS "t0_c0", "t"."emissao" AS "t0_c1", "t"."cancelamento" AS "t0_c2", "t"."observacao" AS "t0_c3", "t"."alteracao" AS "t0_c4", "t"."codusuarioalteracao" AS "t0_c5", "t"."criacao" AS "t0_c6", "t"."codusuariocriacao" AS "t0_c7", "Titulos"."codtitulo" AS "t1_c0", "Titulos"."codtipotitulo" AS "t1_c1", "Titulos"."codfilial" AS "t1_c2", "Titulos"."codportador" AS "t1_c3", "Titulos"."codpessoa" AS "t1_c4", "Titulos"."codcontacontabil" AS "t1_c5", "Titulos"."numero" AS "t1_c6", "Titulos"."fatura" AS "t1_c7", "Titulos"."transacao" AS "t1_c8", "Titulos"."sistema" AS "t1_c9", "Titulos"."emissao" AS "t1_c10", "Titulos"."vencimento" AS "t1_c11", "Titulos"."vencimentooriginal" AS "t1_c12", "Titulos"."debito" AS "t1_c13", "Titulos"."credito" AS "t1_c14", "Titulos"."gerencial" AS "t1_c15", "Titulos"."observacao" AS "t1_c16", "Titulos"."boleto" AS "t1_c17", "Titulos"."nossonumero" AS "t1_c18", "Titulos"."debitototal" AS "t1_c19", "Titulos"."creditototal" AS "t1_c20", "Titulos"."saldo" AS "t1_c21", "Titulos"."debitosaldo" AS "t1_c22", "Titulos"."creditosaldo" AS "t1_c23", "Titulos"."transacaoliquidacao" AS "t1_c24", "Titulos"."codnegocioformapagamento" AS "t1_c25", "Titulos"."codtituloagrupamento" AS "t1_c26", "Titulos"."remessa" AS "t1_c27", "Titulos"."estornado" AS "t1_c28", "Titulos"."alteracao" AS "t1_c29", "Titulos"."codusuarioalteracao" AS "t1_c30", "Titulos"."criacao" AS "t1_c31", "Titulos"."codusuariocriacao" AS "t1_c32", "Pessoa"."fantasia" AS "t2_c2", "Pessoa"."codpessoa" AS "t2_c0" FROM "mgsis"."tbltituloagrupamento" "t"  LEFT OUTER JOIN "mgsis"."tbltitulo" "Titulos" ON ("Titulos"."codtituloagrupamento"="t"."codtituloagrupamento")  LEFT OUTER JOIN "mgsis"."tblpessoa" "Pessoa" ON ("Titulos"."codpessoa"="Pessoa"."codpessoa")  ORDER BY t.emissao DESC, t.criacao DESC, "Pessoa".fantasia ASC, "Titulo".vencimento asc, "Titulo".debito asc, "Titulo".credito asc LIMIT 200.
+in /var/www/MGsis/protected/views/tituloAgrupamento/index.php (135)
+in /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php (150)
+in /var/www/MGsis/index.php (13)
+2014/01/25 17:48:31 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[42P01]: Undefined table: 7 ERROR:  missing FROM-clause entry for table "Titulo"
+LINE 1: ...ssao DESC, t.criacao DESC, "Pessoa".fantasia ASC, "Titulo".v...
+                                                             ^. The SQL statement executed was: SELECT "t"."codtituloagrupamento" AS "t0_c0", "t"."emissao" AS "t0_c1", "t"."cancelamento" AS "t0_c2", "t"."observacao" AS "t0_c3", "t"."alteracao" AS "t0_c4", "t"."codusuarioalteracao" AS "t0_c5", "t"."criacao" AS "t0_c6", "t"."codusuariocriacao" AS "t0_c7", "Titulos"."codtitulo" AS "t1_c0", "Titulos"."codtipotitulo" AS "t1_c1", "Titulos"."codfilial" AS "t1_c2", "Titulos"."codportador" AS "t1_c3", "Titulos"."codpessoa" AS "t1_c4", "Titulos"."codcontacontabil" AS "t1_c5", "Titulos"."numero" AS "t1_c6", "Titulos"."fatura" AS "t1_c7", "Titulos"."transacao" AS "t1_c8", "Titulos"."sistema" AS "t1_c9", "Titulos"."emissao" AS "t1_c10", "Titulos"."vencimento" AS "t1_c11", "Titulos"."vencimentooriginal" AS "t1_c12", "Titulos"."debito" AS "t1_c13", "Titulos"."credito" AS "t1_c14", "Titulos"."gerencial" AS "t1_c15", "Titulos"."observacao" AS "t1_c16", "Titulos"."boleto" AS "t1_c17", "Titulos"."nossonumero" AS "t1_c18", "Titulos"."debitototal" AS "t1_c19", "Titulos"."creditototal" AS "t1_c20", "Titulos"."saldo" AS "t1_c21", "Titulos"."debitosaldo" AS "t1_c22", "Titulos"."creditosaldo" AS "t1_c23", "Titulos"."transacaoliquidacao" AS "t1_c24", "Titulos"."codnegocioformapagamento" AS "t1_c25", "Titulos"."codtituloagrupamento" AS "t1_c26", "Titulos"."remessa" AS "t1_c27", "Titulos"."estornado" AS "t1_c28", "Titulos"."alteracao" AS "t1_c29", "Titulos"."codusuarioalteracao" AS "t1_c30", "Titulos"."criacao" AS "t1_c31", "Titulos"."codusuariocriacao" AS "t1_c32", "Pessoa"."fantasia" AS "t2_c2", "Pessoa"."codpessoa" AS "t2_c0" FROM "mgsis"."tbltituloagrupamento" "t"  LEFT OUTER JOIN "mgsis"."tbltitulo" "Titulos" ON ("Titulos"."codtituloagrupamento"="t"."codtituloagrupamento")  LEFT OUTER JOIN "mgsis"."tblpessoa" "Pessoa" ON ("Titulos"."codpessoa"="Pessoa"."codpessoa")  ORDER BY t.emissao DESC, t.criacao DESC, "Pessoa".fantasia ASC, "Titulo".vencimento asc, "Titulo".debito asc, "Titulo".credito asc LIMIT 200' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(437): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1356): CActiveFinder->query(Object(CDbCriteria), true)
+#5 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(199): CActiveRecord->findAll(Object(CDbCriteria))
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#8 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(111): CDataProvider->getData()
+#9 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(211): CBaseListView->init()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(147): CListView->init()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.CLi...', Array)
+#12 /var/www/MGsis/protected/views/tituloAgrupamento/index.php(135): CBaseController->widget('zii.widgets.CLi...', Array)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#17 /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php(150): CController->render('index', Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloAgrupamentoController->actionIndex()
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#22 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#23 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tituloAgrupamen...')
+#24 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#25 /var/www/MGsis/index.php(13): CApplication->run()
+#26 {main}
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento
+HTTP_REFERER=http://10.0.1.199/MGsis/index.php?r=tituloAgrupamento/view&id=10006618
+---
+2014/01/25 17:48:52 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchAll(): SQLSTATE[42601]: Syntax error: 7 ERROR:  unterminated quoted identifier at or near ""t.vencimento asc, t.debito asc, t.credito asc LIMIT 200"
+LINE 1: ...ssao DESC, t.criacao DESC, "Pessoa".fantasia ASC, "t.vencime...
+                                                             ^. A declaração SQL executada foi: SELECT "t"."codtituloagrupamento" AS "t0_c0", "t"."emissao" AS "t0_c1", "t"."cancelamento" AS "t0_c2", "t"."observacao" AS "t0_c3", "t"."alteracao" AS "t0_c4", "t"."codusuarioalteracao" AS "t0_c5", "t"."criacao" AS "t0_c6", "t"."codusuariocriacao" AS "t0_c7", "Titulos"."codtitulo" AS "t1_c0", "Titulos"."codtipotitulo" AS "t1_c1", "Titulos"."codfilial" AS "t1_c2", "Titulos"."codportador" AS "t1_c3", "Titulos"."codpessoa" AS "t1_c4", "Titulos"."codcontacontabil" AS "t1_c5", "Titulos"."numero" AS "t1_c6", "Titulos"."fatura" AS "t1_c7", "Titulos"."transacao" AS "t1_c8", "Titulos"."sistema" AS "t1_c9", "Titulos"."emissao" AS "t1_c10", "Titulos"."vencimento" AS "t1_c11", "Titulos"."vencimentooriginal" AS "t1_c12", "Titulos"."debito" AS "t1_c13", "Titulos"."credito" AS "t1_c14", "Titulos"."gerencial" AS "t1_c15", "Titulos"."observacao" AS "t1_c16", "Titulos"."boleto" AS "t1_c17", "Titulos"."nossonumero" AS "t1_c18", "Titulos"."debitototal" AS "t1_c19", "Titulos"."creditototal" AS "t1_c20", "Titulos"."saldo" AS "t1_c21", "Titulos"."debitosaldo" AS "t1_c22", "Titulos"."creditosaldo" AS "t1_c23", "Titulos"."transacaoliquidacao" AS "t1_c24", "Titulos"."codnegocioformapagamento" AS "t1_c25", "Titulos"."codtituloagrupamento" AS "t1_c26", "Titulos"."remessa" AS "t1_c27", "Titulos"."estornado" AS "t1_c28", "Titulos"."alteracao" AS "t1_c29", "Titulos"."codusuarioalteracao" AS "t1_c30", "Titulos"."criacao" AS "t1_c31", "Titulos"."codusuariocriacao" AS "t1_c32", "Pessoa"."fantasia" AS "t2_c2", "Pessoa"."codpessoa" AS "t2_c0" FROM "mgsis"."tbltituloagrupamento" "t"  LEFT OUTER JOIN "mgsis"."tbltitulo" "Titulos" ON ("Titulos"."codtituloagrupamento"="t"."codtituloagrupamento")  LEFT OUTER JOIN "mgsis"."tblpessoa" "Pessoa" ON ("Titulos"."codpessoa"="Pessoa"."codpessoa")  ORDER BY t.emissao DESC, t.criacao DESC, "Pessoa".fantasia ASC, "t.vencimento asc, t.debito asc, t.credito asc LIMIT 200.
+in /var/www/MGsis/protected/views/tituloAgrupamento/index.php (135)
+in /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php (150)
+in /var/www/MGsis/index.php (13)
+2014/01/25 17:48:52 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[42601]: Syntax error: 7 ERROR:  unterminated quoted identifier at or near ""t.vencimento asc, t.debito asc, t.credito asc LIMIT 200"
+LINE 1: ...ssao DESC, t.criacao DESC, "Pessoa".fantasia ASC, "t.vencime...
+                                                             ^. The SQL statement executed was: SELECT "t"."codtituloagrupamento" AS "t0_c0", "t"."emissao" AS "t0_c1", "t"."cancelamento" AS "t0_c2", "t"."observacao" AS "t0_c3", "t"."alteracao" AS "t0_c4", "t"."codusuarioalteracao" AS "t0_c5", "t"."criacao" AS "t0_c6", "t"."codusuariocriacao" AS "t0_c7", "Titulos"."codtitulo" AS "t1_c0", "Titulos"."codtipotitulo" AS "t1_c1", "Titulos"."codfilial" AS "t1_c2", "Titulos"."codportador" AS "t1_c3", "Titulos"."codpessoa" AS "t1_c4", "Titulos"."codcontacontabil" AS "t1_c5", "Titulos"."numero" AS "t1_c6", "Titulos"."fatura" AS "t1_c7", "Titulos"."transacao" AS "t1_c8", "Titulos"."sistema" AS "t1_c9", "Titulos"."emissao" AS "t1_c10", "Titulos"."vencimento" AS "t1_c11", "Titulos"."vencimentooriginal" AS "t1_c12", "Titulos"."debito" AS "t1_c13", "Titulos"."credito" AS "t1_c14", "Titulos"."gerencial" AS "t1_c15", "Titulos"."observacao" AS "t1_c16", "Titulos"."boleto" AS "t1_c17", "Titulos"."nossonumero" AS "t1_c18", "Titulos"."debitototal" AS "t1_c19", "Titulos"."creditototal" AS "t1_c20", "Titulos"."saldo" AS "t1_c21", "Titulos"."debitosaldo" AS "t1_c22", "Titulos"."creditosaldo" AS "t1_c23", "Titulos"."transacaoliquidacao" AS "t1_c24", "Titulos"."codnegocioformapagamento" AS "t1_c25", "Titulos"."codtituloagrupamento" AS "t1_c26", "Titulos"."remessa" AS "t1_c27", "Titulos"."estornado" AS "t1_c28", "Titulos"."alteracao" AS "t1_c29", "Titulos"."codusuarioalteracao" AS "t1_c30", "Titulos"."criacao" AS "t1_c31", "Titulos"."codusuariocriacao" AS "t1_c32", "Pessoa"."fantasia" AS "t2_c2", "Pessoa"."codpessoa" AS "t2_c0" FROM "mgsis"."tbltituloagrupamento" "t"  LEFT OUTER JOIN "mgsis"."tbltitulo" "Titulos" ON ("Titulos"."codtituloagrupamento"="t"."codtituloagrupamento")  LEFT OUTER JOIN "mgsis"."tblpessoa" "Pessoa" ON ("Titulos"."codpessoa"="Pessoa"."codpessoa")  ORDER BY t.emissao DESC, t.criacao DESC, "Pessoa".fantasia ASC, "t.vencimento asc, t.debito asc, t.credito asc LIMIT 200' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(437): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1356): CActiveFinder->query(Object(CDbCriteria), true)
+#5 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(199): CActiveRecord->findAll(Object(CDbCriteria))
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#8 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(111): CDataProvider->getData()
+#9 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(211): CBaseListView->init()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(147): CListView->init()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.CLi...', Array)
+#12 /var/www/MGsis/protected/views/tituloAgrupamento/index.php(135): CBaseController->widget('zii.widgets.CLi...', Array)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#17 /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php(150): CController->render('index', Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloAgrupamentoController->actionIndex()
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#22 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#23 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tituloAgrupamen...')
+#24 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#25 /var/www/MGsis/index.php(13): CApplication->run()
+#26 {main}
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento
+HTTP_REFERER=http://10.0.1.199/MGsis/index.php?r=tituloAgrupamento/view&id=10006618
+---
+2014/01/25 17:49:00 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchAll(): SQLSTATE[42703]: Undefined column: 7 ERROR:  column t.vencimento does not exist
+LINE 1: ...ssao DESC, t.criacao DESC, "Pessoa".fantasia ASC, t.vencimen...
+                                                             ^. A declaração SQL executada foi: SELECT "t"."codtituloagrupamento" AS "t0_c0", "t"."emissao" AS "t0_c1", "t"."cancelamento" AS "t0_c2", "t"."observacao" AS "t0_c3", "t"."alteracao" AS "t0_c4", "t"."codusuarioalteracao" AS "t0_c5", "t"."criacao" AS "t0_c6", "t"."codusuariocriacao" AS "t0_c7", "Titulos"."codtitulo" AS "t1_c0", "Titulos"."codtipotitulo" AS "t1_c1", "Titulos"."codfilial" AS "t1_c2", "Titulos"."codportador" AS "t1_c3", "Titulos"."codpessoa" AS "t1_c4", "Titulos"."codcontacontabil" AS "t1_c5", "Titulos"."numero" AS "t1_c6", "Titulos"."fatura" AS "t1_c7", "Titulos"."transacao" AS "t1_c8", "Titulos"."sistema" AS "t1_c9", "Titulos"."emissao" AS "t1_c10", "Titulos"."vencimento" AS "t1_c11", "Titulos"."vencimentooriginal" AS "t1_c12", "Titulos"."debito" AS "t1_c13", "Titulos"."credito" AS "t1_c14", "Titulos"."gerencial" AS "t1_c15", "Titulos"."observacao" AS "t1_c16", "Titulos"."boleto" AS "t1_c17", "Titulos"."nossonumero" AS "t1_c18", "Titulos"."debitototal" AS "t1_c19", "Titulos"."creditototal" AS "t1_c20", "Titulos"."saldo" AS "t1_c21", "Titulos"."debitosaldo" AS "t1_c22", "Titulos"."creditosaldo" AS "t1_c23", "Titulos"."transacaoliquidacao" AS "t1_c24", "Titulos"."codnegocioformapagamento" AS "t1_c25", "Titulos"."codtituloagrupamento" AS "t1_c26", "Titulos"."remessa" AS "t1_c27", "Titulos"."estornado" AS "t1_c28", "Titulos"."alteracao" AS "t1_c29", "Titulos"."codusuarioalteracao" AS "t1_c30", "Titulos"."criacao" AS "t1_c31", "Titulos"."codusuariocriacao" AS "t1_c32", "Pessoa"."fantasia" AS "t2_c2", "Pessoa"."codpessoa" AS "t2_c0" FROM "mgsis"."tbltituloagrupamento" "t"  LEFT OUTER JOIN "mgsis"."tbltitulo" "Titulos" ON ("Titulos"."codtituloagrupamento"="t"."codtituloagrupamento")  LEFT OUTER JOIN "mgsis"."tblpessoa" "Pessoa" ON ("Titulos"."codpessoa"="Pessoa"."codpessoa")  ORDER BY t.emissao DESC, t.criacao DESC, "Pessoa".fantasia ASC, t.vencimento asc, t.debito asc, t.credito asc LIMIT 200.
+in /var/www/MGsis/protected/views/tituloAgrupamento/index.php (135)
+in /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php (150)
+in /var/www/MGsis/index.php (13)
+2014/01/25 17:49:00 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[42703]: Undefined column: 7 ERROR:  column t.vencimento does not exist
+LINE 1: ...ssao DESC, t.criacao DESC, "Pessoa".fantasia ASC, t.vencimen...
+                                                             ^. The SQL statement executed was: SELECT "t"."codtituloagrupamento" AS "t0_c0", "t"."emissao" AS "t0_c1", "t"."cancelamento" AS "t0_c2", "t"."observacao" AS "t0_c3", "t"."alteracao" AS "t0_c4", "t"."codusuarioalteracao" AS "t0_c5", "t"."criacao" AS "t0_c6", "t"."codusuariocriacao" AS "t0_c7", "Titulos"."codtitulo" AS "t1_c0", "Titulos"."codtipotitulo" AS "t1_c1", "Titulos"."codfilial" AS "t1_c2", "Titulos"."codportador" AS "t1_c3", "Titulos"."codpessoa" AS "t1_c4", "Titulos"."codcontacontabil" AS "t1_c5", "Titulos"."numero" AS "t1_c6", "Titulos"."fatura" AS "t1_c7", "Titulos"."transacao" AS "t1_c8", "Titulos"."sistema" AS "t1_c9", "Titulos"."emissao" AS "t1_c10", "Titulos"."vencimento" AS "t1_c11", "Titulos"."vencimentooriginal" AS "t1_c12", "Titulos"."debito" AS "t1_c13", "Titulos"."credito" AS "t1_c14", "Titulos"."gerencial" AS "t1_c15", "Titulos"."observacao" AS "t1_c16", "Titulos"."boleto" AS "t1_c17", "Titulos"."nossonumero" AS "t1_c18", "Titulos"."debitototal" AS "t1_c19", "Titulos"."creditototal" AS "t1_c20", "Titulos"."saldo" AS "t1_c21", "Titulos"."debitosaldo" AS "t1_c22", "Titulos"."creditosaldo" AS "t1_c23", "Titulos"."transacaoliquidacao" AS "t1_c24", "Titulos"."codnegocioformapagamento" AS "t1_c25", "Titulos"."codtituloagrupamento" AS "t1_c26", "Titulos"."remessa" AS "t1_c27", "Titulos"."estornado" AS "t1_c28", "Titulos"."alteracao" AS "t1_c29", "Titulos"."codusuarioalteracao" AS "t1_c30", "Titulos"."criacao" AS "t1_c31", "Titulos"."codusuariocriacao" AS "t1_c32", "Pessoa"."fantasia" AS "t2_c2", "Pessoa"."codpessoa" AS "t2_c0" FROM "mgsis"."tbltituloagrupamento" "t"  LEFT OUTER JOIN "mgsis"."tbltitulo" "Titulos" ON ("Titulos"."codtituloagrupamento"="t"."codtituloagrupamento")  LEFT OUTER JOIN "mgsis"."tblpessoa" "Pessoa" ON ("Titulos"."codpessoa"="Pessoa"."codpessoa")  ORDER BY t.emissao DESC, t.criacao DESC, "Pessoa".fantasia ASC, t.vencimento asc, t.debito asc, t.credito asc LIMIT 200' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(437): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1356): CActiveFinder->query(Object(CDbCriteria), true)
+#5 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(199): CActiveRecord->findAll(Object(CDbCriteria))
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#8 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(111): CDataProvider->getData()
+#9 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(211): CBaseListView->init()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(147): CListView->init()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.CLi...', Array)
+#12 /var/www/MGsis/protected/views/tituloAgrupamento/index.php(135): CBaseController->widget('zii.widgets.CLi...', Array)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#17 /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php(150): CController->render('index', Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloAgrupamentoController->actionIndex()
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#22 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#23 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tituloAgrupamen...')
+#24 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#25 /var/www/MGsis/index.php(13): CApplication->run()
+#26 {main}
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento
+HTTP_REFERER=http://10.0.1.199/MGsis/index.php?r=tituloAgrupamento/view&id=10006618
+---
+2014/01/25 17:52:41 [error] [exception.CException] exception 'CException' with message 'A propriedade "TituloAgrupamentoController.codtituloagrupamento" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/MGsis/protected/views/tituloAgrupamento/view.php(31): CComponent->__get('codtituloagrupa...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('view', Array, true)
+#5 /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php(19): CController->render('view', Array)
+#6 [internal function]: TituloAgrupamentoController->actionView('10006613')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloAgrupamentoController), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloAgrupamentoController), Object(ReflectionMethod), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('view')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tituloAgrupamen...')
+#14 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/MGsis/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento/view&id=10006613
+HTTP_REFERER=http://10.0.1.199/MGsis/index.php?r=tituloAgrupamento/index
+---
+2014/01/25 18:03:43 [error] [php] Trying to get property of non-object (/var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php:204)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloAgrupamentoController->runAction()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloAgrupamentoController->runActionWithFilters()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloAgrupamentoController->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento/relatorio&id=10006613
+in /var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php (204)
+in /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php (201)
+in /var/www/MGsis/index.php (13)
+2014/01/25 18:04:52 [error] [php] Undefined property: MGRelatorioTituloAgrupamento::$_titulos (/var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php:201)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloAgrupamentoController->runAction()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloAgrupamentoController->runActionWithFilters()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloAgrupamentoController->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento/relatorio&id=10006613
+in /var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php (201)
+in /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php (201)
+in /var/www/MGsis/index.php (13)
+2014/01/25 18:05:06 [error] [php] Undefined property: MGRelatorioTituloAgrupamento::$_titulos (/var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php:201)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloAgrupamentoController->runAction()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloAgrupamentoController->runActionWithFilters()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloAgrupamentoController->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento/relatorio&id=10006613
+in /var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php (201)
+in /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php (201)
+in /var/www/MGsis/index.php (13)
+2014/01/25 18:05:35 [error] [php] Undefined property: MGRelatorioTituloAgrupamento::$_titulos (/var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php:201)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloAgrupamentoController->runAction()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloAgrupamentoController->runActionWithFilters()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloAgrupamentoController->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento/relatorio&id=10006613
+in /var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php (201)
+in /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php (201)
+in /var/www/MGsis/index.php (13)
+2014/01/25 18:07:54 [error] [exception.CException] exception 'CException' with message 'A propriedade "TituloAgrupamento.Pessoa" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('Pessoa')
+#1 /var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php(196): CActiveRecord->__get('Pessoa')
+#2 /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php(201): MGRelatorioTituloAgrupamento->montaRelatorio()
+#3 [internal function]: TituloAgrupamentoController->actionRelatorio('10006613')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloAgrupamentoController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloAgrupamentoController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('relatorio')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tituloAgrupamen...')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento/relatorio&id=10006613
+HTTP_REFERER=http://10.0.1.199/MGsis/index.php?r=tituloAgrupamento/view&id=10006613
+---
+2014/01/25 18:33:59 [error] [php] Missing argument 1 for FPDF::Line(), called in /var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php on line 231 and defined (/var/www/MGsis/protected/vendors/fpdf/fpdf.php:443)
+Stack trace:
+#0 unknown(0): TituloAgrupamentoController->actionRelatorio()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloAgrupamentoController->runAction()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloAgrupamentoController->runActionWithFilters()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloAgrupamentoController->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento/relatorio&id=10006597
+in /var/www/MGsis/protected/vendors/fpdf/fpdf.php (443)
+in /var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php (231)
+in /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php (201)
+2014/01/25 18:37:19 [error] [exception.CException] exception 'CException' with message 'A propriedade "Pessoa.fantaisa" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('fantaisa')
+#1 /var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php(233): CActiveRecord->__get('fantaisa')
+#2 /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php(201): MGRelatorioTituloAgrupamento->montaRelatorio()
+#3 [internal function]: TituloAgrupamentoController->actionRelatorio('10006597')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloAgrupamentoController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloAgrupamentoController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('relatorio')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tituloAgrupamen...')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento/relatorio&id=10006597
+HTTP_REFERER=http://10.0.1.199/MGsis/index.php?r=tituloAgrupamento/view&id=10006597
+---
+2014/01/25 18:38:51 [error] [exception.CException] exception 'CException' with message 'A propriedade "Pessoa.telefone" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('telefone')
+#1 /var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php(236): CActiveRecord->__get('telefone')
+#2 /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php(201): MGRelatorioTituloAgrupamento->montaRelatorio()
+#3 [internal function]: TituloAgrupamentoController->actionRelatorio('10006597')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloAgrupamentoController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloAgrupamentoController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('relatorio')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tituloAgrupamen...')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento/relatorio&id=10006597
+HTTP_REFERER=http://10.0.1.199/MGsis/index.php?r=tituloAgrupamento/view&id=10006597
+---
+2014/01/25 18:54:23 [error] [php] Undefined property: MGRelatorioTituloAgrupamento::$_titulo (/var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php:266)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloAgrupamentoController->runAction()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloAgrupamentoController->runActionWithFilters()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloAgrupamentoController->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento/relatorio&id=10006597
+in /var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php (266)
+in /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php (201)
+in /var/www/MGsis/index.php (13)
+2014/01/25 18:55:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php:180
+Stack trace:
+#0 /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php(199): TituloAgrupamentoController->loadModel('10031376')
+#1 [internal function]: TituloAgrupamentoController->actionRelatorio('10031376')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloAgrupamentoController), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloAgrupamentoController), Object(ReflectionMethod), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('relatorio')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tituloAgrupamen...')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento/relatorio&id=10031376
+---
+2014/01/25 18:59:12 [error] [php] Undefined index: valorTotal (/var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php:272)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloAgrupamentoController->runAction()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloAgrupamentoController->runActionWithFilters()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloAgrupamentoController->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento/relatorio&id=10004807
+in /var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php (272)
+in /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php (201)
+in /var/www/MGsis/index.php (13)
+2014/01/25 19:18:12 [error] [php] Undefined variable: model (/var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php:316)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloAgrupamentoController->runAction()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloAgrupamentoController->runActionWithFilters()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloAgrupamentoController->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento/relatorio&id=10004807
+in /var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php (316)
+in /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php (201)
+in /var/www/MGsis/index.php (13)
+2014/01/25 19:22:17 [error] [exception.CException] exception 'CException' with message 'A propriedade "MovimentoTitulo.titulo" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('titulo')
+#1 /var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php(318): CActiveRecord->__get('titulo')
+#2 /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php(201): MGRelatorioTituloAgrupamento->montaRelatorio()
+#3 [internal function]: TituloAgrupamentoController->actionRelatorio('10004807')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloAgrupamentoController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloAgrupamentoController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('relatorio')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tituloAgrupamen...')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento/relatorio&id=10004807
+---
+2014/01/25 19:22:19 [error] [exception.CException] exception 'CException' with message 'A propriedade "MovimentoTitulo.titulo" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('titulo')
+#1 /var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php(318): CActiveRecord->__get('titulo')
+#2 /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php(201): MGRelatorioTituloAgrupamento->montaRelatorio()
+#3 [internal function]: TituloAgrupamentoController->actionRelatorio('10004807')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloAgrupamentoController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloAgrupamentoController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('relatorio')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tituloAgrupamen...')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento/relatorio&id=10004807
+---
+2014/01/25 19:22:39 [error] [exception.CException] exception 'CException' with message 'A propriedade "MovimentoTitulo.titulo" não está definida.' in /var/www/yii-1.1.14.f0fee9/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(145): CComponent->__get('titulo')
+#1 /var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php(318): CActiveRecord->__get('titulo')
+#2 /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php(201): MGRelatorioTituloAgrupamento->montaRelatorio()
+#3 [internal function]: TituloAgrupamentoController->actionRelatorio('10004807')
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloAgrupamentoController), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloAgrupamentoController), Object(ReflectionMethod), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('relatorio')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tituloAgrupamen...')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento/relatorio&id=10004807
+---
+2014/01/25 19:37:30 [error] [php] Undefined variable: valor (/var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php:337)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloAgrupamentoController->runAction()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloAgrupamentoController->runActionWithFilters()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloAgrupamentoController->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento/relatorio&id=10006613
+in /var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php (337)
+in /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php (201)
+in /var/www/MGsis/index.php (13)
+2014/01/25 19:39:49 [error] [php] Undefined variable: pdf (/var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php:337)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloAgrupamentoController->runAction()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloAgrupamentoController->runActionWithFilters()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloAgrupamentoController->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento/relatorio&id=10004807
+in /var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php (337)
+in /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php (201)
+in /var/www/MGsis/index.php (13)
+2014/01/25 19:40:39 [error] [php] Undefined property: MGRelatorioTituloAgrupamento::$numberFormat (/var/www/MGsis/protected/components/MGFormatter.php:26)
+Stack trace:
+#0 unknown(0): TituloAgrupamentoController->actionRelatorio()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloAgrupamentoController->runAction()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloAgrupamentoController->runActionWithFilters()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloAgrupamentoController->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento/relatorio&id=10004807
+in /var/www/MGsis/protected/components/MGFormatter.php (26)
+in /var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php (341)
+in /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php (201)
+2014/01/25 19:40:55 [error] [php] Undefined property: MGRelatorioTituloAgrupamento::$numberFormat (/var/www/MGsis/protected/components/MGFormatter.php:26)
+Stack trace:
+#0 unknown(0): TituloAgrupamentoController->actionRelatorio()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloAgrupamentoController->runAction()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloAgrupamentoController->runActionWithFilters()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloAgrupamentoController->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento/relatorio&id=10004807
+in /var/www/MGsis/protected/components/MGFormatter.php (26)
+in /var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php (341)
+in /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php (201)
+2014/01/25 19:40:57 [error] [php] Undefined property: MGRelatorioTituloAgrupamento::$numberFormat (/var/www/MGsis/protected/components/MGFormatter.php:26)
+Stack trace:
+#0 unknown(0): TituloAgrupamentoController->actionRelatorio()
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TituloAgrupamentoController->runAction()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TituloAgrupamentoController->runActionWithFilters()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TituloAgrupamentoController->run()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento/relatorio&id=10004807
+in /var/www/MGsis/protected/components/MGFormatter.php (26)
+in /var/www/MGsis/protected/components/MGRelatorioTituloAgrupamento.php (341)
+in /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php (201)
