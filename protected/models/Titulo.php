@@ -230,7 +230,7 @@ class Titulo extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'MovimentoTitulos' => array(self::HAS_MANY, 'MovimentoTitulo', 'codtitulo', 'order'=>'criacao DESC, sistema DESC'),
+			'MovimentoTitulos' => array(self::HAS_MANY, 'MovimentoTitulo', 'codtitulo', 'order'=>'criacao ASC, sistema ASC, codmovimentotitulo ASC'),
 			'MovimentoTitulosRelacionado' => array(self::HAS_MANY, 'MovimentoTitulo', 'codtitulorelacionado'),
 			'ContaContabil' => array(self::BELONGS_TO, 'ContaContabil', 'codcontacontabil'),
 			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
@@ -698,66 +698,6 @@ class Titulo extends MGActiveRecord
 		return $ret;
 	}
 	
-	public function atualizaSaldo()
-	{
-		
-		// carrega valores de saldo / movimento
-		$this->refresh();
-		
-		// valores
-		$debito = 0;
-		$credito = 0;
-		$datatit = DateTime::createFromFormat('d/m/Y', $this->transacao);
-		$dataestorno = false;
-		
-		// percorre movimento somando
-		foreach ($this->MovimentoTitulos as $mov)
-		{
-			$debito += $mov->debito;
-			$credito += $mov->credito;
-			if ($datamov = DateTime::createFromFormat('d/m/Y', $mov->transacao))
-			{
-				if ($datamov > $datatit)
-					$datatit = $datamov;
-			}
-			if ($mov->codtipomovimentotitulo == 900)
-			{
-				if (!$dataestorno = DateTime::createFromFormat('d/m/Y H:i:s', $mov->criacao))
-				{
-					if (!$dataestorno = DateTime::createFromFormat('d/m/Y H:i:s', $mov->sistema))
-						$dataestorno = new DateTime();
-				}
-			}
-		}
-		
-		// passa soma para modelo
-		$this->debitototal = $debito;
-		$this->creditototal = $credito;
-		$this->saldo = $debito - $credito;
-		if ($this->saldo >= 0)
-		{
-			$this->debitosaldo = abs($this->saldo);
-			$this->creditosaldo = 0;
-		}
-		else
-		{
-			$this->debitosaldo = 0;
-			$this->creditosaldo = abs($this->saldo);
-		}
-		if ($this->saldo == 0)
-			$this->transacaoliquidacao = $datatit->format('d/m/Y');
-		else
-			$this->transacaoliquidacao = null;
-		
-		if ($this->saldo == 0 && $dataestorno)
-			$this->estornado = $dataestorno->format('d/m/Y H:i:s');
-		else
-			$this->estornado = null;
-		
-		//salva
-		return $this->save();
-	}
-
 	public function estorna()
 	{
 		if ($this->saldo == 0)

@@ -28,7 +28,7 @@ $this->menu=array(
 		'icon'=>'icon-thumbs-down', 
 		'url'=>'#', 
 		'linkOptions'=>array('id'=>'btnExcluir'),
-		'visible'=>(empty($model->codtituloagrupamento) && ($model->saldo > 0))
+		'visible'=>(empty($model->codtituloagrupamento) && ($model->saldo <> 0))
 		),
 	array('label'=>'Duplicar', 'icon'=>'icon-retweet', 'url'=>array('create','duplicar'=>$model->codtitulo)),
 	//array('label'=>'Agrupar', 'icon'=>'icon-tasks', 'url'=>array('agrupar','id'=>$model->codtitulo)),
@@ -271,7 +271,7 @@ $this->widget('UsuarioCriacao', array('model'=>$model));
 
 foreach ($model->MovimentoTitulos as $mov)
 {
-	$css_valor = ($mov->operacao <> $mov->Titulo->operacao)?"text-success":"text-warning";
+	$css_valor = ($mov->operacao == "CR")?"text-warning":"text-success";
 	?>
 	<div class="registro">
 		<small class="row-fluid">

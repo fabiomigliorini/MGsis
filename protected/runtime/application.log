@@ -7390,3 +7390,131 @@ Stack trace:
 REQUEST_URI=/MGsis/index.php?r=titulo/imprimeboleto&codtituloagrupamento=10006615
 in /var/www/MGsis/protected/controllers/TituloController.php (242)
 in /var/www/MGsis/index.php (13)
+2014/01/24 11:55:25 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetch(): SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...agrupamento" "t" WHERE "t"."codtituloagrupamento"='' LIMIT 1
+                                                             ^. A declaração SQL executada foi: SELECT * FROM "mgsis"."tbltituloagrupamento" "t" WHERE "t"."codtituloagrupamento"='' LIMIT 1.
+in /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php (178)
+in /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php (18)
+in /var/www/MGsis/index.php (13)
+2014/01/24 11:55:25 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for integer: ""
+LINE 1: ...agrupamento" "t" WHERE "t"."codtituloagrupamento"='' LIMIT 1
+                                                             ^. The SQL statement executed was: SELECT * FROM "mgsis"."tbltituloagrupamento" "t" WHERE "t"."codtituloagrupamento"='' LIMIT 1' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1486): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php(178): CActiveRecord->findByPk('')
+#4 /var/www/MGsis/protected/controllers/TituloAgrupamentoController.php(18): TituloAgrupamentoController->loadModel('')
+#5 [internal function]: TituloAgrupamentoController->actionView('')
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloAgrupamentoController), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloAgrupamentoController), Object(ReflectionMethod), Array)
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('view')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tituloAgrupamen...')
+#13 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/MGsis/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/MGsis/index.php?r=tituloAgrupamento/view&id=
+HTTP_REFERER=http://10.0.1.199/MGsis/index.php?r=tituloAgrupamento/create
+---
+2014/01/25 17:02:15 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[42703]: Undefined column: 7 ERROR:  column "transacaoestorno" of relation "tbltitulo" does not exist
+LINE 8:       , TransacaoEstorno    = vTransacaoEstorno
+                ^
+QUERY:  UPDATE tblTitulo
+	   SET DebitoTotal         = vDebitoTotal
+	     , CreditoTotal        = vCreditoTotal
+	     , DebitoSaldo         = vDebitoSaldo
+	     , CreditoSaldo        = vCreditoSaldo
+	     , Saldo               = vSaldo
+	     , TransacaoLiquidacao = vTransacaoLiquidacao
+	     , TransacaoEstorno    = vTransacaoEstorno
+	 WHERE tblTitulo.codTitulo = vCodTitulo
+CONTEXT:  PL/pgSQL function "fntblmovimentotituloaiauad" line 65 at SQL statement. A declaração SQL executada foi: INSERT INTO "mgsis"."tblmovimentotitulo" ("codtitulo", "codtipomovimentotitulo", "debito", "credito", "transacao", "codtituloagrupamento", "codliquidacaotitulo", "codboletoretorno", "codcobranca", "codportador", "codtitulorelacionado", "historico", "sistema", "codmovimentotitulo", "alteracao", "codusuarioalteracao", "criacao", "codusuariocriacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12, :yp13, :yp14, :yp15, :yp16, :yp17).
+in /var/www/MGsis/protected/models/Titulo.php (572)
+in /var/www/MGsis/protected/models/Titulo.php (687)
+in /var/www/MGsis/protected/controllers/TituloController.php (36)
+2014/01/25 17:02:15 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[42703]: Undefined column: 7 ERROR:  column "transacaoestorno" of relation "tbltitulo" does not exist
+LINE 8:       , TransacaoEstorno    = vTransacaoEstorno
+                ^
+QUERY:  UPDATE tblTitulo
+	   SET DebitoTotal         = vDebitoTotal
+	     , CreditoTotal        = vCreditoTotal
+	     , DebitoSaldo         = vDebitoSaldo
+	     , CreditoSaldo        = vCreditoSaldo
+	     , Saldo               = vSaldo
+	     , TransacaoLiquidacao = vTransacaoLiquidacao
+	     , TransacaoEstorno    = vTransacaoEstorno
+	 WHERE tblTitulo.codTitulo = vCodTitulo
+CONTEXT:  PL/pgSQL function "fntblmovimentotituloaiauad" line 65 at SQL statement. The SQL statement executed was: INSERT INTO "mgsis"."tblmovimentotitulo" ("codtitulo", "codtipomovimentotitulo", "debito", "credito", "transacao", "codtituloagrupamento", "codliquidacaotitulo", "codboletoretorno", "codcobranca", "codportador", "codtitulorelacionado", "historico", "sistema", "codmovimentotitulo", "alteracao", "codusuarioalteracao", "criacao", "codusuariocriacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12, :yp13, :yp14, :yp15, :yp16, :yp17)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/MGsis/protected/models/Titulo.php(572): CActiveRecord->save()
+#3 /var/www/MGsis/protected/models/Titulo.php(687): Titulo->adicionaMovimento(100, 1000, 0, '25/01/2014', NULL, NULL)
+#4 /var/www/MGsis/protected/controllers/TituloController.php(36): Titulo->save()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TituloController->actionCreate()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/create')
+#11 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/MGsis/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/create
+HTTP_REFERER=http://10.0.1.199/MGsis/index.php?r=titulo/create
+---
+2014/01/25 17:23:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/MGsis/protected/controllers/TituloController.php:198
+Stack trace:
+#0 /var/www/MGsis/protected/controllers/TituloController.php(18): TituloController->loadModel('10040606')
+#1 [internal function]: TituloController->actionView('10040606')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('view')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/view')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/view&id=10040606
+---
+2014/01/25 17:30:44 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchAll(): SQLSTATE[42703]: Undefined column: 7 ERROR:  column "codtitulomovimento" does not exist
+LINE 1: ...codtitulo"=$1) ORDER BY criacao ASC, sistema ASC, codtitulom...
+                                                             ^. A declaração SQL executada foi: SELECT "MovimentoTitulos"."codmovimentotitulo" AS "t1_c0", "MovimentoTitulos"."codtipomovimentotitulo" AS "t1_c1", "MovimentoTitulos"."codtitulo" AS "t1_c2", "MovimentoTitulos"."codportador" AS "t1_c3", "MovimentoTitulos"."codtitulorelacionado" AS "t1_c4", "MovimentoTitulos"."debito" AS "t1_c5", "MovimentoTitulos"."credito" AS "t1_c6", "MovimentoTitulos"."historico" AS "t1_c7", "MovimentoTitulos"."transacao" AS "t1_c8", "MovimentoTitulos"."sistema" AS "t1_c9", "MovimentoTitulos"."codliquidacaotitulo" AS "t1_c10", "MovimentoTitulos"."codtituloagrupamento" AS "t1_c11", "MovimentoTitulos"."codboletoretorno" AS "t1_c12", "MovimentoTitulos"."codcobranca" AS "t1_c13", "MovimentoTitulos"."alteracao" AS "t1_c14", "MovimentoTitulos"."codusuarioalteracao" AS "t1_c15", "MovimentoTitulos"."criacao" AS "t1_c16", "MovimentoTitulos"."codusuariocriacao" AS "t1_c17" FROM "mgsis"."tblmovimentotitulo" "MovimentoTitulos"  WHERE ("MovimentoTitulos"."codtitulo"=:ypl0) ORDER BY criacao ASC, sistema ASC, codtitulomovimento ASC.
+in /var/www/MGsis/protected/views/titulo/view.php (272)
+in /var/www/MGsis/protected/controllers/TituloController.php (19)
+in /var/www/MGsis/index.php (13)
+2014/01/25 17:30:44 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[42703]: Undefined column: 7 ERROR:  column "codtitulomovimento" does not exist
+LINE 1: ...codtitulo"=$1) ORDER BY criacao ASC, sistema ASC, codtitulom...
+                                                             ^. The SQL statement executed was: SELECT "MovimentoTitulos"."codmovimentotitulo" AS "t1_c0", "MovimentoTitulos"."codtipomovimentotitulo" AS "t1_c1", "MovimentoTitulos"."codtitulo" AS "t1_c2", "MovimentoTitulos"."codportador" AS "t1_c3", "MovimentoTitulos"."codtitulorelacionado" AS "t1_c4", "MovimentoTitulos"."debito" AS "t1_c5", "MovimentoTitulos"."credito" AS "t1_c6", "MovimentoTitulos"."historico" AS "t1_c7", "MovimentoTitulos"."transacao" AS "t1_c8", "MovimentoTitulos"."sistema" AS "t1_c9", "MovimentoTitulos"."codliquidacaotitulo" AS "t1_c10", "MovimentoTitulos"."codtituloagrupamento" AS "t1_c11", "MovimentoTitulos"."codboletoretorno" AS "t1_c12", "MovimentoTitulos"."codcobranca" AS "t1_c13", "MovimentoTitulos"."alteracao" AS "t1_c14", "MovimentoTitulos"."codusuarioalteracao" AS "t1_c15", "MovimentoTitulos"."criacao" AS "t1_c16", "MovimentoTitulos"."codusuariocriacao" AS "t1_c17" FROM "mgsis"."tblmovimentotitulo" "MovimentoTitulos"  WHERE ("MovimentoTitulos"."codtitulo"=:ypl0) ORDER BY criacao ASC, sistema ASC, codtitulomovimento ASC' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(507): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveFinder.php(163): CJoinElement->lazyFind(Object(Titulo))
+#4 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(281): CActiveFinder->lazyFind(Object(Titulo))
+#5 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(143): CActiveRecord->getRelated('MovimentoTitulo...')
+#6 /var/www/MGsis/protected/views/titulo/view.php(272): CActiveRecord->__get('MovimentoTitulo...')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('view', Array, true)
+#11 /var/www/MGsis/protected/controllers/TituloController.php(19): CController->render('view', Array)
+#12 [internal function]: TituloController->actionView('10040606')
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TituloController), Array)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TituloController), Object(ReflectionMethod), Array)
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('view')
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('titulo/view')
+#20 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#21 /var/www/MGsis/index.php(13): CApplication->run()
+#22 {main}
+REQUEST_URI=/MGsis/index.php?r=titulo/view&id=10040606
+HTTP_REFERER=http://10.0.1.199/MGsis/index.php?r=tituloAgrupamento/view&id=10006618
+---
