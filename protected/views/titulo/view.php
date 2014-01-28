@@ -7,6 +7,8 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
+	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
+	array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codtitulo)),
 	array(
 		'label'=>'Imprimir Vale', 
 		'icon'=>'icon-print', 
@@ -21,8 +23,6 @@ $this->menu=array(
 		'linkOptions'=>array('id'=>'btnMostrarBoleto'),
 		'visible'=>($model->boleto && ($model->saldo>0))
 	),
-	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
-	array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codtitulo)),
 	array(
 		'label'=>'Estornar', 
 		'icon'=>'icon-thumbs-down', 
@@ -291,7 +291,7 @@ foreach ($model->MovimentoTitulos as $mov)
 				<span class="span4">
 					<?php echo (!empty($mov->codboletoretorno)) ? "Retorno Boleto" :""?>
 					<?php echo (!empty($mov->codcobranca)) ? "Cobranca" :""?>
-					<?php echo (!empty($mov->codliquidacaotitulo)) ? "Liquidação" :""?>
+					<?php echo (!empty($mov->codliquidacaotitulo)) ? "Liquidação "  . CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($mov->codliquidacaotitulo)),array('liquidacaoTitulo/view','id'=>$mov->codliquidacaotitulo)):""?>
 					<?php echo (!empty($mov->codtituloagrupamento)) ? "Agrupamento " . CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($mov->codtituloagrupamento)),array('tituloAgrupamento/view','id'=>$mov->codtituloagrupamento)) :""?>
 				</span>
 			</span>

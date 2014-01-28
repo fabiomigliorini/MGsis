@@ -44,7 +44,7 @@
 		
 		echo $form->textFieldRow(
 				$model,
-				'impressoratelanegocio',
+				'impressoramatricial',
 				array('class' => 'span2')                    
 				); 
 

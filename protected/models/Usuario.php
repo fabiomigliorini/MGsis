@@ -12,6 +12,7 @@
  * @property string $codoperacao
  * @property string $codpessoa
  * @property string $impressoratelanegocio
+ * @property string $impressoramatricial
  * @property string $codportador
  * @property string $alteracao
  * @property string $codusuarioalteracao
@@ -189,7 +190,7 @@ class Usuario extends MGActiveRecord
 			array('usuario', 'length', 'min'=>4),
 			array('usuario', 'unique', 'caseSensitive' => false),
 
-			array('senha, senha_tela, impressoratelanegocio', 'length', 'max'=>100),
+			array('senha, senha_tela, impressoramatricial', 'length', 'max'=>100),
 			
 			array('senha_tela', 'length', 'max'=>20),
 			array('senha_tela', 'length', 'min'=>6),
@@ -198,7 +199,7 @@ class Usuario extends MGActiveRecord
 			
 			array('codecf, codfilial, codpessoa, codportador, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			
-			array('senha, codecf, codfilial, codpessoa, impressoratelanegocio, codportador', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('senha, codecf, codfilial, codpessoa, impressoramatricial, codportador', 'default', 'setOnEmpty' => true, 'value' => null),
 
 			array('codecf', 'exist', 'className'=>'Ecf'),
 			array('codfilial', 'exist', 'className'=>'Filial'),
@@ -210,7 +211,7 @@ class Usuario extends MGActiveRecord
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('codusuario', 'numerical', 'on'=>'search'),
-			array('codusuario, usuario, codecf, codfilial, codoperacao, codportador, impressoratelanegocio', 'safe', 'on'=>'search'),
+			array('codusuario, usuario, codecf, codfilial, codoperacao, codportador, impressoramatricial', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -385,7 +386,7 @@ class Usuario extends MGActiveRecord
 			'codfilial' => 'Filial',
 			'codoperacao' => 'Operação',
 			'codpessoa' => 'Pessoa',
-			'impressoratelanegocio' => 'Impressora Negócio',
+			'impressoramatricial' => 'Impressora Matricial',
 			'codportador' => 'Portador',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
@@ -435,8 +436,8 @@ class Usuario extends MGActiveRecord
 		if (!empty($this->usuario))
 			$criteria->addSearchCondition('usuario', '%'.$this->usuario.'%', false, 'AND', 'ILIKE');
 		
-		if (!empty($this->impressoratelanegocio))
-			$criteria->addSearchCondition('impressoratelanegocio', '%'.$this->impressoratelanegocio.'%', false, 'AND', 'ILIKE');
+		if (!empty($this->impressoramatricial))
+			$criteria->addSearchCondition('impressoramatricial', '%'.$this->impressoramatricial.'%', false, 'AND', 'ILIKE');
 		
 		$criteria->order = 'usuario ASC';
 		

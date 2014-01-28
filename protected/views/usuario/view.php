@@ -39,7 +39,7 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 			'value'=>isset($model->codpessoa)?CHtml::link(CHtml::encode($model->Pessoa->fantasia), array('pessoa/view', 'id'=>$model->codpessoa)):Null,
 			'type'=>'raw'
 			),
-		'impressoratelanegocio',
+		'impressoramatricial',
 		array(
 			'name'=>'codportador',
 			'value'=>isset($model->codportador)?CHtml::encode($model->Portador->portador):Null,

@@ -15,6 +15,7 @@ class MGEscPrint
 	private $_comandos = array();
 	private $_linhas = 31;
 	private $_textoFinal = "";
+	public $quebralaser = 3;
 	
 	function __construct($impressora = null, $linhas = null) 
 	{
@@ -69,7 +70,7 @@ class MGEscPrint
 				//Controle da impressora
 				"Reset"           => array(Chr(27)."@",   ""  ), //Inicializa a impressora (Reset)
 				"LF"              => array(Chr(10),       "\n"    ), //Avança uma linha
-				"FF"              => array(Chr(12),       "<hr style='page-break-before: always;'>"  ), //Avança uma página
+				"FF"              => array(Chr(12),       "<hr>"  ), //Avança uma página
 				"CR"              => array(Chr(13),       ""      ), //Retorno do carro
 				
 			);
@@ -94,7 +95,7 @@ class MGEscPrint
 		fwrite($handle, $this->converteEsc());
 		fclose($handle);
 		return exec("lpr -P {$this->impressora} {$arquivo}");		
-		//unlink($file);
+		unlink($arquivo);
 	}
 
 	/*
@@ -115,7 +116,39 @@ class MGEscPrint
 	 */
 	public function converteHtml()
 	{
-		return $this->converte(1);
+		ob_start();
+		?>
+		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-BR" lang="pt-BR">
+			<head>
+				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+				<meta name="language" content="pt-BR" />			
+				<title>MGsis - Relatório Matricial</title>
+			</head>
+			<style>
+				@page 
+				{
+					size: auto;   /* auto is the initial value */
+					//margin: 10mm;  /* this affects the margin in the printer settings */
+					margin-top: 4mm;
+					margin-bottom: 4mm;
+				}
+				hr:nth-of-type(<?php echo $this->quebralaser; ?>n)
+				{
+					page-break-after: always;
+				}
+				hr:last-child
+				{
+					page-break-after: avoid;
+				}				
+			</style>
+			<body>
+				<pre><?php echo $this->converte(1); ?></pre>
+			</body>
+		</html>
+		<?
+		$html = ob_get_contents();
+		ob_end_clean();
+		return $html;
 	}
 	
 	/*
@@ -191,7 +224,6 @@ class MGEscPrint
 		{
 			//remove quebra de linha se houver no final do rodape
 			$this->_conteudoSecao["rodape"] = trim($this->_conteudoSecao["rodape"], $lf);
-			$this->_conteudoSecao["rodape"] .= "<FF>";
 			$linhasRodape = substr_count($this->_conteudoSecao["rodape"], $lf);
 			$linhasRodape++;
 		}
@@ -225,6 +257,7 @@ class MGEscPrint
 		
 		//adiciona rodape ultima pagina
 		$textoFinal .= $this->_conteudoSecao["rodape"];
+		$textoFinal .= "<FF>";
 
 		
 		$this->_textoFinal = $textoFinal;

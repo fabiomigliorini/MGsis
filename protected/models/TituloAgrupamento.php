@@ -260,20 +260,11 @@ class TituloAgrupamento extends MGActiveRecord
 				'select' => 'fantasia'
 			)
 		);
-		/*
-		$criteria->select='t.codtituloagrupamento, t.emissao, t.criacao, t.codusuario';
-		$criteria->join="LEFT JOIN adressen t1 ON t.plink = t1.nr ";
-		*/
+		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 			'sort'=>array('defaultOrder'=>'t.emissao DESC, t.criacao DESC, "Pessoa".fantasia ASC'),
-			/*
-			'Pagination' => array (
-				'PageSize' => 200
-			 ),			
-			 * 
-			 */
-			//'sort'=>array('defaultOrder'=>'"Pessoa".fantasia ASC, t.codtituloagrupamento ASC'),
+			'pagination'=>array('pageSize'=>20)
 		));
 	}
 
@@ -296,7 +287,7 @@ class TituloAgrupamento extends MGActiveRecord
 		
 		$ret = parent::save($runValidation, $attributes);
 
-		if ($novo)
+		if ($novo && $ret)
 		{
 		
 			$titulos = array();

@@ -20,7 +20,7 @@ $this->menu=array(
 
 $(document).ready(function(){
 	
-	//abre janela boleto
+	//abre janela Relatorio
 	var frameSrcRelatorio = $('#btnMostrarRelatorio').attr('href');
 	$('#btnMostrarRelatorio').click(function(event){
 		event.preventDefault();

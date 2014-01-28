@@ -107,24 +107,20 @@ class MGRelatorioTitulos extends FPDF
 			$this->SetTextColor(100, 100, 100);
 		else
 			if ($this->_titulo->Juros->diasAtraso > 0)
-			{
 				if ($this->_titulo->Juros->diasAtraso <= $this->_titulo->Juros->diasTolerancia) 
-				{
 					$this->SetTextColor(255, 100, 0);
-				}
 				else 
-				{
 					$this->SetTextColor(255, 0, 0);
-				}
-			}
 			else
-			{
-				$css_vencimento = "text-success";
 				$this->SetTextColor(0, 150, 0);
-			}
 			
 		$this->SetFont('Arial','B',8);
 		$this->Cell(16, 6, utf8_decode($this->_titulo->vencimento),     '', 0, 'C', $this->_fill);
+
+		if ($this->_titulo->operacao == 'CR') 
+			$this->SetTextColor(255, 100, 0);
+		else
+			$this->SetTextColor(0, 150, 0);
 		
 		$this->SetFont('Arial','',8);
 		$this->Cell(22, 6, utf8_decode(Yii::app()->format->formatNumber(abs($this->_titulo->saldo))), '', 0, 'R', $this->_fill);

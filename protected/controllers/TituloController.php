@@ -248,7 +248,7 @@ class TituloController extends Controller
 		
 	}
 	
-	public function actionImprimeVale($id)
+	public function actionImprimeVale($id, $imprimir = false)
 	{
 		
 		$model = $this->loadModel($id);
@@ -256,152 +256,15 @@ class TituloController extends Controller
 		if ($model->saldo >= 0)
 			throw new CHttpException(400,'Título sem saldo.');
 		
-		//inicializa
-		$escp = new MGEscPrint();
-		$escp->adicionaTexto("<Reset><6lpp><Draft><CondensedOff>", "cabecalho");
+		$rel = new MGEscPrintVale($model);
+		$rel->quebralaser =2;
+		$rel->prepara();
 		
-		//linha divisoria
-		$escp->adicionaLinha("", "cabecalho", 80, STR_PAD_RIGHT, "=");
+		if ($imprimir)
+			$rel->imprimir();
 		
-		// Fantasia e NUMERO do Vale
-		$escp->adicionaTexto("<DblStrikeOn>", "cabecalho");
-		$escp->adicionaTexto($model->Filial->Pessoa->fantasia . " " . $model->Filial->Pessoa->telefone1, "cabecalho", 56);
-		$escp->adicionaTexto("Titulo:        " . Yii::app()->format->formataCodigo($model->codtitulo), "cabecalho", 24);
-		$escp->adicionaTexto("<DblStrikeOff>", "cabecalho");
-		$escp->adicionaLinha("", "cabecalho");
+		echo $rel->converteHtml();
 		
-		// Usuario e Data
-		if (isset($model->codusuariocriacao))
-			$usuario = $model->UsuarioCriacao->usuario;
-		else
-			$usuario = Yii::app()->user->name;
-		$escp->adicionaTexto("Usuario: " . $usuario, "cabecalho", 56);
-		$escp->adicionaTexto("Data..: " . $model->sistema, "cabecalho", 24);
-		$escp->adicionaLinha("", "cabecalho");
-		
-		//linha divisoria
-		$escp->adicionaLinha("", "cabecalho", 80, STR_PAD_RIGHT, "=");
-
-		//forca impressao cabecalho primeira pagina
-		//$escp->cabecalho();
-
-		//Rodape
-		$escp->adicionaTexto("", "rodape", 80, STR_PAD_RIGHT, "=");
-		
-		//titulo
-		$escp->adicionaLinha("");
-		$escp->adicionaTexto("<LargeOn>");
-		$escp->adicionaTexto("<DblStrikeOn>");
-		$escp->adicionaTexto("V A L E", "documento", 40, STR_PAD_BOTH);
-		$escp->adicionaTexto("<DblStrikeOff>");
-		$escp->adicionaTexto("<LargeOff>");
-		$escp->adicionaLinha("");
-
-		//Numero titulo
-		$escp->adicionaTexto("Numero....:", "documento", 12);
-		$escp->adicionaTexto($model->numero, "documento", 68);
-		$escp->adicionaLinha();
-		
-		//Espaco
-		$escp->adicionaLinha();
-		
-		//Fantasia
-		$escp->adicionaTexto("<DblStrikeOn>");
-		$escp->adicionaTexto("Favorecido: ");
-		$escp->adicionaTexto($model->Pessoa->fantasia . " (" .Yii::app()->format->formataCodigo($model->codpessoa) . ")", "documento", 68);
-		$escp->adicionaTexto("<DblStrikeOff>");
-		$escp->adicionaLinha();
-
-		//Telefone
-		$escp->adicionaTexto("", "documento", 12);
-		$escp->adicionaTexto("{$model->Pessoa->telefone1} / {$model->Pessoa->telefone2} / {$model->Pessoa->telefone3}", "documento", 68);
-		$escp->adicionaLinha();
-		
-		//Razao Social
-		$escp->adicionaTexto("", "documento", 12);
-		$escp->adicionaTexto($model->Pessoa->pessoa, "documento", 68);
-		$escp->adicionaLinha();
-		
-		//Cnpj
-		$escp->adicionaTexto("", "documento", 12);
-		$escp->adicionaTexto("CNPJ/CPF: " . Yii::app()->format->formataCnpjCpf($model->Pessoa->cnpj, $model->Pessoa->fisica), "documento", 29);
-		if (!empty($model->Pessoa->ie))
-			$escp->adicionaTexto("- Inscricao Estadual: " .Yii::app()->format->formataInscricaoEstadual($model->Pessoa->ie, $model->Pessoa->Cidade->Estado->sigla), "documento", 38);
-		$escp->adicionaLinha();
-
-		//Espaco
-		$escp->adicionaLinha();
-		
-		//Extenso
-		$escp->adicionaTexto("<DblStrikeOn>");
-		$linhas = Yii::app()->format->formataValorPorExtenso($model->creditosaldo, true);
-		$linhas = "R$ " . Yii::app()->format->formatNumber($model->creditosaldo) . " ($linhas)";
-		$linhas = str_split($linhas, 68);
-		$label = "Valor.....:";
-		foreach ($linhas as $linha)
-		{
-			$escp->adicionaTexto($label, "documento", 12);
-			$escp->adicionaTexto(trim($linha), "documento", 68);
-			$escp->adicionaLinha();
-			$label = "";
-		}
-		$escp->adicionaTexto("<DblStrikeOff>");
-		
-		// Espaco
-		$escp->adicionaLinha();
-
-		//Observacao
-		if (!empty($model->observacao))
-		{
-			$label = "Observacao:";
-			$linhas = str_split($model->observacao, 68);
-			foreach ($linhas as $linha)
-			{
-				$escp->adicionaTexto($label, "documento", 12);
-				$escp->adicionaTexto(trim($linha), "documento", 68);
-				$escp->adicionaLinha();
-				$label = "";
-			}
-			
-			// Espaco
-			$escp->adicionaLinha();
-		}
-		
-
-		// Data por extenso
-		$escp->adicionaTexto("", "documento", 12);
-		$escp->adicionaTexto($model->Filial->Pessoa->Cidade->cidade);
-		$escp->adicionaTexto("/");
-		$escp->adicionaTexto($model->Filial->Pessoa->Cidade->Estado->sigla);
-		$escp->adicionaTexto(", ");
-		$escp->adicionaTexto(Yii::app()->format->formataDataPorExtenso($model->emissao));
-		$escp->adicionaTexto(".");
-		$escp->adicionaLinha();
-
-		// Espaco
-		$escp->adicionaLinha();
-		$escp->adicionaLinha();
-		$escp->adicionaLinha();
-
-		//Assinatura
-		$escp->adicionaTexto("", "documento", 12);
-		$escp->adicionaTexto("", "documento", 50, STR_PAD_RIGHT, "-");
-		$escp->adicionaLinha();
-		$escp->adicionaTexto("", "documento", 12);
-		$escp->adicionaTexto($model->Filial->Pessoa->pessoa, "documento", 50);
-		$escp->adicionaLinha();
-		
-		$escp->prepara();
-		
-		if (!empty($_GET["imprimir"]))
-		{
-			echo $escp->imprimir();
-			echo "<script>alert('Documento enviado para a Impressora: {$escp->impressora}');</script>";
-		}
-		
-		echo "<pre>";
-		echo $escp->converteHtml();
-		echo "</pre>";
 	}
 
 	public function actionRelatorio()
