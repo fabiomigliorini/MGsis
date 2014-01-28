@@ -96,6 +96,10 @@ class MGEscPrintRecibo extends MGEscPrint
 		$resumo = $this->_model->getResumoTitulos();
 		foreach ($resumo as $codtitulo => $valores)
 		{
+			//pula titulos de credito liquidados
+			if ($valores["total"] < 0)
+				continue;
+			
 			$titulo = Titulo::model()->findByPk($codtitulo);
 			$this->adicionaTexto($titulo->numero, "documento", 29);
 			$this->adicionaTexto($titulo->emissao, "documento", 12);
