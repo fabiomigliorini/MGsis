@@ -1,6 +1,5 @@
 <?php 
-$total = $data->calculaTotal();
-$css_valor =  ($total<0)?"text-warning":"text-success"; 
+$css_valor = ($data->operacao == 'CR')?"text-warning":"text-success"; 
 ?>
 <div class="registro <?php echo (!empty($data->cancelamento))?"alert-danger":""; ?>">
 	<div class="row-fluid">
@@ -9,17 +8,12 @@ $css_valor =  ($total<0)?"text-warning":"text-success";
 		</small>
 		<small class="span1 muted"><?php echo CHtml::encode($data->emissao); ?></small>
 		<b class="span4">
-			<?php
-			if (isset($data->Titulos[0]))
-			{
-				echo CHtml::link(CHtml::encode($data->Titulos[0]->Pessoa->fantasia),array('pessoa/view','id'=>$data->Titulos[0]->codpessoa));
-			}
-			?>
+			<?php echo CHtml::link(CHtml::encode($data->Pessoa->fantasia),array('pessoa/view','id'=>$data->codpessoa)); ?>
 		</b>
 		<b class="span2 text-right <?php echo $css_valor; ?>">
-			<?php echo CHtml::encode(Yii::app()->format->formatNumber(abs($total))); ?>
+			<?php echo CHtml::encode(Yii::app()->format->formatNumber($data->valor)); ?>
 			&nbsp;
-			<?php echo ($total<0)?"CR":"DB"; ?>
+			<?php echo $data->operacao ?>
 		</b>
 		<small class="span4 muted"><?php echo CHtml::encode($data->observacao); ?></small>
 	</div>

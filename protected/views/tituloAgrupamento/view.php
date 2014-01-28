@@ -117,16 +117,20 @@ $(document).ready(function(){
 
 <?php 
 
-$total = $model->calculaTotal();
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
+		array(
+			'label'=>'Pessoa',
+			'value'=>CHtml::link(CHtml::encode($model->Pessoa->fantasia),array('pessoa/view','id'=>$model->codpessoa)),
+			'type'=>'raw'
+		),
 		'emissao',
-		'observacao',
 		array(
 			'label'=>'Total',
-			'value'=>Yii::app()->format->formatNumber(abs($total)) . " " . (($total<0)?"CR":"DB"),
+			'value'=>Yii::app()->format->formatNumber($model->valor) . " " . $model->operacao,
 		),
+		'observacao',
 	),
 )); 
 

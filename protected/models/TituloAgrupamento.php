@@ -12,18 +12,20 @@
  * @property string $codusuarioalteracao
  * @property string $criacao
  * @property string $codusuariocriacao
+ * @property string $debito
+ * @property string $credito
+ * @property string $codpessoa
  *
  * The followings are the available model relations:
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
  * @property Movimentotitulo[] $movimentotitulos
  * @property Titulo[] $titulos
+ * @property Usuario $codusuarioalteracao
+ * @property Usuario $codusuariocriacao
+ * @property Pessoa $codpessoa 
  */
 class TituloAgrupamento extends MGActiveRecord
 {
-	
-	public $codpessoa;
-	
+		
 	public $codportador;
 	public $codfilial;
 	public $boleto;
@@ -40,6 +42,9 @@ class TituloAgrupamento extends MGActiveRecord
 	public $emissao_ate;
 	public $criacao_de;
 	public $criacao_ate;
+
+	public $operacao;
+	public $valor;
 	
 	/**
 	 * @return string the associated database table name
@@ -173,7 +178,7 @@ class TituloAgrupamento extends MGActiveRecord
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 			'MovimentoTitulos' => array(self::HAS_MANY, 'MovimentoTitulo', 'codtituloagrupamento', 'order'=>'codmovimentotitulo ASC'),
 			'Titulos' => array(self::HAS_MANY, 'Titulo', 'codtituloagrupamento', 'order'=>'vencimento asc'),
-			//'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
+			'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
 		);
 	}
 
@@ -201,6 +206,10 @@ class TituloAgrupamento extends MGActiveRecord
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
 			'codusuariocriacao' => 'Usuário Criação',
+			
+			'debito' => 'Débito',
+			'credito' => 'Crédito',
+			'codpessoa' => 'Pessoa',			
 		);
 	}
 
@@ -244,17 +253,12 @@ class TituloAgrupamento extends MGActiveRecord
 			$criteria->params = array_merge($criteria->params, array(':criacao_ate' => $criacao_ate->format('Y-m-d').' 23:59:59.9'));
 		}
 		
-		$criteria->compare('"Titulos".codpessoa', $this->codpessoa, false);
+		$criteria->compare('t.codpessoa', $this->codpessoa, false);
 		
 		$criteria->with = array(
-				'Titulos' => array(
-					'together' => true,
-					'with' => array(
-						'Pessoa' => array(
-							'select' => 'fantasia'
-						)
-					)
-			),
+			'Pessoa' => array(
+				'select' => 'fantasia'
+			)
 		);
 		/*
 		$criteria->select='t.codtituloagrupamento, t.emissao, t.criacao, t.codusuario';
@@ -263,9 +267,12 @@ class TituloAgrupamento extends MGActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 			'sort'=>array('defaultOrder'=>'t.emissao DESC, t.criacao DESC, "Pessoa".fantasia ASC'),
+			/*
 			'Pagination' => array (
 				'PageSize' => 200
 			 ),			
+			 * 
+			 */
 			//'sort'=>array('defaultOrder'=>'"Pessoa".fantasia ASC, t.codtituloagrupamento ASC'),
 		));
 	}
@@ -280,17 +287,7 @@ class TituloAgrupamento extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
-	
-	public function calculaTotal()
-	{
-		$total = 0;
-		foreach ($this->Titulos as $titulo)
-		{
-			$total += $titulo->debito - $titulo->credito;
-		}
-		return $total;
-	}
-	
+		
 	public function save($runValidation=true, $attributes=NULL)
 	{
 		//comeca transacao
@@ -429,6 +426,17 @@ class TituloAgrupamento extends MGActiveRecord
 			$trans->commit();
 		else
 			$trans->rollback();
+		
+		return $ret;
+	}
+	
+	protected function afterFind()
+	{
+		$ret = parent::afterFind();
+		
+		$this->valor = $this->debito-$this->credito;
+		$this->operacao = ($this->valor<0)?"CR":"DB";
+		$this->valor = abs($this->valor);
 		
 		return $ret;
 	}

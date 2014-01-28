@@ -8,6 +8,10 @@ return array(
 
 	// preloading 'log' component
 	'preload'=>array('log'),
+	
+	'import'=>array(
+		'application.components.*',
+	),
 
 	'commandMap' => array(
 		'migrate' => array(

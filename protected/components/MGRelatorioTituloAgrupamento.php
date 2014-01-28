@@ -56,12 +56,12 @@ class MGRelatorioTituloAgrupamento extends FPDF
 		$titulos = $this->_model->Titulos;
 		
 		$telefones = array();
-		if (!empty($titulos[0]->Pessoa->telefone1))
-			$telefones[] = $titulos[0]->Pessoa->telefone1;
-		if (!empty($titulos[0]->Pessoa->telefone2))
-			$telefones[] = $titulos[0]->Pessoa->telefone2;
-		if (!empty($titulos[0]->Pessoa->telefone3))
-			$telefones[] = $titulos[0]->Pessoa->telefone3;
+		if (!empty($this->_model->Pessoa->telefone1))
+			$telefones[] = $this->_model->Pessoa->telefone1;
+		if (!empty($this->_model->Pessoa->telefone2))
+			$telefones[] = $this->_model->Pessoa->telefone2;
+		if (!empty($this->_model->Pessoa->telefone3))
+			$telefones[] = $this->_model->Pessoa->telefone3;
 		$telefones = implode(" / ", $telefones);
 
 		// fantasia cliente
@@ -70,7 +70,7 @@ class MGRelatorioTituloAgrupamento extends FPDF
 		$this->Cell(18, 6, utf8_decode("Cliente:"));
 		$this->SetTextColor(0, 0, 0);
 		$this->SetFont('Arial','B',12);		
-		$this->Cell(172, 6, utf8_decode($titulos[0]->Pessoa->fantasia  . " - " . $telefones), null ,1);
+		$this->Cell(172, 6, utf8_decode($this->_model->Pessoa->fantasia  . " - " . $telefones), null ,1);
 		
 		// codigo / cnpj / ie / razao social
 		$this->SetTextColor(100, 100, 100);
@@ -78,11 +78,11 @@ class MGRelatorioTituloAgrupamento extends FPDF
 		$this->Cell(18, 4, '');
 		$this->Cell(172, 4, 
 			utf8_decode(
-				Yii::app()->format->formataCodigo($titulos[0]->codpessoa) . " - " .
-				(($titulos[0]->Pessoa->fisica)?"CPF: ":"CNPJ: ") . 
-				Yii::app()->format->formataCnpjCpf($titulos[0]->Pessoa->cnpj, $titulos[0]->Pessoa->fisica) .
-				((!empty($titulos[0]->Pessoa->ie))?" - IE: " . Yii::app()->format->formataInscricaoEstadual($titulos[0]->Pessoa->ie, $titulos[0]->Pessoa->Cidade->Estado->sigla):"") .
-				" - " . $titulos[0]->Pessoa->pessoa
+				Yii::app()->format->formataCodigo($this->_model->codpessoa) . " - " .
+				(($this->_model->Pessoa->fisica)?"CPF: ":"CNPJ: ") . 
+				Yii::app()->format->formataCnpjCpf($this->_model->Pessoa->cnpj, $this->_model->Pessoa->fisica) .
+				((!empty($this->_model->Pessoa->ie))?" - IE: " . Yii::app()->format->formataInscricaoEstadual($this->_model->Pessoa->ie, $this->_model->Pessoa->Cidade->Estado->sigla):"") .
+				" - " . $this->_model->Pessoa->pessoa
 			)
 		);
 		$this->ln();
@@ -127,7 +127,6 @@ class MGRelatorioTituloAgrupamento extends FPDF
 		// linhas dos títulos
 		$this->SetFillColor(240,240,240);
 		$this->_fill = false;
-		$total = 0;
 		foreach ($titulos as $titulo)
 		{
 			$this->Cell(25, 10, utf8_decode($titulo->numero), null, 0, 'L', $this->_fill);
@@ -142,7 +141,6 @@ class MGRelatorioTituloAgrupamento extends FPDF
 				null, 0, 'L', $this->_fill);
 			$this->Cell(30, 10, "______/_____/_____", null, 0, 'C', $this->_fill);
 			$this->Cell(30, 10, "______/_____/_____", null, 0, 'C', $this->_fill);
-			$total += $titulo->valor;
 			$this->ln();
 			$this->_fill = !$this->_fill;
 		}
@@ -204,8 +202,8 @@ class MGRelatorioTituloAgrupamento extends FPDF
 			5, 
 			utf8_decode(
 				"Declaro(amos) ter conferido o(s) título(s) acima listado(s), que reconheço(emos) a exatidão da dívida de R$ " . 
-				Yii::app()->format->formatNumber(abs($total)) . " (" .
-				MGFormatter::formataValorPorExtenso($total, true) .
+				Yii::app()->format->formatNumber($this->_model->valor) . " (" .
+				MGFormatter::formataValorPorExtenso($this->_model->valor, true) .
 				") expressa neste relatório e que pagarei(emos) a importância à " .
 				$titulos[0]->Filial->Pessoa->pessoa .
 				", ou a sua ordem, no(s) vencimento(s) e/ou nos agendamento(s) acima indicado(s)."
@@ -226,7 +224,7 @@ class MGRelatorioTituloAgrupamento extends FPDF
 		// Razao Social
 		$this->ln();
 		$this->Cell(75, 6, "");
-		$this->Cell(115, 6, utf8_decode($titulos[0]->Pessoa->pessoa), null, null, "C");
+		$this->Cell(115, 6, utf8_decode($this->_model->Pessoa->pessoa), null, null, "C");
 		
 		// CNPJ
 		$this->ln();
@@ -235,8 +233,8 @@ class MGRelatorioTituloAgrupamento extends FPDF
 			115, 
 			4, 
 			utf8_decode(
-				(($titulos[0]->Pessoa->fisica)?"CPF: ":"CNPJ: ") . 
-				Yii::app()->format->formataCnpjCpf($titulos[0]->Pessoa->cnpj, $titulos[0]->Pessoa->fisica)
+				(($this->_model->Pessoa->fisica)?"CPF: ":"CNPJ: ") . 
+				Yii::app()->format->formataCnpjCpf($this->_model->Pessoa->cnpj, $this->_model->Pessoa->fisica)
 			), 
 			null, 
 			null, 

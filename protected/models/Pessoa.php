@@ -53,6 +53,7 @@
  *
  * The followings are the available model relations:
  * @property Titulo[] $titulos
+ * @property Tituloagrupamento[] $tituloagrupamentos
  * @property Filial[] $filials
  * @property Usuario[] $usuarios
  * @property Cidade $codcidade
@@ -193,6 +194,7 @@ class Pessoa extends MGActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'Titulos' => array(self::HAS_MANY, 'Titulo', 'codpessoa'),
+			'TituloAgrupamentos' => array(self::HAS_MANY, 'TituloAgrupamento', 'codpessoa'),
 			'Filials' => array(self::HAS_MANY, 'Filial', 'codpessoa'),
 			'Usuarios' => array(self::HAS_MANY, 'Usuario', 'codpessoa'),
 			'Cidade' => array(self::BELONGS_TO, 'Cidade', 'codcidade'),
