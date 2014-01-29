@@ -1,25 +1,28 @@
 body {
-  padding-top: 100px;
-  padding-bottom: 60px;
+	padding-top: 100px;
+	padding-bottom: 60px;
 }
 
 .registro {
-  border-top: 1px solid #dddddd;
-  border-collapse: separate;
-  *border-collapse: collapse;
+	border-top: 1px solid #dddddd;
+	/*
+	border-collapse: separate;
+	*border-collapse: collapse;
 	padding: 5px 5px 0px 5px;
+	*/
 }
-
 .registro:hover {
     background-color: #eeeeee;
 }
 
-.selecionado {
-	background-color: lightgoldenrodyellow;
+.subregistro {
+	border-top: 1px solid #dddddd;
 }
-
-.selecionado:hover {
-    background-color: #FECA40;
+.subregistro:nth-child(1) {
+	border-top: none;
+}
+.subregistro:hover {
+    background-color: #f5f5f5;
 }
 
 .menuthumbnails a {
@@ -31,5 +34,5 @@ body {
 }
 .subnav.navbar-fixed-top { 
 	top:40px; 
-    z-index: 1020; // make z-index smaller than .mainnav	
+    z-index: 1; // make z-index smaller than .mainnav	
 }

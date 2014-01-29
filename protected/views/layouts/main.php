@@ -20,7 +20,14 @@
 	<script type="text/javascript">
 
 		$(document).ready(function() {
+			
 			$.ytLoad();
+			
+			$("li.dropdown a").click(function(e){
+				$(this).next('ul.dropdown-menu').css("display", "block");
+				e.stopPropagation();
+			});
+			
 		});
 
 	</script>	
@@ -39,6 +46,41 @@
 	$logo  = '<div class="nav">' . CHtml::image(Yii::app()->getBaseUrl().'/images/icones/mgsis-20px.ico', 'MGsis', array('width'=>'20px')) . '</div>';
 	$logo .= '<div class="nav">MGsis</div>';
 	
+	$menu = 
+		array(
+			array(
+				'label' => 'Financeiro', 
+				'url'=>'#', 
+				'items'=>array(
+					array('label' => 'Pessoas', 'url' => Yii::app()->createUrl('pessoa')),
+					array('label' => 'Titulos', 'url' => Yii::app()->createUrl('titulo')),
+					array('label' => 'Liquidações', 'url' => Yii::app()->createUrl('liquidacaoTitulo')),
+					array('label' => 'Agrupamentos', 'url' => Yii::app()->createUrl('tituloAgrupamento')),
+				)
+			),
+
+			array(
+				'label' => 'Estoque', 
+				'url'=>'#', 
+				'items'=>array(
+					array('label' => 'Produtos', 'url' => Yii::app()->createUrl('produto')),
+				)
+			),
+
+			// Admin
+			array(
+				'label' => 'Admin', 
+				'url'=>'#', 
+				'items'=>array(
+					array('label' => 'Usuários', 'url' => Yii::app()->createUrl('usuario')),
+					array('label' => 'Permissões', 'url' => Yii::app()->createUrl('srbac/authitem/frontpage')),
+					'---',
+					array('label' => 'Codigos', 'url' => Yii::app()->createUrl('codigo')),
+					array('label' => 'Cidades', 'url' => Yii::app()->createUrl('cidade')),
+				)
+			),
+		);
+	
 	$this->widget('bootstrap.widgets.TbNavbar', array(
 		'type'=>'inverse', // null or 'inverse'
 		'brand' => $logo,
@@ -50,33 +92,7 @@
 		'items'=>array(
 			array(
 				'class'=>'bootstrap.widgets.TbMenu',
-				'items'=>array(
-					array('label' => 'Pessoas', 'url' => Yii::app()->createUrl('pessoa')),
-
-					array(
-						'label' => 'Títulos', 
-						'url'=>'#', 
-						'items'=>array(
-							array('label' => 'Titulos', 'url' => Yii::app()->createUrl('titulo')),
-							array('label' => 'Liquidações', 'url' => Yii::app()->createUrl('liquidacaoTitulo')),
-							array('label' => 'Agrupamentos', 'url' => Yii::app()->createUrl('tituloAgrupamento')),
-						)
-					),
-					
-					
-					// Admin
-					array(
-						'label' => 'Admin', 
-						'url'=>'#', 
-						'items'=>array(
-							array('label' => 'Usuários', 'url' => Yii::app()->createUrl('usuario')),
-							array('label' => 'Permissões', 'url' => Yii::app()->createUrl('srbac/authitem/frontpage')),
-							'---',
-							array('label' => 'Codigos', 'url' => Yii::app()->createUrl('codigo')),
-							array('label' => 'Cidades', 'url' => Yii::app()->createUrl('cidade')),
-						)
-					),
-				),
+				'items'=>$menu
 			),
 			array(
 				'class'=>'bootstrap.widgets.TbMenu',

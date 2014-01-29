@@ -19,11 +19,12 @@ class MGFormatter extends CFormatter
      * @return string the formatted result
      * @see numberFormat
      */
-	public function formatNumber($value) 
+	public function formatNumber($value, $decimals = null) 
 	{
 		if ($value === null) return null;    // new
 		if ($value === '') return '';        // new
-		return number_format($value, $this->numberFormat['decimals'], $this->numberFormat['decimalSeparator'], $this->numberFormat['thousandSeparator']);
+		if ($decimals === null) $decimals = $this->numberFormat['decimals'];
+		return number_format($value, $decimals, $this->numberFormat['decimalSeparator'], $this->numberFormat['thousandSeparator']);
 	}
  
     /*
@@ -125,6 +126,11 @@ class MGFormatter extends CFormatter
 	public function formataCep ($string)
 	{
 		return self::formataPorMascara($string, "##.###-###");
+	}
+	
+	public function formataNcm ($string)
+	{
+		return self::formataPorMascara($string, "####.##.##");
 	}
 	
 	public function formataCodigo ($string, $digitos = 8)
