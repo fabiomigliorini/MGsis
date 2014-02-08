@@ -71,10 +71,7 @@
 	?>
 </fieldset>
 <div class="form-actions">
-    
     <?php 
-	
-
         $this->widget(
             'bootstrap.widgets.TbButton',
             array(
@@ -85,16 +82,6 @@
                 )
             ); 
 	?>
-	<?php
-        $this->widget(
-            'bootstrap.widgets.TbButton',
-            array(
-                'buttonType' => 'reset',
-                'label' => 'Limpar',
-                'icon' => 'icon-refresh'
-                )
-            );
-    ?>
 </div>
 
 <?php $this->endWidget(); ?>

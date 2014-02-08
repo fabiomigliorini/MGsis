@@ -1,7 +1,7 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Gerenciar Produto';
 $this->breadcrumbs=array(
-	'Produto'=>array('index'),
+	'Produtos'=>array('index'),
 	'Gerenciar',
 );
 

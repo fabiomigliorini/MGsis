@@ -71,9 +71,10 @@ class MGFormatter extends CFormatter
 			return self::formataPorMascara($string, '##.###.###/####-##');
 	}
 	
-	function formataPorMascara($string, $mascara)
+	function formataPorMascara($string, $mascara, $somenteNumeros = true)
 	{
-		$string = self::numeroLimpo($string);
+		if ($somenteNumeros)
+			$string = self::numeroLimpo($string);
 		/* @var $caracteres int */
 		$caracteres = substr_count($mascara, '#');
 		$string = str_pad($string, $caracteres, "0", STR_PAD_LEFT);
@@ -130,7 +131,8 @@ class MGFormatter extends CFormatter
 	
 	public function formataNcm ($string)
 	{
-		return self::formataPorMascara($string, "####.##.##");
+		$string = str_pad(self::numeroLimpo($string), 8, "*", STR_PAD_RIGHT);
+		return self::formataPorMascara($string, "####.##.##", false);
 	}
 	
 	public function formataCodigo ($string, $digitos = 8)

@@ -43,14 +43,29 @@ class ProdutoBarra extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codprodutobarra, codproduto, barras', 'required'),
+			array('codproduto, barras', 'required'),
+			array('barras', 'unique'),
 			array('variacao', 'length', 'max'=>100),
+			array('codmarca', 'validaMarca'),
 			array('barras, referencia', 'length', 'max'=>50),
 			array('codmarca, codprodutoembalagem, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('codprodutobarra, codproduto, variacao, barras, referencia, codmarca, codprodutoembalagem, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
 		);
+	}
+	
+	public function validaMarca($attribute, $params)
+	{
+		Yii::app()->user->setFlash('notice','Il y aura plus de 25 étudiants dans ce cours');
+		
+		if (empty($this->codmarca))
+			return;
+		
+		if ($this->codmarca = $this->Produto->codmarca)
+			//Yii::app()->user->setFlash('notice','Il y aura plus de 25 étudiants dans ce cours');
+			//$this->addWarning($attribute, 'Você selecionou a mesma marca informada no Produto, neste caso deixe em branco. Só preencha quando a marca for diferente da marca principal do produto!');
+			$this->addError($attribute, 'Você selecionou a mesma marca informada no Produto, neste caso deixe em branco. Só preencha quando a marca for diferente da marca principal do produto!');
 	}
 
 	/**
@@ -78,17 +93,17 @@ class ProdutoBarra extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codprodutobarra' => 'Codprodutobarra',
-			'codproduto' => 'Codproduto',
-			'variacao' => 'Variacao',
+			'codprodutobarra' => '#',
+			'codproduto' => 'Produto',
+			'variacao' => 'Variação',
 			'barras' => 'Barras',
-			'referencia' => 'Referencia',
-			'codmarca' => 'Codmarca',
-			'codprodutoembalagem' => 'Codprodutoembalagem',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'referencia' => 'Referência',
+			'codmarca' => 'Marca',
+			'codprodutoembalagem' => 'Embalagem',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

@@ -1,8 +1,8 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Alterar Produto';
 $this->breadcrumbs=array(
-	'Produto'=>array('index'),
-	$model->codproduto=>array('view','id'=>$model->codproduto),
+	'Produtos'=>array('index'),
+	$model->produto=>array('view','id'=>$model->codproduto),
 	'Alterar',
 );
 
@@ -14,7 +14,7 @@ $this->breadcrumbs=array(
 	);
 	?>
 
-	<h1>Alterar Produto <?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codproduto)); ?></h1>
+	<h1>Alterar Produto <?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codproduto), 6); ?></h1>
 	<br>
 
 	<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>	

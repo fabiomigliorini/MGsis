@@ -24,6 +24,8 @@
  */
 class ProdutoEmbalagem extends MGActiveRecord
 {
+	var $descricao;
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -40,7 +42,7 @@ class ProdutoEmbalagem extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codprodutoembalagem', 'required'),
+			array('codunidademedida, quantidade', 'required'),
 			array('quantidade, preco', 'length', 'max'=>14),
 			array('codproduto, codunidademedida, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
@@ -72,15 +74,15 @@ class ProdutoEmbalagem extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codprodutoembalagem' => 'Codprodutoembalagem',
-			'codproduto' => 'Codproduto',
-			'codunidademedida' => 'Codunidademedida',
+			'codprodutoembalagem' => '#',
+			'codproduto' => 'Produto',
+			'codunidademedida' => 'Unidade de Medida',
 			'quantidade' => 'Quantidade',
-			'preco' => 'Preco',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'preco' => 'Preço',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 
@@ -127,4 +129,28 @@ class ProdutoEmbalagem extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
+	
+	protected function afterFind()
+	{
+		$ret = parent::afterFind();
+		$this->descricao = $this->UnidadeMedida->sigla . " C/" . Yii::app()->format->formatNumber($this->quantidade, 0);
+		return $ret;
+	}
+
+	public function scopes () 
+	{
+		return array(
+			'combo'=>array(
+				'select'=>array('codprodutoembalagem', 'quantidade', 'codunidademedida'),
+				'order'=>'quantidade ASC',
+				),
+			);
+	}
+	
+	public function getListaCombo ($codproduto)
+	{
+		$lista = self::model()->combo()->findAll('codproduto = :codproduto', array(':codproduto'=>$codproduto));
+		return CHtml::listData($lista, 'codprodutoembalagem', 'descricao');
+	}	
+	
 }

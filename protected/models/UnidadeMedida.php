@@ -67,13 +67,13 @@ class UnidadeMedida extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codunidademedida' => 'Codunidademedida',
-			'unidademedida' => 'Unidademedida',
+			'codunidademedida' => '#',
+			'unidademedida' => 'Descrição',
 			'sigla' => 'Sigla',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 
@@ -118,4 +118,21 @@ class UnidadeMedida extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
+	
+	public function scopes () 
+	{
+		return array(
+			'combo'=>array(
+				'select'=>array('codunidademedida', 'sigla'),
+				'order'=>'sigla ASC',
+				),
+			);
+	}
+	
+	public function getListaCombo ()
+	{
+		$lista = self::model()->combo()->findAll();
+		return CHtml::listData($lista, 'codunidademedida', 'sigla');
+	}	
+	
 }

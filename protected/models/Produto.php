@@ -95,7 +95,8 @@ class Produto extends MGActiveRecord
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 			'ProdutoHistoricoPrecos' => array(self::HAS_MANY, 'ProdutoHistoricoPreco', 'codproduto'),
 			'ProdutoEmbalagens' => array(self::HAS_MANY, 'ProdutoEmbalagem', 'codproduto', 'order'=>'quantidade ASC, codunidademedida ASC'),
-			'ProdutoBarras' => array(self::HAS_MANY, 'ProdutoBarra', 'codproduto', 'order'=>'variacao ASC, barras ASC'),
+			'ProdutoBarras' => array(self::HAS_MANY, 'ProdutoBarra', 'codproduto', 'order'=>'codprodutoembalagem ASC, variacao ASC, barras ASC'),
+			'Ncm' => array(self::BELONGS_TO, 'Ncm', 'ncm'),
 		);
 	}
 
@@ -105,24 +106,24 @@ class Produto extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codproduto' => 'Codproduto',
-			'produto' => 'Produto',
-			'referencia' => 'Referencia',
-			'codunidademedida' => 'Codunidademedida',
-			'codsubgrupoproduto' => 'Codsubgrupoproduto',
-			'codmarca' => 'Codmarca',
-			'preco' => 'Preco',
+			'codproduto' => '#',
+			'produto' => 'Descrição',
+			'referencia' => 'Referência',
+			'codunidademedida' => 'Unidade Medida',
+			'codsubgrupoproduto' => 'Grupo',
+			'codmarca' => 'Marca',
+			'preco' => 'Preço',
 			'importado' => 'Importado',
-			'ncm' => 'Ncm',
-			'codtributacao' => 'Codtributacao',
+			'ncm' => 'NCM',
+			'codtributacao' => 'Tributação',
 			'inativo' => 'Inativo',
-			'codtipoproduto' => 'Codtipoproduto',
+			'codtipoproduto' => 'Tipo',
 			'site' => 'Site',
-			'descricaosite' => 'Descricaosite',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'descricaosite' => 'Descrição Site',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

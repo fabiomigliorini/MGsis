@@ -136,13 +136,6 @@ $form = $this->beginWidget('MGActiveForm', array(
 		'icon' => 'icon-ok',
 		)
 	);
-	$this->widget(
-		'bootstrap.widgets.TbButton', array(
-		'buttonType' => 'reset',
-		'label' => 'Limpar',
-		'icon' => 'icon-refresh'
-		)
-	);
 	?>
 
 </div>

@@ -46,16 +46,6 @@ foreach ($this->tableSchema->columns as $column) {
                 )
             ); 
 	?>
-	<?php
-        \$this->widget(
-            'bootstrap.widgets.TbButton',
-            array(
-                'buttonType' => 'reset',
-                'label' => 'Limpar',
-                'icon' => 'icon-refresh'
-                )
-            );
-    ?>
     "; ?>
 
 </div>

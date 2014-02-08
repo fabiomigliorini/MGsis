@@ -22,7 +22,6 @@
 ?>
 
 <div class="form-actions">
-	
     <?php 
         $this->widget(
             'bootstrap.widgets.TbButton',
@@ -34,15 +33,4 @@
                 )
             );
 	?>
-	<?php
-        $this->widget(
-            'bootstrap.widgets.TbButton',
-            array(
-                'buttonType' => 'reset',
-                'label' => 'Limpar',
-                'icon' => 'icon-refresh'
-                )
-            );
-    ?>
-	
 </div>
