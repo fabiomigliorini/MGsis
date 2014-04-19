@@ -36,7 +36,7 @@ class Marca extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codmarca', 'required'),
+			array('marca', 'required'),
 			array('marca', 'length', 'max'=>50),
 			array('descricaosite', 'length', 'max'=>1024),
 			array('site, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
@@ -54,9 +54,9 @@ class Marca extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'produtos' => array(self::HAS_MANY, 'Produto', 'codmarca'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'Produtos' => array(self::HAS_MANY, 'Produto', 'codmarca'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 
@@ -66,14 +66,14 @@ class Marca extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codmarca' => 'Codmarca',
+			'codmarca' => '#',
 			'marca' => 'Marca',
-			'site' => 'Site',
-			'descricaosite' => 'Descricaosite',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'site' => 'Disponível no Site',
+			'descricaosite' => 'Descrição Site',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 
@@ -106,7 +106,10 @@ class Marca extends MGActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array('defaultOrder'=>'t.marca ASC'),
+			'pagination'=>array('pageSize'=>20)
 		));
+		
 	}
 
 	/**

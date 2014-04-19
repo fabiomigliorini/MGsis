@@ -8,15 +8,13 @@
 	<?php 	
 		echo $form->textFieldRow($model,'marca',array('class'=>'span5','maxlength'=>50));
 		echo $form->checkBoxRow($model,'site');
-		echo $form->textFieldRow($model,'descricaosite',array('class'=>'span5','maxlength'=>1024));
+//		echo $form->textFieldRow($model,'descricaosite',array('class'=>'span5','maxlength'=>1024));
+		echo $form->textAreaRow($model,'descricaosite',array('class'=>'span5','maxlength'=>1024,'rows'=>5));
 	?>
 </fieldset>
 <div class="form-actions">
-
-    
-    <?php 
 	
-
+    <?php 
         $this->widget(
             'bootstrap.widgets.TbButton',
             array(

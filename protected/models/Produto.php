@@ -133,7 +133,7 @@ class Produto extends MGActiveRecord
 			'codtributacao' => 'Tributação',
 			'inativo' => 'Inativo desde',
 			'codtipoproduto' => 'Tipo',
-			'site' => 'Site',
+			'site' => 'Disponível no Site',
 			'descricaosite' => 'Descrição Site',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',

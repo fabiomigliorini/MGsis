@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
-array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
+array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create')),
 array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codmarca)),
 array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
 //array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
@@ -29,19 +29,25 @@ $(document).ready(function(){
 /*]]>*/
 </script>
 
-<h1><?php echo $model->codmarca; ?></h1>
+<h1><?php echo $model->marca; ?></h1>
 
 <?php 
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-			'codmarca',
-		'marca',
+		'codmarca',
 		'site',
 		'descricaosite',
 		),
 	)); 
 
-	$this->widget('UsuarioCriacao', array('model'=>$model));
+$arq = Yii::app()->basePath . "/../images/marca/" . $model->codmarca . ".jpg";
+if (file_exists($arq))
+	echo CHtml::image( Yii::app()->baseUrl . "/images/marca/" . $model->codmarca . ".jpg"); 
+?>
+<br>
+<?php
+
+$this->widget('UsuarioCriacao', array('model'=>$model));
 
 ?>

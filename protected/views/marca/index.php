@@ -5,7 +5,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
+	array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 	);
 ?>
@@ -69,7 +69,7 @@ $this->widget(
 			'listViewId' => 'Listagem', 
 			'header' => '',
 			'loaderText'=>'Carregando...',
-			'options' => array('history' => false, 'triggerPageTreshold' => 10, 'trigger'=>'Carregar mais registros'),
+			'options' => array('history' => false, 'triggerPageTreshold' => 20, 'trigger'=>'Carregar mais registros'),
 		)
 	)
 );

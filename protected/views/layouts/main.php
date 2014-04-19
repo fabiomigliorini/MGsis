@@ -64,6 +64,7 @@
 				'url'=>'#', 
 				'items'=>array(
 					array('label' => 'Produtos', 'url' => Yii::app()->createUrl('produto')),
+					array('label' => 'Marcas', 'url' => Yii::app()->createUrl('marca')),
 				)
 			),
 

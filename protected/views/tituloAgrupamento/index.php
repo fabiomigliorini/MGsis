@@ -129,7 +129,7 @@ $this->widget(
 			'listViewId' => 'Listagem', 
 			'header' => '',
 			'loaderText'=>'Carregando...',
-			'options' => array('history' => false, 'triggerPageTreshold' => 10, 'trigger'=>'Carregar mais registros'),
+			'options' => array('history' => false, 'triggerPageTreshold' => 20, 'trigger'=>'Carregar mais registros'),
 		)
 	)
 );
