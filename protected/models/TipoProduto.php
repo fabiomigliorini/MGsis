@@ -19,6 +19,9 @@
  */
 class TipoProduto extends MGActiveRecord
 {
+	
+	const MERCADORIA = 0;
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -113,4 +116,21 @@ class TipoProduto extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
+	
+	public function scopes () 
+	{
+		return array(
+			'combo'=>array(
+				'select'=>array('codtipoproduto', 'tipoproduto'),
+				'order'=>'tipoproduto ASC',
+				),
+			);
+	}
+	
+	public function getListaCombo ()
+	{
+		$lista = self::model()->combo()->findAll();
+		return CHtml::listData($lista, 'codtipoproduto', 'tipoproduto');
+	}	
+	
 }

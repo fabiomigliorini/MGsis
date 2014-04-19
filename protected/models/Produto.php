@@ -64,9 +64,14 @@ class Produto extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codproduto, produto, codunidademedida, ncm, codtributacao', 'required'),
+			array('produto, codunidademedida, ncm, codtributacao, codtipoproduto, preco, codsubgrupoproduto, codmarca', 'required'),
+			array('produto', 'validaMarca'),
 			array('produto', 'length', 'max'=>100),
 			array('referencia', 'length', 'max'=>50),
+			array('preco', 'numerical', 'min'=>0.01),
+			array('ncm', 'length', 'max'=>8),
+			array('ncm', 'length', 'min'=>8),
+			array('ncm', 'numerical'),
 			array('preco', 'length', 'max'=>14),
 			array('descricaosite', 'length', 'max'=>1024),
 			array('codsubgrupoproduto, codmarca, importado, inativo, codtipoproduto, site, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
@@ -76,6 +81,16 @@ class Produto extends MGActiveRecord
 		);
 	}
 
+	//verifica se o numero tem pelo menos 10 digitos
+	public function validaMarca($attribute,$params)
+	{
+		if (!empty($this->$attribute) && !empty($this->codmarca) && empty($this->inativo))
+		{
+			if (strpos(strtoupper($this->$attribute), strtoupper($this->Marca->marca)) === false)
+				$this->addError($attribute,'Preencha a marca "' . $this->Marca->marca . '" na descrição do produto!');
+		}
+	}
+	
 	/**
 	 * @return array relational rules.
 	 */
@@ -116,7 +131,7 @@ class Produto extends MGActiveRecord
 			'importado' => 'Importado',
 			'ncm' => 'NCM',
 			'codtributacao' => 'Tributação',
-			'inativo' => 'Inativo',
+			'inativo' => 'Inativo desde',
 			'codtipoproduto' => 'Tipo',
 			'site' => 'Site',
 			'descricaosite' => 'Descrição Site',
@@ -268,5 +283,51 @@ class Produto extends MGActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+	
+	public function criaBarras ($barras) 
+	{
+		if ($this->isNewRecord)
+			return false;
+		
+		$barras = trim($barras);
+		
+		if (empty($barras))
+			$barras = str_pad($this->codproduto, 6, "0", STR_PAD_LEFT);
+		
+		$pb = new ProdutoBarra('insert');
+		
+		$pb->codproduto = $this->codproduto;
+		$pb->barras = $barras;
+		
+		return $pb->save();
+	}
+	
+	public function getImagens ()
+	{
+		$baseDir = Yii::app()->basePath . "/..";
+
+		$dir = "$baseDir/images/produto/" . str_pad($this->codproduto, 6, "0", STR_PAD_LEFT);
+		
+		if (!is_dir($dir)) {
+			return array();
+		}
+
+		$imgs_orig = CFileHelper::findFiles(
+			$dir
+			, array (
+				'fileTypes' => array("jpg", "gif", "png", "JPG", "PNG")
+				)
+			);
+		
+		
+		
+		foreach ($imgs_orig as $img)
+		{
+			$img = str_replace($baseDir, "", $img);
+			$imgs[] = $img;
+		}
+		
+		return $imgs;
 	}
 }

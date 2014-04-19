@@ -179,12 +179,6 @@ class Pessoa extends MGActiveRecord
 		}
 	}
 	
-	//retorna numero limpo
-	public function numeroLimpo($str)
-	{
-		return MGFormatter::numeroLimpo($str);
-	}
-
 	/**
 	 * @return array relational rules.
 	 */

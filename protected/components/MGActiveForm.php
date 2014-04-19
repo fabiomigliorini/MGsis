@@ -9,8 +9,8 @@ class MGActiveForm extends TbActiveForm
 
 	public function select2Row($model, $attribute, $data, $htmlOptions = array())
 	{
-		$widget = $this->select2Marca($model, $attribute, $htmlOptions);
-		return $this->customRow($model, 'codmarca', $widget);
+		$widget = $this->select2($model, $attribute, $data, $htmlOptions);
+		return $this->customRow($model, $attribute, $widget);
 	}
 
 	public function select2($model, $attribute, $data, $htmlOptions = array())
@@ -36,7 +36,7 @@ class MGActiveForm extends TbActiveForm
 	public function select2PessoaRow($model, $attribute, $htmlOptions = array())
 	{
 		$widget = $this->select2Pessoa($model, $attribute, $htmlOptions);
-		return $this->customRow($model, 'codpessoa', $widget);
+		return $this->customRow($model, $attribute, $widget);
 	}
 
 	public function select2Pessoa($model, $attribute, $htmlOptions = array())
@@ -55,7 +55,7 @@ class MGActiveForm extends TbActiveForm
 	public function select2CidadeRow($model, $attribute, $htmlOptions = array())
 	{
 		$widget = $this->select2Cidade($model, $attribute, $htmlOptions);
-		return $this->customRow($model, 'codcidade', $widget);
+		return $this->customRow($model, $attribute, $widget);
 	}
 
 	public function select2Cidade($model, $attribute, $htmlOptions = array())
@@ -74,7 +74,7 @@ class MGActiveForm extends TbActiveForm
 	public function select2MarcaRow($model, $attribute, $htmlOptions = array())
 	{
 		$widget = $this->select2Marca($model, $attribute, $htmlOptions);
-		return $this->customRow($model, 'codmarca', $widget);
+		return $this->customRow($model, $attribute, $widget);
 	}
 
 	public function select2Marca($model, $attribute, $htmlOptions = array())

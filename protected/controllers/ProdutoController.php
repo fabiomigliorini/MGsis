@@ -23,7 +23,7 @@ class ProdutoController extends Controller
 	* Creates a new model.
 	* If creation is successful, the browser will be redirected to the 'view' page.
 	*/
-	public function actionCreate()
+	public function actionCreate($barras = "")
 	{
 		$model=new Produto;
 
@@ -34,7 +34,14 @@ class ProdutoController extends Controller
 		{
 			$model->attributes=$_POST['Produto'];
 			if($model->save())
+			{
+				$model->criaBarras($barras);
 				$this->redirect(array('view','id'=>$model->codproduto));
+			}
+		}
+		else
+		{
+			$model->codtipoproduto = TipoProduto::MERCADORIA;
 		}
 
 		$this->render('create',array(

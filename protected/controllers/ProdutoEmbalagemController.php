@@ -35,7 +35,10 @@ class ProdutoEmbalagemController extends Controller
 		{
 			$model->attributes=$_POST['ProdutoEmbalagem'];
 			if($model->save())
+			{
+				$model->criaBarras();
 				$this->redirect(array('produto/view','id'=>$model->codproduto));
+			}
 		}
 
 		$this->render('create',array(

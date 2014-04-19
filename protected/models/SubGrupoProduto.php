@@ -117,4 +117,26 @@ class SubGrupoProduto extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
+	
+	public function scopes () 
+	{
+		return array(
+			'combo'=>array(
+				'select'=>array('codsubgrupoproduto', 'subgrupoproduto'),
+				'with'=>array(
+					'GrupoProduto' => array(
+						'select'=>array('codgrupoproduto', 'grupoproduto')
+					)
+				),
+				'order'=>'"GrupoProduto".grupoproduto ASC, subgrupoproduto ASC',
+				),
+			);
+	}
+	
+	public function getListaCombo ()
+	{
+		$lista = self::model()->combo()->findAll();
+		return CHtml::listData($lista, 'codsubgrupoproduto', 'subgrupoproduto', 'GrupoProduto.grupoproduto');
+	}	
+	
 }

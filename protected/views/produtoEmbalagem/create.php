@@ -7,10 +7,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Produto', 'icon'=>'icon-list-alt', 'url'=>array('produto/view', 'id'=>$model->codproduto)),
+	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('produto/view', 'id'=>$model->codproduto)),
 );
 ?>
 
-<h1>Nova Embalagem <?php echo CHtml::encode($model->Produto->produto . " " . $model->descricao); ?></h1>
+<h1>Nova Embalagem <?php echo CHtml::encode($model->Produto->produto); ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -7,7 +7,12 @@
 		</div>
 	
 		<div class="span4">
-			<b><?php echo CHtml::link(CHtml::encode($data->produto),array('view','id'=>$data->codproduto)); ?></b><br>
+			<b><?php echo CHtml::link(CHtml::encode($data->produto),array('view','id'=>$data->codproduto)); ?></b>
+				<?php if (!empty($data->inativo)): ?>
+					<span class="label label-important pull-right">Inativado em <?php echo CHtml::encode($data->inativo); ?></span>
+				<?php endif; ?>
+			
+			<br>
 			<small class="muted">
 				<b><?php echo CHtml::encode((!empty($data->codsubgrupoproduto))?$data->SubGrupoProduto->GrupoProduto->grupoproduto . " > ". $data->SubGrupoProduto->subgrupoproduto:""); ?></b><br>
 				<b><?php echo CHtml::encode((!empty($data->codmarca))?$data->Marca->marca:""); ?></b>

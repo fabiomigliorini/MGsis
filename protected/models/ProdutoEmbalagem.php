@@ -44,6 +44,10 @@ class ProdutoEmbalagem extends MGActiveRecord
 		return array(
 			array('codunidademedida, quantidade', 'required'),
 			array('quantidade, preco', 'length', 'max'=>14),
+			array('quantidade', 'numerical', 'min'=>1.01),
+			array('preco', 'numerical'),
+			array('preco', 'validaPreco'),
+			array('quantidade', 'validaQuantidade'),
 			array('codproduto, codunidademedida, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -51,6 +55,39 @@ class ProdutoEmbalagem extends MGActiveRecord
 		);
 	}
 
+	public function validaPreco($attribute, $params)
+	{
+		if (empty($this->preco))
+			return;
+		
+		if (empty($this->quantidade))
+			return;
+		
+		if ($this->preco >= ($this->Produto->preco * $this->quantidade))
+			$this->addError($attribute, 'O preço deve ser menos de R$ ' . Yii::app()->format->formatNumber($this->Produto->preco * $this->quantidade) . ' (preço unitário X quantidade da embalagem) !');
+		
+		if ($this->preco <= $this->Produto->preco)
+			$this->addError($attribute, 'O preço deve ser maior do que R$ ' . Yii::app()->format->formatNumber($this->Produto->preco) . ' (preço unitário) !');
+	}
+	
+	public function validaQuantidade($attribute, $params)
+	{
+		if (empty($this->quantidade))
+			return;
+
+		$pe = ProdutoEmbalagem::model()->find('codproduto=:codproduto AND quantidade=:quantidade AND codprodutoembalagem<>:codprodutoembalagem'
+			, array(
+				':codproduto'=>$this->codproduto
+				, ':quantidade' => $this->quantidade
+				, ':codprodutoembalagem' => (empty($this->codprodutoembalagem))?0:$this->codprodutoembalagem
+				)
+			);
+
+		if ($pe !== null)
+			$this->addError($attribute, 'Já existe uma embalagem ' . $pe->UnidadeMedida->sigla . ' cadastrada para esta mesma quantidade!');
+		
+	}
+	
 	/**
 	 * @return array relational rules.
 	 */
@@ -152,5 +189,20 @@ class ProdutoEmbalagem extends MGActiveRecord
 		$lista = self::model()->combo()->findAll('codproduto = :codproduto', array(':codproduto'=>$codproduto));
 		return CHtml::listData($lista, 'codprodutoembalagem', 'descricao');
 	}	
+	
+	public function criaBarras () 
+	{
+		if ($this->isNewRecord)
+			return false;
+		
+		$pb = new ProdutoBarra('insert');
+		
+		$pb->codproduto = $this->codproduto;
+		$pb->barras = str_pad ($this->codproduto, 6, "0", STR_PAD_LEFT) . "*" . $this->quantidade;
+		$pb->codprodutoembalagem = $this->codprodutoembalagem;
+		
+		return $pb->save();
+	}
+	
 	
 }

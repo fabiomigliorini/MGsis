@@ -57,14 +57,10 @@ class ProdutoBarra extends MGActiveRecord
 	
 	public function validaMarca($attribute, $params)
 	{
-		Yii::app()->user->setFlash('notice','Il y aura plus de 25 étudiants dans ce cours');
-		
 		if (empty($this->codmarca))
 			return;
 		
 		if ($this->codmarca = $this->Produto->codmarca)
-			//Yii::app()->user->setFlash('notice','Il y aura plus de 25 étudiants dans ce cours');
-			//$this->addWarning($attribute, 'Você selecionou a mesma marca informada no Produto, neste caso deixe em branco. Só preencha quando a marca for diferente da marca principal do produto!');
 			$this->addError($attribute, 'Você selecionou a mesma marca informada no Produto, neste caso deixe em branco. Só preencha quando a marca for diferente da marca principal do produto!');
 	}
 
