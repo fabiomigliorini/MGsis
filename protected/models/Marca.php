@@ -95,14 +95,17 @@ class Marca extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codmarca',$this->codmarca,true);
+		$criteria->compare('codmarca',$this->codmarca,false);
 		$criteria->compare('marca',$this->marca,true);
-		$criteria->compare('site',$this->site);
-		$criteria->compare('descricaosite',$this->descricaosite,true);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		switch ($this->site) // '1'=>'No Site', '2'=>'Fora do Site'), 
+		{
+			case 1:
+				$criteria->addCondition("t.site  = true");
+				continue;
+			case 2:
+				$criteria->addCondition("t.site = false");
+				continue;
+		}
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

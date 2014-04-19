@@ -15,7 +15,7 @@
 			<br>
 			<small class="muted">
 				<b><?php echo CHtml::encode((!empty($data->codsubgrupoproduto))?$data->SubGrupoProduto->GrupoProduto->grupoproduto . " > ". $data->SubGrupoProduto->subgrupoproduto:""); ?></b><br>
-				<b><?php echo CHtml::encode((!empty($data->codmarca))?$data->Marca->marca:""); ?></b>
+				<b><?php echo CHtml::link(CHtml::encode((!empty($data->codmarca))?$data->Marca->marca:""), array('marca/view','id'=>$data->codmarca)); ?></b>
 				<?php echo CHtml::encode($data->referencia); ?>
 			</small>			
 		</div>

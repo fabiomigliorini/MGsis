@@ -2,7 +2,7 @@
 $this->pagetitle = Yii::app()->name . ' - Alterar Marca';
 $this->breadcrumbs=array(
 	'Marca'=>array('index'),
-	$model->codmarca=>array('view','id'=>$model->codmarca),
+	$model->marca=>array('view','id'=>$model->codmarca),
 	'Alterar',
 );
 

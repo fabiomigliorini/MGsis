@@ -2,7 +2,7 @@
 $this->pagetitle = Yii::app()->name . ' - Detalhes Marca';
 $this->breadcrumbs=array(
 	'Marca'=>array('index'),
-	$model->codmarca,
+	$model->marca,
 );
 
 $this->menu=array(
