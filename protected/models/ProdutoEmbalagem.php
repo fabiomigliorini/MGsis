@@ -25,6 +25,7 @@
 class ProdutoEmbalagem extends MGActiveRecord
 {
 	var $descricao;
+	var $preco_calculado;
 	
 	/**
 	 * @return string the associated database table name
@@ -96,8 +97,8 @@ class ProdutoEmbalagem extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'ProdutoHistoricoPrecos' => array(self::HAS_MANY, 'ProdutoHistoricoPreco', 'codprodutoembalagem'),
 			'Produto' => array(self::BELONGS_TO, 'Produto', 'codproduto'),
+			'ProdutoHistoricoPrecos' => array(self::HAS_MANY, 'ProdutoHistoricoPreco', 'codprodutoembalagem'),
 			'UnidadeMedida' => array(self::BELONGS_TO, 'UnidadeMedida', 'codunidademedida'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
@@ -170,7 +171,12 @@ class ProdutoEmbalagem extends MGActiveRecord
 	protected function afterFind()
 	{
 		$ret = parent::afterFind();
-		$this->descricao = $this->UnidadeMedida->sigla . " C/" . Yii::app()->format->formatNumber($this->quantidade, 0);
+		$this->descricao = "C/" . Yii::app()->format->formatNumber($this->quantidade, 0);
+		$this->preco_calculado = (!empty($this->preco)) ? $this->preco : $this->Produto->preco * $this->quantidade;
+		//echo "<pre>";
+		//echo print_r($this->Produto);
+		//echo $this->Produto->_attributes["preco"];
+		//echo "</pre>";
 		return $ret;
 	}
 

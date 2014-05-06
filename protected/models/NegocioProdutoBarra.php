@@ -16,12 +16,12 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Notafiscalprodutobarra[] $notafiscalprodutobarras
- * @property Estoquemovimento[] $estoquemovimentos
  * @property Negocio $codnegocio
  * @property Produtobarra $codprodutobarra
  * @property Usuario $codusuarioalteracao
  * @property Usuario $codusuariocriacao
+ * @property Notafiscalprodutobarra[] $notafiscalprodutobarras
+ * @property Estoquemovimento[] $estoquemovimentos
  * @property Cupomfiscalprodutobarra[] $cupomfiscalprodutobarras
  */
 class NegocioProdutoBarra extends MGActiveRecord
@@ -42,7 +42,9 @@ class NegocioProdutoBarra extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codnegocioprodutobarra, codnegocio, quantidade, valorunitario, valortotal, codprodutobarra', 'required'),
+			array('codnegocio, quantidade, valorunitario, valortotal, codprodutobarra', 'required'),
+			array('quantidade, valorunitario, valortotal', 'numerical', 'min' => 0.01),
+			array('codnegocio', 'validaStatusNegocio'),
 			array('quantidade, valorunitario, valortotal', 'length', 'max'=>14),
 			array('alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
@@ -51,6 +53,16 @@ class NegocioProdutoBarra extends MGActiveRecord
 		);
 	}
 
+	
+	public function validaStatusNegocio($attribute, $params)
+	{
+		if (empty($this->Negocio))
+			return;
+		
+		if ($this->Negocio->codnegociostatus != 1)
+			$this->addError($attribute, 'O status do Negócio não permite alterações!');
+	}
+	
 	/**
 	 * @return array relational rules.
 	 */
@@ -59,13 +71,13 @@ class NegocioProdutoBarra extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'notafiscalprodutobarras' => array(self::HAS_MANY, 'Notafiscalprodutobarra', 'codnegocioprodutobarra'),
-			'estoquemovimentos' => array(self::HAS_MANY, 'Estoquemovimento', 'codnegocioprodutobarra'),
-			'codnegocio' => array(self::BELONGS_TO, 'Negocio', 'codnegocio'),
-			'codprodutobarra' => array(self::BELONGS_TO, 'Produtobarra', 'codprodutobarra'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
-			'cupomfiscalprodutobarras' => array(self::HAS_MANY, 'Cupomfiscalprodutobarra', 'codnegocioprodutobarra'),
+			'Negocio' => array(self::BELONGS_TO, 'Negocio', 'codnegocio'),
+			'ProdutoBarra' => array(self::BELONGS_TO, 'ProdutoBarra', 'codprodutobarra'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'NotaFiscalProdutoBarras' => array(self::HAS_MANY, 'NotaFiscalProdutoBarra', 'codnegocioprodutobarra'),
+			'EstoqueMovimentos' => array(self::HAS_MANY, 'EstoqueMovimento', 'codnegocioprodutobarra'),
+			'CupomFiscalProdutoBarras' => array(self::HAS_MANY, 'CupomFiscalProdutoBarra', 'codnegocioprodutobarra'),
 		);
 	}
 
@@ -75,16 +87,16 @@ class NegocioProdutoBarra extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codnegocioprodutobarra' => 'Codnegocioprodutobarra',
-			'codnegocio' => 'Codnegocio',
+			'codnegocioprodutobarra' => '#',
+			'codnegocio' => 'Negócio',
 			'quantidade' => 'Quantidade',
-			'valorunitario' => 'Valorunitario',
-			'valortotal' => 'Valortotal',
-			'codprodutobarra' => 'Codprodutobarra',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'valorunitario' => 'Preço',
+			'valortotal' => 'Total',
+			'codprodutobarra' => 'Produto',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

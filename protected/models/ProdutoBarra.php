@@ -27,6 +27,10 @@
  */
 class ProdutoBarra extends MGActiveRecord
 {
+	public $descricao;
+	public $codunidademedida;
+	public $preco;
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -80,6 +84,7 @@ class ProdutoBarra extends MGActiveRecord
 			'Marca' => array(self::BELONGS_TO, 'Marca', 'codmarca'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'UnidadeMedida' => array(self::BELONGS_TO, 'UnidadeMedida', 'codunidademedida'),
 		);
 	}
 
@@ -147,5 +152,63 @@ class ProdutoBarra extends MGActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+	
+	protected function afterFind()
+	{
+		$ret = parent::afterFind();
+		
+		$this->descricao = $this->Produto->produto;
+		$this->codunidademedida = $this->Produto->codunidademedida;
+		$this->preco = $this->Produto->preco;
+		
+		if (isset($this->ProdutoEmbalagem))
+		{
+			$this->descricao .= " " . $this->ProdutoEmbalagem->descricao;
+			$this->codunidademedida = $this->ProdutoEmbalagem->codunidademedida;
+			$this->preco = $this->ProdutoEmbalagem->preco_calculado;
+		}
+		
+		if (!empty($this->variacao))
+			$this->descricao .= ' ' . $this->variacao;
+			
+		return $ret;
+	}
+
+	public static function findByBarras($barras)
+	{
+		
+		//Procura pelo Codigo de Barras
+		if ($ret = self::model()->find('barras=:barras', array(':barras'=>$barras)))
+			return $ret;
+		
+		//Procura pelo Codigo Interno
+		if (strlen($barras) == 6 && ($barras == Yii::app()->format->numeroLimpo($barras)))
+			if ($ret = self::model()->find('codproduto=:barras and codprodutoembalagem is null', array(':barras'=>$barras)))
+				return $ret;
+			
+		//Procura pelo Codigo Interno * Embalagem
+		$arr = explode('*', $barras);
+		if (
+			count($arr) == 2
+			&& strlen($arr[0]) == 6
+			&& $arr[0] == Yii::app()->format->numeroLimpo($arr[0])
+			&& $arr[1] == Yii::app()->format->numeroLimpo($arr[1])
+			) 
+		{
+			if ($pe = ProdutoEmbalagem::model()->find('codproduto=:codproduto and quantidade=:quantidade', 
+				array(
+					':codproduto'=>$arr[0],
+					':quantidade'=>$arr[1]
+					)))
+			{
+				if ($ret = self::model()->find('codprodutoembalagem=:codprodutoembalagem', array(':codprodutoembalagem'=>$pe->codprodutoembalagem)))
+				{
+					return $ret;
+				}
+			}
+		}
+		return false;
+		
 	}
 }

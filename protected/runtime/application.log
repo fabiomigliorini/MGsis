@@ -4360,3 +4360,403 @@ Stack trace:
 REQUEST_URI=/MGsis/index.php?r=produto/view&id=10000379
 HTTP_REFERER=http://10.0.1.199/MGsis/index.php?r=produto
 ---
+2014/04/19 17:15:41 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P01]: Undefined table: 7 ERROR:  relation "tblnegocioprodutobarraaiauad" does not exist. The SQL statement executed was: 
+			CREATE TRIGGER tblnegocioprodutobarraaiauad
+			AFTER INSERT OR UPDATE OR DELETE
+			ON tblnegocioprodutobarraaiauad
+			FOR EACH ROW
+			EXECUTE PROCEDURE fntblnegocioprodutobarraaiauad();
+			.
+2014/04/19 17:15:41 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P01]: Undefined table: 7 ERROR:  relation "tblnegocioprodutobarraaiauad" does not exist. The SQL statement executed was: 
+			CREATE TRIGGER tblnegocioprodutobarraaiauad
+			AFTER INSERT OR UPDATE OR DELETE
+			ON tblnegocioprodutobarraaiauad
+			FOR EACH ROW
+			EXECUTE PROCEDURE fntblnegocioprodutobarraaiauad();
+			' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/MGsis/protected/migrations/m140419_195316_totais_tabela_negocio.php(88): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(385): m140419_195316_totais_tabela_negocio->up()
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(109): MigrateCommand->migrateUp('m140419_195316_...')
+#3 [internal function]: MigrateCommand->actionUp(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#8 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#9 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#10 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#11 {main}
+---
+2014/04/19 17:16:10 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42P01]: Undefined table: 7 ERROR:  relation "tblnegocioprodutobarraaiauad" does not exist. The SQL statement executed was: 
+			CREATE TRIGGER tblnegocioprodutobarraaiauad
+			AFTER INSERT OR UPDATE OR DELETE
+			ON tblnegocioprodutobarraaiauad
+			FOR EACH ROW
+			EXECUTE PROCEDURE fntblnegocioprodutobarraaiauad();
+			.
+2014/04/19 17:16:10 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42P01]: Undefined table: 7 ERROR:  relation "tblnegocioprodutobarraaiauad" does not exist. The SQL statement executed was: 
+			CREATE TRIGGER tblnegocioprodutobarraaiauad
+			AFTER INSERT OR UPDATE OR DELETE
+			ON tblnegocioprodutobarraaiauad
+			FOR EACH ROW
+			EXECUTE PROCEDURE fntblnegocioprodutobarraaiauad();
+			' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/MGsis/protected/migrations/m140419_195316_totais_tabela_negocio.php(88): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(385): m140419_195316_totais_tabela_negocio->up()
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(109): MigrateCommand->migrateUp('m140419_195316_...')
+#3 [internal function]: MigrateCommand->actionUp(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#8 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#9 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#10 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#11 {main}
+---
+2014/04/19 17:16:25 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42710]: Duplicate object: 7 ERROR:  trigger "tblnegocioprodutobarraaiauad" for relation "tblnegocioprodutobarra" already exists. The SQL statement executed was: 
+			CREATE TRIGGER tblnegocioprodutobarraaiauad
+			AFTER INSERT OR UPDATE OR DELETE
+			ON tblnegocioprodutobarra
+			FOR EACH ROW
+			EXECUTE PROCEDURE fntblnegocioprodutobarraaiauad();
+			.
+2014/04/19 17:16:25 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42710]: Duplicate object: 7 ERROR:  trigger "tblnegocioprodutobarraaiauad" for relation "tblnegocioprodutobarra" already exists. The SQL statement executed was: 
+			CREATE TRIGGER tblnegocioprodutobarraaiauad
+			AFTER INSERT OR UPDATE OR DELETE
+			ON tblnegocioprodutobarra
+			FOR EACH ROW
+			EXECUTE PROCEDURE fntblnegocioprodutobarraaiauad();
+			' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/MGsis/protected/migrations/m140419_195316_totais_tabela_negocio.php(88): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(385): m140419_195316_totais_tabela_negocio->up()
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(109): MigrateCommand->migrateUp('m140419_195316_...')
+#3 [internal function]: MigrateCommand->actionUp(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#8 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#9 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#10 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#11 {main}
+---
+2014/04/19 17:19:51 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42703]: Undefined column: 7 ERROR:  column "codnaturezaoperacao" of relation "tblnegocio" does not exist. The SQL statement executed was: alter table tblnegocio drop column codnaturezaoperacao.
+2014/04/19 17:19:51 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42703]: Undefined column: 7 ERROR:  column "codnaturezaoperacao" of relation "tblnegocio" does not exist. The SQL statement executed was: alter table tblnegocio drop column codnaturezaoperacao' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/MGsis/protected/migrations/m140419_195316_totais_tabela_negocio.php(158): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(410): m140419_195316_totais_tabela_negocio->down()
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(145): MigrateCommand->migrateDown('m140419_195316_...')
+#3 [internal function]: MigrateCommand->actionDown(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#8 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#9 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#10 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#11 {main}
+---
+2014/04/22 14:56:26 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42704]: Undefined object: 7 ERROR:  trigger "tblnegocioprodutobarraaiauad" for table "tblnegocioprodutobarra" does not exist. The SQL statement executed was: DROP TRIGGER tblnegocioprodutobarraaiauad ON tblnegocioprodutobarra.
+2014/04/22 14:56:26 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42704]: Undefined object: 7 ERROR:  trigger "tblnegocioprodutobarraaiauad" for table "tblnegocioprodutobarra" does not exist. The SQL statement executed was: DROP TRIGGER tblnegocioprodutobarraaiauad ON tblnegocioprodutobarra' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/MGsis/protected/migrations/m140419_195316_totais_tabela_negocio.php(260): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(410): m140419_195316_totais_tabela_negocio->down()
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(145): MigrateCommand->migrateDown('m140419_195316_...')
+#3 [internal function]: MigrateCommand->actionDown(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#8 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#9 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#10 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#11 {main}
+---
+2014/04/22 14:56:57 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42703]: Undefined column: 7 ERROR:  column "codnaturezaoperacao" of relation "tblnegocio" does not exist. The SQL statement executed was: alter table tblnegocio drop column codnaturezaoperacao.
+2014/04/22 14:56:57 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42703]: Undefined column: 7 ERROR:  column "codnaturezaoperacao" of relation "tblnegocio" does not exist. The SQL statement executed was: alter table tblnegocio drop column codnaturezaoperacao' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/MGsis/protected/migrations/m140419_195316_totais_tabela_negocio.php(255): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(410): m140419_195316_totais_tabela_negocio->down()
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(145): MigrateCommand->migrateDown('m140419_195316_...')
+#3 [internal function]: MigrateCommand->actionDown(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#8 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#9 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#10 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#11 {main}
+---
+2014/04/22 14:57:09 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42703]: Undefined column: 7 ERROR:  column "valorprodutos" of relation "tblnegocio" does not exist. The SQL statement executed was: alter table tblnegocio drop column valorprodutos.
+2014/04/22 14:57:09 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42703]: Undefined column: 7 ERROR:  column "valorprodutos" of relation "tblnegocio" does not exist. The SQL statement executed was: alter table tblnegocio drop column valorprodutos' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/MGsis/protected/migrations/m140419_195316_totais_tabela_negocio.php(256): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(410): m140419_195316_totais_tabela_negocio->down()
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(145): MigrateCommand->migrateDown('m140419_195316_...')
+#3 [internal function]: MigrateCommand->actionDown(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#8 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#9 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#10 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#11 {main}
+---
+2014/04/22 14:57:18 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42703]: Undefined column: 7 ERROR:  column "valortotal" of relation "tblnegocio" does not exist. The SQL statement executed was: alter table tblnegocio drop column valortotal.
+2014/04/22 14:57:18 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42703]: Undefined column: 7 ERROR:  column "valortotal" of relation "tblnegocio" does not exist. The SQL statement executed was: alter table tblnegocio drop column valortotal' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/MGsis/protected/migrations/m140419_195316_totais_tabela_negocio.php(257): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(410): m140419_195316_totais_tabela_negocio->down()
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(145): MigrateCommand->migrateDown('m140419_195316_...')
+#3 [internal function]: MigrateCommand->actionDown(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#8 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#9 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#10 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#11 {main}
+---
+2014/04/22 14:57:25 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42703]: Undefined column: 7 ERROR:  column "valoraprazo" of relation "tblnegocio" does not exist. The SQL statement executed was: alter table tblnegocio drop column valoraprazo.
+2014/04/22 14:57:25 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42703]: Undefined column: 7 ERROR:  column "valoraprazo" of relation "tblnegocio" does not exist. The SQL statement executed was: alter table tblnegocio drop column valoraprazo' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/MGsis/protected/migrations/m140419_195316_totais_tabela_negocio.php(258): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(410): m140419_195316_totais_tabela_negocio->down()
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(145): MigrateCommand->migrateDown('m140419_195316_...')
+#3 [internal function]: MigrateCommand->actionDown(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#8 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#9 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#10 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#11 {main}
+---
+2014/04/22 14:57:32 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42703]: Undefined column: 7 ERROR:  column "valoravista" of relation "tblnegocio" does not exist. The SQL statement executed was: alter table tblnegocio drop column valoravista.
+2014/04/22 14:57:32 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42703]: Undefined column: 7 ERROR:  column "valoravista" of relation "tblnegocio" does not exist. The SQL statement executed was: alter table tblnegocio drop column valoravista' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/MGsis/protected/migrations/m140419_195316_totais_tabela_negocio.php(259): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(410): m140419_195316_totais_tabela_negocio->down()
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(145): MigrateCommand->migrateDown('m140419_195316_...')
+#3 [internal function]: MigrateCommand->actionDown(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#8 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#9 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#10 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#11 {main}
+---
+2014/04/22 14:57:38 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42883]: Undefined function: 7 ERROR:  function fntblnegocioprodutobarraaiauad() does not exist. The SQL statement executed was: DROP FUNCTION fntblnegocioprodutobarraaiauad().
+2014/04/22 14:57:38 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42883]: Undefined function: 7 ERROR:  function fntblnegocioprodutobarraaiauad() does not exist. The SQL statement executed was: DROP FUNCTION fntblnegocioprodutobarraaiauad()' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/MGsis/protected/migrations/m140419_195316_totais_tabela_negocio.php(261): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(410): m140419_195316_totais_tabela_negocio->down()
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(145): MigrateCommand->migrateDown('m140419_195316_...')
+#3 [internal function]: MigrateCommand->actionDown(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#8 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#9 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#10 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#11 {main}
+---
+2014/04/22 14:57:47 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42704]: Undefined object: 7 ERROR:  trigger "tblnegocioformapagamentoaiauad" for table "tblnegocioformapagamento" does not exist. The SQL statement executed was: DROP TRIGGER tblnegocioformapagamentoaiauad ON tblnegocioformapagamento.
+2014/04/22 14:57:47 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42704]: Undefined object: 7 ERROR:  trigger "tblnegocioformapagamentoaiauad" for table "tblnegocioformapagamento" does not exist. The SQL statement executed was: DROP TRIGGER tblnegocioformapagamentoaiauad ON tblnegocioformapagamento' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/MGsis/protected/migrations/m140419_195316_totais_tabela_negocio.php(262): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(410): m140419_195316_totais_tabela_negocio->down()
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(145): MigrateCommand->migrateDown('m140419_195316_...')
+#3 [internal function]: MigrateCommand->actionDown(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#8 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#9 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#10 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#11 {main}
+---
+2014/04/22 14:58:01 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42883]: Undefined function: 7 ERROR:  function fntblnegocioformapagamentoaiauad() does not exist. The SQL statement executed was: DROP FUNCTION fntblnegocioformapagamentoaiauad().
+2014/04/22 14:58:01 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42883]: Undefined function: 7 ERROR:  function fntblnegocioformapagamentoaiauad() does not exist. The SQL statement executed was: DROP FUNCTION fntblnegocioformapagamentoaiauad()' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/MGsis/protected/migrations/m140419_195316_totais_tabela_negocio.php(263): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(410): m140419_195316_totais_tabela_negocio->down()
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(145): MigrateCommand->migrateDown('m140419_195316_...')
+#3 [internal function]: MigrateCommand->actionDown(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#8 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#9 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#10 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#11 {main}
+---
+2014/04/22 15:04:31 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42701]: Duplicate column: 7 ERROR:  column "codnaturezaoperacao" of relation "tblnegocio" already exists. The SQL statement executed was: alter table tblnegocio add codnaturezaoperacao bigint.
+2014/04/22 15:04:31 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42701]: Duplicate column: 7 ERROR:  column "codnaturezaoperacao" of relation "tblnegocio" already exists. The SQL statement executed was: alter table tblnegocio add codnaturezaoperacao bigint' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/MGsis/protected/migrations/m140419_195316_totais_tabela_negocio.php(16): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(385): m140419_195316_totais_tabela_negocio->up()
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(109): MigrateCommand->migrateUp('m140419_195316_...')
+#3 [internal function]: MigrateCommand->actionUp(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#8 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#9 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#10 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#11 {main}
+---
+2014/04/22 15:06:13 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23502]: Not null violation: 7 ERROR:  column "codnaturezaoperacao" contains null values. The SQL statement executed was: alter table tblnegocio alter column codnaturezaoperacao SET NOT NULL.
+2014/04/22 15:06:13 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23502]: Not null violation: 7 ERROR:  column "codnaturezaoperacao" contains null values. The SQL statement executed was: alter table tblnegocio alter column codnaturezaoperacao SET NOT NULL' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/MGsis/protected/migrations/m140419_195316_totais_tabela_negocio.php(19): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(385): m140419_195316_totais_tabela_negocio->up()
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(109): MigrateCommand->migrateUp('m140419_195316_...')
+#3 [internal function]: MigrateCommand->actionUp(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#8 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#9 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#10 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#11 {main}
+---
+2014/04/22 15:07:45 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42883]: Undefined function: 7 ERROR:  function fntblnegocioformapagamentoaiauad() does not exist. The SQL statement executed was: 
+			CREATE OR REPLACE FUNCTION fntblnegocio_atualiza_valortotal(pCodNegocio BIGINT)
+			  RETURNS BOOLEAN AS
+			$BODY$
+			BEGIN
+
+				-- Atualiza Tabela com valores calculados
+				UPDATE tblNegocio
+				   SET valorAVista = coalesce(tblNegocio.valorProdutos, 0) - coalesce(tblNegocio.valorDesconto, 0) - coalesce(tblNegocio.valorAPrazo, 0)
+					 , valorTotal  = coalesce(tblNegocio.valorProdutos, 0) - coalesce(tblNegocio.valorDesconto, 0) 
+				 WHERE tblNegocio.CodNegocio = pCodNegocio;
+
+				RETURN TRUE;
+
+			END;
+			$BODY$
+			  LANGUAGE plpgsql VOLATILE
+			  COST 100;
+			ALTER FUNCTION fntblnegocioformapagamentoaiauad()
+			  OWNER TO mgsis;
+			.
+2014/04/22 15:07:45 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42883]: Undefined function: 7 ERROR:  function fntblnegocioformapagamentoaiauad() does not exist. The SQL statement executed was: 
+			CREATE OR REPLACE FUNCTION fntblnegocio_atualiza_valortotal(pCodNegocio BIGINT)
+			  RETURNS BOOLEAN AS
+			$BODY$
+			BEGIN
+
+				-- Atualiza Tabela com valores calculados
+				UPDATE tblNegocio
+				   SET valorAVista = coalesce(tblNegocio.valorProdutos, 0) - coalesce(tblNegocio.valorDesconto, 0) - coalesce(tblNegocio.valorAPrazo, 0)
+					 , valorTotal  = coalesce(tblNegocio.valorProdutos, 0) - coalesce(tblNegocio.valorDesconto, 0) 
+				 WHERE tblNegocio.CodNegocio = pCodNegocio;
+
+				RETURN TRUE;
+
+			END;
+			$BODY$
+			  LANGUAGE plpgsql VOLATILE
+			  COST 100;
+			ALTER FUNCTION fntblnegocioformapagamentoaiauad()
+			  OWNER TO mgsis;
+			' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/MGsis/protected/migrations/m140419_195316_totais_tabela_negocio.php(83): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(385): m140419_195316_totais_tabela_negocio->up()
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(109): MigrateCommand->migrateUp('m140419_195316_...')
+#3 [internal function]: MigrateCommand->actionUp(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#8 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#9 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#10 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#11 {main}
+---
+2014/04/22 15:25:27 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42701]: Duplicate column: 7 ERROR:  column "codnaturezaoperacao" of relation "tblnegocio" already exists. The SQL statement executed was: alter table tblnegocio add codnaturezaoperacao bigint.
+2014/04/22 15:25:27 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42701]: Duplicate column: 7 ERROR:  column "codnaturezaoperacao" of relation "tblnegocio" already exists. The SQL statement executed was: alter table tblnegocio add codnaturezaoperacao bigint' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/MGsis/protected/migrations/m140419_195316_totais_tabela_negocio.php(16): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(385): m140419_195316_totais_tabela_negocio->up()
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(109): MigrateCommand->migrateUp('m140419_195316_...')
+#3 [internal function]: MigrateCommand->actionUp(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#8 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#9 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#10 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#11 {main}
+---
+2014/04/22 15:30:52 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42701]: Duplicate column: 7 ERROR:  column "codnaturezaoperacao" of relation "tblnegocio" already exists. The SQL statement executed was: alter table tblnegocio add codnaturezaoperacao bigint.
+2014/04/22 15:30:52 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42701]: Duplicate column: 7 ERROR:  column "codnaturezaoperacao" of relation "tblnegocio" already exists. The SQL statement executed was: alter table tblnegocio add codnaturezaoperacao bigint' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/MGsis/protected/migrations/m140419_195316_totais_tabela_negocio.php(16): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(385): m140419_195316_totais_tabela_negocio->up()
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(109): MigrateCommand->migrateUp('m140419_195316_...')
+#3 [internal function]: MigrateCommand->actionUp(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#8 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#9 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#10 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#11 {main}
+---
+2014/04/22 15:44:31 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[2BP01]: Dependent objects still exist: 7 ERROR:  cannot drop table tblnegocio column valorprodutos because other objects depend on it
+DETAIL:  trigger tblnegocioaiau_valorprodutos_valoraprazo on table tblnegocio depends on table tblnegocio column valorprodutos
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.. The SQL statement executed was: alter table tblnegocio drop column valorprodutos.
+2014/04/22 15:44:31 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[2BP01]: Dependent objects still exist: 7 ERROR:  cannot drop table tblnegocio column valorprodutos because other objects depend on it
+DETAIL:  trigger tblnegocioaiau_valorprodutos_valoraprazo on table tblnegocio depends on table tblnegocio column valorprodutos
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.. The SQL statement executed was: alter table tblnegocio drop column valorprodutos' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/MGsis/protected/migrations/m140419_195316_totais_tabela_negocio.php(248): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(410): m140419_195316_totais_tabela_negocio->down()
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(145): MigrateCommand->migrateDown('m140419_195316_...')
+#3 [internal function]: MigrateCommand->actionDown(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#8 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#9 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#10 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#11 {main}
+---
+2014/04/22 15:58:59 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42704]: Undefined object: 7 ERROR:  trigger "tblnegocioaiau_valorprodutos_valoraprazo_valordesconto" for table "tblnegocio" does not exist. The SQL statement executed was: DROP TRIGGER tblnegocioaiau_valorprodutos_valoraprazo_valordesconto ON tblnegocio.
+2014/04/22 15:58:59 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42704]: Undefined object: 7 ERROR:  trigger "tblnegocioaiau_valorprodutos_valoraprazo_valordesconto" for table "tblnegocio" does not exist. The SQL statement executed was: DROP TRIGGER tblnegocioaiau_valorprodutos_valoraprazo_valordesconto ON tblnegocio' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/MGsis/protected/migrations/m140419_195316_totais_tabela_negocio.php(256): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(410): m140419_195316_totais_tabela_negocio->down()
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(145): MigrateCommand->migrateDown('m140419_195316_...')
+#3 [internal function]: MigrateCommand->actionDown(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#8 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#9 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#10 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#11 {main}
+---

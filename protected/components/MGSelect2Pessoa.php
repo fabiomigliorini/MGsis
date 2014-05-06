@@ -16,10 +16,15 @@ class MGSelect2Pessoa extends TbSelect2
 		if (!isset($this->htmlOptions['placeholder'])) 
 			$this->htmlOptions['placeholder'] = 'Pessoa';
 		
-		if (isset($this->htmlOptions["inativo"]) && $this->htmlOptions["inativo"])
+		if (!empty($this->htmlOptions["inativo"]))
 			$inativo = 1;
 		else 
 			$inativo = 0;
+
+		if (!empty($this->htmlOptions["vendedor"]))
+			$vendedor = 1;
+		else 
+			$vendedor = 0;
 		
 		$this->options = array(
 					'minimumInputLength'=>3,
@@ -68,7 +73,7 @@ class MGSelect2Pessoa extends TbSelect2
 						}',
 					'formatSelection' => 'js:function(item) { return item.fantasia; }',
 					'ajax' => array(
-						'url' =>  Yii::app()->createUrl('pessoa/ajaxbuscapessoa', array("inativo"=>$inativo)),
+						'url' =>  Yii::app()->createUrl('pessoa/ajaxbuscapessoa', array("inativo"=>$inativo, "vendedor"=>$vendedor)),
 						'dataType' => 'json',
 						'quietMillis' => 500,
 						'data' => 'js:function(term,page) { return {texto: term, limite: 20, pagina: page}; }',

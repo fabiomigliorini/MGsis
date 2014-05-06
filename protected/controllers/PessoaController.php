@@ -164,13 +164,14 @@ class PessoaController extends Controller
 		}
 	}
 	
-	public function actionAjaxBuscaPessoa() 
+	public function actionAjaxBuscaPessoa($texto, $limite=20, $pagina=1, $inativo = 0, $vendedor = 0) 
 	{
 
 		// variaveis _GET 
-		$texto  = str_replace(' ', '%', trim(isset($_GET['texto'])?$_GET['texto']:''));
-		$limite = isset($_GET['limite'])?$_GET['limite']:20;
-		$pagina = isset($_GET['pagina'])?$_GET['pagina']:1;
+		//$texto  = str_replace(' ', '%', trim(isset($_GET['texto'])?$_GET['texto']:''));
+		$texto  = str_replace(' ', '%', trim($texto));
+		//$limite = isset($_GET['limite'])?$_GET['limite']:20;
+		//$pagina = isset($_GET['pagina'])?$_GET['pagina']:1;
 
 		// corrige pagina se veio sujeira
 		if ($pagina < 1) $pagina = 1;
@@ -191,6 +192,9 @@ class PessoaController extends Controller
 			// se quiser inativas limpa o filtro de ativas
 			if (isset($_GET['inativo']) && $_GET['inativo'])
 					$condition = '';
+			
+			if (!empty($vendedor))
+				$condition .= "vendedor = true AND ";
 			
 			// busca pelos campos "fantasia" e "pessoa" 			
 			$condition .= '(fantasia ILIKE :fantasia OR pessoa ILIKE :pessoa ';

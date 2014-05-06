@@ -1,33 +1,29 @@
 <?php
 
 /**
- * This is the model class for table "mgsis.tblnegocioformapagamento".
+ * This is the model class for table "mgsis.tblnegociostatus".
  *
- * The followings are the available columns in table 'mgsis.tblnegocioformapagamento':
- * @property string $codnegocioformapagamento
- * @property string $codnegocio
- * @property string $codformapagamento
- * @property string $valorpagamento
+ * The followings are the available columns in table 'mgsis.tblnegociostatus':
+ * @property string $codnegociostatus
+ * @property string $negociostatus
  * @property string $alteracao
  * @property string $codusuarioalteracao
  * @property string $criacao
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Formapagamento $codformapagamento
- * @property Negocio $codnegocio
+ * @property Negocio[] $negocios
  * @property Usuario $codusuarioalteracao
  * @property Usuario $codusuariocriacao
- * @property Titulo[] $titulos
  */
-class NegocioFormaPagamento extends MGActiveRecord
+class NegocioStatus extends MGActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'mgsis.tblnegocioformapagamento';
+		return 'mgsis.tblnegociostatus';
 	}
 
 	/**
@@ -38,12 +34,12 @@ class NegocioFormaPagamento extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codnegocioformapagamento, codnegocio, codformapagamento, valorpagamento', 'required'),
-			array('valorpagamento', 'length', 'max'=>14),
+			array('codnegociostatus, negociostatus', 'required'),
+			array('negociostatus', 'length', 'max'=>50),
 			array('alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('codnegocioformapagamento, codnegocio, codformapagamento, valorpagamento, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
+			array('codnegociostatus, negociostatus, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,11 +51,9 @@ class NegocioFormaPagamento extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'codformapagamento' => array(self::BELONGS_TO, 'Formapagamento', 'codformapagamento'),
-			'codnegocio' => array(self::BELONGS_TO, 'Negocio', 'codnegocio'),
+			'negocios' => array(self::HAS_MANY, 'Negocio', 'codnegociostatus'),
 			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
-			'titulos' => array(self::HAS_MANY, 'Titulo', 'codnegocioformapagamento'),
 		);
 	}
 
@@ -69,10 +63,8 @@ class NegocioFormaPagamento extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codnegocioformapagamento' => 'Codnegocioformapagamento',
-			'codnegocio' => 'Codnegocio',
-			'codformapagamento' => 'Codformapagamento',
-			'valorpagamento' => 'Valorpagamento',
+			'codnegociostatus' => 'Codnegociostatus',
+			'negociostatus' => 'Negociostatus',
 			'alteracao' => 'Alteracao',
 			'codusuarioalteracao' => 'Codusuarioalteracao',
 			'criacao' => 'Criacao',
@@ -98,10 +90,8 @@ class NegocioFormaPagamento extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codnegocioformapagamento',$this->codnegocioformapagamento,true);
-		$criteria->compare('codnegocio',$this->codnegocio,true);
-		$criteria->compare('codformapagamento',$this->codformapagamento,true);
-		$criteria->compare('valorpagamento',$this->valorpagamento,true);
+		$criteria->compare('codnegociostatus',$this->codnegociostatus,true);
+		$criteria->compare('negociostatus',$this->negociostatus,true);
 		$criteria->compare('alteracao',$this->alteracao,true);
 		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
 		$criteria->compare('criacao',$this->criacao,true);
@@ -116,10 +106,26 @@ class NegocioFormaPagamento extends MGActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return NegocioFormaPagamento the static model class
+	 * @return NegocioStatus the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
+	
+	public function scopes () 
+	{
+		return array(
+			'combo'=>array(
+				'select'=>array('codnegociostatus', 'negociostatus'),
+				'order'=>'t.codnegociostatus ASC, t.negociostatus ASC',
+				),
+			);
+	}
+	
+	public function getListaCombo ()
+	{
+		$lista = self::model()->combo()->findAll();
+		return CHtml::listData($lista, 'codnegociostatus', 'negociostatus');
+	}	
 }

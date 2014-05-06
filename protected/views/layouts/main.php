@@ -48,6 +48,15 @@
 	
 	$menu = 
 		array(
+			
+			array(
+				'label' => 'Comercial', 
+				'url'=>'#', 
+				'items'=>array(
+					array('label' => 'Negócios', 'url' => Yii::app()->createUrl('negocio')),
+				)
+			),
+			
 			array(
 				'label' => 'Financeiro', 
 				'url'=>'#', 
