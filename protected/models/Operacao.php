@@ -20,6 +20,10 @@
  */
 class Operacao extends MGActiveRecord
 {
+	
+	const ENTRADA = 1;
+	const SAIDA = 2;
+	
 	/**
 	 * @return string the associated database table name
 	 */

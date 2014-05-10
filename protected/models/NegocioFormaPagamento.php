@@ -38,7 +38,7 @@ class NegocioFormaPagamento extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codnegocioformapagamento, codnegocio, codformapagamento, valorpagamento', 'required'),
+			array('codnegocio, codformapagamento, valorpagamento', 'required'),
 			array('valorpagamento', 'length', 'max'=>14),
 			array('alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
@@ -55,11 +55,11 @@ class NegocioFormaPagamento extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'codformapagamento' => array(self::BELONGS_TO, 'Formapagamento', 'codformapagamento'),
-			'codnegocio' => array(self::BELONGS_TO, 'Negocio', 'codnegocio'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
-			'titulos' => array(self::HAS_MANY, 'Titulo', 'codnegocioformapagamento'),
+			'FormaPagamento' => array(self::BELONGS_TO, 'FormaPagamento', 'codformapagamento'),
+			'Negocio' => array(self::BELONGS_TO, 'Negocio', 'codnegocio'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'Titulos' => array(self::HAS_MANY, 'Titulo', 'codnegocioformapagamento'),
 		);
 	}
 
@@ -69,14 +69,14 @@ class NegocioFormaPagamento extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codnegocioformapagamento' => 'Codnegocioformapagamento',
-			'codnegocio' => 'Codnegocio',
-			'codformapagamento' => 'Codformapagamento',
-			'valorpagamento' => 'Valorpagamento',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'codnegocioformapagamento' => '#',
+			'codnegocio' => 'Negócio',
+			'codformapagamento' => 'Forma de Pagamento',
+			'valorpagamento' => 'Valor',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 
@@ -122,4 +122,85 @@ class NegocioFormaPagamento extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
+	
+	function geraTitulos ()
+	{
+		
+		//se for avista ignora
+		if ($this->FormaPagamento->avista)
+			return true;
+
+		//se ja tem titulos gerados gera erro
+		if (count($this->Titulos) != 0)
+		{
+			$this->addError("codformapagamento", "Já existem Títulos gerados para a forma de pagamento, impossível gerar novos!");
+			return false;
+		}
+
+		$total = 0;
+		
+		// faz um looping para gerar duplicatas
+		for ($i = 1; $i <= $this->FormaPagamento->parcelas; $i++) 
+		{
+		
+			//Joga diferença no último titulo gerado
+			if ($i == $this->FormaPagamento->parcelas)
+				$valor = $this->valorpagamento - $total;
+			else
+				$valor = floor($this->valorpagamento / $this->FormaPagamento->parcelas);
+			$total += $valor;
+
+			$titulo = new Titulo();
+			$titulo->codnegocioformapagamento = $this->codnegocioformapagamento;
+			$titulo->codfilial = $this->Negocio->codfilial;
+
+			//TODO: Amarrar tipo de titulo pela Natureza de operacao
+			if ($this->Negocio->codoperacao == Operacao::SAIDA)
+			{
+				$titulo->codtipotitulo = TipoTitulo::VENDA;
+				$titulo->codcontacontabil = ContaContabil::VENDA;
+				$titulo->valor = $valor;
+			}
+			else
+			{
+				$titulo->codtipotitulo = TipoTitulo::COMPRA;
+				$titulo->codcontacontabil = ContaContabil::COMPRA;
+				$titulo->valor = $valor * -1;
+			}
+			
+			$titulo->boleto = $this->FormaPagamento->boleto;
+			$titulo->codpessoa = $this->Negocio->codpessoa;
+			$titulo->numero = "N" . str_pad($this->codnegocio, 8, "0", STR_PAD_LEFT) . "-$i/{$this->FormaPagamento->parcelas}";
+			$titulo->emissao = date('d/m/Y');
+			$titulo->transacao = date('d/m/Y');
+			$titulo->vencimento = date('d/m/Y', strtotime("+" . $i * $this->FormaPagamento->diasentreparcelas . " days"));
+			$titulo->vencimentooriginal = $titulo->vencimento;
+			$titulo->gerencial = true;
+			
+			//se for boleto pega o primeiro portador bancario da filial
+			if ($titulo->boleto)
+				if ($portador = Portador::model()->find("codfilial = :codfilial and emiteboleto = true", array(":codfilial" => $titulo->codfilial)))
+					$titulo->codportador = $portador->codportador;
+			
+			//se nao achou tenta pegar portador do usuario
+			if (empty($titulo->codportador))
+				$titulo->codportador = Yii::app()->user->getState("codportador");
+			
+			//se nao preencheu carteira
+			if (empty($titulo->codportador))
+				$titulo->codportador = Portador::CARTEIRA;
+			
+			//se deu erro ao salvar titulo aborta
+			if (!$titulo->save())
+			{
+				$this->addErrors($titulo->getErrors());
+				return false;
+			}
+			
+		}
+		
+		return true;
+		
+	}
+	
 }

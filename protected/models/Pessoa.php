@@ -77,6 +77,8 @@ class Pessoa extends MGActiveRecord
 	const NOTAFISCAL_SEMPRE = 1;
 	const NOTAFISCAL_SOMENTE_FECHAMENTO = 2;
 	const NOTAFISCAL_NUNCA = 9;
+	
+	const CONSUMIDOR = 1;
 
 	/**
 	 * @return string the associated database table name
@@ -121,6 +123,13 @@ class Pessoa extends MGActiveRecord
 			array('codpessoa, pessoa, fantasia, inativo, cnpj, codcidade, email, telefone1', 'safe', 'on'=>'search'),
 		);
 	}
+
+	//retorna numero limpo
+	//necessario para o filtro de ie/cep/cobranca
+	public function numeroLimpo($str)
+	{
+		return MGFormatter::numeroLimpo($str);
+	}	
 
 	//verifica se o numero tem pelo menos 10 digitos
 	public function validaTelefone($attribute,$params)

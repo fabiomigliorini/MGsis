@@ -22,6 +22,8 @@
  */
 class NaturezaOperacao extends MGActiveRecord
 {
+	const VENDA = 1;
+	
 	/**
 	 * @return string the associated database table name
 	 */

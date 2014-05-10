@@ -18,6 +18,11 @@
  */
 class NegocioStatus extends MGActiveRecord
 {
+	
+	const ABERTO = 1;
+	const FECHADO = 2;
+	const CANCELADO = 3;
+	
 	/**
 	 * @return string the associated database table name
 	 */

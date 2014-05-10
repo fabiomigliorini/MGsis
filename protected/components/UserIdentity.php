@@ -31,6 +31,7 @@ class UserIdentity extends CUserIdentity
 			//TODO: pegar da tabela de usuario
 			$this->setState('impressoraMatricial', $usuario->impressoramatricial);
 			$this->setState('codportador', $usuario->codportador);
+			$this->setState('codfilial', $usuario->codfilial);
 			$usuario->saveAttributes(array('ultimoacesso'=>	date('Y-m-d H:i:s')));
 			
 			$user = Yii::app()->getComponent('user');

@@ -1,20 +1,20 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Alterar Negócio';
+$this->pagetitle = Yii::app()->name . ' - Informar Detalhes';
 $this->breadcrumbs=array(
 	'Negócios'=>array('index'),
 	$model->codnegocio=>array('view','id'=>$model->codnegocio),
-	'Alterar',
+	'Informar Detalhes',
 );
 
 $this->menu=array(
-	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
-	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
+	//array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
+	//array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
 	array('label'=>'Detalhes', 'icon'=>'icon-eye-open', 'url'=>array('view','id'=>$model->codnegocio)),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Alterar Negócio <?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codnegocio)); ?></h1>
+<h1>Detalhes Negócio <?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codnegocio)); ?></h1>
 <br>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model)); ?>	

@@ -23,11 +23,7 @@
 		<div class="span6">
 			Desconto
 			<div class="badge pull-right">
-				<?php
-				$qtd = 100 * ($model->valordesconto / $model->valorprodutos);
-
-				echo Yii::app()->format->formatNumber($qtd, 1);
-				?>
+				<?php echo Yii::app()->format->formatNumber($model->percentualdesconto, 1);	?>
 				%
 			</div>
 		</div>

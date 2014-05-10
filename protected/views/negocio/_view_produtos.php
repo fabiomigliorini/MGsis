@@ -13,7 +13,7 @@ if ($model->codnegociostatus == 1)
 				<label class="add-on" for="barras">Código</label>
 				<input class="input-medium text-right" id="barras" type="text">
 				<button class="btn" type="submit" id="btnAdicionar" >Adicionar</button>
-				</div>
+			</div>
 		</div>
 	</form>
 	<?php

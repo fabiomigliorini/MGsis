@@ -29,10 +29,19 @@ class NegocioController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
+		
+		$model->codusuario = Yii::app()->user->id;
+		$model->lancamento = date('d/m/Y H:i:s');
+		$model->codnegociostatus = 1;
+		$model->codfilial = Yii::app()->user->getState("codfilial");
+		$model->codnaturezaoperacao = NaturezaOperacao::VENDA;
+		$model->codpessoa = Pessoa::CONSUMIDOR;
 
 		if(isset($_POST['Negocio']))
 		{
 			$model->attributes=$_POST['Negocio'];
+			if (!empty($model->NaturezaOperacao))
+				$model->codoperacao = $model->NaturezaOperacao->codoperacao;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->codnegocio));
 		}
@@ -230,10 +239,93 @@ class NegocioController extends Controller
 			));		
 	}
 	
+	public function actionAtualizaListagemPagamentos($codnegocio)
+	{
+		$this->renderPartial('_view_pagamentos_listagem',array(
+			'model'=>$this->loadModel($codnegocio),
+			));		
+	}
+	
 	public function actionAtualizaTotais($codnegocio)
 	{
 		$this->renderPartial('_view_totais',array(
 			'model'=>$this->loadModel($codnegocio),
 			));		
+	}
+	
+	public function actionAdicionaFormaPagamento($codnegocio, $codformapagamento, $valorpagamento)
+	{
+		$model=$this->loadModel($codnegocio);
+		
+		$retorno = array("Adicionado"=>true, "Mensagem"=>"");
+		
+		if ($valorpagamento <= 0)
+		{
+			$retorno["Adicionado"] = false;
+			$retorno["Mensagem"] = "Valor Inválido!";
+		}
+		elseif ($fp = FormaPagamento::model()->findByPk($codformapagamento))
+		{
+			if ($nfp = NegocioFormaPagamento::model()->find(
+				"codnegocio=:codnegocio AND codformapagamento=:codformapagamento", 
+				array(
+					":codnegocio" => $model->codnegocio,
+					":codformapagamento" => $fp->codformapagamento
+					)
+				))
+			{
+				$nfp->valorpagamento += $valorpagamento;
+			}
+			else
+			{
+				$nfp = new NegocioFormaPagamento;
+				$nfp->codnegocio = $model->codnegocio;
+				$nfp->codformapagamento = $fp->codformapagamento;
+				$nfp->valorpagamento = $valorpagamento;
+			}
+			
+			if (!$nfp->save())
+			{
+				$retorno["Adicionado"] = false;
+				$erros = $nfp->getErrors();
+				$erro = "Erro ao salvar registro de produto!<br>";
+				foreach ($erros as $campo => $mensagens)
+					foreach($mensagens as $mensagem)
+						$erro .= "\n<br>- " . $mensagem;
+					
+				$retorno["Mensagem"] = $erro;
+				$retorno["Erros"] = $erros;
+			}
+			
+			
+		}
+		else
+		{
+			$retorno["Adicionado"] = false;
+			$retorno["Mensagem"] = "Forma de Pagamento '$codformapagamento' não localizada!";
+		}
+		
+		echo CJSON::encode($retorno);
+		
+	}
+
+	public function actionFecharNegocio($codnegocio)
+	{
+		$negocio = $this->loadModel($codnegocio);
+		
+		$retorno = array("Fechado"=>true, "Mensagem"=>"");
+		if (!$negocio->fecharNegocio())
+		{
+			$retorno["Fechado"] = false;
+			$erros = $negocio->getErrors();
+			$erro = "Erro ao Fechar Negócio!";
+			foreach ($erros as $campo => $mensagens)
+				foreach($mensagens as $mensagem)
+					$erro .= " " . $mensagem;
+			$retorno["Mensagem"] = $erro;
+			
+		}
+		
+		echo CJSON::encode($retorno);
 	}
 }

@@ -343,11 +343,11 @@ class TituloAgrupamento extends MGActiveRecord
 
 				$titulo = new Titulo('insert');
 				$titulo->codtituloagrupamento = $this->codtituloagrupamento;
-				$titulo->codtipotitulo = ($total<0)?TipoTitulo::TIPO_AGRUPAMENTO_CREDITO:TipoTitulo::TIPO_AGRUPAMENTO_DEBITO;
+				$titulo->codtipotitulo = ($total<0)?TipoTitulo::AGRUPAMENTO_CREDITO:TipoTitulo::AGRUPAMENTO_DEBITO;
 				$titulo->codfilial = $this->codfilial;
 				$titulo->codportador = $this->codportador;
 				$titulo->codpessoa = $this->codpessoa;
-				$titulo->codcontacontabil = ContaContabil::CONTA_AGRUPAMENTO;
+				$titulo->codcontacontabil = ContaContabil::AGRUPAMENTO;
 				$titulo->numero = "A" . str_pad($this->codtituloagrupamento, 8, "0", STR_PAD_LEFT) . "-$i/" . sizeof($this->vencimentos);
 				$titulo->fatura = implode(", ", $fatura);
 				$titulo->emissao = $emissao->format('d/m/Y');

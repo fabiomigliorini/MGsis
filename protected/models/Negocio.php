@@ -47,6 +47,7 @@ class Negocio extends MGActiveRecord
 	public $lancamento_ate;
 	public $horario_de;
 	public $horario_ate;
+	public $percentualdesconto;
 	
 	/**
 	 * @return string the associated database table name
@@ -64,9 +65,11 @@ class Negocio extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codnegocio, codfilial, lancamento, codoperacao, codnegociostatus, codusuario, codnaturezaoperacao', 'required'),
+			array('codpessoa, codfilial, lancamento, codoperacao, codnegociostatus, codusuario, codnaturezaoperacao', 'required'),
 			array('observacoes', 'length', 'max'=>500),
-			array('valordesconto, valorprodutos, valortotal, valoraprazo, valoravista', 'length', 'max'=>14),
+			array('valordesconto, valorprodutos, valortotal, valoraprazo, valoravista', 'numerical'),
+			array('valordesconto', 'validaDesconto'),
+			array('codnegociostatus', 'validaStatus'),
 			array('codpessoa, codpessoavendedor, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -74,6 +77,18 @@ class Negocio extends MGActiveRecord
 		);
 	}
 
+	public function validaDesconto($attribute, $params)
+	{
+		if ($this->valordesconto > $this->valorprodutos)
+			$this->addError($attribute, 'O valor de desconto não pode ser maior que o valor dos produtos!');
+	}
+
+	public function validaStatus($attribute, $params)
+	{
+		if ($this->codnegociostatus <> 1)
+			$this->addError($attribute, 'O status do negócio não permite alterações!');
+	}
+	
 	/**
 	 * @return array relational rules.
 	 */
@@ -113,6 +128,7 @@ class Negocio extends MGActiveRecord
 			'observacoes' => 'Observações',
 			'codusuario' => 'Usuário',
 			'valordesconto' => 'Desconto',
+			'percentualdesconto' => 'Desconto %',
 			'entrega' => 'Entrega',
 			'acertoentrega' => 'Acerto Entrega',
 			'codusuarioacertoentrega' => 'Usuário Acerto Entrega',
@@ -203,5 +219,37 @@ class Negocio extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	protected function afterFind()
+	{
+		if ($this->valortotal >0 and $this->valordesconto>0)
+			$this->percentualdesconto = 100 * ($this->valordesconto / $this->valorprodutos);
+		else
+			$this->percentualdesconto = 0;
+		
+		return parent::afterFind();
+	}		
 	
+	public function fecharNegocio()
+	{
+		
+		//So continua se for status ABERTO
+		if ($this->codnegociostatus != NegocioStatus::ABERTO)
+		{
+			$this->addError("codnegociostatus", "O Status do Negócio não permite Fechamento!");
+			return false;
+		}
+		
+		foreach ($this->NegocioFormaPagamentos as $nfp)
+		{
+			if (!$nfp->geraTitulos())
+			{
+				$this->addErrors($nfp->getErrors());
+				return false;
+			}
+		}
+		
+		return true;
+		
+	}
 }

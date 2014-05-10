@@ -27,6 +27,8 @@
  */
 class FormaPagamento extends MGActiveRecord
 {
+	const DINHEIRO = 1010;
+	
 	/**
 	 * @return string the associated database table name
 	 */

@@ -37,6 +37,9 @@
 			  content: none;
 			}
 		  }
+		html {
+			   overflow-y: scroll;
+		}		  
 	</style>
 </head>
 <body>

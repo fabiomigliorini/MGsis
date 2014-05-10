@@ -36,6 +36,9 @@
  */
 class Portador extends MGActiveRecord
 {
+	
+	const CARTEIRA = 999;
+	
 	/**
 	 * @return string the associated database table name
 	 */

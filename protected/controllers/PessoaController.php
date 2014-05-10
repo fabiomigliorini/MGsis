@@ -274,4 +274,10 @@ class PessoaController extends Controller
 		Yii::app()->end();
 	} 
 	
+	public function actionDetalhes($codpessoa)
+	{
+		$model = $this->loadModel($codpessoa);
+		echo CJSON::encode($model->attributes);
+	}
+	
 }

@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
-array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codnegocio)),
+array('label'=>'Informar Detalhes', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codnegocio), 'visible'=>($model->codnegociostatus==1)),
 array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
 //array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
