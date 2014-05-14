@@ -28,18 +28,18 @@
  * @property string $valoravista
  *
  * The followings are the available model relations:
- * @property Filial $codfilial
- * @property Negociostatus $codnegociostatus
- * @property Operacao $codoperacao
- * @property Pessoa $codpessoa
- * @property Pessoa $codpessoavendedor
- * @property Usuario $codusuario
- * @property Usuario $codusuarioacertoentrega
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
- * @property Naturezaoperacao $codnaturezaoperacao
- * @property Negocioformapagamento[] $negocioformapagamentos
- * @property Negocioprodutobarra[] $negocioprodutobarras
+ * @property Filial $Filial
+ * @property Negociostatus $NegocioStatus
+ * @property Operacao $Operacao
+ * @property Pessoa $Pessoa
+ * @property Pessoa $PessoaVendedor
+ * @property Usuario $Usuario
+ * @property Usuario $UsuarioAcertoEntrega
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
+ * @property NaturezaOperacao $NaturezaOperacao
+ * @property NegocioFormaPagamento[] $NegocioFormaPagamentos
+ * @property NegocioProdutoBarra[] $NegocioProdutoBarras
  */
 class Negocio extends MGActiveRecord
 {
@@ -69,7 +69,7 @@ class Negocio extends MGActiveRecord
 			array('observacoes', 'length', 'max'=>500),
 			array('valordesconto, valorprodutos, valortotal, valoraprazo, valoravista', 'numerical'),
 			array('valordesconto', 'validaDesconto'),
-			array('codnegociostatus', 'validaStatus'),
+			//array('codnegociostatus', 'validaStatus'),
 			array('codpessoa, codpessoavendedor, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -83,11 +83,14 @@ class Negocio extends MGActiveRecord
 			$this->addError($attribute, 'O valor de desconto não pode ser maior que o valor dos produtos!');
 	}
 
+	/*
 	public function validaStatus($attribute, $params)
 	{
 		if ($this->codnegociostatus <> 1)
 			$this->addError($attribute, 'O status do negócio não permite alterações!');
 	}
+	 * 
+	 */
 	
 	/**
 	 * @return array relational rules.
@@ -230,7 +233,7 @@ class Negocio extends MGActiveRecord
 		return parent::afterFind();
 	}		
 	
-	public function fecharNegocio()
+	public function fechaNegocio()
 	{
 		
 		//So continua se for status ABERTO
@@ -249,7 +252,95 @@ class Negocio extends MGActiveRecord
 			}
 		}
 		
-		return true;
+		$this->codnegociostatus = NegocioStatus::FECHADO;
+		return $this->save();
 		
 	}
+	
+	// Gera nota fiscal a partir do negocio
+	public function geraNotaFiscal($codnotafiscal = null, $geraDuplicatas = true)
+	{
+		//se passou uma nota por parametro tenta localizar ela
+		if (!empty($codnotafiscal))
+			$nota = NotaFiscal::model()->findByPK($codnotafiscal);
+				
+		//se nao localizou nenhuma nota, cria uma nova
+		if (empty($nota))
+		{
+			$nota = new NotaFiscal;
+			$nota->codpessoa = $this->codpessoa;
+			if (empty($nota->codpessoa))
+				$nota->codpessoa = Pessoa::CONSUMIDOR;
+			$nota->codfilial = $this->codfilial;
+			$nota->serie = 1;
+			$nota->numero = 0;
+			$nota->codnaturezaoperacao = $this->codnaturezaoperacao;
+			$nota->emitida = $this->NaturezaOperacao->emitida;
+			//die(date('d/m/Y'));
+			$nota->emissao = date('d/m/Y');
+			$nota->saida = date('d/m/Y h:i:s');
+			$nota->observacoes = $this->NaturezaOperacao->observacoesnf;
+			$nota->fretepagar = 1;
+			$nota->codoperacao = $this->NaturezaOperacao->codoperacao;
+		}
+	
+		//concatena obeservacoes
+		$nota->observacoes .= "\nReferente ao Negocio #{$this->codnegocio}";
+		if (strlen($nota->observacoes) > 500)
+			$nota->observacoes = substr($nota->observacoes, 0, 500);
+		
+		//acumula o valor de desconto
+		$nota->valordesconto += $this->valordesconto;
+		
+		//salva nota fiscal
+		if (!$nota->save())
+		{
+			$this->addErrors($nota->getErrors());
+			return false;
+		}
+		
+		//percorre os itens do negocio e adiciona na nota
+		foreach($this->NegocioProdutoBarras as $negocioItem)
+		{
+			$notaItem = new NotaFiscalProdutoBarra;
+			
+            $notaItem->codnotafiscal = $nota->codnotafiscal;
+            $notaItem->codnegocioprodutobarra = $negocioItem->codnegocioprodutobarra;
+            $notaItem->codprodutobarra = $negocioItem->codprodutobarra;
+            $notaItem->quantidade = $negocioItem->quantidade;
+            $notaItem->valorunitario = $negocioItem->valorunitario;
+            $notaItem->valortotal = $negocioItem->valortotal;
+            
+			if (!$notaItem->save())
+			{
+				$this->addErrors($notaItem->getErrors());
+				return false;
+			}
+		}
+		
+		if ($geraDuplicatas)
+		{
+			foreach($this->NegocioFormaPagamentos as $forma)
+			{
+				foreach ($forma->Titulos as $titulo)
+				{
+					$duplicata = new NotaFiscalDuplicatas;
+					$duplicata->codnotafiscal = $nota->codnotafiscal;
+					$duplicata->fatura = $titulo->numero;
+					$duplicata->valor = $titulo->valor;
+					$duplicata->vencimento = $titulo->vencimento;
+					if (!$duplicata->save())
+					{
+						$this->addErrors($duplicata->getErrors());
+						return false;
+					}
+				}
+			}
+		}
+		
+		//retorna codigo da nota gerada
+		return $nota->codnotafiscal;
+		
+	}
+	
 }

@@ -309,14 +309,16 @@ class NegocioController extends Controller
 		
 	}
 
-	public function actionFecharNegocio($codnegocio)
+	public function actionFechaNegocio($codnegocio)
 	{
+		
 		$negocio = $this->loadModel($codnegocio);
 		
-		$retorno = array("Fechado"=>true, "Mensagem"=>"");
-		if (!$negocio->fecharNegocio())
+		$retorno = array("Retorno"=>true, "Mensagem"=>"");
+		
+		if (!$negocio->fechaNegocio())
 		{
-			$retorno["Fechado"] = false;
+			$retorno["Retorno"] = false;
 			$erros = $negocio->getErrors();
 			$erro = "Erro ao Fechar Negócio!";
 			foreach ($erros as $campo => $mensagens)
@@ -327,5 +329,30 @@ class NegocioController extends Controller
 		}
 		
 		echo CJSON::encode($retorno);
+		
 	}
+
+	public function actionGeraNotaFiscal($codnegocio, $codnotafiscal = null)
+	{
+		
+		$negocio = $this->loadModel($codnegocio);
+		
+		$retorno = array("Retorno"=>true, "Mensagem"=>"");
+		
+		if (!$negocio->geraNotaFiscal($codnotafiscal, true))
+		{
+			$retorno["Retorno"] = false;
+			$erros = $negocio->getErrors();
+			$erro = "Erro ao Gerar Nota Fiscal!";
+			foreach ($erros as $campo => $mensagens)
+				foreach($mensagens as $mensagem)
+					$erro .= " " . $mensagem;
+			$retorno["Mensagem"] = $erro;
+			
+		}
+		
+		echo CJSON::encode($retorno);
+		
+	}
+	
 }

@@ -14,11 +14,11 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Formapagamento $codformapagamento
- * @property Negocio $codnegocio
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
- * @property Titulo[] $titulos
+ * @property FormaPagamento $FormaPagamento
+ * @property Negocio $Negocio
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
+ * @property Titulo[] $Titulos
  */
 class NegocioFormaPagamento extends MGActiveRecord
 {
