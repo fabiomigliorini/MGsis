@@ -20,8 +20,8 @@
  * The followings are the available model relations:
  * @property Titulo[] $titulos
  * @property Tipomovimentotitulo $codtipomovimentotitulo
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class TipoTitulo extends MGActiveRecord
 {
@@ -67,8 +67,8 @@ class TipoTitulo extends MGActiveRecord
 		return array(
 			'titulos' => array(self::HAS_MANY, 'Titulo', 'codtipotitulo'),
 			'codtipomovimentotitulo' => array(self::BELONGS_TO, 'Tipomovimentotitulo', 'codtipomovimentotitulo'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 
@@ -86,10 +86,10 @@ class TipoTitulo extends MGActiveRecord
 			'codtipomovimentotitulo' => 'Codtipomovimentotitulo',
 			'debito' => 'Debito',
 			'credito' => 'Credito',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

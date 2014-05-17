@@ -13,8 +13,8 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  * @property Estado[] $estados
  */
 class Pais extends MGActiveRecord
@@ -53,8 +53,8 @@ class Pais extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 			'estados' => array(self::HAS_MANY, 'Estado', 'codpais'),
 		);
 	}
@@ -68,10 +68,10 @@ class Pais extends MGActiveRecord
 			'codpais' => 'Codpais',
 			'pais' => 'Pais',
 			'sigla' => 'Sigla',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

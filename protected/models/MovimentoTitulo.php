@@ -32,8 +32,8 @@
  * @property Titulo $codtitulo
  * @property Tituloagrupamento $codtituloagrupamento
  * @property Titulo $codtitulorelacionado
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class MovimentoTitulo extends MGActiveRecord
 {
@@ -108,10 +108,10 @@ class MovimentoTitulo extends MGActiveRecord
 			'codtituloagrupamento' => 'Codtituloagrupamento',
 			'codboletoretorno' => 'Codboletoretorno',
 			'codcobranca' => 'Codcobranca',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

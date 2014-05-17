@@ -14,8 +14,8 @@
  * The followings are the available model relations:
  * @property Produto[] $produtos
  * @property Tributacaonaturezaoperacao[] $tributacaonaturezaoperacaos
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class TipoProduto extends MGActiveRecord
 {
@@ -56,8 +56,8 @@ class TipoProduto extends MGActiveRecord
 		return array(
 			'produtos' => array(self::HAS_MANY, 'Produto', 'codtipoproduto'),
 			'tributacaonaturezaoperacaos' => array(self::HAS_MANY, 'Tributacaonaturezaoperacao', 'codtipoproduto'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 
@@ -69,10 +69,10 @@ class TipoProduto extends MGActiveRecord
 		return array(
 			'codtipoproduto' => 'Codtipoproduto',
 			'tipoproduto' => 'Tipoproduto',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

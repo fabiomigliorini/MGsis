@@ -27,8 +27,8 @@
  * @property Titulo[] $titulos
  * @property Filial $codfilial
  * @property Banco $codbanco
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  * @property Usuario[] $usuarios
  * @property Boletoretorno[] $boletoretornos
  * @property Cobranca[] $cobrancas
@@ -79,8 +79,8 @@ class Portador extends MGActiveRecord
 			'titulos' => array(self::HAS_MANY, 'Titulo', 'codportador'),
 			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
 			'Banco' => array(self::BELONGS_TO, 'Banco', 'codbanco'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 			'usuarios' => array(self::HAS_MANY, 'Usuario', 'codportador'),
 			'boletoretornos' => array(self::HAS_MANY, 'Boletoretorno', 'codportador'),
 			'cobrancas' => array(self::HAS_MANY, 'Cobranca', 'codportador'),
@@ -107,10 +107,10 @@ class Portador extends MGActiveRecord
 			'diretorioremessa' => 'Diretorioremessa',
 			'diretorioretorno' => 'Diretorioretorno',
 			'carteira' => 'Carteira',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

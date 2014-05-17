@@ -15,8 +15,8 @@
  *
  * The followings are the available model relations:
  * @property Titulo[] $titulos
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class ContaContabil extends MGActiveRecord
 {
@@ -60,8 +60,8 @@ class ContaContabil extends MGActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'titulos' => array(self::HAS_MANY, 'Titulo', 'codcontacontabil'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 
@@ -75,10 +75,10 @@ class ContaContabil extends MGActiveRecord
 			'contacontabil' => 'Contacontabil',
 			'numero' => 'Numero',
 			'inativo' => 'Inativo',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

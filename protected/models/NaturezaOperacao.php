@@ -15,10 +15,10 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Negocio[] $negocios
- * @property Tributacaonaturezaoperacao[] $tributacaonaturezaoperacaos
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Negocio[] $Negocios
+ * @property TributacaoNaturezaOperacao[] $TributacaoNaturezaOperacaos
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class NaturezaOperacao extends MGActiveRecord
 {
@@ -58,10 +58,10 @@ class NaturezaOperacao extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'negocios' => array(self::HAS_MANY, 'Negocio', 'codnaturezaoperacao'),
-			'tributacaonaturezaoperacaos' => array(self::HAS_MANY, 'Tributacaonaturezaoperacao', 'codnaturezaoperacao'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'Negocios' => array(self::HAS_MANY, 'Negocio', 'codnaturezaoperacao'),
+			'TributacaoNaturezaOperacaos' => array(self::HAS_MANY, 'TributacaoNaturezaOperacao', 'codnaturezaoperacao'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 
@@ -76,10 +76,10 @@ class NaturezaOperacao extends MGActiveRecord
 			'codoperacao' => 'Codoperacao',
 			'emitida' => 'Emitida',
 			'observacoesnf' => 'Observacoesnf',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

@@ -43,8 +43,8 @@
  * @property Naturezaoperacao $codnaturezaoperacao
  * @property Filial $codfilial
  * @property Pessoa $codpessoa
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  * @property Notafiscalcartacorrecao[] $notafiscalcartacorrecaos
  * @property Notafiscalduplicatas[] $notafiscalduplicatases
  */
@@ -133,10 +133,10 @@ class NotaFiscal extends MGActiveRecord
 			'nfeinutilizacao' => 'Nfeinutilizacao',
 			'nfedatainutilizacao' => 'Nfedatainutilizacao',
 			'justificativa' => 'Justificativa',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

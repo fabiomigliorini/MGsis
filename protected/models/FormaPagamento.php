@@ -22,8 +22,8 @@
  * The followings are the available model relations:
  * @property Negocioformapagamento[] $negocioformapagamentos
  * @property Pessoa[] $pessoas
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class FormaPagamento extends MGActiveRecord
 {
@@ -65,8 +65,8 @@ class FormaPagamento extends MGActiveRecord
 		return array(
 			'negocioformapagamentos' => array(self::HAS_MANY, 'Negocioformapagamento', 'codformapagamento'),
 			'pessoas' => array(self::HAS_MANY, 'Pessoa', 'codformapagamento'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 
@@ -86,10 +86,10 @@ class FormaPagamento extends MGActiveRecord
 			'avista' => 'Avista',
 			'formapagamentoecf' => 'Formapagamentoecf',
 			'entrega' => 'Entrega',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

@@ -13,8 +13,8 @@
  *
  * The followings are the available model relations:
  * @property Subgrupoproduto[] $subgrupoprodutos
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class GrupoProduto extends MGActiveRecord
 {
@@ -52,8 +52,8 @@ class GrupoProduto extends MGActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'subgrupoprodutos' => array(self::HAS_MANY, 'Subgrupoproduto', 'codgrupoproduto'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 
@@ -65,10 +65,10 @@ class GrupoProduto extends MGActiveRecord
 		return array(
 			'codgrupoproduto' => 'Codgrupoproduto',
 			'grupoproduto' => 'Grupoproduto',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

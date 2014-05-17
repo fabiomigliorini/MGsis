@@ -19,8 +19,8 @@
  *
  * The followings are the available model relations:
  * @property Notafiscal $codnotafiscal
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class NotaFiscalCartaCorrecao extends MGActiveRecord
 {
@@ -59,8 +59,8 @@ class NotaFiscalCartaCorrecao extends MGActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'codnotafiscal' => array(self::BELONGS_TO, 'Notafiscal', 'codnotafiscal'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 
@@ -78,10 +78,10 @@ class NotaFiscalCartaCorrecao extends MGActiveRecord
 			'texto' => 'Texto',
 			'protocolo' => 'Protocolo',
 			'protocolodata' => 'Protocolodata',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

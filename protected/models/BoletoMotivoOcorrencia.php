@@ -13,9 +13,9 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Boletotipoocorrencia $codboletotipoocorrencia
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property BoletoTipoOcorrencia $BoletoTipoOcorrencia
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class BoletoMotivoOcorrencia extends MGActiveRecord
 {
@@ -64,13 +64,13 @@ class BoletoMotivoOcorrencia extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codboletomotivoocorrencia' => 'Codboletomotivoocorrencia',
+			'codboletomotivoocorrencia' => '#',
 			'motivo' => 'Motivo',
-			'codboletotipoocorrencia' => 'Codboletotipoocorrencia',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'codboletotipoocorrencia' => 'Tipo da Ocorrência',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

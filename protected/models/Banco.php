@@ -14,10 +14,10 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Portador[] $portadors
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
- * @property Cheque[] $cheques
+ * @property Portador[] $Portadors
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
+ * @property Cheque[] $Cheques
  */
 class Banco extends MGActiveRecord
 {
@@ -55,10 +55,10 @@ class Banco extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'portadors' => array(self::HAS_MANY, 'Portador', 'codbanco'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
-			'cheques' => array(self::HAS_MANY, 'Cheque', 'codbanco'),
+			'Portadors' => array(self::HAS_MANY, 'Portador', 'codbanco'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'Cheques' => array(self::HAS_MANY, 'Cheque', 'codbanco'),
 		);
 	}
 
@@ -68,14 +68,14 @@ class Banco extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codbanco' => 'Codbanco',
+			'codbanco' => '#',
 			'banco' => 'Banco',
 			'sigla' => 'Sigla',
-			'numerobanco' => 'Numerobanco',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'numerobanco' => 'Número Banco',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

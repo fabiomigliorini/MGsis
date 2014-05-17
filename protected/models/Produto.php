@@ -31,8 +31,8 @@
  * @property Tipoproduto $codtipoproduto
  * @property Tributacao $codtributacao
  * @property Unidademedida $codunidademedida
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  * @property Produtohistoricopreco[] $produtohistoricoprecos
  * @property Produtoembalagem[] $produtoembalagems
  * @property Produtobarra[] $produtobarras

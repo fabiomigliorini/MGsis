@@ -33,8 +33,8 @@
  * @property Negocioprodutobarra $codnegocioprodutobarra
  * @property Notafiscal $codnotafiscal
  * @property Produtobarra $codprodutobarra
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  * @property Estoquemovimento[] $estoquemovimentos
  */
 class NotaFiscalProdutoBarra extends MGActiveRecord

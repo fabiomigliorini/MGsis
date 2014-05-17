@@ -12,8 +12,8 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class Codigo extends MGActiveRecord
 {
@@ -63,10 +63,10 @@ class Codigo extends MGActiveRecord
 		return array(
 			'tabela' => 'Tabela',
 			'codproximo' => 'Codproximo',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

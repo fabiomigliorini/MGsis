@@ -27,8 +27,8 @@
  * @property Usuario $acbrnfemonitorcodusuario
  * @property Empresa $codempresa
  * @property Pessoa $codpessoa
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  * @property Portador[] $portadors
  * @property Usuario[] $usuarios
  * @property Estoquemovimento[] $estoquemovimentos
@@ -78,8 +78,8 @@ class Filial extends MGActiveRecord
 			'acbrnfemonitorcodusuario' => array(self::BELONGS_TO, 'Usuario', 'acbrnfemonitorcodusuario'),
 			'codempresa' => array(self::BELONGS_TO, 'Empresa', 'codempresa'),
 			'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 			'portadors' => array(self::HAS_MANY, 'Portador', 'codfilial'),
 			'usuarios' => array(self::HAS_MANY, 'Usuario', 'codfilial'),
 			'estoquemovimentos' => array(self::HAS_MANY, 'Estoquemovimento', 'codfilial'),
@@ -108,10 +108,10 @@ class Filial extends MGActiveRecord
 			'acbrnfemonitorip' => 'Acbrnfemonitorip',
 			'acbrnfemonitorporta' => 'Acbrnfemonitorporta',
 			'odbcnumeronotafiscal' => 'Odbcnumeronotafiscal',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

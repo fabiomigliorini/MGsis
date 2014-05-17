@@ -25,8 +25,8 @@
  * @property Cheque $codcheque
  * @property Portador $codportador
  * @property Titulo $codtitulo
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class Cobranca extends MGActiveRecord
 {
@@ -68,8 +68,8 @@ class Cobranca extends MGActiveRecord
 			'codcheque' => array(self::BELONGS_TO, 'Cheque', 'codcheque'),
 			'codportador' => array(self::BELONGS_TO, 'Portador', 'codportador'),
 			'codtitulo' => array(self::BELONGS_TO, 'Titulo', 'codtitulo'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 
@@ -90,10 +90,10 @@ class Cobranca extends MGActiveRecord
 			'debitoacerto' => 'Debitoacerto',
 			'creditoacerto' => 'Creditoacerto',
 			'acertado' => 'Acertado',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

@@ -22,8 +22,8 @@
  * @property Cupomfiscalprodutobarra[] $cupomfiscalprodutobarras
  * @property Produto $codproduto
  * @property Produtoembalagem $codprodutoembalagem
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class ProdutoBarra extends MGActiveRecord
 {

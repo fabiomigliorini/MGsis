@@ -33,8 +33,8 @@
  * @property Movimentotitulo[] $movimentotitulos
  * @property Portador $codportador
  * @property Titulo $codtitulo
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  * @property BoletoMotivoOcorrencia $codboletomotivoocorrencia
  */
 class BoletoRetorno extends MGActiveRecord
@@ -112,10 +112,10 @@ class BoletoRetorno extends MGActiveRecord
 			'protesto' => 'Protesto',
 			'codtitulo' => 'Codtitulo',
 			'arquivo' => 'Arquivo',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

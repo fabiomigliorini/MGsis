@@ -18,8 +18,8 @@
  * @property Pessoa[] $pessoas
  * @property Pessoa[] $pessoas1
  * @property Estado $codestado
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class Cidade extends MGActiveRecord
 {
@@ -60,8 +60,8 @@ class Cidade extends MGActiveRecord
 			'pessoas' => array(self::HAS_MANY, 'Pessoa', 'codcidade'),
 			'pessoas1' => array(self::HAS_MANY, 'Pessoa', 'codcidadecobranca'),
 			'Estado' => array(self::BELONGS_TO, 'Estado', 'codestado'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 
@@ -76,10 +76,10 @@ class Cidade extends MGActiveRecord
 			'cidade' => 'Cidade',
 			'sigla' => 'Sigla',
 			'codigooficial' => 'Codigooficial',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

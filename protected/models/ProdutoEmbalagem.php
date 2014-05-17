@@ -18,8 +18,8 @@
  * @property Produtohistoricopreco[] $produtohistoricoprecos
  * @property Produto $codproduto
  * @property Unidademedida $codunidademedida
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  * @property Produtobarra[] $produtobarras
  */
 class ProdutoEmbalagem extends MGActiveRecord

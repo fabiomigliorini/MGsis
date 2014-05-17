@@ -12,9 +12,9 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
- * @property Boletomotivoocorrencia[] $boletomotivoocorrencias
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
+ * @property Boletomotivoocorrencia[] $BoletoMotivoOcorrencias
  */
 class BoletoTipoOcorrencia extends MGActiveRecord
 {
@@ -51,9 +51,9 @@ class BoletoTipoOcorrencia extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
-			'boletomotivoocorrencias' => array(self::HAS_MANY, 'Boletomotivoocorrencia', 'codboletotipoocorrencia'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'BoletoMotivoOcorrencias' => array(self::HAS_MANY, 'BoletoMotivoOcorrencia', 'codboletotipoocorrencia'),
 		);
 	}
 
@@ -63,12 +63,12 @@ class BoletoTipoOcorrencia extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codboletotipoocorrencia' => 'Codboletotipoocorrencia',
-			'ocorrencia' => 'Ocorrencia',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'codboletotipoocorrencia' => '#',
+			'ocorrencia' => 'Ocorrência',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

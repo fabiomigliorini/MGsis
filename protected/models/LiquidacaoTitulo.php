@@ -19,8 +19,8 @@
  *
  * The followings are the available model relations:
  * @property Portador $codportador
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  * @property Pessoa $codpessoa
  * @property Movimentotitulo[] $movimentotitulos
  */

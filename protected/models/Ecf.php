@@ -24,8 +24,8 @@
  * @property Cupomfiscal[] $cupomfiscals
  * @property Filial $codfilial
  * @property Usuario $codusuario
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  * @property Ecfreducaoz[] $ecfreducaozs
  */
 class Ecf extends MGActiveRecord
@@ -71,8 +71,8 @@ class Ecf extends MGActiveRecord
 			'cupomfiscals' => array(self::HAS_MANY, 'Cupomfiscal', 'codecf'),
 			'codfilial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
 			'codusuario' => array(self::BELONGS_TO, 'Usuario', 'codusuario'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 			'ecfreducaozs' => array(self::HAS_MANY, 'Ecfreducaoz', 'codecf'),
 		);
 	}
@@ -93,10 +93,10 @@ class Ecf extends MGActiveRecord
 			'codfilial' => 'Codfilial',
 			'modelo' => 'Modelo',
 			'numero' => 'Numero',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

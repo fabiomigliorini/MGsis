@@ -18,8 +18,8 @@
  * The followings are the available model relations:
  * @property Negocio $codnegocio
  * @property Produtobarra $codprodutobarra
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  * @property Notafiscalprodutobarra[] $notafiscalprodutobarras
  * @property Estoquemovimento[] $estoquemovimentos
  * @property Cupomfiscalprodutobarra[] $cupomfiscalprodutobarras

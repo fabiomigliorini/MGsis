@@ -14,8 +14,8 @@
  *
  * The followings are the available model relations:
  * @property Grupoproduto $codgrupoproduto
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  * @property Produto[] $produtos
  */
 class SubGrupoProduto extends MGActiveRecord
@@ -69,10 +69,10 @@ class SubGrupoProduto extends MGActiveRecord
 			'codsubgrupoproduto' => 'Codsubgrupoproduto',
 			'codgrupoproduto' => 'Codgrupoproduto',
 			'subgrupoproduto' => 'Subgrupoproduto',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

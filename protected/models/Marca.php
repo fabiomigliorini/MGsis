@@ -15,8 +15,8 @@
  *
  * The followings are the available model relations:
  * @property Produto[] $produtos
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class Marca extends MGActiveRecord
 {

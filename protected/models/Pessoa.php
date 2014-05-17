@@ -61,8 +61,8 @@
  * @property EstadoCivil $codestadocivil
  * @property Formapagamento $codformapagamento
  * @property Sexo $codsexo
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  * @property Cupomfiscal[] $cupomfiscals
  * @property Cobrancahistorico[] $cobrancahistoricos
  * @property Negocio[] $negocios

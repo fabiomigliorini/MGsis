@@ -13,8 +13,8 @@
  *
  * The followings are the available model relations:
  * @property Usuario[] $usuarios
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  * @property Negocio[] $negocios
  * @property Notafiscal[] $notafiscals
  */
@@ -58,8 +58,8 @@ class Operacao extends MGActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'usuarios' => array(self::HAS_MANY, 'Usuario', 'codoperacao'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 			'negocios' => array(self::HAS_MANY, 'Negocio', 'codoperacao'),
 			'notafiscals' => array(self::HAS_MANY, 'Notafiscal', 'codoperacao'),
 		);
@@ -73,10 +73,10 @@ class Operacao extends MGActiveRecord
 		return array(
 			'codoperacao' => 'Codoperacao',
 			'operacao' => 'Operacao',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

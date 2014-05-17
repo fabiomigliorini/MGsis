@@ -19,8 +19,8 @@
  * The followings are the available model relations:
  * @property Movimentotitulo[] $movimentotitulos
  * @property Titulo[] $titulos
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  * @property Pessoa $codpessoa 
  */
 class TituloAgrupamento extends MGActiveRecord

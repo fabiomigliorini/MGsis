@@ -34,9 +34,9 @@
  * @property Operacao $codoperacao
  * @property Pessoa $codpessoa
  * @property Portador $codportador
- * @property Usuario $codusuarioalteracao
+ * @property Usuario $UsuarioAlteracao
  * @property Usuario[] $usuarios
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioCriacao
  * @property Usuario[] $usuarios1
  * @property Empresa[] $empresas
  * @property Empresa[] $empresas1

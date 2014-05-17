@@ -13,8 +13,8 @@
  *
  * The followings are the available model relations:
  * @property Pessoa[] $pessoas
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class EstadoCivil extends MGActiveRecord
 {
@@ -52,8 +52,8 @@ class EstadoCivil extends MGActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'pessoas' => array(self::HAS_MANY, 'Pessoa', 'codestadocivil'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 
@@ -65,10 +65,10 @@ class EstadoCivil extends MGActiveRecord
 		return array(
 			'codestadocivil' => 'Codestadocivil',
 			'estadocivil' => 'Estadocivil',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

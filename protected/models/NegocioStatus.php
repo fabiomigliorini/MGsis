@@ -13,8 +13,8 @@
  *
  * The followings are the available model relations:
  * @property Negocio[] $negocios
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class NegocioStatus extends MGActiveRecord
 {
@@ -57,8 +57,8 @@ class NegocioStatus extends MGActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'negocios' => array(self::HAS_MANY, 'Negocio', 'codnegociostatus'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 
@@ -70,10 +70,10 @@ class NegocioStatus extends MGActiveRecord
 		return array(
 			'codnegociostatus' => 'Codnegociostatus',
 			'negociostatus' => 'Negociostatus',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

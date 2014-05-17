@@ -29,8 +29,8 @@
  * @property Naturezaoperacao $codnaturezaoperacao
  * @property Tipoproduto $codtipoproduto
  * @property Tributacao $codtributacao
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class TributacaoNaturezaOperacao extends MGActiveRecord
 {
@@ -75,8 +75,8 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 			'codnaturezaoperacao' => array(self::BELONGS_TO, 'Naturezaoperacao', 'codnaturezaoperacao'),
 			'codtipoproduto' => array(self::BELONGS_TO, 'Tipoproduto', 'codtipoproduto'),
 			'codtributacao' => array(self::BELONGS_TO, 'Tributacao', 'codtributacao'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 
@@ -100,10 +100,10 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 			'historicodominio' => 'Historicodominio',
 			'movimentacaofisica' => 'Movimentacaofisica',
 			'movimentacaocontabil' => 'Movimentacaocontabil',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

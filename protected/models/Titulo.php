@@ -48,8 +48,8 @@
  * @property Portador $codportador
  * @property Tipotitulo $codtipotitulo
  * @property Tituloagrupamento $codtituloagrupamento
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  * @property Boletoretorno[] $boletoretornos
  * @property Cobranca[] $cobrancas
  * @property Cobrancahistoricotitulo[] $cobrancahistoricotitulos
