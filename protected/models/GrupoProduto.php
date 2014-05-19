@@ -12,7 +12,7 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Subgrupoproduto[] $subgrupoprodutos
+ * @property SubGrupoProduto[] $SubGrupoProdutos
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
  */
@@ -51,7 +51,7 @@ class GrupoProduto extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'subgrupoprodutos' => array(self::HAS_MANY, 'Subgrupoproduto', 'codgrupoproduto'),
+			'SubGrupoProdutos' => array(self::HAS_MANY, 'SubGrupoProduto', 'codgrupoproduto'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);

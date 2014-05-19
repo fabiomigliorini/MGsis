@@ -23,18 +23,18 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Titulo[] $titulos
- * @property Usuario $acbrnfemonitorcodusuario
- * @property Empresa $codempresa
- * @property Pessoa $codpessoa
+ * @property Titulo[] $Titulos
+ * @property Usuario $AcbrNfeMonitorUsuario
+ * @property Empresa $Empresa
+ * @property Pessoa $Pessoa
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
- * @property Portador[] $portadors
- * @property Usuario[] $usuarios
- * @property Estoquemovimento[] $estoquemovimentos
- * @property Ecf[] $ecfs
- * @property Negocio[] $negocios
- * @property Estoquesaldo[] $estoquesaldos
+ * @property Portador[] $Portadors
+ * @property Usuario[] $Usuarios
+ * @property EstoqueMovimento[] $EstoqueMovimentos
+ * @property Ecf[] $Ecfs
+ * @property Negocio[] $Negocios
+ * @property EstoqueSaldo[] $EstoqueSaldos
  */
 class Filial extends MGActiveRecord
 {
@@ -74,18 +74,18 @@ class Filial extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'titulos' => array(self::HAS_MANY, 'Titulo', 'codfilial'),
-			'acbrnfemonitorcodusuario' => array(self::BELONGS_TO, 'Usuario', 'acbrnfemonitorcodusuario'),
-			'codempresa' => array(self::BELONGS_TO, 'Empresa', 'codempresa'),
+			'Titulos' => array(self::HAS_MANY, 'Titulo', 'codfilial'),
+			'AcbrNfeMonitorUsuario' => array(self::BELONGS_TO, 'Usuario', 'acbrnfemonitorcodusuario'),
+			'Empresa' => array(self::BELONGS_TO, 'Empresa', 'codempresa'),
 			'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
-			'portadors' => array(self::HAS_MANY, 'Portador', 'codfilial'),
-			'usuarios' => array(self::HAS_MANY, 'Usuario', 'codfilial'),
-			'estoquemovimentos' => array(self::HAS_MANY, 'Estoquemovimento', 'codfilial'),
-			'ecfs' => array(self::HAS_MANY, 'Ecf', 'codfilial'),
-			'negocios' => array(self::HAS_MANY, 'Negocio', 'codfilial'),
-			'estoquesaldos' => array(self::HAS_MANY, 'Estoquesaldo', 'codfilial'),
+			'Portadors' => array(self::HAS_MANY, 'Portador', 'codfilial'),
+			'Usuarios' => array(self::HAS_MANY, 'Usuario', 'codfilial'),
+			'EstoqueMovimentos' => array(self::HAS_MANY, 'EstoqueMovimento', 'codfilial'),
+			'Ecfs' => array(self::HAS_MANY, 'Ecf', 'codfilial'),
+			'Negocios' => array(self::HAS_MANY, 'Negocio', 'codfilial'),
+			'EstoqueSaldos' => array(self::HAS_MANY, 'EstoqueSaldo', 'codfilial'),
 		);
 	}
 
@@ -95,16 +95,16 @@ class Filial extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codfilial' => 'Codfilial',
-			'codempresa' => 'Codempresa',
-			'codpessoa' => 'Codpessoa',
+			'codfilial' => '#',
+			'codempresa' => 'Empresa',
+			'codpessoa' => 'Pessoa',
 			'filial' => 'Filial',
-			'emitenfe' => 'Emitenfe',
-			'acbrnfemonitorcaminho' => 'Acbrnfemonitorcaminho',
-			'acbrnfemonitorcaminhorede' => 'Acbrnfemonitorcaminhorede',
-			'acbrnfemonitorbloqueado' => 'Acbrnfemonitorbloqueado',
-			'acbrnfemonitorcodusuario' => 'Acbrnfemonitorcodusuario',
-			'empresadominio' => 'Empresadominio',
+			'emitenfe' => 'Emite NFE',
+			'acbrnfemonitorcaminho' => 'Caminho Monitor ACBR',
+			'acbrnfemonitorcaminhorede' => 'Caminho Rede ACBR',
+			'acbrnfemonitorbloqueado' => 'Monitor ACBR Bloqueado',
+			'acbrnfemonitorcodusuario' => 'Usuario Bloqueio ACBR Monitor',
+			'empresadominio' => 'Empresa Domínio',
 			'acbrnfemonitorip' => 'Acbrnfemonitorip',
 			'acbrnfemonitorporta' => 'Acbrnfemonitorporta',
 			'odbcnumeronotafiscal' => 'Odbcnumeronotafiscal',

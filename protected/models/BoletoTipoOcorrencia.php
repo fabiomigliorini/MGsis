@@ -14,7 +14,7 @@
  * The followings are the available model relations:
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
- * @property Boletomotivoocorrencia[] $BoletoMotivoOcorrencias
+ * @property BoletoMotivoOcorrencia[] $BoletoMotivoOcorrencias
  */
 class BoletoTipoOcorrencia extends MGActiveRecord
 {

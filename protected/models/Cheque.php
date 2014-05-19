@@ -27,11 +27,11 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Cobranca[] $cobrancas
- * @property Chequeemitente[] $chequeemitentes
- * @property Banco $codbanco
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Cobranca[] $Cobrancas
+ * @property ChequeEmitente[] $ChequeEmitentes
+ * @property Banco $Banco
+ * @property Usuario $usuarioAlteracao
+ * @property Usuario $usuarioCriacao
  */
 class Cheque extends MGActiveRecord
 {
@@ -73,11 +73,11 @@ class Cheque extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'cobrancas' => array(self::HAS_MANY, 'Cobranca', 'codcheque'),
-			'chequeemitentes' => array(self::HAS_MANY, 'Chequeemitente', 'codcheque'),
-			'codbanco' => array(self::BELONGS_TO, 'Banco', 'codbanco'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'Cobrancas' => array(self::HAS_MANY, 'Cobranca', 'codcheque'),
+			'ChequeEmitentes' => array(self::HAS_MANY, 'ChequeEmitente', 'codcheque'),
+			'Banco' => array(self::BELONGS_TO, 'Banco', 'codbanco'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 

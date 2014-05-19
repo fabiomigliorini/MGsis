@@ -13,8 +13,8 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Cobrancahistorico $codcobrancahistorico
- * @property Titulo $codtitulo
+ * @property CobrancaHistorico $CobrancaHistorico
+ * @property Titulo $Titulo
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
  */
@@ -52,8 +52,8 @@ class CobrancaHistoricoTitulo extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'codcobrancahistorico' => array(self::BELONGS_TO, 'Cobrancahistorico', 'codcobrancahistorico'),
-			'codtitulo' => array(self::BELONGS_TO, 'Titulo', 'codtitulo'),
+			'CobrancaHistorico' => array(self::BELONGS_TO, 'CobrancaHistorico', 'codcobrancahistorico'),
+			'Titulo' => array(self::BELONGS_TO, 'Titulo', 'codtitulo'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);

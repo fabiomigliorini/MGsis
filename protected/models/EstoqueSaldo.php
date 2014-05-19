@@ -17,10 +17,10 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Filial $codfilial
- * @property Produto $codproduto
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Filial $Filial
+ * @property Produto $Produto
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class EstoqueSaldo extends MGActiveRecord
 {
@@ -57,10 +57,10 @@ class EstoqueSaldo extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'codfilial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
-			'codproduto' => array(self::BELONGS_TO, 'Produto', 'codproduto'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
+			'Produto' => array(self::BELONGS_TO, 'Produto', 'codproduto'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 

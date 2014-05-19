@@ -14,9 +14,9 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Cheque $codcheque
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Cheque $Cheque
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class ChequeEmitente extends MGActiveRecord
 {
@@ -54,9 +54,9 @@ class ChequeEmitente extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'codcheque' => array(self::BELONGS_TO, 'Cheque', 'codcheque'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'Cheque' => array(self::BELONGS_TO, 'Cheque', 'codcheque'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 

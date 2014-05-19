@@ -23,14 +23,14 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Cupomfiscalprodutobarra $codcupomfiscalprodutobarra
- * @property Estoquemovimentotipo $codestoquemovimentotipo
- * @property Filial $codfilial
- * @property Negocioprodutobarra $codnegocioprodutobarra
- * @property Notafiscalprodutobarra $codnotafiscalprodutobarra
- * @property Produto $codproduto
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property CupomFiscalProdutoBarra $CupomFiscalProdutoBarra
+ * @property EstoqueMovimentoTipo $EstoqueMovimentoTipo
+ * @property Filial $Filial
+ * @property NegocioProdutoBarra $NegocioProdutoBarra
+ * @property NotaFiscalProdutoBarra $NotaFiscalProdutoBarra
+ * @property Produto $Produto
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class EstoqueMovimento extends MGActiveRecord
 {
@@ -67,14 +67,14 @@ class EstoqueMovimento extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'codcupomfiscalprodutobarra' => array(self::BELONGS_TO, 'Cupomfiscalprodutobarra', 'codcupomfiscalprodutobarra'),
-			'codestoquemovimentotipo' => array(self::BELONGS_TO, 'Estoquemovimentotipo', 'codestoquemovimentotipo'),
-			'codfilial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
-			'codnegocioprodutobarra' => array(self::BELONGS_TO, 'Negocioprodutobarra', 'codnegocioprodutobarra'),
-			'codnotafiscalprodutobarra' => array(self::BELONGS_TO, 'Notafiscalprodutobarra', 'codnotafiscalprodutobarra'),
-			'codproduto' => array(self::BELONGS_TO, 'Produto', 'codproduto'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'CupomFiscalProdutoBarra' => array(self::BELONGS_TO, 'CupomFiscalProdutoBarra', 'codcupomfiscalprodutobarra'),
+			'EstoqueMovimentoTipo' => array(self::BELONGS_TO, 'EstoqueMovimentoTipo', 'codestoquemovimentotipo'),
+			'Filial' => array(self::BELONGS_TO, 'Filial', 'Filial'),
+			'NegocioProdutoBarra' => array(self::BELONGS_TO, 'NegocioProdutoBarra', 'codnegocioprodutobarra'),
+			'NotaFiscalProdutoBarra' => array(self::BELONGS_TO, 'NotaFiscalProdutoBarra', 'codnotafiscalprodutobarra'),
+			'Produto' => array(self::BELONGS_TO, 'Produto', 'codproduto'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 

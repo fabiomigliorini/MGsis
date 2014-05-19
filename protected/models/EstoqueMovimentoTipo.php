@@ -13,9 +13,9 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Estoquemovimento[] $estoquemovimentos
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property EstoqueMovimento[] $EstoqueMovimentos
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class EstoqueMovimentoTipo extends MGActiveRecord
 {
@@ -53,9 +53,9 @@ class EstoqueMovimentoTipo extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'estoquemovimentos' => array(self::HAS_MANY, 'Estoquemovimento', 'codestoquemovimentotipo'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'EstoqueMovimentos' => array(self::HAS_MANY, 'EstoqueMovimento', 'codestoquemovimentotipo'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 

@@ -15,8 +15,8 @@
  *
  * The followings are the available model relations:
  * @property Auditoria[] $tblauditorias
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class BaseRemota extends MGActiveRecord
 {
@@ -55,8 +55,8 @@ class BaseRemota extends MGActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'tblauditorias' => array(self::MANY_MANY, 'Auditoria', 'tblauditoriatransmissao(codbaseremota, codauditoria)'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 

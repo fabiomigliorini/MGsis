@@ -16,11 +16,11 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Pessoa $codpessoa
- * @property Usuario $codusuario
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
- * @property Cobrancahistoricotitulo[] $cobrancahistoricotitulos
+ * @property Pessoa $Pessoa
+ * @property Usuario $Usuario
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
+ * @property CobrancaHistoricoTitulo[] $CobrancaHistoricoTitulos
  */
 class CobrancaHistorico extends MGActiveRecord
 {
@@ -57,11 +57,11 @@ class CobrancaHistorico extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'codpessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
-			'codusuario' => array(self::BELONGS_TO, 'Usuario', 'codusuario'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
-			'cobrancahistoricotitulos' => array(self::HAS_MANY, 'Cobrancahistoricotitulo', 'codcobrancahistorico'),
+			'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
+			'Usuario' => array(self::BELONGS_TO, 'Usuario', 'codusuario'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'CobrancaHistoricoTitulos' => array(self::HAS_MANY, 'CobrancaHistoricoTitulo', 'codcobrancahistorico'),
 		);
 	}
 

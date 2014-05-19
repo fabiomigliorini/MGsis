@@ -20,13 +20,13 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Usuario[] $usuarios
- * @property Cupomfiscal[] $cupomfiscals
- * @property Filial $codfilial
- * @property Usuario $codusuario
+ * @property Usuario[] $Usuarios
+ * @property CupomFiscal[] $CupomFiscals
+ * @property Filial $Filial
+ * @property Usuario $Usuario
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
- * @property Ecfreducaoz[] $ecfreducaozs
+ * @property EcfReducaoZ[] $EcfReducaoZs
  */
 class Ecf extends MGActiveRecord
 {
@@ -67,13 +67,13 @@ class Ecf extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'usuarios' => array(self::HAS_MANY, 'Usuario', 'codecf'),
-			'cupomfiscals' => array(self::HAS_MANY, 'Cupomfiscal', 'codecf'),
-			'codfilial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
-			'codusuario' => array(self::BELONGS_TO, 'Usuario', 'codusuario'),
+			'Usuarios' => array(self::HAS_MANY, 'Usuario', 'codecf'),
+			'CupomFiscals' => array(self::HAS_MANY, 'CupomFiscal', 'codecf'),
+			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
+			'Usuario' => array(self::BELONGS_TO, 'Usuario', 'codusuario'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
-			'ecfreducaozs' => array(self::HAS_MANY, 'Ecfreducaoz', 'codecf'),
+			'EcfReducaoZs' => array(self::HAS_MANY, 'EcfReducaoZ', 'codecf'),
 		);
 	}
 

@@ -20,8 +20,8 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Negocioformapagamento[] $negocioformapagamentos
- * @property Pessoa[] $pessoas
+ * @property NegocioFormaPagamento[] $NegocioFormaPagamentos
+ * @property Pessoa[] $Pessoas
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
  */
@@ -63,8 +63,8 @@ class FormaPagamento extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'negocioformapagamentos' => array(self::HAS_MANY, 'Negocioformapagamento', 'codformapagamento'),
-			'pessoas' => array(self::HAS_MANY, 'Pessoa', 'codformapagamento'),
+			'NegocioFormaPagamentos' => array(self::HAS_MANY, 'NegocioFormaPagamento', 'codformapagamento'),
+			'Pessoas' => array(self::HAS_MANY, 'Pessoa', 'codformapagamento'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);

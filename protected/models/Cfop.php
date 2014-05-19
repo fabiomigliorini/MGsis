@@ -12,10 +12,10 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Notafiscalprodutobarra[] $notafiscalprodutobarras
- * @property Tributacaonaturezaoperacao[] $tributacaonaturezaoperacaos
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property NotaFiscalProdutoBarra[] $NotaFiscalProdutoBarras
+ * @property TributacaoNaturezaOperacao[] $TributacaoNaturezaOperacaos
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class Cfop extends MGActiveRecord
 {
@@ -52,10 +52,10 @@ class Cfop extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'notafiscalprodutobarras' => array(self::HAS_MANY, 'Notafiscalprodutobarra', 'codcfop'),
-			'tributacaonaturezaoperacaos' => array(self::HAS_MANY, 'Tributacaonaturezaoperacao', 'codcfop'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'NotafiscalProdutoBarras' => array(self::HAS_MANY, 'NotafiscalProdutoBarra', 'codcfop'),
+			'TributacaoNaturezaOperacaos' => array(self::HAS_MANY, 'TributacaoNaturezaOperacao', 'codcfop'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 

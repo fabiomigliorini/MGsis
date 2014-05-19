@@ -18,9 +18,9 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Ecf $codecf
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Ecf $Ecf
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class EcfReducaoZ extends MGActiveRecord
 {
@@ -58,9 +58,9 @@ class EcfReducaoZ extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'codecf' => array(self::BELONGS_TO, 'Ecf', 'codecf'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'Ecf' => array(self::BELONGS_TO, 'Ecf', 'codecf'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 

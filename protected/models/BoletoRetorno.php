@@ -30,12 +30,12 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Movimentotitulo[] $movimentotitulos
- * @property Portador $codportador
- * @property Titulo $codtitulo
+ * @property MovimenTotitulo[] $MovimentoTitulos
+ * @property Portador $Portador
+ * @property Titulo $Titulo
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
- * @property BoletoMotivoOcorrencia $codboletomotivoocorrencia
+ * @property BoletoMotivoOcorrencia $BoletoMotivoOcorrencia
  */
 class BoletoRetorno extends MGActiveRecord
 {

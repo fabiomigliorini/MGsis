@@ -14,7 +14,7 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Titulo[] $titulos
+ * @property Titulo[] $Titulos
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
  */
@@ -59,7 +59,7 @@ class ContaContabil extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'titulos' => array(self::HAS_MANY, 'Titulo', 'codcontacontabil'),
+			'Titulos' => array(self::HAS_MANY, 'Titulo', 'codcontacontabil'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);

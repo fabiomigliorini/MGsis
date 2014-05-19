@@ -17,11 +17,11 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Cupomfiscalprodutobarra[] $cupomfiscalprodutobarras
- * @property Ecf $codecf
- * @property Pessoa $codpessoa
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property CupomFiscalProdutoBarra[] $CupomFiscalProdutoBarras
+ * @property Ecf $Ecf
+ * @property Pessoa $Pessoa
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class CupomFiscal extends MGActiveRecord
 {
@@ -58,11 +58,11 @@ class CupomFiscal extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'cupomfiscalprodutobarras' => array(self::HAS_MANY, 'Cupomfiscalprodutobarra', 'codcupomfiscal'),
-			'codecf' => array(self::BELONGS_TO, 'Ecf', 'codecf'),
-			'codpessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'CupomFiscalProdutoBarras' => array(self::HAS_MANY, 'CupomFiscalProdutoBarra', 'codcupomfiscal'),
+			'Ecf' => array(self::BELONGS_TO, 'Ecf', 'codecf'),
+			'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 

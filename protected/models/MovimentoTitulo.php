@@ -24,14 +24,14 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Boletoretorno $codboletoretorno
- * @property Cobranca $codcobranca
- * @property Liquidacaotitulo $codliquidacaotitulo
- * @property Portador $codportador
- * @property Tipomovimentotitulo $codtipomovimentotitulo
- * @property Titulo $codtitulo
- * @property Tituloagrupamento $codtituloagrupamento
- * @property Titulo $codtitulorelacionado
+ * @property BoletoRetorno $BoletoRetorno
+ * @property Cobranca $Cobranca
+ * @property LiquidacaoTitulo $LiquidacaoTitulo
+ * @property Portador $Portador
+ * @property TipoMovimentoTitulo $TipoMovimentoTitulo
+ * @property Titulo $Titulo
+ * @property TituloAgrupamento $TituloAgrupamento
+ * @property Titulo $TituloRelacionado
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
  */

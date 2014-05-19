@@ -14,7 +14,7 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Produto[] $produtos
+ * @property Produto[] $Produtos
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
  */

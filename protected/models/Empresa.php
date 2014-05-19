@@ -12,9 +12,9 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Filial[] $filials
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Filial[] $Filials
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class Empresa extends MGActiveRecord
 {
@@ -51,9 +51,9 @@ class Empresa extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'filials' => array(self::HAS_MANY, 'Filial', 'codempresa'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'Filials' => array(self::HAS_MANY, 'Filial', 'codempresa'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 

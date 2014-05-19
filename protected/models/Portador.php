@@ -96,7 +96,7 @@ class Portador extends MGActiveRecord
 		return array(
 			'codportador' => 'Codportador',
 			'portador' => 'Portador',
-			'codbanco' => 'Codbanco',
+			'codbanco' => 'Banco ALisson',
 			'agencia' => 'Agencia',
 			'agenciadigito' => 'Agenciadigito',
 			'conta' => 'Conta',
