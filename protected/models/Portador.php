@@ -23,16 +23,16 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Movimentotitulo[] $movimentotitulos
- * @property Titulo[] $titulos
- * @property Filial $codfilial
- * @property Banco $codbanco
+ * @property MovimentoTitulo[] $MovimentoTitulos
+ * @property Titulo[] $Titulos
+ * @property Filial $Filial
+ * @property Banco $Banco
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
- * @property Usuario[] $usuarios
- * @property Boletoretorno[] $boletoretornos
- * @property Cobranca[] $cobrancas
- * @property Liquidacaotitulo[] $liquidacaotitulos
+ * @property Usuario[] $Usuarios
+ * @property BoletoRetorno[] $BoletoRetornos
+ * @property Cobranca[] $Cobrancas
+ * @property LiquidacaoTitulo[] $LiquidacaoTitulos
  */
 class Portador extends MGActiveRecord
 {
