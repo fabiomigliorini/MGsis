@@ -125,7 +125,7 @@ return array(
 		*/
 		'db'=>array(
 			'pdoClass' => 'NestedPDO',			
-			'connectionString' => 'pgsql:host=localhost;dbname=mgsis',
+			'connectionString' => 'pgsql:host=10.0.1.199;dbname=mgsis',
 			//'emulatePrepare' => true,
 			'username' => 'mgsis_yii',
 			'password' => 'mgsis_yii',
