@@ -17,7 +17,7 @@ Yii::app()->clientScript->registerCoreScript('yii');
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.hotkeys.js');
 
 ?>
-<h3> teste </h3>
+
 <script type="text/javascript">
 /*<![CDATA[*/
 $(document).ready(function(){
