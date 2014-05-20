@@ -70,14 +70,14 @@ class NotaFiscalCartaCorrecao extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codnotafiscalcartacorrecao' => 'Codnotafiscalcartacorrecao',
-			'codnotafiscal' => 'Codnotafiscal',
+			'codnotafiscalcartacorrecao' => '#',
+			'codnotafiscal' => 'Nota Fiscal',
 			'lote' => 'Lote',
 			'data' => 'Data',
 			'sequencia' => 'Sequencia',
 			'texto' => 'Texto',
 			'protocolo' => 'Protocolo',
-			'protocolodata' => 'Protocolodata',
+			'protocolodata' => 'Data do Protocolo',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',

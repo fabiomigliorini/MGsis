@@ -103,16 +103,16 @@ class TipoMovimentoTitulo extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codtipomovimentotitulo' => 'Codtipomovimentotitulo',
-			'tipomovimentotitulo' => 'Tipomovimentotitulo',
-			'implantacao' => 'Implantacao',
+			'codtipomovimentotitulo' => '#',
+			'tipomovimentotitulo' => 'Tipo Movimento Titulo',
+			'implantacao' => 'Implantação',
 			'ajuste' => 'Ajuste',
-			'armotizacao' => 'Armotizacao',
+			'armotizacao' => 'Armotização',
 			'juros' => 'Juros',
 			'desconto' => 'Desconto',
 			'pagamento' => 'Pagamento',
 			'estorno' => 'Estorno',
-			'observacao' => 'Observacao',
+			'observacao' => 'Observação',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',

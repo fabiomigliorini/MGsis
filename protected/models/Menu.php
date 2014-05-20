@@ -64,11 +64,11 @@ class Menu extends MGActiveRecord
 		return array(
 			'nome' => 'Nome',
 			'form' => 'Form',
-			'codmenu' => 'Codmenu',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'codmenu' => 'Menu',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

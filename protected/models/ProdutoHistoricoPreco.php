@@ -72,17 +72,17 @@ class ProdutoHistoricoPreco extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codprodutohistoricopreco' => 'Codprodutohistoricopreco',
-			'codproduto' => 'Codproduto',
-			'codprodutoembalagem' => 'Codprodutoembalagem',
-			'codusuario' => 'Codusuario',
-			'precoantigo' => 'Precoantigo',
-			'preconovo' => 'Preconovo',
+			'codprodutohistoricopreco' => '#',
+			'codproduto' => 'Produto',
+			'codprodutoembalagem' => 'Produto Embalagem',
+			'codusuario' => 'Usuário',
+			'precoantigo' => 'Preço Antigo',
+			'preconovo' => 'Preço Novo',
 			'data' => 'Data',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário ALteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

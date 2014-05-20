@@ -61,9 +61,9 @@ class ParametrosGerais extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codparametrosgerais' => 'Codparametrosgerais',
-			'transacaoinicial' => 'Transacaoinicial',
-			'transacaofinal' => 'Transacaofinal',
+			'codparametrosgerais' => '#',
+			'transacaoinicial' => 'Transação Inicial',
+			'transacaofinal' => 'Transação Final',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',

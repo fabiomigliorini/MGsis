@@ -68,16 +68,16 @@ class Ibptax extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codibptax' => 'Codibptax',
+			'codibptax' => '#',
 			'codigo' => 'Codigo',
 			'ex' => 'Ex',
 			'tabela' => 'Tabela',
 			'aliqnac' => 'Aliqnac',
 			'aliqimp' => 'Aliqimp',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Alteração',
 		);
 	}
 

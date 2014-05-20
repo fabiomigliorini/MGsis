@@ -4964,3 +4964,67 @@ Stack trace:
 #3 {main}
 REQUEST_URI=/MGsis/index.php?r=filial
 ---
+2014/05/20 11:37:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "notafiscal".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('notafiscal')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=notafiscal
+---
+2014/05/20 11:48:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "pais".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pais')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=pais
+---
+2014/05/20 11:48:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "pais/index".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pais/index')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=pais/index
+---
+2014/05/20 11:51:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "notafiscal" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('notafiscal')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('notafiscal')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('negocio/notafis...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=negocio/notafiscal
+---
+2014/05/20 11:51:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "operacao" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('operacao')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('operacao')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('negocio/operaca...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=negocio/operacao
+---
+2014/05/20 11:51:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "pessoa" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('pessoa')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('pessoa')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('negocio/pessoa')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=negocio/pessoa
+---
+2014/05/20 11:51:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "pessoas" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('pessoas')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('pessoas')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('negocio/pessoas')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=negocio/pessoas
+---

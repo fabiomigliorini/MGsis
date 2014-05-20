@@ -68,8 +68,8 @@ class NegocioStatus extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codnegociostatus' => 'Codnegociostatus',
-			'negociostatus' => 'Negociostatus',
+			'codnegociostatus' => '#',
+			'negociostatus' => 'Status',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',

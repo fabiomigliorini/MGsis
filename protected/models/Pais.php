@@ -65,8 +65,8 @@ class Pais extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codpais' => 'Codpais',
-			'pais' => 'Pais',
+			'codpais' => '#',
+			'pais' => 'País',
 			'sigla' => 'Sigla',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',

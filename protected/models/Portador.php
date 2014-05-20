@@ -94,15 +94,15 @@ class Portador extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codportador' => 'Codportador',
+			'codportador' => '#',
 			'portador' => 'Portador',
-			'codbanco' => 'Banco ALisson',
+			'codbanco' => 'Banco',
 			'agencia' => 'Agencia',
-			'agenciadigito' => 'Agenciadigito',
+			'agenciadigito' => 'Dígito',
 			'conta' => 'Conta',
-			'contadigito' => 'Contadigito',
-			'emiteboleto' => 'Emiteboleto',
-			'codfilial' => 'Codfilial',
+			'contadigito' => 'Dígito',
+			'emiteboleto' => 'Emitir Boleto',
+			'codfilial' => 'Filial',
 			'convenio' => 'Convenio',
 			'diretorioremessa' => 'Diretorioremessa',
 			'diretorioretorno' => 'Diretorioretorno',

@@ -71,11 +71,11 @@ class NaturezaOperacao extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codnaturezaoperacao' => 'Codnaturezaoperacao',
-			'naturezaoperacao' => 'Naturezaoperacao',
-			'codoperacao' => 'Codoperacao',
+			'codnaturezaoperacao' => '#',
+			'naturezaoperacao' => 'Natureza Operacao',
+			'codoperacao' => 'Operacao',
 			'emitida' => 'Emitida',
-			'observacoesnf' => 'Observacoesnf',
+			'observacoesnf' => 'Observações nf',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',

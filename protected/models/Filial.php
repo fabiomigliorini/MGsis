@@ -107,7 +107,7 @@ class Filial extends MGActiveRecord
 			'empresadominio' => 'Empresa Domínio',
 			'acbrnfemonitorip' => 'Acbrnfemonitorip',
 			'acbrnfemonitorporta' => 'Acbrnfemonitorporta',
-			'odbcnumeronotafiscal' => 'Odbcnumeronotafiscal',
+			'odbcnumeronotafiscal' => 'Número Nota Fiscal',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',

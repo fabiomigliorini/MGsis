@@ -63,8 +63,8 @@ class GrupoProduto extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codgrupoproduto' => 'Codgrupoproduto',
-			'grupoproduto' => 'Grupoproduto',
+			'codgrupoproduto' => '#',
+			'grupoproduto' => 'Grupo Produto',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',

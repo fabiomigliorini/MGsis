@@ -232,8 +232,8 @@ class Usuario extends MGActiveRecord
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			
 			/*
-			'movimentotitulos' => array(self::HAS_MANY, 'Movimentotitulo', 'codusuarioalteracao'),
-			'movimentotitulos1' => array(self::HAS_MANY, 'Movimentotitulo', 'codusuariocriacao'),
+			'MovimentoTituloAlteracaos' => array(self::HAS_MANY, 'Movimentotitulo', 'codusuarioalteracao'),
+			'MovimentoTituloCriacaos' => array(self::HAS_MANY, 'Movimentotitulo', 'codusuariocriacao'),
 			'titulos' => array(self::HAS_MANY, 'Titulo', 'codusuarioalteracao'),
 			'titulos1' => array(self::HAS_MANY, 'Titulo', 'codusuariocriacao'),
 			'filials' => array(self::HAS_MANY, 'Filial', 'acbrnfemonitorcodusuario'),

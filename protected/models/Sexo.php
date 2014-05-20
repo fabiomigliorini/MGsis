@@ -63,7 +63,7 @@ class Sexo extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codsexo' => 'Codsexo',
+			'codsexo' => '#',
 			'sexo' => 'Sexo',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',

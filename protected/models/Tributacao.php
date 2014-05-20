@@ -67,9 +67,9 @@ class Tributacao extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codtributacao' => 'Codtributacao',
-			'tributacao' => 'Tributacao',
-			'aliquotaicmsecf' => 'Aliquotaicmsecf',
+			'codtributacao' => '#',
+			'tributacao' => 'Tributação',
+			'aliquotaicmsecf' => 'Aliquota icms ecf',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',

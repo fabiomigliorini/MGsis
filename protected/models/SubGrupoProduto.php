@@ -66,9 +66,9 @@ class SubGrupoProduto extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codsubgrupoproduto' => 'Codsubgrupoproduto',
-			'codgrupoproduto' => 'Codgrupoproduto',
-			'subgrupoproduto' => 'Subgrupoproduto',
+			'codsubgrupoproduto' => '#',
+			'codgrupoproduto' => 'Grupo do Produto',
+			'subgrupoproduto' => 'SubGrupo do Produto',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',

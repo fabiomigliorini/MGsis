@@ -67,8 +67,8 @@ class TipoProduto extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codtipoproduto' => 'Codtipoproduto',
-			'tipoproduto' => 'Tipoproduto',
+			'codtipoproduto' => '#',
+			'tipoproduto' => 'Tipo do Produto',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',

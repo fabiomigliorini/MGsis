@@ -63,9 +63,9 @@ class Ncm extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codncm' => 'Codncm',
+			'codncm' => '#',
 			'ncm' => 'Ncm',
-			'descricao' => 'Descricao',
+			'descricao' => 'Descrição',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',

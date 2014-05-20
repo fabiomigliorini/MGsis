@@ -78,14 +78,14 @@ class TipoTitulo extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codtipotitulo' => 'Codtipotitulo',
-			'tipotitulo' => 'Tipotitulo',
+			'codtipotitulo' => '#',
+			'tipotitulo' => 'Tipo Titulo',
 			'pagar' => 'Pagar',
 			'receber' => 'Receber',
-			'observacoes' => 'Observacoes',
-			'codtipomovimentotitulo' => 'Codtipomovimentotitulo',
-			'debito' => 'Debito',
-			'credito' => 'Credito',
+			'observacoes' => 'Observações',
+			'codtipomovimentotitulo' => 'Tipo Movimento Titulo',
+			'debito' => 'Débito',
+			'credito' => 'Crédito',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',

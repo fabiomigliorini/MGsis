@@ -71,8 +71,8 @@ class Operacao extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codoperacao' => 'Codoperacao',
-			'operacao' => 'Operacao',
+			'codoperacao' => '#',
+			'operacao' => 'Operação',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
