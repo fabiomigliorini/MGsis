@@ -15,7 +15,7 @@
  * The followings are the available model relations:
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
- * @property Estado[] $estados
+ * @property Estado[] $Estados
  */
 class Pais extends MGActiveRecord
 {
@@ -55,7 +55,7 @@ class Pais extends MGActiveRecord
 		return array(
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
-			'estados' => array(self::HAS_MANY, 'Estado', 'codpais'),
+			'Estados' => array(self::HAS_MANY, 'Estado', 'codpais'),
 		);
 	}
 

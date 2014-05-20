@@ -22,8 +22,8 @@
  * The followings are the available model relations:
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
- * @property Movimentotitulo[] $movimentotitulos
- * @property Tipotitulo[] $tipotitulos
+ * @property MovimentoTitulo[] $MovimentoTitulos
+ * @property TipoTitulo[] $tipoTitulos
  */
 class TipoMovimentoTitulo extends MGActiveRecord
 {
@@ -92,8 +92,8 @@ class TipoMovimentoTitulo extends MGActiveRecord
 		return array(
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
-			'movimentotitulos' => array(self::HAS_MANY, 'Movimentotitulo', 'codtipomovimentotitulo'),
-			'tipotitulos' => array(self::HAS_MANY, 'Tipotitulo', 'codtipomovimentotitulo'),
+			'MovimentoTitulos' => array(self::HAS_MANY, 'MovimentoTitulo', 'codtipomovimentotitulo'),
+			'tipoTitulos' => array(self::HAS_MANY, 'TipoTitulo', 'codtipomovimentotitulo'),
 		);
 	}
 

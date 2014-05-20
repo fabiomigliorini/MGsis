@@ -15,7 +15,7 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Notafiscal $NotaFiscal
+ * @property NotaFiscal $NotaFiscal
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
  */
@@ -55,7 +55,7 @@ class NotaFiscalDuplicatas extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'NotaFiscal' => array(self::BELONGS_TO, 'Notafiscal', 'codnotafiscal'),
+			'NotaFiscal' => array(self::BELONGS_TO, 'NotaFiscal', 'codnotafiscal'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);

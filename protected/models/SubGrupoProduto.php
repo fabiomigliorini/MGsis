@@ -13,10 +13,10 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Grupoproduto $codgrupoproduto
+ * @property GrupoProduto $GrupoProduto
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
- * @property Produto[] $produtos
+ * @property Produto[] $Produtos
  */
 class SubGrupoProduto extends MGActiveRecord
 {

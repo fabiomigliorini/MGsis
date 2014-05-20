@@ -83,16 +83,16 @@ class Ecf extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codecf' => 'Codecf',
+			'codecf' => 'Ecf',
 			'ecf' => 'Ecf',
 			'acbrmonitorcaminho' => 'Acbrmonitorcaminho',
 			'acbrmonitorcaminhorede' => 'Acbrmonitorcaminhorede',
-			'codusuario' => 'Codusuario',
+			'codusuario' => 'Usuário',
 			'bloqueado' => 'Bloqueado',
-			'serie' => 'Serie',
-			'codfilial' => 'Codfilial',
+			'serie' => 'Série',
+			'codfilial' => 'Filial',
 			'modelo' => 'Modelo',
-			'numero' => 'Numero',
+			'numero' => 'Número',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',

@@ -24,11 +24,11 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Cfop $codcfop
- * @property Estado $codestado
- * @property Naturezaoperacao $codnaturezaoperacao
- * @property Tipoproduto $codtipoproduto
- * @property Tributacao $codtributacao
+ * @property Cfop $Cfop
+ * @property Estado $Estado
+ * @property NaturezaOperacao $NaturezaOperacao
+ * @property TipoProduto $TipoProduto
+ * @property Tributacao $Tributacao
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
  */
@@ -70,11 +70,11 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'codcfop' => array(self::BELONGS_TO, 'Cfop', 'codcfop'),
-			'codestado' => array(self::BELONGS_TO, 'Estado', 'codestado'),
-			'codnaturezaoperacao' => array(self::BELONGS_TO, 'Naturezaoperacao', 'codnaturezaoperacao'),
-			'codtipoproduto' => array(self::BELONGS_TO, 'Tipoproduto', 'codtipoproduto'),
-			'codtributacao' => array(self::BELONGS_TO, 'Tributacao', 'codtributacao'),
+			'Cfop' => array(self::BELONGS_TO, 'Cfop', 'codcfop'),
+			'Estado' => array(self::BELONGS_TO, 'Estado', 'codestado'),
+			'NaturezaOperacao' => array(self::BELONGS_TO, 'NaturezaOperacao', 'codnaturezaoperacao'),
+			'TipoProduto' => array(self::BELONGS_TO, 'TipoProduto', 'codtipoproduto'),
+			'Tributacao' => array(self::BELONGS_TO, 'Tributacao', 'codtributacao'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);

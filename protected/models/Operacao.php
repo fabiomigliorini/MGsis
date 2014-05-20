@@ -12,11 +12,11 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Usuario[] $usuarios
+ * @property Usuario[] $Usuarios
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
- * @property Negocio[] $negocios
- * @property Notafiscal[] $notafiscals
+ * @property Negocio[] $Negocios
+ * @property NotaFiscal[] $NotaFiscals
  */
 class Operacao extends MGActiveRecord
 {
@@ -57,11 +57,11 @@ class Operacao extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'usuarios' => array(self::HAS_MANY, 'Usuario', 'codoperacao'),
+			'Usuarios' => array(self::HAS_MANY, 'Usuario', 'codoperacao'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
-			'negocios' => array(self::HAS_MANY, 'Negocio', 'codoperacao'),
-			'notafiscals' => array(self::HAS_MANY, 'Notafiscal', 'codoperacao'),
+			'Negocios' => array(self::HAS_MANY, 'Negocio', 'codoperacao'),
+			'NotaFiscals' => array(self::HAS_MANY, 'NotaFiscal', 'codoperacao'),
 		);
 	}
 

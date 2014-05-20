@@ -71,16 +71,16 @@ class CobrancaHistorico extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codcobrancahistorico' => 'Codcobrancahistorico',
-			'codpessoa' => 'Codpessoa',
-			'codusuario' => 'Codusuario',
+			'codcobrancahistorico' => 'Histórico de Cobrança',
+			'codpessoa' => 'Pessoa',
+			'codusuario' => 'Usuário',
 			'sistema' => 'Sistema',
-			'historico' => 'Historico',
-			'emailautomatico' => 'Emailautomatico',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'historico' => 'Histórico',
+			'emailautomatico' => 'Email Automatico',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

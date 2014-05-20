@@ -4793,3 +4793,174 @@ Stack trace:
 REQUEST_URI=/MGsis/index.php?r=site/login
 HTTP_REFERER=http://localhost/MGsis/index.php?r=site/login
 ---
+2014/05/20 09:48:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "cobrancahistoricotitulo" solicitada.' in /var/www/yii-1.1.14.f0fee9/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(270): CController->missingAction('cobrancahistori...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('cobrancahistori...')
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('pessoa/cobranca...')
+#3 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/MGsis/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/MGsis/index.php?r=pessoa/cobrancahistoricotitulo
+---
+2014/05/20 09:50:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "cobrnca/index".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('cobrnca/index')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=cobrnca/index
+---
+2014/05/20 09:50:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "cobranca/index".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('cobranca/index')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=cobranca/index
+---
+2014/05/20 09:51:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "boletoretorno/index".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('boletoretorno/i...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=boletoretorno/index
+---
+2014/05/20 09:51:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "boletoretorno".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('boletoretorno')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=boletoretorno
+---
+2014/05/20 09:51:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "cfop".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('cfop')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=cfop
+---
+2014/05/20 09:51:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "cheque".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('cheque')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=cheque
+---
+2014/05/20 09:51:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "cheque/index".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('cheque/index')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=cheque/index
+---
+2014/05/20 09:52:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "banco".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('banco')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=banco
+---
+2014/05/20 09:52:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "contacontabil".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('contacontabil')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=contacontabil
+---
+2014/05/20 09:53:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "ecf".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('ecf')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=ecf
+---
+2014/05/20 09:53:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "cdigo".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('cdigo')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=cdigo
+---
+2014/05/20 09:54:57 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Você não está autorizado a realizar essa operação.' in /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'Voc?? n??o est?...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('admin')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('codigo/admin')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=codigo/admin
+HTTP_REFERER=http://localhost/MGsis/index.php?r=codigo/create
+---
+2014/05/20 10:09:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "Empresa".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('Empresa')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=Empresa
+---
+2014/05/20 10:09:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "empresa".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('empresa')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=empresa
+---
+2014/05/20 10:09:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "MGActiveRecord".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('MGActiveRecord')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=MGActiveRecord
+---
+2014/05/20 10:18:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "estoquemovimenro".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('estoquemovimenr...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=estoquemovimenro
+---
+2014/05/20 10:18:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "estoquemovimento".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('estoquemoviment...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=estoquemovimento
+---
+2014/05/20 10:18:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "estoque".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('estoque')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=estoque
+---
+2014/05/20 10:18:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "filial".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('filial')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=filial
+---

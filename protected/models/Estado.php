@@ -71,11 +71,11 @@ class Estado extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codestado' => 'Codestado',
-			'codpais' => 'Codpais',
+			'codestado' => 'Estado',
+			'codpais' => 'País',
 			'estado' => 'Estado',
 			'sigla' => 'Sigla',
-			'codigooficial' => 'Codigooficial',
+			'codigooficial' => 'Codigo Oficial',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',

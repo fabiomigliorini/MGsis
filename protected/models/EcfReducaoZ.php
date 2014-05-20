@@ -71,17 +71,17 @@ class EcfReducaoZ extends MGActiveRecord
 	{
 		return array(
 			'codecfreducaoz' => 'Codecfreducaoz',
-			'codecf' => 'Codecf',
+			'codecf' => 'Ecf',
 			'movimento' => 'Movimento',
-			'observacoes' => 'Observacoes',
+			'observacoes' => 'Observações',
 			'crz' => 'Crz',
 			'coo' => 'Coo',
 			'cro' => 'Cro',
-			'grandetotal' => 'Grandetotal',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'grandetotal' => 'Grande Total',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alterção',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

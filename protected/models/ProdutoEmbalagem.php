@@ -15,12 +15,12 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Produtohistoricopreco[] $produtohistoricoprecos
- * @property Produto $codproduto
- * @property Unidademedida $codunidademedida
+ * @property ProdutoHistoricoPreco[] $ProdutoHistoricoPrecos
+ * @property Produto $Produto
+ * @property UnidadeMedida $UnidadeMedida
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
- * @property Produtobarra[] $produtobarras
+ * @property ProdutoBarra[] $ProdutoBarras
  */
 class ProdutoEmbalagem extends MGActiveRecord
 {

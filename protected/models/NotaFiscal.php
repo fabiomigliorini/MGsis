@@ -38,15 +38,15 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Notafiscalprodutobarra[] $notafiscalprodutobarras
- * @property Operacao $codoperacao
- * @property Naturezaoperacao $codnaturezaoperacao
- * @property Filial $codfilial
- * @property Pessoa $codpessoa
+ * @property NotaFiscalProdutoBarra[] $NotaFiscalProdutoBarras
+ * @property Operacao $Operacao
+ * @property NaturezaOperacao $NaturezaOperacao
+ * @property Filial $Filial
+ * @property Pessoa $Pessoa
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
- * @property Notafiscalcartacorrecao[] $notafiscalcartacorrecaos
- * @property Notafiscalduplicatas[] $notafiscalduplicatases
+ * @property NotafiscalCartaCorrecao[] $NotafiscalCartaCorrecaos
+ * @property NotafiscalDuplicatas[] $NotafiscalDuplicatass
  */
 class NotaFiscal extends MGActiveRecord
 {
@@ -87,15 +87,15 @@ class NotaFiscal extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'NotaFiscalProdutoBarras' => array(self::HAS_MANY, 'Notafiscalprodutobarra', 'codnotafiscal'),
+			'NotaFiscalProdutoBarras' => array(self::HAS_MANY, 'NotaFiscalProdutoBarra', 'codnotafiscal'),
 			'Operacao' => array(self::BELONGS_TO, 'Operacao', 'codoperacao'),
-			'NaturezaOperacao' => array(self::BELONGS_TO, 'Naturezaoperacao', 'codnaturezaoperacao'),
+			'NaturezaOperacao' => array(self::BELONGS_TO, 'NaturezaOperacao', 'codnaturezaoperacao'),
 			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
 			'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),			
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
-			'NotaFiscalCartaCorrecaos' => array(self::HAS_MANY, 'Notafiscalcartacorrecao', 'codnotafiscal'),
-			'NotaFiscalDuplicatass' => array(self::HAS_MANY, 'Notafiscalduplicatas', 'codnotafiscal'),
+			'NotaFiscalCartaCorrecaos' => array(self::HAS_MANY, 'NotaFiscalCartaCorrecao', 'codnotafiscal'),
+			'NotaFiscalDuplicatass' => array(self::HAS_MANY, 'NotaFiscalDuplicatas', 'codnotafiscal'),
 		);
 	}
 

@@ -71,11 +71,11 @@ class Cidade extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codcidade' => 'Codcidade',
-			'codestado' => 'Codestado',
+			'codcidade' => 'Cidade',
+			'codestado' => 'Estado',
 			'cidade' => 'Cidade',
 			'sigla' => 'Sigla',
-			'codigooficial' => 'Codigooficial',
+			'codigooficial' => 'Codigo Oficial',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',

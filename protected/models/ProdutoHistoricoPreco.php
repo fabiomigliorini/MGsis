@@ -17,11 +17,11 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Produto $codproduto
- * @property Produtoembalagem $codprodutoembalagem
- * @property Usuario $codusuario
- * @property Usuario $codusuarioalteracao
- * @property Usuario $codusuariocriacao
+ * @property Produto $Produto
+ * @property ProdutoEmbalagem $ProdutoEmbalagem
+ * @property Usuario $Usuario
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario $UsuarioCriacao
  */
 class ProdutoHistoricoPreco extends MGActiveRecord
 {
@@ -58,11 +58,11 @@ class ProdutoHistoricoPreco extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'codproduto' => array(self::BELONGS_TO, 'Produto', 'codproduto'),
-			'codprodutoembalagem' => array(self::BELONGS_TO, 'Produtoembalagem', 'codprodutoembalagem'),
-			'codusuario' => array(self::BELONGS_TO, 'Usuario', 'codusuario'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'Produto' => array(self::BELONGS_TO, 'Produto', 'codproduto'),
+			'ProdutoEmbalagem' => array(self::BELONGS_TO, 'ProdutoEmbalagem', 'codprodutoembalagem'),
+			'Usuario' => array(self::BELONGS_TO, 'Usuario', 'codusuario'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 

@@ -72,17 +72,17 @@ class CupomFiscal extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codcupomfiscal' => 'Codcupomfiscal',
+			'codcupomfiscal' => 'Cupom Fiscal',
 			'codecf' => 'Codecf',
-			'datamovimento' => 'Datamovimento',
-			'numero' => 'Numero',
+			'datamovimento' => 'Data Movimento',
+			'numero' => 'Número',
 			'cancelado' => 'Cancelado',
-			'descontoacrescimo' => 'Descontoacrescimo',
-			'codpessoa' => 'Codpessoa',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'descontoacrescimo' => 'Desconto Acréscimo',
+			'codpessoa' => 'Pessoa',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

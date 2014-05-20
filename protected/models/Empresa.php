@@ -63,12 +63,12 @@ class Empresa extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codempresa' => 'Codempresa',
+			'codempresa' => 'Empresa',
 			'empresa' => 'Empresa',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

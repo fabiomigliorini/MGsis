@@ -70,17 +70,17 @@ class EstoqueSaldo extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codestoquesaldo' => 'Codestoquesaldo',
-			'codfilial' => 'Codfilial',
-			'codproduto' => 'Codproduto',
+			'codestoquesaldo' => 'Estoque Saldo',
+			'codfilial' => 'Filial',
+			'codproduto' => 'Produto',
 			'fiscal' => 'Fiscal',
-			'saldoquantidade' => 'Saldoquantidade',
-			'saldovalor' => 'Saldovalor',
-			'saldovalorunitario' => 'Saldovalorunitario',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'saldoquantidade' => 'Saldo Quantidade',
+			'saldovalor' => 'Saldo valor',
+			'saldovalorunitario' => 'Saldo Valor Unitario',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

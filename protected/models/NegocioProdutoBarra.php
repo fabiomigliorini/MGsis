@@ -16,13 +16,13 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Negocio $codnegocio
- * @property Produtobarra $codprodutobarra
+ * @property Negocio $Negocio
+ * @property ProdutoBarra $ProdutoBarra
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
- * @property Notafiscalprodutobarra[] $notafiscalprodutobarras
- * @property Estoquemovimento[] $estoquemovimentos
- * @property Cupomfiscalprodutobarra[] $cupomfiscalprodutobarras
+ * @property NotafiscalProdutoBarra[] $NotafiscalProdutoBarras
+ * @property EstoqueMovimento[] $EstoqueMovimentos
+ * @property CupomFiscalProdutoBarra[] $CupomFiscalProdutoBarras
  */
 class NegocioProdutoBarra extends MGActiveRecord
 {

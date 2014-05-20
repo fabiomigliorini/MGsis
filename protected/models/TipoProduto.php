@@ -12,8 +12,8 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Produto[] $produtos
- * @property Tributacaonaturezaoperacao[] $tributacaonaturezaoperacaos
+ * @property Produto[] $Produtos
+ * @property TributacaoNaturezaOperacao[] $TributacaoNaturezaOperacaos
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
  */
@@ -54,8 +54,8 @@ class TipoProduto extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'produtos' => array(self::HAS_MANY, 'Produto', 'codtipoproduto'),
-			'tributacaonaturezaoperacaos' => array(self::HAS_MANY, 'Tributacaonaturezaoperacao', 'codtipoproduto'),
+			'Produtos' => array(self::HAS_MANY, 'Produto', 'codtipoproduto'),
+			'TributacaoNaturezaOperacaos' => array(self::HAS_MANY, 'TributacaoNaturezaOperacao', 'codtipoproduto'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);

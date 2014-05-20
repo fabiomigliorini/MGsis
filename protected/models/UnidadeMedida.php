@@ -13,10 +13,10 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Produto[] $produtos
+ * @property Produto[] $Produtos
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
- * @property Produtoembalagem[] $produtoembalagems
+ * @property ProdutoEmbalagem[] $ProdutoEmbalagems
  */
 class UnidadeMedida extends MGActiveRecord
 {
@@ -54,10 +54,10 @@ class UnidadeMedida extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'produtos' => array(self::HAS_MANY, 'Produto', 'codunidademedida'),
+			'Produtos' => array(self::HAS_MANY, 'Produto', 'codunidademedida'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
-			'produtoembalagems' => array(self::HAS_MANY, 'Produtoembalagem', 'codunidademedida'),
+			'ProdutoEmbalagems' => array(self::HAS_MANY, 'ProdutoEmbalagem', 'codunidademedida'),
 		);
 	}
 

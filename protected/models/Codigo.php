@@ -62,7 +62,7 @@ class Codigo extends MGActiveRecord
 	{
 		return array(
 			'tabela' => 'Tabela',
-			'codproximo' => 'Codproximo',
+			'codproximo' => 'Próximo',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',

@@ -39,20 +39,20 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Movimentotitulo[] $movimentotitulos
- * @property Movimentotitulo[] $movimentotitulos1
- * @property Contacontabil $codcontacontabil
- * @property Filial $codfilial
- * @property Negocioformapagamento $codnegocioformapagamento
- * @property Pessoa $codpessoa
- * @property Portador $codportador
- * @property Tipotitulo $codtipotitulo
- * @property Tituloagrupamento $codtituloagrupamento
+ * @property MovimentoTitulo[] $MovimentoTitulos
+ * @property MovimentoTitulo[] $MovimentoTitulosRelacionados
+ * @property ContaContabil $ContaContabil
+ * @property Filial $Filial
+ * @property NegocioFormaPagamento $NegocioFormaPagamento
+ * @property Pessoa $Pessoa
+ * @property Portador $Portador
+ * @property TipoTitulo $TipoTitulo
+ * @property TituloAgrupamento $TituloAgrupamento
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
- * @property Boletoretorno[] $boletoretornos
- * @property Cobranca[] $cobrancas
- * @property Cobrancahistoricotitulo[] $cobrancahistoricotitulos
+ * @property BoletoRetorno[] $BoletoRetornos
+ * @property Cobranca[] $Cobrancas
+ * @property CobrancaHistoricoTitulo[] $CobrancaHistoricoTitulos
  */
 class Titulo extends MGActiveRecord
 {
@@ -231,7 +231,7 @@ class Titulo extends MGActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'MovimentoTitulos' => array(self::HAS_MANY, 'MovimentoTitulo', 'codtitulo', 'order'=>'criacao ASC, sistema ASC, codmovimentotitulo ASC'),
-			'MovimentoTitulosRelacionado' => array(self::HAS_MANY, 'MovimentoTitulo', 'codtitulorelacionado'),
+			'MovimentoTitulosRelacionados' => array(self::HAS_MANY, 'MovimentoTitulo', 'codtitulorelacionado'),
 			'ContaContabil' => array(self::BELONGS_TO, 'ContaContabil', 'codcontacontabil'),
 			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
 			'NegocioFormaPagamento' => array(self::BELONGS_TO, 'NegocioFormaPagamento', 'codnegocioformapagamento'),

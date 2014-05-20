@@ -79,14 +79,14 @@ class Cobranca extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codcobranca' => 'Codcobranca',
-			'codtitulo' => 'Codtitulo',
-			'codcheque' => 'Codcheque',
+			'codcobranca' => 'Cobrança',
+			'codtitulo' => 'Titulo',
+			'codcheque' => 'Cheque',
 			'agendamento' => 'Agendamento',
-			'posicao' => 'Posicao',
-			'codportador' => 'Codportador',
+			'posicao' => 'Posição',
+			'codportador' => 'Portador',
 			'reagendamento' => 'Reagendamento',
-			'observacoes' => 'Observacoes',
+			'observacoes' => 'Observações',
 			'debitoacerto' => 'Debitoacerto',
 			'creditoacerto' => 'Creditoacerto',
 			'acertado' => 'Acertado',

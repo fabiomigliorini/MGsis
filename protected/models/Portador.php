@@ -75,16 +75,16 @@ class Portador extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'movimentotitulos' => array(self::HAS_MANY, 'Movimentotitulo', 'codportador'),
-			'titulos' => array(self::HAS_MANY, 'Titulo', 'codportador'),
+			'MovimentoTitulos' => array(self::HAS_MANY, 'MovimentoTitulo', 'codportador'),
+			'Titulos' => array(self::HAS_MANY, 'Titulo', 'codportador'),
 			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
 			'Banco' => array(self::BELONGS_TO, 'Banco', 'codbanco'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
-			'usuarios' => array(self::HAS_MANY, 'Usuario', 'codportador'),
-			'boletoretornos' => array(self::HAS_MANY, 'Boletoretorno', 'codportador'),
-			'cobrancas' => array(self::HAS_MANY, 'Cobranca', 'codportador'),
-			'liquidacaotitulos' => array(self::HAS_MANY, 'Liquidacaotitulo', 'codportador'),
+			'Usuarios' => array(self::HAS_MANY, 'Usuario', 'codportador'),
+			'BoletoRetornos' => array(self::HAS_MANY, 'BoletoRetorno', 'codportador'),
+			'Cobrancas' => array(self::HAS_MANY, 'Cobranca', 'codportador'),
+			'LiquidacaoTitulos' => array(self::HAS_MANY, 'LiquidacaoTitulo', 'codportador'),
 		);
 	}
 

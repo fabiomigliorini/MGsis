@@ -12,7 +12,7 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Negocio[] $negocios
+ * @property Negocio[] $Negocios
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
  */
@@ -56,7 +56,7 @@ class NegocioStatus extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'negocios' => array(self::HAS_MANY, 'Negocio', 'codnegociostatus'),
+			'Negocios' => array(self::HAS_MANY, 'Negocio', 'codnegociostatus'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);

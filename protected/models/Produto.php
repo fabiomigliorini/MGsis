@@ -24,18 +24,18 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Estoquesaldo[] $estoquesaldos
- * @property Estoquemovimento[] $estoquemovimentos
- * @property Marca $codmarca
- * @property Subgrupoproduto $codsubgrupoproduto
- * @property Tipoproduto $codtipoproduto
- * @property Tributacao $codtributacao
- * @property Unidademedida $codunidademedida
+ * @property EstoqueSaldo[] $EstoqueSaldos
+ * @property EstoqueMovimento[] $EstoqueMovimentos
+ * @property Marca $Marca
+ * @property SubGrupoProduto $SubGrupoProduto
+ * @property TipoProduto $TipoProduto
+ * @property Tributacao $Tributacao
+ * @property UnidadeMedida $UnidadeMedida
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
- * @property Produtohistoricopreco[] $produtohistoricoprecos
- * @property Produtoembalagem[] $produtoembalagems
- * @property Produtobarra[] $produtobarras
+ * @property ProdutoHistoricoPreco[] $ProdutoHistoricoPrecos
+ * @property ProdutoEmbalagem[] $ProdutoEmbalagems
+ * @property ProdutoBarra[] $ProdutoBarras
  */
 class Produto extends MGActiveRecord
 {
@@ -99,8 +99,8 @@ class Produto extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			//'estoquesaldos' => array(self::HAS_MANY, 'Estoquesaldo', 'codproduto'),
-			//'estoquemovimentos' => array(self::HAS_MANY, 'Estoquemovimento', 'codproduto'),
+			'EstoqueSaldos' => array(self::HAS_MANY, 'EstoqueSaldo', 'codproduto'),
+			'EstoqueMovimentos' => array(self::HAS_MANY, 'EstoqueMovimento', 'codproduto'),
 			'Marca' => array(self::BELONGS_TO, 'Marca', 'codmarca'),
 			'SubGrupoProduto' => array(self::BELONGS_TO, 'SubGrupoProduto', 'codsubgrupoproduto'),
 			'TipoProduto' => array(self::BELONGS_TO, 'TipoProduto', 'codtipoproduto'),

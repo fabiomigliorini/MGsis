@@ -52,21 +52,21 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Titulo[] $titulos
- * @property Tituloagrupamento[] $tituloagrupamentos
- * @property Filial[] $filials
- * @property Usuario[] $usuarios
- * @property Cidade $codcidade
- * @property Cidade $codcidadecobranca
- * @property EstadoCivil $codestadocivil
- * @property Formapagamento $codformapagamento
- * @property Sexo $codsexo
+ * @property Titulo[] $Titulos
+ * @property TituloAgrupamento[] $TituloAgrupamentos
+ * @property Filial[] $Filials
+ * @property Usuario[] $Usuarios
+ * @property Cidade $Cidade
+ * @property Cidade $CidadeCobranca
+ * @property EstadoCivil $EstadoCivil
+ * @property FormaPagamento $FormaPagamento
+ * @property Sexo $Sexo
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
- * @property Cupomfiscal[] $cupomfiscals
- * @property Cobrancahistorico[] $cobrancahistoricos
- * @property Negocio[] $negocios
- * @property Negocio[] $negocios1
+ * @property CupomFiscal[] $CupomFiscals
+ * @property CobrancaHistorico[] $CobrancaHistoricos
+ * @property Negocio[] $Negocios
+ * @property Negocio[] $NegocioVendedors
  */
 class Pessoa extends MGActiveRecord
 {
@@ -208,9 +208,9 @@ class Pessoa extends MGActiveRecord
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 			'CupomFiscals' => array(self::HAS_MANY, 'Cupomfiscal', 'codpessoa'),
-			'CobrancaHistoricos' => array(self::HAS_MANY, 'Cobrancahistorico', 'codpessoa'),
+			'CobrancaHistoricos' => array(self::HAS_MANY, 'CobrancaHistorico', 'codpessoa'),
 			'Negocios' => array(self::HAS_MANY, 'Negocio', 'codpessoa'),
-			'NegociosVendedor' => array(self::HAS_MANY, 'Negocio', 'codpessoavendedor'),
+			'NegociosVendedors' => array(self::HAS_MANY, 'Negocio', 'codpessoavendedor'),
 		);
 	}
 

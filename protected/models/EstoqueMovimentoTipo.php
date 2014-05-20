@@ -66,12 +66,12 @@ class EstoqueMovimentoTipo extends MGActiveRecord
 	{
 		return array(
 			'codestoquemovimentotipo' => 'Codestoquemovimentotipo',
-			'descricao' => 'Descricao',
+			'descricao' => 'Descrição',
 			'sigla' => 'Sigla',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuario Criação',
 		);
 	}
 

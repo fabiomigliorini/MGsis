@@ -84,23 +84,23 @@ class EstoqueMovimento extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codestoquemovimento' => 'Codestoquemovimento',
-			'codfilial' => 'Codfilial',
-			'codproduto' => 'Codproduto',
+			'codestoquemovimento' => 'Movimento de  Estoque',
+			'codfilial' => 'Filial',
+			'codproduto' => 'Produto',
 			'fiscal' => 'Fiscal',
 			'codestoquemovimentotipo' => 'Codestoquemovimentotipo',
-			'lancamento' => 'Lancamento',
-			'entradaquantidade' => 'Entradaquantidade',
-			'entradavalor' => 'Entradavalor',
-			'saidaquantidade' => 'Saidaquantidade',
-			'saidavalor' => 'Saidavalor',
+			'lancamento' => 'Lançamento',
+			'entradaquantidade' => 'Quantidade Entrada',
+			'entradavalor' => 'Valor de Entrada',
+			'saidaquantidade' => 'Qauntidade de Saida',
+			'saidavalor' => 'Valor de Saida',
 			'codnegocioprodutobarra' => 'Codnegocioprodutobarra',
 			'codnotafiscalprodutobarra' => 'Codnotafiscalprodutobarra',
 			'codcupomfiscalprodutobarra' => 'Codcupomfiscalprodutobarra',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Craição',
 		);
 	}
 

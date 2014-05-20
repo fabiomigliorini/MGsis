@@ -29,13 +29,13 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Cfop $codcfop
- * @property Negocioprodutobarra $codnegocioprodutobarra
- * @property Notafiscal $codnotafiscal
- * @property Produtobarra $codprodutobarra
+ * @property Cfop $Cfop
+ * @property NegocioProdutoBarra $NegocioProdutoBarra
+ * @property NotaFiscal $NotaFiscal
+ * @property ProdutoBarra $ProdutoBarra
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
- * @property Estoquemovimento[] $estoquemovimentos
+ * @property EstoqueMovimento[] $EstoqueMovimentos
  */
 class NotaFiscalProdutoBarra extends MGActiveRecord
 {

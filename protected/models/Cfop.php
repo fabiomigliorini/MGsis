@@ -65,12 +65,12 @@ class Cfop extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codcfop' => 'Codcfop',
+			'codcfop' => 'Cfop',
 			'cfop' => 'Cfop',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 

@@ -17,11 +17,11 @@
  * @property string $codpessoa
  *
  * The followings are the available model relations:
- * @property Movimentotitulo[] $movimentotitulos
- * @property Titulo[] $titulos
+ * @property MovimentoTitulo[] $MovimentoTitulos
+ * @property Titulo[] $Titulos
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
- * @property Pessoa $codpessoa 
+ * @property Pessoa $Pessoa 
  */
 class TituloAgrupamento extends MGActiveRecord
 {

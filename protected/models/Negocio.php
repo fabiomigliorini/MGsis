@@ -29,7 +29,7 @@
  *
  * The followings are the available model relations:
  * @property Filial $Filial
- * @property Negociostatus $NegocioStatus
+ * @property NegocioStatus $NegocioStatus
  * @property Operacao $Operacao
  * @property Pessoa $Pessoa
  * @property Pessoa $PessoaVendedor

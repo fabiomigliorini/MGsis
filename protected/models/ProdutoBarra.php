@@ -17,11 +17,11 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Notafiscalprodutobarra[] $notafiscalprodutobarras
- * @property Negocioprodutobarra[] $negocioprodutobarras
- * @property Cupomfiscalprodutobarra[] $cupomfiscalprodutobarras
- * @property Produto $codproduto
- * @property Produtoembalagem $codprodutoembalagem
+ * @property NotaFiscalProdutoBarra[] $NotaFiscalProdutoBarras
+ * @property NegocioProdutoBarra[] $NegocioProdutoBarras
+ * @property CupomFiscalProdutoBarra[] $CupomFiscalProdutoBarras
+ * @property Produto $Produto
+ * @property ProdutoEmbalagem $ProdutoEmbalagem
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
  */
