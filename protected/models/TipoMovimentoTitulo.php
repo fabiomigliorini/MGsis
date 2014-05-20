@@ -104,7 +104,7 @@ class TipoMovimentoTitulo extends MGActiveRecord
 	{
 		return array(
 			'codtipomovimentotitulo' => '#',
-			'tipomovimentotitulo' => 'Tipo Movimento Titulo',
+			'tipomovimentotitulo' => 'Tipo Movimento Título',
 			'implantacao' => 'Implantação',
 			'ajuste' => 'Ajuste',
 			'armotizacao' => 'Armotização',

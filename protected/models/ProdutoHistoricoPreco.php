@@ -77,10 +77,10 @@ class ProdutoHistoricoPreco extends MGActiveRecord
 			'codprodutoembalagem' => 'Produto Embalagem',
 			'codusuario' => 'Usuário',
 			'precoantigo' => 'Preço Antigo',
-			'preconovo' => 'Preço Novo',
+			'preconovo' => 'Novo Preço',
 			'data' => 'Data',
 			'alteracao' => 'Alteração',
-			'codusuarioalteracao' => 'Usuário ALteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
 			'codusuariocriacao' => 'Usuário Criação',
 		);

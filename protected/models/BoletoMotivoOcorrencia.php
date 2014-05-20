@@ -66,7 +66,7 @@ class BoletoMotivoOcorrencia extends MGActiveRecord
 		return array(
 			'codboletomotivoocorrencia' => '#',
 			'motivo' => 'Motivo',
-			'codboletotipoocorrencia' => 'Tipo da Ocorrência',
+			'codboletotipoocorrencia' => 'Boleto Tipo da Ocorrência',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',

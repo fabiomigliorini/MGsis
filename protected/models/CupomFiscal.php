@@ -72,8 +72,8 @@ class CupomFiscal extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codcupomfiscal' => 'Cupom Fiscal',
-			'codecf' => 'Codecf',
+			'codcupomfiscal' => '#',
+			'codecf' => 'ECF',
 			'datamovimento' => 'Data Movimento',
 			'numero' => 'Número',
 			'cancelado' => 'Cancelado',

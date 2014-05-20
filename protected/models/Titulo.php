@@ -254,7 +254,7 @@ class Titulo extends MGActiveRecord
 	{
 		return array(
 			'codtitulo' => '#',
-			'codtipotitulo' => 'Tipo Titulo',
+			'codtipotitulo' => 'Tipo Título',
 			'codfilial' => 'Filial',
 			'codportador' => 'Portador',
 			'codpessoa' => 'Pessoa',

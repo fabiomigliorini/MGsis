@@ -70,13 +70,13 @@ class EcfReducaoZ extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codecfreducaoz' => 'Codecfreducaoz',
-			'codecf' => 'Ecf',
+			'codecfreducaoz' => '#',
+			'codecf' => 'ECF',
 			'movimento' => 'Movimento',
 			'observacoes' => 'Observações',
-			'crz' => 'Crz',
-			'coo' => 'Coo',
-			'cro' => 'Cro',
+			'crz' => 'CRX',
+			'coo' => 'COO',
+			'cro' => 'CRO',
 			'grandetotal' => 'Grande Total',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alterção',

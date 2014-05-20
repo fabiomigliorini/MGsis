@@ -71,7 +71,7 @@ class CobrancaHistorico extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codcobrancahistorico' => 'Histórico de Cobrança',
+			'codcobrancahistorico' => '#',
 			'codpessoa' => 'Pessoa',
 			'codusuario' => 'Usuário',
 			'sistema' => 'Sistema',

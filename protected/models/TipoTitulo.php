@@ -79,11 +79,11 @@ class TipoTitulo extends MGActiveRecord
 	{
 		return array(
 			'codtipotitulo' => '#',
-			'tipotitulo' => 'Tipo Titulo',
+			'tipotitulo' => 'Tipo Título',
 			'pagar' => 'Pagar',
 			'receber' => 'Receber',
 			'observacoes' => 'Observações',
-			'codtipomovimentotitulo' => 'Tipo Movimento Titulo',
+			'codtipomovimentotitulo' => 'Tipo Movimento Título',
 			'debito' => 'Débito',
 			'credito' => 'Crédito',
 			'alteracao' => 'Alteração',

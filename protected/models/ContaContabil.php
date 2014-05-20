@@ -71,8 +71,8 @@ class ContaContabil extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codcontacontabil' => 'Conta Contabil',
-			'contacontabil' => 'Contabil',
+			'codcontacontabil' => '#',
+			'contacontabil' => 'Contábil',
 			'numero' => 'Número',
 			'inativo' => 'Inativo',
 			'alteracao' => 'Alteração',

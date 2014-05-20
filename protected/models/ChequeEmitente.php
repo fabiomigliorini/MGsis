@@ -66,9 +66,9 @@ class ChequeEmitente extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codchequeemitente' => 'Cheque Emitente',
+			'codchequeemitente' => '#',
 			'codcheque' => 'Cheque',
-			'cnpj' => 'Cnpj',
+			'cnpj' => 'CNPJ',
 			'emitente' => 'Emitente',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',

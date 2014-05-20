@@ -65,7 +65,7 @@ class CobrancaHistoricoTitulo extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codcobrancahistoricotitulo' => 'Histórico de Cobrança de Título',
+			'codcobrancahistoricotitulo' => '#',
 			'codcobrancahistorico' => 'Histórico de Cobrança',
 			'codtitulo' => 'Titulo',
 			'alteracao' => 'Alteração',
