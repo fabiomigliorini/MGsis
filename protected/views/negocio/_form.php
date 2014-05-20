@@ -40,20 +40,17 @@
 					'class' => 'span4'
 					)
 				);
-		echo $form->textAreaRow($model,'observacoes',array('class'=>'span4', 'rows'=>'6','maxlength'=>500));
+		echo $form->textAreaRow($model,'observacoes',array('class'=>'span4', 'rows'=>'6','maxlength'=>500, 'tabindex'=>-1));
 		?>
 	</div>
 	<?php if (!$model->isNewRecord): ?>
 	<div class="span6">
 		<?
-		echo $form->textFieldRow($model,'valorprodutos',array('class'=>'input-small text-right','maxlength'=>14, "readOnly"=>true));
+		echo $form->textFieldRow($model,'valorprodutos',array('class'=>'input-small text-right','maxlength'=>14, "readOnly"=>true, "tabindex"=>-1));
 		echo $form->textFieldRow($model,'percentualdesconto',array('class'=>'input-mini text-right','maxlength'=>14, 'append'=>'%'));
 		echo $form->textFieldRow($model,'valordesconto',array('class'=>'input-small text-right','maxlength'=>14));
-		echo $form->textFieldRow($model,'valortotal',array('class'=>'input-small text-right','maxlength'=>14, "readOnly"=>true));
-
-		?>
-		<?
-			$this->renderPartial('_view_pagamentos', array('model'=>$model))
+		echo $form->textFieldRow($model,'valortotal',array('class'=>'input-small text-right','maxlength'=>14, "readOnly"=>true, "tabindex"=>-1));
+		$this->renderPartial('_view_pagamentos', array('model'=>$model))
 		?>
 	</div>
 	<?php endif; ?>
@@ -63,18 +60,46 @@
     
     <?php 
 	
-
+	if ($model->isNewRecord)
+	{
+		$this->widget(
+			'bootstrap.widgets.TbButton',
+			array(
+				'buttonType' => 'submit',
+				'type' => 'primary',
+				'label' => 'Criar Novo',
+				'icon' => 'icon-ok',
+				)
+			); 
+	}
+	else
+	{
         $this->widget(
             'bootstrap.widgets.TbButton',
             array(
+                'id' => 'btnSalvarFechar',
                 'buttonType' => 'submit',
                 'type' => 'primary',
-                'label' => 'Salvar',
+                'label' => 'Salvar e Fechar',
                 'icon' => 'icon-ok',
                 )
             ); 
+		
+		echo "&nbsp;";
+		
+        $this->widget(
+            'bootstrap.widgets.TbButton',
+            array(
+                'id' => 'btnSalvar',
+                'buttonType' => 'submit',
+                'type' => 'warning',
+                'label' => 'Somente Salvar',
+                'icon' => 'icon-ok',
+                )
+            ); 
+	}
 	?>
-    
+	
 </div>
 
 <?php $this->endWidget(); ?>
@@ -209,14 +234,23 @@ $(document).ready(function() {
 	
 	$('.btn-primary').focus();
 	
+	$('#btnSalvarFechar').bind("click", function(e) {
+		$("#negocio-form").attr("action", "<?php echo $this->createUrl('update',array('id'=>$model->codnegocio, 'fechar'=>1)); ?>");
+	});
+	
+	$('#btnSalvar').bind("click", function(e) {
+		$("#negocio-form").attr("action", "<?php echo $this->createUrl('update',array('id'=>$model->codnegocio, 'fechar'=>0)); ?>");
+	});
+	
 	$('#negocio-form').submit(function(e) {
-        var currentForm = this;
-        e.preventDefault();
-        bootbox.confirm("Tem certeza que deseja salvar?", function(result) {
-            if (result) {
-                currentForm.submit();
-            }
-        });
+		var currentForm = this;
+		//alert($("#fechar").val());
+		e.preventDefault();
+		bootbox.confirm("Tem certeza que deseja salvar?", function(result) {
+			if (result) {
+				currentForm.submit();
+			}
+		});
     });	
 });
 

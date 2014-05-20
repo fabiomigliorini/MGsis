@@ -243,6 +243,31 @@ class Negocio extends MGActiveRecord
 			return false;
 		}
 		
+		//Calcula total pagamentos à vista e à prazo
+		$valorPagamentos = 0;
+		$valorPagamentosPrazo = 0;
+		foreach ($this->NegocioFormaPagamentos as $nfp)
+		{
+			$valorPagamentos += $nfp->valorpagamento;
+			if (!$nfp->FormaPagamento->avista)
+				$valorPagamentosPrazo += $nfp->valorpagamento;
+		}
+		
+		//valida total pagamentos
+		if ($valorPagamentos < $this->valortotal)
+		{
+			$this->addError("valortotal", "O valor dos Pagamentos é inferior ao Total!");
+			return false;
+		}
+		
+		//valida total à prazo
+		if ($valorPagamentosPrazo > $this->valortotal)
+		{
+			$this->addError("valortotal", "O valor à Prazo é superior ao Total!");
+			return false;
+		}
+		
+		//gera títulos
 		foreach ($this->NegocioFormaPagamentos as $nfp)
 		{
 			if (!$nfp->geraTitulos())
@@ -252,6 +277,7 @@ class Negocio extends MGActiveRecord
 			}
 		}
 		
+		//atualiza status
 		$this->codnegociostatus = NegocioStatus::FECHADO;
 		return $this->save();
 		

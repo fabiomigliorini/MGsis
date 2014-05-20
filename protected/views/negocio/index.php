@@ -5,9 +5,12 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
+	array('label'=>'Novo (F2)', 'icon'=>'icon-plus', 'url'=>array('create'), 'linkOptions'=> array('id'=>'btnNovo')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 	);
+
+$this->renderPartial("_hotkeys");
+
 ?>
 
 <script type='text/javascript'>
@@ -23,6 +26,8 @@ $(document).ready(function(){
     });
 });
 	*/
+</script>
+   
 </script>
 
 <h1>Negócios</h1>

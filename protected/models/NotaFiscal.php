@@ -50,6 +50,18 @@
  */
 class NotaFiscal extends MGActiveRecord
 {
+	
+	const CODSTATUS_NOVA = 0;
+	const CODSTATUS_DIGITACAO = 1;
+	const CODSTATUS_AUTORIZADA = 2;
+	const CODSTATUS_LANCADA = 9;
+	const CODSTATUS_NAOAUTORIZADA = 97;
+	const CODSTATUS_INUTILIZADA = 98;
+	const CODSTATUS_CANCELADA = 99;
+	
+	public $status;
+	public $codstatus;
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -206,4 +218,76 @@ class NotaFiscal extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
+	
+	function calculaCodStatus()
+	{
+
+		if ($this->isNewRecord)
+		{
+			$this->codstatus = self::CODSTATUS_NOVA;
+			return $this->codstatus;
+		}
+		
+		if (!empty($this->nfeinutilizacao))
+		{
+			$this->codstatus = self::CODSTATUS_INUTILIZADA;
+			return $this->codstatus;
+		}
+		
+		if (!empty($this->nfecancelamento))
+		{
+			$this->codstatus = self::CODSTATUS_CANCELADA;
+			return $this->codstatus;
+		}
+		
+		if ($this->emitida)
+		{
+			if (empty($this->nfechave))
+			{
+				$this->codstatus = self::CODSTATUS_DIGITACAO;
+				return $this->codstatus;
+			}
+			
+			if (!empty($this->nfeautorizacao))
+			{
+				$this->codstatus = self::CODSTATUS_AUTORIZADA;
+				return $this->codstatus;
+			}
+
+			$this->codstatus = self::CODSTATUS_NAOAUTORIZADA;
+			return $this->codstatus;
+		}
+		
+		$this->codstatus = self::CODSTATUS_LANCADA;
+		return $this->codstatus;
+		
+	}
+	
+	function calculaStatus()
+	{
+		$codstatus = $this->calculaCodStatus();
+		$opcoes = $this->listagemStatus();
+		$this->status = $opcoes[$codstatus];
+	}
+	
+	function listagemStatus()
+	{
+		return array(
+			self::CODSTATUS_NOVA => "Nova",
+			self::CODSTATUS_DIGITACAO => "Em Digitação",
+			self::CODSTATUS_AUTORIZADA => "Autorizada",
+			self::CODSTATUS_LANCADA => "Lançada",
+			self::CODSTATUS_NAOAUTORIZADA => "Não Autorizada",
+			self::CODSTATUS_INUTILIZADA => "Inutilizada",
+			self::CODSTATUS_CANCELADA => "Cancelada"
+		);
+	}
+	
+	protected function afterFind()
+	{
+		
+		$this->calculaStatus();
+		return parent::afterFind();
+	}		
+
 }

@@ -129,6 +129,11 @@ class MGFormatter extends CFormatter
 		return self::formataPorMascara($string, "##.###-###");
 	}
 	
+	public function formataNumeroNota ($emitida, $serie, $numero)
+	{
+		return (($emitida)?"N-":"T-") . $serie . "-" . self::formataPorMascara($numero, "########");
+	}
+	
 	public function formataNcm ($string)
 	{
 		$string = str_pad(self::numeroLimpo($string), 8, "*", STR_PAD_RIGHT);

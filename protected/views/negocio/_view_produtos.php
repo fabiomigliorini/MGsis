@@ -1,33 +1,36 @@
-<?php
-
-if ($model->codnegociostatus == 1)
-{
-	?>
-	<form>
-		<div class="row-fluid">
-			<div class="input-prepend">
-				<label class="add-on" for="quantidade">Quantidade</label>
-				<input class="input-mini text-right" id="quantidade" type="text" value="1">
-			</div>
-			<div class="input-prepend input-append">
-				<label class="add-on" for="barras">Código</label>
-				<input class="input-medium text-right" id="barras" type="text">
-				<button class="btn" type="submit" id="btnAdicionar" >Adicionar</button>
-			</div>
-		</div>
-	</form>
+<div class="row-fluid">
+	<b class="span4" style="font-size: 160%;">
+		Produtos
+	</b>
 	<?php
-}
-?>
+	if ($model->codnegociostatus == 1)
+	{
+		?>
+		<form>
+			<div class="span8">
+				<div class="input-prepend">
+					<label class="add-on" for="quantidade">Quantidade</label>
+					<input class="input-mini text-right" id="quantidade" type="text" value="1">
+				</div>
+				<div class="input-prepend input-append">
+					<label class="add-on" for="barras">Código</label>
+					<input class="input-medium text-right" id="barras" type="text">
+					<button class="btn" type="submit" id="btnAdicionar" >Adicionar</button>
+				</div>
+			</div>
+		</form>
+		<?php
+	}
+	?>
+</div>	
 <div id="listagemProdutos">
-<?php
-$this->renderPartial('_view_produtos_listagem',
-	array(
-		'model'=>$model,
-	));		
-?>
+	<?php
+	$this->renderPartial('_view_produtos_listagem',
+		array(
+			'model'=>$model,
+		));		
+	?>
 </div>
-
 <script>
 	
 function atualizaListagemProdutos()
