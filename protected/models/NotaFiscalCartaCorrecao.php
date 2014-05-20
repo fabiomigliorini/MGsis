@@ -74,7 +74,7 @@ class NotaFiscalCartaCorrecao extends MGActiveRecord
 			'codnotafiscal' => 'Nota Fiscal',
 			'lote' => 'Lote',
 			'data' => 'Data',
-			'sequencia' => 'Sequencia',
+			'sequencia' => 'Sequência',
 			'texto' => 'Texto',
 			'protocolo' => 'Protocolo',
 			'protocolodata' => 'Data do Protocolo',

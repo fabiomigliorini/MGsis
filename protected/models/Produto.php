@@ -27,6 +27,7 @@
  * @property EstoqueSaldo[] $EstoqueSaldos
  * @property EstoqueMovimento[] $EstoqueMovimentos
  * @property Marca $Marca
+ * @property Ncm $Ncm
  * @property SubGrupoProduto $SubGrupoProduto
  * @property TipoProduto $TipoProduto
  * @property Tributacao $Tributacao

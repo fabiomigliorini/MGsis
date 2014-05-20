@@ -64,7 +64,7 @@ class Cobranca extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'MovimentoTitulos' => array(self::HAS_MANY, 'Movimentotitulo', 'codcobranca'),
+			'MovimentoTitulos' => array(self::HAS_MANY, 'MovimentoTitulo', 'codcobranca'),
 			'Cheque' => array(self::BELONGS_TO, 'Cheque', 'codcheque'),
 			'Portador' => array(self::BELONGS_TO, 'Portador', 'codportador'),
 			'Titulo' => array(self::BELONGS_TO, 'Titulo', 'codtitulo'),
@@ -79,7 +79,7 @@ class Cobranca extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codcobranca' => 'Cobrança',
+			'codcobranca' => '#',
 			'codtitulo' => 'Titulo',
 			'codcheque' => 'Cheque',
 			'agendamento' => 'Agendamento',
@@ -87,8 +87,8 @@ class Cobranca extends MGActiveRecord
 			'codportador' => 'Portador',
 			'reagendamento' => 'Reagendamento',
 			'observacoes' => 'Observações',
-			'debitoacerto' => 'Debitoacerto',
-			'creditoacerto' => 'Creditoacerto',
+			'debitoacerto' => 'Débito Acerto',
+			'creditoacerto' => 'Crédito Acerto',
 			'acertado' => 'Acertado',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',

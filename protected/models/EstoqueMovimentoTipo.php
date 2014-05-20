@@ -65,7 +65,7 @@ class EstoqueMovimentoTipo extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codestoquemovimentotipo' => 'Codestoquemovimentotipo',
+			'codestoquemovimentotipo' => '#',
 			'descricao' => 'Descrição',
 			'sigla' => 'Sigla',
 			'alteracao' => 'Alteração',

@@ -69,7 +69,7 @@ class Tributacao extends MGActiveRecord
 		return array(
 			'codtributacao' => '#',
 			'tributacao' => 'Tributação',
-			'aliquotaicmsecf' => 'Aliquota icms ecf',
+			'aliquotaicmsecf' => 'Aliquota ICMS ECF',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',

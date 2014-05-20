@@ -77,14 +77,14 @@ class FormaPagamento extends MGActiveRecord
 	{
 		return array(
 			'codformapagamento' => '#',
-			'formapagamento' => 'Formapagamento',
+			'formapagamento' => 'Forma de Pagamento',
 			'boleto' => 'Boleto',
 			'fechamento' => 'Fechamento',
 			'notafiscal' => 'Nota Fiscal',
 			'parcelas' => 'Parcelas',
 			'diasentreparcelas' => 'Dias Entre Parcelas',
-			'avista' => 'Avista',
-			'formapagamentoecf' => 'Forma de Pagamento ecf',
+			'avista' => 'Á vista',
+			'formapagamentoecf' => 'Forma de Pagamento ECF',
 			'entrega' => 'Entrega',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',

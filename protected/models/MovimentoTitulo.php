@@ -100,7 +100,7 @@ class MovimentoTitulo extends MGActiveRecord
 			'codportador' => 'Portador',
 			'codtitulorelacionado' => 'Título Relacionado',
 			'debito' => 'Débito',
-			'credito' => 'Credito',
+			'credito' => 'Crédito',
 			'historico' => 'Histórico',
 			'transacao' => 'Transação',
 			'sistema' => 'Sistema',

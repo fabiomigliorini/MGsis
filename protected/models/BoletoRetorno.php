@@ -77,7 +77,7 @@ class BoletoRetorno extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'MovimenTotitulos' => array(self::HAS_MANY, 'Movimentotitulo', 'codboletoretorno'),
+			'MovimenTotitulos' => array(self::HAS_MANY, 'MovimentoTitulo', 'codboletoretorno'),
 			'Portador' => array(self::BELONGS_TO, 'Portador', 'codportador'),
 			'Titulo' => array(self::BELONGS_TO, 'Titulo', 'codtitulo'),
 			'BoletoMotivoOcorrencia' => array(self::BELONGS_TO, 'BoletoMotivoOcorrencia', 'codboletomotivoocorrencia'),
@@ -92,16 +92,16 @@ class BoletoRetorno extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codboletoretorno' => 'Codboletoretorno',
-			'codboletomotivoocorrencia' => 'Codboletomotivoocorrencia',
+			'codboletoretorno' => '#',
+			'codboletomotivoocorrencia' => 'Boleto Motivo Ocorrência',
 			'codportador' => 'Portador',
 			'dataretorno' => 'Data de Retorno',
 			'linha' => 'Linha',
-			'nossonumero' => 'Nosso Numero',
-			'numero' => 'Numero',
+			'nossonumero' => 'Nosso Número',
+			'numero' => 'Número',
 			'valor' => 'Valor',
 			'codbancocobrador' => 'Banco Cobrador',
-			'agenciacobradora' => 'Agencia Cobradora',
+			'agenciacobradora' => 'Agência Cobradora',
 			'despesas' => 'Despesas',
 			'outrasdespesas' => 'Outras Despesas',
 			'jurosatraso' => 'Juros Atrasados',
@@ -110,7 +110,7 @@ class BoletoRetorno extends MGActiveRecord
 			'pagamento' => 'Pagamento',
 			'jurosmora' => 'Jurosmora',
 			'protesto' => 'Protesto',
-			'codtitulo' => 'Titulo',
+			'codtitulo' => 'Título',
 			'arquivo' => 'Arquivo',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',

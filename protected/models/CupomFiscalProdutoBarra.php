@@ -75,13 +75,13 @@ class CupomFiscalProdutoBarra extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codcupomfiscalprodutobarra' => 'Codcupomfiscalprodutobarra',
+			'codcupomfiscalprodutobarra' => '#',
 			'codcupomfiscal' => 'Cupom Fiscal',
 			'codprodutobarra' => 'Produto Barra',
-			'aliquotaicms' => 'Aliquota Icms',
+			'aliquotaicms' => 'Aliquota ICMS',
 			'quantidade' => 'Quantidade',
-			'valorunitario' => 'Valor Unitario',
-			'codnegocioprodutobarra' => 'Codnegocioprodutobarra',
+			'valorunitario' => 'Valor Unitário',
+			'codnegocioprodutobarra' => 'Negócio Produto Barra',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',

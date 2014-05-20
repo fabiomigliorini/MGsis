@@ -88,7 +88,7 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 		return array(
 			'codtributacaonaturezaoperacao' => '#',
 			'codtributacao' => 'Tributação',
-			'codnaturezaoperacao' => 'Natureza da Operacao',
+			'codnaturezaoperacao' => 'Natureza da Operação',
 			'codcfop' => 'CFOP',
 			'icmsbase' => 'ICMS Base',
 			'icmspercentual' => 'ICMS %',

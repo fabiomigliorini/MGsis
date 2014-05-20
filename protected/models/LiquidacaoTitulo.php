@@ -91,7 +91,7 @@ class LiquidacaoTitulo extends MGActiveRecord
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
-			'codusuariocriacao' => 'Usuario Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 			'debito' => 'Débito',
 			'credito' => 'Crédito',
 			'codpessoa' => 'Pessoa',

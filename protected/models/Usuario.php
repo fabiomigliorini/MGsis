@@ -20,15 +20,15 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Movimentotitulo[] $movimentotitulos
- * @property Movimentotitulo[] $movimentotitulos1
- * @property Titulo[] $titulos
- * @property Titulo[] $titulos1
+ * @property Movimentotitulo[] $UsuarioAlteracaos
+ * @property Movimentotitulo[] $UsuarioCriacaos
+ * @property Titulo[] $UsuarioAlteracaos
+ * @property Titulo[] $UsuarioCriacaos
  * @property Filial[] $filials
- * @property Filial[] $filials1
- * @property Filial[] $filials2
- * @property Portador[] $portadors
- * @property Portador[] $portadors1
+ * @property Filial[] $UsuarioAlteracaos
+ * @property Filial[] $UsuarioCriacaos
+ * @property Portador[] $UsuarioAlteracaos
+ * @property Portador[] $UsuarioCriacaos
  * @property Ecf $codecf
  * @property Filial $codfilial
  * @property Operacao $codoperacao
@@ -114,53 +114,53 @@
  * @property Ncm[] $ncms1
  * @property Parametrosgerais[] $parametrosgeraises
  * @property Parametrosgerais[] $parametrosgeraises1
- * @property Tipoproduto[] $tipoprodutos
- * @property Tipoproduto[] $tipoprodutos1
- * @property Tributacaonaturezaoperacao[] $tributacaonaturezaoperacaos
- * @property Tributacaonaturezaoperacao[] $tributacaonaturezaoperacaos1
- * @property Unidademedida[] $unidademedidas
- * @property Unidademedida[] $unidademedidas1
- * @property Contacontabil[] $contacontabils
- * @property Contacontabil[] $contacontabils1
- * @property Negocio[] $negocios
- * @property Negocio[] $negocios1
- * @property Negocio[] $negocios2
- * @property Negocio[] $negocios3
- * @property Negocioformapagamento[] $negocioformapagamentos
- * @property Negocioformapagamento[] $negocioformapagamentos1
- * @property Negociostatus[] $negociostatuses
- * @property Negociostatus[] $negociostatuses1
- * @property Negocioprodutobarra[] $negocioprodutobarras
- * @property Negocioprodutobarra[] $negocioprodutobarras1
- * @property Menu[] $menus
- * @property Menu[] $menus1
- * @property Tributacao[] $tributacaos
- * @property Tributacao[] $tributacaos1
- * @property Notafiscal[] $notafiscals
- * @property Notafiscal[] $notafiscals1
- * @property Boletomotivoocorrencia[] $boletomotivoocorrencias
- * @property Boletomotivoocorrencia[] $boletomotivoocorrencias1
- * @property Estoquesaldo[] $estoquesaldos
- * @property Estoquesaldo[] $estoquesaldos1
- * @property Formapagamento[] $formapagamentos
- * @property Formapagamento[] $formapagamentos1
- * @property Ibptax[] $ibptaxes
- * @property Ibptax[] $ibptaxes1
- * @property Marca[] $marcas
- * @property Marca[] $marcas1
- * @property Grupoproduto[] $grupoprodutos
- * @property Grupoproduto[] $grupoprodutos1
- * @property Codigo[] $codigos
- * @property Codigo[] $codigos1
- * @property Boletotipoocorrencia[] $boletotipoocorrencias
- * @property Boletotipoocorrencia[] $boletotipoocorrencias1
- * @property Baseremota[] $baseremotas
- * @property Baseremota[] $baseremotas1
- * @property Subgrupoproduto[] $subgrupoprodutos
- * @property Subgrupoproduto[] $subgrupoprodutos1
- * @property Produtohistoricopreco[] $produtohistoricoprecos
- * @property Produtohistoricopreco[] $produtohistoricoprecos1
- * @property Produtohistoricopreco[] $produtohistoricoprecos2
+ * @property Tipoproduto[] $UsuarioAlteracaos
+ * @property Tipoproduto[] $UsuarioCriacaos
+ * @property Tributacaonaturezaoperacao[] $UsuarioAlteracaos
+ * @property Tributacaonaturezaoperacao[] $UsuarioCriacaos
+ * @property Unidademedida[] $UsuarioAlteracaos
+ * @property Unidademedida[] $UsuarioCriacaos
+ * @property Contacontabil[] $UsuarioAlteracaos
+ * @property Contacontabil[] $UsuarioCriacaos
+ * @property Negocio[] $Usuarios
+ * @property Negocio[] $UsuarioAcertoEntregas
+ * @property Negocio[] $UsuarioAlteracaos
+ * @property Negocio[] $UsuarioCriacao
+ * @property Negocioformapagamento[] $UsuarioAlteracaos
+ * @property Negocioformapagamento[] $UsuarioCriacaos
+ * @property Negociostatus[] $UsuarioAlteracaos
+ * @property Negociostatus[] $UsuarioCriacaos
+ * @property Negocioprodutobarra[] $UsuarioAlteracaos
+ * @property Negocioprodutobarra[] $UsuarioCriacaos
+ * @property Menu[] $UsuarioAlteracaos
+ * @property Menu[] $UsuarioCriacaos
+ * @property Tributacao[] $UsuarioAlteracaos
+ * @property Tributacao[] $UsuarioCriacaos
+ * @property Notafiscal[] $UsuarioAlteracaos
+ * @property Notafiscal[] $UsuarioCriacaos
+ * @property Boletomotivoocorrencia[] $UsuarioAlteracaos
+ * @property Boletomotivoocorrencia[] $UsuarioCriacaos
+ * @property Estoquesaldo[] $UsuarioAlteracaos
+ * @property Estoquesaldo[] $UsuarioCriacaos
+ * @property Formapagamento[] $UsuarioAlteracaos
+ * @property Formapagamento[] $UsuarioCriacaos
+ * @property Ibptax[] $UsuarioAlteracaos
+ * @property Ibptax[] $UsuarioCriacaos
+ * @property Marca[] $UsuarioAlteracaos
+ * @property Marca[] $UsuarioCriacaos
+ * @property Grupoproduto[] $UsuarioAlteracaos
+ * @property Grupoproduto[] $UsuarioCriacaos
+ * @property Codigo[] $UsuarioAlteracaos
+ * @property Codigo[] $UsuarioCriacaos
+ * @property Boletotipoocorrencia[] $UsuarioAlteracaos
+ * @property Boletotipoocorrencia[] $UsuarioCriacaos
+ * @property Baseremota[] $UsuarioAlteracaos
+ * @property Baseremota[] $UsuarioCriacaos
+ * @property Subgrupoproduto[] $UsuarioAlteracaos
+ * @property Subgrupoproduto[] $UsuarioCriacaos
+ * @property Produtohistoricopreco[] $Usuarios
+ * @property Produtohistoricopreco[] $UsuarioAlteracaos
+ * @property Produtohistoricopreco[] $UsuarioCriacaos
  */
 class Usuario extends MGActiveRecord
 {

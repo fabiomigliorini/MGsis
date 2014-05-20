@@ -69,7 +69,7 @@ class Ibptax extends MGActiveRecord
 	{
 		return array(
 			'codibptax' => '#',
-			'codigo' => 'Codigo',
+			'codigo' => 'Código',
 			'ex' => 'Ex',
 			'tabela' => 'Tabela',
 			'aliqnac' => 'Aliqnac',

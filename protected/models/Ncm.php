@@ -64,7 +64,7 @@ class Ncm extends MGActiveRecord
 	{
 		return array(
 			'codncm' => '#',
-			'ncm' => 'Ncm',
+			'ncm' => 'NCM',
 			'descricao' => 'Descrição',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',

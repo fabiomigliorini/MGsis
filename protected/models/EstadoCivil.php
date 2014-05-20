@@ -63,7 +63,7 @@ class EstadoCivil extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codestadocivil' => 'Estado Cívil',
+			'codestadocivil' => '#',
 			'estadocivil' => 'Estado Cívil',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',

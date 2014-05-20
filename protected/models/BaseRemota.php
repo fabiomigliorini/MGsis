@@ -66,14 +66,14 @@ class BaseRemota extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codbaseremota' => 'Codbaseremota',
-			'baseremota' => 'Baseremota',
-			'conexao' => 'Conexao',
-			'inicioreplicacao' => 'Inicioreplicacao',
-			'alteracao' => 'Alteracao',
-			'codusuarioalteracao' => 'Codusuarioalteracao',
-			'criacao' => 'Criacao',
-			'codusuariocriacao' => 'Codusuariocriacao',
+			'codbaseremota' => 'Base Remota',
+			'baseremota' => 'Base Remota',
+			'conexao' => 'Conexão',
+			'inicioreplicacao' => 'Inicio Replicação',
+			'alteracao' => 'Alteração',
+			'codusuarioalteracao' => 'Usuário Alteração',
+			'criacao' => 'Criação',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 
