@@ -20,147 +20,145 @@
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property Movimentotitulo[] $UsuarioAlteracaos
- * @property Movimentotitulo[] $UsuarioCriacaos
- * @property Titulo[] $UsuarioAlteracaos
- * @property Titulo[] $UsuarioCriacaos
- * @property Filial[] $filials
- * @property Filial[] $UsuarioAlteracaos
- * @property Filial[] $UsuarioCriacaos
- * @property Portador[] $UsuarioAlteracaos
- * @property Portador[] $UsuarioCriacaos
- * @property Ecf $codecf
- * @property Filial $codfilial
- * @property Operacao $codoperacao
- * @property Pessoa $codpessoa
- * @property Portador $codportador
- * @property Usuario $UsuarioAlteracao
- * @property Usuario[] $usuarios
+ * @property MovimentoTitulo[] $MovimentoTituloAlteracaos
+ * @property MovimentoTitulo[] $MovimentoTituloCriacaos
+ * @property Titulo[] $TituloAlteracaos
+ * @property Titulo[] $TituloCriacaos
+ * @property Filial[] $FilialAcbrNfeMonitors
+ * @property Filial[] $FilialAlteracaos
+ * @property Filial[] $FilialCriacaos
+ * @property Portador[] $PortadorAlteracaos
+ * @property Portador[] $PortadorCriacaos
+ * @property Ecf $Ecf
+ * @property Filial $Filial
+ * @property Operacao $Operacao
+ * @property Pessoa $Pessoa
+ * @property Portador $Portador
  * @property Usuario $UsuarioCriacao
- * @property Usuario[] $usuarios1
- * @property Empresa[] $empresas
- * @property Empresa[] $empresas1
- * @property Boletoretorno[] $boletoretornos
- * @property Boletoretorno[] $boletoretornos1
- * @property Cobranca[] $cobrancas
- * @property Cobranca[] $cobrancas1
- * @property Tipomovimentotitulo[] $tipomovimentotitulos
- * @property Tipomovimentotitulo[] $tipomovimentotitulos1
- * @property Liquidacaotitulo[] $liquidacaotitulos
- * @property Liquidacaotitulo[] $liquidacaotitulos1
- * @property Liquidacaotitulo[] $liquidacaotitulos2
- * @property Liquidacaotitulo[] $liquidacaotitulos3
- * @property Tituloagrupamento[] $tituloagrupamentos
- * @property Tituloagrupamento[] $tituloagrupamentos1
- * @property Pessoa[] $pessoas
- * @property Pessoa[] $pessoas1
- * @property Pais[] $paises
- * @property Pais[] $paises1
- * @property Notafiscalprodutobarra[] $notafiscalprodutobarras
- * @property Notafiscalprodutobarra[] $notafiscalprodutobarras1
- * @property Cupomfiscalprodutobarra[] $cupomfiscalprodutobarras
- * @property Cupomfiscalprodutobarra[] $cupomfiscalprodutobarras1
- * @property Estoquemovimentotipo[] $estoquemovimentotipos
- * @property Estoquemovimentotipo[] $estoquemovimentotipos1
- * @property Estoquemovimento[] $estoquemovimentos
- * @property Estoquemovimento[] $estoquemovimentos1
- * @property Produtobarra[] $produtobarras
- * @property Produtobarra[] $produtobarras1
- * @property Produto[] $produtos
- * @property Produto[] $produtos1
- * @property Estado[] $estados
- * @property Estado[] $estados1
- * @property Cupomfiscal[] $cupomfiscals
- * @property Cupomfiscal[] $cupomfiscals1
- * @property Ecf[] $ecfs
- * @property Ecf[] $ecfs1
- * @property Ecf[] $ecfs2
- * @property Ecfreducaoz[] $ecfreducaozs
- * @property Ecfreducaoz[] $ecfreducaozs1
- * @property Cidade[] $cidades
- * @property Cidade[] $cidades1
- * @property Chequeemitente[] $chequeemitentes
- * @property Chequeemitente[] $chequeemitentes1
- * @property Banco[] $bancos
- * @property Banco[] $bancos1
- * @property Cheque[] $cheques
- * @property Cheque[] $cheques1
- * @property Cobrancahistorico[] $cobrancahistoricos
- * @property Cobrancahistorico[] $cobrancahistoricos1
- * @property Cobrancahistorico[] $cobrancahistoricos2
- * @property Cobrancahistoricotitulo[] $cobrancahistoricotitulos
- * @property Cobrancahistoricotitulo[] $cobrancahistoricotitulos1
- * @property Operacao[] $operacaos
- * @property Operacao[] $operacaos1
- * @property Tipotitulo[] $tipotitulos
- * @property Tipotitulo[] $tipotitulos1
- * @property Cfop[] $cfops
- * @property Cfop[] $cfops1
- * @property Notafiscalcartacorrecao[] $notafiscalcartacorrecaos
- * @property Notafiscalcartacorrecao[] $notafiscalcartacorrecaos1
- * @property Notafiscalduplicatas[] $notafiscalduplicatases
- * @property Notafiscalduplicatas[] $notafiscalduplicatases1
- * @property Produtoembalagem[] $produtoembalagems
- * @property Produtoembalagem[] $produtoembalagems1
- * @property Estadocivil[] $estadocivils
- * @property Estadocivil[] $estadocivils1
- * @property Sexo[] $sexos
- * @property Sexo[] $sexos1
- * @property Estoquemovimento2012[] $estoquemovimento2012s
- * @property Estoquemovimento2012[] $estoquemovimento2012s1
- * @property Naturezaoperacao[] $naturezaoperacaos
- * @property Naturezaoperacao[] $naturezaoperacaos1
- * @property Ncm[] $ncms
- * @property Ncm[] $ncms1
- * @property Parametrosgerais[] $parametrosgeraises
- * @property Parametrosgerais[] $parametrosgeraises1
- * @property Tipoproduto[] $UsuarioAlteracaos
- * @property Tipoproduto[] $UsuarioCriacaos
- * @property Tributacaonaturezaoperacao[] $UsuarioAlteracaos
- * @property Tributacaonaturezaoperacao[] $UsuarioCriacaos
- * @property Unidademedida[] $UsuarioAlteracaos
- * @property Unidademedida[] $UsuarioCriacaos
- * @property Contacontabil[] $UsuarioAlteracaos
- * @property Contacontabil[] $UsuarioCriacaos
- * @property Negocio[] $Usuarios
- * @property Negocio[] $UsuarioAcertoEntregas
- * @property Negocio[] $UsuarioAlteracaos
- * @property Negocio[] $UsuarioCriacao
- * @property Negocioformapagamento[] $UsuarioAlteracaos
- * @property Negocioformapagamento[] $UsuarioCriacaos
- * @property Negociostatus[] $UsuarioAlteracaos
- * @property Negociostatus[] $UsuarioCriacaos
- * @property Negocioprodutobarra[] $UsuarioAlteracaos
- * @property Negocioprodutobarra[] $UsuarioCriacaos
- * @property Menu[] $UsuarioAlteracaos
- * @property Menu[] $UsuarioCriacaos
- * @property Tributacao[] $UsuarioAlteracaos
- * @property Tributacao[] $UsuarioCriacaos
- * @property Notafiscal[] $UsuarioAlteracaos
- * @property Notafiscal[] $UsuarioCriacaos
- * @property Boletomotivoocorrencia[] $UsuarioAlteracaos
- * @property Boletomotivoocorrencia[] $UsuarioCriacaos
- * @property Estoquesaldo[] $UsuarioAlteracaos
- * @property Estoquesaldo[] $UsuarioCriacaos
- * @property Formapagamento[] $UsuarioAlteracaos
- * @property Formapagamento[] $UsuarioCriacaos
- * @property Ibptax[] $UsuarioAlteracaos
- * @property Ibptax[] $UsuarioCriacaos
- * @property Marca[] $UsuarioAlteracaos
- * @property Marca[] $UsuarioCriacaos
- * @property Grupoproduto[] $UsuarioAlteracaos
- * @property Grupoproduto[] $UsuarioCriacaos
- * @property Codigo[] $UsuarioAlteracaos
- * @property Codigo[] $UsuarioCriacaos
- * @property Boletotipoocorrencia[] $UsuarioAlteracaos
- * @property Boletotipoocorrencia[] $UsuarioCriacaos
- * @property Baseremota[] $UsuarioAlteracaos
- * @property Baseremota[] $UsuarioCriacaos
- * @property Subgrupoproduto[] $UsuarioAlteracaos
- * @property Subgrupoproduto[] $UsuarioCriacaos
- * @property Produtohistoricopreco[] $Usuarios
- * @property Produtohistoricopreco[] $UsuarioAlteracaos
- * @property Produtohistoricopreco[] $UsuarioCriacaos
+ * @property Usuario[] $UsuarioAlteracaos
+ * @property Usuario $UsuarioAlteracao
+ * @property Usuario[] $UsuarioCriacaos
+ * @property Empresa[] $EmpresaAlteracaos
+ * @property Empresa[] $EmpresaCriacaos
+ * @property BoletoRetorno[] $BoletoRetornoAlteracaos
+ * @property BoletoRetorno[] $BoletoRetornoCriacaos
+ * @property Cobranca[] $CobrancaAlteracaos
+ * @property Cobranca[] $CobrancaCriacaos
+ * @property TipoMovimentoTitulo[] $TipoMovimentoTituloAlteracaos
+ * @property TipoMovimentoTitulo[] $TipoMovimentoTituloCriacaos
+ * @property LiquidacaoTitulo[] $LiquidacaoTitulos
+ * @property LiquidacaoTitulo[] $LiquidacaoTituloEstornos
+ * @property LiquidacaoTitulo[] $LiquidacaoTituloAlteracaos
+ * @property LiquidacaoTitulo[] $LiquidacaoTituloCriacaos
+ * @property TituloAgrupamento[] $TituloAgrupamentoAlteracaos
+ * @property TituloAgrupamento[] $TituloAgrupamentoCriacaos
+ * @property Pessoa[] $PessoaAlteracaos
+ * @property Pessoa[] $PessoaCriacaos
+ * @property Pais[] $PaisAlteracaos
+ * @property Pais[] $PaisCriacaos
+ * @property NotafiscalProdutoBarra[] $NotafiscalProdutoBarraAlteracaos
+ * @property NotafiscalProdutoBarra[] $NotafiscalProdutoBarraCriacaos
+ * @property CupomfiscalProdutoBarra[] $CupomfiscalProdutoBarraAlteracaos
+ * @property CupomfiscalProdutoBarra[] $CupomfiscalProdutoBarraCriacaos
+ * @property EstoqueMovimentoTipo[] $EstoqueMovimentoTipoAlteracaos
+ * @property EstoqueMovimentoTipo[] $EstoqueMovimentoTipoCriacaos
+ * @property EstoqueMovimento[] $EstoqueMovimentoAlteracaos
+ * @property EstoqueMovimento[] $EstoqueMovimentoCriacaos
+ * @property ProdutoBarra[] $ProdutoBarraAlteracaos
+ * @property ProdutoBarra[] $ProdutoBarraCriacaos
+ * @property Produto[] $ProdutoAlteracaos
+ * @property Produto[] $ProdutoCriacaos
+ * @property Estado[] $EstadoAlteracaos
+ * @property Estado[] $EstadoCriacaos
+ * @property CupomFiscal[] $CupomFiscalAlteracaos
+ * @property CupomFiscal[] $CupomFiscalCriacaos
+ * @property Ecf[] $Ecfs
+ * @property Ecf[] $EcfAlteracaos
+ * @property Ecf[] $EcfCriacaos
+ * @property EcfReducaoZ[] $EcfReducaoZAlteracaos
+ * @property EcfReducaoZ[] $EcfReducaoZCriacaos
+ * @property Cidade[] $CidadeAlteracaos
+ * @property Cidade[] $CidadeCriacaos
+ * @property ChequeEmitente[] $ChequeEmitenteAlteracaos
+ * @property ChequeEmitente[] $ChequeEmitenteCriacaos
+ * @property Banco[] $BancoAlteracaos
+ * @property Banco[] $BancoCriacaos
+ * @property Cheque[] $ChequeAlteracaos
+ * @property Cheque[] $ChequeCriacaos
+ * @property CobrancaHistorico[] $CobrancaHistoricos
+ * @property CobrancaHistorico[] $CobrancaHistoricoAlteracaos
+ * @property CobrancaHistorico[] $CobrancaHistoricoCriacaos
+ * @property CobrancaHistoricoTitulo[] $CobrancaHistoricoTituloAlteracaos
+ * @property CobrancaHistoricoTitulo[] $CobrancaHistoricoTituloCriacaos
+ * @property Operacao[] $OperacaoAlteracaos
+ * @property Operacao[] $OperacaoCriacaos
+ * @property TipoTitulo[] $TipoTituloAlteracaos
+ * @property TipoTitulo[] $TipoTituloCriacaos
+ * @property Cfop[] $CfopAlteracaos
+ * @property Cfop[] $CfopCriacaos
+ * @property NotafiscalCartaCorrecao[] $NotafiscalCartaCorrecaoAlteracaos
+ * @property NotafiscalCartaCorrecao[] $NotafiscalCartaCorrecaoCriacaos
+ * @property NotafiscalDuplicatas[] $NotafiscalDuplicatasAlteracaos
+ * @property NotafiscalDuplicatas[] $NotafiscalDuplicatasCriacaos
+ * @property ProdutoEmbalagem[] $ProdutoEmbalagemAlteracaos
+ * @property ProdutoEmbalagem[] $ProdutoEmbalagemCriacaos
+ * @property EstadoCivil[] $EstadoCivilAlteracaos
+ * @property EstadoCivil[] $EstadoCivilCriacaos
+ * @property Sexo[] $SexoAlteracaos
+ * @property Sexo[] $SexoCriacaos
+ * @property NaturezaOperacao[] $NaturezaOperacaoAlteracaos
+ * @property NaturezaOperacao[] $NaturezaOperacaoCriacaos
+ * @property Ncm[] $NcmAlteracaos
+ * @property Ncm[] $NcmCriacaos
+ * @property ParametrosGerais[] $ParametrosGeraisAlteracaos
+ * @property ParametrosGerais[] $ParametrosGeraisCriacaos
+ * @property TipoProduto[] $TipoProdutoAlteracaos
+ * @property TipoProduto[] $TipoProdutoCriacaos
+ * @property TributacaoNaturezaOperacao[] $TributacaoNaturezaOperacaoAlteracaos
+ * @property TributacaoNaturezaOperacao[] $TributacaoNaturezaOperacaoCriacaos
+ * @property UnidadeMedida[] $UnidadeMedidaAlteracaos
+ * @property UnidadeMedida[] $UnidadeMedidaCriacaos
+ * @property Contacontabil[] $ContacontabilAlteracaos
+ * @property Contacontabil[] $ContacontabilCriacaos
+ * @property Negocio[] $Negocios
+ * @property Negocio[] $NegocioAcertoEntregas
+ * @property Negocio[] $NegocioAlteracaos
+ * @property Negocio[] $NegocioCriacao
+ * @property Negocioformapagamento[] $NegocioformapagamentoAlteracaos
+ * @property Negocioformapagamento[] $NegocioformapagamentoCriacaos
+ * @property NegocioStatus[] $NegocioStatusAlteracaos
+ * @property NegocioStatus[] $NegocioStatusCriacaos
+ * @property NegocioProdutoBarra[] $NegocioProdutoBarraAlteracaos
+ * @property NegocioProdutoBarra[] $NegocioProdutoBarraCriacaos
+ * @property Menu[] $MenuAlteracaos
+ * @property Menu[] $MenuCriacaos
+ * @property Tributacao[] $TributacaoAlteracaos
+ * @property Tributacao[] $TributacaoCriacaos
+ * @property NotaFiscal[] $NotaFiscalAlteracaos
+ * @property NotaFiscal[] $NotaFiscalCriacaos
+ * @property BoletoMotivoOcorrencia[] $BoletoMotivoOcorrenciaAlteracaos
+ * @property BoletoMotivoOcorrencia[] $BoletoMotivoOcorrenciaCriacaos
+ * @property EstoqueSaldo[] $EstoqueSaldoAlteracaos
+ * @property EstoqueSaldo[] $EstoqueSaldoCriacaos
+ * @property FormaPagamento[] $FormaPagamentoAlteracaos
+ * @property FormaPagamento[] $FormaPagamentoCriacaos
+ * @property Ibptax[] $IbptaxAlteracaos
+ * @property Ibptax[] $IbptaxCriacaos
+ * @property Marca[] $MarcaoAlteracaos
+ * @property Marca[] $MarcaCriacaos
+ * @property GrupoProduto[] $GrupoProdutoAlteracaos
+ * @property GrupoProduto[] $GrupoProdutoCriacaos
+ * @property Codigo[] $CodigoAlteracaos
+ * @property Codigo[] $CodigoCriacaos
+ * @property BoletoTipoOcorrencia[] $BoletoTipoOcorrenciaAlteracaos
+ * @property BoletoTipoOcorrencia[] $BoletoTipoOcorrenciaCriacaos
+ * @property BaseRemota[] $BaseRemotaAlteracaos
+ * @property BaseRemota[] $BaseRemotaCriacaos
+ * @property SubgrupoProduto[] $SubGrupoProdutoAlteracaos
+ * @property SubgrupoProduto[] $SubGrupoProdutoCriacaos
+ * @property ProdutoHistoricoPreco[] $ProdutoHistoricoPrecos
+ * @property ProdutoHistoricoPreco[] $ProdutoHistoricoPrecoAlteracaos
+ * @property ProdutoHistoricoPreco[] $ProdutoHistoricoPrecoCriacaos
  */
 class Usuario extends MGActiveRecord
 {
@@ -232,140 +230,138 @@ class Usuario extends MGActiveRecord
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			
 			/*
-			'MovimentoTituloAlteracaos' => array(self::HAS_MANY, 'Movimentotitulo', 'codusuarioalteracao'),
-			'MovimentoTituloCriacaos' => array(self::HAS_MANY, 'Movimentotitulo', 'codusuariocriacao'),
-			'titulos' => array(self::HAS_MANY, 'Titulo', 'codusuarioalteracao'),
-			'titulos1' => array(self::HAS_MANY, 'Titulo', 'codusuariocriacao'),
-			'filials' => array(self::HAS_MANY, 'Filial', 'acbrnfemonitorcodusuario'),
-			'filials1' => array(self::HAS_MANY, 'Filial', 'codusuarioalteracao'),
-			'filials2' => array(self::HAS_MANY, 'Filial', 'codusuariocriacao'),
-			'portadors' => array(self::HAS_MANY, 'Portador', 'codusuarioalteracao'),
-			'portadors1' => array(self::HAS_MANY, 'Portador', 'codusuariocriacao'),
-			'usuarios' => array(self::HAS_MANY, 'Usuario', 'codusuarioalteracao'),
-			'usuarios1' => array(self::HAS_MANY, 'Usuario', 'codusuariocriacao'),
-			'empresas' => array(self::HAS_MANY, 'Empresa', 'codusuarioalteracao'),
-			'empresas1' => array(self::HAS_MANY, 'Empresa', 'codusuariocriacao'),
-			'boletoretornos' => array(self::HAS_MANY, 'Boletoretorno', 'codusuarioalteracao'),
-			'boletoretornos1' => array(self::HAS_MANY, 'Boletoretorno', 'codusuariocriacao'),
-			'cobrancas' => array(self::HAS_MANY, 'Cobranca', 'codusuarioalteracao'),
-			'cobrancas1' => array(self::HAS_MANY, 'Cobranca', 'codusuariocriacao'),
-			'tipomovimentotitulos' => array(self::HAS_MANY, 'Tipomovimentotitulo', 'codusuarioalteracao'),
-			'tipomovimentotitulos1' => array(self::HAS_MANY, 'Tipomovimentotitulo', 'codusuariocriacao'),
-			'liquidacaotitulos' => array(self::HAS_MANY, 'Liquidacaotitulo', 'codusuario'),
-			'liquidacaotitulos1' => array(self::HAS_MANY, 'Liquidacaotitulo', 'codusuarioestorno'),
-			'liquidacaotitulos2' => array(self::HAS_MANY, 'Liquidacaotitulo', 'codusuarioalteracao'),
-			'liquidacaotitulos3' => array(self::HAS_MANY, 'Liquidacaotitulo', 'codusuariocriacao'),
-			'tituloagrupamentos' => array(self::HAS_MANY, 'Tituloagrupamento', 'codusuarioalteracao'),
-			'tituloagrupamentos1' => array(self::HAS_MANY, 'Tituloagrupamento', 'codusuariocriacao'),
-			'pessoas' => array(self::HAS_MANY, 'Pessoa', 'codusuarioalteracao'),
-			'pessoas1' => array(self::HAS_MANY, 'Pessoa', 'codusuariocriacao'),
-			'paises' => array(self::HAS_MANY, 'Pais', 'codusuarioalteracao'),
-			'paises1' => array(self::HAS_MANY, 'Pais', 'codusuariocriacao'),
-			'notafiscalprodutobarras' => array(self::HAS_MANY, 'Notafiscalprodutobarra', 'codusuarioalteracao'),
-			'notafiscalprodutobarras1' => array(self::HAS_MANY, 'Notafiscalprodutobarra', 'codusuariocriacao'),
-			'cupomfiscalprodutobarras' => array(self::HAS_MANY, 'Cupomfiscalprodutobarra', 'codusuarioalteracao'),
-			'cupomfiscalprodutobarras1' => array(self::HAS_MANY, 'Cupomfiscalprodutobarra', 'codusuariocriacao'),
-			'estoquemovimentotipos' => array(self::HAS_MANY, 'Estoquemovimentotipo', 'codusuarioalteracao'),
-			'estoquemovimentotipos1' => array(self::HAS_MANY, 'Estoquemovimentotipo', 'codusuariocriacao'),
-			'estoquemovimentos' => array(self::HAS_MANY, 'Estoquemovimento', 'codusuarioalteracao'),
-			'estoquemovimentos1' => array(self::HAS_MANY, 'Estoquemovimento', 'codusuariocriacao'),
-			'produtobarras' => array(self::HAS_MANY, 'Produtobarra', 'codusuarioalteracao'),
-			'produtobarras1' => array(self::HAS_MANY, 'Produtobarra', 'codusuariocriacao'),
-			'produtos' => array(self::HAS_MANY, 'Produto', 'codusuarioalteracao'),
-			'produtos1' => array(self::HAS_MANY, 'Produto', 'codusuariocriacao'),
-			'estados' => array(self::HAS_MANY, 'Estado', 'codusuarioalteracao'),
-			'estados1' => array(self::HAS_MANY, 'Estado', 'codusuariocriacao'),
-			'cupomfiscals' => array(self::HAS_MANY, 'Cupomfiscal', 'codusuarioalteracao'),
-			'cupomfiscals1' => array(self::HAS_MANY, 'Cupomfiscal', 'codusuariocriacao'),
-			'ecfs' => array(self::HAS_MANY, 'Ecf', 'codusuario'),
-			'ecfs1' => array(self::HAS_MANY, 'Ecf', 'codusuarioalteracao'),
-			'ecfs2' => array(self::HAS_MANY, 'Ecf', 'codusuariocriacao'),
-			'ecfreducaozs' => array(self::HAS_MANY, 'Ecfreducaoz', 'codusuarioalteracao'),
-			'ecfreducaozs1' => array(self::HAS_MANY, 'Ecfreducaoz', 'codusuariocriacao'),
-			'cidades' => array(self::HAS_MANY, 'Cidade', 'codusuarioalteracao'),
-			'cidades1' => array(self::HAS_MANY, 'Cidade', 'codusuariocriacao'),
-			'chequeemitentes' => array(self::HAS_MANY, 'Chequeemitente', 'codusuarioalteracao'),
-			'chequeemitentes1' => array(self::HAS_MANY, 'Chequeemitente', 'codusuariocriacao'),
-			'bancos' => array(self::HAS_MANY, 'Banco', 'codusuarioalteracao'),
-			'bancos1' => array(self::HAS_MANY, 'Banco', 'codusuariocriacao'),
-			'cheques' => array(self::HAS_MANY, 'Cheque', 'codusuarioalteracao'),
-			'cheques1' => array(self::HAS_MANY, 'Cheque', 'codusuariocriacao'),
-			'cobrancahistoricos' => array(self::HAS_MANY, 'Cobrancahistorico', 'codusuario'),
-			'cobrancahistoricos1' => array(self::HAS_MANY, 'Cobrancahistorico', 'codusuarioalteracao'),
-			'cobrancahistoricos2' => array(self::HAS_MANY, 'Cobrancahistorico', 'codusuariocriacao'),
-			'cobrancahistoricotitulos' => array(self::HAS_MANY, 'Cobrancahistoricotitulo', 'codusuarioalteracao'),
-			'cobrancahistoricotitulos1' => array(self::HAS_MANY, 'Cobrancahistoricotitulo', 'codusuariocriacao'),
-			'operacaos' => array(self::HAS_MANY, 'Operacao', 'codusuarioalteracao'),
-			'operacaos1' => array(self::HAS_MANY, 'Operacao', 'codusuariocriacao'),
-			'tipotitulos' => array(self::HAS_MANY, 'Tipotitulo', 'codusuarioalteracao'),
-			'tipotitulos1' => array(self::HAS_MANY, 'Tipotitulo', 'codusuariocriacao'),
-			'cfops' => array(self::HAS_MANY, 'Cfop', 'codusuarioalteracao'),
-			'cfops1' => array(self::HAS_MANY, 'Cfop', 'codusuariocriacao'),
-			'notafiscalcartacorrecaos' => array(self::HAS_MANY, 'Notafiscalcartacorrecao', 'codusuarioalteracao'),
-			'notafiscalcartacorrecaos1' => array(self::HAS_MANY, 'Notafiscalcartacorrecao', 'codusuariocriacao'),
-			'notafiscalduplicatases' => array(self::HAS_MANY, 'Notafiscalduplicatas', 'codusuarioalteracao'),
-			'notafiscalduplicatases1' => array(self::HAS_MANY, 'Notafiscalduplicatas', 'codusuariocriacao'),
-			'produtoembalagems' => array(self::HAS_MANY, 'Produtoembalagem', 'codusuarioalteracao'),
-			'produtoembalagems1' => array(self::HAS_MANY, 'Produtoembalagem', 'codusuariocriacao'),
-			'estadocivils' => array(self::HAS_MANY, 'Estadocivil', 'codusuarioalteracao'),
-			'estadocivils1' => array(self::HAS_MANY, 'Estadocivil', 'codusuariocriacao'),
-			'sexos' => array(self::HAS_MANY, 'Sexo', 'codusuarioalteracao'),
-			'sexos1' => array(self::HAS_MANY, 'Sexo', 'codusuariocriacao'),
-			'estoquemovimento2012s' => array(self::HAS_MANY, 'Estoquemovimento2012', 'codusuarioalteracao'),
-			'estoquemovimento2012s1' => array(self::HAS_MANY, 'Estoquemovimento2012', 'codusuariocriacao'),
-			'naturezaoperacaos' => array(self::HAS_MANY, 'Naturezaoperacao', 'codusuarioalteracao'),
-			'naturezaoperacaos1' => array(self::HAS_MANY, 'Naturezaoperacao', 'codusuariocriacao'),
-			'ncms' => array(self::HAS_MANY, 'Ncm', 'codusuarioalteracao'),
-			'ncms1' => array(self::HAS_MANY, 'Ncm', 'codusuariocriacao'),
-			'parametrosgeraises' => array(self::HAS_MANY, 'Parametrosgerais', 'codusuarioalteracao'),
-			'parametrosgeraises1' => array(self::HAS_MANY, 'Parametrosgerais', 'codusuariocriacao'),
-			'tipoprodutos' => array(self::HAS_MANY, 'Tipoproduto', 'codusuarioalteracao'),
-			'tipoprodutos1' => array(self::HAS_MANY, 'Tipoproduto', 'codusuariocriacao'),
-			'tributacaonaturezaoperacaos' => array(self::HAS_MANY, 'Tributacaonaturezaoperacao', 'codusuarioalteracao'),
-			'tributacaonaturezaoperacaos1' => array(self::HAS_MANY, 'Tributacaonaturezaoperacao', 'codusuariocriacao'),
-			'unidademedidas' => array(self::HAS_MANY, 'Unidademedida', 'codusuarioalteracao'),
-			'unidademedidas1' => array(self::HAS_MANY, 'Unidademedida', 'codusuariocriacao'),
-			'contacontabils' => array(self::HAS_MANY, 'Contacontabil', 'codusuarioalteracao'),
-			'contacontabils1' => array(self::HAS_MANY, 'Contacontabil', 'codusuariocriacao'),
-			'negocios' => array(self::HAS_MANY, 'Negocio', 'codusuario'),
-			'negocios1' => array(self::HAS_MANY, 'Negocio', 'codusuarioacertoentrega'),
-			'negocios2' => array(self::HAS_MANY, 'Negocio', 'codusuarioalteracao'),
-			'negocios3' => array(self::HAS_MANY, 'Negocio', 'codusuariocriacao'),
-			'negocioformapagamentos' => array(self::HAS_MANY, 'Negocioformapagamento', 'codusuarioalteracao'),
-			'negocioformapagamentos1' => array(self::HAS_MANY, 'Negocioformapagamento', 'codusuariocriacao'),
-			'negociostatuses' => array(self::HAS_MANY, 'Negociostatus', 'codusuarioalteracao'),
-			'negociostatuses1' => array(self::HAS_MANY, 'Negociostatus', 'codusuariocriacao'),
-			'negocioprodutobarras' => array(self::HAS_MANY, 'Negocioprodutobarra', 'codusuarioalteracao'),
-			'negocioprodutobarras1' => array(self::HAS_MANY, 'Negocioprodutobarra', 'codusuariocriacao'),
-			'menus' => array(self::HAS_MANY, 'Menu', 'codusuarioalteracao'),
-			'menus1' => array(self::HAS_MANY, 'Menu', 'codusuariocriacao'),
-			'tributacaos' => array(self::HAS_MANY, 'Tributacao', 'codusuarioalteracao'),
-			'tributacaos1' => array(self::HAS_MANY, 'Tributacao', 'codusuariocriacao'),
-			'notafiscals' => array(self::HAS_MANY, 'Notafiscal', 'codusuarioalteracao'),
-			'notafiscals1' => array(self::HAS_MANY, 'Notafiscal', 'codusuariocriacao'),
-			'boletomotivoocorrencias' => array(self::HAS_MANY, 'Boletomotivoocorrencia', 'codusuarioalteracao'),
-			'boletomotivoocorrencias1' => array(self::HAS_MANY, 'Boletomotivoocorrencia', 'codusuariocriacao'),
-			'estoquesaldos' => array(self::HAS_MANY, 'Estoquesaldo', 'codusuarioalteracao'),
-			'estoquesaldos1' => array(self::HAS_MANY, 'Estoquesaldo', 'codusuariocriacao'),
-			'formapagamentos' => array(self::HAS_MANY, 'Formapagamento', 'codusuarioalteracao'),
-			'formapagamentos1' => array(self::HAS_MANY, 'Formapagamento', 'codusuariocriacao'),
-			'ibptaxes' => array(self::HAS_MANY, 'Ibptax', 'codusuarioalteracao'),
-			'ibptaxes1' => array(self::HAS_MANY, 'Ibptax', 'codusuariocriacao'),
-			'marcas' => array(self::HAS_MANY, 'Marca', 'codusuarioalteracao'),
-			'marcas1' => array(self::HAS_MANY, 'Marca', 'codusuariocriacao'),
-			'grupoprodutos' => array(self::HAS_MANY, 'Grupoproduto', 'codusuarioalteracao'),
-			'grupoprodutos1' => array(self::HAS_MANY, 'Grupoproduto', 'codusuariocriacao'),
-			'codigos' => array(self::HAS_MANY, 'Codigo', 'codusuarioalteracao'),
-			'codigos1' => array(self::HAS_MANY, 'Codigo', 'codusuariocriacao'),
-			'boletotipoocorrencias' => array(self::HAS_MANY, 'Boletotipoocorrencia', 'codusuarioalteracao'),
-			'boletotipoocorrencias1' => array(self::HAS_MANY, 'Boletotipoocorrencia', 'codusuariocriacao'),
-			'baseremotas' => array(self::HAS_MANY, 'Baseremota', 'codusuarioalteracao'),
-			'baseremotas1' => array(self::HAS_MANY, 'Baseremota', 'codusuariocriacao'),
-			'subgrupoprodutos' => array(self::HAS_MANY, 'Subgrupoproduto', 'codusuarioalteracao'),
-			'subgrupoprodutos1' => array(self::HAS_MANY, 'Subgrupoproduto', 'codusuariocriacao'),
-			'produtohistoricoprecos' => array(self::HAS_MANY, 'Produtohistoricopreco', 'codusuario'),
-			'produtohistoricoprecos1' => array(self::HAS_MANY, 'Produtohistoricopreco', 'codusuarioalteracao'),
-			'produtohistoricoprecos2' => array(self::HAS_MANY, 'Produtohistoricopreco', 'codusuariocriacao'),
+			'MovimentoTituloAlteracaos' => array(self::HAS_MANY, 'MovimentoTitulo', 'codusuarioalteracao'),
+			'MovimentoTituloCriacaos' => array(self::HAS_MANY, 'MovimentoTitulo', 'codusuariocriacao'),
+			'TituloAlteracaos' => array(self::HAS_MANY, 'Titulo', 'codusuarioalteracao'),
+			'TituloCriacaos' => array(self::HAS_MANY, 'Titulo', 'codusuariocriacao'),
+			'FilialAcbrNfeMonitors' => array(self::HAS_MANY, 'Filial', 'acbrnfemonitorcodusuario'),
+			'FilialAlteracaos' => array(self::HAS_MANY, 'Filial', 'codusuarioalteracao'),
+			'FilialCriacaos' => array(self::HAS_MANY, 'Filial', 'codusuariocriacao'),
+			'PortadorAlteracaos' => array(self::HAS_MANY, 'Portador', 'codusuarioalteracao'),
+			'PortadorCriacaos' => array(self::HAS_MANY, 'Portador', 'codusuariocriacao'),
+			'UsuarioAlteracaos' => array(self::HAS_MANY, 'Usuario', 'codusuarioalteracao'),
+			'UsuarioCriacaos' => array(self::HAS_MANY, 'Usuario', 'codusuariocriacao'),
+			'EmpresaAlteracaos' => array(self::HAS_MANY, 'Empresa', 'codusuarioalteracao'),
+			'EmpresaCriacaos' => array(self::HAS_MANY, 'Empresa', 'codusuariocriacao'),
+			'BoletoRetornoAlteracaos' => array(self::HAS_MANY, 'BoletoRetorno', 'codusuarioalteracao'),
+			'BoletoRetornoCriacaos' => array(self::HAS_MANY, 'BoletoRetorno', 'codusuariocriacao'),
+			'Cobrancalteracaos' => array(self::HAS_MANY, 'Cobranca', 'codusuarioalteracao'),
+			'CobrancaCriacaos' => array(self::HAS_MANY, 'Cobranca', 'codusuariocriacao'),
+			'TipoMovimentoTituloAlteracaos' => array(self::HAS_MANY, 'TipoMovimentoTitulo', 'codusuarioalteracao'),
+			'TipoMovimentoTituloCriacaos' => array(self::HAS_MANY, 'TipoMovimentoTitulo', 'codusuariocriacao'),
+			'LiquidacaoTitulos' => array(self::HAS_MANY, 'LiquidacaoTitulo', 'codusuario'),
+			'LiquidacaoTituloEstornos' => array(self::HAS_MANY, 'LiquidacaoTitulo', 'codusuarioestorno'),
+			'LiquidacaoTituloAlteracaos' => array(self::HAS_MANY, 'LiquidacaotTtulo', 'codusuarioalteracao'),
+			'LiquidacaoTituloCriacaos' => array(self::HAS_MANY, 'LiquidacaoTitulo', 'codusuariocriacao'),
+			'TituloAgrupamentoAlteracaos' => array(self::HAS_MANY, 'TituloAgrupamento', 'codusuarioalteracao'),
+			'TituloAgrupamentoCriacaos' => array(self::HAS_MANY, 'TituloAgrupamento', 'codusuariocriacao'),
+			'PessoaAlteracaos' => array(self::HAS_MANY, 'Pessoa', 'codusuarioalteracao'),
+			'PessoaCriacaos' => array(self::HAS_MANY, 'Pessoa', 'codusuariocriacao'),
+			'PaisAlteracaos' => array(self::HAS_MANY, 'Pais', 'codusuarioalteracao'),
+			'PaisCriacaos' => array(self::HAS_MANY, 'Pais', 'codusuariocriacao'),
+			'NotafiscalProdutoBarraAlteracaos' => array(self::HAS_MANY, 'NotafiscalProdutoBarra', 'codusuarioalteracao'),
+			'NotafiscalProdutoBarraCriacaos' => array(self::HAS_MANY, 'NotafiscalProdutoBarra', 'codusuariocriacao'),
+			'CupomFiscalProdutoBarraAlteracaos' => array(self::HAS_MANY, 'CupomFiscalProdutoBarra', 'codusuarioalteracao'),
+			'CupomFiscalProdutoBarraCriacaos' => array(self::HAS_MANY, 'CupomFiscalProdutoBarra', 'codusuariocriacao'),
+			'EstoqueMovimentoTipoAlteracaos' => array(self::HAS_MANY, 'EstoqueMovimentoTipo', 'codusuarioalteracao'),
+			'EstoqueMovimentoTipoCriacaos' => array(self::HAS_MANY, 'EstoqueMovimentoTipo', 'codusuariocriacao'),
+			'EstoqueMovimentoAlteracaos' => array(self::HAS_MANY, 'EstoqueMovimento', 'codusuarioalteracao'),
+			'EstoqueMovimentoCriacaos' => array(self::HAS_MANY, 'EstoqueMovimento', 'codusuariocriacao'),
+			'ProdutoBarraAlteracaos' => array(self::HAS_MANY, 'ProdutoBarra', 'codusuarioalteracao'),
+			'ProdutoBarraCriacaos' => array(self::HAS_MANY, 'ProdutoBarra', 'codusuariocriacao'),
+			'ProdutoAlteracaos' => array(self::HAS_MANY, 'Produto', 'codusuarioalteracao'),
+			'ProdutoCriacaos' => array(self::HAS_MANY, 'Produto', 'codusuariocriacao'),
+			'EstadoAlteracaos' => array(self::HAS_MANY, 'Estado', 'codusuarioalteracao'),
+			'EstadoCriacaos' => array(self::HAS_MANY, 'Estado', 'codusuariocriacao'),
+			'CupomFiscalAlteracaos' => array(self::HAS_MANY, 'CupomFiscal', 'codusuarioalteracao'),
+			'CupomFiscalCriacaos' => array(self::HAS_MANY, 'CupomFiscal', 'codusuariocriacao'),
+			'Ecfs' => array(self::HAS_MANY, 'Ecf', 'codusuario'),
+			'EcfAlteracaos' => array(self::HAS_MANY, 'Ecf', 'codusuarioalteracao'),
+			'EcfCriacaos' => array(self::HAS_MANY, 'Ecf', 'codusuariocriacao'),
+			'EcfReducaoZAlteracaos' => array(self::HAS_MANY, 'EcfReducaoZ', 'codusuarioalteracao'),
+			'EcfReducaoZCriacaos' => array(self::HAS_MANY, 'EcfReducaoZ', 'codusuariocriacao'),
+			'CidadeAlteracaos' => array(self::HAS_MANY, 'Cidade', 'codusuarioalteracao'),
+			'CidadeCriacaos' => array(self::HAS_MANY, 'Cidade', 'codusuariocriacao'),
+			'ChequeEmitenteAlteracaos' => array(self::HAS_MANY, 'ChequeEmitente', 'codusuarioalteracao'),
+			'ChequeEmitenteCriacaos' => array(self::HAS_MANY, 'ChequeEmitente', 'codusuariocriacao'),
+			'BancoAlteracaos' => array(self::HAS_MANY, 'Banco', 'codusuarioalteracao'),
+			'BancoCriacaos' => array(self::HAS_MANY, 'Banco', 'codusuariocriacao'),
+			'ChequeAlteracaos' => array(self::HAS_MANY, 'Cheque', 'codusuarioalteracao'),
+			'ChequeCriacaos' => array(self::HAS_MANY, 'Cheque', 'codusuariocriacao'),
+			'CobrancaHistoricos' => array(self::HAS_MANY, 'CobrancaHistorico', 'codusuario'),
+			'CobrancaHistoricoAlteracaos' => array(self::HAS_MANY, 'CobrancaHistorico', 'codusuarioalteracao'),
+			'CobrancaHistoricoCriacaos' => array(self::HAS_MANY, 'CobrancaHistorico', 'codusuariocriacao'),
+			'CobrancaHistoricoTituloAlteracaos' => array(self::HAS_MANY, 'CobrancaHistoricoTitulo', 'codusuarioalteracao'),
+			'CobrancaHistoricoTituloCriacaos' => array(self::HAS_MANY, 'CobrancaHistoricoTitulo', 'codusuariocriacao'),
+			'OperacaoAlteracaos' => array(self::HAS_MANY, 'Operacao', 'codusuarioalteracao'),
+			'OperacaoCriacaos' => array(self::HAS_MANY, 'Operacao', 'codusuariocriacao'),
+			'TipoTituloAlteracaos' => array(self::HAS_MANY, 'TipoTitulo', 'codusuarioalteracao'),
+			'TipoTituloCriacaos' => array(self::HAS_MANY, 'TipoTitulo', 'codusuariocriacao'),
+			'CfopAlteracaos' => array(self::HAS_MANY, 'Cfop', 'codusuarioalteracao'),
+			'CfopCriacaos' => array(self::HAS_MANY, 'Cfop', 'codusuariocriacao'),
+			'NotaFiscalCartaCorrecaoAlteracaos' => array(self::HAS_MANY, 'NotaFiscalCartaCorrecao', 'codusuarioalteracao'),
+			'NotaFiscalCartaCorrecaoCriacaos' => array(self::HAS_MANY, 'NotaFiscalCartaCorrecao', 'codusuariocriacao'),
+			'NotaFiscalDuplicatasAlteracaos' => array(self::HAS_MANY, 'NotaFiscalDuplicatas', 'codusuarioalteracao'),
+			'NotaFiscalDuplicatasCriacaos' => array(self::HAS_MANY, 'NotaFiscalDuplicatas', 'codusuariocriacao'),
+			'ProdutoEmbalagemAlteracaos' => array(self::HAS_MANY, 'ProdutoEmbalagem', 'codusuarioalteracao'),
+			'ProdutoEmbalagemCriacaos' => array(self::HAS_MANY, 'ProdutoEmbalagem', 'codusuariocriacao'),
+			'EstadoCivilAlteracaos' => array(self::HAS_MANY, 'EstadoCivil', 'codusuarioalteracao'),
+			'EstadoCivilCriacaos' => array(self::HAS_MANY, 'EstadoCivil', 'codusuariocriacao'),
+			'SexoAlteracaos' => array(self::HAS_MANY, 'Sexo', 'codusuarioalteracao'),
+			'SexoCriacaos' => array(self::HAS_MANY, 'Sexo', 'codusuariocriacao'),
+			'NaturezaOperacaolteracaos' => array(self::HAS_MANY, 'NaturezaOperacao', 'codusuarioalteracao'),
+			'NaturezaOperacaoCriacaos' => array(self::HAS_MANY, 'NaturezaOperacao', 'codusuariocriacao'),
+			'NcmAlteracaos' => array(self::HAS_MANY, 'Ncm', 'codusuarioalteracao'),
+			'NcmCriacaos' => array(self::HAS_MANY, 'Ncm', 'codusuariocriacao'),
+			'ParametrosGeraisAlteracaos' => array(self::HAS_MANY, 'ParametrosGerais', 'codusuarioalteracao'),
+			'ParametrosGeraisCriacaos' => array(self::HAS_MANY, 'ParametrosGerais', 'codusuariocriacao'),
+			'TipoProdutoAlteracaos' => array(self::HAS_MANY, 'TipoProduto', 'codusuarioalteracao'),
+			'TipoProdutoCriacaos' => array(self::HAS_MANY, 'TipoProduto', 'codusuariocriacao'),
+			'TributacaoNaturezaOperacaoAlteracaos' => array(self::HAS_MANY, 'TributacaoNaturezaOperacao', 'codusuarioalteracao'),
+			'TributacaoNaturezaOperacaoCriacaos' => array(self::HAS_MANY, 'TributacaoNaturezaOperacao', 'codusuariocriacao'),
+			'UnidadeMedidaAlteracaos' => array(self::HAS_MANY, 'UnidadeMedida', 'codusuarioalteracao'),
+			'UnidadeMedidaCriacaos' => array(self::HAS_MANY, 'UnidadeMedida', 'codusuariocriacao'),
+			'ContacontabilAlteracaos' => array(self::HAS_MANY, 'Contacontabil', 'codusuarioalteracao'),
+			'ContacontabilCriacaos' => array(self::HAS_MANY, 'Contacontabil', 'codusuariocriacao'),
+			'Negocios' => array(self::HAS_MANY, 'Negocio', 'codusuario'),
+			'NegocioAcertoEntregas' => array(self::HAS_MANY, 'Negocio', 'codusuarioacertoentrega'),
+			'NegocioAlteracaos' => array(self::HAS_MANY, 'Negocio', 'codusuarioalteracao'),
+			'NegocioCriacaos' => array(self::HAS_MANY, 'Negocio', 'codusuariocriacao'),
+			'NegocioFormaPagamentoAlteracaos' => array(self::HAS_MANY, 'NegocioFormaPagamento', 'codusuarioalteracao'),
+			'NegocioFormaPagamentoCriacaos' => array(self::HAS_MANY, 'NegocioFormaPagamento', 'codusuariocriacao'),
+			'NegocioStatusAlteracaos' => array(self::HAS_MANY, 'NegocioStatus', 'codusuarioalteracao'),
+			'NegocioStatusCriacaos' => array(self::HAS_MANY, 'NegocioStatus', 'codusuariocriacao'),
+			'NegocioProdutoBarraAlteracaos' => array(self::HAS_MANY, 'NegocioProdutoBarra', 'codusuarioalteracao'),
+			'NegocioProdutoBarraCriacaos' => array(self::HAS_MANY, 'NegocioProdutoBarra', 'codusuariocriacao'),
+			'MenuAlteracaos' => array(self::HAS_MANY, 'Menu', 'codusuarioalteracao'),
+			'MenuCriacaos' => array(self::HAS_MANY, 'Menu', 'codusuariocriacao'),
+			'TributacaoAlteracaos' => array(self::HAS_MANY, 'Tributacao', 'codusuarioalteracao'),
+			'TributacaoCriacaos' => array(self::HAS_MANY, 'Tributacao', 'codusuariocriacao'),
+			'NotaFiscalAlteracaos' => array(self::HAS_MANY, 'NotaFiscal', 'codusuarioalteracao'),
+			'NotaFiscalCriacaos' => array(self::HAS_MANY, 'NotaFiscal', 'codusuariocriacao'),
+			'BoletoMotivoOcorrenciaAlteracaos' => array(self::HAS_MANY, 'BoletoMotivoOcorrencia', 'codusuarioalteracao'),
+			'BoletoMotivoOcorrenciaCriacaos' => array(self::HAS_MANY, 'BoletoMotivoOcorrencia', 'codusuariocriacao'),
+			'EstoqueSaldoAlteracaos' => array(self::HAS_MANY, 'EstoqueSaldo', 'codusuarioalteracao'),
+			'EstoqueSaldoCriacaos' => array(self::HAS_MANY, 'EstoqueSaldo', 'codusuariocriacao'),
+			'FormaPagamentoAlteracaos' => array(self::HAS_MANY, 'FormaPagamento', 'codusuarioalteracao'),
+			'FormaPagamentoCriacaos' => array(self::HAS_MANY, 'FormaPagamento', 'codusuariocriacao'),
+			'IbptaxAlteracaos' => array(self::HAS_MANY, 'Ibptax', 'codusuarioalteracao'),
+			'IbptaxCriacaos' => array(self::HAS_MANY, 'Ibptax', 'codusuariocriacao'),
+			'MarcaAlteracaos' => array(self::HAS_MANY, 'Marca', 'codusuarioalteracao'),
+			'MarcaCriacaos' => array(self::HAS_MANY, 'Marca', 'codusuariocriacao'),
+			'GrupoProdutoAlteracaos' => array(self::HAS_MANY, 'GrupoProduto', 'codusuarioalteracao'),
+			'GrupoProdutoCriacaos' => array(self::HAS_MANY, 'GrupoProduto', 'codusuariocriacao'),
+			'CodigoAlteracaos' => array(self::HAS_MANY, 'Codigo', 'codusuarioalteracao'),
+			'CodigooCriacaos' => array(self::HAS_MANY, 'Codigo', 'codusuariocriacao'),
+			'BoletoTipoOcorrenciaAlteracaos' => array(self::HAS_MANY, 'BoletoTipoOcorrencia', 'codusuarioalteracao'),
+			'BoletoTipoOcorrenciaCriacaos' => array(self::HAS_MANY, 'BoletoTipoOcorrencia', 'codusuariocriacao'),
+			'BaseRemotaAlteracaos' => array(self::HAS_MANY, 'BaseRemota', 'codusuarioalteracao'),
+			'BaseRemotaCriacaos' => array(self::HAS_MANY, 'BaseRemota', 'codusuariocriacao'),
+			'SubGrupoProdutoAlteracaos' => array(self::HAS_MANY, 'SubGrupoProduto', 'codusuarioalteracao'),
+			'SubGrupoProdutoCriacaos' => array(self::HAS_MANY, 'SubGrupoProduto', 'codusuariocriacao'),
+			'ProdutoHistoricoPrecos' => array(self::HAS_MANY, 'ProdutoHistoricoPreco', 'codusuario'),
+			'ProdutoHistoricoPrecoAlteracaos' => array(self::HAS_MANY, 'ProdutoHistoricoPreco', 'codusuarioalteracao'),
+			'ProdutoHistoricoPrecoCriacaos' => array(self::HAS_MANY, 'ProdutoHistoricoPreco', 'codusuariocriacao'),
 			 * 
 			 */
 		);
