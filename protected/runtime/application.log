@@ -5028,3 +5028,440 @@ Stack trace:
 #5 {main}
 REQUEST_URI=/MGsis/index.php?r=negocio/pessoas
 ---
+2014/05/21 10:37:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "srbac/site/logout".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('srbac/site/logo...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=srbac/site/logout
+HTTP_REFERER=http://localhost/MGsis/index.php?r=srbac/authitem/frontpage
+---
+2014/05/21 15:06:09 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /var/www/MGsis/protected/models/MGActiveRecord.php (129)
+in /var/www/MGsis/protected/controllers/NegocioController.php (183)
+in /var/www/MGsis/protected/controllers/NegocioController.php (64)
+2014/05/21 15:07:18 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /var/www/MGsis/protected/models/MGActiveRecord.php (129)
+in /var/www/MGsis/protected/controllers/NegocioController.php (183)
+in /var/www/MGsis/protected/controllers/NegocioController.php (64)
+2014/05/21 15:07:22 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /var/www/MGsis/protected/models/MGActiveRecord.php (129)
+in /var/www/MGsis/protected/controllers/NegocioController.php (68)
+in /var/www/MGsis/index.php (13)
+2014/05/21 15:23:06 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchColumn(): SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...NT(*) FROM "mgsis"."tblempresa" "t" WHERE codempresa LIKE $1
+                                                                ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. A declaração SQL executada foi: SELECT COUNT(*) FROM "mgsis"."tblempresa" "t" WHERE codempresa LIKE :ycp0.
+in /var/www/MGsis/protected/views/empresa/index.php (75)
+in /var/www/MGsis/protected/controllers/EmpresaController.php (119)
+in /var/www/MGsis/index.php (13)
+2014/05/21 15:23:06 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...NT(*) FROM "mgsis"."tblempresa" "t" WHERE codempresa LIKE $1
+                                                                ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. The SQL statement executed was: SELECT COUNT(*) FROM "mgsis"."tblempresa" "t" WHERE codempresa LIKE :ycp0' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1601): CDbCommand->queryScalar()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(111): CDataProvider->getData()
+#7 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(211): CBaseListView->init()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(147): CListView->init()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.CLi...', Array)
+#10 /var/www/MGsis/protected/views/empresa/index.php(75): CBaseController->widget('zii.widgets.CLi...', Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#15 /var/www/MGsis/protected/controllers/EmpresaController.php(119): CController->render('index', Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): EmpresaController->actionIndex()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('index')
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('empresa/index')
+#22 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/MGsis/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/MGsis/index.php?Empresa%5Bcodempresa%5D=3&ajax=Listagem&r=empresa%2Findex
+HTTP_REFERER=http://localhost/MGsis/index.php?r=empresa
+---
+2014/05/21 15:34:35 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblempresa_pkey"
+DETAIL:  Key (codempresa)=(1) already exists.. A declaração SQL executada foi: INSERT INTO "mgsis"."tblempresa" ("empresa", "codempresa", "alteracao", "codusuarioalteracao", "criacao", "codusuariocriacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5).
+in /var/www/MGsis/protected/controllers/EmpresaController.php (36)
+in /var/www/MGsis/index.php (13)
+2014/05/21 15:34:35 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblempresa_pkey"
+DETAIL:  Key (codempresa)=(1) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblempresa" ("empresa", "codempresa", "alteracao", "codusuarioalteracao", "criacao", "codusuariocriacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/MGsis/protected/controllers/EmpresaController.php(36): CActiveRecord->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): EmpresaController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('empresa/create')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=empresa/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=empresa/create
+---
+2014/05/21 15:34:51 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblempresa_pkey"
+DETAIL:  Key (codempresa)=(2) already exists.. A declaração SQL executada foi: INSERT INTO "mgsis"."tblempresa" ("empresa", "codempresa", "alteracao", "codusuarioalteracao", "criacao", "codusuariocriacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5).
+in /var/www/MGsis/protected/controllers/EmpresaController.php (36)
+in /var/www/MGsis/index.php (13)
+2014/05/21 15:34:51 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblempresa_pkey"
+DETAIL:  Key (codempresa)=(2) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblempresa" ("empresa", "codempresa", "alteracao", "codusuarioalteracao", "criacao", "codusuariocriacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/MGsis/protected/controllers/EmpresaController.php(36): CActiveRecord->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): EmpresaController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('empresa/create')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=empresa/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=empresa/create
+---
+2014/05/21 15:34:56 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblempresa_pkey"
+DETAIL:  Key (codempresa)=(3) already exists.. A declaração SQL executada foi: INSERT INTO "mgsis"."tblempresa" ("empresa", "codempresa", "alteracao", "codusuarioalteracao", "criacao", "codusuariocriacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5).
+in /var/www/MGsis/protected/controllers/EmpresaController.php (36)
+in /var/www/MGsis/index.php (13)
+2014/05/21 15:34:56 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblempresa_pkey"
+DETAIL:  Key (codempresa)=(3) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tblempresa" ("empresa", "codempresa", "alteracao", "codusuarioalteracao", "criacao", "codusuariocriacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/MGsis/protected/controllers/EmpresaController.php(36): CActiveRecord->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): EmpresaController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('empresa/create')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=empresa/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=empresa/create
+---
+2014/05/21 15:49:31 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tblempresa" violates foreign key constraint "tblfilial_codempresa_fkey" on table "tblfilial"
+DETAIL:  Key (codempresa)=(1) is still referenced from table "tblfilial".. A declaração SQL executada foi: DELETE FROM "mgsis"."tblempresa" WHERE "mgsis"."tblempresa"."codempresa"='1'.
+in /var/www/MGsis/protected/controllers/EmpresaController.php (81)
+in /var/www/MGsis/index.php (13)
+2014/05/21 15:49:31 [error] [exception.CHttpException.409] exception 'CHttpException' with message 'Registro em uso, você não pode excluir.' in /var/www/MGsis/protected/controllers/EmpresaController.php:91
+Stack trace:
+#0 [internal function]: EmpresaController->actionDelete('1')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(EmpresaController), Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(EmpresaController), Object(ReflectionMethod), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('empresa/delete')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=empresa/delete&id=1
+HTTP_REFERER=http://localhost/MGsis/index.php?r=empresa/view&id=1
+---
+2014/05/21 15:53:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "srbac/tributacao".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('srbac/tributaca...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=srbac/tributacao
+---
+2014/05/21 15:57:06 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchColumn(): SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...FROM "mgsis"."tbltributacao" "t" WHERE codtributacao LIKE $1
+                                                                ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. A declaração SQL executada foi: SELECT COUNT(*) FROM "mgsis"."tbltributacao" "t" WHERE codtributacao LIKE :ycp0.
+in /var/www/MGsis/protected/views/tributacao/index.php (76)
+in /var/www/MGsis/protected/controllers/TributacaoController.php (119)
+in /var/www/MGsis/index.php (13)
+2014/05/21 15:57:06 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...FROM "mgsis"."tbltributacao" "t" WHERE codtributacao LIKE $1
+                                                                ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. The SQL statement executed was: SELECT COUNT(*) FROM "mgsis"."tbltributacao" "t" WHERE codtributacao LIKE :ycp0' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1601): CDbCommand->queryScalar()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(111): CDataProvider->getData()
+#7 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(211): CBaseListView->init()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(147): CListView->init()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.CLi...', Array)
+#10 /var/www/MGsis/protected/views/tributacao/index.php(76): CBaseController->widget('zii.widgets.CLi...', Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#15 /var/www/MGsis/protected/controllers/TributacaoController.php(119): CController->render('index', Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TributacaoController->actionIndex()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('index')
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tributacao/inde...')
+#22 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/MGsis/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/MGsis/index.php?Tributacao%5Bcodtributacao%5D=1&Tributacao%5Btributacao%5D=&ajax=Listagem&r=tributacao%2Findex
+HTTP_REFERER=http://localhost/MGsis/index.php?r=tributacao
+---
+2014/05/21 15:57:06 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchColumn(): SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...FROM "mgsis"."tbltributacao" "t" WHERE codtributacao LIKE $1
+                                                                ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. A declaração SQL executada foi: SELECT COUNT(*) FROM "mgsis"."tbltributacao" "t" WHERE codtributacao LIKE :ycp0.
+in /var/www/MGsis/protected/views/tributacao/index.php (76)
+in /var/www/MGsis/protected/controllers/TributacaoController.php (119)
+in /var/www/MGsis/index.php (13)
+2014/05/21 15:57:06 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...FROM "mgsis"."tbltributacao" "t" WHERE codtributacao LIKE $1
+                                                                ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. The SQL statement executed was: SELECT COUNT(*) FROM "mgsis"."tbltributacao" "t" WHERE codtributacao LIKE :ycp0' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1601): CDbCommand->queryScalar()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(111): CDataProvider->getData()
+#7 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(211): CBaseListView->init()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(147): CListView->init()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.CLi...', Array)
+#10 /var/www/MGsis/protected/views/tributacao/index.php(76): CBaseController->widget('zii.widgets.CLi...', Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#15 /var/www/MGsis/protected/controllers/TributacaoController.php(119): CController->render('index', Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TributacaoController->actionIndex()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('index')
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tributacao/inde...')
+#22 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/MGsis/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/MGsis/index.php?r=tributacao%2Findex&Tributacao%5Bcodtributacao%5D=1&Tributacao%5Btributacao%5D=&yt0=
+HTTP_REFERER=http://localhost/MGsis/index.php?r=tributacao
+---
+2014/05/21 15:57:10 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchColumn(): SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...FROM "mgsis"."tbltributacao" "t" WHERE codtributacao LIKE $1
+                                                                ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. A declaração SQL executada foi: SELECT COUNT(*) FROM "mgsis"."tbltributacao" "t" WHERE codtributacao LIKE :ycp0.
+in /var/www/MGsis/protected/views/tributacao/index.php (76)
+in /var/www/MGsis/protected/controllers/TributacaoController.php (119)
+in /var/www/MGsis/index.php (13)
+2014/05/21 15:57:10 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...FROM "mgsis"."tbltributacao" "t" WHERE codtributacao LIKE $1
+                                                                ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. The SQL statement executed was: SELECT COUNT(*) FROM "mgsis"."tbltributacao" "t" WHERE codtributacao LIKE :ycp0' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1601): CDbCommand->queryScalar()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(111): CDataProvider->getData()
+#7 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(211): CBaseListView->init()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(147): CListView->init()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.CLi...', Array)
+#10 /var/www/MGsis/protected/views/tributacao/index.php(76): CBaseController->widget('zii.widgets.CLi...', Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#15 /var/www/MGsis/protected/controllers/TributacaoController.php(119): CController->render('index', Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TributacaoController->actionIndex()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tributacao')
+#22 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/MGsis/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/MGsis/index.php?r=tributacao
+---
+2014/05/21 15:57:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "srbac/tributacao".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('srbac/tributaca...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=srbac/tributacao
+---
+2014/05/21 15:57:20 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchColumn(): SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...FROM "mgsis"."tbltributacao" "t" WHERE codtributacao LIKE $1
+                                                                ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. A declaração SQL executada foi: SELECT COUNT(*) FROM "mgsis"."tbltributacao" "t" WHERE codtributacao LIKE :ycp0.
+in /var/www/MGsis/protected/views/tributacao/index.php (76)
+in /var/www/MGsis/protected/controllers/TributacaoController.php (119)
+in /var/www/MGsis/index.php (13)
+2014/05/21 15:57:20 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[42883]: Undefined function: 7 ERROR:  operator does not exist: bigint ~~ unknown
+LINE 1: ...FROM "mgsis"."tbltributacao" "t" WHERE codtributacao LIKE $1
+                                                                ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.. The SQL statement executed was: SELECT COUNT(*) FROM "mgsis"."tbltributacao" "t" WHERE codtributacao LIKE :ycp0' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1601): CDbCommand->queryScalar()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(111): CDataProvider->getData()
+#7 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(211): CBaseListView->init()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(147): CListView->init()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.CLi...', Array)
+#10 /var/www/MGsis/protected/views/tributacao/index.php(76): CBaseController->widget('zii.widgets.CLi...', Array)
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require('/var/www/MGsis/...')
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/MGsis/...', Array, true)
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): CBaseController->renderFile('/var/www/MGsis/...', Array, true)
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#15 /var/www/MGsis/protected/controllers/TributacaoController.php(119): CController->render('index', Array)
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TributacaoController->actionIndex()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('')
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tributacao')
+#22 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/MGsis/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/MGsis/index.php?r=tributacao
+---
+2014/05/21 16:02:30 [error] [php] Array to string conversion (/var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:275)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/schema/CDbCommandBuilder.php(177): CPgsqlCommandBuilder->bindValues()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1601): CPgsqlCommandBuilder->createCountCommand()
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(228): Tributacao->count()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CActiveDataProvider.php(178): CActiveDataProvider->getTotalItemCount()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(111): CActiveDataProvider->getData()
+#7 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(211): CListView->init()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(147): CListView->init()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(172): TributacaoController->createWidget()
+#10 /var/www/MGsis/protected/views/tributacao/index.php(76): TributacaoController->widget()
+#11 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require()
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): TributacaoController->renderInternal()
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): TributacaoController->renderFile()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): TributacaoController->renderPartial()
+#15 /var/www/MGsis/protected/controllers/TributacaoController.php(119): TributacaoController->render()
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TributacaoController->actionIndex()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#18 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): TributacaoController->runAction()
+#19 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): TributacaoController->runActionWithFilters()
+#20 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): TributacaoController->run()
+#21 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#22 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=tributacao%2Findex&Tributacao%5Bcodtributacao%5D=&Tributacao%5Btributacao%5D=isento&yt0=
+in /var/www/MGsis/protected/views/tributacao/index.php (76)
+in /var/www/MGsis/protected/controllers/TributacaoController.php (119)
+in /var/www/MGsis/index.php (13)
+2014/05/21 16:20:00 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tbltributacao_pkey"
+DETAIL:  Key (codtributacao)=(1) already exists.. A declaração SQL executada foi: INSERT INTO "mgsis"."tbltributacao" ("tributacao", "aliquotaicmsecf", "codtributacao", "alteracao", "codusuarioalteracao", "criacao", "codusuariocriacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6).
+in /var/www/MGsis/protected/controllers/TributacaoController.php (36)
+in /var/www/MGsis/index.php (13)
+2014/05/21 16:20:00 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tbltributacao_pkey"
+DETAIL:  Key (codtributacao)=(1) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tbltributacao" ("tributacao", "aliquotaicmsecf", "codtributacao", "alteracao", "codusuarioalteracao", "criacao", "codusuariocriacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/MGsis/protected/controllers/TributacaoController.php(36): CActiveRecord->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TributacaoController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tributacao/crea...')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=tributacao/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=tributacao/create
+---
+2014/05/21 16:20:05 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tbltributacao_pkey"
+DETAIL:  Key (codtributacao)=(2) already exists.. A declaração SQL executada foi: INSERT INTO "mgsis"."tbltributacao" ("tributacao", "aliquotaicmsecf", "codtributacao", "alteracao", "codusuarioalteracao", "criacao", "codusuariocriacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6).
+in /var/www/MGsis/protected/controllers/TributacaoController.php (36)
+in /var/www/MGsis/index.php (13)
+2014/05/21 16:20:05 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tbltributacao_pkey"
+DETAIL:  Key (codtributacao)=(2) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tbltributacao" ("tributacao", "aliquotaicmsecf", "codtributacao", "alteracao", "codusuarioalteracao", "criacao", "codusuariocriacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/MGsis/protected/controllers/TributacaoController.php(36): CActiveRecord->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TributacaoController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tributacao/crea...')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=tributacao/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=tributacao/create
+---
+2014/05/21 16:20:08 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tbltributacao_pkey"
+DETAIL:  Key (codtributacao)=(3) already exists.. A declaração SQL executada foi: INSERT INTO "mgsis"."tbltributacao" ("tributacao", "aliquotaicmsecf", "codtributacao", "alteracao", "codusuarioalteracao", "criacao", "codusuariocriacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6).
+in /var/www/MGsis/protected/controllers/TributacaoController.php (36)
+in /var/www/MGsis/index.php (13)
+2014/05/21 16:20:08 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tbltributacao_pkey"
+DETAIL:  Key (codtributacao)=(3) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tbltributacao" ("tributacao", "aliquotaicmsecf", "codtributacao", "alteracao", "codusuarioalteracao", "criacao", "codusuariocriacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/MGsis/protected/controllers/TributacaoController.php(36): CActiveRecord->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TributacaoController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tributacao/crea...')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=tributacao/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=tributacao/create
+---
+2014/05/21 16:29:39 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table "tbltributacao" violates foreign key constraint "tblproduto_codtributacao_fkey" on table "tblproduto"
+DETAIL:  Key (codtributacao)=(1) is still referenced from table "tblproduto".. A declaração SQL executada foi: DELETE FROM "mgsis"."tbltributacao" WHERE "mgsis"."tbltributacao"."codtributacao"='1'.
+in /var/www/MGsis/protected/controllers/TributacaoController.php (81)
+in /var/www/MGsis/index.php (13)
+2014/05/21 16:29:39 [error] [exception.CHttpException.409] exception 'CHttpException' with message 'Registro em uso, você não pode excluir.' in /var/www/MGsis/protected/controllers/TributacaoController.php:91
+Stack trace:
+#0 [internal function]: TributacaoController->actionDelete('1')
+#1 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(TributacaoController), Array)
+#2 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(TributacaoController), Object(ReflectionMethod), Array)
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('delete')
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tributacao/dele...')
+#8 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/MGsis/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/MGsis/index.php?r=tributacao/delete&id=1
+HTTP_REFERER=http://localhost/MGsis/index.php?r=tributacao/view&id=1
+---

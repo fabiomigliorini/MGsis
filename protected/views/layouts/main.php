@@ -88,8 +88,10 @@
 					array('label' => 'Usuários', 'url' => Yii::app()->createUrl('usuario')),
 					array('label' => 'Permissões', 'url' => Yii::app()->createUrl('srbac/authitem/frontpage')),
 					'---',
-					array('label' => 'Codigos', 'url' => Yii::app()->createUrl('codigo')),
+					array('label' => 'Códigos', 'url' => Yii::app()->createUrl('codigo')),
 					array('label' => 'Cidades', 'url' => Yii::app()->createUrl('cidade')),
+					array('label' => 'Empresas', 'url' => Yii::app()->createUrl('empresa')),
+					array('label' => 'Tributações', 'url' => Yii::app()->createUrl('tributacao')),
 				)
 			),
 		);

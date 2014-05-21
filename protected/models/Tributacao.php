@@ -36,7 +36,7 @@ class Tributacao extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codtributacao, tributacao, aliquotaicmsecf', 'required'),
+			array('tributacao, aliquotaicmsecf', 'required'),
 			array('tributacao', 'length', 'max'=>50),
 			array('aliquotaicmsecf', 'length', 'max'=>10),
 			array('alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
@@ -95,13 +95,18 @@ class Tributacao extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codtributacao',$this->codtributacao,true);
-		$criteria->compare('tributacao',$this->tributacao,true);
-		$criteria->compare('aliquotaicmsecf',$this->aliquotaicmsecf,true);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('codtributacao',$this->codtributacao,false);
+		if (!empty($this->tributacao))
+		{
+			$texto  = str_replace(' ', '%', trim($this->tributacao));
+			$criteria->addCondition('t.tributacao ILIKE :tributacao');
+			$criteria->params = array_merge($criteria->params, array(':tributacao' => '%'.$texto.'%'));
+		}
+		$criteria->compare('aliquotaicmsecf',$this->aliquotaicmsecf,false);
+		$criteria->compare('alteracao',$this->alteracao,false);
+		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);
+		$criteria->compare('criacao',$this->criacao,false);
+		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,false);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -34,7 +34,7 @@ class Empresa extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codempresa', 'required'),
+			array('empresa', 'required'),
 			array('empresa', 'length', 'max'=>50),
 			array('alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
@@ -64,7 +64,7 @@ class Empresa extends MGActiveRecord
 	{
 		return array(
 			'codempresa' => '#',
-			'empresa' => 'Empresa',
+			'empresa' => 'Empresa:',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
@@ -90,12 +90,19 @@ class Empresa extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codempresa',$this->codempresa,true);
-		$criteria->compare('empresa',$this->empresa,true);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('codempresa',$this->codempresa,false);
+		//$criteria->compare('empresa',$this->empresa,true);
+		if (!empty($this->empresa))
+		{
+			$texto  = str_replace(' ', '%', trim($this->empresa));
+			$criteria->addCondition('t.empresa ILIKE :empresa');
+			$criteria->params = array_merge($criteria->params, array(':empresa' => '%'.$texto.'%'));
+		}
+                
+		$criteria->compare('alteracao',$this->alteracao,false);
+		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);
+		$criteria->compare('criacao',$this->criacao,false);
+		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,false);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
