@@ -56,7 +56,7 @@ class NegocioController extends Controller
 	* If update is successful, the browser will be redirected to the 'view' page.
 	* @param integer $id the ID of the model to be updated
 	*/
-	public function actionUpdate($id)
+	public function actionUpdate($id, $fechar = null)
 	{
 		$model=$this->loadModel($id);
 
@@ -66,8 +66,14 @@ class NegocioController extends Controller
 		if(isset($_POST['Negocio']))
 		{
 			$model->attributes=$_POST['Negocio'];
-			if($model->save())
+			$salvo = $model->save();
+			
+			if($salvo && $fechar == 1)
+				$salvo = $model->fechaNegocio();
+			
+			if ($salvo)
 				$this->redirect(array('view','id'=>$model->codnegocio));
+				
 		}
 
 		$this->render('update',array(
