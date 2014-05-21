@@ -79,8 +79,19 @@
 					array('label' => 'Marcas', 'url' => Yii::app()->createUrl('marca')),
 				)
 			),
-
-			// Admin
+			
+			//Fiscal
+			array(
+				'label' => 'Fiscal', 
+				'url'=>'#', 
+				'items'=>array(
+					array('label' => 'Cidades', 'url' => Yii::app()->createUrl('cidade')),
+					array('label' => 'Empresas', 'url' => Yii::app()->createUrl('empresa')),
+					array('label' => 'Tributações', 'url' => Yii::app()->createUrl('tributacao')),
+					array('label' => 'CFOP', 'url' => Yii::app()->createUrl('cfop')),
+				)
+			),
+						// Admin
 			array(
 				'label' => 'Admin', 
 				'url'=>'#', 
@@ -89,11 +100,9 @@
 					array('label' => 'Permissões', 'url' => Yii::app()->createUrl('srbac/authitem/frontpage')),
 					'---',
 					array('label' => 'Códigos', 'url' => Yii::app()->createUrl('codigo')),
-					array('label' => 'Cidades', 'url' => Yii::app()->createUrl('cidade')),
-					array('label' => 'Empresas', 'url' => Yii::app()->createUrl('empresa')),
-					array('label' => 'Tributações', 'url' => Yii::app()->createUrl('tributacao')),
 				)
 			),
+
 		);
 	
 	$this->widget('bootstrap.widgets.TbNavbar', array(
