@@ -101,15 +101,21 @@ class Cidade extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codcidade',$this->codcidade,true);
-		$criteria->compare('codestado',$this->codestado,true);
-		$criteria->compare('cidade',$this->cidade,true);
-		$criteria->compare('sigla',$this->sigla,true);
-		$criteria->compare('codigooficial',$this->codigooficial,true);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('codcidade',Yii::app()->format->numeroLimpo($this->codcidade),false);
+		$criteria->compare('codestado',$this->codestado,false);
+		if (!empty($this->cidade))
+		{
+			$texto  = str_replace(' ', '%', trim($this->cidade));
+			$criteria->addCondition('t.cidade ILIKE :cidade');
+			$criteria->params = array_merge($criteria->params, array(':cidade' => '%'.$texto.'%'));
+		}
+		//$criteria->compare('cidade',$this->cidade,false);
+		$criteria->compare('sigla',$this->sigla,false);
+		$criteria->compare('codigooficial',$this->codigooficial,false);
+		$criteria->compare('alteracao',$this->alteracao,false);
+		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);
+		$criteria->compare('criacao',$this->criacao,false);
+		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,false);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

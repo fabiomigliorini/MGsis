@@ -1,48 +1,56 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Cidade';
+$this->pagetitle = Yii::app()->name . ' - Conta Contábil';
 $this->breadcrumbs=array(
-	'Cidade',
+	'Conta Contábil',
 );
 
 $this->menu=array(
-	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
+	array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 	);
 ?>
 
-<h1>Cidade</h1>
+<script type='text/javascript'>
+
+$(document).ready(function(){
+	$('#search-form').change(function(){
+		var ajaxRequest = $("#search-form").serialize();
+		$.fn.yiiListView.update(
+			// this is the id of the CListView
+			'Listagem',
+			{data: ajaxRequest}
+		);
+    });
+});
+
+</script>
+
+<h1>Conta Contábil</h1>
 
 <br>
 
 <?php $form=$this->beginWidget('MGActiveForm',array(
 	'action'=>Yii::app()->createUrl($this->route),
-	'type' => 'search',
+	'id' => 'search-form',
+	'type' => 'inline',
 	'method'=>'get',
 )); 
 
 ?>
-<div class="controls-row well well-small">
-	<div class="span11">
+<div class="well well-small">
+	<?php echo $form->textField($model, 'codcontacontabil', array('placeholder' => 'Código', 'class'=>'input-mini')); ?>
+	<?php echo $form->textField($model, 'contacontabil', array('placeholder' => 'Descrição', 'class'=>'input-x-larg')); ?>
+	<?php echo $form->textField($model, 'numero', array('placeholder' => 'Número', 'class'=>'input-mini')); ?>
 	<?php
-		echo $form->textField($model, 'cidade', array('placeholder' => 'Cidade', 'class'=>'input-large')); 
-		echo $form->textField($model, 'codigooficial', array('placeholder' => 'Código Oficial', 'class'=>'input-large')); 
-	?>
-	</div>
-	<div class="span1 right">
-	<?php
-
 	$this->widget('bootstrap.widgets.TbButton'
 		, array(
 			'buttonType' => 'submit',
 			'icon'=>'icon-search',
 			//'label'=>'',
-			'htmlOptions' => array('class'=>'btn btn-info')
+			'htmlOptions' => array('class'=>'pull-right btn btn-info')
 			)
 		); 
-	
 	?>
-	</div>
-		
 </div>
 
 <?php $this->endWidget(); ?>

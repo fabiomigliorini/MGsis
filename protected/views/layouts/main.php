@@ -79,6 +79,7 @@
 					array('label' => 'Marcas', 'url' => Yii::app()->createUrl('marca')),
 					array('label' => 'NCM', 'url' => Yii::app()->createUrl('ncm')),
 					array('label' => 'Tipo de Produtos', 'url' => Yii::app()->createUrl('tipoProduto')),
+					array('label' => 'Grupo de Produtos', 'url' => Yii::app()->createUrl('grupoProduto')),
 				)
 			),
 			
@@ -91,6 +92,7 @@
 					array('label' => 'Empresas', 'url' => Yii::app()->createUrl('empresa')),
 					array('label' => 'Tributações', 'url' => Yii::app()->createUrl('tributacao')),
 					array('label' => 'CFOP', 'url' => Yii::app()->createUrl('cfop')),
+					array('label' => 'Conta Contabil', 'url' => Yii::app()->createUrl('contaContabil')),
 				)
 			),
 						// Admin

@@ -41,7 +41,7 @@ class ContaContabil extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codcontacontabil', 'required'),
+			array('contacontabil', 'required'),
 			array('contacontabil', 'length', 'max'=>50),
 			array('numero', 'length', 'max'=>15),
 			array('inativo, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
@@ -100,17 +100,25 @@ class ContaContabil extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codcontacontabil',$this->codcontacontabil,true);
-		$criteria->compare('contacontabil',$this->contacontabil,true);
+		$criteria->compare('codcontacontabil',Yii::app()->format->numeroLimpo($this->codcontacontabil),false);
+		//$criteria->compare('contacontabil',$this->contacontabil,true);
+		if (!empty($this->contacontabil))
+		{
+			$texto  = str_replace(' ', '%', trim($this->contacontabil));
+			$criteria->addCondition('t.contacontabil ILIKE :contacontabil');
+			$criteria->params = array_merge($criteria->params, array(':contacontabil' => '%'.$texto.'%'));
+		}
 		$criteria->compare('numero',$this->numero,true);
 		$criteria->compare('inativo',$this->inativo);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('alteracao',$this->alteracao,false);
+		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);
+		$criteria->compare('criacao',$this->criacao,false);
+		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,false);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array('defaultOrder'=>'t.codcontacontabil ASC'),
+			'pagination'=>array('pageSize'=>20)
 		));
 	}
 

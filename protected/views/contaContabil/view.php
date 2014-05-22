@@ -1,14 +1,14 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Detalhes Tipo do Produto';
+$this->pagetitle = Yii::app()->name . ' - Detalhes da Conta Contábil';
 $this->breadcrumbs=array(
-	'Tipo do Produto'=>array('index'),
-	$model->tipoproduto,
+	'Conta Contábil'=>array('index'),
+	$model->contacontabil,
 );
 
 $this->menu=array(
 array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
-array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codtipoproduto)),
+array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codcontacontabil)),
 array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
 //array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
@@ -22,21 +22,23 @@ $(document).ready(function(){
 	jQuery('body').on('click','#btnExcluir',function() {
 		bootbox.confirm("Excluir este registro?", function(result) {
 			if (result)
-				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('tipoProduto/delete', array('id' => $model->codtipoproduto))?>",{});
+				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('contaContabil/delete', array('id' => $model->codcontacontabil))?>",{});
 		});
 	});
 });
 /*]]>*/
 </script>
 
-<h1><?php echo $model->tipoproduto; ?></h1>
+<h1><?php echo $model->contacontabil; ?></h1>
 
 <?php 
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-			'codtipoproduto',
-		'tipoproduto',
+			'codcontacontabil',
+		'contacontabil',
+		'numero',
+		'inativo',
 		),
 	)); 
 

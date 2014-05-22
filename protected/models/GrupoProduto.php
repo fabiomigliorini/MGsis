@@ -34,7 +34,7 @@ class GrupoProduto extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codgrupoproduto', 'required'),
+			array('grupoproduto', 'required'),
 			array('grupoproduto', 'length', 'max'=>50),
 			array('alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
@@ -64,7 +64,7 @@ class GrupoProduto extends MGActiveRecord
 	{
 		return array(
 			'codgrupoproduto' => '#',
-			'grupoproduto' => 'Grupo Produto',
+			'grupoproduto' => 'Grupo de Produtos',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
@@ -90,15 +90,23 @@ class GrupoProduto extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codgrupoproduto',$this->codgrupoproduto,true);
-		$criteria->compare('grupoproduto',$this->grupoproduto,true);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('codgrupoproduto',Yii::app()->format->numeroLimpo($this->codgrupoproduto),false);
+		//$criteria->compare('grupoproduto',$this->grupoproduto,true);
+		if (!empty($this->grupoproduto))
+		{
+			$texto  = str_replace(' ', '%', trim($this->grupoproduto));
+			$criteria->addCondition('t.grupoproduto ILIKE :grupoproduto');
+			$criteria->params = array_merge($criteria->params, array(':grupoproduto' => '%'.$texto.'%'));
+		}
+		$criteria->compare('alteracao',$this->alteracao,false);
+		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);
+		$criteria->compare('criacao',$this->criacao,false);
+		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,false);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array('defaultOrder'=>'t.codgrupoproduto ASC'),
+			'pagination'=>array('pageSize'=>20)
 		));
 	}
 

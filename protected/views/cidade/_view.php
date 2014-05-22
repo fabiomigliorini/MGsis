@@ -9,7 +9,7 @@
 		<small class="span1 muted">
 			<?php echo CHtml::encode($data->sigla); ?>
 		</small>
-		<small class="span1 muted">
+		<small class="span1">
 			<?php echo CHtml::encode($data->codigooficial); ?>
 		</small>
 	</div>
