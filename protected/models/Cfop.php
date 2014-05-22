@@ -35,7 +35,8 @@ class Cfop extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codcfop', 'required'),
+			array('codcfop, cfop', 'required'),
+			array('codcfop', 'unique'),
 			array('cfop', 'length', 'max'=>100),
 			array('alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
@@ -65,8 +66,8 @@ class Cfop extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codcfop' => '#',
-			'cfop' => 'Cfop',
+			'codcfop' => 'CFOP',
+			'cfop' => 'Descrição',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
@@ -92,15 +93,23 @@ class Cfop extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codcfop',$this->codcfop,true);
-		$criteria->compare('cfop',$this->cfop,true);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('codcfop',$this->codcfop,false);
+		//$criteria->compare('cfop',$this->cfop,false);
+		if (!empty($this->cfop))
+		{
+			$texto  = str_replace(' ', '%', trim($this->cfop));
+			$criteria->addCondition('t.cfop ILIKE :cfop');
+			$criteria->params = array_merge($criteria->params, array(':cfop' => '%'.$texto.'%'));
+		}
+		$criteria->compare('alteracao',$this->alteracao,false);
+		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);
+		$criteria->compare('criacao',$this->criacao,false);
+		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,false);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array('defaultOrder'=>'t.codcfop ASC'),
+			'pagination'=>array('pageSize'=>20)
 		));
 	}
 

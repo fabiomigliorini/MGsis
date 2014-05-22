@@ -38,7 +38,7 @@ class TipoProduto extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codtipoproduto', 'required'),
+			array('tipoproduto', 'required'),
 			array('tipoproduto, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -94,15 +94,23 @@ class TipoProduto extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codtipoproduto',$this->codtipoproduto,true);
-		$criteria->compare('tipoproduto',$this->tipoproduto,true);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('codtipoproduto',$this->codtipoproduto,false);
+		//$criteria->compare('tipoproduto',$this->tipoproduto,true);
+		if (!empty($this->tipoproduto))
+		{
+			$texto  = str_replace(' ', '%', trim($this->tipoproduto));
+			$criteria->addCondition('t.tipoproduto ILIKE :tipoproduto');
+			$criteria->params = array_merge($criteria->params, array(':tipoproduto' => '%'.$texto.'%'));
+		}
+		$criteria->compare('alteracao',$this->alteracao,false);
+		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);
+		$criteria->compare('criacao',$this->criacao,false);
+		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,false);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array('defaultOrder'=>'t.codtipoproduto ASC'),
+			'pagination'=>array('pageSize'=>20)
 		));
 	}
 
