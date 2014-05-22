@@ -59,7 +59,7 @@ class NegocioFormaPagamento extends MGActiveRecord
 			'Negocio' => array(self::BELONGS_TO, 'Negocio', 'codnegocio'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
-			'Titulos' => array(self::HAS_MANY, 'Titulo', 'codnegocioformapagamento'),
+			'Titulos' => array(self::HAS_MANY, 'Titulo', 'codnegocioformapagamento', 'order'=>'vencimentooriginal ASC'),
 		);
 	}
 

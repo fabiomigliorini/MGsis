@@ -163,4 +163,116 @@ class ProdutoBarraController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+	public function actionAjaxBuscaProdutoBarra($texto, $inativo = false, $limite = 20, $pagina = 1) 
+	{
+
+		// limpa texto
+		$texto  = str_replace(' ', '%', trim($texto));
+
+		// corrige pagina se veio sujeira
+		if ($pagina < 1) $pagina = 1;
+
+		// calcula de onde continuar a consulta
+		$offset = ($pagina-1)*$limite;
+		
+		// inicializa array com resultados
+		$resultados = array();
+
+		// se o texto foi preenchido
+		if (strlen($texto)>=3)
+		{
+    
+			$sql = "SELECT codprodutobarra as id, codproduto, barras, descricao, sigla, preco, marca, referencia 
+				      FROM vwProdutoBarra 
+				     WHERE codProdutoBarra is not null ";
+			
+			if (!$inativo) 
+				$sql .= "AND Inativo is null ";
+				
+			$sql .= " AND (";
+
+			// Verifica se foi digitado um valor e procura pelo preco
+			If ((Yii::app()->format->formatNumber(Yii::app()->format->unformatNumber($texto)) == $texto)
+				&& (strpos($texto, ",") != 0)
+				&& ((strlen($texto) - strpos($texto, ",")) == 3)) 
+			{
+				$sql .= "preco = :preco";
+				$params = array(
+					':preco'=>Yii::app()->format->unformatNumber($texto),
+					);
+			}
+			//senao procura por barras, descricao, marca e referencia
+			else
+			{
+				$sql .= "barras ilike :texto ";
+				$sql .= "OR descricao ilike :texto ";
+				$sql .= "OR marca ilike :texto ";
+				$sql .= "OR referencia ilike :texto ";
+				$params = array(
+					':texto'=>'%'.$texto.'%',
+					);
+			}
+
+			//ordena
+			$sql .= ") ORDER BY descricao LIMIT $limite OFFSET $offset";
+			
+			$command = Yii::app()->db->createCommand($sql);
+			$command->params = $params;
+			
+			$resultados = $command->queryAll();
+			
+			for ($i=0; $i<sizeof($resultados);$i++)
+			{
+				$resultados[$i]["codproduto"] = Yii::app()->format->formataCodigo($resultados[$i]["codproduto"], 6);
+				$resultados[$i]["preco"] = Yii::app()->format->formatNumber($resultados[$i]["preco"]);
+				if (empty($resultados[$i]["referencia"]))
+					$resultados[$i]["referencia"] = "-";
+			}
+			
+		} 
+		
+		// transforma o array em JSON
+		echo CJSON::encode(
+				array(
+					'mais' => count($resultados)==$limite?true:false, 
+					'pagina' => (int) $pagina, 
+					'itens' => $resultados
+					)
+				);
+		
+		// FIM
+		Yii::app()->end();
+	} 
+	
+	public function actionAjaxInicializaProdutoBarra($codprodutobarra) 
+	{
+		
+		if (!is_numeric($codprodutobarra))
+			throw new CHttpException(404,'The requested page does not exist.');			
+
+		$sql = "SELECT codprodutobarra as id, codproduto, barras, descricao, sigla, preco, marca, referencia 
+				  FROM vwProdutoBarra 
+				 WHERE codProdutoBarra = $codprodutobarra ";
+
+		$command = Yii::app()->db->createCommand($sql);
+		$resultados = $command->queryAll();
+
+		if (empty($resultados))
+			throw new CHttpException(404,'The requested page does not exist.');
+		
+		$i = 0;
+		
+		$resultados[$i]["codproduto"] = Yii::app()->format->formataCodigo($resultados[$i]["codproduto"], 6);
+		$resultados[$i]["preco"] = Yii::app()->format->formatNumber($resultados[$i]["preco"]);
+		if (empty($resultados[$i]["referencia"]))
+			$resultados[$i]["referencia"] = "-";
+		
+		
+		echo CJSON::encode($resultados[0]);
+		Yii::app()->end();
+		
+	} 
+
+	
 }

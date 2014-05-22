@@ -248,6 +248,8 @@ $(document).ready(function() {
 		e.preventDefault();
 		bootbox.confirm("Tem certeza que deseja salvar?", function(result) {
 			if (result) {
+				bootbox.dialog("<h1>Aguarde... <br>Salvando Negócio<h1>", 
+					[]);				
 				currentForm.submit();
 			}
 		});
