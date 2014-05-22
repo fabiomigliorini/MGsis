@@ -110,6 +110,8 @@ class Tributacao extends MGActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array('defaultOrder'=>'t.codtributacao ASC'),
+			'pagination'=>array('pageSize'=>20)
 		));
 	}
 

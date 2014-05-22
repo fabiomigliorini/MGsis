@@ -306,3 +306,111 @@ Stack trace:
 REQUEST_URI=/MGsis/index.php?r=ncm/create
 HTTP_REFERER=http://localhost/MGsis/index.php?r=ncm/create
 ---
+2014/05/22 10:11:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "tipoproduto".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tipoproduto')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=tipoproduto
+---
+2014/05/22 10:12:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "tipoproduto".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tipoproduto')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=tipoproduto
+HTTP_REFERER=http://localhost/MGsis/index.php?r=tipoProduto
+---
+2014/05/22 10:12:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "tipoproduto".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tipoproduto')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=tipoproduto
+HTTP_REFERER=http://localhost/MGsis/index.php?r=tipoProduto
+---
+2014/05/22 10:13:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "produtobarra".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('produtobarra')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=produtobarra
+---
+2014/05/22 10:13:48 [error] [php] Undefined variable: produto (/var/www/MGsis/protected/views/produtoBarra/_view.php:6)
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CListView.php(291): ProdutoBarraController->renderFile()
+#1 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(167): CListView->renderItems()
+#2 unknown(0): CListView->renderSection()
+#3 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback()
+#4 /var/www/yii-1.1.14.f0fee9/framework/zii/widgets/CBaseListView.php(135): CListView->renderContent()
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(173): CListView->run()
+#6 /var/www/MGsis/protected/views/produtoBarra/index.php(75): ProdutoBarraController->widget()
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(126): require()
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CBaseController.php(95): ProdutoBarraController->renderInternal()
+#9 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(869): ProdutoBarraController->renderFile()
+#10 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(782): ProdutoBarraController->renderPartial()
+#11 /var/www/MGsis/protected/controllers/ProdutoBarraController.php(120): ProdutoBarraController->render()
+#12 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): ProdutoBarraController->actionIndex()
+#13 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams()
+#14 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): ProdutoBarraController->runAction()
+#15 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): ProdutoBarraController->runActionWithFilters()
+#16 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): ProdutoBarraController->run()
+#17 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#18 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/MGsis/index.php(13): CWebApplication->run()
+REQUEST_URI=/MGsis/index.php?r=produtoBarra
+in /var/www/MGsis/protected/views/produtoBarra/_view.php (6)
+in /var/www/MGsis/protected/views/produtoBarra/index.php (75)
+in /var/www/MGsis/protected/controllers/ProdutoBarraController.php (120)
+2014/05/22 10:14:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "produtoembalagem".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('produtoembalage...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=produtoembalagem
+---
+2014/05/22 10:46:48 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tbltipoproduto_pkey"
+DETAIL:  Key (codtipoproduto)=(1) already exists.. A declaração SQL executada foi: INSERT INTO "mgsis"."tbltipoproduto" ("tipoproduto", "codtipoproduto", "alteracao", "codusuarioalteracao", "criacao", "codusuariocriacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5).
+in /var/www/MGsis/protected/controllers/TipoProdutoController.php (36)
+in /var/www/MGsis/index.php (13)
+2014/05/22 10:46:48 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tbltipoproduto_pkey"
+DETAIL:  Key (codtipoproduto)=(1) already exists.. The SQL statement executed was: INSERT INTO "mgsis"."tbltipoproduto" ("tipoproduto", "codtipoproduto", "alteracao", "codusuarioalteracao", "criacao", "codusuariocriacao") VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5)' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/MGsis/protected/controllers/TipoProdutoController.php(36): CActiveRecord->save()
+#3 /var/www/yii-1.1.14.f0fee9/framework/web/actions/CInlineAction.php(49): TipoProdutoController->actionCreate()
+#4 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii-1.1.14.f0fee9/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(282): CController->run('create')
+#8 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tipoProduto/cre...')
+#9 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/MGsis/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/MGsis/index.php?r=tipoProduto/create
+HTTP_REFERER=http://localhost/MGsis/index.php?r=tipoProduto/create
+---
+2014/05/22 10:49:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "tipo-produto/delete".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tipo-produto/de...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=tipo-produto/delete&id=101
+HTTP_REFERER=http://localhost/MGsis/index.php?r=tipoProduto/view&id=101
+---
+2014/05/22 10:49:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "tipo-produto/delete".' in /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii-1.1.14.f0fee9/framework/web/CWebApplication.php(141): CWebApplication->runController('tipo-produto/de...')
+#1 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/MGsis/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/MGsis/index.php?r=tipo-produto/delete&id=100
+HTTP_REFERER=http://localhost/MGsis/index.php?r=tipoProduto/view&id=100
+---

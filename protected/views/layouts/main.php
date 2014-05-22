@@ -78,6 +78,7 @@
 					array('label' => 'Produtos', 'url' => Yii::app()->createUrl('produto')),
 					array('label' => 'Marcas', 'url' => Yii::app()->createUrl('marca')),
 					array('label' => 'NCM', 'url' => Yii::app()->createUrl('ncm')),
+					array('label' => 'Tipo de Produtos', 'url' => Yii::app()->createUrl('tipoProduto')),
 				)
 			),
 			
