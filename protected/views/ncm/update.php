@@ -1,20 +1,24 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Alterar CFOP';
+$this->pagetitle = Yii::app()->name . ' - Alterar NCM';
 $this->breadcrumbs=array(
-	'CFOP'=>array('index'),
-	$model->codcfop=>array('view','id'=>$model->codcfop),
-	'Alterar CFOP',
+	'NCM'=>array('index'),
+	$model->codncm=>array('view','id'=>$model->codncm),
+	'Alterar NCM',
 );
 
 	$this->menu=array(
 	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
-	array('label'=>'Detalhes', 'icon'=>'icon-eye-open', 'url'=>array('view','id'=>$model->codcfop)),
+	array('label'=>'Detalhes', 'icon'=>'icon-eye-open', 'url'=>array('view','id'=>$model->codncm)),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 	);
 	?>
 
-	<h1>Alterar CFOP <?php echo CHtml::encode($model->codcfop); ?></h1>
+	<h1>Alterar NCM 
+		<?php 
+		echo CHtml::encode(Yii::app()->format->formataCodigo($model->ncm)); 
+		?>
+	</h1>
 	<br>
 
 	<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>	
