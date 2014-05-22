@@ -10,7 +10,14 @@ $command = Yii::app()->db->createCommand('
 
 $command->params = array("codnegocio" => $model->codnegocio);
 
-$codnotas = $command->select('*')->from('tbl_users')->queryAll();
+$codnotas = $command->queryAll();
+
+if (empty($codnotas))
+{
+	?>
+	<div class="alert">Nenhuma Nota Fiscal foi gerada para este negócio!</div>
+	<?php
+}
 
 foreach ($codnotas as $codnota)
 {

@@ -1,28 +1,40 @@
-<div class="row-fluid">
-	<b class="span4" style="font-size: 160%;">
-		Produtos
-	</b>
-	<?php
-	if ($model->codnegociostatus == 1)
-	{
-		?>
-		<form>
-			<div class="span8">
-				<div class="input-prepend">
-					<label class="add-on" for="quantidade">Quantidade</label>
-					<input class="input-mini text-right" id="quantidade" type="text" value="1">
-				</div>
-				<div class="input-prepend input-append">
-					<label class="add-on" for="barras">Código</label>
-					<input class="input-medium text-right" id="barras" type="text">
-					<button class="btn" type="submit" id="btnAdicionar" >Adicionar</button>
-				</div>
-			</div>
-		</form>
-		<?php
-	}
+<div style="min-height: 120px">
+<?php
+if ($model->codnegociostatus == 1)
+{
 	?>
-</div>	
+	<form>
+		<div class="row-fluid">
+			<div class="input-prepend">
+				<label class="add-on" for="quantidade">Quantidade</label>
+				<input class="input-mini text-right" id="quantidade" type="text" value="1">
+			</div>
+			<div class="input-prepend input-append">
+				<label class="add-on" for="barras">Código</label>
+				<input class="input-medium text-right" id="barras" type="text">
+				<button class="btn" type="submit" id="btnAdicionar" tabindex="-1">Adicionar</button>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<?php
+			$this->widget('MGSelect2ProdutoBarra', 
+				array(
+					'name' => 'codprodutobarra', 
+					'htmlOptions' => array(
+						'class' => 'span12', 
+						'placeholder' => 'Pesquisa de Produtos'
+						),
+					)
+				); 
+			?>
+		</div>
+	</form>
+	<?php
+}
+
+
+
+?>
 <div id="listagemProdutos">
 	<?php
 	$this->renderPartial('_view_produtos_listagem',
@@ -30,6 +42,7 @@
 			'model'=>$model,
 		));		
 	?>
+</div>
 </div>
 <script>
 	
@@ -86,7 +99,6 @@ function adicionaProduto()
 	var barras = $("#barras").val();
 	var quantidade = $('#quantidade').autoNumeric('get');
 	$("#barras").val("");
-	$("#barras").focus();
 	$.ajax({
 		url: "<?php echo Yii::app()->createUrl('negocio/adicionaproduto') ?>",
 		data: {
@@ -172,7 +184,15 @@ $(document).ready(function() {
 		preencheQuantidade();
 	});
 	
-
+	$('#codprodutobarra').change(function(e) { 
+		if ($("#codprodutobarra").select2('data') != null)
+		{
+			$("#barras").val($("#codprodutobarra").select2('data').barras);
+			window.setTimeout(function(){$('#barras').focus();}, 0);
+			$('#codprodutobarra').select2('data', null);
+			adicionaProduto ();
+		}
+	});
 	// botão delete da embalagem
 	jQuery(document).on('click','a.delete-barra',function(e) {
 	

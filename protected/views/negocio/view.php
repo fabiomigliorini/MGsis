@@ -36,16 +36,7 @@ $(document).ready(function(){
 <div class="row-fluid">
 
 	<div class="span8">
-		<?php 
-			$this->renderPartial('_view_produtos', array('model'=>$model));
-		?>
-		<hr> 
 		<?php
-			$this->renderPartial('_view_notas', array('model'=>$model));
-			//$this->renderPartial('_view_cupons', array('model'=>$model));
-		?>
-		<?php
-		/*
 			$this->widget(
 				'bootstrap.widgets.TbTabs',
 				array(
@@ -57,14 +48,20 @@ $(document).ready(function(){
 							'active' => true
 						),
 						array(
-							'label' => 'Documentos', 
-							'content' => 'Ainda Vazio'
+							'label' => 'Notas Fiscais',
+							'content' => $this->renderPartial('_view_notas', array('model'=>$model), true),
+						),
+						array(
+							'label' => 'Cupons Fiscais',
+							'content' => $this->renderPartial('_view_cupons', array('model'=>$model), true),
+						),
+						array(
+							'label' => 'Títulos',
+							'content' => $this->renderPartial('_view_titulos', array('model'=>$model), true),
 						),
 					),
 				)
 			);	
-		 * 
-		 */
 		?>
 	</div>
 	

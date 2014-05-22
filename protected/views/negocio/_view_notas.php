@@ -1,12 +1,10 @@
 <div class="row-fluid">
-	<b class="span4" style="font-size: 160%;">
-		Notas Fiscais
-	</b>
 	<?php
-	if ($model->codnegociostatus != 1)
+	if ($model->codnegociostatus == NegocioStatus::FECHADO)
 	{
 		?>
 		<a href="#">Gerar Nova Nota</a>
+		<hr>
 		<?php
 	}
 	?>
