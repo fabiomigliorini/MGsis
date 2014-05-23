@@ -35,11 +35,20 @@ $(document).ready(function(){
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-			'codfilial',
-		'codempresa',
-		'codpessoa',
+		'codfilial',
+		//'codempresa',
+		array(
+					'name'=>'codempresa',
+					'value'=>(isset($model->Empresa))?CHtml::link(CHtml::encode($model->Empresa->empresa),array('empresa/view','id'=>$model->codempresa)):null,
+					'type'=>'raw',
+					),
+		//'codpessoa',
+		array(
+					'name'=>'codpessoa',
+					'value'=>(isset($model->Pessoa))?CHtml::link(CHtml::encode($model->Pessoa->fantasia),array('pessoa/view','id'=>$model->codpessoa)):null,
+					'type'=>'raw',
+					),
 		'filial',
-		'emitenfe',
 		'acbrnfemonitorcaminho',
 		'acbrnfemonitorcaminhorede',
 		'acbrnfemonitorbloqueado',

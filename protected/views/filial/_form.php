@@ -6,18 +6,23 @@
 
 <fieldset>
 	<?php 	
-		echo $form->textFieldRow($model,'codempresa',array('class'=>'span5'));
-		echo $form->textFieldRow($model,'codpessoa',array('class'=>'span5'));
-		echo $form->textFieldRow($model,'filial',array('class'=>'span5','maxlength'=>20));
-		echo $form->checkBoxRow($model,'emitenfe');
-		echo $form->textFieldRow($model,'acbrnfemonitorcaminho',array('class'=>'span5','maxlength'=>100));
-		echo $form->textFieldRow($model,'acbrnfemonitorcaminhorede',array('class'=>'span5','maxlength'=>100));
-		echo $form->textFieldRow($model,'acbrnfemonitorbloqueado',array('class'=>'span5'));
-		echo $form->textFieldRow($model,'acbrnfemonitorcodusuario',array('class'=>'span5'));
-		echo $form->textFieldRow($model,'empresadominio',array('class'=>'span5','maxlength'=>7));
-		echo $form->textFieldRow($model,'acbrnfemonitorip',array('class'=>'span5','maxlength'=>20));
-		echo $form->textFieldRow($model,'acbrnfemonitorporta',array('class'=>'span5'));
-		echo $form->textFieldRow($model,'odbcnumeronotafiscal',array('class'=>'span5','maxlength'=>500));
+		//echo $form->textFieldRow($model,'codempresa',array('class'=>'span5'));
+		echo $form->dropDownListRow($model, 'codempresa', Empresa::getListaCombo());
+		//echo $form->textFieldRow($model,'codpessoa',array('class'=>'span5'));
+		// codpessoa
+		echo $form->select2PessoaRow($model, 'codpessoa',array('class'=>'span3'));
+		echo $form->textFieldRow($model,'filial',array('class'=>'span3','maxlength'=>20));
+		//echo $form->checkBoxRow($model,'emitenfe');
+		echo $form->textFieldRow($model,'acbrnfemonitorcaminho',array('class'=>'span3','maxlength'=>100));
+		echo $form->textFieldRow($model,'acbrnfemonitorcaminhorede',array('class'=>'span3','maxlength'=>100));
+		echo $form->textFieldRow($model,'acbrnfemonitorbloqueado',array('class'=>'span3'));
+		//echo $form->textFieldRow($model,'acbrnfemonitorcodusuario',array('class'=>'span5'));
+		echo $form->select2Row($model, 'acbrnfemonitorcodusuario', Usuario::getListaCombo(), array('class' => 'input-larg'));
+
+		echo $form->textFieldRow($model,'empresadominio',array('class'=>'input-mini text-right','maxlength'=>7));
+		echo $form->textFieldRow($model,'acbrnfemonitorip',array('class'=>'span3','maxlength'=>20));
+		echo $form->textFieldRow($model,'acbrnfemonitorporta',array('class'=>'input-mini text-right'));
+		echo $form->textFieldRow($model,'odbcnumeronotafiscal',array('class'=>'span3','maxlength'=>500));
 	?>
 </fieldset>
 <div class="form-actions">
@@ -44,6 +49,8 @@
 <script type='text/javascript'>
 	
 $(document).ready(function() {
+		$('#Filial_acbrnfemonitorporta').autoNumeric('init', {aSep:'', aDec:',', altDec:'.', mDec:0 });
+		$('#Filial_empresadominio').autoNumeric('init', {aSep:'', aDec:',', altDec:'.', mDec:0 });
 
 	$("#Filial_filial").Setcase();
 

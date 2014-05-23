@@ -54,7 +54,7 @@ class Filial extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('filial', 'required'),
+			array('codempresa, codpessoa, filial', 'required'),
 			array('filial, acbrnfemonitorip', 'length', 'max'=>20),
 			array('acbrnfemonitorcaminho, acbrnfemonitorcaminhorede', 'length', 'max'=>100),
 			array('empresadominio', 'length', 'max'=>7),
@@ -107,7 +107,7 @@ class Filial extends MGActiveRecord
 			'empresadominio' => 'Empresa Domínio',
 			'acbrnfemonitorip' => 'ACBR Monitor IP',
 			'acbrnfemonitorporta' => 'ACBR Monitor Porta',
-			'odbcnumeronotafiscal' => 'Número Nota Fiscal',
+			'odbcnumeronotafiscal' => 'ODBC Número Nota Fiscal',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
