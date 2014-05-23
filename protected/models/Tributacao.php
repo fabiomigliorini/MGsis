@@ -95,7 +95,7 @@ class Tributacao extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codtributacao',$this->codtributacao,false);
+		$criteria->compare('codtributacao',Yii::app()->format->numeroLimpo($this->codtributacao),false);
 		if (!empty($this->tributacao))
 		{
 			$texto  = str_replace(' ', '%', trim($this->tributacao));

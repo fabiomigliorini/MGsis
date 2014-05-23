@@ -40,7 +40,7 @@ class NaturezaOperacao extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codnaturezaoperacao', 'required'),
+			array('naturezaoperacao', 'required'),
 			array('naturezaoperacao', 'length', 'max'=>50),
 			array('observacoesnf', 'length', 'max'=>500),
 			array('codoperacao, emitida, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
@@ -61,7 +61,7 @@ class NaturezaOperacao extends MGActiveRecord
 			'Negocios' => array(self::HAS_MANY, 'Negocio', 'codnaturezaoperacao'),
 			'TributacaoNaturezaOperacaos' => array(self::HAS_MANY, 'TributacaoNaturezaOperacao', 'codnaturezaoperacao'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 
@@ -72,7 +72,7 @@ class NaturezaOperacao extends MGActiveRecord
 	{
 		return array(
 			'codnaturezaoperacao' => '#',
-			'naturezaoperacao' => 'Natureza Operação',
+			'naturezaoperacao' => 'Natureza da Operação',
 			'codoperacao' => 'Operação',
 			'emitida' => 'Emitida',
 			'observacoesnf' => 'Observações NF',
@@ -101,18 +101,26 @@ class NaturezaOperacao extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codnaturezaoperacao',$this->codnaturezaoperacao,true);
-		$criteria->compare('naturezaoperacao',$this->naturezaoperacao,true);
-		$criteria->compare('codoperacao',$this->codoperacao,true);
+		$criteria->compare('codnaturezaoperacao',Yii::app()->format->numeroLimpo($this->codnaturezaoperacao),false);
+		//$criteria->compare('naturezaoperacao',$this->naturezaoperacao,false);
+		if (!empty($this->naturezaoperacao))
+		{
+			$texto  = str_replace(' ', '%', trim($this->naturezaoperacao));
+			$criteria->addCondition('t.naturezaoperacao ILIKE :naturezaoperacao');
+			$criteria->params = array_merge($criteria->params, array(':naturezaoperacao' => '%'.$texto.'%'));
+		}
+		$criteria->compare('codoperacao',$this->codoperacao,false);
 		$criteria->compare('emitida',$this->emitida);
-		$criteria->compare('observacoesnf',$this->observacoesnf,true);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('observacoesnf',$this->observacoesnf,false);
+		$criteria->compare('alteracao',$this->alteracao,false);
+		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);
+		$criteria->compare('criacao',$this->criacao,false);
+		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,false);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array('defaultOrder'=>'t.codnaturezaoperacao ASC'),
+			'pagination'=>array('pageSize'=>20)
 		));
 	}
 

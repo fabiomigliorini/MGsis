@@ -1,5 +1,5 @@
 <div class="registro row-fluid">
-	<small class="span1">
+	<small class="span1 muted">
 		<?php echo CHtml::encode(Yii::app()->format->formataCodigo($data->codncm)); ?>
 	</small>
 	

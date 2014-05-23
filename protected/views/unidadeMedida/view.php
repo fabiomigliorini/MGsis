@@ -1,14 +1,14 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Detalhes Filial';
+$this->pagetitle = Yii::app()->name . ' - Detalhes Unidade de Medida';
 $this->breadcrumbs=array(
-	'Filial'=>array('index'),
-	$model->filial,
+	'Unidade de Medida'=>array('index'),
+	$model->unidademedida,
 );
 
 $this->menu=array(
 array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create')),
-array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codfilial)),
+array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codunidademedida)),
 array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
 //array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
@@ -22,32 +22,22 @@ $(document).ready(function(){
 	jQuery('body').on('click','#btnExcluir',function() {
 		bootbox.confirm("Excluir este registro?", function(result) {
 			if (result)
-				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('filial/delete', array('id' => $model->codfilial))?>",{});
+				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('unidadeMedida/delete', array('id' => $model->codunidademedida))?>",{});
 		});
 	});
 });
 /*]]>*/
 </script>
 
-<h1><?php echo $model->filial; ?></h1>
+<h1><?php echo $model->unidademedida; ?></h1>
 
 <?php 
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-			'codfilial',
-		'codempresa',
-		'codpessoa',
-		'filial',
-		'emitenfe',
-		'acbrnfemonitorcaminho',
-		'acbrnfemonitorcaminhorede',
-		'acbrnfemonitorbloqueado',
-		'acbrnfemonitorcodusuario',
-		'empresadominio',
-		'acbrnfemonitorip',
-		'acbrnfemonitorporta',
-		'odbcnumeronotafiscal',
+			'codunidademedida',
+		'unidademedida',
+		'sigla',
 		),
 	)); 
 

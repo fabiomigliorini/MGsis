@@ -80,6 +80,7 @@
 					array('label' => 'NCM', 'url' => Yii::app()->createUrl('ncm')),
 					array('label' => 'Tipo de Produtos', 'url' => Yii::app()->createUrl('tipoProduto')),
 					array('label' => 'Grupo de Produtos', 'url' => Yii::app()->createUrl('grupoProduto')),
+					array('label' => 'Unidade de Medida', 'url' => Yii::app()->createUrl('unidadeMedida')),
 				)
 			),
 			
@@ -88,11 +89,13 @@
 				'label' => 'Fiscal', 
 				'url'=>'#', 
 				'items'=>array(
+					array('label' => 'Filial', 'url' => Yii::app()->createUrl('filial')),
+					array('label' => 'CFOP', 'url' => Yii::app()->createUrl('cfop')),
 					array('label' => 'Cidades', 'url' => Yii::app()->createUrl('cidade')),
 					array('label' => 'Empresas', 'url' => Yii::app()->createUrl('empresa')),
 					array('label' => 'Tributações', 'url' => Yii::app()->createUrl('tributacao')),
-					array('label' => 'CFOP', 'url' => Yii::app()->createUrl('cfop')),
 					array('label' => 'Conta Contabil', 'url' => Yii::app()->createUrl('contaContabil')),
+					array('label' => 'Natureza da Operação', 'url' => Yii::app()->createUrl('naturezaOperacao')),
 				)
 			),
 						// Admin

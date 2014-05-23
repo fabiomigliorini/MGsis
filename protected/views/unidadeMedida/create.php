@@ -1,8 +1,8 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Nova Filial';
+$this->pagetitle = Yii::app()->name . ' - Nova Unidade de Medida';
 $this->breadcrumbs=array(
-	'Filial'=>array('index'),
-	'Nova Filial',
+	'Unidade de Medida'=>array('index'),
+	'Nova Unidade de Medida',
 );
 
 $this->menu=array(
@@ -11,6 +11,6 @@ array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 );
 ?>
 
-<h1>Nova Filial</h1>
+<h1>Nova Unidade de Medida</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

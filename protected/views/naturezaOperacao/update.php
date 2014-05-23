@@ -1,0 +1,21 @@
+<?php
+$this->pagetitle = Yii::app()->name . ' - Alterar Natureza da Operação';
+$this->breadcrumbs=array(
+	'Natureza da Operação'=>array('index'),
+	$model->naturezaoperacao=>array('view','id'=>$model->codnaturezaoperacao),
+	'Alterar Natureza da Operação',
+);
+
+	$this->menu=array(
+	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
+	array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create')),
+	array('label'=>'Detalhes', 'icon'=>'icon-eye-open', 'url'=>array('view','id'=>$model->codnaturezaoperacao)),
+	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
+	);
+	?>
+
+	<h1>Alterar NaturezaOperacao <?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codnaturezaoperacao)); ?></h1>
+	<br>
+
+	<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>	
+	<?php $this->widget('UsuarioCriacao', array('model'=>$model)); ?>

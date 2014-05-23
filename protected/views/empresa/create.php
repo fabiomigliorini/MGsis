@@ -2,7 +2,7 @@
 $this->pagetitle = Yii::app()->name . ' - Nova Empresa';
 $this->breadcrumbs=array(
 	'Empresas'=>array('index'),
-	'Nova',
+	'Nova Empresa',
 );
 
 $this->menu=array(

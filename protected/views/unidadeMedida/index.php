@@ -1,7 +1,7 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Marca';
+$this->pagetitle = Yii::app()->name . ' - Unidade de Medida';
 $this->breadcrumbs=array(
-	'Marca',
+	'Unidade de Medida',
 );
 
 $this->menu=array(
@@ -25,7 +25,7 @@ $(document).ready(function(){
 
 </script>
 
-<h1>Marca</h1>
+<h1>Unidade de Medida</h1>
 
 <br>
 
@@ -38,19 +38,8 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
-	<?php echo $form->textField($model, 'codmarca', array('placeholder' => 'Código', 'class'=>'input-medium')); ?>
-	<?php echo $form->textField($model, 'marca', array('placeholder' => 'Descrição', 'class'=>'input-large')); ?>
-	<?php
-		echo $form->select2(
-			$model, 
-			'site', 
-			array(1=>'No Site', 2=>'Fora do Site'), 
-			array(
-				'placeholder'=>'Site',
-				'class' => 'input-medium'
-			)
-		);
-	?>
+	<?php echo $form->textField($model, 'codunidademedida', array('placeholder' => 'Código', 'class'=>'input-mini')); ?>
+	<?php echo $form->textField($model, 'unidademedida', array('placeholder' => 'Un. Medida', 'class'=>'input-larg')); ?>
 	<?php
 	$this->widget('bootstrap.widgets.TbButton'
 		, array(
@@ -81,7 +70,7 @@ $this->widget(
 			'listViewId' => 'Listagem', 
 			'header' => '',
 			'loaderText'=>'Carregando...',
-			'options' => array('history' => false, 'triggerPageTreshold' => 20, 'trigger'=>'Carregar mais registros'),
+			'options' => array('history' => false, 'triggerPageTreshold' => 10, 'trigger'=>'Carregar mais registros'),
 		)
 	)
 );

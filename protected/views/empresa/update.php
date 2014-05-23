@@ -3,7 +3,7 @@ $this->pagetitle = Yii::app()->name . ' - Alterar Empresa';
 $this->breadcrumbs=array(
 	'Empresa'=>array('index'),
 	$model->empresa=>array('view','id'=>$model->codempresa),
-	'Alterar',
+	'Alterar Empresa',
 );
 
 	$this->menu=array(

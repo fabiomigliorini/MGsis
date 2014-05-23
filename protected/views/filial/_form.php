@@ -45,7 +45,7 @@
 	
 $(document).ready(function() {
 
-	//$("#Pessoa_fantasia").Setcase();
+	$("#Filial_filial").Setcase();
 
 	$('#filial-form').submit(function(e) {
         var currentForm = this;

@@ -2,7 +2,7 @@
 $this->pagetitle = Yii::app()->name . ' - Alterar NCM';
 $this->breadcrumbs=array(
 	'NCM'=>array('index'),
-	$model->codncm=>array('view','id'=>$model->codncm),
+	$model->ncm=>array('view','id'=>$model->codncm),
 	'Alterar NCM',
 );
 

@@ -54,7 +54,7 @@ class Filial extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codfilial, filial', 'required'),
+			array('filial', 'required'),
 			array('filial, acbrnfemonitorip', 'length', 'max'=>20),
 			array('acbrnfemonitorcaminho, acbrnfemonitorcaminhorede', 'length', 'max'=>100),
 			array('empresadominio', 'length', 'max'=>7),
@@ -133,26 +133,34 @@ class Filial extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codfilial',$this->codfilial,true);
-		$criteria->compare('codempresa',$this->codempresa,true);
-		$criteria->compare('codpessoa',$this->codpessoa,true);
-		$criteria->compare('filial',$this->filial,true);
+		$criteria->compare('codfilial',$this->codfilial,false);
+		$criteria->compare('codempresa',$this->codempresa,false);
+		$criteria->compare('codpessoa',$this->codpessoa,false);
+		//$criteria->compare('filial',$this->filial,false);
+		if (!empty($this->filial))
+		{
+			$texto  = str_replace(' ', '%', trim($this->filial));
+			$criteria->addCondition('t.filial ILIKE :filial');
+			$criteria->params = array_merge($criteria->params, array(':filial' => '%'.$texto.'%'));
+		}
 		$criteria->compare('emitenfe',$this->emitenfe);
-		$criteria->compare('acbrnfemonitorcaminho',$this->acbrnfemonitorcaminho,true);
-		$criteria->compare('acbrnfemonitorcaminhorede',$this->acbrnfemonitorcaminhorede,true);
-		$criteria->compare('acbrnfemonitorbloqueado',$this->acbrnfemonitorbloqueado,true);
-		$criteria->compare('acbrnfemonitorcodusuario',$this->acbrnfemonitorcodusuario,true);
-		$criteria->compare('empresadominio',$this->empresadominio,true);
-		$criteria->compare('acbrnfemonitorip',$this->acbrnfemonitorip,true);
-		$criteria->compare('acbrnfemonitorporta',$this->acbrnfemonitorporta,true);
-		$criteria->compare('odbcnumeronotafiscal',$this->odbcnumeronotafiscal,true);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('acbrnfemonitorcaminho',$this->acbrnfemonitorcaminho,false);
+		$criteria->compare('acbrnfemonitorcaminhorede',$this->acbrnfemonitorcaminhorede,false);
+		$criteria->compare('acbrnfemonitorbloqueado',$this->acbrnfemonitorbloqueado,false);
+		$criteria->compare('acbrnfemonitorcodusuario',$this->acbrnfemonitorcodusuario,false);
+		$criteria->compare('empresadominio',$this->empresadominio,false);
+		$criteria->compare('acbrnfemonitorip',$this->acbrnfemonitorip,false);
+		$criteria->compare('acbrnfemonitorporta',$this->acbrnfemonitorporta,false);
+		$criteria->compare('odbcnumeronotafiscal',$this->odbcnumeronotafiscal,false);
+		$criteria->compare('alteracao',$this->alteracao,false);
+		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);
+		$criteria->compare('criacao',$this->criacao,false);
+		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,false);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array('defaultOrder'=>'t.codfilial ASC'),
+			'pagination'=>array('pageSize'=>20)
 		));
 	}
 

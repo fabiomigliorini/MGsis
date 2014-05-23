@@ -36,7 +36,7 @@ class UnidadeMedida extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codunidademedida', 'required'),
+			array('unidademedida, sigla', 'required'),
 			array('unidademedida', 'length', 'max'=>15),
 			array('sigla', 'length', 'max'=>3),
 			array('alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
@@ -95,16 +95,24 @@ class UnidadeMedida extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codunidademedida',$this->codunidademedida,true);
-		$criteria->compare('unidademedida',$this->unidademedida,true);
-		$criteria->compare('sigla',$this->sigla,true);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('codunidademedida',Yii::app()->format->numeroLimpo($this->codunidademedida),false);
+		//$criteria->compare('unidademedida',$this->unidademedida,false);
+		if (!empty($this->unidademedida))
+		{
+			$texto  = str_replace(' ', '%', trim($this->unidademedida));
+			$criteria->addCondition('t.unidademedida ILIKE :unidademedida');
+			$criteria->params = array_merge($criteria->params, array(':unidademedida' => '%'.$texto.'%'));
+		}
+		$criteria->compare('sigla',$this->sigla,false);
+		$criteria->compare('alteracao',$this->alteracao,false);
+		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);
+		$criteria->compare('criacao',$this->criacao,false);
+		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,false);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array('defaultOrder'=>'t.codunidademedida ASC'),
+			'pagination'=>array('pageSize'=>20)
 		));
 	}
 

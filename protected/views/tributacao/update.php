@@ -3,7 +3,7 @@ $this->pagetitle = Yii::app()->name . ' - Alterar Tributação';
 $this->breadcrumbs=array(
 	'Tributações'=>array('index'),
 	$model->tributacao=>array('view','id'=>$model->codtributacao),
-	'Alterar',
+	'Alterar Tributação',
 );
 
 	$this->menu=array(

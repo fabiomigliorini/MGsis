@@ -94,7 +94,7 @@ class TipoProduto extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codtipoproduto',$this->codtipoproduto,false);
+		$criteria->compare('codtipoproduto',Yii::app()->format->numeroLimpo($this->codtipoproduto),false);
 		//$criteria->compare('tipoproduto',$this->tipoproduto,true);
 		if (!empty($this->tipoproduto))
 		{
