@@ -40,7 +40,7 @@ class Operacao extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codoperacao', 'required'),
+			array('operacao', 'required'),
 			array('operacao', 'length', 'max'=>50),
 			array('alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().

@@ -47,7 +47,7 @@ class TipoTitulo extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codtipotitulo', 'required'),
+			array('tipotitulo', 'required'),
 			array('tipotitulo', 'length', 'max'=>20),
 			array('observacoes', 'length', 'max'=>255),
 			array('pagar, receber, codtipomovimentotitulo, debito, credito, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
@@ -111,21 +111,29 @@ class TipoTitulo extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codtipotitulo',$this->codtipotitulo,true);
-		$criteria->compare('tipotitulo',$this->tipotitulo,true);
+		$criteria->compare('codtipotitulo',Yii::app()->format->numeroLimpo($this->codtipotitulo),false);
+		//$criteria->compare('tipotitulo',$this->tipotitulo,false);
+		if (!empty($this->tipotitulo))
+		{
+			$texto  = str_replace(' ', '%', trim($this->tipotitulo));
+			$criteria->addCondition('t.tipotitulo ILIKE :tipotitulo');
+			$criteria->params = array_merge($criteria->params, array(':tipotitulo' => '%'.$texto.'%'));
+		}
 		$criteria->compare('pagar',$this->pagar);
 		$criteria->compare('receber',$this->receber);
-		$criteria->compare('observacoes',$this->observacoes,true);
-		$criteria->compare('codtipomovimentotitulo',$this->codtipomovimentotitulo,true);
+		$criteria->compare('observacoes',$this->observacoes,false);
+		$criteria->compare('codtipomovimentotitulo',$this->codtipomovimentotitulo,false);
 		$criteria->compare('debito',$this->debito);
 		$criteria->compare('credito',$this->credito);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('alteracao',$this->alteracao,false);
+		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);
+		$criteria->compare('criacao',$this->criacao,false);
+		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,false);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array('defaultOrder'=>'t.codtipotitulo ASC'),
+			'pagination'=>array('pageSize'=>20)
 		));
 	}
 

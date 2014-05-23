@@ -10,19 +10,19 @@
 		echo $form->dropDownListRow($model, 'codempresa', Empresa::getListaCombo());
 		//echo $form->textFieldRow($model,'codpessoa',array('class'=>'span5'));
 		// codpessoa
-		echo $form->select2PessoaRow($model, 'codpessoa',array('class'=>'span3'));
-		echo $form->textFieldRow($model,'filial',array('class'=>'span3','maxlength'=>20));
+		echo $form->select2PessoaRow($model, 'codpessoa',array('class'=>'span4'));
+		echo $form->textFieldRow($model,'filial',array('class'=>'input-medium','maxlength'=>20));
 		//echo $form->checkBoxRow($model,'emitenfe');
-		echo $form->textFieldRow($model,'acbrnfemonitorcaminho',array('class'=>'span3','maxlength'=>100));
-		echo $form->textFieldRow($model,'acbrnfemonitorcaminhorede',array('class'=>'span3','maxlength'=>100));
-		echo $form->textFieldRow($model,'acbrnfemonitorbloqueado',array('class'=>'span3'));
+		echo $form->textFieldRow($model,'acbrnfemonitorcaminho',array('class'=>'input-x-medium','maxlength'=>100));
+		echo $form->textFieldRow($model,'acbrnfemonitorcaminhorede',array('class'=>'x-input-medium','maxlength'=>100));
+		echo $form->textFieldRow($model,'acbrnfemonitorbloqueado',array('class'=>'input-medium'));
 		//echo $form->textFieldRow($model,'acbrnfemonitorcodusuario',array('class'=>'span5'));
-		echo $form->select2Row($model, 'acbrnfemonitorcodusuario', Usuario::getListaCombo(), array('class' => 'input-larg'));
+		echo $form->select2Row($model, 'acbrnfemonitorcodusuario', Usuario::getListaCombo(), array('class' => 'input-medium'));
 
 		echo $form->textFieldRow($model,'empresadominio',array('class'=>'input-mini text-right','maxlength'=>7));
-		echo $form->textFieldRow($model,'acbrnfemonitorip',array('class'=>'span3','maxlength'=>20));
+		echo $form->textFieldRow($model,'acbrnfemonitorip',array('class'=>'input-medium','maxlength'=>20));
 		echo $form->textFieldRow($model,'acbrnfemonitorporta',array('class'=>'input-mini text-right'));
-		echo $form->textFieldRow($model,'odbcnumeronotafiscal',array('class'=>'span3','maxlength'=>500));
+		echo $form->textFieldRow($model,'odbcnumeronotafiscal',array('class' => 'input-larg','maxlength'=>500));
 	?>
 </fieldset>
 <div class="form-actions">

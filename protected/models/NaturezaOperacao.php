@@ -19,6 +19,7 @@
  * @property TributacaoNaturezaOperacao[] $TributacaoNaturezaOperacaos
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
+ * @property Operacao $Operacao
  */
 class NaturezaOperacao extends MGActiveRecord
 {
@@ -62,6 +63,7 @@ class NaturezaOperacao extends MGActiveRecord
 			'TributacaoNaturezaOperacaos' => array(self::HAS_MANY, 'TributacaoNaturezaOperacao', 'codnaturezaoperacao'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'Operacao' => array(self::BELONGS_TO, 'Operacao', 'codoperacao'),
 		);
 	}
 
@@ -74,7 +76,7 @@ class NaturezaOperacao extends MGActiveRecord
 			'codnaturezaoperacao' => '#',
 			'naturezaoperacao' => 'Natureza da Operação',
 			'codoperacao' => 'Operação',
-			'emitida' => 'Emitida',
+			'emitida' => 'Nossa Emissão',
 			'observacoesnf' => 'Observações NF',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',

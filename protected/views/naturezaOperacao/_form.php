@@ -7,8 +7,9 @@
 <fieldset>
 	<?php 	
 		echo $form->textFieldRow($model,'naturezaoperacao',array('class'=>'span5','maxlength'=>50));
-		echo $form->textFieldRow($model,'codoperacao',array('class'=>'span5'));
-		echo $form->checkBoxRow($model,'emitida');
+		echo $form->select2Row($model, 'codoperacao', Operacao::getListaCombo(), array('class' => 'input-medium'));
+		//echo $form->checkBoxRow($model,'emitida');
+		echo $form->toggleButtonRow($model,'emitida', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 		echo $form->textFieldRow($model,'observacoesnf',array('class'=>'span5','maxlength'=>500));
 	?>
 </fieldset>
