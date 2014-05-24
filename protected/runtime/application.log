@@ -5514,3 +5514,109 @@ Stack trace:
 REQUEST_URI=/MGsis/index.php?r=naturezaOperacao/update&id=1
 HTTP_REFERER=http://localhost/MGsis/index.php?r=naturezaOperacao/view&id=1
 ---
+2014/05/24 09:06:09 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblauditoriaexcecao_pkey"
+DETAIL:  Key (codauditoriaexcecao)=(10) already exists.. The SQL statement executed was: insert into tblauditoriaexcecao (codauditoriaexcecao, tabela, campo) values (10, 'tblnotafiscal', 'valorprodutos').
+2014/05/24 09:06:09 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "tblauditoriaexcecao_pkey"
+DETAIL:  Key (codauditoriaexcecao)=(10) already exists.. The SQL statement executed was: insert into tblauditoriaexcecao (codauditoriaexcecao, tabela, campo) values (10, 'tblnotafiscal', 'valorprodutos')' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/MGsis/protected/migrations/m140524_125448_totais_tabela_notafiscal.php(16): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(385): m140524_125448_totais_tabela_notafiscal->up()
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(109): MigrateCommand->migrateUp('m140524_125448_...')
+#3 [internal function]: MigrateCommand->actionUp(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#8 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#9 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#10 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#11 {main}
+---
+2014/05/24 15:45:47 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42883]: Undefined function: 7 ERROR:  function fntblnotafiscalaiau_valorprodutos_valordesconto() does not exist. The SQL statement executed was: 
+			CREATE TRIGGER tblnotafiscalaiau_valorprodutos
+			AFTER INSERT OR UPDATE OF 
+					  valorProdutos
+					, valorDesconto
+					, valorfrete
+					, valorseguro
+					, valordesconto
+					, valoroutras
+					, icmsstvalor
+					, ipivalor
+			ON tblnotafiscal
+			FOR EACH ROW
+			EXECUTE PROCEDURE fntblnotafiscalaiau_valorprodutos_valordesconto();			
+			.
+2014/05/24 15:45:47 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42883]: Undefined function: 7 ERROR:  function fntblnotafiscalaiau_valorprodutos_valordesconto() does not exist. The SQL statement executed was: 
+			CREATE TRIGGER tblnotafiscalaiau_valorprodutos
+			AFTER INSERT OR UPDATE OF 
+					  valorProdutos
+					, valorDesconto
+					, valorfrete
+					, valorseguro
+					, valordesconto
+					, valoroutras
+					, icmsstvalor
+					, ipivalor
+			ON tblnotafiscal
+			FOR EACH ROW
+			EXECUTE PROCEDURE fntblnotafiscalaiau_valorprodutos_valordesconto();			
+			' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/MGsis/protected/migrations/m140524_125448_totais_tabela_notafiscal.php(196): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(385): m140524_125448_totais_tabela_notafiscal->up()
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(109): MigrateCommand->migrateUp('m140524_125448_...')
+#3 [internal function]: MigrateCommand->actionUp(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#8 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#9 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#10 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#11 {main}
+---
+2014/05/24 15:52:55 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42703]: Undefined column: 7 ERROR:  column "vicmsbase" of relation "tblnotafiscal" does not exist
+LINE 3:          , vIcmsBase       = coalesce(vIcmsBase     , 0)
+                   ^
+QUERY:  UPDATE tblNotaFiscal
+				   SET valorProdutos   = coalesce(vValorProdutos, 0)
+				     , vIcmsBase       = coalesce(vIcmsBase     , 0)
+				     , vIcmsValor      = coalesce(vIcmsValor    , 0)
+				     , vIcmsStBase     = coalesce(vIcmsStBase   , 0)
+				     , vIcmsStValor    = coalesce(vIcmsStValor  , 0)
+				     , vIpiBase        = coalesce(vIpiBase      , 0)
+				     , vIpiValor       = coalesce(vIpiValor     , 0)
+				 WHERE tblNotaFiscal.CodNotaFiscal = pCodNotaFiscal
+CONTEXT:  PL/pgSQL function "fntblnotafiscal_atualiza_valorprodutos" line 33 at SQL statement
+SQL statement "SELECT               fnTblNotaFiscal_Atualiza_ValorProdutos(NEW.codNotaFiscal)"
+PL/pgSQL function "fntblnotafiscalprodutobarraaiauad" line 16 at SQL statement. The SQL statement executed was: UPDATE tblnotafiscalprodutobarra  SET codnotafiscal=codnotafiscal.
+2014/05/24 15:52:55 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42703]: Undefined column: 7 ERROR:  column "vicmsbase" of relation "tblnotafiscal" does not exist
+LINE 3:          , vIcmsBase       = coalesce(vIcmsBase     , 0)
+                   ^
+QUERY:  UPDATE tblNotaFiscal
+				   SET valorProdutos   = coalesce(vValorProdutos, 0)
+				     , vIcmsBase       = coalesce(vIcmsBase     , 0)
+				     , vIcmsValor      = coalesce(vIcmsValor    , 0)
+				     , vIcmsStBase     = coalesce(vIcmsStBase   , 0)
+				     , vIcmsStValor    = coalesce(vIcmsStValor  , 0)
+				     , vIpiBase        = coalesce(vIpiBase      , 0)
+				     , vIpiValor       = coalesce(vIpiValor     , 0)
+				 WHERE tblNotaFiscal.CodNotaFiscal = pCodNotaFiscal
+CONTEXT:  PL/pgSQL function "fntblnotafiscal_atualiza_valorprodutos" line 33 at SQL statement
+SQL statement "SELECT               fnTblNotaFiscal_Atualiza_ValorProdutos(NEW.codNotaFiscal)"
+PL/pgSQL function "fntblnotafiscalprodutobarraaiauad" line 16 at SQL statement. The SQL statement executed was: UPDATE tblnotafiscalprodutobarra  SET codnotafiscal=codnotafiscal' in /var/www/yii-1.1.14.f0fee9/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/MGsis/protected/migrations/m140524_125448_totais_tabela_notafiscal.php(205): CDbCommand->execute()
+#1 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(385): m140524_125448_totais_tabela_notafiscal->up()
+#2 /var/www/yii-1.1.14.f0fee9/framework/cli/commands/MigrateCommand.php(109): MigrateCommand->migrateUp('m140524_125448_...')
+#3 [internal function]: MigrateCommand->actionUp(Array)
+#4 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#5 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#6 /var/www/yii-1.1.14.f0fee9/framework/console/CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#7 /var/www/yii-1.1.14.f0fee9/framework/base/CApplication.php(180): CConsoleApplication->processRequest()
+#8 /var/www/yii-1.1.14.f0fee9/framework/yiic.php(33): CApplication->run()
+#9 /var/www/MGsis/protected/yiic.php(7): require_once('/var/www/yii-1....')
+#10 /var/www/MGsis/protected/yiic(4): require_once('/var/www/MGsis/...')
+#11 {main}
+---

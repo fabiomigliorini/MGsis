@@ -119,7 +119,7 @@ class Cidade extends MGActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
-			'sort'=>array('defaultOrder'=>'t.codcidade ASC'),
+			'sort'=>array('defaultOrder'=>'t.cidade ASC'),
 			'pagination'=>array('pageSize'=>20)
 		));
 	}
