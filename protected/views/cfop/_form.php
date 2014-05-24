@@ -7,9 +7,9 @@
 <fieldset>
 	<?php
 		if ($model->isNewRecord)
-			echo $form->textFieldRow($model,'codcfop',array('class'=>'span5','maxlength'=>100));
+			echo $form->textFieldRow($model,'codcfop',array('class'=>'input-mini','maxlength'=>100));
 		
-		echo $form->textFieldRow($model,'cfop',array('class'=>'span5','maxlength'=>100));
+		echo $form->textAreaRow($model,'cfop',array('class'=>'span4', 'rows'=>'6','maxlength'=>500, 'tabindex'=>-1));
 	?>
 </fieldset>
 <div class="form-actions">

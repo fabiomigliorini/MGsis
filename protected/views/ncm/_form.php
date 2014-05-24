@@ -6,7 +6,7 @@
 
 <fieldset>
 	<?php 	
-		echo $form->textFieldRow($model,'ncm',array('class'=>'span5','maxlength'=>10));
+		echo $form->textFieldRow($model,'ncm',array('class'=>'imput-medum','maxlength'=>10));
 		echo $form->textFieldRow($model,'descricao',array('class'=>'span5','maxlength'=>1500));
 	?>
 </fieldset>

@@ -49,7 +49,7 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 		//'codtipomovimentotitulo',
 		array(
 					'name'=>'codtipomovimentotitulo',
-					'value'=>(isset($model->TipomMovimentoTitulo))?CHtml::link(CHtml::encode($model->TipoMovimentoTitulo->tipomovimentotitulo),array('tipomovimentotitulo/view','id'=>$model->codtipomovimentotitulo)):null,
+					'value'=>(isset($model->codtipomovimentotitulo))?CHtml::link(CHtml::encode($model->TipoMovimentoTitulo->tipomovimentotitulo),array('codtipomovimentotitulo/view','id'=>$model->codtipomovimentotitulo)):null,
 					'type'=>'raw',
 					),
 		array(

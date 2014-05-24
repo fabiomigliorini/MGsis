@@ -6,7 +6,7 @@
 
 <fieldset>
 	<?php 	
-		echo $form->textFieldRow($model,'empresa',array('class'=>'span5','maxlength'=>50));
+		echo $form->textFieldRow($model,'empresa',array('class'=>'medum','maxlength'=>50));
 	?>
 </fieldset>
 <div class="form-actions">

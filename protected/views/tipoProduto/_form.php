@@ -6,7 +6,7 @@
 
 <fieldset>
 	<?php 	
-		echo $form->textFieldRow($model,'tipoproduto',array('class'=>'span5'));
+		echo $form->textFieldRow($model,'tipoproduto',array('class'=>'imput-medum'));
 	?>
 </fieldset>
 <div class="form-actions">

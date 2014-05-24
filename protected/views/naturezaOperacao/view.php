@@ -35,10 +35,18 @@ $(document).ready(function(){
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-			'codnaturezaoperacao',
+		'codnaturezaoperacao',
 		'naturezaoperacao',
-		'codoperacao',
-		'emitida',
+		//'codoperacao',
+		array(
+			'name'=>'codoperacao',
+			'value'=>($model->codoperacao)?'Entrada':'Saída',
+			),
+		//'emitida',
+		array(
+			'name'=>'emitida',
+			'value'=>($model->emitida)?'Sim':'Não',
+			),
 		'observacoesnf',
 		),
 	)); 

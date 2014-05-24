@@ -6,7 +6,7 @@
 
 <fieldset>
 	<?php 	
-		echo $form->textFieldRow($model,'naturezaoperacao',array('class'=>'span5','maxlength'=>50));
+		echo $form->textFieldRow($model,'naturezaoperacao',array('class'=>'medum','maxlength'=>50));
 		echo $form->select2Row($model, 'codoperacao', Operacao::getListaCombo(), array('class' => 'input-medium'));
 		//echo $form->checkBoxRow($model,'emitida');
 		echo $form->toggleButtonRow($model,'emitida', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));

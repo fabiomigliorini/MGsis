@@ -23,7 +23,7 @@
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
  * @property MovimentoTitulo[] $MovimentoTitulos
- * @property TipoTitulo[] $tipoTitulos
+ * @property TipoTitulo[] $TipoTitulos
  */
 class TipoMovimentoTitulo extends MGActiveRecord
 {
@@ -93,7 +93,7 @@ class TipoMovimentoTitulo extends MGActiveRecord
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 			'MovimentoTitulos' => array(self::HAS_MANY, 'MovimentoTitulo', 'codtipomovimentotitulo'),
-			'tipoTitulos' => array(self::HAS_MANY, 'TipoTitulo', 'codtipomovimentotitulo'),
+			'TipoTitulos' => array(self::HAS_MANY, 'TipoTitulo', 'codtipomovimentotitulo'),
 		);
 	}
 
@@ -168,4 +168,21 @@ class TipoMovimentoTitulo extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
+	
+	public function scopes () 
+	{
+		return array(
+			'combo'=>array(
+				'select'=>array('codtipomovimentotitulo', 'tipomovimentotitulo'),
+				'order'=>'tipomovimentotitulo ASC',
+				),
+			);
+	}
+	
+	public function getListaCombo ()
+	{
+		$lista = self::model()->combo()->findAll();
+		return CHtml::listData($lista, 'codtipomovimentotitulo', 'tipomovimentotitulo');
+	}	
+	
 }
