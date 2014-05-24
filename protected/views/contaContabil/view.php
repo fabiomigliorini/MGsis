@@ -35,10 +35,14 @@ $(document).ready(function(){
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-			'codcontacontabil',
+		'codcontacontabil',
 		'contacontabil',
 		'numero',
-		'inativo',
+		//'inativo',
+		array(
+			'name'=>'inativo',
+			'value'=>($model->inativo)?'Sim':'Não',
+			),
 		),
 	)); 
 

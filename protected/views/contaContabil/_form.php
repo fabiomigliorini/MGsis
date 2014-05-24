@@ -8,7 +8,7 @@
 	<?php 	
 		echo $form->textFieldRow($model,'contacontabil',array('class'=>'span3','maxlength'=>50));
 		echo $form->textFieldRow($model,'numero',array('class'=>'span1','maxlength'=>15));
-		echo $form->checkBoxRow($model,'inativo');
+		echo $form->toggleButtonRow($model,'inativo', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 	?>
 </fieldset>
 <div class="form-actions">
