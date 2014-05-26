@@ -36,7 +36,7 @@ class SubGrupoProduto extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codsubgrupoproduto', 'required'),
+			array('subgrupoproduto', 'required'),
 			array('subgrupoproduto', 'length', 'max'=>50),
 			array('codgrupoproduto, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
@@ -94,16 +94,24 @@ class SubGrupoProduto extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codsubgrupoproduto',$this->codsubgrupoproduto,true);
-		$criteria->compare('codgrupoproduto',$this->codgrupoproduto,true);
-		$criteria->compare('subgrupoproduto',$this->subgrupoproduto,true);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('codsubgrupoproduto',$this->codsubgrupoproduto,false);
+		$criteria->compare('codgrupoproduto',$this->codgrupoproduto,false);
+		//$criteria->compare('subgrupoproduto',$this->subgrupoproduto,true);
+		if (!empty($this->subgrupoproduto))
+		{
+			$texto  = str_replace(' ', '%', trim($this->subgrupoproduto));
+			$criteria->addCondition('t.subgrupoproduto ILIKE :subgrupoproduto');
+			$criteria->params = array_merge($criteria->params, array(':subgrupoproduto' => '%'.$texto.'%'));
+		}
+		$criteria->compare('alteracao',$this->alteracao,false);
+		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);
+		$criteria->compare('criacao',$this->criacao,false);
+		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,false);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array('defaultOrder'=>'t.subgrupoproduto ASC'),
+			'pagination'=>array('pageSize'=>20)
 		));
 	}
 

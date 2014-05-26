@@ -72,7 +72,7 @@ class TipoMovimentoTitulo extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codtipomovimentotitulo', 'required'),
+			array('tipomovimentotitulo', 'required'),
 			array('tipomovimentotitulo', 'length', 'max'=>20),
 			array('observacao', 'length', 'max'=>255),
 			array('implantacao, ajuste, armotizacao, juros, desconto, pagamento, estorno, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
@@ -138,8 +138,14 @@ class TipoMovimentoTitulo extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codtipomovimentotitulo',$this->codtipomovimentotitulo,true);
-		$criteria->compare('tipomovimentotitulo',$this->tipomovimentotitulo,true);
+		$criteria->compare('codtipomovimentotitulo',$this->codtipomovimentotitulo,false);
+		//$criteria->compare('tipomovimentotitulo',$this->tipomovimentotitulo,false);
+			if (!empty($this->tipomovimentotitulo))
+		{
+			$texto  = str_replace(' ', '%', trim($this->tipomovimentotitulo));
+			$criteria->addCondition('t.tipomovimentotitulo ILIKE :tipomovimentotitulo');
+			$criteria->params = array_merge($criteria->params, array(':tipomovimentotitulo' => '%'.$texto.'%'));
+		}
 		$criteria->compare('implantacao',$this->implantacao);
 		$criteria->compare('ajuste',$this->ajuste);
 		$criteria->compare('armotizacao',$this->armotizacao);
@@ -147,14 +153,16 @@ class TipoMovimentoTitulo extends MGActiveRecord
 		$criteria->compare('desconto',$this->desconto);
 		$criteria->compare('pagamento',$this->pagamento);
 		$criteria->compare('estorno',$this->estorno);
-		$criteria->compare('observacao',$this->observacao,true);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('observacao',$this->observacao,false);
+		$criteria->compare('alteracao',$this->alteracao,false);
+		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);
+		$criteria->compare('criacao',$this->criacao,false);
+		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,false);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array('defaultOrder'=>'t.tipomovimentotitulo ASC'),
+			'pagination'=>array('pageSize'=>20)
 		));
 	}
 

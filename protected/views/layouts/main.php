@@ -71,6 +71,7 @@
 					array('label' => 'Agrupamentos', 'url' => Yii::app()->createUrl('tituloAgrupamento')),
 					array('label' => 'Cheques', 'url' => Yii::app()->createUrl('cheque')),
 					array('label' => 'Tipo Título', 'url' => Yii::app()->createUrl('tipoTitulo')),
+					array('label' => 'Tipo Movimento Título', 'url' => Yii::app()->createUrl('tipoMovimentoTitulo')),
 				)
 			),
 
@@ -84,6 +85,7 @@
 					array('label' => 'Tipo de Produtos', 'url' => Yii::app()->createUrl('tipoProduto')),
 					array('label' => 'Grupo de Produtos', 'url' => Yii::app()->createUrl('grupoProduto')),
 					array('label' => 'Unidade de Medida', 'url' => Yii::app()->createUrl('unidadeMedida')),
+					array('label' => 'Sub Grupo Produto', 'url' => Yii::app()->createUrl('subGrupoProduto')),
 				)
 			),
 			
