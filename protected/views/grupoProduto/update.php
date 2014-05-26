@@ -1,9 +1,9 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Alterar Grupo de Produtos';
 $this->breadcrumbs=array(
-	'Grupo de Produts'=>array('index'),
-	$model->grupoproduto=>array('view','id'=>$model->grupoproduto),
-	'Alterar Grupo de Produto',
+	'Grupos de Produtos'=>array('index'),
+	$model->grupoproduto=>array('view','id'=>$model->codgrupoproduto),
+	'Alterar',
 );
 
 	$this->menu=array(
@@ -14,7 +14,7 @@ $this->breadcrumbs=array(
 	);
 	?>
 
-	<h1>Alterar Grupo de Produto <?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codgrupoproduto)); ?></h1>
+	<h1>Alterar Grupo de Produtos <?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codgrupoproduto)); ?></h1>
 	<br>
 
 	<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>	

@@ -65,12 +65,12 @@
 				'label' => 'Financeiro', 
 				'url'=>'#', 
 				'items'=>array(
-					array('label' => 'Pessoas', 'url' => Yii::app()->createUrl('pessoa')),
 					array('label' => 'Titulos', 'url' => Yii::app()->createUrl('titulo')),
-					array('label' => 'Liquidações', 'url' => Yii::app()->createUrl('liquidacaoTitulo')),
-					array('label' => 'Agrupamentos', 'url' => Yii::app()->createUrl('tituloAgrupamento')),
+					array('label' => 'Pessoas', 'url' => Yii::app()->createUrl('pessoa')),
 					array('label' => 'Cheques', 'url' => Yii::app()->createUrl('cheque')),
 					array('label' => 'Tipo Título', 'url' => Yii::app()->createUrl('tipoTitulo')),
+					array('label' => 'Liquidações', 'url' => Yii::app()->createUrl('liquidacaoTitulo')),
+					array('label' => 'Agrupamentos', 'url' => Yii::app()->createUrl('tituloAgrupamento')),
 					array('label' => 'Tipo Movimento Título', 'url' => Yii::app()->createUrl('tipoMovimentoTitulo')),
 				)
 			),
@@ -83,9 +83,9 @@
 					array('label' => 'Marcas', 'url' => Yii::app()->createUrl('marca')),
 					array('label' => 'NCM', 'url' => Yii::app()->createUrl('ncm')),
 					array('label' => 'Tipo de Produtos', 'url' => Yii::app()->createUrl('tipoProduto')),
-					array('label' => 'Grupo de Produtos', 'url' => Yii::app()->createUrl('grupoProduto')),
-					array('label' => 'Unidade de Medida', 'url' => Yii::app()->createUrl('unidadeMedida')),
-					array('label' => 'Sub Grupo Produto', 'url' => Yii::app()->createUrl('subGrupoProduto')),
+					array('label' => 'Grupos de Produtos', 'url' => Yii::app()->createUrl('grupoProduto')),
+					array('label' => 'Unidades de Medida', 'url' => Yii::app()->createUrl('unidadeMedida')),
+					array('label' => 'Sub Grupos Produtos', 'url' => Yii::app()->createUrl('subGrupoProduto')),
 				)
 			),
 			
@@ -101,6 +101,7 @@
 					array('label' => 'Tributações', 'url' => Yii::app()->createUrl('tributacao')),
 					array('label' => 'Conta Contabil', 'url' => Yii::app()->createUrl('contaContabil')),
 					array('label' => 'Natureza da Operação', 'url' => Yii::app()->createUrl('naturezaOperacao')),
+					array('label' => 'Tributação Natureza Operação', 'url' => Yii::app()->createUrl('tributacaoNaturezaOperacao')),
 				)
 			),
 						// Admin

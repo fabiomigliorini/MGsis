@@ -1,8 +1,8 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Alterar Sub Grupo Produto';
+$this->pagetitle = Yii::app()->name . ' - Alterar Sub Grupos de Produtos';
 $this->breadcrumbs=array(
-	'Sub Grupo Produto'=>array('index'),
-	$model->codsubgrupoproduto=>array('view','id'=>$model->codsubgrupoproduto),
+	'Sub Grupos de Produtos'=>array('index'),
+	$model->subgrupoproduto=>array('view','id'=>$model->codsubgrupoproduto),
 	'Alterar',
 );
 
@@ -14,7 +14,7 @@ $this->breadcrumbs=array(
 	);
 	?>
 
-	<h1>Alterar SubGrupoProduto <?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codsubgrupoproduto)); ?></h1>
+	<h1>Alterar Sub Grupo de Produto <?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codsubgrupoproduto)); ?></h1>
 	<br>
 
 	<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>	

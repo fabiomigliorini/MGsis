@@ -1,7 +1,7 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Detalhes Grupo Produto';
+$this->pagetitle = Yii::app()->name . ' - Detalhes Grupo de Produtos';
 $this->breadcrumbs=array(
-	'Grupo Produto'=>array('index'),
+	'Grupos de Produtos'=>array('index'),
 	$model->grupoproduto,
 );
 

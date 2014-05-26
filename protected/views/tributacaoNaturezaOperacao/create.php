@@ -1,7 +1,7 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Novo Grupo de Produtos';
+$this->pagetitle = Yii::app()->name . ' - Novo Tributacao Natureza Operacao';
 $this->breadcrumbs=array(
-	'Grupos de Produtos'=>array('index'),
+	'Tributacao Natureza Operacao'=>array('index'),
 	'Novo',
 );
 
@@ -11,6 +11,6 @@ array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 );
 ?>
 
-<h1>Novo Grupo de Produtos</h1>
+<h1>Nova Tributação Natureza Operação</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

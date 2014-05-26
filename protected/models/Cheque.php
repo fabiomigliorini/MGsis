@@ -152,7 +152,8 @@ class Cheque extends MGActiveRecord
 		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
 
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria'=>$criteria,'sort'=>array('defaultOrder'=>'t.codcheque ASC'),
+			'pagination'=>array('pageSize'=>20)
 		));
 	}
 

@@ -5,7 +5,7 @@
 	
 		<small class="span3 muted"><?php echo CHtml::encode($data->cmc7); ?></small>
 
-		<small class="span1 muted"><?php echo CHtml::encode($data->codbanco); ?></small>
+		<small class="span1 muted"><?php echo CHtml::encode($data->Banco->banco); ?></small>
 
 		<small class="span1 muted"><?php echo CHtml::encode($data->agencia); ?></small>
 

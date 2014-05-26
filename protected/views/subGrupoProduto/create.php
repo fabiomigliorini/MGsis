@@ -1,8 +1,8 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Novo Sub Grupo Produto';
+$this->pagetitle = Yii::app()->name . ' - Novo Sub Grupos de Produtos';
 $this->breadcrumbs=array(
-	'Sub Grupo Produto'=>array('index'),
-	'Novo Sub Grupo Produto',
+	'Sub Grupos de Produtos'=>array('index'),
+	'Novo',
 );
 
 $this->menu=array(
@@ -11,6 +11,6 @@ array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 );
 ?>
 
-<h1>Novo Sub Grupo Produto</h1>
+<h1>Novo Sub Grupos de Produtos</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -1,7 +1,7 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Gerenciar Sub Grupo Produto';
+$this->pagetitle = Yii::app()->name . ' - Gerenciar Sub Grupos de Produtos';
 $this->breadcrumbs=array(
-	'Sub Grupo Produto'=>array('index'),
+	'Sub Grupos de Produtos'=>array('index'),
 	'Gerenciar',
 );
 
@@ -24,7 +24,7 @@ Yii::app()->clientScript->registerScript('search', "
 ");
 ?>
 
-<h1>Gerenciar Sub Grupo Produto</h1>
+<h1>Gerenciar Sub Grupos de Produtos</h1>
 
 
 <?php echo CHtml::link('Busca Avançada','#',array('class'=>'search-button btn')); ?>

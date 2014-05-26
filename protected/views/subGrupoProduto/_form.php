@@ -6,10 +6,9 @@
 
 <fieldset>
 	<?php 	
-		echo $form->textFieldRow($model,'codgrupoproduto',array('class'=>'span5'));
-		//echo $form->select2Row($model, 'codgrupoproduto', GrupoProduto::getListaCombo(), array('class' => 'input-medium'));
-		//echo $form->select2Row($model, 'codgrupoproduto', GrupoProduto::getListaCombo(), array('prompt' => '', 'class' => 'input-large'));
-		echo $form->textFieldRow($model,'subgrupoproduto',array('class'=>'span5','maxlength'=>50));
+		//echo $form->textFieldRow($model,'codgrupoproduto',array('class'=>'span5'));
+		echo $form->select2Row($model, 'codgrupoproduto', GrupoProduto::getListaCombo(), array('prompt' => '', 'class' => 'input-xlarge'));
+		echo $form->textFieldRow($model,'subgrupoproduto',array('class'=>'input-xlarge','maxlength'=>50));
 	?>
 </fieldset>
 <div class="form-actions">
@@ -37,7 +36,7 @@
 	
 $(document).ready(function() {
 
-	//$("#Pessoa_fantasia").Setcase();
+	$("#SubGrupoProduto_subgrupoproduto").Setcase();
 
 	$('#sub-grupo-produto-form').submit(function(e) {
         var currentForm = this;

@@ -68,7 +68,7 @@ class SubGrupoProduto extends MGActiveRecord
 		return array(
 			'codsubgrupoproduto' => '#',
 			'codgrupoproduto' => 'Grupo do Produto',
-			'subgrupoproduto' => 'SubGrupo do Produto',
+			'subgrupoproduto' => 'Sub Grupo do Produto',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',

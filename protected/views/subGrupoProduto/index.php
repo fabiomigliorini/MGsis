@@ -1,7 +1,7 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Sub Grupo Produto';
+$this->pagetitle = Yii::app()->name . ' - Sub Grupos de Produtos';
 $this->breadcrumbs=array(
-	'Sub Grupo Produto',
+	'Sub Grupos de Produtos',
 );
 
 $this->menu=array(
@@ -25,7 +25,7 @@ $(document).ready(function(){
 
 </script>
 
-<h1>Sub Grupo Produto</h1>
+<h1>Sub Grupos de Produtos</h1>
 
 <br>
 

@@ -1,7 +1,7 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Grupos de Produtos';
+$this->pagetitle = Yii::app()->name . ' - Tributação Natureza Operação';
 $this->breadcrumbs=array(
-	'Grupos de Produtos',
+	'Tributação Natureza Operação',
 );
 
 $this->menu=array(
@@ -25,7 +25,7 @@ $(document).ready(function(){
 
 </script>
 
-<h1>Grupos de Produtos</h1>
+<h1>Tributação Natureza Operação</h1>
 
 <br>
 
@@ -38,8 +38,7 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
-	<?php echo $form->textField($model, 'codgrupoproduto', array('placeholder' => 'Código', 'class'=>'input-mini')); ?>
-	<?php echo $form->textField($model, 'grupoproduto', array('placeholder' => 'Descrição', 'class'=>'input-larg')); ?>
+	<?php echo $form->textField($model, 'codusuariocriacao', array('placeholder' => '#', 'class'=>'input-mini')); ?>
 	<?php
 	$this->widget('bootstrap.widgets.TbButton'
 		, array(

@@ -120,4 +120,19 @@ class GrupoProduto extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
+	public function scopes () 
+	{
+		return array(
+			'combo'=>array(
+				'select'=>array('codgrupoproduto', 'grupoproduto'),
+				'order'=>'grupoproduto ASC',
+				),
+			);
+	}
+	
+	public function getListaCombo ()
+	{
+		$lista = self::model()->combo()->findAll();
+		return CHtml::listData($lista, 'codgrupoproduto', 'grupoproduto');
+	}	
 }

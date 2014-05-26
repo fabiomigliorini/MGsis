@@ -7,7 +7,7 @@
 <fieldset>
 	<?php 	
 		//echo $form->textFieldRow($model,'codempresa',array('class'=>'span5'));
-		echo $form->dropDownListRow($model, 'codempresa', Empresa::getListaCombo());
+		echo $form->select2Row($model, 'codempresa', Empresa::getListaCombo());
 		//echo $form->textFieldRow($model,'codpessoa',array('class'=>'span5'));
 		// codpessoa
 		echo $form->select2PessoaRow($model, 'codpessoa',array('class'=>'span4'));
