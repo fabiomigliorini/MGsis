@@ -10,7 +10,8 @@
 		echo $form->select2Row($model, 'codoperacao', Operacao::getListaCombo(), array('class' => 'input-medium'));
 		//echo $form->checkBoxRow($model,'emitida');
 		echo $form->toggleButtonRow($model,'emitida', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
-		echo $form->textFieldRow($model,'observacoesnf',array('class'=>'span5','maxlength'=>500));
+		//echo $form->textFieldRow($model,'observacoesnf',array('class'=>'span5','maxlength'=>500));
+		echo $form->textAreaRow($model,'observacoesnf',array('class'=>'input-xlarge', 'rows'=>'5','maxlength'=>500));
 	?>
 </fieldset>
 <div class="form-actions">

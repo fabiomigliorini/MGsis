@@ -16,10 +16,16 @@
 
 		<small class="span1 muted"><?php echo CHtml::encode($data->convenio); ?></small>
 		
+		
+		<?php /*	
+		
 		<small class="span1 muted"><?php echo CHtml::encode($data->diretorioremessa); ?></small>
 		
 		<small class="span1 muted"><?php echo CHtml::encode($data->diretorioretorno); ?></small>
 		
 		<small class="span1 muted"><?php echo CHtml::encode($data->carteira); ?></small>
+		
+		*/ ?>
+		
 	</div>
 </div>

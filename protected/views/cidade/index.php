@@ -23,10 +23,8 @@ $this->menu=array(
 ?>
 <div class="controls-row well well-small">
 	<div class="span11">
-	<?php
-		echo $form->textField($model, 'cidade', array('placeholder' => 'Cidade', 'class'=>'input-large')); 
-		echo $form->textField($model, 'codigooficial', array('placeholder' => 'Código Oficial', 'class'=>'input-large')); 
-	?>
+	<?php echo $form->textField($model, 'cidade', array('placeholder' => 'Cidade', 'class'=>'input-large')); ?>
+	<?php echo $form->textField($model, 'codigooficial', array('placeholder' => 'Código Oficial', 'class'=>'input-large')); ?>
 	</div>
 	<div class="span1 right">
 	<?php

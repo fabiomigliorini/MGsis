@@ -152,6 +152,8 @@ class Portador extends MGActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array('defaultOrder'=>'t.codportador ASC'),
+			'pagination'=>array('pageSize'=>20)
 		));
 	}
 

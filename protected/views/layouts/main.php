@@ -99,7 +99,7 @@
 					array('label' => 'Cidades', 'url' => Yii::app()->createUrl('cidade')),
 					array('label' => 'Empresas', 'url' => Yii::app()->createUrl('empresa')),
 					array('label' => 'Tributações', 'url' => Yii::app()->createUrl('tributacao')),
-					array('label' => 'Conta Contabil', 'url' => Yii::app()->createUrl('contaContabil')),
+					array('label' => 'Conta Contábil', 'url' => Yii::app()->createUrl('contaContabil')),
 					array('label' => 'Natureza da Operação', 'url' => Yii::app()->createUrl('naturezaOperacao')),
 					array('label' => 'Tributação Natureza Operação', 'url' => Yii::app()->createUrl('tributacaoNaturezaOperacao')),
 				)

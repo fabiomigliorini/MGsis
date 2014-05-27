@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
-array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
+array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create')),
 array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codtributacaonaturezaoperacao)),
 array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
 //array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
@@ -22,7 +22,7 @@ $(document).ready(function(){
 	jQuery('body').on('click','#btnExcluir',function() {
 		bootbox.confirm("Excluir este registro?", function(result) {
 			if (result)
-				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('tributacao-natureza-operacao/delete', array('id' => $model->codtributacaonaturezaoperacao))?>",{});
+				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('tributacaoNaturezaOperacao/delete', array('id' => $model->codtributacaonaturezaoperacao))?>",{});
 		});
 	});
 });
@@ -45,7 +45,7 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 		//'codnaturezaoperacao',
 		array(
 					'name'=>'codnaturezaoperacao',
-					'value'=>(isset($model->NaturezaOperacao))?CHtml::link(CHtml::encode($model->NaturezaOperacao->naturezaoperacao),array('naturezaoperacao/view','id'=>$model->codnaturezaoperacao)):null,
+					'value'=>(isset($model->NaturezaOperacao))?CHtml::link(CHtml::encode($model->NaturezaOperacao->naturezaoperacao),array('naturezaOperacao/view','id'=>$model->codnaturezaoperacao)):null,
 					'type'=>'raw',
 					),
 		//'codcfop',
@@ -67,7 +67,7 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 		//'codtipoproduto',
 		array(
 					'name'=>'codtipoproduto',
-					'value'=>(isset($model->TipoProduto))?CHtml::link(CHtml::encode($model->TipoProduto->tipoproduto),array('tipoproduto/view','id'=>$model->codtipoproduto)):null,
+					'value'=>(isset($model->TipoProduto))?CHtml::link(CHtml::encode($model->TipoProduto->tipoproduto),array('tipoProduto/view','id'=>$model->codtipoproduto)):null,
 					'type'=>'raw',
 					),
 		'acumuladordominiovista',

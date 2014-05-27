@@ -3,7 +3,7 @@ $this->pagetitle = Yii::app()->name . ' - Alterar Natureza da Operação';
 $this->breadcrumbs=array(
 	'Natureza da Operação'=>array('index'),
 	$model->naturezaoperacao=>array('view','id'=>$model->codnaturezaoperacao),
-	'Alterar Natureza da Operação',
+	'Alterar',
 );
 
 	$this->menu=array(
@@ -14,7 +14,7 @@ $this->breadcrumbs=array(
 	);
 	?>
 
-	<h1>Alterar NaturezaOperacao <?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codnaturezaoperacao)); ?></h1>
+	<h1>Alterar Natureza Operação <?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codnaturezaoperacao)); ?></h1>
 	<br>
 
 	<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>	

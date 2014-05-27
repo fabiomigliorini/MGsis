@@ -9,6 +9,7 @@
 
 		<small class="span2 muted"><?php echo ($data->emitida)?"Nossa Emissão":""; ?></small>
 
-		<small class="span6 muted"><?php echo CHtml::encode($data->observacoesnf); ?></small>
+		
+		<small class="span6 muted"><?php echo nl2br(CHtml::encode($data->observacoesnf)); ?></small>
 
 </div>

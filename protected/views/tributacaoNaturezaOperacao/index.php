@@ -5,7 +5,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
+	array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 	);
 ?>
@@ -38,7 +38,53 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
-	<?php echo $form->textField($model, 'codusuariocriacao', array('placeholder' => '#', 'class'=>'input-mini')); ?>
+	<?php echo $form->textField($model, 'codtributacaonaturezaoperacao', array('placeholder' => 'Código', 'class'=>'input-mini')); ?>
+	<?php
+		echo $form->select2(
+			$model, 
+			'codnaturezaoperacao', 
+			NaturezaOperacao::getListaCombo(), 
+			array(
+				'placeholder'=>'Natureza Operação',
+				'class' => 'input-xmedium'
+			)
+		);
+	?>
+	<?php
+		echo $form->select2(
+			$model, 
+			'codtributacao', 
+			Tributacao::getListaCombo(), 
+			array(
+				'placeholder'=>'Tributação',
+				'class' => 'input-medium'
+			)
+		);
+	?>
+	<?php
+		echo $form->select2(
+			$model, 
+			'codtipoproduto', 
+			TipoProduto::getListaCombo(), 
+			array(
+				'placeholder'=>'Tipo Produto',
+				'class' => 'input-medium'
+			)
+		);
+	?>
+	<?php
+		echo $form->select2(
+			$model, 
+			'codestado', 
+			Estado::getListaCombo(), 
+			array(
+				'placeholder'=>'Estado',
+				'class' => 'input-medium'
+			)
+		);
+	?>
+	<?php echo $form->textField($model, 'codcfop', array('placeholder' => 'Código CFOP', 'class'=>'input-Xmini')); ?>
+
 	<?php
 	$this->widget('bootstrap.widgets.TbButton'
 		, array(

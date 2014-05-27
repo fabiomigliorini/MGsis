@@ -50,7 +50,7 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codtributacaonaturezaoperacao, codtributacao, codnaturezaoperacao, codcfop, csosn', 'required'),
+			array('codtributacao, codnaturezaoperacao, codcfop, csosn', 'required'),
 			array('acumuladordominiovista, acumuladordominioprazo', 'numerical', 'integerOnly'=>true),
 			array('icmsbase, icmspercentual', 'length', 'max'=>14),
 			array('csosn', 'length', 'max'=>4),
@@ -125,24 +125,24 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codtributacaonaturezaoperacao',$this->codtributacaonaturezaoperacao,true);
-		$criteria->compare('codtributacao',$this->codtributacao,true);
-		$criteria->compare('codnaturezaoperacao',$this->codnaturezaoperacao,true);
-		$criteria->compare('codcfop',$this->codcfop,true);
-		$criteria->compare('icmsbase',$this->icmsbase,true);
-		$criteria->compare('icmspercentual',$this->icmspercentual,true);
-		$criteria->compare('codestado',$this->codestado,true);
-		$criteria->compare('csosn',$this->csosn,true);
-		$criteria->compare('codtipoproduto',$this->codtipoproduto,true);
+		$criteria->compare('codtributacaonaturezaoperacao',$this->codtributacaonaturezaoperacao,false);
+		$criteria->compare('codtributacao',$this->codtributacao,false);
+		$criteria->compare('codnaturezaoperacao',$this->codnaturezaoperacao,false);
+		$criteria->compare('codcfop',$this->codcfop,false);
+		$criteria->compare('icmsbase',$this->icmsbase,false);
+		$criteria->compare('icmspercentual',$this->icmspercentual,false);
+		$criteria->compare('codestado',$this->codestado,false);
+		$criteria->compare('csosn',$this->csosn,false);
+		$criteria->compare('codtipoproduto',$this->codtipoproduto,false);
 		$criteria->compare('acumuladordominiovista',$this->acumuladordominiovista);
 		$criteria->compare('acumuladordominioprazo',$this->acumuladordominioprazo);
-		$criteria->compare('historicodominio',$this->historicodominio,true);
+		$criteria->compare('historicodominio',$this->historicodominio,false);
 		$criteria->compare('movimentacaofisica',$this->movimentacaofisica);
 		$criteria->compare('movimentacaocontabil',$this->movimentacaocontabil);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('alteracao',$this->alteracao,false);
+		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);
+		$criteria->compare('criacao',$this->criacao,false);
+		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,false);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -47,7 +47,12 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 			'name'=>'emitida',
 			'value'=>($model->emitida)?'Sim':'Não',
 			),
-		'observacoesnf',
+		//'observacoesnf',
+		array(
+			'name'=>'observacoesnf',
+			'value'=>nl2br(CHtml::encode($model->observacoesnf)),
+			'type'=>'raw',
+			),
 		),
 	)); 
 

@@ -15,13 +15,13 @@
 		echo $form->textFieldRow($model,'icmsbase',array('class'=>'input-mini','maxlength'=>14));
 		echo $form->textFieldRow($model,'icmspercentual',array('class'=>'input-mini','maxlength'=>14));
 		//echo $form->textFieldRow($model,'codestado',array('class'=>'span5'));
-		echo $form->select2Row($model, 'codestado', Estado::getListaCombo(), array('prompt' => '', 'class' => 'input-mini'));
+		echo $form->select2Row($model, 'codestado', Estado::getListaCombo(), array('prompt' => '', 'class' => 'input-medium'));
 		echo $form->textFieldRow($model,'csosn',array('class'=>'input-xmini','maxlength'=>4));
 		//echo $form->textFieldRow($model,'codtipoproduto',array('class'=>'span5'));
 		echo $form->select2Row($model, 'codtipoproduto', TipoProduto::getListaCombo(), array('prompt' => '', 'class' => 'input-large'));
-		echo $form->textFieldRow($model,'acumuladordominiovista',array('class'=>'span5'));
-		echo $form->textFieldRow($model,'acumuladordominioprazo',array('class'=>'span5'));
-		echo $form->textFieldRow($model,'historicodominio',array('class'=>'span5','maxlength'=>512));
+		echo $form->textFieldRow($model,'acumuladordominiovista',array('class'=>'input-mini'));
+		echo $form->textFieldRow($model,'acumuladordominioprazo',array('class'=>'input-mini'));
+		echo $form->textFieldRow($model,'historicodominio',array('class'=>'input-xmini','maxlength'=>512));
 		//echo $form->checkBoxRow($model,'movimentacaofisica');
 		//echo $form->checkBoxRow($model,'movimentacaocontabil');
 		echo $form->toggleButtonRow($model,'movimentacaofisica', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));

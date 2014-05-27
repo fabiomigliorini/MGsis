@@ -38,7 +38,8 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
-	<?php echo $form->textField($model, 'codusuariocriacao', array('placeholder' => '#', 'class'=>'input-mini')); ?>
+	<?php echo $form->textField($model, 'codportador', array('placeholder' => 'Código', 'class'=>'input-medium')); ?>
+	<?php echo $form->textField($model, 'portador', array('placeholder' => 'Portador', 'class'=>'input-medium')); ?>
 	<?php
 	$this->widget('bootstrap.widgets.TbButton'
 		, array(
