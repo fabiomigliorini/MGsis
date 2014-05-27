@@ -2,7 +2,6 @@ body {
 	padding-top: 100px;
 	padding-bottom: 60px;
 }
-
 .registro {
 	border-top: 1px solid #dddddd;
 	/*
@@ -11,6 +10,7 @@ body {
 	padding: 5px 5px 0px 5px;
 	*/
 }
+
 .registro:hover {
     background-color: #eeeeee;
 }

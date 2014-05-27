@@ -5,43 +5,64 @@
 <?php echo $form->errorSummary($model); ?>
 
 <fieldset>
-	<?php 	
-		echo $form->textFieldRow($model,'codnaturezaoperacao',array('class'=>'span5'));
-		echo $form->checkBoxRow($model,'emitida');
-		echo $form->textFieldRow($model,'nfechave',array('class'=>'span5','maxlength'=>100));
-		echo $form->checkBoxRow($model,'nfeimpressa');
-		echo $form->textFieldRow($model,'serie',array('class'=>'span5'));
-		echo $form->textFieldRow($model,'numero',array('class'=>'span5'));
-		echo $form->textFieldRow($model,'emissao',array('class'=>'span5'));
-		echo $form->textFieldRow($model,'saida',array('class'=>'span5'));
-		echo $form->textFieldRow($model,'codfilial',array('class'=>'span5'));
-		echo $form->textFieldRow($model,'codpessoa',array('class'=>'span5'));
-		echo $form->textFieldRow($model,'observacoes',array('class'=>'span5','maxlength'=>500));
-		echo $form->textFieldRow($model,'volumes',array('class'=>'span5'));
-		echo $form->checkBoxRow($model,'fretepagar');
-		echo $form->textFieldRow($model,'codoperacao',array('class'=>'span5'));
-		echo $form->textFieldRow($model,'nfereciboenvio',array('class'=>'span5','maxlength'=>100));
-		echo $form->textFieldRow($model,'nfedataenvio',array('class'=>'span5'));
-		echo $form->textFieldRow($model,'nfeautorizacao',array('class'=>'span5','maxlength'=>100));
-		echo $form->textFieldRow($model,'nfedataautorizacao',array('class'=>'span5'));
-		echo $form->textFieldRow($model,'valorfrete',array('class'=>'span5','maxlength'=>14));
-		echo $form->textFieldRow($model,'valorseguro',array('class'=>'span5','maxlength'=>14));
-		echo $form->textFieldRow($model,'valordesconto',array('class'=>'span5','maxlength'=>14));
-		echo $form->textFieldRow($model,'valoroutras',array('class'=>'span5','maxlength'=>14));
-		echo $form->textFieldRow($model,'nfecancelamento',array('class'=>'span5','maxlength'=>100));
-		echo $form->textFieldRow($model,'nfedatacancelamento',array('class'=>'span5'));
-		echo $form->textFieldRow($model,'nfeinutilizacao',array('class'=>'span5','maxlength'=>100));
-		echo $form->textFieldRow($model,'nfedatainutilizacao',array('class'=>'span5'));
-		echo $form->textFieldRow($model,'justificativa',array('class'=>'span5','maxlength'=>200));
-		echo $form->textFieldRow($model,'valorprodutos',array('class'=>'span5','maxlength'=>14));
-		echo $form->textFieldRow($model,'valortotal',array('class'=>'span5','maxlength'=>14));
-		echo $form->textFieldRow($model,'icmsbase',array('class'=>'span5','maxlength'=>14));
-		echo $form->textFieldRow($model,'icmsvalor',array('class'=>'span5','maxlength'=>14));
-		echo $form->textFieldRow($model,'icmsstbase',array('class'=>'span5','maxlength'=>14));
-		echo $form->textFieldRow($model,'icmsstvalor',array('class'=>'span5','maxlength'=>14));
-		echo $form->textFieldRow($model,'ipibase',array('class'=>'span5','maxlength'=>14));
-		echo $form->textFieldRow($model,'ipivalor',array('class'=>'span5','maxlength'=>14));
-	?>
+	<div class="row-fluid">
+		<div class="span5">
+			<?php 	
+			echo $form->select2Row($model,'codfilial', Filial::getListaCombo() , array('class'=>'input-medium'));
+			echo $form->toggleButtonRow($model,'emitida', array('options' => array('width' => 200,  'enabledLabel' => 'Filial', 'disabledLabel' => 'Contraparte')));
+			echo $form->textFieldRow($model,'nfechave',array('class'=>'input-xlarge text-center','maxlength'=>100));
+			echo $form->select2PessoaRow($model,'codpessoa', array('class'=>'input-xlarge'));
+			echo $form->select2Row($model,'codnaturezaoperacao', NaturezaOperacao::getListaCombo() , array('class'=>'input-xlarge'));
+			echo $form->textAreaRow($model,'observacoes',array('class'=>'input-xlarge', 'rows'=>'5','maxlength'=>500));
+			?>
+		</div>
+		<div class="span3">
+			<?php
+			echo $form->textFieldRow($model,'serie',array('class'=>'input-mini text-right'));
+			echo $form->textFieldRow($model,'numero',array('class'=>'input-small text-right'));
+			echo $form->datepickerRow(
+					$model,
+					'emissao',
+					array(
+						'class' => 'input-small text-center', 
+						'options' => array(
+							'language' => 'pt',
+							'format' => 'dd/mm/yyyy'
+							),
+						'prepend' => '<i class="icon-calendar"></i>',
+						)
+					); 
+
+			echo $form->datepickerRow(
+					$model,
+					'saida',
+					array(
+						'class' => 'input-small text-center', 
+						'options' => array(
+							'language' => 'pt',
+							'format' => 'dd/mm/yyyy'
+							),
+						'prepend' => '<i class="icon-calendar"></i>',
+						)
+					); 
+			echo $form->toggleButtonRow($model,'fretepagar', array('options' => array('width' => 150,  'enabledLabel' => 'Destinatário', 'disabledLabel' => 'Remetente')));
+			echo $form->textFieldRow($model,'volumes',array('class'=>'input-mini text-right'));
+
+			?>
+		</div>
+		<div class="span3">
+			<?php
+			echo $form->textFieldRow($model,'valorprodutos',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14, 'disabled'=>true));
+			echo $form->textFieldRow($model,'icmsstvalor',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14, 'disabled'=>true));
+			echo $form->textFieldRow($model,'ipivalor',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14, 'disabled'=>true));
+			echo $form->textFieldRow($model,'valorfrete',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14));
+			echo $form->textFieldRow($model,'valorseguro',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14));
+			echo $form->textFieldRow($model,'valordesconto',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14));
+			echo $form->textFieldRow($model,'valoroutras',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14));
+			echo $form->textFieldRow($model,'valortotal',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14, 'disabled'=>true));
+			?>
+		</div>
+	</div>
 </fieldset>
 <div class="form-actions">
 
@@ -69,6 +90,14 @@
 $(document).ready(function() {
 
 	//$("#Pessoa_fantasia").Setcase();
+	$('#NotaFiscal_valorprodutos').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+	$('#NotaFiscal_icmsstvalor').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+	$('#NotaFiscal_ipivalor').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+	$('#NotaFiscal_valorfrete').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+	$('#NotaFiscal_valorseguro').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+	$('#NotaFiscal_valordesconto').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+	$('#NotaFiscal_valoroutras').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+	$('#NotaFiscal_valortotal').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 
 	$('#nota-fiscal-form').submit(function(e) {
         var currentForm = this;

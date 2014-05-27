@@ -7,8 +7,6 @@
  * @property string $codnotafiscal
  * @property string $codnaturezaoperacao
  * @property boolean $emitida
- * @property string $nfechave
- * @property boolean $nfeimpressa
  * @property integer $serie
  * @property integer $numero
  * @property string $emissao
@@ -19,14 +17,16 @@
  * @property integer $volumes
  * @property boolean $fretepagar
  * @property string $codoperacao
- * @property string $nfereciboenvio
- * @property string $nfedataenvio
- * @property string $nfeautorizacao
- * @property string $nfedataautorizacao
  * @property string $valorfrete
  * @property string $valorseguro
  * @property string $valordesconto
  * @property string $valoroutras
+ * @property string $nfechave
+ * @property boolean $nfeimpressa
+ * @property string $nfereciboenvio
+ * @property string $nfedataenvio
+ * @property string $nfeautorizacao
+ * @property string $nfedataautorizacao
  * @property string $nfecancelamento
  * @property string $nfedatacancelamento
  * @property string $nfeinutilizacao
@@ -53,8 +53,8 @@
  * @property Pessoa $Pessoa
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
- * @property NotafiscalCartaCorrecao[] $NotafiscalCartaCorrecaos
- * @property NotafiscalDuplicatas[] $NotafiscalDuplicatass
+ * @property NotaFiscalCartaCorrecao[] $NotafiscalCartaCorrecaos
+ * @property NotaFiscalDuplicatas[] $NotafiscalDuplicatass
  */
 class NotaFiscal extends MGActiveRecord
 {
@@ -131,14 +131,14 @@ class NotaFiscal extends MGActiveRecord
 	{
 		return array(
 			'codnotafiscal' => '#',
-			'codnaturezaoperacao' => 'Natureza Operação',
+			'codnaturezaoperacao' => 'Natureza de Operação',
 			'emitida' => 'Emitida',
 			'nfechave' => 'NFE Chave',
 			'nfeimpressa' => 'NFE Impressa',
 			'serie' => 'Série',
 			'numero' => 'Número',
 			'emissao' => 'Emissão',
-			'saida' => 'Saida',
+			'saida' => 'Saída/Entrada',
 			'codfilial' => 'Filial',
 			'codpessoa' => 'Pessoa',
 			'observacoes' => 'Observações',
@@ -149,10 +149,10 @@ class NotaFiscal extends MGActiveRecord
 			'nfedataenvio' => 'NFE Data Envio',
 			'nfeautorizacao' => 'NFE Autorização',
 			'nfedataautorizacao' => 'NFE Data Autorização',
-			'valorfrete' => 'Valor do Frete',
-			'valorseguro' => 'Valor do Seguro',
-			'valordesconto' => 'Valor do Desconto',
-			'valoroutras' => 'Valor de Outras',
+			'valorfrete' => 'Frete',
+			'valorseguro' => 'Seguro',
+			'valordesconto' => 'Desconto',
+			'valoroutras' => 'Outras',
 			'nfecancelamento' => 'NFE cancelamento',
 			'nfedatacancelamento' => 'NFE Data do Cancelamento',
 			'nfeinutilizacao' => 'NFE Inutilização',

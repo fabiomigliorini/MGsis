@@ -1,8 +1,8 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Alterar Notas Fiscais';
+$this->pagetitle = Yii::app()->name . ' - Alterar Nota Fiscal';
 $this->breadcrumbs=array(
 	'Notas Fiscais'=>array('index'),
-	$model->codnotafiscal=>array('view','id'=>$model->codnotafiscal),
+	Yii::app()->format->formataNumeroNota($model->emitida, $model->serie, $model->numero)=>array('view','id'=>$model->codnotafiscal),
 	'Alterar',
 );
 
@@ -14,7 +14,7 @@ $this->breadcrumbs=array(
 	);
 	?>
 
-	<h1>Alterar NotaFiscal <?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codnotafiscal)); ?></h1>
+	<h1>Alterar Nota Fiscal <?php echo 	Yii::app()->format->formataNumeroNota($model->emitida, $model->serie, $model->numero); ?></h1>
 	<br>
 
 	<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>	

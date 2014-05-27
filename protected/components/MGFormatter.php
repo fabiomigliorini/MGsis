@@ -134,6 +134,11 @@ class MGFormatter extends CFormatter
 		return (($emitida)?"N-":"T-") . $serie . "-" . self::formataPorMascara($numero, "########");
 	}
 	
+	public function formataChaveNfe ($chave)
+	{
+		return self::formataPorMascara($chave, "#### #### #### #### #### #### #### #### #### #### ####");
+	}
+	
 	public function formataNcm ($string)
 	{
 		$string = str_pad(self::numeroLimpo($string), 8, "*", STR_PAD_RIGHT);
