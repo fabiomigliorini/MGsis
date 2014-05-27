@@ -1,7 +1,7 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Tipo Movimento Títulos';
+$this->pagetitle = Yii::app()->name . ' - País';
 $this->breadcrumbs=array(
-	'Tipo Movimento Títulos',
+	'País',
 );
 
 $this->menu=array(
@@ -25,7 +25,7 @@ $(document).ready(function(){
 
 </script>
 
-<h1>Tipo Movimento Títulos</h1>
+<h1>País</h1>
 
 <br>
 
@@ -38,8 +38,8 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
-	<?php echo $form->textField($model, 'codtipomovimentotitulo', array('placeholder' => 'Código', 'class'=>'input-mini')); ?>
-	<?php echo $form->textField($model, 'tipomovimentotitulo', array('placeholder' => 'Descrição', 'class'=>'input-large')); ?>
+	<?php echo $form->textField($model, 'codpais', array('placeholder' => '#', 'class'=>'input-mini')); ?>
+	<?php echo $form->textField($model, 'pais', array('placeholder' => 'País', 'class'=>'input-medium')); ?>
 	<?php
 	$this->widget('bootstrap.widgets.TbButton'
 		, array(

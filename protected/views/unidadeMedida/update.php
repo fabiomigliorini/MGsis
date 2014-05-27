@@ -3,7 +3,7 @@ $this->pagetitle = Yii::app()->name . ' - Alterar Unidade de Medida';
 $this->breadcrumbs=array(
 	'Unidade de Medida'=>array('index'),
 	$model->unidademedida=>array('view','id'=>$model->codunidademedida),
-	'Alterar Unidade de Medida',
+	'Alterar',
 );
 
 	$this->menu=array(

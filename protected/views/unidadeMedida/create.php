@@ -2,7 +2,7 @@
 $this->pagetitle = Yii::app()->name . ' - Nova Unidade de Medida';
 $this->breadcrumbs=array(
 	'Unidade de Medida'=>array('index'),
-	'Nova Unidade de Medida',
+	'Nova',
 );
 
 $this->menu=array(

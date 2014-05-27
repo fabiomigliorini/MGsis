@@ -3,7 +3,7 @@ $this->pagetitle = Yii::app()->name . ' - Alterar Filial';
 $this->breadcrumbs=array(
 	'Filial'=>array('index'),
 	$model->filial=>array('view','id'=>$model->codfilial),
-	'Alterar Filial',
+	'Alterar',
 );
 
 	$this->menu=array(

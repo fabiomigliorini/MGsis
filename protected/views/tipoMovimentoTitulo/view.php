@@ -1,7 +1,7 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Detalhes Tipo Movimento Título';
 $this->breadcrumbs=array(
-	'Tipo Movimento Título'=>array('index'),
+	'Tipo Movimento Títulos'=>array('index'),
 	$model->tipomovimentotitulo,
 );
 

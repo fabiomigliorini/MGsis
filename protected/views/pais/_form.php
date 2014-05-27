@@ -1,14 +1,13 @@
 <?php $form=$this->beginWidget('MGActiveForm',array(
-	'id'=>'ncm-form',
+	'id'=>'pais-form',
 )); ?>
 
 <?php echo $form->errorSummary($model); ?>
 
 <fieldset>
 	<?php 	
-		echo $form->textFieldRow($model,'ncm',array('class'=>'imput-medum','maxlength'=>10));
-		echo $form->textAreaRow($model,'descricao',array('class'=>'input-xlarge', 'rows'=>'5','maxlength'=>255));
-		//echo $form->textFieldRow($model,'descricao',array('class'=>'span5','maxlength'=>1500));
+		echo $form->textFieldRow($model,'pais',array('class'=>'input-medium','maxlength'=>50));
+		echo $form->textFieldRow($model,'sigla',array('class'=>'input-mini','maxlength'=>2));
 	?>
 </fieldset>
 <div class="form-actions">
@@ -36,9 +35,9 @@
 	
 $(document).ready(function() {
 
-	$("#Ncm_descricao").Setcase();
+	$("#Pais_pais").Setcase();
 
-	$('#ncm-form').submit(function(e) {
+	$('#pais-form').submit(function(e) {
         var currentForm = this;
         e.preventDefault();
         bootbox.confirm("Tem certeza que deseja salvar?", function(result) {

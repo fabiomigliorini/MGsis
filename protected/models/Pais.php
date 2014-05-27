@@ -35,7 +35,7 @@ class Pais extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codpais', 'required'),
+			array('pais, sigla', 'required'),
 			array('pais', 'length', 'max'=>50),
 			array('sigla', 'length', 'max'=>2),
 			array('alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
@@ -93,16 +93,24 @@ class Pais extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codpais',$this->codpais,true);
-		$criteria->compare('pais',$this->pais,true);
-		$criteria->compare('sigla',$this->sigla,true);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('codpais',$this->codpais,false);
+		//$criteria->compare('pais',$this->pais,false);
+		if (!empty($this->pais))
+		{
+			$texto  = str_replace(' ', '%', trim($this->pais));
+			$criteria->addCondition('t.pais ILIKE :pais');
+			$criteria->params = array_merge($criteria->params, array(':pais' => '%'.$texto.'%'));
+		}
+		$criteria->compare('sigla',$this->sigla,false);
+		$criteria->compare('alteracao',$this->alteracao,false);
+		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);
+		$criteria->compare('criacao',$this->criacao,false);
+		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,false);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array('defaultOrder'=>'t.pais ASC'),
+			'pagination'=>array('pageSize'=>20)
 		));
 	}
 
@@ -115,5 +123,20 @@ class Pais extends MGActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+	public function scopes () 
+	{
+		return array(
+			'combo'=>array(
+				'select'=>array('codpais', 'pais'),
+				'order'=>'pais ASC',
+				),
+			);
+	}
+	
+	public function getListaCombo ()
+	{
+		$lista = self::model()->combo()->findAll();
+		return CHtml::listData($lista, 'codpais', 'pais');
 	}
 }

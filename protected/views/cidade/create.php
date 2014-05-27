@@ -2,7 +2,7 @@
 $this->pagetitle = Yii::app()->name . ' - Novo Cidade';
 $this->breadcrumbs=array(
 	'Cidade'=>array('index'),
-	'Novo',
+	'Nova',
 );
 
 $this->menu=array(
@@ -11,6 +11,6 @@ array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 );
 ?>
 
-<h1>Novo Cidade</h1>
+<h1>Nova Cidade</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

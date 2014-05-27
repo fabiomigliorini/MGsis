@@ -41,6 +41,17 @@ $(document).ready(function(){
 	<?php echo $form->textField($model, 'codsubgrupoproduto', array('placeholder' => 'Código', 'class'=>'input-mini')); ?>
 	<?php echo $form->textField($model, 'subgrupoproduto', array('placeholder' => 'Descrição', 'class'=>'input-large')); ?>
 	<?php
+		echo $form->select2(
+			$model, 
+			'codgrupoproduto', 
+			GrupoProduto::getListaCombo(), 
+			array(
+				'placeholder'=>'Grupo de Produto',
+				'class' => 'input-xmedium'
+			)
+		);
+	?>
+	<?php
 	$this->widget('bootstrap.widgets.TbButton'
 		, array(
 			'buttonType' => 'submit',

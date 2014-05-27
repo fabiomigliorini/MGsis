@@ -6,10 +6,11 @@
 
 <fieldset>
 	<?php 	
-		echo $form->textFieldRow($model,'codestado',array('class'=>'span5'));
-		echo $form->textFieldRow($model,'cidade',array('class'=>'span5','maxlength'=>50));
-		echo $form->textFieldRow($model,'sigla',array('class'=>'span5','maxlength'=>3));
-		echo $form->textFieldRow($model,'codigooficial',array('class'=>'span5'));
+		//echo $form->textFieldRow($model,'codestado',array('class'=>'input-xmini'));
+		echo $form->select2Row($model, 'codestado', Estado::getListaCombo(), array('class' => 'input-medium'));
+		echo $form->textFieldRow($model,'cidade',array('class'=>'input-xlarge','maxlength'=>50));
+		echo $form->textFieldRow($model,'sigla',array('class'=>'input-mini','maxlength'=>3));
+		echo $form->textFieldRow($model,'codigooficial',array('class'=>'input-mini'));
 	?>
 </fieldset>
 <div class="form-actions">

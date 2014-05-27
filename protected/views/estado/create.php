@@ -1,7 +1,7 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Novo Tipo Movimento Título';
+$this->pagetitle = Yii::app()->name . ' - Novo Estado';
 $this->breadcrumbs=array(
-	'Tipo Movimento Títulos'=>array('index'),
+	'Estado'=>array('index'),
 	'Novo',
 );
 
@@ -11,6 +11,6 @@ array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 );
 ?>
 
-<h1>Novo Tipo Movimento Título</h1>
+<h1>Novo Estado</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

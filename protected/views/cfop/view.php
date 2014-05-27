@@ -35,8 +35,13 @@ $(document).ready(function(){
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-			'codcfop',
-		'cfop',
+	'codcfop',
+	//'cfop',
+	array(
+		'name'=>'cfop',
+		'value'=>nl2br(CHtml::encode($model->cfop)),
+		'type'=>'raw',
+		),
 		),
 	)); 
 

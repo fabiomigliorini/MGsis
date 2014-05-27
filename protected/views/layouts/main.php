@@ -68,10 +68,10 @@
 					array('label' => 'Titulos', 'url' => Yii::app()->createUrl('titulo')),
 					array('label' => 'Pessoas', 'url' => Yii::app()->createUrl('pessoa')),
 					array('label' => 'Cheques', 'url' => Yii::app()->createUrl('cheque')),
-					array('label' => 'Tipo Título', 'url' => Yii::app()->createUrl('tipoTitulo')),
+					array('label' => 'Tipo Títulos', 'url' => Yii::app()->createUrl('tipoTitulo')),
 					array('label' => 'Liquidações', 'url' => Yii::app()->createUrl('liquidacaoTitulo')),
 					array('label' => 'Agrupamentos', 'url' => Yii::app()->createUrl('tituloAgrupamento')),
-					array('label' => 'Tipo Movimento Título', 'url' => Yii::app()->createUrl('tipoMovimentoTitulo')),
+					array('label' => 'Tipo Movimento Títulos', 'url' => Yii::app()->createUrl('tipoMovimentoTitulo')),
 				)
 			),
 
@@ -82,10 +82,10 @@
 					array('label' => 'Produtos', 'url' => Yii::app()->createUrl('produto')),
 					array('label' => 'Marcas', 'url' => Yii::app()->createUrl('marca')),
 					array('label' => 'NCM', 'url' => Yii::app()->createUrl('ncm')),
-					array('label' => 'Tipo de Produtos', 'url' => Yii::app()->createUrl('tipoProduto')),
+					array('label' => 'Tipos de Produtos', 'url' => Yii::app()->createUrl('tipoProduto')),
 					array('label' => 'Grupos de Produtos', 'url' => Yii::app()->createUrl('grupoProduto')),
 					array('label' => 'Unidades de Medida', 'url' => Yii::app()->createUrl('unidadeMedida')),
-					array('label' => 'Sub Grupos Produtos', 'url' => Yii::app()->createUrl('subGrupoProduto')),
+					array('label' => 'Sub Grupos de Produtos', 'url' => Yii::app()->createUrl('subGrupoProduto')),
 				)
 			),
 			
@@ -97,6 +97,8 @@
 					array('label' => 'Filial', 'url' => Yii::app()->createUrl('filial')),
 					array('label' => 'CFOP', 'url' => Yii::app()->createUrl('cfop')),
 					array('label' => 'Cidades', 'url' => Yii::app()->createUrl('cidade')),
+					array('label' => 'Estados', 'url' => Yii::app()->createUrl('estado')),
+					array('label' => 'País', 'url' => Yii::app()->createUrl('pais')),
 					array('label' => 'Empresas', 'url' => Yii::app()->createUrl('empresa')),
 					array('label' => 'Tributações', 'url' => Yii::app()->createUrl('tributacao')),
 					array('label' => 'Conta Contábil', 'url' => Yii::app()->createUrl('contaContabil')),

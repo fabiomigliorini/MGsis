@@ -1,14 +1,16 @@
 <?php $form=$this->beginWidget('MGActiveForm',array(
-	'id'=>'ncm-form',
+	'id'=>'estado-form',
 )); ?>
 
 <?php echo $form->errorSummary($model); ?>
 
 <fieldset>
 	<?php 	
-		echo $form->textFieldRow($model,'ncm',array('class'=>'imput-medum','maxlength'=>10));
-		echo $form->textAreaRow($model,'descricao',array('class'=>'input-xlarge', 'rows'=>'5','maxlength'=>255));
-		//echo $form->textFieldRow($model,'descricao',array('class'=>'span5','maxlength'=>1500));
+		//echo $form->textFieldRow($model,'codpais',array('class'=>'span5'));
+		echo $form->select2Row($model, 'codpais', Pais::getListaCombo(), array('class' => 'input-medium'));
+		echo $form->textFieldRow($model,'estado',array('class'=>'input-medium','maxlength'=>50));
+		echo $form->textFieldRow($model,'sigla',array('class'=>'input-mini','maxlength'=>2));
+		echo $form->textFieldRow($model,'codigooficial',array('class'=>'input-mini'));
 	?>
 </fieldset>
 <div class="form-actions">
@@ -36,9 +38,9 @@
 	
 $(document).ready(function() {
 
-	$("#Ncm_descricao").Setcase();
+	//$("#Pessoa_fantasia").Setcase();
 
-	$('#ncm-form').submit(function(e) {
+	$('#estado-form').submit(function(e) {
         var currentForm = this;
         e.preventDefault();
         bootbox.confirm("Tem certeza que deseja salvar?", function(result) {

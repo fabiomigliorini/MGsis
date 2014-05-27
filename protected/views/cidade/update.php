@@ -2,7 +2,7 @@
 $this->pagetitle = Yii::app()->name . ' - Alterar Cidade';
 $this->breadcrumbs=array(
 	'Cidade'=>array('index'),
-	$model->codcidade=>array('view','id'=>$model->codcidade),
+	$model->cidade=>array('view','id'=>$model->codcidade),
 	'Alterar',
 );
 

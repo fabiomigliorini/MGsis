@@ -1,14 +1,14 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Detalhes NCM';
+$this->pagetitle = Yii::app()->name . ' - Detalhes do Estado';
 $this->breadcrumbs=array(
-	'NCM'=>array('index'),
-	$model->ncm,
+	'Estado'=>array('index'),
+	$model->estado,
 );
 
 $this->menu=array(
 array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
-array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codncm)),
+array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codestado)),
 array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
 //array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
@@ -22,27 +22,29 @@ $(document).ready(function(){
 	jQuery('body').on('click','#btnExcluir',function() {
 		bootbox.confirm("Excluir este registro?", function(result) {
 			if (result)
-				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('ncm/delete', array('id' => $model->codncm))?>",{});
+				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('estado/delete', array('id' => $model->codestado))?>",{});
 		});
 	});
 });
 /*]]>*/
 </script>
 
-<h1><?php echo $model->ncm; ?></h1>
+<h1><?php echo $model->estado; ?></h1>
 
 <?php 
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-	'codncm',
-	'ncm',
-	//'descricao',
-	array(
-		'name'=>'descricao',
-		'value'=>nl2br(CHtml::encode($model->descricao)),
-		'type'=>'raw',
-		),
+		'codestado',
+		//'codpais',
+		array(
+					'name'=>'codpais',
+					'value'=>(isset($model->Pais))?CHtml::link(CHtml::encode($model->Pais->pais),array('pais/view','id'=>$model->codpais)):null,
+					'type'=>'raw',
+					),
+		'estado',
+		'sigla',
+		'codigooficial',
 		),
 	)); 
 

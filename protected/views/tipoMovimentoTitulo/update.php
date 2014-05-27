@@ -1,9 +1,9 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Alterar Tipo Movimento Título';
 $this->breadcrumbs=array(
-	'Tipo Movimento Título'=>array('index'),
+	'Tipo Movimento Títulos'=>array('index'),
 	$model->tipomovimentotitulo=>array('view','id'=>$model->codtipomovimentotitulo),
-	'Alterar Tipo Movimento Título',
+	'Alterar',
 );
 
 	$this->menu=array(

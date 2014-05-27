@@ -39,7 +39,7 @@ class Cidade extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codcidade', 'required'),
+			array('codestado, cidade, codigooficial', 'required'),
 			array('cidade', 'length', 'max'=>50),
 			array('sigla', 'length', 'max'=>3),
 			array('codestado, codigooficial, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),

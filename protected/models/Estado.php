@@ -39,7 +39,7 @@ class Estado extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codestado', 'required'),
+			array('estado, codpais, sigla, codigooficial', 'required'),
 			array('estado', 'length', 'max'=>50),
 			array('sigla', 'length', 'max'=>2),
 			array('codpais, codigooficial, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
@@ -100,19 +100,26 @@ class Estado extends MGActiveRecord
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
-
-		$criteria->compare('codestado',$this->codestado,true);
-		$criteria->compare('codpais',$this->codpais,true);
-		$criteria->compare('estado',$this->estado,true);
-		$criteria->compare('sigla',$this->sigla,true);
-		$criteria->compare('codigooficial',$this->codigooficial,true);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('codestado',$this->codestado,false);
+		//$criteria->compare('estado',$this->estado,false);
+		if (!empty($this->estado))
+		{
+			$texto  = str_replace(' ', '%', trim($this->estado));
+			$criteria->addCondition('t.estado ILIKE :estado');
+			$criteria->params = array_merge($criteria->params, array(':estado' => '%'.$texto.'%'));
+		}
+		$criteria->compare('codpais',$this->codpais,false);
+		$criteria->compare('sigla',$this->sigla,false);
+		$criteria->compare('codigooficial',$this->codigooficial,false);
+		$criteria->compare('alteracao',$this->alteracao,false);
+		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);
+		$criteria->compare('criacao',$this->criacao,false);
+		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,false);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array('defaultOrder'=>'t.estado ASC'),
+			'pagination'=>array('pageSize'=>20)
 		));
 	}
 

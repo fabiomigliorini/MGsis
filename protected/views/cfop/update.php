@@ -3,7 +3,7 @@ $this->pagetitle = Yii::app()->name . ' - Alterar CFOP';
 $this->breadcrumbs=array(
 	'CFOP'=>array('index'),
 	$model->codcfop=>array('view','id'=>$model->codcfop),
-	'Alterar CFOP',
+	'Alterar',
 );
 
 	$this->menu=array(

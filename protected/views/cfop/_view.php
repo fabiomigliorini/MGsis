@@ -3,6 +3,7 @@
 		<?php echo CHtml::link(CHtml::encode($data->codcfop),array('view','id'=>$data->codcfop)); ?>
 	</b>
 	
-		<small class="span11"><?php echo CHtml::encode($data->cfop); ?></small>
+		<small class="span11"><?php echo nl2br(CHtml::encode($data->cfop)); ?></small>
+
 
 </div>

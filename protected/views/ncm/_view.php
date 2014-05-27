@@ -7,6 +7,7 @@
             <?php echo CHtml::link(CHtml::encode($data->ncm),array('view','id'=>$data->codncm)); ?>
         </b>
 
-		<small class="span9"><?php echo CHtml::encode($data->descricao); ?></small>
+		
+		<small class="span6 muted"><?php echo nl2br(CHtml::encode($data->descricao)); ?></small>
 
 </div>

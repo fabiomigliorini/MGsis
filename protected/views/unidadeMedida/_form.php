@@ -6,8 +6,8 @@
 
 <fieldset>
 	<?php 	
-		echo $form->textFieldRow($model,'unidademedida',array('class'=>'span3','maxlength'=>15));
-		echo $form->textFieldRow($model,'sigla',array('class'=>'span2','maxlength'=>3));
+		echo $form->textFieldRow($model,'unidademedida',array('class'=>'input-medium','maxlength'=>15));
+		echo $form->textFieldRow($model,'sigla',array('class'=>'input-mini','maxlength'=>3));
 	?>
 </fieldset>
 <div class="form-actions">
