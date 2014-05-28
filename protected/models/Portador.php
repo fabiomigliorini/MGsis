@@ -55,7 +55,7 @@ class Portador extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codportador', 'required'),
+			array('portador', 'required'),
 			array('agenciadigito, contadigito, carteira', 'numerical', 'integerOnly'=>true),
 			array('portador', 'length', 'max'=>50),
 			array('convenio', 'length', 'max'=>20),
@@ -132,23 +132,29 @@ class Portador extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codportador',$this->codportador,true);
-		$criteria->compare('portador',$this->portador,true);
-		$criteria->compare('codbanco',$this->codbanco,true);
-		$criteria->compare('agencia',$this->agencia,true);
+		$criteria->compare('codportador',$this->codportador,false);
+		//$criteria->compare('portador',$this->portador,false);
+		if (!empty($this->portador))
+		{
+			$texto  = str_replace(' ', '%', trim($this->portador));
+			$criteria->addCondition('t.portador ILIKE :portador');
+			$criteria->params = array_merge($criteria->params, array(':portador' => '%'.$texto.'%'));
+		}
+		$criteria->compare('codbanco',$this->codbanco,false);
+		$criteria->compare('agencia',$this->agencia,false);
 		$criteria->compare('agenciadigito',$this->agenciadigito);
-		$criteria->compare('conta',$this->conta,true);
+		$criteria->compare('conta',$this->conta,false);
 		$criteria->compare('contadigito',$this->contadigito);
 		$criteria->compare('emiteboleto',$this->emiteboleto);
-		$criteria->compare('codfilial',$this->codfilial,true);
-		$criteria->compare('convenio',$this->convenio,true);
-		$criteria->compare('diretorioremessa',$this->diretorioremessa,true);
-		$criteria->compare('diretorioretorno',$this->diretorioretorno,true);
+		$criteria->compare('codfilial',$this->codfilial,false);
+		$criteria->compare('convenio',$this->convenio,false);
+		$criteria->compare('diretorioremessa',$this->diretorioremessa,false);
+		$criteria->compare('diretorioretorno',$this->diretorioretorno,false);
 		$criteria->compare('carteira',$this->carteira);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('alteracao',$this->alteracao,false);
+		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);
+		$criteria->compare('criacao',$this->criacao,false);
+		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,false);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

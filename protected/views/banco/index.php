@@ -1,7 +1,7 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Portador';
+$this->pagetitle = Yii::app()->name . ' - Banco';
 $this->breadcrumbs=array(
-	'Portador',
+	'Banco',
 );
 
 $this->menu=array(
@@ -25,7 +25,7 @@ $(document).ready(function(){
 
 </script>
 
-<h1>Portador</h1>
+<h1>Banco</h1>
 
 <br>
 
@@ -38,19 +38,8 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
-	<?php echo $form->textField($model, 'codportador', array('placeholder' => 'Código', 'class'=>'input-medium')); ?>
-	<?php echo $form->textField($model, 'portador', array('placeholder' => 'Portador', 'class'=>'input-medium')); ?>
-	<?php
-		echo $form->select2(
-			$model, 
-			'codbanco', 
-			Banco::getListaCombo(), 
-			array(
-				'placeholder'=>'Banco',
-				'class' => 'input-medium'
-			)
-		);
-	?>
+	<?php echo $form->textField($model, 'codbanco', array('placeholder' => '#', 'class'=>'input-mini')); ?>
+	<?php echo $form->textField($model, 'banco', array('placeholder' => 'Banco', 'class'=>'input-xmini')); ?>
 	<?php
 	$this->widget('bootstrap.widgets.TbButton'
 		, array(

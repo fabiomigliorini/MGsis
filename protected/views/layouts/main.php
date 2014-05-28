@@ -72,6 +72,9 @@
 					array('label' => 'Liquidações', 'url' => Yii::app()->createUrl('liquidacaoTitulo')),
 					array('label' => 'Agrupamentos', 'url' => Yii::app()->createUrl('tituloAgrupamento')),
 					array('label' => 'Tipo Movimento Títulos', 'url' => Yii::app()->createUrl('tipoMovimentoTitulo')),
+					array('label' => 'Portadores', 'url' => Yii::app()->createUrl('portador')),
+					array('label' => 'Bancos', 'url' => Yii::app()->createUrl('banco')),
+					array('label' => 'Formas de Pagamento', 'url' => Yii::app()->createUrl('formaPagamento')),
 				)
 			),
 
@@ -98,11 +101,11 @@
 					array('label' => 'CFOP', 'url' => Yii::app()->createUrl('cfop')),
 					array('label' => 'Cidades', 'url' => Yii::app()->createUrl('cidade')),
 					array('label' => 'Estados', 'url' => Yii::app()->createUrl('estado')),
-					array('label' => 'País', 'url' => Yii::app()->createUrl('pais')),
+					array('label' => 'Países', 'url' => Yii::app()->createUrl('pais')),
 					array('label' => 'Empresas', 'url' => Yii::app()->createUrl('empresa')),
 					array('label' => 'Tributações', 'url' => Yii::app()->createUrl('tributacao')),
-					array('label' => 'Conta Contábil', 'url' => Yii::app()->createUrl('contaContabil')),
-					array('label' => 'Natureza da Operação', 'url' => Yii::app()->createUrl('naturezaOperacao')),
+					array('label' => 'Contas Contábeis', 'url' => Yii::app()->createUrl('contaContabil')),
+					array('label' => 'Naturezas das Operações', 'url' => Yii::app()->createUrl('naturezaOperacao')),
 					array('label' => 'Tributação Natureza Operação', 'url' => Yii::app()->createUrl('tributacaoNaturezaOperacao')),
 				)
 			),

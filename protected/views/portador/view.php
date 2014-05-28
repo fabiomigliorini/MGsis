@@ -2,7 +2,7 @@
 $this->pagetitle = Yii::app()->name . ' - Detalhes Portador';
 $this->breadcrumbs=array(
 	'Portador'=>array('index'),
-	$model->codportador,
+	$model->portador,
 );
 
 $this->menu=array(
@@ -29,21 +29,35 @@ $(document).ready(function(){
 /*]]>*/
 </script>
 
-<h1><?php echo $model->codportador; ?></h1>
+<h1><?php echo $model->portador; ?></h1>
 
 <?php 
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-			'codportador',
+		'codportador',
 		'portador',
-		'codbanco',
+		//'codbanco',
+		array(
+			'name'=>'codbanco',
+			'value'=>(isset($model->Banco))?CHtml::link(CHtml::encode($model->Banco->banco),array('banco/view','id'=>$model->codbanco)):null,
+			'type'=>'raw',
+			),
 		'agencia',
 		'agenciadigito',
 		'conta',
 		'contadigito',
-		'emiteboleto',
-		'codfilial',
+		//'emiteboleto',
+		array(
+			'name'=>'emiteboleto',
+			'value'=>($model->emiteboleto)?'Sim':'Não',
+			),
+		//'codfilial',
+		array(
+			'name'=>'codfilial',
+			'value'=>(isset($model->Filial))?CHtml::link(CHtml::encode($model->Filial->filial),array('filial/view','id'=>$model->codfilial)):null,
+			'type'=>'raw',
+			),
 		'convenio',
 		'diretorioremessa',
 		'diretorioretorno',

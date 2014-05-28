@@ -377,5 +377,20 @@ class NotaFiscal extends MGActiveRecord
 		$this->calculaStatus();
 		return parent::afterFind();
 	}
+	public function scopes () 
+	{
+		return array(
+			'combo'=>array(
+				'select'=>array('codnotafiscal', 'notafiscal'),
+				'order'=>'notafiscal ASC',
+				),
+			);
+	}
+	
+	public function getListaCombo ()
+	{
+		$lista = self::model()->combo()->findAll();
+		return CHtml::listData($lista, 'codnotafiscal', 'notafiscal');
+	}	
 
 }

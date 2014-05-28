@@ -45,7 +45,7 @@ class FormaPagamento extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codformapagamento, formapagamento', 'required'),
+			array('formapagamento', 'required'),
 			array('formapagamento', 'length', 'max'=>50),
 			array('formapagamentoecf', 'length', 'max'=>5),
 			array('boleto, fechamento, notafiscal, parcelas, diasentreparcelas, avista, entrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
@@ -112,7 +112,13 @@ class FormaPagamento extends MGActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('codformapagamento',$this->codformapagamento,true);
-		$criteria->compare('formapagamento',$this->formapagamento,true);
+		//$criteria->compare('formapagamento',$this->formapagamento,true);
+		if (!empty($this->formapagamento))
+		{
+			$texto  = str_replace(' ', '%', trim($this->formapagamento));
+			$criteria->addCondition('t.formapagamento ILIKE :formapagamento');
+			$criteria->params = array_merge($criteria->params, array(':formapagamento' => '%'.$texto.'%'));
+		}
 		$criteria->compare('boleto',$this->boleto);
 		$criteria->compare('fechamento',$this->fechamento);
 		$criteria->compare('notafiscal',$this->notafiscal);
@@ -128,6 +134,8 @@ class FormaPagamento extends MGActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array('defaultOrder'=>'t.codformapagamento ASC'),
+			'pagination'=>array('pageSize'=>20)
 		));
 	}
 

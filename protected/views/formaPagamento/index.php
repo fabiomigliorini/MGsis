@@ -1,11 +1,11 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Portador';
+$this->pagetitle = Yii::app()->name . ' - Formas de Pagamento';
 $this->breadcrumbs=array(
-	'Portador',
+	'Formas de Pagamento',
 );
 
 $this->menu=array(
-	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
+	array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 	);
 ?>
@@ -25,7 +25,7 @@ $(document).ready(function(){
 
 </script>
 
-<h1>Portador</h1>
+<h1>Formas de Pagamento</h1>
 
 <br>
 
@@ -38,19 +38,8 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
-	<?php echo $form->textField($model, 'codportador', array('placeholder' => 'Código', 'class'=>'input-medium')); ?>
-	<?php echo $form->textField($model, 'portador', array('placeholder' => 'Portador', 'class'=>'input-medium')); ?>
-	<?php
-		echo $form->select2(
-			$model, 
-			'codbanco', 
-			Banco::getListaCombo(), 
-			array(
-				'placeholder'=>'Banco',
-				'class' => 'input-medium'
-			)
-		);
-	?>
+	<?php echo $form->textField($model, 'codformapagamento', array('placeholder' => '#', 'class'=>'input-mini')); ?>
+	<?php echo $form->textField($model, 'formapagamento', array('placeholder' => 'Forma de Pagamento', 'class'=>'input-large')); ?>
 	<?php
 	$this->widget('bootstrap.widgets.TbButton'
 		, array(

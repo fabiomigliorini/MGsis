@@ -37,7 +37,7 @@ class Banco extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codbanco', 'required'),
+			array('banco', 'required'),
 			array('banco', 'length', 'max'=>50),
 			array('sigla', 'length', 'max'=>3),
 			array('numerobanco, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
@@ -97,17 +97,25 @@ class Banco extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codbanco',$this->codbanco,true);
-		$criteria->compare('banco',$this->banco,true);
-		$criteria->compare('sigla',$this->sigla,true);
-		$criteria->compare('numerobanco',$this->numerobanco,true);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('codbanco',$this->codbanco,false);
+		//$criteria->compare('banco',$this->banco,true);
+		if (!empty($this->banco))
+		{
+			$texto  = str_replace(' ', '%', trim($this->banco));
+			$criteria->addCondition('t.banco ILIKE :banco');
+			$criteria->params = array_merge($criteria->params, array(':banco' => '%'.$texto.'%'));
+		}
+		$criteria->compare('sigla',$this->sigla,false);
+		$criteria->compare('numerobanco',$this->numerobanco,false);
+		$criteria->compare('alteracao',$this->alteracao,false);
+		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);
+		$criteria->compare('criacao',$this->criacao,false);
+		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,false);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array('defaultOrder'=>'t.codbanco ASC'),
+			'pagination'=>array('pageSize'=>20)
 		));
 	}
 
@@ -120,5 +128,20 @@ class Banco extends MGActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+	public function scopes () 
+	{
+		return array(
+			'combo'=>array(
+				'select'=>array('codbanco', 'banco'),
+				'order'=>'banco ASC',
+				),
+			);
+	}
+
+	public function getListaCombo ()
+	{
+		$lista = self::model()->combo()->findAll();
+		return CHtml::listData($lista, 'codbanco', 'banco');
 	}
 }
