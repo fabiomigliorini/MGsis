@@ -38,7 +38,19 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
-	<?php echo $form->textField($model, 'codusuariocriacao', array('placeholder' => '#', 'class'=>'input-mini')); ?>
+	<?php echo $form->textField($model, 'codcheque', array('placeholder' => '#', 'class'=>'input-mini')); ?>
+	<?php echo $form->textField($model, 'emitente', array('placeholder' => 'Emitente', 'class'=>'input-large')); ?>
+	<?php
+		echo $form->select2(
+			$model, 
+			'codbanco', 
+			Banco::getListaCombo(), 
+			array(
+				'placeholder'=>'Banco',
+				'class' => 'input-xmedium'
+			)
+		);
+	?>
 	<?php
 	$this->widget('bootstrap.widgets.TbButton'
 		, array(

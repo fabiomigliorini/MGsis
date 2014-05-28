@@ -48,10 +48,10 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 		'observacoes',
 		//'codtipomovimentotitulo',
 		array(
-					'name'=>'codtipomovimentotitulo',
-					'value'=>(isset($model->codtipomovimentotitulo))?CHtml::link(CHtml::encode($model->TipoMovimentoTitulo->tipomovimentotitulo),array('tipoMovimentoTitulo/view','id'=>$model->codtipomovimentotitulo)):null,
-					'type'=>'raw',
-					),
+			'name'=>'codtipomovimentotitulo',
+			'value'=>(isset($model->codtipomovimentotitulo))?CHtml::link(CHtml::encode($model->TipoMovimentoTitulo->tipomovimentotitulo),array('tipoMovimentoTitulo/view','id'=>$model->codtipomovimentotitulo)):null,
+			'type'=>'raw',
+			),
 		array(
 			'name'=>'debito',
 			'value'=>($model->debito)?'Sim':'Não',

@@ -1,8 +1,8 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Detalhes Cheque';
+$this->pagetitle = Yii::app()->name . ' - Detalhes do Cheque';
 $this->breadcrumbs=array(
 	'Cheque'=>array('index'),
-	$model->codcheque,
+	$model->emitente,
 );
 
 $this->menu=array(
@@ -29,15 +29,20 @@ $(document).ready(function(){
 /*]]>*/
 </script>
 
-<h1><?php echo $model->codcheque; ?></h1>
+<h1><?php echo $model->emitente; ?></h1>
 
 <?php 
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-			'codcheque',
+		'codcheque',
 		'cmc7',
-		'codbanco',
+		//'codbanco',
+		array(
+			'name'=>'codbanco',
+			'value'=>(isset($model->codbanco))?CHtml::link(CHtml::encode($model->Banco->banco),array('banco/view','id'=>$model->codbanco)):null,
+			'type'=>'raw',
+			),
 		'agencia',
 		'contacorrente',
 		'emitente',
@@ -46,12 +51,21 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 		'vencimento',
 		'repasse',
 		'destino',
-		'devolucao',
+		//'devolucao',
+		array(
+			'name'=>'devolucao',
+			'value'=>($model->devolucao)?'Sim':'Não',
+			),
 		'motivodevolucao',
 		'observacao',
 		'lancamento',
 		'cancelamento',
-		'valor',
+		//'valor',
+		array(
+				'name'=>'valor',
+				'value'=>Yii::app()->format->formatNumber($model->valor) . " ",
+				),
+		
 		),
 	)); 
 

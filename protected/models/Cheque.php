@@ -51,7 +51,7 @@ class Cheque extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codcheque, codbanco, agencia, contacorrente, emitente, numero, emissao, vencimento, lancamento, valor', 'required'),
+			array('codbanco, agencia, contacorrente, emitente, numero, emissao, vencimento, valor', 'required'),
 			array('cmc7, destino, motivodevolucao', 'length', 'max'=>50),
 			array('agencia', 'length', 'max'=>10),
 			array('contacorrente, numero', 'length', 'max'=>15),
@@ -129,27 +129,33 @@ class Cheque extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codcheque',$this->codcheque,true);
-		$criteria->compare('cmc7',$this->cmc7,true);
-		$criteria->compare('codbanco',$this->codbanco,true);
-		$criteria->compare('agencia',$this->agencia,true);
-		$criteria->compare('contacorrente',$this->contacorrente,true);
-		$criteria->compare('emitente',$this->emitente,true);
-		$criteria->compare('numero',$this->numero,true);
-		$criteria->compare('emissao',$this->emissao,true);
-		$criteria->compare('vencimento',$this->vencimento,true);
-		$criteria->compare('repasse',$this->repasse,true);
-		$criteria->compare('destino',$this->destino,true);
-		$criteria->compare('devolucao',$this->devolucao,true);
-		$criteria->compare('motivodevolucao',$this->motivodevolucao,true);
-		$criteria->compare('observacao',$this->observacao,true);
-		$criteria->compare('lancamento',$this->lancamento,true);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('cancelamento',$this->cancelamento,true);
-		$criteria->compare('valor',$this->valor,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('codcheque',$this->codcheque,false);
+		$criteria->compare('cmc7',$this->cmc7,false);
+		$criteria->compare('codbanco',$this->codbanco,false);
+		$criteria->compare('agencia',$this->agencia,false);
+		$criteria->compare('contacorrente',$this->contacorrente,false);
+		//$criteria->compare('emitente',$this->emitente,false);
+		if (!empty($this->emitente))
+		{
+			$texto  = str_replace(' ', '%', trim($this->emitente));
+			$criteria->addCondition('t.emitente ILIKE :emitente');
+			$criteria->params = array_merge($criteria->params, array(':emitente' => '%'.$texto.'%'));
+		}
+		$criteria->compare('numero',$this->numero,false);
+		$criteria->compare('emissao',$this->emissao,false);
+		$criteria->compare('vencimento',$this->vencimento,false);
+		$criteria->compare('repasse',$this->repasse,false);
+		$criteria->compare('destino',$this->destino,false);
+		$criteria->compare('devolucao',$this->devolucao,false);
+		$criteria->compare('motivodevolucao',$this->motivodevolucao,false);
+		$criteria->compare('observacao',$this->observacao,false);
+		$criteria->compare('lancamento',$this->lancamento,false);
+		$criteria->compare('alteracao',$this->alteracao,false);
+		$criteria->compare('cancelamento',$this->cancelamento,false);
+		$criteria->compare('valor',$this->valor,false);
+		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);
+		$criteria->compare('criacao',$this->criacao,false);
+		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,false);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

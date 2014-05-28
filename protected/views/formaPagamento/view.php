@@ -1,13 +1,13 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Detalhes Forma Pagamento';
+$this->pagetitle = Yii::app()->name . ' - Detalhes Formas de Pagamento';
 $this->breadcrumbs=array(
-	'Forma Pagamento'=>array('index'),
-	$model->codformapagamento,
+	'Formas de Pagamento'=>array('index'),
+	$model->formapagamento,
 );
 
 $this->menu=array(
 array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
-array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
+array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create')),
 array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codformapagamento)),
 array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
 //array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
@@ -22,14 +22,14 @@ $(document).ready(function(){
 	jQuery('body').on('click','#btnExcluir',function() {
 		bootbox.confirm("Excluir este registro?", function(result) {
 			if (result)
-				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('forma-pagamento/delete', array('id' => $model->codformapagamento))?>",{});
+				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('formaPagamento/delete', array('id' => $model->codformapagamento))?>",{});
 		});
 	});
 });
 /*]]>*/
 </script>
 
-<h1><?php echo $model->codformapagamento; ?></h1>
+<h1><?php echo $model->formapagamento; ?></h1>
 
 <?php 
 $this->widget('bootstrap.widgets.TbDetailView',array(

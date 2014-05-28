@@ -11,11 +11,11 @@
 
 		<small class="span1 muted"><?php echo ($data->notafiscal)?"Nota Fiscal":""; ?></small>
 
+		<small class="span1 muted"><?php echo ($data->avista)?"Á Vista":"Á prazo"; ?></small>
+		
 		<small class="span1 muted"><?php echo CHtml::encode($data->parcelas); ?></small>
 
-		<small class="span1 muted"><?php echo CHtml::encode($data->diasentreparcelas); ?></small>
-
-		<small class="span1 muted"><?php echo ($data->avista)?"Á Vista":"Á prazo"; ?></small>
+		<small class="span3 muted"><?php echo CHtml::encode($data->diasentreparcelas); ?></small>
 
 
 		<?php /*
