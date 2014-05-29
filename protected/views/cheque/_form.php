@@ -10,7 +10,7 @@
 		echo $form->select2Row($model, 'codbanco', Banco::getListaCombo(), array('class' => 'input-xmini'));
 		echo $form->textFieldRow($model,'agencia',array('class'=>'input-small','maxlength'=>10));
 		echo $form->textFieldRow($model,'contacorrente',array('class'=>'input-small','maxlength'=>15));
-		echo $form->textFieldRow($model,'emitente',array('class'=>'input-small','maxlength'=>100));
+		echo $form->textFieldRow($model,'emitente',array('class'=>'input-xlarge','xmaxlength'=>100));
 		echo $form->textFieldRow($model,'numero',array('class'=>'input-small','maxlength'=>15));
 		//echo $form->textFieldRow($model,'emissao',array('class'=>'span5'));
 		
@@ -84,7 +84,8 @@
 	
 $(document).ready(function() {
 
-	//$("#Pessoa_fantasia").Setcase();
+	$("#Cheque_destino").Setcase();
+	$("#Cheque_emitente").Setcase();
 
 	$('#Cheque_valor').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	

@@ -373,10 +373,10 @@ class NotaFiscal extends MGActiveRecord
 	
 	protected function afterFind()
 	{
-		
 		$this->calculaStatus();
 		return parent::afterFind();
 	}
+	
 	public function scopes () 
 	{
 		return array(

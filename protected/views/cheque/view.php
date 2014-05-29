@@ -32,6 +32,28 @@ $(document).ready(function(){
 <h1><?php echo $model->emitente; ?></h1>
 
 <?php 
+
+$css_label = "";
+
+switch ($model->codstatus)
+{
+	case Cheque::CODSTATUS_ABERTO;
+		$css_label = "label-success";
+		break;
+
+	case Cheque::CODSTATUS_REPASSADO;
+		$css_label = "label-info";
+		break;
+
+	case Cheque::CODSTATUS_DEVOLVIDO;
+		$css_label = "label-important";
+		break;
+
+	case Cheque::CODSTATUS_CANCELADO;
+		break;
+	
+}
+
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
@@ -51,13 +73,20 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 		'vencimento',
 		'repasse',
 		'destino',
-		//'devolucao',
-		array(
-			'name'=>'devolucao',
-			'value'=>($model->devolucao)?'Sim':'Não',
-			),
+		'devolucao',
 		'motivodevolucao',
-		'observacao',
+		//'status',
+		array(
+			'label'=>'Status',
+			'value'=>"<small class='label $css_label'>$model->status</small>",
+			'type'=>'raw',
+		),
+		//'observacao',
+		array(
+			'name'=>'observacao',
+			'value'=>nl2br(CHtml::encode($model->observacao)),
+			'type'=>'raw',
+			),
 		'lancamento',
 		'cancelamento',
 		//'valor',

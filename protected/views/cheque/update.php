@@ -2,7 +2,7 @@
 $this->pagetitle = Yii::app()->name . ' - Alterar Cheque';
 $this->breadcrumbs=array(
 	'Cheque'=>array('index'),
-	$model->codcheque=>array('view','id'=>$model->codcheque),
+	$model->emitente=>array('view','id'=>$model->codcheque),
 	'Alterar',
 );
 

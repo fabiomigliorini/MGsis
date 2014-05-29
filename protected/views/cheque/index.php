@@ -38,29 +38,159 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
-	<?php echo $form->textField($model, 'codcheque', array('placeholder' => '#', 'class'=>'input-mini')); ?>
-	<?php echo $form->textField($model, 'emitente', array('placeholder' => 'Emitente', 'class'=>'input-large')); ?>
-	<?php
-		echo $form->select2(
-			$model, 
-			'codbanco', 
-			Banco::getListaCombo(), 
-			array(
-				'placeholder'=>'Banco',
-				'class' => 'input-xmedium'
-			)
-		);
-	?>
-	<?php
-	$this->widget('bootstrap.widgets.TbButton'
-		, array(
-			'buttonType' => 'submit',
-			'icon'=>'icon-search',
-			//'label'=>'',
-			'htmlOptions' => array('class'=>'pull-right btn btn-info')
-			)
-		); 
-	?>
+	<div class='row-fluid'>
+		<?php
+		$this->widget('bootstrap.widgets.TbButton'
+			, array(
+				'buttonType' => 'submit',
+				'icon'=>'icon-search',
+				//'label'=>'',
+				'htmlOptions' => array('class'=>'pull-right btn btn-info')
+				)
+			); 
+		?>
+		<div class="span6">
+			<div class="row-fluid">
+				<?php echo $form->textField($model, 'codcheque', array('placeholder' => '#', 'class'=>'input-mini')); ?>
+				<?php echo $form->textField($model, 'emitente', array('placeholder' => 'Emitente', 'class'=>'input-large')); ?>
+				<?php echo $form->textField($model, 'destino', array('placeholder' => 'Destino', 'class'=>'input-large')); ?>
+			</div>
+			<div class="row-fluid">
+				<?php echo $form->textField($model, 'motivodevolucao', array('placeholder' => 'Motivo Devolução', 'class'=>'input-large')); ?>
+				<?php echo $form->select2($model, 'codstatus', Cheque::getStatusListaCombo(), array('placeholder' => 'Status', 'class'=>'input-medium')); ?>
+				&nbsp
+				<?php
+					echo $form->select2(
+						$model, 
+						'codbanco', 
+						Banco::getListaCombo(), 
+						array(
+							'placeholder'=>'Banco',
+							'class' => 'input-medium'
+						)
+					);
+				?>
+			</div>
+		</div>
+		<div class="span5">
+			<div class="row-fluid">
+				<?php 
+					echo $form->datepickerRow(
+							$model,
+							'vencimento_de',
+							array(
+								'class' => 'input-mini text-center', 
+								'options' => array(
+									'format' => 'dd/mm/yy'
+									),
+								'placeholder' => 'Vencimento',
+								'prepend' => 'De',
+								)
+							); 	
+				?>
+				<?php 
+					echo $form->datepickerRow(
+							$model,
+							'vencimento_ate',
+							array(
+								'class' => 'input-mini text-center', 
+								'options' => array(
+									'format' => 'dd/mm/yy'
+									),
+								'placeholder' => 'Vencimento',
+								'prepend' => 'Até',
+								)
+							); 	
+				?>
+				<?php 
+					echo $form->datepickerRow(
+							$model,
+							'emissao_de',
+							array(
+								'class' => 'input-mini text-center', 
+								'options' => array(
+									'format' => 'dd/mm/yy'
+									),
+								'placeholder' => 'Emissão',
+								'prepend' => 'De',
+								)
+							); 	
+				?>
+				<?php 
+					echo $form->datepickerRow(
+							$model,
+							'emissao_ate',
+							array(
+								'class' => 'input-mini text-center', 
+								'options' => array(
+									'format' => 'dd/mm/yy'
+									),
+								'placeholder' => 'Emissão',
+								'prepend' => 'Até',
+								)
+							); 	
+				?>
+			</div>
+			<div class="row-fluid">
+				<?php 
+				echo $form->datepickerRow(
+						$model,
+						'repasse_de',
+						array(
+							'class' => 'input-mini text-center', 
+							'options' => array(
+								'format' => 'dd/mm/yy'
+								),
+							'placeholder' => 'Repasse',
+							'prepend' => 'De',
+							)
+						); 	
+				?>
+				<?php 
+					echo $form->datepickerRow(
+							$model,
+							'repasse_ate',
+							array(
+								'class' => 'input-mini text-center', 
+								'options' => array(
+									'format' => 'dd/mm/yy'
+									),
+								'placeholder' => 'Repasse',
+								'prepend' => 'Até',
+								)
+							); 	
+				?>
+				<?php 
+					echo $form->datepickerRow(
+							$model,
+							'devolucao_de',
+							array(
+								'class' => 'input-mini text-center', 
+								'options' => array(
+									'format' => 'dd/mm/yy'
+									),
+								'placeholder' => 'Devolução',
+								'prepend' => 'De',
+								)
+							); 	
+				?>
+				<?php 
+					echo $form->datepickerRow(
+							$model,
+							'devolucao_ate',
+							array(
+								'class' => 'input-mini text-center', 
+								'options' => array(
+									'format' => 'dd/mm/yy'
+									),
+								'placeholder' => 'Devolução',
+								'prepend' => 'Até',
+								)
+							); 	
+				?>
+			</div>
+		</div>
+	</div>
 </div>
 
 <?php $this->endWidget(); ?>
