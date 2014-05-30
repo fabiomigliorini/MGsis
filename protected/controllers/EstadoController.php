@@ -23,9 +23,11 @@ class EstadoController extends Controller
 	* Creates a new model.
 	* If creation is successful, the browser will be redirected to the 'view' page.
 	*/
-	public function actionCreate()
+	public function actionCreate($codpais)
 	{
 		$model=new Estado;
+		
+		$model->codpais = $codpais;
 
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
@@ -78,10 +80,12 @@ class EstadoController extends Controller
 			// we only allow deletion via POST request
 			try
 			{
-				$this->loadModel($id)->delete();
+				$model = $this->loadModel($id);
+				$codpais = $model->codpais;
+				$model->delete();
 				// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 				if(!isset($_GET['ajax']))
-					$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
+					$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('pais/view', 'id'=>$codpais));
 			}
 			catch(CDbException $e)
 			{

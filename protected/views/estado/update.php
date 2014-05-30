@@ -1,14 +1,15 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Alterar Estado';
 $this->breadcrumbs=array(
-	'Estado'=>array('index'),
-	$model->estado=>array('view','id'=>$model->estado),
+	'Países'=>array('pais/index'),
+	$model->Pais->pais=>array('pais/view', "id"=>$model->codpais),
+	$model->estado=>array('view','id'=>$model->codestado),
 	'Alterar',
 );
 
 	$this->menu=array(
-	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
-	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
+	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('pais/view', "id"=>$model->codpais)),
+	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create', "codpais"=>$model->codpais)),
 	array('label'=>'Detalhes', 'icon'=>'icon-eye-open', 'url'=>array('view','id'=>$model->codestado)),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 	);

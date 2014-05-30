@@ -1,7 +1,7 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - País';
+$this->pagetitle = Yii::app()->name . ' - Países';
 $this->breadcrumbs=array(
-	'País',
+	'Países',
 );
 
 $this->menu=array(
@@ -25,7 +25,7 @@ $(document).ready(function(){
 
 </script>
 
-<h1>País</h1>
+<h1>Países</h1>
 
 <br>
 

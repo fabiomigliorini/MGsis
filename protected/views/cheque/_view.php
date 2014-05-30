@@ -70,6 +70,7 @@ switch ($data->codstatus)
 		
 	</small>	
 		<?php /*
+		<div class="span2 text-error"><?php echo CHtml::encode($data->cmc7); ?></div>		
 	 
 		*/ ?>
 </div>

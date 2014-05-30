@@ -1,7 +1,7 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Alterar País';
 $this->breadcrumbs=array(
-	'País'=>array('index'),
+	'Países'=>array('index'),
 	$model->pais=>array('view','id'=>$model->codpais),
 	'Alterar',
 );

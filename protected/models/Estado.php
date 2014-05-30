@@ -42,6 +42,7 @@ class Estado extends MGActiveRecord
 			array('estado, codpais, sigla, codigooficial', 'required'),
 			array('estado', 'length', 'max'=>50),
 			array('sigla', 'length', 'max'=>2),
+			array('codigooficial', 'unique'),
 			array('codpais, codigooficial, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.

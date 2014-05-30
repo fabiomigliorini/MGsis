@@ -1,7 +1,7 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Detalhes do País';
 $this->breadcrumbs=array(
-	'País'=>array('index'),
+	'Países'=>array('index'),
 	$model->pais,
 );
 
@@ -41,6 +41,22 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 		),
 	)); 
 
-	$this->widget('UsuarioCriacao', array('model'=>$model));
+$this->widget('UsuarioCriacao', array('model'=>$model));
 
+$estado=new Estado('search');
+
+$estado->unsetAttributes();  // clear any default values
+
+if(isset($_GET['Estado']))
+	Yii::app()->session['FiltroEstadoIndex'] = $_GET['Estado'];
+
+if (isset(Yii::app()->session['FiltroEstadoIndex']))
+	$estado->attributes=Yii::app()->session['FiltroEstadoIndex'];
+
+$estado->codpais = $model->codpais;
+
+$this->renderPartial('/estado/index',array(
+	'dataProvider'=>$estado->search(),
+	'model'=>$estado,
+	));
 ?>
