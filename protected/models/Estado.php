@@ -110,7 +110,13 @@ class Estado extends MGActiveRecord
 			$criteria->params = array_merge($criteria->params, array(':estado' => '%'.$texto.'%'));
 		}
 		$criteria->compare('codpais',$this->codpais,false);
-		$criteria->compare('sigla',$this->sigla,false);
+		//$criteria->compare('sigla',$this->sigla,false);
+		if (!empty($this->sigla))
+		{
+			$texto  = str_replace(' ', '%', trim($this->sigla));
+			$criteria->addCondition('t.sigla ILIKE :sigla');
+			$criteria->params = array_merge($criteria->params, array(':sigla' => '%'.$texto.'%'));
+		}
 		$criteria->compare('codigooficial',$this->codigooficial,false);
 		$criteria->compare('alteracao',$this->alteracao,false);
 		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);

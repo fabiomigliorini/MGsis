@@ -50,20 +50,22 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 	)); 
 
 	$this->widget('UsuarioCriacao', array('model'=>$model));
-	
+
 	$cidade=new Cidade('search');
-		
-		$cidade->unsetAttributes();  // clear any default values
-		
-		if(isset($_GET['Cidade']))
-			Yii::app()->session['FiltroCidadeIndex'] = $_GET['Cidade'];
-		
-		if (isset(Yii::app()->session['FiltroCidadeIndex']))
-			$cidade->attributes=Yii::app()->session['FiltroCidadeIndex'];
-		
-		$this->render('index',array(
-			'dataProvider'=>$model->search(),
-			'model'=>$model,
-			));
+
+	$cidade->unsetAttributes();  // clear any default values
+	
+	if(isset($_GET['Cidade']))
+	Yii::app()->session['FiltroCidadeIndex'] = $_GET['Cidade'];
+
+	if (isset(Yii::app()->session['FiltroCidadeIndex']))
+		$cidade->attributes=Yii::app()->session['FiltroCidadeIndex'];
+
+	$cidade->codestado = $model->codestado;
+
+	$this->renderPartial('/cidade/index',array(
+		'dataProvider'=>$cidade->search(),
+		'model'=>$cidade,
+		));
 
 ?>

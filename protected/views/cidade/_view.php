@@ -1,7 +1,9 @@
 <div class="registro">
 	<div class="row-fluid">
+		<small class="span1 muted"><?php echo CHtml::encode(Yii::app()->format->formataCodigo($data->codcidade)); ?></small>
+		
 		<b class="span2">
-			<?php echo CHtml::link(CHtml::encode($data->cidade),array('view','id'=>$data->codcidade)); ?>
+			<?php echo CHtml::link(CHtml::encode($data->cidade),array('cidade/view','id'=>$data->codcidade)); ?>
 		</b>
 		<small class="span1"><?php echo CHtml::encode($data->Estado->sigla); ?></small>
 		

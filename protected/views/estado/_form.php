@@ -38,7 +38,7 @@
 	
 $(document).ready(function() {
 
-	//$("#Pessoa_fantasia").Setcase();
+	$("#Estado_estado").Setcase();
 
 	$('#estado-form').submit(function(e) {
         var currentForm = this;
