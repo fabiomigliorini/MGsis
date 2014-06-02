@@ -39,10 +39,10 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 		'codsubgrupoproduto',
 		//'codgrupoproduto',
 		array(
-					'name'=>'codgrupoproduto',
-					'value'=>(isset($model->codgrupoproduto))?CHtml::link(CHtml::encode($model->GrupoProduto->grupoproduto),array('grupoProduto/view','id'=>$model->codgrupoproduto)):null,
-					'type'=>'raw',
-					),
+			'name'=>'codgrupoproduto',
+			'value'=>(isset($model->codgrupoproduto))?CHtml::link(CHtml::encode($model->GrupoProduto->grupoproduto),array('grupoProduto/view','id'=>$model->codgrupoproduto)):null,
+			'type'=>'raw',
+			),
 		'subgrupoproduto',
 		),
 	)); 

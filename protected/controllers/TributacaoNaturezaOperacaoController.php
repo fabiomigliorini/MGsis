@@ -23,9 +23,11 @@ class TributacaoNaturezaOperacaoController extends Controller
 	* Creates a new model.
 	* If creation is successful, the browser will be redirected to the 'view' page.
 	*/
-	public function actionCreate()
+	public function actionCreate($codnaturezaoperacao)
 	{
 		$model=new TributacaoNaturezaOperacao;
+		
+		$model->codnaturezaoperacao = $codnaturezaoperacao;
 
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
@@ -78,10 +80,12 @@ class TributacaoNaturezaOperacaoController extends Controller
 			// we only allow deletion via POST request
 			try
 			{
-				$this->loadModel($id)->delete();
+				$model = $this->loadModel($id);
+				$codnaturezaoperacao = $model->codnaturezaoperacao;
+				$model->delete();
 				// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 				if(!isset($_GET['ajax']))
-					$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
+					$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('naturezaOperacao/view', 'id'=>$codnaturezaoperacao));
 			}
 			catch(CDbException $e)
 			{

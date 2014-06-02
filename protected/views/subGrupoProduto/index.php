@@ -46,6 +46,8 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
+	<input type ="hidden" name="id" value="<?php echo $model->codgrupoproduto;?>">
+
 	<?php echo $form->textField($model, 'codsubgrupoproduto', array('placeholder' => 'Código', 'class'=>'input-mini')); ?>
 	<?php echo $form->textField($model, 'subgrupoproduto', array('placeholder' => 'Descrição', 'class'=>'input-large')); ?>
 

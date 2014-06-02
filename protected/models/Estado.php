@@ -101,7 +101,7 @@ class Estado extends MGActiveRecord
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
-		$criteria->compare('codestado',$this->codestado,false);
+		$criteria->compare('codestado',Yii::app()->format->numeroLimpo($this->codestado),false);
 		//$criteria->compare('estado',$this->estado,false);
 		if (!empty($this->estado))
 		{

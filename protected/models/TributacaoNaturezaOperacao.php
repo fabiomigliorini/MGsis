@@ -125,7 +125,8 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codtributacaonaturezaoperacao',$this->codtributacaonaturezaoperacao,false);
+		$criteria->compare('codtributacaonaturezaoperacao',Yii::app()->format->numeroLimpo($this->codtributacaonaturezaoperacao),false);
+		//$criteria->compare('codtributacaonaturezaoperacao',$this->codtributacaonaturezaoperacao,false);
 		$criteria->compare('codtributacao',$this->codtributacao,false);
 		$criteria->compare('codnaturezaoperacao',$this->codnaturezaoperacao,false);
 		$criteria->compare('codcfop',$this->codcfop,false);
@@ -160,5 +161,21 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+	
+	public function scopes () 
+	{
+		return array(
+			'combo'=>array(
+				'select'=>array('codtributacaonaturezaoperacao', 'tributacaonaturezaoperacao'),
+				'order'=>'tributacaonaturezaoperacao ASC',
+				),
+			);
+	}
+	
+	public function getListaCombo ()
+	{
+		$lista = self::model()->combo()->findAll();
+		return CHtml::listData($lista, 'codtributacaonaturezaoperacao', 'tributacaonaturezaoperacao');
 	}
 }

@@ -65,16 +65,16 @@
 				'label' => 'Financeiro', 
 				'url'=>'#', 
 				'items'=>array(
-					array('label' => 'Titulos', 'url' => Yii::app()->createUrl('titulo')),
+					array('label' => 'Agrupamentos', 'url' => Yii::app()->createUrl('tituloAgrupamento')),					
 					array('label' => 'Bancos', 'url' => Yii::app()->createUrl('banco')),					
+					array('label' => 'Cheques', 'url' => Yii::app()->createUrl('cheque')),			
+					array('label' => 'Formas de Pagamento', 'url' => Yii::app()->createUrl('formaPagamento')),					
+					array('label' => 'Liquidações', 'url' => Yii::app()->createUrl('liquidacaoTitulo')),
 					array('label' => 'Pessoas', 'url' => Yii::app()->createUrl('pessoa')),
-					array('label' => 'Cheques', 'url' => Yii::app()->createUrl('cheque')),
+					array('label' => 'Portadores', 'url' => Yii::app()->createUrl('portador')),
 					array('label' => 'Tipo Movimento Títulos', 'url' => Yii::app()->createUrl('tipoMovimentoTitulo')),				
 					array('label' => 'Tipo Títulos', 'url' => Yii::app()->createUrl('tipoTitulo')),
-					array('label' => 'Liquidações', 'url' => Yii::app()->createUrl('liquidacaoTitulo')),
-					array('label' => 'Agrupamentos', 'url' => Yii::app()->createUrl('tituloAgrupamento')),
-					array('label' => 'Portadores', 'url' => Yii::app()->createUrl('portador')),
-					array('label' => 'Formas de Pagamento', 'url' => Yii::app()->createUrl('formaPagamento')),
+					array('label' => 'Titulos', 'url' => Yii::app()->createUrl('titulo')),				
 				)
 			),
 
@@ -82,13 +82,12 @@
 				'label' => 'Estoque', 
 				'url'=>'#', 
 				'items'=>array(
-					array('label' => 'Produtos', 'url' => Yii::app()->createUrl('produto')),
+					array('label' => 'Grupos de Produtos', 'url' => Yii::app()->createUrl('grupoProduto')),
 					array('label' => 'Marcas', 'url' => Yii::app()->createUrl('marca')),
 					array('label' => 'NCM', 'url' => Yii::app()->createUrl('ncm')),
+					array('label' => 'Produtos', 'url' => Yii::app()->createUrl('produto')),
 					array('label' => 'Tipos de Produtos', 'url' => Yii::app()->createUrl('tipoProduto')),
-					array('label' => 'Grupos de Produtos', 'url' => Yii::app()->createUrl('grupoProduto')),
 					array('label' => 'Unidades de Medida', 'url' => Yii::app()->createUrl('unidadeMedida')),
-					array('label' => 'Sub Grupos de Produtos', 'url' => Yii::app()->createUrl('subGrupoProduto')),
 				)
 			),
 			
@@ -97,14 +96,20 @@
 				'label' => 'Fiscal', 
 				'url'=>'#', 
 				'items'=>array(
-					array('label' => 'Filial', 'url' => Yii::app()->createUrl('filial')),
 					array('label' => 'CFOP', 'url' => Yii::app()->createUrl('cfop')),
-					array('label' => 'Países, Estados e Cidades', 'url' => Yii::app()->createUrl('pais')),
-					array('label' => 'Empresas', 'url' => Yii::app()->createUrl('empresa')),
-					array('label' => 'Tributações', 'url' => Yii::app()->createUrl('tributacao')),
+					'---',
 					array('label' => 'Contas Contábeis', 'url' => Yii::app()->createUrl('contaContabil')),
+					'---',
+					array('label' => 'Empresas', 'url' => Yii::app()->createUrl('empresa')),
+					'---',
+					array('label' => 'Filial', 'url' => Yii::app()->createUrl('filial')),
+					'---',
 					array('label' => 'Naturezas das Operações', 'url' => Yii::app()->createUrl('naturezaOperacao')),
-					array('label' => 'Tributação Natureza Operação', 'url' => Yii::app()->createUrl('tributacaoNaturezaOperacao')),
+					'---',
+					array('label' => 'Países, Estados e Cidades', 'url' => Yii::app()->createUrl('pais')),
+					'---',
+					array('label' => 'Tributações', 'url' => Yii::app()->createUrl('tributacao')),
+
 				)
 			),
 						// Admin

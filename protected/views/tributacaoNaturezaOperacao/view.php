@@ -1,13 +1,14 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Detalhes Tributação Natureza Operação';
 $this->breadcrumbs=array(
-	'Tributação Natureza Operação'=>array('index'),
+	'Natureza Operação'=>array('naturezaOperacao/index'),
+	$model->NaturezaOperacao->naturezaoperacao=>array('naturezaOperacao/view', "id"=>$model->codnaturezaoperacao),
 	$model->codtributacaonaturezaoperacao,
 );
 
 $this->menu=array(
-array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
-array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create')),
+array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('naturezaOperacao/view', 'id'=>$model->codnaturezaoperacao)),
+array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create', 'codnaturezaoperacao'=>$model->codnaturezaoperacao)),
 array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codtributacaonaturezaoperacao)),
 array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
 //array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
