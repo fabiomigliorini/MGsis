@@ -99,7 +99,6 @@
 				'items'=>array(
 					array('label' => 'Filial', 'url' => Yii::app()->createUrl('filial')),
 					array('label' => 'CFOP', 'url' => Yii::app()->createUrl('cfop')),
-					array('label' => 'Cidades', 'url' => Yii::app()->createUrl('cidade')),
 					array('label' => 'Países, Estados e Cidades', 'url' => Yii::app()->createUrl('pais')),
 					array('label' => 'Empresas', 'url' => Yii::app()->createUrl('empresa')),
 					array('label' => 'Tributações', 'url' => Yii::app()->createUrl('tributacao')),

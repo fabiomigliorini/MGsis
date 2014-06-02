@@ -1,13 +1,14 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Detalhes Sub Grupos de Produtos';
 $this->breadcrumbs=array(
-	'Sub Grupos de Produtos'=>array('index'),
+	'Grupo de Produtos'=>array('grupoProduto/index'),
+	$model->GrupoProduto->grupoproduto=>array('grupoProduto/view', "id"=>$model->codgrupoproduto),
 	$model->subgrupoproduto,
 );
 
 $this->menu=array(
-array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
-array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
+array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('grupoProduto/view', 'id'=>$model->codgrupoproduto)),
+array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create', 'codgrupoproduto'=>$model->codgrupoproduto)),
 array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codsubgrupoproduto)),
 array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
 //array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),

@@ -78,13 +78,25 @@ class CidadeController extends Controller
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
-			$this->loadModel($id)->delete();
-			$codestado = $model->codestado;
+			try 
+			{
+				$model = $this->loadModel($id);
+				$codestado = $model->codestado;
 				$model->delete();
-
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('estado/view', 'id'=>$codestado));
+				// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+				if(!isset($_GET['ajax']))
+					$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('estado/view', 'id'=>$codestado));
+			} 
+			catch (Exception $ex)
+			{
+				// Cannot delete or update a parent row: a foreign key constraint fails
+				if($e->errorInfo[1] == 7)
+				{
+					throw new CHttpException(409, 'Registro em uso, você não pode excluir.');
+				}
+				else
+					throw $e;
+			}
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');

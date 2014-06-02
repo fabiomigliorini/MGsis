@@ -1,14 +1,15 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Detalhes da Cidade';
 $this->breadcrumbs=array(
-	'Estados'=>array('estado/index'),
+	'Países'=>array('pais/index'),
+	$model->Estado->Pais->pais=>array('pais/view', "id"=>$model->Estado->codpais),
 	$model->Estado->estado=>array('estado/view', "id"=>$model->codestado),
 	$model->cidade,
 );
 
 $this->menu=array(
 array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('estado/view', 'id'=>$model->codestado)),
-array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create')),
+array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create', 'codestado'=>$model->codestado)),
 array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codcidade)),
 array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
 //array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),

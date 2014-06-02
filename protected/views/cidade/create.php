@@ -1,8 +1,10 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Nova Cidade';
 $this->breadcrumbs=array(
-	'Estados'=>array('estado/index'),
+	'Países'=>array('pais/index'),
+	$model->Estado->Pais->pais=>array('pais/view', "id"=>$model->Estado->codpais),
 	$model->Estado->estado=>array('estado/view', "id"=>$model->codestado),
+
 	'Nova Cidade',
 );
 
