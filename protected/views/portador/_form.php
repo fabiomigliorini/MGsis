@@ -9,10 +9,10 @@
 		echo $form->textFieldRow($model,'portador',array('class'=>'input-large','maxlength'=>50));
 		//echo $form->textFieldRow($model,'codbanco',array('class'=>'span5'));
 		echo $form->select2Row($model, 'codbanco', Banco::getListaCombo(), array('prompt' => '', 'class' => 'input-large'));
-		echo $form->textFieldRow($model,'agencia',array('class'=>'input-mini'));
-		echo $form->textFieldRow($model,'agenciadigito',array('class'=>'input-mini'));
-		echo $form->textFieldRow($model,'conta',array('class'=>'input-mini'));
-		echo $form->textFieldRow($model,'contadigito',array('class'=>'input-mini'));
+		echo $form->textFieldRow($model,'agencia',array('class'=>'input-mini text-right'));
+		echo $form->textFieldRow($model,'agenciadigito',array('class'=>'input-mini text-right'));
+		echo $form->textFieldRow($model,'conta',array('class'=>'input-mini text-right'));
+		echo $form->textFieldRow($model,'contadigito',array('class'=>'input-mini text-right'));
 		//echo $form->checkBoxRow($model,'emiteboleto');
 		echo $form->toggleButtonRow($model,'emiteboleto', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 		//echo $form->textFieldRow($model,'codfilial',array('class'=>'span5'));

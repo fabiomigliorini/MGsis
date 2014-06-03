@@ -35,7 +35,11 @@ $(document).ready(function(){
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-	'codncm',
+	//'codncm',
+	array(
+		'name'=>'codncm',
+		'value'=>Yii::app()->format->formataCodigo($model->codncm),
+		),
 	'ncm',
 	//'descricao',
 	array(

@@ -35,7 +35,11 @@ $(document).ready(function(){
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-		'codnaturezaoperacao',
+		//'codnaturezaoperacao',
+		array(
+			'name'=>'codnaturezaoperacao',
+			'value'=>Yii::app()->format->formataCodigo($model->codnaturezaoperacao),
+			),
 		'naturezaoperacao',
 		//'codoperacao',
 		array(

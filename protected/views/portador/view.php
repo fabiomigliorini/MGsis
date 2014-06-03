@@ -1,7 +1,7 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Detalhes Portador';
+$this->pagetitle = Yii::app()->name . ' - Detalhes do Portador';
 $this->breadcrumbs=array(
-	'Portador'=>array('index'),
+	'Portadores'=>array('index'),
 	$model->portador,
 );
 
@@ -35,7 +35,11 @@ $(document).ready(function(){
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-		'codportador',
+		//'codportador',
+		array(
+			'name'=>'codportador',
+			'value'=>Yii::app()->format->formataCodigo($model->codportador),
+			),
 		'portador',
 		//'codbanco',
 		array(

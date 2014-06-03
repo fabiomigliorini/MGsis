@@ -1,9 +1,9 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Alterar Conta Contábil';
 $this->breadcrumbs=array(
-	'Conta Contábil'=>array('index'),
+	'Contas Contábeis'=>array('index'),
 	$model->contacontabil=>array('view','id'=>$model->codcontacontabil),
-	'Alterar Conta Contábil',
+	'Alterar',
 );
 
 	$this->menu=array(

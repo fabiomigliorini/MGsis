@@ -1,12 +1,13 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Nova Filial';
 $this->breadcrumbs=array(
-	'Filial'=>array('index'),
+	'Empresas'=>array('empresa/index'),
+	$model->Empresa->empresa=>array('empresa/view', "id"=>$model->codempresa),
 	'Nova',
 );
 
 $this->menu=array(
-array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
+array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('empresa/view', "id"=>$model->codempresa)),
 //array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
 ?>

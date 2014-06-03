@@ -8,7 +8,7 @@
 	<?php 	
 		echo $form->textFieldRow($model,'banco',array('class'=>'input-large','maxlength'=>50));
 		echo $form->textFieldRow($model,'sigla',array('class'=>'input-mini','maxlength'=>3));
-		echo $form->textFieldRow($model,'numerobanco',array('class'=>'input-mini'));
+		echo $form->textFieldRow($model,'numerobanco',array('class'=>'input-mini text-right'));
 	?>
 </fieldset>
 <div class="form-actions">

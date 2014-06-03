@@ -1,7 +1,7 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Novo Tipo Título';
 $this->breadcrumbs=array(
-	'Tipo Título'=>array('index'),
+	'Tipo de Títulos'=>array('index'),
 	'Novo',
 );
 

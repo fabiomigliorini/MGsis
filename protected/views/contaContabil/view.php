@@ -1,7 +1,7 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Detalhes da Conta Contábil';
 $this->breadcrumbs=array(
-	'Conta Contábil'=>array('index'),
+	'Contas Contábeis'=>array('index'),
 	$model->contacontabil,
 );
 
@@ -35,7 +35,11 @@ $(document).ready(function(){
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-		'codcontacontabil',
+		//'codcontacontabil',
+		array(
+			'name'=>'codcontacontabil',
+			'value'=>Yii::app()->format->formataCodigo($model->codcontacontabil),
+			),
 		'contacontabil',
 		'numero',
 		//'inativo',

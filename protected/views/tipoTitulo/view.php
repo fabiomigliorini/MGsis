@@ -1,7 +1,7 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Detalhes Tipo Título';
 $this->breadcrumbs=array(
-	'Tipo Título'=>array('index'),
+	'Tipo de Títulos'=>array('index'),
 	$model->tipotitulo,
 );
 
@@ -35,7 +35,11 @@ $(document).ready(function(){
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-		'codtipotitulo',
+		//'codtipotitulo',
+		array(
+			'name'=>'codtipotitulo',
+			'value'=>Yii::app()->format->formataCodigo($model->codtipotitulo),
+			),
 		'tipotitulo',
 		array(
 			'name'=>'pagar',
@@ -45,7 +49,12 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 			'name'=>'receber',
 			'value'=>($model->receber)?'Sim':'Não',
 			),
-		'observacoes',
+		//'observacoes',
+		array(
+			'name'=>'observacoes',
+			'value'=>nl2br(CHtml::encode($model->observacoes)),
+			'type'=>'raw',
+			),
 		//'codtipomovimentotitulo',
 		array(
 			'name'=>'codtipomovimentotitulo',

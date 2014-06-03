@@ -31,9 +31,10 @@ switch ($data->codstatus)
 		
 	<small class='row-fluid'>
 		
-		<b class="span1 muted"><?php echo CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($data->codcheque)),array('view','id'=>$data->codcheque)); ?></b>
+		<small class="span1 muted"><?php echo CHtml::encode(Yii::app()->format->formataCodigo($data->codcheque)); ?></small>
 
-		<b class="span3"><?php echo CHtml::encode($data->emitente); ?></b>
+		<b class="span3"><?php echo CHtml::link(CHtml::encode($data->emitente),array('view','id'=>$data->codcheque)); ?></b>
+		
 		
 		<b class="span2 text-right">
 			<?php echo CHtml::encode(Yii::app()->format->formatNumber(abs($data->valor))); ?>

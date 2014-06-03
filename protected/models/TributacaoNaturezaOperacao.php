@@ -50,9 +50,10 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codtributacao, codnaturezaoperacao, codcfop, csosn', 'required'),
+			array('codtributacao, codnaturezaoperacao, codtipoproduto, codcfop, csosn', 'required'),
 			array('acumuladordominiovista, acumuladordominioprazo', 'numerical', 'integerOnly'=>true),
 			array('icmsbase, icmspercentual', 'length', 'max'=>14),
+			array('codtributacao', 'validaChaveUnica'),
 			array('csosn', 'length', 'max'=>4),
 			array('historicodominio', 'length', 'max'=>512),
 			array('codestado, codtipoproduto, movimentacaofisica, movimentacaocontabil, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
@@ -61,6 +62,47 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 			array('codtributacaonaturezaoperacao, codtributacao, codnaturezaoperacao, codcfop, icmsbase, icmspercentual, codestado, csosn, codtipoproduto, acumuladordominiovista, acumuladordominioprazo, historicodominio, movimentacaofisica, movimentacaocontabil, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
 		);
 	}
+	
+//verifica se a combinacao de CNPJ e IE já não estão cadastrados
+	public function validaChaveUnica($attribute,$params)
+	{
+		if (empty($this->codtributacao))
+			return;
+		
+		if (empty($this->codnaturezaoperacao))
+			return;
+		
+		if (strlen($this->codtipoproduto) <= 0)
+			return;
+		
+		$condicao  = 'codtributacao = :codtributacao AND codnaturezaoperacao = :codnaturezaoperacao AND codtipoproduto = :codtipoproduto';
+		$parametros = array(
+			'codtributacao' => $this->codtributacao,
+			'codnaturezaoperacao' => $this->codnaturezaoperacao,
+			'codtipoproduto' => $this->codtipoproduto,
+			);
+		
+		if (empty($this->codestado))
+		{
+			$condicao .= ' AND codestado IS NULL';
+		}
+		else
+		{
+			$condicao .= ' AND codestado = :codestado';
+			$parametros['codestado'] = $this->codestado;
+		}
+		
+		$regs = TributacaoNaturezaOperacao::model()->findAll(
+			array(
+				'condition' => $condicao, 
+				'params' => $parametros,
+			)
+		);
+		
+		if (sizeof($regs) > 0)
+			if ($regs[0]->codtributacaonaturezaoperacao <> $this->codtributacaonaturezaoperacao)
+				$this->addError($attribute, "Já existe uma combinação de Tributação, Tipo de Produto e Estado igual à essa cadastrada!");
+	}	
 
 	/**
 	 * @return array relational rules.

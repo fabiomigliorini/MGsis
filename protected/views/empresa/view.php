@@ -44,5 +44,30 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 	)); 
 
 	$this->widget('UsuarioCriacao', array('model'=>$model));
+	
+	$filial=new Filial('search');
+
+	$filial->unsetAttributes();  // clear any default values
+
+	if(isset($_GET['Filial']))
+	{
+		Yii::app()->session['FiltroFilialIndex'] = $_GET['Filial'];
+	}
+
+	if (isset(Yii::app()->session['FiltroFilialIndex']))
+		$filial->attributes=Yii::app()->session['FiltroFilialIndex'];
+
+	$filial->codempresa = $model->codempresa;
+	
+	//echo "<pre>";
+	//print_r($filial);
+	//echo "</pre>";
+		//die('aqui');
+
+
+	$this->renderPartial('/filial/index',array(
+		'dataProvider'=>$filial->search(),
+		'model'=>$filial,
+		));
 
 ?>

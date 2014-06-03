@@ -1,7 +1,7 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Detalhes Unidade de Medida';
+$this->pagetitle = Yii::app()->name . ' - Detalhes Unidades de Medidas';
 $this->breadcrumbs=array(
-	'Unidade de Medida'=>array('index'),
+	'Unidades de Medidas'=>array('index'),
 	$model->unidademedida,
 );
 
@@ -35,7 +35,11 @@ $(document).ready(function(){
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-			'codunidademedida',
+		//'codunidademedida',
+		array(
+			'name'=>'codunidademedida',
+			'value'=>Yii::app()->format->formataCodigo($model->codunidademedida),
+			),
 		'unidademedida',
 		'sigla',
 		),

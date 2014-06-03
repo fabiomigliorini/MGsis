@@ -4,11 +4,11 @@
 		
 		<b class="span2"><?php echo CHtml::link(CHtml::encode($data->portador),array('view','id'=>$data->codportador)); ?></b>
 
-		<small class="span1 muted"><?php echo CHtml::encode((isset($data->Banco)?$data->Banco->banco:"")); ?></small>
+		<small class="span1"><?php echo CHtml::encode((isset($data->Banco)?$data->Banco->banco:"")); ?></small>
 		
-		<small class="span1 muted"><?php echo CHtml::encode((isset($data->Filial)?$data->Filial->filial:"")); ?></small>
+		<small class="span1"><?php echo CHtml::encode((isset($data->Filial)?$data->Filial->filial:"")); ?></small>
 
-		<small class="span7 muted"><?php echo CHtml::encode(($data->emiteboleto)?"Boleto":""); ?></small>
+		<small class="span7"><?php echo CHtml::encode(($data->emiteboleto)?"Boleto":""); ?></small>
 		
 		
 		<?php /*	

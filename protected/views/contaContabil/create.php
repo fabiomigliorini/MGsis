@@ -1,8 +1,8 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Nova Conta Contábil';
 $this->breadcrumbs=array(
-	'Conta Contábil'=>array('index'),
-	'Nova Conta Contábil',
+	'Contas Contábeis'=>array('index'),
+	'Nova',
 );
 
 $this->menu=array(

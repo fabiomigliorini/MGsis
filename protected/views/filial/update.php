@@ -1,14 +1,15 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Alterar Filial';
 $this->breadcrumbs=array(
-	'Filial'=>array('index'),
+	'Empresas'=>array('empresa/index'),
+	$model->Empresa->empresa=>array('empresa/view', "id"=>$model->codempresa),
 	$model->filial=>array('view','id'=>$model->codfilial),
 	'Alterar',
 );
 
 	$this->menu=array(
-	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
-	array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create')),
+	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('empresa/view', "id"=>$model->codempresa)),
+	array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create', "codempresa"=>$model->codempresa)),
 	array('label'=>'Detalhes', 'icon'=>'icon-eye-open', 'url'=>array('view','id'=>$model->codfilial)),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 	);

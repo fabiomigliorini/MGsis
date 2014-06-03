@@ -3,7 +3,7 @@
 	
 		<b class="span2"><?php echo CHtml::link(CHtml::encode($data->tipomovimentotitulo),array('view','id'=>$data->codtipomovimentotitulo)); ?></b>
 
-		<small class="span3 muted">
+		<small class="span3">
 			<?php echo ($data->implantacao)?"Implantação":""; ?>
 
 			<?php echo CHtml::encode($data->ajuste)?"Ajuste":""; ?>
@@ -19,7 +19,7 @@
 			<?php echo CHtml::encode($data->estorno)?"Estorno":""; ?>
 		</small>
 
-		<small class="span6 muted"><?php echo nl2br(CHtml::encode($data->observacao)); ?></small>
+		<small class="span6"><?php echo nl2br(CHtml::encode($data->observacao)); ?></small>
 
 	
 </div>

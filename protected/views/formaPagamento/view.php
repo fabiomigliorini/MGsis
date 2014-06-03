@@ -35,7 +35,11 @@ $(document).ready(function(){
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-		'codformapagamento',
+		//'codformapagamento',
+		array(
+			'name'=>'codformapagamento',
+			'value'=>Yii::app()->format->formataCodigo($model->codformapagamento),
+			),
 		'formapagamento',
 		//'boleto',
 		array(

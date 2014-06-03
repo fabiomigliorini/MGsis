@@ -1,7 +1,7 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Alterar Portador';
 $this->breadcrumbs=array(
-	'Portador'=>array('index'),
+	'Portadores'=>array('index'),
 	$model->portador=>array('view','id'=>$model->codportador),
 	'Alterar',
 );

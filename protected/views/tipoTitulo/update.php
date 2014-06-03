@@ -1,7 +1,7 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Alterar Tipo Título';
 $this->breadcrumbs=array(
-	'Tipo Título'=>array('index'),
+	'Tipos de Títulos'=>array('index'),
 	$model->tipotitulo=>array('view','id'=>$model->codtipotitulo),
 	'Alterar',
 );

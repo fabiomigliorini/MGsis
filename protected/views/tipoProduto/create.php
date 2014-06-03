@@ -1,8 +1,8 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Novo Tipo de Produto';
 $this->breadcrumbs=array(
-	'Tipo de Produto'=>array('index'),
-	'Novo Tipo de Produto',
+	'Tipos de Produtos'=>array('index'),
+	'Novo',
 );
 
 $this->menu=array(
