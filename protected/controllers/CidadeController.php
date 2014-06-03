@@ -23,9 +23,11 @@ class CidadeController extends Controller
 	* Creates a new model.
 	* If creation is successful, the browser will be redirected to the 'view' page.
 	*/
-	public function actionCreate()
+	public function actionCreate($codestado)
 	{
 		$model=new Cidade;
+		
+		$model->codestado = $codestado;
 
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
@@ -76,11 +78,25 @@ class CidadeController extends Controller
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
-			$this->loadModel($id)->delete();
-
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
+			try 
+			{
+				$model = $this->loadModel($id);
+				$codestado = $model->codestado;
+				$model->delete();
+				// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+				if(!isset($_GET['ajax']))
+					$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('estado/view', 'id'=>$codestado));
+			} 
+			catch (Exception $ex)
+			{
+				// Cannot delete or update a parent row: a foreign key constraint fails
+				if($e->errorInfo[1] == 7)
+				{
+					throw new CHttpException(409, 'Registro em uso, você não pode excluir.');
+				}
+				else
+					throw $e;
+			}
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
@@ -91,13 +107,15 @@ class CidadeController extends Controller
 	*/
 	public function actionIndex()
 	{
-		
 		$model=new Cidade('search');
 		
 		$model->unsetAttributes();  // clear any default values
 		
 		if(isset($_GET['Cidade']))
-			$model->attributes=$_GET['Cidade'];
+			Yii::app()->session['FiltroCidadeIndex'] = $_GET['Cidade'];
+		
+		if (isset(Yii::app()->session['FiltroCidadeIndex']))
+			$model->attributes=Yii::app()->session['FiltroCidadeIndex'];
 
 		$this->render('index',array(
 			'dataProvider'=>$model->search(),

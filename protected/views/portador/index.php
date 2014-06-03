@@ -41,6 +41,17 @@ $(document).ready(function(){
 	<?php echo $form->textField($model, 'codportador', array('placeholder' => 'Código', 'class'=>'input-medium')); ?>
 	<?php echo $form->textField($model, 'portador', array('placeholder' => 'Portador', 'class'=>'input-medium')); ?>
 	<?php
+		echo $form->select2(
+			$model, 
+			'codbanco', 
+			Banco::getListaCombo(), 
+			array(
+				'placeholder'=>'Banco',
+				'class' => 'input-medium'
+			)
+		);
+	?>
+	<?php
 	$this->widget('bootstrap.widgets.TbButton'
 		, array(
 			'buttonType' => 'submit',

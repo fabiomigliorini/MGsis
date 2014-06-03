@@ -1,4 +1,5 @@
 <?php
+/*
 $this->pagetitle = Yii::app()->name . ' - Tributação Natureza Operação';
 $this->breadcrumbs=array(
 	'Tributação Natureza Operação',
@@ -8,6 +9,8 @@ $this->menu=array(
 	array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 	);
+ */
+
 ?>
 
 <script type='text/javascript'>
@@ -25,7 +28,12 @@ $(document).ready(function(){
 
 </script>
 
-<h1>Tributação Natureza Operação</h1>
+<h2>
+	Tributação Natureza Operação
+	<small>
+		<?php echo CHtml::link("<i class=\"icon-plus\"></i> Nova", array("tributacaoNaturezaOperacao/create", "codnaturezaoperacao" => $model->codnaturezaoperacao)); ?>
+	</small>
+</h2>
 
 <br>
 
@@ -38,18 +46,10 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
+	<input type ="hidden" name="id" value="<?php echo $model->codnaturezaoperacao;?>">
+
 	<?php echo $form->textField($model, 'codtributacaonaturezaoperacao', array('placeholder' => 'Código', 'class'=>'input-mini')); ?>
-	<?php
-		echo $form->select2(
-			$model, 
-			'codnaturezaoperacao', 
-			NaturezaOperacao::getListaCombo(), 
-			array(
-				'placeholder'=>'Natureza Operação',
-				'class' => 'input-xmedium'
-			)
-		);
-	?>
+	
 	<?php
 		echo $form->select2(
 			$model, 
@@ -68,7 +68,7 @@ $(document).ready(function(){
 			TipoProduto::getListaCombo(), 
 			array(
 				'placeholder'=>'Tipo Produto',
-				'class' => 'input-medium'
+				'class' => 'input-xmedium'
 			)
 		);
 	?>
@@ -79,7 +79,7 @@ $(document).ready(function(){
 			Estado::getListaCombo(), 
 			array(
 				'placeholder'=>'Estado',
-				'class' => 'input-medium'
+				'class' => 'input-small'
 			)
 		);
 	?>
@@ -107,7 +107,7 @@ $this->widget(
 	array(
 		'id' => 'Listagem',
 		'dataProvider' => $dataProvider,
-		'itemView' => '_view',
+		'itemView' => '/tributacaoNaturezaOperacao/_view',
 		'template' => '{items} {pager}',
 		'pager' => array(
 			'class' => 'ext.infiniteScroll.IasPager', 

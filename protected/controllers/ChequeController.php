@@ -112,6 +112,10 @@ class ChequeController extends Controller
 		
 		if (isset(Yii::app()->session['FiltroChequeIndex']))
 			$model->attributes=Yii::app()->session['FiltroChequeIndex'];
+		else
+		{
+			$model->codstatus= Cheque::CODSTATUS_ABERTO; //Aberto
+		}
 		
 		$this->render('index',array(
 			'dataProvider'=>$model->search(),

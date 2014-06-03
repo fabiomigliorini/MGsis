@@ -9,9 +9,9 @@
 		//echo $form->textFieldRow($model,'codtributacao',array('class'=>'span5'));
 		echo $form->select2Row($model, 'codtributacao', Tributacao::getListaCombo(), array('prompt' => '', 'class' => 'input-large'));
 		//echo $form->textFieldRow($model,'codnaturezaoperacao',array('class'=>'span5'));
-		echo $form->select2Row($model, 'codnaturezaoperacao', NaturezaOperacao::getListaCombo(), array('prompt' => '', 'class' => 'input-large'));
+		//echo $form->select2Row($model, 'codnaturezaoperacao', NaturezaOperacao::getListaCombo(), array('prompt' => '', 'class' => 'input-large'));
 		//echo $form->textFieldRow($model,'codcfop',array('class'=>'span5'));
-		echo $form->select2Row($model, 'codcfop', Cfop::getListaCombo(), array('prompt' => '', 'class' => 'input-xlarge'));
+		echo $form->select2Row($model, 'codcfop', Cfop::getListaCombo(), array('prompt' => '', 'class' => 'input-xxlarge'));
 		echo $form->textFieldRow($model,'icmsbase',array('class'=>'input-mini','maxlength'=>14));
 		echo $form->textFieldRow($model,'icmspercentual',array('class'=>'input-mini','maxlength'=>14));
 		//echo $form->textFieldRow($model,'codestado',array('class'=>'span5'));

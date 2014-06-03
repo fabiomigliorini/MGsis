@@ -1,7 +1,7 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - País';
+$this->pagetitle = Yii::app()->name . ' - Países';
 $this->breadcrumbs=array(
-	'País',
+	'Países',
 );
 
 $this->menu=array(
@@ -25,7 +25,7 @@ $(document).ready(function(){
 
 </script>
 
-<h1>País</h1>
+<h1>Países</h1>
 
 <br>
 
@@ -65,12 +65,12 @@ $this->widget(
 		'itemView' => '_view',
 		'template' => '{items} {pager}',
 		'pager' => array(
-			'class' => 'ext.infiniteScroll.IasPager', 
-			'rowSelector'=>'.registro', 
-			'listViewId' => 'Listagem', 
-			'header' => '',
-			'loaderText'=>'Carregando...',
-			'options' => array('history' => false, 'triggerPageTreshold' => 10, 'trigger'=>'Carregar mais registros'),
+		'class' => 'ext.infiniteScroll.IasPager', 
+		'rowSelector'=>'.registro', 
+		'listViewId' => 'Listagem', 
+		'header' => '',
+		'loaderText'=>'Carregando...',
+		'options' => array('history' => false, 'triggerPageTreshold' => 10, 'trigger'=>'Carregar mais registros'),
 		)
 	)
 );

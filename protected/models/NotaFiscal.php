@@ -586,11 +586,11 @@ class NotaFiscal extends MGActiveRecord
 	
 	protected function afterFind()
 	{
-		
 		$this->calculaStatus();
 		return parent::afterFind();
 	}
 	
+<<<<<<< HEAD
 	//preenche codoperacao
 	protected function beforeValidate()
 	{
@@ -600,5 +600,22 @@ class NotaFiscal extends MGActiveRecord
 		return parent::beforeValidate();
 	}
 	
+=======
+	public function scopes () 
+	{
+		return array(
+			'combo'=>array(
+				'select'=>array('codnotafiscal', 'notafiscal'),
+				'order'=>'notafiscal ASC',
+				),
+			);
+	}
+	
+	public function getListaCombo ()
+	{
+		$lista = self::model()->combo()->findAll();
+		return CHtml::listData($lista, 'codnotafiscal', 'notafiscal');
+	}	
+>>>>>>> d4cbca912507c3e8316f33c6ddc4077594bd829e
 
 }

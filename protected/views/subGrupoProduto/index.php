@@ -1,4 +1,5 @@
 <?php
+/*
 $this->pagetitle = Yii::app()->name . ' - Sub Grupos de Produtos';
 $this->breadcrumbs=array(
 	'Sub Grupos de Produtos',
@@ -8,6 +9,8 @@ $this->menu=array(
 	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 	);
+ * 
+ */
 ?>
 
 <script type='text/javascript'>
@@ -25,7 +28,12 @@ $(document).ready(function(){
 
 </script>
 
-<h1>Sub Grupos de Produtos</h1>
+<h2>
+	Sub Grupos de Produtos
+	<small>
+		<?php echo CHtml::link("<i class=\"icon-plus\"></i> Novo", array("subGrupoProduto/create", "codgrupoproduto" => $model->codgrupoproduto)); ?>
+	</small>
+</h2>
 
 <br>
 
@@ -38,19 +46,11 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
+	<input type ="hidden" name="id" value="<?php echo $model->codgrupoproduto;?>">
+
 	<?php echo $form->textField($model, 'codsubgrupoproduto', array('placeholder' => 'Código', 'class'=>'input-mini')); ?>
 	<?php echo $form->textField($model, 'subgrupoproduto', array('placeholder' => 'Descrição', 'class'=>'input-large')); ?>
-	<?php
-		echo $form->select2(
-			$model, 
-			'codgrupoproduto', 
-			GrupoProduto::getListaCombo(), 
-			array(
-				'placeholder'=>'Grupo de Produto',
-				'class' => 'input-xmedium'
-			)
-		);
-	?>
+
 	<?php
 	$this->widget('bootstrap.widgets.TbButton'
 		, array(
@@ -73,7 +73,7 @@ $this->widget(
 	array(
 		'id' => 'Listagem',
 		'dataProvider' => $dataProvider,
-		'itemView' => '_view',
+		'itemView' => '/subGrupoProduto/_view',
 		'template' => '{items} {pager}',
 		'pager' => array(
 			'class' => 'ext.infiniteScroll.IasPager', 

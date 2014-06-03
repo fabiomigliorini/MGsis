@@ -41,5 +41,21 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 	)); 
 
 	$this->widget('UsuarioCriacao', array('model'=>$model));
+	
+	$subgrupoproduto=new SubGrupoProduto('search');
 
+	$subgrupoproduto->unsetAttributes();  // clear any default values
+
+	if(isset($_GET['SubGrupoProduto']))
+		Yii::app()->session['FiltroSubGrupoProdutoIndex'] = $_GET['SubGrupoProduto'];
+
+	if (isset(Yii::app()->session['FiltroSubGrupoProdutoIndex']))
+		$subgrupoproduto->attributes=Yii::app()->session['FiltroSubGrupoProdutoIndex'];
+
+	$subgrupoproduto->codgrupoproduto = $model->codgrupoproduto;
+
+	$this->renderPartial('/subGrupoProduto/index',array(
+		'dataProvider'=>$subgrupoproduto->search(),
+		'model'=>$subgrupoproduto,
+		));
 ?>

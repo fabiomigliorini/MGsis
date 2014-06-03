@@ -93,7 +93,7 @@ class Pais extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codpais',$this->codpais,false);
+		$criteria->compare('codpais',Yii::app()->format->numeroLimpo($this->codpais),false);
 		//$criteria->compare('pais',$this->pais,false);
 		if (!empty($this->pais))
 		{

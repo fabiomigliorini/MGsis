@@ -1,12 +1,15 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Novo Cidade';
+$this->pagetitle = Yii::app()->name . ' - Nova Cidade';
 $this->breadcrumbs=array(
-	'Cidade'=>array('index'),
-	'Nova',
+	'Países'=>array('pais/index'),
+	$model->Estado->Pais->pais=>array('pais/view', "id"=>$model->Estado->codpais),
+	$model->Estado->estado=>array('estado/view', "id"=>$model->codestado),
+
+	'Nova Cidade',
 );
 
 $this->menu=array(
-array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
+array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('estado/view', "id"=>$model->codestado)),
 //array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
 ?>

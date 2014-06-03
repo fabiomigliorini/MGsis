@@ -7,7 +7,7 @@
 <fieldset>
 	<?php 	
 		//echo $form->textFieldRow($model,'codpais',array('class'=>'span5'));
-		echo $form->select2Row($model, 'codpais', Pais::getListaCombo(), array('class' => 'input-medium'));
+		//echo $form->select2Row($model, 'codpais', Pais::getListaCombo(), array('class' => 'input-medium'));
 		echo $form->textFieldRow($model,'estado',array('class'=>'input-medium','maxlength'=>50));
 		echo $form->textFieldRow($model,'sigla',array('class'=>'input-mini','maxlength'=>2));
 		echo $form->textFieldRow($model,'codigooficial',array('class'=>'input-mini'));
@@ -38,7 +38,7 @@
 	
 $(document).ready(function() {
 
-	//$("#Pessoa_fantasia").Setcase();
+	$("#Estado_estado").Setcase();
 
 	$('#estado-form').submit(function(e) {
         var currentForm = this;

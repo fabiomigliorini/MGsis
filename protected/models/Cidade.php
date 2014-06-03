@@ -39,7 +39,7 @@ class Cidade extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codestado, cidade, codigooficial', 'required'),
+			array('cidade, codigooficial', 'required'),
 			array('cidade', 'length', 'max'=>50),
 			array('sigla', 'length', 'max'=>3),
 			array('codestado, codigooficial, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
@@ -133,5 +133,21 @@ class Cidade extends MGActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+	
+	public function scopes () 
+	{
+		return array(
+			'combo'=>array(
+				'select'=>array('codcidade', 'cidade'),
+				'order'=>'cidade ASC',
+				),
+			);
+	}
+	
+	public function getListaCombo ()
+	{
+		$lista = self::model()->combo()->findAll();
+		return CHtml::listData($lista, 'codcidade', 'cidade');
 	}
 }

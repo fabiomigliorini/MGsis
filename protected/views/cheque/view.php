@@ -1,8 +1,8 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Detalhes Cheque';
+$this->pagetitle = Yii::app()->name . ' - Detalhes do Cheque';
 $this->breadcrumbs=array(
 	'Cheque'=>array('index'),
-	$model->codcheque,
+	$model->emitente,
 );
 
 $this->menu=array(
@@ -29,15 +29,42 @@ $(document).ready(function(){
 /*]]>*/
 </script>
 
-<h1><?php echo $model->codcheque; ?></h1>
+<h1><?php echo $model->emitente; ?></h1>
 
 <?php 
+
+$css_label = "";
+
+switch ($model->codstatus)
+{
+	case Cheque::CODSTATUS_ABERTO;
+		$css_label = "label-success";
+		break;
+
+	case Cheque::CODSTATUS_REPASSADO;
+		$css_label = "label-info";
+		break;
+
+	case Cheque::CODSTATUS_DEVOLVIDO;
+		$css_label = "label-important";
+		break;
+
+	case Cheque::CODSTATUS_CANCELADO;
+		break;
+	
+}
+
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-			'codcheque',
+		'codcheque',
 		'cmc7',
-		'codbanco',
+		//'codbanco',
+		array(
+			'name'=>'codbanco',
+			'value'=>(isset($model->codbanco))?CHtml::link(CHtml::encode($model->Banco->banco),array('banco/view','id'=>$model->codbanco)):null,
+			'type'=>'raw',
+			),
 		'agencia',
 		'contacorrente',
 		'emitente',
@@ -48,10 +75,26 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 		'destino',
 		'devolucao',
 		'motivodevolucao',
-		'observacao',
+		//'status',
+		array(
+			'label'=>'Status',
+			'value'=>"<small class='label $css_label'>$model->status</small>",
+			'type'=>'raw',
+		),
+		//'observacao',
+		array(
+			'name'=>'observacao',
+			'value'=>nl2br(CHtml::encode($model->observacao)),
+			'type'=>'raw',
+			),
 		'lancamento',
 		'cancelamento',
-		'valor',
+		//'valor',
+		array(
+				'name'=>'valor',
+				'value'=>Yii::app()->format->formatNumber($model->valor) . " ",
+				),
+		
 		),
 	)); 
 

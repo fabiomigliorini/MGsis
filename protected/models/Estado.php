@@ -42,6 +42,7 @@ class Estado extends MGActiveRecord
 			array('estado, codpais, sigla, codigooficial', 'required'),
 			array('estado', 'length', 'max'=>50),
 			array('sigla', 'length', 'max'=>2),
+			array('codigooficial', 'unique'),
 			array('codpais, codigooficial, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -100,7 +101,7 @@ class Estado extends MGActiveRecord
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
-		$criteria->compare('codestado',$this->codestado,false);
+		$criteria->compare('codestado',Yii::app()->format->numeroLimpo($this->codestado),false);
 		//$criteria->compare('estado',$this->estado,false);
 		if (!empty($this->estado))
 		{
@@ -109,7 +110,13 @@ class Estado extends MGActiveRecord
 			$criteria->params = array_merge($criteria->params, array(':estado' => '%'.$texto.'%'));
 		}
 		$criteria->compare('codpais',$this->codpais,false);
-		$criteria->compare('sigla',$this->sigla,false);
+		//$criteria->compare('sigla',$this->sigla,false);
+		if (!empty($this->sigla))
+		{
+			$texto  = str_replace(' ', '%', trim($this->sigla));
+			$criteria->addCondition('t.sigla ILIKE :sigla');
+			$criteria->params = array_merge($criteria->params, array(':sigla' => '%'.$texto.'%'));
+		}
 		$criteria->compare('codigooficial',$this->codigooficial,false);
 		$criteria->compare('alteracao',$this->alteracao,false);
 		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);

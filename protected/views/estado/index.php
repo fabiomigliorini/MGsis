@@ -1,4 +1,5 @@
 <?php
+/*
 $this->pagetitle = Yii::app()->name . ' - Estado';
 $this->breadcrumbs=array(
 	'Estado',
@@ -8,6 +9,8 @@ $this->menu=array(
 	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 	);
+ * 
+ */
 ?>
 
 <script type='text/javascript'>
@@ -25,7 +28,12 @@ $(document).ready(function(){
 
 </script>
 
-<h1>Estado</h1>
+<h2>
+	Estados 
+	<small>
+		<?php echo CHtml::link("<i class=\"icon-plus\"></i> Novo", array("estado/create", "codpais" => $model->codpais)); ?>
+	</small>
+</h2>
 
 <br>
 
@@ -38,18 +46,24 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
+	<input type ="hidden" name="id" value="<?php echo $model->codpais;?>">
 	<?php echo $form->textField($model, 'codestado', array('placeholder' => '#', 'class'=>'input-mini')); ?>
 	<?php echo $form->textField($model, 'estado', array('placeholder' => 'Estado', 'class'=>'input-medium')); ?>
+	<?php echo $form->textField($model, 'sigla', array('placeholder' => 'Sigla', 'class'=>'input-mini')); ?>
+	<?php echo $form->textField($model, 'codigooficial', array('placeholder' => 'Código Oficial', 'class'=>'input-small')); ?>
 	<?php
+		/*
 		echo $form->select2(
 			$model, 
 			'codpais', 
 			Pais::getListaCombo(), 
 			array(
-				'placeholder'=>'País',
+				'placeholder'=>'Países',
 				'class' => 'input-medium'
 			)
 		);
+		 * 
+		 */
 	?>
 	<?php
 	$this->widget('bootstrap.widgets.TbButton'
@@ -73,7 +87,7 @@ $this->widget(
 	array(
 		'id' => 'Listagem',
 		'dataProvider' => $dataProvider,
-		'itemView' => '_view',
+		'itemView' => '/estado/_view',
 		'template' => '{items} {pager}',
 		'pager' => array(
 			'class' => 'ext.infiniteScroll.IasPager', 
