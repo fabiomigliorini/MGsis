@@ -87,8 +87,51 @@
 
 <script type='text/javascript'>
 	
+function calculaTotal()
+{
+	//pega valor Desconto
+	var total = Number($('#NotaFiscal_valorprodutos').autoNumeric('get'))
+		+ Number($('#NotaFiscal_icmsstvalor').autoNumeric('get'))
+		+ Number($('#NotaFiscal_ipivalor').autoNumeric('get'))
+		+ Number($('#NotaFiscal_valorfrete').autoNumeric('get'))
+		+ Number($('#NotaFiscal_valorseguro').autoNumeric('get'))
+		- Number($('#NotaFiscal_valordesconto').autoNumeric('get'))
+		+ Number($('#NotaFiscal_valoroutras').autoNumeric('get'));
+	
+	$('#NotaFiscal_valortotal').autoNumeric('set', total);
+
+}
+
+function desabilitaCamposEmitida()
+{
+	var emitida = $('#NotaFiscal_emitida').is(':checked');
+	
+	$("#NotaFiscal_serie").prop('disabled', emitida);
+	$("#NotaFiscal_numero").prop('disabled', emitida);
+	$("#NotaFiscal_nfechave").prop('disabled', emitida);
+	
+	if (emitida == <?php echo ($model->emitida)?"true":"false"; ?> 
+		<?php if (!$model->isNewRecord): ?>
+		&& $("#NotaFiscal_codfilial").val() == <?php echo $model->codfilial; ?>
+		<?php endif; ?>
+		)
+	{
+		$("#NotaFiscal_serie").val("<?php echo $model->serie; ?>");
+		$("#NotaFiscal_numero").val("<?php echo $model->numero; ?>");
+		$("#NotaFiscal_nfechave").val("<?php echo $model->nfechave; ?>");
+	}
+	else if (emitida == true)
+	{
+		$("#NotaFiscal_serie").val(1);
+		$("#NotaFiscal_numero").val(0);
+		$("#NotaFiscal_nfechave").val("<?php echo $model->nfechave; ?>");
+	}
+}
+	
 $(document).ready(function() {
 
+	desabilitaCamposEmitida();
+	
 	//$("#Pessoa_fantasia").Setcase();
 	$('#NotaFiscal_valorprodutos').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#NotaFiscal_icmsstvalor').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
@@ -98,6 +141,17 @@ $(document).ready(function() {
 	$('#NotaFiscal_valordesconto').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#NotaFiscal_valoroutras').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#NotaFiscal_valortotal').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+
+	$('#NotaFiscal_valorprodutos').change(function(e){ calculaTotal(); });
+	$('#NotaFiscal_icmsstvalor').change(function(e){ calculaTotal(); });
+	$('#NotaFiscal_ipivalor').change(function(e){ calculaTotal(); });
+	$('#NotaFiscal_valorfrete').change(function(e){ calculaTotal(); });
+	$('#NotaFiscal_valorseguro').change(function(e){ calculaTotal(); });
+	$('#NotaFiscal_valordesconto').change(function(e){ calculaTotal(); });
+	$('#NotaFiscal_valoroutras').change(function(e){ calculaTotal(); });
+
+	$('#NotaFiscal_emitida').change(function(e){ desabilitaCamposEmitida(); });
+	$('#NotaFiscal_codfilial').change(function(e){ desabilitaCamposEmitida(); });
 
 	$('#nota-fiscal-form').submit(function(e) {
         var currentForm = this;
