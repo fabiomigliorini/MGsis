@@ -91,9 +91,16 @@ class NotaFiscal extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codnaturezaoperacao, serie, numero, emissao, saida, codfilial, codpessoa', 'required'),
+			array('codnaturezaoperacao, serie, emissao, saida, codfilial, codpessoa', 'required'),
 			array('serie, numero, volumes', 'numerical', 'integerOnly'=>true),
 			array('nfechave, nfereciboenvio, nfeautorizacao, nfecancelamento, nfeinutilizacao', 'length', 'max'=>100),
+			array('nfechave', 'validaChaveNFE'),
+			array('codpessoa', 'validaPessoaPelaChaveNFE'),
+			array('serie', 'validaSeriePelaChaveNFE'),
+			array('numero', 'validaNumeroPelaChaveNFE'),
+			array('numero', 'validaNumero'),
+			array('emissao', 'validaEmissaoPelaChaveNFE'),
+			array('saida', 'validaSaida'),
 			array('observacoes', 'length', 'max'=>500),
 			array('valorfrete, valorseguro, valordesconto, valoroutras, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipivalor', 'length', 'max'=>14),
 			array('justificativa', 'length', 'max'=>200),
@@ -103,6 +110,212 @@ class NotaFiscal extends MGActiveRecord
 			array('codnotafiscal, codnaturezaoperacao, emitida, nfechave, nfeimpressa, serie, numero, emissao, saida, codfilial, codpessoa, observacoes, volumes, fretepagar, codoperacao, nfereciboenvio, nfedataenvio, nfeautorizacao, nfedataautorizacao, valorfrete, valorseguro, valordesconto, valoroutras, nfecancelamento, nfedatacancelamento, nfeinutilizacao, nfedatainutilizacao, justificativa, alteracao, codusuarioalteracao, criacao, codusuariocriacao, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipivalor, codstatus, emissao_de, emissao_ate, saida_de, saida_ate', 'safe', 'on'=>'search'),
 		);
 	}
+	
+	// composicao serie e numero deve ser unica para a filial ou para a pessoa
+	public function validaNumero($attribute, $params)
+	{
+		if ((!$this->emitida) && empty($this->numero))
+			$this->addError($attribute, "Preencha o número da Nota Fiscal!");
+		
+		if (empty($this->numero))
+			return;
+		
+		if (empty($this->codpessoa))
+			return;
+		
+		if (empty($this->serie))
+			return;
+		
+		if (empty($this->codfilial))
+			return;
+
+		$condicao = " serie = :serie AND numero = :numero ";
+		
+		$parametros = array(
+			"serie" => $this->serie,
+			"numero" => $this->numero
+			);
+		
+		if (!$this->isNewRecord)
+		{
+			$condicao .= " AND codnotafiscal <> :codnotafiscal ";
+			$parametros["codnotafiscal"] = $this->codnotafiscal;
+		}
+		
+		if ($this->emitida)
+		{
+			$condicao .= " AND emitida = true AND codfilial = :codfilial ";
+			$parametros["codfilial"] = $this->codfilial;
+		}
+		else
+		{
+			$condicao .= " AND emitida = false AND codpessoa = :codpessoa ";
+			$parametros["codpessoa"] = $this->codpessoa;
+		}
+		
+		if ($nota = NotaFiscal::model()->findAll($condicao, $parametros))
+			$this->addError($attribute, "Esta Nota Fiscal já está cadastrada no sistema!");
+
+	}
+		
+	// valida chave da NFE
+	public function validaSaida($attribute, $params)
+	{
+		if (empty($this->emissao))
+			return;
+		
+		if (empty($this->saida))
+			return;
+		
+		$saida = DateTime::createFromFormat("d/m/Y",$this->saida);
+		$emissao = DateTime::createFromFormat("d/m/Y",$this->emissao);
+		$maximo = new DateTime("now");
+		$maximo->add(new DateInterval("P3D"));
+		
+		if ($saida < $emissao)
+			$this->addError($attribute, "A data de Entrada/Saída precisa ser posterior à $this->emissao!");
+		
+		if ($saida > $maximo)
+			$this->addError($attribute, "A data de Entrada/Saída precisa ser anterior à " . $maximo->format('d/m/Y') . " !");
+	}
+	
+	// valida chave da NFE
+	public function validaChaveNFE($attribute, $params)
+	{
+		if (empty($this->nfechave))
+			return;
+		
+		$digito = $this->calculaDigitoChaveNFE($this->nfechave);
+		
+		if ($digito == -1)
+			$this->addError($attribute, "Chave da NFE Inválida!");
+		
+		if (substr($this->nfechave, 43, 1) <> $digito)
+			$this->addError($attribute, "Dígito da Chave da NFE Inválido!");
+	}
+	
+	// compara CNPJ da Filial ou da Pessoa com o CNPJ da Chave da NFE
+	public function validaPessoaPelaChaveNFE($attribute, $params)
+	{
+		if (empty($this->nfechave))
+			return;
+		
+		if (empty($this->codpessoa))
+			return;
+		
+		if (empty($this->codfilial))
+			return;
+		
+		$cnpj = substr(Yii::app()->format->numeroLimpo($this->nfechave), 6, 14);
+		
+		if (strlen($cnpj) <> 14)
+			return;
+		
+		if ($this->emitida)
+		{
+			if ($cnpj != $this->Filial->Pessoa->cnpj)
+				$this->addError($attribute, "A filial selecionada não bate com o CNPJ da chave da NFE!");
+		}
+		else
+		{
+			$pessoas = Pessoa::model()->findAll("cnpj = :cnpj", array(":cnpj" => $cnpj));
+			$achou = false;
+			foreach ($pessoas as $pessoa)
+				if ($this->codpessoa == $pessoa->codpessoa)
+					$achou = true;
+
+			if (!$achou)
+				$this->addError($attribute, "A pessoa selecionada não bate com o CNPJ da chave da NFE!");
+		}
+	}
+	
+	// compara Serie informada com a Serie da chave a NFE
+	public function validaSeriePelaChaveNFE($attribute, $params)
+	{
+		if (empty($this->nfechave))
+			return;
+		
+		if (empty($this->serie))
+			return;
+		
+		$serie = intval(substr(Yii::app()->format->numeroLimpo($this->nfechave), 22, 3));
+		
+		if ($serie <> $this->serie)
+			$this->addError($attribute, "A série informada não bate com a chave da NFE!");
+		
+	}
+	
+	// compara numero informada com o numero da chave a NFE
+	public function validaNumeroPelaChaveNFE($attribute, $params)
+	{
+		if (empty($this->nfechave))
+			return;
+		
+		if (empty($this->numero))
+			return;
+		
+		$numero = intval(substr(Yii::app()->format->numeroLimpo($this->nfechave), 25, 9));
+		
+		if ($numero <> $this->numero)
+			$this->addError($attribute, "O número informado não bate com a chave da NFE!");
+		
+	}
+
+	// compara data de emissão informada com o mes e ano da chave a NFE
+	public function validaEmissaoPelaChaveNFE($attribute, $params)
+	{
+		if (empty($this->nfechave))
+			return;
+		
+		if (empty($this->emissao))
+			return;
+		
+		$mes = substr(Yii::app()->format->numeroLimpo($this->nfechave), 4, 2);
+		$ano = intval(substr(Yii::app()->format->numeroLimpo($this->nfechave), 2, 2));
+		$ano += 2000;
+		
+		if (($mes <> substr($this->emissao, 3, 2)) || ($ano <> substr($this->emissao, 6, 4)))
+			$this->addError($attribute, "A emissão informada não bate com a chave da NFE!");
+		
+		
+	}
+	
+	public function calculaDigitoChaveNFE($chave)
+	{
+
+		//Dim i As Integer
+		//Dim c As Byte
+
+		$key = 0;
+		$chave = substr(Yii::app()->format->numeroLimpo($chave), 0, 43);
+		
+		//echo $chave;
+
+		If (strlen($chave) <> 43)
+			return -1;
+
+		$c = 2;
+
+		//faz um loop por cada número o mutiplicando-o pelos valores de C
+		for ($i = strlen($chave); $i >= 1; $i--)
+		{
+			//vericica se o valor de c for maior que nove passa o valor para 2
+			If ($c > 9) 
+				$c = 2;
+
+			//soma os valores mutiplicados
+			$key = $key + (intval(substr($chave, $i-1, 1)) * $c);
+			
+			$c++;
+		}
+
+		//obtem o Digito Verificador
+		If ((($key % 11) == 0) || (($key % 11) == 1))
+			return 0;
+		else
+			return (11 - ($key % 11));
+
+	}	
 
 	/**
 	 * @return array relational rules.
@@ -377,20 +590,14 @@ class NotaFiscal extends MGActiveRecord
 		return parent::afterFind();
 	}
 	
-	public function scopes () 
+	//preenche codoperacao
+	protected function beforeValidate()
 	{
-		return array(
-			'combo'=>array(
-				'select'=>array('codnotafiscal', 'notafiscal'),
-				'order'=>'notafiscal ASC',
-				),
-			);
+		if (!empty($this->codnaturezaoperacao))
+			$this->codoperacao = $this->NaturezaOperacao->codoperacao;
+		
+		return parent::beforeValidate();
 	}
 	
-	public function getListaCombo ()
-	{
-		$lista = self::model()->combo()->findAll();
-		return CHtml::listData($lista, 'codnotafiscal', 'notafiscal');
-	}	
 
 }

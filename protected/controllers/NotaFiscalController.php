@@ -29,7 +29,14 @@ class NotaFiscalController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
-
+		
+		//$model->codusuario = Yii::app()->user->id;
+		$model->emissao = date('d/m/Y');
+		$model->saida = date('d/m/Y');
+		$model->codfilial = Yii::app()->user->getState("codfilial");
+		$model->serie = 1;
+		$model->numero = 0;
+		
 		if(isset($_POST['NotaFiscal']))
 		{
 			$model->attributes=$_POST['NotaFiscal'];
@@ -162,4 +169,5 @@ class NotaFiscalController extends Controller
 			Yii::app()->end();
 		}
 	}
+
 }
