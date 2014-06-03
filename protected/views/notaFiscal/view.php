@@ -5,11 +5,20 @@ $this->breadcrumbs=array(
 	Yii::app()->format->formataNumeroNota($model->emitida, $model->serie, $model->numero),
 );
 
+if (
+	$model->codstatus == NotaFiscal::CODSTATUS_AUTORIZADA
+	|| $model->codstatus == NotaFiscal::CODSTATUS_INUTILIZADA
+	|| $model->codstatus == NotaFiscal::CODSTATUS_CANCELADA
+	)
+	$bloqueado = true;
+else
+	$bloqueado = false;
+
 $this->menu=array(
 array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create')),
-array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codnotafiscal)),
-array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
+array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codnotafiscal), 'visible' => !$bloqueado),
+array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir'), 'visible' => !$bloqueado),
 //array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
 
@@ -22,9 +31,70 @@ $(document).ready(function(){
 	jQuery('body').on('click','#btnExcluir',function() {
 		bootbox.confirm("Excluir este registro?", function(result) {
 			if (result)
-				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('nota-fiscal/delete', array('id' => $model->codnotafiscal))?>",{});
+				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('notaFiscal/delete', array('id' => $model->codnotafiscal))?>",{});
 		});
 	});
+	
+	// botão delete da embalagem
+	jQuery(document).on('click','a.delete-barra',function(e) {
+	
+		//evita redirecionamento da pagina
+		e.preventDefault();
+		
+		// pega url para delete
+		var url = jQuery(this).attr('href');
+		
+		//pede confirmacao
+		bootbox.confirm("Excluir este Item?", function(result) {
+			
+			// se confirmou
+			if (result) {
+				
+				//faz post
+				jQuery.ajax({
+					type: 'POST',
+					url: url,
+					
+					//se sucesso, atualiza listagem de embalagens
+					success: function(){
+						location.reload();
+					},
+					
+					//caso contrário mostra mensagem com erro
+					error: function (XHR, textStatus) {
+						var err;
+						if (XHR.readyState === 0 || XHR.status === 0) {
+							return;
+						}
+						//tipos de erro
+						switch (textStatus) {
+							case 'timeout':
+								err = 'O servidor não responde (timed out)!';
+								break;
+							case 'parsererror':
+								err = 'Erro de parâmetros (Parser error)!';
+								break;
+							case 'error':
+								if (XHR.status && !/^\s*$/.test(XHR.status)) {
+									err = 'Erro ' + XHR.status;
+								} else {
+									err = 'Erro';
+								}
+								if (XHR.responseText && !/^\s*$/.test(XHR.responseText)) {
+									err = err + ': ' + XHR.responseText;
+								}
+								break;
+						}
+						//abre janela do bootbox com a mensagem de erro
+						if (err) {
+							bootbox.alert(err);
+						}
+					}
+				});
+			}	
+		});
+	});			
+	
 });
 /*]]>*/
 </script>
@@ -288,7 +358,12 @@ $(document).ready(function(){
 	</small>
 </div>
 <br>
-<h2>Produtos</h2>
+<h2>
+	Produtos
+	<small>
+		<?php echo CHtml::link("<i class=\"icon-plus\"></i> Novo", array("notaFiscalProdutoBarra/create", "codnotafiscal" => $model->codnotafiscal)); ?>
+	</small>	
+</h2>
 <?php
 foreach ($model->NotaFiscalProdutoBarras as $prod)
 {
@@ -345,26 +420,6 @@ foreach ($model->NotaFiscalProdutoBarras as $prod)
 					<?php
 				}
 				
-				if (($prod->ipibase>0) || ($prod->ipipercentual>0) || ($prod->ipivalor>0))
-				{
-					?>
-					<div>
-						<div class="span3 muted">
-							IPI
-						</div>
-						<div class="span3 text-right">
-							<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->ipibase)); ?>
-						</div>
-						<div class="span3 text-right">
-							<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->ipipercentual)); ?>%
-						</div>
-						<div class="span3 text-right">
-							<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->ipivalor)); ?>
-						</div>
-					</div>
-					<?php
-				}
-
 				if (($prod->icmsstbase>0) || ($prod->icmsstpercentual>0) || ($prod->icmsstvalor>0))
 				{
 					?>
@@ -384,6 +439,27 @@ foreach ($model->NotaFiscalProdutoBarras as $prod)
 					</div>
 					<?php
 				}
+				
+				if (($prod->ipibase>0) || ($prod->ipipercentual>0) || ($prod->ipivalor>0))
+				{
+					?>
+					<div>
+						<div class="span3 muted">
+							IPI
+						</div>
+						<div class="span3 text-right">
+							<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->ipibase)); ?>
+						</div>
+						<div class="span3 text-right">
+							<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->ipipercentual)); ?>%
+						</div>
+						<div class="span3 text-right">
+							<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->ipivalor)); ?>
+						</div>
+					</div>
+					<?php
+				}
+				
 				?>
 			</div>
 			<div class="span1">
@@ -392,6 +468,10 @@ foreach ($model->NotaFiscalProdutoBarras as $prod)
 					echo CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($prod->NegocioProdutoBarra->codnegocio))
 						, array("negocio/view", "id"=>$prod->NegocioProdutoBarra->codnegocio));
 				?>
+			</div>
+			<div class="pull-right">
+				<a href="<?php echo Yii::app()->createUrl('notaFiscalProdutoBarra/update', array('id'=>$prod->codnotafiscalprodutobarra)); ?>"><i class="icon-pencil"></i></a>
+				<a class="delete-barra" href="<?php echo Yii::app()->createUrl('notaFiscalProdutoBarra/delete', array('id'=>$prod->codnotafiscalprodutobarra)); ?>"><i class="icon-trash"></i></a>
 			</div>
 		</small>
 	</div>

@@ -90,4 +90,24 @@ class MGActiveForm extends TbActiveForm
 		return $widget;
 	}
 	
+	public function select2ProdutoBarraRow($model, $attribute, $htmlOptions = array())
+	{
+		$widget = $this->select2ProdutoBarra($model, $attribute, $htmlOptions);
+		return $this->customRow($model, $attribute, $widget);
+	}
+
+	public function select2ProdutoBarra($model, $attribute, $htmlOptions = array())
+	{
+		$widget = $this->widget(
+			'MGSelect2ProdutoBarra',
+			array(
+				'model' => $model,
+				'attribute' => $attribute,
+				'htmlOptions' => $htmlOptions,
+			),
+			true);		
+		return $widget;
+	}
+	
+	
 }

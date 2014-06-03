@@ -23,9 +23,12 @@ class NotaFiscalProdutoBarraController extends Controller
 	* Creates a new model.
 	* If creation is successful, the browser will be redirected to the 'view' page.
 	*/
-	public function actionCreate()
+	public function actionCreate($codnotafiscal)
 	{
 		$model=new NotaFiscalProdutoBarra;
+		
+		$model->codnotafiscal = $codnotafiscal;
+		$model->quantidade = 1;
 
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
@@ -34,7 +37,7 @@ class NotaFiscalProdutoBarraController extends Controller
 		{
 			$model->attributes=$_POST['NotaFiscalProdutoBarra'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->codnotafiscalprodutobarra));
+				$this->redirect(array('notaFiscal/view','id'=>$model->codnotafiscal));
 		}
 
 		$this->render('create',array(
@@ -58,7 +61,7 @@ class NotaFiscalProdutoBarraController extends Controller
 		{
 			$model->attributes=$_POST['NotaFiscalProdutoBarra'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->codnotafiscalprodutobarra));
+				$this->redirect(array('notaFiscal/view','id'=>$model->codnotafiscal));
 		}
 
 		$this->render('update',array(

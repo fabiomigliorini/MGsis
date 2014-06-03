@@ -180,8 +180,10 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 		return parent::beforeValidate();
 	}
 	
-	public function calculaTributacao()
+	public function calculaTributacao($somenteVazios = true)
 	{
+		if ((!empty($this->codcfop) && !empty($this->csosn)) || !$somenteVazios)
+			return true;
 		
 		if (empty($this->ProdutoBarra))
 		{
@@ -195,7 +197,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 			return false;
 		}
 		
-					if (empty($this->NotaFiscal->Pessoa))
+		if (empty($this->NotaFiscal->Pessoa))
 		{
 			$this->addError('codnotafiscal', 'Erro ao calcular tributação. Pessoa não informada na Nota Fiscal!');
 			return false;

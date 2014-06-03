@@ -57,6 +57,12 @@ class NotaFiscalController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
+		
+		if ($model->codstatus == NotaFiscal::CODSTATUS_AUTORIZADA
+			|| $model->codstatus == NotaFiscal::CODSTATUS_INUTILIZADA
+			|| $model->codstatus == NotaFiscal::CODSTATUS_CANCELADA)
+			throw new CHttpException(409, 'Registro não permite alterações!');
+
 
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
@@ -85,7 +91,15 @@ class NotaFiscalController extends Controller
 			// we only allow deletion via POST request
 			try
 			{
-				$this->loadModel($id)->delete();
+				$model = $this->loadModel($id);
+				
+				if ($model->codstatus == NotaFiscal::CODSTATUS_AUTORIZADA
+					|| $model->codstatus == NotaFiscal::CODSTATUS_INUTILIZADA
+					|| $model->codstatus == NotaFiscal::CODSTATUS_CANCELADA)
+					throw new CHttpException(409, 'Registro não permite exclusão!');
+				
+				$model->delete();
+					
 				// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 				if(!isset($_GET['ajax']))
 					$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));

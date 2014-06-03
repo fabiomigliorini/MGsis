@@ -94,6 +94,7 @@ class NotaFiscal extends MGActiveRecord
 			array('codnaturezaoperacao, serie, emissao, saida, codfilial, codpessoa', 'required'),
 			array('serie, numero, volumes', 'numerical', 'integerOnly'=>true),
 			array('nfechave, nfereciboenvio, nfeautorizacao, nfecancelamento, nfeinutilizacao', 'length', 'max'=>100),
+			array('nfechave', 'unique'),
 			array('nfechave', 'validaChaveNFE'),
 			array('codpessoa', 'validaPessoaPelaChaveNFE'),
 			array('serie', 'validaSeriePelaChaveNFE'),

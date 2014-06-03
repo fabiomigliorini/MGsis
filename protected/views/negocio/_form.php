@@ -46,10 +46,10 @@
 	<?php if (!$model->isNewRecord): ?>
 	<div class="span6">
 		<?
-		echo $form->textFieldRow($model,'valorprodutos',array('class'=>'input-small text-right','maxlength'=>14, "readOnly"=>true, "tabindex"=>-1));
-		echo $form->textFieldRow($model,'percentualdesconto',array('class'=>'input-mini text-right','maxlength'=>14, 'append'=>'%'));
-		echo $form->textFieldRow($model,'valordesconto',array('class'=>'input-small text-right','maxlength'=>14));
-		echo $form->textFieldRow($model,'valortotal',array('class'=>'input-small text-right','maxlength'=>14, "readOnly"=>true, "tabindex"=>-1));
+		echo $form->textFieldRow($model,'valorprodutos',array('class'=>'input-small text-right','maxlength'=>14, "readOnly"=>true, "tabindex"=>-1, 'prepend' => 'R$'));
+		echo $form->textFieldRow($model,'percentualdesconto',array('class'=>'input-small text-right','maxlength'=>14, 'append'=>'%'));
+		echo $form->textFieldRow($model,'valordesconto',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+		echo $form->textFieldRow($model,'valortotal',array('class'=>'input-small text-right','maxlength'=>14, "readOnly"=>true, "tabindex"=>-1, 'prepend' => 'R$'));
 		$this->renderPartial('_view_pagamentos', array('model'=>$model))
 		?>
 	</div>
