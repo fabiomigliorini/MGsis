@@ -128,7 +128,7 @@ class Cfop extends MGActiveRecord
 	{
 		return array(
 			'combo'=>array(
-				'select'=>array('codcfop', 'cfop'),
+				'select'=>array('codcfop', "codcfop || ' - ' || cfop as  cfop"),
 				'order'=>'cfop ASC',
 				),
 			);

@@ -3,8 +3,8 @@
 	
 		<b class="span2"><?php echo CHtml::link(CHtml::encode($data->banco),array('view','id'=>$data->codbanco)); ?> </b>
 
-		<small class="span1 muted"><?php echo CHtml::encode($data->sigla); ?></small>
+		<small class="span1"><?php echo CHtml::encode($data->sigla); ?></small>
 
-		<small class="span8 muted"><?php echo CHtml::encode($data->numerobanco); ?></small>
+		<small class="span8"><?php echo CHtml::encode($data->numerobanco); ?></small>
 
 </div>

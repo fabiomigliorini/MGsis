@@ -35,7 +35,11 @@ $(document).ready(function(){
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-		'codtipomovimentotitulo',
+		//'codtipomovimentotitulo',
+		array(
+			'name'=>'codtipomovimentotitulo',
+			'value'=>Yii::app()->format->formataCodigo($model->codtipomovimentotitulo),
+			),
 		'tipomovimentotitulo',
 		//'implantacao',
 		array(

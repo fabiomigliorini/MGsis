@@ -1,7 +1,7 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Nova Forma de Pagamento';
 $this->breadcrumbs=array(
-	'Forma de Pagamento'=>array('index'),
+	'Formas de Pagamento'=>array('index'),
 	'Nova',
 );
 

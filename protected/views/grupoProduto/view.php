@@ -35,7 +35,11 @@ $(document).ready(function(){
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-			'codgrupoproduto',
+		//'codgrupoproduto',
+		array(
+			'name'=>'codgrupoproduto',
+			'value'=>Yii::app()->format->formataCodigo($model->codgrupoproduto),
+			),
 		'grupoproduto',
 		),
 	)); 

@@ -54,7 +54,7 @@ class Filial extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codempresa, codpessoa, filial', 'required'),
+			array('codpessoa, filial', 'required'),
 			array('filial, acbrnfemonitorip', 'length', 'max'=>20),
 			array('acbrnfemonitorcaminho, acbrnfemonitorcaminhorede', 'length', 'max'=>100),
 			array('empresadominio', 'length', 'max'=>7),

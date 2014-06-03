@@ -1,7 +1,7 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Tipo Título';
 $this->breadcrumbs=array(
-	'Tipo Título',
+	'Tipo de Títulos',
 );
 
 $this->menu=array(
@@ -25,7 +25,7 @@ $(document).ready(function(){
 
 </script>
 
-<h1>Tipo Título</h1>
+<h1>Tipo de Títulos</h1>
 
 <br>
 

@@ -13,8 +13,8 @@
 		echo $form->toggleButtonRow($model,'fechamento', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 		//echo $form->checkBoxRow($model,'notafiscal');
 		echo $form->toggleButtonRow($model,'notafiscal', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
-		echo $form->textFieldRow($model,'parcelas',array('class'=>'input-mini'));
-		echo $form->textFieldRow($model,'diasentreparcelas',array('class'=>'input-mini'));
+		echo $form->textFieldRow($model,'parcelas',array('class'=>'input-mini text-right'));
+		echo $form->textFieldRow($model,'diasentreparcelas',array('class'=>'input-mini text-right'));
 		//echo $form->checkBoxRow($model,'avista');
 		echo $form->toggleButtonRow($model,'avista', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 		echo $form->textFieldRow($model,'formapagamentoecf',array('class'=>'input-mini','maxlength'=>5));

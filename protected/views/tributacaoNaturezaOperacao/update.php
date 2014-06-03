@@ -1,11 +1,22 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Alterar Tributação Natureza Operação';
+$titulo =$model->NaturezaOperacao->naturezaoperacao 
+		. " / "
+		. $model->Tributacao->tributacao 
+		. " / " 
+		. $model->TipoProduto->tipoproduto 
+		. " / " ;
+
+if (empty($model->codestado))
+	$titulo .= "Demais Estados";
+else
+	$titulo .= $model->Estado->sigla;
+$this->pagetitle = Yii::app()->name . ' - Detalhes Tributação Natureza Operação';
 $this->breadcrumbs=array(
 	'Natureza Operação'=>array('naturezaOperacao/index'),
 	$model->NaturezaOperacao->naturezaoperacao=>array('naturezaOperacao/view', "id"=>$model->codnaturezaoperacao),
-	$model->codtributacaonaturezaoperacao=>array('view','id'=>$model->codtributacaonaturezaoperacao),
-	'Alterar',
-);
+	$titulo=>array('view','id'=>$model->codtributacaonaturezaoperacao),
+	'Alterar'
+	);
 
 	$this->menu=array(
 	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('naturezaOperacao/view', 'id'=>$model->codnaturezaoperacao)),
@@ -15,7 +26,7 @@ $this->breadcrumbs=array(
 	);
 	?>
 
-	<h1>Alterar Tributação Natureza Operação <?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codtributacaonaturezaoperacao)); ?></h1>
+	<h1>Alterar Tributação da Natureza de Operação <?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codtributacaonaturezaoperacao)); ?></h1>
 	<br>
 
 	<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>	

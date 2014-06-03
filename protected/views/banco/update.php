@@ -1,7 +1,7 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Alterar Banco';
 $this->breadcrumbs=array(
-	'Banco'=>array('index'),
+	'Bancos'=>array('index'),
 	$model->banco=>array('view','id'=>$model->banco),
 	'Alterar',
 );

@@ -29,7 +29,7 @@ $(document).ready(function(){
 </script>
 
 <h2>
-	Tributação Natureza Operação
+	Tributações da Natureza de Operação
 	<small>
 		<?php echo CHtml::link("<i class=\"icon-plus\"></i> Nova", array("tributacaoNaturezaOperacao/create", "codnaturezaoperacao" => $model->codnaturezaoperacao)); ?>
 	</small>

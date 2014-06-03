@@ -1,7 +1,7 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Detalhes Banco';
+$this->pagetitle = Yii::app()->name . ' - Detalhes do Banco';
 $this->breadcrumbs=array(
-	'Banco'=>array('index'),
+	'Bancos'=>array('index'),
 	$model->banco,
 );
 
@@ -35,7 +35,11 @@ $(document).ready(function(){
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-			'codbanco',
+		//'codbanco',
+		array(
+			'name'=>'codbanco',
+			'value'=>Yii::app()->format->formataCodigo($model->codbanco),
+			),
 		'banco',
 		'sigla',
 		'numerobanco',

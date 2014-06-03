@@ -35,7 +35,11 @@ $(document).ready(function(){
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-	'codcfop',
+	//'codcfop',
+	array(
+			'name'=>'codcfop',
+			'value'=>Yii::app()->format->formataCodigo($model->codcfop),
+			),
 	//'cfop',
 	array(
 		'name'=>'cfop',

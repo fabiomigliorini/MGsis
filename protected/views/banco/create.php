@@ -1,7 +1,7 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Novo Banco';
 $this->breadcrumbs=array(
-	'Banco'=>array('index'),
+	'Bancos'=>array('index'),
 	'Novo',
 );
 

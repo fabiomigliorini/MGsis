@@ -25,7 +25,7 @@ $(document).ready(function(){
 
 </script>
 
-<h1>Tipo Movimento Títulos</h1>
+<h1>Tipos de Movimentos de Títulos</h1>
 
 <br>
 

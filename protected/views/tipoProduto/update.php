@@ -1,9 +1,9 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Alterar Tipo do Produto';
 $this->breadcrumbs=array(
-	'Tipo do Produto'=>array('index'),
+	'Tipos de Produtos'=>array('index'),
 	$model->tipoproduto=>array('view','id'=>$model->codtipoproduto),
-	'Alterar Tipo Produto',
+	'Alterar',
 );
 
 	$this->menu=array(

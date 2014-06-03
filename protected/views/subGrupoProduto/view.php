@@ -1,7 +1,7 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Detalhes Sub Grupos de Produtos';
 $this->breadcrumbs=array(
-	'Grupo de Produtos'=>array('grupoProduto/index'),
+	'Grupos de Produtos'=>array('grupoProduto/index'),
 	$model->GrupoProduto->grupoproduto=>array('grupoProduto/view', "id"=>$model->codgrupoproduto),
 	$model->subgrupoproduto,
 );
@@ -36,7 +36,11 @@ $(document).ready(function(){
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-		'codsubgrupoproduto',
+		//'codsubgrupoproduto',
+		array(
+			'name'=>'codsubgrupoproduto',
+			'value'=>Yii::app()->format->formataCodigo($model->codsubgrupoproduto),
+			),
 		//'codgrupoproduto',
 		array(
 			'name'=>'codgrupoproduto',

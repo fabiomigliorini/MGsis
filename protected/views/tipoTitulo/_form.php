@@ -9,11 +9,13 @@
 		echo $form->textFieldRow($model,'tipotitulo',array('class' => 'imput-mini','maxlength'=>20));
 		echo $form->toggleButtonRow($model,'pagar', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 		echo $form->toggleButtonRow($model,'receber', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
-		echo $form->textFieldRow($model,'observacoes',array('class'=>'imput-mini','maxlength'=>255));
 		//echo $form->textFieldRow($model,'codtipomovimentotitulo',array('class'=>'span5'));
 		echo $form->select2Row($model, 'codtipomovimentotitulo', TipoMovimentoTitulo::getListaCombo(), array('prompt' => '', 'class' => 'input-large'));
 		echo $form->toggleButtonRow($model,'debito', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 		echo $form->toggleButtonRow($model,'credito', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
+		echo $form->textAreaRow($model,'observacoes',array('class'=>'input-xlarge', 'rows'=>'5','maxlength'=>255));
+
+
 	?>
 </fieldset>
 <div class="form-actions">

@@ -1,7 +1,7 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Portador';
+$this->pagetitle = Yii::app()->name . ' - Portadores';
 $this->breadcrumbs=array(
-	'Portador',
+	'Portadores',
 );
 
 $this->menu=array(
@@ -25,7 +25,7 @@ $(document).ready(function(){
 
 </script>
 
-<h1>Portador</h1>
+<h1>Portadores</h1>
 
 <br>
 

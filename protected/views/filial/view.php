@@ -1,13 +1,14 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Detalhes Filial';
 $this->breadcrumbs=array(
-	'Filial'=>array('index'),
+	'Empresas'=>array('empresa/index'),
+	$model->Empresa->empresa=>array('empresa/view', "id"=>$model->codempresa),
 	$model->filial,
 );
 
 $this->menu=array(
-array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
-array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create')),
+array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('empresa/view', 'id'=>$model->codempresa)),
+array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create', 'codempresa'=>$model->codempresa)),
 array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codfilial)),
 array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
 //array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
@@ -35,7 +36,11 @@ $(document).ready(function(){
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-		'codfilial',
+		//'codfilial',
+		array(
+			'name'=>'codfilial',
+			'value'=>Yii::app()->format->formataCodigo($model->codfilial),
+			),
 		//'codempresa',
 		array(
 					'name'=>'codempresa',

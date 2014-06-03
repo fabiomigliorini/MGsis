@@ -1,9 +1,22 @@
 <?php
+
+$titulo = $model->NaturezaOperacao->naturezaoperacao 
+		. " / " 
+		. $model->Tributacao->tributacao 
+		. " / " 
+		. $model->TipoProduto->tipoproduto 
+		. " / " ;
+
+if (empty($model->codestado))
+	$titulo .= "Demais Estados";
+else
+	$titulo .= $model->Estado->sigla;
+
 $this->pagetitle = Yii::app()->name . ' - Detalhes Tributação Natureza Operação';
 $this->breadcrumbs=array(
 	'Natureza Operação'=>array('naturezaOperacao/index'),
 	$model->NaturezaOperacao->naturezaoperacao=>array('naturezaOperacao/view', "id"=>$model->codnaturezaoperacao),
-	$model->codtributacaonaturezaoperacao,
+	$titulo
 );
 
 $this->menu=array(
@@ -30,47 +43,48 @@ $(document).ready(function(){
 /*]]>*/
 </script>
 
-<h1><?php echo $model->codtributacaonaturezaoperacao; ?></h1>
+<h1><?php echo $titulo ?></h1>
 
 <?php 
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
 		'codtributacaonaturezaoperacao',
-		//'codtributacao',
-		array(
-					'name'=>'codtributacao',
-					'value'=>(isset($model->Tributacao))?CHtml::link(CHtml::encode($model->Tributacao->tributacao),array('tributacao/view','id'=>$model->codtributacao)):null,
-					'type'=>'raw',
-					),
 		//'codnaturezaoperacao',
 		array(
 					'name'=>'codnaturezaoperacao',
 					'value'=>(isset($model->NaturezaOperacao))?CHtml::link(CHtml::encode($model->NaturezaOperacao->naturezaoperacao),array('naturezaOperacao/view','id'=>$model->codnaturezaoperacao)):null,
 					'type'=>'raw',
 					),
-		//'codcfop',
+		//'codtributacao',
 		array(
-					'name'=>'codcfop',
-					'value'=>(isset($model->Cfop))?CHtml::link(CHtml::encode($model->Cfop->cfop),array('cfop/view','id'=>$model->codcfop)):null,
+					'name'=>'codtributacao',
+					'value'=>(isset($model->Tributacao))?CHtml::link(CHtml::encode($model->Tributacao->tributacao),array('tributacao/view','id'=>$model->codtributacao)):null,
 					'type'=>'raw',
 					),
-		'icmsbase',
-		'icmspercentual',
-		//'codestado',
-		array(
-					'name'=>'codestado',
-					'value'=>(isset($model->Estado))?CHtml::link(CHtml::encode($model->Estado->estado),array('estado/view','id'=>$model->codestado)):null,
-					'type'=>'raw',
-					),
-		'icmsbase',
-		'csosn',
 		//'codtipoproduto',
 		array(
 					'name'=>'codtipoproduto',
 					'value'=>(isset($model->TipoProduto))?CHtml::link(CHtml::encode($model->TipoProduto->tipoproduto),array('tipoProduto/view','id'=>$model->codtipoproduto)):null,
 					'type'=>'raw',
 					),
+		//'codestado',
+		array(
+					'name'=>'codestado',
+					'value'=>(isset($model->Estado))?CHtml::link(CHtml::encode($model->Estado->estado),array('estado/view','id'=>$model->codestado)):null,
+					'type'=>'raw',
+					),		
+		//'codcfop',
+		array(
+					'name'=>'codcfop',
+					'value'=>(isset($model->Cfop))?CHtml::link(CHtml::encode($model->codcfop . " - " .  $model->Cfop->cfop),array('cfop/view','id'=>$model->codcfop)):null,
+					'type'=>'raw',
+					),
+		'icmsbase',
+		'icmspercentual',
+		
+		'icmsbase',
+		'csosn',
 		'acumuladordominiovista',
 		'acumuladordominioprazo',
 		'historicodominio',

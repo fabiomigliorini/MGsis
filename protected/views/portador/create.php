@@ -1,7 +1,7 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Novo Portador';
 $this->breadcrumbs=array(
-	'Portador'=>array('index'),
+	'Portadores'=>array('index'),
 	'Novo',
 );
 

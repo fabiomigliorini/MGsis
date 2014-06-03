@@ -1,7 +1,7 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Detalhes Tipo do Produto';
+$this->pagetitle = Yii::app()->name . ' - Detalhes Tipos de Produtos';
 $this->breadcrumbs=array(
-	'Tipo do Produto'=>array('index'),
+	'Tipos de Produtos'=>array('index'),
 	$model->tipoproduto,
 );
 
@@ -35,7 +35,11 @@ $(document).ready(function(){
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-	'codtipoproduto',
+	//'codtipoproduto',
+	array(
+		'name'=>'codtipoproduto',
+		'value'=>Yii::app()->format->formataCodigo($model->codtipoproduto),
+		),
 	'tipoproduto',
 		),
 	)); 

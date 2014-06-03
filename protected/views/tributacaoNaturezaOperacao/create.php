@@ -1,9 +1,9 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Novo Tributacao Natureza Operacao';
+$this->pagetitle = Yii::app()->name . ' - Nova Tributação da Natureza de Operacao';
 $this->breadcrumbs=array(
-	'Naureza Operação'=>array('naturezaOperacao/index'),
+	'Naurezas de Operação'=>array('naturezaOperacao/index'),
 	$model->NaturezaOperacao->naturezaoperacao=>array('naturezaOperacao/view', "id"=>$model->codnaturezaoperacao),
-	'Novo',
+	'Nova',
 );
 
 $this->menu=array(
@@ -12,6 +12,6 @@ array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('naturezaOperac
 );
 ?>
 
-<h1>Nova Tributação Natureza Operação</h1>
+<h1>Nova Tributação da Natureza de Operação</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -1,7 +1,7 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Conta Contábil';
+$this->pagetitle = Yii::app()->name . ' - Contas Contábeis';
 $this->breadcrumbs=array(
-	'Conta Contábil',
+	'Contas Contábeis',
 );
 
 $this->menu=array(
@@ -25,7 +25,7 @@ $(document).ready(function(){
 
 </script>
 
-<h1>Conta Contábil</h1>
+<h1>Contas Contábeis</h1>
 
 <br>
 
