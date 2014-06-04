@@ -158,6 +158,24 @@ class NegocioController extends Controller
 			'model'=>$model,
 			));
 	}
+	
+	public function actionImprimeRomaneio($id, $imprimir = false)
+	{
+		
+		$model = $this->loadModel($id);
+		
+		if ($model->codnegociostatus <> NegocioStatus::FECHADO)
+			throw new CHttpException(400,'O status do Negócio não permite impressão do Romaneio!');
+		
+		$rel = new MGEscPrintRomaneio($model);
+		$rel->prepara();
+		
+		if ($imprimir)
+			$rel->imprimir();
+		
+		echo $rel->converteHtml();
+
+	}
 
 	/**
 	* Returns the data model based on the primary key given in the GET variable.

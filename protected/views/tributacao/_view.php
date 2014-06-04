@@ -8,6 +8,6 @@
 
 	</b>
 
-		<small class="span2 muted"><?php echo CHtml::encode($data->aliquotaicmsecf); ?></small>
+		<small class="span9"><?php echo CHtml::encode($data->aliquotaicmsecf); ?></small>
 
 </div>

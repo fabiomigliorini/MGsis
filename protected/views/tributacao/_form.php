@@ -7,7 +7,7 @@
 <fieldset>
 	<?php 	
 		echo $form->textFieldRow($model,'tributacao',array('class'=>'input-medium','maxlength'=>50));
-		echo $form->textFieldRow($model,'aliquotaicmsecf',array('class'=>'input-small','maxlength'=>10));
+		echo $form->textFieldRow($model,'aliquotaicmsecf',array('class'=>'input-small text-right','maxlength'=>10));
 	?>
 </fieldset>
 <div class="form-actions">
