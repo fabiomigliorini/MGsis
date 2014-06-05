@@ -43,7 +43,12 @@ class MGEscPrintRomaneio extends MGEscPrint
 		
 		// Usuario e Data
 		$usuario = $model->Usuario->usuario;
-		$this->adicionaTexto("Usuario: " . $usuario, "cabecalho", 68);
+		if (!empty($model->codpessoavendedor))
+		{
+			$usuario .= " / ";
+			$usuario .= $model->PessoaVendedor->fantasia;
+		}
+		$this->adicionaTexto("Vendedor: " . $usuario, "cabecalho", 68);
 		$this->adicionaTexto("Data...: " . $model->lancamento, "cabecalho", 69, STR_PAD_LEFT);
 		$this->adicionaLinha("", "cabecalho");
 		
@@ -76,37 +81,60 @@ class MGEscPrintRomaneio extends MGEscPrint
 				. " - "
 				. $model->Pessoa->pessoa
 				, "documento", 137);
-		$this->adicionaLinha(
-				"End....: " 
-				.$model->Pessoa->endereco 
-				."-"
-				.$model->Pessoa->numero
-				."-"
-				.$model->Pessoa->complemento
-				."-"
-				.$model->Pessoa->bairro
-				."-"
-				.$model->Pessoa->Cidade->cidade
-				."/   "
-				.Yii::app()->format->formataCep($model->Pessoa->cep)
-				, "documento", 137);
+
+		$endereco = 
+			"End....: " 
+			.$model->Pessoa->endereco 
+			.", "
+			.$model->Pessoa->numero
+			." - ";
+		
+		if (!empty($model->Pessoa->complemento))
+			$endereco .= 
+				$model->Pessoa->complemento
+				." - ";
+		
+		$endereco .=
+			$model->Pessoa->bairro
+			." - "
+			.$model->Pessoa->Cidade->cidade
+			."/"
+			.$model->Pessoa->Cidade->Estado->sigla
+			." - "
+			.Yii::app()->format->formataCep($model->Pessoa->cep);
+
+		
+		$this->adicionaLinha($endereco, "documento", 137);
 		
 		$this->adicionaLinha("", "documento", 137, STR_PAD_LEFT, "-");
+		$this->adicionaTexto("<DblStrikeOn>");
+		$this->adicionaLinha("Vencimento(s): ");
 		
-		$this->adicionaTexto("<CondensedOff><DblStrikeOn>");
-		$this->adicionaLinha(
-				"Vencimento(s) :");
-		$this->adicionaTexto("<DblStrikeOff><CondensedOn>");
+		foreach ($model->NegocioFormaPagamentos as $nfp)
+		{
+			foreach ($nfp->Titulos as $titulo)
+			{
+				$vencimento = $titulo->vencimento;
+				$vencimento = substr($vencimento, 0, 6) . substr($vencimento, 8, 2);
+				$this->adicionaTexto($vencimento, "documento", 10);
+				$this->adicionaLinha(Yii::app()->format->formatNumber($titulo->valor), "documento", 10, STR_PAD_LEFT);
+				
+			}
+		}
+
+		$this->adicionaTexto("<DblStrikeOff>");
 		$this->adicionaLinha("", "documento", 137, STR_PAD_LEFT, "-");
-		$this->adicionaLinha();
+
 		$this->adicionaTexto("Codigo", "documento", 20);
-		$this->adicionaTexto("Descricao", "documento", 61);
+		$this->adicionaTexto("Descricao", "documento", 70);
 		$this->adicionaTexto("UN", "documento", 7);
-		$this->adicionaTexto("Quant", "documento", 15);
-		$this->adicionaTexto("Preco", "documento", 14);
-		$this->adicionaTexto("Total", "documento", 20);
+		$this->adicionaTexto("Quant", "documento", 10, STR_PAD_LEFT);
+		$this->adicionaTexto("Preco", "documento", 15, STR_PAD_LEFT);
+		$this->adicionaTexto("Total", "documento", 15, STR_PAD_LEFT);
 		$this->adicionaLinha();
-		$this->adicionaLinha("", "documento", 137, STR_PAD_LEFT, "-");
+		
+		$this->adicionaTexto("", "documento", 137, STR_PAD_LEFT, "-");
+		$this->adicionaLinha();
 		
 		/*
 		
@@ -160,14 +188,17 @@ class MGEscPrintRomaneio extends MGEscPrint
 		 * 
 		 * 
 		 */ 
+		
+		//percorre produtos
 		foreach ($model->NegocioProdutoBarras as $npb)
 		{
 			$this->adicionaTexto($npb->ProdutoBarra->barras, "documento", 20);
 			$this->adicionaTexto($npb->ProdutoBarra->descricao, "documento", 65);
-			$this->adicionaTexto($npb->ProdutoBarra->UnidadeMedida->sigla, "documento", 7);
-			$this->adicionaTexto($npb->quantidade, "documento", 15);
-			$this->adicionaTexto($npb->valorunitario, "documento", 15);
-			$this->adicionaTexto($npb->valortotal, "documento", 15);
+			$this->adicionaTexto($npb->ProdutoBarra->UnidadeMedida->sigla, "documento", 7, STR_PAD_LEFT);
+			$this->adicionaTexto(Yii::app()->format->formatNumber($npb->quantidade), "documento", 15, STR_PAD_LEFT);
+			$this->adicionaTexto(Yii::app()->format->formatNumber($npb->valorunitario), "documento", 15, STR_PAD_LEFT);
+			//$this->adicionaTexto($npb->valortotal, "documento", 15, STR_PAD_LEFT);
+			$this->adicionaTexto(Yii::app()->format->formatNumber($npb->valortotal), "documento", 15, STR_PAD_LEFT);
 			/*
 			$this->adicionaTexto($titulo->emissao, "documento", 12);
 			$this->adicionaTexto($titulo->vencimento, "documento", 12);
@@ -182,6 +213,54 @@ class MGEscPrintRomaneio extends MGEscPrint
 			 */
 			$this->adicionaLinha();
 		}
+		$this->adicionaLinha("", "documento", 137, STR_PAD_LEFT, "-");
+		
+		$this->adicionaTexto("<DblStrikeOn>");
+		$this->adicionaTexto("Subtotal:");
+		$this->adicionaTexto(Yii::app()->format->formatNumber($model->valorprodutos), "documento", 20, STR_PAD_LEFT);
+		$this->adicionaTexto("Desconto:", "documento", 35, STR_PAD_LEFT);
+		$this->adicionaTexto(Yii::app()->format->formatNumber($model->valordesconto), "documento", 20, STR_PAD_LEFT);
+		$this->adicionaTexto("Total...:", "documento", 35, STR_PAD_LEFT);
+		$this->adicionaTexto(Yii::app()->format->formatNumber($model->valortotal), "documento", 18, STR_PAD_LEFT);
+		
+		$this->adicionaLinha("<DblStrikeOff>");
+		
+		if ($model->valoravista > 0)
+		{
+			$this->adicionaTexto("A Vista.:", "documento", 119, STR_PAD_LEFT);
+			$this->adicionaTexto(Yii::app()->format->formatNumber($model->valoravista), "documento", 18, STR_PAD_LEFT);
+			$this->adicionaLinha();
+		}
+				
+		if ($model->valoraprazo > 0)
+		{
+			$this->adicionaTexto("A Prazo.:", "documento", 119, STR_PAD_LEFT);
+			$this->adicionaTexto(Yii::app()->format->formatNumber($model->valoraprazo), "documento", 18, STR_PAD_LEFT);
+			$this->adicionaLinha();
+		}
+		
+		$this->adicionaLinha();
+			
+		// Texto da confissao de divida
+		$this->adicionaLinha("Confissao de Divida: Confesso(amos) e me(nos) constituo(imos) devedor(es) do valor descrito nesse negocio, obrigando-me(nos) a pagar em");
+		$this->adicionaTexto("moeda corrente do pais, conforme vencimento. Declaro(amos) ainda, ter recebido o servico e/ou produto aqui descrito, sem nada a reclamar.");
+		$this->adicionaLinha();
+		$this->adicionaLinha();
+		$this->adicionaLinha("<DblStrikeOn>");
+		
+		$this->adicionaTexto("", "documento", 25);
+		$this->adicionaLinha("", "documento", 80, STR_PAD_RIGHT, "_");
+		
+		$this->adicionaTexto("", "documento", 25);
+		$this->adicionaTexto(
+				$model->codnegocio
+				." - "
+				.$model->Pessoa->pessoa
+				, "documento"
+				, 80);
+		$this->adicionaLinha("<DblStrikeOff>");
+		
+
 		/*
 		// linha rodape tabela titulos
 		$this->adicionaTexto("", "documento", 137, STR_PAD_LEFT, "-");

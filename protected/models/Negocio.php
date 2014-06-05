@@ -104,7 +104,7 @@ class Negocio extends MGActiveRecord
 			'NegocioStatus' => array(self::BELONGS_TO, 'NegocioStatus', 'codnegociostatus'),
 			'Operacao' => array(self::BELONGS_TO, 'Operacao', 'codoperacao'),
 			'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
-			'Vendedor' => array(self::BELONGS_TO, 'Pessoa', 'codpessoavendedor'),
+			'PessoaVendedor' => array(self::BELONGS_TO, 'Pessoa', 'codpessoavendedor'),
 			'Usuario' => array(self::BELONGS_TO, 'Usuario', 'codusuario'),
 			'UsuarioAcertoEntrega' => array(self::BELONGS_TO, 'Usuario', 'codusuarioacertoentrega'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
