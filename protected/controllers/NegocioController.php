@@ -379,4 +379,27 @@ class NegocioController extends Controller
 		
 	}
 	
+	public function actionRelatorio()
+	{
+		
+		$model=new Negocio('search');
+		
+		$model->unsetAttributes();  // clear any default values
+		
+		if(isset($_GET['Negocio']))
+			Yii::app()->session['FiltroNegocioIndex'] = $_GET['Negocio'];
+		
+		if (isset(Yii::app()->session['FiltroNegocioIndex']))
+			$model->attributes=Yii::app()->session['FiltroNegocioIndex'];
+		
+		$negocios = $model->search(false);
+		
+		$rel = new MGRelatorioNegocios($negocios);
+		$rel->montaRelatorio();
+		$rel->Output();
+		 
+		
+	}
+	
+	
 }

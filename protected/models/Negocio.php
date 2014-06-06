@@ -159,7 +159,7 @@ class Negocio extends MGActiveRecord
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
-	public function search()
+	public function search($comoDataProvider = true)
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
@@ -199,17 +199,26 @@ class Negocio extends MGActiveRecord
 			$criteria->params = array_merge($criteria->params, array(':lancamento_ate' => $lancamento_ate->format('Y-m-d H:i').':59.9'));
 		}
 		
+		$criteria->order = 't.codnegociostatus, t.lancamento DESC, t.codnegocio DESC';
+
+		
 		/*
 		echo "<pre>";
 		print_r($criteria);
 		echo "</pre>";
 		*/
-		
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-			'sort'=>array('defaultOrder'=>'t.lancamento DESC, t.codnegocio DESC'),
-			'pagination'=>array('pageSize'=>20)
-		));
+		if ($comoDataProvider)
+		{
+			$params = array(
+				'criteria'=>$criteria,
+				'pagination'=>array('pageSize'=>20)
+			);
+			return new CActiveDataProvider($this, $params);
+		}
+		else
+		{
+			return $this->findAll($criteria);
+		}
 	}
 
 	/**

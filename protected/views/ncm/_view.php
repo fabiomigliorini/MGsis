@@ -8,6 +8,6 @@
         </b>
 
 		
-		<small class="span6 muted"><?php echo nl2br(CHtml::encode($data->descricao)); ?></small>
+		<small class="span6"><?php echo nl2br(CHtml::encode($data->descricao)); ?></small>
 
 </div>

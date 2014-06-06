@@ -1,6 +1,6 @@
 <div class="well">
 	<div class="muted">
-		<div class="span6">
+		<div class="span5">
 			Produtos
 			<div class="badge pull-right">
 				<?php
@@ -12,7 +12,8 @@
 				?>
 			</div>
 		</div>
-		<strong class="span6 text-right <?php echo ($model->valorprodutos != $model->valortotal)?"text-warning":"text-success"; ?>" style="font-size: <?php echo ($model->valorprodutos != $model->valortotal)?"x-large":"xx-large"; ?>">
+		<strong class="span7 text-right <?php echo ($model->valorprodutos != $model->valortotal)?"text-warning":"text-success"; ?>" style="font-size: <?php echo ($model->valorprodutos != $model->valortotal)?"x-large":"xx-large"; ?>">
+			R$
 			<?php echo Yii::app()->format->formatNumber($model->valorprodutos); ?>
 		</strong>
 	</div>
@@ -20,14 +21,15 @@
 	if ($model->valorprodutos > 0 && $model->valordesconto >0):
 	?>
 	<div class=" muted">
-		<div class="span6">
+		<div class="span5">
 			Desconto
 			<div class="badge pull-right">
 				<?php echo Yii::app()->format->formatNumber($model->percentualdesconto, 1);	?>
 				%
 			</div>
 		</div>
-		<strong class="span6 text-right" style="font-size: x-large">
+		<strong class="span7 text-right" style="font-size: x-large">
+			R$
 			- <?php echo Yii::app()->format->formatNumber($model->valordesconto); ?>
 		</strong>
 	</div>
@@ -41,7 +43,7 @@
 	<div class="row-fluid muted">
 		Total
 		<strong class="pull-right text-success" style="font-size: xx-large">
-			<?php echo Yii::app()->format->formatNumber($model->valortotal); ?>
+			R$ <?php echo Yii::app()->format->formatNumber($model->valortotal); ?>
 		</strong>
 	</div>
 	<?php

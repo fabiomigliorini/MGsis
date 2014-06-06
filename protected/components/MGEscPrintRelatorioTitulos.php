@@ -8,7 +8,7 @@
  * @property Negocio $_model
  */
 
-class MGEscPrintRomaneio extends MGEscPrint
+class MGEscPrintRelatorioTitulos extends MGEscPrint
 {
 	
 	private $_model;
@@ -33,6 +33,7 @@ class MGEscPrintRomaneio extends MGEscPrint
 
 		$filial = $model->Filial;
 		
+		/*
 		// Fantasia e NUMERO do Negocio
 		$this->adicionaTexto("<DblStrikeOn>", "cabecalho");
 		$this->adicionaTexto($filial->Pessoa->fantasia . " " . $filial->Pessoa->telefone1, "cabecalho", 68);
@@ -135,7 +136,7 @@ class MGEscPrintRomaneio extends MGEscPrint
 					$vencimento = substr($titulo->vencimento, 0, 6) . substr($titulo->vencimento, 8, 2);
 					$this->adicionaTexto($vencimento, "documento", 10);
 					$this->adicionaLinha(Yii::app()->format->formatNumber($titulo->valor), "documento", 10, STR_PAD_LEFT);
-					*/
+					
 					$vencimentos[$linha][$i] = array(
 						"vencimento" => substr($titulo->vencimento, 0, 6) . substr($titulo->vencimento, 8, 2),
 						"valor" => Yii::app()->format->formatNumber($titulo->valor)
@@ -263,7 +264,7 @@ class MGEscPrintRomaneio extends MGEscPrint
 			$this->adicionaTexto("<DblStrikeOff>");
 			
 		}
-		
+		*/
 
 	}
 	

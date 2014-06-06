@@ -6,11 +6,18 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'Listagem (F1)', 'icon'=>'icon-list-alt', 'url'=>array('index'), 'linkOptions'=> array('id'=>'btnListagem')),
-array('label'=>'Novo (F2)', 'icon'=>'icon-plus', 'url'=>array('create'), 'linkOptions'=> array('id'=>'btnNovo')),
-array('label'=>'Fechar Negócio (F3)', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codnegocio), 'visible'=>($model->codnegociostatus==1), 'linkOptions'=>	array('id'=>'btnFechar')),
-array('label'=>'Cancelar', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
-//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
+	array('label'=>'Listagem (F1)', 'icon'=>'icon-list-alt', 'url'=>array('index'), 'linkOptions'=> array('id'=>'btnListagem')),
+	array('label'=>'Novo (F2)', 'icon'=>'icon-plus', 'url'=>array('create'), 'linkOptions'=> array('id'=>'btnNovo')),
+	array('label'=>'Fechar Negócio (F3)', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codnegocio), 'visible'=>($model->codnegociostatus==1), 'linkOptions'=>	array('id'=>'btnFechar')),
+	array(
+		'label'=>'Imprimir Romaneio', 
+		'icon'=>'icon-print', 
+		'url'=>array('imprimeromaneio','id'=>$model->codnegocio), 
+		'linkOptions'=>array('id'=>'btnMostrarRomaneio'),
+		'visible'=>($model->codnegociostatus == 2)
+	),
+	array('label'=>'Cancelar', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
+	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
 
 Yii::app()->clientScript->registerCoreScript('yii');
@@ -22,6 +29,29 @@ $this->renderPartial("_hotkeys");
 <script type="text/javascript">
 /*<![CDATA[*/
 $(document).ready(function(){
+	
+	//abre janela vale
+	var frameSrcRomaneio = $('#btnMostrarRomaneio').attr('href');
+	$('#btnMostrarRomaneio').click(function(event){
+		event.preventDefault();
+		$('#modalRomaneio').on('show', function () {
+			$('#frameRomaneio').attr("src",frameSrcRomaneio);
+		});
+		$('#modalRomaneio').modal({show:true})
+		$('#modalRomaneio').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
+	});	
+		
+	//imprimir Romaneio
+	$('#btnImprimirRomaneio').click(function(event){
+		window.frames["frameRomaneio"].focus();
+		window.frames["frameRomaneio"].print();
+	});
+	
+	//imprimir Romaneio Matricial
+	$('#btnImprimirRomaneioMatricial').click(function(event){
+		$('#frameRomaneio').attr("src",frameSrcRomaneio + "&imprimir=true");
+	});
+	
 	$('body').on('click','#btnExcluir',function() {
 		bootbox.confirm("Excluir este registro?", function(result) {
 			if (result)
@@ -31,6 +61,25 @@ $(document).ready(function(){
 });
 /*]]>*/
 </script>
+
+<div id="modalRomaneio" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">
+		<div class="pull-right">
+			<div class="btn-group">
+                <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">Imprimir <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+					<li ><a id="btnImprimirRomaneio" href="#">Na Impressora Laser</a></button>
+					<li ><a id="btnImprimirRomaneioMatricial" href="#">Na Impressora Matricial</a></button>
+                </ul>
+              </div>			
+			<button class="btn" data-dismiss="modal">Fechar</button>
+		</div>
+		<h3>Romaneio</h3>  
+	</div>
+	<div class="modal-body">
+      <iframe src="" id="frameRomaneio" name="frameRomaneio" width="99.6%" height="400" frameborder="0"></iframe>
+	</div>
+</div>
 
 
 <div class="row-fluid">
