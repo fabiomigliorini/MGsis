@@ -59,129 +59,111 @@ class MGRelatorioNegocios extends FPDF
 		$this->Cell(63,3, date('d/m/Y H:i:s'),"",0,'R');
 	}	
 	
-	public function imprimeCabecalhoPessoa()
+	public function imprimeCabecalho()
 	{
 	
-		$this->SetTextColor(100, 100, 100);
-		$this->SetFont('Arial','',8);
-		$this->SetLineWidth(0.6);
-		$this->Cell(18, 8, utf8_decode(Yii::app()->format->formataCodigo($this->_negocio->codpessoa)), 'B');
+		$this->SetFillColor(240,240,240);
+		$this->SetFont('Arial','B',7);
+		
 		$this->SetTextColor(0, 0, 0);
-		$this->SetFont('Arial','B',12);		
-		$this->Cell(172, 8, utf8_decode($this->_negocio->Pessoa->fantasia), 'B',1);
-		$this->SetLineWidth(0.2);
 		
-		$this->SetFont('Arial','B',8);
-		$this->Cell(37, 6, utf8_decode("Título"),   'B', 0, 'L');
-		$this->Cell(15, 6, utf8_decode("Filial"),   'B', 0, 'L');
-		$this->Cell(16, 6, utf8_decode("Emissão"),  'B', 0, 'C');
-		$this->Cell(22, 6, utf8_decode("Original"), 'B', 0, 'R');
-		$this->Cell(16, 6, utf8_decode("Venc"),     'B', 0, 'C');
-		$this->Cell(22, 6, utf8_decode("Saldo"),    'B', 0, 'R');
-		$this->Cell(16, 6, utf8_decode("Multa"),    'B', 0, 'R');
-		$this->Cell(16, 6, utf8_decode("Juros"),    'B', 0, 'R');
-		$this->Cell(22, 6, utf8_decode("Total"),    'B', 0, 'R');
-		$this->Cell(8,  6, utf8_decode("OP"),       'B', 0, 'C');
+		$this->Cell(11, 5, utf8_decode("Filial"),   'B', 0, 'L', $this->_fill);		
+		$this->Cell(12, 5, utf8_decode("Usuário"),   'B', 0, 'L', $this->_fill);		
+		$this->Cell(9, 5, utf8_decode("Oper"),   'B', 0, 'L', $this->_fill);		
+		$this->Cell(15, 5, utf8_decode("#"),   'B', 0, 'L', $this->_fill);		
+		$this->Cell(11, 5, utf8_decode("Data"),   'B', 0, 'L', $this->_fill);		
+		$this->Cell(18, 5, utf8_decode("À Prazo"),   'B', 0, 'R', $this->_fill);		
+		$this->Cell(18, 5, utf8_decode("À Vista"),   'B', 0, 'R', $this->_fill);		
+		$this->Cell(18, 5, utf8_decode("Total"),   'B', 0, 'R', $this->_fill);		
+		$this->Cell(15, 5, utf8_decode("Status"),   'B', 0, 'C', $this->_fill);		
+		$this->Cell(14, 5, utf8_decode("# Pessoa"),   'B', 0, 'R', $this->_fill);		
+		$this->Cell(33, 5, utf8_decode("Fantasia"),   'B', 0, 'L', $this->_fill);		
+		$this->Cell(16, 5, utf8_decode("Vendedor"),   'B', 0, 'L', $this->_fill);
+		
 		$this->Ln();
-		$this->_fill = false;
-		/*
-		$this->_totais["original"][$this->_negocio->codpessoa]   = 0;
-		$this->_totais["saldo"][$this->_negocio->codpessoa]      = 0;
-		$this->_totais["valorMulta"][$this->_negocio->codpessoa] = 0;
-		$this->_totais["valorJuros"][$this->_negocio->codpessoa] = 0;
-		$this->_totais["valorTotal"][$this->_negocio->codpessoa] = 0;
-		
-		*/
+
 	}
 	
 	public function imprimeLinhaNegocio()
 	{
 		
 		$this->SetFillColor(240,240,240);
-		$this->SetFont('Arial','',8);
+		$this->SetFont('Arial','',7);
 		
-		$this->SetTextColor(0, 0, 0);
-
-
-		$this->Cell(15, 5, utf8_decode("Filial"),   'B', 0, 'L', $this->_fill);		
-		$this->Cell(20, 5, utf8_decode("Usuário"),   'B', 0, 'L', $this->_fill);		
-		$this->Cell(15, 5, utf8_decode("Oper"),   'B', 0, 'L', $this->_fill);		
-		$this->Cell(10, 5, utf8_decode("#"),   'B', 0, 'R', $this->_fill);		
-		$this->Cell(15, 5, utf8_decode("Data"),   'B', 0, 'C', $this->_fill);		
-		$this->Cell(15, 5, utf8_decode("À Prazo"),   'B', 0, 'C', $this->_fill);		
-		$this->Cell(15, 5, utf8_decode("À Vista"),   'B', 0, 'C', $this->_fill);		
-		$this->Cell(15, 5, utf8_decode("Total"),   'B', 0, 'C', $this->_fill);		
-		$this->Cell(15, 5, utf8_decode("Status"),   'B', 0, 'C', $this->_fill);		
-		$this->Cell(15, 5, utf8_decode("#Pessoa"),   'B', 0, 'C', $this->_fill);		
-		$this->Cell(15, 5, utf8_decode("Fantasia"),   'B', 0, 'C', $this->_fill);		
-		$this->Cell(15, 5, utf8_decode("Vendedor"),   'B', 0, 'C', $this->_fill);		
-		//$this->Ln();
-		//$this->Cell(50, 6, utf8_decode($this->_negocio->codnegocio),   'RTL', 0, 'C', $this->_fill);		
-
-		/*
-		if ($this->_negocio->gerencial)
-			$this->SetTextColor(255, 100, 0);
-		else
-			$this->SetTextColor(0, 150, 0);
-		
-		$this->Cell(15, 6, utf8_decode($this->_negocio->Filial->filial),   '', 0, 'L', $this->_fill);
-		
-		$this->SetTextColor(0, 0, 0);
-		$this->Cell(16, 6, utf8_decode($this->_negocio->emissao),  '', 0, 'C', $this->_fill);
-		$this->Cell(22, 6, utf8_decode(Yii::app()->format->formatNumber(abs($this->_negocio->debito - $this->_negocio->credito))), '', 0, 'R', $this->_fill);
-		
-		if ($this->_negocio->saldo == 0) 
-			$this->SetTextColor(100, 100, 100);
-		else
-			if ($this->_negocio->Juros->diasAtraso > 0)
-				if ($this->_negocio->Juros->diasAtraso <= $this->_negocio->Juros->diasTolerancia) 
-					$this->SetTextColor(255, 100, 0);
-				else 
-					$this->SetTextColor(255, 0, 0);
-			else
-				$this->SetTextColor(0, 150, 0);
+		switch ($this->_negocio->codnegociostatus)
+		{
+			case NegocioStatus::ABERTO:
+				$this->SetTextColor(0, 150, 0); // Verde
+				break;
 			
-		$this->SetFont('Arial','B',8);
-		$this->Cell(16, 6, utf8_decode($this->_negocio->vencimento),     '', 0, 'C', $this->_fill);
+			case NegocioStatus::FECHADO:
+				$this->SetTextColor(0, 0, 0);  // Preto
+				break;
+			
+			case NegocioStatus::CANCELADO:
+				$this->SetTextColor(255, 100, 0); // Vermelho
+				break;
+		}
+		
 
-		if ($this->_negocio->operacao == 'CR') 
-			$this->SetTextColor(255, 100, 0);
-		else
-			$this->SetTextColor(0, 150, 0);
-		
-		$this->SetFont('Arial','',8);
-		$this->Cell(22, 6, utf8_decode(Yii::app()->format->formatNumber(abs($this->_negocio->saldo))), '', 0, 'R', $this->_fill);
-		$this->Cell(16, 6, utf8_decode(Yii::app()->format->formatNumber(abs($this->_negocio->Juros->valorMulta))), '', 0, 'R', $this->_fill);
-		$this->Cell(16, 6, utf8_decode(Yii::app()->format->formatNumber(abs($this->_negocio->Juros->valorJuros))), '', 0, 'R', $this->_fill);
-		
-		$this->SetFont('Arial','B',8);
-		$this->Cell(22, 6, utf8_decode(Yii::app()->format->formatNumber(abs($this->_negocio->Juros->valorTotal))), '', 0, 'R', $this->_fill);
-		
-		$this->SetFont('Arial','',8);
-		$this->Cell(8, 6, utf8_decode($this->_negocio->operacao), '', 0, 'C', $this->_fill);
-		 */ 
-		$this->Ln();
 		$this->_fill = ! $this->_fill;
-		/*
-		$this->_totais["original"][$this->_negocio->codpessoa] += $this->_negocio->debito-$this->_negocio->credito;
-		$this->_totais["saldo"][$this->_negocio->codpessoa] += $this->_negocio->saldo;
-		$this->_totais["valorMulta"][$this->_negocio->codpessoa] += $this->_negocio->Juros->valorMulta;
-		$this->_totais["valorJuros"][$this->_negocio->codpessoa] += $this->_negocio->Juros->valorJuros;
-		$this->_totais["valorTotal"][$this->_negocio->codpessoa] += $this->_negocio->Juros->valorTotal;		
+		$this->Cell(11, 5, utf8_decode($this->_negocio->Filial->filial),   '', 0, 'L', $this->_fill);	
+		$this->Cell(12, 5, utf8_decode($this->_negocio->Usuario->usuario),   '', 0, 'L', $this->_fill);	
+		$this->Cell(9, 5, utf8_decode($this->_negocio->Operacao->operacao),   '', 0, 'L', $this->_fill);	
+		$this->Cell(15, 5, utf8_decode(Yii::app()->format->formataCodigo(abs($this->_negocio->codnegocio))),   '', 0, 'L', $this->_fill);	
+		$data = $this->_negocio->lancamento;
+		$data = substr($data, 0, 6) . substr($data, 8, 2);
+		$this->Cell(11, 5, utf8_decode($data),   '', 0, 'L', $this->_fill);	
+		$this->Cell(18, 5, utf8_decode(Yii::app()->format->formatNumber(abs($this->_negocio->valoraprazo))), '', 0, 'R', $this->_fill);
+		$this->Cell(18, 5, utf8_decode(Yii::app()->format->formatNumber(abs($this->_negocio->valoravista))), '', 0, 'R', $this->_fill);
+		$this->Cell(18, 5, utf8_decode(Yii::app()->format->formatNumber(abs($this->_negocio->valortotal))), '', 0, 'R', $this->_fill);
+		$this->Cell(15, 5, utf8_decode($this->_negocio->NegocioStatus->negociostatus),   '', 0, 'C', $this->_fill);	
+		$this->Cell(14, 5, utf8_decode(Yii::app()->format->formataCodigo(abs($this->_negocio->codpessoa))),   '', 0, 'R', $this->_fill);	
 		
-		$this->_totais["original"]["geral"] += $this->_negocio->debito-$this->_negocio->credito;
-		$this->_totais["saldo"]["geral"] += $this->_negocio->saldo;
-		$this->_totais["valorMulta"]["geral"] += $this->_negocio->Juros->valorMulta;
-		$this->_totais["valorJuros"]["geral"] += $this->_negocio->Juros->valorJuros;
-		$this->_totais["valorTotal"]["geral"] += $this->_negocio->Juros->valorTotal;		
-		 
-		 */
+		if (isset($this->_negocio->Pessoa))
+			$this->Cell(33, 5, utf8_decode(substr($this->_negocio->Pessoa->fantasia, 0, 27)),   '', 0, 'L', $this->_fill);	
+		else
+			$this->Cell(33, 5, utf8_decode(""),   '', 0, 'L', $this->_fill);	
+		
+		if (isset($this->_negocio->PessoaVendedor))
+			$this->Cell(16, 5, utf8_decode(substr($this->_negocio->PessoaVendedor->fantasia, 0, 12)),   '', 0, 'L', $this->_fill);
+		else {
+			$this->Cell(16, 5, utf8_decode(""),   '', 0, 'L', $this->_fill);
+
+		}
+		
+		$this->Ln();
+		
+		if (!isset($this->_totais["valoravista"][$this->_negocio->codnegociostatus]))
+			$this->_totais["valoravista"][$this->_negocio->codnegociostatus] = 0;
+		
+		if (!isset($this->_totais["valoraprazo"][$this->_negocio->codnegociostatus]))
+			$this->_totais["valoraprazo"][$this->_negocio->codnegociostatus] = 0;
+		
+		if (!isset($this->_totais["valortotal"][$this->_negocio->codnegociostatus]))
+			$this->_totais["valortotal"][$this->_negocio->codnegociostatus] = 0;
+		
+		$this->_totais["valoravista"][$this->_negocio->codnegociostatus] += $this->_negocio->valoravista;
+		$this->_totais["valoraprazo"][$this->_negocio->codnegociostatus] += $this->_negocio->valoraprazo;
+		$this->_totais["valortotal"][$this->_negocio->codnegociostatus] += $this->_negocio->valortotal;
+		
+		$this->_totais["valoravista"]["geral"] += $this->_negocio->valoravista;
+		$this->_totais["valoraprazo"]["geral"] += $this->_negocio->valoraprazo;
+		$this->_totais["valortotal"]["geral"] += $this->_negocio->valortotal;
+		
 	}
 
-	public function imprimeTotais($codpessoa)
+	public function imprimeTotais($codnegociostatus)
 	{
-		/*
-		if ($codpessoa == "geral")
+		
+		$this->SetFillColor(240,240,240);
+		$this->SetFont('Arial','',8);
+		
+		$this->SetTextColor(0, 0, 0);
+		
+		$this->Cell("aqui");
+		
+		if ($codnegociostatus == "geral")
 			$this->SetLineWidth (0.6);
 		else
 			$this->SetLineWidth (0.2);
@@ -190,24 +172,31 @@ class MGRelatorioNegocios extends FPDF
 		
 		$this->SetTextColor(0, 0, 0);
 		
-		if ($codpessoa == "geral")
+			$this->Ln();
+		if ($codnegociostatus == "geral")
 		{
 			$this->Ln();
-			$this->Cell(68, 6, utf8_decode("Total Geral"),   'T', 0, 'R');
+			$this->Cell(56, 6, utf8_decode("Total Geral"),   'T', 0, 'R');
 		}
 		else
-			$this->Cell(68, 6, utf8_decode("Total"),   'T', 0, 'R');
+			$this->Cell(56, 6, utf8_decode("Total"),   'T', 0, 'R');
 			
-		$this->Cell(22, 6, utf8_decode(Yii::app()->format->formatNumber(abs($this->_totais["original"][$codpessoa]))), 'T', 0, 'R');
+		$this->Cell(20, 6, utf8_decode(Yii::app()->format->formatNumber(abs($this->_totais["valoraprazo"][$codnegociostatus]))), 'T', 0, 'R');
+		$this->Cell(18, 6, utf8_decode(Yii::app()->format->formatNumber(abs($this->_totais["valoravista"][$codnegociostatus]))), 'T', 0, 'R');
+		$this->Cell(18, 6, utf8_decode(Yii::app()->format->formatNumber(abs($this->_totais["valortotal"][$codnegociostatus]))), 'T', 0, 'R');
+		$this->Cell(78, 6, utf8_decode(""),   'T', 0, 'R');
+		/*
 		$this->Cell(16, 6, '',     'T', 0, 'C', false);
-		$this->Cell(22, 6, utf8_decode(Yii::app()->format->formatNumber(abs($this->_totais["saldo"][$codpessoa]))), 'T', 0, 'R');
-		$this->Cell(16, 6, utf8_decode(Yii::app()->format->formatNumber(abs($this->_totais["valorMulta"][$codpessoa]))), 'T', 0, 'R');
-		$this->Cell(16, 6, utf8_decode(Yii::app()->format->formatNumber(abs($this->_totais["valorJuros"][$codpessoa]))), 'T', 0, 'R');
-		$this->Cell(22, 6, utf8_decode(Yii::app()->format->formatNumber(abs($this->_totais["valorTotal"][$codpessoa]))), 'T', 0, 'R');
-		$this->Cell(8, 6, utf8_decode(($this->_totais["valorTotal"][$codpessoa]<0)?"CR":"DB"), 'T', 0, 'C');
+		$this->Cell(22, 6, utf8_decode(Yii::app()->format->formatNumber(abs($this->_totais["saldo"][$codnegociostatus]))), 'T', 0, 'R');
+		$this->Cell(16, 6, utf8_decode(Yii::app()->format->formatNumber(abs($this->_totais["valorMulta"][$codnegociostatus]))), 'T', 0, 'R');
+		$this->Cell(16, 6, utf8_decode(Yii::app()->format->formatNumber(abs($this->_totais["valorJuros"][$codnegociostatus]))), 'T', 0, 'R');
+		$this->Cell(22, 6, utf8_decode(Yii::app()->format->formatNumber(abs($this->_totais["valorTotal"][$codnegociostatus]))), 'T', 0, 'R');
+		$this->Cell(8, 6, utf8_decode(($this->_totais["valorTotal"][$codnegociostatus]<0)?"CR":"DB"), 'T', 0, 'C');
+		 * 
+		 */
 		$this->Ln();
 	
-		 */
+		
 		
 	}
 	
@@ -215,48 +204,43 @@ class MGRelatorioNegocios extends FPDF
 	{
 		$this->AddPage();
 
-		/*
-		$this->_totais["original"]["geral"]   = 0;
-		$this->_totais["saldo"]["geral"]      = 0;
-		$this->_totais["valorMulta"]["geral"] = 0;
-		$this->_totais["valorJuros"]["geral"] = 0;
-		$this->_totais["valorTotal"]["geral"] = 0;
-		
-		$this->SetFont('Arial','',14);
-		
-		//$negocios = $this->_dataProvider->getData();
+		$this->_totais["valoravista"]["geral"]  = 0;
+		$this->_totais["valoraprazo"]["geral"] = 0;
+		$this->_totais["valortotal"]["geral"]  = 0;
 
-		$codpessoa = null;
+		$codnegociostatus = null;
 		$linha = 0;
-		*/
+
 		foreach ($this->_negocios as $this->_negocio)
 		{
-			/*
-			if ($codpessoa <> $this->_negocio->codpessoa)
+			
+			if ($codnegociostatus <> $this->_negocio->codnegociostatus)
 			{
-				if (!empty($codpessoa))
+				if (!empty($codnegociostatus))
 				{
-					$this->imprimeTotais($codpessoa);
+					$this->imprimeTotais($codnegociostatus);
 					$this->Ln();
 				}
-				$this->imprimeCabecalhoPessoa();
+				$this->imprimeCabecalho();
 			}
 			
-			$codpessoa = $this->_negocio->codpessoa;
-			 */
+			$codnegociostatus = $this->_negocio->codnegociostatus;
 
 			$this->imprimeLinhaNegocio();
+			
 		}
-		/*
-		if (!empty($codpessoa))
-			$this->imprimeTotais($codpessoa);
+		
+		if (!empty($codnegociostatus))
+			$this->imprimeTotais($codnegociostatus);
 		
 		$this->imprimeTotais("geral");
 		
-		 * 
-		 */
 		$this->AliasNbPages();
-
+		
+		
+		
+		//$this->Ln();
+		//$this->_fill = ! $this->_fill;
 
 	}
 
