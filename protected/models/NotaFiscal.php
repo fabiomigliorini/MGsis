@@ -399,7 +399,7 @@ class NotaFiscal extends MGActiveRecord
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
-	public function search()
+	public function search($comoDataProvider = true)
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
@@ -501,12 +501,20 @@ class NotaFiscal extends MGActiveRecord
 				$criteria->addCondition('t.emitida = true and t.nfecancelamento is not null');
 				break;
 		}
+		
+		$criteria->order = 't.saida DESC, t.codfilial ASC, t.numero DESC';
 
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-			'sort'=>array('defaultOrder'=>'t.saida DESC, t.codfilial ASC, t.numero DESC'),
-			'pagination'=>array('pageSize'=>20)
-		));
+		if ($comoDataProvider)
+		{
+			return new CActiveDataProvider($this, array(
+				'criteria'=>$criteria,
+				'pagination'=>array('pageSize'=>20)
+			));
+		}
+		else
+		{
+			return $this->findAll($criteria);
+		}
 	}
 
 	/**
