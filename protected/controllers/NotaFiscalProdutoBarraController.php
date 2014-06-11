@@ -29,7 +29,10 @@ class NotaFiscalProdutoBarraController extends Controller
 		
 		$model->codnotafiscal = $codnotafiscal;
 		$model->quantidade = 1;
-
+		
+		if (!$model->NotaFiscal->podeEditar())
+			throw new CHttpException(409, 'Nota Fiscal não permite edição!');
+		
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
 
@@ -53,6 +56,9 @@ class NotaFiscalProdutoBarraController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
+		
+		if (!$model->NotaFiscal->podeEditar())
+			throw new CHttpException(409, 'Nota Fiscal não permite edição!');
 
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
@@ -81,7 +87,12 @@ class NotaFiscalProdutoBarraController extends Controller
 			// we only allow deletion via POST request
 			try
 			{
-				$this->loadModel($id)->delete();
+				$model = $this->loadModel($id);
+				
+				if (!$model->NotaFiscal->podeEditar())
+					throw new CHttpException(409, 'Nota Fiscal não permite edição!');
+					
+				$model->delete();
 				// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 				if(!isset($_GET['ajax']))
 					$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));

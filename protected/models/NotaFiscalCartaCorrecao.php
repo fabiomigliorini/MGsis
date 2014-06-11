@@ -40,7 +40,7 @@ class NotaFiscalCartaCorrecao extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codnotafiscalcartacorrecao, codnotafiscal, lote, data, sequencia, texto', 'required'),
+			array('codnotafiscal, lote, data, sequencia, texto', 'required'),
 			array('lote, sequencia', 'numerical', 'integerOnly'=>true),
 			array('protocolo', 'length', 'max'=>100),
 			array('protocolodata, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),

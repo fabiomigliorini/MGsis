@@ -17,6 +17,7 @@
  * @property string $acbrnfemonitorip
  * @property string $acbrnfemonitorporta
  * @property string $odbcnumeronotafiscal
+ * @property string $crt
  * @property string $alteracao
  * @property string $codusuarioalteracao
  * @property string $criacao
@@ -54,10 +55,12 @@ class Filial extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codpessoa, filial', 'required'),
+			array('codpessoa, filial, crt', 'required'),
 			array('filial, acbrnfemonitorip', 'length', 'max'=>20),
 			array('acbrnfemonitorcaminho, acbrnfemonitorcaminhorede', 'length', 'max'=>100),
 			array('empresadominio', 'length', 'max'=>7),
+			array('crt', 'length', 'max'=>7),
+			array('crt', 'numerical'),
 			array('odbcnumeronotafiscal', 'length', 'max'=>500),
 			array('codempresa, codpessoa, emitenfe, acbrnfemonitorbloqueado, acbrnfemonitorcodusuario, acbrnfemonitorporta, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
