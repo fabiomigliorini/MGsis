@@ -28,6 +28,32 @@ Yii::app()->clientScript->registerCoreScript('yii');
 
 <script type="text/javascript">
 	
+function enviarNfe()
+{
+	$.getJSON("<?php echo Yii::app()->createUrl('notaFiscal/enviarNfe')?>", { id: <?php echo $model->codnotafiscal ?> } )
+		.done(function(data) {
+
+			var redirecionar = "<?php echo Yii::app()->createUrl('notaFiscal/view', array("id"=>$model->codnotafiscal))?>";
+
+			if (!data.resultado)
+			{
+				var mensagem = '<h3>' + data.erroMonitor + '</h3><pre>' + data.retorno + '</pre>';
+				bootbox.alert(mensagem, function() {
+					document.location = redirecionar;
+				});
+			}
+			else
+			{
+				document.location = redirecionar + "&imprimirDanfe=1";
+			}
+
+		})
+		.fail(function( jqxhr, textStatus, error ) {
+			var err = textStatus + ", " + error;
+			console.log( "Request Failed: " + err );
+		});
+}
+	
 function enviarEmail(email, alterarcadastro)
 {
 	$.getJSON("<?php echo Yii::app()->createUrl('notaFiscal/enviarEmail')?>", 
@@ -54,31 +80,54 @@ function enviarEmail(email, alterarcadastro)
 		});
 	
 }
+
+function abrirDanfe(imprimir)
+{
+	var frameSrcDanfe = "<?php echo $model->Filial->acbrnfemonitorcaminhorede; ?>/PDF/<?php echo $model->nfechave; ?>.pdf";
+	
+	$.getJSON("<?php echo Yii::app()->createUrl('notaFiscal/imprimirDanfePdf')?>", 
+		{ 
+			id: <?php echo $model->codnotafiscal ?>,
+			imprimir: imprimir
+		})
+		.done(function(data) {
+
+			var mensagem = '';
+
+			if (!data.resultado)
+			{
+				mensagem = '<h3>' + data.erroMonitor + '</h3><pre>' + data.retorno + '</pre>';
+				bootbox.alert(mensagem);
+			}
+			else
+			{
+				$('#modalDanfe').on('show', function () {
+					$('#frameDanfe').attr("src",frameSrcDanfe);
+				});
+				$('#modalDanfe').modal({show:true})
+				$('#modalDanfe').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
+			}
+
+		})
+		.fail(function( jqxhr, textStatus, error ) {
+			var err = textStatus + ", " + error;
+			console.log( "Request Failed: " + err );
+		});
+}
 	
 /*<![CDATA[*/
 $(document).ready(function(){
 	
+	<?php
+	if (!empty($_GET["imprimirDanfe"]) && $model->codstatus == NotaFiscal::CODSTATUS_AUTORIZADA)
+		echo "abrirDanfe(1);";
+	else if (!empty($_GET["enviarNfe"]) && ($model->codstatus == NotaFiscal::CODSTATUS_DIGITACAO || $model->codstatus == NotaFiscal::CODSTATUS_NAOAUTORIZADA))
+		echo "enviarNfe();";
+	?>
+			
 	// ENVIAR NFE
 	$('#btnEnviarNfe').on('click', function (e) {
-		$.getJSON("<?php echo Yii::app()->createUrl('notaFiscal/enviarNfe')?>", { id: <?php echo $model->codnotafiscal ?> } )
-			.done(function(data) {
-				
-				var mensagem = '';
-			
-				if (!data.resultado)
-					mensagem = '<h3>' + data.erroMonitor + '</h3><pre>' + data.retorno + '</pre>';
-				else
-					mensagem = '<h3>Autorizada</h3>';
-				
-				bootbox.alert(mensagem, function() {
-					document.location = document.location;
-				});
-				
-			})
-			.fail(function( jqxhr, textStatus, error ) {
-				var err = textStatus + ", " + error;
-				console.log( "Request Failed: " + err );
-			});
+		enviarNfe();
 	});
 	
 	//CONSULTAR NFE
@@ -169,35 +218,16 @@ $(document).ready(function(){
 	});
 
 	//abre janela vale
-	var frameSrcDanfe = "<?php echo $model->Filial->acbrnfemonitorcaminhorede; ?>/PDF/<?php echo $model->nfechave; ?>.pdf";
 	$('#btnAbrirDanfe').click(function(event){
 		event.preventDefault();
-		$.getJSON("<?php echo Yii::app()->createUrl('notaFiscal/imprimirDanfePdf')?>", { id: <?php echo $model->codnotafiscal ?> } )
-			.done(function(data) {
-				
-				var mensagem = '';
-			
-				if (!data.resultado)
-				{
-					mensagem = '<h3>' + data.erroMonitor + '</h3><pre>' + data.retorno + '</pre>';
-					bootbox.alert(mensagem);
-				}
-				else
-				{
-					$('#modalDanfe').on('show', function () {
-						$('#frameDanfe').attr("src",frameSrcDanfe);
-					});
-					$('#modalDanfe').modal({show:true})
-					$('#modalDanfe').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
-				}
-			
-			})
-			.fail(function( jqxhr, textStatus, error ) {
-				var err = textStatus + ", " + error;
-				console.log( "Request Failed: " + err );
-			});
-		
+		abrirDanfe(0);
 	});	
+	
+	//imprimir Danfe Matricial
+	$('#btnImprimirDanfePdfTermica').click(function(event){
+		abrirDanfe(1);
+	});
+	
 	
 	//Enviar Email
 	<?php
@@ -239,12 +269,6 @@ $(document).ready(function(){
 			
 		}, email);		
 	});
-	
-	//imprimir Danfe Matricial
-	$('#btnImprimirDanfeTermica').click(function(event){
-		$('#frameDanfe').attr("src",frameSrcDanfe + "&imprimir=true");
-	});
-	
 	
 	jQuery('body').on('click','#btnExcluir',function() {
 		bootbox.confirm("Excluir este registro?", function(result) {
@@ -314,12 +338,9 @@ $(document).ready(function(){
 <div id="modalDanfe" class="modal hide fade" tabindex="-1" role="dialog">
 	<div class="modal-header">
 		<div class="pull-right">
-			<div class="btn-group">
-				<button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">Imprimir <span class="caret"></span></button>
-				<ul class="dropdown-menu">
-					<li ><a id="btnImprimirDanfeTermica" href="#">Na Impressora Termica</a></button>
-				</ul>
-			</div>			
+			<?php if ($model->modelo == NotaFiscal::MODELO_NFCE): ?>
+				<button class="btn btn-primary" id="btnImprimirDanfePdfTermica" >Imprimir </span></button>
+			<?php endif; ?>
 			<button class="btn" data-dismiss="modal">Fechar</button>
 		</div>
 		<h3>Danfe</h3> 

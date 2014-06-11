@@ -620,8 +620,8 @@ class NotaFiscal extends MGActiveRecord
 	function getModeloListaCombo()
 	{
 		return array(
-			self::MODELO_NFE => "NFe - Nota",
-			self::MODELO_NFCE => "NFC-e - Cupom"
+			self::MODELO_NFE => self::MODELO_NFE . " - NFe - Nota",
+			self::MODELO_NFCE => self::MODELO_NFCE . " - NFC-e - Cupom"
 		);
 	}
 	

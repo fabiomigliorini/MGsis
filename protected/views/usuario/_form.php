@@ -47,6 +47,12 @@
 				'impressoramatricial',
 				array('class' => 'span2')                    
 				); 
+		
+		echo $form->textFieldRow(
+				$model,
+				'impressoratermica',
+				array('class' => 'span2')                    
+				);
 
 		echo $form->dropDownListRow(
 				$model,

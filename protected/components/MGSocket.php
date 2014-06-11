@@ -57,7 +57,7 @@ class MGSocket
 			$this->desconectar();
 		
 		//abre conexao
-		if ($this->_fp = @fsockopen("tcp://$this->servidor", $this->porta, $this->errno, $this->errstr))
+		if ($this->_fp = @fsockopen("tcp://$this->servidor", $this->porta, $this->errno, $this->errstr, 1))
 		{
 			stream_set_blocking($this->_fp, FALSE);
 			$this->recebe();

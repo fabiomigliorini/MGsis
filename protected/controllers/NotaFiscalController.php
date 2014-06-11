@@ -278,12 +278,16 @@ class NotaFiscalController extends Controller
 		
 	}	
 	
-	public function actionImprimirDanfePdf($id)
+	public function actionImprimirDanfePdf($id, $imprimir = false)
 	{
 		$model = $this->loadModel($id);
 		$acbr = new MGAcbrNfeMonitor($model);
 		
 		$res = $acbr->imprimirDanfePdf();
+		//$res = $acbr->imprimirDanfe();
+		
+		if ($res && $imprimir && $model->modelo == NotaFiscal::MODELO_NFCE)
+			$acbr->imprimirDanfePdfTermica ();
 		
 		echo CJSON::encode(
 			array(

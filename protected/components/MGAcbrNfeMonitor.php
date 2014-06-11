@@ -517,13 +517,12 @@ class MGAcbrNfeMonitor extends MGSocket
 		
 		if (!$this->model->emitida)
 			return $this->gerarErro("Nota Fiscal nao e de nossa emissao!");
-		
+
 		//Monta Comando
 		$cmd = "NFE.EnviarNFe(\"";
 		$cmd .= $this->model->Filial->acbrnfemonitorcaminho . "\\Arquivos\\EnvioResp\\" . $this->model->nfechave . "-nfe.xml";
 		$cmd .= "\")\n.\n";
-		
-		
+			
 		//Envia Comando
 		if (!$this->enviaComando($cmd))
 			return false;
@@ -532,7 +531,9 @@ class MGAcbrNfeMonitor extends MGSocket
 		if ($this->retornoMonitor["Mensagem"][0] != "OK")
 			return false;
 		
+		//Salva retorno do envio
 		return $this->salvaRetorno();
+		
 	}
 
 	
@@ -569,6 +570,36 @@ class MGAcbrNfeMonitor extends MGSocket
 		$cmd = "NFE.ImprimirDANFEPDF(\"";
 		$cmd .= $this->model->Filial->acbrnfemonitorcaminho . "\\Arquivos\\NFe\\" . $this->model->nfechave . "-nfe.xml";
 		$cmd .= "\")\n.\n";
+		
+		//Envia Comando
+		if (!$this->enviaComando($cmd))
+			return false;
+		
+		//Se retornou diferente de OK aborta
+		if ($this->retornoMonitor["Mensagem"][0] != "OK")
+			return false;
+		
+		return true;
+	}
+	
+	public function imprimirDanfePdfTermica()
+	{
+		$arquivo = "{$this->model->nfechave}.pdf";
+		$url = "{$this->model->Filial->acbrnfemonitorcaminhorede}/PDF/$arquivo";
+		$cmd = "cd /tmp; rm -f $arquivo; wget $url ; lpr -P bematech-escmig98-pc $arquivo;";
+		return exec($cmd);		
+	}
+	
+	public function imprimirDanfe()
+	{
+		
+		if (!$this->model->emitida)
+			return $this->gerarErro("Nota Fiscal nao e de nossa emissao!");
+		
+		//Monta Comando
+		$cmd = "NFE.ImprimirDANFE(\"";
+		$cmd .= $this->model->Filial->acbrnfemonitorcaminho . "\\Arquivos\\NFe\\" . $this->model->nfechave . "-nfe.xml";
+		$cmd .= "\", \"". Yii::app()->user->getState('impressoraTermica') ."\")\n.\n";
 		
 		//Envia Comando
 		if (!$this->enviaComando($cmd))

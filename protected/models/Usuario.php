@@ -13,6 +13,7 @@
  * @property string $codpessoa
  * @property string $impressoratelanegocio
  * @property string $impressoramatricial
+ * @property string $impressoratermica
  * @property string $codportador
  * @property string $alteracao
  * @property string $codusuarioalteracao
@@ -188,7 +189,9 @@ class Usuario extends MGActiveRecord
 			array('usuario', 'length', 'min'=>4),
 			array('usuario', 'unique', 'caseSensitive' => false),
 
-			array('senha, senha_tela, impressoramatricial', 'length', 'max'=>100),
+			array('senha, senha_tela', 'length', 'max'=>100),
+			array('impressoramatricial', 'length', 'max'=>20),
+			array('impressoratermica', 'length', 'max'=>50),
 			
 			array('senha_tela', 'length', 'max'=>20),
 			array('senha_tela', 'length', 'min'=>6),
@@ -197,7 +200,7 @@ class Usuario extends MGActiveRecord
 			
 			array('codecf, codfilial, codpessoa, codportador, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			
-			array('senha, codecf, codfilial, codpessoa, impressoramatricial, codportador', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('senha, codecf, codfilial, codpessoa, impressoramatricial, impressoratermica, codportador', 'default', 'setOnEmpty' => true, 'value' => null),
 
 			array('codecf', 'exist', 'className'=>'Ecf'),
 			array('codfilial', 'exist', 'className'=>'Filial'),
@@ -383,6 +386,7 @@ class Usuario extends MGActiveRecord
 			'codoperacao' => 'Operação',
 			'codpessoa' => 'Pessoa',
 			'impressoramatricial' => 'Impressora Matricial',
+			'impressoratermica' => 'Impressora Térmica',
 			'codportador' => 'Portador',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',

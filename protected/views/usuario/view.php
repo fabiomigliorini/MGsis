@@ -40,6 +40,7 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 			'type'=>'raw'
 			),
 		'impressoramatricial',
+		'impressoratermica',
 		array(
 			'name'=>'codportador',
 			'value'=>isset($model->codportador)?CHtml::encode($model->Portador->portador):Null,
