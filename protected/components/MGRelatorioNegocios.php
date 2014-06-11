@@ -67,18 +67,18 @@ class MGRelatorioNegocios extends FPDF
 		
 		$this->SetTextColor(0, 0, 0);
 		
-		$this->Cell(11, 5, utf8_decode("Filial"),   'B', 0, 'L', $this->_fill);		
-		$this->Cell(12, 5, utf8_decode("Usuário"),   'B', 0, 'L', $this->_fill);		
-		$this->Cell(9, 5, utf8_decode("Oper"),   'B', 0, 'L', $this->_fill);		
-		$this->Cell(15, 5, utf8_decode("#"),   'B', 0, 'L', $this->_fill);		
-		$this->Cell(11, 5, utf8_decode("Data"),   'B', 0, 'L', $this->_fill);		
-		$this->Cell(18, 5, utf8_decode("À Prazo"),   'B', 0, 'R', $this->_fill);		
-		$this->Cell(18, 5, utf8_decode("À Vista"),   'B', 0, 'R', $this->_fill);		
-		$this->Cell(18, 5, utf8_decode("Total"),   'B', 0, 'R', $this->_fill);		
-		$this->Cell(15, 5, utf8_decode("Status"),   'B', 0, 'C', $this->_fill);		
-		$this->Cell(14, 5, utf8_decode("# Pessoa"),   'B', 0, 'R', $this->_fill);		
-		$this->Cell(33, 5, utf8_decode("Fantasia"),   'B', 0, 'L', $this->_fill);		
-		$this->Cell(16, 5, utf8_decode("Vendedor"),   'B', 0, 'L', $this->_fill);
+		$this->Cell(11, 5, utf8_decode ("Filial"),   'B', 0, 'L', $this->_fill);		
+		$this->Cell(12, 5, utf8_decode ("Usuário"),  'B', 0, 'L', $this->_fill);		
+		$this->Cell(9,  5, utf8_decode ("Oper"),     'B', 0, 'L', $this->_fill);		
+		$this->Cell(15, 5, utf8_decode ("#"),		 'B', 0, 'L', $this->_fill);		
+		$this->Cell(11, 5, utf8_decode ("Data"),     'B', 0, 'L', $this->_fill);		
+		$this->Cell(18, 5, utf8_decode ("À Prazo"),  'B', 0, 'R', $this->_fill);		
+		$this->Cell(18, 5, utf8_decode ("À Vista"),  'B', 0, 'R', $this->_fill);		
+		$this->Cell(18, 5, utf8_decode ("Total"),    'B', 0, 'R', $this->_fill);		
+		$this->Cell(15, 5, utf8_decode ("Status"),   'B', 0, 'C', $this->_fill);		
+		$this->Cell(14, 5, utf8_decode ("# Pessoa"), 'B', 0, 'R', $this->_fill);		
+		$this->Cell(33, 5, utf8_decode ("Fantasia"), 'B', 0, 'L', $this->_fill);		
+		$this->Cell(16, 5, utf8_decode ("Vendedor"), 'B', 0, 'L', $this->_fill);
 		
 		$this->Ln();
 
