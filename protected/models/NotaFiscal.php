@@ -44,6 +44,7 @@
  * @property string $icmsstvalor
  * @property string $ipibase
  * @property string $ipivalor
+ * @property string $modelo
  *
  * The followings are the available model relations:
  * @property NotaFiscalProdutoBarra[] $NotaFiscalProdutoBarras
@@ -53,8 +54,8 @@
  * @property Pessoa $Pessoa
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
- * @property NotaFiscalCartaCorrecao[] $NotafiscalCartaCorrecaos
- * @property NotaFiscalDuplicatas[] $NotafiscalDuplicatass
+ * @property NotaFiscalCartaCorrecao[] $NotaFiscalCartaCorrecaos
+ * @property NotaFiscalDuplicatas[] $NotaFiscalDuplicatass
  */
 class NotaFiscal extends MGActiveRecord
 {
@@ -75,6 +76,8 @@ class NotaFiscal extends MGActiveRecord
 	public $saida_de;
 	public $saida_ate;
 	
+	const MODELO_NFE			= 55;
+	const MODELO_NFCE			= 65;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -96,6 +99,7 @@ class NotaFiscal extends MGActiveRecord
 			array('nfechave, nfereciboenvio, nfeautorizacao, nfecancelamento, nfeinutilizacao', 'length', 'max'=>100),
 			array('nfechave', 'unique'),
 			array('nfechave', 'validaChaveNFE'),
+			array('modelo', 'validaModelo'),
 			array('codpessoa', 'validaPessoaPelaChaveNFE'),
 			array('serie', 'validaSeriePelaChaveNFE'),
 			array('numero', 'validaNumeroPelaChaveNFE'),
@@ -110,6 +114,25 @@ class NotaFiscal extends MGActiveRecord
 			// @todo Please remove those attributes that should not be searched.
 			array('codnotafiscal, codnaturezaoperacao, emitida, nfechave, nfeimpressa, serie, numero, emissao, saida, codfilial, codpessoa, observacoes, volumes, fretepagar, codoperacao, nfereciboenvio, nfedataenvio, nfeautorizacao, nfedataautorizacao, valorfrete, valorseguro, valordesconto, valoroutras, nfecancelamento, nfedatacancelamento, nfeinutilizacao, nfedatainutilizacao, justificativa, alteracao, codusuarioalteracao, criacao, codusuariocriacao, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipivalor, codstatus, emissao_de, emissao_ate, saida_de, saida_ate', 'safe', 'on'=>'search'),
 		);
+	}
+	
+	public function validaModelo($attribute, $params)
+	{
+		if (empty($this->nfechave))
+		{
+			if (!$this->emitida)
+				return;
+			if (empty($this->modelo))
+				$this->addError($attribute, "Modelo não pode ser vazio!");
+			
+			if ($this->modelo != NotaFiscal::MODELO_NFCE && $this->modelo != NotaFiscal::MODELO_NFE)
+				$this->addError($attribute, "Modelo incorreto!");
+		}
+		else
+		{
+			if ($this->modelo != substr($this->nfechave, 20, 2))
+				$this->addError($attribute, "Modelo informado não bate com a Chave!");
+		}
 	}
 	
 	// composicao serie e numero deve ser unica para a filial ou para a pessoa
@@ -326,15 +349,15 @@ class NotaFiscal extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'NotaFiscalProdutoBarras' => array(self::HAS_MANY, 'NotaFiscalProdutoBarra', 'codnotafiscal'),
+			'NotaFiscalProdutoBarras' => array(self::HAS_MANY, 'NotaFiscalProdutoBarra', 'codnotafiscal', 'order'=>'criacao ASC NULLS LAST, codnotafiscalprodutobarra ASC'),
 			'Operacao' => array(self::BELONGS_TO, 'Operacao', 'codoperacao'),
 			'NaturezaOperacao' => array(self::BELONGS_TO, 'NaturezaOperacao', 'codnaturezaoperacao'),
 			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
 			'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),			
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
-			'NotaFiscalCartaCorrecaos' => array(self::HAS_MANY, 'NotaFiscalCartaCorrecao', 'codnotafiscal'),
-			'NotaFiscalDuplicatass' => array(self::HAS_MANY, 'NotaFiscalDuplicatas', 'codnotafiscal'),
+			'NotaFiscalCartaCorrecaos' => array(self::HAS_MANY, 'NotaFiscalCartaCorrecao', 'codnotafiscal', 'order'=>'sequencia DESC'),
+			'NotaFiscalDuplicatass' => array(self::HAS_MANY, 'NotaFiscalDuplicatas', 'codnotafiscal', 'order'=>'vencimento ASC, valor ASC, codnotafiscalduplicatas ASC'),
 		);
 	}
 
@@ -347,8 +370,8 @@ class NotaFiscal extends MGActiveRecord
 			'codnotafiscal' => '#',
 			'codnaturezaoperacao' => 'Natureza de Operação',
 			'emitida' => 'Emitida',
-			'nfechave' => 'NFE Chave',
-			'nfeimpressa' => 'NFE Impressa',
+			'nfechave' => 'Chave',
+			'nfeimpressa' => 'Impressa',
 			'serie' => 'Série',
 			'numero' => 'Número',
 			'emissao' => 'Emissão',
@@ -359,18 +382,18 @@ class NotaFiscal extends MGActiveRecord
 			'volumes' => 'Volumes',
 			'fretepagar' => 'Frete à Pagar',
 			'codoperacao' => 'Operação',
-			'nfereciboenvio' => 'NFE Recibo do Envio',
-			'nfedataenvio' => 'NFE Data Envio',
-			'nfeautorizacao' => 'NFE Autorização',
-			'nfedataautorizacao' => 'NFE Data Autorização',
+			'nfereciboenvio' => 'Recibo do Envio',
+			'nfedataenvio' => 'Data Envio',
+			'nfeautorizacao' => 'Autorização',
+			'nfedataautorizacao' => 'Data Autorização',
 			'valorfrete' => 'Frete',
 			'valorseguro' => 'Seguro',
 			'valordesconto' => 'Desconto',
 			'valoroutras' => 'Outras',
-			'nfecancelamento' => 'NFE cancelamento',
-			'nfedatacancelamento' => 'NFE Data do Cancelamento',
-			'nfeinutilizacao' => 'NFE Inutilização',
-			'nfedatainutilizacao' => 'NFE Data da Inutilização',
+			'nfecancelamento' => 'Cancelamento',
+			'nfedatacancelamento' => 'Data do Cancelamento',
+			'nfeinutilizacao' => 'Inutilização',
+			'nfedatainutilizacao' => 'Data da Inutilização',
 			'justificativa' => 'Justificativa',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
@@ -383,7 +406,8 @@ class NotaFiscal extends MGActiveRecord
 			'icmsstbase' => 'ICMS ST Base',
 			'icmsstvalor' => 'ICMS ST Valor',
 			'ipibase' => 'IPI Base',
-			'ipivalor' => 'IPI Valor',			
+			'ipivalor' => 'IPI Valor',
+			'modelo' => 'Modelo NFE',
 		);
 	}
 
@@ -584,6 +608,14 @@ class NotaFiscal extends MGActiveRecord
 			self::CODSTATUS_CANCELADA => "Cancelada"
 		);
 	}
+
+	function getModeloListaCombo()
+	{
+		return array(
+			self::MODELO_NFE => "NFe - Nota",
+			self::MODELO_NFCE => "NFC-e - Cupom"
+		);
+	}
 	
 	protected function afterFind()
 	{
@@ -601,4 +633,14 @@ class NotaFiscal extends MGActiveRecord
 	}
 	
 
+	public function podeEditar()
+	{
+		if ($this->codstatus == NotaFiscal::CODSTATUS_AUTORIZADA
+			|| $this->codstatus == NotaFiscal::CODSTATUS_INUTILIZADA
+			|| $this->codstatus == NotaFiscal::CODSTATUS_CANCELADA)
+			return false;
+		else
+			return true;
+		
+	}
 }

@@ -1,6 +1,6 @@
 <?php
 
-class NotaFiscalDuplicatasController extends Controller
+class NotaFiscalCartaCorrecaoController extends Controller
 {
 	/**
 	* @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -25,26 +25,38 @@ class NotaFiscalDuplicatasController extends Controller
 	*/
 	public function actionCreate($codnotafiscal)
 	{
-		$model=new NotaFiscalDuplicatas;
+		$model=new NotaFiscalCartaCorrecao;
 		
 		$model->codnotafiscal = $codnotafiscal;
-		
-		if (!$model->NotaFiscal->podeEditar())
-			throw new CHttpException(409, 'Nota Fiscal não permite edição!');
 
 		// Uncomment the following line if AJAX validation is needed
-		$this->performAjaxValidation($model);
+		//$this->performAjaxValidation($model);
+		
+		$erroMonitor = "";
+		$retorno = "";
 
-		if(isset($_POST['NotaFiscalDuplicatas']))
+		if(isset($_POST['NotaFiscalCartaCorrecao']))
 		{
-			$model->attributes=$_POST['NotaFiscalDuplicatas'];
-			if($model->save())
+			$model->attributes=$_POST['NotaFiscalCartaCorrecao'];
+			//$model = $this->loadModel($id);
+			$acbr = new MGAcbrNfeMonitor($model->NotaFiscal);
+
+			$res = $acbr->cartaCorrecao($model->texto);
+
+			$erroMonitor = $acbr->erroMonitor;
+			$retorno = $acbr->retorno;
+			
+			if($res)
 				$this->redirect(array('notaFiscal/view','id'=>$model->codnotafiscal));
 		}
 
-		$this->render('create',array(
-			'model'=>$model,
-			));
+		$this->render('create', 
+			array(
+				'model'=>$model,
+				'erroMonitor'=>$erroMonitor,
+				'retorno'=>$retorno,
+			)
+		);
 	}
 
 	/**
@@ -52,33 +64,34 @@ class NotaFiscalDuplicatasController extends Controller
 	* If update is successful, the browser will be redirected to the 'view' page.
 	* @param integer $id the ID of the model to be updated
 	*/
+	/*
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-		
-		if (!$model->NotaFiscal->podeEditar())
-			throw new CHttpException(409, 'Nota Fiscal não permite edição!');
 
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
 
-		if(isset($_POST['NotaFiscalDuplicatas']))
+		if(isset($_POST['NotaFiscalCartaCorrecao']))
 		{
-			$model->attributes=$_POST['NotaFiscalDuplicatas'];
+			$model->attributes=$_POST['NotaFiscalCartaCorrecao'];
 			if($model->save())
-				$this->redirect(array('notaFiscal/view','id'=>$model->codnotafiscal));
+				$this->redirect(array('view','id'=>$model->codnotafiscalcartacorrecao));
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
 			));
 	}
+	 * 
+	 */
 
 	/**
 	* Deletes a particular model.
 	* If deletion is successful, the browser will be redirected to the 'admin' page.
 	* @param integer $id the ID of the model to be deleted
 	*/
+	/*
 	public function actionDelete($id)
 	{
 		if(Yii::app()->request->isPostRequest)
@@ -86,12 +99,7 @@ class NotaFiscalDuplicatasController extends Controller
 			// we only allow deletion via POST request
 			try
 			{
-				$model = $this->loadModel($id);
-				
-				if (!$model->NotaFiscal->podeEditar())
-					throw new CHttpException(409, 'Nota Fiscal não permite edição!');
-	
-				$model->delete();
+				$this->loadModel($id)->delete();
 				// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 				if(!isset($_GET['ajax']))
 					$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
@@ -110,45 +118,51 @@ class NotaFiscalDuplicatasController extends Controller
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
-
+	*/
 	/**
 	* Lists all models.
 	*/
+	/*
 	public function actionIndex()
 	{
-		$model=new NotaFiscalDuplicatas('search');
+		$model=new NotaFiscalCartaCorrecao('search');
 		
 		$model->unsetAttributes();  // clear any default values
 		
-		if(isset($_GET['NotaFiscalDuplicatas']))
-			Yii::app()->session['FiltroNotaFiscalDuplicatasIndex'] = $_GET['NotaFiscalDuplicatas'];
+		if(isset($_GET['NotaFiscalCartaCorrecao']))
+			Yii::app()->session['FiltroNotaFiscalCartaCorrecaoIndex'] = $_GET['NotaFiscalCartaCorrecao'];
 		
-		if (isset(Yii::app()->session['FiltroNotaFiscalDuplicatasIndex']))
-			$model->attributes=Yii::app()->session['FiltroNotaFiscalDuplicatasIndex'];
+		if (isset(Yii::app()->session['FiltroNotaFiscalCartaCorrecaoIndex']))
+			$model->attributes=Yii::app()->session['FiltroNotaFiscalCartaCorrecaoIndex'];
 		
 		$this->render('index',array(
 			'dataProvider'=>$model->search(),
 			'model'=>$model,
 			));
 	}
+	 * 
+	 */
 
 	/**
 	* Manages all models.
 	*/
+	/*
 	public function actionAdmin()
 	{
 	
-		$model=new NotaFiscalDuplicatas('search');
+		$model=new NotaFiscalCartaCorrecao('search');
 		
 		$model->unsetAttributes();  // clear any default values
 		
-		if(isset($_GET['NotaFiscalDuplicatas']))
-			$model->attributes=$_GET['NotaFiscalDuplicatas'];
+		if(isset($_GET['NotaFiscalCartaCorrecao']))
+			$model->attributes=$_GET['NotaFiscalCartaCorrecao'];
 
 		$this->render('admin',array(
 			'model'=>$model,
 			));
 	}
+	 * 
+	 */
 
 	/**
 	* Returns the data model based on the primary key given in the GET variable.
@@ -157,7 +171,7 @@ class NotaFiscalDuplicatasController extends Controller
 	*/
 	public function loadModel($id)
 	{
-		$model=NotaFiscalDuplicatas::model()->findByPk($id);
+		$model=NotaFiscalCartaCorrecao::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -169,7 +183,7 @@ class NotaFiscalDuplicatasController extends Controller
 	*/
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='nota-fiscal-duplicatas-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='nota-fiscal-carta-correcao-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

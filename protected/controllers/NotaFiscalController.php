@@ -58,10 +58,8 @@ class NotaFiscalController extends Controller
 	{
 		$model=$this->loadModel($id);
 		
-		if ($model->codstatus == NotaFiscal::CODSTATUS_AUTORIZADA
-			|| $model->codstatus == NotaFiscal::CODSTATUS_INUTILIZADA
-			|| $model->codstatus == NotaFiscal::CODSTATUS_CANCELADA)
-			throw new CHttpException(409, 'Registro não permite alterações!');
+		if (!$model->podeEditar())
+			throw new CHttpException(409, 'Nota Fiscal não permite edição!');
 
 
 		// Uncomment the following line if AJAX validation is needed
@@ -93,10 +91,8 @@ class NotaFiscalController extends Controller
 			{
 				$model = $this->loadModel($id);
 				
-				if ($model->codstatus == NotaFiscal::CODSTATUS_AUTORIZADA
-					|| $model->codstatus == NotaFiscal::CODSTATUS_INUTILIZADA
-					|| $model->codstatus == NotaFiscal::CODSTATUS_CANCELADA)
-					throw new CHttpException(409, 'Registro não permite exclusão!');
+				if (!$model->podeEditar())
+					throw new CHttpException(409, 'Nota Fiscal não permite exclusão!');
 				
 				$model->delete();
 					
@@ -182,6 +178,142 @@ class NotaFiscalController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+	
+	public function actionEnviarNfe($id)
+	{
+		$model = $this->loadModel($id);
+		$acbr = new MGAcbrNfeMonitor($model);
+		
+		$res = false;
+		
+		if ($acbr->criarNFe()) 
+			$res = $acbr->enviarNfe();
+		
+		echo CJSON::encode(
+			array(
+				'id' => $id,
+				'resultado' => $res,
+				'retornoMonitor' => $acbr->retornoMonitor["Mensagem"],
+				'erroMonitor' => htmlentities($acbr->erroMonitor),
+				'retorno' => htmlentities($acbr->retorno),
+			)
+		);
+		
+	}
+
+	public function actionConsultarNfe($id)
+	{
+		$model = $this->loadModel($id);
+		$acbr = new MGAcbrNfeMonitor($model);
+		
+		$res = $acbr->consultarNfe();
+		
+		echo CJSON::encode(
+			array(
+				'id' => $id,
+				'resultado' => $res,
+				'retornoMonitor' => $acbr->retornoMonitor["Mensagem"],
+				'erroMonitor' => htmlentities($acbr->erroMonitor),
+				'retorno' => htmlentities($acbr->retorno),
+			)
+		);
+		
+	}
+
+	public function actionEnviarEmail($id, $email, $alterarcadastro = false)
+	{
+		$model = $this->loadModel($id);
+		$acbr = new MGAcbrNfeMonitor($model);
+		
+		$res = $acbr->enviarEmail($email, $alterarcadastro);
+		
+		echo CJSON::encode(
+			array(
+				'id' => $id,
+				'resultado' => $res,
+				'retornoMonitor' => $acbr->retornoMonitor["Mensagem"],
+				'erroMonitor' => htmlentities($acbr->erroMonitor),
+				'retorno' => htmlentities($acbr->retorno),
+			)
+		);
+		
+	}
+	
+	public function actionCancelarNfe($id, $justificativa)
+	{
+		$model = $this->loadModel($id);
+		$acbr = new MGAcbrNfeMonitor($model);
+		
+		$res = $acbr->cancelarNfe($justificativa);
+		
+		echo CJSON::encode(
+			array(
+				'id' => $id,
+				'resultado' => $res,
+				'retornoMonitor' => $acbr->retornoMonitor["Mensagem"],
+				'erroMonitor' => htmlentities($acbr->erroMonitor),
+				'retorno' => htmlentities($acbr->retorno),
+			)
+		);
+		
+	}
+
+	public function actionInutilizarNfe($id, $justificativa)
+	{
+		$model = $this->loadModel($id);
+		$acbr = new MGAcbrNfeMonitor($model);
+		
+		$res = $acbr->inutilizarNfe($justificativa);
+		
+		echo CJSON::encode(
+			array(
+				'id' => $id,
+				'resultado' => $res,
+				'retornoMonitor' => $acbr->retornoMonitor["Mensagem"],
+				'erroMonitor' => htmlentities($acbr->erroMonitor),
+				'retorno' => htmlentities($acbr->retorno),
+			)
+		);
+		
+	}	
+	
+	public function actionImprimirDanfePdf($id)
+	{
+		$model = $this->loadModel($id);
+		$acbr = new MGAcbrNfeMonitor($model);
+		
+		$res = $acbr->imprimirDanfePdf();
+		
+		echo CJSON::encode(
+			array(
+				'id' => $id,
+				'resultado' => $res,
+				'retornoMonitor' => $acbr->retornoMonitor["Mensagem"],
+				'erroMonitor' => htmlentities($acbr->erroMonitor),
+				'retorno' => htmlentities($acbr->retorno),
+			)
+		);
+		
+	}
+	
+	public function actionCartaCorrecao($id, $texto)
+	{
+		$model = $this->loadModel($id);
+		$acbr = new MGAcbrNfeMonitor($model);
+		
+		$res = $acbr->cartaCorrecao($texto);
+		
+		echo CJSON::encode(
+			array(
+				'id' => $id,
+				'resultado' => $res,
+				'retornoMonitor' => $acbr->retornoMonitor["Mensagem"],
+				'erroMonitor' => htmlentities($acbr->erroMonitor),
+				'retorno' => htmlentities($acbr->retorno),
+			)
+		);
+		
 	}
 
 }

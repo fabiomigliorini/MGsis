@@ -16,7 +16,33 @@ abstract class MGActiveRecord extends CActiveRecord
 				$this->$codcoluna = Codigo::PegaProximo($codcoluna);
 			}
 		}
-                		
+		
+		$this->converteParaFormatoMaquina();
+		
+		//descobre codigo do usuario conectado
+		if(null !== Yii::app()->user)
+			$codusuario=Yii::app()->user->id;
+		else
+			$codusuario=null;
+
+		//seta campos de alteracao
+		$this->codusuarioalteracao = $codusuario;
+		$this->alteracao = date('Y-m-d H:i:s');
+
+		//se for novo registro seta campos de criacao
+		if($this->isNewRecord)
+		{
+			$this->codusuariocriacao = $this->codusuarioalteracao;
+			$this->criacao = $this->alteracao;
+		}
+
+		return parent::beforeSave();
+
+	}
+	
+	public function converteParaFormatoMaquina()
+	{
+		
 		//volta data do formato brasileiro para formato Y-m-d
 		foreach($this->metadata->tableSchema->columns as $columnName => $column)
 		{
@@ -49,28 +75,9 @@ abstract class MGActiveRecord extends CActiveRecord
 			}
 		}
 		
-		//descobre codigo do usuario conectado
-		if(null !== Yii::app()->user)
-			$codusuario=Yii::app()->user->id;
-		else
-			$codusuario=null;
-
-		//seta campos de alteracao
-		$this->codusuarioalteracao = $codusuario;
-		$this->alteracao = date('Y-m-d H:i:s');
-
-		//se for novo registro seta campos de criacao
-		if($this->isNewRecord)
-		{
-			$this->codusuariocriacao = $this->codusuarioalteracao;
-			$this->criacao = $this->alteracao;
-		}
-
-		return parent::beforeSave();
-
 	}
-
-	protected function afterFind()
+	
+	public function converteParaFormatoBrasileiro()
 	{
 		// Formata datas no formato brasileiro
 		foreach($this->metadata->tableSchema->columns as $columnName => $column)
@@ -100,6 +107,18 @@ abstract class MGActiveRecord extends CActiveRecord
 					);
 			}
 		}
+		
+	}
+	
+	protected function afterSave()
+	{
+		$this->converteParaFormatoBrasileiro();
+		return parent::afterSave();
+	}
+
+	protected function afterFind()
+	{
+		$this->converteParaFormatoBrasileiro();
 		return parent::afterFind();
 	}	
 

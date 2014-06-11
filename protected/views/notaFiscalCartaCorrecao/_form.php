@@ -1,28 +1,22 @@
-<?php $form=$this->beginWidget('MGActiveForm',array(
-	'id'=>'nota-fiscal-duplicatas-form',
-)); ?>
+<?php 
+$form=$this->beginWidget('MGActiveForm',array(
+	'id'=>'nota-fiscal-carta-correcao-form',
+)); 
+
+$form->enableAjaxValidation = false;
+?>
 
 <?php echo $form->errorSummary($model); ?>
 
 <fieldset>
 	<?php 	
 		//echo $form->textFieldRow($model,'codnotafiscal',array('class'=>'span5'));
-		echo $form->textFieldRow($model,'fatura',array('class'=>'input-medium','maxlength'=>20));
-
-		echo $form->datepickerRow(
-			$model, 
-			'vencimento', 
-			array(
-				'class' => 'input-small text-center', 
-				'options' => array(
-					'language' => 'pt',
-					'format' => 'dd/mm/yyyy'
-				),
-				'prepend' => '<i class="icon-calendar"></i>',
-			)
-		); 
-		
-		echo $form->textFieldRow($model,'valor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend'=>'R$'));
+		//echo $form->textFieldRow($model,'lote',array('class'=>'span5'));
+		//echo $form->textFieldRow($model,'data',array('class'=>'span5'));
+		//echo $form->textFieldRow($model,'sequencia',array('class'=>'span5'));
+		echo $form->textAreaRow($model,'texto',array('rows'=>6, 'cols'=>50, 'class'=>'span8'));
+		//echo $form->textFieldRow($model,'protocolo',array('class'=>'span5','maxlength'=>100));
+		//echo $form->textFieldRow($model,'protocolodata',array('class'=>'span5'));
 	?>
 </fieldset>
 <div class="form-actions">
@@ -51,9 +45,8 @@
 $(document).ready(function() {
 
 	//$("#Pessoa_fantasia").Setcase();
-	$('#NotaFiscalDuplicatas_valor').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 
-	$('#nota-fiscal-duplicatas-form').submit(function(e) {
+	$('#nota-fiscal-carta-correcao-form').submit(function(e) {
         var currentForm = this;
         e.preventDefault();
         bootbox.confirm("Tem certeza que deseja salvar?", function(result) {

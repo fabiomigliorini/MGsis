@@ -18,6 +18,7 @@
 		</div>
 		<div class="span3">
 			<?php
+			echo $form->select2Row($model,'modelo', NotaFiscal::getModeloListaCombo() , array('class'=>'input-medium'));
 			echo $form->textFieldRow($model,'serie',array('class'=>'input-mini text-right'));
 			echo $form->textFieldRow($model,'numero',array('class'=>'input-small text-right'));
 			echo $form->datepickerRow(

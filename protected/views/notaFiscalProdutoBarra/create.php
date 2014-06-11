@@ -1,8 +1,8 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Novo Nota Fiscal Produto Barra';
 $this->breadcrumbs=array(
-	'Notas Fiscais'=>array('index'),
-	Yii::app()->format->formataNumeroNota($model->NotaFiscal->emitida, $model->NotaFiscal->serie, $model->NotaFiscal->numero)=>array('view','id'=>$model->codnotafiscal),
+	'Notas Fiscais'=>array('notaFiscal/index'),
+	Yii::app()->format->formataNumeroNota($model->NotaFiscal->emitida, $model->NotaFiscal->serie, $model->NotaFiscal->numero)=>array('notaFiscal/view','id'=>$model->codnotafiscal),
 	'Novo Produto',
 );
 
