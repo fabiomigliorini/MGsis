@@ -9,12 +9,12 @@
 
 		<b class="span1"><?php echo CHtml::encode((isset($data->Estado)?$data->Estado->sigla:"")); ?></b>
 		
-		<small class="span4 muted">
+		<small class="span4">
 			<?php echo CHtml::encode($data->codcfop); ?> -
 			<?php echo CHtml::encode($data->Cfop->cfop); ?>
 		</small>
 
-		<small class="span1 muted"><?php echo CHtml::encode($data->csosn); ?></small>
+		<small class="span1"><?php echo CHtml::encode($data->csosn); ?></small>
 
 		<?php /*
  

@@ -49,7 +49,11 @@ $(document).ready(function(){
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-		'codtributacaonaturezaoperacao',
+		//'codtributacaonaturezaoperacao',
+		array(
+			'name'=>'codtributacaonaturezaoperacao',
+			'value'=>Yii::app()->format->formataCodigo($model->codtributacaonaturezaoperacao),
+			),
 		//'codnaturezaoperacao',
 		array(
 					'name'=>'codnaturezaoperacao',
@@ -82,7 +86,6 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 					),
 		'icmsbase',
 		'icmspercentual',
-		
 		'icmsbase',
 		'csosn',
 		'acumuladordominiovista',

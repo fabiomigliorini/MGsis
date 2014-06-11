@@ -7,7 +7,7 @@
  * 
  */
 
-class MGEscPrint
+class MGEscBema
 {
 	
 	private $_conteudoSecao = array();

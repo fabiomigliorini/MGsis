@@ -158,6 +158,24 @@ class NegocioController extends Controller
 			'model'=>$model,
 			));
 	}
+	
+	public function actionImprimeRomaneio($id, $imprimir = false)
+	{
+		
+		$model = $this->loadModel($id);
+		
+		if ($model->codnegociostatus <> NegocioStatus::FECHADO)
+			throw new CHttpException(400,'O status do Negócio não permite impressão do Romaneio!');
+		
+		$rel = new MGEscPrintRomaneio($model);
+		$rel->prepara();
+		
+		if ($imprimir)
+			$rel->imprimir();
+		
+		echo $rel->converteHtml();
+
+	}
 
 	/**
 	* Returns the data model based on the primary key given in the GET variable.
@@ -360,5 +378,28 @@ class NegocioController extends Controller
 		echo CJSON::encode($retorno);
 		
 	}
+	
+	public function actionRelatorio()
+	{
+		
+		$model=new Negocio('search');
+		
+		$model->unsetAttributes();  // clear any default values
+		
+		if(isset($_GET['Negocio']))
+			Yii::app()->session['FiltroNegocioIndex'] = $_GET['Negocio'];
+		
+		if (isset(Yii::app()->session['FiltroNegocioIndex']))
+			$model->attributes=Yii::app()->session['FiltroNegocioIndex'];
+		
+		$negocios = $model->search(false);
+		
+		$rel = new MGRelatorioNegocios($negocios);
+		$rel->montaRelatorio();
+		$rel->Output();
+		 
+		
+	}
+	
 	
 }

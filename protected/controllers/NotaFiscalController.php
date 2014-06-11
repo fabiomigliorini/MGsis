@@ -316,4 +316,26 @@ class NotaFiscalController extends Controller
 		
 	}
 
+	public function actionRelatorio()
+	{
+		
+		$model=new NotaFiscal('search');
+		
+		$model->unsetAttributes();  // clear any default values
+		
+		if(isset($_GET['NotaFiscal']))
+			Yii::app()->session['FiltroNotaFiscalIndex'] = $_GET['NotaFiscal'];
+		
+		if (isset(Yii::app()->session['FiltroNotaFiscalIndex']))
+			$model->attributes=Yii::app()->session['FiltroNotaFiscalIndex'];
+		
+		$notasfiscais = $model->search(false);
+		
+		$rel = new MGRelatorioNotasFiscais($notasfiscais);
+		$rel->montaRelatorio();
+		$rel->Output();
+		 
+		
+	}
+	
 }
