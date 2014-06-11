@@ -77,7 +77,7 @@ class MGRelatorioLiquidacaoTitulo extends FPDF
 			$this->SetFont('Arial','',8);
 			$this->SetTextColor(0, 0, 0);
 			$this->Cell(16, 5, utf8_decode(Yii::app()->format->formataCodigo($liq->codliquidacaotitulo)),   '', 0, 'L', $this->_fill);
-			$this->Cell(40, 5, utf8_decode($liq->Pessoa->fantasia),   '', 0, 'L', $this->_fill);
+			$this->Cell(40, 5, utf8_decode(substr($liq->Pessoa->fantasia, 0, 30)),   '', 0, 'L', $this->_fill);
 			
 			if ($liq->operacao == 'CR') 
 				$this->SetTextColor(255, 100, 0);
