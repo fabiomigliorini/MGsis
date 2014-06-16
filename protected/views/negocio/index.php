@@ -59,7 +59,7 @@ $(document).ready(function(){
 	</div>
 </div>
 
-<h1>Negócios</h1>
+<h1>Negócios *</h1>
 
 <br>
 
