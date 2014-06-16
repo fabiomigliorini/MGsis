@@ -600,7 +600,8 @@ class MGAcbrNfeMonitor extends MGSocket
 	{
 		$arquivo = "{$this->model->nfechave}.pdf";
 		$url = "{$this->model->Filial->acbrnfemonitorcaminhorede}/PDF/$arquivo";
-		$cmd = "cd /tmp; rm -f $arquivo; wget $url ; lpr -P bematech-escmig98-pc $arquivo;";
+		$impressora = Yii::app()->user->impressoraTermica;
+		$cmd = "cd /tmp; rm -f $arquivo; wget $url ; lpr -P $impressora $arquivo;";
 		return exec($cmd);		
 	}
 	
