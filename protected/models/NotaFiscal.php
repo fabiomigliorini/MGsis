@@ -112,7 +112,7 @@ class NotaFiscal extends MGActiveRecord
 			array('emitida, nfeimpressa, fretepagar, codoperacao, nfedataenvio, nfedataautorizacao, nfedatacancelamento, nfedatainutilizacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('codnotafiscal, codnaturezaoperacao, emitida, nfechave, nfeimpressa, serie, numero, emissao, saida, codfilial, codpessoa, observacoes, volumes, fretepagar, codoperacao, nfereciboenvio, nfedataenvio, nfeautorizacao, nfedataautorizacao, valorfrete, valorseguro, valordesconto, valoroutras, nfecancelamento, nfedatacancelamento, nfeinutilizacao, nfedatainutilizacao, justificativa, alteracao, codusuarioalteracao, criacao, codusuariocriacao, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipivalor, codstatus, emissao_de, emissao_ate, saida_de, saida_ate', 'safe', 'on'=>'search'),
+			array('codnotafiscal, codnaturezaoperacao, emitida, nfechave, nfeimpressa, serie, numero, emissao, modelo, saida, codfilial, codpessoa, observacoes, volumes, fretepagar, codoperacao, nfereciboenvio, nfedataenvio, nfeautorizacao, nfedataautorizacao, valorfrete, valorseguro, valordesconto, valoroutras, nfecancelamento, nfedatacancelamento, nfeinutilizacao, nfedatainutilizacao, justificativa, alteracao, codusuarioalteracao, criacao, codusuariocriacao, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipivalor, codstatus, emissao_de, emissao_ate, saida_de, saida_ate', 'safe', 'on'=>'search'),
 		);
 	}
 	
@@ -122,6 +122,7 @@ class NotaFiscal extends MGActiveRecord
 		{
 			if (!$this->emitida)
 				return;
+			
 			if (empty($this->modelo))
 				$this->addError($attribute, "Modelo não pode ser vazio!");
 			
@@ -152,6 +153,9 @@ class NotaFiscal extends MGActiveRecord
 		
 		if (empty($this->codfilial))
 			return;
+		
+		if (empty($this->modelo))
+			return;
 
 		$condicao = " serie = :serie AND numero = :numero ";
 		
@@ -168,8 +172,9 @@ class NotaFiscal extends MGActiveRecord
 		
 		if ($this->emitida)
 		{
-			$condicao .= " AND emitida = true AND codfilial = :codfilial ";
+			$condicao .= " AND emitida = true AND codfilial = :codfilial AND modelo = :modelo ";
 			$parametros["codfilial"] = $this->codfilial;
+			$parametros["modelo"] = $this->modelo;
 		}
 		else
 		{
@@ -436,6 +441,7 @@ class NotaFiscal extends MGActiveRecord
 		$criteria->compare('nfeimpressa',$this->nfeimpressa);
 		$criteria->compare('serie',$this->serie);
 		$criteria->compare('numero',$this->numero);
+		$criteria->compare('modelo',$this->modelo);
 		$criteria->compare('emissao',$this->emissao, false);
 		$criteria->compare('saida',$this->saida, false);
 		$criteria->compare('codfilial',$this->codfilial, false);
@@ -647,8 +653,11 @@ class NotaFiscal extends MGActiveRecord
 			|| $this->codstatus == NotaFiscal::CODSTATUS_INUTILIZADA
 			|| $this->codstatus == NotaFiscal::CODSTATUS_CANCELADA)
 			return false;
-		else
-			return true;
+		
+		if ($this->emitida && !empty($this->numero))
+			return false;
+		
+		return true;
 		
 	}
 }

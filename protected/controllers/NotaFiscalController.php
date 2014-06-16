@@ -23,25 +23,98 @@ class NotaFiscalController extends Controller
 	* Creates a new model.
 	* If creation is successful, the browser will be redirected to the 'view' page.
 	*/
-	public function actionCreate()
+	public function actionCreate($duplicar = 0)
 	{
 		$model=new NotaFiscal;
 
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
 		
-		//$model->codusuario = Yii::app()->user->id;
+		
 		$model->emissao = date('d/m/Y');
 		$model->saida = date('d/m/Y');
-		$model->codfilial = Yii::app()->user->getState("codfilial");
 		$model->serie = 1;
 		$model->numero = 0;
 		
 		if(isset($_POST['NotaFiscal']))
 		{
 			$model->attributes=$_POST['NotaFiscal'];
-			if($model->save())
+			if ($model->save())
+			{
+				if (!empty($duplicar))
+				{
+					$original = $this->loadModel($duplicar);
+					
+					//duplica produtos
+					foreach ($original->NotaFiscalProdutoBarras as $prod_orig)
+					{
+						$prod_novo = new NotaFiscalProdutoBarra;
+						$prod_novo->attributes = $prod_orig->attributes;
+						$prod_novo->codnotafiscalprodutobarra = "";
+						$prod_novo->codnotafiscal = $model->codnotafiscal;
+						$prod_novo->criacao = "";
+						$prod_novo->codusuariocriacao = "";
+						$prod_novo->alteracao = "";
+						$prod_novo->codusuarioalteracao = "";
+						$prod_novo->save();
+					}
+
+					//duplica produtos
+					foreach ($original->NotaFiscalDuplicatass as $dupl_orig)
+					{
+						$dupl_novo = new NotaFiscalDuplicatas;
+						$dupl_novo->attributes = $dupl_orig->attributes;
+						$dupl_novo->codnotafiscalduplicatas = "";
+						$dupl_novo->codnotafiscal = $model->codnotafiscal;
+						$dupl_novo->criacao = "";
+						$dupl_novo->codusuariocriacao = "";
+						$dupl_novo->alteracao = "";
+						$dupl_novo->codusuarioalteracao = "";
+						$dupl_novo->save();
+					}
+					
+				}
 				$this->redirect(array('view','id'=>$model->codnotafiscal));
+			}
+		}
+		else
+		{
+			
+			if (!empty($duplicar))
+			{
+				$original = $this->loadModel($duplicar);
+				
+				$model->attributes = $original->attributes;
+				
+				$model->codnotafiscal = "";
+				$model->nfechave = "";
+				$model->nfereciboenvio = "";
+				$model->nfedataenvio = "";
+				$model->nfeautorizacao = "";
+				$model->nfedataautorizacao = "";
+				$model->nfecancelamento = "";
+				$model->nfedatacancelamento = "";
+				$model->nfeinutilizacao = "";
+				$model->nfedatainutilizacao = "";
+				$model->justificativa = "";
+				$model->codusuariocriacao = "";
+				$model->criacao = "";
+				$model->codusuarioalteracao = "";
+				$model->alteracao = "";
+				$model->emissao = date('d/m/Y');
+				$model->saida = date('d/m/Y');
+				$model->serie = 1;
+				$model->numero = 0;
+				
+				$model->codstatus = NotaFiscal::CODSTATUS_NOVA;
+			}
+			else
+			{
+				$model->codfilial = Yii::app()->user->getState("codfilial");
+				$model->modelo = NotaFiscal::MODELO_NFE;
+			}
+			
+			
 		}
 
 		$this->render('create',array(
@@ -56,6 +129,8 @@ class NotaFiscalController extends Controller
 	*/
 	public function actionUpdate($id)
 	{
+		
+		
 		$model=$this->loadModel($id);
 		
 		if (!$model->podeEditar())

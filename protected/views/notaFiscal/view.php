@@ -2,24 +2,18 @@
 $this->pagetitle = Yii::app()->name . ' - Detalhes Nota Fiscal';
 $this->breadcrumbs=array(
 	'Notas Fiscais'=>array('index'),
-	Yii::app()->format->formataNumeroNota($model->emitida, $model->serie, $model->numero),
+	Yii::app()->format->formataNumeroNota($model->emitida, $model->serie, $model->numero, $model->modelo),
 );
 
-if (
-	$model->codstatus == NotaFiscal::CODSTATUS_AUTORIZADA
-	|| $model->codstatus == NotaFiscal::CODSTATUS_INUTILIZADA
-	|| $model->codstatus == NotaFiscal::CODSTATUS_CANCELADA
-	)
-	$bloqueado = true;
-else
-	$bloqueado = false;
+$bloqueado = !$model->podeEditar();
 
 $this->menu=array(
-array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
-array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create')),
-array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codnotafiscal), 'visible' => !$bloqueado),
-array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir'), 'visible' => !$bloqueado),
-//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
+	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
+	array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create')),
+	array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codnotafiscal), 'visible' => !$bloqueado),
+	array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir'), 'visible' => !$bloqueado),
+	array('label'=>'Duplicar', 'icon'=>'icon-retweet', 'url'=>array('create','duplicar'=>$model->codnotafiscal)),
+	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
 
 Yii::app()->clientScript->registerCoreScript('yii');
@@ -143,7 +137,7 @@ $(document).ready(function(){
 					mensagem = '<h3>' + data.retornoMonitor[1] + '</h3><pre>' + data.retorno + '</pre>';
 				
 				bootbox.alert(mensagem, function() {
-					document.location = document.location;
+					document.location = "<?php echo Yii::app()->createUrl('notaFiscal/view', array("id"=>$model->codnotafiscal))?>";
 				});
 				
 			})
@@ -174,7 +168,7 @@ $(document).ready(function(){
 						mensagem = '<h3>' + data.retornoMonitor[1] + '</h3><pre>' + data.retorno + '</pre>';
 
 					bootbox.alert(mensagem, function() {
-						document.location = document.location;
+						document.location = "<?php echo Yii::app()->createUrl('notaFiscal/view', array("id"=>$model->codnotafiscal))?>";
 					});
 
 				})
@@ -206,7 +200,7 @@ $(document).ready(function(){
 						mensagem = '<h3>' + data.retornoMonitor[1] + '</h3><pre>' + data.retorno + '</pre>';
 
 					bootbox.alert(mensagem, function() {
-						document.location = document.location;
+						document.location = "<?php echo Yii::app()->createUrl('notaFiscal/view', array("id"=>$model->codnotafiscal))?>";
 					});
 
 				})
@@ -351,7 +345,7 @@ $(document).ready(function(){
 </div>
 
 
-<h1><?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codnotafiscal)); ?> - <?php echo CHtml::encode(Yii::app()->format->formataNumeroNota($model->emitida, $model->serie, $model->numero)); ?></h1>
+<h1><?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codnotafiscal)); ?> - <?php echo CHtml::encode(Yii::app()->format->formataNumeroNota($model->emitida, $model->serie, $model->numero, $model->modelo)); ?></h1>
 
 
 <div class="row-fluid">
@@ -532,7 +526,7 @@ $(document).ready(function(){
 				<input type="button" class="btn btn-small btn-block btn-primary" value="Email" id="btnEnviarEmail">
 				<input type="button" class="btn btn-small btn-block btn-danger" value="Cancelar" id="btnCancelarNfe">		
 			<?php endif; ?>
-			<?php if (!empty($model->nfechave)): ?>
+			<?php if (!empty($model->nfechave) ): ?>
 				<input type="button" class="btn btn-small btn-block btn-info" value="Consultar" id="btnConsultarNfe">
 			<?php endif; ?>
 		<?php endif; ?>

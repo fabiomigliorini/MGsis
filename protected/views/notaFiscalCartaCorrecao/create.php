@@ -2,7 +2,7 @@
 $this->pagetitle = Yii::app()->name . ' - Nova Carta de Correção da Nota Fiscal';
 $this->breadcrumbs=array(
 	'Notas Fiscais'=>array('notaFiscal/index'),
-	Yii::app()->format->formataNumeroNota($model->NotaFiscal->emitida, $model->NotaFiscal->serie, $model->NotaFiscal->numero)=>array('notaFiscal/view','id'=>$model->codnotafiscal),
+	Yii::app()->format->formataNumeroNota($model->NotaFiscal->emitida, $model->NotaFiscal->serie, $model->NotaFiscal->numero, $model->NotaFiscal->modelo)=>array('notaFiscal/view','id'=>$model->codnotafiscal),
 	'Nova Carta de Correção',
 );
 

@@ -39,6 +39,13 @@ switch ($data->codstatus)
 	
 }
 
+$modelo = NotaFiscal::getModeloListaCombo();
+if (isset($modelo[$data->modelo]))
+	$modelo = $modelo[$data->modelo];
+else 
+	$modelo = $data->modelo;
+
+
 ?>
 <div class="registro <?php echo $css; ?>">
 	<small class="row-fluid">
@@ -50,7 +57,7 @@ switch ($data->codstatus)
 				<?php echo CHtml::encode($data->Filial->filial); ?>
 			</b>
 			<b class="span6">
-				<?php echo CHtml::link(CHtml::encode(Yii::app()->format->formataNumeroNota($data->emitida, $data->serie, $data->numero)),array('view','id'=>$data->codnotafiscal)); ?>
+				<?php echo CHtml::link(CHtml::encode(Yii::app()->format->formataNumeroNota($data->emitida, $data->serie, $data->numero, $data->modelo)),array('view','id'=>$data->codnotafiscal)); ?>
 				
 				<small class="label <?php echo $css_label; ?> pull-right">
 					<?php echo $staus; ?>

@@ -105,28 +105,84 @@ function calculaTotal()
 
 function desabilitaCamposEmitida()
 {
+	
 	var emitida = $('#NotaFiscal_emitida').is(':checked');
+	var valorbanco = (emitida == <?php echo ($model->emitida)?"true":"false" ?>);
+	
+	/*
+	 * se desabilitar, joga sempre valor 0, mesmo quando for true
+	if (emitida && $("#NotaFiscal_numero").val() != 0)
+	{
+		$('#NotaFiscal_emitida').prop('disabled', true);
+	}
+	*/
+   
+	if (valorbanco)
+	{
+		$("#NotaFiscal_serie").val("<?php echo $model->serie; ?>");
+		$("#NotaFiscal_numero").val("<?php echo $model->numero; ?>");
+		$("#NotaFiscal_nfechave").val("<?php echo $model->nfechave; ?>");
+		$("#NotaFiscal_modelo").select2("val", "<?php echo $model->modelo; ?>");
+	}
+	else
+	{
+		if (emitida)
+		{
+			$("#NotaFiscal_serie").val(1);
+			$("#NotaFiscal_numero").val(0);
+			$("#NotaFiscal_nfechave").val("");
+			$("#NotaFiscal_modelo").val("");
+		}
+		else
+		{
+		}
+	}
 	
 	$("#NotaFiscal_serie").prop('disabled', emitida);
 	$("#NotaFiscal_numero").prop('disabled', emitida);
 	$("#NotaFiscal_nfechave").prop('disabled', emitida);
 	
-	if (emitida == <?php echo ($model->emitida)?"true":"false"; ?> 
-		<?php if (!$model->isNewRecord): ?>
-		&& $("#NotaFiscal_codfilial").val() == <?php echo $model->codfilial; ?>
-		<?php endif; ?>
-		)
-	{
-		$("#NotaFiscal_serie").val("<?php echo $model->serie; ?>");
-		$("#NotaFiscal_numero").val("<?php echo $model->numero; ?>");
-		$("#NotaFiscal_nfechave").val("<?php echo $model->nfechave; ?>");
-	}
-	else if (emitida == true)
-	{
-		$("#NotaFiscal_serie").val(1);
-		$("#NotaFiscal_numero").val(0);
-		$("#NotaFiscal_nfechave").val("<?php echo $model->nfechave; ?>");
-	}
+	if (emitida && $("#NotaFiscal_numero").val() != 0)
+		$("#NotaFiscal_modelo").prop('disabled', true);
+	else
+		$("#NotaFiscal_modelo").prop('disabled', false);
+	
+}
+
+var codnaturezaoperacaoantigo = <?php echo empty($model->codnaturezaoperacao)?0:$model->codnaturezaoperacao; ?>;
+
+function atualizaObservacoes()
+{
+	var codnaturezaoperacao = $("#NotaFiscal_codnaturezaoperacao").val();
+	
+	$.getJSON("<?php echo Yii::app()->createUrl('naturezaOperacao/buscaObservacoesNf')?>", 
+		{ 
+			id: codnaturezaoperacao,
+			idantigo: codnaturezaoperacaoantigo
+		})
+		.done(function(data) {
+			
+			//pega observacao da tela
+			observacoes = $("#NotaFiscal_observacoes").val();
+			
+			//se havia algo preenchido automaticamente, apaga
+			if (data.observacoesnfantigo != null)
+				observacoes = observacoes.replace(data.observacoesnfantigo, "");
+		
+			//preenche observacao de acordo com natureza de operacao
+			if (data.observacoesnf != null)
+				observacoes += data.observacoesnf;
+			
+			//joga na tela
+			$("#NotaFiscal_observacoes").val(observacoes);
+
+		})
+		.fail(function( jqxhr, textStatus, error ) {
+			var err = textStatus + ", " + error;
+			console.log( "Request Failed: " + err );
+		});
+	
+	codnaturezaoperacaoantigo = $("#NotaFiscal_codnaturezaoperacao").val();
 }
 	
 $(document).ready(function() {
@@ -150,6 +206,8 @@ $(document).ready(function() {
 	$('#NotaFiscal_valorseguro').change(function(e){ calculaTotal(); });
 	$('#NotaFiscal_valordesconto').change(function(e){ calculaTotal(); });
 	$('#NotaFiscal_valoroutras').change(function(e){ calculaTotal(); });
+
+	$('#NotaFiscal_codnaturezaoperacao').change(function(e){ atualizaObservacoes(); });
 
 	$('#NotaFiscal_emitida').change(function(e){ desabilitaCamposEmitida(); });
 	$('#NotaFiscal_codfilial').change(function(e){ desabilitaCamposEmitida(); });

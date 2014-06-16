@@ -73,6 +73,7 @@ $(document).ready(function(){
 	<?php echo $form->select2($model, 'codfilial', Filial::getListaCombo(), array('placeholder' => 'Filial', 'class'=>'input-medium')); ?>
 	<?php echo $form->select2($model, 'codnaturezaoperacao', NaturezaOperacao::getListaCombo(), array('placeholder' => 'Natureza de Operação', 'class'=>'input-large')); ?>
 	<?php echo $form->select2($model, 'codstatus', NotaFiscal::getStatusListaCombo(), array('placeholder' => 'Status', 'class'=>'input-medium')); ?>
+	<?php echo $form->select2($model, 'modelo', NotaFiscal::getModeloListaCombo(), array('placeholder' => 'Modelo', 'class'=>'input-medium')); ?>
 	<?php echo $form->select2($model, 'codoperacao', Operacao::getListaCombo(), array('placeholder' => 'Operacao', 'class'=>'input-medium')); ?>
 		<?php 
 			echo $form->datepickerRow(

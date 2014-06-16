@@ -21,7 +21,11 @@ class CnpjCpfValidator extends CValidator
 	 * @param CModel the data object being validated
 	 * @param string the name of the attribute to be validated.
 	 */
-	protected function validateAttribute( $object, $attribute ){
+	protected function validateAttribute( $object, $attribute )
+	{
+		if ($object->codpessoa == Pessoa::CONSUMIDOR)
+			return true;
+		
 		if ( !$this->validaCNPJ( $object->$attribute ) )
             if ( !$this->validaCPF( $object->$attribute ) )
 				$this->addError($object, $attribute, Yii::t('yii','{attribute} é inválido.'));

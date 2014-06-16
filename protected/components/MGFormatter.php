@@ -129,9 +129,9 @@ class MGFormatter extends CFormatter
 		return self::formataPorMascara($string, "##.###-###");
 	}
 	
-	public function formataNumeroNota ($emitida, $serie, $numero)
+	public function formataNumeroNota ($emitida, $serie, $numero, $modelo)
 	{
-		return (($emitida)?"N-":"T-") . $serie . "-" . self::formataPorMascara($numero, "########");
+		return (($emitida)?"N-":"T-") . $serie . "-" . (!empty($modelo)?$modelo . "-":"") . self::formataPorMascara($numero, "########");
 	}
 	
 	public function formataChaveNfe ($chave)

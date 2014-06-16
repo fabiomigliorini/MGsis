@@ -30,7 +30,7 @@ foreach ($codnotas as $codnota)
 			</small>
 			<small class="span3">
 				<?php echo CHtml::link(
-					Yii::app()->format->formataNumeroNota($nota->emitida, $nota->serie, $nota->numero)
+					Yii::app()->format->formataNumeroNota($nota->emitida, $nota->serie, $nota->numero, $nota->modelo)
 					, array('notaFiscal/view', 'id'=> $nota->codnotafiscal)); 
 				?> 
 				<?php echo Chtml::encode($nota->emissao); ?> 
