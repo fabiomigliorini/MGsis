@@ -21,7 +21,6 @@ class MGGridTitulos extends CWidget
 		
 		$titulos = array();
 		
-		
 		if (!empty($this->GridTitulos['codtitulo']))
 		{
 			if (!is_array($this->GridTitulos['codtitulo']))
@@ -42,12 +41,8 @@ class MGGridTitulos extends CWidget
 			$model->unsetAttributes();
 			$model->attributes=array('codpessoa' => $this->codpessoa);
 			foreach ($model->search(false) as $titulo)
-			{
 				if (!in_array($titulo->codtitulo, $this->GridTitulos['codtitulo']))
-				{
 					$titulos[] = $titulo;
-				}
-			}
 		}
 		
 		?>
@@ -331,7 +326,6 @@ class MGGridTitulos extends CWidget
 		
 		// percorre resultados
 		foreach ($titulos as $titulo)
-		{
 			$this->controller->renderPartial(
 				'application.components.views._grid_titulos', 
 				array(
@@ -343,7 +337,6 @@ class MGGridTitulos extends CWidget
 					'namePrefix'=>$this->namePrefix,
 				)
 			);
-		}
 		
 	}
 	

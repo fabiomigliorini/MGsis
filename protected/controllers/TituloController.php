@@ -316,9 +316,6 @@ class TituloController extends Controller
 		) 
 	{
 		
-		if (empty($GridTitulos))
-			$GridTitulos = array();
-		
 		$this->widget('MGGridTitulos', array(
 			'modelname'   => $modelname,
 			'campo'		  => $campo,
