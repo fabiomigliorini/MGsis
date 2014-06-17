@@ -12,10 +12,16 @@ $command->params = array("codnegocio" => $model->codnegocio);
 
 $codnotas = $command->queryAll();
 
-if (empty($codnotas))
+if (!empty($codnotas))
 {
+	/*
 	?>
 	<div class="alert">Nenhuma Nota Fiscal foi gerada para este negócio!</div>
+	<?php
+	 * 
+	 */
+	?>
+	<h3>Notas Fiscais</h3>
 	<?php
 }
 

@@ -1,4 +1,5 @@
-<div style="min-height: 120px">
+<h3>Produtos</h3>
+<div>
 <?php
 if ($model->codnegociostatus == 1)
 {

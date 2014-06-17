@@ -41,7 +41,7 @@ Yii::app()->clientScript->registerCoreScript('yii');
 /*<![CDATA[*/
 $(document).ready(function(){
 
-
+	//abre janela boleto
 	var frameSrcBoleto = $('#btnMostrarBoleto').attr('href');
 	$('#btnMostrarBoleto').click(function(event){
 		event.preventDefault();
@@ -52,7 +52,13 @@ $(document).ready(function(){
 		$('#modalBoleto').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
 	});	
 	
-	//abre janela boleto
+	//imprimir Boleto
+	$('#btnImprimirBoleto').click(function(event){
+		window.frames["frameBoleto"].focus();
+		window.frames["frameBoleto"].print();
+	});
+
+	//abre janela relatorio
 	var frameSrcRelatorio = $('#btnMostrarRelatorio').attr('href');
 	$('#btnMostrarRelatorio').click(function(event){
 		event.preventDefault();
@@ -63,13 +69,6 @@ $(document).ready(function(){
 		$('#modalRelatorio').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
 	});	
 	
-
-	//imprimir Boleto
-	$('#btnImprimirBoleto').click(function(event){
-		window.frames["frameBoleto"].focus();
-		window.frames["frameBoleto"].print();
-	});
-
 	jQuery('body').on('click','#btnExcluir',function() {
 		bootbox.confirm("Estornar este Agrupamento?", function(result) {
 			if (result)

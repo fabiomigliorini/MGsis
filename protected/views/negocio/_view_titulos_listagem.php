@@ -3,10 +3,16 @@
  * @var Titulo $titulo
  */
 
-if (empty($model->NegocioFormaPagamentos))
+if (!empty($model->NegocioFormaPagamentos))
 {
+	/*
 	?>
 	<div class="alert">Nenhum Pagamento foi informado para este negócio!</div>
+	<?php
+	 * 
+	 */
+	?>
+	<h3>Forma de Pagamento</h3>
 	<?php
 }
 
@@ -28,18 +34,21 @@ foreach ($model->NegocioFormaPagamentos as $nfp)
 				{
 					?>
 					<div class="row-fluid">
-						<div class="span3">
+						<div class="span4">
 							<?php 
 								echo CHtml::link(
 									CHtml::encode($titulo->numero)
 									, array('titulo/view', 'id'=> $titulo->codtitulo)); 
 							?>
 						</div>
-						<div class="span2">
+						<b class="span2">
 							<?php echo Chtml::encode($titulo->vencimento); ?>
-						</div>
-						<div class="span2 text-right">
+						</b>
+						<b class="span3 text-right">
 							<?php echo Yii::app()->format->formatNumber($titulo->valor); ?> 
+						</b>
+						<div class="span3 text-right">
+							<?php echo Yii::app()->format->formatNumber($titulo->saldo); ?> 
 						</div>
 					</div>
 					<?php

@@ -27,7 +27,7 @@ $this->menu=array(
 		'label'=>'Estornar', 
 		'icon'=>'icon-thumbs-down', 
 		'url'=>'#', 
-		'linkOptions'=>array('id'=>'btnExcluir'),
+		'linkOptions'=>array('id'=>'btnEstornar'),
 		'visible'=>(empty($model->codtituloagrupamento) && ($model->saldo <> 0))
 		),
 	array('label'=>'Duplicar', 'icon'=>'icon-retweet', 'url'=>array('create','duplicar'=>$model->codtitulo)),
@@ -107,7 +107,7 @@ $(document).ready(function(){
 	});
 	
 	//botao excluir
-	jQuery('body').on('click','#btnExcluir',function() {
+	jQuery('body').on('click','#btnEstornar',function() {
 		bootbox.confirm("Estornar este título?", function(result) {
 			if (result)
 				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('titulo/estorna', array('id' => $model->codtitulo))?>",{});

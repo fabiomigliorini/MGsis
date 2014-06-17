@@ -378,4 +378,86 @@ class Negocio extends MGActiveRecord
 		
 	}
 	
+	public function cancelar()
+	{
+		
+		// verifica se ja nao foi cancelado
+		if ($this->codnegociostatus == NegocioStatus::CANCELADO)
+		{
+			$this->addError("codnegociostatus", 'Negócio já está cancelado!');
+			return false;
+		}
+
+		// verifica se tem nota fiscal ativa
+		foreach ($this->NegocioProdutoBarras as $npb)
+		{
+			foreach ($npb->NotaFiscalProdutoBarras as $nfpb)
+			{
+				if ($nfpb->NotaFiscal->codstatus <> NotaFiscal::CODSTATUS_CANCELADA or $nfpb->NotaFiscal->codstatus <> NotaFiscal::CODSTATUS_INUTILIZADA)
+				{
+					$this->addError("codnegociostatus", 'Negócio possui Nota Fiscal ativa!');
+					return false;
+				}
+			}
+		}
+
+		$transaction = Yii::app()->db->beginTransaction();
+		
+		try 
+		{
+			foreach ($this->NegocioFormaPagamentos as $nfp)
+			{
+				foreach ($nfp->Titulos as $tit)
+				{
+					if (!empty($tit->estornado))
+						continue;
+
+					if (!$tit->estorna())
+					{
+						$this->addError("codnegociostatus", "Erro ao estornar Titulos!");
+						$this->addErrors($tit->getErrors());
+						$transaction->rollBack();
+						return false;
+					}
+				}
+			}
+
+			$this->codnegociostatus = NegocioStatus::CANCELADO;
+			if ($this->save())
+			{
+				$transaction->commit();
+				return true;
+			}
+			else
+			{
+				$transaction->rollBack();
+				return false;			
+			}
+			
+		}
+		catch (Exception $e)
+		{
+			$transaction->rollBack();
+			return false;
+		} 		
+		
+		
+		
+		/*
+		if ($this->saldo == 0)
+			return false;
+		
+		return $this->adicionaMovimento(
+			TipoMovimentoTitulo::TIPO_ESTORNO_IMPLANTACAO,
+			$this->creditosaldo, 
+			$this->debitosaldo, 
+			date('d/m/Y'), 
+			$this->codportador, 
+			$this->codtituloagrupamento
+		);
+		 * 
+		 */
+	}
+	
+	
 }

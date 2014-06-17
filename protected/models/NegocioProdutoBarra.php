@@ -20,7 +20,7 @@
  * @property ProdutoBarra $ProdutoBarra
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
- * @property NotafiscalProdutoBarra[] $NotafiscalProdutoBarras
+ * @property NotaFiscalProdutoBarra[] $NotaFiscalProdutoBarras
  * @property EstoqueMovimento[] $EstoqueMovimentos
  * @property CupomFiscalProdutoBarra[] $CupomFiscalProdutoBarras
  */

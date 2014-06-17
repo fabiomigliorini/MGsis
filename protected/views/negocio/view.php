@@ -10,13 +10,34 @@ $this->menu=array(
 	array('label'=>'Novo (F2)', 'icon'=>'icon-plus', 'url'=>array('create'), 'linkOptions'=> array('id'=>'btnNovo')),
 	array('label'=>'Fechar Negócio (F3)', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codnegocio), 'visible'=>($model->codnegociostatus==1), 'linkOptions'=>	array('id'=>'btnFechar')),
 	array(
-		'label'=>'Imprimir Romaneio', 
+		'label'=>'Romaneio', 
 		'icon'=>'icon-print', 
 		'url'=>array('imprimeromaneio','id'=>$model->codnegocio), 
 		'linkOptions'=>array('id'=>'btnMostrarRomaneio'),
-		'visible'=>($model->codnegociostatus == 2)
+		'visible'=>($model->codnegociostatus == NegocioStatus::FECHADO)
 	),
-	array('label'=>'Cancelar', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
+	array(
+		'label'=>'Boletos', 
+		'icon'=>'icon-barcode', 
+		'url'=>array('titulo/imprimeboleto', 'codnegocio'=>$model->codnegocio), 
+		'linkOptions'=>array('id'=>'btnMostrarBoleto'),
+		'visible'=>($model->codnegociostatus == NegocioStatus::FECHADO)
+	),
+	array(
+		'label'=>'Gerar Nota Fiscal', 
+		'icon'=>'icon-globe', 
+		'url'=>array('negocio/geraNotaFiscal', 'codnegocio'=>$model->codnegocio), 
+		'linkOptions'=>array('id'=>'btnGeraNotaFiscal'),
+		'visible'=>($model->codnegociostatus == NegocioStatus::FECHADO)
+	),
+	array(
+		'label'=>'Cancelar', 
+		'icon'=>'icon-thumbs-down', 
+		'url'=>'#', 
+		'linkOptions'=>array('id'=>'btnCancelar'),
+		'visible'=>($model->codnegociostatus != NegocioStatus::CANCELADO)
+		),
+	//array('label'=>'Cancelar', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnCancelar')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
 
@@ -27,10 +48,38 @@ $this->renderPartial("_hotkeys");
 ?>
 
 <script type="text/javascript">
+function perguntaModeloNotaFiscal()
+{
+	$('#modalModeloNotaFiscal').modal({show:true, keyboard:true})
+}
+	
 /*<![CDATA[*/
 $(document).ready(function(){
-	
-	//abre janela vale
+
+	$('#btnGeraNotaFiscal').click(function(event){
+		event.preventDefault();
+		perguntaModeloNotaFiscal();
+	});	
+
+
+	//abre janela boleto
+	var frameSrcBoleto = $('#btnMostrarBoleto').attr('href');
+	$('#btnMostrarBoleto').click(function(event){
+		event.preventDefault();
+		$('#modalBoleto').on('show', function () {
+			$('#frameBoleto').attr("src",frameSrcBoleto);
+		});
+		$('#modalBoleto').modal({show:true})
+		$('#modalBoleto').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
+	});	
+		
+	//imprimir Boleto
+	$('#btnImprimirBoleto').click(function(event){
+		window.frames["frameBoleto"].focus();
+		window.frames["frameBoleto"].print();
+	});
+
+	//abre janela romaneio
 	var frameSrcRomaneio = $('#btnMostrarRomaneio').attr('href');
 	$('#btnMostrarRomaneio').click(function(event){
 		event.preventDefault();
@@ -52,15 +101,40 @@ $(document).ready(function(){
 		$('#frameRomaneio').attr("src",frameSrcRomaneio + "&imprimir=true");
 	});
 	
-	$('body').on('click','#btnExcluir',function() {
-		bootbox.confirm("Excluir este registro?", function(result) {
+	$('body').on('click','#btnCancelar',function() {
+		bootbox.confirm("Cancelar este negócio?", function(result) {
 			if (result)
-				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('negocio/delete', array('id' => $model->codnegocio))?>",{});
+				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('negocio/cancelar', array('id' => $model->codnegocio))?>",{});
 		});
 	});
 });
 /*]]>*/
 </script>
+
+<div id="modalBoleto" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">  
+		<div class="pull-right">
+			<button class="btn btn-primary" id="btnImprimirBoleto">Imprimir</button>
+			<button class="btn" data-dismiss="modal">Fechar</button>
+		</div>
+		<h3>Boletos</h3>  
+	</div>  
+	<div class="modal-body">
+      <iframe src="" id="frameBoleto" name="frameBoleto" width="99.6%" height="400" frameborder="0"></iframe>
+	</div>
+</div>
+
+<div id="modalModeloNotaFiscal" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">  
+		<h3>Gerar qual modelo de nota Fiscal?</h3>  
+	</div>  
+	<div class="modal-body">
+		<div class="pull-right">
+			<button class="btn btn-primary" data-dismiss="modal"  id="btnGerarNfce">NFC-e (Cupom)</button>
+			<button class="btn" data-dismiss="modal" id="btnGerarNfe">NF-e (Nota)</button>
+		</div>		
+	</div>
+</div>
 
 <div id="modalRomaneio" class="modal hide fade" tabindex="-1" role="dialog">
 	<div class="modal-header">
@@ -86,6 +160,7 @@ $(document).ready(function(){
 
 	<div class="span8">
 		<?php
+			/*
 			$this->widget(
 				'bootstrap.widgets.TbTabs',
 				array(
@@ -110,7 +185,14 @@ $(document).ready(function(){
 						),
 					),
 				)
-			);	
+			);
+			 * 
+			 */
+		
+			$this->renderPartial('_view_produtos', array('model'=>$model));
+			$this->renderPartial('_view_notas', array('model'=>$model));
+			$this->renderPartial('_view_cupons', array('model'=>$model));
+			$this->renderPartial('_view_titulos', array('model'=>$model));
 		?>
 	</div>
 	

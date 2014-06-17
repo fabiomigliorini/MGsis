@@ -217,18 +217,19 @@ class TituloController extends Controller
 	{
 		
 		if (!$model->boleto)
-			throw new CHttpException(400,'Este título não é um boleto.');
+			return false;
 		
 		if ($model->saldo <= 0)
-			throw new CHttpException(400,'Título sem saldo.');
+			return false;
 		
 		$boleto = new MGBoleto($model);
 		
 		echo $boleto->getOutput();
+		echo "<HR>";
 		
 	}
 	
-	public function actionImprimeBoleto($id = null, $codtituloagrupamento = null)
+	public function actionImprimeBoleto($id = null, $codtituloagrupamento = null, $codnegocio = null)
 	{	
 		if (!empty($id))
 		{
@@ -244,6 +245,33 @@ class TituloController extends Controller
 			
 			foreach($ta->Titulos as $model)
 				$this->geraBoleto($model);
+		}
+		elseif (!empty($codnegocio))
+		{
+			$neg = Negocio::model()->findByPk($codnegocio);
+			
+			if($neg===null)
+				throw new CHttpException(404,'The requested page does not exist.');
+			
+			foreach ($neg->NegocioFormaPagamentos as $nfp)
+			{
+				foreach ($nfp->Titulos as $tit)
+				{
+					$this->geraBoleto($tit);
+				}
+			}
+			/*
+			$ta = TituloAgrupamento::model()->findByPk($codtituloagrupamento);
+			
+			
+			foreach($ta->Titulos as $model)
+				$this->geraBoleto($model);
+			 * 
+			 */
+		}
+		else
+		{
+			throw new CHttpException(404,'The requested page does not exist.');
 		}
 		
 	}

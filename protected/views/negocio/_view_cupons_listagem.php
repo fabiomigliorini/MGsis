@@ -12,10 +12,16 @@ $command->params = array("codnegocio" => $model->codnegocio);
 
 $cudcupoms = $command->queryAll();
 
-if (empty($codcupoms))
+if (!empty($cudcupoms))
 {
+	/*
 	?>
 	<div class="alert">Nenhum Cupom Fiscal foi gerada para este negócio!</div>
+	<?php
+	 * 
+	 */
+	?>
+	<h3>Cupons Fiscais</h3>
 	<?php
 }
 

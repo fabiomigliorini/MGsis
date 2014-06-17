@@ -700,8 +700,12 @@ class Titulo extends MGActiveRecord
 	
 	public function estorna()
 	{
-		if ($this->saldo == 0)
+		
+		if ($this->debito - $this->credito <> $this->saldo)
+		{
+			$this->addError("saldo", "Impossivel estornar um título movimentado!");
 			return false;
+		}
 		
 		return $this->adicionaMovimento(
 			TipoMovimentoTitulo::TIPO_ESTORNO_IMPLANTACAO,

@@ -86,6 +86,7 @@ class NegocioController extends Controller
 	* If deletion is successful, the browser will be redirected to the 'admin' page.
 	* @param integer $id the ID of the model to be deleted
 	*/
+	/*
 	public function actionDelete($id)
 	{
 		if(Yii::app()->request->isPostRequest)
@@ -112,6 +113,33 @@ class NegocioController extends Controller
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
+	 * 
+	 */
+	
+	public function actionCancelar($id)
+	{
+		if(Yii::app()->request->isPostRequest)
+		{
+			// we only allow Cancelar via POST request
+			$model = $this->loadModel($id);
+			if (!$model->cancelar())
+			{
+				$erros = $model->getErrors();
+				$erro = "Impossível estornar negócio!<br>";
+				foreach ($erros as $campo => $mensagens)
+					foreach($mensagens as $mensagem)
+						$erro .= "\n<br>- " . $mensagem;
+				Yii::app()->user->setFlash("error", $erro);
+			}
+			else
+				Yii::app()->user->setFlash("success", "Negócio Cancelado!");
+			
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('view','id'=>$model->codnegocio));
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+	}
+	
 
 	/**
 	* Lists all models.
