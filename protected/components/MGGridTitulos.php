@@ -322,6 +322,50 @@ class MGGridTitulos extends CWidget
 			</b>
 		</div>
 
+		<div class="registro">
+			<small class="row-fluid muted">
+				<div class="span2">
+					<div class="span6">
+						Título
+					</div>
+					<div class="text-center span6">
+						Vcto
+					</div>
+				</div>
+				<span class="span7 text-right">
+					<div class="span2 text-center">
+						Saldo
+					</div>
+					<div class="span2 text-center">
+						Capital
+					</div>
+					<div class="span2 text-center">
+						Multa
+					</div>
+					<div class="span2 text-center">
+						Juros
+					</div>
+					<div class="span2 text-center">
+						Desconto
+					</div>
+					<div class="span2 text-center">
+						Total
+					</div>
+				</span>
+				<div class="span3">
+					<div class="span1">
+						&nbsp;
+					</div>
+					<div class="span3">
+						Filial
+					</div>
+					<div class="span8">
+						Pessoa
+					</div>
+				</div>
+			</small>
+		</div>
+		
 		<?
 		
 		// percorre resultados

@@ -349,7 +349,7 @@ class TituloAgrupamento extends MGActiveRecord
 				$titulo->codpessoa = $this->codpessoa;
 				$titulo->codcontacontabil = ContaContabil::AGRUPAMENTO;
 				$titulo->numero = "A" . str_pad($this->codtituloagrupamento, 8, "0", STR_PAD_LEFT) . "-$i/" . sizeof($this->vencimentos);
-				$titulo->fatura = implode(", ", $fatura);
+				$titulo->fatura = substr(implode(", ", $fatura), 0, 50);
 				$titulo->emissao = $emissao->format('d/m/Y');
 				$titulo->transacao = $titulo->emissao;
 				$titulo->vencimento = $this->vencimentos[$i-1];

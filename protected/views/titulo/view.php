@@ -117,6 +117,7 @@ $(document).ready(function(){
 });
 /*]]>*/
 </script>
+
 <div id="modalBoleto" class="modal hide fade" tabindex="-1" role="dialog">
 	<div class="modal-header">  
 		<div class="pull-right">
@@ -126,9 +127,10 @@ $(document).ready(function(){
 		<h3>Boleto</h3>  
 	</div>  
 	<div class="modal-body">
-      <iframe src="" id="frameBoleto" width="99.6%" height="400" frameborder="0"></iframe>
+      <iframe src="" id="frameBoleto" name="frameBoleto" width="99.6%" height="400" frameborder="0"></iframe>
 	</div>
 </div>
+
 
 <div id="modalVale" class="modal hide fade" tabindex="-1" role="dialog">
 	<div class="modal-header">
@@ -145,9 +147,10 @@ $(document).ready(function(){
 		<h3>Vale</h3>  
 	</div>
 	<div class="modal-body">
-      <iframe src="" id="frameVale" width="99.6%" height="400" frameborder="0"></iframe>
+      <iframe src="" id="frameVale" name="frameVale" width="99.6%" height="400" frameborder="0"></iframe>
 	</div>
 </div>
+
 
 <h1><?php echo $model->numero; ?> - <?php echo CHtml::link(CHtml::encode($model->Pessoa->fantasia),array('pessoa/view','id'=>$model->codpessoa)); ?></h1>
 
@@ -182,7 +185,9 @@ $(document).ready(function(){
 				),
 			array(
 				'label'=>'Negócio',
-				'value'=>(isset($model->NegocioFormaPagamento))?Yii::app()->format->formataCodigo($model->NegocioFormaPagamento->codnegocio):"Não",
+//				'value'=>(isset($model->NegocioFormaPagamento))?Yii::app()->format->formataCodigo($model->NegocioFormaPagamento->codnegocio):"Não",
+				'value'=>(!empty($model->codnegocioformapagamento))?CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($model->NegocioFormaPagamento->codnegocio)),array('negocio/view','id'=>$model->NegocioFormaPagamento->codnegocio)):null,
+				'type'=>'raw'
 				),
 			array(
 				'label'=>'Agrupamento',

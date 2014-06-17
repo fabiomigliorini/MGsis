@@ -25,7 +25,7 @@ else
 	<small class="row-fluid">
 		<div class="span2">
 			<small>
-				<?php echo CHtml::link(CHtml::encode($data->numero),array('view','id'=>$data->codtitulo)); ?> 
+				<?php echo CHtml::link(CHtml::encode($data->numero),array('view','id'=>$data->codtitulo), array ("tabindex"=>-1)); ?> 
 			</small>
 			<div class="pull-right <?php echo $css_vencimento?> ">
 				<?php echo CHtml::encode($data->vencimento); ?>
@@ -87,6 +87,7 @@ else
 					id="<?php echo $idPrefix; ?>_desconto_<?php echo $data->codtitulo; ?>" 
 					class="span12 text-right numero desconto" 
 					style="font-size: 0.9em"
+					tabindex="-1"
 					>
 			</div>
 			<div class="span2">
@@ -117,7 +118,7 @@ else
 				<?php echo ($data->boleto)?"Boleto":""; ?>
 			</div>
 			<b class="span8">
-				<?php echo CHtml::link(CHtml::encode($data->Pessoa->fantasia),array('pessoa/view','id'=>$data->codpessoa)); ?> 
+				<?php echo CHtml::link(CHtml::encode($data->Pessoa->fantasia),array('pessoa/view','id'=>$data->codpessoa), array ("tabindex"=>-1)); ?> 
 			</b>
 		</small>
 	</small>

@@ -39,7 +39,8 @@ class LiquidacaoTituloController extends Controller
 		else
 		{
 			$model->transacao = date('d/m/Y');	
-			$model->codportador = Yii::app()->user->codportador;
+			if (!empty(Yii::app()->user->codportador))
+				$model->codportador = Yii::app()->user->codportador;
 		}
 
 		$this->render('create',array(

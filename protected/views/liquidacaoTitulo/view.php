@@ -58,7 +58,7 @@ $(document).ready(function(){
 	});
 	
 	jQuery('body').on('click','#btnExcluir',function() {
-		bootbox.confirm("Estornar este Agrupamento?", function(result) {
+		bootbox.confirm("Estornar esta Liquidação?", function(result) {
 			if (result)
 				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('liquidacaoTitulo/estorna', array('id' => $model->codliquidacaotitulo))?>",{});
 		});

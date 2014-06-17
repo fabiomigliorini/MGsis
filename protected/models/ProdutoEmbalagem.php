@@ -59,7 +59,10 @@ class ProdutoEmbalagem extends MGActiveRecord
 	public function validaPreco($attribute, $params)
 	{
 		if (empty($this->preco))
+		{
+			$this->preco = null;
 			return;
+		}
 		
 		if (empty($this->quantidade))
 			return;
@@ -172,7 +175,11 @@ class ProdutoEmbalagem extends MGActiveRecord
 	{
 		$ret = parent::afterFind();
 		$this->descricao = "C/" . Yii::app()->format->formatNumber($this->quantidade, 0);
-		$this->preco_calculado = (!empty($this->preco)) ? $this->preco : $this->Produto->preco * $this->quantidade;
+		if (isset($this->Produto))
+			$this->preco_calculado = (!empty($this->preco)) ? $this->preco : $this->Produto->preco * $this->quantidade;
+		/*
+		 * 
+		 */
 		//echo "<pre>";
 		//echo print_r($this->Produto);
 		//echo $this->Produto->_attributes["preco"];

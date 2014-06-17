@@ -340,7 +340,7 @@ $(document).ready(function(){
 		<h3>Danfe</h3> 
 	</div>
 	<div class="modal-body">
- <iframe src="" id="frameDanfe" width="99.6%" height="400" frameborder="0"></iframe>
+ <iframe src="" id="frameDanfe" name="frameDanfe" width="99.6%" height="400" frameborder="0"></iframe>
 	</div>
 </div>
 

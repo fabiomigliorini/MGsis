@@ -90,7 +90,7 @@ $(document).ready(function(){
 		<h3>Boleto</h3>  
 	</div>  
 	<div class="modal-body">
-      <iframe src="" id="frameBoleto" width="99.6%" height="400" frameborder="0"></iframe>
+      <iframe src="" id="frameBoleto" name="frameBoleto" width="99.6%" height="400" frameborder="0"></iframe>
 	</div>
 </div>
 
@@ -102,7 +102,7 @@ $(document).ready(function(){
 		<h3>Relatório de Fechamento</h3>  
 	</div>  
 	<div class="modal-body">
-      <iframe src="" id="frameRelatorio" width="99.6%" height="400" frameborder="0"></iframe>
+      <iframe src="" id="frameRelatorio" name="frameRelatorio" width="99.6%" height="400" frameborder="0"></iframe>
 	</div>
 </div>
 
