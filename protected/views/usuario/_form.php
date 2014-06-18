@@ -16,21 +16,21 @@
 
 		echo $form->passwordFieldRow($model, 'senha_tela_repeat', array('class' => 'span2'));
 
-		echo $form->dropDownListRow(
+		echo $form->select2Row(
 				$model,
 				'codecf',
 				Ecf::getListaCombo(),
 				array('prompt'=>'', 'class' => 'span2')                    
 				);	
 		
-		echo $form->dropDownListRow(
+		echo $form->select2Row(
 				$model,
 				'codfilial',
 				Filial::getListaCombo(),
 				array('prompt'=>'', 'class' => 'span2')                    
 				);	
 		
-		echo $form->dropDownListRow(
+		echo $form->select2Row(
 				$model,
 				'codoperacao',
 				Operacao::getListaCombo(),
@@ -41,20 +41,42 @@
 				$model, 
 				'codpessoa'
 				);
-		
-		echo $form->textFieldRow(
-				$model,
-				'impressoramatricial',
-				array('class' => 'span2')                    
-				); 
-		
-		echo $form->textFieldRow(
-				$model,
-				'impressoratermica',
-				array('class' => 'span2')                    
-				);
 
-		echo $form->dropDownListRow(
+		function getActivePrinters() 
+		{
+
+			$o = shell_exec("lpstat -d -p");
+			$res = explode("\n", $o);
+			
+			foreach ($res as $r) 
+			{
+				if (strpos($r, "printer") !== FALSE) 
+				{
+					$r = str_replace("printer ", "", $r);
+					$r = explode(" ", $r);
+					$printers[] = $r[0];
+				}
+			}
+			
+			return $printers;
+		}
+
+		$imp = getActivePrinters();
+
+		
+		echo $form->typeAheadRow(
+			$model,
+			'impressoramatricial',
+			array('source' => $imp)
+		);
+
+		echo $form->typeAheadRow(
+			$model,
+			'impressoratermica',
+			array('source' => $imp)
+		);		
+
+		echo $form->select2Row(
 				$model,
 				'codportador',
 				Portador::getListaCombo(),

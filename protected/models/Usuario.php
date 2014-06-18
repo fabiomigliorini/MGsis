@@ -184,13 +184,13 @@ class Usuario extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('usuario, codoperacao', 'required'),
+			array('usuario, codoperacao, impressoramatricial, impressoratermica', 'required'),
 			array('usuario', 'length', 'max'=>50),
 			array('usuario', 'length', 'min'=>4),
 			array('usuario', 'unique', 'caseSensitive' => false),
 
 			array('senha, senha_tela', 'length', 'max'=>100),
-			array('impressoramatricial', 'length', 'max'=>20),
+			array('impressoramatricial', 'length', 'max'=>50),
 			array('impressoratermica', 'length', 'max'=>50),
 			
 			array('senha_tela', 'length', 'max'=>20),

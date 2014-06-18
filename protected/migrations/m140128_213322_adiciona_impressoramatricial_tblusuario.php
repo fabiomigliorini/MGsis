@@ -4,8 +4,8 @@ class m140128_213322_adiciona_impressoramatricial_tblusuario extends CDbMigratio
 {
 	public function up()
 	{
-		Yii::app()->db->createCommand('alter table tblusuario add impressoramatricial varchar(20)')->execute();		
-		Yii::app()->db->createCommand('update tblusuario set impressoramatricial = \'EscritorioEpson\'')->execute();		
+		Yii::app()->db->createCommand('alter table tblusuario add impressoramatricial varchar(50)')->execute();		
+		//Yii::app()->db->createCommand('update tblusuario set impressoramatricial = \'EscritorioEpson\'')->execute();		
 	}
 
 	public function down()
