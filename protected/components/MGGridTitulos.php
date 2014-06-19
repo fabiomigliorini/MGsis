@@ -371,7 +371,7 @@ class MGGridTitulos extends CWidget
 		// percorre resultados
 		foreach ($titulos as $titulo)
 			$this->controller->renderPartial(
-				'application.components.views._grid_titulos', 
+				'application.components.MGGridTitulos._grid_titulos', 
 				array(
 					'data'=>$titulo, 
 					

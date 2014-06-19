@@ -119,6 +119,10 @@ function adicionaFormaPagamento()
 {
 	var codformapagamento = $("#codformapagamento").val();
 	var valorpagamento = $('#valorpagamento').autoNumeric('get');
+	
+	if (valorpagamento == 0)
+		return false;
+	
 	$.ajax({
 		url: "<?php echo Yii::app()->createUrl('negocio/adicionaformapagamento') ?>",
 		data: {

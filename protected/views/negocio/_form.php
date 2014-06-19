@@ -5,53 +5,57 @@
 <?php echo $form->errorSummary($model); ?>
 
 <fieldset>
-	<div class="span6">
-		<?php 	
+	<div class="row-fluid">
+		<div class="span6">
+			<input type="hidden" name="fechar" id="fechar" value="0">
+			<?php 	
 
-		// codfilial
-		echo $form->select2Row($model, 'codfilial', Filial::getListaCombo(), array('prompt' => '', 'class' => 'input-medium'));
+			// codfilial
+			echo $form->select2Row($model, 'codfilial', Filial::getListaCombo(), array('prompt' => '', 'class' => 'input-medium'));
 
-		echo $form->select2Row(
-			$model, 
-			'codnaturezaoperacao', 
-			NaturezaOperacao::getListaCombo(), 
-			array(
-				//'placeholder'=>'Tributação',
-				'class' => 'input-xlarge'
-			)
-		);
-
-		// codpessoa
-		echo $form->select2PessoaRow(
+			echo $form->select2Row(
 				$model, 
-				'codpessoa',
+				'codnaturezaoperacao', 
+				NaturezaOperacao::getListaCombo(), 
 				array(
 					//'placeholder'=>'Tributação',
-					'class' => 'span4'
-					)
-				);
+					'class' => 'input-xlarge'
+				)
+			);
 
-		// codpessoavendedor
-		echo $form->select2PessoaRow(
-				$model, 
-				'codpessoavendedor',
-				array(
-					'vendedor' => true,
-					'class' => 'span4'
-					)
-				);
-		echo $form->textAreaRow($model,'observacoes',array('class'=>'span4', 'rows'=>'6','maxlength'=>500, 'tabindex'=>-1));
-		?>
-	</div>
-	<?php if (!$model->isNewRecord): ?>
-	<div class="span6">
-		<?
-		echo $form->textFieldRow($model,'valorprodutos',array('class'=>'input-small text-right','maxlength'=>14, "readOnly"=>true, "tabindex"=>-1, 'prepend' => 'R$'));
-		echo $form->textFieldRow($model,'percentualdesconto',array('class'=>'input-small text-right','maxlength'=>14, 'append'=>'%'));
-		echo $form->textFieldRow($model,'valordesconto',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-		echo $form->textFieldRow($model,'valortotal',array('class'=>'input-small text-right','maxlength'=>14, "readOnly"=>true, "tabindex"=>-1, 'prepend' => 'R$'));
-		$this->renderPartial('_view_pagamentos', array('model'=>$model))
-		?>
+			
+			// codpessoa
+			echo $form->select2PessoaRow(
+					$model, 
+					'codpessoa',
+					array(
+						//'placeholder'=>'Tributação',
+						'class' => 'span12'
+						)
+					);
+			
+			// codpessoavendedor
+			echo $form->select2PessoaRow(
+					$model, 
+					'codpessoavendedor',
+					array(
+						'vendedor' => true,
+						'class' => 'span12'
+						)
+					);
+			echo $form->textAreaRow($model,'observacoes',array('class'=>'span12', 'rows'=>'6','maxlength'=>500, 'tabindex'=>-1));
+			?>
+		</div>
+		<?php if (!$model->isNewRecord): ?>
+		<div class="span6">
+			<?
+			echo $form->textFieldRow($model,'valorprodutos',array('class'=>'input-small text-right','maxlength'=>14, "readOnly"=>true, "tabindex"=>-1, 'prepend' => 'R$'));
+			echo $form->textFieldRow($model,'percentualdesconto',array('class'=>'input-small text-right','maxlength'=>14, 'append'=>'%'));
+			echo $form->textFieldRow($model,'valordesconto',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+			echo $form->textFieldRow($model,'valortotal',array('class'=>'input-small text-right','maxlength'=>14, "readOnly"=>true, "tabindex"=>-1, 'prepend' => 'R$'));
+			$this->renderPartial('_view_pagamentos', array('model'=>$model))
+			?>
+		</div>
 	</div>
 	<?php endif; ?>
 </fieldset>
@@ -80,7 +84,7 @@
                 'id' => 'btnSalvarFechar',
                 'buttonType' => 'submit',
                 'type' => 'primary',
-                'label' => 'Salvar e Fechar',
+                'label' => 'Salvar e Fechar (F3)',
                 'icon' => 'icon-ok',
                 )
             ); 
@@ -235,22 +239,32 @@ $(document).ready(function() {
 	$('.btn-primary').focus();
 	
 	$('#btnSalvarFechar').bind("click", function(e) {
-		$("#negocio-form").attr("action", "<?php echo $this->createUrl('update',array('id'=>$model->codnegocio, 'fechar'=>1)); ?>");
+		$("#fechar").val(1);
 	});
 	
 	$('#btnSalvar').bind("click", function(e) {
-		$("#negocio-form").attr("action", "<?php echo $this->createUrl('update',array('id'=>$model->codnegocio, 'fechar'=>0)); ?>");
+		$("#fechar").val(0);
 	});
 	
 	$('#negocio-form').submit(function(e) {
+		
+		$(".btn").attr("disabled","disabled");
+		
 		var currentForm = this;
-		//alert($("#fechar").val());
+		
+		var msg = "Tem certeza que deseja SALVAR o negócio?";
+		if ($("#fechar").val()==1)
+			msg = "Tem certeza que deseja FECHAR o negócio?";
+		
 		e.preventDefault();
-		bootbox.confirm("Tem certeza que deseja salvar?", function(result) {
-			if (result) {
-				bootbox.dialog("<h1>Aguarde... <br>Salvando Negócio<h1>", 
-					[]);				
+		bootbox.confirm(msg, function(result) {
+			if (result) 
+			{
 				currentForm.submit();
+			}
+			else
+			{
+				$(".btn").removeAttr("disabled");
 			}
 		});
     });	

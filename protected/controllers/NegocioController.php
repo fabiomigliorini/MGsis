@@ -23,7 +23,7 @@ class NegocioController extends Controller
 	* Creates a new model.
 	* If creation is successful, the browser will be redirected to the 'view' page.
 	*/
-	public function actionCreate()
+	public function actionCreate($duplicar = null)
 	{
 		$model=new Negocio;
 
@@ -32,7 +32,7 @@ class NegocioController extends Controller
 		
 		$model->codusuario = Yii::app()->user->id;
 		$model->lancamento = date('d/m/Y H:i:s');
-		$model->codnegociostatus = 1;
+		$model->codnegociostatus = NegocioStatus::ABERTO;
 		$model->codfilial = Yii::app()->user->getState("codfilial");
 		$model->codnaturezaoperacao = NaturezaOperacao::VENDA;
 		$model->codpessoa = Pessoa::CONSUMIDOR;
@@ -43,7 +43,48 @@ class NegocioController extends Controller
 			if (!empty($model->NaturezaOperacao))
 				$model->codoperacao = $model->NaturezaOperacao->codoperacao;
 			if($model->save())
+			{
+				if (!empty($duplicar))
+				{
+					$original = $this->loadModel($duplicar);
+					
+					//duplica produtos
+					foreach ($original->NegocioProdutoBarras as $prod_orig)
+					{
+						$prod_novo = new NegocioProdutoBarra;
+						$prod_novo->attributes = $prod_orig->attributes;
+						$prod_novo->codnegocioprodutobarra = null;
+						$prod_novo->codnegocio = $model->codnegocio;
+						$prod_novo->criacao = null;
+						$prod_novo->codusuariocriacao = null;
+						$prod_novo->alteracao = null;
+						$prod_novo->codusuarioalteracao = null;
+						$prod_novo->save();
+					}
+
+				}
 				$this->redirect(array('view','id'=>$model->codnegocio));
+			}
+		}
+		else
+		{
+			if (!empty($duplicar))
+			{
+				$original = $this->loadModel($duplicar);
+				
+				$model->attributes = $original->attributes;
+				
+				
+				$model->codusuariocriacao = null;
+				$model->criacao = null;
+				$model->codusuarioalteracao = null;
+				$model->alteracao = null;
+				$model->codnegociostatus = NegocioStatus::ABERTO;
+				$model->codusuario = Yii::app()->user->id;
+				$model->lancamento = date('d/m/Y H:i:s');
+				
+			}
+			
 		}
 
 		$this->render('create',array(
@@ -56,9 +97,13 @@ class NegocioController extends Controller
 	* If update is successful, the browser will be redirected to the 'view' page.
 	* @param integer $id the ID of the model to be updated
 	*/
-	public function actionUpdate($id, $fechar = null)
+	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
+		
+		$fechar = 0;
+		if (isset($_POST["fechar"]))
+			$fechar = $_POST["fechar"];
 
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
@@ -70,6 +115,9 @@ class NegocioController extends Controller
 			
 			if($salvo && $fechar == 1)
 				$salvo = $model->fechaNegocio();
+
+			if($salvo && $fechar == 1)
+				Yii::app()->session['UltimoCodNegocioFechado'] = $model->codnegocio;
 			
 			if ($salvo)
 				$this->redirect(array('view','id'=>$model->codnegocio));
@@ -384,16 +432,16 @@ class NegocioController extends Controller
 		
 	}
 
-	public function actionGeraNotaFiscal($codnegocio, $codnotafiscal = null)
+	public function actionGeraNotaFiscal($id, $modelo = null, $codnotafiscal = null)
 	{
 		
-		$negocio = $this->loadModel($codnegocio);
+		$negocio = $this->loadModel($id);
 		
-		$retorno = array("Retorno"=>true, "Mensagem"=>"");
+		$retorno = array("Retorno"=>1, "Mensagem"=>"", "codnotafiscal" =>$codnotafiscal);
 		
-		if (!$negocio->geraNotaFiscal($codnotafiscal, true))
+		if (!$codnotafiscal = $negocio->geraNotaFiscal($codnotafiscal, $modelo, true))
 		{
-			$retorno["Retorno"] = false;
+			$retorno["Retorno"] = 0;
 			$erros = $negocio->getErrors();
 			$erro = "Erro ao Gerar Nota Fiscal!";
 			foreach ($erros as $campo => $mensagens)
@@ -402,6 +450,8 @@ class NegocioController extends Controller
 			$retorno["Mensagem"] = $erro;
 			
 		}
+		
+		$retorno["codnotafiscal"] = $codnotafiscal;
 		
 		echo CJSON::encode($retorno);
 		

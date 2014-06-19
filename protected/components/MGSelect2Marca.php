@@ -45,7 +45,7 @@ class MGSelect2Marca extends TbSelect2
 							$.ajax({
 								type: "GET",
 								url: "'. Yii::app()->createUrl('marca/ajaxinicializamarca') .'",
-								data: "cod='. $this->model->codmarca .'",
+								data: "cod='. $this->model->{$this->attribute} .'",
 								dataType: "json",
 								success: function(result) { callback(result); }
 								});

@@ -23,7 +23,7 @@ class NotaFiscalController extends Controller
 	* Creates a new model.
 	* If creation is successful, the browser will be redirected to the 'view' page.
 	*/
-	public function actionCreate($duplicar = 0)
+	public function actionCreate($duplicar = null)
 	{
 		$model=new NotaFiscal;
 
@@ -50,12 +50,12 @@ class NotaFiscalController extends Controller
 					{
 						$prod_novo = new NotaFiscalProdutoBarra;
 						$prod_novo->attributes = $prod_orig->attributes;
-						$prod_novo->codnotafiscalprodutobarra = "";
+						$prod_novo->codnotafiscalprodutobarra = null;
 						$prod_novo->codnotafiscal = $model->codnotafiscal;
-						$prod_novo->criacao = "";
-						$prod_novo->codusuariocriacao = "";
-						$prod_novo->alteracao = "";
-						$prod_novo->codusuarioalteracao = "";
+						$prod_novo->criacao = null;
+						$prod_novo->codusuariocriacao = null;
+						$prod_novo->alteracao = null;
+						$prod_novo->codusuarioalteracao = null;
 						$prod_novo->save();
 					}
 
@@ -64,12 +64,12 @@ class NotaFiscalController extends Controller
 					{
 						$dupl_novo = new NotaFiscalDuplicatas;
 						$dupl_novo->attributes = $dupl_orig->attributes;
-						$dupl_novo->codnotafiscalduplicatas = "";
+						$dupl_novo->codnotafiscalduplicatas = null;
 						$dupl_novo->codnotafiscal = $model->codnotafiscal;
-						$dupl_novo->criacao = "";
-						$dupl_novo->codusuariocriacao = "";
-						$dupl_novo->alteracao = "";
-						$dupl_novo->codusuarioalteracao = "";
+						$dupl_novo->criacao = null;
+						$dupl_novo->codusuariocriacao = null;
+						$dupl_novo->alteracao = null;
+						$dupl_novo->codusuarioalteracao = null;
 						$dupl_novo->save();
 					}
 					
@@ -86,21 +86,21 @@ class NotaFiscalController extends Controller
 				
 				$model->attributes = $original->attributes;
 				
-				$model->codnotafiscal = "";
-				$model->nfechave = "";
-				$model->nfereciboenvio = "";
-				$model->nfedataenvio = "";
-				$model->nfeautorizacao = "";
-				$model->nfedataautorizacao = "";
-				$model->nfecancelamento = "";
-				$model->nfedatacancelamento = "";
-				$model->nfeinutilizacao = "";
-				$model->nfedatainutilizacao = "";
-				$model->justificativa = "";
-				$model->codusuariocriacao = "";
-				$model->criacao = "";
-				$model->codusuarioalteracao = "";
-				$model->alteracao = "";
+				$model->codnotafiscal = null;
+				$model->nfechave = null;
+				$model->nfereciboenvio = null;
+				$model->nfedataenvio = null;
+				$model->nfeautorizacao = null;
+				$model->nfedataautorizacao = null;
+				$model->nfecancelamento = null;
+				$model->nfedatacancelamento = null;
+				$model->nfeinutilizacao = null;
+				$model->nfedatainutilizacao = null;
+				$model->justificativa = null;
+				$model->codusuariocriacao = null;
+				$model->criacao = null;
+				$model->codusuarioalteracao = null;
+				$model->alteracao = null;
 				$model->emissao = date('d/m/Y');
 				$model->saida = date('d/m/Y');
 				$model->serie = 1;
@@ -265,13 +265,37 @@ class NotaFiscalController extends Controller
 		if ($acbr->criarNFe()) 
 			$res = $acbr->enviarNfe();
 		
+		$email = $model->Pessoa->emailnfe;
+		$resEmail = false;
+		
+		if ($res)
+		{
+			$resPdf = $acbr->imprimirDanfePdf();
+			
+			$email = $model->Pessoa->emailnfe;
+			if (empty($email))
+				$email = $model->Pessoa->email;
+			if (empty($email))
+				$email = $model->Pessoa->emailcobranca;
+			
+			if (!empty($email))
+				$resEmail = $acbr->enviarEmail($email);
+			
+			$acbr->imprimirDanfePdfTermica();
+		}
+		
+		
 		echo CJSON::encode(
 			array(
 				'id' => $id,
 				'resultado' => $res,
+				'email' => $email,
+				'resultadoEmail' => $resEmail,
+				'modelo' => $model->modelo,
 				'retornoMonitor' => $acbr->retornoMonitor["Mensagem"],
 				'erroMonitor' => htmlentities($acbr->erroMonitor),
 				'retorno' => htmlentities($acbr->retorno),
+				'urlpdf' => $acbr->urlpdf,
 			)
 		);
 		
@@ -371,6 +395,7 @@ class NotaFiscalController extends Controller
 				'retornoMonitor' => $acbr->retornoMonitor["Mensagem"],
 				'erroMonitor' => htmlentities($acbr->erroMonitor),
 				'retorno' => htmlentities($acbr->retorno),
+				'urlpdf' => $acbr->urlpdf,
 			)
 		);
 		

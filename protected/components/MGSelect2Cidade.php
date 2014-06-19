@@ -46,7 +46,7 @@ class MGSelect2Cidade extends TbSelect2
 							$.ajax({
 								type: "GET",
 								url: "'. Yii::app()->createUrl('cidade/ajaxinicializacidade') .'",
-								data: "cod='. $this->model->codcidade .'",
+								data: "cod='. $this->model->{$this->attribute} .'",
 								dataType: "json",
 								success: function(result) { callback(result); }
 								});

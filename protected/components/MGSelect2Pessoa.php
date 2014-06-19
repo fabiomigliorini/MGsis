@@ -87,7 +87,7 @@ class MGSelect2Pessoa extends TbSelect2
 							$.ajax({
 								type: "GET",
 								url: "'. Yii::app()->createUrl('pessoa/ajaxinicializapessoa') .'",
-								data: "cod='. $this->model->codpessoa .'",
+								data: "cod='. $this->model->{$this->attribute} .'",
 								dataType: "json",
 								success: function(result) { callback(result); }
 								});

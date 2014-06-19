@@ -252,6 +252,12 @@ class Negocio extends MGActiveRecord
 			return false;
 		}
 		
+		if (sizeof($this->NegocioProdutoBarras) == 0)
+		{
+			$this->addError("codnegociostatus", "Não foi informado nenhum produto neste negócio!");
+			return false;			
+		}
+		
 		//Calcula total pagamentos à vista e à prazo
 		$valorPagamentos = 0;
 		$valorPagamentosPrazo = 0;
@@ -293,7 +299,7 @@ class Negocio extends MGActiveRecord
 	}
 	
 	// Gera nota fiscal a partir do negocio
-	public function geraNotaFiscal($codnotafiscal = null, $geraDuplicatas = true)
+	public function geraNotaFiscal($codnotafiscal = null, $modelo = NotaFiscal::MODELO_NFE, $geraDuplicatas = true)
 	{
 		//se passou uma nota por parametro tenta localizar ela
 		if (!empty($codnotafiscal))
@@ -309,11 +315,12 @@ class Negocio extends MGActiveRecord
 			$nota->codfilial = $this->codfilial;
 			$nota->serie = 1;
 			$nota->numero = 0;
+			$nota->modelo = $modelo;
 			$nota->codnaturezaoperacao = $this->codnaturezaoperacao;
 			$nota->emitida = $this->NaturezaOperacao->emitida;
 			//die(date('d/m/Y'));
 			$nota->emissao = date('d/m/Y');
-			$nota->saida = date('d/m/Y h:i:s');
+			$nota->saida = date('d/m/Y');
 			$nota->observacoes = $this->NaturezaOperacao->observacoesnf;
 			$nota->fretepagar = 1;
 			$nota->codoperacao = $this->NaturezaOperacao->codoperacao;
@@ -327,16 +334,28 @@ class Negocio extends MGActiveRecord
 		//acumula o valor de desconto
 		$nota->valordesconto += $this->valordesconto;
 		
-		//salva nota fiscal
-		if (!$nota->save())
-		{
-			$this->addErrors($nota->getErrors());
-			return false;
-		}
-		
 		//percorre os itens do negocio e adiciona na nota
 		foreach($this->NegocioProdutoBarras as $negocioItem)
 		{
+			foreach ($negocioItem->NotaFiscalProdutoBarras as $notaItem)
+			{
+				if (!in_array($notaItem->NotaFiscal->codstatus, array(NotaFiscal::CODSTATUS_INUTILIZADA, NotaFiscal::CODSTATUS_CANCELADA)))
+				{
+					continue(2); // vai para proximo item
+				}
+			}
+			
+			//esta aqui para so salvar a nota, caso exista algum produto por adicionar
+			if (empty($nota->codnotafiscal))
+			{
+				//salva nota fiscal
+				if (!$nota->save())
+				{
+					$this->addErrors($nota->getErrors());
+					return false;
+				}
+			}
+			
 			$notaItem = new NotaFiscalProdutoBarra;
 			
             $notaItem->codnotafiscal = $nota->codnotafiscal;
@@ -351,6 +370,12 @@ class Negocio extends MGActiveRecord
 				$this->addErrors($notaItem->getErrors());
 				return false;
 			}
+		}
+		
+		if (empty($nota->codnotafiscal))
+		{
+			$this->addError("codnotafiscal", "Não existe nenhum produto para gerar Nota neste Negócio");
+			return false;
 		}
 		
 		if ($geraDuplicatas)
@@ -393,7 +418,7 @@ class Negocio extends MGActiveRecord
 		{
 			foreach ($npb->NotaFiscalProdutoBarras as $nfpb)
 			{
-				if ($nfpb->NotaFiscal->codstatus <> NotaFiscal::CODSTATUS_CANCELADA or $nfpb->NotaFiscal->codstatus <> NotaFiscal::CODSTATUS_INUTILIZADA)
+				if ($nfpb->NotaFiscal->codstatus <> NotaFiscal::CODSTATUS_CANCELADA && $nfpb->NotaFiscal->codstatus <> NotaFiscal::CODSTATUS_INUTILIZADA)
 				{
 					$this->addError("codnegociostatus", 'Negócio possui Nota Fiscal ativa!');
 					return false;

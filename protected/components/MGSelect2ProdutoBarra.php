@@ -11,8 +11,8 @@ class MGSelect2ProdutoBarra extends TbSelect2
 		$codprodutobarra = null;
 		
 		if (!empty($this->model))
-			if (!empty($this->model->codprodutobarra))
-				$codprodutobarra = $this->model->codprodutobarra;
+			if (!empty($this->model->{$this->attribute}))
+				$codprodutobarra = $this->model->{$this->attribute};
 			
 		$this->asDropDownList = false;
 

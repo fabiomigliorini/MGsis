@@ -21,14 +21,23 @@ class MGAcbrNfeMonitor extends MGSocket
 	public $erroMonitor;
 	public $retornoMonitor;
 	
+	public $urlpdf;
+	
 	public function __construct($model, $servidor = NULL, $porta = NULL)
 	{
 		$this->model = $model;
+		$this->montaUrlPdf();
 		
 		if (isset($this->model->Filial))
 			return parent::__construct($this->model->Filial->acbrnfemonitorip, $this->model->Filial->acbrnfemonitorporta);
 		else
 			return parent::__construct ();
+		
+	}
+	
+	public function montaUrlPdf()
+	{
+		$this->urlpdf = "{$this->model->Filial->acbrnfemonitorcaminhorede}/PDF/{$this->model->nfechave}.pdf";
 	}
 	
 	public function conectar()
@@ -215,6 +224,8 @@ class MGAcbrNfeMonitor extends MGSocket
 	
 	public function criarNFe() 
 	{
+		if (!in_array($this->model->codstatus, array(NotaFiscal::CODSTATUS_NAOAUTORIZADA, NotaFiscal::CODSTATUS_DIGITACAO)))
+			return $this->gerarErro("Status da Nota Fiscal nao permite envio ao Sefaz!");
 		
 		if (!$this->model->emitida)
 			return $this->gerarErro("Nota Fiscal nao e de nossa emissao!");
@@ -495,6 +506,8 @@ class MGAcbrNfeMonitor extends MGSocket
 		$this->model->nfechave = $chave;
 		$this->model->update();
 		
+		$this->montaUrlPdf();
+		
 		//retorna sucesso
 		return true;
 
@@ -528,6 +541,8 @@ class MGAcbrNfeMonitor extends MGSocket
 	//EnviarNFE
 	public function enviarNfe()
 	{
+		if (!in_array($this->model->codstatus, array(NotaFiscal::CODSTATUS_NAOAUTORIZADA, NotaFiscal::CODSTATUS_DIGITACAO)))
+			return $this->gerarErro("Status da Nota Fiscal nao permite envio ao Sefaz!");
 		
 		if (!$this->model->emitida)
 			return $this->gerarErro("Nota Fiscal nao e de nossa emissao!");
@@ -598,10 +613,12 @@ class MGAcbrNfeMonitor extends MGSocket
 	
 	public function imprimirDanfePdfTermica()
 	{
+		if ($this->model->modelo != NotaFiscal::MODELO_NFCE)
+			return false;
+		
 		$arquivo = "{$this->model->nfechave}.pdf";
-		$url = "{$this->model->Filial->acbrnfemonitorcaminhorede}/PDF/$arquivo";
 		$impressora = Yii::app()->user->impressoraTermica;
-		$cmd = "cd /tmp; rm -f $arquivo; wget $url ; lpr -P $impressora $arquivo;";
+		$cmd = "cd /tmp; rm -f $arquivo; wget {$this->urlpdf} ; lpr -P $impressora $arquivo;";
 		return exec($cmd);		
 	}
 	

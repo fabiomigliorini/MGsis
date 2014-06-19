@@ -22,247 +22,8 @@ Yii::app()->clientScript->registerCoreScript('yii');
 
 <script type="text/javascript">
 	
-function enviarNfe()
-{
-	$.getJSON("<?php echo Yii::app()->createUrl('notaFiscal/enviarNfe')?>", { id: <?php echo $model->codnotafiscal ?> } )
-		.done(function(data) {
-
-			var redirecionar = "<?php echo Yii::app()->createUrl('notaFiscal/view', array("id"=>$model->codnotafiscal))?>";
-
-			if (!data.resultado)
-			{
-				var mensagem = '<h3>' + data.erroMonitor + '</h3><pre>' + data.retorno + '</pre>';
-				bootbox.alert(mensagem, function() {
-					document.location = redirecionar;
-				});
-			}
-			else
-			{
-				document.location = redirecionar + "&imprimirDanfe=1";
-			}
-
-		})
-		.fail(function( jqxhr, textStatus, error ) {
-			var err = textStatus + ", " + error;
-			console.log( "Request Failed: " + err );
-		});
-}
-	
-function enviarEmail(email, alterarcadastro)
-{
-	$.getJSON("<?php echo Yii::app()->createUrl('notaFiscal/enviarEmail')?>", 
-		{ 
-			id: <?php echo $model->codnotafiscal ?>, 
-			email: email,
-			alterarcadastro: alterarcadastro,
-		})
-		.done(function(data) {
-
-			var mensagem = '';
-
-			if (!data.resultado)
-				mensagem = '<h3>' + data.erroMonitor + '</h3><pre>' + data.retorno + '</pre>';
-			else
-				mensagem = '<h3>' + data.retornoMonitor[1] + '</h3><pre>' + data.retorno + '</pre>';
-			
-			bootbox.alert(mensagem);
-
-		})
-		.fail(function( jqxhr, textStatus, error ) {
-			var err = textStatus + ", " + error;
-			console.log( "Request Failed: " + err );
-		});
-	
-}
-
-function abrirDanfe(imprimir)
-{
-	var frameSrcDanfe = "<?php echo $model->Filial->acbrnfemonitorcaminhorede; ?>/PDF/<?php echo $model->nfechave; ?>.pdf";
-	
-	$.getJSON("<?php echo Yii::app()->createUrl('notaFiscal/imprimirDanfePdf')?>", 
-		{ 
-			id: <?php echo $model->codnotafiscal ?>,
-			imprimir: imprimir
-		})
-		.done(function(data) {
-
-			var mensagem = '';
-
-			if (!data.resultado)
-			{
-				mensagem = '<h3>' + data.erroMonitor + '</h3><pre>' + data.retorno + '</pre>';
-				bootbox.alert(mensagem);
-			}
-			else
-			{
-				$('#modalDanfe').on('show', function () {
-					$('#frameDanfe').attr("src",frameSrcDanfe);
-				});
-				$('#modalDanfe').modal({show:true})
-				$('#modalDanfe').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
-			}
-
-		})
-		.fail(function( jqxhr, textStatus, error ) {
-			var err = textStatus + ", " + error;
-			console.log( "Request Failed: " + err );
-		});
-}
-	
 /*<![CDATA[*/
 $(document).ready(function(){
-	
-	<?php
-	if (!empty($_GET["imprimirDanfe"]) && $model->codstatus == NotaFiscal::CODSTATUS_AUTORIZADA)
-		echo "abrirDanfe(1);";
-	else if (!empty($_GET["enviarNfe"]) && ($model->codstatus == NotaFiscal::CODSTATUS_DIGITACAO || $model->codstatus == NotaFiscal::CODSTATUS_NAOAUTORIZADA))
-		echo "enviarNfe();";
-	?>
-			
-	// ENVIAR NFE
-	$('#btnEnviarNfe').on('click', function (e) {
-		enviarNfe();
-	});
-	
-	//CONSULTAR NFE
-	$('#btnConsultarNfe').on('click', function (e) {
-		$.getJSON("<?php echo Yii::app()->createUrl('notaFiscal/consultarNfe')?>", { id: <?php echo $model->codnotafiscal ?> } )
-			.done(function(data) {
-				
-				var mensagem = '';
-			
-				if (!data.resultado)
-					mensagem = '<h3>' + data.erroMonitor + '</h3><pre>' + data.retorno + '</pre>';
-				else
-					mensagem = '<h3>' + data.retornoMonitor[1] + '</h3><pre>' + data.retorno + '</pre>';
-				
-				bootbox.alert(mensagem, function() {
-					document.location = "<?php echo Yii::app()->createUrl('notaFiscal/view', array("id"=>$model->codnotafiscal))?>";
-				});
-				
-			})
-			.fail(function( jqxhr, textStatus, error ) {
-				var err = textStatus + ", " + error;
-				console.log( "Request Failed: " + err );
-			});
-	});
-	
-	//CANCELAR NFE
-	$('#btnCancelarNfe').on('click', function (e) {
-		bootbox.prompt("Digite a justificativa para cancelar a NFE!", "Desistir", "OK", function(result) { 
-			if (result === null)
-				return;
-
-			$.getJSON("<?php echo Yii::app()->createUrl('notaFiscal/cancelarNfe')?>", 
-				{ 
-					id: <?php echo $model->codnotafiscal ?>,
-					justificativa: result 
-				} )
-				.done(function(data) {
-
-					var mensagem = '';
-
-					if (!data.resultado)
-						mensagem = '<h3>' + data.erroMonitor + '</h3><pre>' + data.retorno + '</pre>';
-					else
-						mensagem = '<h3>' + data.retornoMonitor[1] + '</h3><pre>' + data.retorno + '</pre>';
-
-					bootbox.alert(mensagem, function() {
-						document.location = "<?php echo Yii::app()->createUrl('notaFiscal/view', array("id"=>$model->codnotafiscal))?>";
-					});
-
-				})
-				.fail(function( jqxhr, textStatus, error ) {
-					var err = textStatus + ", " + error;
-					console.log( "Request Failed: " + err );
-				});
-		});
-	});
-	
-	//INUTILIZAR NFE
-	$('#btnInutilizarNfe').on('click', function (e) {
-		bootbox.prompt("Digite a justificativa para inutilizar a NFE!", "Desistir", "OK", function(result) { 
-			if (result === null)
-				return;
-
-			$.getJSON("<?php echo Yii::app()->createUrl('notaFiscal/inutilizarNfe')?>", 
-				{ 
-					id: <?php echo $model->codnotafiscal ?>,
-					justificativa: result 
-				} )
-				.done(function(data) {
-
-					var mensagem = '';
-
-					if (!data.resultado)
-						mensagem = '<h3>' + data.erroMonitor + '</h3><pre>' + data.retorno + '</pre>';
-					else
-						mensagem = '<h3>' + data.retornoMonitor[1] + '</h3><pre>' + data.retorno + '</pre>';
-
-					bootbox.alert(mensagem, function() {
-						document.location = "<?php echo Yii::app()->createUrl('notaFiscal/view', array("id"=>$model->codnotafiscal))?>";
-					});
-
-				})
-				.fail(function( jqxhr, textStatus, error ) {
-					var err = textStatus + ", " + error;
-					console.log( "Request Failed: " + err );
-				});
-		});
-	});
-
-	//abre janela vale
-	$('#btnAbrirDanfe').click(function(event){
-		event.preventDefault();
-		abrirDanfe(0);
-	});	
-	
-	//imprimir Danfe Matricial
-	$('#btnImprimirDanfePdfTermica').click(function(event){
-		abrirDanfe(1);
-	});
-	
-	
-	//Enviar Email
-	<?php
-		$email = $model->Pessoa->emailnfe;
-		if (empty($email))
-			$email = $model->Pessoa->email;
-		if (empty($email))
-			$email = $model->Pessoa->emailcobranca;
-	?>
-	var email = "<?php echo $email; ?>";
-	$('#btnEnviarEmail').on('click', function (e) {
-		bootbox.prompt("Enviar email para ?", "Cancelar", "OK", function(result) { 
-			if (result === null)
-				return;
-			
-			if (result == email)
-				enviarEmail(result, 0);
-			else
-			{
-				bootbox.dialog("Alterar email do cadastro? <br><br> De <b class=\'text-error\'>" + email + "</b> <br><br> Para <b class=\'text-success\'>" + result + "</b>?", 
-				[
-					{
-						"label" : "Não",
-						"class" : "btn-danger",
-						"callback": function() {
-							enviarEmail(result, 0);
-						}
-					}, {
-						"label" : "Sim",
-						"class" : "btn-success",
-						"callback": function() {
-							email = result;
-							enviarEmail(result, 1);
-						}
-					}
-				]);
-				
-			}
-			
-		}, email);		
-	});
 	
 	jQuery('body').on('click','#btnExcluir',function() {
 		bootbox.confirm("Excluir este registro?", function(result) {
@@ -328,21 +89,6 @@ $(document).ready(function(){
 /*]]>*/
 </script>
 
-
-<div id="modalDanfe" class="modal hide fade" tabindex="-1" role="dialog">
-	<div class="modal-header">
-		<div class="pull-right">
-			<?php if ($model->modelo == NotaFiscal::MODELO_NFCE): ?>
-				<button class="btn btn-primary" id="btnImprimirDanfePdfTermica" >Imprimir </span></button>
-			<?php endif; ?>
-			<button class="btn" data-dismiss="modal">Fechar</button>
-		</div>
-		<h3>Danfe</h3> 
-	</div>
-	<div class="modal-body">
- <iframe src="" id="frameDanfe" name="frameDanfe" width="99.6%" height="400" frameborder="0"></iframe>
-	</div>
-</div>
 
 
 <h1><?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codnotafiscal)); ?> - <?php echo CHtml::encode(Yii::app()->format->formataNumeroNota($model->emitida, $model->serie, $model->numero, $model->modelo)); ?></h1>
@@ -460,9 +206,7 @@ $(document).ready(function(){
 		$attr[] = 
 			array(
 				'name' => 'nfechave',
-				'value' => '<a href="http://www.nfe.fazenda.gov.br/portal/consulta.aspx?tipoConsulta=completa" target="_blank">'
-							. str_replace(" ", "&nbsp;", CHtml::encode(Yii::app()->format->formataChaveNfe($model->nfechave)))
-							. '</a>',
+				'value' => str_replace(" ", "&nbsp;", CHtml::encode(Yii::app()->format->formataChaveNfe($model->nfechave))),
 				'type' => 'raw',
 			);
 	
@@ -509,28 +253,7 @@ $(document).ready(function(){
 	?>
 	</small>
 	<div class="span1">
-		<?php if ($model->emitida): ?>
-			<?php 
-				if ($model->codstatus != NotaFiscal::CODSTATUS_AUTORIZADA
-				&& $model->codstatus != NotaFiscal::CODSTATUS_CANCELADA
-				&& $model->codstatus != NotaFiscal::CODSTATUS_INUTILIZADA
-				):
-			?>
-				<input type="button" class="btn btn-small btn-block btn-primary" value="Enviar" id="btnEnviarNfe">
-				<?php if (!empty($model->numero)): ?>
-					<input type="button" class="btn btn-small btn-block btn-danger" value="Inutilizar" id="btnInutilizarNfe">
-				<?php endif; ?>
-			<?php endif; ?>
-			<?php if ($model->codstatus == NotaFiscal::CODSTATUS_AUTORIZADA): ?>
-				<input type="button" class="btn btn-small btn-block btn-primary" value="Danfe" id="btnAbrirDanfe">
-				<input type="button" class="btn btn-small btn-block btn-primary" value="Email" id="btnEnviarEmail">
-				<input type="button" class="btn btn-small btn-block btn-danger" value="Cancelar" id="btnCancelarNfe">		
-			<?php endif; ?>
-			<?php if (!empty($model->nfechave) ): ?>
-				<input type="button" class="btn btn-small btn-block btn-info" value="Consultar" id="btnConsultarNfe">
-			<?php endif; ?>
-		<?php endif; ?>
-		
+		<?php $this->widget('MGNotaFiscalBotoes', array('model'=>$model)); ?>		
 	</div>
 </div>
 <div class="row-fluid">
