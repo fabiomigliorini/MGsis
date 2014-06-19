@@ -5,7 +5,7 @@
 		&& $model->codstatus != NotaFiscal::CODSTATUS_INUTILIZADA
 		):
 	?>
-		<input type="button" class="btn btn-small btn-block btn-primary btnEnviarNfe" value="Enviar" id="btnEnviarNfe" data-codnotafiscal="<?php echo $model->codnotafiscal; ?>">
+		<input type="button" class="btn btn-small btn-block btn-primary btnEnviarNfe" value="Enviar (F9)" id="btnEnviarNfe" data-codnotafiscal="<?php echo $model->codnotafiscal; ?>">
 		<?php if (!empty($model->numero)): ?>
 			<input type="button" class="btn btn-small btn-block btn-danger btnInutilizarNfe" value="Inutilizar" data-codnotafiscal="<?php echo $model->codnotafiscal; ?>" id="btnInutilizarNfe">
 		<?php endif; ?>

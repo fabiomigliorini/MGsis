@@ -206,9 +206,9 @@ class NegocioController extends Controller
 		else
 		{
 			$model->codusuario = Yii::app()->user->id;
-			$model->lancamento_de = date("d/m/y", strtotime( '-30 days' ) );
-			$model->horario_de = "00:00";
-			$model->codnegociostatus = NegocioStatus::ABERTO; //Aberto
+			//$model->lancamento_de = date("d/m/y", strtotime( '-30 days' ) );
+			//$model->horario_de = "00:00";
+			//$model->codnegociostatus = NegocioStatus::ABERTO; //Aberto
 		}
 		
 		$this->render('index',array(

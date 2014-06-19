@@ -1,3 +1,8 @@
+<?php
+
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.hotkeys.js');
+
+?>
 <script>
 /*<![CDATA[*/
 
@@ -286,6 +291,13 @@ $(document).ready(function(){
 		e.preventDefault();
 		abrirDanfe($(this).data('codnotafiscal'), true, true);
 	});
+	
+	$("*").bind('keydown.f9',function (e) { 
+		e.preventDefault(); 
+		$(".btnEnviarNfe:first").trigger( "click" );
+		return false;
+	});
+
 	
 	//enviar email
 	$('.btnEnviarEmail').on('click', function (e) {
