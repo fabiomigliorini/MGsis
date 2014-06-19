@@ -37,7 +37,7 @@
 					<span class="icon-bar"></span>
 				</a>
 
-				<?php echo Chtml::link(Yii::app()->name, array('/site'), array('class'=>'brand')); //echo CHtml::encode(Yii::app()->name); ?>
+				<?php echo CHtml::link(Yii::app()->name, array('/site'), array('class'=>'brand')); //echo CHtml::encode(Yii::app()->name); ?>
 
 				<div class="nav-collapse">
 					<?php $this->widget('zii.widgets.CMenu',array(

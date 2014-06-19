@@ -32,16 +32,16 @@ foreach ($cudcupoms as $codcupom)
 	<div class="registro">
 		<span class="row-fluid">
 			<small class="span1 muted">
-				<?php echo Chtml::encode($cupom->Ecf->Filial->filial); ?> 
+				<?php echo CHtml::encode($cupom->Ecf->Filial->filial); ?> 
 			</small>
 			<small class="span2 muted">
-				<?php echo Chtml::encode($cupom->Ecf->ecf); ?> 
+				<?php echo CHtml::encode($cupom->Ecf->ecf); ?> 
 			</small>
 			<small class="span1 text-right">
-				<?php echo Chtml::encode($cupom->numero); ?> 
+				<?php echo CHtml::encode($cupom->numero); ?> 
 			</small>
 			<small class="span1 text-right">
-				<?php echo Chtml::encode($cupom->datamovimento); ?> 
+				<?php echo CHtml::encode($cupom->datamovimento); ?> 
 			</small>
 			<small class="span2">
 				<?php 

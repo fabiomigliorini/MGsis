@@ -1,14 +1,14 @@
 <div class="registro row-fluid">
 	<div class="span4">
-		<?php echo Chtml::encode($data->UnidadeMedida->sigla . " " .  $data->descricao) ?>
+		<?php echo CHtml::encode($data->UnidadeMedida->sigla . " " .  $data->descricao) ?>
 	</div>
 	<?php if (empty($data->preco)): ?>
 		<div class="span4 text-right muted">
-			<?php echo Chtml::encode(Yii::app()->format->formatNumber($data->preco_calculado)); ?>
+			<?php echo CHtml::encode(Yii::app()->format->formatNumber($data->preco_calculado)); ?>
 		</div>
 	<?php else: ?>
 		<div class="span4 text-right text-success">
-			<?php echo Chtml::encode(Yii::app()->format->formatNumber($data->preco_calculado)); ?>
+			<?php echo CHtml::encode(Yii::app()->format->formatNumber($data->preco_calculado)); ?>
 		</div>	
 	<?php endif; ?>
 	<div class="span4 text-right">

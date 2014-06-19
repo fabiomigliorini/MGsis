@@ -25,7 +25,7 @@ foreach ($model->NegocioFormaPagamentos as $nfp)
 				<?php echo Yii::app()->format->formatNumber($nfp->valorpagamento); ?> 
 			</div>
 			<b class="span4">
-				<?php echo Chtml::encode($nfp->FormaPagamento->formapagamento); ?> 
+				<?php echo CHtml::encode($nfp->FormaPagamento->formapagamento); ?> 
 			</b>
 			<small class="span6">
 				<?php 
@@ -42,7 +42,7 @@ foreach ($model->NegocioFormaPagamentos as $nfp)
 							?>
 						</div>
 						<b class="span2">
-							<?php echo Chtml::encode($titulo->vencimento); ?>
+							<?php echo CHtml::encode($titulo->vencimento); ?>
 						</b>
 						<b class="span3 text-right">
 							<?php echo Yii::app()->format->formatNumber($titulo->valor); ?> 

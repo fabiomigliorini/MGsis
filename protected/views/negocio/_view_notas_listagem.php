@@ -78,8 +78,8 @@ foreach ($codnotas as $codnota)
 				<?php echo CHtml::link(CHtml::encode(Yii::app()->format->formataNumeroNota($nota->emitida, $nota->serie, $nota->numero, $nota->modelo)),array('notaFiscal/view','id'=>$nota->codnotafiscal)); ?>
 			</div>
 			<small class="span3 muted">
-				<?php echo Chtml::encode($nota->emissao); ?> &nbsp;&nbsp;
-				<?php echo Chtml::encode($nota->NaturezaOperacao->naturezaoperacao); ?> 
+				<?php echo CHtml::encode($nota->emissao); ?> &nbsp;&nbsp;
+				<?php echo CHtml::encode($nota->NaturezaOperacao->naturezaoperacao); ?> 
 			</small>
 			<small class="span3">
 				<?php echo CHtml::link(
