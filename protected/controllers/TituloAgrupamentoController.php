@@ -201,4 +201,76 @@ class TituloAgrupamentoController extends Controller
 		$rel->montaRelatorio();
 		$rel->Output();
 	}
+	
+	public function actionGeraNotaFiscal($id, $modelo = null, $codnotafiscal = null)
+	{
+
+		$command = Yii::app()->db->createCommand(' 
+			SELECT distinct nfp.codnegocio
+			  FROM tbltituloagrupamento ta
+			 INNER JOIN tblmovimentotitulo mt ON (mt.codtituloagrupamento = ta.codtituloagrupamento)
+			 INNER JOIN tbltitulo t ON (t.codtitulo = mt.codtitulo)
+			 INNER JOIN tblnegocioformapagamento nfp ON (nfp.codnegocioformapagamento = t.codnegocioformapagamento)
+			 WHERE ta.codtituloagrupamento = :codtituloagrupamento
+			');
+
+		$command->params = array("codtituloagrupamento" => $id);
+
+		$codnegocios = $command->queryAll();
+		
+		if (empty($codnegocios))
+		{
+			$retorno["Retorno"] = 0;
+			$retorno["Mensagem"] = "Nao foi possível localizar nenhum negócio vinculado ao fechamento!";
+			
+		}
+
+		foreach ($codnegocios as $codnegocio)
+		{
+			$negocio = Negocio::model()->findByPk($codnegocio);
+			
+			$retorno = array("Retorno"=>1, "Mensagem"=>"", "codnotafiscal" =>$codnotafiscal);
+
+			if (!$codnotafiscal = $negocio->geraNotaFiscal($codnotafiscal, $modelo, false))
+			{
+				$retorno["Retorno"] = 0;
+				$erros = $negocio->getErrors();
+				$erro = "Erro ao Gerar Nota Fiscal!";
+				foreach ($erros as $campo => $mensagens)
+					foreach($mensagens as $mensagem)
+						$erro .= " " . $mensagem;
+				$retorno["Mensagem"] = $erro;
+				
+				break;
+
+			}
+
+			$retorno["codnotafiscal"] = $codnotafiscal;
+		}
+		
+		/*
+		$negocio = $this->loadModel($id);
+		
+		$retorno = array("Retorno"=>1, "Mensagem"=>"", "codnotafiscal" =>$codnotafiscal);
+		
+		if (!$codnotafiscal = $negocio->geraNotaFiscal($codnotafiscal, $modelo, true))
+		{
+			$retorno["Retorno"] = 0;
+			$erros = $negocio->getErrors();
+			$erro = "Erro ao Gerar Nota Fiscal!";
+			foreach ($erros as $campo => $mensagens)
+				foreach($mensagens as $mensagem)
+					$erro .= " " . $mensagem;
+			$retorno["Mensagem"] = $erro;
+			
+		}
+		
+		$retorno["codnotafiscal"] = $codnotafiscal;
+		 * 
+		 */
+		
+		echo CJSON::encode($retorno);
+		
+	}
+	
 }

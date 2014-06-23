@@ -19,12 +19,12 @@ $this->menu=array(
 	//array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 	array(
-		'label'=>'Estornar', 
-		'icon'=>'icon-thumbs-down', 
+		'label'=>'Gerar Nota Fiscal', 
+		'icon'=>'icon-globe', 
 		'url'=>'#', 
-		'linkOptions'=>array('id'=>'btnExcluir'),
-		'visible'=>(empty($model->cancelamento))
-		),
+		'linkOptions'=>array('id'=>'btnGeraNotaFiscal'),
+		//'visible'=>($model->codnegociostatus == NegocioStatus::FECHADO)
+	),
 	array(
 		'label'=>'Relatório', 
 		'icon'=>'icon-print', 
@@ -32,6 +32,13 @@ $this->menu=array(
 		'linkOptions'=>array('id'=>'btnMostrarRelatorio'),
 		'visible'=>(empty($model->cancelamento))
 	),
+	array(
+		'label'=>'Estornar', 
+		'icon'=>'icon-thumbs-down', 
+		'url'=>'#', 
+		'linkOptions'=>array('id'=>'btnExcluir'),
+		'visible'=>(empty($model->cancelamento))
+		),
 );
 
 Yii::app()->clientScript->registerCoreScript('yii');
@@ -39,6 +46,34 @@ Yii::app()->clientScript->registerCoreScript('yii');
 ?>
 <script type="text/javascript">
 /*<![CDATA[*/
+
+function geraNotaFiscal(modelo)
+{
+	
+	$.getJSON("<?php echo Yii::app()->createUrl('tituloAgrupamento/geraNotaFiscal')?>", 
+		{ 
+			id: <?php echo $model->codtituloagrupamento ?>,
+			modelo: modelo,
+		})
+		.done(function(data) 
+		{
+			
+			if (data.Retorno != 1)
+			{
+				bootbox.alert(data.Mensagem);
+				return false;
+			}
+			
+			location.reload();
+
+		})
+		.fail(function( jqxhr, textStatus, error ) 
+		{
+			var err = textStatus + ", " + error;
+			bootbox.alert(err);
+		});	
+}
+
 $(document).ready(function(){
 
 	//abre janela boleto
@@ -76,6 +111,21 @@ $(document).ready(function(){
 		});
 	});
 	
+	$('#btnGeraNotaFiscal').click(function(event){
+		event.preventDefault();
+		$('#modalModeloNotaFiscal').modal({show:true, keyboard:true})
+	});
+
+	$('#btnGerarNfce').click(function(event){
+		event.preventDefault();
+		geraNotaFiscal(<?php echo NotaFiscal::MODELO_NFCE; ?>);
+	});
+
+	$('#btnGerarNfe').click(function(event){
+		event.preventDefault();
+		geraNotaFiscal(<?php echo NotaFiscal::MODELO_NFE; ?>);
+	});
+	
 });
 /*]]>*/
 </script>
@@ -92,6 +142,19 @@ $(document).ready(function(){
       <iframe src="" id="frameBoleto" name="frameBoleto" width="99.6%" height="400" frameborder="0"></iframe>
 	</div>
 </div>
+
+<div id="modalModeloNotaFiscal" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">  
+		<h3>Gerar qual modelo de nota Fiscal?</h3>  
+	</div>  
+	<div class="modal-body">
+		<div class="pull-right">
+			<button class="btn btn-primary" data-dismiss="modal"  id="btnGerarNfce">NFC-e (Cupom)</button>
+			<button class="btn" data-dismiss="modal" id="btnGerarNfe">NF-e (Nota)</button>
+		</div>		
+	</div>
+</div>
+
 
 <div id="modalRelatorio" class="modal hide fade" tabindex="-1" role="dialog">
 	<div class="modal-header">  
@@ -134,9 +197,109 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 )); 
 
 $this->widget('UsuarioCriacao', array('model'=>$model));
+
+
+$command = Yii::app()->db->createCommand(' 
+	SELECT distinct nfpb.codnotafiscal
+	  FROM tbltituloagrupamento ta
+	 INNER JOIN tblmovimentotitulo mt ON (mt.codtituloagrupamento = ta.codtituloagrupamento)
+	 INNER JOIN tbltitulo t ON (t.codtitulo = mt.codtitulo)
+	 INNER JOIN tblnegocioformapagamento nfp ON (nfp.codnegocioformapagamento = t.codnegocioformapagamento)
+	 INNER JOIN tblnegocioprodutobarra npb ON (npb.codnegocio = nfp.codnegocio)
+	 INNER JOIN tblnotafiscalprodutobarra nfpb ON (nfpb.codnegocioprodutobarra = npb.codnegocioprodutobarra)
+	 WHERE ta.codtituloagrupamento = :codtituloagrupamento
+	');
+
+$command->params = array("codtituloagrupamento" => $model->codtituloagrupamento);
+
+$codnotas = $command->queryAll();
+
+
+if (!empty($codnotas))
+{
+	?>
+	<h3>Nota Fiscal</h3>
+	<?php
+}
+
+foreach ($codnotas as $codnota)
+{
+	$nota = NotaFiscal::model()->findByPk($codnota);
+	
+	$css_label = "";
+	$staus = "&nbsp";
+	$css = "";
+
+	switch ($nota->codstatus)
+	{
+		case NotaFiscal::CODSTATUS_DIGITACAO;
+			$css_label = "label-warning";
+			$staus = "D";
+			break;
+
+		case NotaFiscal::CODSTATUS_AUTORIZADA;
+			$css_label = "label-success";
+			$staus = "A";
+			break;
+
+		case NotaFiscal::CODSTATUS_LANCADA;
+			$css_label = "label-info";
+			$staus = "L";
+			break;
+
+		case NotaFiscal::CODSTATUS_NAOAUTORIZADA;
+			$css = "alert-info";
+			$staus = "E";
+			break;
+
+		case NotaFiscal::CODSTATUS_INUTILIZADA;
+			$css = "alert-danger";
+			$css_label = "label-important";
+			$staus = "I";
+			break;
+
+		case NotaFiscal::CODSTATUS_CANCELADA;
+			$css = "alert-danger";
+			$css_label = "label-important";
+			$staus = "C";
+			break;
+
+	}	
+	?>
+	<div class="registro <?php echo $css; ?>">
+		<span class="row-fluid">
+			<small class="span1 muted">
+				<?php echo CHtml::encode($nota->Filial->filial); ?> 
+			</small>
+			<div class="span2">
+				<?php echo CHtml::link(CHtml::encode(Yii::app()->format->formataNumeroNota($nota->emitida, $nota->serie, $nota->numero, $nota->modelo)),array('notaFiscal/view','id'=>$nota->codnotafiscal)); ?>
+			</div>
+			<div class="span1">
+				<?php echo CHtml::encode(Yii::app()->format->formatNumber($nota->valortotal)); ?>
+			</div>
+			<small class="span2 muted">
+				<?php echo CHtml::encode($nota->emissao); ?> &nbsp;&nbsp;
+				<?php echo CHtml::encode($nota->NaturezaOperacao->naturezaoperacao); ?> 
+			</small>
+			<small class="span4">
+				<?php echo CHtml::link(
+					CHtml::encode($nota->Pessoa->fantasia)
+					, array('pessoa/view', 'id'=> $nota->codpessoa)); 
+				?> 
+				<small class="label <?php echo $css_label; ?> pull-right">
+					<?php echo $nota->status; ?>
+				</small>
+			</small>
+			<div class="span2">
+				<?php $this->widget('MGNotaFiscalBotoes', array('model'=>$nota)); ?>		
+			</div>
+		</span>
+	</div>
+	<?
+}
 ?>
 
-<h2>Títulos Gerados</h2>
+<h3>Títulos Gerados</h3>
 
 <?php
 
@@ -176,7 +339,7 @@ foreach ($model->Titulos as $titulo)
 unset($titulo)
 ?>
 
-<h2>Títulos Baixados</h2>
+<h3>Títulos Baixados</h3>
 
 <?php
 
