@@ -241,6 +241,23 @@ class MGEscPrintRomaneio extends MGEscPrint
 			$this->adicionaLinha();
 
 			// Texto da confissao de divida
+			
+			//$this->adicionaLinha("Observação");
+			
+			if (!empty($model->observacoes))
+			{
+				$observacoes = "Observacoes: ";
+				$observacoes .= $model->observacoes;
+				
+				$observacoes = str_split($observacoes, 137);
+				
+				foreach($observacoes as $linha)
+					$this->adicionaLinha($linha);
+					
+				$this->adicionaLinha();
+				
+			}
+			
 			$this->adicionaLinha("Confissao de Divida: Confesso(amos) e me(nos) constituo(imos) devedor(es) do valor descrito nesse negocio, obrigando-me(nos) a pagar em");
 			$this->adicionaTexto("moeda corrente do pais, conforme vencimento. Declaro(amos) ainda, ter recebido o servico e/ou produto aqui descrito, sem nada a reclamar.");
 			$this->adicionaLinha();
