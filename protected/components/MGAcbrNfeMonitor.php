@@ -299,9 +299,7 @@ class MGAcbrNfeMonitor extends MGSocket
 						Yii::app()->format->formataPorMascara($nfpb->ProdutoBarra->codproduto, "######") 
 						//. empty($nfpb->ProdutoBarra->codprodutoembalagem)?"":"*" . $nfpb->ProdutoBarra->ProdutoEmbalagem->quantidade
 						,
-					"EAN" => 
-						strlen($nfpb->ProdutoBarra->barras) >= 10?
-						Yii::app()->format->numeroLimpo($nfpb->ProdutoBarra->barras):"",
+					"EAN" => $nfpb->ProdutoBarra->barrasValido()?$nfpb->ProdutoBarra->barras:"",
 					/*
 					If Len(NumeroLimpo($nfpb->barras)) > 6 _
 						And NumeroLimpo(Mid($nfpb->barras, 1, 6)) <> Format($nfpb->codproduto, "000000") _

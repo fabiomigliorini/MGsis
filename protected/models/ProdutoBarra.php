@@ -213,4 +213,54 @@ class ProdutoBarra extends MGActiveRecord
 		return false;
 		
 	}
+	
+	public function calculaDigitoGtin()
+	{
+		//preenche com zeros a esquerda
+		$codigo = "000000000000000000" . $this->barras;
+
+		//pega 18 digitos
+		$codigo = substr($codigo, -18);
+		$soma = 0;
+
+		//soma digito par *1 e impar *3
+		for ($i = 1; $i<strlen($codigo); $i++)
+		{
+			$digito = substr($codigo, $i-1, 1);
+			if ($i === 0 || !!($i && !($i%2)))
+				$multiplicador = 1;
+			else
+				$multiplicador = 3;
+			$soma +=  $digito * $multiplicador;
+		}
+
+		//subtrai da maior dezena
+		$digito = (ceil($soma/10)*10) - $soma;	
+
+		//retorna digitocalculado
+		return $digito;
+	}
+	
+	public function barrasValido()
+	{
+
+		//calcula comprimento string
+		$compr = strlen($this->barras);
+
+		//se nao tiver comprimento adequado retorna false
+		if (($compr != 8) 
+			&& ($compr != 12) 
+			&& ($compr != 13) 
+			&& ($compr != 14) 
+			&& ($compr != 18))
+			return false;
+
+		//calcula digito e verifica se bate com o digitado
+		$digito = $this->calculaDigitoGtin();
+		if ($digito == substr($this->barras, -1))
+			return true;
+		else
+			return false;
+		
+	}
 }
