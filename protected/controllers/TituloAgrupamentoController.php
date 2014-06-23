@@ -205,6 +205,8 @@ class TituloAgrupamentoController extends Controller
 	public function actionGeraNotaFiscal($id, $modelo = null, $codnotafiscal = null)
 	{
 
+		$model = $this->loadModel($id);
+		
 		$command = Yii::app()->db->createCommand(' 
 			SELECT distinct nfp.codnegocio
 			  FROM tbltituloagrupamento ta
@@ -222,7 +224,6 @@ class TituloAgrupamentoController extends Controller
 		{
 			$retorno["Retorno"] = 0;
 			$retorno["Mensagem"] = "Nao foi possível localizar nenhum negócio vinculado ao fechamento!";
-			
 		}
 
 		foreach ($codnegocios as $codnegocio)
@@ -248,26 +249,23 @@ class TituloAgrupamentoController extends Controller
 			$retorno["codnotafiscal"] = $codnotafiscal;
 		}
 		
-		/*
-		$negocio = $this->loadModel($id);
-		
-		$retorno = array("Retorno"=>1, "Mensagem"=>"", "codnotafiscal" =>$codnotafiscal);
-		
-		if (!$codnotafiscal = $negocio->geraNotaFiscal($codnotafiscal, $modelo, true))
+		if (!empty($codnotafiscal))
 		{
-			$retorno["Retorno"] = 0;
-			$erros = $negocio->getErrors();
-			$erro = "Erro ao Gerar Nota Fiscal!";
-			foreach ($erros as $campo => $mensagens)
-				foreach($mensagens as $mensagem)
-					$erro .= " " . $mensagem;
-			$retorno["Mensagem"] = $erro;
-			
+			foreach ($model->Titulos as $tit)
+			{
+				$dupl = new NotaFiscalDuplicatas();
+				$dupl->codnotafiscal = $codnotafiscal;
+				$dupl->fatura = $tit->numero;
+				$dupl->vencimento = $tit->vencimento;
+				$dupl->valor = abs($tit->valor);
+				if (!$dupl->save())
+				{
+					$retorno["Retorno"] = 0;
+					$retorno["Mensagem"] = "Nao foi possível criar as duplicatas da Nota Fiscal!";
+					break;
+				}
+			}
 		}
-		
-		$retorno["codnotafiscal"] = $codnotafiscal;
-		 * 
-		 */
 		
 		echo CJSON::encode($retorno);
 		
