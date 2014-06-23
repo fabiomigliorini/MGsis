@@ -151,6 +151,7 @@ $(document).ready(function(){
 		<div class="pull-right">
 			<button class="btn" data-dismiss="modal"  id="btnGerarNfce">NFC-e (Cupom)</button>
 			<button class="btn btn-primary" data-dismiss="modal" id="btnGerarNfe">NF-e (Nota)</button>
+			<button class="btn" data-dismiss="modal" id="">Cancelar</button>
 		</div>		
 	</div>
 </div>
