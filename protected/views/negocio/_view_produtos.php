@@ -143,7 +143,7 @@ function preencheQuantidade()
 	var barras = $("#barras").val().trim();
 	
 	//o tamanho com o asterisco deve ser entre 2 e 5
-	if (barras.length > 5 || barras.length < 2)
+	if (barras.length > 6 || barras.length < 2)
 		return;
 	
 	// se o último dígito é o asterisco
