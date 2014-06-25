@@ -45,8 +45,6 @@ class Negocio extends MGActiveRecord
 {
 	public $lancamento_de;
 	public $lancamento_ate;
-	public $horario_de;
-	public $horario_ate;
 	public $percentualdesconto;
 	public $pagamento;
 	
@@ -74,7 +72,7 @@ class Negocio extends MGActiveRecord
 			array('codpessoa, codpessoavendedor, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('pagamento, horario_de, horario_ate, lancamento_de, lancamento_ate, codnegocio, codpessoa, codfilial, lancamento, codpessoavendedor, codoperacao, codnegociostatus, observacoes, codusuario, valordesconto, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnaturezaoperacao, valorprodutos, valortotal, valoraprazo, valoravista', 'safe', 'on'=>'search'),
+			array('pagamento, lancamento_de, lancamento_ate, codnegocio, codpessoa, codfilial, lancamento, codpessoavendedor, codoperacao, codnegociostatus, observacoes, codusuario, valordesconto, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnaturezaoperacao, valorprodutos, valortotal, valoraprazo, valoravista', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -189,12 +187,12 @@ class Negocio extends MGActiveRecord
 		$criteria->compare('valoraprazo',$this->valoraprazo,true);
 		$criteria->compare('valoravista',$this->valoravista,true);
 		
-		if ($lancamento_de = DateTime::createFromFormat("d/m/y H:i",$this->lancamento_de . " " . $this->horario_de))
+		if ($lancamento_de = DateTime::createFromFormat("d/m/y H:i",$this->lancamento_de))
 		{
 			$criteria->addCondition('t.lancamento >= :lancamento_de');
 			$criteria->params = array_merge($criteria->params, array(':lancamento_de' => $lancamento_de->format('Y-m-d H:i').':00.0'));
 		}
-		if ($lancamento_ate = DateTime::createFromFormat("d/m/y H:i",$this->lancamento_ate  . " " . $this->horario_ate))
+		if ($lancamento_ate = DateTime::createFromFormat("d/m/y H:i",$this->lancamento_ate))
 		{
 			$criteria->addCondition('t.lancamento <= :lancamento_ate');
 			$criteria->params = array_merge($criteria->params, array(':lancamento_ate' => $lancamento_ate->format('Y-m-d H:i').':59.9'));

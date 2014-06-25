@@ -34,6 +34,16 @@ $(document).ready(function(){
 		$('#modalRelatorio').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
 	});	
 
+
+	$('#search-form').change(function(){
+		var ajaxRequest = $("#search-form").serialize();
+		$.fn.yiiListView.update(
+			// this is the id of the CListView
+			'Listagem',
+			{data: ajaxRequest}
+		);
+    });
+
 	/*
 	$('#search-form').change(function(){
 		var ajaxRequest = $("#search-form").serialize();
@@ -74,73 +84,34 @@ $(document).ready(function(){
 <div class="well well-small">
 	<?php echo $form->textField($model, 'codnegocio', array('placeholder' => '#', 'class'=>'input-mini')); ?>
 	
-	<span>
-		<?php 
+	<?php 
 	
-		echo $form->datepickerRow(
+		echo $form->datetimepickerRow(
 			$model,
 			'lancamento_de',
 			array(
-				'class' => 'input-mini text-center', 
+				'class' => 'input-medium text-center', 
 				'options' => array(
-					'format' => 'dd/mm/yy'
-					),
-				'placeholder' => 'Data',
+					'format' => 'dd/mm/yy hh:ii',
+				),
+				'placeholder' => 'Data Inicial',
 				'prepend' => 'De',
-				)
-			); 	
-		$this->widget(
-			'bootstrap.widgets.TbTimePicker',
-			array(
-				'model' => $model,
-				'attribute' => 'horario_de',
-				'htmlOptions' => array(
-					'class' => 'input-mini text-center', 
-					),
-				'options' => array(
-					'TbActiveForm' => $form,
-					'showMeridian' => false,
-					'showSeconds' => false,
-					'defaultTime' => "00:00",
-				)
 			)
-		);	
+		);
 		
-		?>
-	</span>
-	<span>
-		<?
-		
-		echo $form->datepickerRow(
+		echo $form->datetimepickerRow(
 			$model,
 			'lancamento_ate',
 			array(
-				'class' => 'input-mini text-center', 
+				'class' => 'input-medium text-center', 
 				'options' => array(
-					'format' => 'dd/mm/yy'
-					),
+					'format' => 'dd/mm/yy hh:ii',
+				),
 				'placeholder' => 'Data',
 				'prepend' => 'Até',
-				)
-			); 	
-		$this->widget(
-			'bootstrap.widgets.TbTimePicker',
-			array(
-				'model' => $model,
-				'attribute' => 'horario_ate',
-				'htmlOptions' => array(
-					'class' => 'input-mini text-center', 
-					),
-				'options' => array(
-					'TbActiveForm' => $form,
-					'showMeridian' => false,
-					'showSeconds' => false,
-					'defaultTime' => "23:59",
-				)
 			)
-		);	
-		?>
-	</span>
+		);
+	?>
 	<?php echo $form->select2Pessoa($model, 'codpessoa', array('class' => 'input-xlarge', 'inativo'=>true));?>
 	<?php echo $form->select2($model, 'codnaturezaoperacao', NaturezaOperacao::getListaCombo(), array('placeholder'=>'Natureza', 'class' => 'input-xlarge')); ?>
 	<?php echo $form->select2($model, 'codfilial', Filial::getListaCombo(), array('placeholder'=>'Filial', 'class' => 'input-medium')); ?>
