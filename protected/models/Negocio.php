@@ -48,6 +48,7 @@ class Negocio extends MGActiveRecord
 	public $horario_de;
 	public $horario_ate;
 	public $percentualdesconto;
+	public $pagamento;
 	
 	/**
 	 * @return string the associated database table name
@@ -73,7 +74,7 @@ class Negocio extends MGActiveRecord
 			array('codpessoa, codpessoavendedor, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('horario_de, horario_ate, lancamento_de, lancamento_ate, codnegocio, codpessoa, codfilial, lancamento, codpessoavendedor, codoperacao, codnegociostatus, observacoes, codusuario, valordesconto, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnaturezaoperacao, valorprodutos, valortotal, valoraprazo, valoravista', 'safe', 'on'=>'search'),
+			array('pagamento, horario_de, horario_ate, lancamento_de, lancamento_ate, codnegocio, codpessoa, codfilial, lancamento, codpessoavendedor, codoperacao, codnegociostatus, observacoes, codusuario, valordesconto, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnaturezaoperacao, valorprodutos, valortotal, valoraprazo, valoravista', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -198,6 +199,21 @@ class Negocio extends MGActiveRecord
 			$criteria->addCondition('t.lancamento <= :lancamento_ate');
 			$criteria->params = array_merge($criteria->params, array(':lancamento_ate' => $lancamento_ate->format('Y-m-d H:i').':59.9'));
 		}
+		
+		switch ($this->pagamento)
+		{
+			case "a":
+				$criteria->addCondition('t.valoraprazo = 0');
+				break;
+
+			case "p":
+				$criteria->addCondition('t.valoravista = 0');
+				break;
+			
+			default:
+				break;
+		}
+		
 		
 		$criteria->order = 't.codnegociostatus, t.lancamento DESC, t.codnegocio DESC';
 
@@ -478,22 +494,6 @@ class Negocio extends MGActiveRecord
 			return false;
 		} 		
 		
-		
-		
-		/*
-		if ($this->saldo == 0)
-			return false;
-		
-		return $this->adicionaMovimento(
-			TipoMovimentoTitulo::TIPO_ESTORNO_IMPLANTACAO,
-			$this->creditosaldo, 
-			$this->debitosaldo, 
-			date('d/m/Y'), 
-			$this->codportador, 
-			$this->codtituloagrupamento
-		);
-		 * 
-		 */
 	}
 	
 	
