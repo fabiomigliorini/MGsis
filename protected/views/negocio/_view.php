@@ -39,7 +39,7 @@ switch ($data->codnegociostatus)
 		<small class="span2"><?php echo CHtml::encode($data->Filial->filial);?></small>
 		<small class="span2"><?php echo CHtml::encode($data->Usuario->usuario); ?></small>
 		<small class="span2"><?php echo CHtml::encode($data->NegocioStatus->negociostatus); ?></small>
-		<small class="span6"><?php echo (isset($data->Vendedor))?CHtml::link(CHtml::encode($data->Vendedor->fantasia),array('pessoa/view','id'=>$data->codpessoavendedor)):"";?></small>
+		<small class="span6"><?php echo (isset($data->PessoaVendedor))?CHtml::link(CHtml::encode($data->PessoaVendedor->fantasia),array('pessoa/view','id'=>$data->codpessoavendedor)):"";?></small>
 	</small>
 
 </div>
