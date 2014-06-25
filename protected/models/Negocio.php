@@ -258,6 +258,18 @@ class Negocio extends MGActiveRecord
 			return false;			
 		}
 		
+		if ($this->valoraprazo > 0)
+		{
+			if (!$this->Pessoa->avaliaLimiteCredito($this->valoraprazo))
+			{
+				$this->addError("codpessoa", "Solicite Liberação de Crédito ao Departamento Financeiro!");
+				return false;			
+			}
+			
+		}
+			
+		
+		
 		//Calcula total pagamentos à vista e à prazo
 		$valorPagamentos = 0;
 		$valorPagamentosPrazo = 0;

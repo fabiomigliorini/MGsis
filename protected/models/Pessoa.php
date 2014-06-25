@@ -1,4 +1,4 @@
-    <?php
+<?php
 
 /**
  * This is the model class for table "mgsis.tblpessoa".
@@ -50,6 +50,7 @@
  * @property string $codusuarioalteracao
  * @property string $criacao
  * @property string $codusuariocriacao
+ * @property integer $toleranciaatraso
  *
  * The followings are the available model relations:
  * @property Titulo[] $Titulos
@@ -101,13 +102,13 @@ class Pessoa extends MGActiveRecord
 			array('ie', 'ext.validators.InscricaoEstadualValidator'),
 			array('ie', 'validaCnpjDuplicado'),
 			array('ie, cep, cepcobranca','filter','filter'=>array($this, 'numeroLimpo')),
-			array('numero, email, codcidade, endereco, bairro, cep, codcidadecobranca, enderecocobranca, numerocobranca, bairrocobranca, cepcobranca, pessoa, fantasia, cadastro, notafiscal, telefone1', 'required'),
+			array('toleranciaatraso, numero, email, codcidade, endereco, bairro, cep, codcidadecobranca, enderecocobranca, numerocobranca, bairrocobranca, cepcobranca, pessoa, fantasia, cadastro, notafiscal, telefone1', 'required'),
 			array('fantasia', 'unique', 'caseSensitive' => false),
 			array('fantasia, pessoa', 'length', 'min' => 5),
 			array('pessoa, contato, conjuge, endereco, enderecocobranca, email, emailnfe, emailcobranca', 'length', 'max'=>100),
 			array('email, emailnfe, emailcobranca', 'email'),
 			array('fantasia, complemento, bairro, complementocobranca, bairrocobranca, telefone1, telefone2, telefone3', 'length', 'max'=>50),
-			array('notafiscal', 'numerical', 'integerOnly'=>true),
+			array('notafiscal, toleranciaatraso', 'numerical', 'integerOnly'=>true),
 			array('credito', 'length', 'max'=>14),
 			array('telefone1, telefone2, telefone3', 'validaTelefone'),
 			array('ie', 'length', 'max'=>20),
@@ -260,6 +261,7 @@ class Pessoa extends MGActiveRecord
 			'codformapagamento' => 'Forma de Pagamento',
 			'credito' => 'Limite de Credito',
 			'creditobloqueado' => 'Credito Bloqueado',
+			'toleranciaatraso' => 'Tolerância de Atraso',
 			'observacoes' => 'Observações',
 			'mensagemvenda' => 'Mensagem de Venda',
 			'vendedor' => 'Vendedor',
@@ -423,6 +425,57 @@ class Pessoa extends MGActiveRecord
 			$this->notafiscal = self::NOTAFISCAL_TRATAMENTOPADRAO;
 		
 		return parent::beforeValidate();
+	}
+	
+	public function totalTitulos()
+	{
+		
+		$command = Yii::app()->db->createCommand(' 
+			SELECT SUM(saldo) AS saldo, MIN(vencimento) AS vencimento
+			  FROM tbltitulo 
+			 WHERE codpessoa = :codpessoa
+			   AND saldo <> 0
+			');
+
+		$command->params = array("codpessoa" => $this->codpessoa);
+
+		$ret = $command->queryRow();
+		$ret["vencimentodias"] = 0;
+		
+		if ($venc = DateTime::createFromFormat("Y-m-d",$ret["vencimento"]))
+		{
+			$ret["vencimento"] = $venc->format("d/m/Y");
+			$hoje = new DateTime("NOW");
+			$dif = $hoje->diff($venc);
+			$ret["vencimentodias"] = $dif->format("%r%a");
+		}
+		
+		return $ret;
+	}
+	
+	public function avaliaLimiteCredito($valorAvaliar = 0)
+	{
+		//se esta com o credito marcado como bloqueado
+		if ($this->creditobloqueado)
+			return false;
+		
+		//busca no banco total dos titulos
+		$total = $this->totalTitulos();
+		
+		//calcula 
+		$creditototal = $total["saldo"] + $valorAvaliar;
+
+		//vefica o valor do credito 
+		if ((!empty($this->credito)) && (($this->credito * 1.05) < $creditototal))
+			return false;
+		
+		//verifica o atraso
+		if (($total["vencimentodias"] <= 0) && (abs($total["vencimentodias"]) > $this->toleranciaatraso))
+			return false;
+		
+		
+		return true;
+		
 	}
 
 }

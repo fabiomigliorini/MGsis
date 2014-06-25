@@ -74,9 +74,10 @@
 						);	
 				
 				
-				echo $form->textFieldRow($model,'credito',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14));
 				//echo $form->checkBoxRow($model,'creditobloqueado');
 				echo $form->toggleButtonRow($model,'creditobloqueado', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
+				echo $form->textFieldRow($model,'credito',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14));
+				echo $form->textFieldRow($model,'toleranciaatraso',array('append' => 'Dias', 'class'=>'input-mini text-right','maxlength'=>4));
 				echo $form->textAreaRow($model,'mensagemvenda',array('class'=>'input-xxlarge', 'rows'=>'5','maxlength'=>500));
 
 				echo $form->textFieldRow($model,'desconto',array('append' => '%', 'class'=>'input-small text-right','maxlength'=>5));
@@ -317,6 +318,7 @@ $(document).ready(function() {
 	$("#Pessoa_bairrocobranca").Setcase();
 		
 	$('#Pessoa_credito').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+	$('#Pessoa_toleranciaatraso').autoNumeric('init', {aSep:'', aDec:',', altDec:'.', mDec:0 });
 	$('#Pessoa_desconto').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	
 	$('#Pessoa_cobrancanomesmoendereco').change(function() { escondeCamposEnderecoCobranca(); });	

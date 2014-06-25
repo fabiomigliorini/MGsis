@@ -150,7 +150,7 @@ class MGFormatter extends CFormatter
 		return "#" . str_pad($string, $digitos, "0", STR_PAD_LEFT);
 	}
 	
-	public function formataEndereco($endereco = null, $numero = null, $complemento = null, $bairro = null, $cidade = null, $estado = null, $cep = null)
+	public function formataEndereco($endereco = null, $numero = null, $complemento = null, $bairro = null, $cidade = null, $estado = null, $cep = null, $multilinha = false)
 	{
 		
 		$retorno = $endereco;
@@ -183,7 +183,12 @@ class MGFormatter extends CFormatter
 		
 		$q = urlencode($q);
 		
-		return "<a href='http://maps.google.com/maps?q=$q' target='_blank'>" . CHtml::encode($retorno) . "</a>";
+		$retorno = CHtml::encode($retorno);
+		
+		if ($multilinha)
+			$retorno = str_replace (" - ", "<br>", $retorno);
+		
+		return "<a href='http://maps.google.com/maps?q=$q' target='_blank'>$retorno</a>";
 	}
 	
 	public function removeAcentos ($string)

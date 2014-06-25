@@ -38,135 +38,185 @@ $(document).ready(function(){
 	</div>
 <?php endif; ?>
 
-<?php 
+<div class="row-fluid">
+	<div class="span6">
+		<?php 
 
-$attributes = 
-	array(
-		array(
-			'name'=>'codpessoa',
-			'value'=>Yii::app()->format->formataCodigo($model->codpessoa),
-			),
-		'pessoa',
-		array(
-			'name'=>'telefone1',
-			'value'=>"<a href='tel:{$model->telefone1}'>{$model->telefone1}</a> <a href='tel:{$model->telefone2}'>{$model->telefone2}</a> <a href='tel:{$model->telefone3}'>{$model->telefone3}</a>",
-			'type'=>'raw'
-			),
-		'contato',
-		array(
-			'name'=>'cnpj',
-			'value'=>(isset($model->cnpj))?Yii::app()->format->formataCnpjCpf($model->cnpj, $model->fisica):null,
-			),
-		array(
-			'name'=>'ie',
-			'value'=>(isset($model->ie))?Yii::app()->format->formataInscricaoEstadual($model->ie, $model->Cidade->Estado->sigla):null,
-			),
-		array(
-			'name'=>'endereco',
-			'value'=>Yii::app()->format->formataEndereco($model->endereco, $model->numero, $model->complemento, $model->bairro, $model->Cidade->cidade, $model->Cidade->Estado->sigla, $model->cep),
-			'type'=>'raw'
-			),
-		array(
-			'name'=>'enderecocobranca',
-			'label'=>'Cobrança',
-			'value'=>Yii::app()->format->formataEndereco($model->enderecocobranca, $model->numerocobranca, $model->complementocobranca, $model->bairrocobranca, $model->CidadeCobranca->cidade, $model->CidadeCobranca->Estado->sigla, $model->cepcobranca),
-			'type'=>'raw'
-			),
-		array(
-			'name'=>'email',
-			'value'=>(isset($model->email))?CHtml::link($model->email, 'mailto:'.$model->email):null,
-			'type'=>'raw',                 
-			),
-		array(
-			'name'=>'emailnfe',
-			'value'=>(isset($model->emailnfe))?CHtml::link($model->emailnfe, 'mailto:'.$model->emailnfe):null,
-			'type'=>'raw',                 
-			),
-		array(
-			'name'=>'emailcobranca',
-			'value'=>(isset($model->emailcobranca))?CHtml::link($model->emailcobranca, 'mailto:'.$model->emailcobranca):null,
-			'type'=>'raw',                 
-			),
-	);
+		$attributes = 
+			array(
+				array(
+					'name'=>'codpessoa',
+					'value'=>Yii::app()->format->formataCodigo($model->codpessoa),
+					),
+				'pessoa',
+				array(
+					'name'=>'telefone1',
+					'value'=>"<a href='tel:{$model->telefone1}'>{$model->telefone1}</a> <a href='tel:{$model->telefone2}'>{$model->telefone2}</a> <a href='tel:{$model->telefone3}'>{$model->telefone3}</a>",
+					'type'=>'raw'
+					),
+				'contato',
+				array(
+					'name'=>'cnpj',
+					'value'=>(isset($model->cnpj))?Yii::app()->format->formataCnpjCpf($model->cnpj, $model->fisica):null,
+					),
+				array(
+					'name'=>'ie',
+					'value'=>(isset($model->ie))?Yii::app()->format->formataInscricaoEstadual($model->ie, $model->Cidade->Estado->sigla):null,
+					),
+				array(
+					'name'=>'endereco',
+					'value'=>Yii::app()->format->formataEndereco($model->endereco, $model->numero, $model->complemento, $model->bairro, $model->Cidade->cidade, $model->Cidade->Estado->sigla, $model->cep, true),
+					'type'=>'raw'
+					),
+				);
 
-if ($model->cliente) 
-{
-	$attributes = array_merge($attributes, 
-		array(
+		if (!$model->cobrancanomesmoendereco)
+			$attributes[] = 
+				array(
+					'name'=>'enderecocobranca',
+					'label'=>'Cobrança',
+					'value'=>Yii::app()->format->formataEndereco($model->enderecocobranca, $model->numerocobranca, $model->complementocobranca, $model->bairrocobranca, $model->CidadeCobranca->cidade, $model->CidadeCobranca->Estado->sigla, $model->cepcobranca, true),
+					'type'=>'raw'
+					);
+
+		if (!empty($model->email))
+			$attributes[] = 
+				array(
+					'name'=>'email',
+					'value'=>CHtml::link($model->email, 'mailto:'.$model->email),
+					'type'=>'raw',
+					);
+
+		if (!empty($model->emailnfe))
+			$attributes[] = 
+				array(
+					'name'=>'emailnfe',
+					'value'=>(isset($model->emailnfe))?CHtml::link($model->emailnfe, 'mailto:'.$model->emailnfe):null,
+					'type'=>'raw',                 
+					);
+
+		if (!empty($model->emailcobranca))
+			$attributes[] = 
+				array(
+					'name'=>'emailcobranca',
+					'value'=>(isset($model->emailcobranca))?CHtml::link($model->emailcobranca, 'mailto:'.$model->emailcobranca):null,
+					'type'=>'raw',                 
+					);
+		
+		if ($model->fisica) 
+		{
+			$attributes = array_merge($attributes, 
+				array(
+					'rg',
+					array(
+						'name'=>'codsexo',
+						'value'=>isset($model->codsexo)?$model->Sexo->sexo:null,
+						),
+					array(
+						'name'=>'codestadocivil',
+						'value'=>isset($model->codestadocivil)?$model->EstadoCivil->estadocivil:null,
+						),
+					'conjuge',
+				));
+
+		}
+
+		$this->widget('bootstrap.widgets.TbDetailView',array(
+			'data'=>$model,
+			'attributes'=>$attributes));
+		?>		
+	</div>
+	<div class="span6">
+		<?php
+
+		$attributes = array(
 			array(
 				'name'=>'cliente',
 				'value'=>($model->cliente)?'Sim':'Não',
 				),
-			array(
-				'name'=>'notafiscal',
-				'value'=>$model->getNotaFiscalDescricao(),
-				),
-			array(
-				'name'=>'consumidor',
-				'value'=>($model->consumidor)?'Sim':'Não',
-				),
-			array(
-				'name'=>'codformapagamento',
-				'value'=>isset($model->codformapagamento)?$model->FormaPagamento->formapagamento:null,
-				),
-			array(
-				'name'=>'desconto',
-				'value'=>isset($model->desconto)?Yii::app()->format->formatNumber($model->desconto) . " %":null,
-				),
-			array(
-				'name'=>'creditobloqueado',
-				'value'=>($model->creditobloqueado)?'Sim':'Não',
-				),
-			'credito',
-			array(
-				'name'=>'mensagemvenda',
-				'value'=>(isset($model->mensagemvenda))?nl2br($model->mensagemvenda):null,
-				'type'=>'raw',                 
-				),
-		));
-	
-}
+		);
 
-if ($model->fisica) 
-{
-	$attributes = array_merge($attributes, 
-		array(
-			'rg',
+		if ($model->cliente) 
+		{
+			
+			$total = $model->totalTitulos();
+			
+			$attributes = array_merge($attributes, 
+				array(
+					array(
+						'name'=>'notafiscal',
+						'value'=>$model->getNotaFiscalDescricao(),
+					),
+					array(
+						'name'=>'consumidor',
+						'value'=>($model->consumidor)?'Sim':'Não',
+					),
+					array(
+						'name'=>'codformapagamento',
+						'value'=>isset($model->codformapagamento)?$model->FormaPagamento->formapagamento:null,
+					),
+					array(
+						'name'=>'desconto',
+						'value'=>isset($model->desconto)?Yii::app()->format->formatNumber($model->desconto) . " %":null,
+					),
+					array(
+						'name'=>'creditobloqueado',
+						'value'=>($model->creditobloqueado)?'Sim':'Não',
+					),
+					array(
+						'label'=>'Saldo em Aberto',
+						'value'=>Yii::app()->format->formatNumber($total["saldo"]),
+					),
+					array(
+						'name'=>'credito',
+						'value'=>isset($model->credito)?Yii::app()->format->formatNumber($model->credito):null,
+					),
+					array(
+						'label'=>'Primeiro Vencimento',
+						'value'=>$total["vencimento"] . " (" . $total["vencimentodias"] . " Dias)",
+					),
+					array(
+						'name'=>'toleranciaatraso',
+						'value'=>$model->toleranciaatraso . " Dias",
+					),
+					array(
+						'name'=>'mensagemvenda',
+						'value'=>(isset($model->mensagemvenda))?nl2br($model->mensagemvenda):null,
+						'type'=>'raw',                 
+					),
+				)
+			);
+
+		}
+
+		$attributes = array_merge($attributes, 
 			array(
-				'name'=>'codsexo',
-				'value'=>isset($model->codsexo)?$model->Sexo->sexo:null,
-				),
-			array(
-				'name'=>'codestadocivil',
-				'value'=>isset($model->codestadocivil)?$model->EstadoCivil->estadocivil:null,
-				),
-			'conjuge',
-		));
-	
-}
+				array(
+					'name'=>'observacoes',
+					'value'=>(isset($model->observacoes))?nl2br($model->observacoes):null,
+					'type'=>'raw',                 
+					),
+				array(
+					'name'=>'vendedor',
+					'value'=>($model->vendedor)?'Sim':'Não',
+					),
+				array(
+					'name'=>'fornecedor',
+					'value'=>($model->cliente)?'Sim':'Não',
+					),
+				'cadastro',
+				));
 
-$attributes = array_merge($attributes, 
-	array(
-		array(
-			'name'=>'observacoes',
-			'value'=>(isset($model->observacoes))?nl2br($model->observacoes):null,
-			'type'=>'raw',                 
-			),
-		array(
-			'name'=>'vendedor',
-			'value'=>($model->vendedor)?'Sim':'Não',
-			),
-		array(
-			'name'=>'fornecedor',
-			'value'=>($model->cliente)?'Sim':'Não',
-			),
-		'cadastro',
-		));
+		$this->widget('bootstrap.widgets.TbDetailView',array(
+			'data'=>$model,
+			'attributes'=>$attributes)); 
+		?>
+		
+	</div>
+</div>
 
-$this->widget('bootstrap.widgets.TbDetailView',array(
-	'data'=>$model,
-	'attributes'=>$attributes)); 
 
+<?php
 	$this->widget('UsuarioCriacao', array('model'=>$model));
 
 ?>

@@ -21,8 +21,7 @@
 		?>
 		<input type="button" class="btn btn-small btn-block btn-primary btnEnviarEmail" value="Email" data-codnotafiscal="<?php echo $model->codnotafiscal; ?>" data-email="<?php echo $email; ?>" id="btnEnviarEmail">
 		<input type="button" class="btn btn-small btn-block btn-danger btnCancelarNfe" value="Cancelar" data-codnotafiscal="<?php echo $model->codnotafiscal; ?>" id="btnCancelarNfe">		
-	<?php endif; ?>
-	<?php if (!empty($model->nfechave) ): ?>
+	<?php elseif (!empty($model->nfechave)): ?>
 		<input type="button" class="btn btn-small btn-block btn-info btnConsultarNfe" data-codnotafiscal="<?php echo $model->codnotafiscal; ?>" value="Consultar" id="btnConsultarNfe">
 	<?php endif; ?>
 <?php endif; ?>
