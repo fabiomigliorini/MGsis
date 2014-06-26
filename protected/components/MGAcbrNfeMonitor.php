@@ -307,7 +307,7 @@ class MGAcbrNfeMonitor extends MGSocket
 						And ValidaEan($nfpb->barras) Then
 					End If
 					 */ 
-					"Descricao" => $nfpb->ProdutoBarra->descricao,
+					"Descricao" => (empty($nfpb->descricaoalternativa))?$nfpb->ProdutoBarra->descricao:$nfpb->descricaoalternativa,
 					"Unidade" => $nfpb->ProdutoBarra->UnidadeMedida->sigla,
 					"NCM" => Yii::app()->format->formataPorMascara($nfpb->ProdutoBarra->Produto->ncm, "########"),
 					"Quantidade" => $nfpb->quantidade,
@@ -457,15 +457,11 @@ class MGAcbrNfeMonitor extends MGSocket
 		$compl = str_replace("#ICMSPERCENTUAL#", Yii::app()->format->formatNumber($perc), $compl);
 
 		//Adiciona valor aproximado tributos
-		$command = Yii::app()->db->createCommand("SELECT valoribpt, valortotal FROM vwIbptaxNotaFiscal WHERE codNotaFiscal = :codnotafiscal");
+		$command = Yii::app()->db->createCommand("SELECT max(valoribpt) FROM vwIbptaxNotaFiscal WHERE codNotaFiscal = :codnotafiscal");
 		$command->params = array(':codnotafiscal' => $this->model->codnotafiscal);
-		if ($resultado = $command->queryAll())
+		if ($ibpt = $command->queryScalar())
 		{
-			if (!empty($compl))
-				$compl .= ";";
-			$compl .= "Valor Aprox Tributos R$ ";
-			$compl .= Yii::app()->format->formatNumber($resultado[0]["valoribpt"]);
-			$compl .= ". Fonte: IBPT";
+			$compl = str_replace("#IBPTVALOR#", Yii::app()->format->formatNumber($ibpt), $compl);
 		}
 		
 		if ($this->model->modelo == NotaFiscal::MODELO_NFCE)

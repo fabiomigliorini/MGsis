@@ -35,6 +35,8 @@ class NotaFiscalController extends Controller
 		$model->saida = date('d/m/Y');
 		$model->serie = 1;
 		$model->numero = 0;
+		$model->codfilial = Yii::app()->user->getState("codfilial");
+		$model->modelo = NotaFiscal::MODELO_NFE;
 		
 		if(isset($_POST['NotaFiscal']))
 		{
@@ -52,6 +54,8 @@ class NotaFiscalController extends Controller
 						$prod_novo->attributes = $prod_orig->attributes;
 						$prod_novo->codnotafiscalprodutobarra = null;
 						$prod_novo->codnotafiscal = $model->codnotafiscal;
+						$prod_novo->codcfop = null;
+						$prod_novo->csosn = null;
 						$prod_novo->criacao = null;
 						$prod_novo->codusuariocriacao = null;
 						$prod_novo->alteracao = null;
@@ -108,11 +112,6 @@ class NotaFiscalController extends Controller
 				
 				$model->codstatus = NotaFiscal::CODSTATUS_NOVA;
 			}
-			else
-			{
-				$model->codfilial = Yii::app()->user->getState("codfilial");
-				$model->modelo = NotaFiscal::MODELO_NFE;
-			}
 			
 			
 		}
@@ -168,6 +167,12 @@ class NotaFiscalController extends Controller
 				
 				if (!$model->podeEditar())
 					throw new CHttpException(409, 'Nota Fiscal não permite exclusão!');
+				
+				foreach ($model->NotaFiscalDuplicatass as $dup)
+					$dup->delete();
+				
+				foreach ($model->NotaFiscalProdutoBarras as $prod)
+					$prod->delete();
 				
 				$model->delete();
 					

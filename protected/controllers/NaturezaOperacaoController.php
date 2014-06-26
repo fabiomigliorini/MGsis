@@ -168,35 +168,16 @@ class NaturezaOperacaoController extends Controller
 		
 		$model = $this->loadModel($id);
 		$arr["observacoesnf"] = $model->observacoesnf;
+		$arr["mensagemprocom"] = $model->mensagemprocom;
 		$arr["observacoesnfantigo"] = null;
 		
 		if (!empty($idantigo))
 		{
 			$modelantigo = $this->loadModel($idantigo);
 			$arr["observacoesnfantigo"] = $modelantigo->observacoesnf;
+			$arr["mensagemprocomantigo"] = $modelantigo->mensagemprocom;
 		}
 		echo CJSON::encode($arr);
-		
-		
-		/*
-		$model = $this->loadModel($id);
-		$acbr = new MGAcbrNfeMonitor($model);
-		
-		$res = false;
-		
-		if ($acbr->criarNFe()) 
-			$res = $acbr->enviarNfe();
-		
-		echo CJSON::encode(
-			array(
-				'id' => $id,
-				'resultado' => $res,
-				'retornoMonitor' => $acbr->retornoMonitor["Mensagem"],
-				'erroMonitor' => htmlentities($acbr->erroMonitor),
-				'retorno' => htmlentities($acbr->retorno),
-			)
-		);
-		*/
 		
 	}
 	

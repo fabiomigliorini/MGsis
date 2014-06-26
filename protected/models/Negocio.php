@@ -327,6 +327,12 @@ class Negocio extends MGActiveRecord
 	// Gera nota fiscal a partir do negocio
 	public function geraNotaFiscal($codnotafiscal = null, $modelo = NotaFiscal::MODELO_NFE, $geraDuplicatas = true)
 	{
+		if ($this->Pessoa->notafiscal == Pessoa::NOTAFISCAL_NUNCA && $modelo == NotaFiscal::MODELO_NFE)
+		{
+			$this->addError("codpessoa", "Pessoa marcada para <b>NUNCA EMITIR</b> NFe!");
+			return false;
+		}
+		
 		//se passou uma nota por parametro tenta localizar ela
 		if (!empty($codnotafiscal))
 			$nota = NotaFiscal::model()->findByPK($codnotafiscal);
@@ -347,18 +353,43 @@ class Negocio extends MGActiveRecord
 			//die(date('d/m/Y'));
 			$nota->emissao = date('d/m/Y');
 			$nota->saida = date('d/m/Y');
-			$nota->observacoes = $this->NaturezaOperacao->observacoesnf;
+			
+			$nota->observacoes = "";
+			$nota->observacoes .= $this->NaturezaOperacao->mensagemprocom;
+			
+			if ($nota->modelo == NotaFiscal::MODELO_NFE)
+			{
+				if (!empty($nota->observacoes))
+					$nota->observacoes .= "\n";
+
+				$nota->observacoes .= $this->NaturezaOperacao->observacoesnf;
+			}
+			
 			$nota->fretepagar = 1;
 			$nota->codoperacao = $this->NaturezaOperacao->codoperacao;
 		}
 	
 		//concatena obeservacoes
-		$nota->observacoes .= "\nReferente ao Negocio #{$this->codnegocio}";
-		if (strlen($nota->observacoes) > 500)
-			$nota->observacoes = substr($nota->observacoes, 0, 500);
+		$nota->observacoes = $nota->observacoes;
+		if (!empty($nota->observacoes))
+			$nota->observacoes .= "\n";
+		$nota->observacoes .= "Referente ao Negocio #{$this->codnegocio}";
+		if (isset($this->PessoaVendedor))
+			$nota->observacoes .= " - Vendedor: {$this->PessoaVendedor->fantasia}";
+		if (!empty($this->observacoes))
+			$nota->observacoes .= " - {$this->observacoes}";
+			
+		if (strlen($nota->observacoes) > 1500)
+			$nota->observacoes = substr($nota->observacoes, 0, 1500);
 		
 		//acumula o valor de desconto
 		$nota->valordesconto += $this->valordesconto;
+		
+		if (!$nota->save())
+		{
+			$this->addErrors($nota->getErrors());
+			return false;
+		}
 		
 		//percorre os itens do negocio e adiciona na nota
 		foreach($this->NegocioProdutoBarras as $negocioItem)

@@ -127,6 +127,11 @@ function atualizaUnitario ()
 	
 function atualizaIcmsValor ()
 {
+	if ($('#NotaFiscalProdutoBarra_icmsbase').autoNumeric('get') == 0)
+		$('#NotaFiscalProdutoBarra_icmsbase').autoNumeric('set', 
+			$('#NotaFiscalProdutoBarra_valortotal').autoNumeric('get')
+		);
+	
 	$('#NotaFiscalProdutoBarra_icmsvalor').autoNumeric('set',
 		$('#NotaFiscalProdutoBarra_icmsbase').autoNumeric('get') * 
 		$('#NotaFiscalProdutoBarra_icmspercentual').autoNumeric('get') /100
@@ -152,6 +157,11 @@ function atualizaIcmsPercentual ()
 
 function atualizaIcmsStValor ()
 {
+	if ($('#NotaFiscalProdutoBarra_icmsstbase').autoNumeric('get') == 0)
+		$('#NotaFiscalProdutoBarra_icmsstbase').autoNumeric('set', 
+			$('#NotaFiscalProdutoBarra_valortotal').autoNumeric('get')
+		);
+	
 	$('#NotaFiscalProdutoBarra_icmsstvalor').autoNumeric('set',
 		$('#NotaFiscalProdutoBarra_icmsstbase').autoNumeric('get') * 
 		$('#NotaFiscalProdutoBarra_icmsstpercentual').autoNumeric('get') /100
@@ -177,6 +187,11 @@ function atualizaIcmsStPercentual ()
 
 function atualizaIpiValor ()
 {
+	if ($('#NotaFiscalProdutoBarra_ipibase').autoNumeric('get') == 0)
+		$('#NotaFiscalProdutoBarra_ipibase').autoNumeric('set', 
+			$('#NotaFiscalProdutoBarra_valortotal').autoNumeric('get')
+		);
+	
 	$('#NotaFiscalProdutoBarra_ipivalor').autoNumeric('set',
 		$('#NotaFiscalProdutoBarra_ipibase').autoNumeric('get') * 
 		$('#NotaFiscalProdutoBarra_ipipercentual').autoNumeric('get') /100

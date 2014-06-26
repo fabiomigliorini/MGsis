@@ -8,17 +8,17 @@
 	<div class="row-fluid">
 		<div class="span5">
 			<?php 	
-			echo $form->select2Row($model,'codfilial', Filial::getListaCombo() , array('class'=>'input-medium'));
 			echo $form->toggleButtonRow($model,'emitida', array('options' => array('width' => 200,  'enabledLabel' => 'Filial', 'disabledLabel' => 'Contraparte')));
+			echo $form->select2Row($model,'modelo', NotaFiscal::getModeloListaCombo() , array('class'=>'input-large'));
 			echo $form->textFieldRow($model,'nfechave',array('class'=>'input-xlarge text-center','maxlength'=>100));
 			echo $form->select2PessoaRow($model,'codpessoa', array('class'=>'input-xlarge'));
 			echo $form->select2Row($model,'codnaturezaoperacao', NaturezaOperacao::getListaCombo() , array('class'=>'input-xlarge'));
-			echo $form->textAreaRow($model,'observacoes',array('class'=>'input-xlarge', 'rows'=>'5','maxlength'=>500));
+			echo $form->textAreaRow($model,'observacoes',array('class'=>'input-xlarge', 'rows'=>'5','maxlength'=>1500));
 			?>
 		</div>
 		<div class="span3">
 			<?php
-			echo $form->select2Row($model,'modelo', NotaFiscal::getModeloListaCombo() , array('class'=>'input-medium'));
+			echo $form->select2Row($model,'codfilial', Filial::getListaCombo() , array('class'=>'input-medium'));
 			echo $form->textFieldRow($model,'serie',array('class'=>'input-mini text-right'));
 			echo $form->textFieldRow($model,'numero',array('class'=>'input-small text-right'));
 			echo $form->datepickerRow(
@@ -124,18 +124,12 @@ function desabilitaCamposEmitida()
 		$("#NotaFiscal_nfechave").val("<?php echo $model->nfechave; ?>");
 		$("#NotaFiscal_modelo").select2("val", "<?php echo $model->modelo; ?>");
 	}
-	else
+	else if (emitida)
 	{
-		if (emitida)
-		{
-			$("#NotaFiscal_serie").val(1);
-			$("#NotaFiscal_numero").val(0);
-			$("#NotaFiscal_nfechave").val("");
-			$("#NotaFiscal_modelo").val("");
-		}
-		else
-		{
-		}
+		$("#NotaFiscal_serie").val(1);
+		$("#NotaFiscal_numero").val(0);
+		$("#NotaFiscal_nfechave").val("");
+		$("#NotaFiscal_modelo").select2("val", "<?php echo $model->modelo; ?>");
 	}
 	
 	$("#NotaFiscal_serie").prop('disabled', emitida);
@@ -169,9 +163,27 @@ function atualizaObservacoes()
 			if (data.observacoesnfantigo != null)
 				observacoes = observacoes.replace(data.observacoesnfantigo, "");
 		
+			if (data.mensagemprocomantigo != null)
+				observacoes = observacoes.replace(data.mensagemprocomantigo, "");
+			
+			observacoes = observacoes.replace(/^\s*[\r\n]/gm, '');
+			//observacoes = observacoes.replace(/\n\n/g, '\n');
+
 			//preenche observacao de acordo com natureza de operacao
-			if (data.observacoesnf != null)
+			if (data.mensagemprocom != null)
+			{
+				if (observacoes.length > 0)
+					observacoes += "\n";
+				observacoes += data.mensagemprocom;
+			}
+			
+			if (data.observacoesnf != null && $("#NotaFiscal_modelo").select2("val") == <?php echo NotaFiscal::MODELO_NFE; ?>)
+			{
+				if (observacoes.length > 0)
+					observacoes += "\n";
 				observacoes += data.observacoesnf;
+			}
+			
 			
 			//joga na tela
 			$("#NotaFiscal_observacoes").val(observacoes);
@@ -187,8 +199,6 @@ function atualizaObservacoes()
 	
 $(document).ready(function() {
 
-	desabilitaCamposEmitida();
-	
 	//$("#Pessoa_fantasia").Setcase();
 	$('#NotaFiscal_valorprodutos').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#NotaFiscal_icmsstvalor').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
@@ -222,6 +232,7 @@ $(document).ready(function() {
         });
     });
 	
+	desabilitaCamposEmitida();
 });
 
 </script>

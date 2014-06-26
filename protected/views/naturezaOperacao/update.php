@@ -1,7 +1,7 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Alterar Natureza da Operação';
+$this->pagetitle = Yii::app()->name . ' - Alterar Natureza de Operação';
 $this->breadcrumbs=array(
-	'Natureza da Operação'=>array('index'),
+	'Naturezas de Operação'=>array('index'),
 	$model->naturezaoperacao=>array('view','id'=>$model->codnaturezaoperacao),
 	'Alterar',
 );

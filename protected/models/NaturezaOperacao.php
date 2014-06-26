@@ -13,6 +13,7 @@
  * @property string $codusuarioalteracao
  * @property string $criacao
  * @property string $codusuariocriacao
+ * @property string $mensagemprocom
  *
  * The followings are the available model relations:
  * @property Negocio[] $Negocios
@@ -44,6 +45,7 @@ class NaturezaOperacao extends MGActiveRecord
 			array('naturezaoperacao', 'required'),
 			array('naturezaoperacao', 'length', 'max'=>50),
 			array('observacoesnf', 'length', 'max'=>500),
+			array('mensagemprocom', 'length', 'max'=>300),
 			array('codoperacao, emitida, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -82,6 +84,7 @@ class NaturezaOperacao extends MGActiveRecord
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
 			'codusuariocriacao' => 'Usuário Criação',
+			'mensagemprocom' => 'Mensagem Procom',
 		);
 	}
 

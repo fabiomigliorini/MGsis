@@ -76,6 +76,8 @@ class NotaFiscal extends MGActiveRecord
 	public $saida_de;
 	public $saida_ate;
 	
+	private $_codnaturezaoperacao_original;
+	
 	const MODELO_NFE			= 55;
 	const MODELO_NFCE			= 65;
 	/**
@@ -106,7 +108,7 @@ class NotaFiscal extends MGActiveRecord
 			array('numero', 'validaNumero'),
 			array('emissao', 'validaEmissaoPelaChaveNFE'),
 			array('saida', 'validaSaida'),
-			array('observacoes', 'length', 'max'=>500),
+			array('observacoes', 'length', 'max'=>1500),
 			array('valorfrete, valorseguro, valordesconto, valoroutras, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipivalor', 'length', 'max'=>14),
 			array('justificativa', 'length', 'max'=>200),
 			array('emitida, nfeimpressa, fretepagar, codoperacao, nfedataenvio, nfedataautorizacao, nfedatacancelamento, nfedatainutilizacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
@@ -634,6 +636,8 @@ class NotaFiscal extends MGActiveRecord
 	protected function afterFind()
 	{
 		$this->calculaStatus();
+		$this->_codnaturezaoperacao_original = null;
+		$this->_codnaturezaoperacao_original = $this->codnaturezaoperacao;
 		return parent::afterFind();
 	}
 	
@@ -659,5 +663,21 @@ class NotaFiscal extends MGActiveRecord
 		
 		return true;
 		
+	}
+	
+	protected function afterSave()
+	{
+		if ($this->codnaturezaoperacao !== $this->_codnaturezaoperacao_original)
+		{
+			$nfpbs = NotaFiscalProdutoBarra::model()->findAll("codnotafiscal = {$this->codnotafiscal}");
+			foreach ($nfpbs as $nfpb)
+			{
+				$nfpb->codcfop = null;
+				$nfpb->csosn = null;
+				$nfpb->save();
+			}
+		}
+		
+		return parent::afterSave();
 	}
 }

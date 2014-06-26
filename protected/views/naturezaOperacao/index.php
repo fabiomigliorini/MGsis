@@ -1,7 +1,7 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Natureza da Operação';
+$this->pagetitle = Yii::app()->name . ' - Natureza de Operação';
 $this->breadcrumbs=array(
-	'Natureza da Operação',
+	'Naturezas de Operação',
 );
 
 $this->menu=array(
@@ -25,7 +25,7 @@ $(document).ready(function(){
 
 </script>
 
-<h1>Natureza da Operação</h1>
+<h1>Naturezas de Operação</h1>
 
 <br>
 

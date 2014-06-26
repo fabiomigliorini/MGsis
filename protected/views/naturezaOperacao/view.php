@@ -1,7 +1,7 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Detalhes Natureza da Operação';
+$this->pagetitle = Yii::app()->name . ' - Detalhes Natureza de Operação';
 $this->breadcrumbs=array(
-	'Natureza da Operação'=>array('index'),
+	'Naturezas de Operação'=>array('index'),
 	$model->naturezaoperacao,
 );
 
@@ -55,6 +55,11 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 		array(
 			'name'=>'observacoesnf',
 			'value'=>nl2br(CHtml::encode($model->observacoesnf)),
+			'type'=>'raw',
+			),
+		array(
+			'name'=>'mensagemprocom',
+			'value'=>nl2br(CHtml::encode($model->mensagemprocom)),
 			'type'=>'raw',
 			),
 		),
