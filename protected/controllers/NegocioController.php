@@ -478,6 +478,12 @@ class NegocioController extends Controller
 		 
 		
 	}
-	
+	public function actionRelatorioOrcamento($id)
+	{
+		$model = $this->loadModel($id);
+		$rel = new MGRelatorioOrcamento($model);
+		$rel->montaRelatorio();
+		$rel->Output();
+	}
 	
 }
