@@ -139,16 +139,25 @@ class MGSocket
 	public function envia($str)
 	{
 		
-		if ($this->debug)
-			echo "<HR>ENVIANDO @$str@";
-		
 		if (!$this->conectado())
 			return false;
+
+		//quebra string por linhas
+		$arr = explode("\n", $str);
 		
-		if (fwrite($this->_fp, $str, strlen($str)) === FALSE)
-			return false;
-		
-		fflush($this->_fp);
+		//envia uma linha por vez pra nao estourar buffer do socket
+		foreach ($arr as $str)
+		{
+			//devolve a quebra de linha para a string
+			$str .= "\n";
+			
+			//escreve
+			if (fwrite($this->_fp, $str, strlen($str)) === FALSE)
+				return false;
+
+			//forca envio da linha
+			fflush($this->_fp);
+		}
 		
 		return true;
 		

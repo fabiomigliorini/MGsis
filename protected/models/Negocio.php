@@ -320,6 +320,8 @@ class Negocio extends MGActiveRecord
 		
 		//atualiza status
 		$this->codnegociostatus = NegocioStatus::FECHADO;
+		$model->codusuario = Yii::app()->user->id;
+		$model->lancamento = date('d/m/Y H:i:s');
 		return $this->save();
 		
 	}
