@@ -384,6 +384,8 @@ class MGAcbrNfeMonitor extends MGSocket
 		
 		if ($this->model->modelo == NotaFiscal::MODELO_NFCE)
 		{
+			if (empty($this->model->Pessoa->cnpj))
+				unset($arr["Destinatario"]["CNPJ"]);
 			
 			$arr["Identificacao"]["Emissao"] .= " " . date("H:i:s");
 			$arr["Identificacao"]["Saida"] .= " " . date("H:i:s");
