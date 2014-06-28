@@ -41,6 +41,12 @@ $this->menu=array(
 		'visible'=>($model->codnegociostatus != NegocioStatus::CANCELADO)
 		),
 	array('label'=>'Duplicar', 'icon'=>'icon-retweet', 'url'=>array('create','duplicar'=>$model->codnegocio)),
+	array(
+		'label'=>'Orçamento', 
+		'icon'=>'icon-print', 
+		'url'=>array('relatorioOrcamento','id'=>$model->codnegocio), 
+		'linkOptions'=>array('id'=>'btnOrcamento'),
+	),
 	//array('label'=>'Cancelar', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnCancelar')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
@@ -110,7 +116,17 @@ function mostrarRomaneio(imprimir)
 	$('#modalRomaneio').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
 	
 }
-	
+
+//abre janela Relatorio
+	var frameSrcOrcamento = $('#btnOrcamento').attr('href');
+	$('#btnOrcamento').click(function(event){
+		event.preventDefault();
+		$('#modalOrcamento').on('show', function () {
+			$('#frameOrcamento').attr("src",frameSrcOrcamento);
+		});
+		$('#modalOrcamento').modal({show:true})
+		$('#modalOrcamento').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
+	});	
 /*<![CDATA[*/
 $(document).ready(function(){
 
@@ -249,6 +265,18 @@ $(document).ready(function(){
 });
 /*]]>*/
 </script>
+
+<div id="modalOrcamento" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">  
+		<div class="pull-right">
+			<button class="btn" data-dismiss="modal">Fechar</button>
+		</div>
+		<h3>Orçamento</h3>  
+	</div>  
+	<div class="modal-body">
+      <iframe src="" id="frameOrcamento" name="frameOrcamento" width="99.6%" height="400" frameborder="0"></iframe>
+	</div>
+</div>
 
 <div id="modalBoleto" class="modal hide fade" tabindex="-1" role="dialog">
 	<div class="modal-header">  
