@@ -65,23 +65,23 @@ class MGRelatorioOrcamento extends FPDF
 		
 		//Informações da empresa e do negocio
 		$this->SetFont('Arial','',10);
-		$this->Cell(20, 6, utf8_decode("Filial:"));
-		$this->Cell(128, 6, utf8_decode($negocio->Filial->filial));
+		$this->Cell(20, 3, utf8_decode("Filial:"));
+		$this->Cell(128, 3, utf8_decode($negocio->Filial->filial));
 
-		$this->Cell(24, 6, utf8_decode("Negócio:"));
-		$this->Cell(18, 6, utf8_decode(Yii::app()->format->formataCodigo(abs($negocio->codnegocio))),   '', 0, 'L', $this->_fill);
+		$this->Cell(24, 3, utf8_decode("Negócio:"));
+		$this->Cell(18, 3, utf8_decode(Yii::app()->format->formataCodigo(abs($negocio->codnegocio))),   '', 0, 'L', $this->_fill);
 		
 		$this->Ln();
-		$this->Cell(20, 6, utf8_decode("Vendedor:"));
+		$this->Cell(20, 5, utf8_decode("Vendedor:"));
 		if (isset($negocio->PessoaVendedor))
 			$vendedor=$negocio->PessoaVendedor->fantasia;
 		else 
 			$vendedor="";
 		
-		$this->Cell(128, 6, utf8_decode($vendedor));
+		$this->Cell(128, 5, utf8_decode($vendedor));
 		
-		$this->Cell(24, 6, utf8_decode("Data:"));
-		$this->Cell(16, 6, utf8_decode(substr($negocio->lancamento, 0, 10)),   '', 0, 'L', $this->_fill);
+		$this->Cell(24, 5, utf8_decode("Data:"));
+		$this->Cell(16, 5, utf8_decode(substr($negocio->lancamento, 0, 10)),   '', 0, 'L', $this->_fill);
 		$this->ln();
 		
 		//Divisoria
@@ -109,7 +109,7 @@ class MGRelatorioOrcamento extends FPDF
 		// codigo / cnpj / ie / razao social / Endereço
 		$this->SetTextColor(100, 100, 100);
 		$this->SetFont('Arial','',9);
-		$this->Cell(17, 3, utf8_decode(($this->_model->Pessoa->fisica)?"CPF: ":"CNPJ: "));
+		$this->Cell(18, 3, utf8_decode(($this->_model->Pessoa->fisica)?"CPF: ":"CNPJ: "));
 		
 		$this->SetTextColor(100, 100, 100);
 		$this->SetFont('Arial','',9);
@@ -136,10 +136,10 @@ class MGRelatorioOrcamento extends FPDF
 			.Yii::app()->format->formataCep($negocio->Pessoa->cep)));
 		
 		$this->ln();
-		
 		//Divisoria
+		$this->SetLineWidth(0.3);		
 		$this->Cell(190, 1, "", "T");
-		$this->SetLineWidth(0.3);
+		
 		$this->ln();
 		//Cabeça dos Produtos
 		$this->SetTextColor(0, 0, 0);
@@ -162,11 +162,15 @@ class MGRelatorioOrcamento extends FPDF
 		foreach ($negocio->NegocioProdutoBarras as $npb)
 		{
 			$this->Cell(27, 6, utf8_decode($npb->ProdutoBarra->barras));
+			$this->SetTextColor(0, 0, 0);
 			$this->Cell(96, 6, utf8_decode($npb->ProdutoBarra->descricao));
+			$this->SetTextColor(100, 100, 100);
 			$this->Cell(13, 6, utf8_decode($npb->ProdutoBarra->UnidadeMedida->sigla));
 			$this->Cell(18, 6, (Yii::app()->format->formatNumber(abs($npb->quantidade))), '', 0, 'R', $this->_fill);
 			$this->Cell(18, 6, (Yii::app()->format->formatNumber(abs($npb->valorunitario))), '', 0, 'R', $this->_fill);
+			$this->SetTextColor(0, 0, 0);
 			$this->Cell(18, 6, (Yii::app()->format->formatNumber(abs($npb->valortotal))), '', 0, 'R', $this->_fill);
+			$this->SetTextColor(100, 100, 100);
 			$this->ln();
 
 		}
@@ -191,19 +195,18 @@ class MGRelatorioOrcamento extends FPDF
 		$this->ln();		
 		$this->ln();	
 		$this->ln();
-		
-		$this->SetTextColor(100, 100, 100);
-		$this->SetFont('Arial','I',7);
-		$this->Cell(157, 3);
-		$this->Cell(30, 3, utf8_decode("Orçamento valido por 7 dias."));
-		$this->ln();		
 
 		$this->SetTextColor(0, 0, 0);
 		$this->SetFont('Arial','B',9);
 		
 		if (!empty($negocio->NegocioFormaPagamentos))
 		{
-			$this->Cell(30, 6, utf8_decode("Forma de Pagamento"));
+			$this->Cell(157, 2, utf8_decode("Forma de Pagamento"));
+			$this->SetTextColor(100, 100, 100);
+			$this->SetFont('Arial','I',7);
+			$this->Cell(30, 3, utf8_decode("Orçamento válido por 7 dias."));
+			$this->SetTextColor(0, 0, 0);
+			$this->SetFont('Arial','B',9);
 			$this->ln();
 			
 		}
