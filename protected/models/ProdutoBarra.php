@@ -254,6 +254,9 @@ class ProdutoBarra extends MGActiveRecord
 			&& ($compr != 14) 
 			&& ($compr != 18))
 			return false;
+		
+		if (!ctype_digit($this->barras))
+			return false;
 
 		//calcula digito e verifica se bate com o digitado
 		$digito = $this->calculaDigitoGtin();
