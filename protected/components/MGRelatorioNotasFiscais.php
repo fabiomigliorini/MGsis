@@ -93,7 +93,7 @@ class MGRelatorioNotasFiscais extends FPDF
 		$this->Cell(12, 5, utf8_decode ("Autoriz"),    'B', 0, 'L');		
 		$this->Cell(12, 5, utf8_decode ("Cancel"),     'B', 0, 'L');		
 		$this->Cell(12, 5, utf8_decode ("Inutil"),     'B', 0, 'L');		
-		$this->Cell(4,  5, utf8_decode ("E"),		   'B', 0, 'L');		
+		$this->Cell(4,  5, utf8_decode ("M"),		   'B', 0, 'L');		
 		
 		$this->Ln();
 		$this->_fill = false;
@@ -178,7 +178,8 @@ class MGRelatorioNotasFiscais extends FPDF
 		$data = substr($data, 0, 6) . substr($data, 8, 2);
 		$this->Cell(12, 5, utf8_decode($data),   '', 0, 'L', $this->_fill);
 
-		$this->Cell(4, 5,  utf8_decode($this->_nota->emitida)?"S":"N",   '', 0, 'L', $this->_fill);	
+		//$this->Cell(4, 5,  utf8_decode($this->_nota->emitida)?"S":"N",   '', 0, 'L', $this->_fill);	
+		$this->Cell(4, 5,  utf8_decode($this->_nota->modelo),   '', 0, 'L', $this->_fill);	
 
 		$this->Ln();
 		if (!isset($this->_totais[$this->_nota->codfilial][$this->_nota->codnaturezaoperacao][$this->_nota->status]))
