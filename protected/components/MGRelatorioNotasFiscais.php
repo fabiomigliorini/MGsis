@@ -61,12 +61,9 @@ class MGRelatorioNotasFiscais extends FPDF
 	
 	public function imprimeCabecalho()
 	{
-		
-		$this->Ln();
-		$this->SetFont('Arial', '',12);
-		$this->Cell(20, 5, utf8_decode($this->_nota->Filial->filial),   '', 0, 'L', $this->_fill);	
-		$this->Cell(7, 5, utf8_decode(" > "));
-		$this->Cell(5, 5, utf8_decode($this->_nota->NaturezaOperacao->naturezaoperacao),   '', 0, 'L', $this->_fill);	
+		$this->SetFont('Arial', 'B', 16);
+		$this->Cell(277, 10, utf8_decode($this->_nota->Filial->filial . " > " . $this->_nota->NaturezaOperacao->naturezaoperacao),   '', 0, 'L');
+		$this->SetFont('Arial', 'B', 6);
 		$this->Ln();
 		
 		//Cabeçalho
@@ -112,36 +109,22 @@ class MGRelatorioNotasFiscais extends FPDF
 
 		switch ($this->_nota->codstatus)
 		{
-			case NotaFiscal::CODSTATUS_NOVA:
-				$this->SetTextColor(0, 150, 0); // Verde
+			case NotaFiscal::CODSTATUS_NAOAUTORIZADA:
+				$this->SetTextColor(130, 130, 130); // Cinza
 				break;
 			
 			case NotaFiscal::CODSTATUS_DIGITACAO:
-				$this->SetTextColor(0, 0, 0);  // Preto
+				$this->SetTextColor(255, 100, 0); // Laranja
 				break;
-			
-			case NotaFiscal::CODSTATUS_AUTORIZADA:
-				$this->SetTextColor(0, 0, 0);  // Preto
-				break;
-			
-			case NotaFiscal::CODSTATUS_NOSSA_EMISSAO:
-				$this->SetTextColor(0, 0, 0);  // Preto
-				break;
-			
-			case NotaFiscal::CODSTATUS_LANCADA:
-				$this->SetTextColor(0, 0, 0);  // Preto
-				break;
-			
-			case NotaFiscal::CODSTATUS_NAOAUTORIZADA:
-				$this->SetTextColor(0, 0, 0);  // Preto
-				break;
-			
+				
 			case NotaFiscal::CODSTATUS_INUTILIZADA:
-				$this->SetTextColor(0, 0, 0);  // Preto
+			case NotaFiscal::CODSTATUS_CANCELADA:
+			case NotaFiscal::CODSTATUS_DIGITACAO:
+				$this->SetTextColor(255, 0, 0); // Vermelho
 				break;
 			
-			case NotaFiscal::CODSTATUS_CANCELADA:
-				$this->SetTextColor(255, 100, 0); // Vermelho
+			default:
+				$this->SetTextColor(0, 0, 0);  // Preto
 				break;
 			
 		}
@@ -198,50 +181,54 @@ class MGRelatorioNotasFiscais extends FPDF
 		$this->Cell(4, 5,  utf8_decode($this->_nota->emitida)?"S":"N",   '', 0, 'L', $this->_fill);	
 
 		$this->Ln();
+		if (!isset($this->_totais[$this->_nota->codfilial][$this->_nota->codnaturezaoperacao][$this->_nota->status]))
+		{
+			$this->_totais[$this->_nota->codfilial][$this->_nota->codnaturezaoperacao][$this->_nota->status]["valorprodutos"] = 0;
+			$this->_totais[$this->_nota->codfilial][$this->_nota->codnaturezaoperacao][$this->_nota->status]["icmsvalor"] = 0;
+			$this->_totais[$this->_nota->codfilial][$this->_nota->codnaturezaoperacao][$this->_nota->status]["ipivalor"] = 0;
+			$this->_totais[$this->_nota->codfilial][$this->_nota->codnaturezaoperacao][$this->_nota->status]["icmsstvalor"] = 0;
+			$this->_totais[$this->_nota->codfilial][$this->_nota->codnaturezaoperacao][$this->_nota->status]["valorfrete"] = 0;
+			$this->_totais[$this->_nota->codfilial][$this->_nota->codnaturezaoperacao][$this->_nota->status]["valorseguro"] = 0;
+			$this->_totais[$this->_nota->codfilial][$this->_nota->codnaturezaoperacao][$this->_nota->status]["valordesconto"] = 0;
+			$this->_totais[$this->_nota->codfilial][$this->_nota->codnaturezaoperacao][$this->_nota->status]["valoroutras"] = 0;
+			$this->_totais[$this->_nota->codfilial][$this->_nota->codnaturezaoperacao][$this->_nota->status]["valortotal"] = 0;
+		}
 		
-		
-		if (!isset($this->_totais["valorprodutos"][$this->_nota->codstatus]))
-			$this->_totais["valorprodutos"][$this->_nota->codstatus] = 0;
-		
-			$this->_totais["valorprodutos"][$this->_nota->codstatus] += $this->_nota->valorprodutos;
-			
-			$this->_totais["valorprodutos"]["geral"] += $this->_nota->valorprodutos;
-		
+		$this->_totais[$this->_nota->codfilial][$this->_nota->codnaturezaoperacao][$this->_nota->status]["valorprodutos"] += $this->_nota->valorprodutos;
+		$this->_totais[$this->_nota->codfilial][$this->_nota->codnaturezaoperacao][$this->_nota->status]["icmsvalor"] += $this->_nota->icmsvalor;
+		$this->_totais[$this->_nota->codfilial][$this->_nota->codnaturezaoperacao][$this->_nota->status]["ipivalor"] += $this->_nota->ipivalor;
+		$this->_totais[$this->_nota->codfilial][$this->_nota->codnaturezaoperacao][$this->_nota->status]["icmsstvalor"] += $this->_nota->icmsstvalor;
+		$this->_totais[$this->_nota->codfilial][$this->_nota->codnaturezaoperacao][$this->_nota->status]["valorfrete"] += $this->_nota->valorfrete;
+		$this->_totais[$this->_nota->codfilial][$this->_nota->codnaturezaoperacao][$this->_nota->status]["valorseguro"] += $this->_nota->valorseguro;
+		$this->_totais[$this->_nota->codfilial][$this->_nota->codnaturezaoperacao][$this->_nota->status]["valordesconto"] += $this->_nota->valordesconto;
+		$this->_totais[$this->_nota->codfilial][$this->_nota->codnaturezaoperacao][$this->_nota->status]["valoroutras"] += $this->_nota->valoroutras;
+		$this->_totais[$this->_nota->codfilial][$this->_nota->codnaturezaoperacao][$this->_nota->status]["valortotal"] += $this->_nota->valortotal;
 	}
 
-	public function imprimeTotais($codnaturezaoperacao, $codfilial)
+	public function imprimeTotais($codfilial, $codnaturezaoperacao)
 	{
-		$this->Ln();
-		
 		
 		$this->SetFillColor(240,240,240);
-		$this->SetFont('Arial','',8);
+		$this->SetFont('Arial', 'B', 7);
 		
 		$this->SetTextColor(0, 0, 0);
-		
-		$this->Cell(12, 5, utf8_decode("aqui"),   '', 0, 'L', $this->_fill);
-		$this->Cell(12, 5, utf8_decode("aqui"),   '', 0, 'L', $this->_fill);
-		$this->Cell(12, 5, utf8_decode("aqui"),   '', 0, 'L', $this->_fill);
-	
-			
-		$this->SetFont('Arial','B',8);
-		
-		$this->SetTextColor(0, 0, 0);
-		/*
-			$this->Ln();
-		if ($codnegociostatus == "geral")
+
+		foreach ($this->_totais[$codfilial][$codnaturezaoperacao] as $status => $total)
 		{
+			$this->Cell(120, 5, utf8_decode($status),   'T', 0, 'R');	
+			$this->Cell(13, 5, utf8_decode(Yii::app()->format->formatNumber(abs($total["valorprodutos"]))), 'T', 0, 'R');	
+			$this->Cell(13, 5, utf8_decode(Yii::app()->format->formatNumber(abs($total["icmsvalor"]))), 'T', 0, 'R');	
+			$this->Cell(13, 5, utf8_decode(Yii::app()->format->formatNumber(abs($total["ipivalor"]))), 'T', 0, 'R');	
+			$this->Cell(13, 5, utf8_decode(Yii::app()->format->formatNumber(abs($total["icmsstvalor"]))), 'T', 0, 'R');	
+			$this->Cell(13, 5, utf8_decode(Yii::app()->format->formatNumber(abs($total["valorfrete"]))), 'T', 0, 'R');	
+			$this->Cell(13, 5, utf8_decode(Yii::app()->format->formatNumber(abs($total["valorseguro"]))), 'T', 0, 'R');	
+			$this->Cell(13, 5, utf8_decode(Yii::app()->format->formatNumber(abs($total["valordesconto"]))), 'T', 0, 'R');	
+			$this->Cell(13, 5, utf8_decode(Yii::app()->format->formatNumber(abs($total["valoroutras"]))), 'T', 0, 'R');	
+			$this->Cell(13, 5, utf8_decode(Yii::app()->format->formatNumber(abs($total["valortotal"]))), 'T', 0, 'R');	
+			$this->Cell(40, 5, '', 'T', 0, 'R');	
 			$this->Ln();
-			$this->Cell(56, 6, utf8_decode("Total Geral"),   'T', 0, 'R');
 		}
-		else
-			$this->Cell(56, 6, utf8_decode("Total"),   'T', 0, 'R');
-			
-		$this->Cell(20, 6, utf8_decode(Yii::app()->format->formatNumber(abs($this->_totais["valoraprazo"][$codnegociostatus]))), 'T', 0, 'R');
-		$this->Cell(18, 6, utf8_decode(Yii::app()->format->formatNumber(abs($this->_totais["valoravista"][$codnegociostatus]))), 'T', 0, 'R');
-		$this->Cell(18, 6, utf8_decode(Yii::app()->format->formatNumber(abs($this->_totais["valortotal"][$codnegociostatus]))), 'T', 0, 'R');
-		$this->Cell(78, 6, utf8_decode(""),   'T', 0, 'R');
-		*/
+		$this->Ln();
 		
 	}
 	
@@ -259,23 +246,23 @@ class MGRelatorioNotasFiscais extends FPDF
 		foreach ($this->_notas as $this->_nota)
 		{
 			
-			if ($codnaturezaoperacao <> $this->_nota->codnaturezaoperacao || $codfilial <> $this->_nota->codfilial)
+			if ($codfilial != $this->_nota->codfilial || $codnaturezaoperacao != $this->_nota->codnaturezaoperacao)
 			{
 				if (!empty($codnaturezaoperacao))
 				{
-					$this->imprimeTotais($codnaturezaoperacao, $codfilial);
+					$this->imprimeTotais($codfilial, $codnaturezaoperacao);
 				}
 				$this->imprimeCabecalho();
 			}
 			
-			$codnaturezaoperacao = $this->_nota->codnaturezaoperacao;
 			$codfilial = $this->_nota->codfilial;
+			$codnaturezaoperacao = $this->_nota->codnaturezaoperacao;
 
 			$this->imprimeLinhaNota();
 			
 		}
 
-		$this->imprimeTotais($codnaturezaoperacao, $codfilial);
+		$this->imprimeTotais($codfilial, $codnaturezaoperacao);
 		
 		
 		$this->AliasNbPages();
