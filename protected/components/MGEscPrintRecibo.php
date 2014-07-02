@@ -141,7 +141,7 @@ class MGEscPrintRecibo extends MGEscPrint
 
 		//Assinatura
 		$this->adicionaTexto("", "documento", 67);
-		$this->adicionaTexto("", "documento", 70, STR_PAD_LEFT, "_");
+		$this->adicionaTexto("", "documento", 70, STR_PAD_LEFT, "-");
 		$this->adicionaLinha();
 		$this->adicionaTexto("", "documento", 67);
 		$this->adicionaTexto($filial->Pessoa->pessoa . " " . Yii::app()->format->formataCnpjCpf($filial->Pessoa->cnpj, $filial->Pessoa->fisica), "documento", 70, STR_PAD_LEFT);

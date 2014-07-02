@@ -105,7 +105,6 @@ class MGRelatorioOrcamento extends FPDF
 		$this->Cell(172, 3, utf8_decode($negocio->Pessoa->fantasia  . " - " . $telefones), null ,1);
 		$this->ln();
 
-		
 		// codigo / cnpj / ie / razao social / Endereço
 		$this->SetTextColor(100, 100, 100);
 		$this->SetFont('Arial','',9);

@@ -534,10 +534,10 @@ class NotaFiscal extends MGActiveRecord
 				break;
 		}
 		
-		$criteria->order = 't.saida DESC, t.codfilial ASC, t.numero DESC';
 
 		if ($comoDataProvider)
 		{
+			$criteria->order = 't.saida DESC, t.codfilial ASC, t.numero DESC';
 			return new CActiveDataProvider($this, array(
 				'criteria'=>$criteria,
 				'pagination'=>array('pageSize'=>20)
@@ -545,6 +545,7 @@ class NotaFiscal extends MGActiveRecord
 		}
 		else
 		{
+			$criteria->order = 't.codfilial, t.codnaturezaoperacao, t.emissao, t.saida, t.modelo, t.numero';			
 			return $this->findAll($criteria);
 		}
 	}
