@@ -260,6 +260,96 @@ class NotaFiscalController extends Controller
 		}
 	}
 	
+	public function actionRobo($codfilial)
+	{
+		
+		$codnotafiscal = 0;
+		
+		if (isset(Yii::app()->session["NotaFiscalRobo$codfilial"]))
+			$codnotafiscal = Yii::app()->session["NotaFiscalRobo$codfilial"];
+		
+		$model = NotaFiscal::model()->find(
+			'  	t.emitida = true 
+			and t.numero > 0 
+			and t.nfeautorizacao is null 
+			and t.nfecancelamento is null 
+			and t.nfeinutilizacao is null
+			and t.codfilial = :codfilial
+			and t.codnotafiscal > :codnotafiscal
+			',
+			array(
+				":codfilial" => $codfilial,
+				":codnotafiscal" => $codnotafiscal,
+			)
+		);
+
+		echo "<pre>";
+		
+		$res = false;
+		
+		if($model===null)
+		{
+			Yii::app()->session["NotaFiscalRobo$codfilial"] = 0;
+		}
+		else
+		{
+			Yii::app()->session["NotaFiscalRobo$codfilial"] = $model->codnotafiscal;
+			
+			$acbr = new MGAcbrNfeMonitor($model);
+
+			$res = false;
+
+			if ($acbr->criarNFe()) 
+				$res = $acbr->enviarNfe();
+
+			$email = $model->Pessoa->emailnfe;
+			$resEmail = false;
+
+			$retornoEnvio = null;
+			
+			if ($res)
+			{
+				$resPdf = $acbr->imprimirDanfePdf();
+
+				if (empty($email))
+					$email = $model->Pessoa->email;
+				if (empty($email))
+					$email = $model->Pessoa->emailcobranca;
+
+				if (!empty($email))
+					$resEmail = $acbr->enviarEmail($email);
+
+			}
+			else
+			{
+				$retornoEnvio = $acbr->retorno;
+				$res = $acbr->consultarNfe();
+			}
+			
+			
+			$arrRet = array(
+				'id' => $model->codnotafiscal,
+				'resultado' => $res,
+				'email' => $email,
+				'resultadoEmail' => $resEmail,
+				'modelo' => $model->modelo,
+				'retornoMonitor' => $acbr->retornoMonitor["Mensagem"],
+				'erroMonitor' => htmlentities($acbr->erroMonitor),
+				'retorno' => htmlentities($acbr->retorno),
+				'retornoEnvio' => $retornoEnvio,
+				'urlpdf' => $acbr->urlpdf,
+			);
+			
+			print_r($arrRet);
+		}
+		
+		echo "</pre>";
+		echo "<script>\n";
+		echo "window.setTimeout('location.reload()', 3000); //reloads after 3 seconds\n";
+		echo "</script>\n";
+			
+	}
+	
 	public function actionEnviarNfe($id)
 	{
 		$model = $this->loadModel($id);
@@ -277,7 +367,6 @@ class NotaFiscalController extends Controller
 		{
 			$resPdf = $acbr->imprimirDanfePdf();
 			
-			$email = $model->Pessoa->emailnfe;
 			if (empty($email))
 				$email = $model->Pessoa->email;
 			if (empty($email))
