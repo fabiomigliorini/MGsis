@@ -345,7 +345,7 @@ class NotaFiscalController extends Controller
 		
 		echo "</pre>";
 		echo "<script>\n";
-		echo "window.setTimeout('location.reload()', 3000); //reloads after 3 seconds\n";
+		echo "window.setTimeout('location.reload()', 10000); //reloads after 3 seconds\n";
 		echo "</script>\n";
 			
 	}
