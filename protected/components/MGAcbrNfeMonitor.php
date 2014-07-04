@@ -570,7 +570,7 @@ class MGAcbrNfeMonitor extends MGSocket
 
 		//Monta Comando
 		$cmd  = "NFE.ConsultarNFE(\"";
-		$cmd .= $this->model->Filial->acbrnfemonitorcaminho . "\\Arquivos\\NFe\\" . $this->model->nfechave . "-nfe.xml";
+		$cmd .= $this->model->Filial->acbrnfemonitorcaminho . "\\Arquivos\\EnvioResp\\" . $this->model->nfechave . "-nfe.xml";
 		$cmd .= "\")\n.\n";
 		
 		//Envia Comando
