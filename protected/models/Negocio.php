@@ -387,12 +387,6 @@ class Negocio extends MGActiveRecord
 		//acumula o valor de desconto
 		$nota->valordesconto += $this->valordesconto;
 		
-		if (!$nota->save())
-		{
-			$this->addErrors($nota->getErrors());
-			return false;
-		}
-		
 		//percorre os itens do negocio e adiciona na nota
 		foreach($this->NegocioProdutoBarras as $negocioItem)
 		{
