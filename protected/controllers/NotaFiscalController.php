@@ -268,25 +268,6 @@ class NotaFiscalController extends Controller
 		if (isset(Yii::app()->session["NotaFiscalRobo$codfilial"]))
 			$codnotafiscal = Yii::app()->session["NotaFiscalRobo$codfilial"];
 
-		/*
-		
-		$model = NotaFiscal::model()->find(
-			'  	t.emitida = true 
-			and t.numero > 0 
-			and t.nfeautorizacao is null 
-			and t.nfecancelamento is null 
-			and t.nfeinutilizacao is null
-			and t.codfilial = :codfilial
-			and t.codnotafiscal > :codnotafiscal
-			',
-			array(
-				":codfilial" => $codfilial,
-				":codnotafiscal" => $codnotafiscal,
-			)
-		);
-
-		*/
-
 		$model = NotaFiscal::model()->find(
                         array(
                                 'order' => 'codnotafiscal',
