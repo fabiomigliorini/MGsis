@@ -205,11 +205,13 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 
 		$trib = TributacaoNaturezaOperacao::model()->find(
 			'codtributacao = :codtributacao
+			AND codtipoproduto = :codtipoproduto
 			AND codnaturezaoperacao = :codnaturezaoperacao
 			AND codestado = :codestado
 			',
 			array(
 				':codtributacao' => $this->ProdutoBarra->Produto->codtributacao,
+				':codtipoproduto' => $this->ProdutoBarra->Produto->codtipoproduto,
 				':codnaturezaoperacao' => $this->NotaFiscal->codnaturezaoperacao,
 				':codestado' => $this->NotaFiscal->Pessoa->Cidade->codestado,
 				)
@@ -218,11 +220,13 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 		if ($trib === null)
 			$trib = TributacaoNaturezaOperacao::model()->find(
 				'codtributacao = :codtributacao
+				AND codtipoproduto = :codtipoproduto
 				AND codnaturezaoperacao = :codnaturezaoperacao
 				AND codestado IS NULL
 				',
 				array(
 					':codtributacao' => $this->ProdutoBarra->Produto->codtributacao,
+					':codtipoproduto' => $this->ProdutoBarra->Produto->codtipoproduto,
 					':codnaturezaoperacao' => $this->NotaFiscal->codnaturezaoperacao,
 					)
 				);
