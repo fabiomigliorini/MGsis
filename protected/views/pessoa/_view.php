@@ -25,6 +25,12 @@
 					<?php echo CHtml::encode($data->contato); ?>
 				</small>
 			<?php endif; ?>
+			<?php if (!empty($data->GrupoCliente)): ?>
+				<br>
+				<small class="muted">
+					<?php echo CHtml::link(CHtml::encode($data->GrupoCliente->grupocliente), array("grupoCliente/view", "id"=>$data->codgrupocliente)); ?>
+				</small>
+			<?php endif; ?>				
 		</div>
 		<div class="span6">
 			<div>

@@ -51,6 +51,7 @@
  * @property string $criacao
  * @property string $codusuariocriacao
  * @property integer $toleranciaatraso
+ * @property string $codgrupocliente
  *
  * The followings are the available model relations:
  * @property Titulo[] $Titulos
@@ -64,6 +65,7 @@
  * @property Sexo $Sexo
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
+ * @property GrupoCliente $GrupoCliente
  * @property CupomFiscal[] $CupomFiscals
  * @property CobrancaHistorico[] $CobrancaHistoricos
  * @property Negocio[] $Negocios
@@ -102,7 +104,7 @@ class Pessoa extends MGActiveRecord
 			array('ie', 'ext.validators.InscricaoEstadualValidator'),
 			array('ie', 'validaCnpjDuplicado'),
 			array('ie, cep, cepcobranca','filter','filter'=>array($this, 'numeroLimpo')),
-			array('toleranciaatraso, numero, email, codcidade, endereco, bairro, cep, codcidadecobranca, enderecocobranca, numerocobranca, bairrocobranca, cepcobranca, pessoa, fantasia, cadastro, notafiscal, telefone1', 'required'),
+			array('codgrupocliente, toleranciaatraso, numero, email, codcidade, endereco, bairro, cep, codcidadecobranca, enderecocobranca, numerocobranca, bairrocobranca, cepcobranca, pessoa, fantasia, cadastro, notafiscal, telefone1', 'required'),
 			array('fantasia', 'unique', 'caseSensitive' => false),
 			array('fantasia, pessoa', 'length', 'min' => 5),
 			array('pessoa, contato, conjuge, endereco, enderecocobranca, email, emailnfe, emailcobranca', 'length', 'max'=>100),
@@ -216,6 +218,8 @@ class Pessoa extends MGActiveRecord
 			'CobrancaHistoricos' => array(self::HAS_MANY, 'CobrancaHistorico', 'codpessoa'),
 			'Negocios' => array(self::HAS_MANY, 'Negocio', 'codpessoa'),
 			'NegociosVendedors' => array(self::HAS_MANY, 'Negocio', 'codpessoavendedor'),
+			'GrupoCliente' => array(self::BELONGS_TO, 'GrupoCliente', 'codgrupocliente'),
+
 		);
 	}
 
@@ -231,6 +235,7 @@ class Pessoa extends MGActiveRecord
 			'cadastro' => 'Data do Cadastro',
 			'inativo' => 'Inativo desde',
 			'cliente' => 'Cliente',
+			'codgrupocliente' => 'Grupo de Cliente',
 			'fornecedor' => 'Fornecedor',
 			'fisica' => 'Pessoa Física',
 			'codsexo' => 'Sexo',
@@ -295,6 +300,7 @@ class Pessoa extends MGActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('codpessoa',$this->codpessoa,false);
+		$criteria->compare('codgrupocliente',$this->codgrupocliente,false);
 		
 		if (!empty($this->fantasia))
 		{

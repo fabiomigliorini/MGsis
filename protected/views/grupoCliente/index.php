@@ -1,14 +1,15 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Pessoa';
+$this->pagetitle = Yii::app()->name . ' - Grupos de Cliente';
 $this->breadcrumbs=array(
-	'Pessoa',
+	'Grupos de Cliente',
 );
 
 $this->menu=array(
-	array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create')),
+	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 	);
 ?>
+
 <script type='text/javascript'>
 
 $(document).ready(function(){
@@ -24,7 +25,9 @@ $(document).ready(function(){
 
 </script>
 
-<h1>Pessoas</h1>
+<h1>Grupos de Cliente</h1>
+
+<br>
 
 <?php $form=$this->beginWidget('MGActiveForm',array(
 	'action'=>Yii::app()->createUrl($this->route),
@@ -34,17 +37,9 @@ $(document).ready(function(){
 )); 
 
 ?>
-
-<div class="well well-small hidden-print">
-	<?php echo $form->textField($model, 'codpessoa', array('placeholder' => '#', 'class'=>'input-mini')); ?>
-	<?php echo $form->textField($model, 'fantasia', array('placeholder' => 'Nome', 'class'=>'input-large')); ?>
-	<?php echo $form->textField($model, 'cnpj', array('placeholder' => 'Cnpj/Cpf', 'class'=>'input-small')); ?>
-	<?php echo $form->textField($model, 'email', array('placeholder' => 'Email', 'class'=>'input-small')); ?>
-	<?php echo $form->textField($model, 'telefone1', array('placeholder' => 'Fone', 'class'=>'input-small')); ?>
-	<?php echo $form->dropDownList($model, 'inativo', array('' => 'Ativos', 1 => 'Inativos', 9 => 'Todos'), array('placeholder' => 'Inativo', 'class'=>'input-small')); ?>
-	<?php echo $form->select2Cidade($model, 'codcidade', array('class' => 'input-large') );?>
-	<?php echo $form->select2($model, 'codgrupocliente', GrupoCliente::getListaCombo(), array('placeholder' => 'Grupo de Cliente', 'class'=>'input-large')); ?>
-
+<div class="well well-small">
+	<?php echo $form->textField($model, 'codgrupocliente', array('placeholder' => '#', 'class'=>'input-mini')); ?>
+	<?php echo $form->textField($model, 'grupocliente', array('placeholder' => 'Grupo', 'class'=>'input-large')); ?>
 	<?php
 	$this->widget('bootstrap.widgets.TbButton'
 		, array(
@@ -59,7 +54,7 @@ $(document).ready(function(){
 
 <?php $this->endWidget(); ?>
 
-<div class="row-fluid">
+
 <?php
  
 $this->widget(
@@ -80,4 +75,3 @@ $this->widget(
 	)
 );
 ?>
-</div>

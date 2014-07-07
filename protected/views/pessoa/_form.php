@@ -64,6 +64,7 @@
 			<?php
 			
 				//echo $form->checkBoxRow($model,'consumidor');
+				echo $form->select2Row($model,'codgrupocliente', GrupoCliente::getListaCombo() , array('class'=>'input-xlarge'));
 				echo $form->toggleButtonRow($model,'consumidor', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 				
 				echo $form->dropDownListRow(

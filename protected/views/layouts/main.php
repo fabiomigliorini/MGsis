@@ -69,6 +69,7 @@
 					array('label' => 'Bancos', 'url' => Yii::app()->createUrl('banco')),					
 					array('label' => 'Cheques', 'url' => Yii::app()->createUrl('cheque')),			
 					array('label' => 'Formas de Pagamento', 'url' => Yii::app()->createUrl('formaPagamento')),					
+					array('label' => 'Grupos de Cliente', 'url' => Yii::app()->createUrl('grupoCliente')),					
 					array('label' => 'Liquidações', 'url' => Yii::app()->createUrl('liquidacaoTitulo')),
 					array('label' => 'Pessoas', 'url' => Yii::app()->createUrl('pessoa')),
 					array('label' => 'Portadores', 'url' => Yii::app()->createUrl('portador')),

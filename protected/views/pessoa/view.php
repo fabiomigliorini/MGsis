@@ -144,6 +144,12 @@ $(document).ready(function(){
 			$attributes = array_merge($attributes, 
 				array(
 					array(
+					'name'=>'codgrupocliente',
+					'value'=>(isset($model->GrupoCliente))?CHtml::link(CHtml::encode($model->GrupoCliente->grupocliente),array('grupoCliente/view','id'=>$model->codgrupocliente)):null,
+					'type'=>'raw',
+					),
+					
+					array(
 						'name'=>'notafiscal',
 						'value'=>$model->getNotaFiscalDescricao(),
 					),
