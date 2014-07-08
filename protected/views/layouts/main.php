@@ -73,7 +73,6 @@
 					array('label' => 'Liquidações', 'url' => Yii::app()->createUrl('liquidacaoTitulo')),
 					array('label' => 'Pessoas', 'url' => Yii::app()->createUrl('pessoa')),
 					array('label' => 'Portadores', 'url' => Yii::app()->createUrl('portador')),
-					array('label' => 'Registros SPC', 'url' => Yii::app()->createUrl('registroSpc')),
 					array('label' => 'Tipo Movimento Títulos', 'url' => Yii::app()->createUrl('tipoMovimentoTitulo')),				
 					array('label' => 'Tipo Títulos', 'url' => Yii::app()->createUrl('tipoTitulo')),
 					array('label' => 'Titulos', 'url' => Yii::app()->createUrl('titulo')),				

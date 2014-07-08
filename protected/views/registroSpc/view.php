@@ -54,9 +54,14 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 			'name'=>'valor',
 			'cssClass'=>'text-error',
 			'value'=>Yii::app()->format->formatNumber($model->valor),
-			),
-		
 		),
+		array(
+			'name'=>'observacoes',
+			'value'=>nl2br(CHtml::encode($model->observacoes)),
+			'type'=>'raw',
+		),
+		
+	),
 	)); 
 
 	$this->widget('UsuarioCriacao', array('model'=>$model));

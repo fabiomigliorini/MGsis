@@ -221,12 +221,6 @@ $(document).ready(function(){
 	</div>
 </div>
 
-<pre>
-	<?php
-	echo $model->inclusaoSpc;
-	?>
-</pre>
-
 <?php
 	$this->widget('UsuarioCriacao', array('model'=>$model));
 

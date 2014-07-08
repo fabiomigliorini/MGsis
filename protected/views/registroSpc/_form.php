@@ -38,6 +38,7 @@
 		
 		//echo $form->textFieldRow($model,'valor',array('class'=>'span2','maxlength'=>14));
 		echo $form->textFieldRow($model,'valor',array('class'=>'input-small text-right','maxlength'=>14));
+		echo $form->textAreaRow($model,'observacoes',array('class'=>'input-xxlarge','maxlength'=>500,'rows'=>4));
 	?>
 	
 	

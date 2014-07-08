@@ -13,7 +13,8 @@
  * @property string $codusuarioalteracao
  * @property string $criacao
  * @property string $codusuariocriacao
- *
+ * @property string $observacoes
+ * 
  * The followings are the available model relations:
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
@@ -39,6 +40,7 @@ class RegistroSpc extends MGActiveRecord
 		return array(
 			array('codpessoa, inclusao, valor', 'required'),
 			array('valor', 'length', 'max'=>14),
+			array('observacoes', 'length', 'max'=>500),
 			array('baixa, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -75,6 +77,7 @@ class RegistroSpc extends MGActiveRecord
 			'codusuarioalteracao' => 'Usuario Alteração',
 			'criacao' => 'Criação',
 			'codusuariocriacao' => 'Usuario Criação',
+			'observacoes' => 'Observações',
 		);
 	}
 
