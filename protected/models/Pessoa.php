@@ -221,6 +221,13 @@ class Pessoa extends MGActiveRecord
 			'Negocios' => array(self::HAS_MANY, 'Negocio', 'codpessoa'),
 			'NegociosVendedors' => array(self::HAS_MANY, 'Negocio', 'codpessoavendedor'),
 			'GrupoCliente' => array(self::BELONGS_TO, 'GrupoCliente', 'codgrupocliente'),
+            'inclusaoSpc'=>array(
+				self::STAT, 
+				'RegistroSpc', 
+				'codpessoa',
+				'select'=>'to_char(min(inclusao), \'DD/MM/YYYY\')',
+				'condition'=>'baixa is null'
+				),
 
 		);
 	}
@@ -485,5 +492,22 @@ class Pessoa extends MGActiveRecord
 		return true;
 		
 	}
+	
+	public function scopes () 
+	{
+		return array(
+			'combo'=>array(
+				'select'=>array('codpessoa', 'pessoa'),
+				'order'=>'pessoa ASC',
+				),
+			);
+	}
+	
+	public function getListaCombo ()
+	{
+		$lista = self::model()->combo()->findAll();
+		return CHtml::listData($lista, 'codpessoa', 'pessoa');
+	}
+	
 
 }

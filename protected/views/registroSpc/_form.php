@@ -7,7 +7,7 @@
 <fieldset>
 	<?php 	
 		//echo $form->textFieldRow($model,'codpessoa',array('class'=>'span5'));
-		echo $form->select2PessoaRow($model, 'codpessoa' ,array('class'=>'span4'));
+		//echo $form->select2PessoaRow($model, 'codpessoa' ,array('class'=>'span4'));
 		//echo $form->textFieldRow($model,'inclusao',array('class'=>'span5'));
 		echo $form->datepickerRow(
 				$model,
@@ -66,6 +66,8 @@
 <script type='text/javascript'>
 	
 $(document).ready(function() {
+	
+	$('#RegistroSpc_valor').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 
 	//$("#Pessoa_fantasia").Setcase();
 

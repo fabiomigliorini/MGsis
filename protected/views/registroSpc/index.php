@@ -1,4 +1,5 @@
 <?php
+/*
 $this->pagetitle = Yii::app()->name . ' - Registro SPC';
 $this->breadcrumbs=array(
 	'Registro SPC',
@@ -8,6 +9,8 @@ $this->menu=array(
 	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 	);
+ * 
+ */
 ?>
 
 <script type='text/javascript'>
@@ -25,34 +28,12 @@ $(document).ready(function(){
 
 </script>
 
-<h1>Registro SPC</h1>
-
-<br>
-
-<?php $form=$this->beginWidget('MGActiveForm',array(
-	'action'=>Yii::app()->createUrl($this->route),
-	'id' => 'search-form',
-	'type' => 'inline',
-	'method'=>'get',
-)); 
-
-?>
-<div class="well well-small">
-	<?php echo $form->textField($model, 'codregistrospc', array('placeholder' => '#', 'class'=>'input-mini')); ?>
-	<?php
-	$this->widget('bootstrap.widgets.TbButton'
-		, array(
-			'buttonType' => 'submit',
-			'icon'=>'icon-search',
-			//'label'=>'',
-			'htmlOptions' => array('class'=>'pull-right btn btn-info')
-			)
-		); 
-	?>
-</div>
-
-<?php $this->endWidget(); ?>
-
+<h2>
+	Registro SPC
+	<small>
+		<?php echo CHtml::link("<i class=\"icon-plus\"></i> Nova", array("registroSpc/create", "codpessoa" => $model->codpessoa)); ?>
+	</small>
+</h2>
 
 <?php
  
@@ -61,7 +42,7 @@ $this->widget(
 	array(
 		'id' => 'Listagem',
 		'dataProvider' => $dataProvider,
-		'itemView' => '_view',
+		'itemView' => '/registroSpc/_view',
 		'template' => '{items} {pager}',
 		'pager' => array(
 			'class' => 'ext.infiniteScroll.IasPager', 

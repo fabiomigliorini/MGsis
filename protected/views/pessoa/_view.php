@@ -10,6 +10,9 @@
 				<?php if (!empty($data->inativo)): ?>
 					<span class="label label-important pull-right">Inativado em <?php echo CHtml::encode($data->inativo); ?></span>
 				<?php endif; ?>
+				<?php if (!empty($data->inclusaoSpc)): ?>
+					<span class="label label-warning pull-right">SPC em <?php echo CHtml::encode($data->inclusaoSpc); ?></span>
+				<?php endif; ?>
 			</b>
 			<small class="muted">
 				<b><?php echo CHtml::encode($data->pessoa); ?></b>

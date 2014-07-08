@@ -1,13 +1,16 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Detalhes Registro SPC';
 $this->breadcrumbs=array(
-	'Registro SPC'=>array('index'),
-	'Inclusão',
+	'Pessoas'=>array('pessoa/index'),
+	$model->Pessoa->pessoa=>array('pessoa/view', "id"=>$model->codpessoa),
+	"Registro SPC {$model->inclusao}",
 );
 
 $this->menu=array(
-array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
-array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
+//array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
+array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('pessoa/view', 'id'=>$model->codpessoa)),
+//array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
+array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create', 'codpessoa'=>$model->codpessoa)),
 array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codregistrospc)),
 array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
 //array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
@@ -29,7 +32,7 @@ $(document).ready(function(){
 /*]]>*/
 </script>
 
-<h1>Inclusão</h1>
+<h1>Registro SPC <?php echo $model->inclusao; ?></h1>
 
 <?php 
 $this->widget('bootstrap.widgets.TbDetailView',array(
@@ -50,7 +53,7 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 		array(
 			'name'=>'valor',
 			'cssClass'=>'text-error',
-			'value'=>isset($model->valor)?Yii::app()->format->formatNumber($model->valor):null,
+			'value'=>Yii::app()->format->formatNumber($model->valor),
 			),
 		
 		),

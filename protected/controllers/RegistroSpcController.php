@@ -23,9 +23,11 @@ class RegistroSpcController extends Controller
 	* Creates a new model.
 	* If creation is successful, the browser will be redirected to the 'view' page.
 	*/
-	public function actionCreate()
+	public function actionCreate($codpessoa)
 	{
 		$model=new RegistroSpc;
+		
+		$model->codpessoa = $codpessoa;
 
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
@@ -34,7 +36,11 @@ class RegistroSpcController extends Controller
 		{
 			$model->attributes=$_POST['RegistroSpc'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->codregistrospc));
+			{
+				$model->Pessoa->creditobloqueado = true;
+				$model->Pessoa->save();
+				$this->redirect(array('pessoa/view','id'=>$model->codpessoa));
+			}
 		}
 
 		$this->render('create',array(
@@ -78,10 +84,12 @@ class RegistroSpcController extends Controller
 			// we only allow deletion via POST request
 			try
 			{
-				$this->loadModel($id)->delete();
+				$model = $this->loadModel($id);
+				$model->delete();
 				// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 				if(!isset($_GET['ajax']))
-					$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
+					//$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
+					$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('pessoa/view', 'id'=>$model->codpessoa));
 			}
 			catch(CDbException $e)
 			{

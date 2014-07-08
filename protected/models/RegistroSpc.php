@@ -37,7 +37,7 @@ class RegistroSpc extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codpessoa, inclusao', 'required'),
+			array('codpessoa, inclusao, valor', 'required'),
 			array('valor', 'length', 'max'=>14),
 			array('baixa, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
@@ -110,7 +110,7 @@ class RegistroSpc extends MGActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
-			'sort'=>array('defaultOrder'=>'t.codregistrospc ASC'),
+			'sort'=>array('defaultOrder'=>'t.baixa DESC, t.inclusao DESC'),
 			'pagination'=>array('pageSize'=>20)
 		));
 	}
@@ -125,4 +125,5 @@ class RegistroSpc extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
+	
 }

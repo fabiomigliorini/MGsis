@@ -240,6 +240,7 @@ class PessoaController extends Controller
 					'pessoa' => $pessoa->pessoa,
 					'cnpj' => $pessoa->cnpj,
 					'inativo' => !empty($pessoa->inativo),
+					'inclusaoSpc' => $pessoa->inclusaoSpc,
 					);
 			}
 			

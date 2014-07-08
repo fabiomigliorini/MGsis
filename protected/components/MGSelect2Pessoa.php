@@ -37,24 +37,7 @@ class MGSelect2Pessoa extends TbSelect2
 							var css = "div-combo-pessoa";
 							if (item.inativo)
 								var css = "text-error";
-							/*	
-							var markup = "<div class=\'" + css + " row-fluid\'>";
-							markup    += "<small class=\'" + css + "\'>" + item.fantasia             + "</small>";
-							markup    += "<small class=\'" + css + " pull-right\'>#"  + formataCodigo(item.id)    + "</small>";
-							markup    += "<div class=\'" + css + " pull-left\'>"   + item.pessoa               + "</div>";
-							markup    += "<div class=\'" + css + " pull-right\'>"     + formataCnpjCpf(item.cnpj) + "</div>";
-							markup    += "</div>";
-							var markup = "";
-							markup    += "<div style=\'border:1px solid blue\' class=\'row-fluid muted\'>";
-							markup    += "<small style=\'border:1px solid green\' class=\'\'>" + item.fantasia + "</small>";
-							markup    += "<small style=\'border:1px solid green\' class=\'pull-right\'>#" + formataCodigo(item.id) + "</small>";
-							markup    += "</div>";
-							markup    += "<div style=\'border:1px solid blue\' class=\'row-fluid muted\'>";
-							markup    += "<small style=\'border:1px solid green\' class=\'\'>" + item.pessoa + "</small>";
-							markup    += "<small style=\'border:1px solid green\' class=\'pull-right\'>" + formataCnpjCpf(item.cnpj) + "</small>";
-							markup    += "</div>";
-							*/
-
+								
 							var css_titulo = "";
 							var css_detalhes = "muted";
 							if (item.inativo)
@@ -63,8 +46,13 @@ class MGSelect2Pessoa extends TbSelect2
 								css_detalhes = "text-error";
 							}
 							
+							var nome = item.fantasia;
+							
+							if (item.inclusaoSpc != 0)
+								nome += "&nbsp<span class=\"label label-warning\">" + item.inclusaoSpc + "</span>";
+							
 							var markup = "";
-							markup    += "<strong class=\'" + css_titulo + "\'>" + item.fantasia + "</strong>";
+							markup    += "<strong class=\'" + css_titulo + "\'>" + nome + "</strong>";
 							markup    += "<small class=\'pull-right " + css_detalhes + "\'>#" + formataCodigo(item.id) + "</small>";
 							markup    += "<br>";
 							markup    += "<small class=\'" + css_detalhes + "\'>" + item.pessoa + "</small>";

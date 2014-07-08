@@ -221,8 +221,34 @@ $(document).ready(function(){
 	</div>
 </div>
 
+<pre>
+	<?php
+	echo $model->inclusaoSpc;
+	?>
+</pre>
 
 <?php
 	$this->widget('UsuarioCriacao', array('model'=>$model));
 
+	
+	$registrospc=new RegistroSpc('search');
+
+	$registrospc->unsetAttributes();  // clear any default values
+	
+	if(isset($_GET['RegistroSpc']))
+	Yii::app()->session['FiltroRegistroSpcIndex'] = $_GET['RegistroSpc'];
+
+	if (isset(Yii::app()->session['FiltroRegistroSpcIndex']))
+		$registrospc->attributes=Yii::app()->session['FiltroRegistroSpcIndex'];
+
+	$registrospc->codpessoa = $model->codpessoa;
+
+	$this->renderPartial('/registroSpc/index',array(
+		'dataProvider'=>$registrospc->search(),
+		'model'=>$registrospc,
+		));
+	
+	
 ?>
+
+
