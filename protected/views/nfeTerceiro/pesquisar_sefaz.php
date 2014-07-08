@@ -59,6 +59,7 @@ $this->menu=array(
 		SELECT codfilial, MAX(nsu) AS nsu FROM tblnfeterceiro GROUP BY codfilial
 		');
 	$nsus = $command->queryAll();
+	$arrNsu = array();
 	foreach ($nsus as $nsu)
 		$arrNsu[$nsu["codfilial"]] = $nsu["nsu"];
 	
