@@ -103,6 +103,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		return true;
 		
 	}
+	
 	function processaIni($str)
 	{
 		//quebra a string em linhas
@@ -560,7 +561,6 @@ class MGAcbrNfeMonitor extends MGSocket
 		return $this->salvaRetorno();
 		
 	}
-
 	
 	//ConsultaNFE
 	public function consultarNfe()
@@ -764,7 +764,6 @@ class MGAcbrNfeMonitor extends MGSocket
 		
 	}
 
-	
 	public function enviarEmail($email, $alterarcadastro = false)
 	{
 		if (!$this->model->emitida)
@@ -813,6 +812,20 @@ class MGAcbrNfeMonitor extends MGSocket
 				return false;
 			
 		}
+		
+		return true;
+	}
+	
+	public function consultaNfeDest($nsu = 0)
+	{
+		//Monta Comando
+		$cnpj = str_pad($this->model->Filial->Pessoa->cnpj, 14, 0, STR_PAD_LEFT);
+		$cmd = "NFE.ConsultaNFeDest(\"{$cnpj}\", 0, 0, {$nsu})\n.\n";
+		
+		if (!$this->enviaComando($cmd))
+			return false;
+		
+		$this->processaRetorno();
 		
 		return true;
 	}
