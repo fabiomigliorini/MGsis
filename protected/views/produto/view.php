@@ -362,3 +362,27 @@ if (sizeof($imgs) > 0)
 		</div>
 	<?php
 }
+
+
+$nfpb=new NotaFiscalProdutoBarra('search');
+
+$nfpb->unsetAttributes();  // clear any default values
+
+if(isset($_GET['NotaFiscalProdutoBarra']))
+Yii::app()->session['FiltroNotaFiscalProdutoBarraIndex'] = $_GET['NotaFiscalProdutoBarra'];
+
+if (isset(Yii::app()->session['FiltroNotaFiscalProdutoBarraIndex']))
+	$nfpb->attributes=Yii::app()->session['FiltroNotaFiscalProdutoBarraIndex'];
+
+$nfpb->codproduto = $model->codproduto;
+
+$abaNfpb = $this->renderPartial(
+	'/notaFiscalProdutoBarra/index',
+	array(
+		'dataProvider'=>$nfpb->search(),
+		'model'=>$nfpb,
+	),
+	true
+);
+
+echo $abaNfpb;

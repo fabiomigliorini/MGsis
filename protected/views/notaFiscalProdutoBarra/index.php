@@ -1,4 +1,5 @@
 <?php
+/*
 $this->pagetitle = Yii::app()->name . ' - Nota Fiscal Produto Barra';
 $this->breadcrumbs=array(
 	'Nota Fiscal Produto Barra',
@@ -8,6 +9,8 @@ $this->menu=array(
 	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 	);
+ * 
+ */
 ?>
 
 <script type='text/javascript'>
@@ -38,7 +41,7 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
-	<?php echo $form->textField($model, 'codusuariocriacao', array('placeholder' => '#', 'class'=>'input-mini')); ?>
+	<?php echo $form->textField($model, 'codproduto', array('placeholder' => '#', 'class'=>'input-mini')); ?>
 	<?php
 	$this->widget('bootstrap.widgets.TbButton'
 		, array(
@@ -61,7 +64,7 @@ $this->widget(
 	array(
 		'id' => 'Listagem',
 		'dataProvider' => $dataProvider,
-		'itemView' => '_view',
+		'itemView' => '/notaFiscalProdutoBarra/_view',
 		'template' => '{items} {pager}',
 		'pager' => array(
 			'class' => 'ext.infiniteScroll.IasPager', 

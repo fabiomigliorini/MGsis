@@ -259,10 +259,10 @@ if ($model->cliente)
 	$cobrancahistorico->unsetAttributes();  // clear any default values
 	
 	if(isset($_GET['CobrancaHistorico']))
-	Yii::app()->session['FiltroRegistroSpcIndex'] = $_GET['CobrancaHistorico'];
+	Yii::app()->session['FiltroCobrancaHistoricoIndex'] = $_GET['CobrancaHistorico'];
 
-	if (isset(Yii::app()->session['FiltroRegistroSpcIndex']))
-		$cobrancahistorico->attributes=Yii::app()->session['FiltroRegistroSpcIndex'];
+	if (isset(Yii::app()->session['FiltroCobrancaHistoricoIndex']))
+		$cobrancahistorico->attributes=Yii::app()->session['FiltroCobrancaHistoricoIndex'];
 
 	$cobrancahistorico->codpessoa = $model->codpessoa;
 	
