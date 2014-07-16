@@ -1,34 +1,61 @@
 <div class="registro row-fluid">
-	<b class="span1">
-		<?php echo CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($data->codnotafiscalprodutobarra)),array('view','id'=>$data->codnotafiscalprodutobarra)); ?>
-	</b>
-		<small class="span1"><?php echo CHtml::encode($data->NotaFiscal->emissao); ?></small>
-				
-		<b class="span1"><?php echo CHtml::encode($data->NotaFiscal->Filial->filial); ?></b>
-		
-		<small class="span1"><?php echo CHtml::encode($data->NotaFiscal->NaturezaOperacao->naturezaoperacao); ?></small>
-		
-		<b class="span4"><?php echo CHtml::encode($data->NotaFiscal->Pessoa->pessoa); ?></b>
+		<small class="span4 muted">
 
-		<small class="span1 text-right"><?php echo CHtml::encode(Yii::app()->format->formatNumber($data->quantidade)); ?></small>
+			<div class="span2"><?php echo CHtml::encode($data->NotaFiscal->saida); ?></div>
 
-		<small class="span1 text-right"><?php echo CHtml::encode(Yii::app()->format->formatNumber($data->valortotal)); ?></small>
-		
-		<small class="span1 text-right">
-			<?php
-				echo $data->ProdutoBarra->UnidadeMedida->sigla;
-				if (isset($data->ProdutoBarra->ProdutoEmbalagem))
-					echo " C/" . Yii::app()->format->formatNumber($data->ProdutoBarra->ProdutoEmbalagem->quantidade, 0);
-			?>
+			<div class="span2"><?php echo CHtml::encode($data->NotaFiscal->Filial->filial); ?></div>
+
+			<div class="span2"><?php echo CHtml::encode($data->NotaFiscal->NaturezaOperacao->naturezaoperacao); ?></div>
+
+			<div class="span6">
+				<?php echo CHtml::link(CHtml::encode($data->NotaFiscal->Pessoa->fantasia), array('pessoa/view','id'=>$data->NotaFiscal->Pessoa->codpessoa)); ?>
+			</div>	
 		</small>
 
-		<small class="span1 text-right"><?php echo CHtml::encode(Yii::app()->format->formatNumber($data->valorunitario)); ?></small>
-		<div>
-		<b class="span2">
-				<?php echo CHtml::link(CHtml::encode(Yii::app()->format->formataNumeroNota($data->NotaFiscal->emitida, $data->NotaFiscal->serie, $data->NotaFiscal->numero, $data->NotaFiscal->modelo)),array('notaFiscal/view','id'=>$data->NotaFiscal->codnotafiscal)); ?>			
-		</b>
+		<div class="span5">
 		
-		<small class="span1"><?php echo CHtml::encode($data->ProdutoBarra->barras); ?></small>
+			<small class="span2 text-right"><?php echo CHtml::encode(Yii::app()->format->formatNumber($data->quantidade)); ?></small>
+
+			<small class="span2 muted">
+				<?php
+					$precounitario = ($data->valortotal + $data->icmsstvalor + $data->ipivalor)/$data->quantidade;
+					$ipi = $data->ipivalor/$data->valortotal;
+					$icmsst = $data->icmsstvalor/$data->valortotal;
+					echo $data->ProdutoBarra->UnidadeMedida->sigla;
+					if (isset($data->ProdutoBarra->ProdutoEmbalagem))
+					{
+						echo " C/" . Yii::app()->format->formatNumber($data->ProdutoBarra->ProdutoEmbalagem->quantidade, 0);
+						$precounitario /=$data->ProdutoBarra->ProdutoEmbalagem->quantidade;
+					}
+				?>
+			</small>
+
+			<small class="span2 text-right muted">
+				<?php echo CHtml::encode(Yii::app()->format->formatNumber($data->valorunitario)); ?>
+			</small>
+			<small class="span2 text-right muted">
+				<?php 
+				if ($ipi>0)
+					echo CHtml::encode(Yii::app()->format->formatNumber($ipi*100, 0)) . ' % IPI'; 
+				?>
+			</small>
+			<small class="span2 text-right muted">
+				<?php 
+				if ($icmsst>0)
+					echo CHtml::encode(Yii::app()->format->formatNumber($icmsst*100, 0)) . ' % ST'; 
+				?>
+			</small>
+			
+			<small class="span2 text-right"><?php echo CHtml::encode(Yii::app()->format->formatNumber($precounitario)); ?></small>
+			
+		</div>	
+			
+		<div class="span3">
+			<small class="span6">
+					<?php echo CHtml::link(CHtml::encode(Yii::app()->format->formataNumeroNota($data->NotaFiscal->emitida, $data->NotaFiscal->serie, $data->NotaFiscal->numero, $data->NotaFiscal->modelo)),array('notaFiscal/view','id'=>$data->NotaFiscal->codnotafiscal)); ?>			
+			</small>
+
+			<small class="span2 muted"><?php echo CHtml::encode($data->ProdutoBarra->barras); ?></small>
 		</div>
 
 		<?php /*

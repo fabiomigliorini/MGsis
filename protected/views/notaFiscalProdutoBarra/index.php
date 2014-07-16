@@ -28,9 +28,7 @@ $(document).ready(function(){
 
 </script>
 
-<h1>Nota Fiscal Produto Barra</h1>
-
-<br>
+<h3>Notas Fiscais</h3>
 
 <?php $form=$this->beginWidget('MGActiveForm',array(
 	'action'=>Yii::app()->createUrl($this->route),
@@ -41,7 +39,62 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
-	<?php echo $form->textField($model, 'codproduto', array('placeholder' => '#', 'class'=>'input-mini')); ?>
+	
+	<?php //echo $form->textField($model, 'codproduto', array('placeholder' => '#', 'class'=>'input-mini')); ?>
+	<input type ="hidden" name="id" value="<?php echo $model->codproduto;?>">
+	
+	<?php 
+		echo $form->datepickerRow(
+				$model,
+				'saida_de',
+				array(
+					'class' => 'input-mini text-center', 
+					'options' => array(
+						'format' => 'dd/mm/yy'
+						),
+					'placeholder' => 'Saída',
+					'prepend' => 'De',
+					)
+				); 	
+	?>
+	
+	<?php 
+		echo $form->datepickerRow(
+				$model,
+				'saida_ate',
+				array(
+					'class' => 'input-mini text-center', 
+					'options' => array(
+						'format' => 'dd/mm/yy'
+						),
+					'placeholder' => 'Saída',
+					'prepend' => 'Até',
+					)
+				); 	
+	?>
+		
+	<?php
+		echo $form->select2(
+				$model,
+				'codfilial',
+				Filial::getListaCombo(),
+				array(
+					'prompt'=>'', 
+					'placeholder'=>'Filial', 
+					'class'=>'input-medium'
+					)
+				);	
+	?>
+	<?php echo $form->select2($model,'codnaturezaoperacao', NaturezaOperacao::getListaCombo() , array(
+					'prompt'=>'', 
+					'placeholder'=>'Natureza', 
+					'class'=>'input-xmedium'));?>
+
+	<?php echo $form->select2Pessoa($model, 'codpessoa', array(
+					'placeholder' => 'Pessoa', 
+					'class' => 'input-xlarge', 
+					'inativo'=>true));?>
+	
 	<?php
 	$this->widget('bootstrap.widgets.TbButton'
 		, array(
@@ -72,7 +125,7 @@ $this->widget(
 			'listViewId' => 'Listagem', 
 			'header' => '',
 			'loaderText'=>'Carregando...',
-			'options' => array('history' => false, 'triggerPageTreshold' => 10, 'trigger'=>'Carregar mais registros'),
+			'options' => array('history' => false, 'triggerPageTreshold' => 1, 'trigger'=>'Carregar mais registros'),
 		)
 	)
 );

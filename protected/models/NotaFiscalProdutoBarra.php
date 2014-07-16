@@ -41,6 +41,11 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 {
 	
 	public $codproduto;
+	public $codfilial;
+	public $codpessoa;
+	public $saida_de;
+	public $saida_ate;
+	public $codnaturezaoperacao;
 	
 	/**
 	 * @return string the associated database table name
@@ -65,7 +70,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 			array('codnegocioprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('codproduto, codnotafiscalprodutobarra, codnotafiscal, codprodutobarra, codcfop, descricaoalternativa, quantidade, valorunitario, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, icmsstbase, icmsstpercentual, icmsstvalor, csosn, codnegocioprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
+			array('codnaturezaoperacao, saida_de, saida_ate, codpessoa, codfilial, codproduto, codnotafiscalprodutobarra, codnotafiscal, codprodutobarra, codcfop, descricaoalternativa, quantidade, valorunitario, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, icmsstbase, icmsstpercentual, icmsstvalor, csosn, codnegocioprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -164,7 +169,24 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 		if (!empty($this->codproduto))
 		{
 			$criteria->compare('"ProdutoBarra".codproduto', $this->codproduto);
-			$criteria->with = array('ProdutoBarra');
+			$criteria->with[] = 'ProdutoBarra';
+		}
+		
+		$criteria->with[] = 'NotaFiscal';
+		$criteria->order = '"NotaFiscal".saida DESC, "NotaFiscal".codfilial ASC, "NotaFiscal".numero DESC';
+		
+		$criteria->compare('"NotaFiscal".codfilial', $this->codfilial);
+		$criteria->compare('"NotaFiscal".codpessoa', $this->codpessoa);
+		$criteria->compare('"NotaFiscal".codnaturezaoperacao', $this->codnaturezaoperacao);
+		if ($saida_de = DateTime::createFromFormat("d/m/y",$this->saida_de))
+		{
+			$criteria->addCondition('"NotaFiscal".saida >= :saida_de');
+			$criteria->params = array_merge($criteria->params, array(':saida_de' => $saida_de->format('Y-m-d')));
+		}
+		if ($saida_ate = DateTime::createFromFormat("d/m/y",$this->saida_ate))
+		{
+			$criteria->addCondition('"NotaFiscal".saida <= :saida_ate');
+			$criteria->params = array_merge($criteria->params, array(':saida_ate' => $saida_ate->format('Y-m-d')));
 		}
 		
 		return new CActiveDataProvider($this, array(
