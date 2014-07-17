@@ -235,7 +235,7 @@ class NfeTerceiro extends MGActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
-			'sort'=>array('defaultOrder'=>'t.emissao DESC, t.valortotal asc'),
+			'sort'=>array('defaultOrder'=>'t.emissao ASC, t.valortotal asc'),
 		));
 	}
 
