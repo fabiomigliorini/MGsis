@@ -92,7 +92,7 @@ $(document).ready(function(){
 
 	<?php echo $form->select2Pessoa($model, 'codpessoa', array(
 					'placeholder' => 'Pessoa', 
-					'class' => 'input-xlarge', 
+					'class' => 'input-xxlarge', 
 					'inativo'=>true));?>
 	
 	<?php
@@ -115,18 +115,21 @@ $(document).ready(function(){
 $this->widget(
 	'zii.widgets.CListView', 
 	array(
-		'id' => 'Listagem',
+		'id' => 'ListagemNota',
 		'dataProvider' => $dataProvider,
 		'itemView' => '/notaFiscalProdutoBarra/_view',
-		'template' => '{items} {pager}',
+		'template' => '{pager}<br>{items}',
+		/*
 		'pager' => array(
 			'class' => 'ext.infiniteScroll.IasPager', 
 			'rowSelector'=>'.registro', 
-			'listViewId' => 'Listagem', 
+			'listViewId' => 'ListagemNota', 
 			'header' => '',
 			'loaderText'=>'Carregando...',
 			'options' => array('history' => false, 'triggerPageTreshold' => 1, 'trigger'=>'Carregar mais registros'),
 		)
+		 * 
+		 */
 	)
 );
 ?>

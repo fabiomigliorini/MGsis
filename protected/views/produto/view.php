@@ -329,8 +329,6 @@ $abaImagens = $this->renderPartial(
 	true
 );
 
-
-
 $nfpb=new NotaFiscalProdutoBarra('search');
 
 $nfpb->unsetAttributes();  // clear any default values
@@ -352,6 +350,27 @@ $abaNfpb = $this->renderPartial(
 	true
 );
 
+$npb=new NegocioProdutoBarra('search');
+
+$npb->unsetAttributes();  // clear any default values
+
+if(isset($_GET['NegocioProdutoBarra']))
+	Yii::app()->session['FiltroNegocioProdutoBarraIndex'] = $_GET['NegocioProdutoBarra'];
+
+if (isset(Yii::app()->session['FiltroNegocioProdutoBarraIndex']))
+	$npb->attributes=Yii::app()->session['FiltroNegocioProdutoBarraIndex'];
+
+$npb->codproduto = $model->codproduto;
+$npb->codnegociostatus = NegocioStatus::FECHADO;
+
+$abaNpb = $this->renderPartial(
+	'/negocioProdutoBarra/index',
+	array(
+		'dataProvider'=>$npb->search(),
+		'model'=>$npb,
+	),
+	true
+);
 
 $this->widget('bootstrap.widgets.TbTabs', 
 	array(
@@ -360,6 +379,7 @@ $this->widget('bootstrap.widgets.TbTabs',
 			array(
 				array('label' => 'Imagens', 'content' => $abaImagens, 'active' => true),
 				array('label' => 'Notas Fiscais', 'content' => $abaNfpb, 'active' => false),
+				array('label' => 'Negócios', 'content' => $abaNpb, 'active' => false),
 			)
 	)
-);		
+);
