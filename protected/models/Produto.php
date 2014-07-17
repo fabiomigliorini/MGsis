@@ -110,7 +110,7 @@ class Produto extends MGActiveRecord
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 			'ProdutoHistoricoPrecos' => array(self::HAS_MANY, 'ProdutoHistoricoPreco', 'codproduto'),
-			'ProdutoEmbalagens' => array(self::HAS_MANY, 'ProdutoEmbalagem', 'codproduto', 'order'=>'quantidade ASC, codunidademedida ASC'),
+			'ProdutoEmbalagems' => array(self::HAS_MANY, 'ProdutoEmbalagem', 'codproduto', 'order'=>'quantidade ASC, codunidademedida ASC'),
 			'ProdutoBarras' => array(self::HAS_MANY, 'ProdutoBarra', 'codproduto', 'order'=>'codprodutoembalagem ASC, variacao ASC, barras ASC'),
 			'Ncm' => array(self::BELONGS_TO, 'Ncm', 'ncm'),
 		);

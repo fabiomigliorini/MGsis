@@ -506,7 +506,7 @@ class NotaFiscal extends MGActiveRecord
 				break;
 			
 			case self::CODSTATUS_DIGITACAO;
-				$criteria->addCondition('t.emitida = true and t.nfechave is null and t.nfecancelamento is null and t.nfeinutilizacao is null');
+				$criteria->addCondition('t.emitida = true and t.numero = 0');
 				break;
 			
 			case self::CODSTATUS_AUTORIZADA;
@@ -522,7 +522,7 @@ class NotaFiscal extends MGActiveRecord
 				break;
 			
 			case self::CODSTATUS_NAOAUTORIZADA;
-				$criteria->addCondition('t.emitida = true and t.nfechave is not null and t.nfeautorizacao is null and t.nfecancelamento is null and t.nfeinutilizacao is null');
+				$criteria->addCondition('t.emitida = true and t.numero > 0 and t.nfeautorizacao is null and t.nfecancelamento is null and t.nfeinutilizacao is null');
 				break;
 			
 			case self::CODSTATUS_INUTILIZADA;
@@ -584,7 +584,7 @@ class NotaFiscal extends MGActiveRecord
 		
 		if ($this->emitida)
 		{
-			if (empty($this->nfechave))
+			if (empty($this->numero))
 			{
 				$this->codstatus = self::CODSTATUS_DIGITACAO;
 				return $this->codstatus;
@@ -645,7 +645,7 @@ class NotaFiscal extends MGActiveRecord
 	//preenche codoperacao
 	protected function beforeValidate()
 	{
-		if (!empty($this->codnaturezaoperacao))
+		if (isset($this->NaturezaOperacao))
 			$this->codoperacao = $this->NaturezaOperacao->codoperacao;
 		
 		return parent::beforeValidate();
@@ -676,6 +676,15 @@ class NotaFiscal extends MGActiveRecord
 				$nfpb->codcfop = null;
 				$nfpb->csosn = null;
 				$nfpb->save();
+			}
+		}
+		
+		if (!$this->emitida)
+		{
+			if ($nft = NfeTerceiro::model()->find('codnotafiscal is null and nfechave = :nfechave', array(':nfechave' => $this->nfechave)))
+			{
+				$nft->codnotafiscal = $this->codnotafiscal;
+				$nft->save();
 			}
 		}
 		

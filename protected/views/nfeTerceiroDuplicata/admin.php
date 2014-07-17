@@ -1,13 +1,13 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Gerenciar NFe\'s de Terceiro';
+$this->pagetitle = Yii::app()->name . ' - Gerenciar Nfe Terceiro Duplicata';
 $this->breadcrumbs=array(
-	'NFe\'s de Terceiro'=>array('index'),
+	'Nfe Terceiro Duplicata'=>array('index'),
 	'Gerenciar',
 );
 
 $this->menu=array(
 	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
-	//array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
+	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
 	);
 
 Yii::app()->clientScript->registerScript('search', "
@@ -16,7 +16,7 @@ Yii::app()->clientScript->registerScript('search', "
 		return false;
 		});
 	$('.search-form form').submit(function(){
-	$.fn.yiiGridView.update('nfe-terceiro-grid', {
+	$.fn.yiiGridView.update('nfe-terceiro-duplicata-grid', {
 			data: $(this).serialize()
 		});
 		return false;
@@ -24,7 +24,7 @@ Yii::app()->clientScript->registerScript('search', "
 ");
 ?>
 
-<h1>Gerenciar NFe's de Terceiro</h1>
+<h1>Gerenciar Nfe Terceiro Duplicata</h1>
 
 
 <?php echo CHtml::link('Busca Avançada','#',array('class'=>'search-button btn')); ?>
@@ -36,67 +36,37 @@ Yii::app()->clientScript->registerScript('search', "
 
 <?php 
 $this->widget('bootstrap.widgets.TbGridView',array(
-	'id'=>'nfe-terceiro-grid',
+	'id'=>'nfe-terceiro-duplicata-grid',
 	'dataProvider'=>$model->search(),
 	'type'=>'striped condensed hover bordered',
 	'filter'=>$model,
 	'template'=>'{items} {pager}',
 	'columns'=>array(
 		array(
+			'name'=>'codnfeterceiroduplicata',
+			'htmlOptions'=> array('class'=>'span1'),
+			),	
+			array(
 			'name'=>'codnfeterceiro',
 			'htmlOptions'=> array('class'=>'span1'),
 			),	
 			array(
-			'name'=>'nsu',
+			'name'=>'codtitulo',
 			'htmlOptions'=> array('class'=>'span1'),
 			),	
 			array(
-			'name'=>'nfechave',
+			'name'=>'ndup',
 			'htmlOptions'=> array('class'=>'span1'),
 			),	
 			array(
-			'name'=>'cnpj',
+			'name'=>'dvenc',
 			'htmlOptions'=> array('class'=>'span1'),
 			),	
 			array(
-			'name'=>'ie',
+			'name'=>'vdup',
 			'htmlOptions'=> array('class'=>'span1'),
 			),	
 			array(
-			'name'=>'emitente',
-			'htmlOptions'=> array('class'=>'span1'),
-			),	
-			/*
-		array(
-			'name'=>'codpessoa',
-			'htmlOptions'=> array('class'=>'span1'),
-			),	
-			array(
-			'name'=>'emissao',
-			'htmlOptions'=> array('class'=>'span1'),
-			),	
-			array(
-			'name'=>'nfedataautorizacao',
-			'htmlOptions'=> array('class'=>'span1'),
-			),	
-			array(
-			'name'=>'codoperacao',
-			'htmlOptions'=> array('class'=>'span1'),
-			),	
-			array(
-			'name'=>'valortotal',
-			'htmlOptions'=> array('class'=>'span1'),
-			),	
-			array(
-			'name'=>'indsituacao',
-			'htmlOptions'=> array('class'=>'span1'),
-			),	
-			array(
-			'name'=>'indmanifestacao',
-			'htmlOptions'=> array('class'=>'span1'),
-			),	
-			*/
-		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
 			'htmlOptions'=> array('class'=>'span1'),
 			),

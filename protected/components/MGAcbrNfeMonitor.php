@@ -1,35 +1,56 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of MGSocket
  *
  * @author Fabio Migliorini
- * @property NotaFiscal $model           Model da Nota Fiscal
- * @property Array      $retornoMonitor  Model da Nota Fiscal
+ * @property NotaFiscal $NotaFiscal
+ * @property NfeTerceiro $NfeTerceiro
+ * @property Filial $Filial
+ * @property Array      $retornoMonitor  
  * @property string     $erroMonitor     Descricao do erro ocorrido na comunicacao com o monitor
  */
+
 class MGAcbrNfeMonitor extends MGSocket 
 {
-	public $model;
+	public $NotaFiscal;
+	public $NfeTerceiro;
+	public $Filial;
 	
 	public $erroMonitor;
 	public $retornoMonitor;
 	
 	public $urlpdf;
 	
-	public function __construct($model, $servidor = NULL, $porta = NULL)
+	public $path;
+	public $arquivoxml;
+	public $xml;
+	
+	/**
+	 * 
+	 * @param NotaFiscal $NotaFiscal
+	 * @param NfeTerceiro $NfeTerceiro
+	 * @param string $servidor
+	 * @param string $porta
+	 * @return boolean
+	 */
+	public function __construct($NotaFiscal = NULL, $NfeTerceiro = NULL, $servidor = NULL, $porta = NULL)
 	{
-		$this->model = $model;
-		$this->montaUrlPdf();
+		$this->NotaFiscal = $NotaFiscal;
+		$this->NfeTerceiro = $NfeTerceiro;
 		
-		if (isset($this->model->Filial))
-			return parent::__construct($this->model->Filial->acbrnfemonitorip, $this->model->Filial->acbrnfemonitorporta);
+		if (!empty($this->NotaFiscal))
+		{
+			$this->Filial = $this->NotaFiscal->Filial;
+			$this->montaUrlPdf();
+		}
+		elseif (!empty($this->NfeTerceiro))
+			$this->Filial = $this->NfeTerceiro->Filial;
+		else 
+			return false;	
+		
+		if (isset($this->Filial))
+			return parent::__construct($this->Filial->acbrnfemonitorip, $this->Filial->acbrnfemonitorporta);
 		else
 			return parent::__construct ();
 		
@@ -37,7 +58,7 @@ class MGAcbrNfeMonitor extends MGSocket
 	
 	public function montaUrlPdf()
 	{
-		$this->urlpdf = "{$this->model->Filial->acbrnfemonitorcaminhorede}/PDF/{$this->model->nfechave}.pdf";
+		$this->urlpdf = "{$this->Filial->acbrnfemonitorcaminhorede}/PDF/{$this->NotaFiscal->nfechave}.pdf";
 	}
 	
 	public function conectar()
@@ -225,13 +246,13 @@ class MGAcbrNfeMonitor extends MGSocket
 	
 	public function criarNFe() 
 	{
-		if (!in_array($this->model->codstatus, array(NotaFiscal::CODSTATUS_NAOAUTORIZADA, NotaFiscal::CODSTATUS_DIGITACAO)))
+		if (!in_array($this->NotaFiscal->codstatus, array(NotaFiscal::CODSTATUS_NAOAUTORIZADA, NotaFiscal::CODSTATUS_DIGITACAO)))
 			return $this->gerarErro("Status da Nota Fiscal nao permite envio ao Sefaz!");
 		
-		if (!$this->model->emitida)
+		if (!$this->NotaFiscal->emitida)
 			return $this->gerarErro("Nota Fiscal nao e de nossa emissao!");
 		
-		if (sizeof($this->model->NotaFiscalProdutoBarras) <= 0)
+		if (sizeof($this->NotaFiscal->NotaFiscalProdutoBarras) <= 0)
 			return $this->gerarErro("Nao existe nenhum produto na nota fiscal!");
 		
 		if (!$this->confereNumero())
@@ -240,49 +261,49 @@ class MGAcbrNfeMonitor extends MGSocket
 		$arr = array(
 			//Identificacao
 			"Identificacao" => array(
-				"NaturezaOperacao" => $this->model->NaturezaOperacao->naturezaoperacao,
-				"Codigo" => $this->model->numero,
-				"Emissao" => $this->model->emissao,
-				"Saida" => $this->model->saida,
-				"Modelo" => $this->model->modelo,
-				"Serie" => $this->model->serie,
-				"Numero" => $this->model->numero,
-				"Tipo" => ($this->model->codoperacao == 1)?2:1,
-				"FormaPag" => (sizeof($this->model->NotaFiscalDuplicatass)>0)?1:0,				
+				"NaturezaOperacao" => $this->NotaFiscal->NaturezaOperacao->naturezaoperacao,
+				"Codigo" => $this->NotaFiscal->numero,
+				"Emissao" => $this->NotaFiscal->emissao,
+				"Saida" => $this->NotaFiscal->saida,
+				"Modelo" => $this->NotaFiscal->modelo,
+				"Serie" => $this->NotaFiscal->serie,
+				"Numero" => $this->NotaFiscal->numero,
+				"Tipo" => ($this->NotaFiscal->codoperacao == 1)?2:1,
+				"FormaPag" => (sizeof($this->NotaFiscal->NotaFiscalDuplicatass)>0)?1:0,				
 			),
 			//Emitente
 			"Emitente" => array(
-				"CNPJ" => Yii::app()->format->formataPorMascara($this->model->Filial->Pessoa->cnpj, "##############", true),
-				"IE" => $this->model->Filial->Pessoa->ie,
-				"Razao" => $this->model->Filial->Pessoa->pessoa,
-				"Fantasia" => $this->model->Filial->Pessoa->fantasia,
-				"Fone" => Yii::app()->format->numeroLimpo($this->model->Filial->Pessoa->telefone1),
-				"CEP" => $this->model->Filial->Pessoa->cep,
-				"Logradouro" => $this->model->Filial->Pessoa->endereco,
-				"Numero" => $this->model->Filial->Pessoa->numero,
-				"Complemento" => $this->model->Filial->Pessoa->complemento,
-				"Bairro" => $this->model->Filial->Pessoa->bairro,
-				"CidadeCod" => $this->model->Filial->Pessoa->Cidade->codigooficial,
-				"Cidade" => $this->model->Filial->Pessoa->Cidade->cidade,
-				"UF" => $this->model->Filial->Pessoa->Cidade->Estado->sigla,
-				"CRT" => $this->model->Filial->crt,
+				"CNPJ" => Yii::app()->format->formataPorMascara($this->Filial->Pessoa->cnpj, "##############", true),
+				"IE" => $this->Filial->Pessoa->ie,
+				"Razao" => $this->Filial->Pessoa->pessoa,
+				"Fantasia" => $this->Filial->Pessoa->fantasia,
+				"Fone" => Yii::app()->format->numeroLimpo($this->Filial->Pessoa->telefone1),
+				"CEP" => $this->Filial->Pessoa->cep,
+				"Logradouro" => $this->Filial->Pessoa->endereco,
+				"Numero" => $this->Filial->Pessoa->numero,
+				"Complemento" => $this->Filial->Pessoa->complemento,
+				"Bairro" => $this->Filial->Pessoa->bairro,
+				"CidadeCod" => $this->Filial->Pessoa->Cidade->codigooficial,
+				"Cidade" => $this->Filial->Pessoa->Cidade->cidade,
+				"UF" => $this->Filial->Pessoa->Cidade->Estado->sigla,
+				"CRT" => $this->Filial->crt,
 			),
 			//Destinatario
 			"Destinatario" => array(
-				"CNPJ" => ($this->model->Pessoa->fisica)?
-					Yii::app()->format->formataPorMascara($this->model->Pessoa->cnpj, "###########", true):
-					Yii::app()->format->formataPorMascara($this->model->Pessoa->cnpj, "##############", true),
-				"IE" => empty($this->model->Pessoa->ie)?"ISENTO":$this->model->Pessoa->ie,
-				"NomeRazao" => substr($this->model->Pessoa->pessoa, 0, 60),
-				"Fone" => Yii::app()->format->numeroLimpo($this->model->Pessoa->telefone1),
-				"CEP" => $this->model->Pessoa->cep,
-				"Logradouro" => $this->model->Pessoa->endereco,
-				"Numero" => $this->model->Pessoa->numero,
-				"Complemento" => $this->model->Pessoa->complemento,
-				"Bairro" => $this->model->Pessoa->bairro,
-				"CidadeCod" => $this->model->Pessoa->Cidade->codigooficial,
-				"Cidade" => $this->model->Pessoa->Cidade->cidade,
-				"UF" => $this->model->Pessoa->Cidade->Estado->sigla,
+				"CNPJ" => ($this->NotaFiscal->Pessoa->fisica)?
+					Yii::app()->format->formataPorMascara($this->NotaFiscal->Pessoa->cnpj, "###########", true):
+					Yii::app()->format->formataPorMascara($this->NotaFiscal->Pessoa->cnpj, "##############", true),
+				"IE" => empty($this->NotaFiscal->Pessoa->ie)?"ISENTO":$this->NotaFiscal->Pessoa->ie,
+				"NomeRazao" => substr($this->NotaFiscal->Pessoa->pessoa, 0, 60),
+				"Fone" => Yii::app()->format->numeroLimpo($this->NotaFiscal->Pessoa->telefone1),
+				"CEP" => $this->NotaFiscal->Pessoa->cep,
+				"Logradouro" => $this->NotaFiscal->Pessoa->endereco,
+				"Numero" => $this->NotaFiscal->Pessoa->numero,
+				"Complemento" => $this->NotaFiscal->Pessoa->complemento,
+				"Bairro" => $this->NotaFiscal->Pessoa->bairro,
+				"CidadeCod" => $this->NotaFiscal->Pessoa->Cidade->codigooficial,
+				"Cidade" => $this->NotaFiscal->Pessoa->Cidade->cidade,
+				"UF" => $this->NotaFiscal->Pessoa->Cidade->Estado->sigla,
 			),
 			
 		);
@@ -291,39 +312,39 @@ class MGAcbrNfeMonitor extends MGSocket
 		
 		//Produtos
 		$i = 1;
-		foreach ($this->model->NotaFiscalProdutoBarras as $nfpb)
+		foreach ($this->NotaFiscal->NotaFiscalProdutoBarras as $NotaFiscalpb)
 		{
 			$arr["Produto" . Yii::app()->format->formataPorMascara($i, "###", true)] = 
 				array(
-					"CFOP" => $nfpb->codcfop,
+					"CFOP" => $NotaFiscalpb->codcfop,
 					"Codigo" => 
-						Yii::app()->format->formataPorMascara($nfpb->ProdutoBarra->codproduto, "######") 
-						//. empty($nfpb->ProdutoBarra->codprodutoembalagem)?"":"*" . $nfpb->ProdutoBarra->ProdutoEmbalagem->quantidade
+						Yii::app()->format->formataPorMascara($NotaFiscalpb->ProdutoBarra->codproduto, "######") 
+						//. empty($NotaFiscalpb->ProdutoBarra->codprodutoembalagem)?"":"*" . $NotaFiscalpb->ProdutoBarra->ProdutoEmbalagem->quantidade
 						,
-					"EAN" => $nfpb->ProdutoBarra->barrasValido()?$nfpb->ProdutoBarra->barras:"",
+					"EAN" => $NotaFiscalpb->ProdutoBarra->barrasValido()?$NotaFiscalpb->ProdutoBarra->barras:"",
 					/*
-					If Len(NumeroLimpo($nfpb->barras)) > 6 _
-						And NumeroLimpo(Mid($nfpb->barras, 1, 6)) <> Format($nfpb->codproduto, "000000") _
-						And NumeroLimpo(Mid($nfpb->barras, 1, 3)) <> "999" _
-						And ValidaEan($nfpb->barras) Then
+					If Len(NumeroLimpo($NotaFiscalpb->barras)) > 6 _
+						And NumeroLimpo(Mid($NotaFiscalpb->barras, 1, 6)) <> Format($NotaFiscalpb->codproduto, "000000") _
+						And NumeroLimpo(Mid($NotaFiscalpb->barras, 1, 3)) <> "999" _
+						And ValidaEan($NotaFiscalpb->barras) Then
 					End If
 					 */ 
-					"Descricao" => (empty($nfpb->descricaoalternativa))?$nfpb->ProdutoBarra->descricao:$nfpb->descricaoalternativa,
-					"Unidade" => $nfpb->ProdutoBarra->UnidadeMedida->sigla,
-					"NCM" => Yii::app()->format->formataPorMascara($nfpb->ProdutoBarra->Produto->ncm, "########"),
-					"Quantidade" => $nfpb->quantidade,
-					"ValorUnitario" => $nfpb->valorunitario,
-					"ValorTotal" => $nfpb->valortotal,
-					"ValorDesconto" => round(($this->model->valordesconto / $this->model->valorprodutos) * $nfpb->valortotal, 2),
-					"vFrete" => round(($this->model->valorfrete / $this->model->valorprodutos) * $nfpb->valortotal, 2),
-					"vSeg" => round(($this->model->valorseguro / $this->model->valorprodutos) * $nfpb->valortotal, 2),
-					"vOutro" => round(($this->model->valoroutras / $this->model->valorprodutos) * $nfpb->valortotal, 2),
+					"Descricao" => (empty($NotaFiscalpb->descricaoalternativa))?$NotaFiscalpb->ProdutoBarra->descricao:$NotaFiscalpb->descricaoalternativa,
+					"Unidade" => $NotaFiscalpb->ProdutoBarra->UnidadeMedida->sigla,
+					"NCM" => Yii::app()->format->formataPorMascara($NotaFiscalpb->ProdutoBarra->Produto->ncm, "########"),
+					"Quantidade" => $NotaFiscalpb->quantidade,
+					"ValorUnitario" => $NotaFiscalpb->valorunitario,
+					"ValorTotal" => $NotaFiscalpb->valortotal,
+					"ValorDesconto" => round(($this->NotaFiscal->valordesconto / $this->NotaFiscal->valorprodutos) * $NotaFiscalpb->valortotal, 2),
+					"vFrete" => round(($this->NotaFiscal->valorfrete / $this->NotaFiscal->valorprodutos) * $NotaFiscalpb->valortotal, 2),
+					"vSeg" => round(($this->NotaFiscal->valorseguro / $this->NotaFiscal->valorprodutos) * $NotaFiscalpb->valortotal, 2),
+					"vOutro" => round(($this->NotaFiscal->valoroutras / $this->NotaFiscal->valorprodutos) * $NotaFiscalpb->valortotal, 2),
 				);
 			
 			$arr["ICMS" . Yii::app()->format->formataPorMascara($i, "###", true)] = 
 				array(
 					//"CST" => Nz(prsItem!csosn,
-					"CSOSN" => $nfpb->csosn,
+					"CSOSN" => $NotaFiscalpb->csosn,
 					//"ValorBase" => Nz(prsItem!icmsbase,
 					//"Aliquota" => Nz(prsItem!icmspercentual,
 					//"valor" => Nz(prsItem!icmsvalor,
@@ -339,39 +360,39 @@ class MGAcbrNfeMonitor extends MGSocket
 		//Totais
 		$arr["Total"] = 
 			array(
-				//"BaseICMS" => $this->model->icmsbase,
-				//"ValorICMS" => $this->model->icmsvalor,
+				//"BaseICMS" => $this->NotaFiscal->icmsbase,
+				//"ValorICMS" => $this->NotaFiscal->icmsvalor,
 				//"BaseICMS=0\n";
 				//"ValorICMS=0\n";
-				"ValorProduto" => $this->model->valorprodutos,
-				"ValorFrete" => $this->model->valorfrete,
-				"ValorSeguro" => $this->model->valorseguro,
-				"ValorDesconto" => $this->model->valordesconto,
-				"ValorOutrasDespesas" => $this->model->valoroutras,
-				"ValorNota" => $this->model->valortotal,
+				"ValorProduto" => $this->NotaFiscal->valorprodutos,
+				"ValorFrete" => $this->NotaFiscal->valorfrete,
+				"ValorSeguro" => $this->NotaFiscal->valorseguro,
+				"ValorDesconto" => $this->NotaFiscal->valordesconto,
+				"ValorOutrasDespesas" => $this->NotaFiscal->valoroutras,
+				"ValorNota" => $this->NotaFiscal->valortotal,
 			);
 		
 		//Transportador
 		$arr["Transportador"] =
 			array(
-				"FretePorConta" => ($this->model->fretepagar)?1:0,
+				"FretePorConta" => ($this->NotaFiscal->fretepagar)?1:0,
 			);
 		
 		//Volumes
-		if ($this->model->volumes > 0)
+		if ($this->NotaFiscal->volumes > 0)
 			$arr["Volume001"] =
 				array(
-					"Quantidade" => $this->model->volumes,
+					"Quantidade" => $this->NotaFiscal->volumes,
 				);
 		
 		//Duplicatas
 		$i = 1;
 		$totalDup = 0;
-		foreach ($this->model->NotaFiscalDuplicatass as $dup)
+		foreach ($this->NotaFiscal->NotaFiscalDuplicatass as $dup)
 		{
 			$totalDup += $dup->valor;
 			
-			if ($this->model->modelo != NotaFiscal::MODELO_NFCE)
+			if ($this->NotaFiscal->modelo != NotaFiscal::MODELO_NFCE)
 				$arr["Duplicata" . Yii::app()->format->formataPorMascara($i, "###", true)] =
 					array(
 						"Numero" => $dup->fatura,
@@ -383,9 +404,9 @@ class MGAcbrNfeMonitor extends MGSocket
 			
 		}
 		
-		if ($this->model->modelo == NotaFiscal::MODELO_NFCE)
+		if ($this->NotaFiscal->modelo == NotaFiscal::MODELO_NFCE)
 		{
-			if (empty($this->model->Pessoa->cnpj))
+			if (empty($this->NotaFiscal->Pessoa->cnpj))
 				unset($arr["Destinatario"]["CNPJ"]);
 			
 			$arr["Identificacao"]["Emissao"] .= " " . date("H:i:s");
@@ -401,10 +422,10 @@ class MGAcbrNfeMonitor extends MGSocket
 			
 			$arr["InfNFE"]["Versao"] = "3.10";
 			
-			if (!empty($this->model->Pessoa->ie))
+			if (!empty($this->NotaFiscal->Pessoa->ie))
 				return $this->gerarErro ("Nao permitida emissao de NFC-e para Pessoas que tenham IE!");
 			
-			if ($this->model->codpessoa == Pessoa::CONSUMIDOR)
+			if ($this->NotaFiscal->codpessoa == Pessoa::CONSUMIDOR)
 				unset($arr["Destinatario"]);
 			else
 			{
@@ -437,37 +458,37 @@ class MGAcbrNfeMonitor extends MGSocket
 			}
 			
 			//Total a vista
-			if ($this->model->valortotal > $totalDup)
+			if ($this->NotaFiscal->valortotal > $totalDup)
 			{
 				$arr["Pag$i"]["Tpag"] = 01; // Dinheiro
-				$arr["Pag$i"]["Vpag"] = $this->model->valortotal - $totalDup;
+				$arr["Pag$i"]["Vpag"] = $this->NotaFiscal->valortotal - $totalDup;
 				$i = '003';
 			}
 			
 		}
 
 		//Dados Adicionais
-		$compl = $this->model->observacoes;
+		$compl = $this->NotaFiscal->observacoes;
 		$compl = str_replace("\n", ";", $compl);
 		$compl = str_replace("\r", "", $compl);
 		
 		//substitui ICMSVALOR e ICMSPERCENTUAL da observacao
-		$compl = str_replace("#ICMSVALOR#", Yii::app()->format->formatNumber($this->model->icmsvalor), $compl);
-		if ($this->model->icmsbase > 0 && $this->model->icmsvalor > 0)
-			$perc = ($this->model->icmsvalor / $this->model->icmsbase) * 100;
+		$compl = str_replace("#ICMSVALOR#", Yii::app()->format->formatNumber($this->NotaFiscal->icmsvalor), $compl);
+		if ($this->NotaFiscal->icmsbase > 0 && $this->NotaFiscal->icmsvalor > 0)
+			$perc = ($this->NotaFiscal->icmsvalor / $this->NotaFiscal->icmsbase) * 100;
 		else
 			$perc = 0;
 		$compl = str_replace("#ICMSPERCENTUAL#", Yii::app()->format->formatNumber($perc), $compl);
 
 		//Adiciona valor aproximado tributos
 		$command = Yii::app()->db->createCommand("SELECT max(valoribpt) FROM vwIbptaxNotaFiscal WHERE codNotaFiscal = :codnotafiscal");
-		$command->params = array(':codnotafiscal' => $this->model->codnotafiscal);
+		$command->params = array(':codnotafiscal' => $this->NotaFiscal->codnotafiscal);
 		if ($ibpt = $command->queryScalar())
 		{
 			$compl = str_replace("#IBPTVALOR#", Yii::app()->format->formatNumber($ibpt), $compl);
 		}
 		
-		if ($this->model->modelo == NotaFiscal::MODELO_NFCE)
+		if ($this->NotaFiscal->modelo == NotaFiscal::MODELO_NFCE)
 			$compl = str_replace (";", " ", $compl);
 		
 		$arr["DadosAdicionais"] =
@@ -495,13 +516,13 @@ class MGAcbrNfeMonitor extends MGSocket
 		// Processa Chave da NFE
 		// C:\ACBrNFeMonitor\Arquivos\EnvioResp\51110404576775000160550010000000011000000016-nfe.xml
 		$chave = $this->retornoMonitor["Mensagem"][1];
-		$chave = str_replace($this->model->Filial->acbrnfemonitorcaminho, "", $chave);
+		$chave = str_replace($this->Filial->acbrnfemonitorcaminho, "", $chave);
 		$chave = str_replace("\\Arquivos\\EnvioResp\\", "", $chave);
 		$chave = str_replace("-nfe.xml", "", $chave);
 
 		//grava chave da NFE
-		$this->model->nfechave = $chave;
-		$this->model->update();
+		$this->NotaFiscal->nfechave = $chave;
+		$this->NotaFiscal->update();
 		
 		$this->montaUrlPdf();
 		
@@ -513,23 +534,23 @@ class MGAcbrNfeMonitor extends MGSocket
 	public function confereNumero()
 	{
 
-		If (!empty($this->model->numero))
+		If (!empty($this->NotaFiscal->numero))
 			return true;
 		
 		$numero = Codigo::PegaProximo(
 			"NumeroNotaFiscal-CodFilial#" 
-			. $this->model->codfilial 
-			. "-Serie#" . $this->model->serie
-			. "-Modelo#" . $this->model->modelo
+			. $this->NotaFiscal->codfilial 
+			. "-Serie#" . $this->NotaFiscal->serie
+			. "-Modelo#" . $this->NotaFiscal->modelo
 		);
 		
 		if (empty($numero))
 			return false;
 		
-		$this->model->numero = $numero;
-		$this->model->emissao = date('d/m/Y');
-		$this->model->saida = date('d/m/Y');
-		$this->model->update();
+		$this->NotaFiscal->numero = $numero;
+		$this->NotaFiscal->emissao = date('d/m/Y');
+		$this->NotaFiscal->saida = date('d/m/Y');
+		$this->NotaFiscal->update();
 		
 		return true;
 		
@@ -538,15 +559,15 @@ class MGAcbrNfeMonitor extends MGSocket
 	//EnviarNFE
 	public function enviarNfe()
 	{
-		if (!in_array($this->model->codstatus, array(NotaFiscal::CODSTATUS_NAOAUTORIZADA, NotaFiscal::CODSTATUS_DIGITACAO)))
+		if (!in_array($this->NotaFiscal->codstatus, array(NotaFiscal::CODSTATUS_NAOAUTORIZADA, NotaFiscal::CODSTATUS_DIGITACAO)))
 			return $this->gerarErro("Status da Nota Fiscal nao permite envio ao Sefaz!");
 		
-		if (!$this->model->emitida)
+		if (!$this->NotaFiscal->emitida)
 			return $this->gerarErro("Nota Fiscal nao e de nossa emissao!");
 
 		//Monta Comando
 		$cmd = "NFE.EnviarNFe(\"";
-		$cmd .= $this->model->Filial->acbrnfemonitorcaminho . "\\Arquivos\\EnvioResp\\" . $this->model->nfechave . "-nfe.xml";
+		$cmd .= $this->Filial->acbrnfemonitorcaminho . "\\Arquivos\\EnvioResp\\" . $this->NotaFiscal->nfechave . "-nfe.xml";
 		$cmd .= "\", 1, 1, 1, 1, 1)\n.\n";
 			
 		//Envia Comando
@@ -565,12 +586,12 @@ class MGAcbrNfeMonitor extends MGSocket
 	//ConsultaNFE
 	public function consultarNfe()
 	{
-		if (!$this->model->emitida)
+		if (!$this->NotaFiscal->emitida)
 			return $this->gerarErro("Nota Fiscal nao e de nossa emissao!");
 
 		//Monta Comando
 		$cmd  = "NFE.ConsultarNFE(\"";
-		$cmd .= $this->model->Filial->acbrnfemonitorcaminho . "\\Arquivos\\EnvioResp\\" . $this->model->nfechave . "-nfe.xml";
+		$cmd .= $this->Filial->acbrnfemonitorcaminho . "\\Arquivos\\EnvioResp\\" . $this->NotaFiscal->nfechave . "-nfe.xml";
 		$cmd .= "\")\n.\n";
 		
 		//Envia Comando
@@ -588,12 +609,12 @@ class MGAcbrNfeMonitor extends MGSocket
 	public function imprimirDanfePdf()
 	{
 		
-		if (!$this->model->emitida)
+		if (!$this->NotaFiscal->emitida)
 			return $this->gerarErro("Nota Fiscal nao e de nossa emissao!");
 		
 		//Monta Comando
 		$cmd = "NFE.ImprimirDANFEPDF(\"";
-		$cmd .= $this->model->Filial->acbrnfemonitorcaminho . "\\Arquivos\\NFe\\" . $this->model->nfechave . "-nfe.xml";
+		$cmd .= $this->Filial->acbrnfemonitorcaminho . "\\Arquivos\\NFe\\" . $this->NotaFiscal->nfechave . "-nfe.xml";
 		$cmd .= "\")\n.\n";
 		
 		//Envia Comando
@@ -609,10 +630,10 @@ class MGAcbrNfeMonitor extends MGSocket
 	
 	public function imprimirDanfePdfTermica()
 	{
-		if ($this->model->modelo != NotaFiscal::MODELO_NFCE)
+		if ($this->NotaFiscal->modelo != NotaFiscal::MODELO_NFCE)
 			return false;
 		
-		$arquivo = "{$this->model->nfechave}.pdf";
+		$arquivo = "{$this->NotaFiscal->nfechave}.pdf";
 		$impressora = Yii::app()->user->impressoraTermica;
 		$cmd = "cd /tmp; rm -f $arquivo; wget {$this->urlpdf} ; lpr -P $impressora $arquivo;";
 		return exec($cmd);		
@@ -621,12 +642,12 @@ class MGAcbrNfeMonitor extends MGSocket
 	public function imprimirDanfe()
 	{
 		
-		if (!$this->model->emitida)
+		if (!$this->NotaFiscal->emitida)
 			return $this->gerarErro("Nota Fiscal nao e de nossa emissao!");
 		
 		//Monta Comando
 		$cmd = "NFE.ImprimirDANFE(\"";
-		$cmd .= $this->model->Filial->acbrnfemonitorcaminho . "\\Arquivos\\NFe\\" . $this->model->nfechave . "-nfe.xml";
+		$cmd .= $this->Filial->acbrnfemonitorcaminho . "\\Arquivos\\NFe\\" . $this->NotaFiscal->nfechave . "-nfe.xml";
 		$cmd .= "\", \"". Yii::app()->user->getState('impressoraTermica') ."\")\n.\n";
 		
 		//Envia Comando
@@ -642,7 +663,7 @@ class MGAcbrNfeMonitor extends MGSocket
 	
 	public function cancelarNfe($justificativa)
 	{
-		if (!$this->model->emitida)
+		if (!$this->NotaFiscal->emitida)
 			return $this->gerarErro("Nota Fiscal nao e de nossa emissao!");
 		
 		if (strlen($justificativa) < 15)
@@ -650,7 +671,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		
 		//Monta Comando
 		$cmd = "NFE.CancelarNFE(\"";
-		$cmd .= $this->model->nfechave;
+		$cmd .= $this->NotaFiscal->nfechave;
 		$cmd .= "\", \"$justificativa\")\n.\n";
 		$cmd .= "\")\n.\n";
 		
@@ -667,20 +688,20 @@ class MGAcbrNfeMonitor extends MGSocket
 	
 	public function inutilizarNfe($justificativa)
 	{
-		if (!$this->model->emitida)
+		if (!$this->NotaFiscal->emitida)
 			return $this->gerarErro("Nota Fiscal nao e de nossa emissao!");
 		
 		if (strlen($justificativa) < 15)
 			return $this->gerarErro("Texto de justificativa deve ter no minimo 15 caracteres!");
 		
 		//Monta Comando
-		$cmd = "Nfe.InutilizarNFE (\"" . Yii::app()->format->formataPorMascara($this->model->Filial->Pessoa->cnpj, "##############", true) . "\"";
+		$cmd = "Nfe.InutilizarNFE (\"" . Yii::app()->format->formataPorMascara($this->Filial->Pessoa->cnpj, "##############", true) . "\"";
 		$cmd .= ", \"" . $justificativa . "\"";
-		$cmd .= ", \"" . substr($this->model->emissao, 6, 4) . "\"";
-		$cmd .= ", \"" . $this->model->modelo . "\"";
-		$cmd .= ", \"" . $this->model->serie . "\"";
-		$cmd .= ", \"" . $this->model->numero . "\"";
-		$cmd .= ", \"" . $this->model->numero . "\")\n.\n";
+		$cmd .= ", \"" . substr($this->NotaFiscal->emissao, 6, 4) . "\"";
+		$cmd .= ", \"" . $this->NotaFiscal->modelo . "\"";
+		$cmd .= ", \"" . $this->NotaFiscal->serie . "\"";
+		$cmd .= ", \"" . $this->NotaFiscal->numero . "\"";
+		$cmd .= ", \"" . $this->NotaFiscal->numero . "\")\n.\n";
 		
 		//Envia Comando
 		if (!$this->enviaComando($cmd))
@@ -695,10 +716,10 @@ class MGAcbrNfeMonitor extends MGSocket
 	
 	public function cartaCorrecao($texto)
 	{
-		if (!$this->model->emitida)
+		if (!$this->NotaFiscal->emitida)
 			return $this->gerarErro("Nota Fiscal nao e de nossa emissao!");
 		
-		if ($this->model->codstatus != NotaFiscal::CODSTATUS_AUTORIZADA)
+		if ($this->NotaFiscal->codstatus != NotaFiscal::CODSTATUS_AUTORIZADA)
 			return $this->gerarErro("Status da nota nao permite emissao de carta de correcao!");
 
 		//Verifica se o texto tem mais de 15 caracteres
@@ -711,7 +732,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		//descobre numero do lote e sequencia
 		$lote = 0;
 		$sequencia = 0;
-		foreach ($this->model->NotaFiscalCartaCorrecaos as $cc)
+		foreach ($this->NotaFiscal->NotaFiscalCartaCorrecaos as $cc)
 		{
 			if ($cc->lote > $lote)
 				$lote = $cc->lote;
@@ -724,9 +745,9 @@ class MGAcbrNfeMonitor extends MGSocket
 		$cmd  = "NFE.CARTADECORRECAO(\"[CCE] \n";
 		$cmd .= "idLote=$lote\n";
 		$cmd .= "[EVENTO001]\n";
-		$cmd .= "chNFe=" . $this->model->nfechave . "\n";
-		$cmd .= "cOrgao=" . substr($this->model->nfechave, 0, 2) . "\n";
-		$cmd .= "CNPJ=" . substr($this->model->nfechave, 6, 14) . "\n";
+		$cmd .= "chNFe=" . $this->NotaFiscal->nfechave . "\n";
+		$cmd .= "cOrgao=" . substr($this->NotaFiscal->nfechave, 0, 2) . "\n";
+		$cmd .= "CNPJ=" . substr($this->NotaFiscal->nfechave, 6, 14) . "\n";
 		$cmd .= "dhEvento=$data\n";
 		$cmd .= "nSeqEvento=$sequencia\n";
 		$cmd .= "xCorrecao=$texto\n";
@@ -745,7 +766,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		
 		$cc = new NotaFiscalCartaCorrecao();
 		
-		$cc->codnotafiscal = $this->model->codnotafiscal;
+		$cc->codnotafiscal = $this->NotaFiscal->codnotafiscal;
 		$cc->lote = $lote;
 		$cc->data = $data;
 		$cc->sequencia = $sequencia;
@@ -764,9 +785,15 @@ class MGAcbrNfeMonitor extends MGSocket
 		
 	}
 
+	/**
+	 * Envia e-mail da NFE com arquivo xml, e altera o cadastro caso solicitado
+	 * @param string $email
+	 * @param boolean $alterarcadastro
+	 * @return boolean
+	 */
 	public function enviarEmail($email, $alterarcadastro = false)
 	{
-		if (!$this->model->emitida)
+		if (!$this->NotaFiscal->emitida)
 			return $this->gerarErro("Nota Fiscal nao e de nossa emissao!");
 		
 		//se nao passou email 
@@ -778,7 +805,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		{
 			Yii::app()->db
 				->createCommand("UPDATE tblPessoa SET emailnfe = :emailnfe WHERE codpessoa=:codpessoa")
-				->bindValues(array(':emailnfe' => $email, ':codpessoa' => $this->model->codpessoa))
+				->bindValues(array(':emailnfe' => $email, ':codpessoa' => $this->NotaFiscal->codpessoa))
 				->execute();			
 		}
 		
@@ -800,7 +827,7 @@ class MGAcbrNfeMonitor extends MGSocket
 			
 			//Monta Comando
 			$cmd = "NFE.EnviarEmail(\"$email\", \"";
-			$cmd .= $this->model->Filial->acbrnfemonitorcaminho . "\\Arquivos\\NFe\\" . $this->model->nfechave . "-nfe.xml";
+			$cmd .= $this->Filial->acbrnfemonitorcaminho . "\\Arquivos\\NFe\\" . $this->NotaFiscal->nfechave . "-nfe.xml";
 			$cmd .= "\", \"1\")\n.\n";
 
 			//Envia Comando
@@ -816,10 +843,15 @@ class MGAcbrNfeMonitor extends MGSocket
 		return true;
 	}
 	
+	/**
+	 * Busca listagem de NFes emitidas por terceiros na base da sefaz a partir do NSU informado
+	 * @param bigint $nsu
+	 * @return boolean
+	 */
 	public function consultaNfeDest($nsu = 0)
 	{
 		//Monta Comando
-		$cnpj = str_pad($this->model->Filial->Pessoa->cnpj, 14, 0, STR_PAD_LEFT);
+		$cnpj = str_pad($this->Filial->Pessoa->cnpj, 14, 0, STR_PAD_LEFT);
 		$cmd = "NFE.ConsultaNFeDest(\"{$cnpj}\", 0, 0, {$nsu})\n.\n";
 		
 		if (!$this->enviaComando($cmd))
@@ -830,6 +862,124 @@ class MGAcbrNfeMonitor extends MGSocket
 		return true;
 	}
 	
+	/**
+	 * Efetua o Download do arquivo XML de uma NFe de terceiro
+	 * @return boolean
+	 */
+	public function downloadNfe()
+	{
+		//Monta Comando
+		$cnpj = str_pad($this->Filial->Pessoa->cnpj, 14, 0, STR_PAD_LEFT);
+		$cmd = "NFE.DownloadNFe(\"{$cnpj}\", \"{$this->NfeTerceiro->nfechave}\")\n.\n";
+		
+		if (!$this->enviaComando($cmd))
+			return false;
+		
+		$this->processaRetorno();
+		
+		if ($this->retornoMonitor["Mensagem"][0] != "OK")
+		{
+			$this->erroMonitor = isset($this->retornoMonitor["NFE001"]["xMotivo"])?$this->retornoMonitor["NFE001"]["xMotivo"]:"";
+			return false;
+		}
+		
+		if (!isset($this->retornoMonitor["NFE001"]["cStat"]))
+		{
+			$this->erroMonitor = isset($this->retornoMonitor["NFE001"]["xMotivo"])?$this->retornoMonitor["NFE001"]["xMotivo"]:"";
+			return false;
+		}
+		
+		if ($this->retornoMonitor["NFE001"]["cStat"] <> 140)
+		{
+			$this->erroMonitor = isset($this->retornoMonitor["NFE001"]["xMotivo"])?$this->retornoMonitor["NFE001"]["xMotivo"]:"";
+			return false;
+		}
+		
+		$this->retornoMonitor["Mensagem"][1] = isset($this->retornoMonitor["NFE001"]["xMotivo"])?$this->retornoMonitor["NFE001"]["xMotivo"]:$this->retornoMonitor["Mensagem"][1];
+		
+		
+		$pos = strpos($this->retorno, 'procNFe=');
+		$stringxml = substr($this->retorno, $pos + 8);
+		
+		if (!$this->NfeTerceiro->importarXmlViaString($stringxml))
+			return false;
+		
+		return true;
+		
+	}
+	
+	/**
+	 * Envia evento de manifestacao do destinatario de uma NFe de Terceiro
+	 * @param int $indManifestacao 
+	 * @return boolean
+	 */
+	public function enviarEventoManifestacao($indManifestacao, $justificativa)
+	{
+		
+		switch ($indManifestacao)
+		{
+			case NfeTerceiro::INDMANIFESTACAO_CONFIRMADA:
+				$tpEvento = 210200;
+				break;
+			
+			case NfeTerceiro::INDMANIFESTACAO_DESCONHECIDA:
+				$tpEvento = 210220;
+				break;
+			
+			case NfeTerceiro::INDMANIFESTACAO_NAOREALIZADA:
+				$tpEvento = 210240;
+				break;
+			
+			case NfeTerceiro::INDMANIFESTACAO_CIENCIA:
+				$tpEvento = 210210;
+				break;
+
+			default:
+				return false;
+				break;
+		}
+		
+		$cnpj = str_pad($this->Filial->Pessoa->cnpj, 14, 0, STR_PAD_LEFT);
+		$data = date('d/m/Y H:i:s');
+
+		//Monta Comando
+		$cmd  = "NFE.ENVIAREVENTO(\"[EVENTO] \n";
+		$cmd .= "idLote=1\n";
+		$cmd .= "[EVENTO001]\n";
+		$cmd .= "chNFe={$this->NfeTerceiro->nfechave}\n";
+		$cmd .= "cOrgao=91\n";
+		$cmd .= "CNPJ={$cnpj}\n";
+		$cmd .= "dhEvento={$data}\n";
+		$cmd .= "tpEvento={$tpEvento}\n";
+		$cmd .= "nSeqEvento=1\n";
+		$cmd .= "versaoEvento=1.00\n";
+		$cmd .= "\")\n.\n";
+		
+		if (!$this->enviaComando($cmd))
+			return false;
+		
+		$this->processaRetorno();
+		
+		//Se retornou diferente de OK aborta
+		if ($this->retornoMonitor["Mensagem"][0] != "OK")
+		{
+			$this->erroMonitor = isset($this->retornoMonitor["EVENTO001"]["xMotivo"])?$this->retornoMonitor["EVENTO001"]["xMotivo"]:"";
+			return false;
+		}
+		
+		if ($this->retornoMonitor["EVENTO001"]["cStat"] <> 135)
+		{
+			$this->erroMonitor = isset($this->retornoMonitor["EVENTO001"]["xMotivo"])?$this->retornoMonitor["EVENTO001"]["xMotivo"]:"";
+			return false;
+		}
+		
+		$this->retornoMonitor["Mensagem"][1] = isset($this->retornoMonitor["EVENTO001"]["xMotivo"])?$this->retornoMonitor["EVENTO001"]["xMotivo"]:$this->retornoMonitor["Mensagem"][1];	
+
+		$this->NfeTerceiro->indmanifestacao = $indManifestacao;
+		return $this->NfeTerceiro->save();
+	}
+	
+	
 	public function salvaRetorno($justificativa = "")
 	{
 		
@@ -837,14 +987,14 @@ class MGAcbrNfeMonitor extends MGSocket
 		{
 			//Grava Recibo Envio
 			if (isset($this->retornoMonitor["ENVIO"]["NRec"]))
-				$this->model->nfereciboenvio = $this->retornoMonitor["ENVIO"]["NRec"];
+				$this->NotaFiscal->nfereciboenvio = $this->retornoMonitor["ENVIO"]["NRec"];
 
 			//Grava Data e Hora de Envio
 			if (isset($this->retornoMonitor["ENVIO"]["DhRecbto"]))
-				$this->model->nfedataenvio = $this->retornoMonitor["ENVIO"]["DhRecbto"];
+				$this->NotaFiscal->nfedataenvio = $this->retornoMonitor["ENVIO"]["DhRecbto"];
 
 			//Salva
-			$this->model->update();
+			$this->NotaFiscal->update();
 
 			//Se o envio nao teve status 103 - Lote recebido com sucesso
 			if ($this->retornoMonitor["ENVIO"]["CStat"] != 103)
@@ -866,7 +1016,7 @@ class MGAcbrNfeMonitor extends MGSocket
 
 		
 		//NFE123 - Nfe número 123
-		$nfe = "NFE" . $this->model->numero;
+		$nfe = "NFE" . $this->NotaFiscal->numero;
 		if (isset($this->retornoMonitor[$nfe]))
 		{
 			//Se a NFE nao teve status 100 - Autorizado nem 302 - Denegado
@@ -881,34 +1031,34 @@ class MGAcbrNfeMonitor extends MGSocket
 			{
 
 				//Grava protocolo cancelamento iguao ao envio
-				$this->model->nfecancelamento = $this->model->nfereciboenvio;
-				if (empty($this->model->nfecancelamento)) 
-					$this->model->nfecancelamento = "999999999999999";
+				$this->NotaFiscal->nfecancelamento = $this->NotaFiscal->nfereciboenvio;
+				if (empty($this->NotaFiscal->nfecancelamento)) 
+					$this->NotaFiscal->nfecancelamento = "999999999999999";
 
 				//Data e Hora
-				$this->model->nfedatacancelamento = $this->model->nfedataenvio;
-				if (empty($this->model->nfedatacancelamento)) 
-					$this->model->nfedatacancelamento = date('d/m/Y H:i:s');
+				$this->NotaFiscal->nfedatacancelamento = $this->NotaFiscal->nfedataenvio;
+				if (empty($this->NotaFiscal->nfedatacancelamento)) 
+					$this->NotaFiscal->nfedatacancelamento = date('d/m/Y H:i:s');
 
 				//Justificativa
-				$this->model->justificativa = substr($this->retornoMonitor[$nfe]["XMotivo"], 0, 200);
-				if (empty($this->model->justificativa)) 
-					$this->model->justificativa = "Uso Denegado";
+				$this->NotaFiscal->justificativa = substr($this->retornoMonitor[$nfe]["XMotivo"], 0, 200);
+				if (empty($this->NotaFiscal->justificativa)) 
+					$this->NotaFiscal->justificativa = "Uso Denegado";
 
 				//salva
-				$this->model->update();
+				$this->NotaFiscal->update();
 
 				//retorna
-				$this->erroMonitor = $this->model->justificativa;
+				$this->erroMonitor = $this->NotaFiscal->justificativa;
 				return false;
 			}
 
 			//se chegou ate aqui e porque foi autorizada
-			$this->model->nfeautorizacao = $this->retornoMonitor[$nfe]["NProt"];
-			$this->model->nfedataautorizacao = $this->retornoMonitor[$nfe]["DhRecbto"];
+			$this->NotaFiscal->nfeautorizacao = $this->retornoMonitor[$nfe]["NProt"];
+			$this->NotaFiscal->nfedataautorizacao = $this->retornoMonitor[$nfe]["DhRecbto"];
 
 			//salva
-			$this->model->update();
+			$this->NotaFiscal->update();
 		}
 		
 		//consulta
@@ -918,8 +1068,8 @@ class MGAcbrNfeMonitor extends MGSocket
 			{
 				//cancelada
 				case 101:
-					$this->model->nfecancelamento = $this->retornoMonitor["CONSULTA"]["NProt"];
-					$this->model->nfedatacancelamento = $this->retornoMonitor["CONSULTA"]["DhRecbto"];
+					$this->NotaFiscal->nfecancelamento = $this->retornoMonitor["CONSULTA"]["NProt"];
+					$this->NotaFiscal->nfedatacancelamento = $this->retornoMonitor["CONSULTA"]["DhRecbto"];
 					break;
 				
 				//inexistente
@@ -929,30 +1079,30 @@ class MGAcbrNfeMonitor extends MGSocket
 				//denegada
 				case 302:
 					//protocolo
-					$this->model->nfecancelamento = $this->model->nfereciboenvio;
-					if (empty($this->model->nfecancelamento))
-						$this->model->nfecancelamento = "999999999999999";
+					$this->NotaFiscal->nfecancelamento = $this->NotaFiscal->nfereciboenvio;
+					if (empty($this->NotaFiscal->nfecancelamento))
+						$this->NotaFiscal->nfecancelamento = "999999999999999";
 					
 					//data e hora
-					$this->model->nfedatacancelamento = $this->model->nfedataenvio;
-					if (empty($this->model->nfedatacancelamento))
-						$this->model->nfedatacancelamento = date('d/m/Y H:i:s');
+					$this->NotaFiscal->nfedatacancelamento = $this->NotaFiscal->nfedataenvio;
+					if (empty($this->NotaFiscal->nfedatacancelamento))
+						$this->NotaFiscal->nfedatacancelamento = date('d/m/Y H:i:s');
 					
 					//justificativa
-					$this->model->justificativa = substr($this->retornoMonitor["CONSULTA"]["XMotivo"], 0, 200);
-					if (empty($this->model->justificativa)) 
-						$this->model->justificativa = "Uso Denegado";
+					$this->NotaFiscal->justificativa = substr($this->retornoMonitor["CONSULTA"]["XMotivo"], 0, 200);
+					if (empty($this->NotaFiscal->justificativa)) 
+						$this->NotaFiscal->justificativa = "Uso Denegado";
 					break;
 				
 				//autorizada
 				default :
-					$this->model->nfeautorizacao = $this->retornoMonitor["CONSULTA"]["NProt"];
-					$this->model->nfedataautorizacao = $this->retornoMonitor["CONSULTA"]["DhRecbto"];
+					$this->NotaFiscal->nfeautorizacao = $this->retornoMonitor["CONSULTA"]["NProt"];
+					$this->NotaFiscal->nfedataautorizacao = $this->retornoMonitor["CONSULTA"]["DhRecbto"];
 					break;
 					
 			}
 			
-			$this->model->update();
+			$this->NotaFiscal->update();
 		
 		}
 		
@@ -966,11 +1116,11 @@ class MGAcbrNfeMonitor extends MGSocket
 				return false;
 			}
 			
-			$this->model->nfecancelamento = $this->retornoMonitor["CANCELAMENTO"]["NProt"];
-			$this->model->nfedatacancelamento = $this->retornoMonitor["CANCELAMENTO"]["DhRecbto"];
-			$this->model->justificativa = $justificativa;
+			$this->NotaFiscal->nfecancelamento = $this->retornoMonitor["CANCELAMENTO"]["NProt"];
+			$this->NotaFiscal->nfedatacancelamento = $this->retornoMonitor["CANCELAMENTO"]["DhRecbto"];
+			$this->NotaFiscal->justificativa = $justificativa;
 			
-			$this->model->update();		
+			$this->NotaFiscal->update();		
 			
 		}
 		
@@ -984,11 +1134,11 @@ class MGAcbrNfeMonitor extends MGSocket
 				return false;
 			}
 			
-			$this->model->nfeinutilizacao = $this->retornoMonitor["INUTILIZACAO"]["NProt"];
-			$this->model->nfedatainutilizacao = $this->retornoMonitor["INUTILIZACAO"]["DhRecbto"];
-			$this->model->justificativa = $justificativa;
+			$this->NotaFiscal->nfeinutilizacao = $this->retornoMonitor["INUTILIZACAO"]["NProt"];
+			$this->NotaFiscal->nfedatainutilizacao = $this->retornoMonitor["INUTILIZACAO"]["DhRecbto"];
+			$this->NotaFiscal->justificativa = $justificativa;
 			
-			$this->model->update();		
+			$this->NotaFiscal->update();		
 			
 		}
 		

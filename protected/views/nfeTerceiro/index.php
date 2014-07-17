@@ -1,12 +1,13 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - NFe\'s de Terceiro';
 $this->breadcrumbs=array(
-	'NFe\'s de Terceiros',
+	'NFe de Terceiros',
 );
 
 $this->menu=array(
 	//array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
 	array('label'=>'Pesquisar na Sefaz', 'icon'=>'icon-plus', 'url'=>array('pesquisarSefaz')),
+	array('label'=>'Carregar Via Arquivo XML', 'icon'=>'icon-upload', 'url'=>array('upload')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 	);
 ?>
@@ -26,7 +27,7 @@ $(document).ready(function(){
 
 </script>
 
-<h1>NFe's de Terceiros</h1>
+<h1>NFe de Terceiros</h1>
 
 <br>
 
@@ -39,7 +40,40 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
-	<?php echo $form->textField($model, 'codusuariocriacao', array('placeholder' => '#', 'class'=>'input-mini')); ?>
+	<?php echo $form->select2($model, 'codfilial', Filial::getListaCombo(), array('placeholder' => 'Filial', 'class'=>'input-medium')); ?>
+	<?php echo $form->select2Pessoa($model, 'codpessoa', array('placeholder' => 'Pessoa', 'class'=>'input-xxlarge')); ?>
+	<?php 
+		echo $form->datepickerRow(
+				$model,
+				'emissao_de',
+				array(
+					'class' => 'input-mini text-center', 
+					'options' => array(
+						'format' => 'dd/mm/yy'
+						),
+					'placeholder' => 'Emissão',
+					'prepend' => 'De',
+					)
+				); 	
+	?>
+	<?php 
+		echo $form->datepickerRow(
+				$model,
+				'emissao_ate',
+				array(
+					'class' => 'input-mini text-center', 
+					'options' => array(
+						'format' => 'dd/mm/yy'
+						),
+					'placeholder' => 'Emissão',
+					'prepend' => 'Até',
+					)
+				); 	
+	?>
+	<?php echo $form->textField($model, 'nfechave', array('placeholder' => 'Chave', 'class'=>'input-xlarge')); ?>
+	<?php echo $form->select2($model, 'indmanifestacao', NfeTerceiro::getIndManifestacaoListaCombo(), array('placeholder' => 'Manifestação', 'class'=>'input-xlarge')); ?>
+	<?php echo $form->select2($model, 'indsituacao', NfeTerceiro::getIndSituacaoListaCombo(), array('placeholder' => 'Situação', 'class'=>'input-medium')); ?>
+	<?php echo $form->select2($model, 'codnotafiscal', array("1"=>"Não Importadas", "2"=>"Importadas"), array('placeholder' => 'Importação', 'class'=>'input-large')); ?>
 	<?php
 	$this->widget('bootstrap.widgets.TbButton'
 		, array(

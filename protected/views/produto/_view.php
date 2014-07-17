@@ -22,7 +22,7 @@
 		<div class="span7">
 			<?php 
 			$this->renderPartial('_view_produtoembalagem', array('data'=>$data));
-			foreach ($data->ProdutoEmbalagens as $pe)
+			foreach ($data->ProdutoEmbalagems as $pe)
 			{
 				$this->renderPartial('_view_produtoembalagem', array('data'=>$data, 'pe'=>$pe));
 			}

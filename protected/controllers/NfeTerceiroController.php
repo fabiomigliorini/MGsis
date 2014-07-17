@@ -23,6 +23,7 @@ class NfeTerceiroController extends Controller
 	* Creates a new model.
 	* If creation is successful, the browser will be redirected to the 'view' page.
 	*/
+	/*
 	public function actionCreate()
 	{
 		$model=new NfeTerceiro;
@@ -41,6 +42,7 @@ class NfeTerceiroController extends Controller
 			'model'=>$model,
 			));
 	}
+	*/
 
 	/**
 	* Updates a particular model.
@@ -50,6 +52,9 @@ class NfeTerceiroController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
+		
+		if (!$model->podeEditar())
+			throw new CHttpException(409, 'Registro não permite edição.');
 
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
@@ -65,12 +70,39 @@ class NfeTerceiroController extends Controller
 			'model'=>$model,
 			));
 	}
+	
+	public function actionImportar($id)
+	{
+		$model=$this->loadModel($id);
+		
+		if ($model->importar())
+		{
+			Yii::app()->user->setFlash("success", "NFe de Terceiro Importada com sucesso!");
+			$this->redirect(array('index'));
+		}
+		else
+		{
+			$erros = $model->getErrors();
+			
+			$msgs = array("Erro(s) ao Importar:");
+			
+			foreach ($erros as $campo => $mensagens)
+				foreach ($mensagens as $msg)
+					$msgs[] = "[$campo] => $msg";
+			
+			$msgs = implode("<BR>", $msgs);
+			
+			Yii::app()->user->setFlash("error", $msgs);
+			$this->redirect(array('view','id'=>$model->codnfeterceiro));
+		}
+	}	
 
 	/**
 	* Deletes a particular model.
 	* If deletion is successful, the browser will be redirected to the 'admin' page.
 	* @param integer $id the ID of the model to be deleted
 	*/
+	/*
 	public function actionDelete($id)
 	{
 		if(Yii::app()->request->isPostRequest)
@@ -97,6 +129,8 @@ class NfeTerceiroController extends Controller
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
+	 * 
+	 */
 
 	/**
 	* Lists all models.
@@ -112,6 +146,11 @@ class NfeTerceiroController extends Controller
 		
 		if (isset(Yii::app()->session['FiltroNfeTerceiroIndex']))
 			$model->attributes=Yii::app()->session['FiltroNfeTerceiroIndex'];
+		else
+		{
+			$model->indsituacao = NfeTerceiro::INDSITUACAO_AUTORIZADA;
+			$model->codnotafiscal = 1;
+		}
 		
 		$this->render('index',array(
 			'dataProvider'=>$model->search(),
@@ -122,6 +161,7 @@ class NfeTerceiroController extends Controller
 	/**
 	* Manages all models.
 	*/
+	/*
 	public function actionAdmin()
 	{
 	
@@ -135,6 +175,31 @@ class NfeTerceiroController extends Controller
 		$this->render('admin',array(
 			'model'=>$model,
 			));
+	}
+	 * 
+	 */
+	
+	public function actionUpload()
+	{
+		/**
+		 * @var NfeTerceiro
+		 */
+		$model=new NfeTerceiro;
+
+		if(isset($_POST['NfeTerceiro']))
+		{
+			$model->attributes=$_POST['NfeTerceiro'];
+            $model->arquivoxml=CUploadedFile::getInstance($model,'arquivoxml');
+			if ($model->importarXmlViaArquivo())
+				$this->redirect(array('view','id'=>$model->codnfeterceiro));
+		}
+
+		$this->render(
+			'upload',
+			array(
+				'model'=>$model,
+			)
+		);
 	}
 	
 	public function actionPesquisarSefaz($codfilial = null, $nsu = null)
@@ -151,7 +216,7 @@ class NfeTerceiroController extends Controller
 
 		if (!empty($model->codfilial))
 		{
-			$acbr = new MGAcbrNfeMonitor($model);
+			$acbr = new MGAcbrNfeMonitor(null, $model);
 			
 			$leituras = 0;
 			
@@ -276,6 +341,54 @@ class NfeTerceiroController extends Controller
 			));
 		
 	}
+	
+	/**
+	 * Efetua Download de uma NFE e Carrega os dados na tabela do sistema
+	 * @param bigint $id
+	 * @throws CHttpException
+	 */
+	public function actionDownloadNfe($id)
+	{
+		/**
+		 * @var NfeTerceiro Description
+		 */
+		//$model = $this->loadModel($id);
+		$model = NfeTerceiro::model()->findByPk($id);
+		$acbr = new MGAcbrNfeMonitor(null, $model);
+		
+		$res = $acbr->downloadNfe();
+		
+		echo CJSON::encode(
+			array(
+				'id' => $id,
+				'resultado' => $res,
+				'retornoMonitor' => $acbr->retornoMonitor["Mensagem"],
+				'erroMonitor' => htmlentities($acbr->erroMonitor),
+				'retorno' => htmlentities($acbr->retorno),
+			)
+		);
+		
+	}
+
+	public function actionEnviarEventoManifestacao($id, $indManifestacao, $justificativa = "")
+	{
+		$model = $this->loadModel($id);
+		$acbr = new MGAcbrNfeMonitor(null, $model);
+		
+		$res = $acbr->enviarEventoManifestacao($indManifestacao, $justificativa);
+		
+		echo CJSON::encode(
+			array(
+				'id' => $id,
+				'resultado' => $res,
+				'retornoMonitor' => $acbr->retornoMonitor["Mensagem"],
+				'erroMonitor' => htmlentities($acbr->erroMonitor),
+				'retorno' => htmlentities($acbr->retorno),
+			)
+		);
+		
+	}
+
 
 	/**
 	* Returns the data model based on the primary key given in the GET variable.

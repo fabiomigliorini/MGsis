@@ -104,8 +104,9 @@ class Pessoa extends MGActiveRecord
 			array('cnpj', 'ext.validators.CnpjCpfValidator'),
 			array('ie', 'ext.validators.InscricaoEstadualValidator'),
 			array('ie', 'validaCnpjDuplicado'),
+			array('codgrupocliente', 'validaGrupoCliente'),
 			array('ie, cep, cepcobranca','filter','filter'=>array($this, 'numeroLimpo')),
-			array('codgrupocliente, toleranciaatraso, numero, email, codcidade, endereco, bairro, cep, codcidadecobranca, enderecocobranca, numerocobranca, bairrocobranca, cepcobranca, pessoa, fantasia, cadastro, notafiscal, telefone1', 'required'),
+			array('toleranciaatraso, numero, email, codcidade, endereco, bairro, cep, codcidadecobranca, enderecocobranca, numerocobranca, bairrocobranca, cepcobranca, pessoa, fantasia, cadastro, notafiscal, telefone1', 'required'),
 			array('fantasia', 'unique', 'caseSensitive' => false),
 			array('fantasia, pessoa', 'length', 'min' => 5),
 			array('pessoa, contato, conjuge, endereco, enderecocobranca, email, emailnfe, emailcobranca', 'length', 'max'=>100),
@@ -141,6 +142,13 @@ class Pessoa extends MGActiveRecord
 		if (!empty($this->$attribute))
 			if (strlen(MGFormatter::numeroLimpo($this->$attribute)) < 10)
 				$this->addError($attribute,'Telefone inválido, não esqueça do DDD.');
+	}
+	
+	//verifica se o grupo do cliente está preenchido
+	public function validaGrupoCliente($attribute,$params)
+	{
+		if ($this->cliente && empty($this->codgrupocliente))
+			$this->addError($attribute,'Grupo do Cliente obrigatório.');
 	}
 
 	//verifica se a combinacao de CNPJ e IE já não estão cadastrados

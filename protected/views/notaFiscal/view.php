@@ -146,7 +146,7 @@ $(document).ready(function(){
 				'type'=>"raw",
 			),
 			
-			),
+		),
 	)); 
 	?>
 	</div>

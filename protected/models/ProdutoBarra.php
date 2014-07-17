@@ -177,6 +177,12 @@ class ProdutoBarra extends MGActiveRecord
 		return $ret;
 	}
 
+	
+	/**
+	 * Busca ProdutoBarra pelo codigo de barras
+	 * @param string $barras
+	 * @return ProdutoBarra
+	 */
 	public static function findByBarras($barras)
 	{
 		

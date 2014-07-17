@@ -1,8 +1,8 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Nova NFe de Terceiro';
+$this->pagetitle = Yii::app()->name . ' - Novo Nfe Terceiro Duplicata';
 $this->breadcrumbs=array(
-	'NFe de Terceiros'=>array('index'),
-	'Nova',
+	'Nfe Terceiro Duplicata'=>array('index'),
+	'Novo',
 );
 
 $this->menu=array(
@@ -11,6 +11,6 @@ array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 );
 ?>
 
-<h1>Nova NFe de Terceiro</h1>
+<h1>Novo NfeTerceiroDuplicata</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

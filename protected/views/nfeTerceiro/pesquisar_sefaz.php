@@ -3,21 +3,21 @@
 /**
  * @var NfeTerceiro $model
  */
-$this->pagetitle = Yii::app()->name . ' - Pesquisar na Sefaz NFe\'s de Terceiros';
+$this->pagetitle = Yii::app()->name . ' - Pesquisar na Sefaz NFe de Terceiros';
 $this->breadcrumbs=array(
-	'NFe\'s de Terceiros'=>array('index'),
-	'Pesquisar na Sefaz NFe\'s de Terceiro',
+	'NFe de Terceiros'=>array('index'),
+	'Pesquisar na Sefaz',
 );
 
 $this->menu=array(
 	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
-	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
-	array('label'=>'Detalhes', 'icon'=>'icon-eye-open', 'url'=>array('view','id'=>$model->codnfeterceiro)),
+	//array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
+	//array('label'=>'Detalhes', 'icon'=>'icon-eye-open', 'url'=>array('view','id'=>$model->codnfeterceiro)),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Pesquisar na Sefaz NFe's de Terceiros</h1>
+<h1>Pesquisar na Sefaz NFe de Terceiros</h1>
 <br>
 
 <?php 
@@ -88,6 +88,7 @@ $(document).ready(function() {
         e.preventDefault();
         bootbox.confirm("Tem certeza que deseja executar a consulta?", function(result) {
             if (result) {
+				bootbox.alert("Fazendo consulta na Sefaz, aguarde esta operação pode <b>demorar alguns minutos</b>...");
                 currentForm.submit();
             }
         });
