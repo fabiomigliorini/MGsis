@@ -35,7 +35,7 @@ $(document).ready(function(){
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-			'codnegocioprodutobarra',
+		'codnegocioprodutobarra',
 		'codnegocio',
 		'quantidade',
 		'valorunitario',

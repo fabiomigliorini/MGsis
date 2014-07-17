@@ -39,6 +39,14 @@
  */
 class NotaFiscalProdutoBarra extends MGActiveRecord
 {
+	
+	public $codproduto;
+	public $codfilial;
+	public $codpessoa;
+	public $saida_de;
+	public $saida_ate;
+	public $codnaturezaoperacao;
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -62,7 +70,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 			array('codnegocioprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('codnotafiscalprodutobarra, codnotafiscal, codprodutobarra, codcfop, descricaoalternativa, quantidade, valorunitario, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, icmsstbase, icmsstpercentual, icmsstvalor, csosn, codnegocioprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
+			array('codnaturezaoperacao, saida_de, saida_ate, codpessoa, codfilial, codproduto, codnotafiscalprodutobarra, codnotafiscal, codprodutobarra, codcfop, descricaoalternativa, quantidade, valorunitario, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, icmsstbase, icmsstpercentual, icmsstvalor, csosn, codnegocioprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -134,32 +142,56 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codnotafiscalprodutobarra',$this->codnotafiscalprodutobarra,true);
-		$criteria->compare('codnotafiscal',$this->codnotafiscal,true);
-		$criteria->compare('codprodutobarra',$this->codprodutobarra,true);
-		$criteria->compare('codcfop',$this->codcfop,true);
+		$criteria->compare('codnotafiscalprodutobarra',$this->codnotafiscalprodutobarra, false);
+		$criteria->compare('codnotafiscal',$this->codnotafiscal, false);
+		$criteria->compare('codprodutobarra',$this->codprodutobarra, false);
+		$criteria->compare('codcfop',$this->codcfop, false);
 		$criteria->compare('descricaoalternativa',$this->descricaoalternativa,true);
-		$criteria->compare('quantidade',$this->quantidade,true);
-		$criteria->compare('valorunitario',$this->valorunitario,true);
-		$criteria->compare('valortotal',$this->valortotal,true);
-		$criteria->compare('icmsbase',$this->icmsbase,true);
-		$criteria->compare('icmspercentual',$this->icmspercentual,true);
-		$criteria->compare('icmsvalor',$this->icmsvalor,true);
-		$criteria->compare('ipibase',$this->ipibase,true);
-		$criteria->compare('ipipercentual',$this->ipipercentual,true);
-		$criteria->compare('ipivalor',$this->ipivalor,true);
-		$criteria->compare('icmsstbase',$this->icmsstbase,true);
-		$criteria->compare('icmsstpercentual',$this->icmsstpercentual,true);
-		$criteria->compare('icmsstvalor',$this->icmsstvalor,true);
-		$criteria->compare('csosn',$this->csosn,true);
-		$criteria->compare('codnegocioprodutobarra',$this->codnegocioprodutobarra,true);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
-
+		$criteria->compare('quantidade',$this->quantidade, false);
+		$criteria->compare('valorunitario',$this->valorunitario, false);
+		$criteria->compare('valortotal',$this->valortotal, false);
+		$criteria->compare('icmsbase',$this->icmsbase, false);
+		$criteria->compare('icmspercentual',$this->icmspercentual, false);
+		$criteria->compare('icmsvalor',$this->icmsvalor, false);
+		$criteria->compare('ipibase',$this->ipibase, false);
+		$criteria->compare('ipipercentual',$this->ipipercentual, false);
+		$criteria->compare('ipivalor',$this->ipivalor, false);
+		$criteria->compare('icmsstbase',$this->icmsstbase, false);
+		$criteria->compare('icmsstpercentual',$this->icmsstpercentual, false);
+		$criteria->compare('icmsstvalor',$this->icmsstvalor, false);
+		$criteria->compare('csosn',$this->csosn, false);
+		$criteria->compare('codnegocioprodutobarra',$this->codnegocioprodutobarra, false);
+		$criteria->compare('alteracao',$this->alteracao, false);
+		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao, false);
+		$criteria->compare('criacao',$this->criacao, false);
+		$criteria->compare('codusuariocriacao',$this->codusuariocriacao, false);
+		
+		if (!empty($this->codproduto))
+		{
+			$criteria->compare('"ProdutoBarra".codproduto', $this->codproduto);
+			$criteria->with[] = 'ProdutoBarra';
+		}
+		
+		$criteria->with[] = 'NotaFiscal';
+		$criteria->order = '"NotaFiscal".saida DESC, "NotaFiscal".codfilial ASC, "NotaFiscal".numero DESC';
+		
+		$criteria->compare('"NotaFiscal".codfilial', $this->codfilial);
+		$criteria->compare('"NotaFiscal".codpessoa', $this->codpessoa);
+		$criteria->compare('"NotaFiscal".codnaturezaoperacao', $this->codnaturezaoperacao);
+		if ($saida_de = DateTime::createFromFormat("d/m/y",$this->saida_de))
+		{
+			$criteria->addCondition('"NotaFiscal".saida >= :saida_de');
+			$criteria->params = array_merge($criteria->params, array(':saida_de' => $saida_de->format('Y-m-d')));
+		}
+		if ($saida_ate = DateTime::createFromFormat("d/m/y",$this->saida_ate))
+		{
+			$criteria->addCondition('"NotaFiscal".saida <= :saida_ate');
+			$criteria->params = array_merge($criteria->params, array(':saida_ate' => $saida_ate->format('Y-m-d')));
+		}
+		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'pagination'=>array('pageSize'=>15),
 		));
 	}
 

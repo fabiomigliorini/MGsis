@@ -124,6 +124,9 @@ $(document).ready(function(){
 		$this->widget('bootstrap.widgets.TbDetailView',array(
 			'data'=>$model,
 			'attributes'=>$attributes));
+		
+		$this->widget('UsuarioCriacao', array('model'=>$model));
+
 		?>		
 	</div>
 	<div class="span6">
@@ -222,8 +225,10 @@ $(document).ready(function(){
 </div>
 
 <?php
-	$this->widget('UsuarioCriacao', array('model'=>$model));
 
+	
+if ($model->cliente)
+{
 	
 	$registrospc=new RegistroSpc('search');
 
@@ -237,12 +242,52 @@ $(document).ready(function(){
 
 	$registrospc->codpessoa = $model->codpessoa;
 
-	$this->renderPartial('/registroSpc/index',array(
-		'dataProvider'=>$registrospc->search(),
-		'model'=>$registrospc,
-		));
+	$abaSPC = $this->renderPartial(
+		'/registroSpc/index',
+		array(
+			'dataProvider'=>$registrospc->search(),
+			'model'=>$registrospc,
+		),
+		true
+	);
 	
 	
+
+	
+	$cobrancahistorico=new CobrancaHistorico('search');
+
+	$cobrancahistorico->unsetAttributes();  // clear any default values
+	
+	if(isset($_GET['CobrancaHistorico']))
+	Yii::app()->session['FiltroCobrancaHistoricoIndex'] = $_GET['CobrancaHistorico'];
+
+	if (isset(Yii::app()->session['FiltroCobrancaHistoricoIndex']))
+		$cobrancahistorico->attributes=Yii::app()->session['FiltroCobrancaHistoricoIndex'];
+
+	$cobrancahistorico->codpessoa = $model->codpessoa;
+	
+	$abaCobr = $this->renderPartial(
+		'/cobrancaHistorico/index',
+		array(
+			'dataProvider'=>$cobrancahistorico->search(),
+			'model'=>$cobrancahistorico,
+		),
+		true
+	);
+	
+	
+	$this->widget('bootstrap.widgets.TbTabs', 
+		array(
+			'type' => 'tabs',
+			'tabs' => 
+				array(
+					array('label' => 'Histórico de Cobrança', 'content' => $abaCobr, 'active' => true),
+					array('label' => 'Registro de SPC', 'content' => $abaSPC, 'active' => false),
+				)
+		)
+	);		
+
+}
 ?>
 
 

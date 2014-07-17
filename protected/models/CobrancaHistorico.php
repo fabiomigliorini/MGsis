@@ -6,8 +6,6 @@
  * The followings are the available columns in table 'mgsis.tblcobrancahistorico':
  * @property string $codcobrancahistorico
  * @property string $codpessoa
- * @property string $codusuario
- * @property string $sistema
  * @property string $historico
  * @property boolean $emailautomatico
  * @property string $alteracao
@@ -17,7 +15,6 @@
  *
  * The followings are the available model relations:
  * @property Pessoa $Pessoa
- * @property Usuario $Usuario
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
  * @property CobrancaHistoricoTitulo[] $CobrancaHistoricoTitulos
@@ -40,12 +37,12 @@ class CobrancaHistorico extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codcobrancahistorico, codpessoa, codusuario, sistema, historico', 'required'),
+			array('codpessoa, historico', 'required'),
 			array('historico', 'length', 'max'=>255),
 			array('emailautomatico, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('codcobrancahistorico, codpessoa, codusuario, sistema, historico, emailautomatico, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
+			array('codcobrancahistorico, codpessoa, historico, emailautomatico, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -58,9 +55,8 @@ class CobrancaHistorico extends MGActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
-			'Usuario' => array(self::BELONGS_TO, 'Usuario', 'codusuario'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'UarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 			'CobrancaHistoricoTitulos' => array(self::HAS_MANY, 'CobrancaHistoricoTitulo', 'codcobrancahistorico'),
 		);
 	}
@@ -73,8 +69,6 @@ class CobrancaHistorico extends MGActiveRecord
 		return array(
 			'codcobrancahistorico' => '#',
 			'codpessoa' => 'Pessoa',
-			'codusuario' => 'Usuário',
-			'sistema' => 'Sistema',
 			'historico' => 'Histórico',
 			'emailautomatico' => 'Email Automatico',
 			'alteracao' => 'Alteração',
@@ -102,19 +96,19 @@ class CobrancaHistorico extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codcobrancahistorico',$this->codcobrancahistorico,true);
-		$criteria->compare('codpessoa',$this->codpessoa,true);
-		$criteria->compare('codusuario',$this->codusuario,true);
-		$criteria->compare('sistema',$this->sistema,true);
-		$criteria->compare('historico',$this->historico,true);
+		$criteria->compare('codcobrancahistorico',$this->codcobrancahistorico,false);
+		$criteria->compare('codpessoa',$this->codpessoa);
+		$criteria->compare('historico',$this->historico,false);
 		$criteria->compare('emailautomatico',$this->emailautomatico);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('alteracao',$this->alteracao,false);
+		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);
+		$criteria->compare('criacao',$this->criacao,false);
+		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,false);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array('defaultOrder'=>'t.alteracao DESC'),
+			'pagination'=>array('pageSize'=>20)
 		));
 	}
 

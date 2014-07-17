@@ -217,7 +217,7 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 			),
 		),
 	)); 
-
+$this->widget('UsuarioCriacao', array('model'=>$model));
 ?>
 </div>
 
@@ -251,13 +251,12 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 		),
 	)); 
 
-	$this->widget('UsuarioCriacao', array('model'=>$model));
 
 ?>
 </div>
 </div>
 
-<?php $this->widget('UsuarioCriacao', array('model'=>$model)); ?>
+<?php  ?>
 
 <small class="row-fluid">
 	<div class="span9">
@@ -317,48 +316,70 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 	</div>
 </small>
 
+<br>
+<br>
 <?php
-$imgs = $model->getImagens();
 
-if (sizeof($imgs) > 0)
-{
-	?>
-		<h3>Imagens</h3>
-		<div id="myCarousel" class="carousel slide">
-			<!-- Carousel items -->
-			<div class="carousel-inner">
-				<?php
-				$i=0;
-				foreach ($imgs as $img)
-				{
-					?>
-					<div class="item <?php echo ($i==0)?"active":""; ?> span12 text-center">
-						<center>
-							<a href="<?php echo Yii::app()->baseUrl . $img ?>" target="_blank">
-								<?php //echo CHtml::image( Yii::app()->baseUrl . $img, '', array('style' => 'min-height: 60%')); ?>
-								<?php echo CHtml::image( Yii::app()->baseUrl . $img, '', array('style' => 'max-height: 60%')); ?>
-							</a>
-						</center>
-					</div>
-					<?
-					$i++;
-				}
-				?>
 
-			</div>
-			<ol class="carousel-indicators alert alert-info" >
-				<?php
-				for ($i = 0; $i<sizeof($imgs); $i++)
-				{
-					?>
-						<li data-target="#myCarousel" data-slide-to="<?php echo $i; ?>" class="<?php echo ($i==0)?"active":""; ?>"></li>
-					<?
-				}
-				?>
-			</ol>
-			<!-- Carousel nav -->
-			<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-			<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-		</div>
-	<?php
-}
+$abaImagens = $this->renderPartial(
+	'_view_imagens',
+	array(
+		'model'=>$model,
+	),
+	true
+);
+
+$nfpb=new NotaFiscalProdutoBarra('search');
+
+$nfpb->unsetAttributes();  // clear any default values
+
+if(isset($_GET['NotaFiscalProdutoBarra']))
+	Yii::app()->session['FiltroNotaFiscalProdutoBarraIndex'] = $_GET['NotaFiscalProdutoBarra'];
+
+if (isset(Yii::app()->session['FiltroNotaFiscalProdutoBarraIndex']))
+	$nfpb->attributes=Yii::app()->session['FiltroNotaFiscalProdutoBarraIndex'];
+
+$nfpb->codproduto = $model->codproduto;
+
+$abaNfpb = $this->renderPartial(
+	'/notaFiscalProdutoBarra/index',
+	array(
+		'dataProvider'=>$nfpb->search(),
+		'model'=>$nfpb,
+	),
+	true
+);
+
+$npb=new NegocioProdutoBarra('search');
+
+$npb->unsetAttributes();  // clear any default values
+
+if(isset($_GET['NegocioProdutoBarra']))
+	Yii::app()->session['FiltroNegocioProdutoBarraIndex'] = $_GET['NegocioProdutoBarra'];
+
+if (isset(Yii::app()->session['FiltroNegocioProdutoBarraIndex']))
+	$npb->attributes=Yii::app()->session['FiltroNegocioProdutoBarraIndex'];
+
+$npb->codproduto = $model->codproduto;
+$npb->codnegociostatus = NegocioStatus::FECHADO;
+
+$abaNpb = $this->renderPartial(
+	'/negocioProdutoBarra/index',
+	array(
+		'dataProvider'=>$npb->search(),
+		'model'=>$npb,
+	),
+	true
+);
+
+$this->widget('bootstrap.widgets.TbTabs', 
+	array(
+		'type' => 'tabs',
+		'tabs' => 
+			array(
+				array('label' => 'Imagens', 'content' => $abaImagens, 'active' => true),
+				array('label' => 'Notas Fiscais', 'content' => $abaNfpb, 'active' => false),
+				array('label' => 'Negócios', 'content' => $abaNpb, 'active' => false),
+			)
+	)
+);

@@ -26,6 +26,15 @@
  */
 class NegocioProdutoBarra extends MGActiveRecord
 {
+	public $codproduto;
+	public $codfilial;
+	public $codpessoa;
+	public $codnaturezaoperacao;
+	public $codnegociostatus;
+	public $lancamento_de;
+	public $lancamento_ate;
+	
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -49,7 +58,7 @@ class NegocioProdutoBarra extends MGActiveRecord
 			array('alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('codnegocioprodutobarra, codnegocio, quantidade, valorunitario, valortotal, codprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
+			array('lancamento_de, lancamento_ate, codnaturezaoperacao, codpessoa, codfilial, codnegociostatus, codnegocioprodutobarra, codnegocio, quantidade, valorunitario, valortotal, codprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -129,8 +138,34 @@ class NegocioProdutoBarra extends MGActiveRecord
 		$criteria->compare('criacao',$this->criacao,true);
 		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
 
+		if (!empty($this->codproduto))
+		{
+			$criteria->compare('"ProdutoBarra".codproduto', $this->codproduto);
+			$criteria->with[] = 'ProdutoBarra';
+		}
+		
+		$criteria->with[] = 'Negocio';
+		$criteria->order = '"Negocio".lancamento DESC, "Negocio".codnegocio DESC';
+		
+		$criteria->compare('"Negocio".codfilial', $this->codfilial);
+		$criteria->compare('"Negocio".codpessoa', $this->codpessoa);
+		$criteria->compare('"Negocio".codnaturezaoperacao', $this->codnaturezaoperacao);
+		$criteria->compare('"Negocio".codnegociostatus', $this->codnegociostatus);
+		
+		if ($lancamento_de = DateTime::createFromFormat("d/m/y",$this->lancamento_de))
+		{
+			$criteria->addCondition('"Negocio".lancamento >= :lancamento_de');
+			$criteria->params = array_merge($criteria->params, array(':lancamento_de' => $lancamento_de->format('Y-m-d')));
+		}
+		if ($lancamento_ate = DateTime::createFromFormat("d/m/y",$this->lancamento_ate))
+		{
+			$criteria->addCondition('"Negocio".lancamento <= :lancamento_ate');
+			$criteria->params = array_merge($criteria->params, array(':lancamento_ate' => $lancamento_ate->format('Y-m-d')));
+		}
+		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'pagination'=>array('pageSize'=>15),
 		));
 	}
 
