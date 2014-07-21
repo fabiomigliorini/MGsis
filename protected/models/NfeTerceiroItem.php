@@ -74,7 +74,7 @@ class NfeTerceiroItem extends MGActiveRecord
 			array('codnfeterceiro', 'required'),
 			array('nitem, cfop', 'numerical', 'integerOnly'=>true),
 			array('cprod, cean, ceantrib', 'length', 'max'=>30),
-			array('xprod', 'length', 'max'=>100),
+			array('xprod', 'length', 'max'=>200),
 			array('ncm, ucom, cst, csosn', 'length', 'max'=>10),
 			array('qcom, vuncom, vprod, utrib, qtrib, vuntrib, vbc, picms, vicms, vbcst, picmsst, vicmsst, ipivbc, ipipipi, ipivipi, complemento', 'length', 'max'=>14),
 			array('margem', 'length', 'max'=>6),
