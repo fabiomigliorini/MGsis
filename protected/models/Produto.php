@@ -49,6 +49,7 @@ class Produto extends MGActiveRecord
 	public $alteracao_de;
 	public $alteracao_ate;
 	
+	private $_preco;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -331,4 +332,24 @@ class Produto extends MGActiveRecord
 		
 		return $imgs;
 	}
+	
+	protected function afterFind()
+	{
+		$this->_preco = $this->preco;
+		return parent::afterFind();
+	}
+	
+	protected function afterSave()
+	{
+		if (!empty($this->preco) && ($this->_preco <> $this->preco))
+		{
+			$php = new ProdutoHistoricoPreco();
+			$php->codproduto = $this->codproduto;
+			$php->precoantigo = $this->_preco;
+			$php->preconovo = $this->preco;
+			$php->save();
+		}
+		parent::afterSave();
+	}
+	
 }

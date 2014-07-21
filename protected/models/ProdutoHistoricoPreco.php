@@ -39,7 +39,7 @@ class ProdutoHistoricoPreco extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codprodutohistoricopreco, codproduto, precoantigo, preconovo', 'required'),
+			array('codproduto, precoantigo, preconovo', 'required'),
 			array('precoantigo, preconovo', 'length', 'max'=>14),
 			array('codprodutoembalagem, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
