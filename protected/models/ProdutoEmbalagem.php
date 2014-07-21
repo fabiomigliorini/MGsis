@@ -27,6 +27,8 @@ class ProdutoEmbalagem extends MGActiveRecord
 	var $descricao;
 	var $preco_calculado;
 	
+	private $_preco;
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -174,16 +176,14 @@ class ProdutoEmbalagem extends MGActiveRecord
 	protected function afterFind()
 	{
 		$ret = parent::afterFind();
+		
 		$this->descricao = "C/" . Yii::app()->format->formatNumber($this->quantidade, 0);
+		
 		if (isset($this->Produto))
 			$this->preco_calculado = (!empty($this->preco)) ? $this->preco : $this->Produto->preco * $this->quantidade;
-		/*
-		 * 
-		 */
-		//echo "<pre>";
-		//echo print_r($this->Produto);
-		//echo $this->Produto->_attributes["preco"];
-		//echo "</pre>";
+		
+		$this->_preco = $this->preco;
+		
 		return $ret;
 	}
 
@@ -215,6 +215,21 @@ class ProdutoEmbalagem extends MGActiveRecord
 		$pb->codprodutoembalagem = $this->codprodutoembalagem;
 		
 		return $pb->save();
+	}
+
+	protected function afterSave()
+	{
+		//Grava Historico de alteracao de preco
+		if ((!$this->isNewRecord) && ($this->_preco != $this->preco))
+		{
+			$php = new ProdutoHistoricoPreco();
+			$php->codproduto = $this->codproduto;
+			$php->codprodutoembalagem = $this->codprodutoembalagem;
+			$php->precoantigo = $this->_preco;
+			$php->preconovo = $this->preco;
+			$php->save();
+		}
+		return parent::afterSave();
 	}
 	
 	

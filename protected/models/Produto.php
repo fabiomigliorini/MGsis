@@ -341,7 +341,8 @@ class Produto extends MGActiveRecord
 	
 	protected function afterSave()
 	{
-		if (!empty($this->preco) && ($this->_preco <> $this->preco))
+		//Grava Historico de alteracao de preco
+		if ((!$this->isNewRecord) && ($this->_preco != $this->preco))
 		{
 			$php = new ProdutoHistoricoPreco();
 			$php->codproduto = $this->codproduto;
@@ -349,7 +350,8 @@ class Produto extends MGActiveRecord
 			$php->preconovo = $this->preco;
 			$php->save();
 		}
-		parent::afterSave();
+		
+		return parent::afterSave();
 	}
 	
 }
