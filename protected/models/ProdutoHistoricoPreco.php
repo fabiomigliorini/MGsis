@@ -7,10 +7,8 @@
  * @property string $codprodutohistoricopreco
  * @property string $codproduto
  * @property string $codprodutoembalagem
- * @property string $codusuario
  * @property string $precoantigo
  * @property string $preconovo
- * @property string $data
  * @property string $alteracao
  * @property string $codusuarioalteracao
  * @property string $criacao
@@ -41,12 +39,12 @@ class ProdutoHistoricoPreco extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codprodutohistoricopreco, codproduto, precoantigo, preconovo, data', 'required'),
+			array('codprodutohistoricopreco, codproduto, precoantigo, preconovo', 'required'),
 			array('precoantigo, preconovo', 'length', 'max'=>14),
-			array('codprodutoembalagem, codusuario, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
+			array('codprodutoembalagem, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('codprodutohistoricopreco, codproduto, codprodutoembalagem, codusuario, precoantigo, preconovo, data, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
+			array('codprodutohistoricopreco, codproduto, codprodutoembalagem, precoantigo, preconovo, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,7 +58,6 @@ class ProdutoHistoricoPreco extends MGActiveRecord
 		return array(
 			'Produto' => array(self::BELONGS_TO, 'Produto', 'codproduto'),
 			'ProdutoEmbalagem' => array(self::BELONGS_TO, 'ProdutoEmbalagem', 'codprodutoembalagem'),
-			'Usuario' => array(self::BELONGS_TO, 'Usuario', 'codusuario'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
@@ -75,10 +72,8 @@ class ProdutoHistoricoPreco extends MGActiveRecord
 			'codprodutohistoricopreco' => '#',
 			'codproduto' => 'Produto',
 			'codprodutoembalagem' => 'Produto Embalagem',
-			'codusuario' => 'Usuário',
 			'precoantigo' => 'Preço Antigo',
 			'preconovo' => 'Novo Preço',
-			'data' => 'Data',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
@@ -107,10 +102,8 @@ class ProdutoHistoricoPreco extends MGActiveRecord
 		$criteria->compare('codprodutohistoricopreco',$this->codprodutohistoricopreco,true);
 		$criteria->compare('codproduto',$this->codproduto,true);
 		$criteria->compare('codprodutoembalagem',$this->codprodutoembalagem,true);
-		$criteria->compare('codusuario',$this->codusuario,true);
 		$criteria->compare('precoantigo',$this->precoantigo,true);
 		$criteria->compare('preconovo',$this->preconovo,true);
-		$criteria->compare('data',$this->data,true);
 		$criteria->compare('alteracao',$this->alteracao,true);
 		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
 		$criteria->compare('criacao',$this->criacao,true);
