@@ -161,6 +161,7 @@ class NotaFiscalController extends Controller
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
+			$transaction = Yii::app()->db->beginTransaction();
 			try
 			{
 				$model = $this->loadModel($id);
@@ -168,20 +169,30 @@ class NotaFiscalController extends Controller
 				if (!$model->podeEditar())
 					throw new CHttpException(409, 'Nota Fiscal não permite exclusão!');
 				
+				$model->nfechave = null;
+				$model->save();
+				
 				foreach ($model->NotaFiscalDuplicatass as $dup)
 					$dup->delete();
 				
 				foreach ($model->NotaFiscalProdutoBarras as $prod)
 					$prod->delete();
 				
+				foreach ($model->NfeTerceiros as $ter)
+				{
+					$ter->codnotafiscal = null;
+					$ter->save();
+				}
+				
 				$model->delete();
-					
+				$transaction->commit();
 				// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 				if(!isset($_GET['ajax']))
 					$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
 			}
 			catch(CDbException $e)
 			{
+				$transaction->rollBack();
 				// Cannot delete or update a parent row: a foreign key constraint fails
 				if($e->errorInfo[1] == 7)
 				{

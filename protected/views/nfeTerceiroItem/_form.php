@@ -87,6 +87,33 @@
 
 <script type='text/javascript'>
 	
+function calculaCusto()
+{
+	var vprod = parseFloat($('#NfeTerceiroItem_vprod').autoNumeric('get'));
+	if (isNaN(vprod))
+		vprod = 0;
+
+	var vipi = parseFloat($('#NfeTerceiroItem_ipivipi').autoNumeric('get'));
+	if (isNaN(vipi))
+		vipi = 0;
+
+	var vst = parseFloat($('#NfeTerceiroItem_vicmsst').autoNumeric('get'));
+	if (isNaN(vst))
+		vst = 0;
+
+	var vicms = parseFloat($('#NfeTerceiroItem_vicmscomplementar').autoNumeric('get'));
+	if (isNaN(vicms))
+		vicms = 0;
+
+	var vcomp = parseFloat($('#NfeTerceiroItem_complemento').autoNumeric('get'));
+	if (isNaN(vcomp))
+		vcomp = 0;
+
+	var custo = vprod + vipi + vst + vicms + vcomp;
+
+	$('#NfeTerceiroItem_vcusto').autoNumeric('set', custo);
+	
+}
 $(document).ready(function() {
 
 	//$("#Pessoa_fantasia").Setcase();
@@ -101,31 +128,10 @@ $(document).ready(function() {
 	$('#NfeTerceiroItem_margem').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 
 	$('#NfeTerceiroItem_complemento').change(function (e){
-		
-		var vprod = parseFloat($('#NfeTerceiroItem_vprod').autoNumeric('get'));
-		if (isNaN(vprod))
-			vprod = 0;
-		
-		var vipi = parseFloat($('#NfeTerceiroItem_ipivipi').autoNumeric('get'));
-		if (isNaN(vipi))
-			vipi = 0;
-		
-		var vst = parseFloat($('#NfeTerceiroItem_vicmsst').autoNumeric('get'));
-		if (isNaN(vst))
-			vst = 0;
-		
-		var vicms = parseFloat($('#NfeTerceiroItem_vicmscomplementar').autoNumeric('get'));
-		if (isNaN(vicms))
-			vicms = 0;
-		
-		var vcomp = parseFloat($('#NfeTerceiroItem_complemento').autoNumeric('get'));
-		if (isNaN(vcomp))
-			vcomp = 0;
-		
-		var custo = vprod + vipi + vst + vicms + vcomp;
-		
-		$('#NfeTerceiroItem_vcusto').autoNumeric('set', custo);
+		calculaCusto();
 	});
+	
+	calculaCusto();
 	
 	$('#nfe-terceiro-item-form').submit(function(e) {
         var currentForm = this;

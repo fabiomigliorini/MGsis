@@ -670,6 +670,13 @@ class NfeTerceiro extends MGActiveRecord
 		
 		foreach ($this->NfeTerceiroItems as $nti)
 		{
+			if (empty($nti->vsugestaovenda))
+			{
+				$this->addError("codnfeterceiro", "Não foi informado os detalhes para todos os itens!");
+				$transaction->rollBack();
+				return false;
+			}
+			
 			$nfpb = new NotaFiscalProdutoBarra();
 			
 			$nfpb->codnotafiscal = $nf->codnotafiscal;

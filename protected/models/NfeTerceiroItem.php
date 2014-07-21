@@ -266,9 +266,6 @@ class NfeTerceiroItem extends MGActiveRecord
 		if (empty($this->NfeTerceiro->codpessoa))
 			return false;
 		
-		if (empty($this->NfeTerceiro->entrada))
-			return false;
-		
 		if (!$this->NfeTerceiro->podeEditar())
 			return false;
 		

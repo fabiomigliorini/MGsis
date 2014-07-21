@@ -48,6 +48,7 @@
  *
  * The followings are the available model relations:
  * @property NotaFiscalProdutoBarra[] $NotaFiscalProdutoBarras
+ * @property NfeTerceiro[] $NfeTerceiros
  * @property Operacao $Operacao
  * @property NaturezaOperacao $NaturezaOperacao
  * @property Filial $Filial
@@ -357,6 +358,7 @@ class NotaFiscal extends MGActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'NotaFiscalProdutoBarras' => array(self::HAS_MANY, 'NotaFiscalProdutoBarra', 'codnotafiscal', 'order'=>'criacao ASC NULLS LAST, codnotafiscalprodutobarra ASC'),
+			'NfeTerceiros' => array(self::HAS_MANY, 'NfeTerceiro', 'codnotafiscal'),
 			'Operacao' => array(self::BELONGS_TO, 'Operacao', 'codoperacao'),
 			'NaturezaOperacao' => array(self::BELONGS_TO, 'NaturezaOperacao', 'codnaturezaoperacao'),
 			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
