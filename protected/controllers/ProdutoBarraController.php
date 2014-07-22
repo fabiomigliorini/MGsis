@@ -168,6 +168,8 @@ class ProdutoBarraController extends Controller
 	{
 
 		// limpa texto
+		$ordem = (strstr($texto, '$'))?'preco':'descricao';
+		$texto = str_replace('$', '', $texto);
 		$texto  = str_replace(' ', '%', trim($texto));
 
 		// corrige pagina se veio sujeira
@@ -215,7 +217,7 @@ class ProdutoBarraController extends Controller
 			}
 
 			//ordena
-			$sql .= ") ORDER BY descricao LIMIT $limite OFFSET $offset";
+			$sql .= ") ORDER BY $ordem LIMIT $limite OFFSET $offset";
 			
 			$command = Yii::app()->db->createCommand($sql);
 			$command->params = $params;
