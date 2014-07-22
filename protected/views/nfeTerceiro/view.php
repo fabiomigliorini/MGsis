@@ -99,7 +99,7 @@ $(document).ready(function(){
 		e.preventDefault();
 		bootbox.confirm("Enviar à Sefaz o comunidado de <b class='lead text-error'>Desconhecimento da Operação</b>?<br><br>Tenha cuidado ao confirmar, pois esta ação <b>não poderá ser desfeita</b>!", function(result) {
 			if (result)
-				console.log('btnManifestacaoDesconhecida');
+				enviarEventoManifestacao (<?php echo NfeTerceiro::INDMANIFESTACAO_DESCONHECIDA; ?>, null);
 		});
 	});
 	
@@ -107,7 +107,15 @@ $(document).ready(function(){
 		e.preventDefault();
 		bootbox.confirm("Enviar à Sefaz o comunidado de <b class='lead text-error'>Operação não Realizada</b>?<br><br>Tenha cuidado ao confirmar, pois esta ação <b>não poderá ser desfeita</b>!", function(result) {
 			if (result)
-				console.log('btnManifestacaoNaoRealizada');
+			{
+				bootbox.prompt("Digite a justificativa:", "Cancelar", "OK", function(result) 
+				{ 
+					if (result === null)
+						return;
+					enviarEventoManifestacao (<?php echo NfeTerceiro::INDMANIFESTACAO_NAOREALIZADA; ?>, result);
+				});
+				//console.log('btnManifestacaoNaoRealizada');
+			}
 		});
 	});
 	
@@ -272,12 +280,17 @@ $(document).ready(function(){
 				'nfedataautorizacao',
 				'nsu',
 				array(
-						'name' => 'indsituacao',
-						'value' => $model->getIndSituacaoDescricao(),
+					'name' => 'indsituacao',
+					'value' => $model->getIndSituacaoDescricao(),
 				),
 				array(
-						'name' => 'indmanifestacao',
-						'value' => $model->getIndManifestacaoDescricao(),
+					'name' => 'indmanifestacao',
+					'value' => $model->getIndManifestacaoDescricao(),
+				),
+				array(
+					'name' => 'justificativa',
+					'value' => nl2br(CHtml::encode($model->justificativa)),
+					'type' => 'raw',
 				),
 
 			),

@@ -37,6 +37,7 @@
  * @property string $valorseguro
  * @property string $valordesconto
  * @property string $valoroutras
+ * @property string $justificativa
  * @property CUploadedFile $arquivoxml
  * @property SimpleXMLElement $xml
  *
@@ -163,6 +164,7 @@ class NfeTerceiro extends MGActiveRecord
 			'valorseguro' => 'Valor Seguro',
 			'valordesconto' => 'Valor Desconto',
 			'valoroutras' => 'Valor Outras',
+			'justificativa' => 'Justificativa',
 			'arquivoxml' => 'Arquivo XML',
 		);
 	}
@@ -204,12 +206,23 @@ class NfeTerceiro extends MGActiveRecord
 		
 		switch ($this->codnotafiscal)
 		{
-			case 1:
-				$criteria->addCondition('codnotafiscal is null');
+			case 1: // Pendentes
+				$criteria->addCondition(
+					'codnotafiscal IS NULL '
+					. ' AND indmanifestacao NOT IN (' . self::INDMANIFESTACAO_DESCONHECIDA . ', ' . self::INDMANIFESTACAO_NAOREALIZADA . ')'
+					. ' AND indsituacao = ' . self::INDSITUACAO_AUTORIZADA
+					);
 				break;
 
-			case 2:
-				$criteria->addCondition('codnotafiscal is not null');
+			case 2: // Importadas
+				$criteria->addCondition('codnotafiscal IS NOT NULL');
+				break;
+			
+			case 3: //
+				$criteria->addCondition(
+					'indmanifestacao IN (' . self::INDMANIFESTACAO_DESCONHECIDA . ', ' . self::INDMANIFESTACAO_NAOREALIZADA . ')'
+					. ' OR indsituacao != ' . self::INDSITUACAO_AUTORIZADA
+				);
 				break;
 			
 			default:
@@ -670,6 +683,13 @@ class NfeTerceiro extends MGActiveRecord
 		
 		foreach ($this->NfeTerceiroItems as $nti)
 		{
+			if (empty($nti->vsugestaovenda))
+			{
+				$this->addError("codnfeterceiro", "Não foi informado os detalhes para todos os itens!");
+				$transaction->rollBack();
+				return false;
+			}
+			
 			$nfpb = new NotaFiscalProdutoBarra();
 			
 			$nfpb->codnotafiscal = $nf->codnotafiscal;

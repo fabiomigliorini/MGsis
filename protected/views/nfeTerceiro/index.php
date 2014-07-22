@@ -73,7 +73,21 @@ $(document).ready(function(){
 	<?php echo $form->textField($model, 'nfechave', array('placeholder' => 'Chave', 'class'=>'input-xlarge')); ?>
 	<?php echo $form->select2($model, 'indmanifestacao', NfeTerceiro::getIndManifestacaoListaCombo(), array('placeholder' => 'Manifestação', 'class'=>'input-xlarge')); ?>
 	<?php echo $form->select2($model, 'indsituacao', NfeTerceiro::getIndSituacaoListaCombo(), array('placeholder' => 'Situação', 'class'=>'input-medium')); ?>
-	<?php echo $form->select2($model, 'codnotafiscal', array("1"=>"Não Importadas", "2"=>"Importadas"), array('placeholder' => 'Importação', 'class'=>'input-large')); ?>
+	<?php 
+		echo $form->select2(
+			$model, 
+			'codnotafiscal', 
+			array(
+				"1"=>"Pendentes", 
+				"2"=>"Importadas", 
+				"3"=>"Ignoradas"
+			), 
+			array(
+				'placeholder' => 'Importação', 
+				'class'=>'input-large'
+			)
+		); 
+	?>
 	<?php
 	$this->widget('bootstrap.widgets.TbButton'
 		, array(

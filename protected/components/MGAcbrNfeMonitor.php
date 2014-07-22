@@ -939,6 +939,10 @@ class MGAcbrNfeMonitor extends MGSocket
 				break;
 		}
 		
+		if ($indManifestacao == NfeTerceiro::INDMANIFESTACAO_NAOREALIZADA)
+			if (strlen($justificativa) < 15)
+				return $this->gerarErro("Texto de justificativa deve ter no minimo 15 caracteres!");
+		
 		$cnpj = str_pad($this->Filial->Pessoa->cnpj, 14, 0, STR_PAD_LEFT);
 		$data = date('d/m/Y H:i:s');
 
@@ -949,6 +953,8 @@ class MGAcbrNfeMonitor extends MGSocket
 		$cmd .= "chNFe={$this->NfeTerceiro->nfechave}\n";
 		$cmd .= "cOrgao=91\n";
 		$cmd .= "CNPJ={$cnpj}\n";
+		if (!empty($justificativa))
+			$cmd .= "xJust={$justificativa}\n";
 		$cmd .= "dhEvento={$data}\n";
 		$cmd .= "tpEvento={$tpEvento}\n";
 		$cmd .= "nSeqEvento=1\n";
@@ -976,6 +982,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		$this->retornoMonitor["Mensagem"][1] = isset($this->retornoMonitor["EVENTO001"]["xMotivo"])?$this->retornoMonitor["EVENTO001"]["xMotivo"]:$this->retornoMonitor["Mensagem"][1];	
 
 		$this->NfeTerceiro->indmanifestacao = $indManifestacao;
+		$this->NfeTerceiro->justificativa = $justificativa;
 		return $this->NfeTerceiro->save();
 	}
 	

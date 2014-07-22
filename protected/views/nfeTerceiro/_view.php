@@ -2,9 +2,17 @@
 /**
  * @var NfeTerceiro $data
  */
+
+$css = '';
+if (
+	in_array($data->indmanifestacao, array(NfeTerceiro::INDMANIFESTACAO_NAOREALIZADA, NfeTerceiro::INDMANIFESTACAO_DESCONHECIDA))
+	|| in_array($data->indsituacao, array(NfeTerceiro::INDSITUACAO_CANCELADA, NfeTerceiro::INDSITUACAO_CANCELADA))
+	)
+	$css = 'alert-danger';
+	
 ?>
 
-<div class="registro row-fluid">
+<div class="row-fluid registro <?php echo $css; ?>">
 	<div class="span1">
 		<b>
 			<?php echo CHtml::encode($data->Filial->filial); ?>

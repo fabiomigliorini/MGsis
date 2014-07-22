@@ -148,7 +148,7 @@ class NfeTerceiroController extends Controller
 			$model->attributes=Yii::app()->session['FiltroNfeTerceiroIndex'];
 		else
 		{
-			$model->indsituacao = NfeTerceiro::INDSITUACAO_AUTORIZADA;
+			//$model->indsituacao = NfeTerceiro::INDSITUACAO_AUTORIZADA;
 			$model->codnotafiscal = 1;
 		}
 		
