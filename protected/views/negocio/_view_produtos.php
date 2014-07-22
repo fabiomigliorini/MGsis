@@ -23,7 +23,7 @@ if ($model->codnegociostatus == 1)
 					'name' => 'codprodutobarra', 
 					'htmlOptions' => array(
 						'class' => 'span12', 
-						'placeholder' => 'Pesquisa de Produtos (Utilize $ para ordenar por Preço)'
+						'placeholder' => 'Pesquisa de Produtos ($ ordena por preço)'
 						),
 					)
 				); 
