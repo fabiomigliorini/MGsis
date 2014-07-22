@@ -23,6 +23,12 @@
  */
 class ProdutoHistoricoPreco extends MGActiveRecord
 {
+	public $produto;
+	public $referencia;
+	public $codmarca;
+	public $codusuariocriacao;
+	public $alteracao_de;
+	public $alteracao_ate;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -44,7 +50,7 @@ class ProdutoHistoricoPreco extends MGActiveRecord
 			array('codprodutoembalagem, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('codprodutohistoricopreco, codproduto, codprodutoembalagem, precoantigo, preconovo, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
+			array('alteracao_de, alteracao_ate, codusuariocriacao, codmarca, referencia, produto, codprodutohistoricopreco, codproduto, codprodutoembalagem, precoantigo, preconovo, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -99,18 +105,51 @@ class ProdutoHistoricoPreco extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codprodutohistoricopreco',$this->codprodutohistoricopreco,true);
-		$criteria->compare('codproduto',$this->codproduto,true);
-		$criteria->compare('codprodutoembalagem',$this->codprodutoembalagem,true);
-		$criteria->compare('precoantigo',$this->precoantigo,true);
-		$criteria->compare('preconovo',$this->preconovo,true);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('t.codprodutohistoricopreco',$this->codprodutohistoricopreco,false);
+		//$criteria->compare('codproduto',$this->codproduto,false);
+		$criteria->compare('t.codproduto',Yii::app()->format->numeroLimpo($this->codproduto),false);
+		$criteria->compare('t.codprodutoembalagem',$this->codprodutoembalagem,false);
+		$criteria->compare('t.precoantigo',$this->precoantigo,false);
+		$criteria->compare('t.preconovo',$this->preconovo,false);
+		$criteria->compare('t.alteracao',$this->alteracao,false);
+		$criteria->compare('t.codusuarioalteracao',$this->codusuarioalteracao,false);
+		$criteria->compare('t.criacao',$this->criacao,false);
+		//$criteria->compare('t.codusuariocriacao',$this->codusuariocriacao,false);
+		$criteria->compare('t.codusuariocriacao',Yii::app()->format->numeroLimpo($this->codusuariocriacao),false);
+		
+		$criteria->order = 't.alteracao DESC';
+		$criteria->with[] = 'Produto';
+		
+		if (!empty($this->produto))
+		{
+			$criteria->addCondition('"Produto".produto ilike :produto');
+			$criteria->params[':produto'] = '%' . str_replace(' ', '%', trim($this->produto)) . '%';
+		}
+		
+		if (!empty($this->produto))
+		{
+			$criteria->addCondition('"Produto".referencia ilike :referencia');
+			$criteria->params[':referencia'] = '%' . str_replace(' ', '%', trim($this->referencia)) . '%';
+		}
+
+		//$criteria->compare('"Produto".referencia', $this->referencia);
+		$criteria->compare('"Produto".codmarca', $this->codmarca);
+		//$criteria->compare('"Produto".codusuariocriacao', $this->codusuariocriacao);
+		
+		if ($alteracao_de = DateTime::createFromFormat("d/m/y",$this->alteracao_de))
+		{
+			$criteria->addCondition('t.alteracao >= :alteracao_de');
+			$criteria->params[':alteracao_de'] = $alteracao_de->format('Y-m-d').' 00:00:00.0';
+		}
+		if ($alteracao_ate = DateTime::createFromFormat("d/m/y",$this->alteracao_ate))
+		{
+			$criteria->addCondition('t.alteracao <= :alteracao_ate');
+			$criteria->params[':alteracao_ate'] = $alteracao_ate->format('Y-m-d').' 23:59:59.9';
+		}
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'pagination'=>array('pageSize'=>20)
 		));
 	}
 

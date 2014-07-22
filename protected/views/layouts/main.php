@@ -85,6 +85,7 @@
 				'url'=>'#', 
 				'items'=>array(
 					array('label' => 'Grupos de Produtos', 'url' => Yii::app()->createUrl('grupoProduto')),
+					array('label' => 'Historico de Preço', 'url' => Yii::app()->createUrl('produtoHistoricoPreco')),
 					array('label' => 'Marcas', 'url' => Yii::app()->createUrl('marca')),
 					array('label' => 'NCM', 'url' => Yii::app()->createUrl('ncm')),
 					array('label' => 'Produtos', 'url' => Yii::app()->createUrl('produto')),

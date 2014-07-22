@@ -1,12 +1,13 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Produto Historico Preco';
+$this->pagetitle = Yii::app()->name . ' - Historico Preço';
 $this->breadcrumbs=array(
-	'Produto Historico Preco',
+	'Historico Preço',
 );
 
 $this->menu=array(
-	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
+	//array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
+	array('label'=>'Relatorio', 'icon'=>'XXXX', 'url'=>array('relatorio')),
 	);
 ?>
 
@@ -25,7 +26,7 @@ $(document).ready(function(){
 
 </script>
 
-<h1>Produto Historico Preco</h1>
+<h1>Historico de Preço</h1>
 
 <br>
 
@@ -38,7 +39,41 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
-	<?php echo $form->textField($model, 'codusuariocriacao', array('placeholder' => '#', 'class'=>'input-mini')); ?>
+	<input type ="hidden" name="id" value="<?php echo $model->codproduto;?>">
+	<?php echo $form->textField($model, 'codproduto', array('placeholder' => '#', 'class'=>'input-mini')); ?>
+	<?php echo $form->textField($model, 'produto', array('placeholder' => 'Produto', 'class'=>'input-xlarge')); ?>
+	<?php echo $form->textField($model, 'referencia', array('placeholder' => 'Referencia', 'class'=>'input-large')); ?>
+	<?php //echo $form->textField($model, 'codusuariocriacao', array('placeholder' => 'Usuário', 'class'=>'input-large')); ?>
+	<?php 
+		echo $form->datepickerRow(
+			$model,
+			'alteracao_de',
+			array(
+				'class' => 'input-mini text-center', 
+				'options' => array(
+					'format' => 'dd/mm/yy'
+				),
+				'placeholder' => 'Alteração',
+				'prepend' => 'De',
+			)
+		); 	
+	?>
+	<?php 
+		echo $form->datepickerRow(
+			$model,
+			'alteracao_ate',
+			array(
+				'class' => 'input-mini text-center', 
+				'options' => array(
+					'format' => 'dd/mm/yy'
+				),
+				'placeholder' => 'Alteração',
+				'prepend' => 'Até',
+			)
+		); 	
+	?>
+	<?php echo $form->select2Marca($model, 'codmarca');?>
+	<?php echo $form->select2($model, 'codusuariocriacao', Usuario::getListaCombo(), array('placeholder'=>'Usuário', 'class' => 'input-medium')); ?>	
 	<?php
 	$this->widget('bootstrap.widgets.TbButton'
 		, array(
