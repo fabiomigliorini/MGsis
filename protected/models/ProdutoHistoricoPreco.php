@@ -126,7 +126,13 @@ class ProdutoHistoricoPreco extends MGActiveRecord
 			$criteria->params[':produto'] = '%' . str_replace(' ', '%', trim($this->produto)) . '%';
 		}
 		
-		$criteria->compare('"Produto".referencia', $this->referencia);
+		if (!empty($this->produto))
+		{
+			$criteria->addCondition('"Produto".referencia ilike :referencia');
+			$criteria->params[':referencia'] = '%' . str_replace(' ', '%', trim($this->referencia)) . '%';
+		}
+
+		//$criteria->compare('"Produto".referencia', $this->referencia);
 		$criteria->compare('"Produto".codmarca', $this->codmarca);
 		//$criteria->compare('"Produto".codusuariocriacao', $this->codusuariocriacao);
 		
