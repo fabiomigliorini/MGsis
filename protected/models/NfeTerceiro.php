@@ -37,6 +37,7 @@
  * @property string $valorseguro
  * @property string $valordesconto
  * @property string $valoroutras
+ * @property string $justificativa
  * @property CUploadedFile $arquivoxml
  * @property SimpleXMLElement $xml
  *
@@ -163,6 +164,7 @@ class NfeTerceiro extends MGActiveRecord
 			'valorseguro' => 'Valor Seguro',
 			'valordesconto' => 'Valor Desconto',
 			'valoroutras' => 'Valor Outras',
+			'justificativa' => 'Justificativa',
 			'arquivoxml' => 'Arquivo XML',
 		);
 	}
