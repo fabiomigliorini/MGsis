@@ -1,6 +1,4 @@
 <div class="registro <?php echo (!empty($data->inativo))?"alert-danger":""; ?>">
-	<h4>
-	</h4>
 	<div class="row-fluid">
 		<div class="span4">
 			<b class="row">
