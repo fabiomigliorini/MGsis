@@ -168,7 +168,7 @@ class ProdutoBarraController extends Controller
 	{
 
 		// limpa texto
-		$ordem = (strstr($texto, '$'))?'preco, descricao':'descricao';
+		$ordem = (strstr($texto, '$'))?'preco ASC, descricao ASC':'descricao ASC, preco ASC';
 		$texto = str_replace('$', '', $texto);
 		$texto  = str_replace(' ', '%', trim($texto));
 
