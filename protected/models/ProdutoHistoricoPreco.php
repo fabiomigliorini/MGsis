@@ -99,7 +99,7 @@ class ProdutoHistoricoPreco extends MGActiveRecord
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
-	public function search()
+	public function search($comoDataProvider = true)
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
@@ -146,11 +146,21 @@ class ProdutoHistoricoPreco extends MGActiveRecord
 			$criteria->addCondition('t.alteracao <= :alteracao_ate');
 			$criteria->params[':alteracao_ate'] = $alteracao_ate->format('Y-m-d').' 23:59:59.9';
 		}
+		
+		$criteria->order = 't.alteracao DESC';
+		
+		if ($comoDataProvider)
+		{
+			return new CActiveDataProvider($this, array(
+				'criteria'=>$criteria,
+				'pagination'=>array('pageSize'=>20)
+			));
+		}
+		else
+		{
+			return $this->findAll($criteria);
+		}
 
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-			'pagination'=>array('pageSize'=>20)
-		));
 	}
 
 	/**

@@ -174,4 +174,27 @@ class ProdutoHistoricoPrecoController extends Controller
 			Yii::app()->end();
 		}
 	}
+	
+	public function actionRelatorio()
+	{
+		
+		$model=new ProdutoHistoricoPreco('search');
+		
+		$model->unsetAttributes();  // clear any default values
+		
+		if(isset($_GET['ProdutoHistoricoPreco']))
+			Yii::app()->session['FiltroProdutoHistoricoPrecoIndex'] = $_GET['ProdutoHistoricoPreco'];
+		
+		if (isset(Yii::app()->session['FiltroProdutoHistoricoPrecoIndex']))
+			$model->attributes=Yii::app()->session['FiltroProdutoHistoricoPrecoIndex'];
+		
+		$precos = $model->search(false);
+		
+		$rel = new MGRelatorioProdutoHistoricoPreco($precos);
+		$rel->montaRelatorio();
+		$rel->Output();
+		 
+		
+	}
+	
 }

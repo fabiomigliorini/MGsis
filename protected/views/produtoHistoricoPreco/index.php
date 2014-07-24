@@ -7,13 +7,30 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	//array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
-	array('label'=>'Relatorio', 'icon'=>'XXXX', 'url'=>array('relatorio')),
+	array(
+		'label'=>'Relatório', 
+		'icon'=>'icon-print', 
+		'url'=>array('relatorio'), 
+		'linkOptions'=>array('id'=>'btnMostrarRelatorio'),
+	),
 	);
 ?>
 
 <script type='text/javascript'>
 
 $(document).ready(function(){
+	
+	//abre janela Relatorio
+	var frameSrcRelatorio = $('#btnMostrarRelatorio').attr('href');
+	$('#btnMostrarRelatorio').click(function(event){
+		event.preventDefault();
+		$('#modalRelatorio').on('show', function () {
+			$('#frameRelatorio').attr("src",frameSrcRelatorio);
+		});
+		$('#modalRelatorio').modal({show:true})
+		$('#modalRelatorio').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
+	});	
+	
 	$('#search-form').change(function(){
 		var ajaxRequest = $("#search-form").serialize();
 		$.fn.yiiListView.update(
@@ -25,6 +42,18 @@ $(document).ready(function(){
 });
 
 </script>
+
+<div id="modalRelatorio" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">  
+		<div class="pull-right">
+			<button class="btn" data-dismiss="modal">Fechar</button>
+		</div>
+		<h3>Relatório de Alteração de Preços</h3>  
+	</div>  
+	<div class="modal-body">
+      <iframe src="" id="frameRelatorio" name="frameRelatorio" width="99.6%" height="400" frameborder="0"></iframe>
+	</div>
+</div>
 
 <h1>Historico de Preço</h1>
 
