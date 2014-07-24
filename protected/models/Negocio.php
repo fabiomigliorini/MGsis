@@ -387,6 +387,8 @@ class Negocio extends MGActiveRecord
 		//acumula o valor de desconto
 		$nota->valordesconto += $this->valordesconto;
 		
+		$primeiro = true;
+		
 		//percorre os itens do negocio e adiciona na nota
 		foreach($this->NegocioProdutoBarras as $negocioItem)
 		{
@@ -399,8 +401,9 @@ class Negocio extends MGActiveRecord
 			}
 			
 			//esta aqui para so salvar a nota, caso exista algum produto por adicionar
-			if (empty($nota->codnotafiscal))
+			if (empty($nota->codnotafiscal) || $primeiro)
 			{
+				$primeiro = false;
 				//salva nota fiscal
 				if (!$nota->save())
 				{
