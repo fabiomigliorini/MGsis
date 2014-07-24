@@ -401,7 +401,7 @@ class Negocio extends MGActiveRecord
 			}
 			
 			//esta aqui para so salvar a nota, caso exista algum produto por adicionar
-			if (empty($nota->codnotafiscal) || $primeiro)
+			if ($primeiro)
 			{
 				$primeiro = false;
 				//salva nota fiscal
