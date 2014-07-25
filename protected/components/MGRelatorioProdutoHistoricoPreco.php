@@ -121,7 +121,7 @@ class MGRelatorioProdutoHistoricoPreco extends FPDF
 			$this->SetTextColor(255, 0, 0);
 			$this->Cell(15, 5, utf8_decode(Yii::app()->format->formatNumber($model->precoantigo)),   '', 0, 'R', $this->_fill);
 			$this->SetX(150);
-			$this->Cell(15, 5,"---------------", '', 0, 'R', $this->_fill);
+			$this->Cell(15, 5,"---------------", '', 0, 'R', false);
             $this->SetX(165);
 			
 			$this->SetTextColor(0, 0, 0);
