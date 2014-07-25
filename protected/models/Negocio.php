@@ -201,11 +201,11 @@ class Negocio extends MGActiveRecord
 		switch ($this->pagamento)
 		{
 			case "a":
-				$criteria->addCondition('t.valoravista >= 0');
+				$criteria->addCondition('t.valoravista > 0');
 				break;
 
 			case "p":
-				$criteria->addCondition('t.valoraprazo >= 0');
+				$criteria->addCondition('t.valoraprazo > 0');
 				break;
 			
 			default:
