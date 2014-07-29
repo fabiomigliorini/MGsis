@@ -36,7 +36,7 @@
 $(document).ready(function() {
 
 	$('#ProdutoEmbalagem_preco').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
-	$('#ProdutoEmbalagem_quantidade').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+	$('#ProdutoEmbalagem_quantidade').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.', mDec:5 });
 
 	$('#produto-embalagem-form').submit(function(e) {
         var currentForm = this;

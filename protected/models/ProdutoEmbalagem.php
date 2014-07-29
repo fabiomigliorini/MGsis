@@ -47,7 +47,7 @@ class ProdutoEmbalagem extends MGActiveRecord
 		return array(
 			array('codunidademedida, quantidade', 'required'),
 			array('quantidade, preco', 'length', 'max'=>14),
-			array('quantidade', 'numerical', 'min'=>1.01),
+			array('quantidade', 'numerical', 'min'=>0.00001),
 			array('preco', 'numerical'),
 			array('preco', 'validaPreco'),
 			array('quantidade', 'validaQuantidade'),
@@ -177,7 +177,12 @@ class ProdutoEmbalagem extends MGActiveRecord
 	{
 		$ret = parent::afterFind();
 		
-		$this->descricao = "C/" . Yii::app()->format->formatNumber($this->quantidade, 0);
+		if (floor($this->quantidade) == $this->quantidade)
+			$decimais = 0;
+		else
+			$decimais = 5;
+		
+		$this->descricao = "C/" . Yii::app()->format->formatNumber($this->quantidade, $decimais);
 		
 		if (isset($this->Produto))
 			$this->preco_calculado = (!empty($this->preco)) ? $this->preco : $this->Produto->preco * $this->quantidade;
