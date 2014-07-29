@@ -143,6 +143,26 @@ class ProdutoController extends Controller
 			'model'=>$model,
 			));
 	}
+	
+	public function actionQuiosqueConsulta ($barras = null)
+	{
+		
+		if (isset($_POST['barras']))
+			$barras = $_POST['barras'];
+
+		if (!empty($barras))
+			$model = ProdutoBarra::findByBarras($barras);
+		else
+			$model = null;
+		
+		$this->layout = '//layouts/quiosque';
+		
+		$this->render('quiosque_consulta',array(
+			'model'=>$model,
+			'barras'=>$barras,
+			));
+		
+	}
 
 	/**
 	* Returns the data model based on the primary key given in the GET variable.

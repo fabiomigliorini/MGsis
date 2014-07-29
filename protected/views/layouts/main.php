@@ -32,6 +32,10 @@
 
 	</script>	
 	<style>
+		body {
+			padding-top: 100px;
+			padding-bottom: 60px;
+		}		
 		@media print {
 			a[href]:after {
 			  content: none;

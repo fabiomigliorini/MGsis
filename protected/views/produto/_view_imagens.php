@@ -5,7 +5,6 @@ $imgs = $model->getImagens();
 if (sizeof($imgs) > 0)
 {
 	?>
-		<h3>Imagens</h3>
 		<div id="myCarousel" class="carousel slide">
 			<!-- Carousel items -->
 			<div class="carousel-inner">
@@ -14,7 +13,7 @@ if (sizeof($imgs) > 0)
 				foreach ($imgs as $img)
 				{
 					?>
-					<div class="item <?php echo ($i==0)?"active":""; ?> span12 text-center">
+					<div class="item <?php echo ($i==0)?"active":""; ?>">
 						<center>
 							<a href="<?php echo Yii::app()->baseUrl . $img ?>" target="_blank">
 								<?php //echo CHtml::image( Yii::app()->baseUrl . $img, '', array('style' => 'min-height: 60%')); ?>
