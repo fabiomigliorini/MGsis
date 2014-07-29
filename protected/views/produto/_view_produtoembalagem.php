@@ -8,7 +8,7 @@ if (!isset($pe))
 }
 else
 {
-	$sigla = $pe->UnidadeMedida->sigla . " C/" . Yii::app()->format->formatNumber($pe->quantidade, 0);
+	$sigla = $pe->UnidadeMedida->sigla . " " . $pe->descricao;
 	$preco = empty($pe->preco)?$data->preco * $pe->quantidade:$pe->preco;
 	$condition = 'codprodutoembalagem = :cod';
 	$params = array(':cod'=>$pe->codprodutoembalagem);
