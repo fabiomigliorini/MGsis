@@ -109,12 +109,13 @@ $(document).ready(function(){
 		
 		if (!empty($model->vsugestaovenda))
 		{
-			$attr[]=
-				array(
-					'name'=>'codprodutobarra',
-					'value'=>CHtml::link(CHtml::encode($model->ProdutoBarra->Produto->produto), array('produto/view', 'id'=>$model->ProdutoBarra->codproduto)),
-					'type'=>'raw',
-				);		
+			if (isset($model->ProdutoBarra))
+				$attr[]=
+					array(
+						'name'=>'codprodutobarra',
+						'value'=>CHtml::link(CHtml::encode($model->ProdutoBarra->Produto->produto), array('produto/view', 'id'=>$model->ProdutoBarra->codproduto)),
+						'type'=>'raw',
+					);		
 			$attr[]=
 				array(
 					'name'=>'margem',
@@ -145,34 +146,35 @@ $(document).ready(function(){
 					'value'=>Yii::app()->format->formatNumber($model->vsugestaovenda),
 				);
 			
-			foreach ($model->ProdutoBarra->Produto->ProdutoEmbalagems as $pe)
-			{
-				if (!empty($pe->preco))
-					$venda = $pe->preco;
-				else 
-					$venda = $model->ProdutoBarra->Produto->preco * $pe->quantidade;
-				
-				$sugestao = $model->vsugestaovenda * $pe->quantidade;
-				$cssVenda = 'text-success';
-				if ($venda <= $sugestao * 0.97)
-					$cssVenda = 'text-error';
+			if (isset($model->ProdutoBarra))
+				foreach ($model->ProdutoBarra->Produto->ProdutoEmbalagems as $pe)
+				{
+					if (!empty($pe->preco))
+						$venda = $pe->preco;
+					else 
+						$venda = $model->ProdutoBarra->Produto->preco * $pe->quantidade;
 
-				if ($venda >= $sugestao * 1.05)
-					$cssVenda = 'text-warning';
+					$sugestao = $model->vsugestaovenda * $pe->quantidade;
+					$cssVenda = 'text-success';
+					if ($venda <= $sugestao * 0.97)
+						$cssVenda = 'text-error';
 
-				$attr[]=
-					array(
-						'label'=>$pe->UnidadeMedida->sigla . ' ' . $pe->descricao,
-						'value'=>Yii::app()->format->formatNumber($venda),
-						'cssClass'=>$cssVenda,
-					);
-				$attr[]=
-					array(
-						'label'=>'Sugestão',
-						'value'=>Yii::app()->format->formatNumber($sugestao),
-					);
+					if ($venda >= $sugestao * 1.05)
+						$cssVenda = 'text-warning';
+
+					$attr[]=
+						array(
+							'label'=>$pe->UnidadeMedida->sigla . ' ' . $pe->descricao,
+							'value'=>Yii::app()->format->formatNumber($venda),
+							'cssClass'=>$cssVenda,
+						);
+					$attr[]=
+						array(
+							'label'=>'Sugestão',
+							'value'=>Yii::app()->format->formatNumber($sugestao),
+						);
+				}
 			}
-		}
 		
 		$this->widget('bootstrap.widgets.TbDetailView',array(
 			'data'=>$model,
