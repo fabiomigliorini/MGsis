@@ -88,11 +88,12 @@
 				'label' => 'Estoque', 
 				'url'=>'#', 
 				'items'=>array(
+					array('label' => 'Produtos', 'url' => Yii::app()->createUrl('produto')),
+					array('label' => 'Consulta de Preço', 'url' => Yii::app()->createUrl('produto/quiosqueConsulta')),
 					array('label' => 'Grupos de Produtos', 'url' => Yii::app()->createUrl('grupoProduto')),
 					array('label' => 'Historico de Preço', 'url' => Yii::app()->createUrl('produtoHistoricoPreco')),
 					array('label' => 'Marcas', 'url' => Yii::app()->createUrl('marca')),
 					array('label' => 'NCM', 'url' => Yii::app()->createUrl('ncm')),
-					array('label' => 'Produtos', 'url' => Yii::app()->createUrl('produto')),
 					array('label' => 'Tipos de Produtos', 'url' => Yii::app()->createUrl('tipoProduto')),
 					array('label' => 'Unidades de Medida', 'url' => Yii::app()->createUrl('unidadeMedida')),
 				)
