@@ -31,7 +31,7 @@ foreach ($model->NfeTerceiroItems as $item)
 			<div class="span4">
 				<?php
 				
-				if (!empty($item->vsugestaovenda))
+				if (!empty($item->vsugestaovenda) && isset($item->ProdutoBarra))
 				{
 
 					$cssVenda = 'text-success';
