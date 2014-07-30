@@ -138,6 +138,8 @@ function bootboxSalvar(currentForm)
 
 
 $(document).ready(function() {
+	
+	$("#ProdutoBarra_variacao").Setcase();
 
 	$('#produto-barra-form').submit(function(e) {
         var currentForm = this;
