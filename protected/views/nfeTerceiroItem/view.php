@@ -110,12 +110,26 @@ $(document).ready(function(){
 		if (!empty($model->vsugestaovenda))
 		{
 			if (isset($model->ProdutoBarra))
+			{
+				$produto = CHtml::link(CHtml::encode($model->ProdutoBarra->Produto->produto), array('produto/view', 'id'=>$model->ProdutoBarra->codproduto));
+				
+				if (!empty($model->ProdutoBarra->Produto->inativo))
+				{
+					$produto .= "
+						<span class='label label-important pull-center'>
+						Inativado em {$model->ProdutoBarra->Produto->inativo}
+						</span>
+						";
+				}
+		
 				$attr[]=
 					array(
 						'name'=>'codprodutobarra',
-						'value'=>CHtml::link(CHtml::encode($model->ProdutoBarra->Produto->produto), array('produto/view', 'id'=>$model->ProdutoBarra->codproduto)),
+						'value'=>$produto, 
 						'type'=>'raw',
-					);		
+					);	
+				
+			}
 			$attr[]=
 				array(
 					'name'=>'margem',

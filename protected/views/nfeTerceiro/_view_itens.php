@@ -8,7 +8,7 @@
 foreach ($model->NfeTerceiroItems as $item)
 {
 	?>
-	<div class="registro <?php echo (!empty($item->ProdutoBarra->Produto->inativo))?"alert-danger":""; ?>">
+	<div class="registro">
 		<small class="row-fluid">
 			<div class="span1">
 				<span>
