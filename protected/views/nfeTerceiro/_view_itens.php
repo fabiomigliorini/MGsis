@@ -8,7 +8,7 @@
 foreach ($model->NfeTerceiroItems as $item)
 {
 	?>
-	<div class="registro">
+	<div class="registro <?php echo (!empty($item->ProdutoBarra->Produto->inativo))?"alert-danger":""; ?>">
 		<small class="row-fluid">
 			<div class="span1">
 				<span>
@@ -44,7 +44,15 @@ foreach ($model->NfeTerceiroItems as $item)
 					
 					?>
 					<div class="span9">
+						<div>
 						<?php echo CHtml::link(CHtml::encode($item->ProdutoBarra->Produto->produto), array('produto/view', 'id'=>$item->ProdutoBarra->codproduto)); ?>
+						</div>
+						<?php if (!empty($item->ProdutoBarra->Produto->inativo)): ?>
+						<span class="label label-important pull-center">
+							Inativado em <?php echo CHtml::encode($item->ProdutoBarra->Produto->inativo); ?>
+						</span>
+						
+					<?php endif; ?>
 					</div>
 					<div class="span1">
 						<?php echo CHtml::encode($item->ProdutoBarra->Produto->UnidadeMedida->sigla); ?>
