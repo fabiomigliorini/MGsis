@@ -334,6 +334,8 @@ class NotaFiscalController extends Controller
 
 				if (!empty($email))
 					$resEmail = $acbr->enviarEmail($email);
+				
+				$acbr->imprimirDanfePdfTermica(true);
 
 			}
 			else

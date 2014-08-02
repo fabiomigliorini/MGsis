@@ -628,13 +628,18 @@ class MGAcbrNfeMonitor extends MGSocket
 		return true;
 	}
 	
-	public function imprimirDanfePdfTermica()
+	public function imprimirDanfePdfTermica($impressoraUsuarioCriacao = false)
 	{
 		if ($this->NotaFiscal->modelo != NotaFiscal::MODELO_NFCE)
 			return false;
 		
 		$arquivo = "{$this->NotaFiscal->nfechave}.pdf";
-		$impressora = Yii::app()->user->impressoraTermica;
+		
+		if ($impressoraUsuarioCriacao)
+			$impressora = $this->NotaFiscal->UsuarioCriacao->impressoratermica;
+		else
+			$impressora = Yii::app()->user->impressoraTermica;
+		
 		$cmd = "cd /tmp; rm -f $arquivo; wget {$this->urlpdf} ; lpr -P $impressora $arquivo;";
 		return exec($cmd);		
 	}
