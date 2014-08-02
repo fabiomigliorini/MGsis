@@ -119,6 +119,10 @@ class MGSocket
 				//incrementa contador de leituras vazias
 				$leiturasVazias++;
 				
+				//se desconectou retorna
+				if (!$this->conectado(false))
+					return false;
+				
 				//se ainda não veio nenhum retorno, espera 0.1 segundo
 				if (empty($this->retorno))
 					usleep(100000);
@@ -126,9 +130,10 @@ class MGSocket
 			
 			$dispendido = microtime(true) - $inicio;
 			
+			//se leu nada 5 vezes e tem algum retorno
 			if ((!empty($this->retorno)) && ($leiturasVazias > 5))
 			{
-				false;
+				return false;
 			}
 			
 		} while ($dispendido < $timeout);
