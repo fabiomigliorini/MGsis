@@ -193,7 +193,7 @@ class MGAcbrNfeMonitor extends MGSocket
 	}	
 	
 	
-	public function recebe($timeout = 10)
+	public function recebe($timeout = 500)
 	{
 		if (!$ret = parent::recebe($timeout))
 			return false;

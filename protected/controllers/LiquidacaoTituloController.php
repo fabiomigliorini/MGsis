@@ -144,7 +144,7 @@ class LiquidacaoTituloController extends Controller
 		else
 			$model->attributes = array(
 				'codusuariocriacao' => Yii::app()->user->id,
-				'criacao_de' => date('d/m/y'),
+				//'criacao_de' => date('d/m/y'),
 			);
 		
 		$this->render('index',array(
