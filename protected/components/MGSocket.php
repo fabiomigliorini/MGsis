@@ -78,7 +78,7 @@ class MGSocket
 		return true;
 	}
 	
-	public function recebe($timeout = 500)
+	public function recebe($timeout = 200)
 	{
 		//retorna se nao estiver conectado
 		if (!$this->conectado())
