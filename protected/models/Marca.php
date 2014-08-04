@@ -96,7 +96,13 @@ class Marca extends MGActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('codmarca',$this->codmarca,false);
-		$criteria->compare('marca',$this->marca,true);
+		//$criteria->compare('marca',$this->marca,false);
+		if (!empty($this->marca))
+		{
+			$texto  = str_replace(' ', '%', trim($this->marca));
+			$criteria->addCondition('t.marca ILIKE :marca');
+			$criteria->params = array_merge($criteria->params, array(':marca' => '%'.$texto.'%'));
+		}
 		switch ($this->site) // '1'=>'No Site', '2'=>'Fora do Site'), 
 		{
 			case 1:
