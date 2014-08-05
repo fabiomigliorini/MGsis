@@ -91,7 +91,8 @@ class Ncm extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codncm',$this->codncm,false);
+		//$criteria->compare('codncm',$this->codncm,false);
+		$criteria->compare('codncm',Yii::app()->format->numeroLimpo($this->codncm),false);
 		//$criteria->compare('ncm',$this->ncm,FALSE);
 		if (!empty($this->ncm))
 		{
@@ -99,7 +100,14 @@ class Ncm extends MGActiveRecord
 			$criteria->addCondition('t.ncm ILIKE :ncm');
 			$criteria->params = array_merge($criteria->params, array(':ncm' => '%'.$texto.'%'));
 		}
-		$criteria->compare('descricao',$this->descricao,true);
+		//$criteria->compare('descricao',$this->descricao,true);
+		if (!empty($this->descricao))
+		{
+			$texto  = str_replace(' ', '%', trim($this->descricao));
+			$criteria->addCondition('t.descricao ILIKE :descricao');
+			$criteria->params = array_merge($criteria->params, array(':descricao' => '%'.$texto.'%'));
+		}
+		
 		$criteria->compare('alteracao',$this->alteracao,false);
 		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);
 		$criteria->compare('criacao',$this->criacao,false);

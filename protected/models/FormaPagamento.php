@@ -111,7 +111,8 @@ class FormaPagamento extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codformapagamento',$this->codformapagamento,true);
+		$criteria->compare('codformapagamento',Yii::app()->format->numeroLimpo($this->codformapagamento),false);		
+//		$criteria->compare('codformapagamento',$this->codformapagamento,true);
 		//$criteria->compare('formapagamento',$this->formapagamento,true);
 		if (!empty($this->formapagamento))
 		{

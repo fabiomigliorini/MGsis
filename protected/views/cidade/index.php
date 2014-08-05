@@ -47,7 +47,7 @@ $(document).ready(function(){
 ?>
 <div class="well well-small">
 	<input type="hidden" value="<?php echo $model->codestado ?>" name="id">
-	<?php echo $form->textField($model, 'codcidade', array('placeholder' => '#', 'class'=>'input-small')); ?>
+	<?php echo $form->textField($model, 'codcidade', array('placeholder' => '#', 'class'=>'input-mini')); ?>
 	<?php echo $form->textField($model, 'cidade', array('placeholder' => 'Cidade', 'class'=>'input-large')); ?>
 	<?php echo $form->textField($model, 'codigooficial', array('placeholder' => 'Código Oficial', 'class'=>'input-large')); ?>
 	<?php //echo $form->textField($model, 'codestado', array('placeholder' => '#', 'class'=>'input-mini')); ?>

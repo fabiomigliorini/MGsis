@@ -93,7 +93,8 @@ class Cfop extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codcfop',$this->codcfop,false);
+		//$criteria->compare('codcfop',$this->codcfop,false);
+		$criteria->compare('codcfop',Yii::app()->format->numeroLimpo($this->codcfop),false);
 		//$criteria->compare('cfop',$this->cfop,false);
 		if (!empty($this->cfop))
 		{

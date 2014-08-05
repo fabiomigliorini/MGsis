@@ -308,7 +308,8 @@ class Titulo extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('t.codtitulo', $this->codtitulo, false);
+		//$criteria->compare('t.codtitulo', $this->codtitulo, false);
+		$criteria->compare('codtitulo',Yii::app()->format->numeroLimpo($this->codtitulo),false);
 		$criteria->compare('t.codfilial', $this->codfilial, false);
 		$criteria->compare('t.codpessoa', $this->codpessoa, false);
 		if (!empty($this->numero))

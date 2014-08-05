@@ -138,7 +138,8 @@ class TipoMovimentoTitulo extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codtipomovimentotitulo',$this->codtipomovimentotitulo,false);
+		//$criteria->compare('codtipomovimentotitulo',$this->codtipomovimentotitulo,false);
+		$criteria->compare('codtipomovimentotitulo',Yii::app()->format->numeroLimpo($this->codtipomovimentotitulo),false);
 		//$criteria->compare('tipomovimentotitulo',$this->tipomovimentotitulo,false);
 			if (!empty($this->tipomovimentotitulo))
 		{

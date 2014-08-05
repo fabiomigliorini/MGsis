@@ -97,7 +97,8 @@ class Banco extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codbanco',$this->codbanco,false);
+		//$criteria->compare('codbanco',$this->codbanco,false);
+		$criteria->compare('codbanco',Yii::app()->format->numeroLimpo($this->codbanco),false);
 		//$criteria->compare('banco',$this->banco,true);
 		if (!empty($this->banco))
 		{

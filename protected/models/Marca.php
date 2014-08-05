@@ -95,7 +95,8 @@ class Marca extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codmarca',$this->codmarca,false);
+		//$criteria->compare('codmarca',$this->codmarca,false);
+		$criteria->compare('codmarca',Yii::app()->format->numeroLimpo($this->codmarca),false);
 		//$criteria->compare('marca',$this->marca,false);
 		if (!empty($this->marca))
 		{

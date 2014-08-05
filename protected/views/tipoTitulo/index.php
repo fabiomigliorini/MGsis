@@ -38,8 +38,8 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
-	<?php echo $form->textField($model, 'codtipotitulo', array('placeholder' => 'Código', 'class'=>'input-medium')); ?>
-	<?php echo $form->textField($model, 'tipotitulo', array('placeholder' => 'Descrição', 'class'=>'input-x-mini')); ?>
+	<?php echo $form->textField($model, 'codtipotitulo', array('placeholder' => '#', 'class'=>'input-mini')); ?>
+	<?php echo $form->textField($model, 'tipotitulo', array('placeholder' => 'Descrição', 'class'=>'input-medium')); ?>
 	<?php
 	$this->widget('bootstrap.widgets.TbButton'
 		, array(

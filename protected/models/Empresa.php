@@ -90,7 +90,8 @@ class Empresa extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codempresa',$this->codempresa,false);
+		//$criteria->compare('codempresa',$this->codempresa,false);
+		$criteria->compare('codempresa',Yii::app()->format->numeroLimpo($this->codempresa),false);
 		//$criteria->compare('empresa',$this->empresa,true);
 		if (!empty($this->empresa))
 		{

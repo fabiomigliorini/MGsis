@@ -38,7 +38,7 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
-	<?php echo $form->textField($model, 'codcontacontabil', array('placeholder' => 'Código', 'class'=>'input-mini')); ?>
+	<?php echo $form->textField($model, 'codcontacontabil', array('placeholder' => '#', 'class'=>'input-mini')); ?>
 	<?php echo $form->textField($model, 'contacontabil', array('placeholder' => 'Descrição', 'class'=>'input-x-larg')); ?>
 	<?php echo $form->textField($model, 'numero', array('placeholder' => 'Número', 'class'=>'input-mini')); ?>
 	<?php

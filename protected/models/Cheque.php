@@ -145,7 +145,8 @@ class Cheque extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codcheque',$this->codcheque,false);
+		//$criteria->compare('codcheque',$this->codcheque,false);
+		$criteria->compare('codcheque',Yii::app()->format->numeroLimpo($this->codcheque),false);
 		
 		$criteria->compare('cmc7',$this->cmc7,false);
 		

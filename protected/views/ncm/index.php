@@ -38,7 +38,7 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
-	<?php echo $form->textField($model, 'codncm', array('placeholder' => 'Código', 'class'=>'input-mini')); ?>
+	<?php echo $form->textField($model, 'codncm', array('placeholder' => '#', 'class'=>'input-mini')); ?>
 	<?php echo $form->textField($model, 'ncm', array('placeholder' => 'NCM', 'class'=>'input-mini')); ?>
 	<?php echo $form->textField($model, 'descricao', array('placeholder' => 'Descrição', 'class'=>'input-x-larg')); ?>
 	<?php

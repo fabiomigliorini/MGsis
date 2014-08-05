@@ -132,7 +132,8 @@ class Portador extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codportador',$this->codportador,false);
+		//$criteria->compare('codportador',$this->codportador,false);
+		$criteria->compare('codportador',Yii::app()->format->numeroLimpo($this->codportador),false);
 		//$criteria->compare('portador',$this->portador,false);
 		if (!empty($this->portador))
 		{

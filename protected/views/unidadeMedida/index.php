@@ -38,7 +38,7 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
-	<?php echo $form->textField($model, 'codunidademedida', array('placeholder' => 'Código', 'class'=>'input-mini')); ?>
+	<?php echo $form->textField($model, 'codunidademedida', array('placeholder' => '#', 'class'=>'input-mini')); ?>
 	<?php echo $form->textField($model, 'unidademedida', array('placeholder' => 'Un. Medida', 'class'=>'input-larg')); ?>
 	<?php
 	$this->widget('bootstrap.widgets.TbButton'

@@ -316,7 +316,8 @@ class Pessoa extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codpessoa',$this->codpessoa,false);
+		//$criteria->compare('codpessoa',$this->codpessoa,false);
+		$criteria->compare('codpessoa',Yii::app()->format->numeroLimpo($this->codpessoa),false);
 		$criteria->compare('codgrupocliente',$this->codgrupocliente,false);
 		
 		if (!empty($this->fantasia))

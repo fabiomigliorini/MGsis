@@ -162,7 +162,8 @@ class Produto extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('t.codproduto',$this->codproduto,false);
+		//$criteria->compare('t.codproduto',$this->codproduto,false);
+		$criteria->compare('t.codproduto',Yii::app()->format->numeroLimpo($this->codproduto),false);
 		
 		if (!empty($this->barras))
 		{

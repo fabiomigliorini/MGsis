@@ -38,7 +38,7 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
-	<?php echo $form->textField($model, 'codtipoproduto', array('placeholder' => 'Código', 'class'=>'input-mini')); ?>
+	<?php echo $form->textField($model, 'codtipoproduto', array('placeholder' => '#', 'class'=>'input-mini')); ?>
 	<?php echo $form->textField($model, 'tipoproduto', array('placeholder' => 'Descrição do Produto', 'class'=>'input-x-larg')); ?>
 	<?php
 	$this->widget('bootstrap.widgets.TbButton'
