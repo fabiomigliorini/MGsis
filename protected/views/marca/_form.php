@@ -33,7 +33,8 @@
 <script type='text/javascript'>
 	
 $(document).ready(function() {
-
+	
+	$("#Marca_marca").Setcase();
 	//$("#Pessoa_fantasia").Setcase();
 
 	$('#marca-form').submit(function(e) {
