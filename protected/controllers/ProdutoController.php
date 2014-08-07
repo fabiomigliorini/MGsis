@@ -147,9 +147,6 @@ class ProdutoController extends Controller
 	public function actionQuiosqueConsulta ($barras = null)
 	{
 		
-		if (isset($_POST['barras']))
-			$barras = $_POST['barras'];
-
 		if (!empty($barras))
 			$model = ProdutoBarra::findByBarras($barras);
 		else

@@ -8,33 +8,68 @@ $this->breadcrumbs=array(
 
 function pesquisaProduto()
 {
-	if ($("#barras").val() != '')
-		$('#produto-form').submit();
+	if ($("#barras").val() == '')
+		return false;
+	
+	$.ajax({
+			url: '<?php echo Yii::app()->createUrl('produto/quiosqueConsulta') ?>',
+			data: {
+				barras: $('#barras').val()
+			},
+			type: "GET",
+			dataType: "html",
+			success: function (data) {
+				//var result = $('<div />').append(data).find('#resultadoConsulta').html();
+				var content = $(data).find('#resultadoConsulta').html();
+				//var result = 
+				$('#resultadoConsulta').html(content);
+			},
+			error: function (xhr, status) {
+				bootbox.alert('Erro ao pesquisar o produto!', function () {
+					location.reload();
+				});
+			},
+			complete: function (xhr, status) {
+				$('.carousel').carousel({
+					interval: 3000
+				});
+			}
+	});
+	$('#barras').val('');
+	$('#barras').focus();
+}
+
+function ajustaFoco()
+{
+	window.setTimeout(function() {
+		if (!$("#codprodutobarra").select2("isFocused"))
+			$("#barras").focus();
+		ajustaFoco();
+	}, 3000);
 }
 	
 $(document).ready(function() {
 
 	$("#barras").focus();
 	
-	$("#barras").blur(function() {
-		if (!$("#codprodutobarra").select2("isFocused"))
-			$("#barras").focus();
-	});
+	ajustaFoco();
 	
     $("#btnOK").click(function(e){ 
 		e.preventDefault();
 		pesquisaProduto (); 
 	});
 	
+   
 	$('#codprodutobarra').change(function(e) { 
 		if ($("#codprodutobarra").select2('data') != null)
 		{
 			$("#barras").val($("#codprodutobarra").select2('data').barras);
-			window.setTimeout(function(){$('#barras').focus();}, 0);
 			$('#codprodutobarra').select2('data', null);
 			pesquisaProduto ();
 		}
 	});
+	
+	
 });
 	
 </script>
@@ -45,38 +80,39 @@ $(document).ready(function() {
 	}
 </style>
 
+<?php 
+$form=$this->beginWidget(
+	'MGActiveForm',
+	array(
+		'id'=>'produto-form',
+		'method'=>'get',
+	)
+); 
+?>
 <div class='row-fluid'>
-	<?php 
-	$form=$this->beginWidget(
-		'MGActiveForm',
-		array(
-			'id'=>'produto-form',
-			//'method'=>'get',
-		)
-	); 
-	?>
-	<div class='row-fluid'>
-		<div class='span4'>
-			<div class="input-append">
-				<input class="input-large text-right" name="barras" id="barras" type="text">
-				<button class="btn" type="submit" id="btnOK" tabindex="-1">OK</button>
-			</div>
-		</div>
-		<div class='span8'>
-			<?php
-			$this->widget('MGSelect2ProdutoBarra', 
-				array(
-					'name' => 'codprodutobarra', 
-					'htmlOptions' => array(
-						'class' => 'span12', 
-						'placeholder' => 'Pesquisa de Produtos ($ ordena por preço)'
-						),
-					)
-				); 
-			?>
+	<div class='span4'>
+		<div class="input-append">
+			<input class="input-large text-right" name="barras" id="barras" type="text">
+			<button class="btn" type="submit" id="btnOK" tabindex="-1">OK</button>
 		</div>
 	</div>
-	<?php $this->endWidget(); ?>
+	<div class='span8'>
+		<?php
+		$this->widget('MGSelect2ProdutoBarra', 
+			array(
+				'name' => 'codprodutobarra', 
+				'htmlOptions' => array(
+					'class' => 'span12', 
+					'placeholder' => 'Pesquisa de Produtos ($ ordena por preço)'
+					),
+				)
+			); 
+		?>
+	</div>
+</div>
+<?php $this->endWidget(); ?>
+
+<div class='row-fluid' id='resultadoConsulta'>
 	<?php if ($model): ?>
 		<div class='row-fluid'>
 			<div class='span7'>
@@ -199,7 +235,7 @@ $(document).ready(function() {
 						<?
 					}
 					?>
-				
+				</div>
 				<!-- Fim Precos -->
 			</div>
 		</div>
@@ -232,4 +268,3 @@ $(document).ready(function() {
 		</div>
 	<?php endif; ?>
 </div>
-
