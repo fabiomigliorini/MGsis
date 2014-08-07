@@ -437,6 +437,7 @@ class NotaFiscalController extends Controller
 		$model = $this->loadModel($id);
 		$acbr = new MGAcbrNfeMonitor($model);
 		
+		$res = $acbr->imprimirDanfePdf();
 		$res = $acbr->enviarEmail($email, $alterarcadastro);
 		
 		echo CJSON::encode(
