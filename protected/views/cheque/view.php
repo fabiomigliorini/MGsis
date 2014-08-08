@@ -57,7 +57,11 @@ switch ($model->codstatus)
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-		'codcheque',
+		//'codcheque',
+		array(
+			'name'=>'codcheque',
+			'value'=>Yii::app()->format->formataCodigo($model->codcheque),
+			),
 		'cmc7',
 		//'codbanco',
 		array(

@@ -82,53 +82,56 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
-	<?php echo $form->textField($model, 'codnegocio', array('placeholder' => '#', 'class'=>'input-mini')); ?>
-	
-	<?php 
-	
-		echo $form->datetimepickerRow(
-			$model,
-			'lancamento_de',
-			array(
-				'class' => 'input-medium text-center', 
-				'options' => array(
-					'format' => 'dd/mm/yy hh:ii',
-				),
-				'placeholder' => 'Data Inicial',
-				'prepend' => 'De',
-			)
-		);
-		
-		echo $form->datetimepickerRow(
-			$model,
-			'lancamento_ate',
-			array(
-				'class' => 'input-medium text-center', 
-				'options' => array(
-					'format' => 'dd/mm/yy hh:ii',
-				),
-				'placeholder' => 'Data',
-				'prepend' => 'Até',
-			)
-		);
-	?>
-	<?php echo $form->select2Pessoa($model, 'codpessoa', array('class' => 'input-xlarge', 'inativo'=>true));?>
-	<?php echo $form->select2($model, 'codnaturezaoperacao', NaturezaOperacao::getListaCombo(), array('placeholder'=>'Natureza', 'class' => 'input-xlarge')); ?>
-	<?php echo $form->select2($model, 'codfilial', Filial::getListaCombo(), array('placeholder'=>'Filial', 'class' => 'input-medium')); ?>
-	<?php echo $form->select2($model, 'codnegociostatus', NegocioStatus::getListaCombo(), array('placeholder'=>'Status', 'class' => 'input-medium')); ?>
-	<?php echo $form->select2($model, 'pagamento', array("a"=> "A Vista", "p"=> "A Prazo"), array('placeholder'=>'Pagamento', 'class' => 'input-medium')); ?>
-	<?php echo $form->select2($model, 'codusuario', Usuario::getListaCombo(), array('placeholder'=>'Usuario', 'class' => 'input-medium')); ?>
-	<?php
-		$this->widget('bootstrap.widgets.TbButton'
-			, array(
-				'buttonType' => 'submit',
-				'icon'=>'icon-search',
-				//'label'=>'',
-				'htmlOptions' => array('class'=>'pull-right btn btn-info')
+	<div class="">
+		<?php echo $form->textField($model, 'codnegocio', array('placeholder' => '#', 'class'=>'input-mini')); ?>
+
+		<?php 
+
+			echo $form->datetimepickerRow(
+				$model,
+				'lancamento_de',
+				array(
+					'class' => 'input-medium text-center', 
+					'options' => array(
+						'format' => 'dd/mm/yy hh:ii',
+					),
+					'placeholder' => 'Data Inicial',
+					'prepend' => 'De',
 				)
-			); 
-	?>
-		
+			);
+
+			echo $form->datetimepickerRow(
+				$model,
+				'lancamento_ate',
+				array(
+					'class' => 'input-medium text-center', 
+					'options' => array(
+						'format' => 'dd/mm/yy hh:ii',
+					),
+					'placeholder' => 'Data',
+					'prepend' => 'Até',
+				)
+			);
+		?>
+		<?php echo $form->select2($model, 'codfilial', Filial::getListaCombo(), array('placeholder'=>'Filial', 'class' => 'input-medium')); ?>
+		<?php echo $form->select2($model, 'codnegociostatus', NegocioStatus::getListaCombo(), array('placeholder'=>'Status', 'class' => 'input-medium')); ?>
+		<?php echo $form->select2($model, 'pagamento', array("a"=> "A Vista", "p"=> "A Prazo"), array('placeholder'=>'Pagamento', 'class' => 'input-medium')); ?>
+		<?php echo $form->select2($model, 'codnaturezaoperacao', NaturezaOperacao::getListaCombo(), array('placeholder'=>'Natureza', 'class' => 'input-xlarge')); ?>		
+	</div>
+	<div class="">
+		<?php echo $form->select2Pessoa($model, 'codpessoa', array('class' => 'span5', 'inativo'=>true)); ?> 
+		<?php echo $form->select2($model, 'codusuario', Usuario::getListaCombo(), array('placeholder'=>'Usuario', 'class' => 'input-medium')); ?>
+		<?php
+			$this->widget('bootstrap.widgets.TbButton'
+				, array(
+					'buttonType' => 'submit',
+					'icon'=>'icon-search',
+					//'label'=>'',
+					'htmlOptions' => array('class'=>'pull-right btn btn-info')
+					)
+				); 
+		?>
+	</div>	
 </div>
 
 <?php $this->endWidget(); ?>

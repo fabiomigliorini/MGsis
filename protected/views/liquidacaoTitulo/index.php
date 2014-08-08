@@ -72,8 +72,8 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
-	<?php echo $form->textField($model, 'codliquidacaotitulo', array('placeholder' => '#', 'class'=>'input-small')); ?>
-	<?php echo $form->select2Pessoa($model, 'codpessoa', array('class'=>'input-xlarge')); ?>
+	<?php echo $form->textField($model, 'codliquidacaotitulo', array('placeholder' => '#', 'class'=>'input-mini')); ?>
+	<?php echo $form->select2Pessoa($model, 'codpessoa', array('class'=>'input-xxlarge')); ?>	
 	<?php echo $form->dropDownList($model, 'estornado', array('0' => 'Não Estornados', 1 => 'Estornados', 9 => 'Todos'), array('placeholder' => 'Estornado', 'class'=>'input-medium')); ?>
 	<?php
 		echo $form->dropDownList(
