@@ -116,9 +116,9 @@ $(document).ready(function(){
 		<?php echo $form->select2($model, 'codfilial', Filial::getListaCombo(), array('placeholder'=>'Filial', 'class' => 'input-medium')); ?>
 		<?php echo $form->select2($model, 'codnegociostatus', NegocioStatus::getListaCombo(), array('placeholder'=>'Status', 'class' => 'input-medium')); ?>
 		<?php echo $form->select2($model, 'pagamento', array("a"=> "A Vista", "p"=> "A Prazo"), array('placeholder'=>'Pagamento', 'class' => 'input-medium')); ?>
-		<?php echo $form->select2($model, 'codnaturezaoperacao', NaturezaOperacao::getListaCombo(), array('placeholder'=>'Natureza', 'class' => 'input-xlarge')); ?>		
 	</div>
 	<div class="">
+		<?php echo $form->select2($model, 'codnaturezaoperacao', NaturezaOperacao::getListaCombo(), array('placeholder'=>'Natureza', 'class' => 'input-xlarge')); ?>
 		<?php echo $form->select2Pessoa($model, 'codpessoa', array('class' => 'span5', 'inativo'=>true)); ?> 
 		<?php echo $form->select2($model, 'codusuario', Usuario::getListaCombo(), array('placeholder'=>'Usuario', 'class' => 'input-medium')); ?>
 		<?php
