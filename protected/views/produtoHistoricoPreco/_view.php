@@ -5,7 +5,7 @@
 			<small class="span2 muted"><?php echo CHtml::encode(Yii::app()->format->formataCodigo($data->codproduto, 6)); ?></small>
 
 			<small class="span10"><b><?php echo CHtml::link(CHtml::encode($data->Produto->produto),array('produto/view','id'=>$data->codproduto)); ?></b></small>
-		
+
 		</div>
 		
 		<div class="span4">
@@ -25,8 +25,8 @@
 
 			<small class="span6 muted"><?php echo CHtml::encode($data->Produto->referencia); ?></small>
 
-			<small class="span3 muted"><?php echo CHtml::link(CHtml::encode($data->Produto->Marca->marca), array('marca/view','id'=>$data->codmarca)); ?></small>
-		
+			<small class="span3 muted"><?php echo (isset($data->Produto->Marca))?CHtml::link(CHtml::encode($data->Produto->Marca->marca), array('marca/view','id'=>$data->codmarca)):""; ?></small>
+			
 		</div>	
 			
 		<div class="span2 text-right">
