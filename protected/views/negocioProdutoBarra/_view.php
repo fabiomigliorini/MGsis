@@ -43,6 +43,7 @@
 	
 	
 		<small class="span1 muted"><?php echo CHtml::encode($data->codprodutobarra); ?></small>
+		<small class="span1 muted"><?php echo CHtml::encode($data->ProdutoBarra->barras); ?></small>
 		
 		<small class="span1 muted"><?php echo CHtml::link(Yii::app()->format->formataCodigo(CHtml::encode($data->Negocio->codnegocio)), array('negocio/view','id'=>$data->Negocio->codnegocio)); ?></small>
 		
