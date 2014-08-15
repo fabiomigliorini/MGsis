@@ -35,7 +35,7 @@ class MGRelatorioProdutoHistoricoPreco extends FPDF
 		$this->SetDrawColor(0,0,0);
 		$this->Image(Yii::app()->basePath . '/../images/MGPapelaria.jpg', 162, 10, 38);
 		$this->SetFont('Arial','B',20);
-		$this->Cell(10, 7, utf8_decode('Historico de Preços'));
+		$this->Cell(10, 7, utf8_decode('Histórico de Preços'));
 		$this->Line(10, 8, 200, 8);
 		$this->Line(10, 19, 200, 19);
 		$this->Ln(12);

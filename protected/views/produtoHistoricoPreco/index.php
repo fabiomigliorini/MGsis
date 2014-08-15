@@ -1,7 +1,7 @@
 <?php
-$this->pagetitle = Yii::app()->name . ' - Historico Preço';
+$this->pagetitle = Yii::app()->name . ' - Histórico de Preços';
 $this->breadcrumbs=array(
-	'Historico Preço',
+	'Histórico de Preços',
 );
 
 $this->menu=array(
@@ -48,14 +48,14 @@ $(document).ready(function(){
 		<div class="pull-right">
 			<button class="btn" data-dismiss="modal">Fechar</button>
 		</div>
-		<h3>Relatório de Alteração de Preços</h3>  
+		<h3>Relatório de Histórico de Preços</h3>  
 	</div>  
 	<div class="modal-body">
       <iframe src="" id="frameRelatorio" name="frameRelatorio" width="99.6%" height="400" frameborder="0"></iframe>
 	</div>
 </div>
 
-<h1>Historico de Preço</h1>
+<h1>Histórico de Preços</h1>
 
 <br>
 
