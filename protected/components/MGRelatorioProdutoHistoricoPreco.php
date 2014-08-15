@@ -106,7 +106,7 @@ class MGRelatorioProdutoHistoricoPreco extends FPDF
 			$this->Cell(46, 5, utf8_decode(substr($model->Produto->produto, 0, 40)),   '', 0, 'L', $this->_fill);
 			$this->Cell(15, 5, utf8_decode($um),   '', 0, 'C', $this->_fill);
 			$this->Cell(20, 5, utf8_decode(substr($model->Produto->referencia, 0, 15)),   '', 0, 'L', $this->_fill);
-			$this->Cell(15, 5, utf8_decode($model->Produto->Marca->marca),   '', 0, 'L', $this->_fill);
+			$this->Cell(15, 5, utf8_decode(isset($model->Produto->Marca)?$model->Produto->Marca->marca:''),   '', 0, 'L', $this->_fill);
 			
 			$this->SetFont('Arial','B',8);
 			$this->SetTextColor(0, 150, 0);
