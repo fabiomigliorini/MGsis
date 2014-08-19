@@ -65,7 +65,7 @@ class NfeTerceiro extends MGActiveRecord
 	const INDMANIFESTACAO_NAOREALIZADA = 3;
 	const INDMANIFESTACAO_CIENCIA = 4;
 	
-	const DIRETORIO_XML = "/media/publico/xml";
+	const DIRETORIO_XML = "/media/publico/Arquivos/XML";
 	
 	public $emissao_de;
 	public $emissao_ate;
