@@ -295,12 +295,21 @@ class NfeTerceiroItem extends MGActiveRecord
 		
 		if ($nti != false)
 		{
-			$this->codprodutobarra = $nti->codprodutobarra;
-			$this->margem = $nti->margem;
-			$this->complemento = ($nti->complemento / $nti->vprod) * $this->vprod;
+			if (empty($this->codprodutobarra))
+				$this->codprodutobarra = $nti->codprodutobarra;
+			
+			if (empty($this->margem))
+				$this->margem = $nti->margem;
+			
+			if (empty($this->complemento))
+				$this->complemento = ($nti->complemento / $nti->vprod) * $this->vprod;
+			
 			return true;
 		}
 
+		if (!empty($this->codprodutobarra))
+			return true;
+		
 		//procura pelo codigo de barras / barras trib
 		$pb = ProdutoBarra::findByBarras($this->cean);
 		if ($pb == false)
