@@ -213,6 +213,8 @@ class NfeTerceiroController extends Controller
 		{
 			$model->attributes=$_POST['NfeTerceiro'];
 		}
+		
+		$nsu = $model->nsu;
 
 		if (!empty($model->codfilial))
 		{
@@ -220,7 +222,7 @@ class NfeTerceiroController extends Controller
 			
 			$leituras = 0;
 			
-			$nsuinicial = $model->nsu;
+			$nsuinicial = $nsu;
 			$fim = false;
 			
 			$importadas = array();
@@ -232,7 +234,7 @@ class NfeTerceiroController extends Controller
 				if ($leituras > 100)
 					break;
 				
-				$acbr->consultaNfeDest($model->nsu);
+				$acbr->consultaNfeDest($nsu);
 
 				//if ($acbr->retornoMonitor["Mensagem"][0] != "OK")
 				//	break;
@@ -296,7 +298,7 @@ class NfeTerceiroController extends Controller
 				//echo "</pre>";
 
 				if (isset($acbr->retornoMonitor[""]["ultNSU"]))
-					$model->nsu = $acbr->retornoMonitor[""]["ultNSU"];
+					$nsu = $acbr->retornoMonitor[""]["ultNSU"];
 				else
 				{
 					echo "<h1>Nao achou ult nsu</h1>";
@@ -317,6 +319,8 @@ class NfeTerceiroController extends Controller
 				}
 				
 			} while (true);
+			
+			$model->nsu = $nsu;
 			
 			$lidas = Yii::app()->format->formatNumber($model->nsu - $nsuinicial, 0);
 
