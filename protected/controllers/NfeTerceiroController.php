@@ -232,7 +232,7 @@ class NfeTerceiroController extends Controller
 				if ($leituras > 100)
 					break;
 				
-				$acbr->ConsultaNfeDest($model->nsu);
+				$acbr->consultaNfeDest($model->nsu);
 
 				//if ($acbr->retornoMonitor["Mensagem"][0] != "OK")
 				//	break;
@@ -297,6 +297,14 @@ class NfeTerceiroController extends Controller
 
 				if (isset($acbr->retornoMonitor[""]["ultNSU"]))
 					$model->nsu = $acbr->retornoMonitor[""]["ultNSU"];
+				else
+				{
+					echo "<h1>Nao achou ult nsu</h1>";
+					echo "<pre>";
+					print_r($acbr);
+					echo "</pre>";
+					die();
+				}
 				
 				
 				if (isset($acbr->retornoMonitor[""]["indCont"]))
