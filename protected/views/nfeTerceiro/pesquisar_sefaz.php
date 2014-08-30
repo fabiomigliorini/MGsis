@@ -30,7 +30,7 @@ $this->menu=array(
 
 ?>
 
-<?
+<?php
 	echo $form->select2Row($model,'codfilial', Filial::model()->getListaCombo() , array('class'=>'input-medium'));
 	echo $form->textFieldRow($model,'nsu',array('class'=>'input-medium text-right'));
 ?>

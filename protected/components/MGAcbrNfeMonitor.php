@@ -873,12 +873,11 @@ class MGAcbrNfeMonitor extends MGSocket
 		$cnpj = str_pad($this->Filial->Pessoa->cnpj, 14, 0, STR_PAD_LEFT);
 		$cmd = "NFE.ConsultaNFeDest(\"{$cnpj}\", 0, 0, {$nsu})\n.\n";
 		
-		if (!$this->enviaComando($cmd))
-			return false;
+		$ret = $this->enviaComando($cmd);
 		
 		$this->processaRetorno();
 		
-		return true;
+		return $ret;
 	}
 	
 	/**

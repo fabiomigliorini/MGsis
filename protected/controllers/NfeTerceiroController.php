@@ -205,7 +205,7 @@ class NfeTerceiroController extends Controller
 	public function actionPesquisarSefaz($codfilial = null, $nsu = null)
 	{
 		$model = new NfeTerceiro('search');
-		
+
 		$model->codfilial = $codfilial;
 		$model->nsu = $nsu;
 		
@@ -234,9 +234,17 @@ class NfeTerceiroController extends Controller
 				if ($leituras > 100)
 					break;
 				
-				echo "Pesquisando $nsu <br>";
+				//echo "<hr>Pesquisando $nsu <br>";
 				
-				$acbr->consultaNfeDest($nsu);
+				if (!$acbr->consultaNfeDest($nsu))
+				{
+					//echo "<h1>Erro ao enviar comando</h1>";
+				}
+				usleep(500000);
+				//echo "<pre>";
+				//print_r($acbr->retorno);
+				//echo "</pre>";
+					
 
 				//if ($acbr->retornoMonitor["Mensagem"][0] != "OK")
 				//	break;
@@ -303,21 +311,14 @@ class NfeTerceiroController extends Controller
 				{
 					if ($nsu == $acbr->retornoMonitor[""]["ultNSU"])
 					{
-						echo "<h1>Repetiu ult nsu</h1>";
-						echo "<pre>";
-						print_r($acbr);
-						echo "</pre>";
-						die();
+						//echo "<h1>Repetiu ult nsu</h1>";
+						break;
 					}
 					$nsu = $acbr->retornoMonitor[""]["ultNSU"];
 				}
 				else
 				{
-					echo "<h1>Nao achou ult nsu</h1>";
-					echo "<pre>";
-					print_r($acbr);
-					echo "</pre>";
-					die();
+					//echo "<h1>Nao achou ult nsu</h1>";
 				}
 				
 				
