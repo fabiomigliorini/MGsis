@@ -300,7 +300,17 @@ class NfeTerceiroController extends Controller
 				//echo "</pre>";
 
 				if (isset($acbr->retornoMonitor[""]["ultNSU"]))
+				{
+					if ($nsu == $acbr->retornoMonitor[""]["ultNSU"])
+					{
+						echo "<h1>Repetiu ult nsu</h1>";
+						echo "<pre>";
+						print_r($acbr);
+						echo "</pre>";
+						die();
+					}
 					$nsu = $acbr->retornoMonitor[""]["ultNSU"];
+				}
 				else
 				{
 					echo "<h1>Nao achou ult nsu</h1>";
