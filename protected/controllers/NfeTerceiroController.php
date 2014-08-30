@@ -234,6 +234,8 @@ class NfeTerceiroController extends Controller
 				if ($leituras > 100)
 					break;
 				
+				echo "Pesquisando $nsu <br>";
+				
 				$acbr->consultaNfeDest($nsu);
 
 				//if ($acbr->retornoMonitor["Mensagem"][0] != "OK")
