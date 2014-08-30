@@ -234,8 +234,8 @@ class NfeTerceiroController extends Controller
 				
 				$acbr->ConsultaNfeDest($model->nsu);
 
-				if ($acbr->retornoMonitor["Mensagem"][0] != "OK")
-					break;
+				//if ($acbr->retornoMonitor["Mensagem"][0] != "OK")
+				//	break;
 
 				for ($i=1; $i<1000; $i++)
 				{
@@ -295,15 +295,17 @@ class NfeTerceiroController extends Controller
 
 				//echo "</pre>";
 
-				$model->nsu = $acbr->retornoMonitor[""]["ultNSU"];
+				if (isset($acbr->retornoMonitor[""]["ultNSU"]))
+					$model->nsu = $acbr->retornoMonitor[""]["ultNSU"];
 				
-				if (!isset($acbr->retornoMonitor[""]["indCont"]))
-					break;
-
-				if ($acbr->retornoMonitor[""]["indCont"] != 1)
+				
+				if (isset($acbr->retornoMonitor[""]["indCont"]))
 				{
-					$fim = true;
-					break;
+					if ($acbr->retornoMonitor[""]["indCont"] != 1)
+					{
+						$fim = true;
+						break;
+					}
 				}
 				
 			} while (true);
