@@ -921,7 +921,7 @@ class InscricaoEstadualValidator extends CValidator
 		$caracteresRemontagem_01 = str_split($remontagem_01);
 		
 		//echo "<pre>"; print_r($caracteresRemontagem_01); echo "</pre>";
-		
+		$concat = "";
 		$i = 1;
 		for($j=0; $j<count($caracteresRemontagem_01); $j++){
 			$concat .= $i * $caracteresRemontagem_01[$j]; 
