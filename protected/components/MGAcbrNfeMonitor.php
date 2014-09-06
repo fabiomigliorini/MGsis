@@ -712,7 +712,8 @@ class MGAcbrNfeMonitor extends MGSocket
 		if (!$this->enviaComando($cmd))
 			return false;
 		
-		if (trim($this->retorno) == 'ERRO: Rejeicao: Acesso BD NFE-Inutilizacao (Chave: Ano, CNPJ Emit, Modelo, Serie, nNFIni, nNFFin): ja existe um Pedido de inutilizacao igual (NT 2011/004)')
+		if (trim($this->retorno) == 'ERRO: Rejeicao: Acesso BD NFE-Inutilizacao (Chave: Ano, CNPJ Emit, Modelo, Serie, nNFIni, nNFFin): ja existe um Pedido de inutilizacao igual (NT 2011/004)'
+			|| trim($this->retorno) == 'ERRO: Rejeicao: uma NF-e da faixa ja esta inutilizada na Base de dados da SEFAZ')
 		{
 			if (empty($this->NotaFiscal->nfeinutilizacao))
 				$this->NotaFiscal->nfeinutilizacao = '999999999999999';
