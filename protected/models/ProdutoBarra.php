@@ -66,7 +66,7 @@ class ProdutoBarra extends MGActiveRecord
 		if (empty($this->codmarca))
 			return;
 		
-		if ($this->codmarca = $this->Produto->codmarca)
+		if ($this->codmarca == $this->Produto->codmarca)
 			$this->addError($attribute, 'Você selecionou a mesma marca informada no Produto, neste caso deixe em branco. Só preencha quando a marca for diferente da marca principal do produto!');
 	}
 
