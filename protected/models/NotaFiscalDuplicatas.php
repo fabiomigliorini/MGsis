@@ -38,7 +38,7 @@ class NotaFiscalDuplicatas extends MGActiveRecord
 		// will receive user inputs.
 		return array(
 			array('codnotafiscal, vencimento', 'required'),
-			array('fatura', 'length', 'max'=>20),
+			array('fatura', 'length', 'max'=>50),
 			array('valor', 'length', 'max'=>14),
 			array('alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
