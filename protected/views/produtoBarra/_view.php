@@ -2,7 +2,7 @@
 	<div class="span2">
 		<?php if (isset($data->ProdutoEmbalagem)): ?>
 			<?php echo CHtml::encode($data->ProdutoEmbalagem->descricao) ?>
-		<?php else: ?>
+		<?php elseif (isset($produto)): ?>
 			<?php echo CHtml::encode($produto->UnidadeMedida->sigla) ?>
 		<?php endif; ?>
 	</div>

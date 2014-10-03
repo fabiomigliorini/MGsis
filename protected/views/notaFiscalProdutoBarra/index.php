@@ -16,11 +16,11 @@ $this->menu=array(
 <script type='text/javascript'>
 
 $(document).ready(function(){
-	$('#search-form').change(function(){
-		var ajaxRequest = $("#search-form").serialize();
+	$('#search-form-nfpb').change(function(){
+		var ajaxRequest = $("#search-form-nfpb").serialize();
 		$.fn.yiiListView.update(
 			// this is the id of the CListView
-			'Listagem',
+			'ListagemNota',
 			{data: ajaxRequest}
 		);
     });
@@ -32,7 +32,7 @@ $(document).ready(function(){
 
 <?php $form=$this->beginWidget('MGActiveForm',array(
 	'action'=>Yii::app()->createUrl($this->route),
-	'id' => 'search-form',
+	'id' => 'search-form-nfpb',
 	'type' => 'inline',
 	'method'=>'get',
 )); 

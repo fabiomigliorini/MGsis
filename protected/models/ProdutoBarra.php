@@ -272,4 +272,96 @@ class ProdutoBarra extends MGActiveRecord
 			return false;
 		
 	}
+	
+	public function juntarProdutoBarra($codprodutobarraeliminar)
+	{
+		$pbe = ProdutoBarra::model()->findByPk($codprodutobarraeliminar);
+		$transaction = Yii::app()->db->beginTransaction();
+		
+		try{
+			
+			if ($this->codprodutobarra == $pbe->codprodutobarra)
+			{
+				$this->addError('codproduto', 'Os códigos de barras selecionados são o <b>Mesmo</b>!');
+				$transaction->rollBack();
+				return false;
+			}
+			
+			if ($this->codproduto != $pbe->codproduto)
+			{
+				$this->addError('codproduto', 'Os códigos de barras selecionados são de <b>Produtos</b> diferentes!');
+				$transaction->rollBack();
+				return false;
+			}
+			
+			if ($this->codprodutoembalagem != $pbe->codprodutoembalagem)
+			{
+				$this->addError('codprodutoembalagem', 'Os códigos de barras selecionados são de <b>Embalagens</b> diferentes!');
+				$transaction->rollBack();
+				return false;
+			}
+			
+			Yii::app()->db
+				->createCommand("UPDATE tblNotaFiscalProdutoBarra SET codprodutobarra = :codnovo WHERE codprodutobarra = :codantigo")
+				->bindValues(array(':codnovo' => $this->codprodutobarra, ':codantigo' => $pbe->codprodutobarra))
+				->execute();
+			
+			Yii::app()->db
+				->createCommand("UPDATE tblNegocioProdutoBarra SET codprodutobarra = :codnovo WHERE codprodutobarra = :codantigo")
+				->bindValues(array(':codnovo' => $this->codprodutobarra, ':codantigo' => $pbe->codprodutobarra))
+				->execute();
+			
+			Yii::app()->db
+				->createCommand("UPDATE tblCupomFiscalProdutoBarra SET codprodutobarra = :codnovo WHERE codprodutobarra = :codantigo")
+				->bindValues(array(':codnovo' => $this->codprodutobarra, ':codantigo' => $pbe->codprodutobarra))
+				->execute();
+   
+			$pbe->delete();
+			$transaction->commit();
+			return true;
+		}
+		catch(CDbException $e)
+		{
+			$this->addError('codprodutobarra', $e);
+			$transaction->rollBack();
+			return false;
+		}
+		
+	}
+	
+	/**
+	 * @var ProdutoBarra $pbn
+	 * @param type $codprodutobarranovo
+	 * @return boolean
+	 */
+	public function transferirProdutoBarra($codprodutobarranovo)
+	{
+		$pbn = ProdutoBarra::model()->findByPk($codprodutobarranovo);
+		$transaction = Yii::app()->db->beginTransaction();
+		
+		try{
+			
+			$this->codproduto = $pbn->codproduto;
+			$this->codprodutoembalagem = $pbn->codprodutoembalagem;
+   
+			if ($this->save())
+			{
+				$transaction->commit();
+				return true;
+			}
+			else
+			{
+				$transaction->rollBack();
+				return false;
+			}
+		}
+		catch(CDbException $e)
+		{
+			$this->addError('codprodutobarra', $e);
+			$transaction->rollBack();
+			return false;
+		}
+		
+	}
+	
 }

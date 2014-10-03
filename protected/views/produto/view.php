@@ -9,6 +9,8 @@ $this->menu=array(
 array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
 array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codproduto)),
+array('label'=>'Juntar Códigos de Barras', 'icon'=>'icon-resize-small', 'url'=>array('juntarBarras','id'=>$model->codproduto)),
+array('label'=>'Transferir Código de Barras', 'icon'=>' icon-share-alt', 'url'=>array('transferirBarras','id'=>$model->codproduto)),
 array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
 //array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );

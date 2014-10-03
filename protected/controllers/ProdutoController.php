@@ -105,6 +105,73 @@ class ProdutoController extends Controller
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 
+	public function actionJuntarBarras($id)
+	{
+		$model=$this->loadModel($id);
+
+		if(isset($_POST['Produto']))
+		{
+			$codprodutobarra = $_POST['Produto']['codprodutobarra'];
+			$codprodutobarraeliminar = $_POST['Produto']['codprodutobarraeliminar'];
+			
+			if (empty($codprodutobarra) || empty($codprodutobarraeliminar))
+			{
+				$model->addError('codproduto', "Selectione ambos os códigos para prosseguir!");
+			}
+			elseif (!$pb = ProdutoBarra::model()->findByPk($codprodutobarra))
+			{
+				$model->addError('codproduto', "Produto Barras $codprodutobarra não localizado.");
+			}
+			else
+			{
+				if ($pb->juntarProdutoBarra($codprodutobarraeliminar))
+					$this->redirect(array('view','id'=>$model->codproduto));
+				else
+					$model->addErrors($pb->getErrors());
+			}
+				
+		}
+		
+		$this->render('juntar_barras',array(
+			'model'=>$model,
+			));
+		
+	}
+	
+	public function actionTransferirBarras($id)
+	{
+		$model=$this->loadModel($id);
+
+		if(isset($_POST['Produto']))
+		{
+			
+			$codprodutobarra = $_POST['Produto']['codprodutobarra'];
+			$codprodutobarranovo = $_POST['Produto']['codprodutobarranovo'];
+			
+			if (empty($codprodutobarra) || empty($codprodutobarranovo))
+			{
+				$model->addError('codproduto', "Selectione ambos os códigos para prosseguir!");
+			}
+			elseif (!$pb = ProdutoBarra::model()->findByPk($codprodutobarra))
+			{
+				$model->addError('codproduto', "Produto Barras $codprodutobarra não localizado.");
+			}
+			else
+			{
+				if ($pb->transferirProdutoBarra($codprodutobarranovo))
+					$this->redirect(array('view','id'=>$model->codproduto));
+				else
+					$model->addErrors($pb->getErrors());
+			}
+				
+		}
+		
+		$this->render('transferir_barras',array(
+			'model'=>$model,
+			));
+		
+	}
+	
 	/**
 	* Lists all models.
 	*/
