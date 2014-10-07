@@ -27,7 +27,7 @@ if (
 		<div class="pull-right">
 			<?php 
 			if (isset($data->NotaFiscal))
-				echo CHtml::link(CHtml::encode(Yii::app()->format->formataNumeroNota($data->NotaFiscal->emitida, $data->NotaFiscal->serie, $data->NotaFiscal->numero, $data->NotaFiscal->modelo)),array('view','id'=>$data->codnfeterceiro)); 
+				echo CHtml::link(CHtml::encode(Yii::app()->format->formataNumeroNota($data->NotaFiscal->emitida, $data->NotaFiscal->serie, $data->NotaFiscal->numero, $data->NotaFiscal->modelo)),array('notaFiscal/view','id'=>$data->codnotafiscal)); 
 			/*
 			else
 				echo CHtml::encode(Yii::app()->format->formataNumeroNota(false, $data->serie, $data->numero, NotaFiscal::MODELO_NFE)); 

@@ -273,8 +273,8 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 		$this->codcfop = $trib->codcfop;
 		$this->csosn = $trib->csosn;
 		
-		//Calcula ICMS
-		If (!empty($this->valortotal))
+		//Calcula ICMSs
+		If (!empty($this->valortotal) && ($this->NotaFiscal->emitida))
 		{
 			If (!empty($trib->icmsbase))
 				$this->icmsbase = round(($trib->icmsbase * $this->valortotal)/100, 2);

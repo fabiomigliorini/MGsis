@@ -681,7 +681,7 @@ class NotaFiscal extends MGActiveRecord
 			}
 		}
 		
-		if (!$this->emitida)
+		if (!$this->emitida && !empty($this->nfechave))
 		{
 			if ($nft = NfeTerceiro::model()->find('codnotafiscal is null and nfechave = :nfechave', array(':nfechave' => $this->nfechave)))
 			{
