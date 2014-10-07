@@ -670,7 +670,7 @@ class NotaFiscal extends MGActiveRecord
 	
 	protected function afterSave()
 	{
-		if ($this->codnaturezaoperacao !== $this->_codnaturezaoperacao_original)
+		if ($this->codnaturezaoperacao != $this->_codnaturezaoperacao_original)
 		{
 			$nfpbs = NotaFiscalProdutoBarra::model()->findAll("codnotafiscal = {$this->codnotafiscal}");
 			foreach ($nfpbs as $nfpb)

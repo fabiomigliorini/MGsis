@@ -81,21 +81,21 @@ function atualizaBaseImpostos ()
 		&& $('#NotaFiscalProdutoBarra_icmspercentual').autoNumeric('get') > 0)
 	{
 		$('#NotaFiscalProdutoBarra_icmsbase').autoNumeric('set', totalNovo);
-		atualizaIcmsValor();
+		atualizaImposto('icms', 'base');
 	}
 	
 	if ($('#NotaFiscalProdutoBarra_icmsstbase').autoNumeric('get') == totalAntigo
 		&& $('#NotaFiscalProdutoBarra_icmsstpercentual').autoNumeric('get') > 0)
 	{
 		$('#NotaFiscalProdutoBarra_icmsstbase').autoNumeric('set', totalNovo);
-		atualizaIcmsStValor();
+		atualizaImposto('icmsst', 'base');
 	}
 	
 	if ($('#NotaFiscalProdutoBarra_ipibase').autoNumeric('get') == totalAntigo
 		&& $('#NotaFiscalProdutoBarra_ipipercentual').autoNumeric('get') > 0)
 	{
 		$('#NotaFiscalProdutoBarra_ipibase').autoNumeric('set', totalNovo);
-		atualizaIpiValor();
+		atualizaImposto('ipi', 'base');
 	}
 	
 }
@@ -124,97 +124,78 @@ function atualizaUnitario ()
 		$('#NotaFiscalProdutoBarra_quantidade').autoNumeric('get')  
 	);
 }
-	
-function atualizaIcmsValor ()
-{
-	if ($('#NotaFiscalProdutoBarra_icmsbase').autoNumeric('get') == 0)
-		$('#NotaFiscalProdutoBarra_icmsbase').autoNumeric('set', 
-			$('#NotaFiscalProdutoBarra_valortotal').autoNumeric('get')
-		);
-	
-	$('#NotaFiscalProdutoBarra_icmsvalor').autoNumeric('set',
-		$('#NotaFiscalProdutoBarra_icmsbase').autoNumeric('get') * 
-		$('#NotaFiscalProdutoBarra_icmspercentual').autoNumeric('get') /100
-	);
-}
 
-function atualizaIcmsPercentual ()
-{
-	if ($('#NotaFiscalProdutoBarra_icmsvalor').autoNumeric('get') == 0)
-		return;
-	
-	if ($('#NotaFiscalProdutoBarra_icmsbase').autoNumeric('get') < 0.01)
-		$('#NotaFiscalProdutoBarra_icmsbase').autoNumeric('set', $('#NotaFiscalProdutoBarra_valortotal').autoNumeric('get'));
-	
-	if ($('#NotaFiscalProdutoBarra_icmsbase').autoNumeric('get') < 0.01)
-		$('#NotaFiscalProdutoBarra_icmsbase').autoNumeric('set', 1);
-	
-	$('#NotaFiscalProdutoBarra_icmspercentual').autoNumeric('set',
-		$('#NotaFiscalProdutoBarra_icmsvalor').autoNumeric('get') * 100 /
-		$('#NotaFiscalProdutoBarra_icmsbase').autoNumeric('get')  
-	);
-}
 
-function atualizaIcmsStValor ()
+//atualiza imposto (icms/st/ipi) baseado no campo alterado (base/percentual/valor)
+function atualizaImposto (imposto, campoalterado)
 {
-	if ($('#NotaFiscalProdutoBarra_icmsstbase').autoNumeric('get') == 0)
-		$('#NotaFiscalProdutoBarra_icmsstbase').autoNumeric('set', 
-			$('#NotaFiscalProdutoBarra_valortotal').autoNumeric('get')
-		);
+	var campobase;
+	var campopercentual;
+	var campovalor;
 	
-	$('#NotaFiscalProdutoBarra_icmsstvalor').autoNumeric('set',
-		$('#NotaFiscalProdutoBarra_icmsstbase').autoNumeric('get') * 
-		$('#NotaFiscalProdutoBarra_icmsstpercentual').autoNumeric('get') /100
-	);
+	switch(imposto) 
+	{
+		
+		case 'icms':
+			campobase = '#NotaFiscalProdutoBarra_icmsbase';
+			campopercentual = '#NotaFiscalProdutoBarra_icmspercentual';
+			campovalor = '#NotaFiscalProdutoBarra_icmsvalor';
+			break;
+			
+		case 'icmsst':
+			campobase = '#NotaFiscalProdutoBarra_icmsstbase';
+			campopercentual = '#NotaFiscalProdutoBarra_icmsstpercentual';
+			campovalor = '#NotaFiscalProdutoBarra_icmsstvalor';
+			break;
+			
+		case 'ipi':
+			campobase = '#NotaFiscalProdutoBarra_ipibase';
+			campopercentual = '#NotaFiscalProdutoBarra_ipipercentual';
+			campovalor = '#NotaFiscalProdutoBarra_ipivalor';
+			break;
+			
+		default:
+			return false;
+			
+	}
+	
+	var base = $(campobase).autoNumeric('get');
+	var percentual = $(campopercentual).autoNumeric('get');
+	var valor = $(campovalor).autoNumeric('get');
+	
+	var valorprodutos = $("#NotaFiscalProdutoBarra_valortotal").autoNumeric('get');
+	
+	switch(campoalterado)
+	{
+		case 'percentual':
+			if (base == 0 && percentual > 0)
+				base = valorprodutos;
+			
+		case 'base':
+			valor = base * percentual / 100;
+			if (base == 0)
+				percentual = 0;
+			break;
+		
+		case 'valor':
+			percentual = 0;
+			if (base == 0 && valor > 0)
+				base = valorprodutos;
+			if (base > 0 && valor > 0)
+				percentual = (valor / base) * 100;
+			break;
+			
+	}
+	
+	if (base == 0) base = '';
+	if (percentual == 0) percentual = '';
+	if (valor == 0) valor = '';
+	
+	$(campobase).autoNumeric('set', base);
+	$(campopercentual).autoNumeric('set', percentual);
+	$(campovalor).autoNumeric('set', valor);
+	
 }
-
-function atualizaIcmsStPercentual ()
-{
-	if ($('#NotaFiscalProdutoBarra_icmsstvalor').autoNumeric('get') == 0)
-		return;
-	
-	if ($('#NotaFiscalProdutoBarra_icmsstbase').autoNumeric('get') < 0.01)
-		$('#NotaFiscalProdutoBarra_icmsstbase').autoNumeric('set', $('#NotaFiscalProdutoBarra_valortotal').autoNumeric('get'));
-	
-	if ($('#NotaFiscalProdutoBarra_icmsstbase').autoNumeric('get') < 0.01)
-		$('#NotaFiscalProdutoBarra_icmsstbase').autoNumeric('set', 1);
-	
-	$('#NotaFiscalProdutoBarra_icmsstpercentual').autoNumeric('set',
-		$('#NotaFiscalProdutoBarra_icmsstvalor').autoNumeric('get') * 100 /
-		$('#NotaFiscalProdutoBarra_icmsstbase').autoNumeric('get')  
-	);
-}
-
-function atualizaIpiValor ()
-{
-	if ($('#NotaFiscalProdutoBarra_ipibase').autoNumeric('get') == 0)
-		$('#NotaFiscalProdutoBarra_ipibase').autoNumeric('set', 
-			$('#NotaFiscalProdutoBarra_valortotal').autoNumeric('get')
-		);
-	
-	$('#NotaFiscalProdutoBarra_ipivalor').autoNumeric('set',
-		$('#NotaFiscalProdutoBarra_ipibase').autoNumeric('get') * 
-		$('#NotaFiscalProdutoBarra_ipipercentual').autoNumeric('get') /100
-	);
-}
-
-function atualizaIpiPercentual ()
-{
-	if ($('#NotaFiscalProdutoBarra_ipivalor').autoNumeric('get') == 0)
-		return;
-	
-	if ($('#NotaFiscalProdutoBarra_ipibase').autoNumeric('get') < 0.01)
-		$('#NotaFiscalProdutoBarra_ipibase').autoNumeric('set', $('#NotaFiscalProdutoBarra_valortotal').autoNumeric('get'));
-	
-	if ($('#NotaFiscalProdutoBarra_ipibase').autoNumeric('get') < 0.01)
-		$('#NotaFiscalProdutoBarra_ipibase').autoNumeric('set', 1);
-	
-	$('#NotaFiscalProdutoBarra_ipipercentual').autoNumeric('set',
-		$('#NotaFiscalProdutoBarra_ipivalor').autoNumeric('get') * 100 /
-		$('#NotaFiscalProdutoBarra_ipibase').autoNumeric('get')  
-	);
-}
-	
 
 	
 $(document).ready(function() {
@@ -246,17 +227,26 @@ $(document).ready(function() {
 	$('#NotaFiscalProdutoBarra_valorunitario').change(function() { atualizaTotal(); });
 	$('#NotaFiscalProdutoBarra_valortotal').change(function() { atualizaUnitario(); });
 
-	$('#NotaFiscalProdutoBarra_icmsbase').change(function() { atualizaIcmsValor(); });
-	$('#NotaFiscalProdutoBarra_icmspercentual').change(function() { atualizaIcmsValor(); });
-	$('#NotaFiscalProdutoBarra_icmsvalor').change(function() { atualizaIcmsPercentual(); });
+	//$('#NotaFiscalProdutoBarra_icmsbase').change(function() { atualizaIcmsValor(); });
+	//$('#NotaFiscalProdutoBarra_icmspercentual').change(function() { atualizaIcmsValor(); });
+	//$('#NotaFiscalProdutoBarra_icmsvalor').change(function() { atualizaIcmsPercentual(); });
+	$('#NotaFiscalProdutoBarra_icmsbase').change(function() { atualizaImposto('icms', 'base'); });
+	$('#NotaFiscalProdutoBarra_icmspercentual').change(function() { atualizaImposto('icms', 'percentual'); });
+	$('#NotaFiscalProdutoBarra_icmsvalor').change(function() { atualizaImposto('icms', 'valor'); });
 	
-	$('#NotaFiscalProdutoBarra_icmsstbase').change(function() { atualizaIcmsStValor(); });
-	$('#NotaFiscalProdutoBarra_icmsstpercentual').change(function() { atualizaIcmsStValor(); });
-	$('#NotaFiscalProdutoBarra_icmsstvalor').change(function() { atualizaIcmsStPercentual(); });
+	//$('#NotaFiscalProdutoBarra_icmsstbase').change(function() { atualizaIcmsStValor(); });
+	//$('#NotaFiscalProdutoBarra_icmsstpercentual').change(function() { atualizaIcmsStValor(); });
+	//$('#NotaFiscalProdutoBarra_icmsstvalor').change(function() { atualizaIcmsStPercentual(); });
+	$('#NotaFiscalProdutoBarra_icmsstbase').change(function() { atualizaImposto('icmsst', 'base'); });
+	$('#NotaFiscalProdutoBarra_icmsstpercentual').change(function() { atualizaImposto('icmsst', 'percentual'); });
+	$('#NotaFiscalProdutoBarra_icmsstvalor').change(function() { atualizaImposto('icmsst', 'valor'); });
 	
-	$('#NotaFiscalProdutoBarra_ipibase').change(function() { atualizaIpiValor(); });
-	$('#NotaFiscalProdutoBarra_ipipercentual').change(function() { atualizaIpiValor(); });
-	$('#NotaFiscalProdutoBarra_ipivalor').change(function() { atualizaIpiPercentual(); });
+	//$('#NotaFiscalProdutoBarra_ipibase').change(function() { atualizaIpiValor(); });
+	//$('#NotaFiscalProdutoBarra_ipipercentual').change(function() { atualizaIpiValor(); });
+	//$('#NotaFiscalProdutoBarra_ipivalor').change(function() { atualizaIpiPercentual(); });
+	$('#NotaFiscalProdutoBarra_ipibase').change(function() { atualizaImposto('ipi', 'base'); });
+	$('#NotaFiscalProdutoBarra_ipipercentual').change(function() { atualizaImposto('ipi', 'percentual'); });
+	$('#NotaFiscalProdutoBarra_ipivalor').change(function() { atualizaImposto('ipi', 'valor'); });
 	
 	$('#NotaFiscalProdutoBarra_codprodutobarra').change(function(e) { 
 		if ($("#NotaFiscalProdutoBarra_codprodutobarra").select2('data') != null)
