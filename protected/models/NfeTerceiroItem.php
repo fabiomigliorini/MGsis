@@ -76,7 +76,8 @@ class NfeTerceiroItem extends MGActiveRecord
 			array('cprod, cean, ceantrib', 'length', 'max'=>30),
 			array('xprod', 'length', 'max'=>200),
 			array('ncm, ucom, cst, csosn', 'length', 'max'=>10),
-			array('qcom, vuncom, vprod, utrib, qtrib, vuntrib, vbc, picms, vicms, vbcst, picmsst, vicmsst, ipivbc, ipipipi, ipivipi, complemento', 'length', 'max'=>14),
+			array('vuncom, vuntrib', 'length', 'max'=>25),
+			array('qcom, vprod, utrib, qtrib, vbc, picms, vicms, vbcst, picmsst, vicmsst, ipivbc, ipipipi, ipivipi, complemento', 'length', 'max'=>14),
 			array('margem', 'length', 'max'=>6),
 			array('codprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
