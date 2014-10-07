@@ -107,7 +107,7 @@ function desabilitaCamposEmitida()
 {
 	
 	var emitida = $('#NotaFiscal_emitida').is(':checked');
-	var valorbanco = (emitida == <?php echo ($model->emitida)?"true":"false" ?>);
+	var valorbanco = ((emitida == <?php echo ($model->emitida)?"true":"false" ?>) &&  <?php echo ($model->isNewRecord)?"false":"true" ?>);
 	
 	/*
 	 * se desabilitar, joga sempre valor 0, mesmo quando for true
