@@ -20,6 +20,7 @@
  * @property NotaFiscalProdutoBarra[] $NotaFiscalProdutoBarras
  * @property NegocioProdutoBarra[] $NegocioProdutoBarras
  * @property CupomFiscalProdutoBarra[] $CupomFiscalProdutoBarras
+ * @property NfeTerceiroItem[] $NfeTerceiroItems
  * @property Produto $Produto
  * @property ProdutoEmbalagem $ProdutoEmbalagem
  * @property Marca $Marca
@@ -81,6 +82,7 @@ class ProdutoBarra extends MGActiveRecord
 			'NotaFiscalProdutoBarras' => array(self::HAS_MANY, 'NotaFiscalProdutoBarra', 'codprodutobarra'),
 			'NegocioProdutoBarras' => array(self::HAS_MANY, 'NegocioProdutoBarra', 'codprodutobarra'),
 			'CupomFiscalProdutoBarras' => array(self::HAS_MANY, 'CupomFiscalProdutoBarra', 'codprodutobarra'),
+			'NfeTerceiroItems' => array(self::HAS_MANY, 'NfeTerceiroItem', 'codprodutobarra'),
 			'Produto' => array(self::BELONGS_TO, 'Produto', 'codproduto'),
 			'ProdutoEmbalagem' => array(self::BELONGS_TO, 'ProdutoEmbalagem', 'codprodutoembalagem'),
 			'Marca' => array(self::BELONGS_TO, 'Marca', 'codmarca'),
@@ -313,6 +315,11 @@ class ProdutoBarra extends MGActiveRecord
 			
 			Yii::app()->db
 				->createCommand("UPDATE tblCupomFiscalProdutoBarra SET codprodutobarra = :codnovo WHERE codprodutobarra = :codantigo")
+				->bindValues(array(':codnovo' => $this->codprodutobarra, ':codantigo' => $pbe->codprodutobarra))
+				->execute();
+			
+			Yii::app()->db
+				->createCommand("UPDATE tblNfeTerceiroItem SET codprodutobarra = :codnovo WHERE codprodutobarra = :codantigo")
 				->bindValues(array(':codnovo' => $this->codprodutobarra, ':codantigo' => $pbe->codprodutobarra))
 				->execute();
    
