@@ -285,13 +285,20 @@ class NfeTerceiroItem extends MGActiveRecord
 		//	return false;
 		
 		//Procura ultima entrada
-		$nti = NfeTerceiroItem::model()->find(array(
-			'condition'=>'t.codnfeterceiroitem <> :codnfeterceiroitem AND t.codprodutobarra IS NOT NULL AND t.cprod=:cprod AND "NfeTerceiro".cnpj = :cnpj',
-			'params'=>array(
-				':codnfeterceiroitem'=>$this->codnfeterceiroitem,
+		$condition = 't.codprodutobarra IS NOT NULL AND t.cprod=:cprod AND "NfeTerceiro".cnpj = :cnpj';
+		$params = array(
 				':cprod'=>$this->cprod,
 				':cnpj'=>$this->NfeTerceiro->cnpj,
-			),
+			);
+		if (!empty($this->codnfeterceiroitem))
+		{
+			$condition .= ' AND t.codnfeterceiroitem <> :codnfeterceiroitem';
+			$params[':codnfeterceiroitem'] = $this->codnfeterceiroitem;
+		}
+		
+		$nti = NfeTerceiroItem::model()->find(array(
+			'condition'=>$condition,
+			'params'=>$params,
 			'with'=>'NfeTerceiro',
 			'order'=>'t.alteracao DESC',
 		));
