@@ -75,6 +75,8 @@ class MGSocket
 			return false;
 		
 		fclose($this->_fp);
+		$this->retorno = "Sem conexão com o monitor de NFe!\n";
+		
 		return true;
 	}
 	
