@@ -7,7 +7,6 @@
  * @property string $codpessoa
  * @property string $pessoa
  * @property string $fantasia
- * @property string $cadastro
  * @property string $inativo
  * @property boolean $cliente
  * @property boolean $fornecedor
@@ -106,7 +105,7 @@ class Pessoa extends MGActiveRecord
 			array('ie', 'validaCnpjDuplicado'),
 			array('codgrupocliente', 'validaGrupoCliente'),
 			array('ie, cep, cepcobranca','filter','filter'=>array($this, 'numeroLimpo')),
-			array('toleranciaatraso, numero, email, codcidade, endereco, bairro, cep, codcidadecobranca, enderecocobranca, numerocobranca, bairrocobranca, cepcobranca, pessoa, fantasia, cadastro, notafiscal, telefone1', 'required'),
+			array('toleranciaatraso, numero, email, codcidade, endereco, bairro, cep, codcidadecobranca, enderecocobranca, numerocobranca, bairrocobranca, cepcobranca, pessoa, fantasia, notafiscal, telefone1', 'required'),
 			array('fantasia', 'unique', 'caseSensitive' => false),
 			array('fantasia, pessoa', 'length', 'min' => 5),
 			array('pessoa, contato, conjuge, endereco, enderecocobranca, email, emailnfe, emailcobranca', 'length', 'max'=>100),
@@ -249,7 +248,6 @@ class Pessoa extends MGActiveRecord
 			'codpessoa' => '#',
 			'pessoa' => 'Razão Social',
 			'fantasia' => 'Nome Fantasia',
-			'cadastro' => 'Data do Cadastro',
 			'inativo' => 'Inativo desde',
 			'cliente' => 'Cliente',
 			'codgrupocliente' => 'Grupo de Cliente',
@@ -432,9 +430,7 @@ class Pessoa extends MGActiveRecord
 	
 	protected function beforeValidate()
 	{
-		if (empty($this->cadastro))
-			$this->cadastro = date('Y-m-d H:i:s');
-		
+	
 		if ($this->cobrancanomesmoendereco == true)
 		{
 			$this->enderecocobranca    = $this->endereco;

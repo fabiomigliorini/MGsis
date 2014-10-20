@@ -55,10 +55,6 @@ $this->widget('bootstrap.widgets.TbGridView',array(
 			'htmlOptions'=> array('class'=>'span1'),
 			),	
 			array(
-			'name'=>'cadastro',
-			'htmlOptions'=> array('class'=>'span1'),
-			),	
-			array(
 			'name'=>'inativo',
 			'htmlOptions'=> array('class'=>'span1'),
 			),	

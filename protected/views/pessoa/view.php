@@ -212,8 +212,7 @@ $(document).ready(function(){
 				array(
 					'name'=>'fornecedor',
 					'value'=>($model->cliente)?'Sim':'Não',
-					),
-				'cadastro',
+					)
 				));
 
 		$this->widget('bootstrap.widgets.TbDetailView',array(

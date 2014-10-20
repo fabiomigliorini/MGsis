@@ -12,8 +12,6 @@
 
 		<?php echo $form->textFieldRow($model,'fantasia',array('class'=>'span5','maxlength'=>50)); ?>
 
-		<?php echo $form->textFieldRow($model,'cadastro',array('class'=>'span5')); ?>
-
 		<?php echo $form->textFieldRow($model,'inativo',array('class'=>'span5')); ?>
 
 		<?php echo $form->checkBoxRow($model,'cliente'); ?>
