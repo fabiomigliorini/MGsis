@@ -198,7 +198,7 @@ class ProdutoBarra extends MGActiveRecord
 				return $ret;
 			
 		//Procura pelo Codigo Interno * Embalagem
-		$arr = explode('*', $barras);
+		$arr = explode('-', $barras);
 		if (
 			count($arr) == 2
 			&& strlen($arr[0]) == 6
@@ -247,6 +247,68 @@ class ProdutoBarra extends MGActiveRecord
 
 		//retorna digitocalculado
 		return $digito;
+	}
+	
+	public function barrasEan13Valido()
+	{
+		//calcula comprimento string
+		$compr = strlen($this->barras);
+
+		//precisa ter comprimento 13
+		if ($compr != 13)
+			return false;
+		
+		//precisa ser todo numerico
+		if (!ctype_digit($this->barras))
+			return false;
+		
+		//calcula digito e verifica se bate com o digitado
+		$digito = $this->calculaDigitoGtin();
+		if ($digito == substr($this->barras, -1))
+			return true;
+		else
+			return false;
+		
+	}
+	
+	public function barrasCode128CValido()
+	{
+		//calcula comprimento string
+		$compr = strlen($this->barras);
+
+		//precisa ter par
+		if ($compr % 2 != 0)
+			return false;
+		
+		//precisa ser todo numerico
+		if (!ctype_digit($this->barras))
+			return false;
+		
+		return true;
+		
+	}
+	
+	
+	public function barrasEan8Valido()
+	{
+		//calcula comprimento string
+		$compr = strlen($this->barras);
+
+		//precisa ter comprimento 13
+		if ($compr != 8)
+			return false;
+		
+		//precisa ser todo numerico
+		if (!ctype_digit($this->barras))
+			return false;
+		
+		//calcula digito e verifica se bate com o digitado
+		$digito = $this->calculaDigitoGtin();
+		if ($digito == substr($this->barras, -1))
+			return true;
+		else
+			return false;
+		
 	}
 	
 	public function barrasValido()

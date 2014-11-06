@@ -216,7 +216,7 @@ class ProdutoEmbalagem extends MGActiveRecord
 		$pb = new ProdutoBarra('insert');
 		
 		$pb->codproduto = $this->codproduto;
-		$pb->barras = str_pad ($this->codproduto, 6, "0", STR_PAD_LEFT) . "*" . $this->quantidade;
+		$pb->barras = str_pad ($this->codproduto, 6, "0", STR_PAD_LEFT) . '-' . $this->quantidade;
 		$pb->codprodutoembalagem = $this->codprodutoembalagem;
 		
 		return $pb->save();

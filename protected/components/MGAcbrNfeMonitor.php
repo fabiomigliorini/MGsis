@@ -319,7 +319,7 @@ class MGAcbrNfeMonitor extends MGSocket
 					"CFOP" => $NotaFiscalpb->codcfop,
 					"Codigo" => 
 						Yii::app()->format->formataPorMascara($NotaFiscalpb->ProdutoBarra->codproduto, "######") 
-						//. empty($NotaFiscalpb->ProdutoBarra->codprodutoembalagem)?"":"*" . $NotaFiscalpb->ProdutoBarra->ProdutoEmbalagem->quantidade
+						//. empty($NotaFiscalpb->ProdutoBarra->codprodutoembalagem)?'':'-' . $NotaFiscalpb->ProdutoBarra->ProdutoEmbalagem->quantidade
 						,
 					"EAN" => $NotaFiscalpb->ProdutoBarra->barrasValido()?$NotaFiscalpb->ProdutoBarra->barras:"",
 					/*
