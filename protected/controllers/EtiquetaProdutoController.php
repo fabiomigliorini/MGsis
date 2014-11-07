@@ -160,7 +160,7 @@ class EtiquetaProdutoController extends Controller
 			elseif ($modelo == '2coluna')
 			{
 				$colunas = 2;
-				$tamanhoDescricao = 28;
+				$tamanhoDescricao = 32;
 			}
 
 
@@ -176,8 +176,8 @@ class EtiquetaProdutoController extends Controller
 
 				for ($i=0; $i<$etiqueta['quantidade']; $i++)
 				{
-					$linhas[$linha][$coluna]['DescricaoLinha1'] = substr($pb->descricao, 0, $tamanhoDescricao);
-					$linhas[$linha][$coluna]['DescricaoLinha2'] = substr($pb->descricao, $tamanhoDescricao, $tamanhoDescricao);;
+					$linhas[$linha][$coluna]['DescricaoLinha1'] = trim(substr($pb->descricao, 0, $tamanhoDescricao));
+					$linhas[$linha][$coluna]['DescricaoLinha2'] = trim(substr($pb->descricao, $tamanhoDescricao, $tamanhoDescricao));
 					$linhas[$linha][$coluna]['Codigo'] = Yii::app()->format->formataCodigo($pb->codproduto, 6);
 					$linhas[$linha][$coluna]['UnidadeMedida'] = $pb->UnidadeMedida->sigla;
 					if (isset($pb->ProdutoEmbalagem))
@@ -227,7 +227,7 @@ class EtiquetaProdutoController extends Controller
 						$linhas[$linha][$coluna]['Referencia'] = $pb->Produto->referencia;
 					
 					
-					$linhas[$linha][$coluna]['Data'] = date('d/m/Y');
+					$linhas[$linha][$coluna]['Data'] = date('d/m/y');
 
 					$coluna++;
 					if ($coluna>$colunas)
@@ -240,6 +240,16 @@ class EtiquetaProdutoController extends Controller
 
 			}
 
+			/*
+			echo '<pre>';
+			print_r($linhas);
+			print_r($etiqueta);
+			echo '</pre>';
+			
+			die();
+			 * 
+			 */
+			
 			//die(Yii::app()->basePath . "/../layoutEtiquetas/{$layout}.txt");
 
 			$template = file_get_contents($layout);
@@ -274,12 +284,6 @@ class EtiquetaProdutoController extends Controller
 
 			}
 
-			/*
-			echo '<pre>';
-			print_r($linhas);
-			print_r($etiqueta);
-			echo '</pre>';
-			*/
 
 			/*
 			 * 
