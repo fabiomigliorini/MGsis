@@ -1,0 +1,31 @@
+n
+M0500
+O0220
+V0
+f220
+D
+L
+D11
+A2
+1911A0600700005<DescricaoLinha1Coluna1>
+1911A0600610005<DescricaoLinha2Coluna1>
+1911A0600520005<CodigoColuna1>
+1911A0600430005<UnidadeMedidaColuna1>
+1<ModeloBarrasColuna1>03200110005<SubsetBarrasColuna1><BarrasColuna1>
+1911A0600010005<NumeroBarrasColuna1> (<ModeloBarrasColuna1><SubsetBarrasColuna1>)
+
+1911A0600700145<DescricaoLinha1Coluna2>
+1911A0600610145<DescricaoLinha2Coluna2>
+1911A0600520145<CodigoColuna2>
+1911A0600430145<UnidadeMedidaColuna2>
+1<ModeloBarrasColuna2>03200110145<SubsetBarrasColuna2><BarrasColuna2>
+1911A0600010145<NumeroBarrasColuna2> (<ModeloBarrasColuna2><SubsetBarrasColuna2>)
+
+1911A0600700285<DescricaoLinha1Coluna3>
+1911A0600610285<DescricaoLinha2Coluna3>
+1911A0600520285<CodigoColuna3>
+1911A0600430285<UnidadeMedidaColuna3>
+1<ModeloBarrasColuna3>03200110285<SubsetBarrasColuna3><BarrasColuna3>
+1911A0600010285<NumeroBarrasColuna3> (<ModeloBarrasColuna3><SubsetBarrasColuna3>)
+Q0001
+E

@@ -137,12 +137,12 @@ class EtiquetaProdutoController extends Controller
 			$retorno['Impresso'] = false;
 			$retorno['Mensagem'] = 'Nenhuma etiqueta selecionada!';
 		}
-		elseif ($modelo == '3coluna' && $quant % 3 != 0)
+		elseif (($modelo == '3colunas' || $modelo == '3colunas_sempreco') && $quant % 3 != 0)
 		{
 			$retorno['Impresso'] = false;
 			$retorno['Mensagem'] = 'Você precisa selecionar um múltiplo de 3 etiquetas!<br><br>Por exemplo, 3, 6, 9, 12...';
 		}
-		elseif ($modelo == '2coluna' && $quant % 2 != 0)
+		elseif (($modelo == '2colunas' || $modelo == '2colunas_sempreco') && $quant % 2 != 0)
 		{
 			$retorno['Impresso'] = false;
 			$retorno['Mensagem'] = 'Você precisa selecionar um múltiplo de 2 etiquetas!<br><br>Por exemplo, 2, 4, 6, 8...';
@@ -150,19 +150,26 @@ class EtiquetaProdutoController extends Controller
 		else
 		{
 		
-			$colunas = 1;
-			$tamanhoDescricao = 45;
-			if ($modelo == '3coluna')
+			
+			switch ($modelo)
 			{
-				$colunas = 3;
-				$tamanhoDescricao = 28;
-			}
-			elseif ($modelo == '2coluna')
-			{
-				$colunas = 2;
-				$tamanhoDescricao = 32;
-			}
+				case '2colunas':
+				case '2colunas_sempreco':
+					$colunas = 2;
+					$tamanhoDescricao = 32;
+					break;
 
+				case '3colunas':
+				case '3colunas_sempreco':
+					$colunas = 3;
+					$tamanhoDescricao = 28;
+					break;
+				
+				default:
+					$colunas = 1;
+					$tamanhoDescricao = 45;
+					break;
+			}
 
 			$layout = Yii::app()->basePath . "/../layoutEtiquetas/{$modelo}.txt";
 
@@ -184,13 +191,22 @@ class EtiquetaProdutoController extends Controller
 						$linhas[$linha][$coluna]['UnidadeMedida'] .= ' ' .$pb->ProdutoEmbalagem->descricao; 
 					$linhas[$linha][$coluna]['Preco'] = Yii::app()->format->formatNumber($pb->preco);
 					
+					if (strlen($linhas[$linha][$coluna]['Preco']) < 6)
+						$linhas[$linha][$coluna]['Preco'] = str_pad ($linhas[$linha][$coluna]['Preco'], 6, ' ', STR_PAD_LEFT);
+					
+					$linhas[$linha][$coluna]['Preco'] = str_replace(' ', '  ', $linhas[$linha][$coluna]['Preco']);
 
 					/* Decide o tipo de codigo de barras
 					 * f42 - Ean13
 					 * g63 - Ean8
-					 * e63 subtipo C - Code128 Par
-					 * o42 - Code93
+					 * e63 subtipo A
+					 * e63 subtipo C - Code128 somente números Par
+					 * o42 - Code93 - nao le codigo "100182-8" no leitor metrologic - nao utilizar
+					 * a42 - Code3 of 9
 					 */
+					
+					$linhas[$linha][$coluna]['Barras'] = $pb->barras;
+					$linhas[$linha][$coluna]['NumeroBarras'] = $pb->barras;
 					
 					if ($pb->barrasEan13Valido())
 					{
@@ -204,17 +220,20 @@ class EtiquetaProdutoController extends Controller
 					}
 					elseif ($pb->barrasCode128CValido())
 					{
-						$linhas[$linha][$coluna]['ModeloBarras'] = 'e63';
+						if (strlen($linhas[$linha][$coluna]['Barras']) <= 10)
+							$linhas[$linha][$coluna]['ModeloBarras'] = 'e63';
+						else
+							$linhas[$linha][$coluna]['ModeloBarras'] = 'e42';
 						$linhas[$linha][$coluna]['SubsetBarras'] = 'C';
 					}
 					else
 					{
-						$linhas[$linha][$coluna]['ModeloBarras'] = 'o42';
-						$linhas[$linha][$coluna]['SubsetBarras'] = '';
+						$linhas[$linha][$coluna]['ModeloBarras'] = 'e42';
+						$linhas[$linha][$coluna]['SubsetBarras'] = 'A';
+						//$linhas[$linha][$coluna]['ModeloBarras'] = 'o42';
+						//$linhas[$linha][$coluna]['SubsetBarras'] = '';
 					}
 					
-					$linhas[$linha][$coluna]['Barras'] = $pb->barras;
-					$linhas[$linha][$coluna]['NumeroBarras'] = $pb->barras;
 					
 					if (isset($pb->Produto->Marca))
 						$linhas[$linha][$coluna]['Marca'] = $pb->Produto->Marca->marca;

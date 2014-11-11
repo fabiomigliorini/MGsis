@@ -179,12 +179,14 @@ $imp = getActivePrinters();
 						'value' => null,
 						'data' => array(
 							''=>'', 
-							'3coluna'=>'Pequena com 3 Colunas por linha', 
-							'2coluna'=>'Média com 2 Colunas por linha', 
-							'gondola'=>'Larga para Gondola'
+							'3colunas'=>'Pequena com 3 Colunas por linha', 
+							'3colunas_sempreco'=>'Pequena com 3 Colunas por linha - Sem Preço', 
+							'2colunas'=>'Média com 2 Colunas por linha', 
+							'2colunas_sempreco'=>'Média com 2 Colunas por linha - Sem Preço', 
+							'gondola'=>'Grande para Gondola'
 						),
 						'htmlOptions' => array(
-							'class' => 'input-xlarge',							
+							'class' => 'input-xxlarge',							
 						),
 						'options' => array(
 							'placeholder' => 'Selecione o tipo!',

@@ -13,10 +13,10 @@ A1
 A2
 1<ModeloBarrasColuna1>04200250005<SubsetBarrasColuna1><BarrasColuna1>
 1911A0800140005<NumeroBarrasColuna1>
-1911A0800560135<MarcaColuna1>
-1911A0800420135<ReferenciaColuna1>
-1911A0800280135<CodigoColuna1> - <UnidadeMedidaColuna1>
-1911A0800140135<DataColuna1> - <ModeloBarrasColuna1><SubsetBarrasColuna1>
+1911A0800560155<MarcaColuna1>
+1911A0800420155<ReferenciaColuna1>
+1911A0800280155<CodigoColuna1> - <UnidadeMedidaColuna1>
+1911A0800140155<DataColuna1> - <ModeloBarrasColuna1><SubsetBarrasColuna1>
 1911A1200490241R$
 1922A1800080260<PrecoColuna1>
 Q0001
