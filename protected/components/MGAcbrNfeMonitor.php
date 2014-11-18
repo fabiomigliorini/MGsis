@@ -293,7 +293,7 @@ class MGAcbrNfeMonitor extends MGSocket
 				"CNPJ" => ($this->NotaFiscal->Pessoa->fisica)?
 					Yii::app()->format->formataPorMascara($this->NotaFiscal->Pessoa->cnpj, "###########", true):
 					Yii::app()->format->formataPorMascara($this->NotaFiscal->Pessoa->cnpj, "##############", true),
-				"IE" => empty($this->NotaFiscal->Pessoa->ie)?"0":$this->NotaFiscal->Pessoa->ie,
+				"IE" => empty($this->NotaFiscal->Pessoa->ie)?"00":$this->NotaFiscal->Pessoa->ie,
 				"NomeRazao" => substr($this->NotaFiscal->Pessoa->pessoa, 0, 60),
 				"Fone" => Yii::app()->format->numeroLimpo($this->NotaFiscal->Pessoa->telefone1),
 				"CEP" => $this->NotaFiscal->Pessoa->cep,
