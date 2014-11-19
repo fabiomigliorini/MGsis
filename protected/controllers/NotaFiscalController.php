@@ -306,10 +306,12 @@ class NotaFiscalController extends Controller
 		if($model===null)
 		{
 			Yii::app()->session["NotaFiscalRobo$codfilial"] = 0;
+			$reload = 10000; // 10 segundos
 		}
 		else
 		{
 			Yii::app()->session["NotaFiscalRobo$codfilial"] = $model->codnotafiscal;
+			$reload = 500; //0.5 segundos
 			
 			$acbr = new MGAcbrNfeMonitor($model);
 
@@ -363,7 +365,7 @@ class NotaFiscalController extends Controller
 		
 		echo "</pre>";
 		echo "<script>\n";
-		echo "window.setTimeout('location.reload()', 20000); //reloads after 10 seconds\n";
+		echo "window.setTimeout('location.reload()', $reload); //reloads after 10 seconds\n";
 		echo "</script>\n";
 			
 	}
