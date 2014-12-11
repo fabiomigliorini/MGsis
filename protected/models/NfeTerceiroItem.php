@@ -312,7 +312,7 @@ class NfeTerceiroItem extends MGActiveRecord
 				$this->margem = $nti->margem;
 			
 			if (empty($this->complemento))
-				$this->complemento = ($nti->complemento / $nti->vprod) * $this->vprod;
+				$this->complemento = round(($nti->complemento / $nti->vprod) * $this->vprod, 2);
 			
 			return true;
 		}
