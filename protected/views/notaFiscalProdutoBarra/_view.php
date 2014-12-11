@@ -19,8 +19,13 @@
 			<small class="span2 muted">
 				<?php
 					$precounitario = ($data->valortotal + $data->icmsstvalor + $data->ipivalor)/$data->quantidade;
-					$ipi = $data->ipivalor/$data->valortotal;
-					$icmsst = $data->icmsstvalor/$data->valortotal;
+					$ipi = '';
+					$icmsst = '';
+					if ($data->valortotal > 0)
+					{
+						$ipi = $data->ipivalor/$data->valortotal;
+						$icmsst = $data->icmsstvalor/$data->valortotal;
+					}
 					echo $data->ProdutoBarra->UnidadeMedida->sigla;
 					if (isset($data->ProdutoBarra->ProdutoEmbalagem))
 					{
