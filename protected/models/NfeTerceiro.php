@@ -683,7 +683,7 @@ class NfeTerceiro extends MGActiveRecord
 		
 		foreach ($this->NfeTerceiroItems as $nti)
 		{
-			if (empty($nti->vsugestaovenda))
+			if (empty($nti->vsugestaovenda) && $nti->vprod > 0)
 			{
 				$this->addError("codnfeterceiro", "Não foi informado os detalhes para todos os itens!");
 				$transaction->rollBack();
