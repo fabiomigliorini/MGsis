@@ -22,7 +22,18 @@
  * @property string $codusuarioalteracao
  * @property string $criacao
  * @property string $codusuariocriacao
- *
+ * @property string $icmscst
+ * @property string $piscst
+ * @property string $ipicst
+ * @property string $cofinscst
+ * @property string $pispercentual
+ * @property string $cofinspercentual
+ * @property string $csllpercentual
+ * @property string $irpjpercentual
+ * @property string $ncm
+ * @property string $icmslpbase
+ * @property string $icmslppercentual
+ * 
  * The followings are the available model relations:
  * @property Cfop $Cfop
  * @property Estado $Estado
@@ -50,16 +61,19 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codtributacao, codnaturezaoperacao, codtipoproduto, codcfop, csosn', 'required'),
-			array('acumuladordominiovista, acumuladordominioprazo', 'numerical', 'integerOnly'=>true),
-			array('icmsbase, icmspercentual', 'length', 'max'=>14),
+			array('codtributacao, codnaturezaoperacao, codcfop, csosn, codtipoproduto, icmscst, piscst, ipicst, cofinscst', 'required'),
+			array('acumuladordominiovista, acumuladordominioprazo, ncm', 'numerical', 'integerOnly'=>true),
 			array('codtributacao', 'validaChaveUnica'),
 			array('csosn', 'length', 'max'=>4),
+			array('icmspercentual, pispercentual, cofinspercentual, csllpercentual, irpjpercentual, icmslppercentual', 'length', 'max'=>5),
 			array('historicodominio', 'length', 'max'=>512),
-			array('codestado, codtipoproduto, movimentacaofisica, movimentacaocontabil, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
+			array('icmscst, piscst, ipicst, cofinscst', 'length', 'max'=>3),
+			array('ncm', 'length', 'max'=>10),
+			array('icmsbase, icmslpbase', 'length', 'max'=>6),
+			array('codestado, movimentacaofisica, movimentacaocontabil, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('codtributacaonaturezaoperacao, codtributacao, codnaturezaoperacao, codcfop, icmsbase, icmspercentual, codestado, csosn, codtipoproduto, acumuladordominiovista, acumuladordominioprazo, historicodominio, movimentacaofisica, movimentacaocontabil, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
+			array('codtributacaonaturezaoperacao, codtributacao, codnaturezaoperacao, codcfop, icmsbase, icmspercentual, codestado, csosn, codtipoproduto, acumuladordominiovista, acumuladordominioprazo, historicodominio, movimentacaofisica, movimentacaocontabil, alteracao, codusuarioalteracao, criacao, codusuariocriacao, icmscst, piscst, ipicst, cofinscst, pispercentual, cofinspercentual, csllpercentual, irpjpercentual, ncm, icmslpbase, icmslppercentual', 'safe', 'on'=>'search'),
 		);
 	}
 	
@@ -92,6 +106,16 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 			$parametros['codestado'] = $this->codestado;
 		}
 		
+		if (empty($this->ncm))
+		{
+			$condicao .= ' AND ncm IS NULL';
+		}
+		else
+		{
+			$condicao .= ' AND ncm = :ncm';
+			$parametros['ncm'] = $this->ncm;
+		}
+		
 		$regs = TributacaoNaturezaOperacao::model()->findAll(
 			array(
 				'condition' => $condicao, 
@@ -101,7 +125,7 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 		
 		if (sizeof($regs) > 0)
 			if ($regs[0]->codtributacaonaturezaoperacao <> $this->codtributacaonaturezaoperacao)
-				$this->addError($attribute, "Já existe uma combinação de Tributação, Tipo de Produto e Estado igual à essa cadastrada!");
+				$this->addError($attribute, "Já existe uma combinação de Tributação, Tipo de Produto, Estado e NCM igual à essa cadastrada!");
 	}	
 
 	/**
@@ -137,8 +161,8 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 			'codestado' => 'Estado',
 			'csosn' => 'CSOSN',
 			'codtipoproduto' => 'Tipo do produto',
-			'acumuladordominiovista' => 'Acumulo Domínio à Vista',
-			'acumuladordominioprazo' => 'Acumulo Domínio à Prazo',
+			'acumuladordominiovista' => 'Acumulador Vista',
+			'acumuladordominioprazo' => 'Acumulador Prazo',
 			'historicodominio' => 'Histórico Domínio',
 			'movimentacaofisica' => 'Movimentação Fisica',
 			'movimentacaocontabil' => 'Movimentação Contabil',
@@ -146,6 +170,17 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
 			'codusuariocriacao' => 'Usuário Criação',
+			'icmscst' => 'ICMS CST',
+			'piscst' => 'PIS CST',
+			'ipicst' => 'IPI CST',
+			'cofinscst' => 'Cofins CST',
+			'pispercentual' => 'PIS %',
+			'cofinspercentual' => 'Cofins %',
+			'csllpercentual' => 'CSLL %',
+			'irpjpercentual' => 'IRPJ %',
+			'ncm' => 'NCM',
+			'icmslpbase' => 'ICMS Base',
+			'icmslppercentual' => 'ICMS %',			
 		);
 	}
 
@@ -186,6 +221,17 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);
 		$criteria->compare('criacao',$this->criacao,false);
 		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,false);
+		$criteria->compare('icmscst',$this->icmscst,false);
+		$criteria->compare('piscst',$this->piscst,false);
+		$criteria->compare('ipicst',$this->ipicst,false);
+		$criteria->compare('cofinscst',$this->cofinscst,false);
+		$criteria->compare('pispercentual',$this->pispercentual,false);
+		$criteria->compare('cofinspercentual',$this->cofinspercentual,false);
+		$criteria->compare('csllpercentual',$this->csllpercentual,false);
+		$criteria->compare('irpjpercentual',$this->irpjpercentual,false);
+		$criteria->compare('ncm',$this->ncm,true);
+		$criteria->compare('icmslpbase',$this->icmslpbase,false);
+		$criteria->compare('icmslppercentual',$this->icmslppercentual,false);		
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -1,16 +1,23 @@
 <?php
 
-$titulo = $model->NaturezaOperacao->naturezaoperacao 
-		. " / " 
-		. $model->Tributacao->tributacao 
-		. " / " 
+$titulo = $model->Tributacao->tributacao 
+		. ' / ' 
+		. $model->NaturezaOperacao->naturezaoperacao 
+		. ' / ' 
 		. $model->TipoProduto->tipoproduto 
-		. " / " ;
+		. ' / ' ;
 
 if (empty($model->codestado))
-	$titulo .= "Demais Estados";
+	$titulo .= 'Demais Estados';
 else
 	$titulo .= $model->Estado->sigla;
+
+$titulo .= ' / ';
+
+if (empty($model->ncm))
+	$titulo .= 'Demais NCM\'s';
+else
+	$titulo .= $model->ncm;
 
 $this->pagetitle = Yii::app()->name . ' - Detalhes Tributação Natureza Operação';
 $this->breadcrumbs=array(
@@ -20,10 +27,11 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('naturezaOperacao/view', 'id'=>$model->codnaturezaoperacao)),
-array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create', 'codnaturezaoperacao'=>$model->codnaturezaoperacao)),
-array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codtributacaonaturezaoperacao)),
-array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
+	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('naturezaOperacao/view', 'id'=>$model->codnaturezaoperacao)),
+	array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create', 'codnaturezaoperacao'=>$model->codnaturezaoperacao)),
+	array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codtributacaonaturezaoperacao)),
+	array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
+	array('label'=>'Duplicar', 'icon'=>'icon-retweet', 'url'=>array('create','duplicar'=>$model->codtributacaonaturezaoperacao)),
 //array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
 
@@ -45,65 +53,145 @@ $(document).ready(function(){
 
 <h1><?php echo $titulo ?></h1>
 
+<div class="row-fluid">
+	<div class="span6">
+		<h3>Chave</h3>
+			<?php 
+			$this->widget('bootstrap.widgets.TbDetailView',array(
+				'data'=>$model,
+				'attributes'=>array(
+					//'codtributacaonaturezaoperacao',
+					array(
+						'name'=>'codtributacaonaturezaoperacao',
+						'value'=>Yii::app()->format->formataCodigo($model->codtributacaonaturezaoperacao),
+						),
+					//'codtributacao',
+					array(
+								'name'=>'codtributacao',
+								'value'=>(isset($model->Tributacao))?CHtml::link(CHtml::encode($model->Tributacao->tributacao),array('tributacao/view','id'=>$model->codtributacao)):null,
+								'type'=>'raw',
+								),
+					//'codnaturezaoperacao',
+					array(
+								'name'=>'codnaturezaoperacao',
+								'value'=>(isset($model->NaturezaOperacao))?CHtml::link(CHtml::encode($model->NaturezaOperacao->naturezaoperacao),array('naturezaOperacao/view','id'=>$model->codnaturezaoperacao)):null,
+								'type'=>'raw',
+								),
+					//'codtipoproduto',
+					array(
+								'name'=>'codtipoproduto',
+								'value'=>(isset($model->TipoProduto))?CHtml::link(CHtml::encode($model->TipoProduto->tipoproduto),array('tipoProduto/view','id'=>$model->codtipoproduto)):null,
+								'type'=>'raw',
+								),
+					//'codestado',
+					array(
+								'name'=>'codestado',
+								'value'=>(isset($model->Estado))?CHtml::link(CHtml::encode($model->Estado->estado),array('estado/view','id'=>$model->codestado)):null,
+								'type'=>'raw',
+								),		
+					'ncm',
+					//'codcfop',
+					array(
+								'name'=>'codcfop',
+								'value'=>(isset($model->Cfop))?CHtml::link(CHtml::encode($model->codcfop . " - " .  $model->Cfop->cfop),array('cfop/view','id'=>$model->codcfop)):null,
+								'type'=>'raw',
+								),
+					),
+				)); 
+		?>
+	</div>
+	<div class="span6">
+		<h3>Contábil</h3>
+			<?php 
+			$this->widget('bootstrap.widgets.TbDetailView',array(
+				'data'=>$model,
+				'attributes'=>array(
+					'acumuladordominiovista',
+					'acumuladordominioprazo',
+					'historicodominio',
+					//'movimentacaofisica',
+					array(
+						'name'=>'movimentacaofisica',
+						'value'=>($model->movimentacaofisica)?'Sim':'Não',
+						),
+					//'movimentacaocontabil',
+					array(
+						'name'=>'movimentacaocontabil',
+						'value'=>($model->movimentacaocontabil)?'Sim':'Não',
+						),
+					),
+				)); 
+			?>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span3">
+		<h3>Simples</h3>
+		<?php 
+		$this->widget('bootstrap.widgets.TbDetailView',array(
+			'data'=>$model,
+			'attributes'=>array(
+				'csosn',
+				'icmsbase',
+				'icmspercentual',
+				),
+			)); 
+		?>		
+	</div>
+	<div class="span9">
+		<h3>Lucro Presumido</h3>
+		<div class="row-fluid">
+			<div class="span3">
+				<?php 
+				$this->widget('bootstrap.widgets.TbDetailView',array(
+					'data'=>$model,
+					'attributes'=>array(
+						'icmscst',
+						'icmslpbase',
+						'icmslppercentual',
+						),
+					)); 
+				?>		
+			</div>
+			<div class="span3">
+				<?php 
+				$this->widget('bootstrap.widgets.TbDetailView',array(
+					'data'=>$model,
+					'attributes'=>array(
+						'piscst',
+						'pispercentual',
+						),
+					)); 
+				?>		
+			</div>
+			<div class="span3">
+				<?php 
+				$this->widget('bootstrap.widgets.TbDetailView',array(
+					'data'=>$model,
+					'attributes'=>array(
+						'cofinscst',
+						'cofinspercentual',
+						),
+					)); 
+				?>		
+			</div>
+			<div class="span3">
+				<?php 
+				$this->widget('bootstrap.widgets.TbDetailView',array(
+					'data'=>$model,
+					'attributes'=>array(
+						'ipicst',
+						'csllpercentual',
+						'irpjpercentual',
+						),
+					)); 
+				?>		
+				
+			</div>
+		</div>
+	</div>
+</div>
+
 <?php 
-$this->widget('bootstrap.widgets.TbDetailView',array(
-	'data'=>$model,
-	'attributes'=>array(
-		//'codtributacaonaturezaoperacao',
-		array(
-			'name'=>'codtributacaonaturezaoperacao',
-			'value'=>Yii::app()->format->formataCodigo($model->codtributacaonaturezaoperacao),
-			),
-		//'codnaturezaoperacao',
-		array(
-					'name'=>'codnaturezaoperacao',
-					'value'=>(isset($model->NaturezaOperacao))?CHtml::link(CHtml::encode($model->NaturezaOperacao->naturezaoperacao),array('naturezaOperacao/view','id'=>$model->codnaturezaoperacao)):null,
-					'type'=>'raw',
-					),
-		//'codtributacao',
-		array(
-					'name'=>'codtributacao',
-					'value'=>(isset($model->Tributacao))?CHtml::link(CHtml::encode($model->Tributacao->tributacao),array('tributacao/view','id'=>$model->codtributacao)):null,
-					'type'=>'raw',
-					),
-		//'codtipoproduto',
-		array(
-					'name'=>'codtipoproduto',
-					'value'=>(isset($model->TipoProduto))?CHtml::link(CHtml::encode($model->TipoProduto->tipoproduto),array('tipoProduto/view','id'=>$model->codtipoproduto)):null,
-					'type'=>'raw',
-					),
-		//'codestado',
-		array(
-					'name'=>'codestado',
-					'value'=>(isset($model->Estado))?CHtml::link(CHtml::encode($model->Estado->estado),array('estado/view','id'=>$model->codestado)):null,
-					'type'=>'raw',
-					),		
-		//'codcfop',
-		array(
-					'name'=>'codcfop',
-					'value'=>(isset($model->Cfop))?CHtml::link(CHtml::encode($model->codcfop . " - " .  $model->Cfop->cfop),array('cfop/view','id'=>$model->codcfop)):null,
-					'type'=>'raw',
-					),
-		'icmsbase',
-		'icmspercentual',
-		'icmsbase',
-		'csosn',
-		'acumuladordominiovista',
-		'acumuladordominioprazo',
-		'historicodominio',
-		//'movimentacaofisica',
-		array(
-			'name'=>'movimentacaofisica',
-			'value'=>($model->movimentacaofisica)?'Sim':'Não',
-			),
-		//'movimentacaocontabil',
-		array(
-			'name'=>'movimentacaocontabil',
-			'value'=>($model->movimentacaocontabil)?'Sim':'Não',
-			),
-		),
-	)); 
-
-	$this->widget('UsuarioCriacao', array('model'=>$model));
-
+$this->widget('UsuarioCriacao', array('model'=>$model));
 ?>

@@ -83,7 +83,8 @@ $(document).ready(function(){
 			)
 		);
 	?>
-	<?php echo $form->textField($model, 'codcfop', array('placeholder' => 'Código CFOP', 'class'=>'input-Xmini')); ?>
+	<?php echo $form->textField($model, 'ncm', array('placeholder' => 'NCM', 'class'=>'input-small')); ?>
+	<?php echo $form->textField($model, 'codcfop', array('placeholder' => 'CFOP', 'class'=>'input-mini')); ?>
 
 	<?php
 	$this->widget('bootstrap.widgets.TbButton'

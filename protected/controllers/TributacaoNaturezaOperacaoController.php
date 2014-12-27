@@ -23,7 +23,7 @@ class TributacaoNaturezaOperacaoController extends Controller
 	* Creates a new model.
 	* If creation is successful, the browser will be redirected to the 'view' page.
 	*/
-	public function actionCreate($codnaturezaoperacao)
+	public function actionCreate($codnaturezaoperacao = null, $duplicar = null)
 	{
 		$model=new TributacaoNaturezaOperacao;
 		
@@ -37,6 +37,24 @@ class TributacaoNaturezaOperacaoController extends Controller
 			$model->attributes=$_POST['TributacaoNaturezaOperacao'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->codtributacaonaturezaoperacao));
+		}
+		else
+		{
+			
+			if (!empty($duplicar))
+			{
+				$original = $this->loadModel($duplicar);
+				
+				$model->attributes = $original->attributes;
+				
+				$model->codtributacaonaturezaoperacao = null;
+				$model->codusuariocriacao = null;
+				$model->criacao = null;
+				$model->codusuarioalteracao = null;
+				$model->alteracao = null;
+			}
+			
+			
 		}
 
 		$this->render('create',array(
