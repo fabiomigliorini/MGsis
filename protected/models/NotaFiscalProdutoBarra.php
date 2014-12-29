@@ -27,7 +27,23 @@
  * @property string $codusuarioalteracao
  * @property string $criacao
  * @property string $codusuariocriacao
- *
+ * @property string $icmscst
+ * @property string $ipicst
+ * @property string $piscst
+ * @property string $cofinscst
+ * @property string $pispercentual
+ * @property string $cofinspercentual
+ * @property string $csllpercentual
+ * @property string $irpjpercentual
+ * @property string $pisbase
+ * @property string $pisvalor
+ * @property string $cofinsbase
+ * @property string $cofinsvalor
+ * @property string $csllbase
+ * @property string $csllvalor
+ * @property string $irpjbase
+ * @property string $irpjvalor
+ * 
  * The followings are the available model relations:
  * @property Cfop $Cfop
  * @property NegocioProdutoBarra $NegocioProdutoBarra
@@ -63,14 +79,16 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codnotafiscal, codprodutobarra, codcfop, quantidade, valorunitario, valortotal, csosn', 'required'),
+			array('codnotafiscal, codprodutobarra, codcfop, quantidade, valorunitario, valortotal', 'required'),
 			array('descricaoalternativa', 'length', 'max'=>100),
-			array('quantidade, valorunitario, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, icmsstbase, icmsstpercentual, icmsstvalor', 'length', 'max'=>14),
+			array('quantidade, valorunitario, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, icmsstbase, icmsstpercentual, icmsstvalor, pisbase, pisvalor, cofinsbase, cofinsvalor, csllbase, csllvalor, irpjbase, irpjvalor', 'length', 'max'=>14),
 			array('csosn', 'length', 'max'=>4),
+			array('pispercentual, cofinspercentual, csllpercentual, irpjpercentual', 'length', 'max'=>5),
+			array('icmscst, ipicst, piscst, cofinscst', 'length', 'max'=>3),
 			array('codnegocioprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('codnaturezaoperacao, saida_de, saida_ate, codpessoa, codfilial, codproduto, codnotafiscalprodutobarra, codnotafiscal, codprodutobarra, codcfop, descricaoalternativa, quantidade, valorunitario, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, icmsstbase, icmsstpercentual, icmsstvalor, csosn, codnegocioprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
+			array('codnaturezaoperacao, saida_de, saida_ate, codpessoa, codfilial, codproduto, codnotafiscalprodutobarra, codnotafiscal, codprodutobarra, codcfop, descricaoalternativa, quantidade, valorunitario, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, icmsstbase, icmsstpercentual, icmsstvalor, csosn, codnegocioprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao, icmscst, ipicst, piscst, cofinscst, pispercentual, cofinspercentual, csllpercentual, irpjpercentual, pisbase, pisvalor, cofinsbase, cofinsvalor, csllbase, csllvalor, irpjbase, irpjvalor', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -106,21 +124,46 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 			'quantidade' => 'Quantidade',
 			'valorunitario' => 'Preço',
 			'valortotal' => 'Total',
-			'icmsbase' => 'ICMS Base',
-			'icmspercentual' => 'ICMS %',
-			'icmsvalor' => 'ICMS Valor',
-			'ipibase' => 'IPI Base',
-			'ipipercentual' => 'IPI %',
-			'ipivalor' => 'IPI Valor',
-			'icmsstbase' => 'ST Base',
-			'icmsstpercentual' => 'ST %',
-			'icmsstvalor' => 'ST Valor',
-			'csosn' => 'CSOSN',
+			
 			'codnegocioprodutobarra' => 'Negocio',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
 			'codusuariocriacao' => 'Usuário Criação',
+			
+			'csosn' => 'CSOSN',
+			'icmscst' => 'ICMS CST',
+			'icmsbase' => 'ICMS Base',
+			'icmspercentual' => 'ICMS %',
+			'icmsvalor' => 'ICMS Valor',
+			
+			'icmsstbase' => 'ST Base',
+			'icmsstpercentual' => 'ST %',
+			'icmsstvalor' => 'ST Valor',
+			
+			'ipicst' => 'IPI CST',
+			'ipibase' => 'IPI Base',
+			'ipipercentual' => 'IPI %',
+			'ipivalor' => 'IPI Valor',
+			
+			'piscst' => 'PIS CST',
+			'pisbase' => 'PIS Base',
+			'pispercentual' => 'PIS %',
+			'pisvalor' => 'PIS Valor',
+			
+			'cofinscst' => 'Cofins CST',
+			'cofinsbase' => 'Cofins Base',
+			'cofinspercentual' => 'Cofins %',
+			'cofinsvalor' => 'Cofins Valor',
+			
+			'csllbase' => 'CSLL Base',
+			'csllpercentual' => 'CSLL %',
+			'csllvalor' => 'CSLL Valor',
+			
+			'irpjbase' => 'IRPJ Base',
+			'irpjpercentual' => 'IRPJ %',
+			'irpjvalor' => 'IRPJ Valor',
+			
 		);
 	}
 
@@ -188,6 +231,24 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 			$criteria->addCondition('"NotaFiscal".saida <= :saida_ate');
 			$criteria->params = array_merge($criteria->params, array(':saida_ate' => $saida_ate->format('Y-m-d')));
 		}
+		
+		
+		$criteria->compare('icmscst',$this->icmscst,false);
+		$criteria->compare('ipicst',$this->ipicst,false);
+		$criteria->compare('piscst',$this->piscst,false);
+		$criteria->compare('cofinscst',$this->cofinscst,false);
+		$criteria->compare('pispercentual',$this->pispercentual,false);
+		$criteria->compare('cofinspercentual',$this->cofinspercentual,false);
+		$criteria->compare('csllpercentual',$this->csllpercentual,false);
+		$criteria->compare('irpjpercentual',$this->irpjpercentual,false);
+		$criteria->compare('pisbase',$this->pisbase,false);
+		$criteria->compare('pisvalor',$this->pisvalor,false);
+		$criteria->compare('cofinsbase',$this->cofinsbase,false);
+		$criteria->compare('cofinsvalor',$this->cofinsvalor,false);
+		$criteria->compare('csllbase',$this->csllbase,false);
+		$criteria->compare('csllvalor',$this->csllvalor,false);
+		$criteria->compare('irpjbase',$this->irpjbase,false);
+		$criteria->compare('irpjvalor',$this->irpjvalor,false);
 		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
