@@ -1049,6 +1049,7 @@ class InscricaoEstadualValidator extends CValidator
 		$caracteres = str_split($this->ie);
 		$dv = $caracteres[8];
 		$i=0;
+		$soma=0;
 		for($j=9; $j>1; $j--){
 			$soma += $j * $caracteres[$i]; 
 			$i++;
@@ -1715,7 +1716,7 @@ class InscricaoEstadualValidator extends CValidator
 			$i++;
 		}
 		$resto = $soma%11;
-		if($resto==10 || $rest==11){
+		if($resto==10 || $resto==11){
 			$dv_obtido = 0;	
 		}
 		else{
