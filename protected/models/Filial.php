@@ -39,6 +39,10 @@
  */
 class Filial extends MGActiveRecord
 {
+	const CRT_SIMPLES = 1;
+	const CRT_SIMPLES_EXCESSO = 2;
+	const CRT_REGIME_NORMAL = 3;
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -115,6 +119,7 @@ class Filial extends MGActiveRecord
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
 			'codusuariocriacao' => 'Usuário Criação',
+			'crt' => 'CRT - Código do Regime Tributário',
 		);
 	}
 

@@ -235,7 +235,7 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
-			'sort'=>array('defaultOrder'=>'t.codtributacaonaturezaoperacao ASC'),
+			'sort'=>array('defaultOrder'=>'t.codnaturezaoperacao, t.codtributacao, t.codtipoproduto, t.ncm, t.codestado, t.codcfop ASC'),
 			'pagination'=>array('pageSize'=>20)
 		));
 	}

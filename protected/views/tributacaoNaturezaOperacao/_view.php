@@ -1,51 +1,87 @@
 <div class="registro row-fluid">
 	
-		<small class="span1"><?php echo CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($data->codtributacaonaturezaoperacao)),array('tributacaoNaturezaOperacao/view','id'=>$data->codtributacaonaturezaoperacao)); ?></small>
-		
-		<b class="span1"><?php echo CHtml::encode($data->Tributacao->tributacao); ?></b>
-	
-		<b class="span2"><?php echo CHtml::encode($data->TipoProduto->tipoproduto); ?></b>
-
+	<div class="span4">
+		<small class="span2">
+			<?php echo CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($data->codtributacaonaturezaoperacao)),array('tributacaoNaturezaOperacao/view','id'=>$data->codtributacaonaturezaoperacao)); ?>
+		</small>
+		<b class="span3">
+			<?php echo CHtml::encode($data->Tributacao->tributacao); ?>
+		</b>
+		<b class="span3">
+			<?php echo CHtml::encode($data->TipoProduto->tipoproduto); ?>
+		</b>
 		<b class="span1">
 			<?php echo CHtml::encode((isset($data->Estado)?$data->Estado->sigla:"")); ?>
-			<div class="pull-right"><?php echo CHtml::encode($data->ncm); ?></div>
 		</b>
-		
-		<small class="span4">
-			<?php echo CHtml::encode($data->codcfop); ?> -
+		<b class="span3">
+			<?php echo CHtml::encode($data->ncm); ?>
+		</b>
+	</div>
+	
+	<div class="span3">
+		<b class="span2">
+			<?php echo CHtml::link(CHtml::encode(Yii::app()->format->formatNumber($data->codcfop, 0)),array('cfop/view','id'=>$data->codcfop)); ?>
+		</b>
+		<small class="span10 muted">
 			<?php echo CHtml::encode($data->Cfop->cfop); ?>
 		</small>
+	</div>
 
-		<small class="span3">
-			<div class="row-fluid">
-				<div class="span2">
-					Impostos:
-				</div>
-				<div class="span2 text-right">
+
+	<small class="span5">
+		<div class="row-fluid">
+			<div class="span2">
+				<b class="pull-left">
+					Simples:
+				</b>
+				<div class="pull-right text-right">
 					<?php echo CHtml::encode($data->csosn); ?><br>
 					<?php echo CHtml::encode($data->icmsbase); ?><br>
 					<?php echo CHtml::encode($data->icmspercentual); ?>
 				</div>
-				<div class="span2 text-right">
+			</div>
+			<div class="span2">
+				<b class="pull-left">
+					ICMS:
+				</b>
+				<div class="pull-right text-right">
 					<?php echo CHtml::encode($data->icmscst); ?><br>
 					<?php echo CHtml::encode($data->icmslpbase); ?><br>
 					<?php echo CHtml::encode($data->icmslppercentual); ?>
 				</div>
-				<div class="span2 text-right">
+			</div>
+			<div class="span2">
+				<b class="pull-left">
+					PIS:
+				</b>
+				<div class="pull-right text-right">
 					<?php echo CHtml::encode($data->piscst); ?><br>
 					<?php echo CHtml::encode($data->pispercentual); ?>
 				</div>
-				<div class="span2 text-right">
+			</div>
+			<div class="span2">
+				<b class="pull-left">
+					Cofins:
+				</b>
+				<div class="pull-right text-right">
 					<?php echo CHtml::encode($data->cofinscst); ?><br>
 					<?php echo CHtml::encode($data->cofinspercentual); ?>
 				</div>
-				<div class="span2 text-right">
+			</div>
+			<div class="span2">
+				<b class="pull-left">
+					IPI:<br>
+					CSLL:<br>
+					IRPJ:
+				</b>
+				<div class="pull-right text-right">
 					<?php echo CHtml::encode($data->ipicst); ?><br>
-					<?php echo CHtml::encode($data->csllpercentual); ?><br>
-					<?php echo CHtml::encode($data->irpjpercentual); ?>
+				<?php echo CHtml::encode($data->csllpercentual); ?><br>
+				<?php echo CHtml::encode($data->irpjpercentual); ?>
 				</div>
 			</div>
-		</small>
+		</div>
+	</small>
 
 		<?php /*
 					<?php echo CHtml::encode($data->icmscst); ?>
