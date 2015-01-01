@@ -359,7 +359,7 @@ class Negocio extends MGActiveRecord
 			$nota->observacoes = "";
 			$nota->observacoes .= $this->NaturezaOperacao->mensagemprocom;
 			
-			if ($nota->modelo == NotaFiscal::MODELO_NFE)
+			if ($nota->modelo == NotaFiscal::MODELO_NFE && $nota->Filial->crt != Filial::CRT_SIMPLES_EXCESSO)
 			{
 				if (!empty($nota->observacoes))
 					$nota->observacoes .= "\n";

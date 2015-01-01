@@ -163,18 +163,27 @@ class NaturezaOperacaoController extends Controller
 		}
 	}
 	
-	public function actionBuscaObservacoesNf($id, $idantigo = 0)
+	public function actionBuscaObservacoesNf($id, $idantigo, $codfilial, $codfilialantigo)
 	{
-		
+
 		$model = $this->loadModel($id);
 		$arr["observacoesnf"] = $model->observacoesnf;
+		
+		$filial = Filial::model()->findByPk($codfilial);
+		if ($filial->crt == Filial::CRT_REGIME_NORMAL)
+			$arr["observacoesnf"] = null;
+		
 		$arr["mensagemprocom"] = $model->mensagemprocom;
 		$arr["observacoesnfantigo"] = null;
+		$arr["mensagemprocomantigo"] = null;
 		
 		if (!empty($idantigo))
 		{
 			$modelantigo = $this->loadModel($idantigo);
 			$arr["observacoesnfantigo"] = $modelantigo->observacoesnf;
+			$filial = Filial::model()->findByPk($codfilialantigo);
+			if ($filial->crt == Filial::CRT_REGIME_NORMAL)
+				$arr["observacoesnfantigo"] = null;
 			$arr["mensagemprocomantigo"] = $modelantigo->mensagemprocom;
 		}
 		echo CJSON::encode($arr);

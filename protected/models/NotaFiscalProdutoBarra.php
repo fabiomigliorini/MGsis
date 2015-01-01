@@ -295,35 +295,38 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 			$this->addError('codnotafiscal', 'Erro ao calcular tributação. Pessoa não informada na Nota Fiscal!');
 			return false;
 		}
+		
+		if (empty($this->NotaFiscal->Filial))
+		{
+			$this->addError('codnotafiscal', 'Erro ao calcular tributação. Filial não informada na Nota Fiscal!');
+			return false;
+		}
+		
+		if ($this->NotaFiscal->Pessoa->Cidade->Estado == $this->NotaFiscal->Filial->Pessoa->Cidade->Estado)
+		    $filtroEstado = 'codestado = :codestado';
+		else
+		    $filtroEstado = '(codestado = :codestado or codestado is null)';
 
 		$trib = TributacaoNaturezaOperacao::model()->find(
-			'codtributacao = :codtributacao
-			AND codtipoproduto = :codtipoproduto
-			AND codnaturezaoperacao = :codnaturezaoperacao
-			AND codestado = :codestado
-			',
 			array(
-				':codtributacao' => $this->ProdutoBarra->Produto->codtributacao,
-				':codtipoproduto' => $this->ProdutoBarra->Produto->codtipoproduto,
-				':codnaturezaoperacao' => $this->NotaFiscal->codnaturezaoperacao,
-				':codestado' => $this->NotaFiscal->Pessoa->Cidade->codestado,
-				)
-			);
-		
-		if ($trib === null)
-			$trib = TributacaoNaturezaOperacao::model()->find(
-				'codtributacao = :codtributacao
-				AND codtipoproduto = :codtipoproduto
-				AND codnaturezaoperacao = :codnaturezaoperacao
-				AND codestado IS NULL
-				',
-				array(
+			    'condition' => 
+					'   codtributacao = :codtributacao
+					AND codtipoproduto = :codtipoproduto
+					AND codnaturezaoperacao = :codnaturezaoperacao
+					AND ' . $filtroEstado . '
+					AND (:ncm ilike ncm || \'%\' or ncm is null)
+					',
+			    'params' => array(
 					':codtributacao' => $this->ProdutoBarra->Produto->codtributacao,
 					':codtipoproduto' => $this->ProdutoBarra->Produto->codtipoproduto,
 					':codnaturezaoperacao' => $this->NotaFiscal->codnaturezaoperacao,
-					)
-				);
-			
+					':codestado' => $this->NotaFiscal->Pessoa->Cidade->codestado,
+					':ncm' => $this->ProdutoBarra->Produto->ncm,
+				),
+			    'order' => 'codestado nulls last, char_length(ncm) desc nulls last',
+			)
+		);
+		
 		if ($trib === null)
 		{
 			$this->addError('codprodutobarra', 'Erro ao calcular tributação. Impossível localizar tributação para o produto informado!');
@@ -332,19 +335,77 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 		
 		//Traz codigos de tributacao
 		$this->codcfop = $trib->codcfop;
-		$this->csosn = $trib->csosn;
 		
-		//Calcula ICMSs
-		If (!empty($this->valortotal) && ($this->NotaFiscal->emitida))
+		if ($this->NotaFiscal->Filial->crt == Filial::CRT_REGIME_NORMAL)
 		{
-			If (!empty($trib->icmsbase))
-				$this->icmsbase = round(($trib->icmsbase * $this->valortotal)/100, 2);
+			
+			//CST's
+			$this->icmscst = $trib->icmscst;
+			$this->ipicst = $trib->ipicst;
+			$this->piscst = $trib->piscst;
+			$this->cofinscst = $trib->cofinscst;
+			
+		    If (!empty($this->valortotal) && ($this->NotaFiscal->emitida))
+		    {
+				//Calcula ICMS				
+				If (!empty($trib->icmslpbase))
+					$this->icmsbase = round(($trib->icmslpbase * $this->valortotal)/100, 2);
 
-			$this->icmspercentual = $trib->icmspercentual;
+				$this->icmspercentual = $trib->icmslppercentual;
 
-			If ((!empty($this->icmsbase)) and (!empty($this->icmspercentual)))
-				$this->icmsvalor = round(($this->icmsbase * $this->icmspercentual)/100, 2);
+				If ((!empty($this->icmsbase)) and (!empty($this->icmspercentual)))
+					$this->icmsvalor = round(($this->icmsbase * $this->icmspercentual)/100, 2);
+				
+				//Calcula PIS
+				If ($trib->pispercentual > 0)
+				{
+					$this->pisbase = $this->valortotal;
+					$this->pispercentual = $trib->pispercentual;
+					$this->pisvalor = round(($this->pisbase * $this->pispercentual)/100, 2);
+				}
+				
+				//Calcula Cofins
+				If ($trib->cofinspercentual > 0)
+				{
+					$this->cofinsbase = $this->valortotal;
+					$this->cofinspercentual = $trib->cofinspercentual;
+					$this->cofinsvalor = round(($this->cofinsbase * $this->cofinspercentual)/100, 2);
+				}
+				
+				//Calcula CSLL
+				If ($trib->csllpercentual > 0)
+				{
+					$this->csllbase = $this->valortotal;
+					$this->csllpercentual = $trib->csllpercentual;
+					$this->csllvalor = round(($this->csllbase * $this->csllpercentual)/100, 2);
+				}
+				
+				//Calcula IRPJ
+				If ($trib->irpjpercentual > 0)
+				{
+					$this->irpjbase = $this->valortotal;
+					$this->irpjpercentual = $trib->irpjpercentual;
+					$this->irpjvalor = round(($this->irpjbase * $this->irpjpercentual)/100, 2);
+				}
+				
+			}
 		}
+		else
+		{
+		    $this->csosn = $trib->csosn;
 
+		    //Calcula ICMSs
+		    If (!empty($this->valortotal) && ($this->NotaFiscal->emitida))
+		    {
+			    If (!empty($trib->icmsbase))
+				    $this->icmsbase = round(($trib->icmsbase * $this->valortotal)/100, 2);
+
+			    $this->icmspercentual = $trib->icmspercentual;
+
+			    If ((!empty($this->icmsbase)) and (!empty($this->icmspercentual)))
+				    $this->icmsvalor = round(($this->icmsbase * $this->icmspercentual)/100, 2);
+			}
+		}
+		
 	}
 }

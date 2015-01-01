@@ -108,14 +108,6 @@ function desabilitaCamposEmitida()
 	
 	var emitida = $('#NotaFiscal_emitida').is(':checked');
 	var valorbanco = ((emitida == <?php echo ($model->emitida)?"true":"false" ?>) &&  <?php echo ($model->isNewRecord)?"false":"true" ?>);
-	
-	/*
-	 * se desabilitar, joga sempre valor 0, mesmo quando for true
-	if (emitida && $("#NotaFiscal_numero").val() != 0)
-	{
-		$('#NotaFiscal_emitida').prop('disabled', true);
-	}
-	*/
    
 	if (valorbanco)
 	{
@@ -144,15 +136,19 @@ function desabilitaCamposEmitida()
 }
 
 var codnaturezaoperacaoantigo = <?php echo empty($model->codnaturezaoperacao)?0:$model->codnaturezaoperacao; ?>;
+var codfilialantigo = <?php echo empty($model->codfilial)?0:$model->codfilial; ?>;
 
 function atualizaObservacoes()
 {
 	var codnaturezaoperacao = $("#NotaFiscal_codnaturezaoperacao").val();
+	var codfilial = $("#NotaFiscal_codfilial").val();
 	
 	$.getJSON("<?php echo Yii::app()->createUrl('naturezaOperacao/buscaObservacoesNf')?>", 
 		{ 
 			id: codnaturezaoperacao,
-			idantigo: codnaturezaoperacaoantigo
+			idantigo: codnaturezaoperacaoantigo,
+			codfilial: codfilial,
+			codfilialantigo: codfilialantigo,
 		})
 		.done(function(data) {
 			
@@ -195,6 +191,7 @@ function atualizaObservacoes()
 		});
 	
 	codnaturezaoperacaoantigo = $("#NotaFiscal_codnaturezaoperacao").val();
+	codfilialantigo = $("#NotaFiscal_codfilial").val();
 }
 	
 $(document).ready(function() {
@@ -220,7 +217,7 @@ $(document).ready(function() {
 	$('#NotaFiscal_codnaturezaoperacao').change(function(e){ atualizaObservacoes(); });
 
 	$('#NotaFiscal_emitida').change(function(e){ desabilitaCamposEmitida(); });
-	$('#NotaFiscal_codfilial').change(function(e){ desabilitaCamposEmitida(); });
+	$('#NotaFiscal_codfilial').change(function(e){ desabilitaCamposEmitida(); atualizaObservacoes(); });
 
 	$('#nota-fiscal-form').submit(function(e) {
         var currentForm = this;

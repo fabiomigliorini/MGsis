@@ -312,6 +312,9 @@ class MGAcbrNfeMonitor extends MGSocket
 		
 		//Produtos
 		$i = 1;
+		$totalPis = 0;
+		$totalCofins = 0;
+			
 		foreach ($this->NotaFiscal->NotaFiscalProdutoBarras as $NotaFiscalpb)
 		{
 			$arr["Produto" . Yii::app()->format->formataPorMascara($i, "###", true)] = 
@@ -341,18 +344,78 @@ class MGAcbrNfeMonitor extends MGSocket
 					"vOutro" => round(($this->NotaFiscal->valoroutras / $this->NotaFiscal->valorprodutos) * $NotaFiscalpb->valortotal, 2),
 				);
 			
-			$arr["ICMS" . Yii::app()->format->formataPorMascara($i, "###", true)] = 
-				array(
-					//"CST" => Nz(prsItem!csosn,
-					"CSOSN" => $NotaFiscalpb->csosn,
-					//"ValorBase" => Nz(prsItem!icmsbase,
-					//"Aliquota" => Nz(prsItem!icmspercentual,
-					//"valor" => Nz(prsItem!icmsvalor,
-					//"ValorBase=0\n";
-					//"Aliquota=0\n";
-					//"valor=0\n";
-				);
+			if ($this->NotaFiscal->Filial->crt == Filial::CRT_REGIME_NORMAL)
+			{
+				/*
+				[ICMS001]
+				Origem=0
+				Modalidade=1
+				 * CST=51
+				 * ValorBase=0.00
+				PercentualReducao=0.00
+				 * Aliquota=0.00
+				 * Valor=0.00
+				 * 
+				 * [PIS001]
+				 * CST=50
+				 * ValorBase=100.00
+				 * Aliquota=1.65
+				 * Valor=1.65
+				 * 
+				 * [COFINS001]
+				 * CST=50
+				 * ValorBase=100.00
+				 * Aliquota=7.60
+				 * Valor=7.60
+				 */
+				$arr["ICMS" . Yii::app()->format->formataPorMascara($i, "###", true)] = 
+					array(
+						//"CST" => Nz(prsItem!csosn,
+						"CST" => Yii::app()->format->formataPorMascara($NotaFiscalpb->icmscst, "##", true),
+						"ValorBase" => $NotaFiscalpb->icmsbase,
+						"Aliquota" => $NotaFiscalpb->icmspercentual,
+						"Valor" => $NotaFiscalpb->icmsvalor,
+						//"ValorBase=0\n";
+						//"Aliquota=0\n";
+						//"valor=0\n";
+					);
+				
+				$arr["PIS" . Yii::app()->format->formataPorMascara($i, "###", true)] = 
+					array(
+						"CST" => Yii::app()->format->formataPorMascara($NotaFiscalpb->piscst, "##", true),
+						"ValorBase" => $NotaFiscalpb->pisbase,
+						"Aliquota" => $NotaFiscalpb->pispercentual,
+						"Valor" => $NotaFiscalpb->pisvalor,
+					);
+				$totalPis += $NotaFiscalpb->pisvalor;
+				
+				$arr["COFINS" . Yii::app()->format->formataPorMascara($i, "###", true)] = 
+					array(
+						"CST" => Yii::app()->format->formataPorMascara($NotaFiscalpb->cofinscst, "##", true),
+						"ValorBase" => $NotaFiscalpb->cofinsbase,
+						"Aliquota" => $NotaFiscalpb->cofinspercentual,
+						"Valor" => $NotaFiscalpb->cofinsvalor,
+					);
+				$totalCofins += $NotaFiscalpb->cofinsvalor;
+				
+			}
+			else
+			{
 
+				$arr["ICMS" . Yii::app()->format->formataPorMascara($i, "###", true)] = 
+					array(
+						//"CST" => Nz(prsItem!csosn,
+						"CSOSN" => $NotaFiscalpb->csosn,
+						//"ValorBase" => Nz(prsItem!icmsbase,
+						//"Aliquota" => Nz(prsItem!icmspercentual,
+						//"valor" => Nz(prsItem!icmsvalor,
+						//"ValorBase=0\n";
+						//"Aliquota=0\n";
+						//"valor=0\n";
+					);
+				
+			}
+			
 			$i++;
 
 		}
@@ -371,6 +434,12 @@ class MGAcbrNfeMonitor extends MGSocket
 				"ValorOutrasDespesas" => $this->NotaFiscal->valoroutras,
 				"ValorNota" => $this->NotaFiscal->valortotal,
 			);
+		
+		if ($this->NotaFiscal->Filial->crt == Filial::CRT_REGIME_NORMAL)
+		{
+			$arr["Total"]["ValorPIS"]=$totalPis;
+			$arr["Total"]["ValorCOFINS"]=$totalCofins;
+		}
 		
 		//Transportador
 		$arr["Transportador"] =
@@ -500,7 +569,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		$cmd = "NFE.CriarNFe(\"\n";
 		$cmd .= $this->geraIni($arr);
 		$cmd .= "\")\n.\n";
-		
+
 		//Envia Comando
 		if (!$this->enviaComando($cmd))
 			return false;
