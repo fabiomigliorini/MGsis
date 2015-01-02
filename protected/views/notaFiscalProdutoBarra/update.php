@@ -3,7 +3,7 @@ $this->pagetitle = Yii::app()->name . ' - Alterar Nota Fiscal Produto Barra';
 $this->breadcrumbs=array(
 	'Notas Fiscais'=>array('notaFiscal/index'),
 	Yii::app()->format->formataNumeroNota($model->NotaFiscal->emitida, $model->NotaFiscal->serie, $model->NotaFiscal->numero, $model->NotaFiscal->modelo)=>array('notaFiscal/view','id'=>$model->codnotafiscal),
-	$model->ProdutoBarra->descricao, //=>array('view','id'=>$model->codnotafiscalprodutobarra),
+	$model->ProdutoBarra->descricao => array('view','id'=>$model->codnotafiscalprodutobarra),
 	'Alterar',
 );
 

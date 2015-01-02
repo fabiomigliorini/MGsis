@@ -83,6 +83,8 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 			array('descricaoalternativa', 'length', 'max'=>100),
 			array('quantidade, valorunitario, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, icmsstbase, icmsstpercentual, icmsstvalor, pisbase, pisvalor, cofinsbase, cofinsvalor, csllbase, csllvalor, irpjbase, irpjvalor', 'length', 'max'=>14),
 			array('csosn', 'length', 'max'=>4),
+			array('csosn', 'validaCsosn'),
+			array('icmscst, ipicst, piscst, cofinscst', 'validaCst'),
 			array('pispercentual, cofinspercentual, csllpercentual, irpjpercentual', 'length', 'max'=>5),
 			array('icmscst, ipicst, piscst, cofinscst', 'length', 'max'=>3),
 			array('codnegocioprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
@@ -92,6 +94,26 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 		);
 	}
 
+	//verifica se o numero tem pelo menos 10 digitos
+	public function validaCsosn($attribute,$params)
+	{
+		if ($this->NotaFiscal->Filial->crt != Filial::CRT_REGIME_NORMAL && empty($this->$attribute))
+			$this->addError($attribute,'CSOSN deve ser preenchido!');
+		
+		if ($this->NotaFiscal->Filial->crt == Filial::CRT_REGIME_NORMAL && !empty($this->$attribute))
+			$this->addError($attribute,'CSOSN não deve ser preenchido!');
+	}	
+	
+	//verifica se o numero tem pelo menos 10 digitos
+	public function validaCst($attribute,$params)
+	{
+		if ($this->NotaFiscal->Filial->crt == Filial::CRT_REGIME_NORMAL && empty($this->$attribute))
+			$this->addError($attribute,'CST deve ser preenchido!');
+		
+		if ($this->NotaFiscal->Filial->crt != Filial::CRT_REGIME_NORMAL && !empty($this->$attribute))
+			$this->addError($attribute,'CST não deve ser preenchido!');
+	}	
+	
 	/**
 	 * @return array relational rules.
 	 */
@@ -125,7 +147,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 			'valorunitario' => 'Preço',
 			'valortotal' => 'Total',
 			
-			'codnegocioprodutobarra' => 'Negocio',
+			'codnegocioprodutobarra' => 'Negócio',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
@@ -275,7 +297,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 	
 	public function calculaTributacao($somenteVazios = true)
 	{
-		if ((!empty($this->codcfop) && !empty($this->csosn)) || !$somenteVazios)
+		if ((!empty($this->codcfop) && (!empty($this->csosn) || !empty($this->icmscst))) || !$somenteVazios)
 			return true;
 		
 		if (empty($this->ProdutoBarra))

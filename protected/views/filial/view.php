@@ -54,14 +54,15 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 					'type'=>'raw',
 					),
 		'filial',
+		'crt',
 		'acbrnfemonitorcaminho',
 		'acbrnfemonitorcaminhorede',
-		'acbrnfemonitorbloqueado',
-		'acbrnfemonitorcodusuario',
+		//'acbrnfemonitorbloqueado',
+		//'acbrnfemonitorcodusuario',
 		'empresadominio',
 		'acbrnfemonitorip',
 		'acbrnfemonitorporta',
-		'odbcnumeronotafiscal',
+		//'odbcnumeronotafiscal',
 		),
 	)); 
 

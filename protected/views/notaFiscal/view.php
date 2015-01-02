@@ -368,7 +368,7 @@ $(document).ready(function(){
 	</small>	
 </h2>
 
-<table class="table table-hover table-condensed table-bordered">
+<table class="table table-hover table-condensed table-bordered table-striped">
 	<thead>
 		<tr>
 			<th colspan="3">Produto</th>
@@ -523,6 +523,7 @@ $(document).ready(function(){
 					</small>
 				</td>
 				<td>
+					<a href="<?php echo Yii::app()->createUrl('notaFiscalProdutoBarra/view', array('id'=>$prod->codnotafiscalprodutobarra)); ?>"><i class="icon-eye-open"></i></a>
 					<a href="<?php echo Yii::app()->createUrl('notaFiscalProdutoBarra/update', array('id'=>$prod->codnotafiscalprodutobarra)); ?>"><i class="icon-pencil"></i></a>
 					<a class="delete" href="<?php echo Yii::app()->createUrl('notaFiscalProdutoBarra/delete', array('id'=>$prod->codnotafiscalprodutobarra)); ?>"><i class="icon-trash"></i></a>
 				</td>
