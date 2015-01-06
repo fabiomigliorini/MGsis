@@ -32,7 +32,7 @@
 
 		<?php echo $form->textFieldRow($model,'volumes',array('class'=>'span5')); ?>
 
-		<?php echo $form->checkBoxRow($model,'fretepagar'); ?>
+		<?php echo $form->select2Row($model,'codnaturezaoperacao', NaturezaOperacao::getListaCombo() , array('class'=>'input-xlarge')); ?>
 
 		<?php echo $form->textFieldRow($model,'codoperacao',array('class'=>'span5')); ?>
 

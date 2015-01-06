@@ -120,6 +120,13 @@ $(document).ready(function(){
 	</div>
 	<div class="span4">
 	<?php 
+	
+	$fretes = NotaFiscal::getFreteListaCombo();
+	if (isset($fretes[$model->frete]))
+		$frete = $fretes[$model->frete];
+	else 
+		$frete = $model->frete;
+	
 	$this->widget('bootstrap.widgets.TbDetailView',array(
 		'data'=>$model,
 		'attributes'=>array(
@@ -136,8 +143,8 @@ $(document).ready(function(){
 					((isset($model->NaturezaOperacao))?$model->NaturezaOperacao->naturezaoperacao:null),
 				),
 			array(
-				'name'=>'fretepagar',
-				'value'=>($model->fretepagar)?"Destinatário":"Remetente",
+				'name'=>'frete',
+				'value'=>$frete,
 				),
 			'volumes',
 			array(

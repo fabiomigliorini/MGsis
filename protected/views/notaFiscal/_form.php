@@ -46,7 +46,7 @@
 						'prepend' => '<i class="icon-calendar"></i>',
 						)
 					); 
-			echo $form->toggleButtonRow($model,'fretepagar', array('options' => array('width' => 150,  'enabledLabel' => 'Destinatário', 'disabledLabel' => 'Remetente')));
+			echo $form->select2Row($model,'frete', NotaFiscal::getFreteListaCombo() , array('class'=>'input-medium'));
 			echo $form->textFieldRow($model,'volumes',array('class'=>'input-mini text-right'));
 
 			?>

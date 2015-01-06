@@ -444,7 +444,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		//Transportador
 		$arr["Transportador"] =
 			array(
-				"FretePorConta" => ($this->NotaFiscal->fretepagar)?1:0,
+				"FretePorConta" => $this->NotaFiscal->frete,
 			);
 		
 		//Volumes
@@ -503,7 +503,7 @@ class MGAcbrNfeMonitor extends MGSocket
 			}
 			
 			
-			$arr["Transportador"]["FretePorConta"] = 9;
+			//$arr["Transportador"]["FretePorConta"] = 9;
 
 			//pagamentos
 			//01=Dinheiro

@@ -15,7 +15,7 @@
  * @property string $codpessoa
  * @property string $observacoes
  * @property integer $volumes
- * @property boolean $fretepagar
+ * @property integer $frete
  * @property string $codoperacao
  * @property string $valorfrete
  * @property string $valorseguro
@@ -70,6 +70,11 @@ class NotaFiscal extends MGActiveRecord
 	const CODSTATUS_INUTILIZADA   = 302;
 	const CODSTATUS_CANCELADA     = 303;
 	
+	const FRETE_EMITENTE          = 0;
+	const FRETE_DESTINATARIO      = 1;
+	const FRETE_TERCEIROS         = 2;
+	const FRETE_SEM               = 9;
+	
 	public $status;
 	public $codstatus;
 	public $emissao_de;
@@ -98,7 +103,7 @@ class NotaFiscal extends MGActiveRecord
 		// will receive user inputs.
 		return array(
 			array('codnaturezaoperacao, serie, emissao, saida, codfilial, codpessoa', 'required'),
-			array('serie, numero, volumes', 'numerical', 'integerOnly'=>true),
+			array('serie, numero, volumes, frete', 'numerical', 'integerOnly'=>true),
 			array('nfechave, nfereciboenvio, nfeautorizacao, nfecancelamento, nfeinutilizacao', 'length', 'max'=>100),
 			array('nfechave', 'unique'),
 			array('nfechave', 'validaChaveNFE'),
@@ -112,10 +117,10 @@ class NotaFiscal extends MGActiveRecord
 			array('observacoes', 'length', 'max'=>1500),
 			array('valorfrete, valorseguro, valordesconto, valoroutras, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipivalor', 'length', 'max'=>14),
 			array('justificativa', 'length', 'max'=>200),
-			array('emitida, nfeimpressa, fretepagar, codoperacao, nfedataenvio, nfedataautorizacao, nfedatacancelamento, nfedatainutilizacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
+			array('emitida, nfeimpressa, codoperacao, nfedataenvio, nfedataautorizacao, nfedatacancelamento, nfedatainutilizacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('codnotafiscal, codnaturezaoperacao, emitida, nfechave, nfeimpressa, serie, numero, emissao, modelo, saida, codfilial, codpessoa, observacoes, volumes, fretepagar, codoperacao, nfereciboenvio, nfedataenvio, nfeautorizacao, nfedataautorizacao, valorfrete, valorseguro, valordesconto, valoroutras, nfecancelamento, nfedatacancelamento, nfeinutilizacao, nfedatainutilizacao, justificativa, alteracao, codusuarioalteracao, criacao, codusuariocriacao, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipivalor, codstatus, emissao_de, emissao_ate, saida_de, saida_ate', 'safe', 'on'=>'search'),
+			array('codnotafiscal, codnaturezaoperacao, emitida, nfechave, nfeimpressa, serie, numero, emissao, modelo, saida, codfilial, codpessoa, observacoes, volumes, frete, codoperacao, nfereciboenvio, nfedataenvio, nfeautorizacao, nfedataautorizacao, valorfrete, valorseguro, valordesconto, valoroutras, nfecancelamento, nfedatacancelamento, nfeinutilizacao, nfedatainutilizacao, justificativa, alteracao, codusuarioalteracao, criacao, codusuariocriacao, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipivalor, codstatus, emissao_de, emissao_ate, saida_de, saida_ate', 'safe', 'on'=>'search'),
 		);
 	}
 	
@@ -389,7 +394,7 @@ class NotaFiscal extends MGActiveRecord
 			'codpessoa' => 'Pessoa',
 			'observacoes' => 'Observações',
 			'volumes' => 'Volumes',
-			'fretepagar' => 'Frete à Pagar',
+			'frete' => 'Frete por Conta',
 			'codoperacao' => 'Operação',
 			'nfereciboenvio' => 'Recibo do Envio',
 			'nfedataenvio' => 'Data Envio',
@@ -452,7 +457,7 @@ class NotaFiscal extends MGActiveRecord
 		$criteria->compare('codpessoa',$this->codpessoa, false);
 		$criteria->compare('observacoes',$this->observacoes, false);
 		$criteria->compare('volumes',$this->volumes);
-		$criteria->compare('fretepagar',$this->fretepagar);
+		$criteria->compare('frete',$this->frete);
 		$criteria->compare('codoperacao',$this->codoperacao, false);
 		$criteria->compare('nfereciboenvio',$this->nfereciboenvio, false);
 		$criteria->compare('nfedataenvio',$this->nfedataenvio, false);
@@ -625,6 +630,16 @@ class NotaFiscal extends MGActiveRecord
 			self::CODSTATUS_NAOAUTORIZADA => "Não Autorizada",
 			self::CODSTATUS_INUTILIZADA => "Inutilizada",
 			self::CODSTATUS_CANCELADA => "Cancelada"
+		);
+	}
+	
+	function getFreteListaCombo()
+	{
+		return array(
+			self::FRETE_EMITENTE => "Emitente",
+			self::FRETE_DESTINATARIO => "Destinatario",
+			self::FRETE_TERCEIROS => "Terceiros",
+			self::FRETE_SEM => "Sem Frete",
 		);
 	}
 

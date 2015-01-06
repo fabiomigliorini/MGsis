@@ -628,7 +628,7 @@ class NfeTerceiro extends MGActiveRecord
 		$nf->codpessoa = $this->codpessoa;
 		//$nf->observacoes = 
 		//$nf->volumes = 
-		//$nf->fretepagar = 
+		//$nf->frete = 
 		//$nf->codoperacao = $this->NaturezaOperacao->codoperacao;
 		//$nf->nfereciboenvio = 
 		//$nf->nfedataenvio = 

@@ -110,7 +110,7 @@ else
 
 			<small class="span2 muted"><?php echo CHtml::encode($data->volumes); ?></small>
 
-			<small class="span2 muted"><?php echo CHtml::encode($data->fretepagar); ?></small>
+			<small class="span2 muted"><?php echo CHtml::encode($data->frete); ?></small>
 
 			<small class="span2 muted"><?php echo CHtml::encode($data->codoperacao); ?></small>
 

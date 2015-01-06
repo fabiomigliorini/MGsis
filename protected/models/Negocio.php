@@ -367,7 +367,7 @@ class Negocio extends MGActiveRecord
 				$nota->observacoes .= $this->NaturezaOperacao->observacoesnf;
 			}
 			
-			$nota->fretepagar = 1;
+			$nota->frete = NotaFiscal::FRETE_SEM;
 			$nota->codoperacao = $this->NaturezaOperacao->codoperacao;
 		}
 	

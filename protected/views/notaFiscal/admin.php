@@ -96,7 +96,7 @@ $this->widget('bootstrap.widgets.TbGridView',array(
 			'htmlOptions'=> array('class'=>'span1'),
 			),	
 			array(
-			'name'=>'fretepagar',
+			'name'=>'frete',
 			'htmlOptions'=> array('class'=>'span1'),
 			),	
 			array(
