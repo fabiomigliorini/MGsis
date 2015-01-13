@@ -22,7 +22,7 @@ $this->menu=array(
 		'label'=>'Gerar Nota Fiscal', 
 		'icon'=>'icon-globe', 
 		'url'=>'#', 
-		'linkOptions'=>array('id'=>'btnGeraNotaFiscal'),
+		'linkOptions'=>array('id'=>'btnGerarNotaFiscal'),
 		//'visible'=>($model->codnegociostatus == NegocioStatus::FECHADO)
 	),
 	array(
@@ -47,10 +47,10 @@ Yii::app()->clientScript->registerCoreScript('yii');
 <script type="text/javascript">
 /*<![CDATA[*/
 
-function geraNotaFiscal(modelo)
+function gerarNotaFiscal(modelo)
 {
 	
-	$.getJSON("<?php echo Yii::app()->createUrl('tituloAgrupamento/geraNotaFiscal')?>", 
+	$.getJSON("<?php echo Yii::app()->createUrl('tituloAgrupamento/gerarNotaFiscal')?>", 
 		{ 
 			id: <?php echo $model->codtituloagrupamento ?>,
 			modelo: modelo,
@@ -111,19 +111,19 @@ $(document).ready(function(){
 		});
 	});
 	
-	$('#btnGeraNotaFiscal').click(function(event){
+	$('#btnGerarNotaFiscal').click(function(event){
 		event.preventDefault();
 		$('#modalModeloNotaFiscal').modal({show:true, keyboard:true})
 	});
 
 	$('#btnGerarNfce').click(function(event){
 		event.preventDefault();
-		geraNotaFiscal(<?php echo NotaFiscal::MODELO_NFCE; ?>);
+		gerarNotaFiscal(<?php echo NotaFiscal::MODELO_NFCE; ?>);
 	});
 
 	$('#btnGerarNfe').click(function(event){
 		event.preventDefault();
-		geraNotaFiscal(<?php echo NotaFiscal::MODELO_NFE; ?>);
+		gerarNotaFiscal(<?php echo NotaFiscal::MODELO_NFE; ?>);
 	});
 	
 });

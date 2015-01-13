@@ -18,8 +18,10 @@ function fechaJanelas()
 {
 	bootbox.hideAll();
 	$(".modal").modal('hide');
-	$("#barras").focus();
-	$("#Negocio_codpessoavendedor").select2('focus');
+	if ($("#barras").length)
+		$("#barras").focus();
+	if ($("#Negocio_codpessoavendedor").length)
+		$("#Negocio_codpessoavendedor").select2('focus');
 	$(".btn").removeAttr("disabled");
 	return false;
 }

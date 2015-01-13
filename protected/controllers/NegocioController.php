@@ -36,34 +36,55 @@ class NegocioController extends Controller
 		$model->codfilial = Yii::app()->user->getState("codfilial");
 		$model->codnaturezaoperacao = NaturezaOperacao::VENDA;
 		$model->codpessoa = Pessoa::CONSUMIDOR;
-
-		if(isset($_POST['Negocio']))
+		
+		if (isset($_POST['Negocio']))
 		{
+			$transaction = Yii::app()->db->beginTransaction();
+			
+			$erro = false;
 			$model->attributes=$_POST['Negocio'];
 			if (!empty($model->NaturezaOperacao))
 				$model->codoperacao = $model->NaturezaOperacao->codoperacao;
-			if($model->save())
+			if(!$model->save())
 			{
-				if (!empty($duplicar))
-				{
-					$original = $this->loadModel($duplicar);
-					
-					//duplica produtos
-					foreach ($original->NegocioProdutoBarras as $prod_orig)
-					{
-						$prod_novo = new NegocioProdutoBarra;
-						$prod_novo->attributes = $prod_orig->attributes;
-						$prod_novo->codnegocioprodutobarra = null;
-						$prod_novo->codnegocio = $model->codnegocio;
-						$prod_novo->criacao = null;
-						$prod_novo->codusuariocriacao = null;
-						$prod_novo->alteracao = null;
-						$prod_novo->codusuarioalteracao = null;
-						$prod_novo->save();
-					}
+				$erro = true;
+			}
+			
+			if (!$erro && !empty($duplicar))
+			{
+				$original = $this->loadModel($duplicar);
 
+				//duplica produtos
+				foreach ($original->NegocioProdutoBarras as $prod_orig)
+				{
+					$prod_novo = new NegocioProdutoBarra;
+					$prod_novo->attributes = $prod_orig->attributes;
+					$prod_novo->codnegocioprodutobarra = null;
+					$prod_novo->codnegocio = $model->codnegocio;
+					$prod_novo->criacao = null;
+					$prod_novo->codusuariocriacao = null;
+					$prod_novo->alteracao = null;
+					$prod_novo->codusuarioalteracao = null;
+					
+					if (!$prod_novo->save())
+					{
+						$model->addError('codnegocio', 'Erro ao duplicar NegocioProdutoBarra #' . $prod_orig->codnegocioprodutobarra);
+						$model->addErrors($prod_novo->getErrors());
+						$erro = true;
+						break;
+					}
 				}
+
+			}
+
+			if (!$erro)
+			{
+				$transaction->commit();
 				$this->redirect(array('view','id'=>$model->codnegocio));
+			}
+			else
+			{
+				$transaction->rollBack();
 			}
 		}
 		else
@@ -73,7 +94,6 @@ class NegocioController extends Controller
 				$original = $this->loadModel($duplicar);
 				
 				$model->attributes = $original->attributes;
-				
 				
 				$model->codusuariocriacao = null;
 				$model->criacao = null;
@@ -114,7 +134,7 @@ class NegocioController extends Controller
 			$salvo = $model->save();
 			
 			if($salvo && $fechar == 1)
-				$salvo = $model->fechaNegocio();
+				$salvo = $model->fecharNegocio();
 
 			if($salvo && $fechar == 1)
 				Yii::app()->session['UltimoCodNegocioFechado'] = $model->codnegocio;
@@ -409,14 +429,14 @@ class NegocioController extends Controller
 		
 	}
 
-	public function actionFechaNegocio($codnegocio)
+	public function actionFecharNegocio($codnegocio)
 	{
 		
 		$negocio = $this->loadModel($codnegocio);
 		
 		$retorno = array("Retorno"=>true, "Mensagem"=>"");
 		
-		if (!$negocio->fechaNegocio())
+		if (!$negocio->fecharNegocio())
 		{
 			$retorno["Retorno"] = false;
 			$erros = $negocio->getErrors();
@@ -432,14 +452,14 @@ class NegocioController extends Controller
 		
 	}
 
-	public function actionGeraNotaFiscal($id, $modelo = null, $codnotafiscal = null)
+	public function actionGerarNotaFiscal($id, $modelo = null, $codnotafiscal = null)
 	{
 		
 		$negocio = $this->loadModel($id);
 		
 		$retorno = array("Retorno"=>1, "Mensagem"=>"", "codnotafiscal" =>$codnotafiscal);
 		
-		if (!$codnotafiscal = $negocio->geraNotaFiscal($codnotafiscal, $modelo, true))
+		if (!$codnotafiscal = $negocio->gerarNotaFiscal($codnotafiscal, $modelo, true))
 		{
 			$retorno["Retorno"] = 0;
 			$erros = $negocio->getErrors();
@@ -485,5 +505,25 @@ class NegocioController extends Controller
 		$rel->montaRelatorio();
 		$rel->Output();
 	}
+	
+	public function actionDevolucao($id)
+	{
+		$model = $this->loadModel($id);
+		if($model->codnegociostatus != NegocioStatus::FECHADO)
+			throw new CHttpException(409, 'O Status do Negócio não permite Devolução!');
+		
+		if (isset($_POST['quantidadedevolucao']))
+		{
+			$codnegociodevolucao = $model->gerarDevolucao($_POST['quantidadedevolucao']);
+			if ($codnegociodevolucao !== false)
+				$this->redirect(array('view','id'=>$codnegociodevolucao));
+
+		}
+		
+		$this->render('devolucao',array(
+			'model'=>$model,
+			));
+	}
+	
 	
 }

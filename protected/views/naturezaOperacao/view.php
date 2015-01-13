@@ -62,6 +62,21 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 			'value'=>nl2br(CHtml::encode($model->mensagemprocom)),
 			'type'=>'raw',
 			),
+		array(
+			'name'=>'codnaturezaoperacaodevolucao',
+			'value'=>(isset($model->NaturezaOperacaoDevolucao))?CHtml::link(CHtml::encode($model->NaturezaOperacaoDevolucao->naturezaoperacao),array('naturezaOperacao/view','id'=>$model->codnaturezaoperacaodevolucao)):null,
+			'type'=>'raw',
+			),
+		array(
+			'name'=>'codtipotitulo',
+			'value'=>(isset($model->TipoTitulo))?CHtml::link(CHtml::encode($model->TipoTitulo->tipotitulo),array('tipoTitulo/view','id'=>$model->codtipotitulo)):null,
+			'type'=>'raw',
+			),
+		array(
+			'name'=>'codcontacontabil',
+			'value'=>(isset($model->ContaContabil))?CHtml::link(CHtml::encode($model->ContaContabil->contacontabil),array('contaContabil/view','id'=>$model->codcontacontabil)):null,
+			'type'=>'raw',
+			),
 		),
 	)); 
 

@@ -11,8 +11,11 @@
 		//echo $form->checkBoxRow($model,'emitida');
 		echo $form->toggleButtonRow($model,'emitida', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 		//echo $form->textFieldRow($model,'observacoesnf',array('class'=>'span5','maxlength'=>500));
+		echo $form->select2Row($model, 'codtipotitulo', TipoTitulo::getListaCombo(), array('class' => 'input-xlarge'));
+		echo $form->select2Row($model, 'codcontacontabil', ContaContabil::getListaCombo(), array('class' => 'input-xlarge'));
 		echo $form->textAreaRow($model,'observacoesnf',array('class'=>'input-xlarge', 'rows'=>'5','maxlength'=>500));
 		echo $form->textAreaRow($model,'mensagemprocom',array('class'=>'input-xlarge', 'rows'=>'5','maxlength'=>300));
+		echo $form->select2Row($model, 'codnaturezaoperacaodevolucao', NaturezaOperacao::getListaCombo(), array('class' => 'input-xxlarge'));
 	?>
 </fieldset>
 <div class="form-actions">

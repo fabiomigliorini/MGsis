@@ -68,6 +68,7 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 			array('icmspercentual, pispercentual, cofinspercentual, csllpercentual, irpjpercentual, icmslppercentual', 'length', 'max'=>5),
 			array('historicodominio', 'length', 'max'=>512),
 			array('icmscst, piscst, ipicst, cofinscst', 'length', 'max'=>3),
+			array('csosn, icmscst, piscst, ipicst, cofinscst', 'numerical', 'min'=>1),
 			array('ncm', 'length', 'max'=>10),
 			array('icmsbase, icmslpbase', 'length', 'max'=>6),
 			array('codestado, movimentacaofisica, movimentacaocontabil, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),

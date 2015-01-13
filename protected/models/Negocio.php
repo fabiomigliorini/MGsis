@@ -256,7 +256,7 @@ class Negocio extends MGActiveRecord
 		return parent::afterFind();
 	}		
 	
-	public function fechaNegocio()
+	public function fecharNegocio()
 	{
 		
 		//So continua se for status ABERTO
@@ -281,8 +281,6 @@ class Negocio extends MGActiveRecord
 			}
 			
 		}
-			
-		
 		
 		//Calcula total pagamentos à vista e à prazo
 		$valorPagamentos = 0;
@@ -327,7 +325,7 @@ class Negocio extends MGActiveRecord
 	}
 	
 	// Gera nota fiscal a partir do negocio
-	public function geraNotaFiscal($codnotafiscal = null, $modelo = NotaFiscal::MODELO_NFE, $geraDuplicatas = true)
+	public function gerarNotaFiscal($codnotafiscal = null, $modelo = NotaFiscal::MODELO_NFE, $geraDuplicatas = true)
 	{
 		if ($this->Pessoa->notafiscal == Pessoa::NOTAFISCAL_NUNCA && $modelo == NotaFiscal::MODELO_NFE)
 		{
@@ -524,5 +522,127 @@ class Negocio extends MGActiveRecord
 		
 	}
 	
+	function gerarDevolucao($arrQuantidadeDevolucao)
+	{
+		
+		//inicia Transacao
+		$trans = $this->dbConnection->beginTransaction();
+		
+		//monta array com itens devolvidos
+		$arr = array();
+		foreach($arrQuantidadeDevolucao as $codnegocioprodutobarra => $quantidadedevolucao)
+		{
+			$quantidadedevolucao = Yii::app()->format->unformatNumber($quantidadedevolucao);
+			if ($quantidadedevolucao > 0)
+				$arr[$codnegocioprodutobarra] = $quantidadedevolucao;
+		}
+		
+		//se nao tem nenhum item para devolver, retorna erro
+		if (empty($arr))
+		{
+			$this->addError('codnegocio', 'Não foi selecionado nenhum item para devolução!');
+			$trans->rollback();
+			return false;
+		}
+		
+		//cria registro tabela Negocio
+		$negocio = new Negocio;
+		$negocio->codpessoa = $this->codpessoa;
+		$negocio->codfilial = $this->codfilial;
+		$negocio->lancamento = date('d/m/Y H:i:s');
+		$negocio->codpessoavendedor = $this->codpessoavendedor;
+		$negocio->codnaturezaoperacao = $this->NaturezaOperacao->codnaturezaoperacaodevolucao;
+		if (!isset($negocio->NaturezaOperacao))
+		{
+			$this->addError('codnegocio', 'Natureza de Operação de devolução não parametrizada!');
+			$trans->rollback();
+			return false;
+		}
+			
+		$negocio->codoperacao = $negocio->NaturezaOperacao->codoperacao;
+		$negocio->codnegociostatus = NegocioStatus::ABERTO;
+		$negocio->observacoes = 'Devolução referente Negócio ' . Yii::app()->format->formataCodigo($this->codnegocio);
+		$negocio->codusuario = Yii::app()->user->id;
+		
+		//salva Negocio
+		if (!$negocio->save())
+		{
+			$this->addErrors($negocio->getErrors());
+			$trans->rollback();
+			return false;
+		}
+
+		//percorre os itens
+		foreach ($arr as $codnegocioprodutobarra => $quantidadedevolucao)
+		{
+			
+			/* @var $npb_original NegocioProdutoBarra */
+			
+			//busca item a ser devolvido
+			$npb_original =  NegocioProdutoBarra::model()->findByPk($codnegocioprodutobarra);
+			if($npb_original===null)
+			{
+				$this->addError('codnegocio', 'NegocioProdutoBarra Original não localizado!');
+				$trans->rollback();
+				return false;
+			}
+			
+			//cria item na devolucao
+			$npb = new NegocioProdutoBarra();
+			$npb->codnegocio = $negocio->codnegocio;
+			$npb->quantidade = $quantidadedevolucao;
+			$npb->valorunitario = $npb_original->valorunitario;
+			$npb->valortotal = $npb->quantidade * $npb->valorunitario;
+			$npb->codprodutobarra = $npb_original->codprodutobarra;
+			$npb->codnegocioprodutobarradevolucao = $npb_original->codnegocioprodutobarra;
+			
+			//salva item
+			if (!$npb->save())
+			{
+				$this->addErrors($npb->getErrors());
+				$trans->rollback();
+				return false;
+			}
+		}
+		
+		//calcula desconto proporcional
+		if ($this->valordesconto > 0 && $this->valorprodutos > 0)
+		{
+			$negocio->refresh();
+			$negocio->valordesconto = ($this->valordesconto / $this->valorprodutos) * $negocio->valorprodutos;
+			if (!$negocio->save())
+			{
+				$this->addErrors($negocio->getErrors());
+				$trans->rollback();
+				return false;
+			}
+		}
+
+		//cria forma de pagamento
+		$nfp = new NegocioFormaPagamento();
+		$nfp->codnegocio = $negocio->codnegocio;
+		$nfp->valorpagamento = $negocio->valortotal;
+		$nfp->codformapagamento = NegocioFormaPagamento::CARTEIRA_A_VISTA;
+		if (!$nfp->save())
+		{
+			$this->addErrors($nfp->getErrors());
+			$trans->rollback();
+			return false;
+		}
+		
+		//fecha a devolucao
+		if (!$negocio->fecharNegocio())
+		{
+			$this->addErrors($negocio->getErrors());
+			$trans->rollback();
+			return false;			
+		}
+		
+		//informa o usuario do sucesso
+		Yii::app()->user->setFlash('success', "Gerada devolução <b>{$negocio->codnegocio}</b>!");
+		$trans->commit();
+		return $negocio->codnegocio;
 	
+	}
+
 }

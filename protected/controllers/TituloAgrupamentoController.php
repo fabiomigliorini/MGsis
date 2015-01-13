@@ -202,7 +202,7 @@ class TituloAgrupamentoController extends Controller
 		$rel->Output();
 	}
 	
-	public function actionGeraNotaFiscal($id, $modelo = null, $codnotafiscal = null)
+	public function actionGerarNotaFiscal($id, $modelo = null, $codnotafiscal = null)
 	{
 
 		$model = $this->loadModel($id);
@@ -232,7 +232,7 @@ class TituloAgrupamentoController extends Controller
 			
 			$retorno = array("Retorno"=>1, "Mensagem"=>"", "codnotafiscal" =>$codnotafiscal);
 
-			if (!$codnotafiscal = $negocio->geraNotaFiscal($codnotafiscal, $modelo, false))
+			if (!$codnotafiscal = $negocio->gerarNotaFiscal($codnotafiscal, $modelo, false))
 			{
 				$retorno["Retorno"] = 0;
 				$erros = $negocio->getErrors();

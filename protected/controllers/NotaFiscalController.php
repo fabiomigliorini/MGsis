@@ -41,45 +41,81 @@ class NotaFiscalController extends Controller
 		if(isset($_POST['NotaFiscal']))
 		{
 			$model->attributes=$_POST['NotaFiscal'];
-			if ($model->save())
+			
+			$transaction = Yii::app()->db->beginTransaction();
+			$erro = false;
+			
+			if (!$model->save())
 			{
-				if (!empty($duplicar))
-				{
-					$original = $this->loadModel($duplicar);
-					
-					//duplica produtos
-					foreach ($original->NotaFiscalProdutoBarras as $prod_orig)
-					{
-						$prod_novo = new NotaFiscalProdutoBarra;
-						$prod_novo->attributes = $prod_orig->attributes;
-						$prod_novo->codnotafiscalprodutobarra = null;
-						$prod_novo->codnotafiscal = $model->codnotafiscal;
-						$prod_novo->codcfop = null;
-						$prod_novo->csosn = null;
-						$prod_novo->criacao = null;
-						$prod_novo->codusuariocriacao = null;
-						$prod_novo->alteracao = null;
-						$prod_novo->codusuarioalteracao = null;
-						$prod_novo->save();
-					}
+				$erro = true;
+			}
+			
 
-					//duplica produtos
-					foreach ($original->NotaFiscalDuplicatass as $dupl_orig)
+			//duplica produtos
+			if (!$erro && !empty($duplicar))
+			{
+				$original = $this->loadModel($duplicar);
+				foreach ($original->NotaFiscalProdutoBarras as $prod_orig)
+				{
+					$prod_novo = new NotaFiscalProdutoBarra;
+					$prod_novo->attributes = $prod_orig->attributes;
+					$prod_novo->codnotafiscalprodutobarra = null;
+					$prod_novo->codnotafiscal = $model->codnotafiscal;
+					$prod_novo->codcfop = null;
+					$prod_novo->csosn = null;
+					$prod_novo->criacao = null;
+					$prod_novo->codusuariocriacao = null;
+					$prod_novo->alteracao = null;
+					$prod_novo->codusuarioalteracao = null;
+					if (!$prod_novo->save())
 					{
-						$dupl_novo = new NotaFiscalDuplicatas;
-						$dupl_novo->attributes = $dupl_orig->attributes;
-						$dupl_novo->codnotafiscalduplicatas = null;
-						$dupl_novo->codnotafiscal = $model->codnotafiscal;
-						$dupl_novo->criacao = null;
-						$dupl_novo->codusuariocriacao = null;
-						$dupl_novo->alteracao = null;
-						$dupl_novo->codusuarioalteracao = null;
-						$dupl_novo->save();
+						echo '<pre>';
+						print_r($prod_novo);
+						echo '</pre>';
+						
+						$erro = true;
+						$model->addError('codnotafiscal', 'Erro ao duplicar NotaFiscalProdutoBarra #' . $prod_orig->codnotafiscalprodutobarra);
+						$model->addErrors($prod_novo->getErrors());
+						break;
 					}
-					
 				}
+			}
+
+			//duplica produtos
+			if (!$erro && !empty($duplicar))
+			{
+				foreach ($original->NotaFiscalDuplicatass as $dupl_orig)
+				{
+					$dupl_novo = new NotaFiscalDuplicatas;
+					$dupl_novo->attributes = $dupl_orig->attributes;
+					$dupl_novo->codnotafiscalduplicatas = null;
+					$dupl_novo->codnotafiscal = $model->codnotafiscal;
+					$dupl_novo->criacao = null;
+					$dupl_novo->codusuariocriacao = null;
+					$dupl_novo->alteracao = null;
+					$dupl_novo->codusuarioalteracao = null;
+					$dupl_novo->save();
+					if (!$dupl_novo->save())
+					{
+						$erro = true;
+						$model->addError('codnotafiscal', 'Erro ao duplicar NotaFiscalDuplicatas #' . $dupl_orig->codnotafiscalprodutobarra);
+						$model->addErrors($dupl_novo->getErrors());
+						break;
+					}
+				}
+
+			}
+			
+			if (!$erro)
+			{
+				$transaction->commit();
 				$this->redirect(array('view','id'=>$model->codnotafiscal));
 			}
+			else
+			{
+				$transaction->rollBack();
+			}
+			
 		}
 		else
 		{

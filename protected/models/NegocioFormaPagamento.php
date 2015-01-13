@@ -22,6 +22,9 @@
  */
 class NegocioFormaPagamento extends MGActiveRecord
 {
+	
+	const CARTEIRA_A_VISTA = 1099;
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -153,21 +156,9 @@ class NegocioFormaPagamento extends MGActiveRecord
 			$titulo = new Titulo();
 			$titulo->codnegocioformapagamento = $this->codnegocioformapagamento;
 			$titulo->codfilial = $this->Negocio->codfilial;
-
-			//TODO: Amarrar tipo de titulo pela Natureza de operacao
-			if ($this->Negocio->codoperacao == Operacao::SAIDA)
-			{
-				$titulo->codtipotitulo = TipoTitulo::VENDA;
-				$titulo->codcontacontabil = ContaContabil::VENDA;
-				$titulo->valor = $valor;
-			}
-			else
-			{
-				$titulo->codtipotitulo = TipoTitulo::COMPRA;
-				$titulo->codcontacontabil = ContaContabil::COMPRA;
-				$titulo->valor = $valor * -1;
-			}
-			
+			$titulo->codtipotitulo = $this->Negocio->NaturezaOperacao->codtipotitulo;
+			$titulo->codcontacontabil = $this->Negocio->NaturezaOperacao->codcontacontabil;
+			$titulo->valor = $valor;
 			$titulo->boleto = $this->FormaPagamento->boleto;
 			$titulo->codpessoa = $this->Negocio->codpessoa;
 			$titulo->numero = "N" . str_pad($this->codnegocio, 8, "0", STR_PAD_LEFT) . "-$i/{$this->FormaPagamento->parcelas}";

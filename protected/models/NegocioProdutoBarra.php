@@ -14,6 +14,8 @@
  * @property string $codusuarioalteracao
  * @property string $criacao
  * @property string $codusuariocriacao
+ * @property string $codnegocioprodutobarradevolucao
+ * @property string $devolucaoTotal Quantidade ja devolvida
  *
  * The followings are the available model relations:
  * @property Negocio $Negocio
@@ -23,6 +25,8 @@
  * @property NotaFiscalProdutoBarra[] $NotaFiscalProdutoBarras
  * @property EstoqueMovimento[] $EstoqueMovimentos
  * @property CupomFiscalProdutoBarra[] $CupomFiscalProdutoBarras
+ * @property NegocioProdutoBarraDevolucaos[] $NegocioProutoBarra
+ * @property NegocioProdutoBarraDevolucao $NegocioProutoBarra
  */
 class NegocioProdutoBarra extends MGActiveRecord
 {
@@ -55,7 +59,7 @@ class NegocioProdutoBarra extends MGActiveRecord
 			array('quantidade, valorunitario, valortotal', 'numerical', 'min' => 0.01),
 			array('codnegocio', 'validaStatusNegocio'),
 			array('quantidade, valorunitario, valortotal', 'length', 'max'=>14),
-			array('alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
+			array('alteracao, codnegocioprodutobarradevolucao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('lancamento_de, lancamento_ate, codnaturezaoperacao, codpessoa, codfilial, codnegociostatus, codnegocioprodutobarra, codnegocio, quantidade, valorunitario, valortotal, codprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
@@ -87,6 +91,17 @@ class NegocioProdutoBarra extends MGActiveRecord
 			'NotaFiscalProdutoBarras' => array(self::HAS_MANY, 'NotaFiscalProdutoBarra', 'codnegocioprodutobarra'),
 			'EstoqueMovimentos' => array(self::HAS_MANY, 'EstoqueMovimento', 'codnegocioprodutobarra'),
 			'CupomFiscalProdutoBarras' => array(self::HAS_MANY, 'CupomFiscalProdutoBarra', 'codnegocioprodutobarra'),
+			'NegocioProdutoBarraDevolucaos' => array(self::HAS_MANY, 'NegocioProdutoBarra', 'codnegocioprodutobarradevolucao'),
+			'NegocioProdutoBarraDevolucao' => array(self::BELONGS_TO, 'NegocioProdutoBarra', 'codnegocioprodutobarradevolucao'),
+			'devolucaoTotal'=>array(
+				self::STAT,  
+				'NegocioProdutoBarra', 
+				'codnegocioprodutobarradevolucao', 
+				'select' => 'SUM(quantidade)', 
+				//'with'=>'Negocio'
+				'join' => 'INNER JOIN '. Negocio::Model()->tableName().' AS n USING(codnegocio)',
+				'condition' => 'n.codnegociostatus = ' . NegocioStatus::FECHADO ,
+			),
 		);
 	}
 
@@ -106,6 +121,7 @@ class NegocioProdutoBarra extends MGActiveRecord
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
 			'codusuariocriacao' => 'Usuário Criação',
+			'codnegocioprodutobarradevolucao' => 'Devolução',
 		);
 	}
 
@@ -137,6 +153,7 @@ class NegocioProdutoBarra extends MGActiveRecord
 		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
 		$criteria->compare('criacao',$this->criacao,true);
 		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('codnegocioprodutobarradevolucao',$this->codnegocioprodutobarradevolucao,true);
 
 		if (!empty($this->codproduto))
 		{

@@ -20,17 +20,10 @@ $this->menu=array(
 		'visible'=>($model->codnegociostatus == NegocioStatus::FECHADO)
 	),
 	array(
-		'label'=>'Boletos', 
-		'icon'=>'icon-barcode', 
-		'url'=>array('titulo/imprimeboleto', 'codnegocio'=>$model->codnegocio), 
-		'linkOptions'=>array('id'=>'btnMostrarBoleto'),
-		'visible'=>($model->codnegociostatus == NegocioStatus::FECHADO)
-	),
-	array(
 		'label'=>'Gerar Nota Fiscal', 
 		'icon'=>'icon-globe', 
 		'url'=>'#', 
-		'linkOptions'=>array('id'=>'btnGeraNotaFiscal'),
+		'linkOptions'=>array('id'=>'btnGerarNotaFiscal'),
 		'visible'=>($model->codnegociostatus == NegocioStatus::FECHADO)
 	),
 	array(
@@ -42,10 +35,24 @@ $this->menu=array(
 		),
 	array('label'=>'Duplicar', 'icon'=>'icon-retweet', 'url'=>array('create','duplicar'=>$model->codnegocio)),
 	array(
+		'label'=>'Boletos', 
+		'icon'=>'icon-barcode', 
+		'url'=>array('titulo/imprimeboleto', 'codnegocio'=>$model->codnegocio), 
+		'linkOptions'=>array('id'=>'btnMostrarBoleto'),
+		'visible'=>($model->codnegociostatus == NegocioStatus::FECHADO && $model->NaturezaOperacao->codoperacao == Operacao::SAIDA)
+	),
+	array(
 		'label'=>'Orçamento', 
 		'icon'=>'icon-print', 
 		'url'=>array('relatorioOrcamento','id'=>$model->codnegocio), 
 		'linkOptions'=>array('id'=>'btnOrcamento'),
+		'visible'=>($model->NaturezaOperacao->codoperacao == Operacao::SAIDA)
+	),
+	array(
+		'label'=>'Devolução', 
+		'icon'=>'icon-thumbs-down', 
+		'url'=>array('devolucao', 'id'=>$model->codnegocio),
+		'visible'=>($model->codnegociostatus == NegocioStatus::FECHADO && !empty($model->NaturezaOperacao->codnaturezaoperacaodevolucao))
 	),
 	//array('label'=>'Cancelar', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnCancelar')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
@@ -59,10 +66,10 @@ $this->renderPartial("_hotkeys");
 
 <script type="text/javascript">
 	
-function geraNotaFiscal(modelo, enviar)
+function gerarNotaFiscal(modelo, enviar)
 {
 	
-	$.getJSON("<?php echo Yii::app()->createUrl('negocio/geraNotaFiscal')?>", 
+	$.getJSON("<?php echo Yii::app()->createUrl('negocio/gerarNotaFiscal')?>", 
 		{ 
 			id: <?php echo $model->codnegocio ?>,
 			modelo: modelo,
@@ -180,12 +187,12 @@ $(document).ready(function(){
 		{
 			case "NFE":
 				$pergunta = "Deseja gerar uma NFE?";
-				$funcao = "geraNotaFiscal(" . NotaFiscal::MODELO_NFE . ", true);";
+				$funcao = "gerarNotaFiscal(" . NotaFiscal::MODELO_NFE . ", true);";
 				break;
 			
 			case "NFCE":
 				$pergunta = "Deseja gerar uma NFCe?";
-				$funcao = "geraNotaFiscal(" . NotaFiscal::MODELO_NFCE . ", true);";
+				$funcao = "gerarNotaFiscal(" . NotaFiscal::MODELO_NFCE . ", true);";
 				break;
 			
 			case "ROMANEIO":
@@ -212,19 +219,19 @@ $(document).ready(function(){
 	?>
 
 
-	$('#btnGeraNotaFiscal').click(function(event){
+	$('#btnGerarNotaFiscal').click(function(event){
 		event.preventDefault();
 		$('#modalModeloNotaFiscal').modal({show:true, keyboard:true})
 	});
 
 	$('#btnGerarNfce').click(function(event){
 		event.preventDefault();
-		geraNotaFiscal(<?php echo NotaFiscal::MODELO_NFCE; ?>);
+		gerarNotaFiscal(<?php echo NotaFiscal::MODELO_NFCE; ?>);
 	});
 
 	$('#btnGerarNfe').click(function(event){
 		event.preventDefault();
-		geraNotaFiscal(<?php echo NotaFiscal::MODELO_NFE; ?>);
+		gerarNotaFiscal(<?php echo NotaFiscal::MODELO_NFE; ?>);
 	});
 	
 	//abre janela boleto
@@ -399,7 +406,8 @@ $(document).ready(function(){
 					),
 				array(
 					'name'=>'codpessoavendedor',
-					'value'=>(isset($model->PessoaVendedor))?$model->PessoaVendedor->fantasia:null,
+					'value'=>(isset($model->PessoaVendedor))?CHtml::link(CHtml::encode($model->PessoaVendedor->fantasia),array('pessoa/view','id'=>$model->codpessoavendedor)):null,
+					'type'=>'raw',
 					),
 				'lancamento',
 				array(
