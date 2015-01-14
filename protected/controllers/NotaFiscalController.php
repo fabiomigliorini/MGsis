@@ -62,17 +62,47 @@ class NotaFiscalController extends Controller
 					$prod_novo->codnotafiscalprodutobarra = null;
 					$prod_novo->codnotafiscal = $model->codnotafiscal;
 					$prod_novo->codcfop = null;
+					
 					$prod_novo->csosn = null;
+					$prod_novo->icmscst = null;
+					$prod_novo->ipicst = null;
+					$prod_novo->piscst = null;
+					$prod_novo->cofinscst = null;
+					
+					$prod_novo->icmsbase = null;
+					$prod_novo->icmspercentual = null;
+					$prod_novo->icmsvalor = null;
+
+					$prod_novo->icmsstbase = null;
+					$prod_novo->icmsstpercentual = null;
+					$prod_novo->icmsstvalor = null;
+
+					$prod_novo->ipibase = null;
+					$prod_novo->ipipercentual = null;
+					$prod_novo->ipivalor = null;
+
+					$prod_novo->pisbase = null;
+					$prod_novo->pispercentual = null;
+					$prod_novo->pisvalor = null;
+
+					$prod_novo->cofinsbase = null;
+					$prod_novo->cofinspercentual = null;
+					$prod_novo->cofinsvalor = null;
+
+					$prod_novo->csllbase = null;
+					$prod_novo->csllpercentual = null;
+					$prod_novo->csllvalor = null;
+
+					$prod_novo->irpjbase = null;
+					$prod_novo->irpjpercentual = null;
+					$prod_novo->irpjvalor = null;
+					
 					$prod_novo->criacao = null;
 					$prod_novo->codusuariocriacao = null;
 					$prod_novo->alteracao = null;
 					$prod_novo->codusuarioalteracao = null;
 					if (!$prod_novo->save())
 					{
-						echo '<pre>';
-						print_r($prod_novo);
-						echo '</pre>';
-						
 						$erro = true;
 						$model->addError('codnotafiscal', 'Erro ao duplicar NotaFiscalProdutoBarra #' . $prod_orig->codnotafiscalprodutobarra);
 						$model->addErrors($prod_novo->getErrors());
