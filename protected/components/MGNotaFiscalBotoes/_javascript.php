@@ -24,7 +24,7 @@ function enviarNfe(codnotafiscal)
 					$.notify("Email enviado para " + data.email + "!", "success");
 			
 				if (data.modelo == <?php echo NotaFiscal::MODELO_NFCE; ?>)
-					abrirJanelaDanfeNFCe(codnotafiscal, true, true);
+					abrirJanelaDanfeNFCe(codnotafiscal, false, true);
 				else
 					abrirJanelaDanfe(codnotafiscal, data.urlpdf, true);
 				

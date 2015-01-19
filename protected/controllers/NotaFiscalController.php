@@ -403,7 +403,7 @@ class NotaFiscalController extends Controller
 				if (!empty($email))
 					$resEmail = $acbr->enviarEmail($email);
 				
-				$acbr->imprimirDanfePdfTermica(true);
+				$this->imprimirDanfePdfTermica($model);
 
 			}
 			else
@@ -461,7 +461,7 @@ class NotaFiscalController extends Controller
 			if (!empty($email))
 				$resEmail = $acbr->enviarEmail($email);
 			
-			$acbr->imprimirDanfePdfTermica();
+			$this->imprimirDanfePdfTermica($model);
 		}
 		
 		
@@ -567,7 +567,7 @@ class NotaFiscalController extends Controller
 		//$res = $acbr->imprimirDanfe();
 		
 		if ($res && $imprimir && $model->modelo == NotaFiscal::MODELO_NFCE)
-			$acbr->imprimirDanfePdfTermica ();
+			$this->imprimirDanfePdfTermica ($model);
 		
 		echo CJSON::encode(
 			array(
@@ -620,6 +620,37 @@ class NotaFiscalController extends Controller
 		$rel->montaRelatorio();
 		$rel->Output();
 		 
+		
+	}
+	
+	/**
+	 * @param NotaFiscal $nf
+	 */
+	function imprimirDanfePdfTermica ($nf)
+	{
+		
+		if ($nf->modelo <> NotaFiscal::MODELO_NFCE)
+			return false;
+		
+		//require_once('/var/www/NFePHP/101/libs/NFe/DanfeNFCeNFePHP.class.php');
+		require_once('/var/www/NFePHP/' . $nf->codfilial . '/libs/NFe/DanfeNFCeNFePHP.class.php');
+
+		//Baixa XML
+		$urlxml = $nf->Filial->acbrnfemonitorcaminhorede . 'NFe/' . substr($nf->emissao, 6, 4) . substr($nf->emissao, 3, 2)  . '/' . $nf->nfechave . '-nfe.xml';
+		$xml = file_get_contents($urlxml);
+		
+		//Monta Danfe
+		$danfe = new DanfeNFCeNFePHP($xml, '/var/www/NFePHP/Imagens/MGPapelariaSeloPretoBranco.jpg', 0, $nf->Filial->nfcetokenid, $nf->Filial->nfcetoken);
+		$id = $danfe->montaDANFE(true);
+		
+		//Decide Impressora
+		$impressora = null;
+		if ($imprimir == 1)
+			$impressora = Yii::app()->user->impressoraTermica;
+		
+		//Imprime
+		$arquivo = "{$nf->nfechave}.pdf";
+		$teste = $danfe->printDANFE('pdf', $arquivo, 'I', $impressora);
 		
 	}
 	
