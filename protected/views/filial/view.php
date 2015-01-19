@@ -55,6 +55,8 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 					),
 		'filial',
 		'crt',
+		'nfcetoken',
+		'nfcetokenid',
 		'acbrnfemonitorcaminho',
 		'acbrnfemonitorcaminhorede',
 		//'acbrnfemonitorbloqueado',

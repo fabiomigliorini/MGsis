@@ -18,6 +18,8 @@
  * @property string $acbrnfemonitorporta
  * @property string $odbcnumeronotafiscal
  * @property string $crt
+ * @property string $nfcetoken
+ * @property string $nfcetokenid
  * @property string $alteracao
  * @property string $codusuarioalteracao
  * @property string $criacao
@@ -64,6 +66,10 @@ class Filial extends MGActiveRecord
 			array('acbrnfemonitorcaminho, acbrnfemonitorcaminhorede', 'length', 'max'=>100),
 			array('empresadominio', 'length', 'max'=>7),
 			array('crt', 'length', 'max'=>7),
+			array('nfcetoken', 'length', 'max'=>32),
+			array('nfcetoken', 'length', 'min'=>32),
+			array('nfcetokenid', 'length', 'max'=>6),
+			array('nfcetokenid', 'length', 'min'=>6),
 			array('crt', 'numerical'),
 			array('odbcnumeronotafiscal', 'length', 'max'=>500),
 			array('codempresa, codpessoa, emitenfe, acbrnfemonitorbloqueado, acbrnfemonitorcodusuario, acbrnfemonitorporta, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
@@ -120,6 +126,8 @@ class Filial extends MGActiveRecord
 			'criacao' => 'Criação',
 			'codusuariocriacao' => 'Usuário Criação',
 			'crt' => 'CRT - Código do Regime Tributário',
+			'nfcetoken' => 'Token NFCe',
+			'nfcetokenid' => 'ID Token NFCe',
 		);
 	}
 

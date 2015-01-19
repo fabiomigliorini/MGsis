@@ -27,7 +27,7 @@ class NFePHPController extends Controller
 		$xml = file_get_contents($urlxml);
 		
 		//Monta Danfe
-		$danfe = new DanfeNFCeNFePHP($xml, '/var/www/NFePHP/Imagens/MGPapelariaSeloPretoBranco.jpg', 0);
+		$danfe = new DanfeNFCeNFePHP($xml, '/var/www/NFePHP/Imagens/MGPapelariaSeloPretoBranco.jpg', 0, $nf->Filial->nfcetokenid, $nf->Filial->nfcetoken);
 		$id = $danfe->montaDANFE(true);
 		
 		//Decide Impressora

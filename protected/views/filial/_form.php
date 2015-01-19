@@ -23,8 +23,10 @@
 			array('class' => 'input-xxlarge')
 		);		
 		//echo $form->checkBoxRow($model,'emitenfe');
-		echo $form->textFieldRow($model,'acbrnfemonitorcaminho',array('class'=>'input-x-medium','maxlength'=>100));
-		echo $form->textFieldRow($model,'acbrnfemonitorcaminhorede',array('class'=>'x-input-medium','maxlength'=>100));
+		echo $form->textFieldRow($model,'acbrnfemonitorcaminho',array('class'=>'input-large','maxlength'=>100));
+		echo $form->textFieldRow($model,'acbrnfemonitorcaminhorede',array('class'=>'input-large','maxlength'=>100));
+		echo $form->textFieldRow($model,'nfcetoken',array('class'=>'input-xlarge text-center','maxlength'=>32));
+		echo $form->textFieldRow($model,'nfcetokenid',array('class'=>'input-mini text-center','maxlength'=>6));
 		//echo $form->textFieldRow($model,'acbrnfemonitorbloqueado',array('class'=>'input-medium'));
 		//echo $form->textFieldRow($model,'acbrnfemonitorcodusuario',array('class'=>'span5'));
 		//echo $form->select2Row($model, 'acbrnfemonitorcodusuario', Usuario::getListaCombo(), array('class' => 'input-medium'));
