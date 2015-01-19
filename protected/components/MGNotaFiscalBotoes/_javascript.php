@@ -23,12 +23,10 @@ function enviarNfe(codnotafiscal)
 				if (data.resultadoEmail)
 					$.notify("Email enviado para " + data.email + "!", "success");
 			
-				var botaoImprimir = false;
-				
 				if (data.modelo == <?php echo NotaFiscal::MODELO_NFCE; ?>)
-					botaoImprimir = true;
-					
-				abrirJanelaDanfe(codnotafiscal, data.urlpdf, true, botaoImprimir);
+					abrirJanelaDanfeNFCe(codnotafiscal, true, true);
+				else
+					abrirJanelaDanfe(codnotafiscal, data.urlpdf, true);
 				
 			}
 
@@ -105,7 +103,7 @@ function enviarEmail(codnotafiscal, email, alterarcadastro)
 	
 }
 
-function abrirJanelaDanfe(codnotafiscal, urlpdf, recarregar, botaoImprimir)
+function abrirJanelaDanfe(codnotafiscal, urlpdf, recarregar)
 {
 	$('#modalDanfe').on('show', function () {
 		$('#frameDanfe').attr("src", urlpdf);
@@ -116,10 +114,7 @@ function abrirJanelaDanfe(codnotafiscal, urlpdf, recarregar, botaoImprimir)
 	$('#btnImprimirDanfePdfTermica').data('codnotafiscal', codnotafiscal);
 	$('#modalDanfe').off('hide');
 	
-	if (botaoImprimir)
-		$('#btnImprimirDanfePdfTermica').show();
-	else
-		$('#btnImprimirDanfePdfTermica').hide();
+	$('#btnImprimirDanfePdfTermica').hide();
 	
 	if (recarregar)
 		$('#modalDanfe').on('hide', function(){
@@ -128,18 +123,38 @@ function abrirJanelaDanfe(codnotafiscal, urlpdf, recarregar, botaoImprimir)
 		
 }
 
-function abrirDanfe(codnotafiscal, imprimir, botaoImprimir)
-{	
-	
+function abrirJanelaDanfeNFCe(codnotafiscal, imprimir, recarregar)
+{
 	if (imprimir)
 		imprimir = 1;
 	else
 		imprimir = 0;
 	
+	$('#modalDanfe').modal({show:true})
+	var src = '<?php echo Yii::app()->createUrl('NFePHP/danfe') ?>&codnotafiscal=' + codnotafiscal + '&imprimir=' + imprimir;
+	if ($('#frameDanfe').attr("src") != src || imprimir)
+		$('#frameDanfe').attr("src", src);
+	//$('#modalDanfe').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
+	$('#btnImprimirDanfePdfTermica').data('codnotafiscal', codnotafiscal);
+	$('#modalDanfe').off('hide');
+	$('#btnImprimirDanfePdfTermica').show();
+	
+	$('#modalDanfe').on('hide', function(){
+		//$('#frameDanfe').attr("src", 'about:blank');
+	});
+	
+	if (recarregar)
+		$('#modalDanfe').on('hide', function(){
+			location.reload();
+		});
+}
+
+function abrirDanfe(codnotafiscal)
+{	
+	
 	$.getJSON("<?php echo Yii::app()->createUrl('notaFiscal/imprimirDanfePdf')?>", 
 		{ 
-			id: codnotafiscal,
-			imprimir: imprimir
+			id: codnotafiscal
 		})
 		.done(function(data) {
 
@@ -152,7 +167,7 @@ function abrirDanfe(codnotafiscal, imprimir, botaoImprimir)
 			}
 			else
 			{
-				abrirJanelaDanfe(codnotafiscal, data.urlpdf, false, botaoImprimir);
+				abrirJanelaDanfe(codnotafiscal, data.urlpdf, false);
 			}
 
 		})
@@ -161,6 +176,12 @@ function abrirDanfe(codnotafiscal, imprimir, botaoImprimir)
 			console.log( "Request Failed: " + err );
 		});
 }
+
+function abrirDanfeNFCe(codnotafiscal, imprimir)
+{	
+	abrirJanelaDanfeNFCe(codnotafiscal, imprimir, false);
+}
+
 
 function cancelarNfe(codnotafiscal)
 {
@@ -253,6 +274,8 @@ function consultarNfe (codnotafiscal)
 
 $(document).ready(function(){
 
+	$('#frameDanfe').attr("src", "about:blank");
+
 	// ENVIAR NFE
 	$('.btnEnviarNfe').on('click', function (e) {
 		e.preventDefault();
@@ -280,16 +303,16 @@ $(document).ready(function(){
 	//abre janela vale
 	$('.btnAbrirDanfe').click(function(e){
 		e.preventDefault();
-		var botaoImprimir = false;
 		if ($(this).data('modelo') == "<?php echo NotaFiscal::MODELO_NFCE; ?>")
-			botaoImprimir = true;
-		abrirDanfe($(this).data('codnotafiscal'), false, botaoImprimir);
+			abrirDanfeNFCe($(this).data('codnotafiscal'), false);
+		else
+			abrirDanfe($(this).data('codnotafiscal'), false);
 	});	
 	
 	//imprimir Danfe Matricial
 	$('#btnImprimirDanfePdfTermica').click(function(e){
 		e.preventDefault();
-		abrirDanfe($(this).data('codnotafiscal'), true, true);
+		abrirDanfeNFCe($(this).data('codnotafiscal'), true);
 	});
 	
 	$("*").bind('keydown.f9',function (e) { 
@@ -298,7 +321,6 @@ $(document).ready(function(){
 		return false;
 	});
 
-	
 	//enviar email
 	$('.btnEnviarEmail').on('click', function (e) {
 		e.preventDefault();
