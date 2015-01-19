@@ -345,6 +345,9 @@ class NotaFiscalController extends Controller
 		if (isset(Yii::app()->session["NotaFiscalRobo$codfilial"]))
 			$codnotafiscal = Yii::app()->session["NotaFiscalRobo$codfilial"];
 
+		/**
+		 * @var NotaFiscal $model
+		 */
 		$model = NotaFiscal::model()->find(
                         array(
                                 'order' => 'codnotafiscal',
@@ -391,7 +394,15 @@ class NotaFiscalController extends Controller
 
 			$retornoEnvio = null;
 			
-			if ($res)
+			if (!$res)
+			{
+				$retornoEnvio = $acbr->retorno;
+				$res = $acbr->consultarNfe();
+			}
+
+			$model = $this->loadModel($model->codnotafiscal);
+			
+			if ($model->codstatus == NotaFiscal::CODSTATUS_AUTORIZADA)
 			{
 				$resPdf = $acbr->imprimirDanfePdf();
 
@@ -403,18 +414,13 @@ class NotaFiscalController extends Controller
 				if (!empty($email))
 					$resEmail = $acbr->enviarEmail($email);
 				
-				$this->imprimirDanfePdfTermica($model);
-
+				$impressora = $model->UsuarioCriacao->impressoratermica;
+				$this->imprimirDanfePdfTermica($model, $impressora);
 			}
-			else
-			{
-				$retornoEnvio = $acbr->retorno;
-				$res = $acbr->consultarNfe();
-			}
-			
 			
 			$arrRet = array(
 				'id' => $model->codnotafiscal,
+				'status' => $model->codstatus . ' - ' . $model->status,
 				'resultado' => $res,
 				'email' => $email,
 				'resultadoEmail' => $resEmail,
@@ -461,7 +467,8 @@ class NotaFiscalController extends Controller
 			if (!empty($email))
 				$resEmail = $acbr->enviarEmail($email);
 			
-			$this->imprimirDanfePdfTermica($model);
+			$impressora = Yii::app()->user->impressoraTermica;
+			$this->imprimirDanfePdfTermica($model, $impressora);
 		}
 		
 		
@@ -566,8 +573,9 @@ class NotaFiscalController extends Controller
 		$res = $acbr->imprimirDanfePdf();
 		//$res = $acbr->imprimirDanfe();
 		
+		$impressora = Yii::app()->user->impressoraTermica;
 		if ($res && $imprimir && $model->modelo == NotaFiscal::MODELO_NFCE)
-			$this->imprimirDanfePdfTermica ($model);
+			$this->imprimirDanfePdfTermica ($model, $impressora);
 		
 		echo CJSON::encode(
 			array(
@@ -626,10 +634,12 @@ class NotaFiscalController extends Controller
 	/**
 	 * @param NotaFiscal $nf
 	 */
-	function imprimirDanfePdfTermica ($nf)
+	function imprimirDanfePdfTermica ($nf, $impressora)
 	{
-		
 		if ($nf->modelo <> NotaFiscal::MODELO_NFCE)
+			return false;
+		
+		if (empty($impressora))
 			return false;
 		
 		//require_once('/var/www/NFePHP/101/libs/NFe/DanfeNFCeNFePHP.class.php');
@@ -643,14 +653,10 @@ class NotaFiscalController extends Controller
 		$danfe = new DanfeNFCeNFePHP($xml, '/var/www/NFePHP/Imagens/MGPapelariaSeloPretoBranco.jpg', 0, $nf->Filial->nfcetokenid, $nf->Filial->nfcetoken);
 		$id = $danfe->montaDANFE(true);
 		
-		//Decide Impressora
-		$impressora = null;
-		if ($imprimir == 1)
-			$impressora = Yii::app()->user->impressoraTermica;
-		
 		//Imprime
 		$arquivo = "{$nf->nfechave}.pdf";
-		$teste = $danfe->printDANFE('pdf', $arquivo, 'I', $impressora);
+		//$teste = $danfe->printDANFE('pdf', $arquivo, 'P', $impressora);
+		$teste = $danfe->printDANFE('pdf', $arquivo, 'P', $impressora);
 		
 	}
 	
