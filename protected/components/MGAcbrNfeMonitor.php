@@ -317,6 +317,18 @@ class MGAcbrNfeMonitor extends MGSocket
 			
 		foreach ($this->NotaFiscal->NotaFiscalProdutoBarras as $NotaFiscalpb)
 		{
+			$valorDesconto = 0;
+			$vFrete = 0;
+			$vSeg = 0;
+			$vOutro = 0;
+
+			if ($this->NotaFiscal->valorprodutos <> 0)
+			{
+                        	$valorDesconto = round(($this->NotaFiscal->valordesconto / $this->NotaFiscal->valorprodutos) * $NotaFiscalpb->valortotal, 2);
+                                $vFrete = round(($this->NotaFiscal->valorfrete / $this->NotaFiscal->valorprodutos) * $NotaFiscalpb->valortotal, 2);
+                                $vSeg = round(($this->NotaFiscal->valorseguro / $this->NotaFiscal->valorprodutos) * $NotaFiscalpb->valortotal, 2);
+                                $vOutro = round(($this->NotaFiscal->valoroutras / $this->NotaFiscal->valorprodutos) * $NotaFiscalpb->valortotal, 2);
+			}
 			$arr["Produto" . Yii::app()->format->formataPorMascara($i, "###", true)] = 
 				array(
 					"CFOP" => $NotaFiscalpb->codcfop,
@@ -338,10 +350,10 @@ class MGAcbrNfeMonitor extends MGSocket
 					"Quantidade" => $NotaFiscalpb->quantidade,
 					"ValorUnitario" => $NotaFiscalpb->valorunitario,
 					"ValorTotal" => $NotaFiscalpb->valortotal,
-					"ValorDesconto" => round(($this->NotaFiscal->valordesconto / $this->NotaFiscal->valorprodutos) * $NotaFiscalpb->valortotal, 2),
-					"vFrete" => round(($this->NotaFiscal->valorfrete / $this->NotaFiscal->valorprodutos) * $NotaFiscalpb->valortotal, 2),
-					"vSeg" => round(($this->NotaFiscal->valorseguro / $this->NotaFiscal->valorprodutos) * $NotaFiscalpb->valortotal, 2),
-					"vOutro" => round(($this->NotaFiscal->valoroutras / $this->NotaFiscal->valorprodutos) * $NotaFiscalpb->valortotal, 2),
+					"ValorDesconto" => $valorDesconto,
+					"vFrete" => $vFrete,
+					"vSeg" => $vSeg,
+					"vOutro" => $vOutro,
 				);
 			
 			if ($this->NotaFiscal->Filial->crt == Filial::CRT_REGIME_NORMAL)
