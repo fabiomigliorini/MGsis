@@ -18,7 +18,9 @@
 
 			<small class="span2 muted">
 				<?php
-					$precounitario = ($data->valortotal + $data->icmsstvalor + $data->ipivalor)/$data->quantidade;
+					$precounitario = ($data->valortotal + $data->icmsstvalor + $data->ipivalor);
+					if ($data->quantidade > 0)
+						$precounitario = $precounitario/$data->quantidade;
 					$ipi = '';
 					$icmsst = '';
 					if ($data->valortotal > 0)
