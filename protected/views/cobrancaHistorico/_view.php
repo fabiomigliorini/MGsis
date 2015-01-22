@@ -12,12 +12,4 @@
 	<div class="span8">
 		<?php echo nl2br(CHtml::encode($data->historico)); ?>
 	</div>
-
-
 </div>
-
-<pre>
-	<?php
-	echo print_r($data);
-	?>
-</pre>
