@@ -435,10 +435,6 @@ class MGAcbrNfeMonitor extends MGSocket
 		//Totais
 		$arr["Total"] = 
 			array(
-				//"BaseICMS" => $this->NotaFiscal->icmsbase,
-				//"ValorICMS" => $this->NotaFiscal->icmsvalor,
-				//"BaseICMS=0\n";
-				//"ValorICMS=0\n";
 				"ValorProduto" => $this->NotaFiscal->valorprodutos,
 				"ValorFrete" => $this->NotaFiscal->valorfrete,
 				"ValorSeguro" => $this->NotaFiscal->valorseguro,
@@ -446,11 +442,13 @@ class MGAcbrNfeMonitor extends MGSocket
 				"ValorOutrasDespesas" => $this->NotaFiscal->valoroutras,
 				"ValorNota" => $this->NotaFiscal->valortotal,
 			);
-		
+
 		if ($this->NotaFiscal->Filial->crt == Filial::CRT_REGIME_NORMAL)
 		{
-			$arr["Total"]["ValorPIS"]=$totalPis;
-			$arr["Total"]["ValorCOFINS"]=$totalCofins;
+			$arr["Total"]["ValorPIS"]    = $totalPis;
+			$arr["Total"]["ValorCOFINS"] = $totalCofins;
+			$arr["Total"]["BaseICMS"]    = $this->NotaFiscal->icmsbase;
+			$arr["Total"]["ValorICMS"]   = $this->NotaFiscal->icmsvalor;
 		}
 		
 		//Transportador
