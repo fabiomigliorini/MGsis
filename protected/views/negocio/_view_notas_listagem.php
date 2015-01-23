@@ -74,22 +74,27 @@ foreach ($codnotas as $codnota)
 			<small class="span1 muted">
 				<?php echo CHtml::encode($nota->Filial->filial); ?> 
 			</small>
-			<div class="span3">
+			<div class="span2">
 				<?php echo CHtml::link(CHtml::encode(Yii::app()->format->formataNumeroNota($nota->emitida, $nota->serie, $nota->numero, $nota->modelo)),array('notaFiscal/view','id'=>$nota->codnotafiscal)); ?>
+				<small class="muted"><?php echo CHtml::encode($nota->emissao); ?></small>
 			</div>
-			<small class="span3 muted">
-				<?php echo CHtml::encode($nota->emissao); ?> &nbsp;&nbsp;
-				<?php echo CHtml::encode($nota->NaturezaOperacao->naturezaoperacao); ?> 
-			</small>
-			<small class="span3">
+			<div class="span4">
 				<?php echo CHtml::link(
 					CHtml::encode($nota->Pessoa->fantasia)
 					, array('pessoa/view', 'id'=> $nota->codpessoa)); 
-				?> 
-				<small class="label <?php echo $css_label; ?> pull-right">
-					<?php echo $nota->status; ?>
+				?><br>
+				<small class="muted">
+					<?php echo CHtml::encode($nota->NaturezaOperacao->naturezaoperacao); ?> 
 				</small>
-			</small>
+			</div>
+			<div class="span1 text-right muted">
+				<?php echo Yii::app()->format->formatNumber($nota->valortotal); ?>
+			</div>
+			<div class="span2">
+				<div class="label <?php echo $css_label; ?> pull-right">
+					<?php echo $nota->status; ?>
+				</div>
+			</div>
 			<div class="span2">
 				<?php $this->widget('MGNotaFiscalBotoes', array('model'=>$nota)); ?>		
 			</div>
