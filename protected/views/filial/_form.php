@@ -22,6 +22,15 @@
 			),
 			array('class' => 'input-xxlarge')
 		);		
+		echo $form->select2Row(
+			$model, 
+			'nfeambiente', 
+			array(
+				Filial::NFEAMBIENTE_PRODUCAO => 'Produção',
+				Filial::NFEAMBIENTE_HOMOLOGACAO => 'Homologação (Testes)',
+			),
+			array('class' => 'input-large')
+		);		
 		//echo $form->checkBoxRow($model,'emitenfe');
 		echo $form->textFieldRow($model,'acbrnfemonitorcaminho',array('class'=>'input-large','maxlength'=>100));
 		echo $form->textFieldRow($model,'acbrnfemonitorcaminhorede',array('class'=>'input-large','maxlength'=>100));

@@ -24,6 +24,7 @@
  * @property string $codusuarioalteracao
  * @property string $criacao
  * @property string $codusuariocriacao
+ * @property integer $nfeambiente Description
  *
  * The followings are the available model relations:
  * @property Titulo[] $Titulos
@@ -45,6 +46,10 @@ class Filial extends MGActiveRecord
 	const CRT_SIMPLES_EXCESSO = 2;
 	const CRT_REGIME_NORMAL = 3;
 	
+	const NFEAMBIENTE_PRODUCAO = 1;
+	const NFEAMBIENTE_HOMOLOGACAO = 2;
+	
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -61,7 +66,7 @@ class Filial extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codpessoa, filial, crt', 'required'),
+			array('codpessoa, filial, crt, nfeambiente', 'required'),
 			array('filial, acbrnfemonitorip', 'length', 'max'=>20),
 			array('acbrnfemonitorcaminho, acbrnfemonitorcaminhorede', 'length', 'max'=>100),
 			array('empresadominio', 'length', 'max'=>7),
@@ -70,6 +75,8 @@ class Filial extends MGActiveRecord
 			array('nfcetoken', 'length', 'min'=>32),
 			array('nfcetokenid', 'length', 'max'=>6),
 			array('nfcetokenid', 'length', 'min'=>6),
+			array('nfeambiente', 'length', 'max'=>2),
+			array('nfeambiente', 'length', 'min'=>1),
 			array('crt', 'numerical'),
 			array('odbcnumeronotafiscal', 'length', 'max'=>500),
 			array('codempresa, codpessoa, emitenfe, acbrnfemonitorbloqueado, acbrnfemonitorcodusuario, acbrnfemonitorporta, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
@@ -128,6 +135,7 @@ class Filial extends MGActiveRecord
 			'crt' => 'CRT - Código do Regime Tributário',
 			'nfcetoken' => 'Token NFCe',
 			'nfcetokenid' => 'ID Token NFCe',
+			'nfeambiente' => 'Ambiente NFe',
 		);
 	}
 
