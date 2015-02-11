@@ -329,21 +329,14 @@ class MGAcbrNfeMonitor extends MGSocket
                                 $vSeg = round(($this->NotaFiscal->valorseguro / $this->NotaFiscal->valorprodutos) * $NotaFiscalpb->valortotal, 2);
                                 $vOutro = round(($this->NotaFiscal->valoroutras / $this->NotaFiscal->valorprodutos) * $NotaFiscalpb->valortotal, 2);
 			}
-			$arr["Produto" . Yii::app()->format->formataPorMascara($i, "###", true)] = 
+			
+			$produto = "Produto" . Yii::app()->format->formataPorMascara($i, "###", true);
+			
+			$arr[$produto] = 
 				array(
 					"CFOP" => $NotaFiscalpb->codcfop,
-					"Codigo" => 
-						Yii::app()->format->formataPorMascara($NotaFiscalpb->ProdutoBarra->codproduto, "######") 
-						//. empty($NotaFiscalpb->ProdutoBarra->codprodutoembalagem)?'':'-' . $NotaFiscalpb->ProdutoBarra->ProdutoEmbalagem->quantidade
-						,
-					"EAN" => $NotaFiscalpb->ProdutoBarra->barrasValido()?$NotaFiscalpb->ProdutoBarra->barras:"",
-					/*
-					If Len(NumeroLimpo($NotaFiscalpb->barras)) > 6 _
-						And NumeroLimpo(Mid($NotaFiscalpb->barras, 1, 6)) <> Format($NotaFiscalpb->codproduto, "000000") _
-						And NumeroLimpo(Mid($NotaFiscalpb->barras, 1, 3)) <> "999" _
-						And ValidaEan($NotaFiscalpb->barras) Then
-					End If
-					 */ 
+					"Codigo" => Yii::app()->format->formataPorMascara($NotaFiscalpb->ProdutoBarra->codproduto, '######'),
+					"EAN" => $NotaFiscalpb->ProdutoBarra->barrasValido()?$NotaFiscalpb->ProdutoBarra->barras:'',
 					"Descricao" => (empty($NotaFiscalpb->descricaoalternativa))?$NotaFiscalpb->ProdutoBarra->descricao:$NotaFiscalpb->descricaoalternativa,
 					"Unidade" => $NotaFiscalpb->ProdutoBarra->UnidadeMedida->sigla,
 					"NCM" => Yii::app()->format->formataPorMascara($NotaFiscalpb->ProdutoBarra->Produto->ncm, "########"),
@@ -355,6 +348,10 @@ class MGAcbrNfeMonitor extends MGSocket
 					"vSeg" => $vSeg,
 					"vOutro" => $vOutro,
 				);
+
+			//concatena o '-Quantidade' da embalagem
+			if (isset($NotaFiscalpb->ProdutoBarra->ProdutoEmbalagem))
+				$arr[$produto]['Codigo'] .= '-' . str_replace('C/', '', $NotaFiscalpb->ProdutoBarra->ProdutoEmbalagem->descricao);
 			
 			if ($this->NotaFiscal->Filial->crt == Filial::CRT_REGIME_NORMAL)
 			{
