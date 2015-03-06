@@ -613,12 +613,8 @@ class MGAcbrNfeMonitor extends MGSocket
 		If (!empty($this->NotaFiscal->numero))
 			return true;
 		
-		$numero = Codigo::PegaProximo(
-			"NumeroNotaFiscal-CodFilial#" 
-			. $this->NotaFiscal->codfilial 
-			. "-Serie#" . $this->NotaFiscal->serie
-			. "-Modelo#" . $this->NotaFiscal->modelo
-		);
+		$sequence = "tblnotafiscal_numero_{$this->NotaFiscal->codfilial}_{$this->NotaFiscal->serie}_{$this->NotaFiscal->modelo}_seq";
+		$numero = Yii::app()->db->createCommand("SELECT NEXTVAL('$sequence')")->queryScalar();
 		
 		if (empty($numero))
 			return false;

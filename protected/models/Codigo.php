@@ -114,10 +114,4 @@ class Codigo extends MGActiveRecord
 		return parent::model($className);
 	}
 	
-	public static function PegaProximo ($tabela)
-	{
-		$command = Yii::app()->db->createCommand('select * from fnpegaproximocodigo(:tabela);');
-		$command->bindParam(":tabela",$tabela,PDO::PARAM_STR);
-		return $command->queryScalar();	
-	}
 }

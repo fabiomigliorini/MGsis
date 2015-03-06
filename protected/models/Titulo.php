@@ -621,7 +621,10 @@ class Titulo extends MGActiveRecord
 				$codportador_antigo = $old->codportador;
 			}
 			if (empty($this->nossonumero) || $this->codportador <> $codportador_antigo)
-				$this->nossonumero = Codigo::PegaProximo ("NossoNumero-#{$this->codportador}");
+			{
+				$sequence = "tbltitulo_nossonumero_{$this->codportador}_seq";
+				$this->nossonumero = Yii::app()->db->createCommand("SELECT NEXTVAL('$sequence')")->queryScalar();
+			}
 		}
 		
 		return $ret;

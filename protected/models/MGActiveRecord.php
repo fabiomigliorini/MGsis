@@ -7,15 +7,6 @@ abstract class MGActiveRecord extends CActiveRecord
 	*/
 	protected function beforeSave()
 	{
-
-		if($this->isNewRecord)
-		{
-			$codcoluna = $this->tableSchema->primaryKey;
-			if (empty($this->$codcoluna))
-			{
-				$this->$codcoluna = Codigo::PegaProximo($codcoluna);
-			}
-		}
 		
 		$this->converteParaFormatoMaquina();
 		
