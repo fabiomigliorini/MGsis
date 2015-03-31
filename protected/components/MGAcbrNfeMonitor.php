@@ -597,7 +597,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		// C:\ACBrNFeMonitor\Logs\51110404576775000160550010000000011000000016-nfe.xml
 		$chave = $this->retornoMonitor["Mensagem"][1];
 		$chave = str_replace($this->Filial->acbrnfemonitorcaminho, "", $chave);
-		$chave = str_replace("\\Logs\\", "", $chave);
+		$chave = str_replace("\\Arquivos\\EnvioResp\\", "", $chave);
 		$chave = str_replace("-nfe.xml", "", $chave);
 
 		//grava chave da NFE
@@ -643,7 +643,7 @@ class MGAcbrNfeMonitor extends MGSocket
 
 		//Monta Comando
 		$cmd = "NFE.EnviarNFe(\"";
-		$cmd .= $this->Filial->acbrnfemonitorcaminho . "\\Logs\\" . $this->NotaFiscal->nfechave . "-nfe.xml";
+		$cmd .= $this->Filial->acbrnfemonitorcaminho . "\\Arquivos\\EnvioResp\\" . $this->NotaFiscal->nfechave . "-nfe.xml";
 		$cmd .= "\", {$this->NotaFiscal->numero}, 0, 0, 0, 1)\n.\n";
 		//NFe.EnviarNFe(cArqXML,nLote,[nAssina],[nImprime],[NomeImpressora],[bSincrono])
 
@@ -680,7 +680,7 @@ class MGAcbrNfeMonitor extends MGSocket
 			
 			//Monta Comando
 			$cmd  = "NFE.ConsultarNFE(\"";
-			$cmd .= $this->Filial->acbrnfemonitorcaminho . "\\Logs\\" . $this->NotaFiscal->nfechave . "-nfe.xml";
+			$cmd .= $this->Filial->acbrnfemonitorcaminho . "\\Arquivos\\EnvioResp\\" . $this->NotaFiscal->nfechave . "-nfe.xml";
 			$cmd .= "\")\n.\n";
 			
 			//Envia Comando
