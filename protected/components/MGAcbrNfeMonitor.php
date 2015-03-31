@@ -668,7 +668,7 @@ class MGAcbrNfeMonitor extends MGSocket
 
 		//Monta Comando
 		$cmd  = "NFE.ConsultarNFE(\"";
-		$cmd .= $this->NotaFiscal->nfechave;
+		$cmd .= "{$this->Filial->acbrnfemonitorcaminho}\\Arquivos\\NFe\\$mes\\$chave-nfe.xml";
 		$cmd .= "\")\n.\n";
 		
 		//Envia Comando
