@@ -665,6 +665,9 @@ class MGAcbrNfeMonitor extends MGSocket
 	{
 		if (!$this->NotaFiscal->emitida)
 			return $this->gerarErro("Nota Fiscal nao e de nossa emissao!");
+		
+		$chave = $this->NotaFiscal->nfechave;
+		$mes = '20' . substr($chave, 2, 4);
 
 		//Monta Comando
 		$cmd  = "NFE.ConsultarNFE(\"";
