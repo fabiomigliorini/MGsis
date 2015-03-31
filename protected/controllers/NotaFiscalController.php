@@ -425,9 +425,9 @@ class NotaFiscalController extends Controller
 				'email' => $email,
 				'resultadoEmail' => $resEmail,
 				'modelo' => $model->modelo,
-				'retornoMonitor' => $acbr->retornoMonitor["Mensagem"],
-				'erroMonitor' => htmlentities($acbr->erroMonitor),
-				'retorno' => htmlentities($acbr->retorno),
+				'retornoMonitor' => (isset($acbr->retornoMonitor["Mensagem"])?$acbr->retornoMonitor["Mensagem"]:null),
+				'erroMonitor' => htmlentities($acbr->erroMonitor, ENT_QUOTES, 'ISO-8859-1'),
+				'retorno' => htmlentities($acbr->retorno, ENT_QUOTES, 'ISO-8859-1'),
 				'retornoEnvio' => $retornoEnvio,
 				'urlpdf' => $acbr->urlpdf,
 			);
@@ -479,9 +479,9 @@ class NotaFiscalController extends Controller
 				'email' => $email,
 				'resultadoEmail' => $resEmail,
 				'modelo' => $model->modelo,
-				'retornoMonitor' => $acbr->retornoMonitor["Mensagem"],
-				'erroMonitor' => htmlentities($acbr->erroMonitor),
-				'retorno' => htmlentities($acbr->retorno),
+				'retornoMonitor' => (isset($acbr->retornoMonitor["Mensagem"])?$acbr->retornoMonitor["Mensagem"]:null),
+				'erroMonitor' => htmlentities($acbr->erroMonitor, ENT_QUOTES, 'ISO-8859-1'),
+				'retorno' => htmlentities($acbr->retorno, ENT_QUOTES, 'ISO-8859-1'),
 				'urlpdf' => $acbr->urlpdf,
 			)
 		);
@@ -499,9 +499,9 @@ class NotaFiscalController extends Controller
 			array(
 				'id' => $id,
 				'resultado' => $res,
-				'retornoMonitor' => $acbr->retornoMonitor["Mensagem"],
-				'erroMonitor' => htmlentities($acbr->erroMonitor),
-				'retorno' => htmlentities($acbr->retorno),
+				'retornoMonitor' => (isset($acbr->retornoMonitor["Mensagem"])?$acbr->retornoMonitor["Mensagem"]:null),
+				'erroMonitor' => htmlentities($acbr->erroMonitor, ENT_QUOTES, 'ISO-8859-1'),
+				'retorno' => htmlentities($acbr->retorno, ENT_QUOTES, 'ISO-8859-1'),
 			)
 		);
 		
@@ -512,6 +512,7 @@ class NotaFiscalController extends Controller
 		$model = $this->loadModel($id);
 		$acbr = new MGAcbrNfeMonitor($model);
 		
+				
 		$res = $acbr->imprimirDanfePdf();
 		$res = $acbr->enviarEmail($email, $alterarcadastro);
 		
@@ -519,9 +520,9 @@ class NotaFiscalController extends Controller
 			array(
 				'id' => $id,
 				'resultado' => $res,
-				'retornoMonitor' => $acbr->retornoMonitor["Mensagem"],
-				'erroMonitor' => htmlentities($acbr->erroMonitor),
-				'retorno' => htmlentities($acbr->retorno),
+				'retornoMonitor' => (isset($acbr->retornoMonitor["Mensagem"])?$acbr->retornoMonitor["Mensagem"]:null),
+				'erroMonitor' => htmlentities($acbr->erroMonitor, ENT_QUOTES, 'ISO-8859-1'),
+				'retorno' => htmlentities($acbr->retorno, ENT_QUOTES, 'ISO-8859-1'),
 			)
 		);
 		
@@ -538,9 +539,9 @@ class NotaFiscalController extends Controller
 			array(
 				'id' => $id,
 				'resultado' => $res,
-				'retornoMonitor' => $acbr->retornoMonitor["Mensagem"],
-				'erroMonitor' => htmlentities($acbr->erroMonitor),
-				'retorno' => htmlentities($acbr->retorno),
+				'retornoMonitor' => (isset($acbr->retornoMonitor["Mensagem"])?$acbr->retornoMonitor["Mensagem"]:null),
+				'erroMonitor' => htmlentities($acbr->erroMonitor, ENT_QUOTES, 'ISO-8859-1'),
+				'retorno' => htmlentities($acbr->retorno, ENT_QUOTES, 'ISO-8859-1'),
 			)
 		);
 		
@@ -557,9 +558,9 @@ class NotaFiscalController extends Controller
 			array(
 				'id' => $id,
 				'resultado' => $res,
-				'retornoMonitor' => $acbr->retornoMonitor["Mensagem"],
-				'erroMonitor' => htmlentities($acbr->erroMonitor),
-				'retorno' => htmlentities($acbr->retorno),
+				'retornoMonitor' => (isset($acbr->retornoMonitor["Mensagem"])?$acbr->retornoMonitor["Mensagem"]:null),
+				'erroMonitor' => htmlentities($acbr->erroMonitor, ENT_QUOTES, 'ISO-8859-1'),
+				'retorno' => htmlentities($acbr->retorno, ENT_QUOTES, 'ISO-8859-1'),
 			)
 		);
 		
@@ -581,9 +582,9 @@ class NotaFiscalController extends Controller
 			array(
 				'id' => $id,
 				'resultado' => $res,
-				'retornoMonitor' => $acbr->retornoMonitor["Mensagem"],
-				'erroMonitor' => htmlentities($acbr->erroMonitor),
-				'retorno' => htmlentities($acbr->retorno),
+				'retornoMonitor' => (isset($acbr->retornoMonitor["Mensagem"])?$acbr->retornoMonitor["Mensagem"]:null),
+				'erroMonitor' => htmlentities($acbr->erroMonitor, ENT_QUOTES, 'ISO-8859-1'),
+				'retorno' => htmlentities($acbr->retorno, ENT_QUOTES, 'ISO-8859-1'),
 				'urlpdf' => $acbr->urlpdf,
 			)
 		);
@@ -601,9 +602,9 @@ class NotaFiscalController extends Controller
 			array(
 				'id' => $id,
 				'resultado' => $res,
-				'retornoMonitor' => $acbr->retornoMonitor["Mensagem"],
-				'erroMonitor' => htmlentities($acbr->erroMonitor),
-				'retorno' => htmlentities($acbr->retorno),
+				'retornoMonitor' => (isset($acbr->retornoMonitor["Mensagem"])?$acbr->retornoMonitor["Mensagem"]:null),
+				'erroMonitor' => htmlentities($acbr->erroMonitor, ENT_QUOTES, 'ISO-8859-1'),
+				'retorno' => htmlentities($acbr->retorno, ENT_QUOTES, 'ISO-8859-1'),
 			)
 		);
 		

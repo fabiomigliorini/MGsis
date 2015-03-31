@@ -59,7 +59,7 @@ class MGSocket
 		//abre conexao
 		if ($this->_fp = @fsockopen("tcp://$this->servidor", $this->porta, $this->errno, $this->errstr, 1))
 		{
-			stream_set_blocking($this->_fp, FALSE);
+			stream_set_blocking($this->_fp, false);
 			$this->recebe();
 			return true;
 		}
@@ -80,8 +80,14 @@ class MGSocket
 		return true;
 	}
 	
-	public function recebe($timeout = 200)
+	/**
+	 * Recebe os dados do socket
+	 * @param int $timeout Timeout em segundos
+	 * @return boolean
+	 */
+	public function recebe($timeout = 10)
 	{
+		
 		//retorna se nao estiver conectado
 		if (!$this->conectado())
 			return false;
@@ -91,66 +97,54 @@ class MGSocket
 		
 		//marca inicio
 		$inicio = microtime(true);
-		$leiturasVazias = 1;
-		
+		$leiturasVazias = 0;
 		do 
 		{
+			
+			// espera 0.1 segundo
+			usleep(100000);
+			
 			//le o buffer
 			$linha = fgets($this->_fp);
 			
-			//se linha lida nao estiver em branco
 			if (!empty($linha))
 			{
-				
-				//se for final de fim de texto ASCII 3 para a execucao
-				if ((substr($linha, 0, 1) == chr(3)) && !empty($this->retorno))
-				{
-					return true;
-				}
-				else
-				{
-					//concatena linha ao retorno
-					$this->retorno .= $linha;
-				}
-				
-				//zera contador de leituras vazias
-				$leiturasVazias = 1;
+				$this->retorno .= $linha;
+				$leiturasVazias	= 0;
 			}
 			else
-			{
-				//incrementa contador de leituras vazias
 				$leiturasVazias++;
-				
-				//se desconectou retorna
-				if (!$this->conectado(false))
-					return false;
-				
-				//se ainda não veio nenhum retorno, espera 0.1 segundo
-				if (empty($this->retorno))
-					usleep(100000);
-			}
+			
+			if (strpos($linha, chr(3)) !== false)
+				return true;
 			
 			$dispendido = microtime(true) - $inicio;
-			
-			//se leu nada 5 vezes e tem algum retorno
-			if ((!empty($this->retorno)) && ($leiturasVazias > 5))
+			if ($dispendido > $timeout)
 			{
+				$this->retorno = "ERRO: Monitor não responde (Timeout)!\n" . $this->retorno;
 				return false;
 			}
 			
-		} while ($dispendido < $timeout);
+			if ($leiturasVazias>100)
+			{
+				$this->retorno = "ERRO: Monitor não responde (100 Leituras Vazias)!\n" . $this->retorno;
+				return false;
+			}
+			
+		} while (true);
 
 		return false;
 	}
 	
 	public function envia($str)
 	{
-		
+	
 		if (!$this->conectado())
 			return false;
 
 		//quebra string por linhas
-		$arr = explode("\n", $str);
+		$arr = explode("\n", $str . chr(3));
+		$arr[] = chr(13).chr(10).chr(46).chr(13).chr(10);
 		
 		//envia uma linha por vez pra nao estourar buffer do socket
 		foreach ($arr as $str)
@@ -165,7 +159,7 @@ class MGSocket
 			//forca envio da linha
 			fflush($this->_fp);
 		}
-		
+
 		return true;
 		
 	}

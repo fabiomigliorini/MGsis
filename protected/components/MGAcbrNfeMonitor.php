@@ -58,7 +58,7 @@ class MGAcbrNfeMonitor extends MGSocket
 	
 	public function montaUrlPdf()
 	{
-		$this->urlpdf = "{$this->Filial->acbrnfemonitorcaminhorede}/PDF/{$this->NotaFiscal->nfechave}.pdf";
+		$this->urlpdf = "{$this->Filial->acbrnfemonitorcaminhorede}/PDF/{$this->NotaFiscal->nfechave}-nfe.pdf";
 	}
 	
 	public function conectar()
@@ -107,10 +107,10 @@ class MGAcbrNfeMonitor extends MGSocket
 		}
 		
 		//processa 1a linha - e joga como Mensagem
-		$ret = split("\n", $ret);
-		$mensagem = split(":", $ret[0], 2);
+		$ret = explode("\n", $ret);
+		$mensagem = explode(":", $ret[0], 2);
 		for ($i=0; $i<sizeof($mensagem); $i++)
-			$mensagem[$i] = trim($mensagem[$i]);
+			$mensagem[$i] = htmlentities(trim($mensagem[$i]), ENT_QUOTES, 'ISO-8859-1');
 		$this->retornoMonitor = array("Mensagem" => $mensagem);
 		
 		//processa arquivo ini se existir anexado
@@ -192,8 +192,12 @@ class MGAcbrNfeMonitor extends MGSocket
 		return $conteudo;
 	}	
 	
-	
-	public function recebe($timeout = 200)
+	/**
+	 * Recebe os dados do monitor
+	 * @param int $timeout Timeout em segundos
+	 * @return boolean
+	 */
+	public function recebe($timeout = 10)
 	{
 		if (!$ret = parent::recebe($timeout))
 			return false;
@@ -293,7 +297,7 @@ class MGAcbrNfeMonitor extends MGSocket
 				"CNPJ" => ($this->NotaFiscal->Pessoa->fisica)?
 					Yii::app()->format->formataPorMascara($this->NotaFiscal->Pessoa->cnpj, "###########", true):
 					Yii::app()->format->formataPorMascara($this->NotaFiscal->Pessoa->cnpj, "##############", true),
-				"IE" => empty($this->NotaFiscal->Pessoa->ie)?"ISENTO":$this->NotaFiscal->Pessoa->ie,
+				"IE" => empty($this->NotaFiscal->Pessoa->ie)?'':$this->NotaFiscal->Pessoa->ie,
 				"NomeRazao" => substr($this->NotaFiscal->Pessoa->pessoa, 0, 60),
 				"Fone" => Yii::app()->format->numeroLimpo($this->NotaFiscal->Pessoa->telefone1),
 				"CEP" => $this->NotaFiscal->Pessoa->cep,
@@ -479,7 +483,15 @@ class MGAcbrNfeMonitor extends MGSocket
 			$i++;
 			
 		}
+
+		if ($this->NotaFiscal->codpessoa == Pessoa::CONSUMIDOR)
+			unset($arr["Destinatario"]);
 		
+		if (empty($arr["Destinatario"]["IE"]))
+			$arr["Destinatario"]["indIedest"] = 9;
+		else
+			$arr["Destinatario"]["indIedest"] = 1;
+			
 		if ($this->NotaFiscal->modelo == NotaFiscal::MODELO_NFCE)
 		{
 			if (empty($this->NotaFiscal->Pessoa->cnpj))
@@ -500,14 +512,6 @@ class MGAcbrNfeMonitor extends MGSocket
 			
 			if (!empty($this->NotaFiscal->Pessoa->ie))
 				return $this->gerarErro ("Nao permitida emissao de NFC-e para Pessoas que tenham IE!");
-			
-			if ($this->NotaFiscal->codpessoa == Pessoa::CONSUMIDOR)
-				unset($arr["Destinatario"]);
-			else
-			{
-				$arr["Destinatario"]["indIedest"] = 9;
-				unset($arr["Destinatario"]["IE"]);
-			}
 			
 			
 			//$arr["Transportador"]["FretePorConta"] = 9;
@@ -590,14 +594,14 @@ class MGAcbrNfeMonitor extends MGSocket
 		
 		//
 		// Processa Chave da NFE
-		// C:\ACBrNFeMonitor\Arquivos\EnvioResp\51110404576775000160550010000000011000000016-nfe.xml
+		// C:\ACBrNFeMonitor\Logs\51110404576775000160550010000000011000000016-nfe.xml
 		$chave = $this->retornoMonitor["Mensagem"][1];
 		$chave = str_replace($this->Filial->acbrnfemonitorcaminho, "", $chave);
-		$chave = str_replace("\\Arquivos\\EnvioResp\\", "", $chave);
+		$chave = str_replace("\\Logs\\", "", $chave);
 		$chave = str_replace("-nfe.xml", "", $chave);
 
 		//grava chave da NFE
-		$this->NotaFiscal->nfechave = $chave;
+		$this->NotaFiscal->nfechave = MGFormatter::numeroLimpo($chave);
 		$this->NotaFiscal->update();
 		
 		$this->montaUrlPdf();
@@ -639,9 +643,10 @@ class MGAcbrNfeMonitor extends MGSocket
 
 		//Monta Comando
 		$cmd = "NFE.EnviarNFe(\"";
-		$cmd .= $this->Filial->acbrnfemonitorcaminho . "\\Arquivos\\EnvioResp\\" . $this->NotaFiscal->nfechave . "-nfe.xml";
-		$cmd .= "\", 1, 1, 1, 1, 1)\n.\n";
-			
+		$cmd .= $this->Filial->acbrnfemonitorcaminho . "\\Logs\\" . $this->NotaFiscal->nfechave . "-nfe.xml";
+		$cmd .= "\", {$this->NotaFiscal->numero}, 0, 0, 0, 1)\n.\n";
+		//NFe.EnviarNFe(cArqXML,nLote,[nAssina],[nImprime],[NomeImpressora],[bSincrono])
+
 		//Envia Comando
 		if (!$this->enviaComando($cmd))
 			return false;
@@ -661,11 +666,9 @@ class MGAcbrNfeMonitor extends MGSocket
 		if (!$this->NotaFiscal->emitida)
 			return $this->gerarErro("Nota Fiscal nao e de nossa emissao!");
 
-		$mes = '20' . substr($this->NotaFiscal->nfechave, 2, 4);
-		
 		//Monta Comando
 		$cmd  = "NFE.ConsultarNFE(\"";
-		$cmd .= $this->Filial->acbrnfemonitorcaminho . "\\Arquivos\\NFe\\$mes\\" . $this->NotaFiscal->nfechave . "-nfe.xml";
+		$cmd .= $this->NotaFiscal->nfechave;
 		$cmd .= "\")\n.\n";
 		
 		//Envia Comando
@@ -677,7 +680,7 @@ class MGAcbrNfeMonitor extends MGSocket
 			
 			//Monta Comando
 			$cmd  = "NFE.ConsultarNFE(\"";
-			$cmd .= $this->Filial->acbrnfemonitorcaminho . "\\Arquivos\\EnvioResp\\" . $this->NotaFiscal->nfechave . "-nfe.xml";
+			$cmd .= $this->Filial->acbrnfemonitorcaminho . "\\Logs\\" . $this->NotaFiscal->nfechave . "-nfe.xml";
 			$cmd .= "\")\n.\n";
 			
 			//Envia Comando
@@ -699,11 +702,12 @@ class MGAcbrNfeMonitor extends MGSocket
 		if (!$this->NotaFiscal->emitida)
 			return $this->gerarErro("Nota Fiscal nao e de nossa emissao!");
 		
-		$mes = '20' . substr($this->NotaFiscal->nfechave, 2, 4);
+		$chave = $this->NotaFiscal->nfechave;
+		$mes = '20' . substr($chave, 2, 4);
 		
 		//Monta Comando
 		$cmd = "NFE.ImprimirDANFEPDF(\"";
-		$cmd .= $this->Filial->acbrnfemonitorcaminho . "\\Arquivos\\NFe\\$mes\\" . $this->NotaFiscal->nfechave . "-nfe.xml";
+		$cmd .= "{$this->Filial->acbrnfemonitorcaminho}\\Arquivos\\NFe\\$mes\\$chave-nfe.xml";
 		$cmd .= "\")\n.\n";
 		
 		
@@ -740,11 +744,12 @@ class MGAcbrNfeMonitor extends MGSocket
 		if (!$this->NotaFiscal->emitida)
 			return $this->gerarErro("Nota Fiscal nao e de nossa emissao!");
 		
-		$mes = '20' . substr($this->NotaFiscal->nfechave, 2, 4);
+		$chave = $this->NotaFiscal->nfechave;
+		$mes = '20' . substr($chave, 2, 4);
 		
 		//Monta Comando
 		$cmd = "NFE.ImprimirDANFE(\"";
-		$cmd .= $this->Filial->acbrnfemonitorcaminho . "\\Arquivos\\NFe\\$mes\\" . $this->NotaFiscal->nfechave . "-nfe.xml";
+		$cmd .= "{$this->Filial->acbrnfemonitorcaminho}\\Arquivos\\NFe\\$mes\\$chave-nfe.xml";
 		$cmd .= "\", \"". Yii::app()->user->getState('impressoraTermica') ."\")\n.\n";
 		
 		//Envia Comando
@@ -937,17 +942,18 @@ class MGAcbrNfeMonitor extends MGSocket
 			if (empty($email))
 				next;
 
-			$mes = '20' . substr($this->NotaFiscal->nfechave, 2, 4);
+			$chave = $this->NotaFiscal->nfechave;
+			$mes = '20' . substr($chave, 2, 4);
 
 			//Monta Comando
 			$cmd = "NFE.EnviarEmail(\"$email\", \"";
-			$cmd .= $this->Filial->acbrnfemonitorcaminho . "\\Arquivos\\NFe\\$mes\\" . $this->NotaFiscal->nfechave . "-nfe.xml";
+			$cmd .= "{$this->Filial->acbrnfemonitorcaminho}\\Arquivos\\NFe\\$mes\\$chave-nfe.xml";
 			$cmd .= "\", \"1\")\n.\n";
 
 			//Envia Comando
 			if (!$this->enviaComando($cmd))
 				return false;
-
+			
 			//Se retornou diferente de OK aborta
 			if ($this->retornoMonitor["Mensagem"][0] != "OK")
 				return false;
