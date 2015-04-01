@@ -588,7 +588,10 @@ class MGAcbrNfeMonitor extends MGSocket
 		//Se retornou diferente de OK aborta
 		if ($this->retornoMonitor["Mensagem"][0] != "OK")
 		{
-			$this->erroMonitor = $this->retornoMonitor["Mensagem"][1];
+			if (isset($this->retornoMonitor["Mensagem"][1]))
+				$this->erroMonitor = $this->retornoMonitor["Mensagem"][1];
+			else
+				$this->erroMonitor = $this->retorno;
 			return false;
 		}
 		
