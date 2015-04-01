@@ -386,50 +386,78 @@ class NotaFiscalController extends Controller
 
 			$res = false;
 
-			if ($acbr->criarNFe()) 
-				$res = $acbr->enviarNfe();
-
+			//tenta consultar se ja tiver chave
+			$retornoConsulta = '';
+			$resConsulta = false;
+			if (!empty($model->nfechave))
+			{
+				$resConsulta = $acbr->consultarNfe();
+				$retornoConsulta = $acbr->retorno;
+				//recarrega modelo
+				$model = $this->loadModel($model->codnotafiscal);
+				if ($model->codstatus == NotaFiscal::CODSTATUS_AUTORIZADA)
+					$resConsulta = true;
+				else 
+					$resConsulta = false;
+			}
+			
+			//se na consulta nao retornou autorizada re-envia
+			$retornoEnvio = '';
+			$resEnvio = false;
+			if ($model->codstatus != NotaFiscal::CODSTATUS_AUTORIZADA)
+			{
+				if ($acbr->criarNFe()) 
+					$resEnvio = $acbr->enviarNfe();
+				$retornoEnvio = $acbr->retorno;
+				//recarrega modelo
+				$model = $this->loadModel($model->codnotafiscal);
+				if ($model->codstatus == NotaFiscal::CODSTATUS_AUTORIZADA)
+					$resEnvio = true;
+				else 
+					$resEnvio = false;
+			}
+			
+			//se esta autorizada
 			$email = $model->Pessoa->emailnfe;
 			$resEmail = false;
-
-			$retornoEnvio = null;
-			
-			if (!$res)
-			{
-				$retornoEnvio = $acbr->retorno;
-				$res = $acbr->consultarNfe();
-			}
-
-			$model = $this->loadModel($model->codnotafiscal);
-			
+			$retornoEmail = '';
 			if ($model->codstatus == NotaFiscal::CODSTATUS_AUTORIZADA)
 			{
+				//gera o PDF da DANFE
 				$resPdf = $acbr->imprimirDanfePdf();
 
+				//ENVIA o EMAIL
 				if (empty($email))
 					$email = $model->Pessoa->email;
 				if (empty($email))
 					$email = $model->Pessoa->emailcobranca;
-
 				if (!empty($email))
 					$resEmail = $acbr->enviarEmail($email);
+				$retornoEmail = $acbr->retorno;
 				
-				$impressora = $model->UsuarioCriacao->impressoratermica;
-				$this->imprimirDanfePdfTermica($model, $impressora);
+				//Se for NFCe Imprime na termica
+				if ($model->modelo = NotaFiscal::MODELO_NFCE)
+				{
+					$impressora = $model->UsuarioCriacao->impressoratermica;
+					$this->imprimirDanfePdfTermica($model, $impressora);
+				}
 			}
 			
 			$arrRet = array(
 				'id' => $model->codnotafiscal,
 				'status' => $model->codstatus . ' - ' . $model->status,
-				'resultado' => $res,
-				'email' => $email,
-				'resultadoEmail' => $resEmail,
 				'modelo' => $model->modelo,
-				'retornoMonitor' => (isset($acbr->retornoMonitor["Mensagem"])?$acbr->retornoMonitor["Mensagem"]:null),
-				'erroMonitor' => htmlentities($acbr->erroMonitor, ENT_QUOTES, 'ISO-8859-1'),
-				'retorno' => htmlentities($acbr->retorno, ENT_QUOTES, 'ISO-8859-1'),
-				'retornoEnvio' => $retornoEnvio,
-				'urlpdf' => $acbr->urlpdf,
+				
+				'ResConsulta' => $resConsulta,
+				'RetornoConsulta' => $retornoConsulta,
+				
+				'ResEnvio' => $resEnvio,
+				'RetornoEnvio' => $retornoEnvio,
+				
+				'Email' => $email,
+				'ResEmail' => $resEmail,
+				'RetornoEmail' => $retornoEmail,
+				
 			);
 			
 			print_r($arrRet);
