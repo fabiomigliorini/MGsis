@@ -129,11 +129,11 @@ class MGSocket
 				return false;
 			}
 			
-			if ($leiturasVazias>300)
-			{
-				$this->retorno = "ERRO: Monitor não responde (300 Leituras Vazias)!\n" . $this->retorno;
-				return false;
-			}
+			//if ($leiturasVazias>300)
+			//{
+			//	$this->retorno = "ERRO: Monitor não responde (300 Leituras Vazias)!\n" . $this->retorno;
+			//	return false;
+			//}
 			
 		} while (true);
 

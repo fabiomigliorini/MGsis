@@ -210,7 +210,7 @@ class MGAcbrNfeMonitor extends MGSocket
 	 */
 	public function statusServico()
 	{
-		if (!$this->enviaComando("NFE.StatusServico\n.\n", 10))
+		if (!$this->enviaComando("NFE.StatusServico\n.\n", 20))
 			return false;
 		
 		if ($this->retornoMonitor["Mensagem"][0] != "OK")
@@ -228,7 +228,7 @@ class MGAcbrNfeMonitor extends MGSocket
 	 */
 	public function ativo()
 	{
-		if (!$this->enviaComando("NFE.Ativo\n.\n", 1))
+		if (!$this->enviaComando("NFE.Ativo\n.\n", 2))
 			return false;
 		
 		if ($this->retornoMonitor["Mensagem"][0] != "OK")
@@ -583,7 +583,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		$cmd .= "\")\n.\n";
 
 		//Envia Comando
-		if (!$this->enviaComando($cmd, 3))
+		if (!$this->enviaComando($cmd, 5))
 			return false;
 		
 		//Se retornou diferente de OK aborta
@@ -652,7 +652,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		//NFe.EnviarNFe(cArqXML,nLote,[nAssina],[nImprime],[NomeImpressora],[bSincrono])
 
 		//Envia Comando
-		if (!$this->enviaComando($cmd, 20))
+		if (!$this->enviaComando($cmd, 30))
 			return false;
 		
 		//Se retornou diferente de OK aborta
@@ -679,7 +679,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		$cmd .= "\")\n.\n";
 		
 		//Envia Comando
-		if (!$this->enviaComando($cmd, 10))
+		if (!$this->enviaComando($cmd, 30))
 			return false;
 		
 		if ($this->retornoMonitor["Mensagem"][0] == "ERRO")
@@ -691,7 +691,7 @@ class MGAcbrNfeMonitor extends MGSocket
 			$cmd .= "\")\n.\n";
 			
 			//Envia Comando
-			if (!$this->enviaComando($cmd, 10))
+			if (!$this->enviaComando($cmd, 30))
 				return false;
 		}
 		
@@ -719,7 +719,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		
 		
 		//Envia Comando
-		if (!$this->enviaComando($cmd, 3))
+		if (!$this->enviaComando($cmd, 5))
 			return false;
 		
 		//Se retornou diferente de OK aborta
@@ -760,7 +760,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		$cmd .= "\", \"". Yii::app()->user->getState('impressoraTermica') ."\")\n.\n";
 		
 		//Envia Comando
-		if (!$this->enviaComando($cmd, 3))
+		if (!$this->enviaComando($cmd, 5))
 			return false;
 		
 		//Se retornou diferente de OK aborta
@@ -785,7 +785,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		$cmd .= "\")\n.\n";
 		
 		//Envia Comando
-		if (!$this->enviaComando($cmd, 20))
+		if (!$this->enviaComando($cmd, 30))
 			return false;
 		
 		//Se retornou diferente de OK aborta
@@ -813,7 +813,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		$cmd .= ", \"" . $this->NotaFiscal->numero . "\")\n.\n";
 		
 		//Envia Comando
-		if (!$this->enviaComando($cmd, 20))
+		if (!$this->enviaComando($cmd, 30))
 			return false;
 		
 		if (trim($this->retorno) == 'ERRO: Rejeicao: Acesso BD NFE-Inutilizacao (Chave: Ano, CNPJ Emit, Modelo, Serie, nNFIni, nNFFin): ja existe um Pedido de inutilizacao igual (NT 2011/004)'
@@ -878,7 +878,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		$cmd .= "\")\n.\n";
 		
 		//Envia Comando
-		if (!$this->enviaComando($cmd, 20))
+		if (!$this->enviaComando($cmd, 30))
 			return false;
 		
 		//Se retornou diferente de OK aborta
@@ -958,7 +958,7 @@ class MGAcbrNfeMonitor extends MGSocket
 			$cmd .= "\", \"1\")\n.\n";
 
 			//Envia Comando
-			if (!$this->enviaComando($cmd, 20))
+			if (!$this->enviaComando($cmd, 30))
 				return false;
 			
 			//Se retornou diferente de OK aborta
@@ -981,7 +981,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		$cnpj = str_pad($this->Filial->Pessoa->cnpj, 14, 0, STR_PAD_LEFT);
 		$cmd = "NFE.ConsultaNFeDest(\"{$cnpj}\", 0, 0, {$nsu})\n.\n";
 		
-		$ret = $this->enviaComando($cmd, 20);
+		$ret = $this->enviaComando($cmd, 30);
 		
 		$this->processaRetorno();
 		
@@ -998,7 +998,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		$cnpj = str_pad($this->Filial->Pessoa->cnpj, 14, 0, STR_PAD_LEFT);
 		$cmd = "NFE.DownloadNFe(\"{$cnpj}\", \"{$this->NfeTerceiro->nfechave}\")\n.\n";
 		
-		if (!$this->enviaComando($cmd, 20))
+		if (!$this->enviaComando($cmd, 30))
 			return false;
 		
 		$this->processaRetorno();
@@ -1087,7 +1087,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		$cmd .= "versaoEvento=1.00\n";
 		$cmd .= "\")\n.\n";
 		
-		if (!$this->enviaComando($cmd, 20))
+		if (!$this->enviaComando($cmd, 30))
 			return false;
 		
 		$this->processaRetorno();
