@@ -105,8 +105,8 @@ class MGSocket
 		do 
 		{
 			
-			// espera 0.5 segundo
-			usleep(500000);
+			// espera 0.1 segundo
+			usleep(100000);
 			
 			//le o buffer
 			$linha = fgets($this->_fp);
@@ -129,9 +129,9 @@ class MGSocket
 				return false;
 			}
 			
-			if ($leiturasVazias>100)
+			if ($leiturasVazias>300)
 			{
-				$this->retorno = "ERRO: Monitor não responde (100 Leituras Vazias)!\n" . $this->retorno;
+				$this->retorno = "ERRO: Monitor não responde (300 Leituras Vazias)!\n" . $this->retorno;
 				return false;
 			}
 			
