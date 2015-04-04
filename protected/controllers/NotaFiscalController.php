@@ -436,7 +436,7 @@ class NotaFiscalController extends Controller
 				$retornoEmail = $acbr->retorno;
 				
 				//Se for NFCe Imprime na termica
-				if ($model->modelo = NotaFiscal::MODELO_NFCE)
+				if ($model->modelo == NotaFiscal::MODELO_NFCE)
 				{
 					$impressora = $model->UsuarioCriacao->impressoratermica;
 					$this->imprimirDanfePdfTermica($model, $impressora);
