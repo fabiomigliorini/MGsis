@@ -10,12 +10,13 @@
  * Description of MGSocket
  *
  * @author Fabio Migliorini
- * @property string $servidor IP do Servidor
- * @property string $porta    Porta do Servidor
- * @property string $errno    Numero do Erro de conexão
- * @property string $errstr   Descrição do Erro de conexão
- * @property string $retorno  String de retorno da leitura
- * @property string $_fp      Ponteiro da conexão
+ * @property string  $servidor  IP do Servidor
+ * @property string  $porta     Porta do Servidor
+ * @property string  $errno     Numero do Erro de conexão
+ * @property string  $errstr    Descrição do Erro de conexão
+ * @property integer $timeout   Tempo maximo de espera para retorno (segundos)
+ * @property string  $retorno   String de retorno da leitura
+ * @property string  $_fp       Ponteiro da conexão
  */
 class MGSocket 
 {
@@ -24,6 +25,8 @@ class MGSocket
 	
 	public $errno;
 	public $errstr;
+	
+	public $timeout = 10;
 	
 	public $retorno;
 	
@@ -60,7 +63,7 @@ class MGSocket
 		if ($this->_fp = @fsockopen("tcp://$this->servidor", $this->porta, $this->errno, $this->errstr, 1))
 		{
 			stream_set_blocking($this->_fp, false);
-			$this->recebe();
+			$this->recebe(1);
 			return true;
 		}
 		else
@@ -82,11 +85,12 @@ class MGSocket
 	
 	/**
 	 * Recebe os dados do socket
-	 * @param int $timeout Timeout em segundos
 	 * @return boolean
 	 */
-	public function recebe($timeout = 10)
+	public function recebe($timeout = null)
 	{
+		if (empty($timeout))
+			$timeout = $this->timeout;
 		
 		//retorna se nao estiver conectado
 		if (!$this->conectado())
