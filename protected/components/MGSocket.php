@@ -105,8 +105,8 @@ class MGSocket
 		do 
 		{
 			
-			// espera 0.1 segundo
-			usleep(100000);
+			// espera 0.5 segundo
+			usleep(500000);
 			
 			//le o buffer
 			$linha = fgets($this->_fp);
