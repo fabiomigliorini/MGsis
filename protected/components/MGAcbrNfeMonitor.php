@@ -583,7 +583,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		$cmd .= "\")\n.\n";
 
 		//Envia Comando
-		if (!$this->enviaComando($cmd, 5))
+		if (!$this->enviaComando($cmd, 10))
 			return false;
 		
 		//Se retornou diferente de OK aborta
@@ -652,7 +652,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		//NFe.EnviarNFe(cArqXML,nLote,[nAssina],[nImprime],[NomeImpressora],[bSincrono])
 
 		//Envia Comando
-		if (!$this->enviaComando($cmd, 60))
+		if (!$this->enviaComando($cmd, 70))
 			return false;
 		
 		//Se retornou diferente de OK aborta
