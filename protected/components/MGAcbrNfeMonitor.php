@@ -679,7 +679,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		$cmd .= "\")\n.\n";
 		
 		//Envia Comando
-		if (!$this->enviaComando($cmd, 30))
+		if (!$this->enviaComando($cmd, 60))
 			return false;
 		
 		if ($this->retornoMonitor["Mensagem"][0] == "ERRO")
