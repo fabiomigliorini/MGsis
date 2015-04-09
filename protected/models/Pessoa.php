@@ -157,7 +157,7 @@ class Pessoa extends MGActiveRecord
 		
 		//se alterou algo
 		if ($dado_banco != $dado_tela)
-			$this->addError($attribute, 'Impossível alterar Número de documento de um cadastro já movimentado!');
+			$this->addError($attribute, 'É proibido alterar Número dos Documentos em cadastro já movimentado!');
 		
 	}
 	
