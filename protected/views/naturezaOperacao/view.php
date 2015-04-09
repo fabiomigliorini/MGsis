@@ -77,6 +77,7 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 			'value'=>(isset($model->ContaContabil))?CHtml::link(CHtml::encode($model->ContaContabil->contacontabil),array('contaContabil/view','id'=>$model->codcontacontabil)):null,
 			'type'=>'raw',
 			),
+		'finnfe',
 		),
 	)); 
 

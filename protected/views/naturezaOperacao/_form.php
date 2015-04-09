@@ -16,6 +16,7 @@
 		echo $form->textAreaRow($model,'observacoesnf',array('class'=>'input-xlarge', 'rows'=>'5','maxlength'=>500));
 		echo $form->textAreaRow($model,'mensagemprocom',array('class'=>'input-xlarge', 'rows'=>'5','maxlength'=>300));
 		echo $form->select2Row($model, 'codnaturezaoperacaodevolucao', NaturezaOperacao::getListaCombo(), array('class' => 'input-xxlarge'));
+		echo $form->select2Row($model, 'finnfe', NaturezaOperacao::getFinNfeListaCombo(), array('class' => 'input-large'));
 	?>
 </fieldset>
 <div class="form-actions">

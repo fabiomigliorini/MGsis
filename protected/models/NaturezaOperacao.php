@@ -7,6 +7,7 @@
  * @property string $codnaturezaoperacao
  * @property string $naturezaoperacao
  * @property string $codoperacao
+ * @property string $finnfe
  * @property boolean $emitida
  * @property string $observacoesnf
  * @property string $alteracao
@@ -33,6 +34,11 @@ class NaturezaOperacao extends MGActiveRecord
 {
 	const VENDA = 1;
 	
+	const FINNFE_NORMAL = 1;
+	const FINNFE_COMPLEMENTAR = 2;
+	const FINNFE_AJUSTE = 3;
+	const FINNFE_DEVOLUCAO_RETORNO = 4;
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -49,7 +55,7 @@ class NaturezaOperacao extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('naturezaoperacao, codtipotitulo, codcontacontabil', 'required'),
+			array('naturezaoperacao, codtipotitulo, codcontacontabil, finnfe', 'required'),
 			array('naturezaoperacao', 'length', 'max'=>50),
 			array('observacoesnf', 'length', 'max'=>500),
 			array('mensagemprocom', 'length', 'max'=>300),
@@ -99,6 +105,7 @@ class NaturezaOperacao extends MGActiveRecord
 			'codnaturezaoperacaodevolucao' => 'Natureza de Devolução',
 			'codtipotitulo' => 'Tipo Titulo',
 			'codcontacontabil' => 'Conta Contábil',
+			'finnfe' => 'Finalidade NFe',
 		);
 	}
 
@@ -138,6 +145,7 @@ class NaturezaOperacao extends MGActiveRecord
 		$criteria->compare('codnaturezaoperacaodevolucao',$this->codnaturezaoperacaodevolucao,false);
 		$criteria->compare('codtipotitulo',$this->codtipotitulo,false);
 		$criteria->compare('codcontacontabil',$this->codcontacontabil,false);
+		$criteria->compare('finnfe',$this->finnfe,false);
 		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -172,5 +180,15 @@ class NaturezaOperacao extends MGActiveRecord
 		$lista = self::model()->combo()->findAll();
 		return CHtml::listData($lista, 'codnaturezaoperacao', 'naturezaoperacao');
 	}	
-	
+
+	function getFinNfeListaCombo()
+	{
+		return array(
+			self::FINNFE_NORMAL => self::FINNFE_NORMAL . " - Normal",
+			self::FINNFE_COMPLEMENTAR => self::FINNFE_COMPLEMENTAR . " - Complementar",
+			self::FINNFE_AJUSTE => self::FINNFE_AJUSTE . " - Ajuste",
+			self::FINNFE_DEVOLUCAO_RETORNO => self::FINNFE_DEVOLUCAO_RETORNO . " - Devolução / Retorno",
+		);
+	}
+
 }

@@ -40,6 +40,7 @@ $(document).ready(function(){
 <div class="well well-small">
 	<?php echo $form->textField($model, 'codnaturezaoperacao', array('placeholder' => '#', 'class'=>'input-mini')); ?>
 	<?php echo $form->textField($model, 'naturezaoperacao', array('placeholder' => 'Descrição', 'class'=>'input-large')); ?>
+	<?php echo $form->select2($model, 'finnfe', NaturezaOperacao::getFinNfeListaCombo(), array('placeholder' => 'Finalidade', 'class' => 'input-large')); ?>
 	<?php
 	$this->widget('bootstrap.widgets.TbButton'
 		, array(

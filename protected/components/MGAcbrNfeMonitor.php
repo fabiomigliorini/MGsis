@@ -273,6 +273,7 @@ class MGAcbrNfeMonitor extends MGSocket
 				"Serie" => $this->NotaFiscal->serie,
 				"Numero" => $this->NotaFiscal->numero,
 				"Tipo" => ($this->NotaFiscal->codoperacao == 1)?2:1,
+				"finNfe" => $this->NotaFiscal->NaturezaOperacao->finnfe,
 				"FormaPag" => (sizeof($this->NotaFiscal->NotaFiscalDuplicatass)>0)?1:0,
 				"idDest" => ($this->NotaFiscal->Pessoa->Cidade->codestado == $this->NotaFiscal->Filial->Pessoa->Cidade->codestado)?1:2
 			),
