@@ -69,6 +69,7 @@
  * @property CupomFiscal[] $CupomFiscals
  * @property CobrancaHistorico[] $CobrancaHistoricos
  * @property Negocio[] $Negocios
+ * @property NotaFiscal[] $NotaFiscals
  * @property Negocio[] $NegocioVendedors
  */
 class Pessoa extends MGActiveRecord
@@ -101,6 +102,7 @@ class Pessoa extends MGActiveRecord
 		return array(
 			
 			array('cnpj', 'ext.validators.CnpjCpfValidator'),
+			array('cnpj, ie', 'validaAlteracao'),
 			array('ie', 'ext.validators.InscricaoEstadualValidator'),
 			array('ie', 'validaCnpjDuplicado'),
 			array('codgrupocliente', 'validaGrupoCliente'),
@@ -128,6 +130,38 @@ class Pessoa extends MGActiveRecord
 		);
 	}
 
+	//verifica se pode alterar Cnpj e IE
+	public function validaAlteracao($attribute,$params)
+	{
+		//se é cadastro novo
+		if ($this->isNewRecord)
+			return true;
+		
+		//busca dados do banco
+		$banco = Pessoa::model()->findByPk($this->codpessoa);
+		$dado_banco = (int)MGFormatter::NumeroLimpo($banco->$attribute);
+		$dado_tela  = (int)MGFormatter::NumeroLimpo($this->$attribute);
+		
+		//se for o cnpj e o cadastro estava vazio
+		if ($dado_banco == 0 && $attribute == 'cnpj')
+			return true;
+		
+		//se não teve movimento ainda
+		$movimentos = sizeof($this->NotaFiscals);
+		var_dump($movimentos);
+		if ($movimentos == 0)
+			$movimentos = sizeof($this->Negocios);
+		if ($movimentos == 0)
+			$movimentos = sizeof($this->Titulos);
+		if ($movimentos == 0)
+			return true;
+		
+		//se alterou algo
+		if ($dado_banco != $dado_tela)
+			$this->addError($attribute, 'Impossível alterar Número de documento de um cadastro já movimentado!');
+		
+	}
+	
 	//retorna numero limpo
 	//necessario para o filtro de ie/cep/cobranca
 	public function numeroLimpo($str)
@@ -226,6 +260,7 @@ class Pessoa extends MGActiveRecord
 			'CupomFiscals' => array(self::HAS_MANY, 'Cupomfiscal', 'codpessoa'),
 			'CobrancaHistoricos' => array(self::HAS_MANY, 'CobrancaHistorico', 'codpessoa'),
 			'Negocios' => array(self::HAS_MANY, 'Negocio', 'codpessoa'),
+			'NotaFiscals' => array(self::HAS_MANY, 'NotaFiscal', 'codpessoa'),
 			'NegociosVendedors' => array(self::HAS_MANY, 'Negocio', 'codpessoavendedor'),
 			'GrupoCliente' => array(self::BELONGS_TO, 'GrupoCliente', 'codgrupocliente'),
             'inclusaoSpc'=>array(
