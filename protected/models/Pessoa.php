@@ -148,7 +148,6 @@ class Pessoa extends MGActiveRecord
 		
 		//se não teve movimento ainda
 		$movimentos = sizeof($this->NotaFiscals);
-		var_dump($movimentos);
 		if ($movimentos == 0)
 			$movimentos = sizeof($this->Negocios);
 		if ($movimentos == 0)
