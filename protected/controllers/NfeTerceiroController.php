@@ -319,6 +319,7 @@ class NfeTerceiroController extends Controller
 				else
 				{
 					//echo "<h1>Nao achou ult nsu</h1>";
+					break;
 				}
 				
 				
