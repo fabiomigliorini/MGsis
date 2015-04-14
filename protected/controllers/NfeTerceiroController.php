@@ -275,7 +275,7 @@ class NfeTerceiroController extends Controller
 					$nfe->cnpj = $arr["CNPJ"];
 
 					//[xNome] => Chocolates Garoto S.A.
-					$nfe->emitente = $arr["xNome"];
+					$nfe->emitente = MGFormatter::removeAcentos($arr["xNome"]);
 
 					//[IE] => 134342763
 					$nfe->ie = $arr["IE"];
