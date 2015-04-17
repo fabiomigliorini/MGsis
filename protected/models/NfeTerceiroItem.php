@@ -246,7 +246,7 @@ class NfeTerceiroItem extends MGActiveRecord
 
 			$this->vsugestaovenda = round($this->vcustounitario * (1+($this->margem/100)), 2);
 			
-			if ($this->vsugestaovenda >= 0.025)
+			if ($this->vsugestaovenda >= 0.50)
 				$this->vsugestaovenda = round($this->vsugestaovenda / 0.05, 0) * 0.05;
 			
 		}
