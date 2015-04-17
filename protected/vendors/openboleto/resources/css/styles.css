@@ -180,3 +180,11 @@ body{
 .barcode .large.white {
     width: 3px;
 }
+
+hr {
+	border-style: hidden;
+}
+
+hr:not(:last-child) {
+	page-break-after: always;
+}
