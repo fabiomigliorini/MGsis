@@ -244,11 +244,10 @@ class NfeTerceiroItem extends MGActiveRecord
 			
 			$this->vcustounitario = $this->vcusto / $this->quantidade;
 
-			$this->vsugestaovenda = round($this->vcustounitario * (1+($this->margem/100)), 2);
+			$this->vsugestaovenda = round($this->vcustounitario * (1+($this->margem/100)), 6);
 			
-			if ($this->vsugestaovenda >= 0.50)
-				$this->vsugestaovenda = round($this->vsugestaovenda / 0.05, 0) * 0.05;
-			
+			/*if ($this->vsugestaovenda >= 0.50)
+				$this->vsugestaovenda = round($this->vsugestaovenda / 0.05, 0) * 0.05;*/
 		}
 		
 		return parent::afterFind();
