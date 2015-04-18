@@ -37,6 +37,7 @@ class Marca extends MGActiveRecord
 		// will receive user inputs.
 		return array(
 			array('marca', 'required'),
+			array('marca', 'unique', 'caseSensitive' => false),
 			array('marca', 'length', 'max'=>50),
 			array('descricaosite', 'length', 'max'=>1024),
 			array('site, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
