@@ -214,6 +214,11 @@ $(document).ready(function() {
 	$('#NotaFiscal_valordesconto').change(function(e){ calculaTotal(); });
 	$('#NotaFiscal_valoroutras').change(function(e){ calculaTotal(); });
 
+	$('#NotaFiscal_nfechave').change(function(e){ 
+		$(this).val($(this).val().replace(/\s+/g, ''));
+	});
+
+
 	$('#NotaFiscal_codnaturezaoperacao').change(function(e){ atualizaObservacoes(); });
 
 	$('#NotaFiscal_emitida').change(function(e){ desabilitaCamposEmitida(); });

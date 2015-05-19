@@ -715,6 +715,32 @@ $(document).ready(function(){
 	?>
 </div>
 <br>
+<h2>
+	Notas Fiscais Referenciadas
+	<small>
+		<?php echo CHtml::link("<i class=\"icon-plus\"></i> Novo", array("notaFiscalReferenciada/create", "codnotafiscal" => $model->codnotafiscal)); ?>
+	</small>	
+</h2>
+	<?php 
+	$total = 0;
+	$ultima = 0;
+	foreach ($model->NotaFiscalReferenciadas as $nfr)
+	{
+		
+		?>
+		<div class="row-fluid">
+			<small class="span4 text-center">
+				<b><?php echo CHtml::encode(Yii::app()->format->formataChaveNfe($nfr->nfechave)); ?></b>
+				<div class="pull-right">
+					<a href="<?php echo Yii::app()->createUrl('notaFiscalReferenciada/update', array('id'=>$nfr->codnotafiscalreferenciada)); ?>"><i class="icon-pencil"></i></a>
+					<a class="delete" href="<?php echo Yii::app()->createUrl('notaFiscalReferenciada/delete', array('id'=>$nfr->codnotafiscalreferenciada)); ?>"><i class="icon-trash"></i></a>
+				</div>
+			</small>
+		</div>
+		<?php
+	}
+	?>
+<br>
 <h2>Observações</h2>
 <?php echo nl2br(CHtml::encode($model->observacoes)); ?>
 <br>

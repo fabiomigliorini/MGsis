@@ -57,6 +57,7 @@
  * @property Usuario $UsuarioCriacao
  * @property NotaFiscalCartaCorrecao[] $NotaFiscalCartaCorrecaos
  * @property NotaFiscalDuplicatas[] $NotaFiscalDuplicatass
+ * @property NotaFiscalReferenciada[] $NotaFiscalReferenciadas
  */
 class NotaFiscal extends MGActiveRecord
 {
@@ -317,7 +318,7 @@ class NotaFiscal extends MGActiveRecord
 		
 	}
 	
-	public function calculaDigitoChaveNFE($chave)
+	public Static function calculaDigitoChaveNFE($chave)
 	{
 
 		//Dim i As Integer
@@ -372,6 +373,7 @@ class NotaFiscal extends MGActiveRecord
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 			'NotaFiscalCartaCorrecaos' => array(self::HAS_MANY, 'NotaFiscalCartaCorrecao', 'codnotafiscal', 'order'=>'sequencia DESC'),
 			'NotaFiscalDuplicatass' => array(self::HAS_MANY, 'NotaFiscalDuplicatas', 'codnotafiscal', 'order'=>'vencimento ASC, valor ASC, codnotafiscalduplicatas ASC'),
+			'NotaFiscalReferenciadas' => array(self::HAS_MANY, 'NotaFiscalReferenciada', 'codnotafiscal'),
 		);
 	}
 

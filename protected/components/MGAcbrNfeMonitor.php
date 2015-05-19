@@ -314,6 +314,18 @@ class MGAcbrNfeMonitor extends MGSocket
 			
 		);
 		
+
+		$i = 1;
+		foreach($this->NotaFiscal->NotaFiscalReferenciadas as $ref)
+		{
+			$key = "NFRef" . Yii::app()->format->formataPorMascara($i, "###", true);
+			$arr[$key] = array(
+				'Tipo' => 'NFe',
+				'refNFe' => $ref->nfechave,
+			);
+			$i++;
+		}
+		
 		
 		
 		//Produtos

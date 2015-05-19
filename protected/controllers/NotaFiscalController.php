@@ -111,7 +111,7 @@ class NotaFiscalController extends Controller
 				}
 			}
 
-			//duplica produtos
+			//duplica duplicatas
 			if (!$erro && !empty($duplicar))
 			{
 				foreach ($original->NotaFiscalDuplicatass as $dupl_orig)
@@ -128,8 +128,33 @@ class NotaFiscalController extends Controller
 					if (!$dupl_novo->save())
 					{
 						$erro = true;
-						$model->addError('codnotafiscal', 'Erro ao duplicar NotaFiscalDuplicatas #' . $dupl_orig->codnotafiscalprodutobarra);
+						$model->addError('codnotafiscal', 'Erro ao duplicar NotaFiscalDuplicatas #' . $dupl_orig->codnotafiscalduplicatas);
 						$model->addErrors($dupl_novo->getErrors());
+						break;
+					}
+				}
+
+			}
+			
+			//duplica Referenciadas
+			if (!$erro && !empty($duplicar))
+			{
+				foreach ($original->NotaFiscalReferenciadas as $ref_orig)
+				{
+					$ref_novo = new NotaFiscalReferenciada;
+					$ref_novo->attributes = $ref_orig->attributes;
+					$ref_novo->codnotafiscalreferenciada = null;
+					$ref_novo->codnotafiscal = $model->codnotafiscal;
+					$ref_novo->criacao = null;
+					$ref_novo->codusuariocriacao = null;
+					$ref_novo->alteracao = null;
+					$ref_novo->codusuarioalteracao = null;
+					$ref_novo->save();
+					if (!$ref_novo->save())
+					{
+						$erro = true;
+						$model->addError('codnotafiscal', 'Erro ao duplicar NotaFiscalReferenciada #' . $ref_orig->codnotafiscalreferenciada);
+						$model->addErrors($ref_novo->getErrors());
 						break;
 					}
 				}
