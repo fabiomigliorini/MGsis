@@ -880,6 +880,7 @@ class InscricaoEstadualValidator extends CValidator
 		$remontagem = $caracteres[0].$caracteres[1].$caracteres[2].$caracteres[3].$caracteres[4].$caracteres[5].$caracteres[6].$caracteres[7];
 		$caracteresRemontagem = str_split($remontagem);
 		$i = 0;
+		$soma = 0;
 		for($j=9; $j>1; $j--){
 			$soma += $j * $caracteresRemontagem[$i]; 
 			$i++;
