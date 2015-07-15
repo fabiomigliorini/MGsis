@@ -384,6 +384,7 @@ class NotaFiscalController extends Controller
                                         and t.nfeinutilizacao is null
                                         and t.codfilial = :codfilial
                                         and t.codnotafiscal > :codnotafiscal
+                                        and t.alteracao between current_date and (current_timestamp - interval \'30 seconds\')
                                 ',
                                 'params' => 
                                         array(
@@ -400,12 +401,12 @@ class NotaFiscalController extends Controller
 		if($model===null)
 		{
 			Yii::app()->session["NotaFiscalRobo$codfilial"] = 0;
-			$reload = 10000; // 10 segundos
+			$reload = 30000; // 30 segundos
 		}
 		else
 		{
 			Yii::app()->session["NotaFiscalRobo$codfilial"] = $model->codnotafiscal;
-			$reload = 500; //0.5 segundos
+			$reload = 1000; //1.0 segundos
 			
 			$acbr = new MGAcbrNfeMonitor($model);
 
