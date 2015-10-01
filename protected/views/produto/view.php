@@ -197,7 +197,7 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 			),
 		array(
 			'name'=>'codmarca',
-			'value'=>isset($model->Marca)?$model->Marca->marca:null,
+			'value'=>isset($model->Marca)?CHtml::encode($model->Marca->marca . ' '):null,
 			),
 		'referencia',
 		array(
