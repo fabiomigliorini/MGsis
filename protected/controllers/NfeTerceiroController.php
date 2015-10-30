@@ -294,10 +294,12 @@ class NfeTerceiroController extends Controller
 					$nfe->nfedataautorizacao = $arr["dhRecbto"];
 
 					//[cSitNFe] => 1
-					$nfe->indsituacao = $arr["cSitNFe"];
+					if (isset($arr["cSitNFe"]))
+						$nfe->indsituacao = $arr["cSitNFe"];
 
 					//[cSitConf] => 0		
-					$nfe->indmanifestacao = $arr["cSitConf"];
+					if (isset($arr["cSitConf"]))
+						$nfe->indmanifestacao = $arr["cSitConf"];
 					
 					$importadas[] = $arr["chNFe"];
 
