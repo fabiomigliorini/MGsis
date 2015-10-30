@@ -291,7 +291,8 @@ class NfeTerceiroController extends Controller
 
 					//[digVal] => WAFS3wPj/69U7sJI412ygTDk7+I=
 					//[dhRecbto] => 24/06/2014 07:25:09
-					$nfe->nfedataautorizacao = $arr["dhRecbto"];
+					if (isset($arr["dhRecbto"]))
+						$nfe->nfedataautorizacao = $arr["dhRecbto"];
 
 					//[cSitNFe] => 1
 					if (isset($arr["cSitNFe"]))
