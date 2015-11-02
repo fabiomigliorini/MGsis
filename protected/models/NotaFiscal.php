@@ -106,7 +106,7 @@ class NotaFiscal extends MGActiveRecord
 			array('codnaturezaoperacao, serie, emissao, saida, codfilial, codpessoa', 'required'),
 			array('serie, numero, volumes, frete', 'numerical', 'integerOnly'=>true),
 			array('nfechave, nfereciboenvio, nfeautorizacao, nfecancelamento, nfeinutilizacao', 'length', 'max'=>100),
-			array('nfechave', 'unique'),
+			//array('nfechave', 'unique'),
 			array('nfechave', 'validaChaveNFE'),
 			array('modelo', 'validaModelo'),
 			array('codpessoa', 'validaPessoaPelaChaveNFE'),
@@ -230,6 +230,19 @@ class NotaFiscal extends MGActiveRecord
 		
 		if (substr($this->nfechave, 43, 1) <> $digito)
 			$this->addError($attribute, "Dígito da Chave da NFE Inválido!");
+
+		$condicao = "nfechave = :nfechave";
+		$parametros["nfechave"] = $this->nfechave;
+
+		if (!empty($this->codfilial))
+		{
+			$condicao .= " AND codfilial = :codfilial ";
+			$parametros["codfilial"] = $this->codfilial;
+		}
+
+                if ($nota = NotaFiscal::model()->findAll($condicao, $parametros))
+                        $this->addError($attribute, "Esta Chave já está cadastrada no sistema!");
+
 	}
 	
 	// compara CNPJ da Filial ou da Pessoa com o CNPJ da Chave da NFE
