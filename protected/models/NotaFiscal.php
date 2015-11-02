@@ -234,6 +234,12 @@ class NotaFiscal extends MGActiveRecord
 		$condicao = "nfechave = :nfechave";
 		$parametros["nfechave"] = $this->nfechave;
 
+		if (!empty($this->codnotafiscal))
+		{
+			$condicao .= " AND codnotafiscal != :codnotafiscal";
+			$parametros["codnotafiscal"] = $this->codnotafiscal;
+		}
+
 		if (!empty($this->codfilial))
 		{
 			$condicao .= " AND codfilial = :codfilial ";
