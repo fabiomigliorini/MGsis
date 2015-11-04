@@ -464,8 +464,15 @@ class NfeTerceiro extends MGActiveRecord
 		$this->cnpj = $this->xml->NFe->infNFe->emit->CNPJ->__toString();
 		$this->ie = $this->xml->NFe->infNFe->emit->IE->__toString();
 		$this->emitente = $this->xml->NFe->infNFe->emit->xNome->__toString();
-		if ($emissao = DateTime::createFromFormat("Y-m-d", $this->xml->NFe->infNFe->ide->dEmi->__toString()))
+
+		//<dhEmi>2015-10-09T00:00:00-04:00</dhEmi>
+		$dEmi = trim($this->xml->NFe->infNFe->ide->dhEmi->__toString());
+		if (empty($dEmi))
+			$dEmi = $this->xml->NFe->infNFe->ide->dEmi->__toString();
+		$dEmi = substr($dEmi, 0, 10);
+		if ($emissao = DateTime::createFromFormat("Y-m-d", $dEmi))
 			$this->emissao = $emissao->format("d/m/Y");
+
 		$this->codoperacao = Operacao::SAIDA;
 		
 		$this->icmsbase = $this->xml->NFe->infNFe->total->ICMSTot->vBC->__toString();
