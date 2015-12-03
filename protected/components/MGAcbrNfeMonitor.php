@@ -1039,6 +1039,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		
 		$pos = strpos($this->retorno, 'procNFe=');
 		$stringxml = substr($this->retorno, $pos + 8);
+                $stringxml = str_replace(chr(3), '', $stringxml);
 		
 		if (!$this->NfeTerceiro->importarXmlViaString($stringxml))
 			return false;

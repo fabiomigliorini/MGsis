@@ -23,7 +23,7 @@ class NotaFiscalController extends Controller
 	* Creates a new model.
 	* If creation is successful, the browser will be redirected to the 'view' page.
 	*/
-	public function actionCreate($duplicar = null)
+	public function actionCreate($duplicar = null, $inverter = null)
 	{
 		$model=new NotaFiscal;
 
@@ -52,9 +52,13 @@ class NotaFiscalController extends Controller
 			
 
 			//duplica produtos
-			if (!$erro && !empty($duplicar))
+			if (!$erro && (!empty($duplicar) || !empty($inverter)))
 			{
-				$original = $this->loadModel($duplicar);
+				if (!empty($duplicar))
+					$original = $this->loadModel($duplicar);
+				if (!empty($inverter))
+                                        $original = $this->loadModel($inverter);
+
 				foreach ($original->NotaFiscalProdutoBarras as $prod_orig)
 				{
 					$prod_novo = new NotaFiscalProdutoBarra;
@@ -112,7 +116,7 @@ class NotaFiscalController extends Controller
 			}
 
 			//duplica duplicatas
-			if (!$erro && !empty($duplicar))
+                        if (!$erro && (!empty($duplicar) || !empty($inverter)))
 			{
 				foreach ($original->NotaFiscalDuplicatass as $dupl_orig)
 				{
@@ -137,7 +141,7 @@ class NotaFiscalController extends Controller
 			}
 			
 			//duplica Referenciadas
-			if (!$erro && !empty($duplicar))
+                        if (!$erro && (!empty($duplicar) || !empty($inverter)))
 			{
 				foreach ($original->NotaFiscalReferenciadas as $ref_orig)
 				{
@@ -203,6 +207,52 @@ class NotaFiscalController extends Controller
 				
 				$model->codstatus = NotaFiscal::CODSTATUS_NOVA;
 			}
+
+                        if (!empty($inverter))
+                        {
+                                $original = $this->loadModel($inverter);
+
+                                $model->attributes = $original->attributes;
+                                $model->codnotafiscal = null;
+				if (isset($original->NaturezaOperacao))
+                                	$model->codnaturezaoperacao = $original->NaturezaOperacao->codnaturezaoperacaodevolucao;
+				else
+					$model->codnaturezaoperacao = null;
+
+				$model->emitida = !$original->emitida;
+				$model->codpessoa = null;
+				if (isset($original->Filial))
+                                	$model->codpessoa = $original->Filial->codpessoa;
+				$model->codfilial = null;
+				if (isset($original->Pessoa))
+					foreach ($original->Pessoa->Filials as $filial)
+						$model->codfilial = $filial->codfilial;
+                                $model->codoperacao = null;
+                                $model->nfereciboenvio = null;
+                                $model->nfedataenvio = null;
+                                $model->nfeautorizacao = null;
+                                $model->nfedataautorizacao = null;
+                                $model->nfecancelamento = null;
+                                $model->nfedatacancelamento = null;
+                                $model->nfeinutilizacao = null;
+                                $model->nfedatainutilizacao = null;
+                                $model->justificativa = null;
+                                $model->alteracao = null;
+                                $model->codusuarioalteracao = null;
+                                $model->criacao = null;
+                                $model->codusuariocriacao = null;
+				switch ($model->frete) 
+				{
+					case NotaFiscal::FRETE_EMITENTE:
+						$model->frete = NotaFiscal::FRETE_DESTINATARIO;
+						break;
+					case NotaFiscal::FRETE_DESTINATARIO:
+						$model->frete = NotaFiscal::FRETE_EMITENTE;
+						break;
+				}
+                                $model->codstatus = NotaFiscal::CODSTATUS_NOVA;
+                        }
+
 			
 			
 		}

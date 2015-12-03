@@ -6,34 +6,35 @@ class m140419_195316_totais_tabela_negocio extends CDbMigration
 	{
 
 		/* Desabilita todas as triggers de tblnegocio */
-		Yii::app()->db->createCommand('ALTER TABLE tblnegocio DISABLE TRIGGER ALL ')->execute();
+		//Yii::app()->db->createCommand('ALTER TABLE tblnegocio DISABLE TRIGGER ALL ')->execute();
 		
 		/* 
 		 * NATUREZA DE OPERACAO
 		 * Passa para 2 - "Devolução de Venda" - Quando Operacao 1
 		 * Passa para 1 - "Venda             " - Quando Operacao 2
 		 */
-		Yii::app()->db->createCommand('alter table tblnegocio add codnaturezaoperacao bigint')->execute();
-		Yii::app()->db->createCommand('update tblnegocio set codnaturezaoperacao = 2 where codoperacao = 1')->execute();
-		Yii::app()->db->createCommand('update tblnegocio set codnaturezaoperacao = 1 where codoperacao = 2')->execute();
-		Yii::app()->db->createCommand('alter table tblnegocio alter column codnaturezaoperacao SET NOT NULL')->execute();
-		Yii::app()->db->createCommand('alter table tblnegocio add foreign key (codnaturezaoperacao) references tblnaturezaoperacao (codnaturezaoperacao)')->execute();
+		//Yii::app()->db->createCommand('alter table tblnegocio add codnaturezaoperacao bigint')->execute();
+		//Yii::app()->db->createCommand('update tblnegocio set codnaturezaoperacao = 2 where codoperacao = 1')->execute();
+		//Yii::app()->db->createCommand('update tblnegocio set codnaturezaoperacao = 1 where codoperacao = 2')->execute();
+		//Yii::app()->db->createCommand('alter table tblnegocio alter column codnaturezaoperacao SET NOT NULL')->execute();
+		//Yii::app()->db->createCommand('alter table tblnegocio add foreign key (codnaturezaoperacao) references tblnaturezaoperacao (codnaturezaoperacao)')->execute();
 		
 		/* valor produtos e total */
-		Yii::app()->db->createCommand('alter table tblnegocio add valorprodutos numeric(14,2) NOT NULL DEFAULT 0')->execute();
-		Yii::app()->db->createCommand('alter table tblnegocio add valortotal    numeric(14,2) NOT NULL DEFAULT 0')->execute();
+		//Yii::app()->db->createCommand('alter table tblnegocio add valorprodutos numeric(14,2) NOT NULL DEFAULT 0')->execute();
+		//Yii::app()->db->createCommand('alter table tblnegocio add valortotal    numeric(14,2) NOT NULL DEFAULT 0')->execute();
 		
 		/* valor prazo e a vista */
-		Yii::app()->db->createCommand('alter table tblnegocio add valoraprazo   numeric(14,2) NOT NULL DEFAULT 0')->execute();
-		Yii::app()->db->createCommand('alter table tblnegocio add valoravista   numeric(14,2) NOT NULL DEFAULT 0')->execute();
+		//Yii::app()->db->createCommand('alter table tblnegocio add valoraprazo   numeric(14,2) NOT NULL DEFAULT 0')->execute();
+		//Yii::app()->db->createCommand('alter table tblnegocio add valoravista   numeric(14,2) NOT NULL DEFAULT 0')->execute();
 		
 		/* cria regra de excecao na auditoria pra nao replicar os campos de totais criados */
-		Yii::app()->db->createCommand('insert into tblauditoriaexcecao (codauditoriaexcecao, tabela, campo) values (10, \'tblnegocio\', \'valorprodutos\')')->execute();
-		Yii::app()->db->createCommand('insert into tblauditoriaexcecao (codauditoriaexcecao, tabela, campo) values (11, \'tblnegocio\', \'valortotal\'   )')->execute();
-		Yii::app()->db->createCommand('insert into tblauditoriaexcecao (codauditoriaexcecao, tabela, campo) values (12, \'tblnegocio\', \'valoraprazo\'  )')->execute();
-		Yii::app()->db->createCommand('insert into tblauditoriaexcecao (codauditoriaexcecao, tabela, campo) values (13, \'tblnegocio\', \'valoravista\'  )')->execute();
+		//Yii::app()->db->createCommand('insert into tblauditoriaexcecao (codauditoriaexcecao, tabela, campo) values (10, \'tblnegocio\', \'valorprodutos\')')->execute();
+		//Yii::app()->db->createCommand('insert into tblauditoriaexcecao (codauditoriaexcecao, tabela, campo) values (11, \'tblnegocio\', \'valortotal\'   )')->execute();
+		//Yii::app()->db->createCommand('insert into tblauditoriaexcecao (codauditoriaexcecao, tabela, campo) values (12, \'tblnegocio\', \'valoraprazo\'  )')->execute();
+		//Yii::app()->db->createCommand('insert into tblauditoriaexcecao (codauditoriaexcecao, tabela, campo) values (13, \'tblnegocio\', \'valoravista\'  )')->execute();
 		
 		/* Funcoes de Atualização dos campos */
+/*
 		Yii::app()->db->createCommand('
 			CREATE OR REPLACE FUNCTION fntblnegocio_atualiza_valoraprazo(pCodNegocio BIGINT)
 			  RETURNS BOOLEAN AS
@@ -117,9 +118,9 @@ class m140419_195316_totais_tabela_negocio extends CDbMigration
 			ALTER FUNCTION fntblnegocio_atualiza_valorprodutos(pCodNegocio BIGINT)
 			  OWNER TO mgsis;			
 			')->execute();
-		
+*/		
 		/* Funcoes para as Triggers */
-		Yii::app()->db->createCommand('
+/*		Yii::app()->db->createCommand('
 			CREATE OR REPLACE FUNCTION fntblnegocioformapagamentoaiauad()
 			  RETURNS trigger AS
 			$BODY$
@@ -210,10 +211,10 @@ class m140419_195316_totais_tabela_negocio extends CDbMigration
 			ALTER FUNCTION fntblnegocioprodutobarraaiauad()
 			  OWNER TO mgsis;
 			')->execute();
-
+*/
 		
 		/* Triggers */
-		Yii::app()->db->createCommand('
+/*		Yii::app()->db->createCommand('
 			CREATE TRIGGER tblnegocioprodutobarraaiauad
 			AFTER INSERT OR UPDATE OR DELETE
 			ON tblnegocioprodutobarra
@@ -236,12 +237,12 @@ class m140419_195316_totais_tabela_negocio extends CDbMigration
 			FOR EACH ROW
 			EXECUTE PROCEDURE fntblnegocioaiau_valorprodutos_valoraprazo_valordesconto();			
 			')->execute();
-		
+*/		
 		
 		/* forca execucao das triggers pra poder atualizar campos com totais */
-		Yii::app()->db->createCommand('UPDATE TBLNEGOCIOFORMAPAGAMENTO SET CODNEGOCIO=CODNEGOCIO')->execute();
-		Yii::app()->db->createCommand('UPDATE tblnegocioprodutobarra  SET CODNEGOCIO=CODNEGOCIO')->execute();
-		Yii::app()->db->createCommand('update tblnegocio set valordesconto = valordesconto where valordesconto is not null and valorprodutos <= 0')->execute();
+		//Yii::app()->db->createCommand('UPDATE TBLNEGOCIOFORMAPAGAMENTO SET CODNEGOCIO=CODNEGOCIO')->execute();
+		//Yii::app()->db->createCommand('UPDATE tblnegocioprodutobarra  SET CODNEGOCIO=CODNEGOCIO')->execute();
+		//Yii::app()->db->createCommand('update tblnegocio set valordesconto = valordesconto where valordesconto is not null and valorprodutos <= 0')->execute();
 		
 		/* habilita todas as triggers de tblnegocio */
 		Yii::app()->db->createCommand('ALTER TABLE tblnegocio ENABLE TRIGGER ALL ')->execute();
