@@ -272,22 +272,30 @@ class NfeTerceiroController extends Controller
 					$nfe->nfechave = $arr["chNFe"];
 
 					//[CNPJ] => 28053619009644
-					$nfe->cnpj = $arr["CNPJ"];
+					if (isset($arr["CNPJ"]))
+						$nfe->cnpj = $arr["CNPJ"];
 
 					//[xNome] => Chocolates Garoto S.A.
-					$nfe->emitente = MGFormatter::removeAcentos(utf8_encode($arr["xNome"]));
+					if (isset($arr["xNome"]))
+						$nfe->emitente = MGFormatter::removeAcentos(utf8_encode($arr["xNome"]));
+					else
+						$nfe->emitente = "<Vazio>";
 					
 					//[IE] => 134342763
-					$nfe->ie = $arr["IE"];
+					if (isset($arr["IE"]))
+						$nfe->ie = $arr["IE"];
 
 					//[dEmi] => 24/06/2014
-					$nfe->emissao = $arr["dEmi"];
+					if (isset($arr["dEmi"]))
+						$nfe->emissao = $arr["dEmi"];
 
 					//[tpNF] => 1
-					$nfe->codoperacao = $arr["tpNF"]+1;
+					if (isset($arr["tpNF"]))
+						$nfe->codoperacao = $arr["tpNF"]+1;
 
 					//[vNF] => 222,84
-					$nfe->valortotal = Yii::app()->format->unformatNumber($arr["vNF"]);
+					if (isset($arr["vNF"]))
+						$nfe->valortotal = Yii::app()->format->unformatNumber($arr["vNF"]);
 
 					//[digVal] => WAFS3wPj/69U7sJI412ygTDk7+I=
 					//[dhRecbto] => 24/06/2014 07:25:09
