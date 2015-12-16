@@ -54,10 +54,9 @@ class MGFormatter extends CFormatter
 		 return preg_replace( '/[^0-9]/', '', $string);
 	}
 	
-	function formataCnpjCpf ($string, $fisica = null)
+	function formataCnpjCpf ($string, $fisica = '?')
 	{
-		
-		if ($fisica == null) {
+		if ($fisica == '?') {
 			$string = self::numeroLimpo($string);
 			if (strlen($string) <= 11)
 				$fisica = true;
