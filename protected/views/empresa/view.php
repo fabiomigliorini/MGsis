@@ -32,6 +32,8 @@ $(document).ready(function(){
 <h1><?php echo $model->empresa; ?></h1>
 
 <?php 
+$arrModoEmissaoNFCe = Empresa::getModoEmissaoNFCeListaCombo();
+
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
@@ -40,6 +42,13 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 				'value'=>Yii::app()->format->formataCodigo($model->codempresa),
 				),
 			'empresa',
+			array(
+				'name'=>'modoemissaonfce',
+				'value'=>$arrModoEmissaoNFCe[$model->modoemissaonfce],
+				'cssClass'=>($model->modoemissaonfce == Empresa::MODOEMISSAONFCE_OFFLINE)?'alert-error':'alert-success'
+				),
+			'contingenciadata',
+			'contingenciajustificativa',
 		),
 	)); 
 

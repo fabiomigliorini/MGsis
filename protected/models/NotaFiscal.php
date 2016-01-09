@@ -22,6 +22,7 @@
  * @property string $valordesconto
  * @property string $valoroutras
  * @property string $nfechave
+ * @property integer $tpemis
  * @property boolean $nfeimpressa
  * @property string $nfereciboenvio
  * @property string $nfedataenvio
@@ -76,6 +77,15 @@ class NotaFiscal extends MGActiveRecord
 	const FRETE_TERCEIROS         = 2;
 	const FRETE_SEM               = 9;
 	
+	const TPEMIS_NORMAL           = 1; // Emissão normal (não em contingência);
+	const TPEMIS_FS_IA            = 2; // Contingência FS-IA, com impressão do DANFE em formulário de segurança;
+	const TPEMIS_SCAN             = 3; // Contingência SCAN (Sistema de Contingência do Ambiente Nacional) Desativação prevista para 30/06/2014;
+	const TPEMIS_DPEC             = 4; // Contingência DPEC (Declaração Prévia da Emissão em Contingência);
+	const TPEMIS_FS_DA            = 5; // Contingência FS-DA, com impressão do DANFE em formulário de segurança;
+	const TPEMIS_SVC_AN           = 6; // Contingência SVC-AN (SEFAZ Virtual de Contingência do AN);
+	const TPEMIS_SVC_RS           = 7; // Contingência SVC-RS (SEFAZ Virtual de Contingência do RS);
+	const TPEMIS_OFFLINE          = 9; // Contingência off-line da NFC-e (as demais opções de contingência são válidas também para a NFC-e);	
+	
 	public $status;
 	public $codstatus;
 	public $emissao_de;
@@ -104,7 +114,7 @@ class NotaFiscal extends MGActiveRecord
 		// will receive user inputs.
 		return array(
 			array('codnaturezaoperacao, serie, emissao, saida, codfilial, codpessoa', 'required'),
-			array('serie, numero, volumes, frete', 'numerical', 'integerOnly'=>true),
+			array('serie, tpemis, numero, volumes, frete', 'numerical', 'integerOnly'=>true),
 			array('nfechave, nfereciboenvio, nfeautorizacao, nfecancelamento, nfeinutilizacao', 'length', 'max'=>100),
 			//array('nfechave', 'unique'),
 			array('nfechave', 'validaChaveNFE'),
@@ -121,7 +131,7 @@ class NotaFiscal extends MGActiveRecord
 			array('emitida, nfeimpressa, codoperacao, nfedataenvio, nfedataautorizacao, nfedatacancelamento, nfedatainutilizacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('codnotafiscal, codnaturezaoperacao, emitida, nfechave, nfeimpressa, serie, numero, emissao, modelo, saida, codfilial, codpessoa, observacoes, volumes, frete, codoperacao, nfereciboenvio, nfedataenvio, nfeautorizacao, nfedataautorizacao, valorfrete, valorseguro, valordesconto, valoroutras, nfecancelamento, nfedatacancelamento, nfeinutilizacao, nfedatainutilizacao, justificativa, alteracao, codusuarioalteracao, criacao, codusuariocriacao, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipivalor, codstatus, emissao_de, emissao_ate, saida_de, saida_ate', 'safe', 'on'=>'search'),
+			array('codnotafiscal, codnaturezaoperacao, emitida, nfechave, tpemis, nfeimpressa, serie, numero, emissao, modelo, saida, codfilial, codpessoa, observacoes, volumes, frete, codoperacao, nfereciboenvio, nfedataenvio, nfeautorizacao, nfedataautorizacao, valorfrete, valorseguro, valordesconto, valoroutras, nfecancelamento, nfedatacancelamento, nfeinutilizacao, nfedatainutilizacao, justificativa, alteracao, codusuarioalteracao, criacao, codusuariocriacao, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipivalor, codstatus, emissao_de, emissao_ate, saida_de, saida_ate', 'safe', 'on'=>'search'),
 		);
 	}
 	
@@ -406,6 +416,7 @@ class NotaFiscal extends MGActiveRecord
 			'codnaturezaoperacao' => 'Natureza de Operação',
 			'emitida' => 'Emitida',
 			'nfechave' => 'Chave',
+			'tpemis' => 'Forma Emissão NFe/NFCe',
 			'nfeimpressa' => 'Impressa',
 			'serie' => 'Série',
 			'numero' => 'Número',
@@ -468,6 +479,7 @@ class NotaFiscal extends MGActiveRecord
 		$criteria->compare('codnaturezaoperacao',$this->codnaturezaoperacao, false);
 		$criteria->compare('emitida',$this->emitida);
 		$criteria->compare('nfechave',$this->nfechave, false);
+		$criteria->compare('tpemis',$this->tpemis);
 		$criteria->compare('nfeimpressa',$this->nfeimpressa);
 		$criteria->compare('serie',$this->serie);
 		$criteria->compare('numero',$this->numero);
@@ -639,6 +651,21 @@ class NotaFiscal extends MGActiveRecord
 		$opcoes = $this->getStatusListaCombo();
 		$this->status = $opcoes[$codstatus];
 	}
+
+	function getTpEmisListaCombo()
+	{
+		return array(
+			self::TPEMIS_NORMAL => "Emissão normal (não em contingência)",
+			self::TPEMIS_FS_IA => "Contingência FS-IA, com impressão do DANFE em formulário de segurança",
+			self::TPEMIS_SCAN => "Contingência SCAN (Sistema de Contingência do Ambiente Nacional) Desativação prevista para 30/06/2014",
+			self::TPEMIS_DPEC => "Contingência DPEC (Declaração Prévia da Emissão em Contingência)",
+			self::TPEMIS_FS_DA => "Contingência FS-DA, com impressão do DANFE em formulário de segurança",
+			self::TPEMIS_SVC_AN => "Contingência SVC-AN (SEFAZ Virtual de Contingência do AN)",
+			self::TPEMIS_SVC_RS => "Contingência SVC-RS (SEFAZ Virtual de Contingência do RS)",
+			self::TPEMIS_OFFLINE => "Contingência Off-Line da NFC-e"
+		);
+	}
+	
 	
 	function getStatusListaCombo()
 	{
@@ -728,4 +755,23 @@ class NotaFiscal extends MGActiveRecord
 		
 		return parent::afterSave();
 	}
+	
+	public function scopes () 
+	{
+		return array(
+			'pendentes'=>array(
+				'condition' => '
+					   t.emitida = true 
+						and t.numero > 0 
+						and t.nfeautorizacao is null 
+						and t.nfecancelamento is null 
+						and t.nfeinutilizacao is null
+						and t.emissao >= \'2016-01-08\'
+						and t.alteracao <= (current_timestamp - interval \'30 seconds\')
+				',
+				'order'=>'criacao ASC',
+				),
+			);
+	}
+	
 }

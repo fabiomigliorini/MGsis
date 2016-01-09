@@ -17,6 +17,13 @@ $this->menu=array(
 );
 ?>
 
+
+<div class="hero-unit" style="display:none" id="divCarregando">
+	<h1>Aguarde... Consultando SEFAZ...</h1>
+</div>
+
+<div id="divFormulario">
+	
 <h1>Pesquisar na Sefaz NFe de Terceiros</h1>
 <br>
 
@@ -40,6 +47,7 @@ $this->menu=array(
 		'bootstrap.widgets.TbButton',
 		array(
 			'buttonType' => 'submit',
+			'id' => 'btnPesquisar',
 			'type' => 'primary',
 			'label' => 'Pesquisar',
 			'icon' => 'icon-ok',
@@ -49,19 +57,27 @@ $this->menu=array(
 	
 ?>
 </div>
+	
+</div>
+
+<div id="divImportadas">
+	
+</div>
+
+<div id="divResultado">
+	
+</div>
 
 <?php $this->endWidget(); ?>
 
 <?php 
 
 	//busca o ultimo nsu das filiais
-	$command = Yii::app()->db->createCommand(' 
-		SELECT codfilial, MAX(nsu) AS nsu FROM tblnfeterceiro GROUP BY codfilial
-		');
+	$command = Yii::app()->db->createCommand('SELECT codfilial, ultimonsu FROM tblfilial');
 	$nsus = $command->queryAll();
 	$arrNsu = array();
 	foreach ($nsus as $nsu)
-		$arrNsu[$nsu["codfilial"]] = $nsu["nsu"];
+		$arrNsu[$nsu["codfilial"]] = $nsu["ultimonsu"];
 	
 	if (!empty($model->codfilial) && !empty($model->nsu))
 		$arrNsu[$model->codfilial] = $model->nsu;
@@ -82,14 +98,71 @@ $(document).ready(function() {
 		var nsu = arrNsu[codfilial];
 		$('#NfeTerceiro_nsu').val(nsu);
 	});
+	
+	function adicionaNotaImportada(codfilial, chave, codnfeterceiro)
+	{
+		var html = '';
+		
+		html += codfilial + ' - ';
+		html += '<a href="<?php echo Yii::app()->createUrl('NfeTerceiro/view')?>&id=' + codnfeterceiro + '">';
+		html += chave;
+		html += '</a><br>';
+		
+		$('#divImportadas').append(html);
+	}
+	
+	function sefazDistDFe(codfilial, nsu)
+	{
+		$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/sefazDistDFe')?>", { 
+			codfilial: codfilial,
+			nsu: nsu,
+		})
+			.done(function(data) {
+				$('#NfeTerceiro_nsu').val(data.ultNSU);
+				arrNsu[codfilial] = data.ultNSU;
+				var i = 0;
+				$.each(data.importadas, function( chave, codnfeterceiro ) {
+					adicionaNotaImportada(codfilial, chave, codnfeterceiro);
+					i++;
+				});
+				if (data.ultNSU < data.maxNSU)
+					sefazDistDFe(codfilial, data.ultNSU)
+				else
+				{
+					$('#divFormulario').fadeIn('slow');
+					$('#divCarregando').fadeOut('slow');
+				}
+				$('#divResultado').append(
+					'<h4>Consulta Filial ' + 
+					codfilial + 
+					' executada até NSU ' + 
+					data.ultNSU + 
+					' - Importadas ' + 
+					i + 
+					' Chaves</h4>'
+				);
+				//$('#divResultado').append('<pre>' + JSON.stringify(data, null, '\t') + '</pre>');
+			})
+			.fail(function( jqxhr, textStatus, error ) {
+				$('#divResultado').append('<pre>' + error + '</pre><br>');
+			});
+	}
+	
+	
 
 	$('#nfe-terceiro-form').submit(function(e) {
         var currentForm = this;
         e.preventDefault();
         bootbox.confirm("Tem certeza que deseja executar a consulta?", function(result) {
             if (result) {
-				bootbox.alert("Fazendo consulta na Sefaz, aguarde esta operação pode <b>demorar alguns minutos</b>...");
-                currentForm.submit();
+				var nsu = $('#NfeTerceiro_nsu').val();
+				var codfilial = $('#NfeTerceiro_codfilial').val();
+				sefazDistDFe(codfilial, nsu);
+				//bootbox.alert("Fazendo consulta na Sefaz, aguarde esta operação pode <b>demorar alguns minutos</b>...");
+                //currentForm.submit();
+				$('#divResultado').html('');
+				$('#divFormulario').fadeOut('slow');
+				$('#divCarregando').fadeIn('slow');
             }
         });
     });

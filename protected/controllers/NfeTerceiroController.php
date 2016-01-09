@@ -216,6 +216,7 @@ class NfeTerceiroController extends Controller
 		
 		$nsu = $model->nsu;
 
+		/*
 		if (!empty($model->codfilial))
 		{
 			$acbr = new MGAcbrNfeMonitor(null, $model);
@@ -374,6 +375,7 @@ class NfeTerceiroController extends Controller
 			Yii::app()->user->setFlash($class, $mensagem);
 			
 		}
+		*/
 		
 		$this->render('pesquisar_sefaz',array(
 			'model'=>$model,

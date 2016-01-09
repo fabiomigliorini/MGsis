@@ -6,6 +6,9 @@
  * The followings are the available columns in table 'mgsis.tblempresa':
  * @property string $codempresa
  * @property string $empresa
+ * @property string $modoemissaonfce
+ * @property string $contingenciadata
+ * @property string $contingenciajustificativa
  * @property string $alteracao
  * @property string $codusuarioalteracao
  * @property string $criacao
@@ -18,6 +21,9 @@
  */
 class Empresa extends MGActiveRecord
 {
+	const MODOEMISSAONFCE_NORMAL = 1;
+	const MODOEMISSAONFCE_OFFLINE = 9;
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -34,14 +40,68 @@ class Empresa extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('empresa', 'required'),
+			array('empresa, modoemissaonfce', 'required'),
+			array('modoemissaonfce', 'validaModoEmissaoNFCe'),
+			array('contingenciadata', 'validaDataContingencia'),
 			array('empresa', 'length', 'max'=>50),
-			array('alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
+			array('contingenciajustificativa, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('codempresa, empresa, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
+			array('codempresa, empresa, modoemissaonfce, contingenciadata, contingenciajustificativa, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
 		);
 	}
+	
+	//verifica data da contingencia
+	public function validaDataContingencia($attribute, $params)
+	{
+		if ($this->modoemissaonfce != Empresa::MODOEMISSAONFCE_OFFLINE)
+			return true;
+			
+		if (empty($this->contingenciadata))
+		{
+			$this->addError('contingenciadata', 'Informe a data e hora de entrada em Contingência.');
+			return false;
+		}
+		
+		if (!$dh = DateTime::createFromFormat ('d/m/Y H:i:s', $this->contingenciadata,  new DateTimeZone('America/Cuiaba')))
+		{
+			$this->addError('contingenciadata', 'Formato de data e hora de entrada em Contingência inválido.');
+			return false;
+		}
+		
+		$cdh = new DateTime();
+		
+		if ($dh > $cdh)
+		{
+			$this->addError('contingenciadata', 'Data e hora posterior à data e hora correntes.');
+			return false;
+		}
+		
+		$dd = date_diff($dh, $cdh);
+		 
+		if ($dd->days >= 1)
+		{
+			$this->addError('contingenciadata', 'Data e hora superior à 24 horas.');
+			return false;
+		}
+		
+		if (empty($this->contingenciadata))
+		{
+			$this->addError('contingenciadata', 'Informe a data e hora de entrada em Contingência.');
+			return false;
+		}
+	}
+	
+	//verifica se foi informada justificativa da contingencia
+	public function validaModoEmissaoNFCe($attribute, $params)
+	{
+		if ($this->modoemissaonfce == Empresa::MODOEMISSAONFCE_OFFLINE)
+		{
+			if (empty($this->contingenciajustificativa))
+				$this->addError('contingenciajustificativa', 'Informe a Justificativa de entrada em Contingência.');
+		}
+	}
+	
 
 	/**
 	 * @return array relational rules.
@@ -65,6 +125,9 @@ class Empresa extends MGActiveRecord
 		return array(
 			'codempresa' => '#',
 			'empresa' => 'Empresa:',
+			'modoemissaonfce' => 'Modo Emissão NFCe:',
+			'contingenciadata' => 'Contingência Ativada em:',
+			'contingenciajustificativa' => 'Justificativa Contingência:',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
@@ -136,5 +199,14 @@ class Empresa extends MGActiveRecord
 		$lista = self::model()->combo()->findAll();
 		return CHtml::listData($lista, 'codempresa', 'empresa');
 	}	
+
+	function getModoEmissaoNFCeListaCombo()
+	{
+		return array(
+			self::MODOEMISSAONFCE_NORMAL => "Normal",
+			self::MODOEMISSAONFCE_OFFLINE => "Off-Line",
+		);
+	}
+	
 	
 }

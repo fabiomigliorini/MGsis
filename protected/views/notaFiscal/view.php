@@ -25,6 +25,35 @@ Yii::app()->clientScript->registerCoreScript('yii');
 	
 /*<![CDATA[*/
 $(document).ready(function(){
+
+	jQuery('body').on('click','#btnSalvarCartaCorrecao',function() {
+		var texto = $("#txtCartaCorrecao").val();
+		bootbox.confirm("<h3>Confirma emissão da carta de correção?</h3><br><pre>" + texto + "</pre>", function(result) {
+			if (result)
+			{
+				
+				$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/cartaCorrecao')?>", 
+					{ 
+						codnotafiscal: <?php echo $model->codnotafiscal; ?>, 
+						texto: texto,
+					})
+					.done(function(data) {
+
+						var mensagem = formataMensagem(data);
+						$('#modalProgressoNfe').modal('hide');
+						bootbox.alert(mensagem, function() {
+							location.reload();
+						});
+					})
+					.fail(function( jqxhr, textStatus, error ) {
+						$('#modalProgressoNfe').modal('hide');
+						bootbox.alert(error, function() {
+							location.reload();
+						});
+					});
+			}
+		});
+	});
 	
 	jQuery('body').on('click','#btnExcluir',function() {
 		bootbox.confirm("Excluir este registro?", function(result) {
@@ -193,6 +222,9 @@ $(document).ready(function(){
 	else 
 		$modelo = $model->modelo;
 	
+	$arrTpEmis = NotaFiscal::getTpEmisListaCombo();
+	$tpEmis = @$arrTpEmis[$model->tpemis];
+	
 	$attr = array(
 		array(
 			'name'=>'emitida',
@@ -205,7 +237,7 @@ $(document).ready(function(){
 		),
 		array(
 			'label'=>'Status',
-			'value'=>"<small class='label $css_label'>$model->status</small>",
+			'value'=>"<small class='label $css_label'>$model->status</small> $tpEmis",
 			'type'=>'raw',
 		),
 	);
@@ -748,9 +780,25 @@ $(document).ready(function(){
 <h2>
 	Cartas de Correção
 	<small>
-		<?php echo CHtml::link("<i class=\"icon-plus\"></i> Nova", array("notaFiscalCartaCorrecao/create", "codnotafiscal" => $model->codnotafiscal)); ?>
+		<a href="#modalCartaCorrecao" role="button" class="" data-toggle="modal"><i class="icon-plus"></i> Nova</a>
 	</small>	
 </h2>
+
+<!-- Modal -->
+<div id="modalCartaCorrecao" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Digite o texto da Carta de Correção</h3>
+  </div>
+  <div class="modal-body">
+	  <textarea id="txtCartaCorrecao" style="width: 97%; height: 200px"></textarea>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+    <button class="btn btn-primary" data-dismiss="modal" id="btnSalvarCartaCorrecao">Salvar</button>
+  </div>
+</div>
+
 <?php 
 foreach ($model->NotaFiscalCartaCorrecaos as $cc)
 {
@@ -775,6 +823,6 @@ foreach ($model->NotaFiscalCartaCorrecaos as $cc)
 	<?php
 }
 ?>
-
+ 
 <br>
 <?php $this->widget('UsuarioCriacao', array('model'=>$model)); ?>

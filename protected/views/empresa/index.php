@@ -56,7 +56,9 @@ $(document).ready(function(){
 
 
 <?php
- 
+
+$arrModoEmissaoNFCe = Empresa::getModoEmissaoNFCeListaCombo();
+
 $this->widget(
 	'zii.widgets.CListView', 
 	array(
@@ -64,6 +66,9 @@ $this->widget(
 		'dataProvider' => $dataProvider,
 		'itemView' => '_view',
 		'template' => '{items} {pager}',
+		'viewData' => array(
+			'arrModoEmissaoNFCe' => $arrModoEmissaoNFCe,			
+		),
 		'pager' => array(
 			'class' => 'ext.infiniteScroll.IasPager', 
 			'rowSelector'=>'.registro', 

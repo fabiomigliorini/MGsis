@@ -20,6 +20,8 @@
  * @property string $crt
  * @property string $nfcetoken
  * @property string $nfcetokenid
+ * @property string $senhacertificado
+ * @property string $ultimonsu
  * @property string $alteracao
  * @property string $codusuarioalteracao
  * @property string $criacao
@@ -75,11 +77,12 @@ class Filial extends MGActiveRecord
 			array('nfcetoken', 'length', 'min'=>32),
 			array('nfcetokenid', 'length', 'max'=>6),
 			array('nfcetokenid', 'length', 'min'=>6),
+			array('senhacertificado', 'length', 'max'=>50),
 			array('nfeambiente', 'length', 'max'=>2),
 			array('nfeambiente', 'length', 'min'=>1),
 			array('crt', 'numerical'),
 			array('odbcnumeronotafiscal', 'length', 'max'=>500),
-			array('codempresa, codpessoa, emitenfe, acbrnfemonitorbloqueado, acbrnfemonitorcodusuario, acbrnfemonitorporta, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
+			array('codempresa, ultimonsu, codpessoa, emitenfe, acbrnfemonitorbloqueado, acbrnfemonitorcodusuario, acbrnfemonitorporta, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('codfilial, codempresa, codpessoa, filial, emitenfe, acbrnfemonitorcaminho, acbrnfemonitorcaminhorede, acbrnfemonitorbloqueado, acbrnfemonitorcodusuario, empresadominio, acbrnfemonitorip, acbrnfemonitorporta, odbcnumeronotafiscal, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
@@ -135,7 +138,9 @@ class Filial extends MGActiveRecord
 			'crt' => 'CRT - Código do Regime Tributário',
 			'nfcetoken' => 'Token NFCe',
 			'nfcetokenid' => 'ID Token NFCe',
+			'senhacertificado' => 'Senha Certificado PFX',
 			'nfeambiente' => 'Ambiente NFe',
+			'ultimonsu' => 'Último NSU Consultado na Sefaz',
 		);
 	}
 

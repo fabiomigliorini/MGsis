@@ -23,6 +23,7 @@ class NotaFiscalCartaCorrecaoController extends Controller
 	* Creates a new model.
 	* If creation is successful, the browser will be redirected to the 'view' page.
 	*/
+	/*
 	public function actionCreate($codnotafiscal)
 	{
 		$model=new NotaFiscalCartaCorrecao;
@@ -58,7 +59,7 @@ class NotaFiscalCartaCorrecaoController extends Controller
 			)
 		);
 	}
-
+	*/
 	/**
 	* Updates a particular model.
 	* If update is successful, the browser will be redirected to the 'view' page.

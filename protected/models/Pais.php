@@ -7,6 +7,7 @@
  * @property string $codpais
  * @property string $pais
  * @property string $sigla
+ * @property string $codigooficial
  * @property string $alteracao
  * @property string $codusuarioalteracao
  * @property string $criacao
@@ -35,13 +36,13 @@ class Pais extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('pais, sigla', 'required'),
+			array('pais, sigla, codigooficial', 'required'),
 			array('pais', 'length', 'max'=>50),
 			array('sigla', 'length', 'max'=>2),
 			array('alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('codpais, pais, sigla, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
+			array('codpais, pais, sigla, codigooficial, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -68,6 +69,7 @@ class Pais extends MGActiveRecord
 			'codpais' => '#',
 			'pais' => 'País',
 			'sigla' => 'Sigla',
+			'codigooficial' => 'Código Oficial',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
@@ -102,6 +104,7 @@ class Pais extends MGActiveRecord
 			$criteria->params = array_merge($criteria->params, array(':pais' => '%'.$texto.'%'));
 		}
 		$criteria->compare('sigla',$this->sigla,false);
+		$criteria->compare('codigooficial',$this->codigooficial,false);
 		$criteria->compare('alteracao',$this->alteracao,false);
 		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);
 		$criteria->compare('criacao',$this->criacao,false);
