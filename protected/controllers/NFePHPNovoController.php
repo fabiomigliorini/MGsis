@@ -1410,6 +1410,7 @@ class NFePHPNovoController extends Controller
 				{
 					$saveFile = true;
 					$retorno = $tools->addProtocolo($this->arquivoXMLValidada, $this->arquivoXMLProtocoloSituacao, $saveFile);
+					var_dump($retorno );
 				}
 				
 			}
