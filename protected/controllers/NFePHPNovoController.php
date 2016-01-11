@@ -1573,7 +1573,10 @@ class NFePHPNovoController extends Controller
 				$email = $nf->Pessoa->email;
 			if (empty($email))
 				$email = $nf->Pessoa->emailcobranca;
+			if (empty($email))
+				throw new Exception ('Nenhum E-mail informado!');
 
+				
 			//altera cadastro da pessoa
 			if ($alterarcadastro && $nf->codpessoa != Pessoa::CONSUMIDOR)
 			{
@@ -1623,7 +1626,7 @@ class NFePHPNovoController extends Controller
 				throw new Exception ('Erro ao enviar E-mail: ' . $mail->ErrorInfo);
 			} else {
 				$aRetorno['retorno'] = true;
-				$aRetorno['xMotivo'] = 'Email enviado!';
+				$aRetorno['xMotivo'] = 'E-mail enviado!';
 			}
 			
 		} catch (Exception $ex) {
