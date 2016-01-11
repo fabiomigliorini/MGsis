@@ -392,10 +392,7 @@ function perguntarEmail(codnotafiscal, email)
 function imprimirNFCe (codnotafiscal)
 {
 	
-	$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/imprimirNFCe')?>", 
-		{ 
-			codnotafiscal: codnotafiscal
-		})
+	$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/imprimirNFCe')?>", { codnotafiscal: codnotafiscal, impressoraUsuarioCriacao: 0 })
 		.done(function(data) {
 			if (data.retorno)
 				$.notify('Documento enviado à impressora!', { position:"right bottom", className:"success"});

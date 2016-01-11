@@ -47,6 +47,7 @@
 		echo $form->textFieldRow($model,'acbrnfemonitorip',array('class'=>'input-medium','maxlength'=>20));
 		echo $form->textFieldRow($model,'acbrnfemonitorporta',array('class'=>'input-mini text-right'));
 		//echo $form->textFieldRow($model,'odbcnumeronotafiscal',array('class' => 'input-larg','maxlength'=>500));
+		echo $form->textFieldRow($model,'tokenibpt',array('class'=>'input-xxlarge text-center','maxlength'=>32));
 	?>
 </fieldset>
 <div class="form-actions">

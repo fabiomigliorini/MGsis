@@ -33,6 +33,7 @@ class NFePHPNovoController extends Controller
 	var $arquivoPDF;
 	
 	public $layout='//layouts/column2';
+	public $defaultAction = 'view';
 	
 	/**
 	 * 
@@ -57,6 +58,20 @@ class NFePHPNovoController extends Controller
 	public function loadModelFilial($id)
 	{
 		$model=Filial::model()->findByPk($id);
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
+	}
+	
+	/**
+	 * 
+	 * @param integer $id
+	 * @return NfeTerceiro
+	 * @throws CHttpException
+	 */
+	public function loadModelNfeTerceiro($id)
+	{
+		$model=  NfeTerceiro::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -117,7 +132,7 @@ class NFePHPNovoController extends Controller
 		$conf['razaosocial'] =  $filial->Pessoa->pessoa;
 		$conf['siglaUF'] =  $filial->Pessoa->Cidade->Estado->sigla;
 		$conf['cnpj'] =  str_pad($filial->Pessoa->cnpj, 14, '0', STR_PAD_LEFT);
-		$conf['tokenIBPT'] =  "";
+		$conf['tokenIBPT'] =  $filial->tokenibpt;
 		$conf['tokenNFCe'] =  $filial->nfcetoken;
 		$conf['tokenNFCeId'] =  $filial->nfcetokenid;
 		$conf['certPfxName'] =  "$codfilial.pfx";
@@ -386,7 +401,7 @@ class NFePHPNovoController extends Controller
 			$xNome = utf8_encode($nf->Filial->Pessoa->pessoa);
 			//$xNome = 'Migliorini';
 			$xFant = utf8_encode($nf->Filial->Pessoa->fantasia);
-			$IE = $nf->Filial->Pessoa->ie;
+			$IE = Yii::app()->format->NumeroLimpo($nf->Filial->Pessoa->ie);
 			$IEST = '';
 			$IM = ''; //'95095870';
 			$CNAE = ''; //'0131380';
@@ -1622,7 +1637,7 @@ class NFePHPNovoController extends Controller
 			
 	}
 	
-	public function actionImprimirNFCe($codnotafiscal, $impressoraUsuarioCriacao = false)
+	public function actionImprimirNFCe($codnotafiscal, $impressoraUsuarioCriacao = 0)
 	{
 
 		$nf = $this->loadModelNotaFiscal($codnotafiscal);
@@ -1633,7 +1648,7 @@ class NFePHPNovoController extends Controller
 			$this->gerarDanfe($codnotafiscal);
 		
 		if ($impressoraUsuarioCriacao)
-			$impressora = $this->NotaFiscal->UsuarioCriacao->impressoratermica;
+			$impressora = $nf->UsuarioCriacao->impressoratermica;
 		else
 			$impressora = Yii::app()->user->impressoraTermica;
 		
@@ -1752,11 +1767,14 @@ class NFePHPNovoController extends Controller
 					throw new Exception ($nfe->getErrors());
 
 				$importadas[$chave] = $nfe->codnfeterceiro;
+				
 
 			}
 			
 			$filial->ultimonsu = $aRetorno['ultNSU'];
 			$filial->save();
+			
+			$aRetorno['retorno'] = true;
 			
 		} catch (Exception $ex) {
 			$aRetorno['ex'] = $ex->getMessage();
@@ -1766,5 +1784,74 @@ class NFePHPNovoController extends Controller
 		
 		header('Content-type: text/json; charset=UTF-8');
 		echo json_encode($aRetorno);
+	}
+	
+	
+	public function actionIBPT($codfilial, $ncm, $exTarif = 0)
+	{
+		
+		$filial = $this->loadModelFilial($codfilial);
+		$config = $this->montarConfiguracao($codfilial, '55');
+		
+		$tools = new ToolsNFe($config);
+		$tools->setModelo('55');
+		
+		$siglaUF = $filial->Pessoa->Cidade->Estado->sigla;
+		//$ncm = '60063100';
+		//$exTarif = '0';
+		//$siglaUF = 'SP';
+		
+		$resp = $tools->getImpostosIBPT($ncm, $exTarif, $siglaUF);
+		header('Content-type: text/json; charset=UTF-8');
+		echo json_encode($resp);
+		
+	}
+	
+	public function actionManifesta($codnfeterceiro, $indmanifestacao, $justificativa = '')
+	{
+		$nfet = $this->loadModelNfeTerceiro($codnfeterceiro);
+		$config = $this->montarConfiguracao($nfet->codfilial, '55');
+		
+		$aRetorno = array();
+		$aRetorno['retorno'] = false;
+		$aRetorno['ex'] = '';
+		
+		try {
+			$aRetorno['retorno'] = true;
+			
+			$tools = new ToolsNFe($config);
+			$tools->setModelo('55');
+			//210200 – Confirmação da Operação
+			//210210 – Ciência da Operação
+			//210220 – Desconhecimento da Operação
+			//210240 – Operação não Realizada ===> é obritatoria uma justificativa para esse caso
+			$chave = $nfet->nfechave;
+			$tpAmb = $nfet->Filial->nfeambiente;
+			$xJust = $justificativa;
+			$tpEvento = $indmanifestacao;
+			$aResposta = array();
+			$xml = $tools->sefazManifesta($chave, $tpAmb, $xJust, $tpEvento, $aResposta);
+			
+		} catch (Exception $ex) {
+			$aRetorno['ex'] = $ex->getMessage();
+		}
+		
+		$aRetorno['cStat'] = isset($aResposta['evento'][0]['cStat'])?$aResposta['evento'][0]['cStat']:array();
+		$aRetorno['xMotivo'] = isset($aResposta['evento'][0]['xMotivo'])?$aResposta['evento'][0]['xMotivo']:array();
+		$aRetorno['aResposta'] = isset($aResposta)?$aResposta:array();
+		
+		echo '<br><br><PRE>';
+		echo htmlspecialchars($tools->soapDebug);
+		echo '<hr>';
+		print_r($aRetorno);
+		echo '<hr>';
+		print_r($aResposta);
+		echo "<br>";		
+		
+	}
+	
+	public function actionDownload()
+	{
+		
 	}
 }

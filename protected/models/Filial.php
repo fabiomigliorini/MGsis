@@ -21,6 +21,7 @@
  * @property string $nfcetoken
  * @property string $nfcetokenid
  * @property string $senhacertificado
+ * @property string $tokenibpt
  * @property string $ultimonsu
  * @property string $alteracao
  * @property string $codusuarioalteracao
@@ -78,6 +79,7 @@ class Filial extends MGActiveRecord
 			array('nfcetokenid', 'length', 'max'=>6),
 			array('nfcetokenid', 'length', 'min'=>6),
 			array('senhacertificado', 'length', 'max'=>50),
+			array('tokenibpt', 'length', 'max'=>200),
 			array('nfeambiente', 'length', 'max'=>2),
 			array('nfeambiente', 'length', 'min'=>1),
 			array('crt', 'numerical'),
@@ -141,6 +143,7 @@ class Filial extends MGActiveRecord
 			'senhacertificado' => 'Senha Certificado PFX',
 			'nfeambiente' => 'Ambiente NFe',
 			'ultimonsu' => 'Último NSU Consultado na Sefaz',
+			'tokenibpt' => 'Token IBPT',
 		);
 	}
 

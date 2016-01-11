@@ -51,7 +51,7 @@ $(document).ready(function(){
 
 		$('#divResultado').append('<h3>Imprimindo NFCe<h3>');
 		
-		$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/imprimirNFCe')?>", { codnotafiscal: codnotafiscal })
+		$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/imprimirNFCe')?>", { codnotafiscal: codnotafiscal, impressoraUsuarioCriacao: 1 })
 			.done(function(data) {
 				$('#Nota' + codnotafiscal).removeClass('alert-info');
 				$('#Nota' + codnotafiscal).addClass('alert-success');

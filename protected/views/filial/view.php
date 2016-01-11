@@ -58,6 +58,7 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 		'nfeambiente',
 		'nfcetoken',
 		'nfcetokenid',
+		'tokenibpt',
 		'acbrnfemonitorcaminho',
 		'acbrnfemonitorcaminhorede',
 		//'acbrnfemonitorbloqueado',
