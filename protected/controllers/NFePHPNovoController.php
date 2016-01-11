@@ -29,6 +29,7 @@ class NFePHPNovoController extends Controller
 	var $arquivoXMLProtocoloRecibo;
 	var $arquivoXMLProtocoloSituacao;
 	var $arquivoXMLAprovada;
+	var $arquivoXMLDenegada;
 	var $arquivoXMLValidada;
 	var $arquivoPDF;
 	
@@ -182,6 +183,13 @@ class NFePHPNovoController extends Controller
 			if (!is_dir($this->arquivoXMLAprovada))
 				mkdir($this->arquivoXMLAprovada, 0755, true);
 			$this->arquivoXMLAprovada .= $nf->nfechave . '-protNFe.xml';
+			
+			$this->arquivoXMLDenegada = 
+				$diretorioBase
+				. 'enviadas/denegadas/' . substr($nf->emissao, 6, 4) . substr($nf->emissao, 3, 2) . '/';
+			if (!is_dir($this->arquivoXMLDenegada))
+				mkdir($this->arquivoXMLDenegada, 0755, true);
+			$this->arquivoXMLDenegada .= $nf->nfechave . '-protNFe.xml';
 			
 			$this->arquivoXMLProtocoloCancelamento = 
 				$diretorioBase
@@ -1399,20 +1407,16 @@ class NFePHPNovoController extends Controller
 				$dh = DateTime::createFromFormat ('Y-m-d\TH:i:sP', $aResposta['aProt']['dhRecbto']);
 				$nf->nfedatainutilizacao = $dh->format('d/m/Y H:i:s');
 				$nf->justificativa = $aResposta['aProt']['xMotivo'];
-				//$nf->save();
-				
-				echo $this->arquivoXMLProtocoloSituacao;
-				echo '<hr>';
-				echo $this->arquivoXMLValidada;
-				die();
 				
 				if (is_file($this->arquivoXMLProtocoloSituacao) && is_file($this->arquivoXMLValidada))
 				{
-					echo 'entrou!';
 					$saveFile = true;
 					$retorno = $tools->addProtocolo($this->arquivoXMLValidada, $this->arquivoXMLProtocoloSituacao, $saveFile);
-					var_dump($retorno );
+					if (!@file_put_contents($this->arquivoXMLDenegada, $retorno))
+						throw new Exception('Erro ao salvar Arquivo XML Denegada!');
 				}
+				
+				$nf->save();
 				
 			}
 			
