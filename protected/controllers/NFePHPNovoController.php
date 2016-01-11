@@ -1408,6 +1408,7 @@ class NFePHPNovoController extends Controller
 				
 				if (is_file($this->arquivoXMLProtocoloSituacao) && is_file($this->arquivoXMLValidada))
 				{
+					echo 'entrou!';
 					$saveFile = true;
 					$retorno = $tools->addProtocolo($this->arquivoXMLValidada, $this->arquivoXMLProtocoloSituacao, $saveFile);
 					var_dump($retorno );
