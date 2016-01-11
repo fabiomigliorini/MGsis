@@ -23,7 +23,10 @@
 		
 		echo $form->toggleButtonRow($model,'importado', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 		
-		echo $form->textFieldRow($model,'ncm',array('class'=>'input-small text-center', 'maxlength'=>8));
+//		echo $form->textFieldRow($model,'ncm',array('class'=>'input-small text-center', 'maxlength'=>8));
+		if (!empty($model->ncm))
+			$model->ncm = Yii::app()->format->formataNcm($model->ncm);
+		echo $form->maskedTextFieldRow($model,'ncm', '99999999', array('class'=>'input-small text-center','maxlength'=>10));
 		
 		echo $form->dropDownListRow($model, 'codtributacao', Tributacao::getListaCombo(), array('prompt' => '', 'class' => 'input-medium'));
 		echo $form->dropDownListRow($model, 'codtipoproduto', TipoProduto::getListaCombo(), array('prompt' => '', 'class' => 'input-xlarge'));
@@ -73,6 +76,10 @@ $(document).ready(function() {
 
 	$("#Produto_produto").Setcase();
 	$('#Produto_preco').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+
+	//mascara="999.99.99";
+	//$("#Produto_ncm").mask(mascara);	
+
 
 	$('#produto-form').submit(function(e) {
         var currentForm = this;
