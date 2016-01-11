@@ -85,7 +85,7 @@ function gerarNotaFiscal(modelo, enviar)
 			
 			if (modelo == <?php echo NotaFiscal::MODELO_NFCE; ?> || enviar)
 			{
-				criaXml(data.codnotafiscal);
+				criaXml(data.codnotafiscal, modelo);
 			}
 			else
 			{
