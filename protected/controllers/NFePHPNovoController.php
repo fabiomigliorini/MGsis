@@ -407,7 +407,6 @@ class NFePHPNovoController extends Controller
 			//$cnpj = '58716523000119';
 			$cpf = '';
 			$xNome = utf8_encode($nf->Filial->Pessoa->pessoa);
-			//$xNome = 'Migliorini';
 			$xFant = utf8_encode($nf->Filial->Pessoa->fantasia);
 			$IE = Yii::app()->format->NumeroLimpo($nf->Filial->Pessoa->ie);
 			$IEST = '';
@@ -451,7 +450,7 @@ class NFePHPNovoController extends Controller
 					$cpf = '';
 				}
 				$idEstrangeiro = '';
-				$xNome = utf8_encode($nf->Pessoa->pessoa);
+				$xNome = substr(utf8_encode($nf->Pessoa->pessoa), 0, 60);
 				$IE = Yii::app()->format->NumeroLimpo($nf->Pessoa->ie);
 				$indIEDest = (empty($IE))?'9':'1';
 				$ISUF = '';
