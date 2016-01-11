@@ -444,7 +444,7 @@ class NFePHPNovoController extends Controller
 				}
 				$idEstrangeiro = '';
 				$xNome = utf8_encode($nf->Pessoa->pessoa);
-				$IE = $nf->Pessoa->ie;
+				$IE = Yii::app()->format->NumeroLimpo($nf->Pessoa->ie);
 				$indIEDest = (empty($IE))?'9':'1';
 				$ISUF = '';
 				$IM = '';
