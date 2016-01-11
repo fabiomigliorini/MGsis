@@ -1392,6 +1392,24 @@ class NFePHPNovoController extends Controller
 				}
 				
 			}
+			
+			if (@$aResposta['aProt']['cStat'] == 302) // Uso Denegado
+			{
+				$nf->nfeinutilizacao = $aResposta['aProt']['nProt'];
+				$dh = DateTime::createFromFormat ('Y-m-d\TH:i:sP', $aResposta['aProt']['dhRecbto']);
+				$nf->nfedatainutilizacao = $dh->format('d/m/Y H:i:s');
+				$nf->justificativa = $aResposta['aProt']['xMotivo'];
+				$nf->save();
+				
+				if (is_file($this->arquivoXMLProtocoloSituacao) && is_file($this->arquivoXMLValidada))
+				{
+					$saveFile = true;
+					$retorno = $tools->addProtocolo($this->arquivoXMLValidada, $this->arquivoXMLProtocoloSituacao, $saveFile);
+				}
+				
+			}
+			
+			
 
 
 			foreach ($aResposta['aEvent'] as $aEvent)
