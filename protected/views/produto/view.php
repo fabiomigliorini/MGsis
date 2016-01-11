@@ -176,14 +176,15 @@ $(document).ready(function(){
 
 /* monta link com tooltip da descricao do ncm */
 $ncm_descricao = "";
-for ($i=1; $i<=strlen($model->ncm); $i++)
+$sNcm = str_pad($model->ncm, 8, '0', STR_PAD_LEFT);
+for ($i=1; $i<=strlen($sNcm); $i++)
 {
-	$ncm_parte = substr($model->ncm, 0, $i);
+	$ncm_parte = substr($sNcm, 0, $i);
 	if ($ncm = Ncm::model()->find("ncm = :ncm_parte", array('ncm_parte'=>$ncm_parte)))
 	{
 		if (!empty($ncm_descricao))
 			$ncm_descricao .= "\n\n";
-		$ncm_descricao .= CHtml::encode(Yii::app()->format->formataNCM($ncm->ncm) . " - " . str_replace("'", "\"", $ncm->descricao));
+		$ncm_descricao .= CHtml::encode($ncm->ncm . " - " . str_replace("'", "\"", $ncm->descricao));
 	}
 }
 $ncm_descricao = "<a href='#' rel='tooltip' title='$ncm_descricao'>" . CHtml::encode(Yii::app()->format->formataNCM($model->ncm)) . "</a>";
