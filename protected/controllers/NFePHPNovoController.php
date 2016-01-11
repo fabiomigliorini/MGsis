@@ -1399,7 +1399,12 @@ class NFePHPNovoController extends Controller
 				$dh = DateTime::createFromFormat ('Y-m-d\TH:i:sP', $aResposta['aProt']['dhRecbto']);
 				$nf->nfedatainutilizacao = $dh->format('d/m/Y H:i:s');
 				$nf->justificativa = $aResposta['aProt']['xMotivo'];
-				$nf->save();
+				//$nf->save();
+				
+				echo $this->arquivoXMLProtocoloSituacao;
+				echo '<hr>';
+				echo $this->arquivoXMLValidada;
+				die();
 				
 				if (is_file($this->arquivoXMLProtocoloSituacao) && is_file($this->arquivoXMLValidada))
 				{
