@@ -606,11 +606,7 @@ class NFePHPNovoController extends Controller
 				else
 					$orig = 0; // Nacional, exceto as indicadas nos códigos 3, 4, 5 e 8
 
-				if ($nf->Filial->crt == Filial::CRT_SIMPLES)
-					$modBC = '';
-				else
-					$modBC = '3';// '1';
-
+				$modBC = '';
 				$pRedBC = '';
 				$vICMSDeson = '';
 				$motDesICMS = '';
@@ -637,10 +633,15 @@ class NFePHPNovoController extends Controller
 						$vBC = number_format($nfpb->icmsbase, 2, '.', '');
 						$pICMS = number_format($nfpb->icmspercentual, 2, '.', '');
 						$vICMS = number_format($nfpb->icmsvalor, 2, '.', '');
+						
+						$modBC = '3';
 
 						$vBCST = number_format($nfpb->icmsstbase, 2, '.', ''); 
 						$pICMSST = number_format($nfpb->icmsstpercentual, 2, '.', '');
 						$vICMSST = number_format($nfpb->icmsstvalor, 2, '.', '');
+
+						if ($cst = '90')
+							$modBCST = '4';
 
 						$resp = $make->tagICMS($nItem, $orig, $cst, $modBC, $pRedBC, $vBC, $pICMS, $vICMS, $vICMSDeson, $motDesICMS, $modBCST, $pMVAST, $pRedBCST, $vBCST, $pICMSST, $vICMSST, $pDif, $vICMSDif, $vICMSOp, $vBCSTRet, $vICMSSTRet);
 
