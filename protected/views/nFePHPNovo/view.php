@@ -226,7 +226,7 @@ $(document).ready(function(){
 		{
 			setTimeout(function(){ 
 				atualizaListagemNotas();
-			}, 3000); // 3 segundos
+			}, 10000); // 10 segundos
 		}
 		else
 		{

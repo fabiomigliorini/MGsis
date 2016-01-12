@@ -767,7 +767,7 @@ class NotaFiscal extends MGActiveRecord
 						and t.nfecancelamento is null 
 						and t.nfeinutilizacao is null
 						and t.emissao >= \'2016-01-08\'
-						and t.alteracao <= (current_timestamp - interval \'30 seconds\')
+						and t.alteracao <= (current_timestamp - interval \'15 seconds\')
 				',
 				'order'=>'criacao ASC',
 				),
