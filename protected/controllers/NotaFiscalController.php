@@ -31,8 +31,8 @@ class NotaFiscalController extends Controller
 		$this->performAjaxValidation($model);
 		
 		
-		$model->emissao = date('d/m/Y');
-		$model->saida = date('d/m/Y');
+		$model->emissao = date('d/m/Y H:i:s');
+		$model->saida = date('d/m/Y H:i:s');
 		$model->serie = 1;
 		$model->numero = 0;
 		$model->codfilial = Yii::app()->user->getState("codfilial");
@@ -200,8 +200,8 @@ class NotaFiscalController extends Controller
 				$model->criacao = null;
 				$model->codusuarioalteracao = null;
 				$model->alteracao = null;
-				$model->emissao = date('d/m/Y');
-				$model->saida = date('d/m/Y');
+				$model->emissao = date('d/m/Y H:i:s');
+				$model->saida = date('d/m/Y H:i:s');
 				$model->serie = 1;
 				$model->numero = 0;
 				
@@ -412,6 +412,7 @@ class NotaFiscalController extends Controller
 		}
 	}
 	
+	/*
 	public function actionRobo($codfilial)
 	{
 		
@@ -420,9 +421,6 @@ class NotaFiscalController extends Controller
 		if (isset(Yii::app()->session["NotaFiscalRobo$codfilial"]))
 			$codnotafiscal = Yii::app()->session["NotaFiscalRobo$codfilial"];
 
-		/**
-		 * @var NotaFiscal $model
-		 */
 		$model = NotaFiscal::model()->find(
                         array(
                                 'order' => 'codnotafiscal',
@@ -545,7 +543,10 @@ class NotaFiscalController extends Controller
 		echo "</script>\n";
 			
 	}
+	 * 
+	 */
 	
+	/*
 	public function actionEnviarNfe($id)
 	{
 		$model = $this->loadModel($id);
@@ -591,7 +592,10 @@ class NotaFiscalController extends Controller
 		);
 		
 	}
+	 * 
+	 */
 
+	/*
 	public function actionConsultarNfe($id)
 	{
 		$model = $this->loadModel($id);
@@ -610,7 +614,10 @@ class NotaFiscalController extends Controller
 		);
 		
 	}
+	 * 
+	 */
 
+	/*
 	public function actionEnviarEmail($id, $email, $alterarcadastro = false)
 	{
 		$model = $this->loadModel($id);
@@ -631,7 +638,10 @@ class NotaFiscalController extends Controller
 		);
 		
 	}
+	 * 
+	 */
 	
+	/*
 	public function actionCancelarNfe($id, $justificativa)
 	{
 		$model = $this->loadModel($id);
@@ -650,7 +660,10 @@ class NotaFiscalController extends Controller
 		);
 		
 	}
-
+	 * 
+	 */
+	
+	/*
 	public function actionInutilizarNfe($id, $justificativa)
 	{
 		$model = $this->loadModel($id);
@@ -668,8 +681,11 @@ class NotaFiscalController extends Controller
 			)
 		);
 		
-	}	
+	}
+	 * 
+	 */	
 	
+	/*
 	public function actionImprimirDanfePdf($id, $imprimir = false)
 	{
 		$model = $this->loadModel($id);
@@ -694,7 +710,10 @@ class NotaFiscalController extends Controller
 		);
 		
 	}
+	 * 
+	 */
 	
+	/*
 	public function actionCartaCorrecao($id, $texto)
 	{
 		$model = $this->loadModel($id);
@@ -713,7 +732,8 @@ class NotaFiscalController extends Controller
 		);
 		
 	}
-
+	*/
+	
 	public function actionRelatorio()
 	{
 		
@@ -739,6 +759,7 @@ class NotaFiscalController extends Controller
 	/**
 	 * @param NotaFiscal $nf
 	 */
+	/*
 	function imprimirDanfePdfTermica ($nf, $impressora)
 	{
 		if ($nf->modelo <> NotaFiscal::MODELO_NFCE)
@@ -764,5 +785,5 @@ class NotaFiscalController extends Controller
 		$teste = $danfe->printDANFE('pdf', $arquivo, 'P', $impressora);
 		
 	}
-	
+	*/
 }

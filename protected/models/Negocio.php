@@ -351,8 +351,8 @@ class Negocio extends MGActiveRecord
 			$nota->codnaturezaoperacao = $this->codnaturezaoperacao;
 			$nota->emitida = $this->NaturezaOperacao->emitida;
 			//die(date('d/m/Y'));
-			$nota->emissao = date('d/m/Y');
-			$nota->saida = date('d/m/Y');
+			$nota->emissao = date('d/m/Y H:i:s');
+			$nota->saida = date('d/m/Y H:i:s');
 			
 			$nota->observacoes = "";
 			$nota->observacoes .= $this->NaturezaOperacao->mensagemprocom;
@@ -561,7 +561,7 @@ class Negocio extends MGActiveRecord
 			
 		$negocio->codoperacao = $negocio->NaturezaOperacao->codoperacao;
 		$negocio->codnegociostatus = NegocioStatus::ABERTO;
-		$negocio->observacoes = 'Devolução referente Negócio ' . Yii::app()->format->formataCodigo($this->codnegocio);
+		//$negocio->observacoes = 'Devolução referente Negócio ' . Yii::app()->format->formataCodigo($this->codnegocio);
 		$negocio->codusuario = Yii::app()->user->id;
 		
 		//salva Negocio
@@ -573,6 +573,7 @@ class Negocio extends MGActiveRecord
 		}
 
 		//percorre os itens
+		$gerarNotaDevolucao = array();
 		foreach ($arr as $codnegocioprodutobarra => $quantidadedevolucao)
 		{
 			
@@ -603,12 +604,20 @@ class Negocio extends MGActiveRecord
 				$trans->rollback();
 				return false;
 			}
+			
+			//Verifica quais notas fiscais referenciar na devolucao
+			foreach ($npb_original->NotaFiscalProdutoBarras as $nfpb)
+				if (!in_array($nfpb->NotaFiscal->codstatus, array(NotaFiscal::CODSTATUS_CANCELADA, NotaFiscal::CODSTATUS_INUTILIZADA)))
+					$gerarNotaDevolucao[$nfpb->codnotafiscal][] = $codnegocioprodutobarra;
+			
 		}
+		
+		//recarrega modelo do negocio, para atalizar totais
+		$negocio->refresh();
 		
 		//calcula desconto proporcional
 		if ($this->valordesconto > 0 && $this->valorprodutos > 0)
 		{
-			$negocio->refresh();
 			$negocio->valordesconto = ($this->valordesconto / $this->valorprodutos) * $negocio->valorprodutos;
 			if (!$negocio->save())
 			{
@@ -640,6 +649,31 @@ class Negocio extends MGActiveRecord
 		
 		//informa o usuario do sucesso
 		Yii::app()->user->setFlash('success', "Gerada devolução <b>{$negocio->codnegocio}</b>!");
+		
+		if (!empty($gerarNotaDevolucao))
+		{
+			if (!$codnotafiscal = $negocio->gerarNotaFiscal(null, NotaFiscal::MODELO_NFE, false))
+			{
+				$this->addErrors($negocio->getErrors());
+				$trans->rollback();
+				return false;							
+			}
+			
+			$notaFiscal = NotaFiscal::model()->findByPk($codnotafiscal);
+			
+			foreach ($gerarNotaDevolucao as $codnotafiscalreferenciada => $arrcodnegocioprodutobarra)
+			{
+				$notaFiscalReferenciada = NotaFiscal::model()->findByPk($codnotafiscalreferenciada);
+				if ($notaFiscalReferenciada->modelo == NotaFiscal::MODELO_NFCE)
+					$labelNfe = 'NFCe';
+				else
+					$labelNfe = 'NFe';
+				$chave = CHtml::encode(Yii::app()->format->formataChaveNfe($notaFiscalReferenciada->nfechave));
+				$notaFiscal->observacoes .= "\nDevolução referente {$labelNfe} {$notaFiscalReferenciada->numero} de {$notaFiscalReferenciada->emissao}, chave {$chave}.";
+				$notaFiscal->save();
+			}
+		}
+		
 		$trans->commit();
 		return $negocio->codnegocio;
 	

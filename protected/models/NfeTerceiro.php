@@ -631,8 +631,8 @@ class NfeTerceiro extends MGActiveRecord
 		//$nf->nfeimpressa = false;
 		$nf->serie = $this->serie;
 		$nf->numero = $this->numero;
-		$nf->emissao = $this->emissao;
-		$nf->saida = $this->entrada;
+		$nf->emissao = $this->emissao . ' 00:00:00';
+		$nf->saida = $this->entrada . ' 00:00:00';
 		$nf->codfilial = $this->codfilial;
 		$nf->codpessoa = $this->codpessoa;
 		//$nf->observacoes = 

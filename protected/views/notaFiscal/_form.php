@@ -21,29 +21,29 @@
 			echo $form->select2Row($model,'codfilial', Filial::getListaCombo() , array('class'=>'input-medium'));
 			echo $form->textFieldRow($model,'serie',array('class'=>'input-mini text-right'));
 			echo $form->textFieldRow($model,'numero',array('class'=>'input-small text-right'));
-			echo $form->datepickerRow(
+			echo $form->datetimepickerRow(
 					$model,
 					'emissao',
 					array(
-						'class' => 'input-small text-center', 
+						'class' => 'input-medium text-center', 
 						'options' => array(
 							'language' => 'pt',
-							'format' => 'dd/mm/yyyy'
+							'format' => 'dd/mm/yyyy hh:ii:ss',
 							),
-						'prepend' => '<i class="icon-calendar"></i>',
+						//'prepend' => '<i class="icon-calendar"></i>',
 						)
 					); 
 
-			echo $form->datepickerRow(
+			echo $form->datetimepickerRow(
 					$model,
 					'saida',
 					array(
-						'class' => 'input-small text-center', 
+						'class' => 'input-medium text-center', 
 						'options' => array(
 							'language' => 'pt',
-							'format' => 'dd/mm/yyyy'
+							'format' => 'dd/mm/yyyy hh:ii:ss',
 							),
-						'prepend' => '<i class="icon-calendar"></i>',
+						//'prepend' => '<i class="icon-calendar"></i>',
 						)
 					); 
 			echo $form->select2Row($model,'frete', NotaFiscal::getFreteListaCombo() , array('class'=>'input-medium'));

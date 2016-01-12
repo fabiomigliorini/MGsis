@@ -641,8 +641,8 @@ class MGAcbrNfeMonitor extends MGSocket
 			return false;
 		
 		$this->NotaFiscal->numero = $numero;
-		$this->NotaFiscal->emissao = date('d/m/Y');
-		$this->NotaFiscal->saida = date('d/m/Y');
+		$this->NotaFiscal->emissao = date('d/m/Y H:i:s');
+		$this->NotaFiscal->saida = date('d/m/Y H:i:s');
 		$this->NotaFiscal->update();
 		
 		return true;

@@ -94,6 +94,8 @@ class NotaFiscal extends MGActiveRecord
 	public $saida_ate;
 	
 	private $_codnaturezaoperacao_original;
+	private $_codfilial_original;
+	private $_codpessoa_original;
 	
 	const MODELO_NFE			= 55;
 	const MODELO_NFCE			= 65;
@@ -704,6 +706,10 @@ class NotaFiscal extends MGActiveRecord
 		$this->calculaStatus();
 		$this->_codnaturezaoperacao_original = null;
 		$this->_codnaturezaoperacao_original = $this->codnaturezaoperacao;
+		$this->_codfilial_original = null;
+		$this->_codfilial_original = $this->codfilial;
+		$this->_codpessoa_original = null;
+		$this->_codpessoa_original = $this->codpessoa;
 		return parent::afterFind();
 	}
 	
@@ -733,13 +739,51 @@ class NotaFiscal extends MGActiveRecord
 	
 	protected function afterSave()
 	{
-		if ($this->codnaturezaoperacao != $this->_codnaturezaoperacao_original)
+		// se alterou Natureza de Operacao, Filial ou Pessoa, Recalcula tributacao
+		if (($this->codnaturezaoperacao != $this->_codnaturezaoperacao_original) 
+			|| ($this->codfilial != $this->_codfilial_original)
+			|| ($this->codpessoa != $this->_codpessoa_original)
+			)
 		{
 			$nfpbs = NotaFiscalProdutoBarra::model()->findAll("codnotafiscal = {$this->codnotafiscal}");
 			foreach ($nfpbs as $nfpb)
 			{
+				//Limpa Tributacao Calculada
 				$nfpb->codcfop = null;
 				$nfpb->csosn = null;
+				
+				$nfpb->icmscst = null;
+				$nfpb->icmsbase = null;
+				$nfpb->icmspercentual = null;
+				$nfpb->icmsvalor = null;
+				
+				$nfpb->ipicst = null;
+				$nfpb->ipibase = null;
+				$nfpb->ipipercentual = null;
+				$nfpb->ipivalor = null;
+
+				$nfpb->icmsstbase = null;
+				$nfpb->icmsstpercentual = null;
+				$nfpb->icmsstvalor = null;
+				
+				$nfpb->piscst = null;
+				$nfpb->pisbase = null;
+				$nfpb->pispercentual = null;
+				$nfpb->pisvalor = null;
+				
+				$nfpb->cofinscst = null;
+				$nfpb->cofinsbase = null;
+				$nfpb->cofinspercentual = null;
+				$nfpb->cofinsvalor = null;
+				
+				$nfpb->csllbase = null;
+				$nfpb->csllpercentual = null;
+				$nfpb->csllvalor = null;
+				
+				$nfpb->irpjbase = null;
+				$nfpb->irpjpercentual = null;
+				$nfpb->irpjvalor = null;
+				
 				$nfpb->save();
 			}
 		}
