@@ -277,7 +277,7 @@ $(document).ready(function(){
 			html     += '<div class="pull-right">' + dados.numero + '</div>';
 			html     += '</div>';
 			*/
-			$('#divListagemNotas').append(html);
+			$('#divListagemNotas').prepend(html);
 		}
 		else
 		{
@@ -288,8 +288,8 @@ $(document).ready(function(){
 	
 	function atualizaListagemNotas ()
 	{
-		limpaListagemNotasAutorizadas();
-		$('#btnParar').button('reset');
+		//limpaListagemNotasAutorizadas();
+		//$('#btnParar').button('reset');
 		
 		$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/listagemNotasPendentes')?>")
 			.done(function(data) {
