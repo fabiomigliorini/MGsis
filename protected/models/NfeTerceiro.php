@@ -60,7 +60,7 @@ class NfeTerceiro extends MGActiveRecord
 	const INDSITUACAO_CANCELADA = 3;
 
 	const INDMANIFESTACAO_SEM = 0;
-	const INDMANIFESTACAO_CONFIRMADA = 210200;
+	const INDMANIFESTACAO_REALIZADA = 210200;
 	const INDMANIFESTACAO_DESCONHECIDA = 210220;
 	const INDMANIFESTACAO_NAOREALIZADA = 210240;
 	const INDMANIFESTACAO_CIENCIA = 210210;
@@ -308,9 +308,9 @@ class NfeTerceiro extends MGActiveRecord
 	{
 		return array(
 			self::INDMANIFESTACAO_SEM => "Sem Manifestação",
-			self::INDMANIFESTACAO_CONFIRMADA => "Confirmada a Operação",
-			self::INDMANIFESTACAO_DESCONHECIDA => "Desconhecida",
-			self::INDMANIFESTACAO_NAOREALIZADA => "Não Realizada a Operação",
+			self::INDMANIFESTACAO_REALIZADA => "Operação Realizada",
+			self::INDMANIFESTACAO_DESCONHECIDA => "Operação Desconhecida",
+			self::INDMANIFESTACAO_NAOREALIZADA => "Operação Não Realizada",
 			self::INDMANIFESTACAO_CIENCIA => "Ciência da Operação",
 		);
 	}

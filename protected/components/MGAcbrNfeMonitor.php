@@ -1058,7 +1058,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		
 		switch ($indManifestacao)
 		{
-			case NfeTerceiro::INDMANIFESTACAO_CONFIRMADA:
+			case NfeTerceiro::INDMANIFESTACAO_REALIZADA:
 				$tpEvento = 210200;
 				break;
 			

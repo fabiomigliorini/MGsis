@@ -1846,10 +1846,9 @@ class NFePHPNovoController extends Controller
 		
 		$aRetorno = array();
 		$aRetorno['retorno'] = false;
-		$aRetorno['ex'] = '';
+		$aRetorno['ex'] = null;
 		
 		try {
-			$aRetorno['retorno'] = true;
 			
 			$tools = new ToolsNFe($config);
 			$tools->setModelo('55');
@@ -1864,6 +1863,19 @@ class NFePHPNovoController extends Controller
 			$aResposta = array();
 			$xml = $tools->sefazManifesta($chave, $tpAmb, $xJust, $tpEvento, $aResposta);
 			
+			switch ($aResposta['evento'][0]['cStat'])
+			{
+				case 135: //Evento registrado e vinculado a NF-e
+					$aRetorno['retorno'] = true;
+				case 573: //Rejeição: Duplicidade de Evento
+				case 136: //Evento registrado, mas nao vinculado a NF-e	
+					$nfet->indmanifestacao = $indmanifestacao;
+					$nfet->justificativa = $justificativa;
+					$nfet->save();
+					break;
+			}
+			
+			
 		} catch (Exception $ex) {
 			$aRetorno['ex'] = $ex->getMessage();
 		}
@@ -1871,14 +1883,9 @@ class NFePHPNovoController extends Controller
 		$aRetorno['cStat'] = isset($aResposta['evento'][0]['cStat'])?$aResposta['evento'][0]['cStat']:array();
 		$aRetorno['xMotivo'] = isset($aResposta['evento'][0]['xMotivo'])?$aResposta['evento'][0]['xMotivo']:array();
 		$aRetorno['aResposta'] = isset($aResposta)?$aResposta:array();
-		
-		echo '<br><br><PRE>';
-		echo htmlspecialchars($tools->soapDebug);
-		echo '<hr>';
-		print_r($aRetorno);
-		echo '<hr>';
-		print_r($aResposta);
-		echo "<br>";		
+
+		header('Content-type: text/json; charset=UTF-8');
+		echo json_encode($aRetorno);
 		
 	}
 	
