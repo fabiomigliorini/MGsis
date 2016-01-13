@@ -145,7 +145,7 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
      * Nome da Fonte para gerar o DANFE
      * @var string
      */
-    protected $fontePadrao='Times';
+    protected $fontePadrao='helvetica';
     /**
      * versão
      * @var string
@@ -358,7 +358,7 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
         $this->pdfDir       = $sDirPDF;
         // verifica se foi passa a fonte a ser usada
         if (empty($fonteDANFE)) {
-            $this->fontePadrao = 'Times';
+            $this->fontePadrao = 'helvetica';
         } else {
             $this->fontePadrao = $fonteDANFE;
         }
@@ -490,9 +490,9 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
         //margens do PDF, em milímetros. Obs.: a margem direita é sempre igual à
         //margem esquerda. A margem inferior *não* existe na FPDF, é definida aqui
         //apenas para controle se necessário ser maior do que a margem superior
-        $margSup = 2;
-        $margEsq = 2;
-        $margInf = 2;
+        $margSup = 4;
+        $margEsq = 4;
+        $margInf = 4;
         // posição inicial do conteúdo, a partir do canto superior esquerdo da página
         $xInic = $margEsq;
         $yInic = $margSup;
