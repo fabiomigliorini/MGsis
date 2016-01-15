@@ -231,7 +231,7 @@ function atualizaTotalImportado()
 	totalImportado++;
 	percentual = parseInt((totalImportado / totalSelecionado) * 100);
 	
-	var texto = 'Importado(s) ' + totalImportado + ' de ' + totalSelecionado + '(' + percentual + ')%...'
+	var texto = 'Importado(s) ' + totalImportado + ' de ' + totalSelecionado + ' (' + percentual + ')%...'
 	
 	$('#modalProgressoImportacaoLabelStatus').text(texto);
 	$('#modalProgressoImportacaoProgressBar').css('width', percentual + '%');
