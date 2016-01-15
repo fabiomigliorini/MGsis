@@ -142,16 +142,21 @@ function formataMensagemImporta(data)
 	return mensagem;
 }
 
-function removeBarra(texto)
+var arrArquivos = new Array();
+
+function descobreArquivoID(arquivo)
 {
-	texto = texto.replace(/\//g, '_');
-	return texto.replace(/\./g, '_');
+	for	(i = 0; i < arrArquivos.length; i++) 
+		if (arrArquivos[i] == arquivo)
+			return i+1;
+	
+	return arrArquivos.push(arquivo)
 }
 
 function adicionaArquivoXml(arquivo)
 {
 	
-	var arquivoID = removeBarra(arquivo);
+	var arquivoID = descobreArquivoID(arquivo);
 	
 	if ($('#divArquivo' + arquivoID).length != 0)
 		return;
@@ -161,6 +166,9 @@ function adicionaArquivoXml(arquivo)
 	html += '<div class="span7">';
 	html += '<input type="checkbox" id="boxArquivo' + arquivoID + '" class="boxArquivo pull-left" data-arquivo="' + arquivo + '">';
 	html += '<label for="boxArquivo' + arquivoID + '">';
+	html += '&nbsp';
+	html += arquivoID;
+	html += '&nbsp-&nbsp';
 	html += arquivo.replace(diretorio, '');
 	html += '</label>';
 	html += '</div>';
@@ -204,7 +212,7 @@ function procuraXml(diretorio)
 
 function importaArquivoXml(arquivo)
 {
-	var arquivoID = removeBarra(arquivo);
+	var arquivoID = descobreArquivoID(arquivo);
 	$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/importaArquivoXml')?>", { arquivo: arquivo })
 		.done(function(data) {			
 			//var mensagem = formataMensagem(data);
