@@ -2078,7 +2078,7 @@ class NFePHPNovoController extends Controller
 		
 	}
 	
-	public function actionVisualizaXml ($codnfeterceiro = '', $codnotafiscal)
+	public function actionVisualizaXml ($codnfeterceiro = '', $codnotafiscal = '')
 	{
 		if (!empty($codnfeterceiro))
 		{
