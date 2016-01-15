@@ -31,6 +31,7 @@ class NFePHPNovoController extends Controller
 	var $arquivoXMLAprovada;
 	var $arquivoXMLDenegada;
 	var $arquivoXMLValidada;
+	var $arquivoXMLRecebida;
 	var $arquivoPDF;
 	
 	public $layout='//layouts/column2';
@@ -105,7 +106,7 @@ class NFePHPNovoController extends Controller
 	}
 	
 	
-	public function montarConfiguracao($codfilial, $modelo, $codnotafiscal = false)
+	public function montarConfiguracao($codfilial, $modelo, $codnotafiscal = false, $codnfeterceiro = false)
 	{
 		$filial = $this->loadModelFilial($codfilial);
 			
@@ -225,6 +226,25 @@ class NFePHPNovoController extends Controller
 			$this->arquivoPDF .= $nf->nfechave . '-NFe.pdf';
 			
 		}
+		
+		if ($codnfeterceiro != false)
+		{
+			
+			$nft = $this->loadModelNfeTerceiro($codnfeterceiro);
+			
+			$diretorioBase = 
+				$this->conf['pathNFeFiles']
+				. (($nft->Filial->nfeambiente == Filial::NFEAMBIENTE_PRODUCAO)?'/producao/':'/homologacao/');
+			
+			$this->arquivoXMLRecebida = 
+				$diretorioBase
+				. 'recebidas/' . substr($nft->emissao, 6, 4) . substr($nft->emissao, 3, 2) . '/';
+			if (!is_dir($this->arquivoXMLRecebida))
+				mkdir($this->arquivoXMLRecebida, 0755, true);
+			
+			$this->arquivoXMLRecebida .= $nft->nfechave . '-nfeProc.xml';
+		}
+		
 		
 		$json = json_encode($conf);
 		return $json;
@@ -1789,6 +1809,7 @@ class NFePHPNovoController extends Controller
 					$nfe->emitente = '<Vazio>';
 				$nfe->ie = @$sXml->IE->__toString();
 				$dh = DateTime::createFromFormat ('Y-m-d\TH:i:sP', $sXml->dhEmi->__toString()); //  AAAA-MM-DDThh:mm:ssTZD
+				$nfe->emissao = @$dh->format('d/m/Y');
 				$nfe->codoperacao = @$sXml->tpNF->__toString() + 1;
 				$nfe->valortotal = @Yii::app()->format->unformatNumber($sXml->vNF->__toString());
 				$dh = DateTime::createFromFormat ('Y-m-d\TH:i:sP', $sXml->dhRecbto->__toString()); //  AAAA-MM-DDThh:mm:ssTZD
@@ -1796,7 +1817,7 @@ class NFePHPNovoController extends Controller
 				$nfe->indsituacao = @$sXml->cSitNFe->__toString();
 				//$nfe->indmanifestacao = $sXml->cSitConf;
 				if (!$nfe->save())
-					throw new Exception ($nfe->getErrors());
+					throw new Exception ("Erro ao salvar NF-e de Terceiros:\n\n" . print_r($nfe->getErrors(), true));
 
 				$importadas[$chave] = $nfe->codnfeterceiro;
 				
@@ -1889,8 +1910,205 @@ class NFePHPNovoController extends Controller
 		
 	}
 	
-	public function actionDownload()
+	public function actionDownload($codnfeterceiro)
 	{
+		$nfet = $this->loadModelNfeTerceiro($codnfeterceiro);
+		$config = $this->montarConfiguracao($nfet->codfilial, '55', false, $codnfeterceiro);
+		
+		$aRetorno = array();
+		$aRetorno['retorno'] = false;
+		$aRetorno['ex'] = null;
+		
+		try
+		{
+			$tools = new ToolsNFe($config);
+			$tools->setModelo('55');
+			$chNFe = $nfet->nfechave;
+			$tpAmb = $nfet->Filial->nfeambiente;
+			$cnpj = str_pad($nfet->Filial->Pessoa->cnpj, 14, '0', STR_PAD_LEFT);
+			$aResposta = array();
+			$resp = $tools->sefazDownload($chNFe, $tpAmb, $cnpj, $aResposta);
+			
+			if ($aResposta['bStat'] && $aResposta['aRetNFe']['cStat'] == 140) // Download disponibilizado
+			{
+				$xml = $aResposta['aRetNFe']['nfeProc'];
+				file_put_contents($this->arquivoXMLRecebida, $xml);
+				$aRetorno['retorno'] = $nfet->importarXml();
+			}
+			
+		} catch (Exception $ex) {
+			$aRetorno['ex'] = $ex->getMessage();
+		}
+		
+		$aRetorno['cStat'] = isset($aResposta['aRetNFe']['cStat'])?$aResposta['aRetNFe']['cStat']:array();
+		$aRetorno['xMotivo'] = isset($aResposta['aRetNFe']['xMotivo'])?$aResposta['aRetNFe']['xMotivo']:array();
+		$aRetorno['aResposta'] = isset($aResposta)?$aResposta:array();
+		
+		header('Content-type: text/json; charset=UTF-8');
+		echo json_encode($aRetorno);
+	}
+	
+	public function actionProcuraXml($diretorio)
+	{
+		$aRetorno['retorno'] = false;
+		$aRetorno['ex'] = null;
+		$aRetorno['aResposta'] = array();
+
+		try
+		{
+			$Directory = new RecursiveDirectoryIterator($diretorio);
+			$Iterator = new RecursiveIteratorIterator($Directory);
+			$Regex = new RegexIterator($Iterator, '/^.+\.XML$/i', RecursiveRegexIterator::GET_MATCH);
+			$arquivos = array();
+			foreach ($Regex as $key => $arquivo)
+				$arquivos[] = $arquivo[0];
+
+			$aRetorno['retorno'] = true;
+			$aRetorno['aResposta'] = $arquivos;
+			$aRetorno['xMotivo'] = sizeof($arquivos) . ' arquivos localizados!';
+			
+		} catch (Exception $ex) {
+			$aRetorno['ex'] = $ex->getMessage();
+		}
+		
+		header('Content-type: text/json; charset=UTF-8');
+		echo json_encode($aRetorno);
 		
 	}
+	
+	public function actionImportaArquivoXml($arquivo)
+	{
+		$aRetorno['retorno'] = false;
+		$aRetorno['ex'] = null;
+		$aRetorno['codnfeterceiro'] = null;
+
+		try
+		{
+			
+			if (!is_file($arquivo))
+				throw new Exception ("Arquivo '{$arquivo}' inexistente!");
+			
+			$xmlOriginal = @file_get_contents($arquivo);
+			if (empty(trim($xmlOriginal)))
+				throw new Exception ("Arquivo '{$arquivo}' sem conteúdo!");
+				
+			$xmlLimpo = NfeTerceiro::limpaCaracteresEspeciaisXml($xmlOriginal);
+			
+			$sXml = @simplexml_load_string($xmlLimpo);
+			if (!$sXml)
+				throw new Exception ("Arquivo '{$arquivo}' não contém um XML válido!");
+			
+			if (isset($sXml->NFe->infNFe))
+				$infNFe = $sXml->NFe->infNFe;
+			
+			if (isset($sXml->infNFe))
+				$infNFe = $sXml->infNFe;
+			
+			if (!isset($infNFe))
+				throw new Exception ("Arquivo '{$arquivo}' não contém uma NF-e válida!");
+				
+			if (!isset($infNFe->attributes()->Id))
+				throw new Exception ("Arquivo '{$arquivo}' não contém uma chave de NF-e!");
+			
+			$chave = Yii::app()->format->NumeroLimpo($infNFe->attributes()->Id->__toString());
+			if (!NFePHP\Common\Keys\Keys::testaChave($chave))
+				throw new Exception ("Arquivo '{$arquivo}' não contém uma chave de NF-e Válida!");
+
+			// busca registro no banco
+			$nfe = NfeTerceiro::model()->find("nfechave = :nfechave", array(":nfechave" => $chave));
+			if ($nfe === NULL)
+				$nfe = new NfeTerceiro;
+			
+			$cnpj = $infNFe->dest->CNPJ;
+			if (empty($cnpj))
+				$cnpj = $infNFe->dest->CPF;
+
+			if ($pessoa = Pessoa::model()->find("cnpj = :cnpj", array(":cnpj" => $cnpj)))
+				if ($filial = Filial::model()->find("codpessoa = :codpessoa", array(":codpessoa" => $pessoa->codpessoa)))
+					$nfe->codfilial = $filial->codfilial;
+
+			if (empty($nfe->codfilial))
+				throw new Exception ("Impossível Localizar a filial com o CNPJ/CPF '{$cnpj}'!");
+				
+			$nfe->nsu = null;
+			$nfe->nfechave = $chave;
+			
+			$nfe->cnpj = $infNFe->emit->CNPJ->__toString();
+			$nfe->ie = $infNFe->emit->IE->__toString();
+			
+			$nfe->emitente = Yii::app()->format->removeAcentos(utf8_encode($infNFe->emit->xNome->__toString()));
+			if (empty($nfe->emitente))
+				$nfe->emitente = '<Vazio>';
+
+			
+			if (!($dh = DateTime::createFromFormat ('Y-m-d\TH:i:sP', $infNFe->ide->dhEmi->__toString())))
+				if (!($dh = DateTime::createFromFormat ('Y-m-d', $infNFe->ide->dEmi->__toString())))
+					throw new Exception ("Impossível determinar a data de emissão da NF-e!");
+				
+			$nfe->emissao = $dh->format("d/m/Y H:i:s");
+			
+			if (!$nfe->save())
+				throw new Exception ("Erro ao Salvar NF-e de Terceiro:\n\n" . print_r($nfe->getErrors(), true));
+			
+			$nfe = NfeTerceiro::model()->find("nfechave = :nfechave", array(":nfechave" => $chave));
+			if ($nfe === NULL)
+				throw new Exception ("Erro localizar NF-e de Terceiro pela chave {$chave}!");
+				
+			$config = $this->montarConfiguracao($nfe->codfilial, '55', $codnotafiscal = null, $nfe->codnfeterceiro);
+			file_put_contents($this->arquivoXMLRecebida, $xmlOriginal);
+			
+			if (!$nfe->importarXml())
+				throw new Exception ("Erro ao Importaro Arquivo XML:\n\n" . print_r($nfe->getErrors(), true));
+			
+			//TODO: APAGAR XML ORIGINAL
+			$aRetorno['codnfeterceiro'] = $nfe->codnfeterceiro;
+			
+			if (!unlink($arquivo))
+				throw new Exception ("Erro ao apagar o arquivo '{$arquivo}'!");
+			
+			$aRetorno['retorno'] = true;
+			
+			
+		} catch (Exception $ex) {
+			$aRetorno['ex'] = $ex->getMessage();
+		}
+		
+		header('Content-type: text/json; charset=UTF-8');
+		echo json_encode($aRetorno);
+		
+	}
+	
+	public function actionVisualizaXml ($codnfeterceiro = '', $codnotafiscal)
+	{
+		if (!empty($codnfeterceiro))
+		{
+			$nfeTerceiro = $this->loadModelNfeTerceiro ($codnfeterceiro);
+			$arquivo = $nfeTerceiro->montarCaminhoArquivoXml();
+		}
+		
+		if (!empty($codnotafiscal))
+		{
+			$nfe = $this->loadModelNotaFiscal ($codnotafiscal);
+			$config = $this->montarConfiguracao($nfe->codfilial, '55', $codnotafiscal);
+			
+			$arquivo = $this->arquivoXMLAprovada;
+			if (!is_file($arquivo))
+				$arquivo = $this->arquivoXMLDenegada;
+			if (!is_file($arquivo))
+				$arquivo = $this->arquivoXMLValidada;
+		}
+		
+		if (empty($arquivo))
+			throw new CHttpException(404, 'Nenhum documento informado!');
+		
+		if (!is_file($arquivo))
+			throw new CHttpException(404, "Arquivo '{$arquivo}' inexistente!");
+			
+		$xml = file_get_contents($arquivo);
+		
+		header("Content-type: text/xml");
+		echo $xml;
+		
+	}
+
 }

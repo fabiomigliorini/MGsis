@@ -14,6 +14,7 @@ $this->menu=array(
 	array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir'), 'visible' => !$bloqueado),
 	array('label'=>'Duplicar', 'icon'=>'icon-retweet', 'url'=>array('create','duplicar'=>$model->codnotafiscal)),
 	array('label'=>'Operacao Inversa', 'icon'=>'icon-random', 'url'=>array('create','inverter'=>$model->codnotafiscal)),
+	array('label'=>'Ver Arquivo XML', 'icon'=>' icon-file', 'url'=>array('NFePHPNovo/visualizaXml','codnotafiscal'=>$model->codnotafiscal), 'linkOptions'=>	array('id'=>'btnArquivoXml'), 'visible' => $bloqueado), 
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
 
@@ -249,6 +250,15 @@ $(document).ready(function(){
 				'value' => str_replace(" ", "&nbsp;", CHtml::encode(Yii::app()->format->formataChaveNfe($model->nfechave))),
 				'type' => 'raw',
 			);
+	
+	foreach($model->NfeTerceiros as $nfet)
+		$attr[] = 
+			array(
+				'label' => 'NF-e Terceiro',
+				'value' => CHtml::link('Abrir', array("nfeTerceiro/view", "id" => $nfet->codnfeterceiro)),
+				'type' => 'raw',
+			);
+	
 	
 	if (!empty($model->nfereciboenvio) || !empty($model->nfedataenvio))
 		$attr[] = 

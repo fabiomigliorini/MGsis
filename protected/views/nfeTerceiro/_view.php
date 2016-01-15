@@ -10,6 +10,23 @@ if (
 	)
 	$css = 'alert-danger';
 	
+
+$cssmanif = '';
+switch ($data->indmanifestacao)
+{
+	case NfeTerceiro::INDMANIFESTACAO_CIENCIA:
+		$cssmanif = 'badge-warning';
+		break;
+	case NfeTerceiro::INDMANIFESTACAO_REALIZADA:
+		$cssmanif = 'badge-success';
+		break;
+	case NfeTerceiro::INDMANIFESTACAO_DESCONHECIDA:
+	case NfeTerceiro::INDMANIFESTACAO_NAOREALIZADA:
+		$cssmanif = 'badge-important';
+		break;
+}
+	
+
 ?>
 
 <div class="row-fluid registro <?php echo $css; ?>">
@@ -23,16 +40,11 @@ if (
 	</div>
 	<small class="span5 muted">
 		<?php echo CHtml::link(CHtml::encode(Yii::app()->format->formataChaveNfe($data->nfechave)),array('view','id'=>$data->codnfeterceiro)); ?>
-
+		<span class='badge <?php echo $cssmanif; ?>'>&nbsp;</span>
 		<div class="pull-right">
 			<?php 
 			if (isset($data->NotaFiscal))
 				echo CHtml::link(CHtml::encode(Yii::app()->format->formataNumeroNota($data->NotaFiscal->emitida, $data->NotaFiscal->serie, $data->NotaFiscal->numero, $data->NotaFiscal->modelo)),array('notaFiscal/view','id'=>$data->codnotafiscal)); 
-			/*
-			else
-				echo CHtml::encode(Yii::app()->format->formataNumeroNota(false, $data->serie, $data->numero, NotaFiscal::MODELO_NFE)); 
-			 * 
-			 */
 			?>
 		</div>
 		<br>

@@ -17,6 +17,7 @@ $this->menu=array(
 	array('label'=>'Download Nfe', 'icon'=>'icon-download-alt', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnDownloadNfe'), 'visible'=>empty($model->codnotafiscal) ),
 	array('label'=>'Informar Detalhes', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codnfeterceiro), 'visible'=>$model->podeEditar()),
 	array('label'=>'Importar', 'icon'=>'icon-thumbs-up', 'url'=>'#', 'visible'=>$model->podeEditar(), 'linkOptions'=>	array('id'=>'btnImportar')), 
+	array('label'=>'Ver Arquivo XML', 'icon'=>' icon-file', 'url'=>array('NFePHPNovo/visualizaXml','codnfeterceiro'=>$model->codnfeterceiro), 'linkOptions'=>	array('id'=>'btnArquivoXml')), 
 	//array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
@@ -25,6 +26,7 @@ Yii::app()->clientScript->registerCoreScript('yii');
 
 ?>
 <script type="text/javascript">
+/*<![CDATA[*/
 
 function formataMensagem(data)
 {
@@ -93,28 +95,24 @@ function enviarEventoManifestacao(indManifestacao, justificativa)
 
 function downloadNfe ()
 {
-	$.getJSON("<?php echo Yii::app()->createUrl('nfeTerceiro/downloadNfe')?>", { id: <?php echo $model->codnfeterceiro; ?> } )
+	
+	$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/download')?>", { 
+		codnfeterceiro: <?php echo $model->codnfeterceiro; ?>
+	})
 		.done(function(data) {
-
-			var mensagem = '';
-
-			if (!data.resultado)
-				mensagem = '<h3>' + data.erroMonitor + '</h3><pre>' + data.retorno + '</pre>';
-			else
-				mensagem = '<h3>' + data.retornoMonitor[1] + '</h3><pre>' + data.retorno + '</pre>';
-
+			var mensagem = formataMensagem(data);
 			bootbox.alert(mensagem, function() {
 				location.reload();
 			});
-
 		})
 		.fail(function( jqxhr, textStatus, error ) {
-			var err = textStatus + ", " + error;
-			console.log( "Request Failed: " + err );
+			bootbox.alert(error, function() {
+				location.reload();
+			});
 		});
+	
 }
 
-/*<![CDATA[*/
 $(document).ready(function(){
 
 	$('#btnManifestacaoCiencia').click(function(e) {

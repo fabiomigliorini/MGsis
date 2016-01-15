@@ -19,14 +19,15 @@
 		echo $form->select2PessoaRow($model,'codpessoa', array('class'=>'input-xlarge'));
 		echo $form->select2Row($model,'indsituacao', NfeTerceiro::getIndSituacaoListaCombo(), array('class'=>'input-medium'));
 		echo $form->select2Row($model,'codnaturezaoperacao', NaturezaOperacao::getListaCombo(), array('class'=>'input-xlarge'));
-		echo $form->datepickerRow(
+
+		echo $form->datetimepickerRow(
 				$model,
 				'entrada',
 				array(
-					'class' => 'input-small text-center', 
+					'class' => 'input-medium text-center', 
 					'options' => array(
 						'language' => 'pt',
-						'format' => 'dd/mm/yyyy'
+						'format' => 'dd/mm/yyyy hh:ii:ss',
 						),
 					'prepend' => '<i class="icon-calendar"></i>',
 					)

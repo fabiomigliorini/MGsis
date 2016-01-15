@@ -186,6 +186,7 @@ class NfeTerceiroController extends Controller
 		 */
 		$model=new NfeTerceiro;
 
+		/*
 		if(isset($_POST['NfeTerceiro']))
 		{
 			$model->attributes=$_POST['NfeTerceiro'];
@@ -193,7 +194,8 @@ class NfeTerceiroController extends Controller
 			if ($model->importarXmlViaArquivo())
 				$this->redirect(array('view','id'=>$model->codnfeterceiro));
 		}
-
+		*/
+		
 		$this->render(
 			'upload',
 			array(

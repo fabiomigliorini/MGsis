@@ -336,13 +336,29 @@ class NfeTerceiro extends MGActiveRecord
 		
 		// replace & followed by a bunch of letters, numbers
 		// and underscores and an equal sign with &amp;
-		$xml = preg_replace('/&[^; ]{0,6}.?/e', "((substr('\\0',-1) == ';') ? '\\0' : '&amp;'.substr('\\0',1))", $xml);
+		//$xml = preg_replace('/&[^; ]{0,6}.?/e', "((substr('\\0',-1) == ';') ? '\\0' : '&amp;'.substr('\\0',1))", $xml);
+		$xml = self::limpaCaracteresEspeciaisXml($xml);
 		
 		return $this->xml = @simplexml_load_string($xml);
 	}
 	
+	public static function limpaCaracteresEspeciaisXml($xml)
+	{
+		return preg_replace_callback(
+			'/&[^; ]{0,6}.?/',
+			create_function(
+				// single quotes are essential here,
+				// or alternative escape all $ as \$
+				'$matches',
+				'return str_replace(\'&\', \'e\', $matches[0]);'
+			),
+			$xml
+		);
+	}
+	
 	public function montarCaminhoArquivoXml()
 	{
+		/*
 		//encontra chave/cnpjs do arquivo XML
 		if ($this->xml instanceof SimpleXMLElement)
 		{
@@ -362,9 +378,15 @@ class NfeTerceiro extends MGActiveRecord
 		$diretorio = self::DIRETORIO_XML . "/{$cnpjfilial}/{$cnpjemitraiz}";
 		if (!file_exists($diretorio))
 			mkdir ($diretorio, 0777, true);
+		*/
+		
+		$arquivo = "/var/www/NFePHP/Arquivos/NFe/{$this->codfilial}";
+		$arquivo .= (($this->Filial->nfeambiente == Filial::NFEAMBIENTE_PRODUCAO)?'/producao/':'/homologacao/');
+		$arquivo .= 'recebidas/' . substr($this->emissao, 6, 4) . substr($this->emissao, 3, 2) . '/';
+		$arquivo .= $this->nfechave . '-nfeProc.xml';
 		
 		//retorna caminho
-		return "{$diretorio}/{$this->nfechave}-nfe.xml";
+		return $arquivo;
 	}
 	
 	public function importarXmlViaString($str)
@@ -453,41 +475,52 @@ class NfeTerceiro extends MGActiveRecord
 			$this->setPrimaryKey($nft->codnfeterceiro);
 			$this->setIsNewRecord(false);
 		}
+
+		if (isset($this->xml->NFe->infNFe))
+			$infNFe = $this->xml->NFe->infNFe;
+
+		if (isset($this->xml->infNFe))
+			$infNFe = $this->xml->infNFe;
 		
-		$cnpj = $this->xml->NFe->infNFe->dest->CNPJ;
+		$cnpj = $infNFe->dest->CNPJ;
 		if (empty($cnpj))
-			$cnpj = $this->xml->NFe->infNFe->dest->CPF;
+			$cnpj = $infNFe->dest->CPF;
 		
 		if ($pessoa = Pessoa::model()->find("cnpj = :cnpj", array(":cnpj" => $cnpj)))
 			if ($filial = Filial::model()->find("codpessoa = :codpessoa", array(":codpessoa" => $pessoa->codpessoa)))
 				$this->codfilial = $filial->codfilial;
 			
-		$this->nfechave = Yii::app()->format->NumeroLimpo($this->xml->NFe->infNFe->attributes()->Id->__toString());
-		$this->cnpj = $this->xml->NFe->infNFe->emit->CNPJ->__toString();
-		$this->ie = $this->xml->NFe->infNFe->emit->IE->__toString();
-		$this->emitente = $this->xml->NFe->infNFe->emit->xNome->__toString();
+		$this->nfechave = Yii::app()->format->NumeroLimpo($infNFe->attributes()->Id->__toString());
+		$this->cnpj = $infNFe->emit->CNPJ->__toString();
+		$this->ie = $infNFe->emit->IE->__toString();
+		$this->emitente = $infNFe->emit->xNome->__toString();
 
-		//<dhEmi>2015-10-09T00:00:00-04:00</dhEmi>
-		$dEmi = trim($this->xml->NFe->infNFe->ide->dhEmi->__toString());
-		if (empty($dEmi))
-			$dEmi = $this->xml->NFe->infNFe->ide->dEmi->__toString();
-		$dEmi = substr($dEmi, 0, 10);
-		if ($emissao = DateTime::createFromFormat("Y-m-d", $dEmi))
-			$this->emissao = $emissao->format("d/m/Y");
-
-		$this->codoperacao = Operacao::SAIDA;
 		
-		$this->icmsbase = $this->xml->NFe->infNFe->total->ICMSTot->vBC->__toString();
-		$this->icmsvalor = $this->xml->NFe->infNFe->total->ICMSTot->vICMS->__toString();
-		$this->icmsstbase = $this->xml->NFe->infNFe->total->ICMSTot->vBCST->__toString();
-		$this->icmsstvalor = $this->xml->NFe->infNFe->total->ICMSTot->vST->__toString();
-		$this->ipivalor = $this->xml->NFe->infNFe->total->ICMSTot->vIPI->__toString();
-		$this->valorprodutos = $this->xml->NFe->infNFe->total->ICMSTot->vProd->__toString();
-		$this->valorfrete = $this->xml->NFe->infNFe->total->ICMSTot->vFrete->__toString();
-		$this->valorseguro = $this->xml->NFe->infNFe->total->ICMSTot->vSeg->__toString();
-		$this->valordesconto = $this->xml->NFe->infNFe->total->ICMSTot->vDesc->__toString();
-		$this->valoroutras = $this->xml->NFe->infNFe->total->ICMSTot->vOutro->__toString();
-		$this->valortotal = $this->xml->NFe->infNFe->total->ICMSTot->vNF->__toString();
+		//<dhEmi>2015-10-09T00:00:00-04:00</dhEmi>
+		if (!($dh = DateTime::createFromFormat ('Y-m-d\TH:i:sP', $infNFe->ide->dhEmi->__toString())))
+		{
+			//<dEmi>2015-10-09</dhEmi>
+			if (!($dh = DateTime::createFromFormat ('Y-m-d', $infNFe->ide->dEmi->__toString())))
+			{
+				$this->addError("arquivoxml", "Impossível determinar a data de emissão da NF-e!");
+				return false;
+			}
+		}
+		$this->emissao = $dh->format("d/m/Y H:i:s");
+
+		$this->codoperacao = $infNFe->ide->__toString() + 1;
+		
+		$this->icmsbase = $infNFe->total->ICMSTot->vBC->__toString();
+		$this->icmsvalor = $infNFe->total->ICMSTot->vICMS->__toString();
+		$this->icmsstbase = $infNFe->total->ICMSTot->vBCST->__toString();
+		$this->icmsstvalor = $infNFe->total->ICMSTot->vST->__toString();
+		$this->ipivalor = $infNFe->total->ICMSTot->vIPI->__toString();
+		$this->valorprodutos = $infNFe->total->ICMSTot->vProd->__toString();
+		$this->valorfrete = $infNFe->total->ICMSTot->vFrete->__toString();
+		$this->valorseguro = $infNFe->total->ICMSTot->vSeg->__toString();
+		$this->valordesconto = $infNFe->total->ICMSTot->vDesc->__toString();
+		$this->valoroutras = $infNFe->total->ICMSTot->vOutro->__toString();
+		$this->valortotal = $infNFe->total->ICMSTot->vNF->__toString();
 		
 		if (empty($this->indsituacao))
 			$this->indsituacao = NfeTerceiro::INDSITUACAO_AUTORIZADA;
@@ -495,13 +528,13 @@ class NfeTerceiro extends MGActiveRecord
 		if (empty($this->indmanifestacao))
 			$this->indmanifestacao = NfeTerceiro::INDMANIFESTACAO_SEM;
 		
-		$this->serie = $this->xml->NFe->infNFe->ide->serie->__toString();
-		$this->numero = $this->xml->NFe->infNFe->ide->nNF->__toString();
+		$this->serie = $infNFe->ide->serie->__toString();
+		$this->numero = $infNFe->ide->nNF->__toString();
 		
 		if (!$this->save())
 			return false;
 		
-		foreach($this->xml->NFe->infNFe->det as $item)
+		foreach($infNFe->det as $item)
 		{
 			
 			$nfitem = NfeTerceiroItem::model()->find(
@@ -553,7 +586,8 @@ class NfeTerceiro extends MGActiveRecord
 				$nfitem->ipivipi = $item->imposto->IPI->IPITrib->vIPI->__toString();
 			}
 			
-			$nfitem->copiaDadosUltimaOcorrencia();
+			if (empty($nfitem->codprodutobarra))
+				$nfitem->copiaDadosUltimaOcorrencia();
 
 			if (!$nfitem->save())
 			{
@@ -564,10 +598,10 @@ class NfeTerceiro extends MGActiveRecord
 			
 		}
 		
-		if (!isset($this->xml->NFe->infNFe->cobr->dup))
+		if (!isset($infNFe->cobr->dup))
 			return true;
 		
-		foreach($this->xml->NFe->infNFe->cobr->dup as $dup)
+		foreach($infNFe->cobr->dup as $dup)
 		{
 			$nfdup = NfeTerceiroDuplicata::model()->find(
 				"codnfeterceiro = :codnfeterceiro AND ndup = :ndup", 
@@ -631,8 +665,8 @@ class NfeTerceiro extends MGActiveRecord
 		//$nf->nfeimpressa = false;
 		$nf->serie = $this->serie;
 		$nf->numero = $this->numero;
-		$nf->emissao = $this->emissao . ' 00:00:00';
-		$nf->saida = $this->entrada . ' 00:00:00';
+		$nf->emissao = $this->emissao;
+		$nf->saida = $this->entrada;
 		$nf->codfilial = $this->codfilial;
 		$nf->codpessoa = $this->codpessoa;
 		//$nf->observacoes = 
