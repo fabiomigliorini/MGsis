@@ -256,11 +256,13 @@ $(document).ready(function() {
     });
 	
 	$('#btnTodos').click(function(e) {
-		 $('.boxArquivo').prop("checked", true);
+		$('.boxArquivo').prop("checked", true);
+		habilitaBtnImportar();
     });
 	
 	$('#btnNenhum').click(function(e) {
 		$('.boxArquivo').prop("checked", false);
+		habilitaBtnImportar();
     });
 	
 });
