@@ -13,6 +13,19 @@ array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 
 <h1>Carregar NFe de Terceiro Via Arquivo XML</h1>
 
+<div id="modalProgressoImportacao" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">
+		<h3>Importando arquivos XML...</h3> 
+	</div>
+	<div class="modal-body">
+		<div class="progress progress-success progress-striped">
+			<div class="bar" id="modalProgressoImportacaoProgressBar" style="width: 00%"></div>
+		</div>
+		<div id="modalProgressoImportacaoLabelStatus">Inicializando...</div>
+	</div>
+</div>
+
+
 <div class="row-fluid">
 	<div class="row-fluid">
 		<div class="span4">
@@ -68,6 +81,10 @@ array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 
 <script type='text/javascript'>
 
+var arrArquivos = new Array();
+var totalSelecionado = 0;
+var totalImportado = 0;
+	
 
 function formataMensagem(data)
 {
@@ -142,7 +159,6 @@ function formataMensagemImporta(data)
 	return mensagem;
 }
 
-var arrArquivos = new Array();
 
 function descobreArquivoID(arquivo)
 {
@@ -210,6 +226,16 @@ function procuraXml(diretorio)
 		});
 }
 
+function atualizaTotalImportado()
+{
+	totalImportado++;
+	percentual = parseInt((totalImportado / totalSelecionado) * 100);
+	$('#modalProgressoImportacaoLabelStatus').text(percentual + '% Importado...');
+	$('#modalProgressoImportacaoProgressBar').css('width', percentual + '%');
+	if (totalSelecionado == totalImportado)
+		$('#modalProgressoImportacao').modal('hide');
+}
+
 function importaArquivoXml(arquivo)
 {
 	var arquivoID = descobreArquivoID(arquivo);
@@ -229,14 +255,16 @@ function importaArquivoXml(arquivo)
 				$('#divArquivo' + arquivoID).addClass('alert-error');
 			}
 			$('#divArquivoResultado' + arquivoID).html(formataMensagemImporta(data));
+			atualizaTotalImportado();
 		})
 		.fail(function( jqxhr, textStatus, error ) {
 			$('#divArquivo' + arquivoID).addClass('alert-error');
 			$('#divArquivoResultado' + arquivoID).html(error);
 			$('#divArquivoResultado' + arquivoID).show();
+			atualizaTotalImportado();
 		});
 }
-	
+
 $(document).ready(function() {
 	
 	 procuraXml($("#NfeTerceiro_arquivoxml").val());
@@ -250,6 +278,10 @@ $(document).ready(function() {
     });
 	
 	$('#btnImportar').click(function(e) {
+		$('#modalProgressoImportacaoProgressBar').css('width', '0%');
+		$('#modalProgressoImportacao').modal({show:true, keyboard:false})
+		totalSelecionado = $('.boxArquivo:checked').length;
+		totalImportado = 0;
 		$('.boxArquivo:checked').each(function(){
 			 importaArquivoXml($(this).data('arquivo'));
 		});
