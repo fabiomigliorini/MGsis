@@ -490,8 +490,8 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
         //margens do PDF, em milímetros. Obs.: a margem direita é sempre igual à
         //margem esquerda. A margem inferior *não* existe na FPDF, é definida aqui
         //apenas para controle se necessário ser maior do que a margem superior
-        $margSup = 4;
-        $margEsq = 4;
+        $margSup = 5;
+        $margEsq = 7;
         $margInf = 4;
         // posição inicial do conteúdo, a partir do canto superior esquerdo da página
         $xInic = $margEsq;
