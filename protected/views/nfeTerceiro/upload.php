@@ -230,7 +230,10 @@ function atualizaTotalImportado()
 {
 	totalImportado++;
 	percentual = parseInt((totalImportado / totalSelecionado) * 100);
-	$('#modalProgressoImportacaoLabelStatus').text(percentual + '% Importado...');
+	
+	var texto = 'Importado(s) ' + totalImportado + ' de ' + totalSelecionado + '(' + percentual + ')%...'
+	
+	$('#modalProgressoImportacaoLabelStatus').text(texto);
 	$('#modalProgressoImportacaoProgressBar').css('width', percentual + '%');
 	if (totalSelecionado == totalImportado)
 		$('#modalProgressoImportacao').modal('hide');
@@ -279,6 +282,7 @@ $(document).ready(function() {
 	
 	$('#btnImportar').click(function(e) {
 		$('#modalProgressoImportacaoProgressBar').css('width', '0%');
+		$('#modalProgressoImportacaoLabelStatus').text('Inicializando...');
 		$('#modalProgressoImportacao').modal({show:true, keyboard:false})
 		totalSelecionado = $('.boxArquivo:checked').length;
 		totalImportado = 0;
