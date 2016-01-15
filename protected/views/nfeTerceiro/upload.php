@@ -170,6 +170,13 @@ function adicionaArquivoXml(arquivo)
 	$('#divListagemArquivos').append(html);
 }
 
+function habilitaBtnImportar()
+{
+	if ($('.boxArquivo:checked').length > 0)
+		$('#btnImportar').removeAttr("disabled");
+	else
+		$('#btnImportar').attr("disabled", true);
+}
 
 function procuraXml(diretorio)
 {
@@ -186,9 +193,9 @@ function procuraXml(diretorio)
 			}
 			$('#divResultadoProcura').html(mensagem);
 			$('.boxArquivo').change(function () {
-				console.log('aqui');
+				habilitaBtnImportar();
 			});
-			//bootbox.alert();
+			habilitaBtnImportar();
 		})
 		.fail(function( jqxhr, textStatus, error ) {
 			bootbox.alert(error);
