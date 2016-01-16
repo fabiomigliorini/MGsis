@@ -842,18 +842,21 @@ class NFePHPNovoController extends Controller
 				$resp = $make->tagdup($nDup, $dVenc, $vDup);
 			}
 			*/
-			foreach ($nf->NotaFiscalDuplicatass as $nfd) {
-				$nDup = utf8_encode($nfd->fatura);
-				$dh = DateTime::createFromFormat ('d/m/Y', $nfd->vencimento);//para versão 3.10 '2014-02-03T13:22:42-3.00' não informar para NFCe
-				$dVenc = $dh->format('Y-m-d');
-				$vDup = number_format($nfd->valor, 2, '.', '');
-				$resp = $make->tagdup($nDup, $dVenc, $vDup);
-			}
-
-			//TODO: Trazer informação do tipo de pagamento do negocio
-			if ($nf->modelo == NotaFiscal::MODELO_NFCE)
+			if ($nf->modelo != NotaFiscal::MODELO_NFCE)
 			{
-				$tPag = '01'; //01=Dinheiro 02=Cheque 03=Cartão de Crédito 04=Cartão de Débito 05=Crédito Loja 10=Vale Alimentação 11=Vale Refeição 12=Vale Presente 13=Vale Combustível 99=Outros
+				foreach ($nf->NotaFiscalDuplicatass as $nfd) 
+				{
+					$nDup = utf8_encode($nfd->fatura);
+					$dh = DateTime::createFromFormat ('d/m/Y', $nfd->vencimento);//para versão 3.10 '2014-02-03T13:22:42-3.00' não informar para NFCe
+					$dVenc = $dh->format('Y-m-d');
+					$vDup = number_format($nfd->valor, 2, '.', '');
+					$resp = $make->tagdup($nDup, $dVenc, $vDup);
+				}
+			}
+			else
+			{
+				//TODO: Trazer informação do tipo de pagamento do negocio
+				$tPag = (sizeof($nf->NotaFiscalDuplicatass)>0)?'05':'01'; //01=Dinheiro 02=Cheque 03=Cartão de Crédito 04=Cartão de Débito 05=Crédito Loja 10=Vale Alimentação 11=Vale Refeição 12=Vale Presente 13=Vale Combustível 99=Outros
 				$vPag = number_format($nf->valortotal, 2, '.', '');
 				$resp = $make->tagpag($tPag, $vPag);
 			}
