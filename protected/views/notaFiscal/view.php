@@ -421,7 +421,7 @@ $(document).ready(function(){
 <table class="table table-hover table-condensed table-bordered table-striped">
 	<thead>
 		<tr>
-			<th colspan="3">Produto</th>
+			<th colspan="4">Produto</th>
 			<th colspan="4">Valores</th>
 			<th rowspan="2">CFOP</th>
 			<th colspan="2">ICMS</th>
@@ -435,6 +435,7 @@ $(document).ready(function(){
 			<th rowspan="2"></th>
 		</tr>
 		<tr>
+			<th>#</th>
 			<th>Barras</th>
 			<th>Descrição</th>
 			<th>NCM</th>
@@ -458,10 +459,17 @@ $(document).ready(function(){
 	<tbody>
 
 		<?php
+		$iItem = 0;
 		foreach ($model->NotaFiscalProdutoBarras as $prod)
 		{
+			$iItem++;
 			?>
 			<tr>
+				<td class="">
+					<small class="muted pull-right">
+						<?php echo $iItem; ?>
+					</small>
+				</td>
 				<td>
 					<small class="muted">
 						<?php echo CHtml::encode($prod->ProdutoBarra->barras, 6); ?>
