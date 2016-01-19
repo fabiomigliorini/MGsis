@@ -1742,6 +1742,9 @@ class NFePHPNovoController extends Controller
 			$arr['codfilial'] = $nota->codfilial;
 			$arr['filial'] = $nota->Filial->filial;
 			$arr['tpEmis'] = $nota->tpemis;
+			$arr['emissao'] = $nota->emissao;
+			$arr['nfedataenvio'] = $nota->nfedataenvio;
+			$arr['usuario'] = $nota->UsuarioCriacao->usuario;
 			$listagem[$nota->codnotafiscal] = $arr;
 		}
 		
