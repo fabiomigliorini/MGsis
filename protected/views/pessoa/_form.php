@@ -206,8 +206,19 @@ function alteraEndereco(cobranca, endereco, bairro, cidade, uf)
 		campoCodCidade = "#Pessoa_codcidadecobranca";
 	}
 	
+	//Joga foco para forcar blur() - Setcase e removeacentos
 	$(campoEndereco).val(endereco);
+	$(campoEndereco).focus();
+	$(campoEndereco).focus();
+	
+	//Joga foco para forcar blur() - Setcase e removeacentos
 	$(campoBairro).val(bairro);
+	$(campoBairro).focus();
+	$(campoBairro).focus();
+	
+	//Joga foco
+	$(campoEndereco).focus();
+	$(campoEndereco).focus();
 
 	$.ajax({
 		url: "<?php echo Yii::app()->createUrl('cidade/ajaxbuscapelonome') ?>&cidade="+escape(cidade)+"&uf="+escape(uf),
