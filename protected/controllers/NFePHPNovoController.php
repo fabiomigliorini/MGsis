@@ -1206,9 +1206,11 @@ class NFePHPNovoController extends Controller
 					break;
 			}
 
-			
 			$arquivopdf = $this->gerarDanfe($codnotafiscal);
+			
 			header('Content-type: application/pdf');
+			header('Content-Disposition: inline; filename="' . basename($this->arquivoPDF) . '"');
+			
 			readfile($this->arquivoPDF);
 
 		} catch (Exception $ex) {
