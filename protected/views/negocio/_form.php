@@ -225,7 +225,8 @@ $(document).ready(function() {
 		atualizaPercentualDesconto();
     });
 
-	//$("#Pessoa_fantasia").Setcase();
+	$("#Negocio_observacoes").RemoveAcentos();
+	
 	$('#Negocio_valorprodutos').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#Negocio_percentualdesconto').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#Negocio_valordesconto').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });

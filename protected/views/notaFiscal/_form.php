@@ -196,7 +196,8 @@ function atualizaObservacoes()
 	
 $(document).ready(function() {
 
-	//$("#Pessoa_fantasia").Setcase();
+	$("#NotaFiscal_observacoes").RemoveAcentos();
+	
 	$('#NotaFiscal_valorprodutos').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#NotaFiscal_icmsstvalor').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#NotaFiscal_ipivalor').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });

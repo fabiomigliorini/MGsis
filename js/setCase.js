@@ -1,5 +1,48 @@
 (function($) {
 	
+	$.fn.RemoveAcentos = function(settings) {
+
+		this.each(function() {
+		
+			$(this).blur(function(){
+				var currVal = $(this).val();
+
+				//remove aspas
+				currVal = currVal.replace(/"/g, " ");
+				currVal = currVal.replace(/'/g, " ");
+
+				//limpa espaço em branco no início e final
+				currVal = currVal.trim();
+
+				//remove espaço duplicado
+				currVal = currVal.replace(/\s{2,}/g, ' ');
+
+				//remove hífen duplicado
+				currVal = currVal.replace(/(\-)\1+/gi, "-");
+
+				//remove acentos
+				currVal = currVal.replace(/[á|ã|â|à|ª]/g, "a");
+				currVal = currVal.replace(/[Á|Ã|Â|À]/g, "A");
+				currVal = currVal.replace(/[é|ẽ|ê|è]/g, "e");
+				currVal = currVal.replace(/[É|Ẽ|Ê|È]/g, "E");
+				currVal = currVal.replace(/[í|ĩ|î|ì]/g, "i");
+				currVal = currVal.replace(/[Í|Ĩ|Î|Ì]/g, "I");
+				currVal = currVal.replace(/[ó|õ|ô|ò|º]/g, "o");
+				currVal = currVal.replace(/[Ó|Õ|Ô|Ò]/g, "O");
+				currVal = currVal.replace(/[ú|ũ|û|ù]/g, "u");
+				currVal = currVal.replace(/[Ú|Ũ|Û|Ù]/g, "U");
+				currVal = currVal.replace(/[ĉ|ç]/g, "c");
+				currVal = currVal.replace(/[Ĉ|Ç]/g, "C");
+				currVal = currVal.replace(/[ń|ñ|ǹ]/gi, "n");
+				currVal = currVal.replace(/[Ń|Ñ|Ǹ]/gi, "N");
+
+				$(this).val(currVal);
+			
+			});
+		});
+		
+	}
+	
 	//Create plugin named Setcase
 	$.fn.Setcase = function(settings) {
 		
@@ -16,36 +59,10 @@
 			//blur event		
 			$(this).blur(function(){
 				
+				$(this).RemoveAcentos();
+				
 				var currVal = $(this).val();
 				
-				//remove aspas
-				currVal = currVal.replace(/"/g, " ");
-				currVal = currVal.replace(/'/g, " ");
-				
-				//limpa espaço em branco no início e final
-				currVal = currVal.trim();
-				
-				//remove espaço duplicado
-				currVal = currVal.replace(/\s{2,}/g, ' ');
-				
-				//remove hífen duplicado
-				currVal = currVal.replace(/(\-)\1+/gi, "-");
-				
-				//remove acentos
-				currVal = currVal.replace(/[á|ã|â|à|ª]/g, "a");
-				currVal = currVal.replace(/[Á|Ã|Â|À]/g, "A");
-				currVal = currVal.replace(/[é|ẽ|ê|è]/g, "e");
-				currVal = currVal.replace(/[É|Ẽ|Ê|È]/g, "E");
-				currVal = currVal.replace(/[í|ĩ|î|ì]/g, "i");
-				currVal = currVal.replace(/[Í|Ĩ|Î|Ì]/g, "I");
-				currVal = currVal.replace(/[ó|õ|ô|ò|º]/g, "o");
-				currVal = currVal.replace(/[Ó|Õ|Ô|Ò]/g, "O");
-				currVal = currVal.replace(/[ú|ũ|û|ù]/g, "u");
-				currVal = currVal.replace(/[Ú|Ũ|Û|Ù]/g, "U");
-				currVal = currVal.replace(/[ĉ|ç]/g, "c");
-				currVal = currVal.replace(/[Ĉ|Ç]/g, "C");
-				currVal = currVal.replace(/[ń|ñ|ǹ]/gi, "n");
-				currVal = currVal.replace(/[Ń|Ñ|Ǹ]/gi, "N");
 				
 				//monta o case conforme o parametro recebido
 				if(config.caseValue == "upper")
