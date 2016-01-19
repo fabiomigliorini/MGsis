@@ -1408,6 +1408,9 @@ class NFePHPNovoController extends Controller
 			
 			$xml = $tools->sefazConsultaChave($chave, $tpAmb, $aResposta);
 			
+			if ($aResposta['cStat'] == 109)
+				throw new Exception('Serviço Paralisado sem Previsão!');
+			
 			if (!$aResposta['bStat'])
 				throw new Exception('Erro na comunicacao!');
 			
@@ -1432,6 +1435,7 @@ class NFePHPNovoController extends Controller
 				$dh = DateTime::createFromFormat ('Y-m-d\TH:i:sP', $aResposta['aProt']['dhRecbto']);
 				$nf->nfedatainutilizacao = $dh->format('d/m/Y H:i:s');
 				$nf->justificativa = $aResposta['aProt']['xMotivo'];
+				$nf->save();
 				
 				if (is_file($this->arquivoXMLProtocoloSituacao) && is_file($this->arquivoXMLValidada))
 				{
@@ -1440,14 +1444,8 @@ class NFePHPNovoController extends Controller
 					if (!@file_put_contents($this->arquivoXMLDenegada, $retorno))
 						throw new Exception('Erro ao salvar Arquivo XML Denegada!');
 				}
-				
-				$nf->save();
-				
 			}
 			
-			
-
-
 			foreach ($aResposta['aEvent'] as $aEvent)
 			{
 				foreach ($aEvent as $aEventB)
@@ -1470,6 +1468,7 @@ class NFePHPNovoController extends Controller
 				}
 			}
 
+			//retorno já esta sendo dado se foi denegada/autorizada
 			$aRetorno['retorno'] = true;
 			
 		} catch (Exception $ex) {
