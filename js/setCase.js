@@ -32,13 +32,13 @@
 				currVal = currVal.replace(/(\-)\1+/gi, "-");
 				
 				//remove acentos
-				currVal = currVal.replace(/[á|ã|â|à]/g, "a");
+				currVal = currVal.replace(/[á|ã|â|à|ª]/g, "a");
 				currVal = currVal.replace(/[Á|Ã|Â|À]/g, "A");
 				currVal = currVal.replace(/[é|ẽ|ê|è]/g, "e");
 				currVal = currVal.replace(/[É|Ẽ|Ê|È]/g, "E");
 				currVal = currVal.replace(/[í|ĩ|î|ì]/g, "i");
 				currVal = currVal.replace(/[Í|Ĩ|Î|Ì]/g, "I");
-				currVal = currVal.replace(/[ó|õ|ô|ò]/g, "o");
+				currVal = currVal.replace(/[ó|õ|ô|ò|º]/g, "o");
 				currVal = currVal.replace(/[Ó|Õ|Ô|Ò]/g, "O");
 				currVal = currVal.replace(/[ú|ũ|û|ù]/g, "u");
 				currVal = currVal.replace(/[Ú|Ũ|Û|Ù]/g, "U");
