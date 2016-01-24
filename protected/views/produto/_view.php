@@ -2,7 +2,12 @@
 	<div class="row-fluid">
 		<div class="span1">
 			<b><?php echo CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($data->codproduto, 6)),array('view','id'=>$data->codproduto)); ?></b>
-			<small class="muted"><?php echo CHtml::encode(Yii::app()->format->formataNcm($data->ncm)); ?></small>
+			<small class="muted">
+				<?php 
+				if (isset($data->codncm))
+					echo CHtml::link(CHtml::encode(Yii::app()->format->formataNcm($data->Ncm->ncm)),array('ncm/view','id'=>$data->codncm)); 
+				?>
+			</small>
 			<small class="muted"><?php echo CHtml::encode($data->Tributacao->tributacao); ?></small>
 		</div>
 	

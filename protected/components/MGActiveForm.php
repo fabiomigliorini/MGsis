@@ -51,6 +51,25 @@ class MGActiveForm extends TbActiveForm
 			true);		
 		return $widget;
 	}
+	
+	public function select2NcmRow($model, $attribute, $htmlOptions = array())
+	{
+		$widget = $this->select2Ncm($model, $attribute, $htmlOptions);
+		return $this->customRow($model, $attribute, $widget);
+	}
+
+	public function select2Ncm($model, $attribute, $htmlOptions = array())
+	{
+		$widget = $this->widget(
+			'MGSelect2Ncm',
+			array(
+				'model' => $model,
+				'attribute' => $attribute,
+				'htmlOptions' => $htmlOptions,
+			),
+			true);		
+		return $widget;
+	}
 
 	public function select2CidadeRow($model, $attribute, $htmlOptions = array())
 	{

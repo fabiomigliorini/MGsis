@@ -18,7 +18,7 @@ array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 		<h3>Importando arquivos XML...</h3> 
 	</div>
 	<div class="modal-body">
-		<div class="progress progress-success progress-striped">
+		<div class="progress progress-striped active">
 			<div class="bar" id="modalProgressoImportacaoProgressBar" style="width: 00%"></div>
 		</div>
 		<div id="modalProgressoImportacaoLabelStatus">Inicializando...</div>

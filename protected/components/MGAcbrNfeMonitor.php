@@ -357,7 +357,7 @@ class MGAcbrNfeMonitor extends MGSocket
 					"EAN" => $NotaFiscalpb->ProdutoBarra->barrasValido()?$NotaFiscalpb->ProdutoBarra->barras:'',
 					"Descricao" => (empty($NotaFiscalpb->descricaoalternativa))?$NotaFiscalpb->ProdutoBarra->descricao:$NotaFiscalpb->descricaoalternativa,
 					"Unidade" => $NotaFiscalpb->ProdutoBarra->UnidadeMedida->sigla,
-					"NCM" => Yii::app()->format->formataPorMascara($NotaFiscalpb->ProdutoBarra->Produto->ncm, "########"),
+					"NCM" => Yii::app()->format->formataPorMascara($NotaFiscalpb->ProdutoBarra->Produto->Ncm->ncm, "########"),
 					"Quantidade" => $NotaFiscalpb->quantidade,
 					"ValorUnitario" => $NotaFiscalpb->valorunitario,
 					"ValorTotal" => $NotaFiscalpb->valortotal,

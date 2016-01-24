@@ -101,21 +101,17 @@ class NcmController extends Controller
 	/**
 	* Lists all models.
 	*/
-	public function actionIndex()
+	public function actionIndex($id = null)
 	{
-		$model=new Ncm('search');
+		if (isset($id))
+			$ncm = $this->loadModel ($id);
 		
-		$model->unsetAttributes();  // clear any default values
-		
-		if(isset($_GET['Ncm']))
-			Yii::app()->session['FiltroNcmIndex'] = $_GET['Ncm'];
-		
-		if (isset(Yii::app()->session['FiltroNcmIndex']))
-			$model->attributes=Yii::app()->session['FiltroNcmIndex'];
+		$caps = Ncm::model()->raiz()->findAll();
 		
 		$this->render('index',array(
-			'dataProvider'=>$model->search(),
-			'model'=>$model,
+			'ncm'=>isset($ncm)?$ncm:null,
+			'caps'=>$caps,
+			'id'=>$id,
 			));
 	}
 
@@ -162,4 +158,85 @@ class NcmController extends Controller
 			Yii::app()->end();
 		}
 	}
+	
+	public function actionAjaxBuscaNcm($texto, $limite=20, $pagina=1) 
+	{
+
+		$texto  = str_replace(' ', '%', trim($texto));
+
+		// corrige pagina se veio sujeira
+		if ($pagina < 1) $pagina = 1;
+
+		// calcula de onde continuar a consulta
+		$offset = ($pagina-1)*$limite;
+		
+		// inicializa array com resultados
+		$resultados = array();
+
+		// se o texto foi preenchido
+		if (strlen($texto)>=2)
+		{
+			
+			// busca pelos campos "descricao" e "ncm" 			
+			$condition = '(descricao ILIKE :descricao OR ncm ILIKE :ncm)';
+			
+			$params = array(
+				':descricao'=>'%'.$texto.'%',
+				':ncm'=>$texto.'%',
+				);
+			
+			
+			// busca ncms
+			$ncms = Ncm::model()->findAll(
+					array(
+						'select'=>'codncm, ncm, descricao', 
+						'order'=>'ncm ASC', 
+						'condition'=>$condition, 
+						'params'=>$params,
+						'limit'=>$limite,
+						'offset'=>$offset,
+						)
+					);
+			
+			//monta array com resultados
+			foreach ($ncms as $ncm) 
+			{
+				$resultados[] = array(
+					'id' => $ncm->codncm,
+					'ncm' => Yii::app()->format->formataNcm($ncm->ncm),
+					'descricao' => $ncm->descricao,
+					);
+			}
+			
+		} 
+		
+		// transforma o array em JSON
+		echo CJSON::encode(
+				array(
+					'mais' => count($resultados)==$limite?true:false, 
+					'pagina' => (int) $pagina, 
+					'itens' => $resultados
+					)
+				);
+		
+		// FIM
+		Yii::app()->end();
+	} 
+	
+	public function actionAjaxInicializaNcm() 
+	{
+		if (isset($_GET['cod']))
+		{
+			$ncm = Ncm::model()->findByPk(
+					$_GET['cod'],
+					array(
+						'select'=>'codncm, ncm, descricao', 
+						'order'=>'ncm', 
+						)
+					);
+			echo CJSON::encode(array('id' => $ncm->codncm,'ncm' => Yii::app()->format->formataNcm($ncm->ncm), 'descricao' => $ncm->descricao));
+		}
+		Yii::app()->end();
+	} 
+	
 }

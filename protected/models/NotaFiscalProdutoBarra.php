@@ -343,7 +343,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 					':codtipoproduto' => $this->ProdutoBarra->Produto->codtipoproduto,
 					':codnaturezaoperacao' => $this->NotaFiscal->codnaturezaoperacao,
 					':codestado' => $this->NotaFiscal->Pessoa->Cidade->codestado,
-					':ncm' => $this->ProdutoBarra->Produto->ncm,
+					':ncm' => $this->ProdutoBarra->Produto->Ncm->ncm,
 				),
 			    'order' => 'codestado nulls last, char_length(ncm) desc nulls last',
 			)

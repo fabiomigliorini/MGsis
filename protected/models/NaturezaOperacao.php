@@ -18,6 +18,7 @@
  * @property string $codnaturezaoperacaodevolucao
  * @property string $codtipotitulo
  * @property string $codcontacontabil
+ * @property boolean $ibpt
  * 
  * The followings are the available model relations:
  * @property Negocio[] $Negocios
@@ -59,7 +60,7 @@ class NaturezaOperacao extends MGActiveRecord
 			array('naturezaoperacao', 'length', 'max'=>50),
 			array('observacoesnf', 'length', 'max'=>500),
 			array('mensagemprocom', 'length', 'max'=>300),
-			array('codoperacao, emitida, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnaturezaoperacaodevolucao', 'safe'),
+			array('ibpt, codoperacao, emitida, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnaturezaoperacaodevolucao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('codnaturezaoperacao, codtipotitulo, naturezaoperacao, codoperacao, emitida, observacoesnf, alteracao, codusuarioalteracao, criacao, codusuariocriacao, mensagemprocom, codnaturezaoperacaodevolucao', 'safe', 'on'=>'search'),
@@ -102,6 +103,7 @@ class NaturezaOperacao extends MGActiveRecord
 			'criacao' => 'Criação',
 			'codusuariocriacao' => 'Usuário Criação',
 			'mensagemprocom' => 'Mensagem Procom',
+			'ibpt' => 'Calcular Tributos com base no IBPT',
 			'codnaturezaoperacaodevolucao' => 'Natureza de Devolução',
 			'codtipotitulo' => 'Tipo Titulo',
 			'codcontacontabil' => 'Conta Contábil',

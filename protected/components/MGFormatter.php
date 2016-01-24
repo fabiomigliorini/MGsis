@@ -140,8 +140,15 @@ class MGFormatter extends CFormatter
 	
 	public function formataNcm ($string)
 	{
-		$string = str_pad(self::numeroLimpo($string), 8, "0", STR_PAD_LEFT);
+		//$string = str_pad(self::numeroLimpo($string), 8, "0", STR_PAD_LEFT);
+		$string = str_pad(self::numeroLimpo($string), 8, "-", STR_PAD_RIGHT);
 		return self::formataPorMascara($string, "####.##.##", false);
+	}
+	
+	public function formataCest ($string)
+	{
+		$string = str_pad(self::numeroLimpo($string), 7, "-", STR_PAD_RIGHT);
+		return self::formataPorMascara($string, "##.###.##", false);
 	}
 	
 	public function formataCodigo ($string, $digitos = 8)

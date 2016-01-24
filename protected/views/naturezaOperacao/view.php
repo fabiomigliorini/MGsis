@@ -78,6 +78,11 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 			'type'=>'raw',
 			),
 		'finnfe',
+		array(
+			'name'=>'ibpt',
+			'value'=>($model->ibpt)?'Sim':'Não',
+			),
+		
 		),
 	)); 
 

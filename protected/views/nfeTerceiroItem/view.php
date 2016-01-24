@@ -206,9 +206,9 @@ $(document).ready(function(){
 		
 		if (isset($model->ProdutoBarra))
 		{
-			if ($model->ncm <> $model->ProdutoBarra->Produto->ncm)
+			if ($model->ncm <> $model->ProdutoBarra->Produto->Ncm->ncm)
 			{
-				$ncm .= '&nbspNota<br>' . CHtml::encode(Yii::app()->format->formataNCM($model->ProdutoBarra->Produto->ncm)) . '&nbspCadastro&nbspProduto';
+				$ncm .= '&nbspNota<br>' . CHtml::encode(Yii::app()->format->formataNCM($model->ProdutoBarra->Produto->Ncm->ncm)) . '&nbspCadastro&nbspProduto';
 				$cssNcm = 'text-error';
 			}
 		}

@@ -59,7 +59,7 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 		'descricaoalternativa',
 		array(
 			'label' => 'NCM',
-			'value' => CHtml::encode(Yii::app()->format->formataNcm($model->ProdutoBarra->Produto->ncm)),
+			'value' => CHtml::encode(Yii::app()->format->formataNcm($model->ProdutoBarra->Produto->Ncm->ncm)),
 			'type' => 'raw',
 		),
 		array (

@@ -1,24 +1,17 @@
 <?php
 
 /**
- * This is the model class for table "mgsis.tblibptax".
+ * This is the model class for table "mgsis.tblregulamentoicmsstmt".
  *
- * The followings are the available columns in table 'mgsis.tblibptax':
- * @property string $codibptax
+ * The followings are the available columns in table 'mgsis.tblregulamentoicmsstmt':
+ * @property bigserial $codregulamentoicmsstmt
  * @property bigint $codncm
- * @property string $codigo
- * @property string $ex
- * @property integer $tipo
+ * @property string $subitem
  * @property string $descricao
- * @property double $nacionalfederal
- * @property double $importadosfederal
- * @property double $estadual
- * @property double $municipal
- * @property date $vigenciainicio
- * @property date $vigenciafim
- * @property string $chave
- * @property string $versao
- * @property string $fonte
+ * @property string $ncm
+ * @property string $ncmexceto
+ * @property double $icmsstsul
+ * @property double $icmsstnorte
  * @property string $alteracao
  * @property string $codusuarioalteracao
  * @property string $criacao
@@ -29,14 +22,14 @@
  * @property Usuario $UsuarioCriacao
  * @property Ncm $Ncm
  */
-class Ibptax extends MGActiveRecord
+class RegulamentoIcmsStMt extends MGActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'mgsis.tblibptax';
+		return 'mgsis.tblregulamentoicmsstmt';
 	}
 
 	/**
@@ -47,15 +40,17 @@ class Ibptax extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codibptax, codigo, tabela, aliqnac, aliqimp', 'required'),
-			array('tabela', 'numerical', 'integerOnly'=>true),
-			array('codigo', 'length', 'max'=>8),
-			array('ex', 'length', 'max'=>3),
-			array('aliqnac, aliqimp', 'length', 'max'=>4),
-			array('alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
+			array('subitem, descricao, ncm', 'required'),
+			array('subitem', 'length', 'max'=>10),
+			array('descricao', 'length', 'max'=>600),
+			array('ncm', 'length', 'max'=>8),
+			array('ncmexceto', 'length', 'max'=>100),
+			array('icmsstsul', 'length', 'max'=>4),
+			array('icmsstnorte', 'length', 'max'=>14),
+			array('alteracao, codusuarioalteracao, criacao, codusuariocriacao, codncm', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('codibptax, codigo, ex, tabela, aliqnac, aliqimp, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
+			array('codregulamentoicmsstmt, subitem, descricao, ncm, ncmexceto, icmsstsul, icmsstnorte, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codncm', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,7 +64,7 @@ class Ibptax extends MGActiveRecord
 		return array(
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
-			'Ncm' => array(self::BELONGS_TO, 'Ucm', 'codncm'),
+			'Ncm' => array(self::BELONGS_TO, 'Ncm', 'codncm'),
 		);
 	}
 
@@ -79,16 +74,18 @@ class Ibptax extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codibptax' => '#',
-			'codigo' => 'Código',
-			'ex' => 'Ex',
-			'tabela' => 'Tabela',
-			'aliqnac' => 'Aliqnac',
-			'aliqimp' => 'Aliqimp',
+			'codregulamentoicmsstmt' => '#',
+			'subitem' => 'Subitem',
+			'descricao' => 'Descrição',
+			'codncm' => 'NCM',
+			'ncm' => 'NCM',
+			'ncmexceto' => 'Ncm Exceto',
+			'icmsstsul' => 'ICMS ST Sul',
+			'icmsstnorte' => 'ICMS ST Norte',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
-			'codusuariocriacao' => 'Usuário Alteração',
+			'codusuariocriacao' => 'Usuário Criação',
 		);
 	}
 
@@ -110,16 +107,18 @@ class Ibptax extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codibptax',$this->codibptax,true);
-		$criteria->compare('codigo',$this->codigo,true);
-		$criteria->compare('ex',$this->ex,true);
-		$criteria->compare('tabela',$this->tabela);
-		$criteria->compare('aliqnac',$this->aliqnac,true);
-		$criteria->compare('aliqimp',$this->aliqimp,true);
+		$criteria->compare('codregulamentoicmsstmt',$this->codregulamentoicmsstmt,true);
+		$criteria->compare('subitem',$this->subitem,true);
+		$criteria->compare('descricao',$this->descricao,true);
+		$criteria->compare('ncm',$this->ncm,true);
+		$criteria->compare('ncmexceto',$this->ncmexceto,true);
+		$criteria->compare('icmsstsul',$this->icmsstsul,true);
+		$criteria->compare('icmsstnorte',$this->icmsstnorte,true);
 		$criteria->compare('alteracao',$this->alteracao,true);
 		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
 		$criteria->compare('criacao',$this->criacao,true);
 		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('codncm',$this->codncm,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -130,7 +129,7 @@ class Ibptax extends MGActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Ibptax the static model class
+	 * @return RegulamentoIcmsStMt the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

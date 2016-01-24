@@ -4,17 +4,24 @@
  * This is the model class for table "mgsis.tblncm".
  *
  * The followings are the available columns in table 'mgsis.tblncm':
- * @property string $codncm
+ * @property bigserial $codncm
+ * @property bigint $codncmpai
  * @property string $ncm
  * @property string $descricao
- * @property string $alteracao
- * @property string $codusuarioalteracao
- * @property string $criacao
- * @property string $codusuariocriacao
+ * @property timestamp $alteracao
+ * @property bigint $codusuarioalteracao
+ * @property timestamp $criacao
+ * @property bigint $codusuariocriacao
  *
  * The followings are the available model relations:
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
+ * @property Ncm $NcmPai
+ * @property Ncm[] $Ncms
+ * @property Ibptax[] $Ibptaxs
+ * @property RegulamentoIcmsStMt[] $RegulamentoIcmsStMts
+ * @property Cest[] $Cests
+ * 
  */
 class Ncm extends MGActiveRecord
 {
@@ -37,7 +44,7 @@ class Ncm extends MGActiveRecord
 			array('ncm, descricao', 'required'),
 			array('ncm', 'length', 'max'=>10),
 			array('descricao', 'length', 'max'=>1500),
-			array('alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
+			array('codncmpai, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('codncm, ncm, descricao, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
@@ -54,6 +61,11 @@ class Ncm extends MGActiveRecord
 		return array(
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'NcmPai' => array(self::BELONGS_TO, 'Ncm', 'codncmpai'),
+			'Ncms' => array(self::HAS_MANY, 'Ncm', 'codncmpai', 'order'=>'ncm ASC'),
+			'Ibptaxs' => array(self::HAS_MANY, 'Ibptax', 'codncm', 'order'=>'codigo ASC'),
+			'RegulamentoIcmsStMts' => array(self::HAS_MANY, 'RegulamentoIcmsStMt', 'codncm', 'order'=>'ncm ASC'),
+			'Cests' => array(self::HAS_MANY, 'Cest', 'codncm', 'order'=>'ncm ASC'),
 		);
 	}
 
@@ -64,6 +76,7 @@ class Ncm extends MGActiveRecord
 	{
 		return array(
 			'codncm' => '#',
+			'codncmpai' => 'Filho de',
 			'ncm' => 'NCM',
 			'descricao' => 'Descrição',
 			'alteracao' => 'Alteração',
@@ -98,7 +111,7 @@ class Ncm extends MGActiveRecord
 		{
 			$texto  = str_replace(' ', '%', trim($this->ncm));
 			$criteria->addCondition('t.ncm ILIKE :ncm');
-			$criteria->params = array_merge($criteria->params, array(':ncm' => '%'.$texto.'%'));
+			$criteria->params = array_merge($criteria->params, array(':ncm' => $texto.'%'));
 		}
 		//$criteria->compare('descricao',$this->descricao,true);
 		if (!empty($this->descricao))
@@ -130,4 +143,61 @@ class Ncm extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
+	
+	public function scopes () 
+	{
+		return array(
+			'raiz'=>array(
+				'condition'=>'codncmpai is null',
+				'order'=>'ncm ASC',
+				),
+			);
+	}
+	
+	/**
+	 * 
+	 * @return Cest[]
+	 */
+	public function cestsDisponiveis()
+	{
+		$cests = array();
+		if (sizeof($this->Cests) > 0)
+			$cests = array_merge ($cests, $this->Cests);
+		if (isset($this->NcmPai))
+			$cests = array_merge ($cests, $this->NcmPai->cestsDisponiveis());
+		return $cests;
+	}
+
+	/**
+	 * 
+	 * @return Cest[]
+	 */
+	public function regulamentoIcmsStMtsDisponiveis()
+	{
+		$regs = array();
+		
+		// pega regulamentos do registro corrente
+		if (sizeof($this->RegulamentoIcmsStMts) > 0)
+			$regs = array_merge ($regs, $this->RegulamentoIcmsStMts);
+		
+		// pega regulamentos da arvore recursivamente
+		if (isset($this->NcmPai))
+			$regs = array_merge ($regs, $this->NcmPai->regulamentoIcmsStMtsDisponiveis());
+
+		// apaga os Excetos
+		$i = 0;
+		$apagar = array();
+		foreach($regs as $reg)
+		{
+			if (strstr($reg->ncmexceto, $this->ncm))
+				$apagar[] = $i;
+			$i++;
+		}
+		
+		foreach ($apagar as $i)
+			unset($regs[$i]);
+		
+		return $regs;
+	}
+	
 }

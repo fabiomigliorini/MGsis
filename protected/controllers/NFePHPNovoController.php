@@ -543,7 +543,11 @@ class NFePHPNovoController extends Controller
 			$totalPis = 0;
 			$totalCofins = 0;
 			$totalTrib = 0;
-
+			$totalTribFederal = 0;
+			$totalTribEstadual = 0;
+			$totalTribMunicipal = 0;
+			$ibptFonte = '';
+			
 			foreach ($nf->NotaFiscalProdutoBarras as $nfpb)
 			{
 				$nItem++;
@@ -556,7 +560,7 @@ class NFePHPNovoController extends Controller
 				$cProd = utf8_encode($cProd);
 				$cEAN = utf8_encode($nfpb->ProdutoBarra->barrasValido()?$nfpb->ProdutoBarra->barras:"");
 				$xProd = utf8_encode((empty($nfpb->descricaoalternativa))?$nfpb->ProdutoBarra->descricao:$nfpb->descricaoalternativa);
-				$NCM = utf8_encode(Yii::app()->format->formataPorMascara($nfpb->ProdutoBarra->Produto->ncm, "########"));
+				$NCM = utf8_encode(Yii::app()->format->formataPorMascara($nfpb->ProdutoBarra->Produto->Ncm->ncm, "########"));
 				$EXTIPI = '';
 				$CFOP = $nfpb->codcfop;
 				$uCom = utf8_encode($nfpb->ProdutoBarra->UnidadeMedida->sigla);
@@ -598,27 +602,38 @@ class NFePHPNovoController extends Controller
 				$nFCI = '';
 				$resp = $make->tagprod($nItem, $cProd, $cEAN, $xProd, $NCM, $EXTIPI, $CFOP, $uCom, $qCom, $vUnCom, $vProd, $cEANTrib, $uTrib, $qTrib, $vUnTrib, $vFrete, $vSeg, $vDesc, $vOutro, $indTot, $xPed, $nItemPed, $nFCI);
 
+				if (isset($nfpb->ProdutoBarra->Produto->Cest))
+					$cest = $make->tagCEST($nItem, $nfpb->ProdutoBarra->Produto->Cest->cest);
+				
 				// TAG IMPOSTO
-				$vTotTrib = Yii::app()->db->createCommand("
-					SELECT 
-						round(
-							CASE
-								WHEN tblproduto.importado 
-								THEN tblibptax.aliqimp
-								ELSE tblibptax.aliqnac
-							END 
-							* tblnotafiscalprodutobarra.valortotal / 100::numeric
-							, 2) AS valoribpt
-					FROM tblnotafiscalprodutobarra
-					LEFT JOIN tblprodutobarra ON tblprodutobarra.codprodutobarra = tblnotafiscalprodutobarra.codprodutobarra
-					LEFT JOIN tblproduto ON tblproduto.codproduto = tblprodutobarra.codproduto
-					LEFT JOIN tblibptax ON tblproduto.ncm::character varying::text ~~ (tblibptax.codigo::text || '%'::text) AND tblibptax.ex IS NULL AND tblibptax.tabela = 0
-					WHERE codNotaFiscalProdutoBarra = {$nfpb->codnotafiscalprodutobarra}
-					")->queryScalar();
-				if (empty($vTotTrib))
-					$vTotTrib = '0.00';
+				$vTotTrib = 0;
+				$aliqFederal = 0;
+				$aliqEstadual = 0;
+				$aliqMunicipal = 0;
+				
+				if ($nf->NaturezaOperacao->ibpt)
+				{
+					foreach ($nfpb->ProdutoBarra->Produto->Ncm->Ibptaxs as $tax)
+					{
+						$aliqFederal = ($nfpb->ProdutoBarra->Produto->importado)?$tax->importadosfederal:$tax->nacionalfederal;
+						$aliqEstadual = $tax->estadual;
+						$aliqMunicipal = $tax->municipal;
+						$ibptFonte = "{$tax->fonte} {$tax->chave} {$tax->versao}";
+						break;
+					}
+					
+					$vTotTribFederal = ($nfpb->valortotal * $aliqFederal)/100;
+					$vTotTribEstadual = ($nfpb->valortotal * $aliqEstadual)/100;
+					$vTotTribMunicipal = ($nfpb->valortotal * $aliqMunicipal)/100;
+					$vTotTrib = round($vTotTribFederal + $vTotTribEstadual + $vTotTribMunicipal, 2);
+					$totalTrib += $vTotTrib;
+					$totalTribFederal += $vTotTribFederal;
+					$totalTribEstadual += $vTotTribEstadual;
+					$totalTribMunicipal += $vTotTribMunicipal;
+					
+				}
+				
 				$resp = $make->tagimposto($nItem, $vTotTrib);
-				$totalTrib += $vTotTrib;
 
 				// TAG ICMS
 				if ($nfpb->ProdutoBarra->Produto->importado)
@@ -877,9 +892,35 @@ class NFePHPNovoController extends Controller
 			//informações Adicionais
 			//informações Adicionais
 			$infAdFisco = '';
-			$infCpl = Yii::app()->format->removeAcentos($nf->observacoes);
+			$infCpl = '';
+			
+			// Mensagem IBPT
+			if ($totalTrib > 0)
+			{
+				$totalSemTributos = $nf->valortotal - $totalTrib;
+				$infCpl = "Voce pagou aproximadamente:;";
+				if ($totalTribFederal > 0)
+					$infCpl .= "R$ " . Yii::app()->format->formatNumber($totalTribFederal) . " de tributos federais;";
+				if ($totalTribEstadual > 0)
+					$infCpl .= "R$ " . Yii::app()->format->formatNumber($totalTribEstadual) . " de tributos estaduais;";
+				if ($totalTribMunicipal > 0)
+					$infCpl .= "R$ " . Yii::app()->format->formatNumber($totalTribMunicipal) . " de tributos municipais;";
+				$infCpl .= "R$ " . Yii::app()->format->formatNumber($totalSemTributos) . " pelos produtos;";
+				$infCpl .= "Fonte: $ibptFonte;;";
+			}
+			$infCpl .= Yii::app()->format->removeAcentos($nf->observacoes);
 			$infCpl = str_replace("\r\n","\n",$infCpl);
+			
+			// MENSAGEM Aproveitamento ICMS
+			$infCpl = str_replace("#ICMSVALOR#", Yii::app()->format->formatNumber($nf->icmsvalor), $infCpl);
+			if ($nf->icmsbase > 0 && $nf->icmsvalor > 0)
+				$perc = ($nf->icmsvalor / $nf->icmsbase) * 100;
+			else
+				$perc = 0;
+			$infCpl = str_replace("#ICMSPERCENTUAL#", Yii::app()->format->formatNumber($perc), $infCpl);
+			
 			$infCpl = utf8_encode($infCpl);
+			
 			$resp = $make->taginfAdic($infAdFisco, $infCpl);
 
 			//observações emitente

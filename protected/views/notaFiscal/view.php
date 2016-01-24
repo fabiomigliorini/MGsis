@@ -486,7 +486,7 @@ $(document).ready(function(){
 				</td>
 				<td>
 					<small class='muted'>
-						<?php echo CHtml::encode(Yii::app()->format->formataNcm($prod->ProdutoBarra->Produto->ncm)); ?>
+						<?php echo CHtml::encode(Yii::app()->format->formataNcm($prod->ProdutoBarra->Produto->Ncm->ncm)); ?>
 					</small>
 				</td>
 				<td>

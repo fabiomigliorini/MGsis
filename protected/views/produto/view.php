@@ -170,61 +170,44 @@ $(document).ready(function(){
 
 <div class="row-fluid">
 
-<div class="span5">
+<div class="span4">
 
 <?php 
 
-/* monta link com tooltip da descricao do ncm */
-$ncm_descricao = "";
-$sNcm = str_pad($model->ncm, 8, '0', STR_PAD_LEFT);
-for ($i=1; $i<=strlen($sNcm); $i++)
-{
-	$ncm_parte = substr($sNcm, 0, $i);
-	if ($ncm = Ncm::model()->find("ncm = :ncm_parte", array('ncm_parte'=>$ncm_parte)))
-	{
-		if (!empty($ncm_descricao))
-			$ncm_descricao .= "\n\n";
-		$ncm_descricao .= CHtml::encode($ncm->ncm . " - " . str_replace("'", "\"", $ncm->descricao));
-	}
-}
-$ncm_descricao = "<a href='#' rel='tooltip' title='$ncm_descricao'>" . CHtml::encode(Yii::app()->format->formataNCM($model->ncm)) . "</a>";
+$attributes = array(
+	array(
+		'name'=>'codproduto',
+		'value'=>Yii::app()->format->formataCodigo($model->codproduto, 6),
+	),
+	array(
+		'name'=>'codmarca',
+		'value'=>isset($model->Marca)?CHtml::encode($model->Marca->marca . ' '):null,
+	),
+	'referencia',
+	array(
+		'label'=>'Grupo',
+		'value'=>isset($model->SubGrupoProduto)?$model->SubGrupoProduto->GrupoProduto->grupoproduto:null,
+	),
+	array(
+		'label'=>'Sub-Grupo',
+		'value'=>isset($model->SubGrupoProduto)?$model->SubGrupoProduto->subgrupoproduto:null,
+	),
+	array(
+		'name'=>'importado',
+		'value'=>empty($model->importado)?"Não":"Sim",
+	),
+);
 
+/* monta link com tooltip da descricao do ncm */
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
-	'attributes'=>array(
-		array(
-			'name'=>'codproduto',
-			'value'=>Yii::app()->format->formataCodigo($model->codproduto, 6),
-			),
-		array(
-			'name'=>'codmarca',
-			'value'=>isset($model->Marca)?CHtml::encode($model->Marca->marca . ' '):null,
-			),
-		'referencia',
-		array(
-			'name'=>'codunidademedida',
-			'value'=>isset($model->UnidadeMedida)?$model->UnidadeMedida->sigla:null,
-			),
-		array(
-			'name'=>'codsubgrupoproduto',
-			'value'=>isset($model->SubGrupoProduto)?$model->SubGrupoProduto->GrupoProduto->grupoproduto . ' > ' . $model->SubGrupoProduto->subgrupoproduto:null,
-			),
-		array(
-			'name'=>'importado',
-			'value'=>empty($model->importado)?"Não":"Sim",
-			),
-		array(
-			'name'=>'ncm',
-			'value'=>$ncm_descricao,
-			'type'=>'raw',
-			),
-		),
-	)); 
-$this->widget('UsuarioCriacao', array('model'=>$model));
+	'attributes'=>$attributes
+	)
+);
 ?>
 </div>
 
-<div class="span7">
+<div class="span8">
 <?php 
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
@@ -234,6 +217,10 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 			'cssClass'=>'text-success',
 			'value'=>isset($model->preco)?Yii::app()->format->formatNumber($model->preco):null,
 			),
+		array(
+			'name'=>'codunidademedida',
+			'value'=>isset($model->UnidadeMedida)?$model->UnidadeMedida->sigla:null,
+		),		
 		array(
 			'name'=>'codtributacao',
 			'value'=>isset($model->Tributacao)?$model->Tributacao->tributacao:null,
@@ -259,7 +246,10 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 </div>
 </div>
 
-<?php  ?>
+<?php  
+$this->widget('UsuarioCriacao', array('model'=>$model));
+
+?>
 
 <small class="row-fluid">
 	<div class="span9">
@@ -323,6 +313,13 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 <br>
 <?php
 
+$abaFiscal = $this->renderPartial(
+	'_view_fiscal',
+	array(
+		'model'=>$model,
+	),
+	true
+);
 
 $abaImagens = $this->renderPartial(
 	'_view_imagens',
@@ -380,7 +377,8 @@ $this->widget('bootstrap.widgets.TbTabs',
 		'type' => 'tabs',
 		'tabs' => 
 			array(
-				array('label' => 'Imagens', 'content' => $abaImagens, 'active' => true),
+				array('label' => 'Fiscal', 'content' => $abaFiscal, 'active' => true),
+				array('label' => 'Imagens', 'content' => $abaImagens, 'active' => false),
 				array('label' => 'Notas Fiscais', 'content' => $abaNfpb, 'active' => false),
 				array('label' => 'Negócios', 'content' => $abaNpb, 'active' => false),
 			)

@@ -16,7 +16,7 @@
 		<h3>Comunicando com Sefaz...</h3> 
 	</div>
 	<div class="modal-body">
-		<div class="progress progress-success progress-striped">
+		<div class="progress progress-striped active">
 			<div class="bar" id="modalProgressoNfeProgressBar" style="width: 00%"></div>
 		</div>
 		<div id="modalProgressoNfeLabelStatus">Inicializando...</div>

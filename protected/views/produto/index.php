@@ -90,7 +90,7 @@ $(document).ready(function(){
 			)
 		); 
 	?>
-	<?php echo $form->textField($model, 'ncm', array('placeholder' => 'NCM', 'class'=>'input-small text-right')); ?>
+	<?php echo $form->select2Ncm($model, 'codncm'); ?>
 	<?php echo $form->textField($model, 'preco_de', array('placeholder' => 'Preço de', 'class'=>'input-mini text-right')); ?>
 	<?php echo $form->textField($model, 'preco_ate', array('placeholder' => 'Preço Até', 'class'=>'input-mini text-right')); ?>
 	<?php 

@@ -12,12 +12,13 @@
  * @property string $codmarca
  * @property string $preco
  * @property boolean $importado
- * @property string $ncm
  * @property string $codtributacao
  * @property string $inativo
  * @property string $codtipoproduto
  * @property boolean $site
  * @property string $descricaosite
+ * @property bigint $codncm
+ * @property bigint $codcest
  * @property string $alteracao
  * @property string $codusuarioalteracao
  * @property string $criacao
@@ -28,6 +29,7 @@
  * @property EstoqueMovimento[] $EstoqueMovimentos
  * @property Marca $Marca
  * @property Ncm $Ncm
+ * @property Cest $Cest
  * @property SubGrupoProduto $SubGrupoProduto
  * @property TipoProduto $TipoProduto
  * @property Tributacao $Tributacao
@@ -66,20 +68,21 @@ class Produto extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('produto, codunidademedida, ncm, codtributacao, codtipoproduto, preco, codsubgrupoproduto, codmarca', 'required'),
+			array('produto, codncm, codunidademedida, codtributacao, codtipoproduto, preco, codsubgrupoproduto, codmarca', 'required'),
 			array('produto', 'validaMarca'),
 			array('produto', 'length', 'max'=>100),
 			array('referencia', 'length', 'max'=>50),
 			array('preco', 'numerical', 'min'=>0.01),
-			array('ncm', 'length', 'max'=>8),
-			array('ncm', 'length', 'min'=>8),
-			array('ncm', 'numerical'),
+			array('codcest, codncm', 'numerical'),
+			array('codcest', 'validaCest'),
+			array('codncm', 'validaNcm'),
+			array('codtributacao', 'validaTributacao'),
 			array('preco', 'length', 'max'=>14),
 			array('descricaosite', 'length', 'max'=>1024),
 			array('codsubgrupoproduto, codmarca, importado, inativo, codtipoproduto, site, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('alteracao_de, alteracao_ate, criacao_de, criacao_ate, preco_de, preco_ate, barras, codproduto, produto, referencia, codunidademedida, codsubgrupoproduto, codmarca, preco, importado, ncm, codtributacao, inativo, codtipoproduto, site, descricaosite, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
+			array('codncm, alteracao_de, alteracao_ate, criacao_de, criacao_ate, preco_de, preco_ate, barras, codproduto, produto, referencia, codunidademedida, codsubgrupoproduto, codmarca, preco, importado, codtributacao, inativo, codtipoproduto, site, descricaosite, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -91,6 +94,72 @@ class Produto extends MGActiveRecord
 			if (strpos(strtoupper($this->$attribute), strtoupper($this->Marca->marca)) === false)
 				$this->addError($attribute,'Preencha a marca "' . $this->Marca->marca . '" na descrição do produto!');
 		}
+	}
+	
+	/**
+	 * Verifica se o usuario selecionou um NCM com 8 Digitos
+	 */
+	public function validaNcm($attribute,$params)
+	{
+		if (empty($this->codncm))
+			return;
+		
+		if (strlen($this->Ncm->ncm) != 8)
+			$this->addError($attribute, 'NCM inválido!');
+	}
+
+	/**
+	 *  valida se existe regulamento de ICMS ST no MT para o NCM selecionado
+	 *  se existe pede para colocar como SUBSTITUICAO
+	 *  se não, não deixa marcar como SUBSTITUICAO
+	 */
+	public function validaTributacao($attribute,$params)
+	{
+		
+		if (!isset($this->Ncm))
+			return;
+		
+		$regs = $this->Ncm->regulamentoIcmsStMtsDisponiveis();
+		
+		if (sizeof($regs) > 0)
+		{
+			if ($this->codtributacao != Tributacao::SUBSTITUICAO)
+				$this->addError($attribute, 'Existe Regulamento de ICMS ST para este NCM!');
+				
+		}
+		else
+		{
+			if ($this->codtributacao == Tributacao::SUBSTITUICAO)
+				$this->addError($attribute, 'Não existe regulamento de ICMS ST para este NCM!');
+		}
+		
+	}
+	
+	/**
+	 * 
+	 */
+	public function validaCest($attribute,$params)
+	{
+		if (!isset($this->codncm))
+			return;
+		
+		if (empty($this->codcest))
+		{
+			if ($this->codtributacao != Tributacao::SUBSTITUICAO)
+				return;
+			
+			$this->addError($attribute, 'É obrigatório o preenchimento para produtos com Substituição Tributária!');
+			return;
+		}
+		
+		$cests = $this->Ncm->cestsDisponiveis();
+		
+		foreach ($cests as $cest)
+			if ($cest->codcest == $this->codcest)
+				return;
+			
+		$this->addError($attribute, 'CEST selecionado não está disponível para o NCM selecionado!');
+		
 	}
 	
 	/**
@@ -113,7 +182,8 @@ class Produto extends MGActiveRecord
 			'ProdutoHistoricoPrecos' => array(self::HAS_MANY, 'ProdutoHistoricoPreco', 'codproduto'),
 			'ProdutoEmbalagems' => array(self::HAS_MANY, 'ProdutoEmbalagem', 'codproduto', 'order'=>'quantidade ASC, codunidademedida ASC'),
 			'ProdutoBarras' => array(self::HAS_MANY, 'ProdutoBarra', 'codproduto', 'order'=>'codprodutoembalagem ASC, variacao ASC, barras ASC'),
-			'Ncm' => array(self::BELONGS_TO, 'Ncm', 'ncm'),
+			'Ncm' => array(self::BELONGS_TO, 'Ncm', 'codncm'),
+			'Cest' => array(self::BELONGS_TO, 'Cest', 'codcest'),
 		);
 	}
 
@@ -131,7 +201,8 @@ class Produto extends MGActiveRecord
 			'codmarca' => 'Marca',
 			'preco' => 'Preço',
 			'importado' => 'Importado',
-			'ncm' => 'NCM',
+			'codncm' => 'NCM',
+			'codcest' => 'CEST',
 			'codtributacao' => 'Tributação',
 			'inativo' => 'Inativo desde',
 			'codtipoproduto' => 'Tipo',
@@ -189,6 +260,12 @@ class Produto extends MGActiveRecord
 			$criteria->params[':codmarca'] = $this->codmarca;
 		}
 		
+		if (!empty($this->codncm))
+		{
+			$criteria->addCondition("t.codncm = :codncm");
+			$criteria->params[':codncm'] = $this->codncm;
+		}
+		
 		switch ($this->inativo)
 		{
 			case 9:
@@ -212,7 +289,6 @@ class Produto extends MGActiveRecord
 		}
 		
 		$criteria->compare('t.codtributacao', $this->codtributacao, false);
-		$criteria->compare('ncm', Yii::app()->format->numeroLimpo($this->ncm),false);
 		
 		if (!empty($this->preco_de))
 		{

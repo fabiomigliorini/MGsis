@@ -143,8 +143,10 @@ class SubGrupoProduto extends MGActiveRecord
 	
 	public function getListaCombo ()
 	{
-		$lista = self::model()->combo()->findAll();
-		return CHtml::listData($lista, 'codsubgrupoproduto', 'subgrupoproduto', 'GrupoProduto.grupoproduto');
+		$itens = self::model()->combo()->findAll();
+		foreach ($itens as $item)
+			$retorno[$item->codsubgrupoproduto] = $item->GrupoProduto->grupoproduto . ' > ' . $item->subgrupoproduto;
+		return $retorno;
 	}	
 	
 }

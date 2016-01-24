@@ -20,6 +20,11 @@
  */
 class Tributacao extends MGActiveRecord
 {
+	
+	const TRIBUTADO = 1;
+	const ISENTO = 2;
+	const SUBSTITUICAO = 3;
+
 	/**
 	 * @return string the associated database table name
 	 */
