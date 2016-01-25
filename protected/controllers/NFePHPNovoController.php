@@ -633,7 +633,7 @@ class NFePHPNovoController extends Controller
 					
 				}
 				
-				$vTotTrib   = number_format($totalTrib,         2, '.', '');
+				$vTotTrib   = number_format($vTotTrib,         2, '.', '');
 				$resp = $make->tagimposto($nItem, $vTotTrib);
 
 				// TAG ICMS
