@@ -145,10 +145,13 @@ class Produto extends MGActiveRecord
 		
 		if (empty($this->codcest))
 		{
+			/*
 			if ($this->codtributacao != Tributacao::SUBSTITUICAO)
 				return;
 			
 			$this->addError($attribute, 'É obrigatório o preenchimento para produtos com Substituição Tributária!');
+			 * 
+			 */
 			return;
 		}
 		
