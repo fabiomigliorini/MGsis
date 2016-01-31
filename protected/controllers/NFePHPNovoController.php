@@ -1161,6 +1161,9 @@ class NFePHPNovoController extends Controller
 			if (!$aResposta['bStat'])
 				throw new Exception('Erro na comunicacao!');
 
+                        if (!isset($aResposta['aProt'][0]))
+                                throw new Exception('Erro na comunicacao!');
+
 			if ($aResposta['aProt'][0]['cStat'] == 100) // Autorizado o uso da NF-e
 			{
 				$saveFile = true;
