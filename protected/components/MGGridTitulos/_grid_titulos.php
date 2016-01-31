@@ -25,7 +25,7 @@ else
 	<small class="row-fluid">
 		<div class="span2">
 			<small>
-				<?php echo CHtml::link(CHtml::encode($data->numero),array('view','id'=>$data->codtitulo), array ("tabindex"=>-1)); ?> 
+				<?php echo CHtml::link(CHtml::encode($data->numero),array('titulo/view','id'=>$data->codtitulo), array ("tabindex"=>-1)); ?> 
 			</small>
 			<div class="pull-right <?php echo $css_vencimento?> ">
 				<?php echo CHtml::encode($data->vencimento); ?>
