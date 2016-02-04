@@ -206,16 +206,18 @@ class NFePHPNovoController extends Controller
 				mkdir($this->arquivoXMLValidada, 0755, true);
 			$this->arquivoXMLValidada .= $nf->nfechave . '-NFe.xml';
 
+			$hoje = date('d/m/Y');
+
 			$this->arquivoXMLProtocoloRecibo = 
 				$diretorioBase
-				. 'temporarias/' . substr($nf->emissao, 6, 4) . substr($nf->emissao, 3, 2) . '/';
+				. 'temporarias/' . substr($hoje, 6, 4) . substr($hoje, 3, 2) . '/';
 			if (!is_dir($this->arquivoXMLProtocoloRecibo))
 				mkdir($this->arquivoXMLProtocoloRecibo, 0755, true);
 			$this->arquivoXMLProtocoloRecibo .= $nf->nfereciboenvio . '-retConsReciNFe.xml';
 			
 			$this->arquivoXMLProtocoloSituacao = 
 				$diretorioBase
-				. 'temporarias/' . substr($nf->emissao, 6, 4) . substr($nf->emissao, 3, 2) . '/';
+				. 'temporarias/' . substr($hoje, 6, 4) . substr($hoje, 3, 2) . '/';
 			$this->arquivoXMLProtocoloSituacao .= $nf->nfechave . '-retConsSitNFe.xml';
 			
 			$this->arquivoPDF = 
