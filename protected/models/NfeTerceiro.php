@@ -649,8 +649,8 @@ class NfeTerceiro extends MGActiveRecord
 		if (!empty($this->codnotafiscal))
 			return false;
 		
-		if (empty($this->NfeTerceiroItems))
-			return false;
+		//if (empty($this->NfeTerceiroItems))
+		//	return false;
 		
 		return true;
 		
