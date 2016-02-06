@@ -209,7 +209,7 @@ class NfeTerceiro extends MGActiveRecord
 			case 1: // Pendentes
 				$criteria->addCondition(
 					'codnotafiscal IS NULL '
-					. ' AND indmanifestacao NOT IN (' . self::INDMANIFESTACAO_DESCONHECIDA . ', ' . self::INDMANIFESTACAO_NAOREALIZADA . ')'
+					. ' AND (indmanifestacao IS NULL OR indmanifestacao NOT IN (' . self::INDMANIFESTACAO_DESCONHECIDA . ', ' . self::INDMANIFESTACAO_NAOREALIZADA . '))'
 					. ' AND indsituacao = ' . self::INDSITUACAO_AUTORIZADA
 					);
 				break;
@@ -237,13 +237,13 @@ class NfeTerceiro extends MGActiveRecord
 		if ($emissao_de = DateTime::createFromFormat("d/m/y",$this->emissao_de))
 		{
 			$criteria->addCondition('t.emissao >= :emissao_de');
-			$criteria->params[':emissao_de'] = $emissao_de->format('Y-m-d');
+			$criteria->params[':emissao_de'] = $emissao_de->format('Y-m-d') . ' 00:00:00.0';
 		}
 		
 		if ($emissao_ate = DateTime::createFromFormat("d/m/y",$this->emissao_ate))
 		{
 			$criteria->addCondition('t.emissao <= :emissao_ate');
-			$criteria->params[':emissao_ate'] = $emissao_ate->format('Y-m-d');
+			$criteria->params[':emissao_ate'] = $emissao_ate->format('Y-m-d') . ' 23:59:59.9';
 		}
 
 		return new CActiveDataProvider($this, array(
