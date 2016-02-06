@@ -19,6 +19,7 @@
 		echo $form->select2PessoaRow($model,'codpessoa', array('class'=>'input-xlarge'));
 		echo $form->select2Row($model,'indsituacao', NfeTerceiro::getIndSituacaoListaCombo(), array('class'=>'input-medium'));
 		echo $form->select2Row($model,'codnaturezaoperacao', NaturezaOperacao::getListaCombo(), array('class'=>'input-xlarge'));
+		echo $form->toggleButtonRow($model,'ignorada', array('options' => array('width' => 150,  'enabledLabel' => 'Ignorada', 'disabledLabel' => 'Não')));
 
 		echo $form->datetimepickerRow(
 				$model,

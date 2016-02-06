@@ -358,6 +358,10 @@ $(document).ready(function(){
 				'nfedataautorizacao',
 				'nsu',
 				array(
+					'name' => 'ignorada',
+					'value' => ($model->ignorada)?'Sim':'Não',
+				),
+				array(
 					'name' => 'indsituacao',
 					'value' => $model->getIndSituacaoDescricao(),
 				),

@@ -16,6 +16,7 @@
  * @property string $codoperacao
  * @property string $valortotal
  * @property integer $indsituacao
+ * @property integer $ignorada
  * @property integer $indmanifestacao
  * @property string $alteracao
  * @property string $codusuarioalteracao
@@ -98,7 +99,7 @@ class NfeTerceiro extends MGActiveRecord
 			array('nfechave, emitente', 'length', 'max'=>100),
 			//array('arquivoxml', 'file', 'types'=>'xml'),
 			array('cnpj, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipivalor, valorprodutos, valorfrete, valorseguro, valordesconto, valoroutras', 'length', 'max'=>14),
-			array('codpessoa, emissao, nfedataautorizacao, codoperacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnotafiscal, codnaturezaoperacao, entrada', 'safe'),
+			array('codpessoa, ignorada, emissao, nfedataautorizacao, codoperacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnotafiscal, codnaturezaoperacao, entrada', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('codnfeterceiro, emissao_de, emissao_ate, valor_de, valor_ate, nsu, nfechave, cnpj, ie, emitente, codpessoa, emissao, nfedataautorizacao, codoperacao, valortotal, indsituacao, indmanifestacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codfilial, codnotafiscal, codnaturezaoperacao, serie, numero, entrada, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipivalor, valorprodutos, valorfrete, valorseguro, valordesconto, valoroutras', 'safe', 'on'=>'search'),
@@ -143,6 +144,7 @@ class NfeTerceiro extends MGActiveRecord
 			'codoperacao' => 'Operação',
 			'valortotal' => 'Valor Total',
 			'indsituacao' => 'Situação',
+			'ignorada' => 'Ignorar NFe',
 			'indmanifestacao' => 'Manifestação',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
@@ -211,6 +213,7 @@ class NfeTerceiro extends MGActiveRecord
 					'codnotafiscal IS NULL '
 					. ' AND (indmanifestacao IS NULL OR indmanifestacao NOT IN (' . self::INDMANIFESTACAO_DESCONHECIDA . ', ' . self::INDMANIFESTACAO_NAOREALIZADA . '))'
 					. ' AND indsituacao = ' . self::INDSITUACAO_AUTORIZADA
+					. ' AND ignorada = FALSE '
 					);
 				break;
 
@@ -222,6 +225,7 @@ class NfeTerceiro extends MGActiveRecord
 				$criteria->addCondition(
 					'indmanifestacao IN (' . self::INDMANIFESTACAO_DESCONHECIDA . ', ' . self::INDMANIFESTACAO_NAOREALIZADA . ')'
 					. ' OR indsituacao != ' . self::INDSITUACAO_AUTORIZADA
+					. ' OR ignorada = TRUE '
 				);
 				break;
 			
