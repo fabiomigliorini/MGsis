@@ -1863,7 +1863,7 @@ class NFePHPNovoController extends Controller
 					$nfe->emitente = '<Vazio>';
 				$nfe->ie = @$sXml->IE->__toString();
 				$dh = DateTime::createFromFormat ('Y-m-d\TH:i:sP', $sXml->dhEmi->__toString()); //  AAAA-MM-DDThh:mm:ssTZD
-				$nfe->emissao = @$dh->format('d/m/Y');
+				$nfe->emissao = @$dh->format('d/m/Y H:i:s');
 				$nfe->codoperacao = @$sXml->tpNF->__toString() + 1;
 				$nfe->valortotal = @Yii::app()->format->unformatNumber($sXml->vNF->__toString());
 				$dh = DateTime::createFromFormat ('Y-m-d\TH:i:sP', $sXml->dhRecbto->__toString()); //  AAAA-MM-DDThh:mm:ssTZD
