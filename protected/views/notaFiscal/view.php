@@ -580,7 +580,7 @@ $(document).ready(function(){
 						?>
 					</small>
 				</td>
-				<td>
+				<td style="width: 50px">
 					<a href="<?php echo Yii::app()->createUrl('notaFiscalProdutoBarra/view', array('id'=>$prod->codnotafiscalprodutobarra)); ?>"><i class="icon-eye-open"></i></a>
 					<a href="<?php echo Yii::app()->createUrl('notaFiscalProdutoBarra/update', array('id'=>$prod->codnotafiscalprodutobarra)); ?>"><i class="icon-pencil"></i></a>
 					<a class="delete" href="<?php echo Yii::app()->createUrl('notaFiscalProdutoBarra/delete', array('id'=>$prod->codnotafiscalprodutobarra)); ?>"><i class="icon-trash"></i></a>
