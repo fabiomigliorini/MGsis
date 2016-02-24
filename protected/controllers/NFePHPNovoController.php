@@ -684,12 +684,17 @@ class NFePHPNovoController extends Controller
 						$resp = $make->tagICMS($nItem, $orig, $cst, $modBC, $pRedBC, $vBC, $pICMS, $vICMS, $vICMSDeson, $motDesICMS, $modBCST, $pMVAST, $pRedBCST, $vBCST, $pICMSST, $vICMSST, $pDif, $vICMSDif, $vICMSOp, $vBCSTRet, $vICMSSTRet);
 
 						//IPI
-						$cst = $nfpb->ipicst;
+						//$cst = $nfpb->ipicst;
+						$cst = str_pad($nfpb->ipicst, 2, '0', STR_PAD_LEFT);
 						$clEnq = '';
 						$cnpjProd = '';
 						$cSelo = '';
 						$qSelo = '';
-						$cEnq = '999';
+						// TODO: Jogar logica cEnq para modelagem do banco de dados
+						if ($nfpb->ipicst == 4 || $nfpb->ipicst == 54)
+							$cEnq = '001'; // Livros, jornais, periódicos e o papel destinado à sua impressão – Art. 18 Inciso I do Decreto 7.212/2010
+						else
+							$cEnq = '999'; // Tributação normal IPI; Outros;
 						$vBC = number_format($nfpb->ipibase, 2, '.', '');
 						$pIPI = number_format($nfpb->ipipercentual, 2, '.', '');
 						$qUnid = '';
