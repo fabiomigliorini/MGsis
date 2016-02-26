@@ -672,6 +672,9 @@ class NfeTerceiro extends MGActiveRecord
 		$nf->emissao = $this->emissao;
 		$nf->saida = $this->entrada;
 		$nf->codfilial = $this->codfilial;
+		//TODO: Criar campo na tblNfeTerceiro.codestoquelocal
+		if (sizeof($nf->Filial->EstoqueLocals) > 0)
+			$nf->codestoquelocal = $nf->Filial->EstoqueLocals[0]->codestoquelocal;
 		$nf->codpessoa = $this->codpessoa;
 		//$nf->observacoes = 
 		//$nf->volumes = 

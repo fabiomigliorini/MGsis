@@ -7,6 +7,7 @@
  * @property string $codnegocio
  * @property string $codpessoa
  * @property string $codfilial
+ * @property string $codestoquelocal
  * @property string $lancamento
  * @property string $codpessoavendedor
  * @property string $codoperacao
@@ -29,6 +30,7 @@
  *
  * The followings are the available model relations:
  * @property Filial $Filial
+ * @property EstoqueLocal $EstoqueLocal
  * @property NegocioStatus $NegocioStatus
  * @property Operacao $Operacao
  * @property Pessoa $Pessoa
@@ -64,15 +66,16 @@ class Negocio extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codpessoa, codfilial, lancamento, codoperacao, codnegociostatus, codusuario, codnaturezaoperacao', 'required'),
+			array('codpessoa, codfilial, codestoquelocal, lancamento, codoperacao, codnegociostatus, codusuario, codnaturezaoperacao', 'required'),
 			array('observacoes', 'length', 'max'=>500),
 			array('valordesconto, valorprodutos, valortotal, valoraprazo, valoravista', 'numerical'),
 			array('valordesconto', 'validaDesconto'),
+			array('codestoquelocal', 'validaEstoqueLocal'),
 			//array('codnegociostatus', 'validaStatus'),
 			array('codpessoa, codpessoavendedor, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('pagamento, lancamento_de, lancamento_ate, codnegocio, codpessoa, codfilial, lancamento, codpessoavendedor, codoperacao, codnegociostatus, observacoes, codusuario, valordesconto, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnaturezaoperacao, valorprodutos, valortotal, valoraprazo, valoravista', 'safe', 'on'=>'search'),
+			array('pagamento, lancamento_de, lancamento_ate, codnegocio, codpessoa, codfilial, codestoquelocal, lancamento, codpessoavendedor, codoperacao, codnegociostatus, observacoes, codusuario, valordesconto, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnaturezaoperacao, valorprodutos, valortotal, valoraprazo, valoravista', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -80,6 +83,18 @@ class Negocio extends MGActiveRecord
 	{
 		if ($this->valordesconto > $this->valorprodutos)
 			$this->addError($attribute, 'O valor de desconto não pode ser maior que o valor dos produtos!');
+	}
+	
+	public function validaEstoqueLocal($attribute, $params)
+	{
+		if (!isset($this->EstoqueLocal))
+			return;
+		
+		if (!isset($this->Filial))
+			return;
+		
+		if ($this->EstoqueLocal->codfilial != $this->codfilial)
+			$this->addError($attribute, 'O Local de Estoque não bate com a Filial selecionada!');
 	}
 
 	/*
@@ -100,6 +115,7 @@ class Negocio extends MGActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
+			'EstoqueLocal' => array(self::BELONGS_TO, 'EstoqueLocal', 'codestoquelocal'),
 			'NegocioStatus' => array(self::BELONGS_TO, 'NegocioStatus', 'codnegociostatus'),
 			'Operacao' => array(self::BELONGS_TO, 'Operacao', 'codoperacao'),
 			'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
@@ -123,6 +139,7 @@ class Negocio extends MGActiveRecord
 			'codnegocio' => '#',
 			'codpessoa' => 'Pessoa',
 			'codfilial' => 'Filial',
+			'codestoquelocal' => 'Local Estoque',
 			'lancamento' => 'Lançamento',
 			'codpessoavendedor' => 'Vendedor',
 			'codoperacao' => 'Operação',
@@ -167,6 +184,7 @@ class Negocio extends MGActiveRecord
 		$criteria->compare('codnegocio',$this->codnegocio,false);
 		$criteria->compare('codpessoa',$this->codpessoa,false);
 		$criteria->compare('codfilial',$this->codfilial,false);
+		$criteria->compare('codestoquelocal',$this->codestoquelocal,false);
 		$criteria->compare('lancamento',$this->lancamento,true);
 		$criteria->compare('codpessoavendedor',$this->codpessoavendedor,false);
 		$criteria->compare('codoperacao',$this->codoperacao,false);
@@ -345,6 +363,7 @@ class Negocio extends MGActiveRecord
 			if (empty($nota->codpessoa))
 				$nota->codpessoa = Pessoa::CONSUMIDOR;
 			$nota->codfilial = $this->codfilial;
+			$nota->codestoquelocal = $this->codestoquelocal;
 			$nota->serie = 1;
 			$nota->numero = 0;
 			$nota->modelo = $modelo;
@@ -549,6 +568,7 @@ class Negocio extends MGActiveRecord
 		$negocio = new Negocio;
 		$negocio->codpessoa = $this->codpessoa;
 		$negocio->codfilial = $this->codfilial;
+		$negocio->codestoquelocal = $this->codestoquelocal;
 		$negocio->lancamento = date('d/m/Y H:i:s');
 		$negocio->codpessoavendedor = $this->codpessoavendedor;
 		$negocio->codnaturezaoperacao = $this->NaturezaOperacao->codnaturezaoperacaodevolucao;

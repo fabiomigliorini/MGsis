@@ -419,6 +419,10 @@ $(document).ready(function(){
 					'value'=>(isset($model->Filial))?$model->Filial->filial:null,
 					),
 				array(
+					'name'=>'codestoquelocal',
+					'value'=>(isset($model->EstoqueLocal))?$model->EstoqueLocal->estoquelocal:null,
+					),
+				array(
 					'name'=>'codusuario',
 					'value'=>(isset($model->Usuario))?$model->Usuario->usuario:null,
 					),

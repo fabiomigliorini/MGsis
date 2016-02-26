@@ -12,6 +12,7 @@
 
 			// codfilial
 			echo $form->select2Row($model, 'codfilial', Filial::getListaCombo(), array('prompt' => '', 'class' => 'input-medium'));
+			echo $form->select2Row($model, 'codestoquelocal', EstoqueLocal::getListaCombo(), array('prompt' => '', 'class' => 'input-medium'));
 
 			echo $form->select2Row(
 				$model, 

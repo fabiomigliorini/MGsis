@@ -1,31 +1,34 @@
 <?php
 
 /**
- * This is the model class for table "mgsis.tblestoquemovimentotipo".
+ * This is the model class for table "mgsis.tblestoquelocal".
  *
- * The followings are the available columns in table 'mgsis.tblestoquemovimentotipo':
- * @property string $codestoquemovimentotipo
- * @property string $descricao
- * @property string $sigla
+ * The followings are the available columns in table 'mgsis.tblestoquelocal':
+ * @property string $codestoquelocal
+ * @property string $estoquelocal
+ * @property string $codfilial
+ * @property string $inativo
  * @property string $alteracao
  * @property string $codusuarioalteracao
  * @property string $criacao
  * @property string $codusuariocriacao
  *
  * The followings are the available model relations:
- * @property EstoqueMovimento[] $EstoqueMovimentos
+ * @property Filial $Filial
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
- * @property NaturezaOperacao[] $NaturezaOperacaos
+ * @property Estoquesaldo[] $EstoqueSaldos
+ * @property Negocio[] $Negocios
+ * @property Notafiscal[] $NotaFiscals
  */
-class EstoqueMovimentoTipo extends MGActiveRecord
+class EstoqueLocal extends MGActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'mgsis.tblestoquemovimentotipo';
+		return 'mgsis.tblestoquelocal';
 	}
 
 	/**
@@ -36,13 +39,12 @@ class EstoqueMovimentoTipo extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('descricao, sigla', 'required'),
-			array('descricao', 'length', 'max'=>100),
-			array('sigla', 'length', 'max'=>3),
-			array('alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
+			array('estoquelocal, codfilial', 'required'),
+			array('estoquelocal', 'length', 'max'=>50),
+			array('inativo, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('codestoquemovimentotipo, descricao, sigla, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
+			array('codestoquelocal, estoquelocal, codfilial, inativo, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -54,10 +56,12 @@ class EstoqueMovimentoTipo extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'EstoqueMovimentos' => array(self::HAS_MANY, 'EstoqueMovimento', 'codestoquemovimentotipo'),
+			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
-			'NaturezaOperacaos' => array(self::HAS_MANY, 'NaturezaOperacao', 'codestoquemovimentotipo'),
+			'EstoqueSaldos' => array(self::HAS_MANY, 'EstoqueSaldo', 'codestoquelocal'),
+			'Negocios' => array(self::HAS_MANY, 'Negocio', 'codestoquelocal'),
+			'NotaFiscals' => array(self::HAS_MANY, 'NotaFiscal', 'codestoquelocal'),
 		);
 	}
 
@@ -67,9 +71,10 @@ class EstoqueMovimentoTipo extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codestoquemovimentotipo' => '#',
-			'descricao' => 'Descrição',
-			'sigla' => 'Sigla',
+			'codestoquelocal' => '#',
+			'estoquelocal' => 'Local',
+			'codfilial' => 'Filial',
+			'inativo' => 'Inativo',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
@@ -95,9 +100,10 @@ class EstoqueMovimentoTipo extends MGActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codestoquemovimentotipo',$this->codestoquemovimentotipo,true);
-		$criteria->compare('descricao',$this->descricao,true);
-		$criteria->compare('sigla',$this->sigla,true);
+		$criteria->compare('codestoquelocal',$this->codestoquelocal,true);
+		$criteria->compare('estoquelocal',$this->estoquelocal,true);
+		$criteria->compare('codfilial',$this->codfilial,true);
+		$criteria->compare('inativo',$this->inativo,true);
 		$criteria->compare('alteracao',$this->alteracao,true);
 		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
 		$criteria->compare('criacao',$this->criacao,true);
@@ -112,10 +118,27 @@ class EstoqueMovimentoTipo extends MGActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return EstoqueMovimentoTipo the static model class
+	 * @return EstoqueLocal the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
+
+	public function scopes () 
+	{
+		return array(
+			'combo'=>array(
+				'select'=>array('codestoquelocal', 'estoquelocal'),
+				'order'=>'codestoquelocal ASC',
+				),
+			);
+	}
+	
+	public function getListaCombo ()
+	{
+		$lista = self::model()->combo()->findAll();
+		return CHtml::listData($lista, 'codestoquelocal', 'estoquelocal');
+	}	
+	
 }

@@ -42,6 +42,7 @@
  * @property Ecf[] $Ecfs
  * @property Negocio[] $Negocios
  * @property EstoqueSaldo[] $EstoqueSaldos
+ * @property EstoqueLocal[] $EstoqueLocals
  */
 class Filial extends MGActiveRecord
 {
@@ -111,6 +112,7 @@ class Filial extends MGActiveRecord
 			'Ecfs' => array(self::HAS_MANY, 'Ecf', 'codfilial'),
 			'Negocios' => array(self::HAS_MANY, 'Negocio', 'codfilial'),
 			'EstoqueSaldos' => array(self::HAS_MANY, 'EstoqueSaldo', 'codfilial'),
+			'EstoqueLocals' => array(self::HAS_MANY, 'EstoqueLocal', 'codfilial'),
 		);
 	}
 
@@ -212,7 +214,7 @@ class Filial extends MGActiveRecord
 		return array(
 			'combo'=>array(
 				'select'=>array('codfilial', 'filial'),
-				'order'=>'filial ASC',
+				'order'=>'codfilial ASC',
 				),
 			);
 	}

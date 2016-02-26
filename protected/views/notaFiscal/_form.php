@@ -19,6 +19,7 @@
 		<div class="span3">
 			<?php
 			echo $form->select2Row($model,'codfilial', Filial::getListaCombo() , array('class'=>'input-medium'));
+			echo $form->select2Row($model,'codestoquelocal', EstoqueLocal::getListaCombo() , array('class'=>'input-medium'));
 			echo $form->textFieldRow($model,'serie',array('class'=>'input-mini text-right'));
 			echo $form->textFieldRow($model,'numero',array('class'=>'input-small text-right'));
 			echo $form->datetimepickerRow(

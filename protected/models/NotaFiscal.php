@@ -12,6 +12,7 @@
  * @property string $emissao
  * @property string $saida
  * @property string $codfilial
+ * @property string $codestoquelocal
  * @property string $codpessoa
  * @property string $observacoes
  * @property integer $volumes
@@ -53,6 +54,7 @@
  * @property Operacao $Operacao
  * @property NaturezaOperacao $NaturezaOperacao
  * @property Filial $Filial
+ * @property EstoqueLocal $EstoqueLocal
  * @property Pessoa $Pessoa
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
@@ -115,10 +117,11 @@ class NotaFiscal extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codnaturezaoperacao, serie, emissao, saida, codfilial, codpessoa', 'required'),
+			array('codnaturezaoperacao, serie, emissao, saida, codfilial, codestoquelocal, codpessoa', 'required'),
 			array('serie, tpemis, numero, volumes, frete', 'numerical', 'integerOnly'=>true),
 			array('nfechave, nfereciboenvio, nfeautorizacao, nfecancelamento, nfeinutilizacao', 'length', 'max'=>100),
 			//array('nfechave', 'unique'),
+			array('codestoquelocal', 'validaEstoqueLocal'),
 			array('nfechave', 'validaChaveNFE'),
 			array('modelo', 'validaModelo'),
 			array('codpessoa', 'validaPessoaPelaChaveNFE'),
@@ -133,8 +136,20 @@ class NotaFiscal extends MGActiveRecord
 			array('emitida, nfeimpressa, codoperacao, nfedataenvio, nfedataautorizacao, nfedatacancelamento, nfedatainutilizacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('codnotafiscal, codnaturezaoperacao, emitida, nfechave, tpemis, nfeimpressa, serie, numero, emissao, modelo, saida, codfilial, codpessoa, observacoes, volumes, frete, codoperacao, nfereciboenvio, nfedataenvio, nfeautorizacao, nfedataautorizacao, valorfrete, valorseguro, valordesconto, valoroutras, nfecancelamento, nfedatacancelamento, nfeinutilizacao, nfedatainutilizacao, justificativa, alteracao, codusuarioalteracao, criacao, codusuariocriacao, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipivalor, codstatus, emissao_de, emissao_ate, saida_de, saida_ate', 'safe', 'on'=>'search'),
+			array('codnotafiscal, codnaturezaoperacao, emitida, nfechave, tpemis, nfeimpressa, serie, numero, emissao, modelo, saida, codfilial, codestoquelocal, codpessoa, observacoes, volumes, frete, codoperacao, nfereciboenvio, nfedataenvio, nfeautorizacao, nfedataautorizacao, valorfrete, valorseguro, valordesconto, valoroutras, nfecancelamento, nfedatacancelamento, nfeinutilizacao, nfedatainutilizacao, justificativa, alteracao, codusuarioalteracao, criacao, codusuariocriacao, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipivalor, codstatus, emissao_de, emissao_ate, saida_de, saida_ate', 'safe', 'on'=>'search'),
 		);
+	}
+
+	public function validaEstoqueLocal($attribute, $params)
+	{
+		if (!isset($this->EstoqueLocal))
+			return;
+		
+		if (!isset($this->Filial))
+			return;
+		
+		if ($this->EstoqueLocal->codfilial != $this->codfilial)
+			$this->addError($attribute, 'O Local de Estoque não bate com a Filial selecionada!');
 	}
 	
 	public function validaModelo($attribute, $params)
@@ -399,6 +414,7 @@ class NotaFiscal extends MGActiveRecord
 			'Operacao' => array(self::BELONGS_TO, 'Operacao', 'codoperacao'),
 			'NaturezaOperacao' => array(self::BELONGS_TO, 'NaturezaOperacao', 'codnaturezaoperacao'),
 			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
+			'EstoqueLocal' => array(self::BELONGS_TO, 'EstoqueLocal', 'codestoquelocal'),
 			'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),			
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
@@ -425,6 +441,7 @@ class NotaFiscal extends MGActiveRecord
 			'emissao' => 'Emissão',
 			'saida' => 'Saída/Entrada',
 			'codfilial' => 'Filial',
+			'codestoquelocal' => 'Local Estoque',
 			'codpessoa' => 'Pessoa',
 			'observacoes' => 'Observações',
 			'volumes' => 'Volumes',
@@ -489,6 +506,7 @@ class NotaFiscal extends MGActiveRecord
 		$criteria->compare('emissao',$this->emissao, false);
 		$criteria->compare('saida',$this->saida, false);
 		$criteria->compare('codfilial',$this->codfilial, false);
+		$criteria->compare('codestoquelocal',$this->codestoquelocal,false);
 		$criteria->compare('codpessoa',$this->codpessoa, false);
 		$criteria->compare('observacoes',$this->observacoes, false);
 		$criteria->compare('volumes',$this->volumes);
@@ -716,8 +734,11 @@ class NotaFiscal extends MGActiveRecord
 	//preenche codoperacao
 	protected function beforeValidate()
 	{
-		if (isset($this->NaturezaOperacao))
-			$this->codoperacao = $this->NaturezaOperacao->codoperacao;
+		if (!empty($this->codnaturezaoperacao))
+		{
+			if (isset($this->NaturezaOperacao))
+				$this->codoperacao = $this->NaturezaOperacao->codoperacao;
+		}
 		
 		return parent::beforeValidate();
 	}

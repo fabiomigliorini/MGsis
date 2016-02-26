@@ -34,6 +34,8 @@ class NegocioController extends Controller
 		$model->lancamento = date('d/m/Y H:i:s');
 		$model->codnegociostatus = NegocioStatus::ABERTO;
 		$model->codfilial = Yii::app()->user->getState("codfilial");
+		if (sizeof($model->Filial->EstoqueLocals) > 0)
+			$model->codestoquelocal = $model->Filial->EstoqueLocals[0]->codestoquelocal;
 		$model->codnaturezaoperacao = NaturezaOperacao::VENDA;
 		$model->codpessoa = Pessoa::CONSUMIDOR;
 		

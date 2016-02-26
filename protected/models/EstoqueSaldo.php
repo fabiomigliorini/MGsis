@@ -5,8 +5,6 @@
  *
  * The followings are the available columns in table 'mgsis.tblestoquesaldo':
  * @property string $codestoquesaldo
- * @property string $codfilial
- * @property string $codproduto
  * @property boolean $fiscal
  * @property string $saldoquantidade
  * @property string $saldovalor
@@ -15,12 +13,15 @@
  * @property string $codusuarioalteracao
  * @property string $criacao
  * @property string $codusuariocriacao
+ * @property string $codproduto
+ * @property string $codestoquelocal
  *
  * The followings are the available model relations:
- * @property Filial $Filial
- * @property Produto $Produto
- * @property Usuario $UsuarioAlteracao
- * @property Usuario $UsuarioCriacao
+ * @property Estoquemes[] $estoquemes
+ * @property Produto $codproduto
+ * @property Estoquelocal $codestoquelocal
+ * @property Usuario $codusuarioalteracao
+ * @property Usuario $codusuariocriacao
  */
 class EstoqueSaldo extends MGActiveRecord
 {
@@ -40,12 +41,12 @@ class EstoqueSaldo extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codestoquesaldo, codfilial, codproduto, fiscal', 'required'),
+			array('fiscal, codproduto, codestoquelocal', 'required'),
 			array('saldoquantidade, saldovalor, saldovalorunitario', 'length', 'max'=>14),
 			array('alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('codestoquesaldo, codfilial, codproduto, fiscal, saldoquantidade, saldovalor, saldovalorunitario, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
+			array('codestoquesaldo, fiscal, saldoquantidade, saldovalor, saldovalorunitario, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codproduto, codestoquelocal', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,10 +58,11 @@ class EstoqueSaldo extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
-			'Produto' => array(self::BELONGS_TO, 'Produto', 'codproduto'),
-			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'estoquemes' => array(self::HAS_MANY, 'Estoquemes', 'codestoquesaldo'),
+			'codproduto' => array(self::BELONGS_TO, 'Produto', 'codproduto'),
+			'codestoquelocal' => array(self::BELONGS_TO, 'Estoquelocal', 'codestoquelocal'),
+			'codusuarioalteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+			'codusuariocriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
 	}
 
@@ -70,13 +72,13 @@ class EstoqueSaldo extends MGActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codestoquesaldo' => '#',
-			'codfilial' => 'Filial',
-			'codproduto' => 'Produto',
+			'codestoquesaldo' => 'Codestoquesaldo',
 			'fiscal' => 'Fiscal',
-			'saldoquantidade' => 'Saldo Quantidade',
-			'saldovalor' => 'Saldo valor',
-			'saldovalorunitario' => 'Saldo Valor Unitário',
+			'saldoquantidade' => 'Saldoquantidade',
+			'saldovalor' => 'Saldovalor',
+			'saldovalorunitario' => 'Saldovalorunitario',
+			'codproduto' => 'Codproduto',
+			'codestoquelocal' => 'Codestoquelocal',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
@@ -103,8 +105,6 @@ class EstoqueSaldo extends MGActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('codestoquesaldo',$this->codestoquesaldo,true);
-		$criteria->compare('codfilial',$this->codfilial,true);
-		$criteria->compare('codproduto',$this->codproduto,true);
 		$criteria->compare('fiscal',$this->fiscal);
 		$criteria->compare('saldoquantidade',$this->saldoquantidade,true);
 		$criteria->compare('saldovalor',$this->saldovalor,true);
@@ -113,6 +113,8 @@ class EstoqueSaldo extends MGActiveRecord
 		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
 		$criteria->compare('criacao',$this->criacao,true);
 		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,true);
+		$criteria->compare('codproduto',$this->codproduto,true);
+		$criteria->compare('codestoquelocal',$this->codestoquelocal,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -126,29 +126,34 @@ $(document).ready(function(){
 
 
 <div class="row-fluid">
-	<div class="span2">
-	<?php 
-	$this->widget('bootstrap.widgets.TbDetailView',array(
-		'data'=>$model,
-		'attributes'=>array(
-			array(
-				'name'=>'codnotafiscal',
-				'value'=>Yii::app()->format->formataCodigo($model->codnotafiscal),
+	<small class="span2">
+		<?php 
+		$this->widget('bootstrap.widgets.TbDetailView',array(
+			'data'=>$model,
+			'attributes'=>array(
+				array(
+					'name'=>'codnotafiscal',
+					'value'=>Yii::app()->format->formataCodigo($model->codnotafiscal),
+					),
+				'serie',
+				array(
+					'name'=>'numero',
+					'value'=>Yii::app()->format->formataPorMascara($model->numero, "########"),
+					),
+				array(
+					'name'=>'emissao',
+					'value'=>str_replace(' ', '&nbsp', $model->emissao),
+					'type'=>'raw'
+					),
+				array(
+					'name'=>'saida',
+					'value'=>str_replace(' ', '&nbsp', $model->saida),
+					'type'=>'raw'
+					),
 				),
-			'serie',
-			array(
-				'name'=>'numero',
-				'value'=>Yii::app()->format->formataPorMascara($model->numero, "########"),
-				),
-			'emissao',
-			array(
-				'name' => 'saida',
-				'value' => substr($model->saida, 0, 10),
-				),
-			),
-	)); 
-	?>
-	</div>
+		)); 
+		?>
+	</small>
 	<div class="span4">
 	<?php 
 	
@@ -163,7 +168,7 @@ $(document).ready(function(){
 		'attributes'=>array(
 			array(
 				'name'=>'codfilial',
-				'value'=>CHtml::link(CHtml::encode($model->Filial->filial), array("filial/view", "id"=>$model->codfilial)),
+				'value'=>CHtml::link(CHtml::encode($model->Filial->filial), array("filial/view", "id"=>$model->codfilial)) . ' (' . $model->EstoqueLocal->estoquelocal . ')',
 				'type'=>'raw',
 				),
 			array(

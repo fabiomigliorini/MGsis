@@ -36,6 +36,8 @@ class NotaFiscalController extends Controller
 		$model->serie = 1;
 		$model->numero = 0;
 		$model->codfilial = Yii::app()->user->getState("codfilial");
+		if (sizeof($model->Filial->EstoqueLocals) > 0)
+			$model->codestoquelocal = $model->Filial->EstoqueLocals[0]->codestoquelocal;
 		$model->modelo = NotaFiscal::MODELO_NFE;
 		
 		if(isset($_POST['NotaFiscal']))
