@@ -538,22 +538,22 @@ class NotaFiscal extends MGActiveRecord
 		$criteria->compare('ipibase',$this->ipibase, false);
 		$criteria->compare('ipivalor',$this->ipivalor, false);
 		
-		if ($emissao_de = DateTime::createFromFormat("d/m/y",$this->emissao_de) . ' 00:00:00.0')
+		if ($emissao_de = DateTime::createFromFormat("d/m/y",$this->emissao_de))
 		{
 			$criteria->addCondition('t.emissao >= :emissao_de');
-			$criteria->params = array_merge($criteria->params, array(':emissao_de' => $emissao_de->format('Y-m-d')));
+			$criteria->params = array_merge($criteria->params, array(':emissao_de' => $emissao_de->format('Y-m-d')  . ' 00:00:00.0' ));
 		}
-		if ($emissao_ate = DateTime::createFromFormat("d/m/y",$this->emissao_ate) . ' 23:59:59.9')
+		if ($emissao_ate = DateTime::createFromFormat("d/m/y",$this->emissao_ate))
 		{
 			$criteria->addCondition('t.emissao <= :emissao_ate');
-			$criteria->params = array_merge($criteria->params, array(':emissao_ate' => $emissao_ate->format('Y-m-d')));
+			$criteria->params = array_merge($criteria->params, array(':emissao_ate' => $emissao_ate->format('Y-m-d')  . ' 23:59:59.9'));
 		}
-		if ($saida_de = DateTime::createFromFormat("d/m/y",$this->saida_de) . ' 00:00:00.0')
+		if ($saida_de = DateTime::createFromFormat("d/m/y",$this->saida_de))
 		{
 			$criteria->addCondition('t.saida >= :saida_de');
 			$criteria->params = array_merge($criteria->params, array(':saida_de' => $saida_de->format('Y-m-d').' 00:00:00.0'));
 		}
-		if ($saida_ate = DateTime::createFromFormat("d/m/y",$this->saida_ate) . ' 23:59:59.9')
+		if ($saida_ate = DateTime::createFromFormat("d/m/y",$this->saida_ate))
 		{
 			$criteria->addCondition('t.saida <= :saida_ate');
 			$criteria->params = array_merge($criteria->params, array(':saida_ate' => $saida_ate->format('Y-m-d').' 23:59:59.9'));
