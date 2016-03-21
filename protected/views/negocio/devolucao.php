@@ -46,8 +46,10 @@ $this->renderPartial("_hotkeys");
 		$.each($('.quantidadedevolucao'),function(){
 			
 			var codnegocioprodutobarra = $(this).data("codnegocioprodutobarra");
-			var quantidadedevolucao = $('#quantidadedevolucao\\[' + codnegocioprodutobarra + '\\]').autoNumeric('get');
-			var maximodevolucao = $('#maximodevolucao\\[' + codnegocioprodutobarra + '\\]').val();
+			var quantidadedevolucao = parseFloat($('#quantidadedevolucao\\[' + codnegocioprodutobarra + '\\]').autoNumeric('get'));
+			var maximodevolucao = parseFloat($('#maximodevolucao\\[' + codnegocioprodutobarra + '\\]').val());
+            
+            //console.log(maximodevolucao);
 			
 			if (quantidadedevolucao > maximodevolucao)
 			{
@@ -140,6 +142,11 @@ $form =
 
 				foreach ($model->NegocioProdutoBarras as $npb)
 				{
+                    $dev = $npb->devolucaoTotal;
+                    $disp = $npb->quantidade - $dev;
+                    $bloqueado = '';
+                    if ($disp == 0)
+                        $bloqueado = 'disabled=disabled';
 					?>
 					<tr>
 						<td>
@@ -155,7 +162,7 @@ $form =
 									class="input-mini" 
 									name="maximodevolucao[<?php echo $npb->codnegocioprodutobarra; ?>]" 
 									id="maximodevolucao[<?php echo $npb->codnegocioprodutobarra; ?>]" 
-									value="<?php echo $npb->quantidade - $npb->devolucaoTotal; ?>"
+									value="<?php echo $disp; ?>"
 								>
 								<input 
 									type="hidden" 
@@ -171,6 +178,7 @@ $form =
 									id="quantidadedevolucao[<?php echo $npb->codnegocioprodutobarra; ?>]" 
 									value="<?php echo (isset($_POST['quantidadedevolucao'][$npb->codnegocioprodutobarra]))?Yii::app()->format->unformatNumber($_POST['quantidadedevolucao'][$npb->codnegocioprodutobarra]):''; ?>"
 									data-codnegocioprodutobarra="<?php echo $npb->codnegocioprodutobarra; ?>"
+                                    <?php echo $bloqueado; ?>
 								>
 							</div>
 						</td>
@@ -179,7 +187,12 @@ $form =
 						</td>
 						<td>
 							<div class="pull-right">
-								<?php echo Yii::app()->format->formatNumber($npb->quantidade); ?>  &nbsp;
+								<?php echo Yii::app()->format->formatNumber($npb->quantidade); ?>  
+                                <?php if (abs($dev) > 0): ?>
+                                    <small class="muted pull-left">
+                                        <?php echo Yii::app()->format->formatNumber($dev); ?>  já devolvido anteriormente! &nbsp;
+                                    </small>
+                                <?php endif; ?>
 							</div>
 						</td>
 						<td>

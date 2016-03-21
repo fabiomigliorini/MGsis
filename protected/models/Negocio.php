@@ -404,21 +404,17 @@ class Negocio extends MGActiveRecord
 		if (strlen($nota->observacoes) > 1500)
 			$nota->observacoes = substr($nota->observacoes, 0, 1500);
 		
-		//acumula o valor de desconto
-		$nota->valordesconto += $this->valordesconto;
-		
 		$primeiro = true;
 		
         $notaReferenciada = [];
         
 		//percorre os itens do negocio e adiciona na nota
+        $valorDesconto = 0;
+        $percDesconto = ($this->valordesconto / $this->valorprodutos);        
 		foreach($this->NegocioProdutoBarras as $negocioItem)
 		{
             
-            $quantidade = $negocioItem->quantidade;
-            
-            foreach ($negocioItem->NegocioProdutoBarraDevolucaos as $dev)
-                $quantidade -= $dev->quantidade;
+            $quantidade = $negocioItem->quantidade - $negocioItem->devolucaoTotal;
             
             if ($quantidade <= 0)
                 continue;
@@ -460,6 +456,7 @@ class Negocio extends MGActiveRecord
             $notaItem->quantidade = $quantidade;
             $notaItem->valorunitario = $negocioItem->valorunitario;
             $notaItem->valortotal = round($quantidade * $negocioItem->valorunitario, 2);
+            $valorDesconto += round($percDesconto * $notaItem->valortotal, 2);
             
 			if (!$notaItem->save())
 			{
@@ -467,6 +464,18 @@ class Negocio extends MGActiveRecord
 				return false;
 			}
 		}
+        
+		//acumula o valor de desconto
+        if (abs($valorDesconto) > 0)
+        {
+            $nota->valordesconto += $valorDesconto;
+
+            if (!$nota->save())
+            {
+                $this->addErrors($nota->getErrors());
+                return false;
+            }
+        }
         
         foreach ($notaReferenciada as $cod => $chave)
         {
@@ -631,6 +640,8 @@ class Negocio extends MGActiveRecord
 
 		//percorre os itens
 		$gerarNotaDevolucao = false;
+        $valorDesconto = 0;
+        $percDesconto = ($this->valordesconto / $this->valorprodutos);
 		foreach ($arr as $codnegocioprodutobarra => $quantidadedevolucao)
 		{
 			
@@ -653,6 +664,8 @@ class Negocio extends MGActiveRecord
 			$npb->valortotal = $npb->quantidade * $npb->valorunitario;
 			$npb->codprodutobarra = $npb_original->codprodutobarra;
 			$npb->codnegocioprodutobarradevolucao = $npb_original->codnegocioprodutobarra;
+            //calcula desconto proporcional
+            $valorDesconto += round($percDesconto * $npb->valortotal, 2);
 			
 			//salva item
 			if (!$npb->save())
@@ -672,14 +685,10 @@ class Negocio extends MGActiveRecord
 		//recarrega modelo do negocio, para atalizar totais
 		$negocio->refresh();
 		
-		//calcula desconto proporcional
-		if ($this->valordesconto > 0 && $this->valorprodutos > 0)
-		{
-			$negocio->valordesconto = round(($this->valordesconto / $this->valorprodutos) * $negocio->valorprodutos, 2);
-		}
-        
-        $negocio->valoravista = 0;
-        $negocio->valoraprazo = $negocio->valorprodutos - $negocio->valordesconto;
+        $negocio->valordesconto = $valorDesconto;
+        $negocio->valortotal = $negocio->valorprodutos - $negocio->valordesconto;
+		$negocio->valoravista = 0;
+        $negocio->valoraprazo = $negocio->valortotal;
         
         if (!$negocio->save())
         {

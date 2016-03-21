@@ -279,6 +279,7 @@ class NegocioController extends Controller
 	* Returns the data model based on the primary key given in the GET variable.
 	* If the data model is not found, an HTTP exception will be raised.
 	* @param integer the ID of the model to be loaded
+    * @return Negocio
 	*/
 	public function loadModel($id)
 	{
@@ -515,8 +516,12 @@ class NegocioController extends Controller
 	public function actionDevolucao($id)
 	{
 		$model = $this->loadModel($id);
+        
 		if($model->codnegociostatus != NegocioStatus::FECHADO)
 			throw new CHttpException(409, 'O Status do Negócio não permite Devolução!');
+		
+		if($model->codnaturezaoperacao != NaturezaOperacao::VENDA)
+			throw new CHttpException(409, 'Negócio não é uma venda!');
 		
 		if (isset($_POST['quantidadedevolucao']))
 		{
