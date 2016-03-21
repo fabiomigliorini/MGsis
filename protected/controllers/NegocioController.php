@@ -460,7 +460,9 @@ class NegocioController extends Controller
 		$negocio = $this->loadModel($id);
 		
 		$retorno = array("Retorno"=>1, "Mensagem"=>"", "codnotafiscal" =>$codnotafiscal);
-		
+
+		$transaction = Yii::app()->db->beginTransaction();
+        
 		if (!$codnotafiscal = $negocio->gerarNotaFiscal($codnotafiscal, $modelo, true))
 		{
 			$retorno["Retorno"] = 0;
@@ -470,8 +472,10 @@ class NegocioController extends Controller
 				foreach($mensagens as $mensagem)
 					$erro .= " " . $mensagem;
 			$retorno["Mensagem"] = $erro;
-			
+			$transaction->rollBack();
 		}
+        else
+            $transaction->commit();
 		
 		$retorno["codnotafiscal"] = $codnotafiscal;
 		

@@ -42,6 +42,7 @@
  * @property NaturezaOperacao $NaturezaOperacao
  * @property NegocioFormaPagamento[] $NegocioFormaPagamentos
  * @property NegocioProdutoBarra[] $NegocioProdutoBarras
+ * @property NfeTerceiro[] $NfeTerceiros
  */
 class Negocio extends MGActiveRecord
 {
@@ -127,6 +128,7 @@ class Negocio extends MGActiveRecord
 			'NaturezaOperacao' => array(self::BELONGS_TO, 'NaturezaOperacao', 'codnaturezaoperacao'),
 			'NegocioFormaPagamentos' => array(self::HAS_MANY, 'NegocioFormaPagamento', 'codnegocio'),
 			'NegocioProdutoBarras' => array(self::HAS_MANY, 'NegocioProdutoBarra', 'codnegocio', 'order'=>'alteracao DESC, codnegocioprodutobarra DESC'),
+			'NfeTerceiros' => array(self::HAS_MANY, 'NfeTerceiro', 'codnegocio'),
 		);
 	}
 
@@ -234,11 +236,6 @@ class Negocio extends MGActiveRecord
 		$criteria->order = 't.codnegociostatus, t.lancamento DESC, t.codnegocio DESC';
 
 		
-		/*
-		echo "<pre>";
-		print_r($criteria);
-		echo "</pre>";
-		*/
 		if ($comoDataProvider)
 		{
 			$params = array(
@@ -276,6 +273,8 @@ class Negocio extends MGActiveRecord
 	
 	public function fecharNegocio()
 	{
+        
+        $this->refresh();
 		
 		//So continua se for status ABERTO
 		if ($this->codnegociostatus != NegocioStatus::ABERTO)
@@ -290,7 +289,7 @@ class Negocio extends MGActiveRecord
 			return false;			
 		}
 		
-		if ($this->valoraprazo > 0)
+		if ($this->valoraprazo > 0 && $this->codoperacao == Operacao::SAIDA)
 		{
 			if (!$this->Pessoa->avaliaLimiteCredito($this->valoraprazo))
 			{
@@ -313,7 +312,9 @@ class Negocio extends MGActiveRecord
 		//valida total pagamentos
 		if ($valorPagamentos < $this->valortotal)
 		{
-			$this->addError("valortotal", "O valor dos Pagamentos é inferior ao Total!");
+            $valorPagamentos = Yii::app()->format->formatNumber($valorPagamentos);
+            $valorTotal = Yii::app()->format->formatNumber($this->valortotal);
+			$this->addError("valortotal", "O valor dos Pagamentos ($valorPagamentos) é inferior ao Total ($valorTotal)!");
 			return false;
 		}
 		
@@ -387,6 +388,8 @@ class Negocio extends MGActiveRecord
 			$nota->frete = NotaFiscal::FRETE_SEM;
 			$nota->codoperacao = $this->NaturezaOperacao->codoperacao;
 		}
+        
+        $nota->setScenario('geracaoAutomatica');
 	
 		//concatena obeservacoes
 		$nota->observacoes = $nota->observacoes;
@@ -406,9 +409,20 @@ class Negocio extends MGActiveRecord
 		
 		$primeiro = true;
 		
+        $notaReferenciada = [];
+        
 		//percorre os itens do negocio e adiciona na nota
 		foreach($this->NegocioProdutoBarras as $negocioItem)
 		{
+            
+            $quantidade = $negocioItem->quantidade;
+            
+            foreach ($negocioItem->NegocioProdutoBarraDevolucaos as $dev)
+                $quantidade -= $dev->quantidade;
+            
+            if ($quantidade <= 0)
+                continue;
+            
 			foreach ($negocioItem->NotaFiscalProdutoBarras as $notaItem)
 			{
 				if (!in_array($notaItem->NotaFiscal->codstatus, array(NotaFiscal::CODSTATUS_INUTILIZADA, NotaFiscal::CODSTATUS_CANCELADA)))
@@ -433,10 +447,19 @@ class Negocio extends MGActiveRecord
 			
             $notaItem->codnotafiscal = $nota->codnotafiscal;
             $notaItem->codnegocioprodutobarra = $negocioItem->codnegocioprodutobarra;
+            if (isset($negocioItem->NegocioProdutoBarraDevolucao))
+            {
+                foreach ($negocioItem->NegocioProdutoBarraDevolucao->NotaFiscalProdutoBarras as $nfpb)
+                {
+                    if (!empty($nfpb->NotaFiscal->nfechave))
+                        $notaReferenciada[$nfpb->codnotafiscal] = $nfpb->NotaFiscal->nfechave;
+                    $notaItem->codnotafiscalprodutobarraorigem = $nfpb->codnotafiscalprodutobarra;
+                }
+            }
             $notaItem->codprodutobarra = $negocioItem->codprodutobarra;
-            $notaItem->quantidade = $negocioItem->quantidade;
+            $notaItem->quantidade = $quantidade;
             $notaItem->valorunitario = $negocioItem->valorunitario;
-            $notaItem->valortotal = $negocioItem->valortotal;
+            $notaItem->valortotal = round($quantidade * $negocioItem->valorunitario, 2);
             
 			if (!$notaItem->save())
 			{
@@ -444,6 +467,20 @@ class Negocio extends MGActiveRecord
 				return false;
 			}
 		}
+        
+        foreach ($notaReferenciada as $cod => $chave)
+        {
+            $nfr = new NotaFiscalReferenciada();
+            $nfr->codnotafiscal = $nota->codnotafiscal;
+            $nfr->nfechave = $chave;
+			if (!$nfr->save())
+			{
+				$this->addErrors($nfr->getErrors());
+				return false;
+			}            
+        }
+        
+        
 		
 		if (empty($nota->codnotafiscal))
 		{
@@ -593,7 +630,7 @@ class Negocio extends MGActiveRecord
 		}
 
 		//percorre os itens
-		$gerarNotaDevolucao = array();
+		$gerarNotaDevolucao = false;
 		foreach ($arr as $codnegocioprodutobarra => $quantidadedevolucao)
 		{
 			
@@ -628,7 +665,7 @@ class Negocio extends MGActiveRecord
 			//Verifica quais notas fiscais referenciar na devolucao
 			foreach ($npb_original->NotaFiscalProdutoBarras as $nfpb)
 				if (!in_array($nfpb->NotaFiscal->codstatus, array(NotaFiscal::CODSTATUS_CANCELADA, NotaFiscal::CODSTATUS_INUTILIZADA)))
-					$gerarNotaDevolucao[$nfpb->codnotafiscal][] = $codnegocioprodutobarra;
+					$gerarNotaDevolucao = true;
 			
 		}
 		
@@ -638,19 +675,23 @@ class Negocio extends MGActiveRecord
 		//calcula desconto proporcional
 		if ($this->valordesconto > 0 && $this->valorprodutos > 0)
 		{
-			$negocio->valordesconto = ($this->valordesconto / $this->valorprodutos) * $negocio->valorprodutos;
-			if (!$negocio->save())
-			{
-				$this->addErrors($negocio->getErrors());
-				$trans->rollback();
-				return false;
-			}
+			$negocio->valordesconto = round(($this->valordesconto / $this->valorprodutos) * $negocio->valorprodutos, 2);
 		}
-
+        
+        $negocio->valoravista = 0;
+        $negocio->valoraprazo = $negocio->valorprodutos - $negocio->valordesconto;
+        
+        if (!$negocio->save())
+        {
+            $this->addErrors($negocio->getErrors());
+            $trans->rollback();
+            return false;
+        }
+        
 		//cria forma de pagamento
 		$nfp = new NegocioFormaPagamento();
 		$nfp->codnegocio = $negocio->codnegocio;
-		$nfp->valorpagamento = $negocio->valortotal;
+		$nfp->valorpagamento = $negocio->valoraprazo;
 		$nfp->codformapagamento = NegocioFormaPagamento::CARTEIRA_A_VISTA;
 		if (!$nfp->save())
 		{
@@ -670,7 +711,7 @@ class Negocio extends MGActiveRecord
 		//informa o usuario do sucesso
 		Yii::app()->user->setFlash('success', "Gerada devolução <b>{$negocio->codnegocio}</b>!");
 		
-		if (!empty($gerarNotaDevolucao))
+		if ($gerarNotaDevolucao)
 		{
 			if (!$codnotafiscal = $negocio->gerarNotaFiscal(null, NotaFiscal::MODELO_NFE, false))
 			{
@@ -679,19 +720,6 @@ class Negocio extends MGActiveRecord
 				return false;							
 			}
 			
-			$notaFiscal = NotaFiscal::model()->findByPk($codnotafiscal);
-			
-			foreach ($gerarNotaDevolucao as $codnotafiscalreferenciada => $arrcodnegocioprodutobarra)
-			{
-				$notaFiscalReferenciada = NotaFiscal::model()->findByPk($codnotafiscalreferenciada);
-				if ($notaFiscalReferenciada->modelo == NotaFiscal::MODELO_NFCE)
-					$labelNfe = 'NFCe';
-				else
-					$labelNfe = 'NFe';
-				$chave = CHtml::encode(Yii::app()->format->formataChaveNfe($notaFiscalReferenciada->nfechave));
-				$notaFiscal->observacoes .= "\nDevolução referente {$labelNfe} {$notaFiscalReferenciada->numero} de {$notaFiscalReferenciada->emissao}, chave {$chave}.";
-				$notaFiscal->save();
-			}
 		}
 		
 		$trans->commit();

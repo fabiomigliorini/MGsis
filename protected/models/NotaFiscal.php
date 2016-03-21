@@ -127,7 +127,7 @@ class NotaFiscal extends MGActiveRecord
 			array('codpessoa', 'validaPessoaPelaChaveNFE'),
 			array('serie', 'validaSeriePelaChaveNFE'),
 			array('numero', 'validaNumeroPelaChaveNFE'),
-			array('numero', 'validaNumero'),
+			array('numero', 'validaNumero', 'except' => 'geracaoAutomatica'),
 			array('emissao', 'validaEmissaoPelaChaveNFE'),
 			array('saida', 'validaSaida'),
 			array('observacoes', 'length', 'max'=>1500),

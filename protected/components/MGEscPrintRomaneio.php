@@ -17,7 +17,7 @@ class MGEscPrintRomaneio extends MGEscPrint
 	 * @parameter Negocio $model
 	 */
 	
-	function __construct($model, $impressora = null, $linhas = null) 
+	function __construct(Negocio $model, $impressora = null, $linhas = null) 
 	{
 		$this->_model = $model;
 		parent::__construct($impressora, $linhas);
@@ -60,65 +60,77 @@ class MGEscPrintRomaneio extends MGEscPrint
 		
 		$this->adicionaTexto("<CondensedOff><DblStrikeOn>");
 		
-		$linha = "Cliente: " 
-				. Yii::app()->format->formataCodigo($model->codpessoa)
-				. " "
-				. $model->Pessoa->fantasia;
-		
-		if (!empty($model->Pessoa->telefone1))
-			$linha .= " - " . trim($model->Pessoa->telefone1);
-		
-		if (!empty($model->Pessoa->telefone2))
-			$linha .= " / " . trim($model->Pessoa->telefone2);
-		
-		if (!empty($model->Pessoa->telefone3))
-			$linha .= " / " . trim($model->Pessoa->telefone3);
-		
+        $linha = 'Natureza: ' . $model->NaturezaOperacao->naturezaoperacao;
+        //$linha = str_pad($linha, 80, " ", STR_PAD_BOTH);
 		$this->adicionaLinha(
 				$linha
 				, "documento", 80);
-		
-		$this->adicionaTexto("<DblStrikeOff><CondensedOn>");
-		
-		if ($model->Pessoa->fisica)
-			$linha = "CPF....: ";
-		else
-			$linha = "CNPJ...: ";
-		
-		$linha .=
-				Yii::app()->format->formataCnpjCpf($model->Pessoa->cnpj, $model->Pessoa->fisica)
-				. " - "
-				. $model->Pessoa->pessoa;
-		
-		$this->adicionaLinha(
-				$linha
-				, "documento", 137);
+        //die($linha);
+        
+        if ($model->codpessoa != Pessoa::CONSUMIDOR)
+        {
+            
+            $linha = "Cliente.: " 
+                    . Yii::app()->format->formataCodigo($model->codpessoa)
+                    . " "
+                    . $model->Pessoa->fantasia;
 
-		$endereco = 
-			"End....: " 
-			.$model->Pessoa->endereco 
-			.", "
-			.$model->Pessoa->numero
-			." - ";
-		
-		if (!empty($model->Pessoa->complemento))
-			$endereco .= 
-				$model->Pessoa->complemento
-				." - ";
-		
-		$endereco .=
-			$model->Pessoa->bairro
-			." - "
-			.$model->Pessoa->Cidade->cidade
-			."/"
-			.$model->Pessoa->Cidade->Estado->sigla
-			." - "
-			.Yii::app()->format->formataCep($model->Pessoa->cep);
-		
-		$this->adicionaLinha($endereco, "documento", 137);
+            if (!empty($model->Pessoa->telefone1))
+                $linha .= " - " . trim($model->Pessoa->telefone1);
 
+            if (!empty($model->Pessoa->telefone2))
+                $linha .= " / " . trim($model->Pessoa->telefone2);
+
+            if (!empty($model->Pessoa->telefone3))
+                $linha .= " / " . trim($model->Pessoa->telefone3);
+
+            $this->adicionaLinha(
+                    $linha
+                    , "documento", 80);
+
+            $this->adicionaTexto("<DblStrikeOff><CondensedOn>");
+
+            if ($model->Pessoa->fisica)
+                $linha = "CPF....: ";
+            else
+                $linha = "CNPJ...: ";
+
+            $linha .=
+                    Yii::app()->format->formataCnpjCpf($model->Pessoa->cnpj, $model->Pessoa->fisica)
+                    . " - "
+                    . $model->Pessoa->pessoa;
+
+            $this->adicionaLinha(
+                    $linha
+                    , "documento", 137);
+
+            $endereco = 
+                "End....: " 
+                .$model->Pessoa->endereco 
+                .", "
+                .$model->Pessoa->numero
+                ." - ";
+
+            if (!empty($model->Pessoa->complemento))
+                $endereco .= 
+                    $model->Pessoa->complemento
+                    ." - ";
+
+            $endereco .=
+                $model->Pessoa->bairro
+                ." - "
+                .$model->Pessoa->Cidade->cidade
+                ."/"
+                .$model->Pessoa->Cidade->Estado->sigla
+                ." - "
+                .Yii::app()->format->formataCep($model->Pessoa->cep);
+
+            $this->adicionaLinha($endereco, "documento", 137);
+        }
+
+        $this->adicionaTexto("<DblStrikeOff><CondensedOn>");
 		
-		if ($model->valoraprazo > 0)
+		if ($model->valoraprazo > 0 && $model->codnaturezaoperacao != NaturezaOperacao::DEVOLUCAO_VENDA)
 		{
 			$this->adicionaLinha("", "documento", 137, STR_PAD_LEFT, "-");
 			$this->adicionaTexto("<DblStrikeOn>");
@@ -222,65 +234,86 @@ class MGEscPrintRomaneio extends MGEscPrint
 		$this->adicionaTexto("Total...:", "documento", 35, STR_PAD_LEFT);
 		$this->adicionaTexto(Yii::app()->format->formatNumber($model->valortotal), "documento", 18, STR_PAD_LEFT);
 		$this->adicionaLinha("<DblStrikeOff>");
-
-		//total a vista
-		if ($model->valoravista > 0)
-		{
-			$this->adicionaTexto("A Vista.:", "documento", 119, STR_PAD_LEFT);
-			$this->adicionaTexto(Yii::app()->format->formatNumber($model->valoravista), "documento", 18, STR_PAD_LEFT);
-			$this->adicionaLinha();
-		}
 				
 		//total a prazo
-		if ($model->valoraprazo > 0)
-		{
-			$this->adicionaTexto("A Prazo.:", "documento", 119, STR_PAD_LEFT);
-			$this->adicionaTexto(Yii::app()->format->formatNumber($model->valoraprazo), "documento", 18, STR_PAD_LEFT);
-			$this->adicionaLinha();
-			
-			$this->adicionaLinha();
+        if ($model->codnaturezaoperacao == NaturezaOperacao::VENDA)
+        {
 
-			// Texto da confissao de divida
-			
-			//$this->adicionaLinha("Observação");
-			
-			if (!empty($model->observacoes))
-			{
-				$observacoes = "Observacoes: ";
-				$observacoes .= $model->observacoes;
-				
-				$observacoes = str_split($observacoes, 137);
-				
-				foreach($observacoes as $linha)
-					$this->adicionaLinha($linha);
-					
-				$this->adicionaLinha();
-				
-			}
-			
-			$this->adicionaLinha("Confissao de Divida: Confesso(amos) e me(nos) constituo(imos) devedor(es) do valor descrito nesse negocio, obrigando-me(nos) a pagar em");
-			$this->adicionaTexto("moeda corrente do pais, conforme vencimento. Declaro(amos) ainda, ter recebido o servico e/ou produto aqui descrito, sem nada a reclamar.");
-			$this->adicionaLinha();
-			$this->adicionaLinha();
-			$this->adicionaLinha();
+            //total a vista
+            if ($model->valoravista > 0)
+            {
+                $this->adicionaTexto("A Vista.:", "documento", 119, STR_PAD_LEFT);
+                $this->adicionaTexto(Yii::app()->format->formatNumber($model->valoravista), "documento", 18, STR_PAD_LEFT);
+                $this->adicionaLinha();
+            }
 
-			//linha da assinatura
-			$this->adicionaTexto("", "documento", 25);
-			$this->adicionaLinha("", "documento", 80, STR_PAD_RIGHT, "_");
+            if ($model->valoraprazo > 0)
+            {
+                $this->adicionaTexto("A Prazo.:", "documento", 119, STR_PAD_LEFT);
+                $this->adicionaTexto(Yii::app()->format->formatNumber($model->valoraprazo), "documento", 18, STR_PAD_LEFT);
+                $this->adicionaLinha();
 
-			//nome pessoa
-			$this->adicionaTexto("<DblStrikeOn>");
-			$this->adicionaTexto("", "documento", 25);
-			$this->adicionaTexto(
-					$model->codnegocio
-					." - "
-					.$model->Pessoa->pessoa
-					, "documento"
-					, 80);
-			$this->adicionaTexto("<DblStrikeOff>");
-			
-		}
-		
+                $this->adicionaLinha();
+
+                // Texto da confissao de divida
+
+                //$this->adicionaLinha("Observação");
+
+                if (!empty($model->observacoes))
+                {
+                    $observacoes = "Observacoes: ";
+                    $observacoes .= $model->observacoes;
+
+                    $observacoes = str_split($observacoes, 137);
+
+                    foreach($observacoes as $linha)
+                        $this->adicionaLinha($linha);
+
+                    $this->adicionaLinha();
+
+                }
+
+                $this->adicionaLinha("Confissao de Divida: Confesso(amos) e me(nos) constituo(imos) devedor(es) do valor descrito nesse negocio, obrigando-me(nos) a pagar em");
+                $this->adicionaTexto("moeda corrente do pais, conforme vencimento. Declaro(amos) ainda, ter recebido o servico e/ou produto aqui descrito, sem nada a reclamar.");
+                $this->adicionaLinha();
+                $this->adicionaLinha();
+                $this->adicionaLinha();
+
+                //linha da assinatura
+                $this->adicionaTexto("", "documento", 25);
+                $this->adicionaLinha("", "documento", 80, STR_PAD_RIGHT, "_");
+
+                //nome pessoa
+                $this->adicionaTexto("<DblStrikeOn>");
+                $this->adicionaTexto("", "documento", 25);
+                $this->adicionaTexto(
+                        $model->codnegocio
+                        ." - "
+                        .$model->Pessoa->pessoa
+                        , "documento"
+                        , 80);
+                $this->adicionaTexto("<DblStrikeOff>");
+
+            }
+        }
+        
+        if ($model->codnaturezaoperacao == NaturezaOperacao::DEVOLUCAO_VENDA && $model->codpessoa == Pessoa::CONSUMIDOR)
+        {
+            $this->adicionaLinha("", "documento");
+            $this->adicionaTexto("<CondensedOff><DblStrikeOn>");
+            $this->adicionaLinha("PREENCHER DADOS ABAIXO PARA EMISSAO DA NOTA FISCAL DE DEVOLUCAO", "documento", 80, STR_PAD_BOTH);
+            $this->adicionaTexto("<CondensedOn><DblStrikeOff>");
+            $this->adicionaLinha("", "documento");
+            $this->adicionaLinha("", "documento");
+            $this->adicionaLinha("Nome Cliente:", "documento", 137, STR_PAD_RIGHT, "_");
+            $this->adicionaLinha("", "documento");
+            $this->adicionaTexto("CPF/CNPJ....:", "documento", 95, STR_PAD_RIGHT, "_");
+            $this->adicionaLinha("Telefone:", "documento", 42, STR_PAD_RIGHT, "_");
+            $this->adicionaLinha("", "documento");
+            $this->adicionaTexto("Endereco....:", "documento", 95, STR_PAD_RIGHT, "_");
+            $this->adicionaLinha("Cidade..:", "documento", 42, STR_PAD_RIGHT, "_");
+            //$this->adicionaTexto(Yii::app()->format->formatNumber($model->valoraprazo), "documento", 18, STR_PAD_LEFT);
+        }
 
 	}
 	

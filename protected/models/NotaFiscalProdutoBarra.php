@@ -4,9 +4,10 @@
  * This is the model class for table "mgsis.tblnotafiscalprodutobarra".
  *
  * The followings are the available columns in table 'mgsis.tblnotafiscalprodutobarra':
- * @property string $codnotafiscalprodutobarra
- * @property string $codnotafiscal
- * @property string $codprodutobarra
+ * @property bigserial $codnotafiscalprodutobarra
+ * @property bigint $codnotafiscal
+ * @property bigint $codnotafiscalprodutobarraorigem
+ * @property bigint $codprodutobarra
  * @property string $codcfop
  * @property string $descricaoalternativa
  * @property string $quantidade
@@ -52,6 +53,8 @@
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
  * @property EstoqueMovimento[] $EstoqueMovimentos
+ * @property NotaFiscalProdutoBarra[] $NotaFiscalProdutoBarras
+ * @property NotaFiscalProdutoBarra $NotaFiscalProdutoBarraOrigem
  */
 class NotaFiscalProdutoBarra extends MGActiveRecord
 {
@@ -129,6 +132,8 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 			'EstoqueMovimentos' => array(self::HAS_MANY, 'EstoqueMovimento', 'codnotafiscalprodutobarra'),
+			'NotaFiscalProdutoBarras' => array(self::HAS_MANY, 'NotaFiscalProdutoBarra', 'codnotafiscalprodutobarraorigem'),
+			'NotaFiscalProdutoBarraOrigem' => array(self::BELONGS_TO, 'NotaFiscalProdutoBarra', 'codnotafiscalprodutobarraorigem'),
 		);
 	}
 

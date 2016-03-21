@@ -24,6 +24,7 @@
  * @property string $codusuariocriacao
  * @property string $codfilial
  * @property string $codnotafiscal
+ * @property string $codnegocio
  * @property string $codnaturezaoperacao
  * @property integer $serie
  * @property integer $numero
@@ -51,6 +52,7 @@
  * @property Usuario $UsuarioCriacao
  * @property Filial $Filial
  * @property NotaFiscal $NotaFiscal
+ * @property Negocio $Negocio
  * @property NaturezaOperacao $NaturezaOperacao
  */
 class NfeTerceiro extends MGActiveRecord
@@ -99,10 +101,10 @@ class NfeTerceiro extends MGActiveRecord
 			array('nfechave, emitente', 'length', 'max'=>100),
 			//array('arquivoxml', 'file', 'types'=>'xml'),
 			array('cnpj, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipivalor, valorprodutos, valorfrete, valorseguro, valordesconto, valoroutras', 'length', 'max'=>14),
-			array('codpessoa, ignorada, emissao, nfedataautorizacao, codoperacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnotafiscal, codnaturezaoperacao, entrada', 'safe'),
+			array('codpessoa, ignorada, emissao, nfedataautorizacao, codoperacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnotafiscal, codnegocio, codnaturezaoperacao, entrada', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('codnfeterceiro, emissao_de, emissao_ate, valor_de, valor_ate, nsu, nfechave, cnpj, ie, emitente, codpessoa, emissao, nfedataautorizacao, codoperacao, valortotal, indsituacao, indmanifestacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codfilial, codnotafiscal, codnaturezaoperacao, serie, numero, entrada, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipivalor, valorprodutos, valorfrete, valorseguro, valordesconto, valoroutras', 'safe', 'on'=>'search'),
+			array('codnfeterceiro, emissao_de, emissao_ate, valor_de, valor_ate, nsu, nfechave, cnpj, ie, emitente, codpessoa, emissao, nfedataautorizacao, codoperacao, valortotal, indsituacao, indmanifestacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codfilial, codnotafiscal, codnegocio, codnaturezaoperacao, serie, numero, entrada, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipivalor, valorprodutos, valorfrete, valorseguro, valordesconto, valoroutras', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -122,6 +124,7 @@ class NfeTerceiro extends MGActiveRecord
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
 			'NotaFiscal' => array(self::BELONGS_TO, 'NotaFiscal', 'codnotafiscal'),
+			'Negocio' => array(self::BELONGS_TO, 'Negocio', 'codnegocio'),
 			'NaturezaOperacao' => array(self::BELONGS_TO, 'NaturezaOperacao', 'codnaturezaoperacao'),			
 		);
 	}
@@ -152,6 +155,7 @@ class NfeTerceiro extends MGActiveRecord
 			'codusuariocriacao' => 'Usuario Criação',
 			'codfilial' => 'Filial',
 			'codnotafiscal' => 'Nota Fiscal',
+			'codnegocio' => 'Negócio',
 			'codnaturezaoperacao' => 'Natureza de Operação',
 			'serie' => 'Série',
 			'numero' => 'Número',
@@ -232,11 +236,9 @@ class NfeTerceiro extends MGActiveRecord
 			default:
 				break;
 		}
+        
+		$criteria->compare('codnegocio',$this->codnegocio);
 
-		if (!empty($this->codnotafiscal))
-		{
-			
-		}
 		
 		if ($emissao_de = DateTime::createFromFormat("d/m/y",$this->emissao_de))
 		{
@@ -648,6 +650,10 @@ class NfeTerceiro extends MGActiveRecord
 	{
 		if (!empty($this->codnotafiscal))
 			return false;
+        
+        if (isset($this->Negocio))
+            if ($this->Negocio->codnegociostatus != NegocioStatus::CANCELADO)
+                return false;
 		
 		//if (empty($this->NfeTerceiroItems))
 		//	return false;
@@ -660,9 +666,13 @@ class NfeTerceiro extends MGActiveRecord
 	{
 		
 		$transaction = Yii::app()->db->beginTransaction();
+        
+        $geraNegocio = true;
+        if (count($this->Pessoa->Filials) > 0)
+            $geraNegocio = false;
 		
 		$nf = new NotaFiscal();
-		
+        
 		$nf->codnaturezaoperacao = $this->codnaturezaoperacao;
 		$nf->emitida = false;
 		$nf->nfechave = $this->nfechave;
@@ -706,16 +716,57 @@ class NfeTerceiro extends MGActiveRecord
 		//$nf->icmsstvalor = 
 		//$nf->ipibase = 
 		//$nf->ipivalor = 
-		
+
 		if (!$nf->save())
 		{
 			$this->addErrors($nf->getErrors());
 			$transaction->rollBack();
 			return false;
 		}
-		
+        
+        if ($geraNegocio)
+        {
+
+            $n = new Negocio();
+            $n->codnaturezaoperacao = $this->codnaturezaoperacao;
+            $n->codpessoa = $this->codpessoa;
+            $n->codfilial = $this->codfilial;
+            $n->codestoquelocal = $this->Filial->EstoqueLocals[0]->codestoquelocal;
+            $n->lancamento = $this->entrada;
+            $n->codoperacao = $this->codoperacao;
+            $n->codnegociostatus = NegocioStatus::ABERTO;
+            $n->codusuario = Yii::app()->user->id;
+            $n->valordesconto = $this->valordesconto;
+
+            if (!$n->save())
+            {
+                $this->addErrors($n->getErrors());
+                $transaction->rollBack();
+                return false;
+            }
+            
+            $nfp = new NegocioFormaPagamento();
+            $nfp->codnegocio = $n->codnegocio;
+            $nfp->codformapagamento = 3010; //Fechamento com boleto
+            $nfp->valorpagamento = $this->valortotal;
+
+            if (!$nfp->save())
+            {
+                $this->addErrors($nfp->getErrors());
+                $transaction->rollBack();
+                return false;
+            }
+        }
+        
+
+        $i = 0;
+        $parcelas = count($this->NfeTerceiroDuplicatas);
+        $totalDupl = 0;
+        
 		foreach($this->NfeTerceiroDuplicatas as $ntd)
 		{
+            $i++;
+            
 			$nfd = new NotaFiscalDuplicatas();
 			$nfd->codnotafiscal = $nf->codnotafiscal;
 			$nfd->fatura = $ntd->ndup;
@@ -728,8 +779,69 @@ class NfeTerceiro extends MGActiveRecord
 				$transaction->rollBack();
 				return false;
 			}
+            
+            if ($geraNegocio)
+            {
+                $tit = new Titulo();
+                $tit->codnegocioformapagamento = $nfp->codnegocioformapagamento;
+                $tit->codtipotitulo = $n->NaturezaOperacao->codtipotitulo;
+                $tit->codfilial = $this->codfilial;
+                $tit->codpessoa = $this->codpessoa;
+                $tit->codportador = Portador::CARTEIRA;
+                $tit->codcontacontabil = $n->NaturezaOperacao->codcontacontabil;
+                $tit->numero = "T" . str_pad($n->codnegocio, 8, "0", STR_PAD_LEFT) . "-$i/$parcelas";
+                //$tit->fatura = $ntd->ndup;
+                $tit->fatura = str_pad($this->numero, 8, "0", STR_PAD_LEFT) . "-$i/$parcelas";
+                $tit->transacao = substr($this->entrada, 0, 10);
+                $tit->emissao = substr($this->emissao, 0, 10);
+                $tit->vencimento = $ntd->dvenc;
+                $tit->vencimentooriginal = $ntd->dvenc;
+                $tit->gerencial = false;
+                $tit->valor = $ntd->vdup;
+                $totalDupl += $tit->valor;
+
+                if (!$tit->save())
+                {
+                    $this->addErrors($tit->getErrors());
+                    $transaction->rollBack();
+                    return false;
+                }
+                
+            }
 			
 		}
+        
+        if ($geraNegocio)
+        {
+            $difDupl = $this->valortotal - $totalDupl;
+
+            if (abs($difDupl) > 0.01)
+            {
+
+                $tit = new Titulo();
+                $tit->codtipotitulo = $n->NaturezaOperacao->codtipotitulo;
+                $tit->codfilial = $this->codfilial;
+                $tit->codpessoa = $this->codpessoa;
+                $tit->codportador = Portador::CARTEIRA;
+                $tit->codcontacontabil = $n->NaturezaOperacao->codcontacontabil;
+                $tit->numero = "T" . str_pad($n->codnegocio, 8, "0", STR_PAD_LEFT) . "-SLD";
+                $tit->fatura = str_pad($this->numero, 8, "0", STR_PAD_LEFT) . "-SLD";
+                $tit->transacao = substr($this->entrada, 0, 10);
+                $tit->emissao = substr($this->emissao, 0, 10);
+                $tit->vencimento = substr($this->emissao, 0, 10);
+                $tit->vencimentooriginal = substr($this->emissao, 0, 10);
+                $tit->gerencial = false;
+                $tit->valor = $difDupl;
+                $totalDupl += $tit->valor;
+
+                if (!$tit->save())
+                {
+                    $this->addErrors($tit->getErrors());
+                    $transaction->rollBack();
+                    return false;
+                }
+            }
+        }
 		
 		foreach ($this->NfeTerceiroItems as $nti)
 		{
@@ -739,7 +851,35 @@ class NfeTerceiro extends MGActiveRecord
 				$transaction->rollBack();
 				return false;
 			}
-			
+            
+            if ($geraNegocio)
+            {
+            
+                $npb = new NegocioProdutoBarra();
+                $npb->codnegocio = $n->codnegocio;
+                $npb->codprodutobarra = $nti->codprodutobarra;
+                $npb->quantidade = $nti->qcom;
+                $npb->valortotal = $nti->vprod + $nti->ipivipi + $nti->vicmsst;
+
+                if ($this->valorfrete > 0)
+                    $npb->valortotal += ($this->valorfrete / $this->valorprodutos) * $nti->vprod;
+
+                if ($this->valorseguro > 0)
+                    $npb->valortotal += ($this->valorseguro / $this->valorprodutos) * $nti->vprod;
+
+                if ($this->valoroutras > 0)
+                    $npb->valortotal += ($this->valoroutras / $this->valorprodutos) * $nti->vprod;
+
+                $npb->valorunitario = round($npb->valortotal / $npb->quantidade, 3);
+
+                if (!$npb->save())
+                {
+                    $this->addErrors($npb->getErrors());
+                    $transaction->rollBack();
+                    return false;
+                }
+            }
+            
 			$nfpb = new NotaFiscalProdutoBarra();
 			
 			$nfpb->codnotafiscal = $nf->codnotafiscal;
@@ -758,6 +898,7 @@ class NfeTerceiro extends MGActiveRecord
 			$nfpb->icmsstbase = $nti->vbcst;
 			$nfpb->icmsstpercentual = $nti->picmsst;
 			$nfpb->icmsstvalor = $nti->vicmsst;
+            $nfpb->codnegocioprodutobarra = $npb->codnegocioprodutobarra;
 			//$nfpb->csosn = 
 			//$nfpb->codnegocioprodutobarra = 
 			//$nfpb->alteracao = 
@@ -772,8 +913,18 @@ class NfeTerceiro extends MGActiveRecord
 				return false;
 			}
 		}
-		
+
+        $n = Negocio::model()->findByPk($n->codnegocio);
+        $n->codnegociostatus = NegocioStatus::FECHADO;
+		if (!$n->save())
+		{
+			$this->addErrors($n->getErrors());
+			$transaction->rollBack();
+			return false;
+		}
+        
 		$this->codnotafiscal = $nf->codnotafiscal;
+		$this->codnegocio = $n->codnegocio;
 		
 		if (!$this->save())
 		{

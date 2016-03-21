@@ -34,6 +34,7 @@
 class NaturezaOperacao extends MGActiveRecord
 {
 	const VENDA = 1;
+    const DEVOLUCAO_VENDA = 2;
 	
 	const FINNFE_NORMAL = 1;
 	const FINNFE_COMPLEMENTAR = 2;

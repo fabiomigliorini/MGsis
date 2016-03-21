@@ -337,6 +337,12 @@ $(document).ready(function(){
 					'type'=>"raw",
 
 				),
+				array (
+					'name'=>'codnegocio',
+					'value'=>(!empty($model->codnegocio))?CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($model->codnegocio)), array("negocio/view", "id"=>$model->codnegocio)) . ' - ' . $model->Negocio->NegocioStatus->negociostatus:null,
+					'type'=>"raw",
+
+				),
 				'entrada',
 			),
 		)); 

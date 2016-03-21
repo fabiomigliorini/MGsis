@@ -385,53 +385,59 @@ $(document).ready(function(){
 		</div>
 		
 		<?php 
-		$this->widget('bootstrap.widgets.TbDetailView',array(
-			'data'=>$model,
-			'attributes'=>array(
-				array(
-					'name'=>'codnegocio',
-					'value'=> Yii::app()->format->formataCodigo($model->codnegocio),
-					),
-				array(
-					'name'=>'codnaturezaoperacao',
-					'value'=>
-						((isset($model->Operacao))?$model->Operacao->operacao:null)
-						. " - " .
-						((isset($model->NaturezaOperacao))?$model->NaturezaOperacao->naturezaoperacao:null),
-					),
-				array(
-					'name'=>'codpessoa',
-					'value'=>(isset($model->Pessoa))?CHtml::link(CHtml::encode($model->Pessoa->fantasia),array('pessoa/view','id'=>$model->codpessoa)):null,
-					'type'=>'raw',
-					),
-				array(
-					'name'=>'codpessoavendedor',
-					'value'=>(isset($model->PessoaVendedor))?CHtml::link(CHtml::encode($model->PessoaVendedor->fantasia),array('pessoa/view','id'=>$model->codpessoavendedor)):null,
-					'type'=>'raw',
-					),
-				'lancamento',
-				array(
-					'name'=>'codnegociostatus',
-					'value'=>(isset($model->NegocioStatus))?$model->NegocioStatus->negociostatus:null,
-					),
-				array(
-					'name'=>'codfilial',
-					'value'=>(isset($model->Filial))?$model->Filial->filial:null,
-					),
-				array(
-					'name'=>'codestoquelocal',
-					'value'=>(isset($model->EstoqueLocal))?$model->EstoqueLocal->estoquelocal:null,
-					),
-				array(
-					'name'=>'codusuario',
-					'value'=>(isset($model->Usuario))?$model->Usuario->usuario:null,
-					),
-				'observacoes',
-				),
-			)); 
+        $attr = array(
+            array(
+                'name'=>'codnegocio',
+                'value'=> Yii::app()->format->formataCodigo($model->codnegocio),
+                ),
+            array(
+                'name'=>'codnaturezaoperacao',
+                'value'=>
+                    ((isset($model->Operacao))?$model->Operacao->operacao:null)
+                    . " - " .
+                    ((isset($model->NaturezaOperacao))?$model->NaturezaOperacao->naturezaoperacao:null),
+                ),
+            array(
+                'name'=>'codpessoa',
+                'value'=>(isset($model->Pessoa))?CHtml::link(CHtml::encode($model->Pessoa->fantasia),array('pessoa/view','id'=>$model->codpessoa)):null,
+                'type'=>'raw',
+                ),
+            array(
+                'name'=>'codpessoavendedor',
+                'value'=>(isset($model->PessoaVendedor))?CHtml::link(CHtml::encode($model->PessoaVendedor->fantasia),array('pessoa/view','id'=>$model->codpessoavendedor)):null,
+                'type'=>'raw',
+                ),
+            'lancamento',
+            array(
+                'name'=>'codnegociostatus',
+                'value'=>(isset($model->NegocioStatus))?$model->NegocioStatus->negociostatus:null,
+                ),
+            array(
+                'name'=>'codfilial',
+                'value'=>(isset($model->Filial))?$model->Filial->filial:null,
+                ),
+            array(
+                'name'=>'codestoquelocal',
+                'value'=>(isset($model->EstoqueLocal))?$model->EstoqueLocal->estoquelocal:null,
+                ),
+            array(
+                'name'=>'codusuario',
+                'value'=>(isset($model->Usuario))?$model->Usuario->usuario:null,
+                ),
+            'observacoes',
+		);
+        foreach($model->NfeTerceiros as $nfet)
+            $attr[] = 
+                array(
+                    'label' => 'NF-e Terceiro',
+                    'value' => CHtml::link('Abrir', array("nfeTerceiro/view", "id" => $nfet->codnfeterceiro)),
+                    'type' => 'raw',
+                );
+        
+		$this->widget('bootstrap.widgets.TbDetailView',array('data'=>$model, 'attributes'=>$attr)); 
 		
 			
-			$this->widget('UsuarioCriacao', array('model'=>$model));
+		$this->widget('UsuarioCriacao', array('model'=>$model));
 
 		?>
 	</div>

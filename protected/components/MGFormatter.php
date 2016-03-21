@@ -248,7 +248,7 @@ class MGFormatter extends CFormatter
 			return($rt ? $rt : "zero");
 		} else {
 
-		if ($rt) $rt=ereg_replace(" E "," e ",ucwords($rt));
+		if ($rt) $rt=str_replace(" E ", " e ", ucwords($rt));
 			return (($rt) ? ($rt) : "Zero");
 		}
 

@@ -25,8 +25,8 @@
  * @property NotaFiscalProdutoBarra[] $NotaFiscalProdutoBarras
  * @property EstoqueMovimento[] $EstoqueMovimentos
  * @property CupomFiscalProdutoBarra[] $CupomFiscalProdutoBarras
- * @property NegocioProdutoBarraDevolucaos[] $NegocioProutoBarra
- * @property NegocioProdutoBarraDevolucao $NegocioProutoBarra
+ * @property NegocioProdutoBarra[] $NegocioProdutoBarraDevolucaos
+ * @property NegocioProdutoBarra $NegocioProdutoBarraDevolucao
  */
 class NegocioProdutoBarra extends MGActiveRecord
 {

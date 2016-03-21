@@ -59,7 +59,7 @@ class NotaFiscalController extends Controller
 				if (!empty($duplicar))
 					$original = $this->loadModel($duplicar);
 				if (!empty($inverter))
-                                        $original = $this->loadModel($inverter);
+                    $original = $this->loadModel($inverter);
 
 				foreach ($original->NotaFiscalProdutoBarras as $prod_orig)
 				{
@@ -67,6 +67,10 @@ class NotaFiscalController extends Controller
 					$prod_novo->attributes = $prod_orig->attributes;
 					$prod_novo->codnotafiscalprodutobarra = null;
 					$prod_novo->codnotafiscal = $model->codnotafiscal;
+                    
+                    if (!empty($inverter))
+                        $prod_novo->codnotafiscalprodutobarraorigem = $prod_orig->codnotafiscalprodutobarra;
+                    
 					$prod_novo->codcfop = null;
 					
 					$prod_novo->csosn = null;
@@ -118,7 +122,7 @@ class NotaFiscalController extends Controller
 			}
 
 			//duplica duplicatas
-                        if (!$erro && (!empty($duplicar) || !empty($inverter)))
+            if (!$erro && (!empty($duplicar) || !empty($inverter)))
 			{
 				foreach ($original->NotaFiscalDuplicatass as $dupl_orig)
 				{
@@ -320,6 +324,9 @@ class NotaFiscalController extends Controller
 				
 				foreach ($model->NotaFiscalProdutoBarras as $prod)
 					$prod->delete();
+                
+				foreach ($model->NotaFiscalReferenciadas as $ref)
+					$ref->delete();
 				
 				foreach ($model->NfeTerceiros as $ter)
 				{
