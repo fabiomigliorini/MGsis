@@ -388,8 +388,6 @@ class Negocio extends MGActiveRecord
 			$nota->frete = NotaFiscal::FRETE_SEM;
 			$nota->codoperacao = $this->NaturezaOperacao->codoperacao;
 		}
-        
-        $nota->setScenario('geracaoAutomatica');
 	
 		//concatena obeservacoes
 		$nota->observacoes = $nota->observacoes;
@@ -432,6 +430,7 @@ class Negocio extends MGActiveRecord
 			{
 				$primeiro = false;
 				//salva nota fiscal
+                $nota->setScenario('geracaoAutomatica');
 				if (!$nota->save())
 				{
 					$this->addErrors($nota->getErrors());
@@ -469,7 +468,7 @@ class Negocio extends MGActiveRecord
         if (abs($valorDesconto) > 0)
         {
             $nota->valordesconto += $valorDesconto;
-
+            $nota->setScenario('geracaoAutomatica');
             if (!$nota->save())
             {
                 $this->addErrors($nota->getErrors());
