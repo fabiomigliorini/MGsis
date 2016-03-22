@@ -312,6 +312,8 @@ class MGEscPrintRomaneio extends MGEscPrint
             $this->adicionaLinha("", "documento");
             $this->adicionaTexto("Endereco....:", "documento", 95, STR_PAD_RIGHT, "_");
             $this->adicionaLinha("Cidade..:", "documento", 42, STR_PAD_RIGHT, "_");
+            $this->adicionaLinha("", "documento");
+            $this->adicionaLinha("E-mail......:", "documento", 137, STR_PAD_RIGHT, "_");
             //$this->adicionaTexto(Yii::app()->format->formatNumber($model->valoraprazo), "documento", 18, STR_PAD_LEFT);
         }
 
