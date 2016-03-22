@@ -49,7 +49,8 @@ $this->renderPartial("_hotkeys");
 			var quantidadedevolucao = parseFloat($('#quantidadedevolucao\\[' + codnegocioprodutobarra + '\\]').autoNumeric('get'));
 			var maximodevolucao = parseFloat($('#maximodevolucao\\[' + codnegocioprodutobarra + '\\]').val());
             
-            //console.log(maximodevolucao);
+            if (isNaN(quantidadedevolucao))
+                quantidadedevolucao = 0;
 			
 			if (quantidadedevolucao > maximodevolucao)
 			{
