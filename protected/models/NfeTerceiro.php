@@ -870,6 +870,8 @@ class NfeTerceiro extends MGActiveRecord
                 if ($this->valoroutras > 0)
                     $npb->valortotal += ($this->valoroutras / $this->valorprodutos) * $nti->vprod;
 
+		$npb->valortotal = round($npb->valortotal, 2);
+
                 $npb->valorunitario = round($npb->valortotal / $npb->quantidade, 3);
 
                 if (!$npb->save())
