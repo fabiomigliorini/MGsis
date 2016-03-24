@@ -467,6 +467,7 @@ class Negocio extends MGActiveRecord
 		//acumula o valor de desconto
         if (abs($valorDesconto) > 0)
         {
+            $nota->refresh();
             $nota->valordesconto += $valorDesconto;
             $nota->setScenario('geracaoAutomatica');
             if (!$nota->save())

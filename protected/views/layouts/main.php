@@ -205,6 +205,38 @@
 	?>
 </div>	
 <div class="container-fluid">
+    <?php if ($_SERVER['SERVER_NAME'] != '10.0.1.4'): ?>
+        <h4 class="row-fluid alert alert-error">
+            <center>
+                <blink>
+                BASE DE TESTES - <?php echo $_SERVER['SERVER_NAME']; ?><?php echo $_SERVER["REQUEST_URI"]; ?>
+                </blink>
+            </center>
+        </h4>
+        <script type="text/javascript">
+
+            function blink() 
+            {
+                var blinks = document.getElementsByTagName('blink');
+                for (var i = blinks.length - 1; i >= 0; i--) 
+                {
+                    var s = blinks[i];
+                    s.style.visibility = (s.style.visibility === 'visible') ? 'hidden' : 'visible';
+                }
+                window.setTimeout(blink, 1000);
+            }
+            
+            if (document.addEventListener) 
+                document.addEventListener("DOMContentLoaded", blink, false);
+            else if (window.addEventListener) 
+                window.addEventListener("load", blink, false);
+            else if (window.attachEvent) 
+                window.attachEvent("onload", blink);
+            else 
+                window.onload = blink;
+
+        </script>
+    <?php endif; ?>
 	<?php $this->widget('bootstrap.widgets.TbAlert', array('userComponentId' => 'user')); ?>
     <?php echo $content; ?>
 </div>
