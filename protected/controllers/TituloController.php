@@ -343,6 +343,9 @@ class TituloController extends Controller
 		$codpessoa=0
 		) 
 	{
+        
+        if (isset($_POST['GridTitulos']))
+            $GridTitulos = $_POST['GridTitulos'];
 		
 		$this->widget('MGGridTitulos', array(
 			'modelname'   => $modelname,

@@ -251,14 +251,16 @@ class MGGridTitulos extends CWidget
 			var params = [];
 			params.push({name: 'codpessoa', value: $('#<?php echo $this->modelname; ?>_codpessoa').val()});
 
+            var params_selecionados = [];
+            
 			//parametro para cada linha da grid
 			$('.codtitulo:checked').each(function() {
-				params.push({name: '<?php echo $this->campo; ?>[codtitulo][]', value: $(this).val()});
-				params.push({name: '<?php echo $this->campo; ?>[saldo][' + $(this).val() + ']', value: $("#<?php echo $this->idPrefix; ?>_saldo_" + $(this).val() ).autoNumeric('get') });
-				params.push({name: '<?php echo $this->campo; ?>[multa][' + $(this).val() + ']', value: $("#<?php echo $this->idPrefix; ?>_multa_" + $(this).val() ).autoNumeric('get') });
-				params.push({name: '<?php echo $this->campo; ?>[juros][' + $(this).val() + ']', value: $("#<?php echo $this->idPrefix; ?>_juros_" + $(this).val() ).autoNumeric('get') });
-				params.push({name: '<?php echo $this->campo; ?>[desconto][' + $(this).val() + ']', value: $("#<?php echo $this->idPrefix; ?>_desconto_" + $(this).val() ).autoNumeric('get') });
-				params.push({name: '<?php echo $this->campo; ?>[total][' + $(this).val() + ']', value: $("#<?php echo $this->idPrefix; ?>_total_" + $(this).val() ).autoNumeric('get') });
+				params_selecionados.push({name: '<?php echo $this->campo; ?>[codtitulo][]', value: $(this).val()});
+				params_selecionados.push({name: '<?php echo $this->campo; ?>[saldo][' + $(this).val() + ']', value: $("#<?php echo $this->idPrefix; ?>_saldo_" + $(this).val() ).autoNumeric('get') });
+				params_selecionados.push({name: '<?php echo $this->campo; ?>[multa][' + $(this).val() + ']', value: $("#<?php echo $this->idPrefix; ?>_multa_" + $(this).val() ).autoNumeric('get') });
+				params_selecionados.push({name: '<?php echo $this->campo; ?>[juros][' + $(this).val() + ']', value: $("#<?php echo $this->idPrefix; ?>_juros_" + $(this).val() ).autoNumeric('get') });
+				params_selecionados.push({name: '<?php echo $this->campo; ?>[desconto][' + $(this).val() + ']', value: $("#<?php echo $this->idPrefix; ?>_desconto_" + $(this).val() ).autoNumeric('get') });
+				params_selecionados.push({name: '<?php echo $this->campo; ?>[total][' + $(this).val() + ']', value: $("#<?php echo $this->idPrefix; ?>_total_" + $(this).val() ).autoNumeric('get') });
 			})
 
 			//se tem parametros
@@ -271,7 +273,7 @@ class MGGridTitulos extends CWidget
 				var params_url = $.param(params);
 				
 				//atualiza div listagem-titulos
-				$("#listagem-titulos").load("<?php echo Yii::app()->createUrl('titulo/ajaxbuscatitulo') ?>&" + params_url, function() {
+				$("#listagem-titulos").load("<?php echo Yii::app()->createUrl('titulo/ajaxbuscatitulo') ?>&" + params_url, params_selecionados, function() {
 					inicializaFuncoes();
 				});
 			
