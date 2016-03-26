@@ -670,6 +670,8 @@ class NfeTerceiro extends MGActiveRecord
         $geraNegocio = true;
         if (count($this->Pessoa->Filials) > 0)
             $geraNegocio = false;
+        
+        $codnegocioformapagamento = null;
 		
 		$nf = new NotaFiscal();
         
@@ -756,6 +758,7 @@ class NfeTerceiro extends MGActiveRecord
                 $transaction->rollBack();
                 return false;
             }
+            $codnegocioformapagamento = $nfp->codnegocioformapagamento;
         }
         
 
@@ -783,7 +786,7 @@ class NfeTerceiro extends MGActiveRecord
             if ($geraNegocio)
             {
                 $tit = new Titulo();
-                $tit->codnegocioformapagamento = $nfp->codnegocioformapagamento;
+                $tit->codnegocioformapagamento = $codnegocioformapagamento;
                 $tit->codtipotitulo = $n->NaturezaOperacao->codtipotitulo;
                 $tit->codfilial = $this->codfilial;
                 $tit->codpessoa = $this->codpessoa;
@@ -819,6 +822,7 @@ class NfeTerceiro extends MGActiveRecord
             {
 
                 $tit = new Titulo();
+                $tit->codnegocioformapagamento = $codnegocioformapagamento;                
                 $tit->codtipotitulo = $n->NaturezaOperacao->codtipotitulo;
                 $tit->codfilial = $this->codfilial;
                 $tit->codpessoa = $this->codpessoa;
