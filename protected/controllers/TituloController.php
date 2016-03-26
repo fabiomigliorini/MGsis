@@ -340,7 +340,10 @@ class TituloController extends Controller
 		$modelname = null,
 		$campo = null,
 		array $GridTitulos = null,
-		$codpessoa=0
+		$codpessoa=null,
+		$vencimento_de=null,
+		$vencimento_ate=null,
+		$codoperacao=null
 		) 
 	{
         
@@ -352,6 +355,9 @@ class TituloController extends Controller
 			'campo'		  => $campo,
 			'GridTitulos' => $GridTitulos,
 			'codpessoa'   => $codpessoa,
+			'vencimento_de'   => $vencimento_de,
+			'vencimento_ate'   => $vencimento_ate,
+			'codoperacao'   => $codoperacao,
 		));
 		
 	} 

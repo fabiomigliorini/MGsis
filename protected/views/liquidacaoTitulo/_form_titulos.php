@@ -1,20 +1,63 @@
 <?php
 
 // Pessoa
-echo $form->select2PessoaRow($model, 'codpessoa');
 
-// Grid de Títulos
-$html_titulos = '<div id="listagem-titulos">';
-$html_titulos .=
-	$this->widget(
-		'MGGridTitulos',
-		array(
-			'modelname'   => 'LiquidacaoTitulo',
-			'campo'		  => 'GridTitulos',
-			'GridTitulos' => $model->GridTitulos,
-			'codpessoa'   => $model->codpessoa,
-		),
-		true
-	);
-$html_titulos .= '</div>';
-echo $form->customRow($model, 'GridTitulos', $html_titulos);
+$model_titulo = new Titulo;
+
+?>
+<div class="row-fluid" style="padding-top: 4px">
+    <div class="span5">
+        <?php 
+            echo $form->select2Pessoa($model, 'codpessoa');
+        ?>
+    </div>
+    <div class="span2">
+        <?php 
+            echo $form->datepickerRow(
+                    $model_titulo,
+                    'vencimento_de',
+                    array(
+                        'class' => 'input-mini text-center', 
+                        'options' => array(
+                            'format' => 'dd/mm/yy'
+                            ),
+                        'placeholder' => 'Vencimento',
+                        'prepend' => 'De',
+                        )
+                    ); 	
+        ?>
+        <?php 
+            echo $form->datepickerRow(
+                    $model_titulo,
+                    'vencimento_ate',
+                    array(
+                        'class' => 'input-mini text-center', 
+                        'options' => array(
+                            'format' => 'dd/mm/yy'
+                            ),
+                        'placeholder' => 'Vencimento',
+                        'prepend' => 'Até',
+                        )
+                    ); 	
+        ?>
+    </div>
+    <div class="span1">
+        <?php echo $form->dropDownList($model_titulo, 'credito', array('' => '', 1 => 'Credito', 2 => 'Debito'), array('placeholder' => 'Operação', 'class'=>'span12')); ?>
+    </div>
+</div>
+<br>
+<div id="listagem-titulos">
+    <?
+
+    // Grid de Títulos
+    $this->widget(
+        'MGGridTitulos',
+        array(
+            'modelname'   => 'LiquidacaoTitulo',
+            'campo'		  => 'GridTitulos',
+            'GridTitulos' => $model->GridTitulos,
+            'codpessoa'   => $model->codpessoa,
+        )
+    );
+    ?>
+</div>

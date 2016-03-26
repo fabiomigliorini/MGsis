@@ -302,7 +302,7 @@ class Titulo extends MGActiveRecord
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
-	public function search($comoDataProvider = true)
+	public function search($comoDataProvider = true, $limit = null, $order = '"Pessoa".fantasia ASC, t.vencimento ASC, t.saldo ASC')
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
@@ -416,7 +416,12 @@ class Titulo extends MGActiveRecord
 	
 		$criteria->select = 't.codtitulo, t.vencimento, t.emissao, t.codfilial, t.numero, t.codportador, t.credito, t.debito, t.saldo, t.codtipotitulo, t.codcontacontabil, t.codusuariocriacao, t.nossonumero, t.gerencial, t.codpessoa, t.codusuarioalteracao, t.estornado';
 
-		$criteria->order = '"Pessoa".fantasia ASC, t.vencimento ASC, t.saldo ASC';
+		$criteria->order = $order;
+        
+        if (!empty($limit))
+        {
+            $criteria->limit = $limit;
+        }
 		
 		if ($comoDataProvider)
 		{

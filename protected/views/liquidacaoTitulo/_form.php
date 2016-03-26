@@ -1,5 +1,6 @@
 <?php $form=$this->beginWidget('MGActiveForm',array(
 	'id'=>'liquidacao-titulo-form',
+	'type' => 'inline',
 )); ?>
 
 <?php echo $form->errorSummary($model); ?>
@@ -49,6 +50,17 @@ $(document).ready(function() {
     });
 	
 	$('#LiquidacaoTitulo_codpessoa').on("change", function(e) { 
+		buscaTitulos();
+	});
+    
+	$('#Titulo_credito').on("change", function(e) { 
+		buscaTitulos();
+	});
+	$('#Titulo_credito').select2();
+	$('#Titulo_vencimento_de').on("change", function(e) { 
+		buscaTitulos();
+	});
+	$('#Titulo_vencimento_ate').on("change", function(e) { 
 		buscaTitulos();
 	});
 	
