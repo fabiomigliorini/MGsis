@@ -8,6 +8,9 @@ class MGGridTitulos extends CWidget
 	public $idPrefix;
 	public $namePrefix;
 	public $codpessoa;
+	public $vencimento_de;
+	public $vencimento_ate;
+	public $codoperacao;
 	public $GridTitulos;
 	
 	
@@ -36,11 +39,24 @@ class MGGridTitulos extends CWidget
 		else
 			$this->GridTitulos['codtitulo'] = array();
 		
+        $attr = [];
 		if (!empty($this->codpessoa))
+            $attr['codpessoa'] = $this->codpessoa;
+        
+		if (!empty($this->vencimento_de))
+            $attr['vencimento_de'] = $this->vencimento_de;
+        
+		if (!empty($this->vencimento_ate))
+            $attr['vencimento_ate'] = $this->vencimento_ate;
+        
+		if (!empty($this->codoperacao))
+            $attr['credito'] = $this->codoperacao;
+        
+        if (sizeof($attr) > 0)
 		{
 			$model->unsetAttributes();
-			$model->attributes=array('codpessoa' => $this->codpessoa);
-			foreach ($model->search(false) as $titulo)
+			$model->attributes=$attr;
+			foreach ($model->search(false, 100, 't.vencimento, t.saldo') as $titulo)
 				if (!in_array($titulo->codtitulo, $this->GridTitulos['codtitulo']))
 					$titulos[] = $titulo;
 		}
@@ -250,6 +266,10 @@ class MGGridTitulos extends CWidget
 			//parametro codpessoa
 			var params = [];
 			params.push({name: 'codpessoa', value: $('#<?php echo $this->modelname; ?>_codpessoa').val()});
+			params.push({name: 'vencimento_de', value: $('#Titulo_vencimento_de').val()});
+			params.push({name: 'vencimento_ate', value: $('#Titulo_vencimento_ate').val()});
+			params.push({name: 'codoperacao', value: $('#Titulo_credito').val()});
+            
 
             var params_selecionados = [];
             
