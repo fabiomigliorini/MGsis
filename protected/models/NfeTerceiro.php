@@ -747,18 +747,22 @@ class NfeTerceiro extends MGActiveRecord
                 return false;
             }
             
-            $nfp = new NegocioFormaPagamento();
-            $nfp->codnegocio = $n->codnegocio;
-            $nfp->codformapagamento = 3010; //Fechamento com boleto
-            $nfp->valorpagamento = $this->valortotal;
-
-            if (!$nfp->save())
+            if ($this->NaturezaOperacao->financeiro)
             {
-                $this->addErrors($nfp->getErrors());
-                $transaction->rollBack();
-                return false;
+            
+                $nfp = new NegocioFormaPagamento();
+                $nfp->codnegocio = $n->codnegocio;
+                $nfp->codformapagamento = 3010; //Fechamento com boleto
+                $nfp->valorpagamento = $this->valortotal;
+
+                if (!$nfp->save())
+                {
+                    $this->addErrors($nfp->getErrors());
+                    $transaction->rollBack();
+                    return false;
+                }
+                $codnegocioformapagamento = $nfp->codnegocioformapagamento;
             }
-            $codnegocioformapagamento = $nfp->codnegocioformapagamento;
         }
         
 
@@ -783,7 +787,7 @@ class NfeTerceiro extends MGActiveRecord
 				return false;
 			}
             
-            if ($geraNegocio)
+            if ($geraNegocio && $this->NaturezaOperacao->financeiro)
             {
                 $tit = new Titulo();
                 $tit->codnegocioformapagamento = $codnegocioformapagamento;
@@ -814,7 +818,7 @@ class NfeTerceiro extends MGActiveRecord
 			
 		}
         
-        if ($geraNegocio)
+        if ($geraNegocio && $this->NaturezaOperacao->financeiro)
         {
             $difDupl = $this->valortotal - $totalDupl;
 

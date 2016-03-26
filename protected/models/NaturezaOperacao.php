@@ -18,6 +18,7 @@
  * @property string $codnaturezaoperacaodevolucao
  * @property string $codtipotitulo
  * @property string $codcontacontabil
+ * @property boolean $financeiro Natureza gera movimento financeiro ou nao
  * @property boolean $ibpt
  * 
  * The followings are the available model relations:
