@@ -181,7 +181,8 @@ $(document).ready(function(){
 				),
 			array(
 				'name'=>'observacao',
-				'value'=>(!empty($model->observacao))?nl2br($model->observacao):null,
+				'value'=>(!empty($model->observacao))?nl2br(CHtml::encode($model->observacao)):null,
+				'type'=>'raw'
 				),
 			array(
 				'label'=>'Negócio',
