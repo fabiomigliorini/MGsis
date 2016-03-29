@@ -128,6 +128,7 @@ $form =
 				<th colspan="4">Original</th>
 			</tr>
 			<tr>
+				<th>#</th>
 				<th>Barras</th>
 				<th>Descrição</th>
 				<th>Quantidade</th>
@@ -140,9 +141,10 @@ $form =
 		</thead>
 		<tbody>
 			<?php
-
+                $i = 0;
 				foreach ($model->NegocioProdutoBarras as $npb)
 				{
+                    $i++;
                     $dev = $npb->devolucaoTotal;
                     $disp = $npb->quantidade - $dev;
                     $bloqueado = '';
@@ -150,6 +152,9 @@ $form =
                         $bloqueado = 'disabled=disabled';
 					?>
 					<tr>
+						<td>
+							<?php echo CHtml::encode($i) ?> 
+						</td>
 						<td>
 							<?php echo CHtml::encode($npb->ProdutoBarra->barras) ?> 
 						</td>
@@ -221,7 +226,7 @@ $form =
 		</tbody>
 		<tfoot>
 			<tr>
-				<th rowspan="3" colspan="2">Total</th>
+				<th rowspan="3" colspan="3">Total</th>
 				<th>
 					Produtos 
 				</th>
