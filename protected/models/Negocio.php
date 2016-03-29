@@ -446,7 +446,10 @@ class Negocio extends MGActiveRecord
             {
                 foreach ($negocioItem->NegocioProdutoBarraDevolucao->NotaFiscalProdutoBarras as $nfpb)
                 {
-                    if (!empty($nfpb->NotaFiscal->nfechave))
+                    if (!empty($nfpb->NotaFiscal->nfechave) && 
+                        ($nfpb->NotaFiscal->codstatus == NotaFiscal::CODSTATUS_AUTORIZADA
+                        ||$nfpb->NotaFiscal->codstatus == NotaFiscal::CODSTATUS_LANCADA)
+                        )
                         $notaReferenciada[$nfpb->codnotafiscal] = $nfpb->NotaFiscal->nfechave;
                     $notaItem->codnotafiscalprodutobarraorigem = $nfpb->codnotafiscalprodutobarra;
                 }
