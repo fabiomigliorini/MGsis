@@ -118,7 +118,7 @@ $form =
 	<table class="table table-bordered table-condensed table-hover table-striped">
 		<thead>
 			<tr>
-				<th colspan="2">Produto</th>
+				<th colspan="3">Produto</th>
 				<th colspan="2">
 					Devolução
 					<small>
