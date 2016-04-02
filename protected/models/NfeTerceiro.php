@@ -607,13 +607,18 @@ class NfeTerceiro extends MGActiveRecord
 		if (!isset($infNFe->cobr->dup))
 			return true;
 		
+        $codnfeterceiroduplicadaProcessado = [0];
+        
 		foreach($infNFe->cobr->dup as $dup)
 		{
+            $notin = implode(', ', $codnfeterceiroduplicadaProcessado);
+            
 			$nfdup = NfeTerceiroDuplicata::model()->find(
-				"codnfeterceiro = :codnfeterceiro AND ndup = :ndup", 
+				"codnfeterceiro = :codnfeterceiro AND ndup = :ndup AND dvenc = :dvenc AND codnfeterceiroduplicata NOT IN ($notin)", 
 				array(
 					":codnfeterceiro"=>$this->codnfeterceiro,
 					":ndup"=>$dup->nDup->__toString(),
+					":dvenc"=>$dup->dVenc->__toString(),
 				)
 			);
 			
@@ -633,9 +638,24 @@ class NfeTerceiro extends MGActiveRecord
 				$this->addErrors($nfdup->getErrors());
 				return false;
 			}
+            
+            $codnfeterceiroduplicadaProcessado[] = $nfdup->codnfeterceiroduplicata;
 			
 		}
-		
+        
+        foreach ($nft->NfeTerceiroDuplicatas as $nfdup)
+        {
+            if (!in_array($nfdup->codnfeterceiroduplicata, $codnfeterceiroduplicadaProcessado))
+            {
+                if (!$nfdup->delete())
+                {
+                    $this->addError("arquivoxml", "Erro ao excluir NfeTerceiroDuplicata sobrando #'$nfdup->codnfeterceiro'");
+                    $this->addErrors($nfdup->getErrors());
+                    return false;
+                }
+            }
+        }
+        
 		$this->findByPk($this->codnfeterceiro);
 		
 		return true;
