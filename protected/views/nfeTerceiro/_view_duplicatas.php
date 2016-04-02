@@ -25,4 +25,13 @@
 		<?php
 	}
 	?>
+    
+    <?php if ($total != $model->valortotal): ?>
+		<small class="span1 text-center alert-error">
+			<b>
+                Diferente <br> da Nota: <br>
+                <?php echo CHtml::encode(Yii::app()->format->formatNumber($model->valortotal)); ?>
+            </b>
+		</small>
+    <?php endif; ?>
 </div>

@@ -792,13 +792,36 @@ class NfeTerceiro extends MGActiveRecord
         $totalDupl = 0;
         
 		foreach($this->NfeTerceiroDuplicatas as $ntd)
+        {
+            $i++;
+            $totalDupl += $ntd->vdup;
+            $valorDupl[$i] = $ntd->vdup;
+        }
+        
+        if ($totalDupl > $this->valortotal)
+        {
+            $percDupl = $this->valortotal / $totalDupl;
+            $totalDupl = 0;
+            for ($i=1; $i<=$parcelas; $i++)
+            {
+                $valorDupl[$i] = round($valorDupl[$i] * $percDupl, 2);
+                $totalDupl += $valorDupl[$i];
+            }
+            
+            $valorDupl[$parcelas] += $this->valortotal - $totalDupl;
+            
+        }
+        
+        $i = 0;
+        
+		foreach($this->NfeTerceiroDuplicatas as $ntd)
 		{
             $i++;
             
 			$nfd = new NotaFiscalDuplicatas();
 			$nfd->codnotafiscal = $nf->codnotafiscal;
 			$nfd->fatura = $ntd->ndup;
-			$nfd->valor = $ntd->vdup;
+			$nfd->valor = $valorDupl[$i];
 			$nfd->vencimento = $ntd->dvenc;
 			
 			if (!$nfd->save())
@@ -825,8 +848,7 @@ class NfeTerceiro extends MGActiveRecord
                 $tit->vencimento = $ntd->dvenc;
                 $tit->vencimentooriginal = $ntd->dvenc;
                 $tit->gerencial = false;
-                $tit->valor = $ntd->vdup;
-                $totalDupl += $tit->valor;
+                $tit->valor = $valorDupl[$i];
 
                 if (!$tit->save())
                 {
