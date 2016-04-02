@@ -759,6 +759,7 @@ class NfeTerceiro extends MGActiveRecord
             $n->codnegociostatus = NegocioStatus::ABERTO;
             $n->codusuario = Yii::app()->user->id;
             $n->valordesconto = $this->valordesconto;
+            $n->valorprodutos = $this->valorprodutos;
 
             if (!$n->save())
             {
