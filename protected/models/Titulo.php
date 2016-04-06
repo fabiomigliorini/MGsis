@@ -113,7 +113,10 @@ class Titulo extends MGActiveRecord
 		if (!$this->isNewRecord)
 		{
 			$old = self::findByPk($this->codtitulo);
-			if ($old->saldo == 0)
+			if ($old->saldo == 0 
+                && $old->credito != $this->credito
+                && $old->debito != $this->debito
+                )
 			{
 				if ($old->valor <> $this->valor)
 					$this->addError($attribute, 'Impossível alterar o valor de um título baixado ou estornado!');
