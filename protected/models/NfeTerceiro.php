@@ -863,9 +863,9 @@ class NfeTerceiro extends MGActiveRecord
         
         if ($geraNegocio && $this->NaturezaOperacao->financeiro)
         {
-            $difDupl = $this->valortotal - $totalDupl;
+            $difDupl = round($this->valortotal - $totalDupl, 2);
 
-            if (abs($difDupl) > 0.01)
+            if (abs($difDupl) > 0.05)
             {
 
                 $tit = new Titulo();
@@ -884,7 +884,7 @@ class NfeTerceiro extends MGActiveRecord
                 $tit->gerencial = false;
                 $tit->valor = $difDupl;
                 $totalDupl += $tit->valor;
-
+                
                 if (!$tit->save())
                 {
                     $this->addErrors($tit->getErrors());
@@ -921,7 +921,7 @@ class NfeTerceiro extends MGActiveRecord
                 if ($this->valoroutras > 0)
                     $npb->valortotal += ($this->valoroutras / $this->valorprodutos) * $nti->vprod;
 
-		$npb->valortotal = round($npb->valortotal, 2);
+                $npb->valortotal = round($npb->valortotal, 2);
 
                 $npb->valorunitario = round($npb->valortotal / $npb->quantidade, 3);
 
