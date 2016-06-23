@@ -50,6 +50,8 @@ class Negocio extends MGActiveRecord
 	public $lancamento_ate;
 	public $percentualdesconto;
 	public $pagamento;
+        
+        private $_codnegociostatus_original;
 	
 	/**
 	 * @return string the associated database table name
@@ -263,12 +265,14 @@ class Negocio extends MGActiveRecord
 
 	protected function afterFind()
 	{
-		if ($this->valortotal >0 and $this->valordesconto>0)
-			$this->percentualdesconto = 100 * ($this->valordesconto / $this->valorprodutos);
-		else
-			$this->percentualdesconto = 0;
-		
-		return parent::afterFind();
+            if ($this->valortotal >0 and $this->valordesconto>0)
+                $this->percentualdesconto = 100 * ($this->valordesconto / $this->valorprodutos);
+            else
+                $this->percentualdesconto = 0;
+            
+            $this->_codnegociostatus_original = $this->codnegociostatus;
+
+            return parent::afterFind();
 	}		
 	
 	public function fecharNegocio()
@@ -593,150 +597,169 @@ class Negocio extends MGActiveRecord
 	function gerarDevolucao($arrQuantidadeDevolucao)
 	{
 		
-		//inicia Transacao
-		$trans = $this->dbConnection->beginTransaction();
-		
-		//monta array com itens devolvidos
-		$arr = array();
-		foreach($arrQuantidadeDevolucao as $codnegocioprodutobarra => $quantidadedevolucao)
-		{
-			$quantidadedevolucao = Yii::app()->format->unformatNumber($quantidadedevolucao);
-			if ($quantidadedevolucao > 0)
-				$arr[$codnegocioprodutobarra] = $quantidadedevolucao;
-		}
-		
-		//se nao tem nenhum item para devolver, retorna erro
-		if (empty($arr))
-		{
-			$this->addError('codnegocio', 'Não foi selecionado nenhum item para devolução!');
-			$trans->rollback();
-			return false;
-		}
-		
-		//cria registro tabela Negocio
-		$negocio = new Negocio;
-		$negocio->codpessoa = $this->codpessoa;
-		$negocio->codfilial = $this->codfilial;
-		$negocio->codestoquelocal = $this->codestoquelocal;
-		$negocio->lancamento = date('d/m/Y H:i:s');
-		$negocio->codpessoavendedor = $this->codpessoavendedor;
-		$negocio->codnaturezaoperacao = $this->NaturezaOperacao->codnaturezaoperacaodevolucao;
-		if (!isset($negocio->NaturezaOperacao))
-		{
-			$this->addError('codnegocio', 'Natureza de Operação de devolução não parametrizada!');
-			$trans->rollback();
-			return false;
-		}
-			
-		$negocio->codoperacao = $negocio->NaturezaOperacao->codoperacao;
-		$negocio->codnegociostatus = NegocioStatus::ABERTO;
-		//$negocio->observacoes = 'Devolução referente Negócio ' . Yii::app()->format->formataCodigo($this->codnegocio);
-		$negocio->codusuario = Yii::app()->user->id;
-		
-		//salva Negocio
-		if (!$negocio->save())
-		{
-			$this->addErrors($negocio->getErrors());
-			$trans->rollback();
-			return false;
-		}
+            //inicia Transacao
+            $trans = $this->dbConnection->beginTransaction();
 
-		//percorre os itens
-		$gerarNotaDevolucao = false;
-        $valorDesconto = 0;
-        $percDesconto = ($this->valordesconto / $this->valorprodutos);
-		foreach ($arr as $codnegocioprodutobarra => $quantidadedevolucao)
-		{
-			
-			/* @var $npb_original NegocioProdutoBarra */
-			
-			//busca item a ser devolvido
-			$npb_original =  NegocioProdutoBarra::model()->findByPk($codnegocioprodutobarra);
-			if($npb_original===null)
-			{
-				$this->addError('codnegocio', 'NegocioProdutoBarra Original não localizado!');
-				$trans->rollback();
-				return false;
-			}
-			
-			//cria item na devolucao
-			$npb = new NegocioProdutoBarra();
-			$npb->codnegocio = $negocio->codnegocio;
-			$npb->quantidade = $quantidadedevolucao;
-			$npb->valorunitario = $npb_original->valorunitario;
-			$npb->valortotal = $npb->quantidade * $npb->valorunitario;
-			$npb->codprodutobarra = $npb_original->codprodutobarra;
-			$npb->codnegocioprodutobarradevolucao = $npb_original->codnegocioprodutobarra;
-            //calcula desconto proporcional
-            $valorDesconto += round($percDesconto * $npb->valortotal, 2);
-			
-			//salva item
-			if (!$npb->save())
-			{
-				$this->addErrors($npb->getErrors());
-				$trans->rollback();
-				return false;
-			}
-			
-			//Verifica quais notas fiscais referenciar na devolucao
-			foreach ($npb_original->NotaFiscalProdutoBarras as $nfpb)
-				if (!in_array($nfpb->NotaFiscal->codstatus, array(NotaFiscal::CODSTATUS_CANCELADA, NotaFiscal::CODSTATUS_INUTILIZADA)))
-					$gerarNotaDevolucao = true;
-			
-		}
-		
-		//recarrega modelo do negocio, para atalizar totais
-		$negocio->refresh();
-		
-        $negocio->valordesconto = $valorDesconto;
-        $negocio->valortotal = $negocio->valorprodutos - $negocio->valordesconto;
-		$negocio->valoravista = 0;
-        $negocio->valoraprazo = $negocio->valortotal;
-        
-        if (!$negocio->save())
-        {
-            $this->addErrors($negocio->getErrors());
-            $trans->rollback();
-            return false;
-        }
-        
-		//cria forma de pagamento
-		$nfp = new NegocioFormaPagamento();
-		$nfp->codnegocio = $negocio->codnegocio;
-		$nfp->valorpagamento = $negocio->valoraprazo;
-		$nfp->codformapagamento = NegocioFormaPagamento::CARTEIRA_A_VISTA;
-		if (!$nfp->save())
-		{
-			$this->addErrors($nfp->getErrors());
-			$trans->rollback();
-			return false;
-		}
-		
-		//fecha a devolucao
-		if (!$negocio->fecharNegocio())
-		{
-			$this->addErrors($negocio->getErrors());
-			$trans->rollback();
-			return false;			
-		}
-		
-		//informa o usuario do sucesso
-		Yii::app()->user->setFlash('success', "Gerada devolução <b>{$negocio->codnegocio}</b>!");
-		
-		if ($gerarNotaDevolucao)
-		{
-			if (!$codnotafiscal = $negocio->gerarNotaFiscal(null, NotaFiscal::MODELO_NFE, false))
-			{
-				$this->addErrors($negocio->getErrors());
-				$trans->rollback();
-				return false;							
-			}
-			
-		}
-		
-		$trans->commit();
-		return $negocio->codnegocio;
+            //monta array com itens devolvidos
+            $arr = array();
+            foreach($arrQuantidadeDevolucao as $codnegocioprodutobarra => $quantidadedevolucao)
+            {
+                    $quantidadedevolucao = Yii::app()->format->unformatNumber($quantidadedevolucao);
+                    if ($quantidadedevolucao > 0)
+                            $arr[$codnegocioprodutobarra] = $quantidadedevolucao;
+            }
+
+            //se nao tem nenhum item para devolver, retorna erro
+            if (empty($arr))
+            {
+                    $this->addError('codnegocio', 'Não foi selecionado nenhum item para devolução!');
+                    $trans->rollback();
+                    return false;
+            }
+
+            //cria registro tabela Negocio
+            $negocio = new Negocio;
+            $negocio->codpessoa = $this->codpessoa;
+            $negocio->codfilial = $this->codfilial;
+            $negocio->codestoquelocal = $this->codestoquelocal;
+            $negocio->lancamento = date('d/m/Y H:i:s');
+            $negocio->codpessoavendedor = $this->codpessoavendedor;
+            $negocio->codnaturezaoperacao = $this->NaturezaOperacao->codnaturezaoperacaodevolucao;
+            if (!isset($negocio->NaturezaOperacao))
+            {
+                    $this->addError('codnegocio', 'Natureza de Operação de devolução não parametrizada!');
+                    $trans->rollback();
+                    return false;
+            }
+
+            $negocio->codoperacao = $negocio->NaturezaOperacao->codoperacao;
+            $negocio->codnegociostatus = NegocioStatus::ABERTO;
+            //$negocio->observacoes = 'Devolução referente Negócio ' . Yii::app()->format->formataCodigo($this->codnegocio);
+            $negocio->codusuario = Yii::app()->user->id;
+
+            //salva Negocio
+            if (!$negocio->save())
+            {
+                    $this->addErrors($negocio->getErrors());
+                    $trans->rollback();
+                    return false;
+            }
+
+            //percorre os itens
+            $gerarNotaDevolucao = false;
+            $valorDesconto = 0;
+            $percDesconto = ($this->valordesconto / $this->valorprodutos);
+
+            foreach ($arr as $codnegocioprodutobarra => $quantidadedevolucao)
+            {
+
+                    /* @var $npb_original NegocioProdutoBarra */
+
+                    //busca item a ser devolvido
+                    $npb_original =  NegocioProdutoBarra::model()->findByPk($codnegocioprodutobarra);
+                    if($npb_original===null)
+                    {
+                            $this->addError('codnegocio', 'NegocioProdutoBarra Original não localizado!');
+                            $trans->rollback();
+                            return false;
+                    }
+
+                    //cria item na devolucao
+                    $npb = new NegocioProdutoBarra();
+                    $npb->codnegocio = $negocio->codnegocio;
+                    $npb->quantidade = $quantidadedevolucao;
+                    $npb->valorunitario = $npb_original->valorunitario;
+                    $npb->valortotal = $npb->quantidade * $npb->valorunitario;
+                    $npb->codprodutobarra = $npb_original->codprodutobarra;
+                    $npb->codnegocioprodutobarradevolucao = $npb_original->codnegocioprodutobarra;
+
+                    //calcula desconto proporcional
+                    $valorDesconto += round($percDesconto * $npb->valortotal, 2);
+
+                    //salva item
+                    if (!$npb->save())
+                    {
+                            $this->addErrors($npb->getErrors());
+                            $trans->rollback();
+                            return false;
+                    }
+
+                    //Verifica quais notas fiscais referenciar na devolucao
+                    foreach ($npb_original->NotaFiscalProdutoBarras as $nfpb)
+                            if (!in_array($nfpb->NotaFiscal->codstatus, array(NotaFiscal::CODSTATUS_CANCELADA, NotaFiscal::CODSTATUS_INUTILIZADA)))
+                                    $gerarNotaDevolucao = true;
+
+            }
+
+            //recarrega modelo do negocio, para atalizar totais
+            $negocio->refresh();
+
+            $negocio->valordesconto = $valorDesconto;
+            $negocio->valortotal = $negocio->valorprodutos - $negocio->valordesconto;
+            $negocio->valoravista = 0;
+            $negocio->valoraprazo = $negocio->valortotal;
+
+            if (!$negocio->save())
+            {
+                $this->addErrors($negocio->getErrors());
+                $trans->rollback();
+                return false;
+            }
+
+            //cria forma de pagamento
+            $nfp = new NegocioFormaPagamento();
+            $nfp->codnegocio = $negocio->codnegocio;
+            $nfp->valorpagamento = $negocio->valoraprazo;
+            $nfp->codformapagamento = NegocioFormaPagamento::CARTEIRA_A_VISTA;
+            if (!$nfp->save())
+            {
+                    $this->addErrors($nfp->getErrors());
+                    $trans->rollback();
+                    return false;
+            }
+
+            //fecha a devolucao
+            if (!$negocio->fecharNegocio())
+            {
+                    $this->addErrors($negocio->getErrors());
+                    $trans->rollback();
+                    return false;			
+            }
+
+            //informa o usuario do sucesso
+            Yii::app()->user->setFlash('success', "Gerada devolução <b>{$negocio->codnegocio}</b>!");
+
+            if ($gerarNotaDevolucao)
+            {
+                    if (!$codnotafiscal = $negocio->gerarNotaFiscal(null, NotaFiscal::MODELO_NFE, false))
+                    {
+                            $this->addErrors($negocio->getErrors());
+                            $trans->rollback();
+                            return false;							
+                    }
+
+            }
+
+            $trans->commit();
+            return $negocio->codnegocio;
 	
 	}
 
+	protected function afterSave()
+        {
+            
+            if ($this->_codnegociostatus_original != $this->codnegociostatus)
+            {
+                $url = "http://localhost/MGLara/estoque/gera-movimento-negocio/{$this->codnegocio}";
+                $ret = json_decode(file_get_contents($url));
+                if (@$ret->response !== 'Agendado')
+                {
+                    echo '<pre>';
+                    var_dump($ret);
+                    echo '<hr>';
+                    die('Erro ao Gerar Movimentação de Estoque');
+                }
+            }
+        }
+        
 }
