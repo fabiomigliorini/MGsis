@@ -677,14 +677,10 @@ class NFePHPNovoController extends Controller
 						$vBCST = number_format($nfpb->icmsstbase, 2, '.', ''); 
 						$pICMSST = number_format($nfpb->icmsstpercentual, 2, '.', '');
 						$vICMSST = number_format($nfpb->icmsstvalor, 2, '.', '');
+                                                
+                                                $modBCST = 4;
 
-						if (empty($nfpb->icmsstvalor))
-                                                {
-                                                        $resp = $make->tagICMS($nItem, $orig, $cst, $modBC, $pRedBC, $vBC, $pICMS, $vICMS, $vICMSDeson, $motDesICMS);
-                                                        
-                                                }
-                                                else
-                                                        $resp = $make->tagICMS($nItem, $orig, $cst, $modBC, $pRedBC, $vBC, $pICMS, $vICMS, $vICMSDeson, $motDesICMS, $modBCST, $pMVAST, $pRedBCST, $vBCST, $pICMSST, $vICMSST, $pDif, $vICMSDif, $vICMSOp, $vBCSTRet, $vICMSSTRet);
+                                                $resp = $make->tagICMS($nItem, $orig, $cst, $modBC, $pRedBC, $vBC, $pICMS, $vICMS, $vICMSDeson, $motDesICMS, $modBCST, $pMVAST, $pRedBCST, $vBCST, $pICMSST, $vICMSST, $pDif, $vICMSDif, $vICMSOp, $vBCSTRet, $vICMSSTRet);
 	
 						//IPI
                                                 if (!empty($nfpb->ipivalor))

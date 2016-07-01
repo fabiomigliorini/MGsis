@@ -2107,6 +2107,7 @@ class MakeNFe extends BaseMake
                 $this->dom->addChild($icms, 'pRedBC', $pRedBC, false, "$identificador [item $nItem] Percentual da Redução de BC");
                 $this->dom->addChild($icms, 'pICMS', $pICMS, true, "$identificador [item $nItem] Alíquota do imposto");
                 $this->dom->addChild($icms, 'vICMS', $vICMS, true, "$identificador [item $nItem] Valor do ICMS");
+                /*
                 $this->dom->addChild($icms, 'modBCST', $modBCST, true, "$identificador [item $nItem] Modalidade de determinação da BC do ICMS ST");
                 $this->dom->addChild(
                     $icms,
@@ -2121,6 +2122,8 @@ class MakeNFe extends BaseMake
                 $this->dom->addChild($icms, 'vICMSST', $vICMSST, true, "$identificador [item $nItem] Valor do ICMS ST");
                 $this->dom->addChild($icms, 'vICMSDeson', $vICMSDeson, false, "$identificador [item $nItem] Valor do ICMS desonerado");
                 $this->dom->addChild($icms, 'motDesICMS', $motDesICMS, false, "$identificador [item $nItem] Motivo da desoneração do ICMS");
+                 * 
+                 */
                 break;
         }
         $tagIcms = $this->dom->createElement('ICMS');
