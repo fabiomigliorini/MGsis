@@ -126,7 +126,7 @@ class NFePHPNovoController extends Controller
 		$conf['pathCertsFiles'] =  '/var/www/MGsis/protected/vendors/nfephp/certs/';
 		$conf['siteUrl'] =  'http://localhost/MGsis/protected/vendors/nfephp/install/';
 		//$conf['schemesNFe'] =  'PL_008f';
-		$conf['schemesNFe'] =  'PL_008h2';
+		$conf['schemesNFe'] =  'PL_008i2';
 		$conf['schemesCTe'] =  'PL_CTe_200';
 		$conf['schemesMDFe'] =  'PL_MDFe_100';
 		$conf['schemesCLe'] =  '';
@@ -474,7 +474,7 @@ class NFePHPNovoController extends Controller
 				$idEstrangeiro = '';
 				$xNome = substr(utf8_encode($nf->Pessoa->pessoa), 0, 60);
 				$IE = Yii::app()->format->NumeroLimpo($nf->Pessoa->ie);
-				$indIEDest = (empty($IE))?'9':'1';
+				$indIEDest = (empty($IE))?'2':'1';
 				$ISUF = '';
 				$IM = '';
 				$email = $nf->Pessoa->emailnfe;
