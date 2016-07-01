@@ -678,7 +678,7 @@ class NFePHPNovoController extends Controller
 						$pICMSST = number_format($nfpb->icmsstpercentual, 2, '.', '');
 						$vICMSST = number_format($nfpb->icmsstvalor, 2, '.', '');
                                                 
-                                                $modBCST = 4;
+                                                $modBCST = '4';
 
                                                 $resp = $make->tagICMS($nItem, $orig, $cst, $modBC, $pRedBC, $vBC, $pICMS, $vICMS, $vICMSDeson, $motDesICMS, $modBCST, $pMVAST, $pRedBCST, $vBCST, $pICMSST, $vICMSST, $pDif, $vICMSDif, $vICMSOp, $vBCSTRet, $vICMSSTRet);
 	
