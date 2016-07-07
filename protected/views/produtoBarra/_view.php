@@ -19,7 +19,9 @@
 		<?php echo isset($data->Marca)?CHtml::encode($data->Marca->marca):""; ?> 
 	</div>
 	<div class="span1 text-right">
+        <!--
 		<a href="<?php echo Yii::app()->createUrl('produtoBarra/update', array('id'=>$data->codprodutobarra)); ?>"><i class="icon-pencil"></i></a>
 		<a class="delete-barra" href="<?php echo Yii::app()->createUrl('produtoBarra/delete', array('id'=>$data->codprodutobarra)); ?>"><i class="icon-trash"></i></a>
+        -->
 	</div>
 </div>
