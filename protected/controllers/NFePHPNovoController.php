@@ -1175,7 +1175,8 @@ class NFePHPNovoController extends Controller
                         if (!isset($aResposta['aProt'][0]))
                                 throw new Exception('Erro na comunicacao!');
 
-			if ($aResposta['aProt'][0]['cStat'] == 100) // Autorizado o uso da NF-e
+			if (($aResposta['aProt'][0]['cStat'] == 100) // Autorizado o uso da NF-e
+                            || ($aResposta['aProt'][0]['cStat'] == 150)) // Autorizado o uso da NF-e, autorizacao fora de prazo
 			{
 				$saveFile = true;
 				$retorno = $tools->addProtocolo($this->arquivoXMLValidada, $this->arquivoXMLProtocoloRecibo, $saveFile);
@@ -1470,7 +1471,7 @@ class NFePHPNovoController extends Controller
 			if (!$aResposta['bStat'])
 				throw new Exception('Erro na comunicacao!');
 			
-			if (@$aResposta['aProt']['cStat'] == 100)
+			if ((@$aResposta['aProt']['cStat'] == 100) || (@$aResposta['aProt']['cStat'] == 150))
 			{
 				$nf->nfeautorizacao = $aResposta['aProt']['nProt'];
 				$dh = DateTime::createFromFormat ('Y-m-d\TH:i:sP', $aResposta['aProt']['dhRecbto']);
