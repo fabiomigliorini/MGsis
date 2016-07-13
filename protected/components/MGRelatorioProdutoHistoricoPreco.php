@@ -125,7 +125,8 @@ class MGRelatorioProdutoHistoricoPreco extends FPDF
             $this->SetX(165);
 			
 			$this->SetTextColor(0, 0, 0);
-			$this->Cell(15, 5, utf8_decode($model->UsuarioAlteracao->usuario),   '', 0, 'L', $this->_fill);
+                        $usuario = (empty($model->codusuariocriacao)?'':$model->UsuarioCriacao->usuario);
+			$this->Cell(15, 5, utf8_decode($usuario),   '', 0, 'L', $this->_fill);
 			$this->Cell(0, 5, utf8_decode(substr($model->alteracao, 0, 16)),   '', 0, 'L', $this->_fill);
 			
 			
