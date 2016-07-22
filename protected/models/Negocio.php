@@ -577,6 +577,7 @@ class Negocio extends MGActiveRecord
 			if ($this->save())
 			{
 				$transaction->commit();
+                                $this->movimentaEstoque();
 				return true;
 			}
 			else
@@ -744,22 +745,26 @@ class Negocio extends MGActiveRecord
             return $negocio->codnegocio;
 	
 	}
+        
+        public function movimentaEstoque()
+        {
+            $url = "http://localhost/MGLara/estoque/gera-movimento-negocio/{$this->codnegocio}";
+            $ret = json_decode(file_get_contents($url));
+            if (@$ret->response !== 'Agendado')
+            {
+                echo '<pre>';
+                var_dump($ret);
+                echo '<hr>';
+                die('Erro ao Gerar Movimentação de Estoque');
+            }
+        }
 
 	protected function afterSave()
         {
-            
-            if ($this->_codnegociostatus_original != $this->codnegociostatus)
-            {
-                $url = "http://localhost/MGLara/estoque/gera-movimento-negocio/{$this->codnegocio}";
-                $ret = json_decode(file_get_contents($url));
-                if (@$ret->response !== 'Agendado')
-                {
-                    echo '<pre>';
-                    var_dump($ret);
-                    echo '<hr>';
-                    die('Erro ao Gerar Movimentação de Estoque');
-                }
+            if ($this->_codnegociostatus_original != $this->codnegociostatus) {
+                $this->movimentaEstoque();
             }
+            
         }
         
 }

@@ -986,6 +986,11 @@ class NfeTerceiro extends MGActiveRecord
 		}
 		
 		$transaction->commit();
+                
+                //Força novamente movimentação de estoque
+                //Em alguns casos o MGLara estava rodando antes do MGsis
+                //completar a transação, e assim não gerava movimentação do estoque
+                $n->movimentaEstoque();
 		return true;
 	}
 	
