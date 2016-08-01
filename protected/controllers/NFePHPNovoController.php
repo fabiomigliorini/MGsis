@@ -474,7 +474,11 @@ class NFePHPNovoController extends Controller
 				$idEstrangeiro = '';
 				$xNome = substr(utf8_encode($nf->Pessoa->pessoa), 0, 60);
 				$IE = Yii::app()->format->NumeroLimpo($nf->Pessoa->ie);
-				$indIEDest = (empty($IE))?'2':'1';
+				if ($nf->Pessoa->Cidade->Estado->sigla != 'MT') {
+					$indIEDest = (empty($IE))?'9':'1';
+				} else {
+					$indIEDest = (empty($IE))?'2':'1';
+				}
 				$ISUF = '';
 				$IM = '';
 				$email = $nf->Pessoa->emailnfe;
