@@ -670,7 +670,7 @@ class NFePHPNovoController extends Controller
 
 
 						//ICMS
-						$cst = $nfpb->icmscst;
+						$cst = MGFormatter::formataPorMascara($nfpb->icmscst, '##');
 
 						$vBC = number_format($nfpb->icmsbase, 2, '.', '');
 						$pICMS = number_format($nfpb->icmspercentual, 2, '.', '');
@@ -718,7 +718,14 @@ class NFePHPNovoController extends Controller
 						$vPIS = number_format($nfpb->pisvalor, 2, '.', '');
 						$qBCProd = number_format(0, 2, '.', '');
 						$vAliqProd = number_format(0, 2, '.', '');
-						$resp = $make->tagPIS($nItem, $cst, $vBC, $pPIS, $vPIS, $qBCProd, $vAliqProd);
+                                                switch ($cst) {
+                                                    case '49':
+                                                        $resp = $make->tagPIS($nItem, $cst, $vBC, $pPIS, $vPIS);
+                                                        break;
+                                                    default:
+                                                        $resp = $make->tagPIS($nItem, $cst, $vBC, $pPIS, $vPIS, $qBCProd, $vAliqProd);
+                                                        break;
+                                                }
 
 						//PISST
 						//$resp = $make->tagPISST($nItem, $vBC, $pPIS, $qBCProd, $vAliqProd, $vPIS);
@@ -730,7 +737,14 @@ class NFePHPNovoController extends Controller
 						$vCOFINS = number_format($nfpb->cofinsvalor, 2, '.', '');
 						$qBCProd = number_format(0, 2, '.', '');
 						$vAliqProd = number_format(0, 2, '.', '');
-						$resp = $make->tagCOFINS($nItem, $cst, $vBC, $pCOFINS, $vCOFINS, $qBCProd, $vAliqProd);
+                                                switch ($cst) {
+                                                    case '49':
+                                                        $resp = $make->tagCOFINS($nItem, $cst, $vBC, $pCOFINS, $vCOFINS);
+                                                        break;
+                                                    default:
+                                                        $resp = $make->tagCOFINS($nItem, $cst, $vBC, $pCOFINS, $vCOFINS, $qBCProd, $vAliqProd);
+                                                        break;
+                                                }
 
 						//COFINSST
 						//$resp = $make->tagCOFINSST($nItem, $vBC, $pCOFINS, $qBCProd, $vAliqProd, $vCOFINS);
@@ -1020,6 +1034,10 @@ class NFePHPNovoController extends Controller
 			//monta a NFe e retorna na tela
 			$resp = $make->montaNFe();
 			$xml = $make->getXML();
+                        
+                        //die($xml);
+                        
+                        @file_put_contents('/tmp/nota.xml', $xml);
 
 			$config = $this->montarConfiguracao($nf->codfilial, $nf->modelo, $codnotafiscal);
 			$tools = new ToolsNFe($config);
