@@ -710,10 +710,10 @@ class NFePHPNovoController extends Controller
                                                     $vICMSUFDest = 0;
                                                     $vICMSUFRemet = 0;
                                                     
+                                                    $resp = $make->tagICMSUFDest($nItem, $vBCUFDest, $pFCPUFDest, $pICMSUFDest, $pICMSInter, $pICMSInterPart, $vFCPUFDest, $vICMSUFDest, $vICMSUFRemet);
+                                                    
                                                 }
                                                 
-                                                $resp = $make->tagICMSUFDest($nItem, $vBCUFDest, $pFCPUFDest, $pICMSUFDest, $pICMSInter, $pICMSInterPart, $vFCPUFDest, $vICMSUFDest, $vICMSUFRemet);
-	
 						//IPI
                                                 if (!empty($nfpb->ipivalor))
                                                 {
