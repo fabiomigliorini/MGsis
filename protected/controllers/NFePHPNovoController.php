@@ -685,6 +685,34 @@ class NFePHPNovoController extends Controller
                                                 $modBCST = '4';
 
                                                 $resp = $make->tagICMS($nItem, $orig, $cst, $modBC, $pRedBC, $vBC, $pICMS, $vICMS, $vICMSDeson, $motDesICMS, $modBCST, $pMVAST, $pRedBCST, $vBCST, $pICMSST, $vICMSST, $pDif, $vICMSDif, $vICMSOp, $vBCSTRet, $vICMSSTRet);
+
+                                                if ($nf->Filial->Pessoa->Cidade->codestado != $nf->Pessoa->Cidade->codestado) {
+                                                    
+                                                    $vBCUFDest = $vBC;
+                                                    $pFCPUFDest = 0;
+                                                    $pICMSUFDest = 0;
+                                                    $pICMSInter = number_format(($nfpb->ProdutoBarra->Produto->importado)?4:12, 2, '.', '');
+                                                    switch (substr($nf->emissao, 6, 4)) {
+                                                        case '2016':
+                                                            $pICMSInterPart = number_format(40, 2, '.', '');
+                                                            break;
+                                                        case '2017':
+                                                            $pICMSInterPart = number_format(60, 2, '.', '');
+                                                            break;
+                                                        case '2018':
+                                                            $pICMSInterPart = number_format(80, 2, '.', '');
+                                                            break;
+                                                        default:
+                                                            $pICMSInterPart = number_format(100, 2, '.', '');
+                                                            break;
+                                                    }
+                                                    $vFCPUFDest = 0;     
+                                                    $vICMSUFDest = 0;
+                                                    $vICMSUFRemet = 0;
+                                                    
+                                                }
+                                                
+                                                $resp = $make->tagICMSUFDest($nItem, $vBCUFDest, $pFCPUFDest, $pICMSUFDest, $pICMSInter, $pICMSInterPart, $vFCPUFDest, $vICMSUFDest, $vICMSUFRemet);
 	
 						//IPI
                                                 if (!empty($nfpb->ipivalor))
@@ -1037,7 +1065,7 @@ class NFePHPNovoController extends Controller
                         
                         //die($xml);
                         
-                        @file_put_contents('/tmp/nota.xml', $xml);
+                        //@file_put_contents('/tmp/nota.xml', $xml);
 
 			$config = $this->montarConfiguracao($nf->codfilial, $nf->modelo, $codnotafiscal);
 			$tools = new ToolsNFe($config);
