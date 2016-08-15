@@ -127,8 +127,8 @@
 				'items'=>array(
 					array('label' => 'Usuários', 'url' => Yii::app()->createUrl('usuario')),
 					array('label' => 'Permissões', 'url' => Yii::app()->createUrl('srbac/authitem/frontpage')),
-					'---',
-					array('label' => 'Códigos', 'url' => Yii::app()->createUrl('codigo')),
+					//'---',
+					//array('label' => 'Códigos', 'url' => Yii::app()->createUrl('codigo')),
 				)
 			),
 
