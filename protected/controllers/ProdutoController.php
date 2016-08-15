@@ -14,6 +14,7 @@ class ProdutoController extends Controller
 	*/
 	public function actionView($id)
 	{
+                $this->redirect("/MGLara/produto/$id");
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 			));
@@ -25,6 +26,7 @@ class ProdutoController extends Controller
 	*/
 	public function actionCreate($barras = "")
 	{
+                $this->redirect("/MGLara/produto/create");
 		$model=new Produto;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -56,6 +58,7 @@ class ProdutoController extends Controller
 	*/
 	public function actionUpdate($id)
 	{
+                $this->redirect("/MGLara/produto/{$id}/edit");
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -80,6 +83,7 @@ class ProdutoController extends Controller
 	*/
 	public function actionDelete($id)
 	{
+                $this->redirect("/MGLara/produto/$id");
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -107,6 +111,7 @@ class ProdutoController extends Controller
 
 	public function actionJuntarBarras($id)
 	{
+                $this->redirect("/MGLara/produto/$id");
 		$model=$this->loadModel($id);
 
 		if(isset($_POST['Produto']))
@@ -140,6 +145,7 @@ class ProdutoController extends Controller
 	
 	public function actionTransferirBarras($id)
 	{
+                $this->redirect("/MGLara/produto/$id");
 		$model=$this->loadModel($id);
 
 		if(isset($_POST['Produto']))
@@ -177,6 +183,8 @@ class ProdutoController extends Controller
 	*/
 	public function actionIndex()
 	{
+                $this->redirect('/MGLara/produto/');
+                
 		$model=new Produto('search');
 		
 		$model->unsetAttributes();  // clear any default values
@@ -198,6 +206,7 @@ class ProdutoController extends Controller
 	*/
 	public function actionAdmin()
 	{
+                $this->redirect("/MGLara/produto/");
 	
 		$model=new Produto('search');
 		

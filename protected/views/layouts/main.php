@@ -91,7 +91,7 @@
 				'url'=>'#', 
 				'items'=>array(
 					array('label' => 'Consulta de Preço', 'url' => Yii::app()->createUrl('produto/quiosqueConsulta')),
-					array('label' => 'Produtos', 'url' => Yii::app()->createUrl('produto')),
+					//array('label' => 'Produtos', 'url' => Yii::app()->createUrl('produto')),
 					'---',
 					array('label' => 'Etiquetas de Produto', 'url' => Yii::app()->createUrl('etiquetaProduto')),
 					'---',
@@ -119,7 +119,8 @@
 
 				)
 			),
-						// Admin
+                    
+                        // Admin
 			array(
 				'label' => 'Admin', 
 				'url'=>'#', 
@@ -129,6 +130,12 @@
 					'---',
 					array('label' => 'Códigos', 'url' => Yii::app()->createUrl('codigo')),
 				)
+			),
+
+                        // MGLara
+			array(
+				'label' => 'MGLara', 
+				'url'=>'/MGLara', 
 			),
 
 		);
