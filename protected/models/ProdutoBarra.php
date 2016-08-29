@@ -11,6 +11,7 @@
  * @property string $referencia
  * @property string $codmarca
  * @property string $codprodutoembalagem
+ * @property string $codprodutovariacao
  * @property string $alteracao
  * @property string $codusuarioalteracao
  * @property string $criacao
@@ -23,6 +24,7 @@
  * @property NfeTerceiroItem[] $NfeTerceiroItems
  * @property Produto $Produto
  * @property ProdutoEmbalagem $ProdutoEmbalagem
+ * @property ProdutoVariacao $ProdutoVariacao
  * @property Marca $Marca
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
@@ -85,6 +87,7 @@ class ProdutoBarra extends MGActiveRecord
 			'NfeTerceiroItems' => array(self::HAS_MANY, 'NfeTerceiroItem', 'codprodutobarra'),
 			'Produto' => array(self::BELONGS_TO, 'Produto', 'codproduto'),
 			'ProdutoEmbalagem' => array(self::BELONGS_TO, 'ProdutoEmbalagem', 'codprodutoembalagem'),
+			'ProdutoVariacao' => array(self::BELONGS_TO, 'ProdutoVariacao', 'codprodutovariacao'),
 			'Marca' => array(self::BELONGS_TO, 'Marca', 'codmarca'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
@@ -105,6 +108,7 @@ class ProdutoBarra extends MGActiveRecord
 			'referencia' => 'Referência',
 			'codmarca' => 'Marca',
 			'codprodutoembalagem' => 'Embalagem',
+			'codprodutovariacao' => 'Variação',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
@@ -137,6 +141,7 @@ class ProdutoBarra extends MGActiveRecord
 		$criteria->compare('referencia',$this->referencia,true);
 		$criteria->compare('codmarca',$this->codmarca,true);
 		$criteria->compare('codprodutoembalagem',$this->codprodutoembalagem,true);
+		$criteria->compare('codprodutovariacao',$this->codprodutovariacao,true);
 		$criteria->compare('alteracao',$this->alteracao,true);
 		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
 		$criteria->compare('criacao',$this->criacao,true);
@@ -173,9 +178,12 @@ class ProdutoBarra extends MGActiveRecord
 			$this->preco = $this->ProdutoEmbalagem->preco_calculado;
 		}
 		
+                if (!empty($this->ProdutoVariacao->variacao))
+                    $this->descricao .= ' ' . $this->ProdutoVariacao->variacao;
+                
 		if (!empty($this->variacao))
 			$this->descricao .= ' ' . $this->variacao;
-			
+
 		return $ret;
 	}
 
