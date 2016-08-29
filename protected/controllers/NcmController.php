@@ -14,6 +14,7 @@ class NcmController extends Controller
 	*/
 	public function actionView($id)
 	{
+		$this->redirect("/MGLara/ncm/$id");
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 			));
@@ -25,6 +26,7 @@ class NcmController extends Controller
 	*/
 	public function actionCreate()
 	{
+		$this->redirect("/MGLara/ncm/create");
 		$model=new Ncm;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -49,6 +51,7 @@ class NcmController extends Controller
 	*/
 	public function actionUpdate($id)
 	{
+		$this->redirect("/MGLara/ncm/{$id}/edit");
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -73,6 +76,7 @@ class NcmController extends Controller
 	*/
 	public function actionDelete($id)
 	{
+		$this->redirect("/MGLara/ncm/$id");
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -103,6 +107,7 @@ class NcmController extends Controller
 	*/
 	public function actionIndex($id = null)
 	{
+		$this->redirect('/MGLara/ncm/');
 		if (isset($id))
 			$ncm = $this->loadModel ($id);
 		
@@ -120,6 +125,7 @@ class NcmController extends Controller
 	*/
 	public function actionAdmin()
 	{
+		$this->redirect('/MGLara/produto/');
 	
 		$model=new Ncm('search');
 		

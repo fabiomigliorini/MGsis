@@ -97,11 +97,11 @@
 					'---',
 					array('label' => 'Histórico de Preços', 'url' => Yii::app()->createUrl('produtoHistoricoPreco')),
 					'---',
-					array('label' => 'Grupos de Produtos', 'url' => Yii::app()->createUrl('grupoProduto')),
-					array('label' => 'Marcas', 'url' => Yii::app()->createUrl('marca')),
-					array('label' => 'NCM', 'url' => Yii::app()->createUrl('ncm')),
-					array('label' => 'Tipos de Produtos', 'url' => Yii::app()->createUrl('tipoProduto')),
-					array('label' => 'Unidades de Medida', 'url' => Yii::app()->createUrl('unidadeMedida')),
+					//array('label' => 'Grupos de Produtos', 'url' => Yii::app()->createUrl('grupoProduto')),
+					//array('label' => 'Marcas', 'url' => Yii::app()->createUrl('marca')),
+					//array('label' => 'NCM', 'url' => Yii::app()->createUrl('ncm')),
+					//array('label' => 'Tipos de Produtos', 'url' => Yii::app()->createUrl('tipoProduto')),
+					//array('label' => 'Unidades de Medida', 'url' => Yii::app()->createUrl('unidadeMedida')),
 				)
 			),
 			
