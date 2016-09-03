@@ -242,7 +242,10 @@ class NfeTerceiroItem extends MGActiveRecord
 			if (isset($this->ProdutoBarra->ProdutoEmbalagem))
 				$this->quantidade *= $this->ProdutoBarra->ProdutoEmbalagem->quantidade;
 			
-			$this->vcustounitario = $this->vcusto / $this->quantidade;
+                        $this->vcustounitario = $this->vcusto;
+                        if (((int)$this->quantidade) > 0) {
+                            $this->vcustounitario /= $this->quantidade;
+                        }
 
 			$this->vsugestaovenda = round($this->vcustounitario * (1+($this->margem/100)), 6);
 			
