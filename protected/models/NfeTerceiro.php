@@ -923,7 +923,10 @@ class NfeTerceiro extends MGActiveRecord
 
                 $npb->valortotal = round($npb->valortotal, 2);
 
-                $npb->valorunitario = round($npb->valortotal / $npb->quantidade, 3);
+                $npb->valorunitario = $npb->valortotal;
+                if ($npb->quantidade > 0) {
+                    $npb->valorunitario = round($npb->valortotal / $npb->quantidade, 3);
+                }
 
                 if (!$npb->save())
                 {
