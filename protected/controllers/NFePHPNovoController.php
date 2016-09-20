@@ -151,7 +151,7 @@ class NFePHPNovoController extends Controller
 		$conf['aMailConf']['mailFrom'] =  false;
 		$conf['aMailConf']['mailSmtp'] =  'smtp.mgpapelaria.com.br';
 		$conf['aMailConf']['mailUser'] =  'nfe@mgpapelaria.com.br';
-		$conf['aMailConf']['mailPass'] =  'trocar01';
+		$conf['aMailConf']['mailPass'] =  'flamboyants701';
 		$conf['aMailConf']['mailProtocol'] =  '';
 		$conf['aMailConf']['mailPort'] =  '587';
 		$conf['aMailConf']['mailFromMail'] =  null;
