@@ -222,7 +222,8 @@ class ProdutoController extends Controller
 	
 	public function actionQuiosqueConsulta ($barras = null)
 	{
-		
+		$this->redirect("/MGLara/produto/quiosque");
+
 		if (!empty($barras))
 			$model = ProdutoBarra::findByBarras($barras);
 		else
