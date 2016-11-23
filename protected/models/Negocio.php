@@ -343,7 +343,11 @@ class Negocio extends MGActiveRecord
 		$this->codnegociostatus = NegocioStatus::FECHADO;
 		$this->codusuario = Yii::app()->user->id;
 		$this->lancamento = date('d/m/Y H:i:s');
-		return $this->save();
+		if (!$this->save()) {
+            return false;
+        }
+        
+        return $this->movimentaEstoque();
 		
 	}
 	
@@ -577,7 +581,7 @@ class Negocio extends MGActiveRecord
 			if ($this->save())
 			{
 				$transaction->commit();
-                                $this->movimentaEstoque();
+                $this->movimentaEstoque();
 				return true;
 			}
 			else
@@ -714,17 +718,17 @@ class Negocio extends MGActiveRecord
             $nfp->codformapagamento = NegocioFormaPagamento::CARTEIRA_A_VISTA;
             if (!$nfp->save())
             {
-                    $this->addErrors($nfp->getErrors());
-                    $trans->rollback();
-                    return false;
+                $this->addErrors($nfp->getErrors());
+                $trans->rollback();
+                return false;
             }
 
             //fecha a devolucao
             if (!$negocio->fecharNegocio())
             {
-                    $this->addErrors($negocio->getErrors());
-                    $trans->rollback();
-                    return false;			
+                $this->addErrors($negocio->getErrors());
+                $trans->rollback();
+                return false;			
             }
 
             //informa o usuario do sucesso
@@ -732,12 +736,12 @@ class Negocio extends MGActiveRecord
 
             if ($gerarNotaDevolucao)
             {
-                    if (!$codnotafiscal = $negocio->gerarNotaFiscal(null, NotaFiscal::MODELO_NFE, false))
-                    {
-                            $this->addErrors($negocio->getErrors());
-                            $trans->rollback();
-                            return false;							
-                    }
+                if (!$codnotafiscal = $negocio->gerarNotaFiscal(null, NotaFiscal::MODELO_NFE, false))
+                {
+                    $this->addErrors($negocio->getErrors());
+                    $trans->rollback();
+                    return false;							
+                }
 
             }
 
@@ -748,7 +752,8 @@ class Negocio extends MGActiveRecord
         
         public function movimentaEstoque()
         {
-            $url = "http://localhost/MGLara/estoque/gera-movimento-negocio/{$this->codnegocio}";
+            // Chama MGLara para fazer movimentacao do estoque com delay de 10 segundos
+            $url = "http://localhost/MGLara/estoque/gera-movimento-negocio/{$this->codnegocio}?delay=10";
             $ret = json_decode(file_get_contents($url));
             if (@$ret->response !== 'Agendado')
             {
@@ -756,15 +761,19 @@ class Negocio extends MGActiveRecord
                 var_dump($ret);
                 echo '<hr>';
                 die('Erro ao Gerar Movimentação de Estoque');
+                return false;
             }
+            return true;
         }
 
-	protected function afterSave()
+        /*
+        protected function afterSave()
         {
             if ($this->_codnegociostatus_original != $this->codnegociostatus) {
                 $this->movimentaEstoque();
             }
-            
         }
+         * 
+         */
         
 }
