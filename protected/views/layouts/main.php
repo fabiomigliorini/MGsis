@@ -212,7 +212,7 @@
 	?>
 </div>	
 <div class="container-fluid">
-    <?php if (! in_array($_SERVER['SERVER_NAME'], ['192.168.1.204', 'mgsis.mgpapelaria.com.br', 'mgsis.mgpapelaria.com']) ): ?>
+    <?php if (! in_array($_SERVER['SERVER_NAME'], ['192.168.1.205', 'mgsis.mgpapelaria.com.br', 'mgsis.mgpapelaria.com']) ): ?>
         <h4 class="row-fluid alert alert-error">
             <center>
                 <blink>
