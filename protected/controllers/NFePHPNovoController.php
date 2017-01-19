@@ -1602,6 +1602,15 @@ class NFePHPNovoController extends Controller {
             $mail->Port = 587;                                    // TCP port to connect to
             $mail->setFrom('nfe@mgpapelaria.com.br', 'MG Papelaria - Sitema de NFe');
 
+            //Estas opcoes sao para ignorar o certificado do servidor, que nao eh valido
+            $mail->SMTPOptions = array(
+                'ssl' => array(
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                )
+            );
+
             //se nao veio o email pelo parametro, busca do cadastro
             if (empty($email))
                 $email = $nf->Pessoa->emailnfe;
