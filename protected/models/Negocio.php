@@ -457,8 +457,24 @@ class Negocio extends MGActiveRecord
                     if (!empty($nfpb->NotaFiscal->nfechave) && 
                         ($nfpb->NotaFiscal->codstatus == NotaFiscal::CODSTATUS_AUTORIZADA
                         ||$nfpb->NotaFiscal->codstatus == NotaFiscal::CODSTATUS_LANCADA)
-                        )
-                        $notaReferenciada[$nfpb->codnotafiscal] = $nfpb->NotaFiscal->nfechave;
+                        && ($nfpb->NotaFiscal->codnaturezaoperacao == $nfpb->NegocioProdutoBarra->Negocio->codnaturezaoperacao)
+                        ) {
+                        
+                        $notaReferenciada[$nfpb->NotaFiscal->nfechave] = $nfpb->NotaFiscal->nfechave;
+                        
+                        // Caso a nota sendo devolvida tenha sido emitida por outra filial
+                        if ($nfpb->NotaFiscal->codestoquelocal != $nota->codestoquelocal) {
+                            $nota->refresh();
+                            $nota->codfilial = $nfpb->NotaFiscal->codfilial;
+                            $nota->codestoquelocal = $nfpb->NotaFiscal->codestoquelocal;
+                            $nota->emitida = true;
+                            if (!$nota->save())
+                            {
+                                $this->addErrors($nota->getErrors());
+                                return false;
+                            }
+                        }
+                    }
                     $notaItem->codnotafiscalprodutobarraorigem = $nfpb->codnotafiscalprodutobarra;
                 }
             }
@@ -500,7 +516,6 @@ class Negocio extends MGActiveRecord
 			}            
         }
         
-        
 		
 		if (empty($nota->codnotafiscal))
 		{
@@ -530,7 +545,7 @@ class Negocio extends MGActiveRecord
 		
 		//retorna codigo da nota gerada
 		return $nota->codnotafiscal;
-		
+        
 	}
 	
 	public function cancelar()
