@@ -52,7 +52,7 @@ foreach ($model->NegocioProdutoBarras as $npb)
 				<?php if ($model->codnegociostatus == 1): ?>
 					<div class="pull-right">
 						<a href="<?php echo Yii::app()->createUrl('negocioProdutoBarra/update', array('id'=>$npb->codnegocioprodutobarra)); ?>"><i class="icon-pencil"></i></a>
-						<a class="delete-barra" href="<?php echo Yii::app()->createUrl('negocioProdutoBarra/delete', array('id'=>$npb->codnegocioprodutobarra)); ?>"><i class="icon-trash"></i></a>
+						<a class="delete-barra" href="<?php echo Yii::app()->createUrl('negocioProdutoBarra/delete', array('id'=>$npb->codnegocioprodutobarra, 'ajax'=>'ajax')); ?>"><i class="icon-trash"></i></a>
 					</div>
 				<?php endif; ?>
 			</b>
