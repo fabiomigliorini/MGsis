@@ -16,7 +16,7 @@ foreach ($model->NegocioFormaPagamentos as $nfp)
 			<span class="span1 text-right">
 				<?php if ($model->codnegociostatus == 1): ?>
 					<div class="pull-right">
-						<a class="delete-pagamento" href="<?php echo Yii::app()->createUrl('negocioFormaPagamento/delete', array('id'=>$nfp->codnegocioformapagamento)); ?>"><i class="icon-trash"></i></a>
+						<a class="delete-pagamento" href="<?php echo Yii::app()->createUrl('negocioFormaPagamento/delete', array('id'=>$nfp->codnegocioformapagamento, 'ajax'=>'ajax')); ?>"><i class="icon-trash"></i></a>
 					</div>
 				<?php endif; ?>
 			</span>
