@@ -289,11 +289,17 @@ class NotaFiscal extends MGActiveRecord
 		
 		if (empty($this->codfilial))
 			return;
-		
+
 		$cnpj = substr(Yii::app()->format->numeroLimpo($this->nfechave), 6, 14);
 		
 		if (strlen($cnpj) <> 14)
 			return;
+
+		// CNPJ Secretaria SEFAZ RS - Nota Emitida por MEI
+		// Exemplo 4317 0287 9586 7400 0181 5589 0014 1416 3114 8458 0590
+		if ($cnpj == '87958674000181') {
+			return;
+		}
 		
 		if ($this->emitida)
 		{
