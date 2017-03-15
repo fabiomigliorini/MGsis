@@ -45,7 +45,15 @@ foreach ($model->NfeTerceiroItems as $item)
 					?>
 					<div class="span9">
 						<div>
+                        <b>
 						<?php echo CHtml::link(CHtml::encode($item->ProdutoBarra->Produto->produto), array('produto/view', 'id'=>$item->ProdutoBarra->codproduto)); ?>
+                        <BR>
+                        <?php if (!empty($item->ProdutoBarra->ProdutoVariacao->variacao)): ?>
+                        <?php echo $item->ProdutoBarra->ProdutoVariacao->variacao; ?>
+                        <?php else: ?>
+                          { Sem Variação }
+                        <?php endif; ?>
+                        </b>
 						</div>
 						<?php if (!empty($item->ProdutoBarra->Produto->inativo)): ?>
 						<span class="label label-important pull-center">

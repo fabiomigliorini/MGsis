@@ -111,7 +111,13 @@ $(document).ready(function(){
 		{
 			if (isset($model->ProdutoBarra))
 			{
-				$produto = CHtml::link(CHtml::encode($model->ProdutoBarra->Produto->produto), array('produto/view', 'id'=>$model->ProdutoBarra->codproduto));
+				$produto = '<B>' . CHtml::link(CHtml::encode($model->ProdutoBarra->Produto->produto), array('produto/view', 'id'=>$model->ProdutoBarra->codproduto));
+                if (!empty($model->ProdutoBarra->ProdutoVariacao->variacao)) {
+                    $produto .= '<BR>' . $model->ProdutoBarra->ProdutoVariacao->variacao . '</B>';
+                } else {
+                    $produto .= '<BR>{ Sem Variação }</B>';
+                }
+                
 				
 				if (!empty($model->ProdutoBarra->Produto->inativo))
 				{
@@ -128,7 +134,7 @@ $(document).ready(function(){
 						'value'=>$produto, 
 						'type'=>'raw',
 					);	
-				
+                
 			}
 			$attr[]=
 				array(
