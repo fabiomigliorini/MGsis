@@ -707,6 +707,7 @@ class NFePHPNovoController extends Controller {
                         $vAliqProd = number_format(0, 2, '.', '');
                         switch ($cst) {
                             case '49':
+                            case '99':
                             case '70':
                                 $resp = $make->tagPIS($nItem, $cst, $vBC, $pPIS, $vPIS);
                                 break;
@@ -726,6 +727,7 @@ class NFePHPNovoController extends Controller {
                         $vAliqProd = number_format(0, 2, '.', '');
                         switch ($cst) {
                             case '49':
+                            case '99':
                             case '70':
                                 $resp = $make->tagCOFINS($nItem, $cst, $vBC, $pCOFINS, $vCOFINS);
                                 break;
