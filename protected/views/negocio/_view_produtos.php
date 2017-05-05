@@ -14,6 +14,7 @@ if ($model->codnegociostatus == 1)
 				<label class="add-on" for="barras">Código</label>
 				<input class="input-medium text-right" id="barras" type="text">
 				<button class="btn" type="submit" id="btnAdicionar" tabindex="-1">Adicionar</button>
+				<button class="btn" type="button" id="btnPrancheta" tabindex="-1"><i class="icon-search"></i> Prancheta (F7)</button>
 			</div>
 		</div>
 		<div class="row-fluid">
@@ -45,8 +46,38 @@ if ($model->codnegociostatus == 1)
 	?>
 </div>
 </div>
+<style>
+  .teste {
+      
+  }
+</style>
 <script>
-	
+
+function carregaUrlPrancheta(forcarCarregamento) 
+{
+    if ($('#framePrancheta').attr('src') == '' || forcarCarregamento) {
+        $('#framePrancheta').attr('src', '/MGUplon/prancheta/quiosque/<?php echo $model->codestoquelocal; ?>');    
+    }
+
+}
+
+function mostrarPrancheta()
+{
+    if (<?php echo $model->codnegociostatus ?> == <?php echo NegocioStatus::ABERTO; ?>) {
+        var height = $( window ).height();
+        var width = $( window ).width();
+
+        carregaUrlPrancheta(false);
+
+        $('#modalPrancheta').css({'width': '96%', 'height': '96%', 'margin-left':'auto', 'margin-right':'auto', 'left':'2%', 'top': '2%'});
+        var bodyHeight = height*.96-100;
+        $('#modalPranchetaBody').css({'height': bodyHeight, 'max-height': bodyHeight, 'overflow-y': 'hidden'});
+        $('#modalPrancheta').modal({show:true})
+    }
+    
+}
+
+
 function atualizaListagemProdutos()
 {
 	$.ajax({
@@ -92,6 +123,14 @@ function atualizaTela()
 {
 	atualizaListagemProdutos();
 	atualizaTotais();
+}
+
+function adicionaProdutoPrancheta(barras) 
+{
+    console.log('adicionaProdutoPrancheta');
+    $("#barras").val(barras); 
+    adicionaProduto();
+    $('#modalPrancheta').modal('hide');
 }
 
 function adicionaProduto()
@@ -172,6 +211,19 @@ function preencheQuantidade()
 }
 	
 $(document).ready(function() {
+
+    $("#btnPrancheta").click(function(e){ 
+        mostrarPrancheta();
+	});	
+
+    $("#btnPranchetaInicio").click(function(e){ 
+        carregaUrlPrancheta(true);
+	});	
+
+    $("#btnPranchetaVoltar").click(function(e){ 
+        document.getElementById('framePrancheta').contentWindow.history.back(-1);
+	});	
+
 
 	$("#barras").focus();
 	$('#quantidade').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
