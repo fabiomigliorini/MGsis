@@ -46,11 +46,6 @@ if ($model->codnegociostatus == 1)
 	?>
 </div>
 </div>
-<style>
-  .teste {
-      
-  }
-</style>
 <script>
 
 function carregaUrlPrancheta(forcarCarregamento) 
@@ -70,9 +65,10 @@ function mostrarPrancheta()
         carregaUrlPrancheta(false);
 
         $('#modalPrancheta').css({'width': '96%', 'height': '96%', 'margin-left':'auto', 'margin-right':'auto', 'left':'2%', 'top': '2%'});
-        var bodyHeight = height*.96-100;
+        var bodyHeight = height*.96-30;
         $('#modalPranchetaBody').css({'height': bodyHeight, 'max-height': bodyHeight, 'overflow-y': 'hidden'});
-        $('#modalPrancheta').modal({show:true})
+        $('#modalPrancheta').modal({show:true});
+        
     }
     
 }
@@ -130,6 +126,11 @@ function adicionaProdutoPrancheta(barras)
     console.log('adicionaProdutoPrancheta');
     $("#barras").val(barras); 
     adicionaProduto();
+    fechaPrancheta();
+}
+
+function fechaPrancheta() 
+{
     $('#modalPrancheta').modal('hide');
 }
 

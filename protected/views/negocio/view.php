@@ -273,14 +273,6 @@ $(document).ready(function(){
 </script>
 
 <div id="modalPrancheta" class="modal hide fade" tabindex="-1" role="dialog">
-	<div class="modal-header">  
-		<div class="pull-right">
-			<button class="btn" id="btnPranchetaInicio">Início</button>
-			<button class="btn" id="btnPranchetaVoltar">Voltar</button>
-            <button class="btn" data-dismiss="modal">Fechar</button>
-		</div>
-		<h3>Prancheta de Produtos sem Código de Barras</h3>  
-	</div>  
 	<div class="modal-body modalPranchetaBody" id="modalPranchetaBody">
         <iframe class="" src="" id="framePrancheta" width="99.6%" height="100%"  name="framePrancheta" class="framePrancheta" frameborder="0"></iframe>
 	</div>
