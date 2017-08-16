@@ -247,10 +247,12 @@ class InscricaoEstadualValidator extends CValidator
 		/*
 		* VERIFICAÇÃO 3
 		* 3o. dígito refere-se ao tipo de empresa (0-Normal, 3-Produtor Rural, 5-Substituta, 7- Micro-Empresa Ambulante, 8-Micro-Empresa)
-		*/		
-		if($tipoEmpresa!=0 && $tipoEmpresa!=3 && $tipoEmpresa!=5 && $tipoEmpresa!=7 && $tipoEmpresa!=8){		
-			return false;
-		}
+		*/	
+		// Comentado porque a IE 242009280 do fornecedor Alaplast nao estava passando
+		// 3o digito e 2	
+		//if($tipoEmpresa!=0 && $tipoEmpresa!=3 && $tipoEmpresa!=5 && $tipoEmpresa!=7 && $tipoEmpresa!=8){		
+		//	return false;
+		//}
 		
 		$remontagem = $caracteres[0].$caracteres[1].$caracteres[2].$caracteres[3].$caracteres[4].$caracteres[5].$caracteres[6].$caracteres[7];
 		$caracteresRemontagem = str_split($remontagem);
