@@ -141,7 +141,7 @@ class NFePHPNovoController extends Controller {
         $conf['aDocFormat']['printer'] = '';
         $conf['aMailConf']['mailAuth'] = '1';
         $conf['aMailConf']['mailFrom'] = false;
-        $conf['aMailConf']['mailSmtp'] = 'smtp.mgpapelaria.com.br';
+        $conf['aMailConf']['mailSmtp'] = 'mail.mgpapelaria.com.br';
         $conf['aMailConf']['mailUser'] = 'nfe@mgpapelaria.com.br';
         $conf['aMailConf']['mailPass'] = '701flamboyants';
         $conf['aMailConf']['mailProtocol'] = '';
@@ -1596,7 +1596,7 @@ class NFePHPNovoController extends Controller {
 
             //configura servidor de email
             $mail->isSMTP();                                      // Set mailer to use SMTP
-            $mail->Host = 'smtp.mgpapelaria.com.br';  // Specify main and backup SMTP servers
+            $mail->Host = 'mail.mgpapelaria.com.br';  // Specify main and backup SMTP servers
             $mail->SMTPAuth = true;                               // Enable SMTP authentication
             $mail->Username = 'nfe@mgpapelaria.com.br';                 // SMTP username
             $mail->Password = '701flamboyants';                           // SMTP password
