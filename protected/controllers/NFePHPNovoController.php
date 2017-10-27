@@ -1601,6 +1601,7 @@ class NFePHPNovoController extends Controller {
             $mail->Username = 'nfe@mgpapelaria.com.br';                 // SMTP username
             $mail->Password = '701flamboyants';                           // SMTP password
             $mail->SMTPAutoTLS = false;
+            $mail->Helo = 'mail.mgpapelaria.com.br';
             $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
             $mail->Port = 587;                                    // TCP port to connect to
             $mail->setFrom('nfe@mgpapelaria.com.br', 'MG Papelaria - Sitema de NFe');
