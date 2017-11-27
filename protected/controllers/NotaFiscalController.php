@@ -233,6 +233,9 @@ class NotaFiscalController extends Controller
 				if (isset($original->Pessoa))
 					foreach ($original->Pessoa->Filials as $filial)
 						$model->codfilial = $filial->codfilial;
+				if (isset($filial->EstoqueLocals[0])) {
+					$model->codestoquelocal = $filial->EstoqueLocals[0]->codestoquelocal;
+				}
                                 $model->codoperacao = null;
                                 $model->nfereciboenvio = null;
                                 $model->nfedataenvio = null;
