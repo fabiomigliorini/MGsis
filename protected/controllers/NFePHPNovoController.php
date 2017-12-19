@@ -532,12 +532,12 @@ class NFePHPNovoController extends Controller {
                 $CFOP = $nfpb->codcfop;
                 $uCom = utf8_encode($nfpb->ProdutoBarra->UnidadeMedida->sigla);
                 $qCom = number_format($nfpb->quantidade, 3, '.', '');
-                $vUnCom = number_format($nfpb->valorunitario, 3, '.', '');
+                $vUnCom = number_format($nfpb->valorunitario, 10, '.', '');
                 $vProd = number_format($nfpb->valortotal, 2, '.', '');
                 $cEANTrib = utf8_encode($nfpb->ProdutoBarra->barrasValido() ? $nfpb->ProdutoBarra->barras : "");
                 $uTrib = utf8_encode($nfpb->ProdutoBarra->UnidadeMedida->sigla); //number_format($nfpb->valorunitario, 3, '.', '');
                 $qTrib = number_format($nfpb->quantidade, 3, '.', '');
-                $vUnTrib = number_format($nfpb->valorunitario, 3, '.', '');
+                $vUnTrib = number_format($nfpb->valorunitario, 10, '.', '');
 
                 $vFrete = round(($nf->valorfrete / $nf->valorprodutos) * $nfpb->valortotal, 2);
                 if ($vFrete > 0)
