@@ -232,22 +232,21 @@ class TituloAgrupamentoController extends Controller
 			
 			$retorno = array("Retorno"=>1, "Mensagem"=>"", "codnotafiscal" =>$codnotafiscal);
 
-			if (!$codnotafiscal = $negocio->gerarNotaFiscal($codnotafiscal, $modelo, false))
-			{
-				$retorno["Retorno"] = 0;
-				$erros = $negocio->getErrors();
-				$erro = "Erro ao Gerar Nota Fiscal!";
-				foreach ($erros as $campo => $mensagens)
-					foreach($mensagens as $mensagem)
-						$erro .= " " . $mensagem;
-				$retorno["Mensagem"] = $erro;
-				
-				break;
-
-			}
+			$codnotafiscal = $negocio->gerarNotaFiscal($codnotafiscal, $modelo, false);
 
 			$retorno["codnotafiscal"] = $codnotafiscal;
 		}
+
+		if ((!empty($codnegocio)) && (empty($codnotafiscal))) 
+		{
+			$retorno["Retorno"] = 0;
+                        $erros = $negocio->getErrors();
+                        $erro = "Erro ao Gerar Nota Fiscal!";
+                        foreach ($erros as $campo => $mensagens)
+                                foreach($mensagens as $mensagem)
+                                        $erro .= " " . $mensagem;
+                        $retorno["Mensagem"] = $erro;
+		}	
 		
 		if (!empty($codnotafiscal))
 		{

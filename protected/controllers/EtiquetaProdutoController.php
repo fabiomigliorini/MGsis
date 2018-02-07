@@ -291,7 +291,7 @@ class EtiquetaProdutoController extends Controller
 				$handle = fopen($arquivo, "w");
 				fwrite($handle, $conteudo);
 				fclose($handle);
-				exec("lpr -P {$impressora} {$arquivo}");
+				exec("lpr -l -P {$impressora} {$arquivo}");
 				/*
 				echo "Imprimiu";
 				echo "<pre>";
