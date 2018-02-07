@@ -141,7 +141,7 @@ class NFePHPNovoController extends Controller {
         $conf['aDocFormat']['printer'] = '';
         $conf['aMailConf']['mailAuth'] = '1';
         $conf['aMailConf']['mailFrom'] = false;
-        $conf['aMailConf']['mailSmtp'] = 'smtp.mgpapelaria.com.br';
+        $conf['aMailConf']['mailSmtp'] = 'smtp.gmail.com';
         $conf['aMailConf']['mailUser'] = 'nfe@mgpapelaria.com.br';
         $conf['aMailConf']['mailPass'] = '701flamboyants';
         $conf['aMailConf']['mailProtocol'] = '';
@@ -622,17 +622,17 @@ class NFePHPNovoController extends Controller {
                 $csosn = $nfpb->csosn;
 
                 switch ($nf->Filial->crt) {
-                    
+
                     // Lucro Presumido
                     case Filial::CRT_REGIME_NORMAL:
-                        
+
                         //ICMS
                         $cst = MGFormatter::formataPorMascara($nfpb->icmscst, '##');
 
                         $vBC = number_format($nfpb->icmsbase, 2, '.', '');
                         $pICMS = number_format($nfpb->icmspercentual, 2, '.', '');
                         $vICMS = number_format($nfpb->icmsvalor, 2, '.', '');
-                        
+
                         if (!empty($nfpb->icmsbase) && ($nfpb->icmsbase < $nfpb->valortotal) && $cst == 20) {
                             $pRedBC = number_format((1 - round($nfpb->icmsbase / $nfpb->valortotal, 2)) * 100, 2, '.', '');
                         }
@@ -1596,7 +1596,7 @@ class NFePHPNovoController extends Controller {
 
             //configura servidor de email
             $mail->isSMTP();                                      // Set mailer to use SMTP
-            $mail->Host = 'smtp.mgpapelaria.com.br';  // Specify main and backup SMTP servers
+            $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
             $mail->SMTPAuth = true;                               // Enable SMTP authentication
             $mail->Username = 'nfe@mgpapelaria.com.br';                 // SMTP username
             $mail->Password = '701flamboyants';                           // SMTP password
