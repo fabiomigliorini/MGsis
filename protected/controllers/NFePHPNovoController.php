@@ -1435,7 +1435,7 @@ class NFePHPNovoController extends Controller {
                 }
             }
 
-            if (@$aResposta['aProt']['cStat'] == 302) { // Uso Denegado
+            if (@$aResposta['aProt']['cStat'] == 302 || @$aResposta['aProt']['cStat'] == 301) { // Uso Denegado
                 $nf->nfeinutilizacao = $aResposta['aProt']['nProt'];
                 $dh = DateTime::createFromFormat('Y-m-d\TH:i:sP', $aResposta['aProt']['dhRecbto']);
                 $nf->nfedatainutilizacao = $dh->format('d/m/Y H:i:s');
