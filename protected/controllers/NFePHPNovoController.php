@@ -1715,6 +1715,7 @@ class NFePHPNovoController extends Controller {
     public function actionListagemNotasPendentes() {
 
         $notas = NotaFiscal::model()->pendentes()->findAll();
+//die('passou');
 
         $listagem = array();
         foreach ($notas as $nota) {
