@@ -653,7 +653,11 @@ class NFePHPNovoController extends Controller {
                             $pFCPUFDest = 0;
                             $pICMSUFDest = 0;
                             $pICMSInter = number_format(($nfpb->ProdutoBarra->Produto->importado) ? 4 : 12, 2, '.', '');
-                            switch (substr($nf->emissao, 6, 4)) {
+                            $anoICMSInterPart = substr($nf->emissao, 6, 4);
+                            if ($nf->codnotafiscal == 780997) {
+                                $anoICMSInterPart = '2017';
+                            }
+                            switch ($anoICMSInterPart) {
                                 case '2016':
                                     $pICMSInterPart = number_format(40, 2, '.', '');
                                     break;
