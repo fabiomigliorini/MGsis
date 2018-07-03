@@ -1,412 +1,245 @@
 <?php
 
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.hotkeys.js');
+require_once(Yii::app()->basePath . '/.env.php');
 
 ?>
 <script>
 /*<![CDATA[*/
 
-function enviarEmail(codnotafiscal, email, alterarcadastro, progresso, modelo)
+function NFePHPErro (jqxhr)
 {
-	if (progresso)
-	{
-		$('#modalProgressoNfe').modal({show:true, keyboard:false})
-		$('#modalProgressoNfeLabelStatus').text('Enviando NFe por E-mail...');
-		$('#modalProgressoNfeProgressBar').css('width', '80%');
+	$('#modalProgressoNfe').modal('hide');
+	if (resp = jQuery.parseJSON(jqxhr.responseText)) {
+		var mensagem = resp.message;
+	} else {
+		var mensagem = 'Erro ao Acessar API';
 	}
-	
-	$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/enviarEmail')?>", 
-		{ 
-			codnotafiscal: codnotafiscal, 
-			email: email,
-			alterarcadastro: alterarcadastro,
-		})
-		.done(function(data) {
-
-			if (progresso)
-			{
-				abrirDanfe(codnotafiscal, modelo, true, true);
-			}
-			else
-			{
-				var mensagem = formataMensagem(data);
-				$('#modalProgressoNfe').modal('hide');
-				bootbox.alert(mensagem);
-			}
-		})
-		.fail(function( jqxhr, textStatus, error ) {
-			$('#modalProgressoNfe').modal('hide');
-			bootbox.alert(error, function() {
-				location.reload();
-			});
-		});
-	
+	mensagem = "<h3 class='text-error'>" + mensagem + "</h3>";
+	bootbox.alert(mensagem, function() {
+		location.reload();
+	});
 }
 
-
-function consultarProtocoloNfe(codnotafiscal, modelo)
+function NFePHPDanfe(codnotafiscal, modelo, recarregar)
 {
-	
-	$('#modalProgressoNfe').modal({show:true, keyboard:false})
-	
-	$('#modalProgressoNfeLabelStatus').text('Consultando Protocolo na Sefaz...');
-	$('#modalProgressoNfeProgressBar').css('width', '70%');
-	
-	$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/consultarProtocolo')?>", { codnotafiscal: codnotafiscal } )
-		.done(function(data) {
-			
-			if (!data.retorno || data.cStat != 100)
-			{
-				var mensagem = formataMensagem(data);
-				$('#modalProgressoNfe').modal('hide');
-				bootbox.alert(mensagem, function() {
-					location.reload();
-				});
-			}
-			else
-			{
-				enviarEmail(codnotafiscal, '', 0, true, modelo);
-			}
+	$('#modalProgressoNfeLabelStatus').text('Finalizado...');
+	$('#modalProgressoNfeProgressBar').css('width', '100%');
 
-		})
-		.fail(function( jqxhr, textStatus, error ) {
-			$('#modalProgressoNfe').modal('hide');
-			bootbox.alert(error, function() {
-				location.reload();
-			});
-		});
-	
-}
-
-function enviarNfe(codnotafiscal, modelo)
-{
-	
-	$('#modalProgressoNfe').modal({show:true, keyboard:false})
-	
-	$('#modalProgressoNfeLabelStatus').text('Enviando NFe para Sefaz...');
-	$('#modalProgressoNfeProgressBar').css('width', '20%');
-	
-	$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/enviar')?>", { codnotafiscal: codnotafiscal } )
-		.done(function(data) {
-			
-			if (!data.retorno)
-			{
-				var mensagem = formataMensagem(data);
-				$('#modalProgressoNfe').modal('hide');
-				bootbox.alert(mensagem, function() {
-					location.reload();
-				});
-			}
-			else
-			{
-				
-				$('#modalProgressoNfeLabelStatus').text('Aguardando processamento da Sefaz...');
-				
-				setTimeout(function(){ 
-					$('#modalProgressoNfeProgressBar').css('width', '25%');
-				}, 500);
-				setTimeout(function(){ 
-					$('#modalProgressoNfeProgressBar').css('width', '30%');
-				}, 1000);
-				setTimeout(function(){ 
-					$('#modalProgressoNfeProgressBar').css('width', '35%');
-				}, 1500);
-				setTimeout(function(){ 
-					$('#modalProgressoNfeProgressBar').css('width', '40%');
-				}, 2000);
-				setTimeout(function(){ 
-					$('#modalProgressoNfeProgressBar').css('width', '45%');
-				}, 2500);
-				setTimeout(function(){ 
-					$('#modalProgressoNfeProgressBar').css('width', '50%');
-				}, 3000);
-				setTimeout(function(){ 
-					$('#modalProgressoNfeProgressBar').css('width', '55%');
-				}, 3500);
-				setTimeout(function(){ 
-					$('#modalProgressoNfeProgressBar').css('width', '60%');
-				}, 4000);
-				setTimeout(function(){ 
-					$('#modalProgressoNfeProgressBar').css('width', '65%');
-				}, 4500);
-			
-				//Aguarda 5 segundos para continuar
-				setTimeout(function(){ 
-					consultarProtocoloNfe(codnotafiscal, modelo);
-				}, 5000);
-			}
-
-		})
-		.fail(function( jqxhr, textStatus, error ) {
-			$('#modalProgressoNfe').modal('hide');
-			bootbox.alert(error, function() {
-				location.reload();
-			});
-		});
-	
-}
-
-
-function criaXml(codnotafiscal, modelo)
-{
-	
-	$('#modalProgressoNfe').modal({show:true, keyboard:false})
-	
-	$('#modalProgressoNfeLabelStatus').text('Criando Arquivo XML...');
-	$('#modalProgressoNfeProgressBar').css('width', '0%');
-	
-	$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/criaXml')?>", { codnotafiscal: codnotafiscal } )
-		.done(function(data) {
-			
-			if (!data.retorno)
-			{
-				var mensagem = formataMensagem(data);
-				$('#modalProgressoNfe').modal('hide');
-				bootbox.alert(mensagem, function() {
-					location.reload();
-				});
-			}
-			else
-			{
-				console.log(modelo);
-				if (data.tpEmis == <?php echo NotaFiscal::TPEMIS_OFFLINE; ?>)
-					abrirDanfe(codnotafiscal, modelo, true, true);
-				else
-					enviarNfe(codnotafiscal, modelo);
-			}
-
-		})
-		.fail(function( jqxhr, textStatus, error ) {
-			$('#modalProgressoNfe').modal('hide');
-			bootbox.alert(error, function() {
-				location.reload();
-			});
-		});
-	
-}
-
-
-function abrirDanfe(codnotafiscal, modelo, recarregar, progresso)
-{	
-	if (progresso)
-	{
-		$('#modalProgressoNfe').modal({show:true, keyboard:false})
-		$('#modalProgressoNfeLabelStatus').text('Processando Danfe...');
-		$('#modalProgressoNfeProgressBar').css('width', '90%');
-	}
-	
 	$('#btnImprimirNFCe').data('codnotafiscal', codnotafiscal);
-	
+
 	modelo = modelo || <?php echo NotaFiscal::MODELO_NFE ?>;
 	recarregar = recarregar || true;
-   
+
 	$('#modalDanfe').modal({show:true})
-	$('#frameDanfe').attr("src", '<?php echo Yii::app()->createUrl('NFePHPNovo/gerarDanfe')?>&codnotafiscal=' + codnotafiscal);
+	$('#frameDanfe').attr("src", "<?php echo MGSPA_NFEPHP_URL; ?>" + codnotafiscal + "/danfe");
 	$('#modalDanfe').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
 	$('#modalDanfe').off('hide');
-	
-	if (modelo == <?php echo NotaFiscal::MODELO_NFE ?>)
-		$('#btnImprimirNFCe').hide();
-	else
-		$('#btnImprimirNFCe').show();
 
-	if (progresso)
-	{
-		$('#modalProgressoNfe').modal({show:true, keyboard:false})
-		$('#modalProgressoNfeLabelStatus').text('Finalizado...');
-		$('#modalProgressoNfeProgressBar').css('width', '100%');
-		$('#modalProgressoNfe').modal('hide');
-		if (modelo == <?php echo NotaFiscal::MODELO_NFCE; ?>)
-			imprimirNFCe(codnotafiscal);
+	if (modelo == <?php echo NotaFiscal::MODELO_NFE ?>) {
+		$('#btnImprimirNFCe').hide();
+	}	else {
+		$('#btnImprimirNFCe').show();
 	}
 
-	if (recarregar)
+	$('#modalProgressoNfe').modal('hide');
+
+	if (recarregar) {
 		$('#modalDanfe').on('hide', function(){
 			location.reload();
 		});
+	}
 }
 
-
-function inutilizarNfe(codnotafiscal)
+function NFePHPImprimir(codnotafiscal, impressora)
 {
-	bootbox.prompt("Digite a justificativa para inutilizar a NFE!", "Desistir", "OK", function(result) { 
-		if (result === null)
-			return;
-
-		//$.getJSON("<?php echo Yii::app()->createUrl('notaFiscal/inutilizarNfe')?>", 
-		$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/inutilizar')?>", 
-			{ 
-				codnotafiscal: codnotafiscal,
-				justificativa: result 
-			})
-			.done(function(data) {
-
-				var mensagem = formataMensagem(data);
-
-				bootbox.alert(mensagem, function() {
-					location.reload();
-				});
-
-			})
-			.fail(function( jqxhr, textStatus, error ) {
-				$('#modalProgressoNfe').modal('hide');
-				bootbox.alert(error, function() {
-					location.reload();
-				});
-			});
+	if (impressora != null) {
+		var data = { impressora: impressora };
+	} else {
+		var data = null;
+	}
+	$.ajax({
+	  type: 'GET',
+	  url: "<?php echo MGSPA_NFEPHP_URL; ?>" + codnotafiscal + "/imprimir",
+	  headers: {"X-Requested-With":"XMLHttpRequest"},
+		data: data
+	}).done(function(resp) {
+		if (resp.sucesso != true) {
+			mensagem = "<h3 class='text-error'>" + resp.mensagem + "</h3>";
+			bootbox.alert(mensagem);
+		}
+	}).fail(function( jqxhr, textStatus, error ) {
+		NFePHPErro(jqxhr);
 	});
-	
+	console.log(impressora);
 }
 
-
-function cancelarNfe(codnotafiscal)
+function NFePHPMail(codnotafiscal, modelo, destinatario)
 {
-	bootbox.prompt("Digite a justificativa para cancelar a NFE!", "Desistir", "OK", function(result) { 
-		if (result === null)
+
+	if (destinatario != null) {
+		var data = { destinatario: destinatario };
+	} else {
+		var data = null;
+		// ABRE MODAL DE PROGRESSO
+		$('#modalProgressoNfe').modal({show:true, keyboard:false})
+	}
+
+	// AJUSTA PERCENTUAL PROGRESSO
+	$('#modalProgressoNfeLabelStatus').text('Enviando Email...');
+	$('#modalProgressoNfeProgressBar').css('width', '75%');
+
+	$.ajax({
+	  type: 'GET',
+	  url: "<?php echo MGSPA_NFEPHP_URL; ?>" + codnotafiscal + "/mail",
+	  headers: {"X-Requested-With":"XMLHttpRequest"},
+		data: data
+	}).done(function(resp) {
+		if (resp.sucesso == true && destinatario == null) {
+			NFePHPDanfe(codnotafiscal, modelo, true);
 			return;
-
-		//$.getJSON("<?php echo Yii::app()->createUrl('notaFiscal/cancelarNfe')?>", 
-		$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/cancelar')?>", 
-			{ 
-				codnotafiscal: codnotafiscal,
-				justificativa: result 
-			} )
-			.done(function(data) {
-
-				var mensagem = formataMensagem(data);
-
-				bootbox.alert(mensagem, function() {
-					location.reload();
-				});
-
-			})
-			.fail(function( jqxhr, textStatus, error ) {
-				$('#modalProgressoNfe').modal('hide');
-				bootbox.alert(error, function() {
-					location.reload();
-				});
-			});
+		}
+		$('#modalProgressoNfe').modal('hide');
+		if (resp.sucesso) {
+			var css = "text-success";
+		} else {
+			var css = "text-error"
+		}
+		mensagem = "<h3 class='" + css + "'>" + resp.mensagem + "</h3>";
+		bootbox.alert(mensagem, function() {
+			location.reload();
+		});
+	}).fail(function( jqxhr, textStatus, error ) {
+		NFePHPErro(jqxhr);
 	});
-	
 }
 
-function consultarNfe (codnotafiscal)
+function NFePHPMailPerguntar (codnotafiscal, email)
 {
-	//$.getJSON("<?php echo Yii::app()->createUrl('notaFiscal/consultarNfe')?>", { id: codnotafiscal } )
-	$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/consultar')?>", { codnotafiscal: codnotafiscal } )
-		.done(function(data) {
+	bootbox.prompt("Digite o endereço de e-mail:", "Cancelar", "OK", function(result) {
+		NFePHPMail (codnotafiscal, null, result);
+	}, email);
 
-			var mensagem = formataMensagem(data);
-			
+}
+
+function NFePHPEnviarSincrono(codnotafiscal, modelo)
+{
+	// ABRE MODAL DE PROGRESSO
+	$('#modalProgressoNfe').modal({show:true, keyboard:false})
+
+	// AJUSTA PERCENTUAL PROGRESSO
+	$('#modalProgressoNfeLabelStatus').text('Enviando NFe para Sefaz...');
+	$('#modalProgressoNfeProgressBar').css('width', '50%');
+
+	$.ajax({
+	  type: 'GET',
+	  url: "<?php echo MGSPA_NFEPHP_URL; ?>" + codnotafiscal + "/enviar-sincrono",
+	  headers: {"X-Requested-With":"XMLHttpRequest"}
+	}).done(function(resp) {
+		if (resp.sucesso == true) {
+			NFePHPMail(codnotafiscal, modelo);
+			if (modelo == <?php echo NotaFiscal::MODELO_NFCE; ?>) {
+				NFePHPImprimir(codnotafiscal, '<?php echo Yii::app()->user->getState('impressoraTermica') ?>');
+			}
+		} else {
+			$('#modalProgressoNfe').modal('hide');
+			mensagem = "<h3 class='text-error'>" + resp.cStat + " - " + resp.xMotivo + "</h3>";
 			bootbox.alert(mensagem, function() {
 				location.reload();
 			});
-
-		})
-		.fail(function( jqxhr, textStatus, error ) {
-			$('#modalProgressoNfe').modal('hide');
-			bootbox.alert(error, function() {
-				location.reload();
-			});
-		});
-}
-
-
-function formataMensagem(data)
-{
-	var mensagem = '';
-	
-	if (data.retorno)
-		classe = 'alert alert-success';
-	else
-		classe = 'alert alert-error';
-	
-	if (data.xMotivo == null)
-		data.xMotivo = 'Erro';
-	
-	mensagem += '<h3 class="' + classe + '">';
-
-	if (data.cStat != null)
-		mensagem += data.cStat + ' - ';
-	
-	mensagem += data.xMotivo + '</h3>';
-	
-	if (data.ex != null)
-		mensagem += '<pre>' + data.ex + '</pre>';
-	
-	if (!$.isEmptyObject(data.aResposta))
-		mensagem += 
-			'<div class="accordion" id="accordion2"> ' +
-			'  <div class="accordion-group"> ' +
-			'	<div class="accordion-heading"> ' +
-			'	  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"> ' +
-			'		Mostrar mais detalhes... ' +
-			'	  </a> ' +
-			'	</div> ' +
-			'	<div id="collapseOne" class="accordion-body collapse"> ' +
-			'	  <div class="accordion-inner"> ' +
-			'		<pre>' + JSON.stringify(data.aResposta, null, '\t') + '</pre>' +
-			'	  </div> ' +
-			'	</div> ' +
-			' </div> ' +
-			'</div> ';
-
-	return mensagem;
-}
-
-
-function perguntarEmail(codnotafiscal, email)
-{
-	bootbox.prompt("Digite o endereço de e-mail:", "Cancelar", "OK", function(result) { 
-		if (result === null)
-			return;
-
-		if (result == email)
-			enviarEmail(codnotafiscal, result, 0, false);
-		else
-		{
-			bootbox.dialog("Alterar email do cadastro? <br><br> De <b class=\'text-error\'>" + email + "</b> <br><br> Para <b class=\'text-success\'>" + result + "</b>?", 
-			[
-				{
-					"label" : "Não",
-					"class" : "btn-danger",
-					"callback": function() {
-						enviarEmail(codnotafiscal, result, 0, false);
-					}
-				}, {
-					"label" : "Sim",
-					"class" : "btn-success",
-					"callback": function() {
-						email = result;
-						enviarEmail(codnotafiscal, result, 1, false);
-					}
-				}
-			]);
-
 		}
-
-	}, email);		
-	
+	}).fail(function( jqxhr, textStatus, error ) {
+		NFePHPErro(jqxhr);
+	});
 }
 
-function imprimirNFCe (codnotafiscal)
+function NFePHPCriar(codnotafiscal, modelo)
 {
-	
-	$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/imprimirNFCe')?>", { codnotafiscal: codnotafiscal, impressoraUsuarioCriacao: 0 })
-		.done(function(data) {
-			if (data.retorno)
-				$.notify('Documento enviado à impressora!', { position:"right bottom", className:"success"});
-			else
-				$.notify('Falha ao imprimir: "' + data.xMotivo + '"', { position:"right bottom", className:"error"});
-		})
-		.fail(function( jqxhr, textStatus, error ) {
-			$('#modalProgressoNfe').modal('hide');
-			bootbox.alert(error, function() {
+	// ABRE MODAL DE PROGRESSO
+	$('#modalProgressoNfe').modal({show:true, keyboard:false})
+
+	// AJUSTA PERCENTUAL PROGRESSO
+	$('#modalProgressoNfeLabelStatus').text('Criando Arquivo XML...');
+	$('#modalProgressoNfeProgressBar').css('width', '0%');
+
+	$.ajax({
+	  type: 'GET',
+	  url: "<?php echo MGSPA_NFEPHP_URL; ?>" + codnotafiscal + "/criar",
+	  headers: {"X-Requested-With":"XMLHttpRequest"}
+	}).done(function(xml) {
+		var tpEmis = $(xml).find('tpEmis').text();
+		$('#modalProgressoNfeLabelStatus').text('Arquivo XML Criado...');
+		$('#modalProgressoNfeProgressBar').css('width', '25%');
+		// Se offline
+		if (tpEmis == <?php echo NotaFiscal::TPEMIS_OFFLINE; ?>) {
+			NFePHPDanfe(codnotafiscal, modelo, true);
+			NFePHPImprimir(codnotafiscal, '<?php echo Yii::app()->user->getState('impressoraTermica') ?>');
+		} else {
+			NFePHPEnviarSincrono(codnotafiscal, modelo);
+		}
+	}).fail(function( jqxhr, textStatus, error ) {
+		NFePHPErro(jqxhr);
+	});
+}
+
+function NFePHPConsultar(codnotafiscal)
+{
+	$.ajax({
+	  type: 'GET',
+	  url: "<?php echo MGSPA_NFEPHP_URL; ?>" + codnotafiscal + "/consultar",
+	  headers: {"X-Requested-With":"XMLHttpRequest"}
+	}).done(function(resp) {
+		if (resp.sucesso == true) {
+			var css="text-success";
+		} else {
+			var css="text-error";
+		}
+		mensagem = "<h3 class='" + css + "'>" + resp.cStat + " - " + resp.xMotivo + "</h3>";
+		bootbox.alert(mensagem, function() {
+			location.reload();
+		});
+	}).fail(function( jqxhr, textStatus, error ) {
+		NFePHPErro(jqxhr);
+	});
+}
+
+function NFePHPCancelarInutilizar (codnotafiscal, tipo)
+{
+	bootbox.prompt("Digite a justificativa para " + tipo + " a NFe!", "Desistir", "OK", function(justificativa) {
+		if (justificativa === null) {
+			return;
+		}
+		$.ajax({
+			type: 'GET',
+			url: "<?php echo MGSPA_NFEPHP_URL; ?>" + codnotafiscal + "/" + tipo,
+			headers: {"X-Requested-With":"XMLHttpRequest"},
+			data: { justificativa: justificativa }
+		}).done(function(resp) {
+			if (resp.sucesso == true) {
+				var css="text-success";
+			} else {
+				var css="text-error";
+			}
+			mensagem = "<h3 class='" + css + "'>" + resp.cStat + " - " + resp.xMotivo + "</h3>";
+			bootbox.alert(mensagem, function() {
 				location.reload();
 			});
+		}).fail(function( jqxhr, textStatus, error ) {
+			NFePHPErro(jqxhr);
 		});
-	
+	});
 }
+
+function NFePHPCancelar (codnotafiscal)
+{
+	NFePHPCancelarInutilizar(codnotafiscal, 'cancelar')
+}
+
+function NFePHPInutilizar (codnotafiscal)
+{
+	NFePHPCancelarInutilizar(codnotafiscal, 'inutilizar')
+}
+
 
 $(document).ready(function(){
 
@@ -415,51 +248,52 @@ $(document).ready(function(){
 	// ENVIAR NFE
 	$('.btnEnviarNfe').on('click', function (e) {
 		e.preventDefault();
-		criaXml($(this).data('codnotafiscal'), $(this).data('modelo'));
+		NFePHPCriar($(this).data('codnotafiscal'), $(this).data('modelo'));
 	});
-	
+
 	//CONSULTAR NFE
 	$('.btnConsultarNfe').on('click', function (e) {
 		e.preventDefault();
-		consultarNfe($(this).data('codnotafiscal'));
+		NFePHPConsultar($(this).data('codnotafiscal'));
 	});
-	
+
 	//CANCELAR NFE
 	$('.btnCancelarNfe').on('click', function (e) {
 		e.preventDefault();
-		cancelarNfe($(this).data('codnotafiscal'));
+		NFePHPCancelar($(this).data('codnotafiscal'));
 	});
-	
+
 	//INUTILIZAR NFE
 	$('.btnInutilizarNfe').on('click', function (e) {
 		e.preventDefault();
-		inutilizarNfe($(this).data('codnotafiscal'));
-	});
-
-	//abre janela vale
-	$('.btnAbrirDanfe').click(function(e){
-		e.preventDefault();
-		abrirDanfe($(this).data('codnotafiscal'), $(this).data('modelo'), false, false);
-	});	
-	
-	//imprimir Danfe Matricial
-	$('#btnImprimirNFCe').click(function(e){
-		e.preventDefault();
-		imprimirNFCe($(this).data('codnotafiscal'));
-	});
-	
-	$("*").bind('keydown.f9',function (e) { 
-		e.preventDefault(); 
-		$(".btnEnviarNfe:first").trigger( "click" );
-		return false;
+		NFePHPInutilizar($(this).data('codnotafiscal'));
 	});
 
 	//enviar email
 	$('.btnEnviarEmail').on('click', function (e) {
 		e.preventDefault();
-		perguntarEmail($(this).data('codnotafiscal'), $(this).data('email'));
+		NFePHPMailPerguntar($(this).data('codnotafiscal'), $(this).data('email'));
 	});
-	
+
+	//abre janela vale
+	$('.btnAbrirDanfe').click(function(e){
+		e.preventDefault();
+		NFePHPDanfe($(this).data('codnotafiscal'), $(this).data('modelo'), false);
+	});
+
+	//imprimir Danfe Matricial
+	$('#btnImprimirNFCe').click(function(e){
+		e.preventDefault();
+		NFePHPImprimir($(this).data('codnotafiscal'), '<?php echo Yii::app()->user->getState('impressoraTermica') ?>');
+	});
+
+	$("*").bind('keydown.f9',function (e) {
+		e.preventDefault();
+		$(".btnEnviarNfe:first").trigger( "click" );
+		return false;
+	});
+
+
 });
 /*]]>*/
 </script>
