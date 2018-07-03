@@ -1,4 +1,6 @@
 <?php
+require_once(Yii::app()->basePath . '/.env.php');
+
 $this->pagetitle = Yii::app()->name . ' - Detalhes Nota Fiscal';
 $this->breadcrumbs=array(
 	'Notas Fiscais'=>array('index'),
@@ -14,7 +16,7 @@ $this->menu=array(
 	array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir'), 'visible' => !$bloqueado),
 	array('label'=>'Duplicar', 'icon'=>'icon-retweet', 'url'=>array('create','duplicar'=>$model->codnotafiscal)),
 	array('label'=>'Operacao Inversa', 'icon'=>'icon-random', 'url'=>array('create','inverter'=>$model->codnotafiscal)),
-	array('label'=>'Ver Arquivo XML', 'icon'=>' icon-file', 'url'=>array('NFePHPNovo/visualizaXml','codnotafiscal'=>$model->codnotafiscal), 'linkOptions'=>	array('id'=>'btnArquivoXml'), 'visible' => $bloqueado), 
+	array('label'=>'Ver Arquivo XML', 'icon'=>' icon-file', 'url'=> MGSPA_NFEPHP_URL . "{$model->codnotafiscal}/xml", 'linkOptions'=>	array('id'=>'btnArquivoXml'), 'visible' => $bloqueado),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
 
@@ -23,7 +25,7 @@ Yii::app()->clientScript->registerCoreScript('yii');
 ?>
 
 <script type="text/javascript">
-	
+
 /*<![CDATA[*/
 $(document).ready(function(){
 
@@ -32,10 +34,10 @@ $(document).ready(function(){
 		bootbox.confirm("<h3>Confirma emissão da carta de correção?</h3><br><pre>" + texto + "</pre>", function(result) {
 			if (result)
 			{
-				
-				$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/cartaCorrecao')?>", 
-					{ 
-						codnotafiscal: <?php echo $model->codnotafiscal; ?>, 
+
+				$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/cartaCorrecao')?>",
+					{
+						codnotafiscal: <?php echo $model->codnotafiscal; ?>,
 						texto: texto,
 					})
 					.done(function(data) {
@@ -55,14 +57,14 @@ $(document).ready(function(){
 			}
 		});
 	});
-	
+
 	jQuery('body').on('click','#btnExcluir',function() {
 		bootbox.confirm("Excluir este registro?", function(result) {
 			if (result)
 				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('notaFiscal/delete', array('id' => $model->codnotafiscal))?>",{});
 		});
 	});
-	
+
 	// botão delete da embalagem
 	jQuery(document).on('click','a.delete',function(e) {
 		//evita redirecionamento da pagina
@@ -112,10 +114,10 @@ $(document).ready(function(){
 						}
 					}
 				});
-			}	
+			}
 		});
-	});			
-	
+	});
+
 });
 /*]]>*/
 </script>
@@ -127,7 +129,7 @@ $(document).ready(function(){
 
 <div class="row-fluid">
 	<small class="span2">
-		<?php 
+		<?php
 		$this->widget('bootstrap.widgets.TbDetailView',array(
 			'data'=>$model,
 			'attributes'=>array(
@@ -151,18 +153,18 @@ $(document).ready(function(){
 					'type'=>'raw'
 					),
 				),
-		)); 
+		));
 		?>
 	</small>
 	<div class="span4">
-	<?php 
-	
+	<?php
+
 	$fretes = NotaFiscal::getFreteListaCombo();
 	if (isset($fretes[$model->frete]))
 		$frete = $fretes[$model->frete];
-	else 
+	else
 		$frete = $model->frete;
-	
+
 	$this->widget('bootstrap.widgets.TbDetailView',array(
 		'data'=>$model,
 		'attributes'=>array(
@@ -188,13 +190,13 @@ $(document).ready(function(){
 				'value'=>CHtml::link(CHtml::encode($model->Pessoa->fantasia), array("pessoa/view", "id"=>$model->codpessoa)),
 				'type'=>"raw",
 			),
-			
+
 		),
-	)); 
+	));
 	?>
 	</div>
 	<small class="span5">
-	<?php 
+	<?php
 	$css_label = "";
 	$staus = "&nbsp";
 	$css = "";
@@ -225,12 +227,12 @@ $(document).ready(function(){
 	$modelo = NotaFiscal::getModeloListaCombo();
 	if (isset($modelo[$model->modelo]))
 		$modelo = $modelo[$model->modelo];
-	else 
+	else
 		$modelo = $model->modelo;
-	
+
 	$arrTpEmis = NotaFiscal::getTpEmisListaCombo();
 	$tpEmis = @$arrTpEmis[$model->tpemis];
-	
+
 	$attr = array(
 		array(
 			'name'=>'emitida',
@@ -249,71 +251,71 @@ $(document).ready(function(){
 	);
 
 	if (!empty($model->nfechave))
-		$attr[] = 
+		$attr[] =
 			array(
 				'name' => 'nfechave',
 				'value' => str_replace(" ", "&nbsp;", CHtml::encode(Yii::app()->format->formataChaveNfe($model->nfechave))),
 				'type' => 'raw',
 			);
-	
+
 	foreach($model->NfeTerceiros as $nfet)
-		$attr[] = 
+		$attr[] =
 			array(
 				'label' => 'NF-e Terceiro',
 				'value' => CHtml::link('Abrir', array("nfeTerceiro/view", "id" => $nfet->codnfeterceiro)),
 				'type' => 'raw',
 			);
-	
-	
+
+
 	if (!empty($model->nfereciboenvio) || !empty($model->nfedataenvio))
-		$attr[] = 
+		$attr[] =
 			array(
 				'name' => 'nfereciboenvio',
 				'value' => $model->nfereciboenvio . " - " . $model->nfedataenvio,
 				'type' => 'raw',
 			);
-	
+
 	if (!empty($model->nfeautorizacao) || !empty($model->nfedataautorizacao))
-		$attr[] = 
+		$attr[] =
 			array(
 				'name' => 'nfeautorizacao',
 				'value' => $model->nfeautorizacao . " - " . $model->nfedataautorizacao,
 				'type' => 'raw',
 			);
-	
+
 	if (!empty($model->nfecancelamento) || !empty($model->nfedatacancelamento))
-		$attr[] = 
+		$attr[] =
 			array(
 				'name' => 'nfecancelamento',
 				'value' => $model->nfecancelamento . " - " . $model->nfedatacancelamento,
 				'type' => 'raw',
 			);
-	
+
 	if (!empty($model->nfeinutilizacao) || !empty($model->nfedatainutilizacao))
-		$attr[] = 
+		$attr[] =
 			array(
 				'name' => 'nfeinutilizacao',
 				'value' => $model->nfeinutilizacao . " - " . $model->nfedatainutilizacao,
 				'type' => 'raw',
 			);
-	
+
 	if (!empty($model->justificativa))
 		$attr[] = 'justificativa';
-	
+
 	$this->widget('bootstrap.widgets.TbDetailView',array(
 		'data'=>$model,
 		'attributes'=> $attr,
-	)); 
+	));
 
 	?>
 	</small>
 	<div class="span1">
-		<?php $this->widget('MGNotaFiscalBotoes', array('model'=>$model)); ?>		
+		<?php $this->widget('MGNotaFiscalBotoes', array('model'=>$model)); ?>
 	</div>
 </div>
 <div class="row-fluid">
 	<div class="span2">
-	<?php 
+	<?php
 	$this->widget('bootstrap.widgets.TbDetailView',array(
 		'data'=>$model,
 		'attributes'=>array(
@@ -326,11 +328,11 @@ $(document).ready(function(){
 				'value'=>Yii::app()->format->formatNumber($model->valortotal),
 				),
 			),
-	)); 
+	));
 	?>
 	</div>
 	<small class="span2">
-	<?php 
+	<?php
 	$this->widget('bootstrap.widgets.TbDetailView',array(
 		'data'=>$model,
 		'attributes'=>array(
@@ -343,11 +345,11 @@ $(document).ready(function(){
 				'value'=>Yii::app()->format->formatNumber($model->valoroutras),
 				),
 			),
-	)); 
+	));
 	?>
 	</small>
 	<small class="span2">
-	<?php 
+	<?php
 	$this->widget('bootstrap.widgets.TbDetailView',array(
 		'data'=>$model,
 		'attributes'=>array(
@@ -360,11 +362,11 @@ $(document).ready(function(){
 				'value'=>Yii::app()->format->formatNumber($model->valorseguro),
 				),
 			),
-	)); 
+	));
 	?>
 	</small>
 	<small class="span2">
-	<?php 
+	<?php
 	$this->widget('bootstrap.widgets.TbDetailView',array(
 		'data'=>$model,
 		'attributes'=>array(
@@ -377,11 +379,11 @@ $(document).ready(function(){
 				'value'=>Yii::app()->format->formatNumber($model->icmsvalor),
 				),
 			),
-	)); 
+	));
 	?>
 	</small>
 	<small class="span2">
-	<?php 
+	<?php
 	$this->widget('bootstrap.widgets.TbDetailView',array(
 		'data'=>$model,
 		'attributes'=>array(
@@ -394,11 +396,11 @@ $(document).ready(function(){
 				'value'=>Yii::app()->format->formatNumber($model->icmsstvalor),
 				),
 			),
-	)); 
+	));
 	?>
 	</small>
 	<small class="span2">
-	<?php 
+	<?php
 	$this->widget('bootstrap.widgets.TbDetailView',array(
 		'data'=>$model,
 		'attributes'=>array(
@@ -411,7 +413,7 @@ $(document).ready(function(){
 				'value'=>Yii::app()->format->formatNumber($model->ipivalor),
 				),
 			),
-	)); 
+	));
 	?>
 	</small>
 </div>
@@ -420,7 +422,7 @@ $(document).ready(function(){
 	Produtos
 	<small>
 		<?php echo CHtml::link("<i class=\"icon-plus\"></i> Novo", array("notaFiscalProdutoBarra/create", "codnotafiscal" => $model->codnotafiscal)); ?>
-	</small>	
+	</small>
 </h2>
 
 <table class="table table-hover table-condensed table-bordered table-striped">
@@ -578,7 +580,7 @@ $(document).ready(function(){
 				</td>
 				<td>
 					<small class='muted'>
-						<?php 
+						<?php
 						if (isset($prod->NegocioProdutoBarra))
 							echo CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($prod->NegocioProdutoBarra->codnegocio))
 								, array("negocio/view", "id"=>$prod->NegocioProdutoBarra->codnegocio));
@@ -591,7 +593,7 @@ $(document).ready(function(){
 					<a class="delete" href="<?php echo Yii::app()->createUrl('notaFiscalProdutoBarra/delete', array('id'=>$prod->codnotafiscalprodutobarra, 'ajax'=>'ajax')); ?>"><i class="icon-trash"></i></a>
 				</td>
 			</tr>
-		
+
 			<?php
 			/*
 			?>
@@ -633,13 +635,13 @@ $(document).ready(function(){
 						<?php endif; ?>
 						<?php if ($prod->csllvalor > 0): ?>
 							<small class="span2 muted" style="border: 1px solid green">
-								CSLL 
+								CSLL
 								<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->csllvalor)); ?>
 							</small>
 						<?php endif; ?>
 						<?php if ($prod->irpjvalor > 0): ?>
 							<small class="span2 muted" style="border: 1px solid green">
-								IRPJ 
+								IRPJ
 								<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->irpjvalor)); ?>
 							</small>
 						<?php endif; ?>
@@ -712,7 +714,7 @@ $(document).ready(function(){
 					</div>
 					-->
 					<div class="span1">
-						<?php 
+						<?php
 						if (isset($prod->NegocioProdutoBarra))
 							echo CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($prod->NegocioProdutoBarra->codnegocio))
 								, array("negocio/view", "id"=>$prod->NegocioProdutoBarra->codnegocio));
@@ -725,7 +727,7 @@ $(document).ready(function(){
 				</div>
 			</div>
 			<?php
-			 * 
+			 *
 			 */
 		}
 		?>
@@ -736,10 +738,10 @@ $(document).ready(function(){
 	Duplicatas
 	<small>
 		<?php echo CHtml::link("<i class=\"icon-plus\"></i> Novo", array("notaFiscalDuplicatas/create", "codnotafiscal" => $model->codnotafiscal)); ?>
-	</small>	
+	</small>
 </h2>
 <div class="row-fluid">
-	<?php 
+	<?php
 	$total = 0;
 	$ultima = 0;
 	foreach ($model->NotaFiscalDuplicatass as $dup)
@@ -775,14 +777,14 @@ $(document).ready(function(){
 	Notas Fiscais Referenciadas
 	<small>
 		<?php echo CHtml::link("<i class=\"icon-plus\"></i> Novo", array("notaFiscalReferenciada/create", "codnotafiscal" => $model->codnotafiscal)); ?>
-	</small>	
+	</small>
 </h2>
-	<?php 
+	<?php
 	$total = 0;
 	$ultima = 0;
 	foreach ($model->NotaFiscalReferenciadas as $nfr)
 	{
-		
+
 		?>
 		<div class="row-fluid">
 			<small class="span4 text-center">
@@ -804,7 +806,7 @@ $(document).ready(function(){
 	Cartas de Correção
 	<small>
 		<a href="#modalCartaCorrecao" role="button" class="" data-toggle="modal"><i class="icon-plus"></i> Nova</a>
-	</small>	
+	</small>
 </h2>
 
 <!-- Modal -->
@@ -822,7 +824,7 @@ $(document).ready(function(){
   </div>
 </div>
 
-<?php 
+<?php
 foreach ($model->NotaFiscalCartaCorrecaos as $cc)
 {
 	?>
@@ -846,6 +848,6 @@ foreach ($model->NotaFiscalCartaCorrecaos as $cc)
 	<?php
 }
 ?>
- 
+
 <br>
 <?php $this->widget('UsuarioCriacao', array('model'=>$model)); ?>
