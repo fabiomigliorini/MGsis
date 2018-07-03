@@ -143,7 +143,7 @@ class NFePHPNovoController extends Controller {
         $conf['aMailConf']['mailFrom'] = false;
         $conf['aMailConf']['mailSmtp'] = 'smtp.gmail.com';
         $conf['aMailConf']['mailUser'] = 'nfe@mgpapelaria.com.br';
-        $conf['aMailConf']['mailPass'] = '701flamboyants';
+        $conf['aMailConf']['mailPass'] = 'flamboyants701';
         $conf['aMailConf']['mailProtocol'] = '';
         $conf['aMailConf']['mailPort'] = '587';
         $conf['aMailConf']['mailFromMail'] = null;
@@ -654,7 +654,7 @@ class NFePHPNovoController extends Controller {
                             $pICMSUFDest = 0;
                             $pICMSInter = number_format(($nfpb->ProdutoBarra->Produto->importado) ? 4 : 12, 2, '.', '');
                             $anoICMSInterPart = substr($nf->emissao, 6, 4);
-                            if ($nf->codnotafiscal == 780997) {
+                            if ($nf->codnotafiscal == 807921) {
                                 $anoICMSInterPart = '2017';
                             }
                             switch ($anoICMSInterPart) {
@@ -1603,7 +1603,7 @@ class NFePHPNovoController extends Controller {
             $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
             $mail->SMTPAuth = true;                               // Enable SMTP authentication
             $mail->Username = 'nfe@mgpapelaria.com.br';                 // SMTP username
-            $mail->Password = '701flamboyants';                           // SMTP password
+            $mail->Password = 'flamboyants701';                           // SMTP password
             $mail->SMTPAutoTLS = false;
             $mail->Helo = 'mail.mgpapelaria.com.br';
             $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
