@@ -297,7 +297,9 @@ class NotaFiscal extends MGActiveRecord
 
 		// CNPJ Secretaria SEFAZ RS - Nota Emitida por MEI
 		// Exemplo 4317 0287 9586 7400 0181 5589 0014 1416 3114 8458 0590
-		if ($cnpj == '87958674000181') {
+		// SEFAZ MT - Exemplo 5118 0803 5074 1500 0578 5589 0000 0396 0019 5637 6714
+		if ($cnpj == '87958674000181'
+		    || $cnpj == '03507415000578') {
 			return;
 		}
 		
