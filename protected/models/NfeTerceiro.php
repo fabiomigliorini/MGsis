@@ -117,7 +117,7 @@ class NfeTerceiro extends MGActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'NfeTerceiroDuplicatas' => array(self::HAS_MANY, 'NfeTerceiroDuplicata', 'codnfeterceiro', 'order'=>'dvenc ASC'),
-			'NfeTerceiroItems' => array(self::HAS_MANY, 'NfeTerceiroItem', 'codnfeterceiro', 'order'=>'nitem ASC'),
+			'NfeTerceiroItems' => array(self::HAS_MANY, 'NfeTerceiroItem', 'codnfeterceiro', 'order'=>'xprod ASC'),
 			'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
 			'Operacao' => array(self::BELONGS_TO, 'Operacao', 'codoperacao'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
@@ -386,7 +386,7 @@ class NfeTerceiro extends MGActiveRecord
 			mkdir ($diretorio, 0777, true);
 		*/
 		
-		$arquivo = "/var/www/NFePHP/Arquivos/NFe/{$this->codfilial}";
+		$arquivo = "/opt/www/NFePHP/Arquivos/NFe/{$this->codfilial}";
 		$arquivo .= (($this->Filial->nfeambiente == Filial::NFEAMBIENTE_PRODUCAO)?'/producao/':'/homologacao/');
 		$arquivo .= 'recebidas/' . substr($this->emissao, 6, 4) . substr($this->emissao, 3, 2) . '/';
 		$arquivo .= $this->nfechave . '-nfeProc.xml';

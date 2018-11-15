@@ -110,12 +110,12 @@ class NFePHPNovoController extends Controller {
         $conf['pathXmlUrlFileMDFe'] = 'mdf2_ws1.xml';
         $conf['pathXmlUrlFileCLe'] = '';
         $conf['pathXmlUrlFileNFSe'] = '';
-        $conf['pathNFeFiles'] = "/var/www/NFePHP/Arquivos/NFe/$codfilial";
-        $conf['pathCTeFiles'] = "/var/www/NFePHP/Arquivos/CTe/$codfilial";
-        $conf['pathMDFeFiles'] = "/var/www/NFePHP/Arquivos/MDFe/$codfilial";
-        $conf['pathCLeFiles'] = "/var/www/NFePHP/Arquivos/CLe/$codfilial";
-        $conf['pathNFSeFiles'] = "/var/www/NFePHP/Arquivos/NFSe/$codfilial";
-        $conf['pathCertsFiles'] = '/var/www/MGsis/protected/vendors/nfephp/certs/';
+        $conf['pathNFeFiles'] = "/opt/www/NFePHP/Arquivos/NFe/$codfilial";
+        $conf['pathCTeFiles'] = "/opt/www/NFePHP/Arquivos/CTe/$codfilial";
+        $conf['pathMDFeFiles'] = "/opt/www/NFePHP/Arquivos/MDFe/$codfilial";
+        $conf['pathCLeFiles'] = "/opt/www/NFePHP/Arquivos/CLe/$codfilial";
+        $conf['pathNFSeFiles'] = "/opt/www/NFePHP/Arquivos/NFSe/$codfilial";
+        $conf['pathCertsFiles'] = '/opt/www/MGsis/protected/vendors/nfephp/certs/';
         $conf['siteUrl'] = 'http://localhost/MGsis/protected/vendors/nfephp/install/';
         //$conf['schemesNFe'] =  'PL_008f';
         $conf['schemesNFe'] = 'PL_008i2';
@@ -135,7 +135,7 @@ class NFePHPNovoController extends Controller {
         $conf['aDocFormat']['format'] = 'P';
         $conf['aDocFormat']['paper'] = 'A4';
         $conf['aDocFormat']['southpaw'] = '1';
-        $conf['aDocFormat']['pathLogoFile'] = '/var/www/MGsis/images/MGPapelariaColorido.png';
+        $conf['aDocFormat']['pathLogoFile'] = '/opt/www/MGsis/images/MGPapelariaColorido.png';
         $conf['aDocFormat']['logoPosition'] = 'L';
         $conf['aDocFormat']['font'] = 'Times';
         $conf['aDocFormat']['printer'] = '';
@@ -1194,12 +1194,12 @@ class NFePHPNovoController extends Controller {
 
         if ($nf->modelo == NotaFiscal::MODELO_NFCE) {
             $saida = isset($_REQUEST['o']) ? $_REQUEST['o'] : 'pdf';
-            $danfe = new Danfce($xml, '/var/www/MGsis/images/MGPapelariaSeloSloganPretoBranco.jpg', 2);
+            $danfe = new Danfce($xml, '/opt/www/MGsis/images/MGPapelariaSeloSloganPretoBranco.jpg', 2);
             $id = $danfe->montaDANFE(true);
             $teste = $danfe->printDANFE($saida, $this->arquivoPDF, 'F');
             return true;
         } else {
-            //$danfe = new Danfe($xml, 'P', 'A4', '/var/www/MGsis/images/MGPapelariaSloganPretoBranco.jpg', 'I', '');
+            //$danfe = new Danfe($xml, 'P', 'A4', '/opt/www/MGsis/images/MGPapelariaSloganPretoBranco.jpg', 'I', '');
             $danfe = new Danfe($xml, 'P', 'A4', '', 'I', '');
             $id = $danfe->montaDANFE();
             $teste = $danfe->printDANFE($this->arquivoPDF, 'F');
