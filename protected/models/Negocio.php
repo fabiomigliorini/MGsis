@@ -46,424 +46,404 @@
  */
 class Negocio extends MGActiveRecord
 {
-	public $lancamento_de;
-	public $lancamento_ate;
-	public $percentualdesconto;
-	public $pagamento;
+    public $lancamento_de;
+    public $lancamento_ate;
+    public $percentualdesconto;
+    public $pagamento;
 
-        private $_codnegociostatus_original;
+    private $_codnegociostatus_original;
 
-	/**
-	 * @return string the associated database table name
-	 */
-	public function tableName()
-	{
-		return 'mgsis.tblnegocio';
-	}
+    /**
+     * @return string the associated database table name
+     */
+    public function tableName()
+    {
+        return 'mgsis.tblnegocio';
+    }
 
-	/**
-	 * @return array validation rules for model attributes.
-	 */
-	public function rules()
-	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
-		return array(
-			array('codpessoa, codfilial, codestoquelocal, lancamento, codoperacao, codnegociostatus, codusuario, codnaturezaoperacao', 'required'),
-			array('observacoes', 'length', 'max'=>500),
-			array('valordesconto, valorprodutos, valortotal, valoraprazo, valoravista', 'numerical'),
-			array('valordesconto', 'validaDesconto'),
-			array('codestoquelocal', 'validaEstoqueLocal'),
-			//array('codnegociostatus', 'validaStatus'),
-			array('codpessoa, codpessoavendedor, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
-			array('pagamento, lancamento_de, lancamento_ate, codnegocio, codpessoa, codfilial, codestoquelocal, lancamento, codpessoavendedor, codoperacao, codnegociostatus, observacoes, codusuario, valordesconto, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnaturezaoperacao, valorprodutos, valortotal, valoraprazo, valoravista', 'safe', 'on'=>'search'),
-		);
-	}
+    /**
+     * @return array validation rules for model attributes.
+     */
+    public function rules()
+    {
+        // NOTE: you should only define rules for those attributes that
+        // will receive user inputs.
+        return array(
+            array('codpessoa, codfilial, codestoquelocal, lancamento, codoperacao, codnegociostatus, codusuario, codnaturezaoperacao', 'required'),
+            array('observacoes', 'length', 'max'=>500),
+            array('valordesconto, valorprodutos, valortotal, valoraprazo, valoravista', 'numerical'),
+            array('valordesconto', 'validaDesconto'),
+            array('codestoquelocal', 'validaEstoqueLocal'),
+            //array('codnegociostatus', 'validaStatus'),
+            array('codpessoa, codpessoavendedor, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
+            // The following rule is used by search().
+            // @todo Please remove those attributes that should not be searched.
+            array('pagamento, lancamento_de, lancamento_ate, codnegocio, codpessoa, codfilial, codestoquelocal, lancamento, codpessoavendedor, codoperacao, codnegociostatus, observacoes, codusuario, valordesconto, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnaturezaoperacao, valorprodutos, valortotal, valoraprazo, valoravista', 'safe', 'on'=>'search'),
+        );
+    }
 
-	public function validaDesconto($attribute, $params)
-	{
-		if ($this->valordesconto > $this->valorprodutos)
-			$this->addError($attribute, 'O valor de desconto não pode ser maior que o valor dos produtos!');
-	}
+    public function validaDesconto($attribute, $params)
+    {
+        if ($this->valordesconto > $this->valorprodutos) {
+            $this->addError($attribute, 'O valor de desconto não pode ser maior que o valor dos produtos!');
+        }
+    }
 
-	public function validaEstoqueLocal($attribute, $params)
-	{
-		if (!isset($this->EstoqueLocal))
-			return;
+    public function validaEstoqueLocal($attribute, $params)
+    {
+        if (!isset($this->EstoqueLocal)) {
+            return;
+        }
 
-		if (!isset($this->Filial))
-			return;
+        if (!isset($this->Filial)) {
+            return;
+        }
 
-		if ($this->EstoqueLocal->codfilial != $this->codfilial)
-			$this->addError($attribute, 'O Local de Estoque não bate com a Filial selecionada!');
-	}
+        if ($this->EstoqueLocal->codfilial != $this->codfilial) {
+            $this->addError($attribute, 'O Local de Estoque não bate com a Filial selecionada!');
+        }
+    }
 
-	/*
-	public function validaStatus($attribute, $params)
-	{
-		if ($this->codnegociostatus <> 1)
-			$this->addError($attribute, 'O status do negócio não permite alterações!');
-	}
-	 *
-	 */
+    /*
+    public function validaStatus($attribute, $params)
+    {
+        if ($this->codnegociostatus <> 1)
+            $this->addError($attribute, 'O status do negócio não permite alterações!');
+    }
+     *
+     */
 
-	/**
-	 * @return array relational rules.
-	 */
-	public function relations()
-	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
-		return array(
-			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
-			'EstoqueLocal' => array(self::BELONGS_TO, 'EstoqueLocal', 'codestoquelocal'),
-			'NegocioStatus' => array(self::BELONGS_TO, 'NegocioStatus', 'codnegociostatus'),
-			'Operacao' => array(self::BELONGS_TO, 'Operacao', 'codoperacao'),
-			'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
-			'PessoaVendedor' => array(self::BELONGS_TO, 'Pessoa', 'codpessoavendedor'),
-			'Usuario' => array(self::BELONGS_TO, 'Usuario', 'codusuario'),
-			'UsuarioAcertoEntrega' => array(self::BELONGS_TO, 'Usuario', 'codusuarioacertoentrega'),
-			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
-			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
-			'NaturezaOperacao' => array(self::BELONGS_TO, 'NaturezaOperacao', 'codnaturezaoperacao'),
-			'NegocioFormaPagamentos' => array(self::HAS_MANY, 'NegocioFormaPagamento', 'codnegocio'),
-			'NegocioProdutoBarras' => array(self::HAS_MANY, 'NegocioProdutoBarra', 'codnegocio', 'order'=>'alteracao DESC, codnegocioprodutobarra DESC'),
-			'NfeTerceiros' => array(self::HAS_MANY, 'NfeTerceiro', 'codnegocio'),
-		);
-	}
+    /**
+     * @return array relational rules.
+     */
+    public function relations()
+    {
+        // NOTE: you may need to adjust the relation name and the related
+        // class name for the relations automatically generated below.
+        return array(
+            'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
+            'EstoqueLocal' => array(self::BELONGS_TO, 'EstoqueLocal', 'codestoquelocal'),
+            'NegocioStatus' => array(self::BELONGS_TO, 'NegocioStatus', 'codnegociostatus'),
+            'Operacao' => array(self::BELONGS_TO, 'Operacao', 'codoperacao'),
+            'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
+            'PessoaVendedor' => array(self::BELONGS_TO, 'Pessoa', 'codpessoavendedor'),
+            'Usuario' => array(self::BELONGS_TO, 'Usuario', 'codusuario'),
+            'UsuarioAcertoEntrega' => array(self::BELONGS_TO, 'Usuario', 'codusuarioacertoentrega'),
+            'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+            'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+            'NaturezaOperacao' => array(self::BELONGS_TO, 'NaturezaOperacao', 'codnaturezaoperacao'),
+            'NegocioFormaPagamentos' => array(self::HAS_MANY, 'NegocioFormaPagamento', 'codnegocio'),
+            'NegocioProdutoBarras' => array(self::HAS_MANY, 'NegocioProdutoBarra', 'codnegocio', 'order'=>'alteracao DESC, codnegocioprodutobarra DESC'),
+            'NfeTerceiros' => array(self::HAS_MANY, 'NfeTerceiro', 'codnegocio'),
+        );
+    }
 
-	/**
-	 * @return array customized attribute labels (name=>label)
-	 */
-	public function attributeLabels()
-	{
-		return array(
-			'codnegocio' => '#',
-			'codpessoa' => 'Pessoa',
-			'codfilial' => 'Filial',
-			'codestoquelocal' => 'Local Estoque',
-			'lancamento' => 'Lançamento',
-			'codpessoavendedor' => 'Vendedor',
-			'codoperacao' => 'Operação',
-			'codnegociostatus' => 'Status',
-			'observacoes' => 'Observações',
-			'codusuario' => 'Usuário',
-			'valordesconto' => 'Desconto',
-			'percentualdesconto' => 'Desconto %',
-			'entrega' => 'Entrega',
-			'acertoentrega' => 'Acerto Entrega',
-			'codusuarioacertoentrega' => 'Usuário Acerto Entrega',
-			'alteracao' => 'Alteração',
-			'codusuarioalteracao' => 'Usuário Alteração',
-			'criacao' => 'Criação',
-			'codusuariocriacao' => 'Usuário Criação',
-			'codnaturezaoperacao' => 'Natureza de Operação',
-			'valorprodutos' => 'Produtos',
-			'valortotal' => 'Total',
-			'valoraprazo' => 'À Prazo',
-			'valoravista' => 'À Vista',
-		);
-	}
+    /**
+     * @return array customized attribute labels (name=>label)
+     */
+    public function attributeLabels()
+    {
+        return array(
+            'codnegocio' => '#',
+            'codpessoa' => 'Pessoa',
+            'codfilial' => 'Filial',
+            'codestoquelocal' => 'Local Estoque',
+            'lancamento' => 'Lançamento',
+            'codpessoavendedor' => 'Vendedor',
+            'codoperacao' => 'Operação',
+            'codnegociostatus' => 'Status',
+            'observacoes' => 'Observações',
+            'codusuario' => 'Usuário',
+            'valordesconto' => 'Desconto',
+            'percentualdesconto' => 'Desconto %',
+            'entrega' => 'Entrega',
+            'acertoentrega' => 'Acerto Entrega',
+            'codusuarioacertoentrega' => 'Usuário Acerto Entrega',
+            'alteracao' => 'Alteração',
+            'codusuarioalteracao' => 'Usuário Alteração',
+            'criacao' => 'Criação',
+            'codusuariocriacao' => 'Usuário Criação',
+            'codnaturezaoperacao' => 'Natureza de Operação',
+            'valorprodutos' => 'Produtos',
+            'valortotal' => 'Total',
+            'valoraprazo' => 'À Prazo',
+            'valoravista' => 'À Vista',
+        );
+    }
 
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 *
-	 * Typical usecase:
-	 * - Initialize the model fields with values from filter form.
-	 * - Execute this method to get CActiveDataProvider instance which will filter
-	 * models according to data in model fields.
-	 * - Pass data provider to CGridView, CListView or any similar widget.
-	 *
-	 * @return CActiveDataProvider the data provider that can return the models
-	 * based on the search/filter conditions.
-	 */
-	public function search($comoDataProvider = true)
-	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
+    /**
+     * Retrieves a list of models based on the current search/filter conditions.
+     *
+     * Typical usecase:
+     * - Initialize the model fields with values from filter form.
+     * - Execute this method to get CActiveDataProvider instance which will filter
+     * models according to data in model fields.
+     * - Pass data provider to CGridView, CListView or any similar widget.
+     *
+     * @return CActiveDataProvider the data provider that can return the models
+     * based on the search/filter conditions.
+     */
+    public function search($comoDataProvider = true)
+    {
+        // @todo Please modify the following code to remove attributes that should not be searched.
 
-		$criteria=new CDbCriteria;
+        $criteria=new CDbCriteria;
 
-		$criteria->compare('codnegocio',$this->codnegocio,false);
-		$criteria->compare('codpessoa',$this->codpessoa,false);
-		$criteria->compare('codfilial',$this->codfilial,false);
-		$criteria->compare('codestoquelocal',$this->codestoquelocal,false);
-		$criteria->compare('lancamento',$this->lancamento,true);
-		$criteria->compare('codpessoavendedor',$this->codpessoavendedor,false);
-		$criteria->compare('codoperacao',$this->codoperacao,false);
-		$criteria->compare('codnegociostatus',$this->codnegociostatus,false);
-		$criteria->compare('observacoes',$this->observacoes,true);
-		$criteria->compare('codusuario',$this->codusuario,false);
-		$criteria->compare('valordesconto',$this->valordesconto,true);
-		$criteria->compare('entrega',$this->entrega);
-		$criteria->compare('acertoentrega',$this->acertoentrega,true);
-		$criteria->compare('codusuarioacertoentrega',$this->codusuarioacertoentrega,false);
-		$criteria->compare('alteracao',$this->alteracao,true);
-		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);
-		$criteria->compare('criacao',$this->criacao,true);
-		$criteria->compare('codusuariocriacao',$this->codusuariocriacao,false);
-		$criteria->compare('codnaturezaoperacao',$this->codnaturezaoperacao,false);
-		$criteria->compare('valorprodutos',$this->valorprodutos,true);
-		$criteria->compare('valortotal',$this->valortotal,true);
-		$criteria->compare('valoraprazo',$this->valoraprazo,true);
-		$criteria->compare('valoravista',$this->valoravista,true);
+        $criteria->compare('codnegocio', $this->codnegocio, false);
+        $criteria->compare('codpessoa', $this->codpessoa, false);
+        $criteria->compare('codfilial', $this->codfilial, false);
+        $criteria->compare('codestoquelocal', $this->codestoquelocal, false);
+        $criteria->compare('lancamento', $this->lancamento, true);
+        $criteria->compare('codpessoavendedor', $this->codpessoavendedor, false);
+        $criteria->compare('codoperacao', $this->codoperacao, false);
+        $criteria->compare('codnegociostatus', $this->codnegociostatus, false);
+        $criteria->compare('observacoes', $this->observacoes, true);
+        $criteria->compare('codusuario', $this->codusuario, false);
+        $criteria->compare('valordesconto', $this->valordesconto, true);
+        $criteria->compare('entrega', $this->entrega);
+        $criteria->compare('acertoentrega', $this->acertoentrega, true);
+        $criteria->compare('codusuarioacertoentrega', $this->codusuarioacertoentrega, false);
+        $criteria->compare('alteracao', $this->alteracao, true);
+        $criteria->compare('codusuarioalteracao', $this->codusuarioalteracao, false);
+        $criteria->compare('criacao', $this->criacao, true);
+        $criteria->compare('codusuariocriacao', $this->codusuariocriacao, false);
+        $criteria->compare('codnaturezaoperacao', $this->codnaturezaoperacao, false);
+        $criteria->compare('valorprodutos', $this->valorprodutos, true);
+        $criteria->compare('valortotal', $this->valortotal, true);
+        $criteria->compare('valoraprazo', $this->valoraprazo, true);
+        $criteria->compare('valoravista', $this->valoravista, true);
 
-		if ($lancamento_de = DateTime::createFromFormat("d/m/y H:i",$this->lancamento_de))
-		{
-			$criteria->addCondition('t.lancamento >= :lancamento_de');
-			$criteria->params = array_merge($criteria->params, array(':lancamento_de' => $lancamento_de->format('Y-m-d H:i').':00.0'));
-		}
-		if ($lancamento_ate = DateTime::createFromFormat("d/m/y H:i",$this->lancamento_ate))
-		{
-			$criteria->addCondition('t.lancamento <= :lancamento_ate');
-			$criteria->params = array_merge($criteria->params, array(':lancamento_ate' => $lancamento_ate->format('Y-m-d H:i').':59.9'));
-		}
+        if ($lancamento_de = DateTime::createFromFormat("d/m/y H:i", $this->lancamento_de)) {
+            $criteria->addCondition('t.lancamento >= :lancamento_de');
+            $criteria->params = array_merge($criteria->params, array(':lancamento_de' => $lancamento_de->format('Y-m-d H:i').':00.0'));
+        }
+        if ($lancamento_ate = DateTime::createFromFormat("d/m/y H:i", $this->lancamento_ate)) {
+            $criteria->addCondition('t.lancamento <= :lancamento_ate');
+            $criteria->params = array_merge($criteria->params, array(':lancamento_ate' => $lancamento_ate->format('Y-m-d H:i').':59.9'));
+        }
 
-		switch ($this->pagamento)
-		{
-			case "a":
-				$criteria->addCondition('t.valoravista > 0');
-				break;
+        switch ($this->pagamento) {
+            case "a":
+                $criteria->addCondition('t.valoravista > 0');
+                break;
 
-			case "p":
-				$criteria->addCondition('t.valoraprazo > 0');
-				break;
+            case "p":
+                $criteria->addCondition('t.valoraprazo > 0');
+                break;
 
-			default:
-				break;
-		}
-
-
-		$criteria->order = 't.codnegociostatus, t.lancamento DESC, t.codnegocio DESC';
+            default:
+                break;
+        }
 
 
-		if ($comoDataProvider)
-		{
-			$params = array(
-				'criteria'=>$criteria,
-				'pagination'=>array('pageSize'=>20)
-			);
-			return new CActiveDataProvider($this, $params);
-		}
-		else
-		{
-			return $this->findAll($criteria);
-		}
-	}
+        $criteria->order = 't.codnegociostatus, t.lancamento DESC, t.codnegocio DESC';
 
-	/**
-	 * Returns the static model of the specified AR class.
-	 * Please note that you should have this exact method in all your CActiveRecord descendants!
-	 * @param string $className active record class name.
-	 * @return Negocio the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
 
-	protected function afterFind()
-	{
-            if ($this->valortotal >0 and $this->valordesconto>0)
-                $this->percentualdesconto = 100 * ($this->valordesconto / $this->valorprodutos);
-            else
-                $this->percentualdesconto = 0;
+        if ($comoDataProvider) {
+            $params = array(
+                'criteria'=>$criteria,
+                'pagination'=>array('pageSize'=>20)
+            );
+            return new CActiveDataProvider($this, $params);
+        } else {
+            return $this->findAll($criteria);
+        }
+    }
 
-            $this->_codnegociostatus_original = $this->codnegociostatus;
+    /**
+     * Returns the static model of the specified AR class.
+     * Please note that you should have this exact method in all your CActiveRecord descendants!
+     * @param string $className active record class name.
+     * @return Negocio the static model class
+     */
+    public static function model($className=__CLASS__)
+    {
+        return parent::model($className);
+    }
 
-            return parent::afterFind();
-	}
+    protected function afterFind()
+    {
+        if ($this->valortotal >0 and $this->valordesconto>0) {
+            $this->percentualdesconto = 100 * ($this->valordesconto / $this->valorprodutos);
+        } else {
+            $this->percentualdesconto = 0;
+        }
 
-	public function fecharNegocio()
-	{
+        $this->_codnegociostatus_original = $this->codnegociostatus;
 
+        return parent::afterFind();
+    }
+
+    public function fecharNegocio()
+    {
         $this->refresh();
 
-		//So continua se for status ABERTO
-		if ($this->codnegociostatus != NegocioStatus::ABERTO)
-		{
-			$this->addError("codnegociostatus", "O Status do Negócio não permite Fechamento!");
-			return false;
-		}
+        //So continua se for status ABERTO
+        if ($this->codnegociostatus != NegocioStatus::ABERTO) {
+            $this->addError("codnegociostatus", "O Status do Negócio não permite Fechamento!");
+            return false;
+        }
 
-		if (sizeof($this->NegocioProdutoBarras) == 0)
-		{
-			$this->addError("codnegociostatus", "Não foi informado nenhum produto neste negócio!");
-			return false;
-		}
+        if (sizeof($this->NegocioProdutoBarras) == 0) {
+            $this->addError("codnegociostatus", "Não foi informado nenhum produto neste negócio!");
+            return false;
+        }
 
-		if ($this->valoraprazo > 0 && $this->codoperacao == Operacao::SAIDA)
-		{
-			if (!$this->Pessoa->avaliaLimiteCredito($this->valoraprazo))
-			{
-				$this->addError("codpessoa", "Solicite Liberação de Crédito ao Departamento Financeiro!");
-				return false;
-			}
+        if ($this->valoraprazo > 0 && $this->codoperacao == Operacao::SAIDA) {
+            if (!$this->Pessoa->avaliaLimiteCredito($this->valoraprazo)) {
+                $this->addError("codpessoa", "Solicite Liberação de Crédito ao Departamento Financeiro!");
+                return false;
+            }
+        }
 
-		}
+        //Calcula total pagamentos à vista e à prazo
+        $valorPagamentos = 0;
+        $valorPagamentosPrazo = 0;
+        foreach ($this->NegocioFormaPagamentos as $nfp) {
+            $valorPagamentos += $nfp->valorpagamento;
+            if (!$nfp->FormaPagamento->avista) {
+                $valorPagamentosPrazo += $nfp->valorpagamento;
+            }
+        }
 
-		//Calcula total pagamentos à vista e à prazo
-		$valorPagamentos = 0;
-		$valorPagamentosPrazo = 0;
-		foreach ($this->NegocioFormaPagamentos as $nfp)
-		{
-			$valorPagamentos += $nfp->valorpagamento;
-			if (!$nfp->FormaPagamento->avista)
-				$valorPagamentosPrazo += $nfp->valorpagamento;
-		}
-
-		//valida total pagamentos
-<<<<<<< HEAD
-		if (($this->valortotal - $valorPagamentos) >= 0.01)
-=======
-		if (($this->valortotal - $valorPagamentos) >= 0.01) {
->>>>>>> 110eb432e826311a8758eb9fb668f32794187195
-		{
+        //valida total pagamentos
+        if (($this->valortotal - $valorPagamentos) >= 0.01) {
             $valorPagamentos = Yii::app()->format->formatNumber($valorPagamentos);
             $valorTotal = Yii::app()->format->formatNumber($this->valortotal);
-			$this->addError("valortotal", "O valor dos Pagamentos ($valorPagamentos) é inferior ao Total ($valorTotal)!");
-			return false;
-		}
+            $this->addError("valortotal", "O valor dos Pagamentos ($valorPagamentos) é inferior ao Total ($valorTotal)!");
+            return false;
+        }
 
-		//valida total à prazo
-		if ($valorPagamentosPrazo > $this->valortotal)
-		{
-			$this->addError("valortotal", "O valor à Prazo é superior ao Total!");
-			return false;
-		}
+        //valida total à prazo
+        if ($valorPagamentosPrazo > $this->valortotal) {
+            $this->addError("valortotal", "O valor à Prazo é superior ao Total!");
+            return false;
+        }
 
-		//gera títulos
-		foreach ($this->NegocioFormaPagamentos as $nfp)
-		{
-			if (!$nfp->geraTitulos())
-			{
-				$this->addErrors($nfp->getErrors());
-				return false;
-			}
-		}
+        //gera títulos
+        foreach ($this->NegocioFormaPagamentos as $nfp) {
+            if (!$nfp->geraTitulos()) {
+                $this->addErrors($nfp->getErrors());
+                return false;
+            }
+        }
 
-		//atualiza status
-		$this->codnegociostatus = NegocioStatus::FECHADO;
-		$this->codusuario = Yii::app()->user->id;
-		$this->lancamento = date('d/m/Y H:i:s');
-		if (!$this->save()) {
+        //atualiza status
+        $this->codnegociostatus = NegocioStatus::FECHADO;
+        $this->codusuario = Yii::app()->user->id;
+        $this->lancamento = date('d/m/Y H:i:s');
+        if (!$this->save()) {
             return false;
         }
 
         return $this->movimentaEstoque();
+    }
 
-	}
+    // Gera nota fiscal a partir do negocio
+    public function gerarNotaFiscal($codnotafiscal = null, $modelo = NotaFiscal::MODELO_NFE, $geraDuplicatas = true)
+    {
+        if ($this->Pessoa->notafiscal == Pessoa::NOTAFISCAL_NUNCA && $modelo == NotaFiscal::MODELO_NFE) {
+            $this->addError("codpessoa", "Pessoa marcada para <b>NUNCA EMITIR</b> NFe!");
+            return false;
+        }
 
-	// Gera nota fiscal a partir do negocio
-	public function gerarNotaFiscal($codnotafiscal = null, $modelo = NotaFiscal::MODELO_NFE, $geraDuplicatas = true)
-	{
-		if ($this->Pessoa->notafiscal == Pessoa::NOTAFISCAL_NUNCA && $modelo == NotaFiscal::MODELO_NFE)
-		{
-			$this->addError("codpessoa", "Pessoa marcada para <b>NUNCA EMITIR</b> NFe!");
-			return false;
-		}
+        //se passou uma nota por parametro tenta localizar ela
+        if (!empty($codnotafiscal)) {
+            $nota = NotaFiscal::model()->findByPK($codnotafiscal);
+        }
 
-		//se passou uma nota por parametro tenta localizar ela
-		if (!empty($codnotafiscal))
-			$nota = NotaFiscal::model()->findByPK($codnotafiscal);
+        //se nao localizou nenhuma nota, cria uma nova
+        if (empty($nota)) {
+            $nota = new NotaFiscal;
+            $nota->codpessoa = $this->codpessoa;
+            if (empty($nota->codpessoa)) {
+                $nota->codpessoa = Pessoa::CONSUMIDOR;
+            }
+            $nota->codfilial = $this->codfilial;
+            $nota->codestoquelocal = $this->codestoquelocal;
+            $nota->serie = 1;
+            $nota->numero = 0;
+            $nota->modelo = $modelo;
+            $nota->codnaturezaoperacao = $this->codnaturezaoperacao;
+            $nota->emitida = $this->NaturezaOperacao->emitida;
+            //die(date('d/m/Y'));
+            $nota->emissao = date('d/m/Y H:i:s');
+            $nota->saida = date('d/m/Y H:i:s');
 
-		//se nao localizou nenhuma nota, cria uma nova
-		if (empty($nota))
-		{
-			$nota = new NotaFiscal;
-			$nota->codpessoa = $this->codpessoa;
-			if (empty($nota->codpessoa))
-				$nota->codpessoa = Pessoa::CONSUMIDOR;
-			$nota->codfilial = $this->codfilial;
-			$nota->codestoquelocal = $this->codestoquelocal;
-			$nota->serie = 1;
-			$nota->numero = 0;
-			$nota->modelo = $modelo;
-			$nota->codnaturezaoperacao = $this->codnaturezaoperacao;
-			$nota->emitida = $this->NaturezaOperacao->emitida;
-			//die(date('d/m/Y'));
-			$nota->emissao = date('d/m/Y H:i:s');
-			$nota->saida = date('d/m/Y H:i:s');
+            $nota->observacoes = "";
+            $nota->observacoes .= $this->NaturezaOperacao->mensagemprocom;
 
-			$nota->observacoes = "";
-			$nota->observacoes .= $this->NaturezaOperacao->mensagemprocom;
+            if ($nota->modelo == NotaFiscal::MODELO_NFE && $nota->Filial->crt != Filial::CRT_SIMPLES_EXCESSO) {
+                if (!empty($nota->observacoes)) {
+                    $nota->observacoes .= "\n";
+                }
 
-			if ($nota->modelo == NotaFiscal::MODELO_NFE && $nota->Filial->crt != Filial::CRT_SIMPLES_EXCESSO)
-			{
-				if (!empty($nota->observacoes))
-					$nota->observacoes .= "\n";
+                $nota->observacoes .= $this->NaturezaOperacao->observacoesnf;
+            }
 
-				$nota->observacoes .= $this->NaturezaOperacao->observacoesnf;
-			}
+            $nota->frete = NotaFiscal::FRETE_SEM;
+            $nota->codoperacao = $this->NaturezaOperacao->codoperacao;
+        }
 
-			$nota->frete = NotaFiscal::FRETE_SEM;
-			$nota->codoperacao = $this->NaturezaOperacao->codoperacao;
-		}
+        //concatena obeservacoes
+        $nota->observacoes = $nota->observacoes;
+        if (!empty($nota->observacoes)) {
+            $nota->observacoes .= "\n";
+        }
+        $nota->observacoes .= "Referente ao Negocio #{$this->codnegocio}";
+        if (isset($this->PessoaVendedor)) {
+            $nota->observacoes .= " - Vendedor: {$this->PessoaVendedor->fantasia}";
+        }
+        if (!empty($this->observacoes)) {
+            $nota->observacoes .= " - {$this->observacoes}";
+        }
 
-		//concatena obeservacoes
-		$nota->observacoes = $nota->observacoes;
-		if (!empty($nota->observacoes))
-			$nota->observacoes .= "\n";
-		$nota->observacoes .= "Referente ao Negocio #{$this->codnegocio}";
-		if (isset($this->PessoaVendedor))
-			$nota->observacoes .= " - Vendedor: {$this->PessoaVendedor->fantasia}";
-		if (!empty($this->observacoes))
-			$nota->observacoes .= " - {$this->observacoes}";
+        if (strlen($nota->observacoes) > 1500) {
+            $nota->observacoes = substr($nota->observacoes, 0, 1500);
+        }
 
-		if (strlen($nota->observacoes) > 1500)
-			$nota->observacoes = substr($nota->observacoes, 0, 1500);
-
-		$primeiro = true;
+        $primeiro = true;
 
         $notaReferenciada = [];
 
-		//percorre os itens do negocio e adiciona na nota
+        //percorre os itens do negocio e adiciona na nota
         $valorDesconto = 0;
         $percDesconto = ($this->valordesconto / $this->valorprodutos);
-		foreach($this->NegocioProdutoBarras as $negocioItem)
-		{
-
+        foreach ($this->NegocioProdutoBarras as $negocioItem) {
             $quantidade = $negocioItem->quantidade - $negocioItem->devolucaoTotal;
 
-            if ($quantidade <= 0)
+            if ($quantidade <= 0) {
                 continue;
+            }
 
-			foreach ($negocioItem->NotaFiscalProdutoBarras as $notaItem)
-			{
-				if (!in_array($notaItem->NotaFiscal->codstatus, array(NotaFiscal::CODSTATUS_INUTILIZADA, NotaFiscal::CODSTATUS_CANCELADA)))
-				{
-					continue(2); // vai para proximo item
-				}
-			}
+            foreach ($negocioItem->NotaFiscalProdutoBarras as $notaItem) {
+                if (!in_array($notaItem->NotaFiscal->codstatus, array(NotaFiscal::CODSTATUS_INUTILIZADA, NotaFiscal::CODSTATUS_CANCELADA))) {
+                    continue(2); // vai para proximo item
+                }
+            }
 
-			//esta aqui para so salvar a nota, caso exista algum produto por adicionar
-			if ($primeiro)
-			{
-				$primeiro = false;
-				//salva nota fiscal
+            //esta aqui para so salvar a nota, caso exista algum produto por adicionar
+            if ($primeiro) {
+                $primeiro = false;
+                //salva nota fiscal
                 $nota->setScenario('geracaoAutomatica');
-				if (!$nota->save())
-				{
-					$this->addErrors($nota->getErrors());
-					return false;
-				}
-			}
+                if (!$nota->save()) {
+                    $this->addErrors($nota->getErrors());
+                    return false;
+                }
+            }
 
-			$notaItem = new NotaFiscalProdutoBarra;
+            $notaItem = new NotaFiscalProdutoBarra;
 
             $notaItem->codnotafiscal = $nota->codnotafiscal;
             $notaItem->codnegocioprodutobarra = $negocioItem->codnegocioprodutobarra;
-            if (isset($negocioItem->NegocioProdutoBarraDevolucao))
-            {
-                foreach ($negocioItem->NegocioProdutoBarraDevolucao->NotaFiscalProdutoBarras as $nfpb)
-                {
+            if (isset($negocioItem->NegocioProdutoBarraDevolucao)) {
+                foreach ($negocioItem->NegocioProdutoBarraDevolucao->NotaFiscalProdutoBarras as $nfpb) {
                     if (!empty($nfpb->NotaFiscal->nfechave) &&
                         ($nfpb->NotaFiscal->codstatus == NotaFiscal::CODSTATUS_AUTORIZADA
                         ||$nfpb->NotaFiscal->codstatus == NotaFiscal::CODSTATUS_LANCADA)
                         && ($nfpb->NotaFiscal->codnaturezaoperacao == $nfpb->NegocioProdutoBarra->Negocio->codnaturezaoperacao)
                         ) {
-
                         $notaReferenciada[$nfpb->NotaFiscal->nfechave] = $nfpb->NotaFiscal->nfechave;
 
                         // Caso a nota sendo devolvida tenha sido emitida por outra filial
@@ -472,8 +452,7 @@ class Negocio extends MGActiveRecord
                             $nota->codfilial = $nfpb->NotaFiscal->codfilial;
                             $nota->codestoquelocal = $nfpb->NotaFiscal->codestoquelocal;
                             $nota->emitida = true;
-                            if (!$nota->save())
-                            {
+                            if (!$nota->save()) {
                                 $this->addErrors($nota->getErrors());
                                 return false;
                             }
@@ -488,311 +467,272 @@ class Negocio extends MGActiveRecord
             $notaItem->valortotal = round($quantidade * $negocioItem->valorunitario, 2);
             $valorDesconto += round($percDesconto * $notaItem->valortotal, 2);
 
-			if (!$notaItem->save())
-			{
-				$this->addErrors($notaItem->getErrors());
-				return false;
-			}
-		}
+            if (!$notaItem->save()) {
+                $this->addErrors($notaItem->getErrors());
+                return false;
+            }
+        }
 
-		//acumula o valor de desconto
-        if (abs($valorDesconto) > 0)
-        {
+        //acumula o valor de desconto
+        if (abs($valorDesconto) > 0) {
             $nota->refresh();
             $nota->valordesconto += $valorDesconto;
             $nota->setScenario('geracaoAutomatica');
-            if (!$nota->save())
-            {
+            if (!$nota->save()) {
                 $this->addErrors($nota->getErrors());
                 return false;
             }
         }
 
-        foreach ($notaReferenciada as $cod => $chave)
-        {
+        foreach ($notaReferenciada as $cod => $chave) {
             $nfr = new NotaFiscalReferenciada();
             $nfr->codnotafiscal = $nota->codnotafiscal;
             $nfr->nfechave = $chave;
-			if (!$nfr->save())
-			{
-				$this->addErrors($nfr->getErrors());
-				return false;
-			}
+            if (!$nfr->save()) {
+                $this->addErrors($nfr->getErrors());
+                return false;
+            }
         }
 
 
-		if (empty($nota->codnotafiscal))
-		{
-			$this->addError("codnotafiscal", "Não existe nenhum produto para gerar Nota neste Negócio");
-			return false;
-		}
+        if (empty($nota->codnotafiscal)) {
+            $this->addError("codnotafiscal", "Não existe nenhum produto para gerar Nota neste Negócio");
+            return false;
+        }
 
-		if ($geraDuplicatas)
-		{
-			foreach($this->NegocioFormaPagamentos as $forma)
-			{
-				foreach ($forma->Titulos as $titulo)
-				{
-					$duplicata = new NotaFiscalDuplicatas;
-					$duplicata->codnotafiscal = $nota->codnotafiscal;
-					$duplicata->fatura = $titulo->numero;
-					$duplicata->valor = $titulo->valor;
-					$duplicata->vencimento = $titulo->vencimento;
-					if (!$duplicata->save())
-					{
-						$this->addErrors($duplicata->getErrors());
-						return false;
-					}
-				}
-			}
-		}
+        if ($geraDuplicatas) {
+            foreach ($this->NegocioFormaPagamentos as $forma) {
+                foreach ($forma->Titulos as $titulo) {
+                    $duplicata = new NotaFiscalDuplicatas;
+                    $duplicata->codnotafiscal = $nota->codnotafiscal;
+                    $duplicata->fatura = $titulo->numero;
+                    $duplicata->valor = $titulo->valor;
+                    $duplicata->vencimento = $titulo->vencimento;
+                    if (!$duplicata->save()) {
+                        $this->addErrors($duplicata->getErrors());
+                        return false;
+                    }
+                }
+            }
+        }
 
-		//retorna codigo da nota gerada
-		return $nota->codnotafiscal;
+        //retorna codigo da nota gerada
+        return $nota->codnotafiscal;
+    }
 
-	}
+    public function cancelar()
+    {
 
-	public function cancelar()
-	{
+        // verifica se ja nao foi cancelado
+        if ($this->codnegociostatus == NegocioStatus::CANCELADO) {
+            $this->addError("codnegociostatus", 'Negócio já está cancelado!');
+            return false;
+        }
 
-		// verifica se ja nao foi cancelado
-		if ($this->codnegociostatus == NegocioStatus::CANCELADO)
-		{
-			$this->addError("codnegociostatus", 'Negócio já está cancelado!');
-			return false;
-		}
+        // verifica se tem nota fiscal ativa
+        foreach ($this->NegocioProdutoBarras as $npb) {
+            foreach ($npb->NotaFiscalProdutoBarras as $nfpb) {
+                if ($nfpb->NotaFiscal->codstatus <> NotaFiscal::CODSTATUS_CANCELADA && $nfpb->NotaFiscal->codstatus <> NotaFiscal::CODSTATUS_INUTILIZADA) {
+                    $this->addError("codnegociostatus", 'Negócio possui Nota Fiscal ativa!');
+                    return false;
+                }
+            }
+        }
 
-		// verifica se tem nota fiscal ativa
-		foreach ($this->NegocioProdutoBarras as $npb)
-		{
-			foreach ($npb->NotaFiscalProdutoBarras as $nfpb)
-			{
-				if ($nfpb->NotaFiscal->codstatus <> NotaFiscal::CODSTATUS_CANCELADA && $nfpb->NotaFiscal->codstatus <> NotaFiscal::CODSTATUS_INUTILIZADA)
-				{
-					$this->addError("codnegociostatus", 'Negócio possui Nota Fiscal ativa!');
-					return false;
-				}
-			}
-		}
+        $transaction = Yii::app()->db->beginTransaction();
 
-		$transaction = Yii::app()->db->beginTransaction();
+        try {
+            foreach ($this->NegocioFormaPagamentos as $nfp) {
+                foreach ($nfp->Titulos as $tit) {
+                    if (!empty($tit->estornado)) {
+                        continue;
+                    }
 
-		try
-		{
-			foreach ($this->NegocioFormaPagamentos as $nfp)
-			{
-				foreach ($nfp->Titulos as $tit)
-				{
-					if (!empty($tit->estornado))
-						continue;
+                    if (!$tit->estorna()) {
+                        $this->addError("codnegociostatus", "Erro ao estornar Titulos!");
+                        $this->addErrors($tit->getErrors());
+                        $transaction->rollBack();
+                        return false;
+                    }
+                }
+            }
 
-					if (!$tit->estorna())
-					{
-						$this->addError("codnegociostatus", "Erro ao estornar Titulos!");
-						$this->addErrors($tit->getErrors());
-						$transaction->rollBack();
-						return false;
-					}
-				}
-			}
-
-			$this->codnegociostatus = NegocioStatus::CANCELADO;
-			if ($this->save())
-			{
-				$transaction->commit();
+            $this->codnegociostatus = NegocioStatus::CANCELADO;
+            if ($this->save()) {
+                $transaction->commit();
                 $this->movimentaEstoque();
-				return true;
-			}
-			else
-			{
-				$transaction->rollBack();
-				return false;
-			}
+                return true;
+            } else {
+                $transaction->rollBack();
+                return false;
+            }
+        } catch (Exception $e) {
+            $transaction->rollBack();
+            return false;
+        }
+    }
 
-		}
-		catch (Exception $e)
-		{
-			$transaction->rollBack();
-			return false;
-		}
-
-	}
-
-	function gerarDevolucao($arrQuantidadeDevolucao)
-	{
+    public function gerarDevolucao($arrQuantidadeDevolucao)
+    {
 
             //inicia Transacao
-            $trans = $this->dbConnection->beginTransaction();
+        $trans = $this->dbConnection->beginTransaction();
 
-            //monta array com itens devolvidos
-            $arr = array();
-            foreach($arrQuantidadeDevolucao as $codnegocioprodutobarra => $quantidadedevolucao)
-            {
-                    $quantidadedevolucao = Yii::app()->format->unformatNumber($quantidadedevolucao);
-                    if ($quantidadedevolucao > 0)
-                            $arr[$codnegocioprodutobarra] = $quantidadedevolucao;
+        //monta array com itens devolvidos
+        $arr = array();
+        foreach ($arrQuantidadeDevolucao as $codnegocioprodutobarra => $quantidadedevolucao) {
+            $quantidadedevolucao = Yii::app()->format->unformatNumber($quantidadedevolucao);
+            if ($quantidadedevolucao > 0) {
+                $arr[$codnegocioprodutobarra] = $quantidadedevolucao;
             }
+        }
 
-            //se nao tem nenhum item para devolver, retorna erro
-            if (empty($arr))
-            {
-                    $this->addError('codnegocio', 'Não foi selecionado nenhum item para devolução!');
-                    $trans->rollback();
-                    return false;
-            }
+        //se nao tem nenhum item para devolver, retorna erro
+        if (empty($arr)) {
+            $this->addError('codnegocio', 'Não foi selecionado nenhum item para devolução!');
+            $trans->rollback();
+            return false;
+        }
 
-            //cria registro tabela Negocio
-            $negocio = new Negocio;
-            $negocio->codpessoa = $this->codpessoa;
-            $negocio->codfilial = $this->codfilial;
-            $negocio->codestoquelocal = $this->codestoquelocal;
-            $negocio->lancamento = date('d/m/Y H:i:s');
-            $negocio->codpessoavendedor = $this->codpessoavendedor;
-            $negocio->codnaturezaoperacao = $this->NaturezaOperacao->codnaturezaoperacaodevolucao;
-            if (!isset($negocio->NaturezaOperacao))
-            {
-                    $this->addError('codnegocio', 'Natureza de Operação de devolução não parametrizada!');
-                    $trans->rollback();
-                    return false;
-            }
+        //cria registro tabela Negocio
+        $negocio = new Negocio;
+        $negocio->codpessoa = $this->codpessoa;
+        $negocio->codfilial = $this->codfilial;
+        $negocio->codestoquelocal = $this->codestoquelocal;
+        $negocio->lancamento = date('d/m/Y H:i:s');
+        $negocio->codpessoavendedor = $this->codpessoavendedor;
+        $negocio->codnaturezaoperacao = $this->NaturezaOperacao->codnaturezaoperacaodevolucao;
+        if (!isset($negocio->NaturezaOperacao)) {
+            $this->addError('codnegocio', 'Natureza de Operação de devolução não parametrizada!');
+            $trans->rollback();
+            return false;
+        }
 
-            $negocio->codoperacao = $negocio->NaturezaOperacao->codoperacao;
-            $negocio->codnegociostatus = NegocioStatus::ABERTO;
-            //$negocio->observacoes = 'Devolução referente Negócio ' . Yii::app()->format->formataCodigo($this->codnegocio);
-            $negocio->codusuario = Yii::app()->user->id;
+        $negocio->codoperacao = $negocio->NaturezaOperacao->codoperacao;
+        $negocio->codnegociostatus = NegocioStatus::ABERTO;
+        //$negocio->observacoes = 'Devolução referente Negócio ' . Yii::app()->format->formataCodigo($this->codnegocio);
+        $negocio->codusuario = Yii::app()->user->id;
 
-            //salva Negocio
-            if (!$negocio->save())
-            {
-                    $this->addErrors($negocio->getErrors());
-                    $trans->rollback();
-                    return false;
-            }
+        //salva Negocio
+        if (!$negocio->save()) {
+            $this->addErrors($negocio->getErrors());
+            $trans->rollback();
+            return false;
+        }
 
-            //percorre os itens
-            $gerarNotaDevolucao = false;
-            $valorDesconto = 0;
-            $percDesconto = ($this->valordesconto / $this->valorprodutos);
+        //percorre os itens
+        $gerarNotaDevolucao = false;
+        $valorDesconto = 0;
+        $percDesconto = ($this->valordesconto / $this->valorprodutos);
 
-            foreach ($arr as $codnegocioprodutobarra => $quantidadedevolucao)
-            {
+        foreach ($arr as $codnegocioprodutobarra => $quantidadedevolucao) {
 
                     /* @var $npb_original NegocioProdutoBarra */
 
-                    //busca item a ser devolvido
-                    $npb_original =  NegocioProdutoBarra::model()->findByPk($codnegocioprodutobarra);
-                    if($npb_original===null)
-                    {
-                            $this->addError('codnegocio', 'NegocioProdutoBarra Original não localizado!');
-                            $trans->rollback();
-                            return false;
-                    }
-
-                    //cria item na devolucao
-                    $npb = new NegocioProdutoBarra();
-                    $npb->codnegocio = $negocio->codnegocio;
-                    $npb->quantidade = $quantidadedevolucao;
-                    $npb->valorunitario = $npb_original->valorunitario;
-                    $npb->valortotal = $npb->quantidade * $npb->valorunitario;
-                    $npb->codprodutobarra = $npb_original->codprodutobarra;
-                    $npb->codnegocioprodutobarradevolucao = $npb_original->codnegocioprodutobarra;
-
-                    //calcula desconto proporcional
-                    $valorDesconto += round($percDesconto * $npb->valortotal, 2);
-
-                    //salva item
-                    if (!$npb->save())
-                    {
-                            $this->addErrors($npb->getErrors());
-                            $trans->rollback();
-                            return false;
-                    }
-
-                    //Verifica quais notas fiscais referenciar na devolucao
-                    foreach ($npb_original->NotaFiscalProdutoBarras as $nfpb)
-                            if (!in_array($nfpb->NotaFiscal->codstatus, array(NotaFiscal::CODSTATUS_CANCELADA, NotaFiscal::CODSTATUS_INUTILIZADA)))
-                                    $gerarNotaDevolucao = true;
-
-            }
-
-            //recarrega modelo do negocio, para atalizar totais
-            $negocio->refresh();
-
-            $negocio->valordesconto = $valorDesconto;
-            $negocio->valortotal = $negocio->valorprodutos - $negocio->valordesconto;
-            $negocio->valoravista = 0;
-            $negocio->valoraprazo = $negocio->valortotal;
-
-            if (!$negocio->save())
-            {
-                $this->addErrors($negocio->getErrors());
+            //busca item a ser devolvido
+            $npb_original =  NegocioProdutoBarra::model()->findByPk($codnegocioprodutobarra);
+            if ($npb_original===null) {
+                $this->addError('codnegocio', 'NegocioProdutoBarra Original não localizado!');
                 $trans->rollback();
                 return false;
             }
 
-            //cria forma de pagamento
-            $nfp = new NegocioFormaPagamento();
-            $nfp->codnegocio = $negocio->codnegocio;
-            $nfp->valorpagamento = $negocio->valoraprazo;
-            $nfp->codformapagamento = NegocioFormaPagamento::CARTEIRA_A_VISTA;
-            if (!$nfp->save())
-            {
-                $this->addErrors($nfp->getErrors());
+            //cria item na devolucao
+            $npb = new NegocioProdutoBarra();
+            $npb->codnegocio = $negocio->codnegocio;
+            $npb->quantidade = $quantidadedevolucao;
+            $npb->valorunitario = $npb_original->valorunitario;
+            $npb->valortotal = $npb->quantidade * $npb->valorunitario;
+            $npb->codprodutobarra = $npb_original->codprodutobarra;
+            $npb->codnegocioprodutobarradevolucao = $npb_original->codnegocioprodutobarra;
+
+            //calcula desconto proporcional
+            $valorDesconto += round($percDesconto * $npb->valortotal, 2);
+
+            //salva item
+            if (!$npb->save()) {
+                $this->addErrors($npb->getErrors());
                 $trans->rollback();
                 return false;
             }
 
-            //fecha a devolucao
-            if (!$negocio->fecharNegocio())
-            {
-                $this->addErrors($negocio->getErrors());
-                $trans->rollback();
-                return false;
-            }
-
-            //informa o usuario do sucesso
-            Yii::app()->user->setFlash('success', "Gerada devolução <b>{$negocio->codnegocio}</b>!");
-
-            if ($gerarNotaDevolucao)
-            {
-                if (!$codnotafiscal = $negocio->gerarNotaFiscal(null, NotaFiscal::MODELO_NFE, false))
-                {
-                    $this->addErrors($negocio->getErrors());
-                    $trans->rollback();
-                    return false;
+            //Verifica quais notas fiscais referenciar na devolucao
+            foreach ($npb_original->NotaFiscalProdutoBarras as $nfpb) {
+                if (!in_array($nfpb->NotaFiscal->codstatus, array(NotaFiscal::CODSTATUS_CANCELADA, NotaFiscal::CODSTATUS_INUTILIZADA))) {
+                    $gerarNotaDevolucao = true;
                 }
-
             }
+        }
 
-            $trans->commit();
-            return $negocio->codnegocio;
+        //recarrega modelo do negocio, para atalizar totais
+        $negocio->refresh();
 
-	}
+        $negocio->valordesconto = $valorDesconto;
+        $negocio->valortotal = $negocio->valorprodutos - $negocio->valordesconto;
+        $negocio->valoravista = 0;
+        $negocio->valoraprazo = $negocio->valortotal;
 
-        public function movimentaEstoque()
-        {
-            // Chama MGLara para fazer movimentacao do estoque com delay de 10 segundos
-            $url = "http://localhost/MGLara/estoque/gera-movimento-negocio/{$this->codnegocio}?delay=10";
-            $ret = json_decode(file_get_contents($url));
-            if (@$ret->response !== 'Agendado')
-            {
-                echo '<pre>';
-                var_dump($ret);
-                echo '<hr>';
-                die('Erro ao Gerar Movimentação de Estoque');
+        if (!$negocio->save()) {
+            $this->addErrors($negocio->getErrors());
+            $trans->rollback();
+            return false;
+        }
+
+        //cria forma de pagamento
+        $nfp = new NegocioFormaPagamento();
+        $nfp->codnegocio = $negocio->codnegocio;
+        $nfp->valorpagamento = $negocio->valoraprazo;
+        $nfp->codformapagamento = NegocioFormaPagamento::CARTEIRA_A_VISTA;
+        if (!$nfp->save()) {
+            $this->addErrors($nfp->getErrors());
+            $trans->rollback();
+            return false;
+        }
+
+        //fecha a devolucao
+        if (!$negocio->fecharNegocio()) {
+            $this->addErrors($negocio->getErrors());
+            $trans->rollback();
+            return false;
+        }
+
+        //informa o usuario do sucesso
+        Yii::app()->user->setFlash('success', "Gerada devolução <b>{$negocio->codnegocio}</b>!");
+
+        if ($gerarNotaDevolucao) {
+            if (!$codnotafiscal = $negocio->gerarNotaFiscal(null, NotaFiscal::MODELO_NFE, false)) {
+                $this->addErrors($negocio->getErrors());
+                $trans->rollback();
                 return false;
             }
-            return true;
         }
 
-        /*
-        protected function afterSave()
-        {
-            if ($this->_codnegociostatus_original != $this->codnegociostatus) {
-                $this->movimentaEstoque();
-            }
-        }
-         *
-         */
+        $trans->commit();
+        return $negocio->codnegocio;
+    }
 
+    public function movimentaEstoque()
+    {
+        // Chama MGLara para fazer movimentacao do estoque com delay de 10 segundos
+        $url = "http://localhost/MGLara/estoque/gera-movimento-negocio/{$this->codnegocio}?delay=10";
+        $ret = json_decode(file_get_contents($url));
+        if (@$ret->response !== 'Agendado') {
+            echo '<pre>';
+            var_dump($ret);
+            echo '<hr>';
+            die('Erro ao Gerar Movimentação de Estoque');
+            return false;
+        }
+        return true;
+    }
+
+    /*
+    protected function afterSave()
+    {
+        if ($this->_codnegociostatus_original != $this->codnegociostatus) {
+            $this->movimentaEstoque();
+        }
+    }
+     *
+     */
 }
