@@ -314,7 +314,11 @@ class Negocio extends MGActiveRecord
 		}
 
 		//valida total pagamentos
+<<<<<<< HEAD
 		if (($this->valortotal - $valorPagamentos) >= 0.01)
+=======
+		if (($this->valortotal - $valorPagamentos) >= 0.01) {
+>>>>>>> 110eb432e826311a8758eb9fb668f32794187195
 		{
             $valorPagamentos = Yii::app()->format->formatNumber($valorPagamentos);
             $valorTotal = Yii::app()->format->formatNumber($this->valortotal);
