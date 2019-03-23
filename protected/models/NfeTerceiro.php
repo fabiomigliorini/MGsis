@@ -117,7 +117,7 @@ class NfeTerceiro extends MGActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'NfeTerceiroDuplicatas' => array(self::HAS_MANY, 'NfeTerceiroDuplicata', 'codnfeterceiro', 'order'=>'dvenc ASC'),
-			'NfeTerceiroItems' => array(self::HAS_MANY, 'NfeTerceiroItem', 'codnfeterceiro', 'order'=>'xprod ASC'),
+			'NfeTerceiroItems' => array(self::HAS_MANY, 'NfeTerceiroItem', 'codnfeterceiro', 'order'=>'nitem ASC'),
 			'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
 			'Operacao' => array(self::BELONGS_TO, 'Operacao', 'codoperacao'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
