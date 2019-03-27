@@ -7,9 +7,13 @@
 <fieldset>
 	<div class="row-fluid">
 		<div class="span5">
-			<?php 	
-			echo $form->toggleButtonRow($model,'emitida', array('options' => array('width' => 200,  'enabledLabel' => 'Filial', 'disabledLabel' => 'Contraparte')));
+			<?php
+			echo $form->select2Row($model,'codfilial', Filial::getListaCombo() , array('class'=>'input-medium'));
+			echo $form->select2Row($model,'codestoquelocal', EstoqueLocal::getListaCombo() , array('class'=>'input-medium'));
 			echo $form->select2Row($model,'modelo', NotaFiscal::getModeloListaCombo() , array('class'=>'input-large'));
+			echo $form->toggleButtonRow($model,'emitida', array('options' => array('width' => 200,  'enabledLabel' => 'Filial', 'disabledLabel' => 'Contraparte')));
+			echo $form->textFieldRow($model,'serie',array('class'=>'input-mini text-right'));
+			echo $form->textFieldRow($model,'numero',array('class'=>'input-small text-right'));
 			echo $form->textFieldRow($model,'nfechave',array('class'=>'input-xlarge text-center','maxlength'=>100));
 			echo $form->select2PessoaRow($model,'codpessoa', array('class'=>'input-xlarge'));
 			echo $form->select2Row($model,'codnaturezaoperacao', NaturezaOperacao::getListaCombo() , array('class'=>'input-xlarge'));
@@ -18,38 +22,39 @@
 		</div>
 		<div class="span3">
 			<?php
-			echo $form->select2Row($model,'codfilial', Filial::getListaCombo() , array('class'=>'input-medium'));
-			echo $form->select2Row($model,'codestoquelocal', EstoqueLocal::getListaCombo() , array('class'=>'input-medium'));
-			echo $form->textFieldRow($model,'serie',array('class'=>'input-mini text-right'));
-			echo $form->textFieldRow($model,'numero',array('class'=>'input-small text-right'));
 			echo $form->datetimepickerRow(
 					$model,
 					'emissao',
 					array(
-						'class' => 'input-medium text-center', 
+						'class' => 'input-medium text-center',
 						'options' => array(
 							'language' => 'pt',
 							'format' => 'dd/mm/yyyy hh:ii:ss',
 							),
 						//'prepend' => '<i class="icon-calendar"></i>',
 						)
-					); 
+					);
 
 			echo $form->datetimepickerRow(
 					$model,
 					'saida',
 					array(
-						'class' => 'input-medium text-center', 
+						'class' => 'input-medium text-center',
 						'options' => array(
 							'language' => 'pt',
 							'format' => 'dd/mm/yyyy hh:ii:ss',
 							),
 						//'prepend' => '<i class="icon-calendar"></i>',
 						)
-					); 
+					);
+			echo $form->select2PessoaRow($model,'codpessoatransportador', array('class'=>'input-xlarge'));
 			echo $form->select2Row($model,'frete', NotaFiscal::getFreteListaCombo() , array('class'=>'input-medium'));
 			echo $form->textFieldRow($model,'volumes',array('class'=>'input-mini text-right'));
-
+			echo $form->textFieldRow($model,'volumesespecie',array('class'=>'input-medium', 'maxlength'=>60));
+			echo $form->textFieldRow($model,'volumesmarca',array('class'=>'input-medium', 'maxlength'=>60));
+			echo $form->textFieldRow($model,'volumesnumero',array('class'=>'input-medium', 'maxlength'=>60));
+			echo $form->textFieldRow($model,'pesobruto',array('class'=>'input-medium text-right'));
+			echo $form->textFieldRow($model,'pesoliquido',array('class'=>'input-medium text-right'));
 			?>
 		</div>
 		<div class="span3">
@@ -68,9 +73,9 @@
 </fieldset>
 <div class="form-actions">
 
-    
-    <?php 
-	
+
+    <?php
+
 
         $this->widget(
             'bootstrap.widgets.TbButton',
@@ -80,15 +85,15 @@
                 'label' => 'Salvar',
                 'icon' => 'icon-ok',
                 )
-            ); 
+            );
 	?>
-    
+
 </div>
 
 <?php $this->endWidget(); ?>
 
 <script type='text/javascript'>
-	
+
 function calculaTotal()
 {
 	//pega valor Desconto
@@ -99,17 +104,17 @@ function calculaTotal()
 		+ Number($('#NotaFiscal_valorseguro').autoNumeric('get'))
 		- Number($('#NotaFiscal_valordesconto').autoNumeric('get'))
 		+ Number($('#NotaFiscal_valoroutras').autoNumeric('get'));
-	
+
 	$('#NotaFiscal_valortotal').autoNumeric('set', total);
 
 }
 
 function desabilitaCamposEmitida()
 {
-	
+
 	var emitida = $('#NotaFiscal_emitida').is(':checked');
 	var valorbanco = ((emitida == <?php echo ($model->emitida)?"true":"false" ?>) &&  <?php echo ($model->isNewRecord)?"false":"true" ?>);
-   
+
 	if (valorbanco)
 	{
 		$("#NotaFiscal_serie").val("<?php echo $model->serie; ?>");
@@ -124,16 +129,16 @@ function desabilitaCamposEmitida()
 		$("#NotaFiscal_nfechave").val("");
 		$("#NotaFiscal_modelo").select2("val", "<?php echo $model->modelo; ?>");
 	}
-	
+
 	$("#NotaFiscal_serie").prop('disabled', emitida);
 	$("#NotaFiscal_numero").prop('disabled', emitida);
 	$("#NotaFiscal_nfechave").prop('disabled', emitida);
-	
+
 	if (emitida && $("#NotaFiscal_numero").val() != 0)
 		$("#NotaFiscal_modelo").prop('disabled', true);
 	else
 		$("#NotaFiscal_modelo").prop('disabled', false);
-	
+
 }
 
 var codnaturezaoperacaoantigo = <?php echo empty($model->codnaturezaoperacao)?0:$model->codnaturezaoperacao; ?>;
@@ -143,26 +148,26 @@ function atualizaObservacoes()
 {
 	var codnaturezaoperacao = $("#NotaFiscal_codnaturezaoperacao").val();
 	var codfilial = $("#NotaFiscal_codfilial").val();
-	
-	$.getJSON("<?php echo Yii::app()->createUrl('naturezaOperacao/buscaObservacoesNf')?>", 
-		{ 
+
+	$.getJSON("<?php echo Yii::app()->createUrl('naturezaOperacao/buscaObservacoesNf')?>",
+		{
 			id: codnaturezaoperacao,
 			idantigo: codnaturezaoperacaoantigo,
 			codfilial: codfilial,
 			codfilialantigo: codfilialantigo,
 		})
 		.done(function(data) {
-			
+
 			//pega observacao da tela
 			observacoes = $("#NotaFiscal_observacoes").val();
-			
+
 			//se havia algo preenchido automaticamente, apaga
 			if (data.observacoesnfantigo != null)
 				observacoes = observacoes.replace(data.observacoesnfantigo, "");
-		
+
 			if (data.mensagemprocomantigo != null)
 				observacoes = observacoes.replace(data.mensagemprocomantigo, "");
-			
+
 			observacoes = observacoes.replace(/^\s*[\r\n]/gm, '');
 			//observacoes = observacoes.replace(/\n\n/g, '\n');
 
@@ -173,15 +178,15 @@ function atualizaObservacoes()
 					observacoes += "\n";
 				observacoes += data.mensagemprocom;
 			}
-			
+
 			if (data.observacoesnf != null && $("#NotaFiscal_modelo").select2("val") == <?php echo NotaFiscal::MODELO_NFE; ?>)
 			{
 				if (observacoes.length > 0)
 					observacoes += "\n";
 				observacoes += data.observacoesnf;
 			}
-			
-			
+
+
 			//joga na tela
 			$("#NotaFiscal_observacoes").val(observacoes);
 
@@ -190,15 +195,15 @@ function atualizaObservacoes()
 			var err = textStatus + ", " + error;
 			console.log( "Request Failed: " + err );
 		});
-	
+
 	codnaturezaoperacaoantigo = $("#NotaFiscal_codnaturezaoperacao").val();
 	codfilialantigo = $("#NotaFiscal_codfilial").val();
 }
-	
+
 $(document).ready(function() {
 
 	$("#NotaFiscal_observacoes").RemoveAcentos();
-	
+
 	$('#NotaFiscal_valorprodutos').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#NotaFiscal_icmsstvalor').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#NotaFiscal_ipivalor').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
@@ -208,6 +213,10 @@ $(document).ready(function() {
 	$('#NotaFiscal_valoroutras').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#NotaFiscal_valortotal').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 
+	$('#NotaFiscal_volumes').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.', mDec:0 });
+	$('#NotaFiscal_pesoliquido').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.', mDec:3 });
+	$('#NotaFiscal_pesobruto').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.', mDec:3 });
+
 	$('#NotaFiscal_valorprodutos').change(function(e){ calculaTotal(); });
 	$('#NotaFiscal_icmsstvalor').change(function(e){ calculaTotal(); });
 	$('#NotaFiscal_ipivalor').change(function(e){ calculaTotal(); });
@@ -216,7 +225,7 @@ $(document).ready(function() {
 	$('#NotaFiscal_valordesconto').change(function(e){ calculaTotal(); });
 	$('#NotaFiscal_valoroutras').change(function(e){ calculaTotal(); });
 
-	$('#NotaFiscal_nfechave').change(function(e){ 
+	$('#NotaFiscal_nfechave').change(function(e){
 		$(this).val($(this).val().replace(/\s+/g, ''));
 	});
 
@@ -235,7 +244,7 @@ $(document).ready(function() {
             }
         });
     });
-	
+
 	desabilitaCamposEmitida();
 });
 

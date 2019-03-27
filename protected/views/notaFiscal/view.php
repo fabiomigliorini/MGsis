@@ -136,7 +136,7 @@ $(document).ready(function(){
 
 
 <div class="row-fluid">
-	<small class="span2">
+	<div class="span4">
 		<?php
 		$this->widget('bootstrap.widgets.TbDetailView',array(
 			'data'=>$model,
@@ -145,11 +145,28 @@ $(document).ready(function(){
 					'name'=>'codnotafiscal',
 					'value'=>Yii::app()->format->formataCodigo($model->codnotafiscal),
 					),
+				array(
+					'name'=>'codfilial',
+					'value'=>CHtml::link(CHtml::encode($model->Filial->filial), array("filial/view", "id"=>$model->codfilial)) . ' (' . $model->EstoqueLocal->estoquelocal . ')',
+					'type'=>'raw',
+					),
+				array(
+					'name'=>'codnaturezaoperacao',
+					'value'=>
+						((isset($model->Operacao))?$model->Operacao->operacao:null)
+						. " - " .
+						((isset($model->NaturezaOperacao))?$model->NaturezaOperacao->naturezaoperacao:null),
+					),
 				'serie',
 				array(
 					'name'=>'numero',
 					'value'=>Yii::app()->format->formataPorMascara($model->numero, "########"),
 					),
+				array(
+					'name'=>'codpessoa',
+					'value'=>CHtml::link(CHtml::encode($model->Pessoa->fantasia), array("pessoa/view", "id"=>$model->codpessoa)),
+					'type'=>"raw",
+				),
 				array(
 					'name'=>'emissao',
 					'value'=>str_replace(' ', '&nbsp', $model->emissao),
@@ -163,8 +180,8 @@ $(document).ready(function(){
 				),
 		));
 		?>
-	</small>
-	<div class="span4">
+	</div>
+	<small class="span3">
 	<?php
 
 	$fretes = NotaFiscal::getFreteListaCombo();
@@ -177,33 +194,34 @@ $(document).ready(function(){
 		'data'=>$model,
 		'attributes'=>array(
 			array(
-				'name'=>'codfilial',
-				'value'=>CHtml::link(CHtml::encode($model->Filial->filial), array("filial/view", "id"=>$model->codfilial)) . ' (' . $model->EstoqueLocal->estoquelocal . ')',
-				'type'=>'raw',
-				),
-			array(
-				'name'=>'codnaturezaoperacao',
-				'value'=>
-					((isset($model->Operacao))?$model->Operacao->operacao:null)
-					. " - " .
-					((isset($model->NaturezaOperacao))?$model->NaturezaOperacao->naturezaoperacao:null),
-				),
-			array(
 				'name'=>'frete',
 				'value'=>$frete,
 				),
-			'volumes',
 			array(
-				'name'=>'codpessoa',
-				'value'=>CHtml::link(CHtml::encode($model->Pessoa->fantasia), array("pessoa/view", "id"=>$model->codpessoa)),
+				'name'=>'volumes',
+				'value'=>Yii::app()->format->formatNumber($model->volumes, 0),
+			),
+			'volumesespecie',
+			'volumesmarca',
+			'volumesnumero',
+			array(
+				'name'=>'pesobruto',
+				'value'=>Yii::app()->format->formatNumber($model->pesobruto, 3),
+			),
+			array(
+				'name'=>'pesoliquido',
+				'value'=>Yii::app()->format->formatNumber($model->pesoliquido, 3),
+			),
+			array(
+				'name'=>'codpessoatransportador',
+				'value'=>CHtml::link(CHtml::encode($model->PessoaTransportador->fantasia), array("pessoa/view", "id"=>$model->codpessoatransportador)),
 				'type'=>"raw",
 			),
-
 		),
 	));
 	?>
-	</div>
-	<small class="span5">
+</small>
+	<small class="span4">
 	<?php
 	$css_label = "";
 	$staus = "&nbsp";
@@ -496,6 +514,15 @@ $(document).ready(function(){
 						<br>
 						<b class="text-success">
 							<?php echo CHtml::encode($prod->descricaoalternativa); ?>
+						</b>
+					<?php endif; ?>
+					<?php if (!empty($prod->pedido) || !empty($prod->pedidoitem)): ?>
+						<br>
+						<b class="text-warning">
+							Pedido:
+							<?php echo CHtml::encode($prod->pedido); ?> -
+							Item:
+							<?php echo CHtml::encode($prod->pedidoitem); ?>
 						</b>
 					<?php endif; ?>
 				</td>

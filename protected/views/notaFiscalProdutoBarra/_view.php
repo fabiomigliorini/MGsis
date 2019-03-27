@@ -9,11 +9,11 @@
 
 			<div class="span6">
 				<?php echo CHtml::link(CHtml::encode($data->NotaFiscal->Pessoa->fantasia), array('pessoa/view','id'=>$data->NotaFiscal->Pessoa->codpessoa)); ?>
-			</div>	
+			</div>
 		</small>
 
 		<div class="span5">
-		
+
 			<small class="span2 text-right"><?php echo CHtml::encode(Yii::app()->format->formatNumber($data->quantidade)); ?></small>
 
 			<small class="span2 muted">
@@ -41,54 +41,54 @@
 				<?php echo CHtml::encode(Yii::app()->format->formatNumber($data->valorunitario)); ?>
 			</small>
 			<small class="span2 text-right muted">
-				<?php 
+				<?php
 				if ($ipi>0)
-					echo CHtml::encode(Yii::app()->format->formatNumber($ipi*100, 0)) . ' % IPI'; 
+					echo CHtml::encode(Yii::app()->format->formatNumber($ipi*100, 0)) . ' % IPI';
 				?>
 			</small>
 			<small class="span2 text-right muted">
-				<?php 
+				<?php
 				if ($icmsst>0)
-					echo CHtml::encode(Yii::app()->format->formatNumber($icmsst*100, 0)) . ' % ST'; 
+					echo CHtml::encode(Yii::app()->format->formatNumber($icmsst*100, 0)) . ' % ST';
 				?>
 			</small>
-			
+
 			<small class="span2 text-right"><?php echo CHtml::encode(Yii::app()->format->formatNumber($precounitario)); ?></small>
-			
-		</div>	
-			
+
+		</div>
+
 		<div class="span3">
 			<small class="span6">
-					<?php echo CHtml::link(CHtml::encode(Yii::app()->format->formataNumeroNota($data->NotaFiscal->emitida, $data->NotaFiscal->serie, $data->NotaFiscal->numero, $data->NotaFiscal->modelo)),array('notaFiscal/view','id'=>$data->NotaFiscal->codnotafiscal)); ?>			
+					<?php echo CHtml::link(CHtml::encode(Yii::app()->format->formataNumeroNota($data->NotaFiscal->emitida, $data->NotaFiscal->serie, $data->NotaFiscal->numero, $data->NotaFiscal->modelo)),array('notaFiscal/view','id'=>$data->NotaFiscal->codnotafiscal)); ?>
 			</small>
 
 			<small class="span2 muted"><?php echo CHtml::encode($data->ProdutoBarra->barras); ?></small>
 		</div>
 
 		<?php /*
-		 * 
-		 * 
-		
+		 *
+		 *
+
 		<small class="span1 muted text-right"><?php echo CHtml::encode($data->ProdutoBarra->ProdutoEmbalagem->UnidadeMedida->sigla); ?></small>
-		
-		
+
+
 		<small class="span1 muted text-right"><?php echo CHtml::encode($data->NotaFiscal->serie); ?></small>
-		
+
 		<small class="span1 muted "><?php echo CHtml::encode($data->NotaFiscal->numero); ?></small>
-		
+
 		<small class="span1 muted "><?php echo CHtml::encode($data->ProdutoBarra->barras); ?></small>
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
  		<small class="span1 muted"><?php echo CHtml::encode($data->codnotafiscal); ?></small>
- 
+
 		<small class="span2 muted"><?php echo CHtml::encode($data->codprodutobarra); ?></small>
 
 		<small class="span2 muted"><?php echo CHtml::encode($data->codcfop); ?></small>
@@ -97,7 +97,7 @@
 
 
 		<small class="span2 muted"><?php echo CHtml::encode($data->valorunitario); ?></small>
-		 
+
 		<small class="span2 muted"><?php echo CHtml::encode($data->valortotal); ?></small>
 
 		<small class="span2 muted"><?php echo CHtml::encode($data->icmsbase); ?></small>

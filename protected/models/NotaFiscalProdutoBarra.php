@@ -44,7 +44,7 @@
  * @property string $csllvalor
  * @property string $irpjbase
  * @property string $irpjvalor
- * 
+ *
  * The followings are the available model relations:
  * @property Cfop $Cfop
  * @property NegocioProdutoBarra $NegocioProdutoBarra
@@ -58,14 +58,14 @@
  */
 class NotaFiscalProdutoBarra extends MGActiveRecord
 {
-	
+
 	public $codproduto;
 	public $codfilial;
 	public $codpessoa;
 	public $saida_de;
 	public $saida_ate;
 	public $codnaturezaoperacao;
-	
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -87,6 +87,8 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 			array('quantidade, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, icmsstbase, icmsstpercentual, icmsstvalor, pisbase, pisvalor, cofinsbase, cofinsvalor, csllbase, csllvalor, irpjbase, irpjvalor', 'length', 'max'=>14),
 			array('valorunitario', 'length', 'max'=>23),
 			array('csosn', 'length', 'max'=>4),
+			array('pedido', 'length', 'max'=>15),
+			array('pedidoitem', 'numerical', 'integerOnly'=>true),
 			array('csosn', 'validaCsosn'),
 			array('icmscst, ipicst, piscst, cofinscst', 'validaCst'),
 			array('pispercentual, cofinspercentual, csllpercentual, irpjpercentual', 'length', 'max'=>5),
@@ -103,21 +105,21 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 	{
 		if ($this->NotaFiscal->Filial->crt != Filial::CRT_REGIME_NORMAL && empty($this->$attribute))
 			$this->addError($attribute,'CSOSN deve ser preenchido!');
-		
+
 		if ($this->NotaFiscal->Filial->crt == Filial::CRT_REGIME_NORMAL && !empty($this->$attribute))
 			$this->addError($attribute,'CSOSN não deve ser preenchido!');
-	}	
-	
+	}
+
 	//verifica se o numero tem pelo menos 10 digitos
 	public function validaCst($attribute,$params)
 	{
 		if ($this->NotaFiscal->Filial->crt == Filial::CRT_REGIME_NORMAL && empty($this->$attribute))
 			$this->addError($attribute,'CST deve ser preenchido!');
-		
+
 		if ($this->NotaFiscal->Filial->crt != Filial::CRT_REGIME_NORMAL && !empty($this->$attribute))
 			$this->addError($attribute,'CST não deve ser preenchido!');
-	}	
-	
+	}
+
 	/**
 	 * @return array relational rules.
 	 */
@@ -152,46 +154,49 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 			'quantidade' => 'Quantidade',
 			'valorunitario' => 'Preço',
 			'valortotal' => 'Total',
-			
+
 			'codnegocioprodutobarra' => 'Negócio',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
 			'codusuariocriacao' => 'Usuário Criação',
-			
+
 			'csosn' => 'CSOSN',
 			'icmscst' => 'ICMS CST',
 			'icmsbase' => 'ICMS Base',
 			'icmspercentual' => 'ICMS %',
 			'icmsvalor' => 'ICMS Valor',
-			
+
 			'icmsstbase' => 'ST Base',
 			'icmsstpercentual' => 'ST %',
 			'icmsstvalor' => 'ST Valor',
-			
+
 			'ipicst' => 'IPI CST',
 			'ipibase' => 'IPI Base',
 			'ipipercentual' => 'IPI %',
 			'ipivalor' => 'IPI Valor',
-			
+
 			'piscst' => 'PIS CST',
 			'pisbase' => 'PIS Base',
 			'pispercentual' => 'PIS %',
 			'pisvalor' => 'PIS Valor',
-			
+
 			'cofinscst' => 'Cofins CST',
 			'cofinsbase' => 'Cofins Base',
 			'cofinspercentual' => 'Cofins %',
 			'cofinsvalor' => 'Cofins Valor',
-			
+
 			'csllbase' => 'CSLL Base',
 			'csllpercentual' => 'CSLL %',
 			'csllvalor' => 'CSLL Valor',
-			
+
 			'irpjbase' => 'IRPJ Base',
 			'irpjpercentual' => 'IRPJ %',
 			'irpjvalor' => 'IRPJ Valor',
-			
+
+			'pedido' => 'Pedido',
+			'pedidoitem' => 'Item do Pedido',
+
 		);
 	}
 
@@ -236,16 +241,16 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao, false);
 		$criteria->compare('criacao',$this->criacao, false);
 		$criteria->compare('codusuariocriacao',$this->codusuariocriacao, false);
-		
+
 		if (!empty($this->codproduto))
 		{
 			$criteria->compare('"ProdutoBarra".codproduto', $this->codproduto);
 			$criteria->with[] = 'ProdutoBarra';
 		}
-		
+
 		$criteria->with[] = 'NotaFiscal';
 		$criteria->order = '"NotaFiscal".saida DESC, "NotaFiscal".codfilial ASC, "NotaFiscal".numero DESC';
-		
+
 		$criteria->compare('"NotaFiscal".codfilial', $this->codfilial);
 		$criteria->compare('"NotaFiscal".codpessoa', $this->codpessoa);
 		$criteria->compare('"NotaFiscal".codnaturezaoperacao', $this->codnaturezaoperacao);
@@ -259,8 +264,8 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 			$criteria->addCondition('"NotaFiscal".saida <= :saida_ate');
 			$criteria->params = array_merge($criteria->params, array(':saida_ate' => $saida_ate->format('Y-m-d')));
 		}
-		
-		
+
+
 		$criteria->compare('icmscst',$this->icmscst,false);
 		$criteria->compare('ipicst',$this->ipicst,false);
 		$criteria->compare('piscst',$this->piscst,false);
@@ -277,7 +282,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 		$criteria->compare('csllvalor',$this->csllvalor,false);
 		$criteria->compare('irpjbase',$this->irpjbase,false);
 		$criteria->compare('irpjvalor',$this->irpjvalor,false);
-		
+
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 			'pagination'=>array('pageSize'=>15),
@@ -294,42 +299,42 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
-	
+
 	protected function beforeValidate()
 	{
 		$this->calculaTributacao();
 		return parent::beforeValidate();
 	}
-	
+
 	public function calculaTributacao($somenteVazios = true)
 	{
 		if ((!empty($this->codcfop) && (!empty($this->csosn) || !empty($this->icmscst))) || !$somenteVazios)
 			return true;
-		
+
 		if (empty($this->ProdutoBarra))
 		{
 			$this->addError('codprodutobarra', 'Erro ao calcular tributação. Produto não informado!');
 			return false;
 		}
-		
+
 		if (empty($this->NotaFiscal))
 		{
 			$this->addError('codnotafiscal', 'Erro ao calcular tributação. Nota Fiscal não informada!');
 			return false;
 		}
-		
+
 		if (empty($this->NotaFiscal->Pessoa))
 		{
 			$this->addError('codnotafiscal', 'Erro ao calcular tributação. Pessoa não informada na Nota Fiscal!');
 			return false;
 		}
-		
+
 		if (empty($this->NotaFiscal->Filial))
 		{
 			$this->addError('codnotafiscal', 'Erro ao calcular tributação. Filial não informada na Nota Fiscal!');
 			return false;
 		}
-		
+
 		if ($this->NotaFiscal->Pessoa->Cidade->Estado == $this->NotaFiscal->Filial->Pessoa->Cidade->Estado)
 		    $filtroEstado = 'codestado = :codestado';
 		else
@@ -337,7 +342,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 
 		$trib = TributacaoNaturezaOperacao::model()->find(
 			array(
-			    'condition' => 
+			    'condition' =>
 					'   codtributacao = :codtributacao
 					AND codtipoproduto = :codtipoproduto
 					AND codnaturezaoperacao = :codnaturezaoperacao
@@ -354,28 +359,28 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 			    'order' => 'codestado nulls last, char_length(ncm) desc nulls last',
 			)
 		);
-		
+
 		if ($trib === null)
 		{
 			$this->addError('codprodutobarra', 'Erro ao calcular tributação. Impossível localizar tributação para o produto informado!');
 			return false;
 		}
-		
+
 		//Traz codigos de tributacao
 		$this->codcfop = $trib->codcfop;
-		
+
 		if ($this->NotaFiscal->Filial->crt == Filial::CRT_REGIME_NORMAL)
 		{
-			
+
 			//CST's
 			$this->icmscst = $trib->icmscst;
 			$this->ipicst = $trib->ipicst;
 			$this->piscst = $trib->piscst;
 			$this->cofinscst = $trib->cofinscst;
-			
+
 		    If (!empty($this->valortotal) && ($this->NotaFiscal->emitida))
 		    {
-				//Calcula ICMS				
+				//Calcula ICMS
 				If (!empty($trib->icmslpbase))
 					$this->icmsbase = round(($trib->icmslpbase * $this->valortotal)/100, 2);
 
@@ -383,7 +388,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 
 				If ((!empty($this->icmsbase)) and (!empty($this->icmspercentual)))
 					$this->icmsvalor = round(($this->icmsbase * $this->icmspercentual)/100, 2);
-				
+
 				//Calcula PIS
 				If ($trib->pispercentual > 0)
 				{
@@ -391,7 +396,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 					$this->pispercentual = $trib->pispercentual;
 					$this->pisvalor = round(($this->pisbase * $this->pispercentual)/100, 2);
 				}
-				
+
 				//Calcula Cofins
 				If ($trib->cofinspercentual > 0)
 				{
@@ -399,7 +404,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 					$this->cofinspercentual = $trib->cofinspercentual;
 					$this->cofinsvalor = round(($this->cofinsbase * $this->cofinspercentual)/100, 2);
 				}
-				
+
 				//Calcula CSLL
 				If ($trib->csllpercentual > 0)
 				{
@@ -407,7 +412,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 					$this->csllpercentual = $trib->csllpercentual;
 					$this->csllvalor = round(($this->csllbase * $this->csllpercentual)/100, 2);
 				}
-				
+
 				//Calcula IRPJ
 				If ($trib->irpjpercentual > 0)
 				{
@@ -415,7 +420,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 					$this->irpjpercentual = $trib->irpjpercentual;
 					$this->irpjvalor = round(($this->irpjbase * $this->irpjpercentual)/100, 2);
 				}
-				
+
 			}
 		}
 		else
@@ -434,6 +439,6 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 				    $this->icmsvalor = round(($this->icmsbase * $this->icmspercentual)/100, 2);
 			}
 		}
-		
+
 	}
 }

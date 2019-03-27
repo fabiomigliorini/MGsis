@@ -64,7 +64,7 @@
  */
 class NotaFiscal extends MGActiveRecord
 {
-	
+
 	const CODSTATUS_NOVA          = 100;
 	const CODSTATUS_DIGITACAO     = 101;
 	const CODSTATUS_AUTORIZADA    = 102;
@@ -73,12 +73,12 @@ class NotaFiscal extends MGActiveRecord
 	const CODSTATUS_NAOAUTORIZADA = 301;
 	const CODSTATUS_INUTILIZADA   = 302;
 	const CODSTATUS_CANCELADA     = 303;
-	
+
 	const FRETE_EMITENTE          = 0;
 	const FRETE_DESTINATARIO      = 1;
 	const FRETE_TERCEIROS         = 2;
 	const FRETE_SEM               = 9;
-	
+
 	const TPEMIS_NORMAL           = 1; // Emissão normal (não em contingência);
 	const TPEMIS_FS_IA            = 2; // Contingência FS-IA, com impressão do DANFE em formulário de segurança;
 	const TPEMIS_SCAN             = 3; // Contingência SCAN (Sistema de Contingência do Ambiente Nacional) Desativação prevista para 30/06/2014;
@@ -86,19 +86,19 @@ class NotaFiscal extends MGActiveRecord
 	const TPEMIS_FS_DA            = 5; // Contingência FS-DA, com impressão do DANFE em formulário de segurança;
 	const TPEMIS_SVC_AN           = 6; // Contingência SVC-AN (SEFAZ Virtual de Contingência do AN);
 	const TPEMIS_SVC_RS           = 7; // Contingência SVC-RS (SEFAZ Virtual de Contingência do RS);
-	const TPEMIS_OFFLINE          = 9; // Contingência off-line da NFC-e (as demais opções de contingência são válidas também para a NFC-e);	
-	
+	const TPEMIS_OFFLINE          = 9; // Contingência off-line da NFC-e (as demais opções de contingência são válidas também para a NFC-e);
+
 	public $status;
 	public $codstatus;
 	public $emissao_de;
 	public $emissao_ate;
 	public $saida_de;
 	public $saida_ate;
-	
+
 	private $_codnaturezaoperacao_original;
 	private $_codfilial_original;
 	private $_codpessoa_original;
-	
+
 	const MODELO_NFE			= 55;
 	const MODELO_NFCE			= 65;
 	/**
@@ -118,7 +118,7 @@ class NotaFiscal extends MGActiveRecord
 		// will receive user inputs.
 		return array(
 			array('codnaturezaoperacao, serie, emissao, saida, codfilial, codestoquelocal, codpessoa', 'required'),
-			array('serie, tpemis, numero, volumes, frete', 'numerical', 'integerOnly'=>true),
+			array('codpessoatransportador, serie, tpemis, numero, volumes, frete', 'numerical', 'integerOnly'=>true),
 			array('nfechave, nfereciboenvio, nfeautorizacao, nfecancelamento, nfeinutilizacao', 'length', 'max'=>100),
 			//array('nfechave', 'unique'),
 			array('codestoquelocal', 'validaEstoqueLocal'),
@@ -131,8 +131,9 @@ class NotaFiscal extends MGActiveRecord
 			array('emissao', 'validaEmissaoPelaChaveNFE'),
 			array('saida', 'validaSaida'),
 			array('observacoes', 'length', 'max'=>1500),
-			array('valorfrete, valorseguro, valordesconto, valoroutras, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipivalor', 'length', 'max'=>14),
+			array('pesoliquido, pesobruto, valorfrete, valorseguro, valordesconto, valoroutras, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipivalor', 'length', 'max'=>14),
 			array('justificativa', 'length', 'max'=>200),
+			array('volumesespecie, volumesmarca, volumesnumero', 'length', 'max'=>60),
 			array('emitida, nfeimpressa, codoperacao, nfedataenvio, nfedataautorizacao, nfedatacancelamento, nfedatainutilizacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -144,24 +145,24 @@ class NotaFiscal extends MGActiveRecord
 	{
 		if (!isset($this->EstoqueLocal))
 			return;
-		
+
 		if (!isset($this->Filial))
 			return;
-		
+
 		if ($this->EstoqueLocal->codfilial != $this->codfilial)
 			$this->addError($attribute, 'O Local de Estoque não bate com a Filial selecionada!');
 	}
-	
+
 	public function validaModelo($attribute, $params)
 	{
 		if (empty($this->nfechave))
 		{
 			if (!$this->emitida)
 				return;
-			
+
 			if (empty($this->modelo))
 				$this->addError($attribute, "Modelo não pode ser vazio!");
-			
+
 			if ($this->modelo != NotaFiscal::MODELO_NFCE && $this->modelo != NotaFiscal::MODELO_NFE)
 				$this->addError($attribute, "Modelo incorreto!");
 		}
@@ -171,41 +172,41 @@ class NotaFiscal extends MGActiveRecord
 				$this->addError($attribute, "Modelo informado não bate com a Chave!");
 		}
 	}
-	
+
 	// composicao serie e numero deve ser unica para a filial ou para a pessoa
 	public function validaNumero($attribute, $params)
 	{
 		if ((!$this->emitida) && empty($this->numero))
 			$this->addError($attribute, "Preencha o número da Nota Fiscal!");
-		
+
 		if (empty($this->numero))
 			return;
-		
+
 		if (empty($this->codpessoa))
 			return;
-		
+
 		if (empty($this->serie))
 			return;
-		
+
 		if (empty($this->codfilial))
 			return;
-		
+
 		if (empty($this->modelo))
 			return;
 
 		$condicao = " serie = :serie AND numero = :numero ";
-		
+
 		$parametros = array(
 			"serie" => $this->serie,
 			"numero" => $this->numero
 			);
-		
+
 		if (!$this->isNewRecord)
 		{
 			$condicao .= " AND codnotafiscal <> :codnotafiscal ";
 			$parametros["codnotafiscal"] = $this->codnotafiscal;
 		}
-		
+
 		if ($this->emitida)
 		{
 			$condicao .= " AND emitida = true AND codfilial = :codfilial AND modelo = :modelo ";
@@ -217,44 +218,44 @@ class NotaFiscal extends MGActiveRecord
 			$condicao .= " AND emitida = false AND codpessoa = :codpessoa ";
 			$parametros["codpessoa"] = $this->codpessoa;
 		}
-		
+
 		if ($nota = NotaFiscal::model()->findAll($condicao, $parametros))
 			$this->addError($attribute, "Esta Nota Fiscal já está cadastrada no sistema!");
 
 	}
-		
+
 	// valida chave da NFE
 	public function validaSaida($attribute, $params)
 	{
 		if (empty($this->emissao))
 			return;
-		
+
 		if (empty($this->saida))
 			return;
-		
+
 		$saida = DateTime::createFromFormat("d/m/Y",$this->saida);
 		$emissao = DateTime::createFromFormat("d/m/Y",$this->emissao);
 		$maximo = new DateTime("now");
 		$maximo->add(new DateInterval("P3D"));
-		
+
 		if ($saida < $emissao)
 			$this->addError($attribute, "A data de Entrada/Saída precisa ser posterior à $this->emissao!");
-		
+
 		if ($saida > $maximo)
 			$this->addError($attribute, "A data de Entrada/Saída precisa ser anterior à " . $maximo->format('d/m/Y') . " !");
 	}
-	
+
 	// valida chave da NFE
 	public function validaChaveNFE($attribute, $params)
 	{
 		if (empty($this->nfechave))
 			return;
-		
+
 		$digito = $this->calculaDigitoChaveNFE($this->nfechave);
-		
+
 		if ($digito == -1)
 			$this->addError($attribute, "Chave da NFE Inválida!");
-		
+
 		if (substr($this->nfechave, 43, 1) <> $digito)
 			$this->addError($attribute, "Dígito da Chave da NFE Inválido!");
 
@@ -277,21 +278,21 @@ class NotaFiscal extends MGActiveRecord
                         $this->addError($attribute, "Esta Chave já está cadastrada no sistema!");
 
 	}
-	
+
 	// compara CNPJ da Filial ou da Pessoa com o CNPJ da Chave da NFE
 	public function validaPessoaPelaChaveNFE($attribute, $params)
 	{
 		if (empty($this->nfechave))
 			return;
-		
+
 		if (empty($this->codpessoa))
 			return;
-		
+
 		if (empty($this->codfilial))
 			return;
 
 		$cnpj = substr(Yii::app()->format->numeroLimpo($this->nfechave), 6, 14);
-		
+
 		if (strlen($cnpj) <> 14)
 			return;
 
@@ -302,7 +303,7 @@ class NotaFiscal extends MGActiveRecord
 		    || $cnpj == '03507415000578') {
 			return;
 		}
-		
+
 		if ($this->emitida)
 		{
 			if ($cnpj != $this->Filial->Pessoa->cnpj)
@@ -320,37 +321,37 @@ class NotaFiscal extends MGActiveRecord
 				$this->addError($attribute, "A pessoa selecionada não bate com o CNPJ da chave da NFE!");
 		}
 	}
-	
+
 	// compara Serie informada com a Serie da chave a NFE
 	public function validaSeriePelaChaveNFE($attribute, $params)
 	{
 		if (empty($this->nfechave))
 			return;
-		
+
 		if (empty($this->serie))
 			return;
-		
+
 		$serie = intval(substr(Yii::app()->format->numeroLimpo($this->nfechave), 22, 3));
-		
+
 		if ($serie <> $this->serie)
 			$this->addError($attribute, "A série informada não bate com a chave da NFE!");
-		
+
 	}
-	
+
 	// compara numero informada com o numero da chave a NFE
 	public function validaNumeroPelaChaveNFE($attribute, $params)
 	{
 		if (empty($this->nfechave))
 			return;
-		
+
 		if (empty($this->numero))
 			return;
-		
+
 		$numero = intval(substr(Yii::app()->format->numeroLimpo($this->nfechave), 25, 9));
-		
+
 		if ($numero <> $this->numero)
 			$this->addError($attribute, "O número informado não bate com a chave da NFE!");
-		
+
 	}
 
 	// compara data de emissão informada com o mes e ano da chave a NFE
@@ -358,20 +359,20 @@ class NotaFiscal extends MGActiveRecord
 	{
 		if (empty($this->nfechave))
 			return;
-		
+
 		if (empty($this->emissao))
 			return;
-		
+
 		$mes = substr(Yii::app()->format->numeroLimpo($this->nfechave), 4, 2);
 		$ano = intval(substr(Yii::app()->format->numeroLimpo($this->nfechave), 2, 2));
 		$ano += 2000;
-		
+
 		if (($mes <> substr($this->emissao, 3, 2)) || ($ano <> substr($this->emissao, 6, 4)))
 			$this->addError($attribute, "A emissão informada não bate com a chave da NFE!");
-		
-		
+
+
 	}
-	
+
 	public Static function calculaDigitoChaveNFE($chave)
 	{
 
@@ -380,7 +381,7 @@ class NotaFiscal extends MGActiveRecord
 
 		$key = 0;
 		$chave = substr(Yii::app()->format->numeroLimpo($chave), 0, 43);
-		
+
 		//echo $chave;
 
 		If (strlen($chave) <> 43)
@@ -392,12 +393,12 @@ class NotaFiscal extends MGActiveRecord
 		for ($i = strlen($chave); $i >= 1; $i--)
 		{
 			//vericica se o valor de c for maior que nove passa o valor para 2
-			If ($c > 9) 
+			If ($c > 9)
 				$c = 2;
 
 			//soma os valores mutiplicados
 			$key = $key + (intval(substr($chave, $i-1, 1)) * $c);
-			
+
 			$c++;
 		}
 
@@ -407,7 +408,7 @@ class NotaFiscal extends MGActiveRecord
 		else
 			return (11 - ($key % 11));
 
-	}	
+	}
 
 	/**
 	 * @return array relational rules.
@@ -423,7 +424,8 @@ class NotaFiscal extends MGActiveRecord
 			'NaturezaOperacao' => array(self::BELONGS_TO, 'NaturezaOperacao', 'codnaturezaoperacao'),
 			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
 			'EstoqueLocal' => array(self::BELONGS_TO, 'EstoqueLocal', 'codestoquelocal'),
-			'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),			
+			'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
+			'PessoaTransportador' => array(self::BELONGS_TO, 'Pessoa', 'codpessoatransportador'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 			'NotaFiscalCartaCorrecaos' => array(self::HAS_MANY, 'NotaFiscalCartaCorrecao', 'codnotafiscal', 'order'=>'sequencia DESC'),
@@ -452,7 +454,13 @@ class NotaFiscal extends MGActiveRecord
 			'codestoquelocal' => 'Local Estoque',
 			'codpessoa' => 'Pessoa',
 			'observacoes' => 'Observações',
-			'volumes' => 'Volumes',
+			'codpessoatransportador' => 'Transportador',
+			'volumes' => 'Quantidade Volumes',
+			'volumesespecie' => 'Espécie',
+			'volumesmarca' => 'Marca',
+			'volumesnumero' => 'Numeração',
+			'pesoliquido' => 'Peso Líquido',
+			'pesobruto' => 'Peso Bruto',
 			'frete' => 'Frete por Conta',
 			'codoperacao' => 'Operação',
 			'nfereciboenvio' => 'Recibo do Envio',
@@ -473,7 +481,7 @@ class NotaFiscal extends MGActiveRecord
 			'criacao' => 'Criação',
 			'codusuariocriacao' => 'Usuário Criação',
 			'valorprodutos' => 'Produtos',
-			'valortotal' => 'Total',			
+			'valortotal' => 'Total',
 			'icmsbase' => 'ICMS Base',
 			'icmsvalor' => 'ICMS Valor',
 			'icmsstbase' => 'ICMS ST Base',
@@ -545,7 +553,7 @@ class NotaFiscal extends MGActiveRecord
 		$criteria->compare('icmsstvalor',$this->icmsstvalor, false);
 		$criteria->compare('ipibase',$this->ipibase, false);
 		$criteria->compare('ipivalor',$this->ipivalor, false);
-		
+
 		if ($emissao_de = DateTime::createFromFormat("d/m/y",$this->emissao_de))
 		{
 			$criteria->addCondition('t.emissao >= :emissao_de');
@@ -566,17 +574,17 @@ class NotaFiscal extends MGActiveRecord
 			$criteria->addCondition('t.saida <= :saida_ate');
 			$criteria->params = array_merge($criteria->params, array(':saida_ate' => $saida_ate->format('Y-m-d').' 23:59:59.9'));
 		}
-		
+
 		switch ($this->codstatus)
 		{
 			case self::CODSTATUS_NOVA;
 				$criteria->addCondition('codnotafiscal = 0');
 				break;
-			
+
 			case self::CODSTATUS_DIGITACAO;
 				$criteria->addCondition('t.emitida = true and t.numero = 0');
 				break;
-			
+
 			case self::CODSTATUS_AUTORIZADA;
 				$criteria->addCondition('t.emitida = true and t.nfechave is not null and t.nfeautorizacao is not null and t.nfecancelamento is null and t.nfeinutilizacao is null');
 				break;
@@ -584,24 +592,24 @@ class NotaFiscal extends MGActiveRecord
 			case self::CODSTATUS_LANCADA;
                 $criteria->addCondition('t.emitida = false');
 				break;
-			
+
 			case self::CODSTATUS_NOSSA_EMISSAO;
                 $criteria->addCondition('t.emitida = true');
 				break;
-			
+
 			case self::CODSTATUS_NAOAUTORIZADA;
 				$criteria->addCondition('t.emitida = true and t.numero > 0 and t.nfeautorizacao is null and t.nfecancelamento is null and t.nfeinutilizacao is null');
 				break;
-			
+
 			case self::CODSTATUS_INUTILIZADA;
                 $criteria->addCondition('t.emitida = true and t.nfeinutilizacao is not null');
 				break;
-			
+
 			case self::CODSTATUS_CANCELADA;
 				$criteria->addCondition('t.emitida = true and t.nfecancelamento is not null');
 				break;
 		}
-		
+
 
 		if ($comoDataProvider)
 		{
@@ -613,7 +621,7 @@ class NotaFiscal extends MGActiveRecord
 		}
 		else
 		{
-			$criteria->order = 't.codfilial, t.codnaturezaoperacao, t.emissao, t.saida, t.modelo, t.numero';			
+			$criteria->order = 't.codfilial, t.codnaturezaoperacao, t.emissao, t.saida, t.modelo, t.numero';
 			return $this->findAll($criteria);
 		}
 	}
@@ -628,7 +636,7 @@ class NotaFiscal extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
-	
+
 	function calculaCodStatus()
 	{
 
@@ -637,19 +645,19 @@ class NotaFiscal extends MGActiveRecord
 			$this->codstatus = self::CODSTATUS_NOVA;
 			return $this->codstatus;
 		}
-		
+
 		if (!empty($this->nfeinutilizacao))
 		{
 			$this->codstatus = self::CODSTATUS_INUTILIZADA;
 			return $this->codstatus;
 		}
-		
+
 		if (!empty($this->nfecancelamento))
 		{
 			$this->codstatus = self::CODSTATUS_CANCELADA;
 			return $this->codstatus;
 		}
-		
+
 		if ($this->emitida)
 		{
 			if (empty($this->numero))
@@ -657,7 +665,7 @@ class NotaFiscal extends MGActiveRecord
 				$this->codstatus = self::CODSTATUS_DIGITACAO;
 				return $this->codstatus;
 			}
-			
+
 			if (!empty($this->nfeautorizacao))
 			{
 				$this->codstatus = self::CODSTATUS_AUTORIZADA;
@@ -667,12 +675,12 @@ class NotaFiscal extends MGActiveRecord
 			$this->codstatus = self::CODSTATUS_NAOAUTORIZADA;
 			return $this->codstatus;
 		}
-		
+
 		$this->codstatus = self::CODSTATUS_LANCADA;
 		return $this->codstatus;
-		
+
 	}
-	
+
 	function calculaStatus()
 	{
 		$codstatus = $this->calculaCodStatus();
@@ -693,8 +701,8 @@ class NotaFiscal extends MGActiveRecord
 			self::TPEMIS_OFFLINE => "Contingência Off-Line da NFC-e"
 		);
 	}
-	
-	
+
+
 	function getStatusListaCombo()
 	{
 		return array(
@@ -708,7 +716,7 @@ class NotaFiscal extends MGActiveRecord
 			self::CODSTATUS_CANCELADA => "Cancelada"
 		);
 	}
-	
+
 	function getFreteListaCombo()
 	{
 		return array(
@@ -726,7 +734,7 @@ class NotaFiscal extends MGActiveRecord
 			self::MODELO_NFCE => self::MODELO_NFCE . " - NFC-e - Cupom"
 		);
 	}
-	
+
 	protected function afterFind()
 	{
 		$this->calculaStatus();
@@ -738,7 +746,7 @@ class NotaFiscal extends MGActiveRecord
 		$this->_codpessoa_original = $this->codpessoa;
 		return parent::afterFind();
 	}
-	
+
 	//preenche codoperacao
 	protected function beforeValidate()
 	{
@@ -747,10 +755,10 @@ class NotaFiscal extends MGActiveRecord
 			if (isset($this->NaturezaOperacao))
 				$this->codoperacao = $this->NaturezaOperacao->codoperacao;
 		}
-		
+
 		return parent::beforeValidate();
 	}
-	
+
 
 	public function podeEditar()
 	{
@@ -758,18 +766,18 @@ class NotaFiscal extends MGActiveRecord
 			|| $this->codstatus == NotaFiscal::CODSTATUS_INUTILIZADA
 			|| $this->codstatus == NotaFiscal::CODSTATUS_CANCELADA)
 			return false;
-		
+
 		if ($this->emitida && !empty($this->numero))
 			return false;
-		
+
 		return true;
-		
+
 	}
-	
+
 	protected function afterSave()
 	{
 		// se alterou Natureza de Operacao, Filial ou Pessoa, Recalcula tributacao
-		if (($this->codnaturezaoperacao != $this->_codnaturezaoperacao_original) 
+		if (($this->codnaturezaoperacao != $this->_codnaturezaoperacao_original)
 			|| ($this->codfilial != $this->_codfilial_original)
 			|| ($this->codpessoa != $this->_codpessoa_original)
 			)
@@ -780,12 +788,12 @@ class NotaFiscal extends MGActiveRecord
 				//Limpa Tributacao Calculada
 				$nfpb->codcfop = null;
 				$nfpb->csosn = null;
-				
+
 				$nfpb->icmscst = null;
 				$nfpb->icmsbase = null;
 				$nfpb->icmspercentual = null;
 				$nfpb->icmsvalor = null;
-				
+
 				$nfpb->ipicst = null;
 				$nfpb->ipibase = null;
 				$nfpb->ipipercentual = null;
@@ -794,29 +802,29 @@ class NotaFiscal extends MGActiveRecord
 				$nfpb->icmsstbase = null;
 				$nfpb->icmsstpercentual = null;
 				$nfpb->icmsstvalor = null;
-				
+
 				$nfpb->piscst = null;
 				$nfpb->pisbase = null;
 				$nfpb->pispercentual = null;
 				$nfpb->pisvalor = null;
-				
+
 				$nfpb->cofinscst = null;
 				$nfpb->cofinsbase = null;
 				$nfpb->cofinspercentual = null;
 				$nfpb->cofinsvalor = null;
-				
+
 				$nfpb->csllbase = null;
 				$nfpb->csllpercentual = null;
 				$nfpb->csllvalor = null;
-				
+
 				$nfpb->irpjbase = null;
 				$nfpb->irpjpercentual = null;
 				$nfpb->irpjvalor = null;
-				
+
 				$nfpb->save();
 			}
 		}
-		
+
 		if (!$this->emitida && !empty($this->nfechave))
 		{
 			if ($nft = NfeTerceiro::model()->find('codnotafiscal is null and nfechave = :nfechave', array(':nfechave' => $this->nfechave)))
@@ -825,19 +833,19 @@ class NotaFiscal extends MGActiveRecord
 				$nft->save();
 			}
 		}
-		
+
 		return parent::afterSave();
 	}
-	
-	public function scopes () 
+
+	public function scopes ()
 	{
 		return array(
 			'pendentes'=>array(
 				'condition' => '
-					   t.emitida = true 
-						and t.numero > 0 
-						and t.nfeautorizacao is null 
-						and t.nfecancelamento is null 
+					   t.emitida = true
+						and t.numero > 0
+						and t.nfeautorizacao is null
+						and t.nfecancelamento is null
 						and t.nfeinutilizacao is null
 						and t.emissao >= \'2016-01-08\'
 						and t.alteracao <= (current_timestamp - interval \'15 seconds\')
@@ -846,5 +854,5 @@ class NotaFiscal extends MGActiveRecord
 				),
 			);
 	}
-	
+
 }
