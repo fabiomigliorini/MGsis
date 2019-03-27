@@ -31,29 +31,37 @@ $(document).ready(function(){
 
 	jQuery('body').on('click','#btnSalvarCartaCorrecao',function() {
 		var texto = $("#txtCartaCorrecao").val();
+		var codnotafiscal = <?php echo $model->codnotafiscal; ?>;
 		bootbox.confirm("<h3>Confirma emissão da carta de correção?</h3><br><pre>" + texto + "</pre>", function(result) {
 			if (result)
 			{
 
-				$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/cartaCorrecao')?>",
-					{
-						codnotafiscal: <?php echo $model->codnotafiscal; ?>,
-						texto: texto,
-					})
-					.done(function(data) {
-
-						var mensagem = formataMensagem(data);
-						$('#modalProgressoNfe').modal('hide');
-						bootbox.alert(mensagem, function() {
-							location.reload();
-						});
-					})
-					.fail(function( jqxhr, textStatus, error ) {
-						$('#modalProgressoNfe').modal('hide');
-						bootbox.alert(error, function() {
-							location.reload();
-						});
+				$.ajax({
+					type: 'GET',
+					url: "<?php echo MGSPA_NFEPHP_URL; ?>" + codnotafiscal + "/carta-correcao/",
+					headers: {"X-Requested-With":"XMLHttpRequest"},
+					data: { texto: texto }
+				}).done(function(resp) {
+					console.log(resp)
+					$('#modalProgressoNfe').modal('hide');
+					if (resp.sucesso == true) {
+						var css="text-success";
+					} else {
+						var css="text-error";
+					}
+					mensagem = "<h3 class='" + css + "'>" + resp.cStat + " - " + resp.xMotivo + "</h3>";
+					bootbox.alert(mensagem, function() {
+						location.reload();
 					});
+				}).fail(function( jqxhr, textStatus, error ) {
+					$('#modalProgressoNfe').modal('hide');
+					var mensagem = jQuery.parseJSON(jqxhr.responseText).message;
+					mensagem = "<h3 class='text-error'>" + mensagem + "</h3>";
+					bootbox.alert(mensagem, function() {
+						location.reload();
+					});
+				});
+
 			}
 		});
 	});
