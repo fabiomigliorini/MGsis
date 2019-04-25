@@ -19,15 +19,15 @@ if ($model->codnegociostatus == 1)
 		</div>
 		<div class="row-fluid">
 			<?php
-			$this->widget('MGSelect2ProdutoBarra', 
+			$this->widget('MGSelect2ProdutoBarra',
 				array(
-					'name' => 'codprodutobarra', 
+					'name' => 'codprodutobarra',
 					'htmlOptions' => array(
-						'class' => 'span12', 
+						'class' => 'span12',
 						'placeholder' => 'Pesquisa de Produtos ($ ordena por preço)'
 						),
 					)
-				); 
+				);
 			?>
 		</div>
 	</form>
@@ -42,16 +42,16 @@ if ($model->codnegociostatus == 1)
 	$this->renderPartial('_view_produtos_listagem',
 		array(
 			'model'=>$model,
-		));		
+		));
 	?>
 </div>
 </div>
 <script>
 
-function carregaUrlPrancheta(forcarCarregamento) 
+function carregaUrlPrancheta(forcarCarregamento)
 {
     if ($('#framePrancheta').attr('src') == '' || forcarCarregamento) {
-        $('#framePrancheta').attr('src', '/MGUplon/prancheta/quiosque/<?php echo $model->codestoquelocal; ?>');    
+        $('#framePrancheta').attr('src', '/MGUplon/prancheta/quiosque/<?php echo $model->codestoquelocal; ?>');
     }
 
 }
@@ -68,9 +68,9 @@ function mostrarPrancheta()
         var bodyHeight = height*.96-30;
         $('#modalPranchetaBody').css({'height': bodyHeight, 'max-height': bodyHeight, 'overflow-y': 'hidden'});
         $('#modalPrancheta').modal({show:true});
-        
+
     }
-    
+
 }
 
 
@@ -90,7 +90,7 @@ function atualizaListagemProdutos()
 		error: function (xhr, status) {
 			bootbox.alert("Erro ao atualizar listagem de produtos!");
 		},
-	});				
+	});
 
 }
 
@@ -106,13 +106,13 @@ function atualizaTotais()
 		async: true,
 		success: function (data) {
 			$('#totais').html(data);
-			$('#totais').animate({opacity: 0.25,}, 200 );			
-			$('#totais').animate({opacity: 1,}, 200 );			
+			$('#totais').animate({opacity: 0.25,}, 200 );
+			$('#totais').animate({opacity: 1,}, 200 );
 		},
 		error: function (xhr, status) {
 			bootbox.alert("Erro ao atualizar totais!");
 		},
-	});				
+	});
 }
 
 function atualizaTela()
@@ -121,22 +121,22 @@ function atualizaTela()
 	atualizaTotais();
 }
 
-function adicionaProdutoPrancheta(barras) 
+function adicionaProdutoPrancheta(barras)
 {
     console.log('adicionaProdutoPrancheta');
-    $("#barras").val(barras); 
+    $("#barras").val(barras);
     adicionaProduto();
     fechaPrancheta();
 }
 
-function fechaPrancheta() 
+function fechaPrancheta()
 {
     $('#modalPrancheta').modal('hide');
 }
 
 function adicionaProduto()
 {
-	
+
 	var barras = $("#barras").val();
 	var quantidade = $('#quantidade').autoNumeric('get');
 	$("#barras").val("");
@@ -153,14 +153,15 @@ function adicionaProduto()
 		success: function(data) {
 			if (!data.Adicionado)
 			{
-				bootbox.dialog(data.Mensagem, 
+				bootbox.dialog(data.Mensagem,
 					[{
 						"label" : "Fechar",
 						"class" : "btn-warning",
 						"callback": function() {
 								$("#barras").focus();
-							}						
+							}
 					}]);
+				tocarSirene();
 				$.notify(barras + " Não Localizado!", { position:"right bottom", className:"error", autoHideDelay: 15000 });
 			}
 			else
@@ -172,73 +173,82 @@ function adicionaProduto()
 			}
 		},
 		error: function (xhr, status) {
-			bootbox.alert("Erro ao adicionar produto!");
+			tocarSirene();
+			bootbox.alert("Erro de conexão ao servidor!");
 		},
 	});
+}
+
+var audioElement = document.createElement('audio');
+audioElement.setAttribute('src', '<?php echo Yii::app()->baseUrl;?>/sounds/alarme.mp3');
+function tocarSirene()
+{
+	audioElement.currentTime = 0;
+	audioElement.play();
 }
 
 function preencheQuantidade()
 {
 	//pega campo com codigo de barras
 	var barras = $("#barras").val().trim();
-	
+
 	//o tamanho com o asterisco deve ser entre 2 e 5
 	if (barras.length > 6 || barras.length < 2)
 		return;
-	
+
 	// se o último dígito é o asterisco
 	if (barras.slice(-1) != "*")
 		return;
-	
+
 	//se o valor antes do asterisco é um número
 	barras = barras.substr(0, barras.length - 1).trim().replace(',', '.');
 	if (!$.isNumeric(barras))
 		return;
-	
+
 	// se o número é maior ou igual à 1
 	barras=parseFloat(barras);
 	if (barras < 0.01)
 		return;
-	
+
 	//preenche o campo de quantidade
 	//$("#quantidade").val(barras);
 	$("#quantidade").autoNumeric('set', barras);
-	
+
 	//limpa o código de barras
 	$("#barras").val("");
-	
-	$('#quantidade').animate({opacity: 0.25,}, 200 );			
-	$('#quantidade').animate({opacity: 1,}, 200 );			
+
+	$('#quantidade').animate({opacity: 0.25,}, 200 );
+	$('#quantidade').animate({opacity: 1,}, 200 );
 }
-	
+
 $(document).ready(function() {
 
-    $("#btnPrancheta").click(function(e){ 
+    $("#btnPrancheta").click(function(e){
         mostrarPrancheta();
-	});	
+	});
 
-    $("#btnPranchetaInicio").click(function(e){ 
+    $("#btnPranchetaInicio").click(function(e){
         carregaUrlPrancheta(true);
-	});	
+	});
 
-    $("#btnPranchetaVoltar").click(function(e){ 
+    $("#btnPranchetaVoltar").click(function(e){
         document.getElementById('framePrancheta').contentWindow.history.back(-1);
-	});	
+	});
 
 
 	$("#barras").focus();
 	$('#quantidade').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
-	
-    $("#btnAdicionar").click(function(e){ 
+
+    $("#btnAdicionar").click(function(e){
 		e.preventDefault();
-		adicionaProduto (); 
+		adicionaProduto ();
 	});
-	
-    $("#barras").keyup(function(){ 
+
+    $("#barras").keyup(function(){
 		preencheQuantidade();
 	});
-	
-	$('#codprodutobarra').change(function(e) { 
+
+	$('#codprodutobarra').change(function(e) {
 		if ($("#codprodutobarra").select2('data') != null)
 		{
 			$("#barras").val($("#codprodutobarra").select2('data').barras);
@@ -249,29 +259,29 @@ $(document).ready(function() {
 	});
 	// botão delete da embalagem
 	jQuery(document).on('click','a.delete-barra',function(e) {
-	
+
 		//evita redirecionamento da pagina
 		e.preventDefault();
-		
+
 		// pega url para delete
 		var url = jQuery(this).attr('href');
-		
+
 		//pede confirmacao
 		bootbox.confirm("Excluir este Item?", function(result) {
-			
+
 			// se confirmou
 			if (result) {
-				
+
 				//faz post
 				jQuery.ajax({
 					type: 'POST',
 					url: url,
-					
+
 					//se sucesso, atualiza listagem de embalagens
 					success: function(){
 						atualizaTela();
 					},
-					
+
 					//caso contrário mostra mensagem com erro
 					error: function (XHR, textStatus) {
 						var err;
@@ -303,10 +313,10 @@ $(document).ready(function() {
 						}
 					}
 				});
-			}	
+			}
 		});
-	});			
-	
+	});
+
 });
-	
+
 </script>
