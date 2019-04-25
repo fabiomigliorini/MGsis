@@ -181,6 +181,7 @@ function adicionaProduto()
 
 var audioElement = document.createElement('audio');
 audioElement.setAttribute('src', '<?php echo Yii::app()->baseUrl;?>/sounds/alarme.mp3');
+//audioElement.setAttribute('src', '<?php echo Yii::app()->baseUrl;?>/sounds/fast-error-alert.mp3');
 function tocarSirene()
 {
 	audioElement.currentTime = 0;
