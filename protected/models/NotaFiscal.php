@@ -134,6 +134,8 @@ class NotaFiscal extends MGActiveRecord
 			array('pesoliquido, pesobruto, valorfrete, valorseguro, valordesconto, valoroutras, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipivalor', 'length', 'max'=>14),
 			array('justificativa', 'length', 'max'=>200),
 			array('volumesespecie, volumesmarca, volumesnumero', 'length', 'max'=>60),
+			array('placa', 'length', 'max'=>7),
+			array('codestadoplaca', 'length', 'max'=>999999999),
 			array('emitida, nfeimpressa, codoperacao, nfedataenvio, nfedataautorizacao, nfedatacancelamento, nfedatainutilizacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -300,7 +302,8 @@ class NotaFiscal extends MGActiveRecord
 		// Exemplo 4317 0287 9586 7400 0181 5589 0014 1416 3114 8458 0590
 		// SEFAZ MT - Exemplo 5118 0803 5074 1500 0578 5589 0000 0396 0019 5637 6714
 		if ($cnpj == '87958674000181'
-		    || $cnpj == '03507415000578') {
+			|| $cnpj == '03507415000578'
+			|| $cnpj == '12200192000169') {
 			return;
 		}
 
@@ -489,6 +492,8 @@ class NotaFiscal extends MGActiveRecord
 			'ipibase' => 'IPI Base',
 			'ipivalor' => 'IPI Valor',
 			'modelo' => 'Modelo NFE',
+			'placa' => 'Placa',
+			'codestadoplaca' => 'Estado',
 		);
 	}
 

@@ -217,6 +217,7 @@ $(document).ready(function(){
 				'value'=>((isset($model->PessoaTransportador))?CHtml::link(CHtml::encode($model->PessoaTransportador->fantasia), array("pessoa/view", "id"=>$model->codpessoatransportador)):null),
 				'type'=>"raw",
 			),
+			'placa',
 		),
 	));
 	?>

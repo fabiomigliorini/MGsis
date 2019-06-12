@@ -55,6 +55,11 @@
 			echo $form->textFieldRow($model,'volumesnumero',array('class'=>'input-medium', 'maxlength'=>60));
 			echo $form->textFieldRow($model,'pesobruto',array('class'=>'input-medium text-right'));
 			echo $form->textFieldRow($model,'pesoliquido',array('class'=>'input-medium text-right'));
+                        echo $form->textFieldRow($model,'placa',array('class'=>'input-small', 'maxlength'=>7));
+			echo $form->select2Row($model, 'codestadoplaca', Estado::getListaCombo(), array('placeholder'=>'Estado', 'class' => 'input-small'));
+
+
+
 			?>
 		</div>
 		<div class="span3">
