@@ -116,9 +116,14 @@ function calculaTotal()
 
 function desabilitaCamposEmitida()
 {
-
 	var emitida = $('#NotaFiscal_emitida').is(':checked');
 	var valorbanco = ((emitida == <?php echo ($model->emitida)?"true":"false" ?>) &&  <?php echo ($model->isNewRecord)?"false":"true" ?>);
+	var nfeserie = [];
+<?php
+	foreach (Filial::model()->findAll() as $filial) {
+		echo "    nfeserie[{$filial->codfilial}] = '{$filial->nfeserie}';\n";
+	}
+?>
 
 	if (valorbanco)
 	{
@@ -129,7 +134,11 @@ function desabilitaCamposEmitida()
 	}
 	else if (emitida)
 	{
-		$("#NotaFiscal_serie").val(1);
+		var codfilial = $("#NotaFiscal_codfilial").select2("val");
+		var serie = nfeserie[codfilial];
+		console.log('alterando serie');
+		console.log(serie);
+		$("#NotaFiscal_serie").val(serie);
 		$("#NotaFiscal_numero").val(0);
 		$("#NotaFiscal_nfechave").val("");
 		$("#NotaFiscal_modelo").select2("val", "<?php echo $model->modelo; ?>");
