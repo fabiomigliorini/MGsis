@@ -7,88 +7,86 @@
 	<link rel="shortcut icon" href="<?php echo Yii::app()->baseUrl;?>/images/icones/mgsis.ico">
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/mgsis.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ytLoad.jquery.css" >
-		
 	<?php Yii::app()->getClientScript()->registerScriptFile(Yii::app()->request->baseUrl.'/js/autoNumeric.js'); ?>
 	<?php Yii::app()->getClientScript()->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery.number.min.js'); ?>
 	<?php Yii::app()->getClientScript()->registerScriptFile(Yii::app()->request->baseUrl.'/js/mgsis.js'); ?>
 	<?php Yii::app()->getClientScript()->registerScriptFile(Yii::app()->request->baseUrl.'/js/setCase.js'); ?>
 	<?php Yii::app()->getClientScript()->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery.transit.js'); ?>
 	<?php Yii::app()->getClientScript()->registerScriptFile(Yii::app()->request->baseUrl.'/js/ytLoad.jquery.js'); ?>
-		
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 
 	<script type="text/javascript">
 
 		$(document).ready(function() {
-			
 			$.ytLoad();
-			
 			$("li.dropdown a").click(function(e){
 				$(this).next('ul.dropdown-menu').css("display", "block");
 				e.stopPropagation();
 			});
-			
 		});
 
-	</script>	
+	</script>
 	<style>
-		body {
-			padding-top: 100px;
-			padding-bottom: 60px;
-		}		
+		/*esta classe remove os espaços entre as NAV BAR */
+		.navbar-fixed-top {
+			margin-bottom: 0px;
+		}
+
+		@media (min-width: 980px) {
+			body {
+				padding-top: 100px;
+				padding-bottom: 60px;
+			}
+		}
 		@media print {
 			a[href]:after {
-			  content: none;
+				content: none;
 			}
-		  }
+		}
 		html {
-			   overflow-y: scroll;
-		}		  
+			overflow-y: scroll;
+		}
 	</style>
 </head>
 <body>
 <?php
 
-	
 	$logo  = '<div class="nav">' . CHtml::image(Yii::app()->getBaseUrl().'/images/icones/mgsis-20px.ico', 'MGsis', array('width'=>'20px')) . '</div>';
 	$logo .= '<div class="nav">MGsis</div>';
-	
-	$menu = 
+	$menu =
 		array(
-			
 			array(
-				'label' => 'Comercial', 
-				'url'=>'#', 
+				'label' => 'Comercial',
+				'url'=>'#',
 				'items'=>array(
 					array('label' => 'Negócios', 'url' => Yii::app()->createUrl('negocio')),
 					array('label' => 'Notas Fiscais', 'url' => Yii::app()->createUrl('notaFiscal')),
 					array('label' => htmlentities("NFe de Terceiros"), 'url' => Yii::app()->createUrl('nfeTerceiro')),
 				)
 			),
-			
 			array(
-				'label' => 'Financeiro', 
-				'url'=>'#', 
+				'label' => 'Financeiro',
+				'url'=>'#',
 				'items'=>array(
 					array('label' => 'Pessoas', 'url' => Yii::app()->createUrl('pessoa')),
 					'---',
 					array('label' => 'Liquidações', 'url' => Yii::app()->createUrl('liquidacaoTitulo')),
-					array('label' => 'Titulos', 'url' => Yii::app()->createUrl('titulo')),				
+					array('label' => 'Titulos', 'url' => Yii::app()->createUrl('titulo')),
 					array('label' => 'Agrupamentos', 'url' => Yii::app()->createUrl('tituloAgrupamento')),
 					'---',
-					array('label' => 'Bancos', 'url' => Yii::app()->createUrl('banco')),					
-					array('label' => 'Cheques', 'url' => Yii::app()->createUrl('cheque')),			
-					array('label' => 'Formas de Pagamento', 'url' => Yii::app()->createUrl('formaPagamento')),					
-					array('label' => 'Grupos de Cliente', 'url' => Yii::app()->createUrl('grupoCliente')),					
+					array('label' => 'Bancos', 'url' => Yii::app()->createUrl('banco')),
+					array('label' => 'Cheques', 'url' => Yii::app()->createUrl('cheque')),
+					array('label' => 'Formas de Pagamento', 'url' => Yii::app()->createUrl('formaPagamento')),
+					array('label' => 'Grupos de Cliente', 'url' => Yii::app()->createUrl('grupoCliente')),
 					array('label' => 'Portadores', 'url' => Yii::app()->createUrl('portador')),
-					array('label' => 'Tipo Movimento Títulos', 'url' => Yii::app()->createUrl('tipoMovimentoTitulo')),				
+					array('label' => 'Tipo Movimento Títulos', 'url' => Yii::app()->createUrl('tipoMovimentoTitulo')),
 					array('label' => 'Tipo Títulos', 'url' => Yii::app()->createUrl('tipoTitulo')),
 				)
 			),
 
 			array(
-				'label' => 'Estoque', 
-				'url'=>'#', 
+				'label' => 'Estoque',
+				'url'=>'#',
 				'items'=>array(
 					//array('label' => 'Consulta de Preço', 'url' => Yii::app()->createUrl('produto/quiosqueConsulta')),
 					//array('label' => 'Produtos', 'url' => Yii::app()->createUrl('produto')),
@@ -104,11 +102,10 @@
 					//array('label' => 'Unidades de Medida', 'url' => Yii::app()->createUrl('unidadeMedida')),
 				)
 			),
-			
 			//Fiscal
 			array(
-				'label' => 'Fiscal', 
-				'url'=>'#', 
+				'label' => 'Fiscal',
+				'url'=>'#',
 				'items'=>array(
 					array('label' => 'CFOP', 'url' => Yii::app()->createUrl('cfop')),
 					array('label' => 'Contas Contábeis', 'url' => Yii::app()->createUrl('contaContabil')),
@@ -119,11 +116,10 @@
 
 				)
 			),
-                    
-                        // Admin
+      // Admin
 			array(
-				'label' => 'Admin', 
-				'url'=>'#', 
+				'label' => 'Admin',
+				'url'=>'#',
 				'items'=>array(
 					//array('label' => 'Usuários', 'url' => Yii::app()->createUrl('usuario')),
 					array('label' => 'Permissões', 'url' => Yii::app()->createUrl('srbac/authitem/frontpage')),
@@ -131,15 +127,13 @@
 					//array('label' => 'Códigos', 'url' => Yii::app()->createUrl('codigo')),
 				)
 			),
-
-                        // MGLara
+      // MGLara
 			array(
-				'label' => 'MGLara', 
-				'url'=>'/MGLara', 
+				'label' => 'MGLara',
+				'url'=>'/MGLara',
 			),
-
 		);
-	
+
 	$this->widget('bootstrap.widgets.TbNavbar', array(
 		'type'=>'inverse', // null or 'inverse'
 		'brand' => $logo,
@@ -158,9 +152,9 @@
 				'htmlOptions'=>array('class'=>'pull-right'),
 				'items'=>array(
 					array(
-						'label'=> Yii::app()->user->name, 
-						'url'=>'#', 
-						'icon'=>'icon-user icon-white', 
+						'label'=> Yii::app()->user->name,
+						'url'=>'#',
+						'icon'=>'icon-user icon-white',
 						'visible'=>!Yii::app()->user->isGuest,
 						'items'=>
 							array(
@@ -171,8 +165,8 @@
 				),
 			),
 		),
-	)); 	
-	
+	));
+
 	if (!empty($this->menu))
 	{
 		$this->widget(
@@ -192,11 +186,10 @@
 				)
 			);
 	}
-	
+
 ?>
 <div class="affix" style="right: 0px; bottom:0px;">
 	<?php
-	
 	if (isset($this->breadcrumbs))
 	{
 		$this->widget(
@@ -205,41 +198,45 @@
 				'homeLink'=>CHtml::link('Início', array('site/index')),
 				'links'=>$this->breadcrumbs,
 			)
-		);	
+		);
 	}
 
-	
-	?>
-</div>	
+?>
+</div>
 <div class="container-fluid">
     <?php if (! in_array($_SERVER['SERVER_ADDR'], ['192.168.3.202', 'sistema.mgpapelaria.com.br', 'sistema.mgpapelaria.com', 'netuno.mgpapelaria.com.br', 'netuno.mgpapelaria.com']) ): ?>
-        <h4 class="row-fluid alert alert-error">
+			<div class="row-fluid">
+			<div class="span12">
+
+        <h4 class="alert alert-error">
             <center>
                 <blink>
                 BASE DE TESTES - <?php echo $_SERVER['SERVER_NAME']; ?><?php echo $_SERVER["REQUEST_URI"]; ?>
                 </blink>
             </center>
         </h4>
+			</div>
+			</div>
         <script type="text/javascript">
 
-            function blink() 
+            function blink()
             {
                 var blinks = document.getElementsByTagName('blink');
-                for (var i = blinks.length - 1; i >= 0; i--) 
+                for (var i = blinks.length - 1; i >= 0; i--)
                 {
                     var s = blinks[i];
                     s.style.visibility = (s.style.visibility === 'visible') ? 'hidden' : 'visible';
                 }
                 window.setTimeout(blink, 1000);
             }
-            
-            if (document.addEventListener) 
+
+            if (document.addEventListener)
                 document.addEventListener("DOMContentLoaded", blink, false);
-            else if (window.addEventListener) 
+            else if (window.addEventListener)
                 window.addEventListener("load", blink, false);
-            else if (window.attachEvent) 
+            else if (window.attachEvent)
                 window.attachEvent("onload", blink);
-            else 
+            else
                 window.onload = blink;
 
         </script>
