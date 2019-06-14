@@ -188,7 +188,7 @@
 	}
 
 ?>
-<div class="affix" style="right: 0px; bottom:0px;">
+<div class="affix hidden-phone hidden-tablet" style="right: 0px; bottom:0px;">
 	<?php
 	if (isset($this->breadcrumbs))
 	{
@@ -211,7 +211,7 @@
         <h4 class="alert alert-error">
             <center>
                 <blink>
-                BASE DE TESTES - <?php echo $_SERVER['SERVER_NAME']; ?><?php echo $_SERVER["REQUEST_URI"]; ?>
+                BASE DE TESTES
                 </blink>
             </center>
         </h4>

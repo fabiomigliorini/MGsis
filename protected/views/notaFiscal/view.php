@@ -222,7 +222,7 @@ $(document).ready(function(){
 	));
 	?>
 </small>
-	<small class="span4">
+	<small class="span4" style="overflow-x: scroll">
 	<?php
 	$css_label = "";
 	$staus = "&nbsp";
@@ -452,6 +452,7 @@ $(document).ready(function(){
 	</small>
 </h2>
 
+<div class="row" style="overflow-x: scroll">
 <table class="table table-hover table-condensed table-bordered table-striped">
 	<thead>
 		<tr>
@@ -769,6 +770,7 @@ $(document).ready(function(){
 		?>
 	</tbody>
 </table>
+</div>
 <br>
 <h2>
 	Duplicatas
