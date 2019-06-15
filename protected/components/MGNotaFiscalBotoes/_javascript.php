@@ -23,32 +23,54 @@ function NFePHPErro (jqxhr)
 
 function NFePHPDanfe(codnotafiscal, modelo, recarregar)
 {
+
 	$('#modalProgressoNfeLabelStatus').text('Finalizado...');
 	$('#modalProgressoNfeProgressBar').css('width', '100%');
 
-	$('#btnImprimirNFCe').data('codnotafiscal', codnotafiscal);
+	// NO CELULAR ABRE PDF
+	if (/Mobi|Android/i.test(navigator.userAgent)) {
 
-	modelo = modelo || <?php echo NotaFiscal::MODELO_NFE ?>;
-	recarregar = recarregar || true;
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', "<?php echo MGSPA_NFEPHP_URL; ?>" + codnotafiscal + "/danfe", true);
+		xhr.responseType = 'blob';
+		xhr.onload = function(e) {
+		 if (this['status'] == 200) {
+		   var blob = new Blob([this['response']], {type: 'application/pdf'});
+		   var url = URL.createObjectURL(blob);
+		   var printWindow = window.open(url);
+			 if (recarregar) {
+				 location.reload();
+			 }
+		 }
+		};
+		xhr.send();
 
-	$('#modalDanfe').modal({show:true})
-	$('#frameDanfe').attr("src", "<?php echo MGSPA_NFEPHP_URL; ?>" + codnotafiscal + "/danfe");
-	$('#modalDanfe').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
-	$('#modalDanfe').off('hide');
-
-	if (modelo == <?php echo NotaFiscal::MODELO_NFE ?>) {
-		$('#btnImprimirNFCe').hide();
+	// NO COMPUTADOR ABRE MODAL
 	}	else {
-		$('#btnImprimirNFCe').show();
+
+		$('#btnImprimirNFCe').data('codnotafiscal', codnotafiscal);
+
+		modelo = modelo || <?php echo NotaFiscal::MODELO_NFE ?>;
+
+		$('#modalDanfe').modal({show:true})
+		$('#frameDanfe').attr("src", "<?php echo MGSPA_NFEPHP_URL; ?>" + codnotafiscal + "/danfe");
+		$('#modalDanfe').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
+		$('#modalDanfe').off('hide');
+
+		if (modelo == <?php echo NotaFiscal::MODELO_NFE ?>) {
+			$('#btnImprimirNFCe').hide();
+		}	else {
+			$('#btnImprimirNFCe').show();
+		}
+
+		if (recarregar) {
+			$('#modalDanfe').on('hide', function(){
+				location.reload();
+			});
+		}
 	}
 
 	$('#modalProgressoNfe').modal('hide');
-
-	if (recarregar) {
-		$('#modalDanfe').on('hide', function(){
-			location.reload();
-		});
-	}
 }
 
 function NFePHPImprimir(codnotafiscal, impressora)
