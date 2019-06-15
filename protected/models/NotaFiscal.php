@@ -769,11 +769,17 @@ class NotaFiscal extends MGActiveRecord
 	{
 		if ($this->codstatus == NotaFiscal::CODSTATUS_AUTORIZADA
 			|| $this->codstatus == NotaFiscal::CODSTATUS_INUTILIZADA
-			|| $this->codstatus == NotaFiscal::CODSTATUS_CANCELADA)
+			|| $this->codstatus == NotaFiscal::CODSTATUS_CANCELADA) {
 			return false;
+		}
 
-		if ($this->emitida && !empty($this->numero))
+		if ($this->Filial->Pessoa->fisica) {
+			return true;
+		}
+
+		if ($this->emitida && !empty($this->numero)) {
 			return false;
+		}
 
 		return true;
 
