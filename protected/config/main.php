@@ -11,7 +11,7 @@ return array(
     //'theme'=>'mgsis',
 	//'sourceLanguage'=>'pt_br',
 	'language'=>'pt-BR',
-	
+
 	// preloading 'log' component
 	'preload'=>array(
 		'log',
@@ -24,17 +24,17 @@ return array(
 		'application.components.*',
 		'application.modules.srbac.controllers.SBaseController'
 	),
-	
+
 	'modules'=>array(
 		// uncomment the following to enable the Gii tool
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'123321',
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
-			'ipFilters'=>array('127.0.0.1','::1'),
+			'ipFilters'=>array('127.0.0.1', '192.168.1.198'),
                         'generatorPaths'=>array(
                             'bootstrap.gii',
-                        ),                    
+                        ),
 		),
 		'srbac'=>
 			array(
@@ -71,7 +71,7 @@ return array(
 				//"imagesPack"=>"noia",
 				// Whether to show text next to the menu icons (default false)
 				"iconText"	=>true,
-			)		
+			)
 		),
 	// application components
 	'components'=>array(
@@ -92,7 +92,7 @@ return array(
 		),
 		'bootstrap' => array(
 			'class' => 'application.extensions.yiibooster.components.Bootstrap',
-		),		
+		),
 
 		// uncomment the following to enable URLs in path-format
 		/*
@@ -104,7 +104,7 @@ return array(
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
-		 * 
+		 *
 		 */
 		/*
 		'urlManager'=>array(
@@ -116,7 +116,7 @@ return array(
 			),
 			'showScriptName'=>false,
 		),
-		 * 
+		 *
 		 */
 		/*
 		'db'=>array(
@@ -124,7 +124,7 @@ return array(
 		),
 		*/
 		'db'=>array(
-			'pdoClass' => 'NestedPDO',			
+			'pdoClass' => 'NestedPDO',
 			'connectionString' => 'pgsql:host=127.0.0.1;dbname=mgsis',
 			//'emulatePrepare' => true,
 			'username' => 'mgsis_yii',

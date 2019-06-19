@@ -40,9 +40,9 @@ $(document).ready(function(){
 
 <div class="row-fluid">
 	<div class="span6">
-		<?php 
+		<?php
 
-		$attributes = 
+		$attributes =
 			array(
 				array(
 					'name'=>'codpessoa',
@@ -71,7 +71,7 @@ $(document).ready(function(){
 				);
 
 		if (!$model->cobrancanomesmoendereco)
-			$attributes[] = 
+			$attributes[] =
 				array(
 					'name'=>'enderecocobranca',
 					'label'=>'Cobrança',
@@ -80,7 +80,7 @@ $(document).ready(function(){
 					);
 
 		if (!empty($model->email))
-			$attributes[] = 
+			$attributes[] =
 				array(
 					'name'=>'email',
 					'value'=>CHtml::link($model->email, 'mailto:'.$model->email),
@@ -88,24 +88,24 @@ $(document).ready(function(){
 					);
 
 		if (!empty($model->emailnfe))
-			$attributes[] = 
+			$attributes[] =
 				array(
 					'name'=>'emailnfe',
 					'value'=>(isset($model->emailnfe))?CHtml::link($model->emailnfe, 'mailto:'.$model->emailnfe):null,
-					'type'=>'raw',                 
+					'type'=>'raw',
 					);
 
 		if (!empty($model->emailcobranca))
-			$attributes[] = 
+			$attributes[] =
 				array(
 					'name'=>'emailcobranca',
 					'value'=>(isset($model->emailcobranca))?CHtml::link($model->emailcobranca, 'mailto:'.$model->emailcobranca):null,
-					'type'=>'raw',                 
+					'type'=>'raw',
 					);
-		
-		if ($model->fisica) 
+
+		if ($model->fisica)
 		{
-			$attributes = array_merge($attributes, 
+			$attributes = array_merge($attributes,
 				array(
 					'rg',
 					array(
@@ -124,10 +124,10 @@ $(document).ready(function(){
 		$this->widget('bootstrap.widgets.TbDetailView',array(
 			'data'=>$model,
 			'attributes'=>$attributes));
-		
+
 		$this->widget('UsuarioCriacao', array('model'=>$model));
 
-		?>		
+		?>
 	</div>
 	<div class="span6">
 		<?php
@@ -139,19 +139,19 @@ $(document).ready(function(){
 				),
 		);
 
-		if ($model->cliente) 
+		if ($model->cliente)
 		{
-			
+
 			$total = $model->totalTitulos();
-			
-			$attributes = array_merge($attributes, 
+
+			$attributes = array_merge($attributes,
 				array(
 					array(
 					'name'=>'codgrupocliente',
 					'value'=>(isset($model->GrupoCliente))?CHtml::link(CHtml::encode($model->GrupoCliente->grupocliente),array('grupoCliente/view','id'=>$model->codgrupocliente)):null,
 					'type'=>'raw',
 					),
-					
+
 					array(
 						'name'=>'notafiscal',
 						'value'=>$model->getNotaFiscalDescricao(),
@@ -191,19 +191,19 @@ $(document).ready(function(){
 					array(
 						'name'=>'mensagemvenda',
 						'value'=>(isset($model->mensagemvenda))?nl2br($model->mensagemvenda):null,
-						'type'=>'raw',                 
+						'type'=>'raw',
 					),
 				)
 			);
 
 		}
 
-		$attributes = array_merge($attributes, 
+		$attributes = array_merge($attributes,
 			array(
 				array(
 					'name'=>'observacoes',
 					'value'=>(isset($model->observacoes))?nl2br($model->observacoes):null,
-					'type'=>'raw',                 
+					'type'=>'raw',
 					),
 				array(
 					'name'=>'vendedor',
@@ -217,76 +217,93 @@ $(document).ready(function(){
 
 		$this->widget('bootstrap.widgets.TbDetailView',array(
 			'data'=>$model,
-			'attributes'=>$attributes)); 
+			'attributes'=>$attributes));
 		?>
-		
+
 	</div>
 </div>
 
 <?php
 
-	
-if ($model->cliente)
-{
-	
-	$registrospc=new RegistroSpc('search');
+$pc=new PessoaCertidao('search');
 
-	$registrospc->unsetAttributes();  // clear any default values
-	
-	if(isset($_GET['RegistroSpc']))
-	Yii::app()->session['FiltroRegistroSpcIndex'] = $_GET['RegistroSpc'];
+$pc->unsetAttributes();  // clear any default values
 
-	if (isset(Yii::app()->session['FiltroRegistroSpcIndex']))
-		$registrospc->attributes=Yii::app()->session['FiltroRegistroSpcIndex'];
+if(isset($_GET['PessoaCertidao']))
+Yii::app()->session['FiltroPessoaCertidaoIndex'] = $_GET['PessoaCertidao'];
 
-	$registrospc->codpessoa = $model->codpessoa;
-
-	$abaSPC = $this->renderPartial(
-		'/registroSpc/index',
-		array(
-			'dataProvider'=>$registrospc->search(),
-			'model'=>$registrospc,
-		),
-		true
-	);
-	
-	
-
-	
-	$cobrancahistorico=new CobrancaHistorico('search');
-
-	$cobrancahistorico->unsetAttributes();  // clear any default values
-	
-	if(isset($_GET['CobrancaHistorico']))
-	Yii::app()->session['FiltroCobrancaHistoricoIndex'] = $_GET['CobrancaHistorico'];
-
-	if (isset(Yii::app()->session['FiltroCobrancaHistoricoIndex']))
-		$cobrancahistorico->attributes=Yii::app()->session['FiltroCobrancaHistoricoIndex'];
-
-	$cobrancahistorico->codpessoa = $model->codpessoa;
-	
-	$abaCobr = $this->renderPartial(
-		'/cobrancaHistorico/index',
-		array(
-			'dataProvider'=>$cobrancahistorico->search(),
-			'model'=>$cobrancahistorico,
-		),
-		true
-	);
-	
-	
-	$this->widget('bootstrap.widgets.TbTabs', 
-		array(
-			'type' => 'tabs',
-			'tabs' => 
-				array(
-					array('label' => 'Histórico de Cobrança', 'content' => $abaCobr, 'active' => true),
-					array('label' => 'Registro de SPC', 'content' => $abaSPC, 'active' => false),
-				)
-		)
-	);		
-
+if (isset(Yii::app()->session['FiltroPessoaCertidaoIndex'])) {
+	$pc->attributes=Yii::app()->session['FiltroPessoaCertidaoIndex'];
 }
+
+$pc->codpessoa = $model->codpessoa;
+
+$abaCertidoes = $this->renderPartial(
+	'/pessoaCertidao/index',
+	array(
+		'dataProvider'=>$pc->search(),
+		'model'=>$pc,
+	),
+	true
+);
+
+
+$registrospc=new RegistroSpc('search');
+
+$registrospc->unsetAttributes();  // clear any default values
+
+if(isset($_GET['RegistroSpc']))
+Yii::app()->session['FiltroRegistroSpcIndex'] = $_GET['RegistroSpc'];
+
+if (isset(Yii::app()->session['FiltroRegistroSpcIndex']))
+	$registrospc->attributes=Yii::app()->session['FiltroRegistroSpcIndex'];
+
+$registrospc->codpessoa = $model->codpessoa;
+
+$abaSPC = $this->renderPartial(
+	'/registroSpc/index',
+	array(
+		'dataProvider'=>$registrospc->search(),
+		'model'=>$registrospc,
+	),
+	true
+);
+
+
+
+
+$cobrancahistorico=new CobrancaHistorico('search');
+
+$cobrancahistorico->unsetAttributes();  // clear any default values
+
+if(isset($_GET['CobrancaHistorico']))
+Yii::app()->session['FiltroCobrancaHistoricoIndex'] = $_GET['CobrancaHistorico'];
+
+if (isset(Yii::app()->session['FiltroCobrancaHistoricoIndex']))
+	$cobrancahistorico->attributes=Yii::app()->session['FiltroCobrancaHistoricoIndex'];
+
+$cobrancahistorico->codpessoa = $model->codpessoa;
+
+$abaCobr = $this->renderPartial(
+	'/cobrancaHistorico/index',
+	array(
+		'dataProvider'=>$cobrancahistorico->search(),
+		'model'=>$cobrancahistorico,
+	),
+	true
+);
+
+
+$this->widget('bootstrap.widgets.TbTabs',
+	array(
+		'type' => 'tabs',
+		'tabs' =>
+			array(
+				array('label' => 'Certidões', 'content' => $abaCertidoes, 'active' => true),
+				array('label' => 'Histórico de Cobrança', 'content' => $abaCobr, 'active' => false),
+				array('label' => 'Registro de SPC', 'content' => $abaSPC, 'active' => false),
+			)
+	)
+);
+
 ?>
-
-

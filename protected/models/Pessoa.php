@@ -51,6 +51,7 @@
  * @property string $codusuariocriacao
  * @property integer $toleranciaatraso
  * @property string $codgrupocliente
+ * @property string $codgrupoeconomico
  *
  * The followings are the available model relations:
  * @property Titulo[] $Titulos
@@ -71,17 +72,18 @@
  * @property Negocio[] $Negocios
  * @property NotaFiscal[] $NotaFiscals
  * @property Negocio[] $NegocioVendedors
+ * @property PessoaCertidao[] $PessoaCertidaos
  */
 class Pessoa extends MGActiveRecord
 {
 	/* @property boolean $cobrancanomesmoendereco */
  	public $cobrancanomesmoendereco;
-	
+
 	const NOTAFISCAL_TRATAMENTOPADRAO = 0;
 	const NOTAFISCAL_SEMPRE = 1;
 	const NOTAFISCAL_SOMENTE_FECHAMENTO = 2;
 	const NOTAFISCAL_NUNCA = 9;
-	
+
 	const CONSUMIDOR = 1;
 
 	/**
@@ -100,7 +102,7 @@ class Pessoa extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			
+
 			array('cnpj', 'ext.validators.CnpjCpfValidator'),
 			array('cnpj, ie', 'validaAlteracao'),
 			array('ie', 'ext.validators.InscricaoEstadualValidator'),
@@ -136,16 +138,16 @@ class Pessoa extends MGActiveRecord
 		//se é cadastro novo
 		if ($this->isNewRecord)
 			return true;
-		
+
 		//busca dados do banco
 		$banco = Pessoa::model()->findByPk($this->codpessoa);
 		$dado_banco = (int)MGFormatter::NumeroLimpo($banco->$attribute);
 		$dado_tela  = (int)MGFormatter::NumeroLimpo($this->$attribute);
-		
+
 		//se for o cnpj e o cadastro estava vazio
 		if ($dado_banco == 0 && $attribute == 'cnpj')
 			return true;
-		
+
 		//se não teve movimento ainda
 		$movimentos = sizeof($this->NotaFiscals);
 		if ($movimentos == 0)
@@ -154,19 +156,19 @@ class Pessoa extends MGActiveRecord
 			$movimentos = sizeof($this->Titulos);
 		if ($movimentos == 0)
 			return true;
-		
+
 		//se alterou algo
 		if ($dado_banco != $dado_tela)
 			$this->addError($attribute, 'É proibido alterar Número dos Documentos em cadastro já movimentado!');
-		
+
 	}
-	
+
 	//retorna numero limpo
 	//necessario para o filtro de ie/cep/cobranca
 	public function numeroLimpo($str)
 	{
 		return MGFormatter::numeroLimpo($str);
-	}	
+	}
 
 	//verifica se o numero tem pelo menos 10 digitos
 	public function validaTelefone($attribute,$params)
@@ -175,7 +177,7 @@ class Pessoa extends MGActiveRecord
 			if (strlen(MGFormatter::numeroLimpo($this->$attribute)) < 10)
 				$this->addError($attribute,'Telefone inválido, não esqueça do DDD.');
 	}
-	
+
 	//verifica se o grupo do cliente está preenchido
 	public function validaGrupoCliente($attribute,$params)
 	{
@@ -186,14 +188,14 @@ class Pessoa extends MGActiveRecord
 	//verifica se a combinacao de CNPJ e IE já não estão cadastrados
 	public function validaCnpjDuplicado($attribute,$params)
 	{
-		
+
 		if ($this->codpessoa == self::CONSUMIDOR)
 			return true;
-		
+
 		if (!empty($this->cnpj))
 		{
 			$validar = true;
-			
+
 			if (!$this->isNewRecord)
 			{
 				$pessoa = Pessoa::model()->findByPk($this->codpessoa);
@@ -202,14 +204,14 @@ class Pessoa extends MGActiveRecord
 					$validar = false;
 				}
 			}
-			
+
 			if ($validar)
 			{
 				$pessoas = Pessoa::model()->findAll(
 					array(
-						'select' => 'codpessoa, fantasia, ie, cnpj', 
-						'condition' => 'cnpj = :cnpj', 
-						'params' => 
+						'select' => 'codpessoa, fantasia, ie, cnpj',
+						'condition' => 'cnpj = :cnpj',
+						'params' =>
 							array(
 								'cnpj' => $this->cnpj,
 							)
@@ -224,7 +226,7 @@ class Pessoa extends MGActiveRecord
 					if ((int) MGFormatter::numeroLimpo($this->ie) == (int) MGFormatter::numeroLimpo($pessoa->ie))
 					{
 						$erro = sprintf(
-							'CNPJ/CPF e Inscrição Estadual já cadastrados para "%s" (%s).', 
+							'CNPJ/CPF e Inscrição Estadual já cadastrados para "%s" (%s).',
 							$pessoa->fantasia,
 							CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($pessoa->codpessoa)),array('view','id'=>$pessoa->codpessoa))
 							);
@@ -235,7 +237,7 @@ class Pessoa extends MGActiveRecord
 			}
 		}
 	}
-	
+
 	/**
 	 * @return array relational rules.
 	 */
@@ -261,10 +263,11 @@ class Pessoa extends MGActiveRecord
 			'Negocios' => array(self::HAS_MANY, 'Negocio', 'codpessoa'),
 			'NotaFiscals' => array(self::HAS_MANY, 'NotaFiscal', 'codpessoa'),
 			'NegociosVendedors' => array(self::HAS_MANY, 'Negocio', 'codpessoavendedor'),
+      'PessoaCertidaos' => array(self::HAS_MANY, 'PessoaCertidao', 'codpessoa'),
 			'GrupoCliente' => array(self::BELONGS_TO, 'GrupoCliente', 'codgrupocliente'),
             'inclusaoSpc'=>array(
-				self::STAT, 
-				'RegistroSpc', 
+				self::STAT,
+				'RegistroSpc',
 				'codpessoa',
 				'select'=>'to_char(min(inclusao), \'DD/MM/YYYY\')',
 				'condition'=>'baixa is null'
@@ -351,14 +354,14 @@ class Pessoa extends MGActiveRecord
 		//$criteria->compare('codpessoa',$this->codpessoa,false);
 		$criteria->compare('codpessoa',Yii::app()->format->numeroLimpo($this->codpessoa),false);
 		$criteria->compare('codgrupocliente',$this->codgrupocliente,false);
-		
+
 		if (!empty($this->fantasia))
 		{
 			$texto  = str_replace(' ', '%', trim($this->fantasia));
 			$criteria->addCondition('t.fantasia ILIKE :fantasia OR t.pessoa ILIKE :fantasia');
 			$criteria->params = array_merge($criteria->params, array(':fantasia' => '%'.$texto.'%'));
 		}
-		
+
 		if (!empty($this->cnpj))
 		{
 			$criteria->addCondition('cast(t.Cnpj as char(20)) ILIKE :cnpj');
@@ -369,16 +372,16 @@ class Pessoa extends MGActiveRecord
 		{
 			case 9:
 				break;
-			
+
 			case 1:
 				$criteria->addCondition('t.inativo is not null');
 				break;
-			
+
 			default:
 				$criteria->addCondition('t.inativo is null');
 				break;
 		}
-		
+
 		if (!empty($this->email))
 		{
 			$criteria->addCondition('t.email ILIKE :email OR t.emailnfe ILIKE :email OR t.emailcobranca ILIKE :email');
@@ -396,9 +399,9 @@ class Pessoa extends MGActiveRecord
 			$criteria->addCondition('t.codcidade = :codcidade OR t.codcidadecobranca = :codcidade');
 			$criteria->params = array_merge($criteria->params, array(':codcidade' => $this->codcidade));
 		}
-		
-		
-		return new CActiveDataProvider($this, 
+
+
+		return new CActiveDataProvider($this,
 				array(
 					'criteria'=>$criteria,
 					'sort'=>array('defaultOrder'=>'fantasia ASC'),
@@ -416,24 +419,24 @@ class Pessoa extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
-	
+
 	protected function afterFind()
 	{
 		if (
-			($this->enderecocobranca    <>  $this->endereco   ) or 
-			($this->numerocobranca      <>  $this->numero     ) or 
-			($this->complementocobranca <>  $this->complemento) or 
-			($this->bairrocobranca      <>  $this->bairro     ) or 
-			($this->codcidadecobranca   <>  $this->codcidade  ) or 
-			($this->cepcobranca         <>  $this->cep        ) 
+			($this->enderecocobranca    <>  $this->endereco   ) or
+			($this->numerocobranca      <>  $this->numero     ) or
+			($this->complementocobranca <>  $this->complemento) or
+			($this->bairrocobranca      <>  $this->bairro     ) or
+			($this->codcidadecobranca   <>  $this->codcidade  ) or
+			($this->cepcobranca         <>  $this->cep        )
 		   )
 			$this->cobrancanomesmoendereco = false;
 		else
 			$this->cobrancanomesmoendereco = true;
-		
+
 		return parent::afterFind();
 	}
-	
+
 	public function getNotaFiscalOpcoes()
 	{
 		return array(
@@ -453,7 +456,7 @@ class Pessoa extends MGActiveRecord
 			self::NOTAFISCAL_NUNCA,
 		);
 	}
-	
+
 	public function getNotaFiscalDescricao()
 	{
 		$opcoes=$this->getNotaFiscalOpcoes();
@@ -461,10 +464,10 @@ class Pessoa extends MGActiveRecord
 			return null;
 		return isset($opcoes[$this->notafiscal]) ? $opcoes[$this->notafiscal] : "Tipo Desconhecido ({$this->notafiscal})";
 	}
-	
+
 	protected function beforeValidate()
 	{
-	
+
 		if ($this->cobrancanomesmoendereco == true)
 		{
 			$this->enderecocobranca    = $this->endereco;
@@ -474,19 +477,19 @@ class Pessoa extends MGActiveRecord
 			$this->codcidadecobranca   = $this->codcidade;
 			$this->cepcobranca         = $this->cep;
 		}
-		
+
 		if (empty($this->notafiscal))
 			$this->notafiscal = self::NOTAFISCAL_TRATAMENTOPADRAO;
-		
+
 		return parent::beforeValidate();
 	}
-	
+
 	public function totalTitulos()
 	{
-		
-		$command = Yii::app()->db->createCommand(' 
+
+		$command = Yii::app()->db->createCommand('
 			SELECT SUM(saldo) AS saldo, MIN(vencimento) AS vencimento
-			  FROM tbltitulo 
+			  FROM tbltitulo
 			 WHERE codpessoa = :codpessoa
 			   AND saldo <> 0
 			');
@@ -495,7 +498,7 @@ class Pessoa extends MGActiveRecord
 
 		$ret = $command->queryRow();
 		$ret["vencimentodias"] = 0;
-		
+
 		if ($venc = DateTime::createFromFormat("Y-m-d",$ret["vencimento"]))
 		{
 			$ret["vencimento"] = $venc->format("d/m/Y");
@@ -503,36 +506,36 @@ class Pessoa extends MGActiveRecord
 			$dif = $hoje->diff($venc);
 			$ret["vencimentodias"] = $dif->format("%r%a");
 		}
-		
+
 		return $ret;
 	}
-	
+
 	public function avaliaLimiteCredito($valorAvaliar = 0)
 	{
 		//se esta com o credito marcado como bloqueado
 		if ($this->creditobloqueado)
 			return false;
-		
+
 		//busca no banco total dos titulos
 		$total = $this->totalTitulos();
-		
-		//calcula 
+
+		//calcula
 		$creditototal = $total["saldo"] + $valorAvaliar;
 
-		//vefica o valor do credito 
+		//vefica o valor do credito
 		if ((!empty($this->credito)) && (($this->credito * 1.05) < $creditototal))
 			return false;
-		
+
 		//verifica o atraso
 		if (($total["vencimentodias"] <= 0) && (abs($total["vencimentodias"]) > $this->toleranciaatraso))
 			return false;
-		
-		
+
+
 		return true;
-		
+
 	}
-	
-	public function scopes () 
+
+	public function scopes ()
 	{
 		return array(
 			'combo'=>array(
@@ -541,12 +544,12 @@ class Pessoa extends MGActiveRecord
 				),
 			);
 	}
-	
+
 	public function getListaCombo ()
 	{
 		$lista = self::model()->combo()->findAll();
 		return CHtml::listData($lista, 'codpessoa', 'pessoa');
 	}
-	
+
 
 }
