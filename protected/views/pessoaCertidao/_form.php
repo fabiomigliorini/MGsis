@@ -26,18 +26,18 @@
 			echo $form->select2Row($model, 'codcertidaotipo', CertidaoTipo::getListaCombo(), array('class'=>'input-xlarge'));
       echo $form->select2Row($model, 'codcertidaoemissor', CertidaoEmissor::getListaCombo(), array('class'=>'input-medium'));
 
-      // echo $form->datepickerRow(
-      //         $model,
-      //         'inativo',
-      //         array(
-      //             'class' => 'input-small text-center',
-      //             'options' => array(
-      //                 'language' => 'pt',
-      //                 'format' => 'dd/mm/yyyy'
-      //                 ),
-      //             'prepend' => '<i class="icon-calendar"></i>',
-      //             )
-      //         );
+      echo $form->datetimepickerRow(
+  				$model,
+  				'inativo',
+  				array(
+  					'class' => 'input-medium text-center',
+  					'options' => array(
+  						'language' => 'pt',
+  						'format' => 'dd/mm/yyyy hh:ii:ss',
+  						),
+  					//'prepend' => '<i class="icon-calendar"></i>',
+  					)
+  				);
 
     ?>
 </fieldset>
