@@ -6,29 +6,33 @@ if ($model->codnegociostatus == 1)
 	?>
 	<form>
 		<div class="row-fluid">
-			<div class="input-prepend">
-				<label class="add-on" for="quantidade">Quantidade</label>
-				<input class="input-mini text-right" id="quantidade" type="text" value="1">
+			<div class="span8">
+				<div class="input-prepend">
+					<label class="add-on" for="quantidade">Quantidade</label>
+					<input class="input-mini text-right" id="quantidade" type="text" value="1">
+				</div>
+				<div class="input-prepend input-append">
+					<label class="add-on" for="barras">Código</label>
+					<input class="input-medium text-right" id="barras" type="text">
+					<button class="btn" type="submit" id="btnAdicionar" tabindex="-1">Adicionar</button>
+				</div>
 			</div>
-			<div class="input-prepend input-append">
-				<label class="add-on" for="barras">Código</label>
-				<input class="input-medium text-right" id="barras" type="text">
-				<button class="btn" type="submit" id="btnAdicionar" tabindex="-1">Adicionar</button>
-				<button class="btn" type="button" id="btnPrancheta" tabindex="-1"><i class="icon-search"></i> Prancheta (F7)</button>
+			<div class="span4">
+				<button style="margin-bottom: 10px" class="btn" type="button" id="btnPrancheta" tabindex="-1"><i class="icon-search"></i> Prancheta (F7)</button>
 			</div>
-		</div>
-		<div class="row-fluid">
-			<?php
-			$this->widget('MGSelect2ProdutoBarra',
-				array(
-					'name' => 'codprodutobarra',
-					'htmlOptions' => array(
-						'class' => 'span12',
-						'placeholder' => 'Pesquisa de Produtos ($ ordena por preço)'
-						),
-					)
-				);
-			?>
+			<div class="row-fluid">
+				<?php
+				$this->widget('MGSelect2ProdutoBarra',
+					array(
+						'name' => 'codprodutobarra',
+						'htmlOptions' => array(
+							'class' => 'span12',
+							'placeholder' => 'Pesquisa de Produtos ($ ordena por preço)'
+							),
+						)
+					);
+				?>
+			</div>
 		</div>
 	</form>
 	<?php

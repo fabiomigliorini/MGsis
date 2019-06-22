@@ -5,11 +5,13 @@
 <?php echo $form->errorSummary($model); ?>
 
 <fieldset>
-	<?php
-		//echo $form->textFieldRow($model,'codnotafiscal',array('class'=>'span5'));
-		//echo $form->textFieldRow($model,'codprodutobarra',array('class'=>'span5'));
-		echo $form->select2ProdutoBarraRow($model,'codprodutobarra',array('class'=>'input-xxlarge'));
-	?>
+	<div class="row" style="max-width: 90vw">
+		<?php
+			//echo $form->textFieldRow($model,'codnotafiscal',array('class'=>'span5'));
+			//echo $form->textFieldRow($model,'codprodutobarra',array('class'=>'span5'
+			echo $form->select2ProdutoBarraRow($model,'codprodutobarra',array('class'=>'span12'));
+		?>
+	</div>
 	<div class="row-fluid">
 		<div class="span4">
 			<?php
