@@ -19,10 +19,21 @@
 
 		$(document).ready(function() {
 			$.ytLoad();
-			$("li.dropdown a").click(function(e){
-				$(this).next('ul.dropdown-menu').css("display", "block");
-				e.stopPropagation();
+
+			$(function() {
+			  return $("a.dropdown-toggle:not(.multiselect)").click(function(e) {
+			    $("ul.dropdown-menu:not(.multiselect-container)").css("display", "none");
+			    $(this).next("ul.dropdown-menu").css("display", "block");
+			    return e.stopPropagation();
+			  });
 			});
+
+			$(document).on('click click.dropdown.data-api', function(e) {
+			  if (!$(e.target).closest('.dropdown, .multiselect-container').length) {
+			    return $("ul.dropdown-menu:not(.multiselect-container)").css("display", "none");
+			  }
+			});
+
 		});
 
 	</script>
