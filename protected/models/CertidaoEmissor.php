@@ -51,6 +51,8 @@ class CertidaoEmissor extends MGActiveRecord
         // class name for the relations automatically generated below.
         return array(
             'pessoacertidaos' => array(self::HAS_MANY, 'Pessoacertidao', 'codcertidaoemissor'),
+            'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+      			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
         );
     }
 
@@ -60,12 +62,12 @@ class CertidaoEmissor extends MGActiveRecord
     public function attributeLabels()
     {
         return array(
-            'codcertidaoemissor' => 'Codcertidaoemissor',
-            'certidaoemissor' => 'Certidaoemissor',
-            'criacao' => 'Criacao',
-            'codusuariocriacao' => 'Codusuariocriacao',
-            'alteracao' => 'Alteracao',
-            'codusuarioalteracao' => 'Codusuarioalteracao',
+            'codcertidaoemissor' => '#',
+            'certidaoemissor' => 'Nome do Órgão',
+            'criacao' => 'Criação',
+            'codusuariocriacao' => 'Usuário Criação',
+            'alteracao' => 'Alteração',
+            'codusuarioalteracao' => 'Usuário Alteração',
             'inativo' => 'Inativo',
         );
     }
