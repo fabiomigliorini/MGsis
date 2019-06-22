@@ -1,5 +1,5 @@
 <div class="registro row-fluid">
-	
+
 	<div class="span4">
 		<small class="span2">
 			<?php echo CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($data->codtributacaonaturezaoperacao)),array('tributacaoNaturezaOperacao/view','id'=>$data->codtributacaonaturezaoperacao)); ?>
@@ -17,7 +17,7 @@
 			<?php echo CHtml::encode($data->ncm); ?>
 		</b>
 	</div>
-	
+
 	<div class="span3">
 		<b class="span2">
 			<?php echo CHtml::link(CHtml::encode(Yii::app()->format->formatNumber($data->codcfop, 0)),array('cfop/view','id'=>$data->codcfop)); ?>
@@ -85,16 +85,16 @@
 
 		<?php /*
 					<?php echo CHtml::encode($data->icmscst); ?>
- 
+
  		<b class="span2 muted"><?php echo CHtml::link(CHtml::encode($data->NaturezaOperacao->naturezaoperacao),array('naturezaOperacao/view','id'=>$data->codnaturezaoperacao)); ?></b>
 
 		<small class="span1 muted"><?php echo CHtml::encode($data->acumuladordominiovista); ?></small>
-		
+
 		<small class="span1 muted"><?php echo CHtml::encode($data->acumuladordominioprazo); ?></small>
-				
+
 		<small class="span1 muted"><?php echo CHtml::encode($data->icmsbase); ?></small>
 
-		<small class="span1 muted"><?php echo CHtml::encode($data->icmspercentual); ?></small>		
+		<small class="span1 muted"><?php echo CHtml::encode($data->icmspercentual); ?></small>
 
 		<small class="span2 muted"><?php echo CHtml::encode($data->historicodominio); ?></small>
 

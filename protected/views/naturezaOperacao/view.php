@@ -31,7 +31,7 @@ $(document).ready(function(){
 
 <h1><?php echo $model->naturezaoperacao; ?></h1>
 
-<?php 
+<?php
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
@@ -77,14 +77,23 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 			'value'=>(isset($model->ContaContabil))?CHtml::link(CHtml::encode($model->ContaContabil->contacontabil),array('contaContabil/view','id'=>$model->codcontacontabil)):null,
 			'type'=>'raw',
 			),
+		array(
+				'name'=>'codestoquemovimentotipo',
+				'value'=>(isset($model->EstoqueMovimentoTipo))?CHtml::link(CHtml::encode($model->EstoqueMovimentoTipo->descricao),array('estoqueMovimentoTipo/view','id'=>$model->codestoquemovimentotipo)):null,
+				'type'=>'raw',
+				),
 		'finnfe',
 		array(
 			'name'=>'ibpt',
 			'value'=>($model->ibpt)?'Sim':'Não',
 			),
-		
+		array(
+			'name'=>'estoque',
+			'value'=>($model->estoque)?'Sim':'Não',
+			),
+
 		),
-	)); 
+	));
 
 	$this->widget('UsuarioCriacao', array('model'=>$model));
 
