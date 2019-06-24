@@ -319,13 +319,8 @@ $(document).ready(function(){
 <div id="modalRomaneio" class="modal hide fade" tabindex="-1" role="dialog">
 	<div class="modal-header">
 		<div class="pull-right">
-			<div class="btn-group">
-                <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">Imprimir <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-					<li ><a id="btnImprimirRomaneio" href="#">Na Impressora Laser</a></button>
-					<li ><a id="btnImprimirRomaneioMatricial" href="#">Na Impressora Matricial</a></button>
-                </ul>
-              </div>
+			<button class="btn btn-primary" id="btnImprimirRomaneioMatricial"><i class="icon-print icon-white"></i>&nbsp;Matricial</button>
+                        <button class="btn btn-primary" id="btnImprimirRomaneio"><i class="icon-print icon-white"></i>&nbsp;Laser</button>
 			<button class="btn" data-dismiss="modal">Fechar</button>
 		</div>
 		<h3>Romaneio</h3>

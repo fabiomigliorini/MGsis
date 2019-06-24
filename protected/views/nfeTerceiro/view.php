@@ -225,30 +225,22 @@ $(document).ready(function(){
 					</a>	
 				</li>
 			<?php endif; ?>
-			<li class="dropdown-submenu">
-				<a tabindex="-1" href="#" class=''>
-					<span class='badge badge-important'>&nbsp;</span>
-					Negar Operação					
-				</a>
-				<ul class="dropdown-menu">
-					<?php if($model->indmanifestacao != NfeTerceiro::INDMANIFESTACAO_DESCONHECIDA): ?>
-						<li>
-							<a class='' href='#' id="btnManifestacaoDesconhecida">
-								<span class='badge badge-important'>&nbsp;</span>
-								Desconhecida
-							</a>
-						</li>
-					<?php endif; ?>
-					<?php if($model->indmanifestacao != NfeTerceiro::INDMANIFESTACAO_NAOREALIZADA): ?>
-						<li>
-							<a class='' href='#' id="btnManifestacaoNaoRealizada">
-								<span class='badge badge-important'>&nbsp;</span>
-								Não Realizada
-							</a>
-						</li>
-					<?php endif; ?>
-				</ul>
-			</li>	
+			<?php if($model->indmanifestacao != NfeTerceiro::INDMANIFESTACAO_DESCONHECIDA): ?>
+				<li>
+					<a class='' href='#' id="btnManifestacaoDesconhecida">
+						<span class='badge badge-important'>&nbsp;</span>
+						Desconhecida
+					</a>
+				</li>
+			<?php endif; ?>
+			<?php if($model->indmanifestacao != NfeTerceiro::INDMANIFESTACAO_NAOREALIZADA): ?>
+				<li>
+					<a class='' href='#' id="btnManifestacaoNaoRealizada">
+						<span class='badge badge-important'>&nbsp;</span>
+						Não Realizada
+					</a>
+				</li>
+			<?php endif; ?>
 		</ul>
 	</div>
 	

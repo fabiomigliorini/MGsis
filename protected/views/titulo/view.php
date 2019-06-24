@@ -135,13 +135,9 @@ $(document).ready(function(){
 <div id="modalVale" class="modal hide fade" tabindex="-1" role="dialog">
 	<div class="modal-header">
 		<div class="pull-right">
-			<div class="btn-group">
-                <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">Imprimir <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-					<li ><a id="btnImprimirVale" href="#">Na Impressora Laser</a></button>
-					<li ><a id="btnImprimirValeMatricial" href="#">Na Impressora Matricial</a></button>
-                </ul>
-              </div>			
+                        <button class="btn btn-primary" id="btnImprimirValeMatricial"><i class="icon-print icon-white"></i>&nbsp;Matricial</button>
+                        <button class="btn btn-primary" id="btnImprimirVale"><i class="icon-print icon-white"></i>&nbsp;Laser</button>
+
 			<button class="btn" data-dismiss="modal">Fechar</button>
 		</div>
 		<h3>Vale</h3>  

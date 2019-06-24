@@ -70,13 +70,8 @@ $(document).ready(function(){
 <div id="modalRecibo" class="modal hide fade" tabindex="-1" role="dialog">
 	<div class="modal-header">
 		<div class="pull-right">
-			<div class="btn-group">
-                <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">Imprimir <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-					<li ><a id="btnImprimirRecibo" href="#">Na Impressora Laser</a></button>
-					<li ><a id="btnImprimirReciboMatricial" href="#">Na Impressora Matricial</a></button>
-                </ul>
-              </div>			
+                        <button class="btn btn-primary" id="btnImprimirReciboMatricial"><i class="icon-print icon-white"></i>&nbsp;Matricial</button>
+                        <button class="btn btn-primary" id="btnImprimirRecibo"><i class="icon-print icon-white"></i>&nbsp;Laser</button>
 			<button class="btn" data-dismiss="modal">Fechar</button>
 		</div>
 		<h3>Recibo</h3>  
