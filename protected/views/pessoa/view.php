@@ -299,9 +299,9 @@ $this->widget('bootstrap.widgets.TbTabs',
 		'type' => 'tabs',
 		'tabs' =>
 			array(
-				array('label' => 'Certidões', 'content' => $abaCertidoes, 'active' => true),
-				array('label' => 'Histórico de Cobrança', 'content' => $abaCobr, 'active' => false),
+				array('label' => 'Histórico de Cobrança', 'content' => $abaCobr, 'active' => true),
 				array('label' => 'Registro de SPC', 'content' => $abaSPC, 'active' => false),
+				array('label' => 'Certidões', 'content' => $abaCertidoes, 'active' => false),
 			)
 	)
 );
