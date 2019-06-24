@@ -20,7 +20,10 @@
 		echo $form->select2Row($model, 'finnfe', NaturezaOperacao::getFinNfeListaCombo(), array('class' => 'input-large'));
 		echo $form->toggleButtonRow($model,'ibpt', array('options' => array('width' => 150,  'enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 		echo $form->toggleButtonRow($model,'estoque', array('options' => array('width' => 150,  'enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
-
+		echo $form->toggleButtonRow($model,'financeiro', array('options' => array('width' => 150,  'enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
+		echo $form->toggleButtonRow($model,'compra', array('options' => array('width' => 150,  'enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
+		echo $form->toggleButtonRow($model,'venda', array('options' => array('width' => 150,  'enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
+		echo $form->toggleButtonRow($model,'vendadevolucao', array('options' => array('width' => 150,  'enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 	?>
 </fieldset>
 <div class="form-actions">

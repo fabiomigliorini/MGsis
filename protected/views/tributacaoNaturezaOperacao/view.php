@@ -1,10 +1,10 @@
 <?php
 
-$titulo = $model->Tributacao->tributacao 
-		. ' / ' 
-		. $model->NaturezaOperacao->naturezaoperacao 
-		. ' / ' 
-		. $model->TipoProduto->tipoproduto 
+$titulo = $model->Tributacao->tributacao
+		. ' / '
+		. $model->NaturezaOperacao->naturezaoperacao
+		. ' / '
+		. $model->TipoProduto->tipoproduto
 		. ' / ' ;
 
 if (empty($model->codestado))
@@ -56,7 +56,7 @@ $(document).ready(function(){
 <div class="row-fluid">
 	<div class="span6">
 		<h3>Chave</h3>
-			<?php 
+			<?php
 			$this->widget('bootstrap.widgets.TbDetailView',array(
 				'data'=>$model,
 				'attributes'=>array(
@@ -88,7 +88,7 @@ $(document).ready(function(){
 								'name'=>'codestado',
 								'value'=>(isset($model->Estado))?CHtml::link(CHtml::encode($model->Estado->estado),array('estado/view','id'=>$model->codestado)):null,
 								'type'=>'raw',
-								),		
+								),
 					'ncm',
 					//'codcfop',
 					array(
@@ -97,12 +97,12 @@ $(document).ready(function(){
 								'type'=>'raw',
 								),
 					),
-				)); 
+				));
 		?>
 	</div>
 	<div class="span6">
 		<h3>Contábil</h3>
-			<?php 
+			<?php
 			$this->widget('bootstrap.widgets.TbDetailView',array(
 				'data'=>$model,
 				'attributes'=>array(
@@ -120,29 +120,29 @@ $(document).ready(function(){
 						'value'=>($model->movimentacaocontabil)?'Sim':'Não',
 						),
 					),
-				)); 
+				));
 			?>
 	</div>
 </div>
 <div class="row-fluid">
 	<div class="span3">
 		<h3>Simples</h3>
-		<?php 
+		<?php
 		$this->widget('bootstrap.widgets.TbDetailView',array(
 			'data'=>$model,
 			'attributes'=>array(
 				'csosn',
 				'icmsbase',
 				'icmspercentual',
-				),
-			)); 
-		?>		
+			),
+		));
+		?>
 	</div>
 	<div class="span9">
 		<h3>Lucro Presumido</h3>
 		<div class="row-fluid">
 			<div class="span3">
-				<?php 
+				<?php
 				$this->widget('bootstrap.widgets.TbDetailView',array(
 					'data'=>$model,
 					'attributes'=>array(
@@ -150,33 +150,33 @@ $(document).ready(function(){
 						'icmslpbase',
 						'icmslppercentual',
 						),
-					)); 
-				?>		
+					));
+				?>
 			</div>
 			<div class="span3">
-				<?php 
+				<?php
 				$this->widget('bootstrap.widgets.TbDetailView',array(
 					'data'=>$model,
 					'attributes'=>array(
 						'piscst',
 						'pispercentual',
 						),
-					)); 
-				?>		
+					));
+				?>
 			</div>
 			<div class="span3">
-				<?php 
+				<?php
 				$this->widget('bootstrap.widgets.TbDetailView',array(
 					'data'=>$model,
 					'attributes'=>array(
 						'cofinscst',
 						'cofinspercentual',
 						),
-					)); 
-				?>		
+					));
+				?>
 			</div>
 			<div class="span3">
-				<?php 
+				<?php
 				$this->widget('bootstrap.widgets.TbDetailView',array(
 					'data'=>$model,
 					'attributes'=>array(
@@ -184,14 +184,45 @@ $(document).ready(function(){
 						'csllpercentual',
 						'irpjpercentual',
 						),
-					)); 
-				?>		
-				
+					));
+				?>
+
 			</div>
 		</div>
 	</div>
+	<div class="row-fluid">
+		<div class="span3">
+			<h3>Produtor Rural</h3>
+			<?php
+			$this->widget('bootstrap.widgets.TbDetailView',array(
+				'data'=>$model,
+				'attributes'=>array(
+					array(
+						'name'=>'certidaosefazmt',
+						'value'=>($model->certidaosefazmt)?'Sim':'Não',
+					),
+					array(
+						'name'=>'fethabkg',
+						'value'=>Yii::app()->format->formatNumber($model->fethabkg, 6),
+					),
+					array(
+						'name'=>'iagrokg',
+						'value'=>Yii::app()->format->formatNumber($model->iagrokg, 6),
+					),
+					array(
+						'name'=>'funruralpercentual',
+						'value'=>Yii::app()->format->formatNumber($model->funruralpercentual, 5),
+					),
+					array(
+						'name'=>'senarpercentual',
+						'value'=>Yii::app()->format->formatNumber($model->senarpercentual, 5),
+					),
+				),
+			));
+			?>
+		</div>
 </div>
 
-<?php 
+<?php
 $this->widget('UsuarioCriacao', array('model'=>$model));
 ?>

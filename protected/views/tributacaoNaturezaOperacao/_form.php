@@ -20,8 +20,8 @@
 				//echo $form->textFieldRow($model,'codtributacao',array('class'=>'span5'));
 				echo $form->select2Row($model, 'codtributacao', Tributacao::getListaCombo(), array('prompt' => '', 'class' => 'input-large'));
 				echo $form->select2Row($model, 'codnaturezaoperacao', NaturezaOperacao::getListaCombo(), array('prompt' => '', 'class' => 'input-xlarge'));
-				echo $form->select2Row($model, 'codtipoproduto', TipoProduto::getListaCombo(), array('prompt' => '', 'class' => 'input-xlarge'));		
-				echo $form->select2Row($model, 'codestado', Estado::getListaCombo(), array('prompt' => '', 'class' => 'input-medium'));		
+				echo $form->select2Row($model, 'codtipoproduto', TipoProduto::getListaCombo(), array('prompt' => '', 'class' => 'input-xlarge'));
+				echo $form->select2Row($model, 'codestado', Estado::getListaCombo(), array('prompt' => '', 'class' => 'input-medium'));
 				echo $form->textFieldRow($model,'ncm',array('class'=>'input-small','maxlength'=>10));
 				echo '<hr>';
 				echo $form->select2Row($model, 'codcfop', Cfop::getListaCombo(), array('prompt' => '', 'class' => 'span12'));
@@ -31,7 +31,7 @@
 		</div>
 		<div class="span6">
 			<?php
-			
+
 				$box = $this->beginWidget(
 					'bootstrap.widgets.TbBox',
 					array(
@@ -50,38 +50,12 @@
 				echo $form->toggleButtonRow($model,'movimentacaocontabil', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 
 				$this->endWidget();
-			
+
 			?>
 		</div>
 	</div>
 	<div class="row-fluid">
-		<div class="span3">
-			<?php
-				$box = $this->beginWidget(
-					'bootstrap.widgets.TbBox',
-					array(
-						'title' => 'Simples',
-						'headerIcon' => 'icon-th-list',
-						//'htmlOptions' => array('class' => ' pull-left')
-					)
-				);
-
-				//echo $form->textFieldRow($model,'codnaturezaoperacao',array('class'=>'span5'));
-				//echo $form->select2Row($model, 'codnaturezaoperacao', NaturezaOperacao::getListaCombo(), array('prompt' => '', 'class' => 'input-large'));
-				//echo $form->textFieldRow($model,'codcfop',array('class'=>'span5'));
-				echo $form->textFieldRow($model,'csosn',array('class'=>'input-mini text-right','maxlength'=>4));
-				echo $form->textFieldRow($model,'icmsbase',array('class'=>'input-mini text-right','maxlength'=>14));
-				echo $form->textFieldRow($model,'icmspercentual',array('class'=>'input-mini text-right','maxlength'=>14));
-				//echo $form->textFieldRow($model,'codestado',array('class'=>'span5'));
-				//echo $form->textFieldRow($model,'codtipoproduto',array('class'=>'span5'));
-
-
-
-				$this->endWidget();
-			?>
-
-		</div>
-		<div class="span9">
+		<div class="span12">
 			<?php
 				$box = $this->beginWidget(
 					'bootstrap.widgets.TbBox',
@@ -128,12 +102,58 @@
 		</div>
 
 	</div>
+
+	<div class="row-fluid">
+		<div class="span6">
+			<?php
+				$box = $this->beginWidget(
+					'bootstrap.widgets.TbBox',
+					array(
+						'title' => 'Simples',
+						'headerIcon' => 'icon-th-list',
+						//'htmlOptions' => array('class' => ' pull-left')
+					)
+				);
+
+				//echo $form->textFieldRow($model,'codnaturezaoperacao',array('class'=>'span5'));
+				//echo $form->select2Row($model, 'codnaturezaoperacao', NaturezaOperacao::getListaCombo(), array('prompt' => '', 'class' => 'input-large'));
+				//echo $form->textFieldRow($model,'codcfop',array('class'=>'span5'));
+				echo $form->textFieldRow($model,'csosn',array('class'=>'input-mini text-right','maxlength'=>4));
+				echo $form->textFieldRow($model,'icmsbase',array('class'=>'input-mini text-right','maxlength'=>14));
+				echo $form->textFieldRow($model,'icmspercentual',array('class'=>'input-mini text-right','maxlength'=>14));
+				//echo $form->textFieldRow($model,'codestado',array('class'=>'span5'));
+				//echo $form->textFieldRow($model,'codtipoproduto',array('class'=>'span5'));
+
+				$this->endWidget();
+			?>
+
+		</div>
+
+		<div class="span6">
+			<?php
+				$box = $this->beginWidget(
+					'bootstrap.widgets.TbBox',
+					array(
+						'title' => 'Produtor Rural',
+						'headerIcon' => 'icon-th-list',
+						//'htmlOptions' => array('class' => ' pull-left')
+					)
+				);
+				echo $form->toggleButtonRow($model,'certidaosefazmt', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
+				echo $form->textFieldRow($model,'fethabkg',array('class'=>'input-mini text-right','maxlength'=>14));
+				echo $form->textFieldRow($model,'iagrokg',array('class'=>'input-mini text-right','maxlength'=>14));
+				echo $form->textFieldRow($model,'funruralpercentual',array('class'=>'input-mini text-right','maxlength'=>14));
+				echo $form->textFieldRow($model,'senarpercentual',array('class'=>'input-mini text-right','maxlength'=>14));
+				$this->endWidget();
+			?>
+		</div>
+	</div>
 </fieldset>
 <div class="form-actions">
 
-    
-    <?php 
-	
+
+    <?php
+
 
         $this->widget(
             'bootstrap.widgets.TbButton',
@@ -143,15 +163,15 @@
                 'label' => 'Salvar',
                 'icon' => 'icon-ok',
                 )
-            ); 
+            );
 	?>
-    
+
 </div>
 
 <?php $this->endWidget(); ?>
 
 <script type='text/javascript'>
-	
+
 $(document).ready(function() {
 
 	//$("#Pessoa_fantasia").Setcase();
@@ -174,7 +194,7 @@ $(document).ready(function() {
             }
         });
     });
-	
+
 });
 
 </script>

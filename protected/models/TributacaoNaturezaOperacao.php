@@ -33,7 +33,12 @@
  * @property string $ncm
  * @property string $icmslpbase
  * @property string $icmslppercentual
- * 
+ * @property boolean $certidaosefazmt
+ * @property float $fethabkg
+ * @property float $iagrokg
+ * @property float $funruralpercentual
+ * @property float $senarpercentual
+ *
  * The followings are the available model relations:
  * @property Cfop $Cfop
  * @property Estado $Estado
@@ -71,32 +76,39 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 			array('csosn, icmscst, piscst, ipicst, cofinscst', 'numerical', 'min'=>1),
 			array('ncm', 'length', 'max'=>10),
 			array('icmsbase, icmslpbase', 'length', 'max'=>6),
-			array('codestado, movimentacaofisica, movimentacaocontabil, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
+			array('codestado, movimentacaofisica, movimentacaocontabil, alteracao, codusuarioalteracao, criacao, codusuariocriacao, certidaosefazmt, fethabkg, iagrokg, funruralpercentual, senarpercentual', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('codtributacaonaturezaoperacao, codtributacao, codnaturezaoperacao, codcfop, icmsbase, icmspercentual, codestado, csosn, codtipoproduto, acumuladordominiovista, acumuladordominioprazo, historicodominio, movimentacaofisica, movimentacaocontabil, alteracao, codusuarioalteracao, criacao, codusuariocriacao, icmscst, piscst, ipicst, cofinscst, pispercentual, cofinspercentual, csllpercentual, irpjpercentual, ncm, icmslpbase, icmslppercentual', 'safe', 'on'=>'search'),
+			array('codtributacaonaturezaoperacao, codtributacao,
+			codnaturezaoperacao, codcfop, icmsbase, icmspercentual,
+			codestado, csosn, codtipoproduto, acumuladordominiovista,
+			acumuladordominioprazo, historicodominio, movimentacaofisica,
+			movimentacaocontabil, alteracao, codusuarioalteracao, criacao,
+			codusuariocriacao, icmscst, piscst, ipicst, cofinscst, pispercentual,
+			cofinspercentual, csllpercentual, irpjpercentual, ncm, icmslpbase,
+			certidaosefazmt, fethabkg, iagrokg, funruralpercentual, senarpercentual, icmslppercentual', 'safe', 'on'=>'search'),
 		);
 	}
-	
+
 //verifica se a combinacao de CNPJ e IE já não estão cadastrados
 	public function validaChaveUnica($attribute,$params)
 	{
 		if (empty($this->codtributacao))
 			return;
-		
+
 		if (empty($this->codnaturezaoperacao))
 			return;
-		
+
 		if (strlen($this->codtipoproduto) <= 0)
 			return;
-		
+
 		$condicao  = 'codtributacao = :codtributacao AND codnaturezaoperacao = :codnaturezaoperacao AND codtipoproduto = :codtipoproduto';
 		$parametros = array(
 			'codtributacao' => $this->codtributacao,
 			'codnaturezaoperacao' => $this->codnaturezaoperacao,
 			'codtipoproduto' => $this->codtipoproduto,
 			);
-		
+
 		if (empty($this->codestado))
 		{
 			$condicao .= ' AND codestado IS NULL';
@@ -106,7 +118,7 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 			$condicao .= ' AND codestado = :codestado';
 			$parametros['codestado'] = $this->codestado;
 		}
-		
+
 		if (empty($this->ncm))
 		{
 			$condicao .= ' AND ncm IS NULL';
@@ -116,18 +128,18 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 			$condicao .= ' AND ncm = :ncm';
 			$parametros['ncm'] = $this->ncm;
 		}
-		
+
 		$regs = TributacaoNaturezaOperacao::model()->findAll(
 			array(
-				'condition' => $condicao, 
+				'condition' => $condicao,
 				'params' => $parametros,
 			)
 		);
-		
+
 		if (sizeof($regs) > 0)
 			if ($regs[0]->codtributacaonaturezaoperacao <> $this->codtributacaonaturezaoperacao)
 				$this->addError($attribute, "Já existe uma combinação de Tributação, Tipo de Produto, Estado e NCM igual à essa cadastrada!");
-	}	
+	}
 
 	/**
 	 * @return array relational rules.
@@ -181,7 +193,12 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 			'irpjpercentual' => 'IRPJ %',
 			'ncm' => 'NCM',
 			'icmslpbase' => 'ICMS Base',
-			'icmslppercentual' => 'ICMS %',			
+			'icmslppercentual' => 'ICMS %',
+			'certidaosefazmt' => 'Certidão sefaz MT',
+			'fethabkg' => 'Fethab por KG',
+			'iagrokg' => 'Iagro por KG',
+			'funruralpercentual' => 'Funrual %',
+			'senarpercentual' => 'Senar %',
 		);
 	}
 
@@ -232,7 +249,12 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 		$criteria->compare('irpjpercentual',$this->irpjpercentual,false);
 		$criteria->compare('ncm',$this->ncm,true);
 		$criteria->compare('icmslpbase',$this->icmslpbase,false);
-		$criteria->compare('icmslppercentual',$this->icmslppercentual,false);		
+		$criteria->compare('icmslppercentual',$this->icmslppercentual,false);
+		$criteria->compare('certidaosefazmt',$this->certidaosefazmt,false);
+		$criteria->compare('fethabkg',$this->fethabkg,false);
+		$criteria->compare('iagrokg',$this->iagrokg,false);
+		$criteria->compare('funruralpercentual',$this->funruralpercentual,false);
+		$criteria->compare('senarpercentual',$this->senarpercentual,false);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -251,8 +273,8 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
-	
-	public function scopes () 
+
+	public function scopes ()
 	{
 		return array(
 			'combo'=>array(
@@ -261,7 +283,7 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 				),
 			);
 	}
-	
+
 	public function getListaCombo ()
 	{
 		$lista = self::model()->combo()->findAll();
