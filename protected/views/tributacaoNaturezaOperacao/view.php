@@ -125,20 +125,7 @@ $(document).ready(function(){
 	</div>
 </div>
 <div class="row-fluid">
-	<div class="span3">
-		<h3>Simples</h3>
-		<?php
-		$this->widget('bootstrap.widgets.TbDetailView',array(
-			'data'=>$model,
-			'attributes'=>array(
-				'csosn',
-				'icmsbase',
-				'icmspercentual',
-			),
-		));
-		?>
-	</div>
-	<div class="span9">
+	<div class="span12">
 		<h3>Lucro Presumido</h3>
 		<div class="row-fluid">
 			<div class="span3">
@@ -147,50 +134,86 @@ $(document).ready(function(){
 					'data'=>$model,
 					'attributes'=>array(
 						'icmscst',
-						'icmslpbase',
-						'icmslppercentual',
+							array(
+								'name'=>'icmslpbase',
+								'value'=>Yii::app()->format->formatNumber($model->icmslpbase, 2),
+							),
+							array(
+								'name'=>'icmslppercentual',
+								'value'=>Yii::app()->format->formatNumber($model->icmslppercentual, 2),
+							),
 						),
 					));
 				?>
 			</div>
 			<div class="span3">
 				<?php
-				$this->widget('bootstrap.widgets.TbDetailView',array(
-					'data'=>$model,
-					'attributes'=>array(
-						'piscst',
-						'pispercentual',
+					$this->widget('bootstrap.widgets.TbDetailView',array(
+						'data'=>$model,
+						'attributes'=>array(
+							'piscst',
+							array(
+								'name'=>'pispercentual',
+								'value'=>Yii::app()->format->formatNumber($model->pispercentual, 2),
+							),
 						),
 					));
 				?>
 			</div>
 			<div class="span3">
 				<?php
-				$this->widget('bootstrap.widgets.TbDetailView',array(
-					'data'=>$model,
-					'attributes'=>array(
-						'cofinscst',
-						'cofinspercentual',
+					$this->widget('bootstrap.widgets.TbDetailView',array(
+						'data'=>$model,
+						'attributes'=>array(
+							'cofinscst',
+							array(
+								'name'=>'cofinspercentual',
+								'value'=>Yii::app()->format->formatNumber($model->cofinspercentual, 2),
+							),
 						),
 					));
 				?>
 			</div>
 			<div class="span3">
 				<?php
-				$this->widget('bootstrap.widgets.TbDetailView',array(
-					'data'=>$model,
-					'attributes'=>array(
-						'ipicst',
-						'csllpercentual',
-						'irpjpercentual',
+					$this->widget('bootstrap.widgets.TbDetailView',array(
+						'data'=>$model,
+						'attributes'=>array(
+							'ipicst',
+							array(
+								'name'=>'csllpercentual',
+								'value'=>Yii::app()->format->formatNumber($model->csllpercentual, 2),
+							),
+							array(
+								'name'=>'irpjpercentual',
+								'value'=>Yii::app()->format->formatNumber($model->irpjpercentual, 2),
+							),
 						),
 					));
 				?>
-
 			</div>
 		</div>
 	</div>
 	<div class="row-fluid">
+		<div class="span3">
+			<h3>Simples</h3>
+			<?php
+			$this->widget('bootstrap.widgets.TbDetailView',array(
+				'data'=>$model,
+				'attributes'=>array(
+					'csosn',
+					array(
+						'name'=>'icmsbase',
+						'value'=>Yii::app()->format->formatNumber($model->icmsbase, 2),
+					),
+					array(
+						'name'=>'icmspercentual',
+						'value'=>Yii::app()->format->formatNumber($model->icmspercentual, 2),
+					),
+				),
+			));
+			?>
+		</div>
 		<div class="span3">
 			<h3>Produtor Rural</h3>
 			<?php

@@ -140,10 +140,10 @@
 					)
 				);
 				echo $form->toggleButtonRow($model,'certidaosefazmt', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
-				echo $form->textFieldRow($model,'fethabkg',array('class'=>'input-mini text-right','maxlength'=>14));
-				echo $form->textFieldRow($model,'iagrokg',array('class'=>'input-mini text-right','maxlength'=>14));
-				echo $form->textFieldRow($model,'funruralpercentual',array('class'=>'input-mini text-right','maxlength'=>14));
-				echo $form->textFieldRow($model,'senarpercentual',array('class'=>'input-mini text-right','maxlength'=>14));
+				echo $form->textFieldRow($model,'fethabkg',array('class'=>'input-small text-right','maxlength'=>14));
+				echo $form->textFieldRow($model,'iagrokg',array('class'=>'input-small text-right','maxlength'=>14));
+				echo $form->textFieldRow($model,'funruralpercentual',array('class'=>'input-small text-right','maxlength'=>14));
+				echo $form->textFieldRow($model,'senarpercentual',array('class'=>'input-small text-right','maxlength'=>14));
 				$this->endWidget();
 			?>
 		</div>
@@ -184,6 +184,10 @@ $(document).ready(function() {
 	$('#TributacaoNaturezaOperacao_cofinspercentual').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#TributacaoNaturezaOperacao_csllpercentual').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#TributacaoNaturezaOperacao_irpjpercentual').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+	$('#TributacaoNaturezaOperacao_fethabkg').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.', mDec:6 });
+	$('#TributacaoNaturezaOperacao_iagrokg').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.', mDec:6 });
+	$('#TributacaoNaturezaOperacao_funruralpercentual').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.', mDec:5 });
+	$('#TributacaoNaturezaOperacao_senarpercentual').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.', mDec:5 });
 
 	$('#tributacao-natureza-operacao-form').submit(function(e) {
         var currentForm = this;

@@ -501,17 +501,17 @@ $(document).ready(function(){
 			$iItem++;
 			?>
 			<tr>
-				<td class="">
+				<td rowspan="2">
 					<small class="muted pull-right">
 						<?php echo $iItem; ?>
 					</small>
 				</td>
-				<td>
+				<td rowspan="2">
 					<small class="muted">
 						<?php echo CHtml::encode($prod->ProdutoBarra->barras, 6); ?>
 					</small>
 				</td>
-				<td>
+				<td rowspan="2">
 					<b><?php echo CHtml::link(CHtml::encode($prod->ProdutoBarra->descricao), array("produto/view", "id"=>$prod->ProdutoBarra->codproduto)); ?></b>
 					<?php if (!empty($prod->descricaoalternativa)): ?>
 						<br>
@@ -529,7 +529,7 @@ $(document).ready(function(){
 						</b>
 					<?php endif; ?>
 				</td>
-				<td>
+				<td rowspan="2">
 					<small class='muted'>
 						<?php echo CHtml::encode(Yii::app()->format->formataNcm($prod->ProdutoBarra->Produto->Ncm->ncm)); ?>
 					</small>
@@ -616,7 +616,7 @@ $(document).ready(function(){
 						<div class="text-right"><?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->irpjvalor)); ?></div>
 					</small>
 				</td>
-				<td>
+				<td  rowspan="2">
 					<small class='muted'>
 						<?php
 						if (isset($prod->NegocioProdutoBarra))
@@ -625,13 +625,68 @@ $(document).ready(function(){
 						?>
 					</small>
 				</td>
-				<td style="width: 50px">
+				<td style="max-width: 50px"  rowspan="2">
 					<a href="<?php echo Yii::app()->createUrl('notaFiscalProdutoBarra/view', array('id'=>$prod->codnotafiscalprodutobarra)); ?>"><i class="icon-eye-open"></i></a>
 					<a href="<?php echo Yii::app()->createUrl('notaFiscalProdutoBarra/update', array('id'=>$prod->codnotafiscalprodutobarra)); ?>"><i class="icon-pencil"></i></a>
 					<a class="delete" href="<?php echo Yii::app()->createUrl('notaFiscalProdutoBarra/delete', array('id'=>$prod->codnotafiscalprodutobarra, 'ajax'=>'ajax')); ?>"><i class="icon-trash"></i></a>
 				</td>
 			</tr>
+			<tr>
 
+				<td colspan="4">
+					<small class='muted'>
+						<div>
+							<?php
+							echo ($prod->certidaosefazmt)?'Destaca Certidão Sefaz/MT':''
+							?>
+						</div>
+					</small>
+				</td>
+
+				<td colspan="3">
+					<small class="muted">
+						Fethab:
+					</small>
+					<div class="pull-right">
+						<small class="muted">
+							<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->fethabvalor)); ?>
+						</small>
+					</div>
+				</td>
+
+				<td colspan="3">
+					<small class="muted">
+						Iagro:
+					</small>
+					<div class="pull-right">
+						<small class="muted">
+							<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->iagrovalor)); ?>
+						</small>
+					</div>
+				</td>
+
+				<td colspan="3">
+					<small class="muted">
+						Funrural:
+					</small>
+					<div class="pull-right">
+						<small class="muted">
+							<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->funruralvalor)); ?>
+						</small>
+					</div>
+				</td>
+
+				<td colspan="3">
+					<small class="muted">
+						Senar:
+					</small>
+					<div class="pull-right">
+						<small class="muted">
+							<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->senarvalor)); ?>
+						</small>
+					</div>
+				</td>
+			</tr>
 			<?php
 			/*
 			?>
