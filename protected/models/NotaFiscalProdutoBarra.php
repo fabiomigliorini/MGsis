@@ -211,7 +211,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
             'pedido' => 'Pedido',
             'pedidoitem' => 'Item do Pedido',
 
-            'certidaosefazmt' => 'Destacar Certidão Sefaz MT',
+            'certidaosefazmt' => 'Certidão Sefaz MT',
 
             'fethabkg' => 'Fethab por KG',
             'fethabvalor' => 'Fethab Valor',

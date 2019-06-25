@@ -5,111 +5,154 @@
 <?php echo $form->errorSummary($model); ?>
 
 <fieldset>
-	<div class="row" style="max-width: 90vw">
-		<?php
-			//echo $form->textFieldRow($model,'codnotafiscal',array('class'=>'span5'));
-			//echo $form->textFieldRow($model,'codprodutobarra',array('class'=>'span5'
-			echo $form->select2ProdutoBarraRow($model,'codprodutobarra',array('class'=>'span12'));
-		?>
-	</div>
-	<div class="row-fluid">
-		<div class="span3">
-			<?php
-				echo $form->textFieldRow($model,'quantidade',array('class'=>'input-small text-right','maxlength'=>14));
-				echo $form->textFieldRow($model,'valorunitario',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-				echo $form->textFieldRow($model,'valortotal',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-				echo $form->textFieldRow($model,'descricaoalternativa',array('class'=>'span12','maxlength'=>100));
-				echo $form->textFieldRow($model,'pedido',array('class'=>'input-medium','maxlength'=>15));
-				echo $form->textFieldRow($model,'pedidoitem',array('class'=>'input-medium text-right'));
-				echo $form->textFieldRow($model,'codcfop',array('class'=>'input-mini text-center'));
-			?>
-		</div>
-		<div class="span3">
-			<?php
-				echo $form->textFieldRow($model,'icmsbase',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-				echo $form->textFieldRow($model,'icmspercentual',array('class'=>'input-small text-right','maxlength'=>14, 'append' => '%'));
-				echo $form->textFieldRow($model,'icmsvalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-				echo $form->textFieldRow($model,'icmscst',array('class'=>'input-mini text-center','maxlength'=>4));
-				echo $form->textFieldRow($model,'csosn',array('class'=>'input-mini text-center','maxlength'=>4));
-			?>
-		</div>
-		<div class="span3">
 
-			<?php
-				echo $form->textFieldRow($model,'icmsstbase',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-				echo $form->textFieldRow($model,'icmsstpercentual',array('class'=>'input-small text-right','maxlength'=>14, 'append' => '%'));
-				echo $form->textFieldRow($model,'icmsstvalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-			?>
-		</div>
-		<div class="span3">
-			<?php
-				echo $form->textFieldRow($model,'ipibase',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-				echo $form->textFieldRow($model,'ipipercentual',array('class'=>'input-small text-right','maxlength'=>14, 'append' => '%'));
-				echo $form->textFieldRow($model,'ipivalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-				echo $form->textFieldRow($model,'ipicst',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-			?>
-		</div>
-	</div>
-	<div class="row-fluid">
-		<div class="span3">
-			<?php
-				echo $form->textFieldRow($model,'pisbase',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-				echo $form->textFieldRow($model,'pispercentual',array('class'=>'input-small text-right','maxlength'=>14, 'append' => '%'));
-				echo $form->textFieldRow($model,'pisvalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-				echo $form->textFieldRow($model,'piscst',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-			?>
-		</div>
-		<div class="span3">
-			<?php
-				echo $form->textFieldRow($model,'cofinsbase',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-				echo $form->textFieldRow($model,'cofinspercentual',array('class'=>'input-small text-right','maxlength'=>14, 'append' => '%'));
-				echo $form->textFieldRow($model,'cofinsvalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-				echo $form->textFieldRow($model,'cofinscst',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-			?>
-		</div>
-		<div class="span3">
-			<?php
-				echo $form->textFieldRow($model,'csllbase',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-				echo $form->textFieldRow($model,'csllpercentual',array('class'=>'input-small text-right','maxlength'=>14, 'append' => '%'));
-				echo $form->textFieldRow($model,'csllvalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-			?>
-		</div>
-		<div class="span3">
-			<?php
-				echo $form->textFieldRow($model,'irpjbase',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-				echo $form->textFieldRow($model,'irpjpercentual',array('class'=>'input-small text-right','maxlength'=>14, 'append' => '%'));
-				echo $form->textFieldRow($model,'irpjvalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-			?>
-		</div>
+	<div class="tabbable"> <!-- Only required for left/right tabs -->
+	  <ul class="nav nav-tabs">
+	    <li class="active"><a href="#tabProduto" data-toggle="tab">Produto</a></li>
+	    <li class="hidden-phone"><a href="#tabLp" data-toggle="tab">Lucro Presumido</a></li>
+	    <li class="hidden-phone"><a href="#tabPr" data-toggle="tab">Produtor Rural</a></li>
+	    <li class="hidden-desktop"><a href="#tabLp" data-toggle="tab">Presumido</a></li>
+	    <li class="hidden-desktop"><a href="#tabPr" data-toggle="tab">Rural</a></li>
+	  </ul>
+	  <div class="tab-content">
+
+			<!-- PRODUTO -->
+	    <div class="tab-pane active" id="tabProduto">
+				<div class="row-fluid">
+					<div class="span12" style="max-width: 90vw">
+						<?php
+							echo $form->select2ProdutoBarraRow($model,'codprodutobarra',array('class'=>'span12'));
+						?>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span3">
+						<?php
+							echo $form->textFieldRow($model,'quantidade',array('class'=>'input-small text-right','maxlength'=>14));
+							echo $form->textFieldRow($model,'valorunitario',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+							echo $form->textFieldRow($model,'valortotal',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+						?>
+					</div>
+					<div class="span3">
+						<?php
+						echo $form->textFieldRow($model,'codcfop',array('class'=>'input-mini text-center'));
+						echo $form->textFieldRow($model,'csosn',array('class'=>'input-mini text-center','maxlength'=>4));
+						?>
+					</div>
+					<div class="span3">
+						<?php
+							echo $form->textFieldRow($model,'descricaoalternativa',array('class'=>'input-xlarge','maxlength'=>100));
+							echo $form->textFieldRow($model,'pedido',array('class'=>'input-medium','maxlength'=>15));
+							echo $form->textFieldRow($model,'pedidoitem',array('class'=>'input-mini text-right'));
+						?>
+					</div>
+				</div>
+
+	    </div>
+
+			<!-- Lucro Presumido -->
+	    <div class="tab-pane" id="tabLp">
+				<div class="row-fluid">
+					<div class="span3">
+						<?php
+							echo $form->textFieldRow($model,'icmsbase',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+							echo $form->textFieldRow($model,'icmspercentual',array('class'=>'input-small text-right','maxlength'=>14, 'append' => '%'));
+							echo $form->textFieldRow($model,'icmsvalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+							echo $form->textFieldRow($model,'icmscst',array('class'=>'input-mini text-center','maxlength'=>4));
+						?>
+					</div>
+					<div class="span3">
+						<?php
+							echo $form->textFieldRow($model,'icmsstbase',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+							echo $form->textFieldRow($model,'icmsstpercentual',array('class'=>'input-small text-right','maxlength'=>14, 'append' => '%'));
+							echo $form->textFieldRow($model,'icmsstvalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+						?>
+					</div>
+					<div class="span3">
+						<?php
+							echo $form->textFieldRow($model,'ipibase',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+							echo $form->textFieldRow($model,'ipipercentual',array('class'=>'input-small text-right','maxlength'=>14, 'append' => '%'));
+							echo $form->textFieldRow($model,'ipivalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+							echo $form->textFieldRow($model,'ipicst',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+						?>
+					</div>
+				</div>
+
+				<div class="row-fluid">
+					<div class="span3">
+						<?php
+							echo $form->textFieldRow($model,'pisbase',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+							echo $form->textFieldRow($model,'pispercentual',array('class'=>'input-small text-right','maxlength'=>14, 'append' => '%'));
+							echo $form->textFieldRow($model,'pisvalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+							echo $form->textFieldRow($model,'piscst',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+						?>
+					</div>
+					<div class="span3">
+						<?php
+							echo $form->textFieldRow($model,'cofinsbase',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+							echo $form->textFieldRow($model,'cofinspercentual',array('class'=>'input-small text-right','maxlength'=>14, 'append' => '%'));
+							echo $form->textFieldRow($model,'cofinsvalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+							echo $form->textFieldRow($model,'cofinscst',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+						?>
+					</div>
+					<div class="span3">
+						<?php
+							echo $form->textFieldRow($model,'csllbase',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+							echo $form->textFieldRow($model,'csllpercentual',array('class'=>'input-small text-right','maxlength'=>14, 'append' => '%'));
+							echo $form->textFieldRow($model,'csllvalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+						?>
+					</div>
+					<div class="span3">
+						<?php
+							echo $form->textFieldRow($model,'irpjbase',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+							echo $form->textFieldRow($model,'irpjpercentual',array('class'=>'input-small text-right','maxlength'=>14, 'append' => '%'));
+							echo $form->textFieldRow($model,'irpjvalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+						?>
+					</div>
+				</div>
+
+	    </div>
+
+			<!-- PRODUTOR RURAL -->
+			<div class="tab-pane" id="tabPr">
+				<div class="row-fluid">
+					<div class="span3">
+						<?php
+							echo $form->toggleButtonRow($model,'certidaosefazmt', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
+					 	?>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span3">
+						<?php
+							echo $form->textFieldRow($model,'fethabkg',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+							echo $form->textFieldRow($model,'fethabvalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+						?>
+					</div>
+					<div class="span3">
+						<?php
+						echo $form->textFieldRow($model,'iagrokg',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+						echo $form->textFieldRow($model,'iagrovalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+						?>
+					</div>
+					<div class="span3">
+						<?php
+						echo $form->textFieldRow($model,'funruralpercentual',array('class'=>'input-small text-right','maxlength'=>14, 'append' => '%'));
+						echo $form->textFieldRow($model,'funruralvalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+						?>
+					</div>
+					<div class="span3">
+						<?php
+						echo $form->textFieldRow($model,'senarpercentual',array('class'=>'input-small text-right','maxlength'=>14, 'append' => '%'));
+						echo $form->textFieldRow($model,'senarvalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+						?>
+					</div>
+				</div>
+			</div>
+
+	  </div>
 	</div>
 
-	<div class="row-fluid">
-		<div class="span3">
-			<?php
-				echo $form->textFieldRow($model,'fethabkg',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-				echo $form->textFieldRow($model,'fethabvalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-				echo $form->toggleButtonRow($model,'certidaosefazmt', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
-			?>
-		</div>
-		<div class="span3">
-			<?php
-			echo $form->textFieldRow($model,'iagrokg',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-			echo $form->textFieldRow($model,'iagrovalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-			?>
-		</div>
-		<div class="span3">
-			<?php
-			echo $form->textFieldRow($model,'funruralpercentual',array('class'=>'input-small text-right','maxlength'=>14, 'append' => '%'));
-			echo $form->textFieldRow($model,'funruralvalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-			?>
-		</div>
-		<div class="span3">
-			<?php
-			echo $form->textFieldRow($model,'senarpercentual',array('class'=>'input-small text-right','maxlength'=>14, 'append' => '%'));
-			echo $form->textFieldRow($model,'senarvalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-			?>
-		</div>
-	</div>
 </fieldset>
 <div class="form-actions">
 

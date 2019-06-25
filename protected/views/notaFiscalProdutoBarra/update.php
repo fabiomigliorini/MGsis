@@ -15,8 +15,8 @@ $this->menu=array(
 );
 ?>
 
-<h1>Alterar Produto da Nota Fiscal</h1>
+<h1>Alterar Produto <?php echo $model->ProdutoBarra->descricao ?> da Nota Fiscal</h1>
 <br>
 
-<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>	
+<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>
 <?php $this->widget('UsuarioCriacao', array('model'=>$model)); ?>
