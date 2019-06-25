@@ -186,8 +186,8 @@ class NaturezaOperacao extends MGActiveRecord
 	{
 		return array(
 			'combo'=>array(
-				'select'=>array('codnaturezaoperacao', 'naturezaoperacao'),
-				'order'=>'t.codoperacao ASC, t.naturezaoperacao ASC',
+				'select'=>array('codnaturezaoperacao', 'codoperacao', 'naturezaoperacao'),
+				'order'=>'t.codoperacao DESC, t.naturezaoperacao ASC',
 				),
 			);
 	}
@@ -195,7 +195,11 @@ class NaturezaOperacao extends MGActiveRecord
 	public function getListaCombo ()
 	{
 		$lista = self::model()->combo()->findAll();
-		return CHtml::listData($lista, 'codnaturezaoperacao', 'naturezaoperacao');
+		$ret = [];
+		foreach ($lista as $item) {
+			$ret[$item->codnaturezaoperacao] = "{$item->Operacao->operacao} - {$item->naturezaoperacao}";
+		}
+		return $ret;
 	}
 
 	function getFinNfeListaCombo()

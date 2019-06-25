@@ -73,10 +73,12 @@ class NotaFiscal extends MGActiveRecord
     const CODSTATUS_INUTILIZADA   = 302;
     const CODSTATUS_CANCELADA     = 303;
 
-    const FRETE_EMITENTE          = 0;
-    const FRETE_DESTINATARIO      = 1;
-    const FRETE_TERCEIROS         = 2;
-    const FRETE_SEM               = 9;
+    const FRETE_EMITENTE             = 0;
+    const FRETE_DESTINATARIO         = 1;
+    const FRETE_TERCEIROS            = 2;
+    const FRETE_EMITENTE_PROPRIO     = 3;
+    const FRETE_DESTINATARIO_PROPRIO = 4;
+    const FRETE_SEM                  = 9;
 
     const TPEMIS_NORMAL           = 1; // Emissão normal (não em contingência);
     const TPEMIS_FS_IA            = 2; // Contingência FS-IA, com impressão do DANFE em formulário de segurança;
@@ -130,6 +132,7 @@ class NotaFiscal extends MGActiveRecord
             array('emissao', 'validaEmissaoPelaChaveNFE'),
             array('saida', 'validaSaida'),
             array('placa', 'validaPlaca'),
+            array('frete', 'validaFrete'),
 						array('codestadoplaca', 'validaCodEstadoPlaca'),
             array('observacoes', 'length', 'max'=>1500),
             array('pesoliquido, pesobruto, valorfrete, valorseguro, valordesconto, valoroutras, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipivalor', 'length', 'max'=>14),
@@ -140,6 +143,19 @@ class NotaFiscal extends MGActiveRecord
             // @todo Please remove those attributes that should not be searched.
             array('codnotafiscal, codnaturezaoperacao, emitida, nfechave, tpemis, nfeimpressa, serie, numero, emissao, modelo, saida, codfilial, codestoquelocal, codpessoa, observacoes, volumes, frete, codoperacao, nfereciboenvio, nfedataenvio, nfeautorizacao, nfedataautorizacao, valorfrete, valorseguro, valordesconto, valoroutras, nfecancelamento, nfedatacancelamento, nfeinutilizacao, nfedatainutilizacao, justificativa, alteracao, codusuarioalteracao, criacao, codusuariocriacao, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipivalor, codstatus, emissao_de, emissao_ate, saida_de, saida_ate', 'safe', 'on'=>'search'),
         );
+    }
+
+    public function validaFrete($attribute, $params)
+    {
+        if ($this->frete == '') {
+          $this->addError($attribute, "Informe a modalidade de Frete!");
+        }
+        if (empty($this->placa) && empty($this->codpessoatransportador)) {
+            return;
+        }
+        if ($this->frete == self::FRETE_SEM) {
+          $this->addError($attribute, "Quando informada placa ou transportador, não pode selecionar 'Sem Frete'!");
+        }
     }
 
     public function validaPlaca($attribute, $params)
@@ -740,9 +756,11 @@ class NotaFiscal extends MGActiveRecord
     public function getFreteListaCombo()
     {
         return array(
-            self::FRETE_EMITENTE => "Emitente",
-            self::FRETE_DESTINATARIO => "Destinatario",
-            self::FRETE_TERCEIROS => "Terceiros",
+            self::FRETE_EMITENTE_PROPRIO => "Emitente (Próprio)",
+            self::FRETE_EMITENTE => "Emitente (Terceirizado)",
+            self::FRETE_DESTINATARIO_PROPRIO => "Destinatario (Próprio)",
+            self::FRETE_DESTINATARIO => "Destinatario (Terceirizado)",
+            self::FRETE_TERCEIROS => "Terceiro (Nem Emitente, Nem Destinatário)",
             self::FRETE_SEM => "Sem Frete",
         );
     }

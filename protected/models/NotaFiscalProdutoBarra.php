@@ -100,6 +100,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
             array('pedido', 'length', 'max'=>15),
             array('pedidoitem', 'numerical', 'integerOnly'=>true),
             array('csosn', 'validaCsosn'),
+            array('observacoes', 'length', 'max'=>1500),
             array('icmscst, ipicst, piscst, cofinscst', 'validaCst'),
             array('pispercentual, cofinspercentual, csllpercentual, irpjpercentual', 'length', 'max'=>5),
             array('icmscst, ipicst, piscst, cofinscst', 'length', 'max'=>3),
@@ -420,8 +421,8 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 							$this->senarvalor = ($this->senarpercentual * $this->valortotal) / 100;
 						}
 
-            if (!empty($trib->observacoes)) {
-              $this->observacoes = $trib->observacoes;
+            if (!empty($trib->observacoesnf)) {
+              $this->observacoes = $trib->observacoesnf;
             }
 
             if (!empty($this->valortotal) && ($this->NotaFiscal->emitida)) {

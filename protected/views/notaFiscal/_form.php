@@ -15,8 +15,8 @@
 			echo $form->textFieldRow($model,'serie',array('class'=>'input-mini text-right'));
 			echo $form->textFieldRow($model,'numero',array('class'=>'input-small text-right'));
 			echo $form->textFieldRow($model,'nfechave',array('class'=>'input-xlarge text-center','maxlength'=>100));
-			echo $form->select2PessoaRow($model,'codpessoa', array('class'=>'input-xlarge'));
-			echo $form->select2Row($model,'codnaturezaoperacao', NaturezaOperacao::getListaCombo() , array('class'=>'input-xlarge'));
+			echo $form->select2PessoaRow($model,'codpessoa', array('class'=>'span12'));
+			echo $form->select2Row($model,'codnaturezaoperacao', NaturezaOperacao::getListaCombo() , array('class'=>'span12'));
 			echo $form->textAreaRow($model,'observacoes',array('class'=>'input-xlarge', 'rows'=>'5','maxlength'=>1500));
 			?>
 		</div>
@@ -48,7 +48,7 @@
 						)
 					);
 			echo $form->select2PessoaRow($model,'codpessoatransportador', array('class'=>'input-xlarge'));
-			echo $form->select2Row($model,'frete', NotaFiscal::getFreteListaCombo() , array('class'=>'input-medium'));
+			echo $form->select2Row($model,'frete', NotaFiscal::getFreteListaCombo() , array('class'=>'input-xlarge'));
 			echo $form->textFieldRow($model,'volumes',array('class'=>'input-mini text-right'));
 			echo $form->textFieldRow($model,'volumesespecie',array('class'=>'input-medium', 'maxlength'=>60));
 			echo $form->textFieldRow($model,'volumesmarca',array('class'=>'input-medium', 'maxlength'=>60));
@@ -133,8 +133,6 @@ function desabilitaCamposEmitida()
 	{
 		var codfilial = $("#NotaFiscal_codfilial").select2("val");
 		var serie = nfeserie[codfilial];
-		console.log('alterando serie');
-		console.log(serie);
 		$("#NotaFiscal_serie").val(serie);
 		$("#NotaFiscal_numero").val(0);
 		$("#NotaFiscal_nfechave").val("");
@@ -211,6 +209,19 @@ function atualizaObservacoes()
 	codfilialantigo = $("#NotaFiscal_codfilial").val();
 }
 
+function atualizaEstoqueLocal()
+{
+	var estoquelocal = [];
+<?php
+		foreach (EstoqueLocal::model()->findAll() as $local) {
+			echo "    estoquelocal[{$local->codfilial}] = '{$local->codestoquelocal}';\n";
+		}
+?>
+	var codfilial = $("#NotaFiscal_codfilial").select2("val");
+	var codestoquelocal = estoquelocal[codfilial];
+	$("#NotaFiscal_codestoquelocal").select2("val", codestoquelocal);
+}
+
 $(document).ready(function() {
 
 	$("#NotaFiscal_observacoes").RemoveAcentos();
@@ -248,7 +259,7 @@ $(document).ready(function() {
 	$('#NotaFiscal_codnaturezaoperacao').change(function(e){ atualizaObservacoes(); });
 
 	$('#NotaFiscal_emitida').change(function(e){ desabilitaCamposEmitida(); });
-	$('#NotaFiscal_codfilial').change(function(e){ desabilitaCamposEmitida(); atualizaObservacoes(); });
+	$('#NotaFiscal_codfilial').change(function(e){ desabilitaCamposEmitida(); atualizaObservacoes(); atualizaEstoqueLocal(); });
 
 	$('#nota-fiscal-form').submit(function(e) {
         var currentForm = this;
