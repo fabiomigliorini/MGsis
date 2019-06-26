@@ -111,16 +111,20 @@ function desabilitaCamposEmitida()
 	var emitida = $('#NotaFiscal_emitida').is(':checked');
 	var valorbanco = ((emitida == <?php echo ($model->emitida)?"true":"false" ?>) &&  <?php echo ($model->isNewRecord)?"false":"true" ?>);
 
-	atualizaSerie();
-
 	if (valorbanco)
 	{
+		if (emitida) {
+			atualizaSerie();
+		} else {
+			$("#NotaFiscal_serie").val("<?php echo $model->serie; ?>");
+		}
 		$("#NotaFiscal_numero").val("<?php echo $model->numero; ?>");
 		$("#NotaFiscal_nfechave").val("<?php echo $model->nfechave; ?>");
 		$("#NotaFiscal_modelo").select2("val", "<?php echo $model->modelo; ?>");
 	}
 	else if (emitida)
 	{
+		atualizaSerie();
 		$("#NotaFiscal_numero").val(0);
 		$("#NotaFiscal_nfechave").val("");
 		$("#NotaFiscal_modelo").select2("val", "<?php echo $model->modelo; ?>");
