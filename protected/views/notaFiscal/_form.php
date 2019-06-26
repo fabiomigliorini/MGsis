@@ -74,11 +74,7 @@
 	</div>
 </fieldset>
 <div class="form-actions">
-
-
     <?php
-
-
         $this->widget(
             'bootstrap.widgets.TbButton',
             array(
@@ -88,8 +84,7 @@
                 'icon' => 'icon-ok',
                 )
             );
-	?>
-
+    ?>
 </div>
 
 <?php $this->endWidget(); ?>
@@ -115,38 +110,31 @@ function desabilitaCamposEmitida()
 {
 	var emitida = $('#NotaFiscal_emitida').is(':checked');
 	var valorbanco = ((emitida == <?php echo ($model->emitida)?"true":"false" ?>) &&  <?php echo ($model->isNewRecord)?"false":"true" ?>);
-	var nfeserie = [];
-<?php
-	foreach (Filial::model()->findAll() as $filial) {
-		echo "    nfeserie[{$filial->codfilial}] = '{$filial->nfeserie}';\n";
-	}
-?>
+
+	atualizaSerie();
 
 	if (valorbanco)
 	{
-		$("#NotaFiscal_serie").val("<?php echo $model->serie; ?>");
 		$("#NotaFiscal_numero").val("<?php echo $model->numero; ?>");
 		$("#NotaFiscal_nfechave").val("<?php echo $model->nfechave; ?>");
 		$("#NotaFiscal_modelo").select2("val", "<?php echo $model->modelo; ?>");
 	}
 	else if (emitida)
 	{
-		var codfilial = $("#NotaFiscal_codfilial").select2("val");
-		var serie = nfeserie[codfilial];
-		$("#NotaFiscal_serie").val(serie);
 		$("#NotaFiscal_numero").val(0);
 		$("#NotaFiscal_nfechave").val("");
 		$("#NotaFiscal_modelo").select2("val", "<?php echo $model->modelo; ?>");
 	}
 
-	$("#NotaFiscal_serie").prop('disabled', emitida);
-	$("#NotaFiscal_numero").prop('disabled', emitida);
-	$("#NotaFiscal_nfechave").prop('disabled', emitida);
+	$("#NotaFiscal_serie").prop('readonly', emitida);
+	$("#NotaFiscal_numero").prop('readonly', emitida);
+	$("#NotaFiscal_nfechave").prop('readonly', emitida);
 
-	if (emitida && $("#NotaFiscal_numero").val() != 0)
-		$("#NotaFiscal_modelo").prop('disabled', true);
-	else
-		$("#NotaFiscal_modelo").prop('disabled', false);
+	if (emitida && $("#NotaFiscal_numero").val() != 0) {
+		$("#NotaFiscal_modelo").prop('readonly', true);
+	} else {
+		$("#NotaFiscal_modelo").prop('readonly', false);
+	}
 
 }
 
@@ -157,6 +145,10 @@ function atualizaObservacoes()
 {
 	var codnaturezaoperacao = $("#NotaFiscal_codnaturezaoperacao").val();
 	var codfilial = $("#NotaFiscal_codfilial").val();
+
+	if (!(codfilial >= 1)) {
+		return
+	}
 
 	$.getJSON("<?php echo Yii::app()->createUrl('naturezaOperacao/buscaObservacoesNf')?>",
 		{
@@ -222,6 +214,27 @@ function atualizaEstoqueLocal()
 	$("#NotaFiscal_codestoquelocal").select2("val", codestoquelocal);
 }
 
+function atualizaSerie()
+{
+	var emitida = $('#NotaFiscal_emitida').is(':checked');
+	if (!emitida) {
+		return
+	}
+	var nfeserie = [];
+<?php
+	foreach (Filial::model()->findAll() as $filial) {
+		echo "    nfeserie[{$filial->codfilial}] = '{$filial->nfeserie}';\n";
+	}
+?>
+	var codfilial = $("#NotaFiscal_codfilial").select2("val");
+	if (!(codfilial >= 1)) {
+		codfilial = $("#NotaFiscal_codfilial").val();
+	}
+	var serie = nfeserie[codfilial];
+	console.log(serie);
+	$("#NotaFiscal_serie").val(serie);
+}
+
 $(document).ready(function() {
 
 	$("#NotaFiscal_observacoes").RemoveAcentos();
@@ -254,7 +267,6 @@ $(document).ready(function() {
 	$('#NotaFiscal_placa').change(function(e){
 		$(this).val($(this).val().toUpperCase());
 	});
-
 
 	$('#NotaFiscal_codnaturezaoperacao').change(function(e){ atualizaObservacoes(); });
 

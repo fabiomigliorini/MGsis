@@ -32,10 +32,11 @@ class NotaFiscalController extends Controller
 
         $model->emissao = date('d/m/Y H:i:s');
         $model->saida = date('d/m/Y H:i:s');
+        $model->emitida = true;
         $model->numero = 0;
         $model->codfilial = Yii::app()->user->getState("codfilial");
         $model->serie = 1;
-        if (!empty($model->codfilial)) {
+        if ($model->emitida && !empty($model->codfilial)) {
             $filial = Filial::model()->findByPk($model->codfilial);
             $model->serie = $filial->nfeserie;
         }
@@ -46,10 +47,6 @@ class NotaFiscalController extends Controller
 
         if (isset($_POST['NotaFiscal'])) {
             $model->attributes=$_POST['NotaFiscal'];
-						if (!empty($model->codfilial)) {
-		            $filial = Filial::model()->findByPk($model->codfilial);
-		            $model->serie = $filial->nfeserie;
-		        }
 
             $transaction = Yii::app()->db->beginTransaction();
             $erro = false;
@@ -199,7 +196,7 @@ class NotaFiscalController extends Controller
                 $model->emissao = date('d/m/Y H:i:s');
                 $model->saida = date('d/m/Y H:i:s');
                 $model->serie = 1;
-                if (!empty($model->codfilial)) {
+                if ($model->emitida && !empty($model->codfilial)) {
                     $filial = Filial::model()->findByPk($model->codfilial);
                     $model->serie = $filial->nfeserie;
                 }
