@@ -1,0 +1,506 @@
+2019/06/15 10:26:44 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:26:55 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:27:06 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:27:09 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:27:10 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:27:21 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:27:28 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:01 [warning] [application] Failed to set unsafe attribute "codnegocio" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (98)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:01 [warning] [application] Failed to set unsafe attribute "codestoquelocaldestino" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (98)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:01 [warning] [application] Failed to set unsafe attribute "recebimento" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (98)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:01 [warning] [application] Failed to set unsafe attribute "codusuariorecebimento" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (98)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codnegocioprodutobarra" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "conferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codusuarioconferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codnegocioprodutobarra" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "conferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codusuarioconferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codnegocioprodutobarra" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "conferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codusuarioconferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codnegocioprodutobarra" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "conferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codusuarioconferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codnegocioprodutobarra" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "conferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codusuarioconferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codnegocioprodutobarra" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "conferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codusuarioconferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codnegocioprodutobarra" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "conferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codusuarioconferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codnegocioprodutobarra" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "conferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codusuarioconferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codnegocioprodutobarra" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "conferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codusuarioconferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codnegocioprodutobarra" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "conferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codusuarioconferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codnegocioprodutobarra" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "conferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codusuarioconferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codnegocioprodutobarra" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "conferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codusuarioconferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codnegocioprodutobarra" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "conferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codusuarioconferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codnegocioprodutobarra" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "conferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:09 [warning] [application] Failed to set unsafe attribute "codusuarioconferencia" of "NegocioProdutoBarra".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (63)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:27 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:28:55 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:28:55 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:29:07 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:29:41 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:29:44 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:29:47 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:29:50 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:29:54 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:29:56 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:29:57 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:30:00 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:30:13 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:30:37 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:30:39 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:30:46 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:30:47 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:30:50 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:31:05 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:31:10 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:31:11 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:31:18 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:31:20 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:31:26 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:31:35 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:31:49 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:32:00 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:32:05 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:32:06 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:32:08 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:32:21 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:33:09 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:33:12 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:33:15 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:33:24 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:33:24 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:33:35 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:33:36 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:33:38 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:33:46 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:33:49 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:33:50 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:33:57 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:33:57 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:35:05 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:35:38 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:35:46 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:36:44 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:36:59 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:37:26 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:38:03 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:38:06 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:38:38 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:38:46 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:38:48 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:38:49 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:38:54 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:39:04 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:39:06 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:39:11 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:39:39 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:39:44 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:39:47 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:39:48 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:40:07 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:40:17 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:40:19 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/15 10:40:22 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (135)
+in /opt/www/MGsis/index.php (13)
+2019/06/15 10:40:23 [warning] [application] Failed to set unsafe attribute "percentualdesconto" of "Negocio".
+in /opt/www/MGsis/protected/models/MGActiveRecord.php (139)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (300)
+in /opt/www/MGsis/protected/controllers/NegocioController.php (131)
+2019/06/26 07:58:54 [error] [exception.CException] exception 'CException' with message 'CAssetManager.basePath "/opt/www/MGsis/assets" é inválido. Por favor, tenha certeza que o diretório existe e que o servidor Web possa escrever nele.' in /opt/www/MGsis/yii-1.1.14.f0fee9/framework/web/CAssetManager.php:138
+Stack trace:
+#0 /opt/www/MGsis/yii-1.1.14.f0fee9/framework/web/CAssetManager.php(123): CAssetManager->setBasePath('/opt/www/MGsis/...')
+#1 /opt/www/MGsis/yii-1.1.14.f0fee9/framework/web/CAssetManager.php(217): CAssetManager->getBasePath()
+#2 /opt/www/MGsis/protected/extensions/yiibooster/components/Bootstrap.php(394): CAssetManager->publish('/opt/www/MGsis/...', false, -1, false)
+#3 /opt/www/MGsis/protected/extensions/yiibooster/components/packages.php(15): Bootstrap->getAssetsUrl()
+#4 /opt/www/MGsis/protected/extensions/yiibooster/components/Bootstrap.php(241): require('/opt/www/MGsis/...')
+#5 /opt/www/MGsis/protected/extensions/yiibooster/components/Bootstrap.php(227): Bootstrap->appendUserSuppliedPackagesToOurs()
+#6 /opt/www/MGsis/protected/extensions/yiibooster/components/Bootstrap.php(195): Bootstrap->includeAssets()
+#7 /opt/www/MGsis/yii-1.1.14.f0fee9/framework/base/CModule.php(387): Bootstrap->init()
+#8 /opt/www/MGsis/yii-1.1.14.f0fee9/framework/base/CModule.php(523): CModule->getComponent('bootstrap')
+#9 /opt/www/MGsis/yii-1.1.14.f0fee9/framework/base/CApplication.php(163): CModule->preloadComponents()
+#10 /opt/www/MGsis/yii-1.1.14.f0fee9/framework/YiiBase.php(125): CApplication->__construct('/opt/www/MGsis/...')
+#11 /opt/www/MGsis/yii-1.1.14.f0fee9/framework/YiiBase.php(98): YiiBase::createApplication('CWebApplication', '/opt/www/MGsis/...')
+#12 /opt/www/MGsis/index.php(13): YiiBase::createWebApplication('/opt/www/MGsis/...')
+#13 {main}
+REQUEST_URI=/MGsis/
+---
