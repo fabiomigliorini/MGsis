@@ -55,6 +55,7 @@
  * @property string $funruralvalor
  * @property string $senarpercentual
  * @property string $senarvalor
+ * @property string $observacoes
  *
  * The followings are the available model relations:
  * @property Cfop $Cfop
@@ -104,10 +105,12 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
             array('icmscst, ipicst, piscst, cofinscst', 'validaCst'),
             array('pispercentual, cofinspercentual, csllpercentual, irpjpercentual', 'length', 'max'=>5),
             array('icmscst, ipicst, piscst, cofinscst', 'length', 'max'=>3),
-            array('codnegocioprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao, certidaosefazmt, fethabkg, fethabvalor, iagrokg, iagrovalor, funruralpercentual, funruralvalor, senarpercentual, senarvalor', 'safe'),
+            array('codnegocioprodutobarra, alteracao, codusuarioalteracao, criacao,
+            codusuariocriacao, certidaosefazmt, fethabkg, fethabvalor, iagrokg, iagrovalor,
+            funruralpercentual, funruralvalor, senarpercentual, senarvalor', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('codnaturezaoperacao, saida_de, saida_ate, codpessoa, codfilial, codproduto, codnotafiscalprodutobarra, codnotafiscal, codprodutobarra, codcfop, descricaoalternativa, quantidade, valorunitario, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, icmsstbase, icmsstpercentual, icmsstvalor, csosn, codnegocioprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao, icmscst, ipicst, piscst, cofinscst, pispercentual, cofinspercentual, csllpercentual, irpjpercentual, pisbase, pisvalor, cofinsbase, cofinsvalor, csllbase, csllvalor, irpjbase, irpjvalor', 'safe', 'on'=>'search'),
+            array('codnaturezaoperacao, saida_de, saida_ate, codpessoa, codfilial, codproduto, codnotafiscalprodutobarra, codnotafiscal, codprodutobarra, codcfop, descricaoalternativa, quantidade, valorunitario, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, icmsstbase, icmsstpercentual, icmsstvalor, csosn, codnegocioprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao, icmscst, ipicst, piscst, cofinscst, pispercentual, cofinspercentual, csllpercentual, irpjpercentual, pisbase, pisvalor, cofinsbase, cofinsvalor, csllbase, csllvalor, irpjbase, irpjvalor, observacoes', 'safe', 'on'=>'search'),
         );
     }
 
@@ -225,6 +228,8 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 
             'senarpercentual' => 'Senar %',
             'senarvalor' => 'Senar Valor',
+
+            'observacoes' => 'Observações',
         );
     }
 
@@ -329,6 +334,24 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
     {
         $this->calculaTributacao();
         return parent::beforeValidate();
+    }
+
+    public function isOperacaoRural() {
+        if (!empty($this->certidaosefazmt)) {
+            return true;
+        }
+        if (!empty($this->fethabvalor)) {
+            return true;
+        }
+        if (!empty($this->iagrovalor)) {
+            return true;
+        }
+        if (!empty($this->funruralvalor)) {
+            return true;
+        }
+        if (!empty($this->senarvalor)) {
+            return true;
+        }
     }
 
     public function calculaTributacao($somenteVazios = true)

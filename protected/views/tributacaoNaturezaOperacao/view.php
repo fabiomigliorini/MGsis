@@ -100,6 +100,7 @@ $(document).ready(function(){
 				));
 		?>
 	</div>
+
 	<div class="span6">
 		<h3>Contábil</h3>
 			<?php
@@ -124,6 +125,7 @@ $(document).ready(function(){
 			?>
 	</div>
 </div>
+
 <div class="row-fluid">
 	<div class="span12">
 		<h3>Lucro Presumido</h3>
@@ -245,6 +247,25 @@ $(document).ready(function(){
 			?>
 		</div>
 </div>
+
+<div class="row-fluid">
+	<div class="span12">
+		<?php
+		$this->widget('bootstrap.widgets.TbDetailView',array(
+			'data'=>$model,
+			'attributes'=>array(
+				array(
+					'name'=>'observacoesnf',
+					'value'=>nl2br(CHtml::encode($model->observacoesnf)),
+					'type'=>'raw',
+				),
+			),
+		));
+		?>
+	</div>
+</div>
+
+
 
 <?php
 $this->widget('UsuarioCriacao', array('model'=>$model));

@@ -25,6 +25,7 @@
 						?>
 					</div>
 				</div>
+
 				<div class="row-fluid">
 					<div class="span3">
 						<?php
@@ -39,11 +40,19 @@
 						echo $form->textFieldRow($model,'csosn',array('class'=>'input-mini text-center','maxlength'=>4));
 						?>
 					</div>
-					<div class="span3">
+					<div class="span4">
 						<?php
 							echo $form->textFieldRow($model,'descricaoalternativa',array('class'=>'input-xlarge','maxlength'=>100));
 							echo $form->textFieldRow($model,'pedido',array('class'=>'input-medium','maxlength'=>15));
 							echo $form->textFieldRow($model,'pedidoitem',array('class'=>'input-mini text-right'));
+						?>
+					</div>
+				</div>
+
+				<div class="row-fluid">
+					<div class="span12">
+						<?php
+							echo $form->textAreaRow($model,'observacoes',array('class'=>'span12', 'rows'=>'5','maxlength'=>500));
 						?>
 					</div>
 				</div>

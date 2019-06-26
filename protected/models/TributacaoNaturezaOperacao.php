@@ -38,6 +38,7 @@
  * @property float $iagrokg
  * @property float $funruralpercentual
  * @property float $senarpercentual
+ * @property float $observacoesnf
  *
  * The followings are the available model relations:
  * @property Cfop $Cfop
@@ -72,11 +73,14 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 			array('csosn', 'length', 'max'=>4),
 			array('icmspercentual, pispercentual, cofinspercentual, csllpercentual, irpjpercentual, icmslppercentual', 'length', 'max'=>5),
 			array('historicodominio', 'length', 'max'=>512),
+			array('observacoesnf', 'length', 'max'=>500),
 			array('icmscst, piscst, ipicst, cofinscst', 'length', 'max'=>3),
 			array('csosn, icmscst, piscst, ipicst, cofinscst', 'numerical', 'min'=>1),
 			array('ncm', 'length', 'max'=>10),
 			array('icmsbase, icmslpbase', 'length', 'max'=>6),
-			array('codestado, movimentacaofisica, movimentacaocontabil, alteracao, codusuarioalteracao, criacao, codusuariocriacao, certidaosefazmt, fethabkg, iagrokg, funruralpercentual, senarpercentual', 'safe'),
+			array('codestado, movimentacaofisica, movimentacaocontabil, alteracao,
+			codusuarioalteracao, criacao, codusuariocriacao, certidaosefazmt, fethabkg,
+			iagrokg, funruralpercentual, senarpercentual', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('codtributacaonaturezaoperacao, codtributacao,
@@ -86,7 +90,8 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 			movimentacaocontabil, alteracao, codusuarioalteracao, criacao,
 			codusuariocriacao, icmscst, piscst, ipicst, cofinscst, pispercentual,
 			cofinspercentual, csllpercentual, irpjpercentual, ncm, icmslpbase,
-			certidaosefazmt, fethabkg, iagrokg, funruralpercentual, senarpercentual, icmslppercentual', 'safe', 'on'=>'search'),
+			certidaosefazmt, fethabkg, iagrokg, funruralpercentual, senarpercentual, icmslppercentual,
+			observacoesnf', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -199,6 +204,7 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 			'iagrokg' => 'Iagro por KG',
 			'funruralpercentual' => 'Funrual %',
 			'senarpercentual' => 'Senar %',
+			'observacoesnf' => 'Observações NF',
 		);
 	}
 

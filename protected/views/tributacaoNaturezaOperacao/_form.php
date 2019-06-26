@@ -54,6 +54,7 @@
 			?>
 		</div>
 	</div>
+
 	<div class="row-fluid">
 		<div class="span12">
 			<?php
@@ -144,6 +145,23 @@
 				echo $form->textFieldRow($model,'iagrokg',array('class'=>'input-small text-right','maxlength'=>14));
 				echo $form->textFieldRow($model,'funruralpercentual',array('class'=>'input-small text-right','maxlength'=>14));
 				echo $form->textFieldRow($model,'senarpercentual',array('class'=>'input-small text-right','maxlength'=>14));
+				$this->endWidget();
+			?>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span12">
+			<?php
+				$box = $this->beginWidget(
+					'bootstrap.widgets.TbBox',
+					array(
+						'title' => 'Observações',
+						'headerIcon' => 'icon-th-list',
+						//'htmlOptions' => array('class' => ' pull-left')
+					)
+				);
+				echo $form->textAreaRow($model,'observacoesnf',array('class'=>'span12', 'rows'=>'5','maxlength'=>1500));
 				$this->endWidget();
 			?>
 		</div>

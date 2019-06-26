@@ -190,9 +190,24 @@ $(document).ready(function(){
 	else
 		$frete = $model->frete;
 
+	$placa = $model->placa;
+	if (!empty($model->codestadoplaca)) {
+		$placa .=  '/' . $model->EstadoPlaca->sigla;
+	}
+
 	$this->widget('bootstrap.widgets.TbDetailView',array(
 		'data'=>$model,
 		'attributes'=>array(
+			array(
+				'name'=>'codpessoatransportador',
+				'value'=>((isset($model->PessoaTransportador))?CHtml::link(CHtml::encode($model->PessoaTransportador->fantasia), array("pessoa/view", "id"=>$model->codpessoatransportador)):null),
+				'type'=>"raw",
+			),
+			array(
+				'name'=>'placa',
+				'value'=>CHtml::encode($placa),
+				'type'=>"raw",
+			),
 			array(
 				'name'=>'frete',
 				'value'=>$frete,
@@ -212,12 +227,6 @@ $(document).ready(function(){
 				'name'=>'pesoliquido',
 				'value'=>Yii::app()->format->formatNumber($model->pesoliquido, 3),
 			),
-			array(
-				'name'=>'codpessoatransportador',
-				'value'=>((isset($model->PessoaTransportador))?CHtml::link(CHtml::encode($model->PessoaTransportador->fantasia), array("pessoa/view", "id"=>$model->codpessoatransportador)):null),
-				'type'=>"raw",
-			),
-			'placa',
 		),
 	));
 	?>
@@ -498,20 +507,28 @@ $(document).ready(function(){
 		$iItem = 0;
 		foreach ($model->NotaFiscalProdutoBarras as $prod)
 		{
+			$linhas = 1;
+			$rural = $prod->isOperacaoRural();
+			if ($rural) {
+				$linhas++;
+			}
+			if(!empty($prod->observacoes)) {
+				$linhas = 3;
+			}
 			$iItem++;
 			?>
 			<tr>
-				<td rowspan="2">
+				<td rowspan="<?php echo $linhas; ?>">
 					<small class="muted pull-right">
 						<?php echo $iItem; ?>
 					</small>
 				</td>
-				<td rowspan="2">
+				<td rowspan="<?php echo $linhas; ?>">
 					<small class="muted">
 						<?php echo CHtml::encode($prod->ProdutoBarra->barras, 6); ?>
 					</small>
 				</td>
-				<td rowspan="2">
+				<td rowspan="<?php echo $linhas; ?>">
 					<b><?php echo CHtml::link(CHtml::encode($prod->ProdutoBarra->descricao), array("produto/view", "id"=>$prod->ProdutoBarra->codproduto)); ?></b>
 					<?php if (!empty($prod->descricaoalternativa)): ?>
 						<br>
@@ -529,7 +546,7 @@ $(document).ready(function(){
 						</b>
 					<?php endif; ?>
 				</td>
-				<td rowspan="2">
+				<td rowspan="<?php echo $linhas; ?>">
 					<small class='muted'>
 						<?php echo CHtml::encode(Yii::app()->format->formataNcm($prod->ProdutoBarra->Produto->Ncm->ncm)); ?>
 					</small>
@@ -616,7 +633,7 @@ $(document).ready(function(){
 						<div class="text-right"><?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->irpjvalor)); ?></div>
 					</small>
 				</td>
-				<td  rowspan="2">
+				<td  rowspan="<?php echo $linhas; ?>">
 					<small class='muted'>
 						<?php
 						if (isset($prod->NegocioProdutoBarra))
@@ -625,203 +642,93 @@ $(document).ready(function(){
 						?>
 					</small>
 				</td>
-				<td style="max-width: 50px"  rowspan="2">
+				<td style="max-width: 50px"  rowspan="<?php echo $linhas; ?>">
 					<a href="<?php echo Yii::app()->createUrl('notaFiscalProdutoBarra/view', array('id'=>$prod->codnotafiscalprodutobarra)); ?>"><i class="icon-eye-open"></i></a>
 					<a href="<?php echo Yii::app()->createUrl('notaFiscalProdutoBarra/update', array('id'=>$prod->codnotafiscalprodutobarra)); ?>"><i class="icon-pencil"></i></a>
 					<a class="delete" href="<?php echo Yii::app()->createUrl('notaFiscalProdutoBarra/delete', array('id'=>$prod->codnotafiscalprodutobarra, 'ajax'=>'ajax')); ?>"><i class="icon-trash"></i></a>
 				</td>
 			</tr>
-			<tr>
 
-				<td colspan="4">
-					<small class='muted'>
-						<div>
-							<?php
-							echo ($prod->certidaosefazmt)?'Destaca Certidão Sefaz/MT':''
-							?>
-						</div>
-					</small>
-				</td>
-
-				<td colspan="3">
-					<small class="muted">
-						Fethab:
-					</small>
-					<div class="pull-right">
-						<small class="muted">
-							<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->fethabvalor)); ?>
-						</small>
-					</div>
-				</td>
-
-				<td colspan="3">
-					<small class="muted">
-						Iagro:
-					</small>
-					<div class="pull-right">
-						<small class="muted">
-							<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->iagrovalor)); ?>
-						</small>
-					</div>
-				</td>
-
-				<td colspan="3">
-					<small class="muted">
-						Funrural:
-					</small>
-					<div class="pull-right">
-						<small class="muted">
-							<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->funruralvalor)); ?>
-						</small>
-					</div>
-				</td>
-
-				<td colspan="3">
-					<small class="muted">
-						Senar:
-					</small>
-					<div class="pull-right">
-						<small class="muted">
-							<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->senarvalor)); ?>
-						</small>
-					</div>
-				</td>
-			</tr>
 			<?php
-			/*
+			if($rural) {
 			?>
-			<div class="registro">
-				<div class="row-fluid">
-					<div class="span4" style="border: 1px solid blue">
-					</div>
-					<div class="span3" style="border: 1px solid green">
 
-					</div>
-					<small class="span4">
-						<small class="span2 muted" style="border: 1px solid green">
-							ICMS (<?php echo CHtml::encode(trim($prod->csosn . ' ' . $prod->icmscst)); ?>)
-							<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->icmsvalor)); ?>
+				<tr>
+
+					<td colspan="4">
+						<small class='muted'>
+							<div>
+								<?php
+								echo ($prod->certidaosefazmt)?'Destaca Certidão Sefaz/MT':''
+								?>
+							</div>
 						</small>
-						<?php if ($prod->icmsstvalor > 0): ?>
-							<small class="span2 muted" style="border: 1px solid green">
-								ICMSST
-								<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->icmsstvalor)); ?>
-							</small>
-						<?php endif; ?>
-						<?php if ($prod->ipivalor > 0): ?>
-							<small class="span2 muted" style="border: 1px solid green">
-								IPI (<?php echo CHtml::encode($prod->ipicst); ?>)
-								<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->ipivalor)); ?>
-							</small>
-						<?php endif; ?>
-						<?php if ($prod->pisvalor > 0): ?>
-							<small class="span2 muted" style="border: 1px solid green">
-								PIS (<?php echo CHtml::encode($prod->piscst); ?>)
-								<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->pisvalor)); ?>
-							</small>
-						<?php endif; ?>
-						<?php if ($prod->cofinsvalor > 0): ?>
-							<small class="span2 muted" style="border: 1px solid green">
-								Cofins (<?php echo CHtml::encode($prod->piscst); ?>)
-								<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->cofinsvalor)); ?>
-							</small>
-						<?php endif; ?>
-						<?php if ($prod->csllvalor > 0): ?>
-							<small class="span2 muted" style="border: 1px solid green">
-								CSLL
-								<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->csllvalor)); ?>
-							</small>
-						<?php endif; ?>
-						<?php if ($prod->irpjvalor > 0): ?>
-							<small class="span2 muted" style="border: 1px solid green">
-								IRPJ
-								<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->irpjvalor)); ?>
-							</small>
-						<?php endif; ?>
-					</small>
-					<!--
-					<div class="span3">
-						<?php
-						if (($prod->icmsbase>0) || ($prod->icmspercentual>0) || ($prod->icmsvalor>0))
-						{
-							?>
-							<div>
-								<div class="span3 muted">
-									ICMS
-									<?php echo CHtml::encode($prod->csosn); ?>
-								</div>
-								<div class="span3 text-right">
-									<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->icmsbase)); ?>
-								</div>
-								<div class="span3 text-right">
-									<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->icmspercentual)); ?>%
-								</div>
-								<div class="span3 text-right">
-									<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->icmsvalor)); ?>
-								</div>
-							</div>
-							<?php
-						}
+					</td>
 
-						if (($prod->icmsstbase>0) || ($prod->icmsstpercentual>0) || ($prod->icmsstvalor>0))
-						{
-							?>
-							<div>
-								<div class="span3 muted">
-									ICMS ST
-								</div>
-								<div class="span3 text-right">
-									<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->icmsstbase)); ?>
-								</div>
-								<div class="span3 text-right">
-									<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->icmsstpercentual)); ?>%
-								</div>
-								<div class="span3 text-right">
-									<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->icmsstvalor)); ?>
-								</div>
-							</div>
-							<?php
-						}
+					<td colspan="3">
+						<small class="muted">
+							Fethab:
+						</small>
+						<div class="pull-right">
+							<small class="muted">
+								<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->fethabvalor)); ?>
+							</small>
+						</div>
+					</td>
 
-						if (($prod->ipibase>0) || ($prod->ipipercentual>0) || ($prod->ipivalor>0))
-						{
-							?>
-							<div>
-								<div class="span3 muted">
-									IPI
-								</div>
-								<div class="span3 text-right">
-									<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->ipibase)); ?>
-								</div>
-								<div class="span3 text-right">
-									<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->ipipercentual)); ?>%
-								</div>
-								<div class="span3 text-right">
-									<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->ipivalor)); ?>
-								</div>
-							</div>
-							<?php
-						}
+					<td colspan="3">
+						<small class="muted">
+							Iagro:
+						</small>
+						<div class="pull-right">
+							<small class="muted">
+								<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->iagrovalor)); ?>
+							</small>
+						</div>
+					</td>
 
-						?>
-					</div>
-					-->
-					<div class="span1">
-						<?php
-						if (isset($prod->NegocioProdutoBarra))
-							echo CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($prod->NegocioProdutoBarra->codnegocio))
-								, array("negocio/view", "id"=>$prod->NegocioProdutoBarra->codnegocio));
-						?>
-					</div>
-					<div class="pull-right">
-						<a href="<?php echo Yii::app()->createUrl('notaFiscalProdutoBarra/update', array('id'=>$prod->codnotafiscalprodutobarra)); ?>"><i class="icon-pencil"></i></a>
-						<a class="delete" href="<?php echo Yii::app()->createUrl('notaFiscalProdutoBarra/delete', array('id'=>$prod->codnotafiscalprodutobarra)); ?>"><i class="icon-trash"></i></a>
-					</div>
-				</div>
-			</div>
+					<td colspan="3">
+						<small class="muted">
+							Funrural:
+						</small>
+						<div class="pull-right">
+							<small class="muted">
+								<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->funruralvalor)); ?>
+							</small>
+						</div>
+					</td>
+
+					<td colspan="3">
+						<small class="muted">
+							Senar:
+						</small>
+						<div class="pull-right">
+							<small class="muted">
+								<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->senarvalor)); ?>
+							</small>
+						</div>
+					</td>
+				</tr>
 			<?php
-			 *
-			 */
+			}
+			?>
+
+			<?php
+			if(!empty($prod->observacoes)) {
+			?>
+				<tr>
+					<td colspan="16">
+						<small class='muted'>
+							<?php echo nl2br(CHtml::encode($prod->observacoes)); ?>
+						</small>
+					</td>
+				</tr>
+			<?php
+			}
+			?>
+
+
+		<?php
 		}
 		?>
 	</tbody>
