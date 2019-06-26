@@ -1,4 +1,4 @@
 /nbproject/private/
 /assets/
 /protected/vendors/
-/protected/runtime/
+/protected/runtime/*log*
