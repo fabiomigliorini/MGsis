@@ -30,7 +30,7 @@
 					<div class="span3">
 						<?php
 							echo $form->textFieldRow($model,'quantidade',array('class'=>'input-small text-right','maxlength'=>14));
-							echo $form->textFieldRow($model,'valorunitario',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+							echo $form->textFieldRow($model,'valorunitario',array('class'=>'input-medium text-right','maxlength'=>14, 'prepend' => 'R$'));
 							echo $form->textFieldRow($model,'valortotal',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
 						?>
 					</div>
@@ -365,7 +365,7 @@ $(document).ready(function() {
 	$('#NotaFiscalProdutoBarra_pedidoitem').autoNumeric('init', {aSep:'', aDec:',', altDec:'.', mDec:0 });
 
 	$('#NotaFiscalProdutoBarra_quantidade').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
-	$('#NotaFiscalProdutoBarra_valorunitario').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+	$('#NotaFiscalProdutoBarra_valorunitario').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.', mDec:10 });
 	$('#NotaFiscalProdutoBarra_valortotal').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 
 	$('#NotaFiscalProdutoBarra_icmsbase').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });

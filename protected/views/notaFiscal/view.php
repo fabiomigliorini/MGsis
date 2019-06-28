@@ -564,7 +564,7 @@ $(document).ready(function(){
 				<td>
 					<div class="text-right">
 						<small>
-							<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->valorunitario)); ?>
+							<?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->valorunitario, 10)); ?>
 						</small>
 					</div>
 				</td>

@@ -2,3 +2,4 @@
 /assets/
 /protected/runtime/*.log
 /protected/runtime/*.log.*
+/protected/vendors/nfephp/
