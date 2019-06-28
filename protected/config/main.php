@@ -1,5 +1,7 @@
 <?php
 
+require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'../.env.php');
+
 // uncomment the following to define a path alias
 // Yii::setPathOfAlias('local','path/to/local-folder');
 
@@ -125,7 +127,8 @@ return array(
 		*/
 		'db'=>array(
 			'pdoClass' => 'NestedPDO',
-			'connectionString' => 'pgsql:host=127.0.0.1;dbname=mgsis',
+			// 'connectionString' => 'pgsql:host=127.0.0.1;dbname=mgsis',
+			'connectionString' => CONNECTION_STRING,
 			//'emulatePrepare' => true,
 			'username' => 'mgsis_yii',
 			'password' => 'mgsis_yii',
