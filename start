@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-docker-compose up -d
+docker-compose up -d --build
 
 #docker-compose exec --user www-data mgsis 
 docker-compose exec -w /opt/www mgsis ln -s MGsis/yii-1.1.14.f0fee9 yii-1.1.14.f0fee9

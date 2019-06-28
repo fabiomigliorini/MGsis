@@ -4,6 +4,13 @@ services:
         build:
             './.docker'
         tty: true
+        command: > 
+            bash -c "chmod -R a+w /opt/www/MGsis/protected 
+            && chmod -R a+w /opt/www/MGsis/assets 
+            && chmod -R a+w /opt/www/MGsis/yii-1.1.14.f0fee9 
+            && service nginx start 
+            && service php5.6-fpm start 
+            && /bin/bash"
         volumes:
             - ./:/opt/www/MGsis
         network_mode: host
