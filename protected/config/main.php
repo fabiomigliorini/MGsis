@@ -153,6 +153,21 @@ return array(
 				*/
 			),
 		),
+		'cache'=>array(
+				'class'=>'CMemCache',
+				'servers'=>array(
+						array(
+								'host'=>'localhost',
+								'port'=>11211,
+								'weight'=>60,
+						),
+						// array(
+						// 		'host'=>'localhost',
+						// 		'port'=>11211,
+						// 		'weight'=>40,
+						// ),
+				),
+		),
 	),
 
 	// application-level parameters that can be accessed
