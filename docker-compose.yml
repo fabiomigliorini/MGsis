@@ -3,6 +3,7 @@ services:
     mgsis:
         build:
             './.docker'
+        working_dir: /opt/www/MGsis
         tty: true
         command: > 
             bash -c "chmod -R a+w /opt/www/MGsis/protected 
