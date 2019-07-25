@@ -565,6 +565,13 @@ class NfeTerceiro extends MGActiveRecord
 			$nfitem->qcom = $item->prod->qCom->__toString();
 			$nfitem->vuncom = $item->prod->vUnCom->__toString();
 			$nfitem->vprod = $item->prod->vProd->__toString();
+			$nfitem->vdesc = $item->prod->vDesc->__toString();
+			$nfitem->infadprod = $item->infAdProd->__toString();
+			//echo "<pre>";
+			//print_r($nfitem);
+			//echo "<hr>";
+			//print_r($item);
+			//die('aqui');
 			$nfitem->ceantrib = $item->prod->cEANTrib->__toString();
 			$nfitem->utrib = $item->prod->uTrib->__toString();
 			$nfitem->qtrib = $item->prod->qTrib->__toString();

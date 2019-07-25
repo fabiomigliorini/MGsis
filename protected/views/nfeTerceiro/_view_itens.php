@@ -21,6 +21,14 @@ foreach ($model->NfeTerceiroItems as $item)
 			</div>
 			<div class="span3">
 				<?php echo CHtml::link(CHtml::encode($item->xprod), array("nfeTerceiroItem/view", "id"=>$item->codnfeterceiroitem)); ?>
+				<?php
+				if (!empty($item->infadprod)) {
+				?>
+					<br>
+					<?php echo nl2br(CHtml::encode($item->infadprod)); ?>
+				<?php
+				}
+				?>
 				<div class="muted">
 					<?php echo CHtml::encode(Yii::app()->format->formataNcm($item->ncm)); ?>
 					<?php echo CHtml::encode($item->cfop); ?>				
@@ -91,7 +99,11 @@ foreach ($model->NfeTerceiroItems as $item)
 					<span class="muted"><?php echo CHtml::encode(Yii::app()->format->formatNumber($item->vuntrib)); ?></span>
 				</div>
 				<div class="span2 text-right">
-					<b><?php echo CHtml::encode(Yii::app()->format->formatNumber($item->vprod)); ?></b>
+					<b><?php echo CHtml::encode(Yii::app()->format->formatNumber($item->vprod)); ?></b><br>
+					<?php if (!empty($item->vdesc)) { ?>
+						<small class="muted">Desc</small>
+						<b class="text-success"><?php echo CHtml::encode(Yii::app()->format->formatNumber($item->vdesc)); ?></b>
+					<?php } ?>
 				</div>
 				<?php
 				

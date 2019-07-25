@@ -31,6 +31,12 @@ $(document).ready(function(){
 </script>
 
 <h1><?php echo $model->xprod; ?></h1>
+<?php if (!empty($model->infadprod)) { ?>
+	<p class="lead">
+		<?php echo CHtml::encode($model->infadprod); ?>
+	</p>
+<?php } ?>
+
 
 <div class="row-fluid">
 	<div class="span5">
@@ -44,6 +50,16 @@ $(document).ready(function(){
 					'value'=>Yii::app()->format->formatNumber($model->vprod),
 				)
 			);
+
+                if (!empty($model->vdesc))
+                        $attr[] = 
+                                array(
+					'name'=>'vdesc',
+					'label'=>'Desconto',
+					'value'=>Yii::app()->format->formatNumber($model->vdesc),
+                                        'cssClass'=>'text-success',
+				);
+
 		
 		if (!empty($model->ipivipi))
 			$attr[] = 

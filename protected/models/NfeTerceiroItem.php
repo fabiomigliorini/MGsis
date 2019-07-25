@@ -227,7 +227,7 @@ class NfeTerceiroItem extends MGActiveRecord
 			{
 
 				$this->vicmscomplementar = 
-					((double)$this->vprod * (self::PERCENTUAL_ICMS_COMPLEMENTAR/100))
+					(((double)$this->vprod + (double)$this->ipivipi - (double)$this->vdesc) * (self::PERCENTUAL_ICMS_COMPLEMENTAR/100))
 					- (double) $this->vicmsst;
 
 				if ($this->vicmscomplementar < 0)
@@ -235,7 +235,7 @@ class NfeTerceiroItem extends MGActiveRecord
 			}
 
 			$this->vcusto = 
-				(double) $this->vprod + (double) $this->ipivipi + (double) $this->vicmscomplementar + (double) $this->vicmsst + (double) $this->complemento;
+				(double) $this->vprod + (double) $this->ipivipi + (double) $this->vicmscomplementar + (double) $this->vicmsst + (double) $this->complemento - (double) $this->vdesc;
 			
 			$this->quantidade = $this->qcom;
 			
