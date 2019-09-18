@@ -13,7 +13,7 @@ $form = $this->beginWidget('MGActiveForm', array(
 	$op = array('prompt' => '', 'class' => 'input-medium');
 	if ($model->gerado_automaticamente)
 		$op = array_merge($op, array("readOnly"=>true));	
-	echo $form->dropDownListRow($model, 'codfilial', Filial::getListaCombo(), $op);
+	echo $form->select2Row($model, 'codfilial', Filial::getListaCombo(), $op);
 	
 	// codpessoa
 	echo $form->select2PessoaRow(
@@ -35,7 +35,7 @@ $form = $this->beginWidget('MGActiveForm', array(
 	$op = array('prompt' => '', 'class' => 'input-large');
 	if (!empty($model->codnegocioformapagamento))
 		$op = array_merge($op, array("readOnly"=>true));
-	echo $form->dropDownListRow($model, 'codtipotitulo', TipoTitulo::getListaCombo(), $op);
+	echo $form->select2Row($model, 'codtipotitulo', TipoTitulo::getListaCombo(), $op);
 	
 	//valor
 	$operacao = "??";
@@ -50,7 +50,7 @@ $form = $this->beginWidget('MGActiveForm', array(
 	
 	
 	// codportador
-	echo $form->dropDownListRow(
+	echo $form->select2Row(
 		$model, 'codportador', Portador::getListaCombo(), array('prompt' => '', 'class' => 'input-large')
 	);
 
@@ -116,7 +116,7 @@ $form = $this->beginWidget('MGActiveForm', array(
 	echo $form->toggleButtonRow($model,'gerencial', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 	
 	// codcontacontabil
-	echo $form->dropDownListRow($model, 'codcontacontabil', ContaContabil::getListaCombo(), array('prompt' => '', 'class' => 'input-large'));
+	echo $form->select2Row($model, 'codcontacontabil', ContaContabil::getListaCombo(), array('prompt' => '', 'class' => 'input-xxlarge'));
 	
 	// observacao
 	echo $form->textAreaRow($model,'observacao',array('class'=>'input-xxlarge', 'rows'=>'5','maxlength'=>500));

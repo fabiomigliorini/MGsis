@@ -22,7 +22,7 @@
     </div>
     <div class="span6">
         <?php
-            echo $form->dropDownListRow($model, 'codportador', Portador::getListaCombo(), array('prompt' => '', 'class' => 'input-large'));
+            echo $form->select2Row($model, 'codportador', Portador::getListaCombo(), array('prompt' => '', 'class' => 'input-xlarge'));
         ?>
     </div>
 </div>

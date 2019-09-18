@@ -275,7 +275,11 @@ class NfeTerceiro extends MGActiveRecord
 	{
 		if (empty($this->codpessoa))
 		{
-			$pessoas = Pessoa::model()->findAll("cnpj = :cnpj", array(":cnpj" => $this->cnpj));
+			$cnpj = $this->cnpj;
+			if (empty($cnpj)) { 
+				$cnpj = 0;
+			}
+			$pessoas = Pessoa::model()->findAll("cnpj = :cnpj", array(":cnpj" => $cnpj));
 			
 			foreach ($pessoas as $pessoa)
 			{
@@ -498,6 +502,9 @@ class NfeTerceiro extends MGActiveRecord
 			
 		$this->nfechave = Yii::app()->format->NumeroLimpo($infNFe->attributes()->Id->__toString());
 		$this->cnpj = $infNFe->emit->CNPJ->__toString();
+		if (empty($this->cnpj)) {
+			$this->cnpj = $infNFe->emit->CPF->__toString();
+		}
 		$this->ie = $infNFe->emit->IE->__toString();
 		$this->emitente = $infNFe->emit->xNome->__toString();
 
