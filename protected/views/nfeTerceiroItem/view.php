@@ -32,28 +32,26 @@ $(document).ready(function(){
 
 <h1><?php echo $model->xprod; ?></h1>
 <?php if (!empty($model->ProdutoBarra)) { ?>
-	<h2>
+	<h3>
 		<?php
 		switch ($model->ProdutoBarra->Produto->abc) {
 			case 'A':
-				$badge = 'badge-success';
+				$label = 'label-success';
 				break;
 			case 'B':
-				$badge = 'badge-warning';
+				$label = 'label-warning';
 				break;
 			default:
-				$badge = 'badge-important';
+				$label = 'label-important';
 				break;
 		}
 		$produto = '<B>' . CHtml::link(CHtml::encode($model->ProdutoBarra->Produto->produto), array('produto/view', 'id'=>$model->ProdutoBarra->codproduto));
-		$produto .= " <span class='badge {$badge}'>{$model->ProdutoBarra->Produto->abc}</span>";
-
-
 		if (!empty($model->ProdutoBarra->ProdutoVariacao->variacao)) {
 				$produto .= ' | ' . $model->ProdutoBarra->ProdutoVariacao->variacao . '</B>';
-		} else {
-				$produto .= ' | { Sem Variação }</B>';
+		// } else {
+		// 		$produto .= ' | { Sem Variação }</B>';
 		}
+		$produto .= " <span class='label {$label}'>{$model->ProdutoBarra->Produto->abc}</span>";
 
 
 
@@ -67,7 +65,7 @@ $(document).ready(function(){
 		}
 		echo $produto;
 		?>
-	</h2>
+	</h3>
 <?php } ?>
 <?php if (!empty($model->infadprod)) { ?>
 	<p class="lead">

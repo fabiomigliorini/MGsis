@@ -13,7 +13,7 @@ foreach ($model->NfeTerceiroItems as $item)
 			<div class="span1">
 				<span>
 					<?php echo CHtml::encode($item->cean); ?>
-					<?php if ($item->cean !== $item->ceantrib) echo CHtml::encode($item->ceantrib); ?>				
+					<?php if ($item->cean !== $item->ceantrib) echo CHtml::encode($item->ceantrib); ?>
 				</span><br>
 				<span class="muted">
 					<?php echo CHtml::encode($item->cprod); ?>
@@ -31,35 +31,32 @@ foreach ($model->NfeTerceiroItems as $item)
 				?>
 				<div class="muted">
 					<?php echo CHtml::encode(Yii::app()->format->formataNcm($item->ncm)); ?>
-					<?php echo CHtml::encode($item->cfop); ?>				
-					<?php echo CHtml::encode($item->cst); ?>				
-					<?php echo CHtml::encode($item->csosn); ?>				
+					<?php echo CHtml::encode($item->cfop); ?>
+					<?php echo CHtml::encode($item->cst); ?>
+					<?php echo CHtml::encode($item->csosn); ?>
 				</div>
 			</div>
 			<div class="span4">
 				<?php
-				
+
 				if (!empty($item->vsugestaovenda) && isset($item->ProdutoBarra))
 				{
 
 					$cssVenda = 'text-success';
-					
+
 					if ($item->ProdutoBarra->Produto->preco <= $item->vsugestaovenda * 0.97)
 						$cssVenda = 'text-error';
 
 					if ($item->ProdutoBarra->Produto->preco >= $item->vsugestaovenda * 1.05)
 						$cssVenda = 'text-warning';
-					
+
 					?>
 					<div class="span9">
 						<div>
                         <b>
 						<?php echo CHtml::link(CHtml::encode($item->ProdutoBarra->Produto->produto), array('produto/view', 'id'=>$item->ProdutoBarra->codproduto)); ?>
-                        <BR>
                         <?php if (!empty($item->ProdutoBarra->ProdutoVariacao->variacao)): ?>
-                        <?php echo $item->ProdutoBarra->ProdutoVariacao->variacao; ?>
-                        <?php else: ?>
-                          { Sem Variação }
+                        | <?php echo $item->ProdutoBarra->ProdutoVariacao->variacao; ?>
                         <?php endif; ?>
                         </b>
 						</div>
@@ -67,7 +64,7 @@ foreach ($model->NfeTerceiroItems as $item)
 						<span class="label label-important pull-center">
 							Inativado em <?php echo CHtml::encode($item->ProdutoBarra->Produto->inativo); ?>
 						</span>
-						
+
 					<?php endif; ?>
 					</div>
 					<div class="span1">
@@ -75,7 +72,7 @@ foreach ($model->NfeTerceiroItems as $item)
 					</div>
 					<div class="span2 text-right">
 						<b class="text-right <?php echo $cssVenda; ?>">
-							<?php echo CHtml::encode(Yii::app()->format->formatNumber($item->ProdutoBarra->Produto->preco)); ?> 
+							<?php echo CHtml::encode(Yii::app()->format->formatNumber($item->ProdutoBarra->Produto->preco)); ?>
 						</b><br>
 						<span class="text-right muted">
 							(<?php echo CHtml::encode(Yii::app()->format->formatNumber($item->vsugestaovenda)); ?>)
@@ -106,11 +103,11 @@ foreach ($model->NfeTerceiroItems as $item)
 					<?php } ?>
 				</div>
 				<?php
-				
+
 				$imp_desc = array();
 				$imp_perc = array();
 				$imp_val = array();
-				
+
 				if (($item->vbc>0) || ($item->picms>0) || ($item->vicms>0))
 				{
 					$imp_desc[] = 'ICMS';
