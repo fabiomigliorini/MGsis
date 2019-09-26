@@ -31,6 +31,44 @@ $(document).ready(function(){
 </script>
 
 <h1><?php echo $model->xprod; ?></h1>
+<?php if (!empty($model->ProdutoBarra)) { ?>
+	<h2>
+		<?php
+		switch ($model->ProdutoBarra->Produto->abc) {
+			case 'A':
+				$badge = 'badge-success';
+				break;
+			case 'B':
+				$badge = 'badge-warning';
+				break;
+			default:
+				$badge = 'badge-important';
+				break;
+		}
+		$produto = '<B>' . CHtml::link(CHtml::encode($model->ProdutoBarra->Produto->produto), array('produto/view', 'id'=>$model->ProdutoBarra->codproduto));
+		$produto .= " <span class='badge {$badge}'>{$model->ProdutoBarra->Produto->abc}</span>";
+
+
+		if (!empty($model->ProdutoBarra->ProdutoVariacao->variacao)) {
+				$produto .= ' | ' . $model->ProdutoBarra->ProdutoVariacao->variacao . '</B>';
+		} else {
+				$produto .= ' | { Sem Variação }</B>';
+		}
+
+
+
+		if (!empty($model->ProdutoBarra->Produto->inativo))
+		{
+			$produto .= "
+				<span class='label label-important pull-center'>
+				Inativado em {$model->ProdutoBarra->Produto->inativo}
+				</span>
+				";
+		}
+		echo $produto;
+		?>
+	</h2>
+<?php } ?>
 <?php if (!empty($model->infadprod)) { ?>
 	<p class="lead">
 		<?php echo CHtml::encode($model->infadprod); ?>
@@ -40,124 +78,155 @@ $(document).ready(function(){
 
 <div class="row-fluid">
 	<div class="span5">
-	<?php 
-	
-		$attr = 
+	<?php
+
+		$attr = [];
+		// if (isset($model->ProdutoBarra))
+		// {
+		// 	switch ($model->ProdutoBarra->Produto->abc) {
+		// 		case 'A':
+		// 			$badge = 'badge-success';
+		// 			break;
+		// 		case 'B':
+		// 			$badge = 'badge-warning';
+		// 			break;
+		// 		default:
+		// 			$badge = 'badge-important';
+		// 			break;
+		// 	}
+		// 	$produto = '<B>' . CHtml::link(CHtml::encode($model->ProdutoBarra->Produto->produto), array('produto/view', 'id'=>$model->ProdutoBarra->codproduto));
+		// 	$produto .= " <span class='badge {$badge}'>{$model->ProdutoBarra->Produto->abc}</span>";
+		//
+		//
+		// 	if (!empty($model->ProdutoBarra->ProdutoVariacao->variacao)) {
+		// 			$produto .= '<BR>' . $model->ProdutoBarra->ProdutoVariacao->variacao . '</B>';
+		// 	} else {
+		// 			$produto .= '<BR>{ Sem Variação }</B>';
+		// 	}
+		//
+		//
+		//
+		// 	if (!empty($model->ProdutoBarra->Produto->inativo))
+		// 	{
+		// 		$produto .= "
+		// 			<span class='label label-important pull-center'>
+		// 			Inativado em {$model->ProdutoBarra->Produto->inativo}
+		// 			</span>
+		// 			";
+		// 	}
+		//
+		// 	$attr[]=
+		// 		array(
+		// 			'name'=>'codprodutobarra',
+		// 			'value'=>$produto,
+		// 			'type'=>'raw',
+		// 		);
+		//
+		// }
+
+		$attr[] =
 			array(
-				array(
-					'name'=>'vprod',
-					'label'=>'Custo Produto',
-					'value'=>Yii::app()->format->formatNumber($model->vprod),
-				)
+				'name'=>'vprod',
+				'label'=>'Custo Produto',
+				'value'=>Yii::app()->format->formatNumber($model->vprod) . ' (' . Yii::app()->format->formatNumber($model->vprod/$model->quantidade) . ')',
 			);
 
-                if (!empty($model->vdesc))
-                        $attr[] = 
-                                array(
-					'name'=>'vdesc',
-					'label'=>'Desconto',
-					'value'=>Yii::app()->format->formatNumber($model->vdesc),
-                                        'cssClass'=>'text-success',
-				);
-
-		
 		if (!empty($model->ipivipi))
-			$attr[] = 
+			$attr[] =
 				array(
 					'name'=>'ipivipi',
 					'label'=>'IPI',
-					'value'=>Yii::app()->format->formatNumber($model->ipivipi),
+					'value'=>Yii::app()->format->formatNumber($model->ipivipi) . ' (' . Yii::app()->format->formatNumber($model->ipivipi/$model->quantidade) . ')',
 				);
-		
-		if (!empty($model->vicmsst))
-			$attr[] = 
-				array(
-					'name'=>'vicmsst',
-					'label'=>'ICMS ST',
-					'value'=>Yii::app()->format->formatNumber($model->vicmsst),
-				);
-		
-		if (!empty($model->vicmscomplementar))
+
+		if (!empty($model->vicmsstutilizado))
 			$attr[] =
 				array(
-					'name'=>'vicmscomplementar',
-					'value'=>Yii::app()->format->formatNumber($model->vicmscomplementar),
+					'name'=>'vicmsstutilizado',
+					'label'=>'ICMS ST',
+					'value'=>Yii::app()->format->formatNumber($model->vicmsstutilizado) . ' (' . Yii::app()->format->formatNumber($model->vicmsstutilizado/$model->quantidade) . ')',
 				);
-		
-		if (!empty($model->complemento))
-			$attr[] = 
+
+		if (!empty($model->vicmsgarantido))
+			$attr[] =
+				array(
+					'name'=>'vicmsgarantido',
+					'value'=>Yii::app()->format->formatNumber($model->vicmsgarantido) . ' (' . Yii::app()->format->formatNumber($model->vicmsgarantido/$model->quantidade) . ')',
+				);
+
+		if ($model->complemento != 0)
+			$attr[] =
 				array(
 					'name'=>'complemento',
-					'value'=>Yii::app()->format->formatNumber($model->complemento),
+					'value'=>Yii::app()->format->formatNumber($model->complemento) . ' (' . Yii::app()->format->formatNumber($model->complemento/$model->quantidade) . ')',
 				);
-		
-		if (!empty($model->vcusto))
-			$attr[] = 
-				array(
-					'name'=>'vcusto',
-					'value'=>Yii::app()->format->formatNumber($model->vcusto),
-				);
+
+		if (!empty($model->vdesc)) {
+			$attr[] = [
+				'name'=>'vdesc',
+				'label'=>'Desconto',
+				'value'=>'-' . Yii::app()->format->formatNumber($model->vdesc) . ' (-' . Yii::app()->format->formatNumber($model->vdesc/$model->quantidade) . ')',
+			];
+		}
+
+		if (!empty($model->vicmscredito)) {
+			$attr[] = [
+				'name'=>'vicmscredito',
+				'label'=>'Credito ICMS',
+				'value'=>'-' . Yii::app()->format->formatNumber($model->vicmscredito) . ' (-' . Yii::app()->format->formatNumber($model->vicmscredito/$model->quantidade) . ')',
+			];
+		}
+
+		if (!empty($model->vcusto)) {
+			$attr[] = [
+				'name'=>'vcusto',
+				'value'=>Yii::app()->format->formatNumber($model->vcusto) . ' (' . Yii::app()->format->formatNumber($model->vcusto/$model->quantidade) . ')',
+			];
+		}
 
 		if (!empty($model->quantidade))
 		{
 			$quantidade = Yii::app()->format->formatNumber($model->quantidade, 3);
 			if (isset($model->ProdutoBarra->ProdutoEmbalagem))
-				$quantidade .= 
+				$quantidade .=
 					' ('
 					. Yii::app()->format->formatNumber($model->qcom, 3)
-					. " {$model->ProdutoBarra->ProdutoEmbalagem->UnidadeMedida->sigla} * " 
-					. Yii::app()->format->formatNumber($model->ProdutoBarra->ProdutoEmbalagem->quantidade, 3) 
+					. " {$model->ProdutoBarra->ProdutoEmbalagem->UnidadeMedida->sigla} * "
+					. Yii::app()->format->formatNumber($model->ProdutoBarra->ProdutoEmbalagem->quantidade, 3)
 					. ' )';
-		
-			$attr[] = 
+
+			$attr[] =
 				array(
 					'name'=>'quantidade',
 					'value'=>$quantidade,
 				);
 		}
-		
+
 		if (!empty($model->vcustounitario))
-		$attr[] = 
+		$attr[] =
 			array(
 				'name'=>'vcustounitario',
 				'value'=>Yii::app()->format->formatNumber($model->vcustounitario),
 			);
-		
+
+		if (!empty($model->vicmsvenda)) {
+			$attr[] = [
+				'label'=>'ICMS Venda',
+				'value'=>Yii::app()->format->formatNumber($model->vicmsvenda) . ' (' . Yii::app()->format->formatNumber($model->picmsvenda, 0) . '%)',
+			];
+		}
+
+		if (!empty($model->vmargem)) {
+			$attr[] = [
+				'label'=>'Margem',
+				'value'=>Yii::app()->format->formatNumber($model->vmargem) . ' (' . Yii::app()->format->formatNumber($model->margem, 0) . '%)',
+			];
+		}
+
+
 		if (!empty($model->vsugestaovenda))
 		{
-			if (isset($model->ProdutoBarra))
-			{
-				$produto = '<B>' . CHtml::link(CHtml::encode($model->ProdutoBarra->Produto->produto), array('produto/view', 'id'=>$model->ProdutoBarra->codproduto));
-                if (!empty($model->ProdutoBarra->ProdutoVariacao->variacao)) {
-                    $produto .= '<BR>' . $model->ProdutoBarra->ProdutoVariacao->variacao . '</B>';
-                } else {
-                    $produto .= '<BR>{ Sem Variação }</B>';
-                }
-                
-				
-				if (!empty($model->ProdutoBarra->Produto->inativo))
-				{
-					$produto .= "
-						<span class='label label-important pull-center'>
-						Inativado em {$model->ProdutoBarra->Produto->inativo}
-						</span>
-						";
-				}
-		
-				$attr[]=
-					array(
-						'name'=>'codprodutobarra',
-						'value'=>$produto, 
-						'type'=>'raw',
-					);	
-                
-			}
-			$attr[]=
-				array(
-					'name'=>'margem',
-					'value'=>Yii::app()->format->formatNumber($model->margem) . '%',
-				);
-			
+
 			$venda = 0;
 			if (isset($model->ProdutoBarra))
 				$venda = $model->ProdutoBarra->Produto->preco;
@@ -169,25 +238,25 @@ $(document).ready(function(){
 
 			if ($venda >= $model->vsugestaovenda * 1.05)
 				$cssVenda = 'text-warning';
-			
+
+			$attr[]=
+				array(
+					'name'=>'vsugestaovenda',
+					'value'=>Yii::app()->format->formatNumber($model->vsugestaovenda),
+				);
 			$attr[]=
 				array(
 					'label'=>'Venda',
 					'value'=>Yii::app()->format->formatNumber($venda),
 					'cssClass'=>$cssVenda,
 				);
-			$attr[]=
-				array(
-					'name'=>'vsugestaovenda',
-					'value'=>Yii::app()->format->formatNumber($model->vsugestaovenda),
-				);
-			
+
 			if (isset($model->ProdutoBarra))
 				foreach ($model->ProdutoBarra->Produto->ProdutoEmbalagems as $pe)
 				{
 					if (!empty($pe->preco))
 						$venda = $pe->preco;
-					else 
+					else
 						$venda = $model->ProdutoBarra->Produto->preco * $pe->quantidade;
 
 					$sugestao = $model->vsugestaovenda * $pe->quantidade;
@@ -198,34 +267,34 @@ $(document).ready(function(){
 					if ($venda >= $sugestao * 1.05)
 						$cssVenda = 'text-warning';
 
+						$attr[]=
+							array(
+								'label'=>'Sugestão',
+								'value'=>Yii::app()->format->formatNumber($sugestao),
+							);
 					$attr[]=
 						array(
 							'label'=>$pe->UnidadeMedida->sigla . ' ' . $pe->descricao,
 							'value'=>Yii::app()->format->formatNumber($venda),
 							'cssClass'=>$cssVenda,
 						);
-					$attr[]=
-						array(
-							'label'=>'Sugestão',
-							'value'=>Yii::app()->format->formatNumber($sugestao),
-						);
 				}
 			}
-		
+
 		$this->widget('bootstrap.widgets.TbDetailView',array(
 			'data'=>$model,
 			'attributes'=>$attr,
-		)); 
+		));
 
 
 		?>
 	</div>
 	<small class="span4">
-	<?php 
-	
+	<?php
+
 		$ncm = CHtml::encode(Yii::app()->format->formataNCM($model->ncm));
 		$cssNcm = 'text-success';
-		
+
 		if (isset($model->ProdutoBarra))
 		{
 			if ($model->ncm <> $model->ProdutoBarra->Produto->Ncm->ncm)
@@ -238,59 +307,115 @@ $(document).ready(function(){
 		{
 			$cssNcm = '';
 		}
-		
+
+		$attr = [
+			'codnfeterceiroitem',
+			'nitem',
+			'cprod',
+		];
+
+		$css = '';
+		if (!empty($model->codprodutobarra)) {
+			$css = $model->ProdutoBarra->ProdutoVariacao->barrasCadastrado($model->cean)?'text-success':'text-error';
+		}
+		$attr[] =	[
+			'name'=>'cean',
+			'value'=>$model->cean,
+			'cssClass'=>$css,
+			'type'=>'raw',
+		];
+		$css = '';
+		if (!empty($model->codprodutobarra)) {
+			$css = $model->ProdutoBarra->ProdutoVariacao->barrasCadastrado($model->ceantrib)?'text-success':'text-error';
+		}
+		$attr[] =	[
+			'name'=>'ceantrib',
+			'value'=>$model->ceantrib,
+			'cssClass'=>$css,
+			'type'=>'raw',
+		];
+		$attr[] =	[
+			'name'=>'ncm',
+			'value'=>$ncm,
+			'cssClass'=>$cssNcm,
+			'type'=>'raw',
+		];
+		$css = '';
+		$value = [(empty($model->cest)?'Vazio':$model->cest) . " Nota"];
+		if (!empty($model->codprodutobarra)) {
+			$css = 'text-error';
+			if (!empty($model->ProdutoBarra->Produto->codcest)) {
+				echo 'entyrou';
+				if ($model->ProdutoBarra->Produto->Cest->cest == $model->cest) {
+					$css = 'text-success';
+				} elseif (empty($model->cest)) {
+					$value[] = $model->ProdutoBarra->Produto->Cest->cest . " Produto";
+				}
+			} elseif (empty($model->cest)) {
+				$css = 'text-success';
+			}
+		}
+		$value = implode('<BR />', $value);
+		$attr[] =	[
+			'name'=>'cest',
+			'value'=>$value,
+			'cssClass'=>$css,
+			'type'=>'raw',
+		];
+		$attr[] =	[
+			'name'=>'qcom',
+			'value'=>Yii::app()->format->formatNumber($model->qcom, 3) . ' ' . $model->ucom,
+			// 'cssClass'=>'text-success',
+		];
+		$attr[] =	[
+			'name'=>'vuncom',
+			'value'=>Yii::app()->format->formatNumber($model->vuncom),
+			// 'cssClass'=>'text-success',
+		];
+		$attr[] =	[
+			'name'=>'vprod',
+			'value'=>Yii::app()->format->formatNumber($model->vprod),
+		];
+		$attr[] =	[
+			'name'=>'qtrib',
+			'value'=>Yii::app()->format->formatNumber($model->qtrib, 3) . ' ' . $model->utrib,
+		];
+		$attr[] =	[
+			'name'=>'vuntrib',
+			'value'=>Yii::app()->format->formatNumber($model->vuntrib),
+		];
+		$attr[] =	[
+			'name'=>'cfop',
+			'value'=>CHtml::link(CHtml::encode($model->cfop), array('cfop/view', 'id'=>$model->cfop)),
+			'type'=>'raw',
+		];
+		$cst = $model->cst;
+		$cst .= $model->csosn;
+		$badge = '';
+		if (!empty($model->codprodutobarra)) {
+			$badge = 'badge-important';
+			if ($model->ProdutoBarra->Produto->codtributacao == $model->codtributacao) {
+				$badge = 'badge-success';
+			}
+		}
+		if (!empty($model->codtributacao)) {
+			$cst .= " <span class='badge {$badge}'>{$model->Tributacao->tributacao}</span>";
+		}
+		$attr[] =	[
+			'name'=>'cst',
+			'value'=>$cst,
+			'type'=>'raw',
+		];
+
 		$this->widget('bootstrap.widgets.TbDetailView',array(
 			'data'=>$model,
-			'attributes'=>array(
-				'codnfeterceiroitem',
-				'nitem',
-				'cprod',
-				'cean',
-				'ceantrib',
-				array(
-					'name'=>'ncm',
-					'value'=>$ncm,
-					'cssClass'=>$cssNcm,
-					'type'=>'raw',
-				),
-				array(
-					'name'=>'qcom',
-					'value'=>Yii::app()->format->formatNumber($model->qcom, 3) . ' ' . $model->ucom,
-					'cssClass'=>'text-success',
-				),
-				array(
-					'name'=>'vuncom',
-					'value'=>Yii::app()->format->formatNumber($model->vuncom),
-					'cssClass'=>'text-success',
-				),
-				array(
-					'name'=>'vprod',
-					'value'=>Yii::app()->format->formatNumber($model->vprod),
-				),
-				array(
-					'name'=>'qtrib',
-					'value'=>Yii::app()->format->formatNumber($model->qtrib, 3) . ' ' . $model->utrib,
-				),
-				array(
-					'name'=>'vuntrib',
-					'value'=>Yii::app()->format->formatNumber($model->vuntrib),
-				),
-				array(
-					'name'=>'cfop',
-					'value'=>CHtml::link(CHtml::encode($model->cfop), array('cfop/view', 'id'=>$model->cfop)),
-					'type'=>'raw',
-				),
-				'cst',
-				'csosn',
-			),
-		)); 
-
-
+			'attributes'=>$attr,
+		));
 
 		?>
 	</small>
 	<small class="span3">
-		<?php 
+		<?php
 		$this->widget('bootstrap.widgets.TbDetailView',array(
 			'data'=>$model,
 			'attributes'=>array(
@@ -331,7 +456,7 @@ $(document).ready(function(){
 					'value'=>Yii::app()->format->formatNumber($model->ipivipi),
 				),
 			),
-		)); 
+		));
 
 		?>
 	</small>

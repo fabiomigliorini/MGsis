@@ -128,4 +128,21 @@ class ProdutoVariacao extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public function barrasCadastrado($barras)
+	{
+			$command = Yii::app()->db->createCommand('
+				SELECT count(codprodutobarra) AS count
+				  FROM tblprodutobarra
+				 WHERE codprodutovariacao = :codprodutovariacao
+				   AND barras = :barras
+			');
+			$command->params = [
+				"codprodutovariacao" => $this->codprodutovariacao,
+				"barras" => $barras,
+			];
+			$ret = $command->queryRow();
+			return $ret['count'] > 0;
+	}
+
 }

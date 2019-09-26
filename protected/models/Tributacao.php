@@ -20,10 +20,11 @@
  */
 class Tributacao extends MGActiveRecord
 {
-	
+
 	const TRIBUTADO = 1;
 	const ISENTO = 2;
 	const SUBSTITUICAO = 3;
+	const DIFERIDO = 4;
 
 	/**
 	 * @return string the associated database table name
@@ -130,8 +131,8 @@ class Tributacao extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
-	
-	public function scopes () 
+
+	public function scopes ()
 	{
 		return array(
 			'combo'=>array(
@@ -140,11 +141,11 @@ class Tributacao extends MGActiveRecord
 				),
 			);
 	}
-	
+
 	public function getListaCombo ()
 	{
 		$lista = self::model()->combo()->findAll();
 		return CHtml::listData($lista, 'codtributacao', 'tributacao');
-	}	
-	
+	}
+
 }

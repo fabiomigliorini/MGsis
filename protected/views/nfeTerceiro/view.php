@@ -16,8 +16,8 @@ $this->menu=array(
 	//array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
 	array('label'=>'Download Nfe', 'icon'=>'icon-download-alt', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnDownloadNfe'), 'visible'=>empty($model->codnotafiscal) ),
 	array('label'=>'Informar Detalhes', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codnfeterceiro), 'visible'=>$model->podeEditar()),
-	array('label'=>'Importar', 'icon'=>'icon-thumbs-up', 'url'=>'#', 'visible'=>$model->podeEditar(), 'linkOptions'=>	array('id'=>'btnImportar')), 
-	array('label'=>'Ver Arquivo XML', 'icon'=>' icon-file', 'url'=>array('NFePHPNovo/visualizaXml','codnfeterceiro'=>$model->codnfeterceiro), 'linkOptions'=>	array('id'=>'btnArquivoXml')), 
+	array('label'=>'Importar', 'icon'=>'icon-thumbs-up', 'url'=>'#', 'visible'=>$model->podeEditar(), 'linkOptions'=>	array('id'=>'btnImportar')),
+	array('label'=>'Ver Arquivo XML', 'icon'=>' icon-file', 'url'=>array('NFePHPNovo/visualizaXml','codnfeterceiro'=>$model->codnfeterceiro), 'linkOptions'=>	array('id'=>'btnArquivoXml')),
 	//array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
@@ -31,27 +31,27 @@ Yii::app()->clientScript->registerCoreScript('yii');
 function formataMensagem(data)
 {
 	var mensagem = '';
-	
+
 	if (data.retorno)
 		classe = 'alert alert-success';
 	else
 		classe = 'alert alert-error';
-	
+
 	if (data.xMotivo == null)
 		data.xMotivo = 'Erro';
-	
+
 	mensagem += '<h3 class="' + classe + '">';
 
 	if (data.cStat != null)
 		mensagem += data.cStat + ' - ';
-	
+
 	mensagem += data.xMotivo + '</h3>';
-	
+
 	if (data.ex != null)
 		mensagem += '<pre>' + data.ex + '</pre>';
-	
+
 	if (!$.isEmptyObject(data.aResposta))
-		mensagem += 
+		mensagem +=
 			'<div class="accordion" id="accordion2"> ' +
 			'  <div class="accordion-group"> ' +
 			'	<div class="accordion-heading"> ' +
@@ -73,11 +73,11 @@ function formataMensagem(data)
 
 function enviarEventoManifestacao(indManifestacao, justificativa)
 {
-	
-	$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/manifesta')?>", { 
+
+	$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/manifesta')?>", {
 		codnfeterceiro: <?php echo $model->codnfeterceiro; ?>,
-		indmanifestacao: indManifestacao, 
-		justificativa: justificativa 
+		indmanifestacao: indManifestacao,
+		justificativa: justificativa
 	})
 		.done(function(data) {
 			var mensagem = formataMensagem(data);
@@ -90,13 +90,13 @@ function enviarEventoManifestacao(indManifestacao, justificativa)
 				location.reload();
 			});
 		});
-	
+
 }
 
 function downloadNfe ()
 {
-	
-	$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/download')?>", { 
+
+	$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/download')?>", {
 		codnfeterceiro: <?php echo $model->codnfeterceiro; ?>
 	})
 		.done(function(data) {
@@ -110,7 +110,7 @@ function downloadNfe ()
 				location.reload();
 			});
 		});
-	
+
 }
 
 $(document).ready(function(){
@@ -122,7 +122,7 @@ $(document).ready(function(){
 				enviarEventoManifestacao (<?php echo NfeTerceiro::INDMANIFESTACAO_CIENCIA; ?>, null);
 		});
 	});
-	
+
 	$('#btnManifestacaoRealizada').click(function(e) {
 		e.preventDefault();
 		bootbox.confirm("Enviar à Sefaz a <b class='lead text-success'>Confirmação da Operação</b>?<br><br>Tenha cuidado ao confirmar, pois esta ação <b>não poderá ser desfeita</b>!", function(result) {
@@ -130,7 +130,7 @@ $(document).ready(function(){
 				enviarEventoManifestacao (<?php echo NfeTerceiro::INDMANIFESTACAO_REALIZADA; ?>, null);
 		});
 	});
-	
+
 	$('#btnManifestacaoDesconhecida').click(function(e) {
 		e.preventDefault();
 		bootbox.confirm("Enviar à Sefaz o comunidado de <b class='lead text-error'>Desconhecimento da Operação</b>?<br><br>Tenha cuidado ao confirmar, pois esta ação <b>não poderá ser desfeita</b>!", function(result) {
@@ -138,14 +138,14 @@ $(document).ready(function(){
 				enviarEventoManifestacao (<?php echo NfeTerceiro::INDMANIFESTACAO_DESCONHECIDA; ?>, null);
 		});
 	});
-	
+
 	$('#btnManifestacaoNaoRealizada').click(function(e) {
 		e.preventDefault();
 		bootbox.confirm("Enviar à Sefaz o comunidado de <b class='lead text-error'>Operação não Realizada</b>?<br><br>Tenha cuidado ao confirmar, pois esta ação <b>não poderá ser desfeita</b>!", function(result) {
 			if (result)
 			{
-				bootbox.prompt("Digite a justificativa:", "Cancelar", "OK", function(result) 
-				{ 
+				bootbox.prompt("Digite a justificativa:", "Cancelar", "OK", function(result)
+				{
 					if (result === null)
 						return;
 					enviarEventoManifestacao (<?php echo NfeTerceiro::INDMANIFESTACAO_NAOREALIZADA; ?>, result);
@@ -154,7 +154,7 @@ $(document).ready(function(){
 			}
 		});
 	});
-	
+
 	jQuery('body').on('click','#btnExcluir',function(e) {
 		e.preventDefault();
 		bootbox.confirm("Excluir este registro?", function(result) {
@@ -162,7 +162,7 @@ $(document).ready(function(){
 				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('nfeTerceiro/delete', array('id' => $model->codnfeterceiro))?>",{});
 		});
 	});
-	
+
 	jQuery('body').on('click','#btnImportar',function(e) {
 		e.preventDefault();
 		bootbox.confirm("Importar essa NFe de Terceiro?", function(result) {
@@ -170,7 +170,7 @@ $(document).ready(function(){
 				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('nfeTerceiro/importar',array('id'=>$model->codnfeterceiro))?>",{});
 		});
 	});
-	
+
 	jQuery('body').on('click','#btnDownloadNfe',function(e) {
 		e.preventDefault();
 		bootbox.confirm("Efetuar o Download da NFe?", function(result) {
@@ -182,7 +182,7 @@ $(document).ready(function(){
 /*]]>*/
 </script>
 
-<?php 
+<?php
 	$manifestacao = $model->getIndManifestacaoDescricao();
 	$cssmanif = '';
 	switch ($model->indmanifestacao)
@@ -198,7 +198,7 @@ $(document).ready(function(){
 			$cssmanif = 'btn-danger';
 			break;
 	}
-	
+
 ?>
 
 <h1>
@@ -214,7 +214,7 @@ $(document).ready(function(){
 					<a href='#' class='' id="btnManifestacaoCiencia">
 						<span class='badge badge-warning'>&nbsp;</span>
 						Ciência da Operação
-					</a>	
+					</a>
 				</li>
 			<?php endif; ?>
 			<?php if($model->indmanifestacao != NfeTerceiro::INDMANIFESTACAO_REALIZADA): ?>
@@ -222,7 +222,7 @@ $(document).ready(function(){
 					<a href='#' class='' id="btnManifestacaoRealizada">
 						<span class='badge badge-success'>&nbsp;</span>
 						Operação Realizada
-					</a>	
+					</a>
 				</li>
 			<?php endif; ?>
 			<?php if($model->indmanifestacao != NfeTerceiro::INDMANIFESTACAO_DESCONHECIDA): ?>
@@ -243,24 +243,24 @@ $(document).ready(function(){
 			<?php endif; ?>
 		</ul>
 	</div>
-	
+
 </h1>
 
 <div class="row-fluid">
 	<div class="span3">
-		<?php 
+		<?php
 		$this->widget('bootstrap.widgets.TbDetailView',array(
 			'data'=>$model,
 			'attributes'=>array(
 				'serie',
 				'numero',
 			),
-		)); 
+		));
 
 		?>
 	</div>
 	<div class="span6">
-		<?php 
+		<?php
 		$this->widget('bootstrap.widgets.TbDetailView',array(
 			'data'=>$model,
 			'attributes'=>array(
@@ -275,12 +275,12 @@ $(document).ready(function(){
 					'type'=>"raw",
 				),
 			),
-		)); 
+		));
 
-		?>		
+		?>
 	</div>
 	<div class="span3">
-		<?php 
+		<?php
 		$this->widget('bootstrap.widgets.TbDetailView',array(
 			'data'=>$model,
 			'attributes'=>array(
@@ -290,9 +290,9 @@ $(document).ready(function(){
 					'value'=>Yii::app()->format->formatNumber($model->valortotal),
 				),
 			),
-		)); 
+		));
 
-		?>		
+		?>
 	</div>
 </div>
 
@@ -300,7 +300,7 @@ $(document).ready(function(){
 <?php if (!empty($model->NfeTerceiroItems)): ?>
 <h3>Itens</h3>
 <div id="ListagemItens">
-	<?php 
+	<?php
 	$this->renderPartial("_view_itens", array("model"=>$model))
 	?>
 </div>
@@ -310,7 +310,7 @@ $(document).ready(function(){
 
 <small class="row-fluid">
 	<div class="span4">
-		<?php 
+		<?php
 		$this->widget('bootstrap.widgets.TbDetailView',array(
 			'data'=>$model,
 			'attributes'=>array(
@@ -337,13 +337,13 @@ $(document).ready(function(){
 				),
 				'entrada',
 			),
-		)); 
+		));
 
 		?>
 	</div>
 	<div class="span5">
-		<?php 
-		
+		<?php
+
 		$this->widget('bootstrap.widgets.TbDetailView',array(
 			'data'=>$model,
 			'attributes'=>array(
@@ -374,12 +374,14 @@ $(document).ready(function(){
 				),
 
 			),
-		)); 
+		));
 
 		?>
 	</div>
 	<div class="span3 pull-right">
-		<?php 
+		<?php
+		$outros = $model->totalComplemento();
+		$totalgeral = $model->valortotal + $outros;
 		$this->widget('bootstrap.widgets.TbDetailView',array(
 			'data'=>$model,
 			'attributes'=>array(
@@ -427,19 +429,27 @@ $(document).ready(function(){
 					'name'=>'valortotal',
 					'value'=>Yii::app()->format->formatNumber($model->valortotal),
 				),
+				array(
+					'label'=>'Outros Custos',
+					'value'=>Yii::app()->format->formatNumber($outros),
+				),
+				array(
+					'label'=>'Total Geral',
+					'value'=>Yii::app()->format->formatNumber($totalgeral),
+				),
 			),
-		)); 
+		));
 
-		?>		
+		?>
 	</div>
-	
-	
+
+
 </small>
 
 <?php if (!empty($model->NfeTerceiroDuplicatas)): ?>
 <h3>Duplicatas</h3>
 <div id="ListagemDuplicatas">
-	<?php 
+	<?php
 	$this->renderPartial("_view_duplicatas", array("model"=>$model))
 	?>
 </div>

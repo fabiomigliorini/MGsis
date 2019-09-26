@@ -19,6 +19,7 @@
 						echo $form->textFieldRow($model,'qcom',array('class'=>'input-small text-right','maxlength'=>14,'disabled'=>true, 'append'=>$model->ucom));
 						echo $form->textFieldRow($model,'vuncom',array('class'=>'input-small text-right','maxlength'=>14,'disabled'=>true));
 						echo $form->textFieldRow($model,'margem',array('class'=>'input-mini text-right','maxlength'=>6, 'append'=>'%'));
+						echo $form->toggleButtonRow($model,'modalidadeicmsgarantido', array('options' => array('width' => 400,  'enabledLabel' => 'Garantido (até 2019)', 'disabledLabel' => 'Apuração (partir 2020)')));
 					?>
 				</div>
 				<div class="span6">
@@ -27,8 +28,8 @@
 					?>
 				</div>
 			</div>
-			
-			<?php 	
+
+			<?php
 				/*
 				echo $form->textFieldRow($model,'codnfeterceiro',array('class'=>'span5'));
 				echo $form->textFieldRow($model,'nitem',array('class'=>'span5'));
@@ -48,16 +49,16 @@
 				echo $form->textFieldRow($model,'ipivbc',array('class'=>'span5','maxlength'=>14));
 				echo $form->textFieldRow($model,'ipipipi',array('class'=>'span5','maxlength'=>14));
 				echo $form->textFieldRow($model,'ipivipi',array('class'=>'span5','maxlength'=>14));
-				 * 
+				 *
 				 */
 			?>
 		</div>
 		<div class="span3">
-			<?php 	
+			<?php
 				echo $form->textFieldRow($model,'vprod',array('class'=>'input-small text-right','maxlength'=>14,'disabled'=>true));
 				echo $form->textFieldRow($model,'ipivipi',array('class'=>'input-small text-right','maxlength'=>14,'disabled'=>true));
 				echo $form->textFieldRow($model,'vicmsst',array('class'=>'input-small text-right','maxlength'=>14,'disabled'=>true));
-				echo $form->textFieldRow($model,'vicmscomplementar',array('class'=>'input-small text-right','maxlength'=>14,'disabled'=>true));
+				// echo $form->textFieldRow($model,'vicmsgarantido',array('class'=>'input-small text-right','maxlength'=>14,'disabled'=>true));
 				echo $form->textFieldRow($model,'complemento',array('class'=>'input-small text-right','maxlength'=>14));
 				echo $form->textFieldRow($model,'vcusto',array('class'=>'input-small text-right','maxlength'=>14,'disabled'=>true));
 			?>
@@ -66,9 +67,9 @@
 </div>
 <div class="form-actions">
 
-    
-    <?php 
-	
+
+    <?php
+
 
         $this->widget(
             'bootstrap.widgets.TbButton',
@@ -78,15 +79,15 @@
                 'label' => 'Salvar',
                 'icon' => 'icon-ok',
                 )
-            ); 
+            );
 	?>
-    
+
 </div>
 
 <?php $this->endWidget(); ?>
 
 <script type='text/javascript'>
-	
+
 function calculaCusto()
 {
 	var vprod = parseFloat($('#NfeTerceiroItem_vprod').autoNumeric('get'));
@@ -101,18 +102,19 @@ function calculaCusto()
 	if (isNaN(vst))
 		vst = 0;
 
-	var vicms = parseFloat($('#NfeTerceiroItem_vicmscomplementar').autoNumeric('get'));
-	if (isNaN(vicms))
-		vicms = 0;
+	// var vicms = parseFloat($('#NfeTerceiroItem_vicmsgarantido').autoNumeric('get'));
+	// if (isNaN(vicms))
+	// 	vicms = 0;
 
 	var vcomp = parseFloat($('#NfeTerceiroItem_complemento').autoNumeric('get'));
 	if (isNaN(vcomp))
 		vcomp = 0;
 
-	var custo = vprod + vipi + vst + vicms + vcomp;
+	// var custo = vprod + vipi + vst + vicms + vcomp;
+	var custo = vprod + vipi + vst + vcomp;
 
 	$('#NfeTerceiroItem_vcusto').autoNumeric('set', custo);
-	
+
 }
 $(document).ready(function() {
 
@@ -122,7 +124,7 @@ $(document).ready(function() {
 	$('#NfeTerceiroItem_vprod').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#NfeTerceiroItem_ipivipi').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#NfeTerceiroItem_vicmsst').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
-	$('#NfeTerceiroItem_vicmscomplementar').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+	// $('#NfeTerceiroItem_vicmsgarantido').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#NfeTerceiroItem_complemento').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#NfeTerceiroItem_vcusto').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#NfeTerceiroItem_margem').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
@@ -130,9 +132,9 @@ $(document).ready(function() {
 	$('#NfeTerceiroItem_complemento').change(function (e){
 		calculaCusto();
 	});
-	
+
 	calculaCusto();
-	
+
 	$('#nfe-terceiro-item-form').submit(function(e) {
         var currentForm = this;
         e.preventDefault();
@@ -142,7 +144,7 @@ $(document).ready(function() {
             }
         });
     });
-	
+
 });
 
 </script>

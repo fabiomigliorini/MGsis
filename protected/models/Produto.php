@@ -42,7 +42,7 @@
  */
 class Produto extends MGActiveRecord
 {
-	
+
 	public $barras;
 	public $preco_de;
 	public $preco_ate;
@@ -50,7 +50,7 @@ class Produto extends MGActiveRecord
 	public $criacao_ate;
 	public $alteracao_de;
 	public $alteracao_ate;
-	
+
 	private $_preco;
 	/**
 	 * @return string the associated database table name
@@ -95,7 +95,7 @@ class Produto extends MGActiveRecord
 				$this->addError($attribute,'Preencha a marca "' . $this->Marca->marca . '" na descrição do produto!');
 		}
 	}
-	
+
 	/**
 	 * Verifica se o usuario selecionou um NCM com 8 Digitos
 	 */
@@ -103,7 +103,7 @@ class Produto extends MGActiveRecord
 	{
 		if (empty($this->codncm))
 			return;
-		
+
 		if (strlen($this->Ncm->ncm) != 8)
 			$this->addError($attribute, 'NCM inválido!');
 	}
@@ -115,56 +115,56 @@ class Produto extends MGActiveRecord
 	 */
 	public function validaTributacao($attribute,$params)
 	{
-		
+
 		if (!isset($this->Ncm))
 			return;
-		
+
 		$regs = $this->Ncm->regulamentoIcmsStMtsDisponiveis();
-		
+
 		if (sizeof($regs) > 0)
 		{
 			if ($this->codtributacao != Tributacao::SUBSTITUICAO)
 				$this->addError($attribute, 'Existe Regulamento de ICMS ST para este NCM!');
-				
+
 		}
 		else
 		{
 			if ($this->codtributacao == Tributacao::SUBSTITUICAO)
 				$this->addError($attribute, 'Não existe regulamento de ICMS ST para este NCM!');
 		}
-		
+
 	}
-	
+
 	/**
-	 * 
+	 *
 	 */
 	public function validaCest($attribute,$params)
 	{
 		if (!isset($this->codncm))
 			return;
-		
+
 		if (empty($this->codcest))
 		{
 			/*
 			if ($this->codtributacao != Tributacao::SUBSTITUICAO)
 				return;
-			
+
 			$this->addError($attribute, 'É obrigatório o preenchimento para produtos com Substituição Tributária!');
-			 * 
+			 *
 			 */
 			return;
 		}
-		
+
 		$cests = $this->Ncm->cestsDisponiveis();
-		
+
 		foreach ($cests as $cest)
 			if ($cest->codcest == $this->codcest)
 				return;
-			
+
 		$this->addError($attribute, 'CEST selecionado não está disponível para o NCM selecionado!');
-		
+
 	}
-	
+
 	/**
 	 * @return array relational rules.
 	 */
@@ -238,7 +238,7 @@ class Produto extends MGActiveRecord
 
 		//$criteria->compare('t.codproduto',$this->codproduto,false);
 		$criteria->compare('t.codproduto',Yii::app()->format->numeroLimpo($this->codproduto),false);
-		
+
 		if (!empty($this->barras))
 		{
 			$criteria->addCondition("t.codproduto in (select pb2.codproduto from tblprodutobarra pb2 where barras ilike :barras)");
@@ -250,25 +250,25 @@ class Produto extends MGActiveRecord
 			$criteria->addCondition("t.produto ilike :produto");
 			$criteria->params[':produto'] = '%' . str_replace(' ', '%', trim($this->produto)) . '%';
 		}
-		
+
 		if (!empty($this->referencia))
 		{
 			$criteria->addCondition("t.referencia ilike :referencia OR t.codproduto in (select pb2.codproduto from tblprodutobarra pb2 where referencia ilike :referencia)");
 			$criteria->params[':referencia'] = '%' . str_replace(' ', '%', trim($this->referencia)) . '%';
 		}
-		
+
 		if (!empty($this->codmarca))
 		{
 			$criteria->addCondition("t.codmarca = :codmarca OR t.codproduto in (select pb2.codproduto from tblprodutobarra pb2 where codmarca = :codmarca)");
 			$criteria->params[':codmarca'] = $this->codmarca;
 		}
-		
+
 		if (!empty($this->codncm))
 		{
 			$criteria->addCondition("t.codncm = :codncm");
 			$criteria->params[':codncm'] = $this->codncm;
 		}
-		
+
 		switch ($this->inativo)
 		{
 			case 9:
@@ -280,8 +280,8 @@ class Produto extends MGActiveRecord
 				$criteria->addCondition("t.inativo is null");
 				continue;
 		}
-		
-		switch ($this->site) // '1'=>'No Site', '2'=>'Fora do Site'), 
+
+		switch ($this->site) // '1'=>'No Site', '2'=>'Fora do Site'),
 		{
 			case 1:
 				$criteria->addCondition("t.site  = true");
@@ -290,21 +290,21 @@ class Produto extends MGActiveRecord
 				$criteria->addCondition("t.site = false");
 				continue;
 		}
-		
+
 		$criteria->compare('t.codtributacao', $this->codtributacao, false);
-		
+
 		if (!empty($this->preco_de))
 		{
 			$criteria->addCondition("t.preco >= :preco_de");
 			$criteria->params[':preco_de'] = Yii::app()->format->unformatNumber($this->preco_de);
 		}
-		
+
 		if (!empty($this->preco_ate))
 		{
 			$criteria->addCondition("t.preco <= :preco_ate");
 			$criteria->params[':preco_ate'] = Yii::app()->format->unformatNumber($this->preco_ate);
 		}
-		
+
 		if ($criacao_de = DateTime::createFromFormat("d/m/y",$this->criacao_de))
 		{
 			$criteria->addCondition('t.criacao >= :criacao_de');
@@ -336,10 +336,10 @@ class Produto extends MGActiveRecord
 		$criteria->compare('codtipoproduto',$this->codtipoproduto,true);
 		$criteria->compare('site',$this->site);
 		$criteria->compare('descricaosite',$this->descricaosite,true);
-		 * 
+		 *
 		 */
 
-		
+
 		$criteria->order = 't.produto ASC, t.preco ASC, t.codproduto ASC';
 		$criteria->with = array(
 			'ProdutoBarras',
@@ -350,7 +350,7 @@ class Produto extends MGActiveRecord
 				'with' => 'GrupoProduto'
 			),
 		);
-		
+
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
@@ -366,31 +366,31 @@ class Produto extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
-	
-	public function criaBarras ($barras) 
+
+	public function criaBarras ($barras)
 	{
 		if ($this->isNewRecord)
 			return false;
-		
+
 		$barras = trim($barras);
-		
+
 		if (empty($barras))
 			$barras = str_pad($this->codproduto, 6, "0", STR_PAD_LEFT);
-		
+
 		$pb = new ProdutoBarra('insert');
-		
+
 		$pb->codproduto = $this->codproduto;
 		$pb->barras = $barras;
-		
+
 		return $pb->save();
 	}
-	
+
 	public function getImagens ()
 	{
 		$baseDir = Yii::app()->basePath . "/..";
 
 		$dir = "$baseDir/images/produto/" . str_pad($this->codproduto, 6, "0", STR_PAD_LEFT);
-		
+
 		if (!is_dir($dir)) {
 			return array();
 		}
@@ -401,24 +401,24 @@ class Produto extends MGActiveRecord
 				'fileTypes' => array("jpg", "gif", "png", "JPG", "PNG")
 				)
 			);
-		
-		
-		
+
+
+
 		foreach ($imgs_orig as $img)
 		{
 			$img = str_replace($baseDir, "", $img);
 			$imgs[] = $img;
 		}
-		
+
 		return $imgs;
 	}
-	
+
 	protected function afterFind()
 	{
 		$this->_preco = $this->preco;
 		return parent::afterFind();
 	}
-	
+
 	protected function afterSave()
 	{
 		//Grava Historico de alteracao de preco
@@ -430,8 +430,24 @@ class Produto extends MGActiveRecord
 			$php->preconovo = $this->preco;
 			$php->save();
 		}
-		
+
 		return parent::afterSave();
 	}
-	
+
+	public function barrasCadastrado($barras)
+	{
+			$command = Yii::app()->db->createCommand('
+				SELECT count(codprodutobarra) AS count
+				  FROM tblprodutobarra
+				 WHERE codproduto = :codproduto
+				   AND barras = :barras
+			');
+			$command->params = [
+				"codproduto" => $this->codproduto,
+				"barras" => $barras,
+			];
+			$ret = $command->queryRow();
+			return $ret['count'] > 0;
+	}
+
 }
