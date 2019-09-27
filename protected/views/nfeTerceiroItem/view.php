@@ -208,14 +208,14 @@ $(document).ready(function(){
 		if (!empty($model->vicmsvenda)) {
 			$attr[] = [
 				'label'=>'ICMS Venda',
-				'value'=>Yii::app()->format->formatNumber($model->vicmsvenda) . ' (' . Yii::app()->format->formatNumber($model->picmsvenda, 0) . '%)',
+				'value'=>Yii::app()->format->formatNumber($model->vicmsvenda) . ' (' . Yii::app()->format->formatNumber($model->picmsvenda, 2) . '%)',
 			];
 		}
 
 		if (!empty($model->vmargem)) {
 			$attr[] = [
 				'label'=>'Margem',
-				'value'=>Yii::app()->format->formatNumber($model->vmargem) . ' (' . Yii::app()->format->formatNumber($model->margem, 0) . '%)',
+				'value'=>Yii::app()->format->formatNumber($model->vmargem) . ' (' . Yii::app()->format->formatNumber($model->margem, 2) . '%)',
 			];
 		}
 
