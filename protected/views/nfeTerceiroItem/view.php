@@ -47,11 +47,9 @@ $(document).ready(function(){
 		}
 		$produto = '<B>' . CHtml::link(CHtml::encode($model->ProdutoBarra->Produto->produto), array('produto/view', 'id'=>$model->ProdutoBarra->codproduto));
 		if (!empty($model->ProdutoBarra->ProdutoVariacao->variacao)) {
-				$produto .= ' | ' . $model->ProdutoBarra->ProdutoVariacao->variacao . '</B>';
-		// } else {
-		// 		$produto .= ' | { Sem Variação }</B>';
+				$produto .= ' | ' . $model->ProdutoBarra->ProdutoVariacao->variacao;
 		}
-		$produto .= " <span class='label {$label}'>{$model->ProdutoBarra->Produto->abc}</span>";
+		$produto .= "</B> <span class='label {$label}'>{$model->ProdutoBarra->Produto->abc}</span>";
 
 
 
