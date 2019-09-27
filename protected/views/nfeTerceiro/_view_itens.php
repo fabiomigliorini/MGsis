@@ -39,7 +39,7 @@ foreach ($model->NfeTerceiroItems as $item)
 			<div class="span4">
 				<?php
 
-				if (!empty($item->vsugestaovenda) && isset($item->ProdutoBarra))
+				if (isset($item->ProdutoBarra))
 				{
 
 					$cssVenda = 'text-success';
@@ -53,12 +53,26 @@ foreach ($model->NfeTerceiroItems as $item)
 					?>
 					<div class="span9">
 						<div>
-                        <b>
-						<?php echo CHtml::link(CHtml::encode($item->ProdutoBarra->Produto->produto), array('produto/view', 'id'=>$item->ProdutoBarra->codproduto)); ?>
-                        <?php if (!empty($item->ProdutoBarra->ProdutoVariacao->variacao)): ?>
-                        | <?php echo $item->ProdutoBarra->ProdutoVariacao->variacao; ?>
-                        <?php endif; ?>
-                        </b>
+	            <b>
+								<?php
+									switch ($item->ProdutoBarra->Produto->abc) {
+										case 'A':
+											$label = 'label-success';
+											break;
+										case 'B':
+											$label = 'label-warning';
+											break;
+										default:
+											$label = 'label-important';
+											break;
+									}
+									echo "<span class='label {$label}'>{$item->ProdutoBarra->Produto->abc}</span>";
+								?>
+								<?php echo CHtml::link(CHtml::encode($item->ProdutoBarra->Produto->produto), array('produto/view', 'id'=>$item->ProdutoBarra->codproduto)); ?>
+	              <?php if (!empty($item->ProdutoBarra->ProdutoVariacao->variacao)): ?>
+	              	| <?php echo $item->ProdutoBarra->ProdutoVariacao->variacao; ?>
+	              <?php endif; ?>
+	            </b>
 						</div>
 						<?php if (!empty($item->ProdutoBarra->Produto->inativo)): ?>
 						<span class="label label-important pull-center">
@@ -70,14 +84,16 @@ foreach ($model->NfeTerceiroItems as $item)
 					<div class="span1">
 						<?php echo CHtml::encode($item->ProdutoBarra->Produto->UnidadeMedida->sigla); ?>
 					</div>
-					<div class="span2 text-right">
-						<b class="text-right <?php echo $cssVenda; ?>">
-							<?php echo CHtml::encode(Yii::app()->format->formatNumber($item->ProdutoBarra->Produto->preco)); ?>
-						</b><br>
-						<span class="text-right muted">
-							(<?php echo CHtml::encode(Yii::app()->format->formatNumber($item->vsugestaovenda)); ?>)
-						</span>
-					</div>
+					<?php if (!empty($item->vsugestaovenda)): ?>
+						<div class="span2 text-right">
+							<b class="text-right <?php echo $cssVenda; ?>">
+								<?php echo CHtml::encode(Yii::app()->format->formatNumber($item->ProdutoBarra->Produto->preco)); ?>
+							</b><br>
+							<span class="text-right muted">
+								(<?php echo CHtml::encode(Yii::app()->format->formatNumber($item->vsugestaovenda)); ?>)
+							</span>
+						</div>
+					<?php endif; ?>
 					<?php
 				}
 				?>

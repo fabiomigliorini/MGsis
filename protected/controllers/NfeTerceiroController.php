@@ -52,7 +52,7 @@ class NfeTerceiroController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-		
+
 		if (!$model->podeEditar())
 			throw new CHttpException(409, 'Registro não permite edição.');
 
@@ -70,32 +70,33 @@ class NfeTerceiroController extends Controller
 			'model'=>$model,
 			));
 	}
-	
+
 	public function actionImportar($id)
 	{
 		$model=$this->loadModel($id);
-		
+
 		if ($model->importar())
 		{
 			Yii::app()->user->setFlash("success", "NFe de Terceiro Importada com sucesso!");
-			$this->redirect(array('index'));
+			$this->redirect(array('view','id'=>$model->codnfeterceiro));
+			// $this->redirect(array('index'));
 		}
 		else
 		{
 			$erros = $model->getErrors();
-			
+
 			$msgs = array("Erro(s) ao Importar:");
-			
+
 			foreach ($erros as $campo => $mensagens)
 				foreach ($mensagens as $msg)
 					$msgs[] = "[$campo] => $msg";
-			
+
 			$msgs = implode("<BR>", $msgs);
-			
+
 			Yii::app()->user->setFlash("error", $msgs);
 			$this->redirect(array('view','id'=>$model->codnfeterceiro));
 		}
-	}	
+	}
 
 	/**
 	* Deletes a particular model.
@@ -129,7 +130,7 @@ class NfeTerceiroController extends Controller
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
-	 * 
+	 *
 	 */
 
 	/**
@@ -138,12 +139,12 @@ class NfeTerceiroController extends Controller
 	public function actionIndex()
 	{
 		$model=new NfeTerceiro('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['NfeTerceiro']))
 			Yii::app()->session['FiltroNfeTerceiroIndex'] = $_GET['NfeTerceiro'];
-		
+
 		if (isset(Yii::app()->session['FiltroNfeTerceiroIndex']))
 			$model->attributes=Yii::app()->session['FiltroNfeTerceiroIndex'];
 		else
@@ -151,7 +152,7 @@ class NfeTerceiroController extends Controller
 			//$model->indsituacao = NfeTerceiro::INDSITUACAO_AUTORIZADA;
 			$model->codnotafiscal = 1;
 		}
-		
+
 		$this->render('index',array(
 			'dataProvider'=>$model->search(),
 			'model'=>$model,
@@ -164,11 +165,11 @@ class NfeTerceiroController extends Controller
 	/*
 	public function actionAdmin()
 	{
-	
+
 		$model=new NfeTerceiro('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['NfeTerceiro']))
 			$model->attributes=$_GET['NfeTerceiro'];
 
@@ -176,9 +177,9 @@ class NfeTerceiroController extends Controller
 			'model'=>$model,
 			));
 	}
-	 * 
+	 *
 	 */
-	
+
 	public function actionUpload()
 	{
 		/**
@@ -195,7 +196,7 @@ class NfeTerceiroController extends Controller
 				$this->redirect(array('view','id'=>$model->codnfeterceiro));
 		}
 		*/
-		
+
 		$this->render(
 			'upload',
 			array(
@@ -203,42 +204,42 @@ class NfeTerceiroController extends Controller
 			)
 		);
 	}
-	
+
 	public function actionPesquisarSefaz($codfilial = null, $nsu = null)
 	{
 		$model = new NfeTerceiro('search');
 
 		$model->codfilial = $codfilial;
 		$model->nsu = $nsu;
-		
+
 		if(isset($_POST['NfeTerceiro']))
 		{
 			$model->attributes=$_POST['NfeTerceiro'];
 		}
-		
+
 		$nsu = $model->nsu;
 
 		/*
 		if (!empty($model->codfilial))
 		{
 			$acbr = new MGAcbrNfeMonitor(null, $model);
-			
+
 			$leituras = 0;
-			
+
 			$nsuinicial = $nsu;
 			$fim = false;
-			
+
 			$importadas = array();
-			
+
 			do {
-				
+
 				$leituras++;
-				
+
 				if ($leituras > 100)
 					break;
-				
+
 				//echo "<hr>Pesquisando $nsu <br>";
-				
+
 				if (!$acbr->consultaNfeDest($nsu))
 				{
 					//echo "<h1>Erro ao enviar comando</h1>";
@@ -247,7 +248,7 @@ class NfeTerceiroController extends Controller
 				//echo "<pre>";
 				//print_r($acbr->retorno);
 				//echo "</pre>";
-					
+
 
 				//if ($acbr->retornoMonitor["Mensagem"][0] != "OK")
 				//	break;
@@ -283,7 +284,7 @@ class NfeTerceiroController extends Controller
 						$nfe->emitente = MGFormatter::removeAcentos(utf8_encode($arr["xNome"]));
 					else
 						$nfe->emitente = "<Vazio>";
-					
+
 					//[IE] => 134342763
 					if (isset($arr["IE"]))
 						$nfe->ie = $arr["IE"];
@@ -309,10 +310,10 @@ class NfeTerceiroController extends Controller
 					if (isset($arr["cSitNFe"]))
 						$nfe->indsituacao = $arr["cSitNFe"];
 
-					//[cSitConf] => 0		
+					//[cSitConf] => 0
 					if (isset($arr["cSitConf"]))
 						$nfe->indmanifestacao = $arr["cSitConf"];
-					
+
 					$importadas[] = $arr["chNFe"];
 
 					$nfe->save();
@@ -335,8 +336,8 @@ class NfeTerceiroController extends Controller
 					//echo "<h1>Nao achou ult nsu</h1>";
 					break;
 				}
-				
-				
+
+
 				if (isset($acbr->retornoMonitor[""]["indCont"]))
 				{
 					if ($acbr->retornoMonitor[""]["indCont"] != 1)
@@ -345,11 +346,11 @@ class NfeTerceiroController extends Controller
 						break;
 					}
 				}
-				
+
 			} while (true);
-			
+
 			$model->nsu = $nsu;
-			
+
 			$lidas = Yii::app()->format->formatNumber($model->nsu - $nsuinicial, 0);
 
 			if ($acbr->retornoMonitor["Mensagem"][0] != "OK")
@@ -375,16 +376,16 @@ class NfeTerceiroController extends Controller
 				}
 			}
 			Yii::app()->user->setFlash($class, $mensagem);
-			
+
 		}
 		*/
-		
+
 		$this->render('pesquisar_sefaz',array(
 			'model'=>$model,
 			));
-		
+
 	}
-	
+
 	/**
 	 * Efetua Download de uma NFE e Carrega os dados na tabela do sistema
 	 * @param bigint $id
@@ -398,9 +399,9 @@ class NfeTerceiroController extends Controller
 		//$model = $this->loadModel($id);
 		$model = NfeTerceiro::model()->findByPk($id);
 		$acbr = new MGAcbrNfeMonitor(null, $model);
-		
+
 		$res = $acbr->downloadNfe();
-		
+
 		echo CJSON::encode(
 			array(
 				'id' => $id,
@@ -410,16 +411,16 @@ class NfeTerceiroController extends Controller
 				'retorno' => htmlentities($acbr->retorno),
 			)
 		);
-		
+
 	}
 
 	public function actionEnviarEventoManifestacao($id, $indManifestacao, $justificativa = "")
 	{
 		$model = $this->loadModel($id);
 		$acbr = new MGAcbrNfeMonitor(null, $model);
-		
+
 		$res = $acbr->enviarEventoManifestacao($indManifestacao, $justificativa);
-		
+
 		echo CJSON::encode(
 			array(
 				'id' => $id,
@@ -429,7 +430,7 @@ class NfeTerceiroController extends Controller
 				'retorno' => htmlentities($acbr->retorno),
 			)
 		);
-		
+
 	}
 
 

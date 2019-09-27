@@ -312,6 +312,29 @@ $(document).ready(function(){
 			'cprod',
 		];
 
+		$attr[] =	[
+			'name'=>'cfop',
+			'value'=>CHtml::link(CHtml::encode($model->cfop), array('cfop/view', 'id'=>$model->cfop)),
+			'type'=>'raw',
+		];
+		$cst = $model->cst;
+		$cst .= $model->csosn;
+		$badge = '';
+		if (!empty($model->codprodutobarra)) {
+			$badge = 'badge-important';
+			if ($model->ProdutoBarra->Produto->codtributacao == $model->codtributacao) {
+				$badge = 'badge-success';
+			}
+		}
+		if (!empty($model->codtributacao)) {
+			$cst .= " <span class='badge {$badge}'>{$model->Tributacao->tributacao}</span>";
+		}
+		$attr[] =	[
+			'name'=>'cst',
+			'value'=>$cst,
+			'type'=>'raw',
+		];
+
 		$css = '';
 		if (!empty($model->codprodutobarra)) {
 			$css = $model->ProdutoBarra->ProdutoVariacao->barrasCadastrado($model->cean)?'text-success':'text-error';
@@ -343,7 +366,6 @@ $(document).ready(function(){
 		if (!empty($model->codprodutobarra)) {
 			$css = 'text-error';
 			if (!empty($model->ProdutoBarra->Produto->codcest)) {
-				echo 'entyrou';
 				if ($model->ProdutoBarra->Produto->Cest->cest == $model->cest) {
 					$css = 'text-success';
 				} elseif (empty($model->cest)) {
@@ -381,28 +403,6 @@ $(document).ready(function(){
 		$attr[] =	[
 			'name'=>'vuntrib',
 			'value'=>Yii::app()->format->formatNumber($model->vuntrib),
-		];
-		$attr[] =	[
-			'name'=>'cfop',
-			'value'=>CHtml::link(CHtml::encode($model->cfop), array('cfop/view', 'id'=>$model->cfop)),
-			'type'=>'raw',
-		];
-		$cst = $model->cst;
-		$cst .= $model->csosn;
-		$badge = '';
-		if (!empty($model->codprodutobarra)) {
-			$badge = 'badge-important';
-			if ($model->ProdutoBarra->Produto->codtributacao == $model->codtributacao) {
-				$badge = 'badge-success';
-			}
-		}
-		if (!empty($model->codtributacao)) {
-			$cst .= " <span class='badge {$badge}'>{$model->Tributacao->tributacao}</span>";
-		}
-		$attr[] =	[
-			'name'=>'cst',
-			'value'=>$cst,
-			'type'=>'raw',
 		];
 
 		$this->widget('bootstrap.widgets.TbDetailView',array(
