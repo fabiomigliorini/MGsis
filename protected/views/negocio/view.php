@@ -385,6 +385,10 @@ $(document).ready(function(){
 		</div>
 
 		<?php
+				$pessoa = CHtml::link(CHtml::encode($model->Pessoa->fantasia), array("pessoa/view", "id"=>$model->codpessoa));
+				if (!empty($model->cpf)) {
+					$pessoa .= '<br /><small>' . Yii::app()->format->formataCnpjCpf($model->cpf, true) . '</small>';
+				}
         $attr = array(
             array(
                 'name'=>'codnegocio',
@@ -399,33 +403,37 @@ $(document).ready(function(){
                 ),
             array(
                 'name'=>'codpessoa',
-                'value'=>(isset($model->Pessoa))?CHtml::link(CHtml::encode($model->Pessoa->fantasia),array('pessoa/view','id'=>$model->codpessoa)):null,
+                'value'=>$pessoa,
                 'type'=>'raw',
                 ),
-            array(
-                'name'=>'codpessoavendedor',
-                'value'=>(isset($model->PessoaVendedor))?CHtml::link(CHtml::encode($model->PessoaVendedor->fantasia),array('pessoa/view','id'=>$model->codpessoavendedor)):null,
-                'type'=>'raw',
-                ),
-            'lancamento',
-            array(
-                'name'=>'codnegociostatus',
-                'value'=>(isset($model->NegocioStatus))?$model->NegocioStatus->negociostatus:null,
-                ),
-            array(
-                'name'=>'codfilial',
-                'value'=>(isset($model->Filial))?$model->Filial->filial:null,
-                ),
-            array(
-                'name'=>'codestoquelocal',
-                'value'=>(isset($model->EstoqueLocal))?$model->EstoqueLocal->estoquelocal:null,
-                ),
-            array(
-                'name'=>'codusuario',
-                'value'=>(isset($model->Usuario))?$model->Usuario->usuario:null,
-                ),
-            'observacoes',
-		);
+				);
+				if (!empty($model->codpessoavendedor)) {
+					$attr[] = [
+						'name'=>'codpessoavendedor',
+						'value'=>(isset($model->PessoaVendedor))?CHtml::link(CHtml::encode($model->PessoaVendedor->fantasia),array('pessoa/view','id'=>$model->codpessoavendedor)):null,
+						'type'=>'raw',
+					];
+				}
+				$attr[] = 'lancamento';
+				$attr[] = [
+					'name'=>'codnegociostatus',
+					'value'=>(isset($model->NegocioStatus))?$model->NegocioStatus->negociostatus:null,
+				];
+				$attr[] = [
+					'name'=>'codfilial',
+					'value'=>(isset($model->Filial))?$model->Filial->filial:null,
+				];
+				$attr[] = [
+					'name'=>'codestoquelocal',
+					'value'=>(isset($model->EstoqueLocal))?$model->EstoqueLocal->estoquelocal:null,
+				];
+				$attr[] = [
+					'name'=>'codusuario',
+					'value'=>(isset($model->Usuario))?$model->Usuario->usuario:null,
+				];
+				if (!empty($model->observacoes)) {
+					$attr[] = 'observacoes';
+				}
         foreach($model->NfeTerceiros as $nfet)
             $attr[] =
                 array(

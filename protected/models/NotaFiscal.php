@@ -139,6 +139,7 @@ class NotaFiscal extends MGActiveRecord
             array('justificativa', 'length', 'max'=>200),
             array('volumesespecie, volumesmarca, volumesnumero', 'length', 'max'=>60),
             array('emitida, nfeimpressa, codoperacao, nfedataenvio, nfedataautorizacao, nfedatacancelamento, nfedatainutilizacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
+            array('cpf', 'ext.validators.CnpjCpfValidator'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('codnotafiscal, codnaturezaoperacao, emitida, nfechave, tpemis, nfeimpressa, serie, numero, emissao, modelo, saida, codfilial, codestoquelocal, codpessoa, observacoes, volumes, frete, codoperacao, nfereciboenvio, nfedataenvio, nfeautorizacao, nfedataautorizacao, valorfrete, valorseguro, valordesconto, valoroutras, nfecancelamento, nfedatacancelamento, nfeinutilizacao, nfedatainutilizacao, justificativa, alteracao, codusuarioalteracao, criacao, codusuariocriacao, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipivalor, codstatus, emissao_de, emissao_ate, saida_de, saida_ate', 'safe', 'on'=>'search'),
@@ -542,6 +543,7 @@ class NotaFiscal extends MGActiveRecord
             'modelo' => 'Modelo NFE',
             'placa' => 'Placa',
             'codestadoplaca' => 'Estado',
+            'cpf' => 'CPF',
         );
     }
 

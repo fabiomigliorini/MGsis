@@ -138,6 +138,11 @@ $(document).ready(function(){
 <div class="row-fluid">
 	<div class="span4">
 		<?php
+		$pessoa = CHtml::link(CHtml::encode($model->Pessoa->fantasia), array("pessoa/view", "id"=>$model->codpessoa));
+		if (!empty($model->cpf)) {
+			$pessoa .= '<br /><small>' . Yii::app()->format->formataCnpjCpf($model->cpf, true) . '</small>';
+		}
+
 		$this->widget('bootstrap.widgets.TbDetailView',array(
 			'data'=>$model,
 			'attributes'=>array(
@@ -164,7 +169,7 @@ $(document).ready(function(){
 					),
 				array(
 					'name'=>'codpessoa',
-					'value'=>CHtml::link(CHtml::encode($model->Pessoa->fantasia), array("pessoa/view", "id"=>$model->codpessoa)),
+					'value'=>$pessoa,
 					'type'=>"raw",
 				),
 				array(

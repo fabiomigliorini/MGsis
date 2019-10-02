@@ -27,6 +27,7 @@
  * @property string $valortotal
  * @property string $valoraprazo
  * @property string $valoravista
+ * @property string $cpf
  *
  * The followings are the available model relations:
  * @property Filial $Filial
@@ -75,6 +76,7 @@ class Negocio extends MGActiveRecord
             array('valordesconto', 'validaDesconto'),
             array('codestoquelocal', 'validaEstoqueLocal'),
             //array('codnegociostatus', 'validaStatus'),
+            array('cpf', 'ext.validators.CnpjCpfValidator'),
             array('codpessoa, codpessoavendedor, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
@@ -168,6 +170,7 @@ class Negocio extends MGActiveRecord
             'valortotal' => 'Total',
             'valoraprazo' => 'À Prazo',
             'valoravista' => 'À Vista',
+            'cpf' => 'CPF',
         );
     }
 
@@ -359,6 +362,7 @@ class Negocio extends MGActiveRecord
             if (empty($nota->codpessoa)) {
                 $nota->codpessoa = Pessoa::CONSUMIDOR;
             }
+            $nota->cpf = $this->cpf;
             $nota->codfilial = $this->codfilial;
             $nota->codestoquelocal = $this->codestoquelocal;
             $nota->serie = 1;

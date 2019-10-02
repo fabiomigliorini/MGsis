@@ -57,6 +57,11 @@ class PessoaController extends Controller
 
 		if(isset($_POST['Pessoa']))
 		{
+			echo '<pre>';
+			print_r($_POST['Pessoa']);
+			$model->attributes=$_POST['Pessoa'];
+			print_r($model->attributes);
+			die ('aqui');
 			$model->attributes=$_POST['Pessoa'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->codpessoa));
@@ -105,15 +110,15 @@ class PessoaController extends Controller
 	public function actionIndex()
 	{
 		$model=new Pessoa('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['Pessoa']))
 			Yii::app()->session['FiltroPessoaIndex'] = $_GET['Pessoa'];
-		
+
 		if (isset(Yii::app()->session['FiltroPessoaIndex']))
 			$model->attributes=Yii::app()->session['FiltroPessoaIndex'];
-		
+
 		$this->render('index',array(
 			'dataProvider'=>$model->search(),
 			'model'=>$model,
@@ -125,11 +130,11 @@ class PessoaController extends Controller
 	*/
 	public function actionAdmin()
 	{
-	
+
 		$model=new Pessoa('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['Pessoa']))
 			$model->attributes=$_GET['Pessoa'];
 
@@ -163,11 +168,11 @@ class PessoaController extends Controller
 			Yii::app()->end();
 		}
 	}
-	
-	public function actionAjaxBuscaPessoa($texto, $limite=20, $pagina=1, $inativo = 0, $vendedor = 0) 
+
+	public function actionAjaxBuscaPessoa($texto, $limite=20, $pagina=1, $inativo = 0, $vendedor = 0)
 	{
 
-		// variaveis _GET 
+		// variaveis _GET
 		//$texto  = str_replace(' ', '%', trim(isset($_GET['texto'])?$_GET['texto']:''));
 		$texto  = str_replace(' ', '%', trim($texto));
 		//$limite = isset($_GET['limite'])?$_GET['limite']:20;
@@ -178,39 +183,39 @@ class PessoaController extends Controller
 
 		// calcula de onde continuar a consulta
 		$offset = ($pagina-1)*$limite;
-		
+
 		// inicializa array com resultados
 		$resultados = array();
 
 		// se o texto foi preenchido
 		if (strlen($texto)>=3)
 		{
-			
+
 			// somente pessoas ativas
 			$condition = 'inativo is null and ';
-			
+
 			// se quiser inativas limpa o filtro de ativas
 			if (isset($_GET['inativo']) && $_GET['inativo'])
 					$condition = '';
-			
+
 			if (!empty($vendedor))
 				$condition .= "vendedor = true AND ";
-			
-			// busca pelos campos "fantasia" e "pessoa" 			
+
+			// busca pelos campos "fantasia" e "pessoa"
 			$condition .= '(fantasia ILIKE :fantasia OR pessoa ILIKE :pessoa ';
-			
+
 			$params = array(
 				':fantasia'=>'%'.$texto.'%',
 				':pessoa'=>'%'.$texto.'%',
 				);
-			
+
 			// se o texto for um numero busca pelo "codpessoa" e "cnpj"
 			$numero = (int)MGFormatter::numeroLimpo($texto);
-			if ($numero > 0) 
+			if ($numero > 0)
 			{
 				$condition .= ' OR codpessoa = :codpessoa OR cast(Cnpj as char(20)) ILIKE :cnpj';
 				$params = array_merge(
-						$params, 
+						$params,
 						array(
 							':codpessoa'=>$numero,
 							':cnpj'=>$numero.'%',
@@ -218,21 +223,21 @@ class PessoaController extends Controller
 						);
 			}
 			$condition .= ')';
-			
+
 			// busca pessoas
 			$pessoas = Pessoa::model()->findAll(
 					array(
-						'select'=>'codpessoa, fantasia, pessoa, cnpj, inativo', 
-						'order'=>'fantasia', 
-						'condition'=>$condition, 
+						'select'=>'codpessoa, fantasia, pessoa, cnpj, inativo',
+						'order'=>'fantasia',
+						'condition'=>$condition,
 						'params'=>$params,
 						'limit'=>$limite,
 						'offset'=>$offset,
 						)
 					);
-			
+
 			//monta array com resultados
-			foreach ($pessoas as $pessoa) 
+			foreach ($pessoas as $pessoa)
 			{
 				$resultados[] = array(
 					'id' => $pessoa->codpessoa,
@@ -243,42 +248,42 @@ class PessoaController extends Controller
 					'inclusaoSpc' => $pessoa->inclusaoSpc,
 					);
 			}
-			
-		} 
-		
+
+		}
+
 		// transforma o array em JSON
 		echo CJSON::encode(
 				array(
-					'mais' => count($resultados)==$limite?true:false, 
-					'pagina' => (int) $pagina, 
+					'mais' => count($resultados)==$limite?true:false,
+					'pagina' => (int) $pagina,
 					'itens' => $resultados
 					)
 				);
-		
+
 		// FIM
 		Yii::app()->end();
-	} 
-	
-	public function actionAjaxInicializaPessoa() 
+	}
+
+	public function actionAjaxInicializaPessoa()
 	{
 		if (isset($_GET['cod']))
 		{
 			$pessoa = Pessoa::model()->findByPk(
 					$_GET['cod'],
 					array(
-						'select'=>'codpessoa, fantasia', 
-						'order'=>'fantasia', 
+						'select'=>'codpessoa, fantasia',
+						'order'=>'fantasia',
 						)
 					);
 			echo CJSON::encode(array('id' => $pessoa->codpessoa,'fantasia' => $pessoa->fantasia));
 		}
 		Yii::app()->end();
-	} 
-	
+	}
+
 	public function actionDetalhes($codpessoa)
 	{
 		$model = $this->loadModel($codpessoa);
 		echo CJSON::encode($model->attributes);
 	}
-	
+
 }

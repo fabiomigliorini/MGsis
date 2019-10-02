@@ -16,6 +16,20 @@
 			echo $form->textFieldRow($model,'numero',array('class'=>'input-small text-right'));
 			echo $form->textFieldRow($model,'nfechave',array('class'=>'input-xlarge text-center','maxlength'=>100));
 			echo $form->select2PessoaRow($model,'codpessoa', array('class'=>'span12'));
+			$style = '';
+			if ($model->codpessoa != Pessoa::CONSUMIDOR) {
+				$style = 'display: none;';
+			}
+			?>
+      <div id="CampoCpf" style="<?php echo $style; ?>">
+        <?php
+            if (!empty($model->cpf)) {
+              $model->cpf = Yii::app()->format->formataPorMascara($model->cpf, '###########');
+            }
+            echo $form->textFieldRow($model, 'cpf', array('class'=>'input-medium text-center', 'maxlength'=>11));
+        ?>
+      </div>
+      <?php
 			echo $form->select2Row($model,'codnaturezaoperacao', NaturezaOperacao::getListaCombo() , array('class'=>'span12'));
 			echo $form->textAreaRow($model,'observacoes',array('class'=>'input-xlarge', 'rows'=>'5','maxlength'=>1500));
 			?>
@@ -90,6 +104,17 @@
 <?php $this->endWidget(); ?>
 
 <script type='text/javascript'>
+
+function escondeCpf()
+{
+  var codpessoa = $('#NotaFiscal_codpessoa').select2('val');
+  if (codpessoa == <?php echo Pessoa::CONSUMIDOR ?> ) {
+  	$('#CampoCpf').slideDown('slow');
+  } else {
+    $('#CampoCpf').slideUp('slow');
+    $('#NotaFiscal_cpf').val('');
+  }
+}
 
 function calculaTotal()
 {
@@ -240,6 +265,10 @@ function atualizaSerie()
 }
 
 $(document).ready(function() {
+
+	$('#NotaFiscal_codpessoa').on("change", function(e) {
+    escondeCpf();
+	});
 
 	$("#NotaFiscal_observacoes").RemoveAcentos();
 
