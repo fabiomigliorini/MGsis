@@ -36,8 +36,10 @@
             );
 
             $style = '';
+            $focoCpf = true;
             if ($model->codpessoa != Pessoa::CONSUMIDOR) {
               $style = 'display: none;';
+              $focoCpf = false;
             }
       ?>
       <div id="CampoCpf" style="<?php echo $style; ?>">
@@ -263,7 +265,13 @@ $(document).ready(function() {
     }
 	});
 
-	$('.btn-primary').focus();
+  <?php
+  if ($focoCpf) {
+    echo '$(\'#Negocio_cpf\').focus();';
+  } else {
+    echo '$(\'.btn-primary\').focus();';
+  }
+  ?>
 
 	$('#btnSalvarFechar').bind("click", function(e) {
 		$("#fechar").val(1);
