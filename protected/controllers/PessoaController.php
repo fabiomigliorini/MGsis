@@ -57,11 +57,11 @@ class PessoaController extends Controller
 
 		if(isset($_POST['Pessoa']))
 		{
-			echo '<pre>';
-			print_r($_POST['Pessoa']);
-			$model->attributes=$_POST['Pessoa'];
-			print_r($model->attributes);
-			die ('aqui');
+			//echo '<pre>';
+			//print_r($_POST['Pessoa']);
+			//$model->attributes=$_POST['Pessoa'];
+			//print_r($model->attributes);
+			//die ('aqui');
 			$model->attributes=$_POST['Pessoa'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->codpessoa));
