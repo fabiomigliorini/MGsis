@@ -367,14 +367,14 @@ $(document).ready(function(){
 			'type'=>'raw',
 		];
 		$css = '';
-		$value = [(empty($model->cest)?'Vazio':$model->cest) . " Nota"];
+		$value = [(empty($model->cest)?'Vazio':Yii::app()->format->formataCest($model->cest)) . " Nota"];
 		if (!empty($model->codprodutobarra)) {
 			$css = 'text-error';
 			if (!empty($model->ProdutoBarra->Produto->codcest)) {
 				if ($model->ProdutoBarra->Produto->Cest->cest == $model->cest) {
 					$css = 'text-success';
 				} elseif (empty($model->cest)) {
-					$value[] = $model->ProdutoBarra->Produto->Cest->cest . " Produto";
+					$value[] = Yii::app()->format->formataCest($model->ProdutoBarra->Produto->Cest->cest) . " Produto";
 				}
 			} elseif (empty($model->cest)) {
 				$css = 'text-success';
