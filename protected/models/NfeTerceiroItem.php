@@ -294,24 +294,80 @@ class NfeTerceiroItem extends MGActiveRecord
 
     protected function calculaCustoICMSApuracao ()
     {
-      if (in_array($this->codtributacao, [Tributacao::ISENTO, Tributacao::DIFERIDO])) {
-        return;
-      }
+      // Se for garantido, cai fora, calculo é outro
       if ($this->modalidadeicmsgarantido) {
+          return;
+      }
+
+      // Se tiver produto informado, utiliza tributacao do produto
+      // caso contrário, utiliza tributacao da nota de compra
+      $codtributacao = $this->codtributacao; 
+      if (!empty($this->codprodutobarra)) {
+        $codtributacao = $this->ProdutoBarra->Produto->codtributacao;
+      }
+
+      // se for isento ou diferido, não existe ICMS
+      if (in_array($codtributacao, [Tributacao::ISENTO, Tributacao::DIFERIDO])) {
         return;
       }
-      if ($this->codtributacao == Tributacao::SUBSTITUICAO && $this->vicmsst > 0) {
-        $this->vicmsstutilizado = $this->vicmsst;
+
+      // verifica se é uma compra interestadual
+      $interestadual = false;
+      if (!empty($this->NfeTerceiro->codpessoa)) {
+        if ($this->NfeTerceiro->Filial->Pessoa->Cidade->codestado != $this->NfeTerceiro->Pessoa->Cidade->codestado) {
+          $interestadual = true;
+        }
+      }
+
+      // se for ICMS ST
+      if ($codtributacao == Tributacao::SUBSTITUICAO) {
+
+        // se ST já está destacada na nota, fim de papo
+        if ($this->vicmsst > 0) {
+           $this->vicmsstutilizado = $this->vicmsst;
+           return;
+        }
+
+        // se nao calcula st que deveria ser para quando comprado fora do estado
+        if ($interestadual) {
+           $this->vicmsstutilizado = ((double)$this->vprod -  (double)$this->vdesc) * 0.17;
+           return;
+        } 
         return;
       }
-      // Credito ICMS, no maximo 17%
-      $max_vicmscredito = ((double)$this->vprod -  (double)$this->vdesc) * 0.07;
-      $this->vicmscredito = min([$max_vicmscredito, (double) $this->vicms]);
+
+      // Credito ICMS, no maximo 17% para compra interestadual
+      if ($interestadual) {
+        $max_vicmscredito = ((double)$this->vprod -  (double)$this->vdesc) * 0.07;
+        $this->vicmscredito = min([$max_vicmscredito, (double) $this->vicms]);
+      } else {
+        $this->vicmscredito = (double) $this->vicms;
+      }
       $this->picmsvenda = 17;
     }
 
     protected function determinaTributacao()
     {
+      if (!empty($this->cest)) {
+        $this->codtributacao = Tributacao::SUBSTITUICAO;
+        return;
+      }
+      if (!empty($this->vicmsst)) {
+        $this->codtributacao = Tributacao::SUBSTITUICAO;
+        return;
+      }
+      if (in_array($this->csosn, ['500'])) {
+        $this->codtributacao = Tributacao::SUBSTITUICAO;
+        return;
+      }
+      if (in_array($this->csosn, ['900', '400', '300'])) {
+        $this->codtributacao = Tributacao::ISENTO;
+        return;
+      }
+      if (!empty($this->csosn)) {
+        $this->codtributacao = Tributacao::TRIBUTADO;
+        return;
+      }
       if (in_array($this->cst, ['30', '40', '41', '50', '90'])) {
         $this->codtributacao = Tributacao::ISENTO;
         return;
@@ -320,13 +376,7 @@ class NfeTerceiroItem extends MGActiveRecord
         $this->codtributacao = Tributacao::DIFERIDO;
         return;
       }
-      if ($this->modalidadeicmsgarantido) {
-        if (in_array($this->cst, ['10', '60', '70'])) {
-          $this->codtributacao = Tributacao::SUBSTITUICAO;
-          return;
-        }
-      }
-      if (!empty($this->cest)) {
+      if (in_array($this->cst, ['10', '60', '70'])) {
         $this->codtributacao = Tributacao::SUBSTITUICAO;
         return;
       }

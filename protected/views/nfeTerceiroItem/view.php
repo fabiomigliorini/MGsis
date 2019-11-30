@@ -135,13 +135,20 @@ $(document).ready(function(){
 					'value'=>Yii::app()->format->formatNumber($model->ipivipi) . ' (' . Yii::app()->format->formatNumber($model->ipivipi/$model->quantidade) . ')',
 				);
 
-		if (!empty($model->vicmsstutilizado))
+		if (!empty($model->vicmsstutilizado)) {
+            $cssSt = '';
+            if ($model->vicmsst != $model->vicmsstutilizado) {
+                $cssSt = 'text-error';
+            }
 			$attr[] =
 				array(
 					'name'=>'vicmsstutilizado',
 					'label'=>'ICMS ST',
 					'value'=>Yii::app()->format->formatNumber($model->vicmsstutilizado) . ' (' . Yii::app()->format->formatNumber($model->vicmsstutilizado/$model->quantidade) . ')',
+                    'cssClass'=>$cssSt,
+
 				);
+        }
 
 		if (!empty($model->vicmsgarantido))
 			$attr[] =
