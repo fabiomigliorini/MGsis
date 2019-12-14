@@ -79,6 +79,7 @@ class Cest extends MGActiveRecord
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
 			'codusuariocriacao' => 'Usuário Criação',
+			'mva' => 'MVA',
 		);
 	}
 

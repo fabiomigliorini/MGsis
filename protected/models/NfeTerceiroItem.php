@@ -60,6 +60,7 @@ class NfeTerceiroItem extends MGActiveRecord
     public $margeminversa;
     public $vmargem;
     public $vicmsstutilizado;
+    public $mva;
 
     public $codtributacao;
 
@@ -301,7 +302,7 @@ class NfeTerceiroItem extends MGActiveRecord
 
       // Se tiver produto informado, utiliza tributacao do produto
       // caso contrário, utiliza tributacao da nota de compra
-      $codtributacao = $this->codtributacao; 
+      $codtributacao = $this->codtributacao;
       if (!empty($this->codprodutobarra)) {
         $codtributacao = $this->ProdutoBarra->Produto->codtributacao;
       }
@@ -319,8 +320,25 @@ class NfeTerceiroItem extends MGActiveRecord
         }
       }
 
+      // Credito ICMS, no maximo 17% para compra interestadual
+      if ($interestadual) {
+        $max_vicmscredito = ((double)$this->vprod -  (double)$this->vdesc) * 0.07;
+        $this->vicmscredito = min([$max_vicmscredito, (double) $this->vicms]);
+      } else {
+        $this->vicmscredito = (double) $this->vicms;
+      }
+      $this->picmsvenda = 17;
+
       // se for ICMS ST
       if ($codtributacao == Tributacao::SUBSTITUICAO) {
+
+        // MVA Média das vendas 2018 e 2019
+        $this->mva = 57.97;
+        if (!empty($this->codprodutobarra)) {
+          if (!empty($this->ProdutoBarra->Produto->codcest)) {
+            $this->mva = $this->ProdutoBarra->Produto->Cest->mva;
+          }
+        }
 
         // se ST já está destacada na nota, fim de papo
         if ($this->vicmsst > 0) {
@@ -330,20 +348,18 @@ class NfeTerceiroItem extends MGActiveRecord
 
         // se nao calcula st que deveria ser para quando comprado fora do estado
         if ($interestadual) {
-           $this->vicmsstutilizado = ((double)$this->vprod -  (double)$this->vdesc) * 0.17;
+           $base = (double) $this->vprod
+             + (double) $this->ipivipi
+             - (double) $this->vdesc
+             ;
+           $base = $base * (1+$this->mva/100);
+           $this->vicmsstutilizado = ($base * ($this->picmsvenda / 100)) - $this->vicmscredito;
+           // $this->vicmsstutilizado = ((double)$this->vprod - (double)$this->vdesc) * 0.17;
            return;
-        } 
+        }
         return;
       }
 
-      // Credito ICMS, no maximo 17% para compra interestadual
-      if ($interestadual) {
-        $max_vicmscredito = ((double)$this->vprod -  (double)$this->vdesc) * 0.07;
-        $this->vicmscredito = min([$max_vicmscredito, (double) $this->vicms]);
-      } else {
-        $this->vicmscredito = (double) $this->vicms;
-      }
-      $this->picmsvenda = 17;
     }
 
     protected function determinaTributacao()
