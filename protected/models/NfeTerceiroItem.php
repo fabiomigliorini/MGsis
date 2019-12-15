@@ -240,168 +240,175 @@ class NfeTerceiroItem extends MGActiveRecord
     protected function calculaSugestaoVenda()
     {
         if ($this->margem <= 0) {
-          return;
+            return;
         }
         $this->calculaCustoICMSGarantido();
         $this->calculaCustoICMSApuracao();
-    		$this->vcusto = (double) $this->vprod
+        $this->vcusto = (double) $this->vprod
           + (double) $this->ipivipi
           + (double) $this->vicmsstutilizado
           + (double) $this->complemento
           + (double) $this->vicmsgarantido
           - (double) $this->vdesc
-          - (double) $this->vicmscredito
           ;
+
+        if (empty($this->vicmsstutilizado)) {
+          $this->vcusto -= (double) $this->vicmscredito;
+        }
+
         $this->vcustounitario = $this->vcusto;
         if (((int)$this->quantidade) > 0) {
             $this->vcustounitario /= $this->quantidade;
         }
-        $this->margeminversa = 100 - $this->margem - $this->picmsvenda;
-        if ($this->margeminversa == 0) {
-          return;
+        $this->margeminversa = 100 - $this->margem;
+        if (empty($this->vicmsstutilizado)) {
+          $this->margeminversa -= (double) $this->picmsvenda;
         }
-    		$this->vsugestaovenda = round($this->vcustounitario / ($this->margeminversa/100), 6);
+        if ($this->margeminversa == 0) {
+            return;
+        }
+        $this->vsugestaovenda = round($this->vcustounitario / ($this->margeminversa/100), 6);
         $this->vicmsvenda =  round($this->vsugestaovenda * ($this->picmsvenda / 100), 6);
         $this->vmargem =  round($this->vsugestaovenda * ($this->margem / 100), 6);
     }
 
-    protected function calculaCustoICMSGarantido ()
+    protected function calculaCustoICMSGarantido()
     {
-      if (in_array($this->codtributacao, [Tributacao::ISENTO, Tributacao::DIFERIDO])) {
-        return;
-      }
-      if (!$this->modalidadeicmsgarantido) {
-        return;
-      }
-      if (!isset($this->NfeTerceiro->Pessoa)) {
-        return;
-      }
-      if (!isset($this->NfeTerceiro->Filial)) {
-        return;
-      }
-      if ($this->NfeTerceiro->Filial->Pessoa->Cidade->codestado == $this->NfeTerceiro->Pessoa->Cidade->codestado) {
-        return;
-      }
-      $this->vicmsstutilizado = $this->vicmsst;
-      $base = (double) $this->vprod
+        if (in_array($this->codtributacao, [Tributacao::ISENTO, Tributacao::DIFERIDO])) {
+            return;
+        }
+        if (!$this->modalidadeicmsgarantido) {
+            return;
+        }
+        if (!isset($this->NfeTerceiro->Pessoa)) {
+            return;
+        }
+        if (!isset($this->NfeTerceiro->Filial)) {
+            return;
+        }
+        if ($this->NfeTerceiro->Filial->Pessoa->Cidade->codestado == $this->NfeTerceiro->Pessoa->Cidade->codestado) {
+            return;
+        }
+        $this->vicmsstutilizado = $this->vicmsst;
+        $base = (double) $this->vprod
         + (double) $this->ipivipi
         - (double) $this->vdesc;
-			$this->vicmsgarantido = $base * (self::PERCENTUAL_ICMS_GARANTIDO/100);
-      $this->vicmsgarantido -= (double) $this->vicmsstutilizado;
-			if ($this->vicmsgarantido < 0) {
-        $this->vicmsgarantido = 0;
-      }
+        $this->vicmsgarantido = $base * (self::PERCENTUAL_ICMS_GARANTIDO/100);
+        $this->vicmsgarantido -= (double) $this->vicmsstutilizado;
+        if ($this->vicmsgarantido < 0) {
+            $this->vicmsgarantido = 0;
+        }
     }
 
-    protected function calculaCustoICMSApuracao ()
+    protected function calculaCustoICMSApuracao()
     {
-      // Se for garantido, cai fora, calculo é outro
-      if ($this->modalidadeicmsgarantido) {
-          return;
-      }
-
-      // Se tiver produto informado, utiliza tributacao do produto
-      // caso contrário, utiliza tributacao da nota de compra
-      $codtributacao = $this->codtributacao;
-      if (!empty($this->codprodutobarra)) {
-        $codtributacao = $this->ProdutoBarra->Produto->codtributacao;
-      }
-
-      // se for isento ou diferido, não existe ICMS
-      if (in_array($codtributacao, [Tributacao::ISENTO, Tributacao::DIFERIDO])) {
-        return;
-      }
-
-      // verifica se é uma compra interestadual
-      $interestadual = false;
-      if (!empty($this->NfeTerceiro->codpessoa)) {
-        if ($this->NfeTerceiro->Filial->Pessoa->Cidade->codestado != $this->NfeTerceiro->Pessoa->Cidade->codestado) {
-          $interestadual = true;
+        // Se for garantido, cai fora, calculo é outro
+        if ($this->modalidadeicmsgarantido) {
+            return;
         }
-      }
 
-      // Credito ICMS, no maximo 17% para compra interestadual
-      if ($interestadual) {
-        $max_vicmscredito = ((double)$this->vprod -  (double)$this->vdesc) * 0.07;
-        $this->vicmscredito = min([$max_vicmscredito, (double) $this->vicms]);
-      } else {
-        $this->vicmscredito = (double) $this->vicms;
-      }
-      $this->picmsvenda = 17;
+        // Se tiver produto informado, utiliza tributacao do produto
+        // caso contrário, utiliza tributacao da nota de compra
+        $codtributacao = $this->codtributacao;
+        if (!empty($this->codprodutobarra)) {
+            $codtributacao = $this->ProdutoBarra->Produto->codtributacao;
+        }
 
-      // se for ICMS ST
-      if ($codtributacao == Tributacao::SUBSTITUICAO) {
+        // se for isento ou diferido, não existe ICMS
+        if (in_array($codtributacao, [Tributacao::ISENTO, Tributacao::DIFERIDO])) {
+            return;
+        }
+
+        // verifica se é uma compra interestadual
+        $interestadual = false;
+        if (!empty($this->NfeTerceiro->codpessoa)) {
+            if ($this->NfeTerceiro->Filial->Pessoa->Cidade->codestado != $this->NfeTerceiro->Pessoa->Cidade->codestado) {
+                $interestadual = true;
+            }
+        }
+
+        // Credito ICMS, no maximo 17% para compra interestadual
+        if ($interestadual) {
+            $max_vicmscredito = ((double)$this->vprod -  (double)$this->vdesc) * 0.07;
+            $this->vicmscredito = min([$max_vicmscredito, (double) $this->vicms]);
+        } else {
+            $this->vicmscredito = (double) $this->vicms;
+        }
+        $this->picmsvenda = 17;
+
+        // se for ICMS ST
+        if ($codtributacao == Tributacao::SUBSTITUICAO) {
 
         // MVA Média das vendas 2018 e 2019
-        $this->mva = 57.97;
-        if (!empty($this->codprodutobarra)) {
-          if (!empty($this->ProdutoBarra->Produto->codcest)) {
-            $this->mva = $this->ProdutoBarra->Produto->Cest->mva;
-          }
-        }
+            $this->mva = 57.97;
+            if (!empty($this->codprodutobarra)) {
+                if (!empty($this->ProdutoBarra->Produto->codcest)) {
+                    $this->mva = $this->ProdutoBarra->Produto->Cest->mva;
+                }
+            }
 
-        // se ST já está destacada na nota, fim de papo
-        if ($this->vicmsst > 0) {
-           $this->vicmsstutilizado = $this->vicmsst;
-           return;
-        }
+            // se ST já está destacada na nota, fim de papo
+            if ($this->vicmsst > 0) {
+                $this->vicmsstutilizado = $this->vicmsst;
+                return;
+            }
 
-        // se nao calcula st que deveria ser para quando comprado fora do estado
-        if ($interestadual) {
-           $base = (double) $this->vprod
-             + (double) $this->ipivipi
-             - (double) $this->vdesc
-             ;
-           $base = $base * (1+$this->mva/100);
-           $this->vicmsstutilizado = ($base * ($this->picmsvenda / 100)) - $this->vicmscredito;
-           // $this->vicmsstutilizado = ((double)$this->vprod - (double)$this->vdesc) * 0.17;
-           return;
+            // se nao calcula st que deveria ser para quando comprado fora do estado
+            if ($interestadual) {
+                $base = (double) $this->vprod
+                    + (double) $this->ipivipi
+                    - (double) $this->vdesc
+                    ;
+                $base = $base * (1+$this->mva/100);
+                // echo $base ;
+                // die();
+                $this->vicmsstutilizado = ($base * ($this->picmsvenda / 100)) - $this->vicmscredito;
+                // $this->vicmsstutilizado = ((double)$this->vprod - (double)$this->vdesc) * 0.17;
+                return;
+            }
+            return;
         }
-        return;
-      }
-
     }
 
     protected function determinaTributacao()
     {
-      if (!empty($this->cest)) {
-        $this->codtributacao = Tributacao::SUBSTITUICAO;
-        return;
-      }
-      if (!empty($this->vicmsst)) {
-        $this->codtributacao = Tributacao::SUBSTITUICAO;
-        return;
-      }
-      if (in_array($this->csosn, ['500'])) {
-        $this->codtributacao = Tributacao::SUBSTITUICAO;
-        return;
-      }
-      if (in_array($this->csosn, ['900', '400', '300'])) {
-        $this->codtributacao = Tributacao::ISENTO;
-        return;
-      }
-      if (!empty($this->csosn)) {
+        if (!empty($this->cest)) {
+            $this->codtributacao = Tributacao::SUBSTITUICAO;
+            return;
+        }
+        if (!empty($this->vicmsst)) {
+            $this->codtributacao = Tributacao::SUBSTITUICAO;
+            return;
+        }
+        if (in_array($this->csosn, ['500'])) {
+            $this->codtributacao = Tributacao::SUBSTITUICAO;
+            return;
+        }
+        if (in_array($this->csosn, ['900', '400', '300'])) {
+            $this->codtributacao = Tributacao::ISENTO;
+            return;
+        }
+        if (!empty($this->csosn)) {
+            $this->codtributacao = Tributacao::TRIBUTADO;
+            return;
+        }
+        if (in_array($this->cst, ['30', '40', '41', '50', '90'])) {
+            $this->codtributacao = Tributacao::ISENTO;
+            return;
+        }
+        if (in_array($this->cst, ['51'])) {
+            $this->codtributacao = Tributacao::DIFERIDO;
+            return;
+        }
+        if (in_array($this->cst, ['10', '60', '70'])) {
+            $this->codtributacao = Tributacao::SUBSTITUICAO;
+            return;
+        }
         $this->codtributacao = Tributacao::TRIBUTADO;
-        return;
-      }
-      if (in_array($this->cst, ['30', '40', '41', '50', '90'])) {
-        $this->codtributacao = Tributacao::ISENTO;
-        return;
-      }
-      if (in_array($this->cst, ['51'])) {
-        $this->codtributacao = Tributacao::DIFERIDO;
-        return;
-      }
-      if (in_array($this->cst, ['10', '60', '70'])) {
-        $this->codtributacao = Tributacao::SUBSTITUICAO;
-        return;
-      }
-      $this->codtributacao = Tributacao::TRIBUTADO;
     }
 
     protected function afterFind()
     {
-
         $this->determinaTributacao();
 
         // Calcula Quantidade com base na embalagem vinculada ao codigo de barras

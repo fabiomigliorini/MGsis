@@ -180,7 +180,7 @@ $(document).ready(function(){
             ];
         }
 
-        if (!empty($model->vicmscredito)) {
+        if (!empty($model->vicmscredito) && empty($model->vicmsstutilizado)) {
             $attr[] = [
                 'name'=>'vicmscredito',
                 'label'=>'Credito ICMS',
@@ -221,7 +221,7 @@ $(document).ready(function(){
             );
         }
 
-        if (!empty($model->vicmsvenda)) {
+        if (!empty($model->vicmsvenda) && empty($model->vicmsstutilizado)) {
             $attr[] = [
                 'label'=>'ICMS Venda',
                 'value'=>Yii::app()->format->formatNumber($model->vicmsvenda) . ' (' . Yii::app()->format->formatNumber($model->picmsvenda, 2) . '%)',
