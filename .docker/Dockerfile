@@ -2,9 +2,9 @@ FROM debian:stretch
 
 MAINTAINER mgpapelaria.com.br
 
-RUN apt-get update \
-    && apt-get upgrade -y \
-    && apt-get install --reinstall systemd -y \
+RUN apt update && apt dist-upgrade --yes
+
+RUN apt-get install --reinstall systemd -y \
     && apt-get install -y \
     lsb-release \
     apt-transport-https \
@@ -14,11 +14,11 @@ RUN apt-get update \
     rsync \
     curl \
     && systemctl enable nginx
-    
+
 RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg \
     && sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list' \
-    && apt update
-    
+    && apt update && apt dist-upgrade --yes
+
 RUN apt install -y \
     php5.6-cli \
     php5.6-fpm \
@@ -31,7 +31,7 @@ RUN apt install -y \
     php-memcache
 
 RUN mv /var/www/html/index.nginx-debian.html /var/www/html/index.html
-    
+
 COPY config/php/php.ini /etc/php/5.6/fpm/php.ini
 COPY config/nginx/default.conf /etc/nginx/sites-available/default
 
