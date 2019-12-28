@@ -13,6 +13,7 @@ RUN apt-get install --reinstall systemd -y \
     vim \
     rsync \
     curl \
+    memcached \
     && systemctl enable nginx
 
 RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg \
