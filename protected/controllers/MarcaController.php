@@ -14,7 +14,7 @@ class MarcaController extends Controller
 	*/
 	public function actionView($id)
 	{
-		$this->redirect("/MGLara/marca/$id");
+		$this->redirect(MGLARA_URL . "marca/$id");
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 			));
@@ -26,7 +26,7 @@ class MarcaController extends Controller
 	*/
 	public function actionCreate()
 	{
-		$this->redirect("/MGLara/marca/create");
+		$this->redirect(MGLARA_URL . "marca/create");
 		$model=new Marca;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -51,7 +51,7 @@ class MarcaController extends Controller
 	*/
 	public function actionUpdate($id)
 	{
-		$this->redirect("/MGLara/marca/{$id}/edit");
+		$this->redirect(MGLARA_URL . "marca/{$id}/edit");
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -76,7 +76,7 @@ class MarcaController extends Controller
 	*/
 	public function actionDelete($id)
 	{
-		$this->redirect("/MGLara/marca/$id");
+		$this->redirect(MGLARA_URL . "marca/$id");
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -107,7 +107,7 @@ class MarcaController extends Controller
 	*/
 	public function actionIndex()
 	{
-		$this->redirect('/MGLara/marca/');
+		$this->redirect(MGLARA_URL . 'marca/');
 		$model=new Marca('search');
 		
 		$model->unsetAttributes();  // clear any default values
@@ -129,7 +129,7 @@ class MarcaController extends Controller
 	*/
 	public function actionAdmin()
 	{
-		$this->redirect("/MGLara/marca/");
+		$this->redirect(MGLARA_URL . "marca/");
 		$model=new Marca('search');
 		
 		$model->unsetAttributes();  // clear any default values

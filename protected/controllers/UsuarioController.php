@@ -15,7 +15,7 @@ class UsuarioController extends Controller
 	*/
 	public function actionView($id)
 	{
-		$this->redirect("/MGLara/usuario/$id");
+		$this->redirect(MGLARA_URL . "usuario/$id");
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 			));
@@ -27,7 +27,7 @@ class UsuarioController extends Controller
 	*/
 	public function actionCreate()
 	{
-		$this->redirect("/MGLara/usuario/create");
+		$this->redirect(MGLARA_URL . "usuario/create");
 		$model=new Usuario;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -52,7 +52,7 @@ class UsuarioController extends Controller
 	*/
 	public function actionUpdate($id)
 	{
-		$this->redirect("/MGLara/usuario/{$id}/edit");
+		$this->redirect(MGLARA_URL . "usuario/{$id}/edit");
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -77,7 +77,7 @@ class UsuarioController extends Controller
 	*/
 	public function actionDelete($id)
 	{
-		$this->redirect("/MGLara/usuario/$id");
+		$this->redirect(MGLARA_URL . "usuario/$id");
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -96,7 +96,7 @@ class UsuarioController extends Controller
 	*/
 	public function actionIndex()
 	{
-		$this->redirect('/MGLara/usuario/');
+		$this->redirect(MGLARA_URL . 'usuario/');
 		$model=new Usuario('search');
 		
 		$model->unsetAttributes();  // clear any default values
@@ -115,7 +115,7 @@ class UsuarioController extends Controller
 	*/
 	public function actionAdmin()
 	{
-		$this->redirect("/MGLara/usuario/");
+		$this->redirect(MGLARA_URL . "usuario/");
 		$model=new Usuario('search');
 		
 		$model->unsetAttributes();  // clear any default values
