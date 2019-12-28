@@ -14,7 +14,7 @@ class GrupoProdutoController extends Controller
 	*/
 	public function actionView($id)
 	{
-		$this->redirect("/MGLara/secao-produto/$id");
+		$this->redirect(MGLARA_URL . "secao-produto/$id");
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 			));
@@ -26,7 +26,7 @@ class GrupoProdutoController extends Controller
 	*/
 	public function actionCreate()
 	{
-		$this->redirect("/MGLara/secao-produto/create");
+		$this->redirect(MGLARA_URL . "secao-produto/create");
 		$model=new GrupoProduto;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -51,7 +51,7 @@ class GrupoProdutoController extends Controller
 	*/
 	public function actionUpdate($id)
 	{
-		$this->redirect("/MGLara/secao-produto/{$id}/edit");
+		$this->redirect(MGLARA_URL . "secao-produto/{$id}/edit");
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -76,7 +76,7 @@ class GrupoProdutoController extends Controller
 	*/
 	public function actionDelete($id)
 	{
-		$this->redirect("/MGLara/secao-produto/$id");
+		$this->redirect(MGLARA_URL . "secao-produto/$id");
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -107,7 +107,7 @@ class GrupoProdutoController extends Controller
 	*/
 	public function actionIndex()
 	{
-		$this->redirect('/MGLara/secao-produto');
+		$this->redirect(MGLARA_URL . 'secao-produto');
 		$model=new GrupoProduto('search');
 		
 		$model->unsetAttributes();  // clear any default values
@@ -129,7 +129,7 @@ class GrupoProdutoController extends Controller
 	*/
 	public function actionAdmin()
 	{
-		$this->redirect('/MGLara/secao-produto');
+		$this->redirect(MGLARA_URL . 'secao-produto');
 		$model=new GrupoProduto('search');
 		
 		$model->unsetAttributes();  // clear any default values

@@ -718,7 +718,7 @@ class Negocio extends MGActiveRecord
     public function movimentaEstoque()
     {
         // Chama MGLara para fazer movimentacao do estoque com delay de 10 segundos
-        $url = "http://localhost/MGLara/estoque/gera-movimento-negocio/{$this->codnegocio}?delay=10";
+        $url = MGLARA_URL . "estoque/gera-movimento-negocio/{$this->codnegocio}?delay=10";
         $ret = json_decode(file_get_contents($url));
         if (@$ret->response !== 'Agendado') {
             echo '<pre>';

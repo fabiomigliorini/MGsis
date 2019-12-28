@@ -142,7 +142,7 @@
       // MGLara
 			array(
 				'label' => 'MGLara',
-				'url'=>'/MGLara',
+				'url'=> MGLARA_URL,
 			),
 		);
 

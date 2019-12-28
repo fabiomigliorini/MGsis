@@ -14,7 +14,7 @@ class ProdutoController extends Controller
 	*/
 	public function actionView($id)
 	{
-                $this->redirect("/MGLara/produto/$id");
+                $this->redirect(MGLARA_URL . "produto/$id");
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 			));
@@ -26,7 +26,7 @@ class ProdutoController extends Controller
 	*/
 	public function actionCreate($barras = "")
 	{
-                $this->redirect("/MGLara/produto/create");
+                $this->redirect(MGLARA_URL . "produto/create");
 		$model=new Produto;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -58,7 +58,7 @@ class ProdutoController extends Controller
 	*/
 	public function actionUpdate($id)
 	{
-                $this->redirect("/MGLara/produto/{$id}/edit");
+                $this->redirect(MGLARA_URL . "produto/{$id}/edit");
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -83,7 +83,7 @@ class ProdutoController extends Controller
 	*/
 	public function actionDelete($id)
 	{
-                $this->redirect("/MGLara/produto/$id");
+                $this->redirect(MGLARA_URL . "produto/$id");
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -111,14 +111,14 @@ class ProdutoController extends Controller
 
 	public function actionJuntarBarras($id)
 	{
-                $this->redirect("/MGLara/produto/$id");
+                $this->redirect(MGLARA_URL . "produto/$id");
 		$model=$this->loadModel($id);
 
 		if(isset($_POST['Produto']))
 		{
 			$codprodutobarra = $_POST['Produto']['codprodutobarra'];
 			$codprodutobarraeliminar = $_POST['Produto']['codprodutobarraeliminar'];
-			
+
 			if (empty($codprodutobarra) || empty($codprodutobarraeliminar))
 			{
 				$model->addError('codproduto', "Selectione ambos os códigos para prosseguir!");
@@ -134,26 +134,26 @@ class ProdutoController extends Controller
 				else
 					$model->addErrors($pb->getErrors());
 			}
-				
+
 		}
-		
+
 		$this->render('juntar_barras',array(
 			'model'=>$model,
 			));
-		
+
 	}
-	
+
 	public function actionTransferirBarras($id)
 	{
-                $this->redirect("/MGLara/produto/$id");
+                $this->redirect(MGLARA_URL . "produto/$id");
 		$model=$this->loadModel($id);
 
 		if(isset($_POST['Produto']))
 		{
-			
+
 			$codprodutobarra = $_POST['Produto']['codprodutobarra'];
 			$codprodutobarranovo = $_POST['Produto']['codprodutobarranovo'];
-			
+
 			if (empty($codprodutobarra) || empty($codprodutobarranovo))
 			{
 				$model->addError('codproduto', "Selectione ambos os códigos para prosseguir!");
@@ -169,32 +169,32 @@ class ProdutoController extends Controller
 				else
 					$model->addErrors($pb->getErrors());
 			}
-				
+
 		}
-		
+
 		$this->render('transferir_barras',array(
 			'model'=>$model,
 			));
-		
+
 	}
-	
+
 	/**
 	* Lists all models.
 	*/
 	public function actionIndex()
 	{
-                $this->redirect('/MGLara/produto/');
-                
+                $this->redirect(MGLARA_URL . 'produto/');
+
 		$model=new Produto('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['Produto']))
 			Yii::app()->session['FiltroProdutoIndex'] = $_GET['Produto'];
-		
+
 		if (isset(Yii::app()->session['FiltroProdutoIndex']))
 			$model->attributes=Yii::app()->session['FiltroProdutoIndex'];
-		
+
 		$this->render('index',array(
 			'dataProvider'=>$model->search(),
 			'model'=>$model,
@@ -206,12 +206,12 @@ class ProdutoController extends Controller
 	*/
 	public function actionAdmin()
 	{
-                $this->redirect("/MGLara/produto/");
-	
+                $this->redirect(MGLARA_URL . "produto/");
+
 		$model=new Produto('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['Produto']))
 			$model->attributes=$_GET['Produto'];
 
@@ -219,23 +219,23 @@ class ProdutoController extends Controller
 			'model'=>$model,
 			));
 	}
-	
+
 	public function actionQuiosqueConsulta ($barras = null)
 	{
-		$this->redirect("/MGLara/produto/quiosque");
+		$this->redirect(MGLARA_URL . "produto/quiosque");
 
 		if (!empty($barras))
 			$model = ProdutoBarra::findByBarras($barras);
 		else
 			$model = null;
-		
+
 		$this->layout = '//layouts/quiosque';
-		
+
 		$this->render('quiosque_consulta',array(
 			'model'=>$model,
 			'barras'=>$barras,
 			));
-		
+
 	}
 
 	/**
