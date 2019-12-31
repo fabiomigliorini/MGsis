@@ -129,11 +129,11 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
     //verifica se o numero tem pelo menos 10 digitos
     public function validaCst($attribute, $params)
     {
-        if ($this->NotaFiscal->Filial->crt == Filial::CRT_REGIME_NORMAL && empty($this->$attribute)) {
+        if ($this->NotaFiscal->Filial->crt == Filial::CRT_REGIME_NORMAL && strlen($this->$attribute) == 0) {
             $this->addError($attribute, 'CST deve ser preenchido!');
         }
 
-        if ($this->NotaFiscal->Filial->crt != Filial::CRT_REGIME_NORMAL && !empty($this->$attribute)) {
+        if ($this->NotaFiscal->Filial->crt != Filial::CRT_REGIME_NORMAL && strlen($this->$attribute) != 0) {
             $this->addError($attribute, 'CST não deve ser preenchido!');
         }
     }
@@ -390,14 +390,16 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
             array(
                 'condition' =>
                     '   codtributacao = :codtributacao
-					AND codtipoproduto = :codtipoproduto
-					AND codnaturezaoperacao = :codnaturezaoperacao
-					AND ' . $filtroEstado . '
-					AND (:ncm ilike ncm || \'%\' or ncm is null)
-					',
+          					AND codtipoproduto = :codtipoproduto
+          					AND bit = :bit
+          					AND codnaturezaoperacao = :codnaturezaoperacao
+          					AND ' . $filtroEstado . '
+          					AND (:ncm ilike ncm || \'%\' or ncm is null)
+          					',
                 'params' => array(
                     ':codtributacao' => $this->ProdutoBarra->Produto->codtributacao,
                     ':codtipoproduto' => $this->ProdutoBarra->Produto->codtipoproduto,
+                    ':bit' => $this->ProdutoBarra->Produto->bit,
                     ':codnaturezaoperacao' => $this->NotaFiscal->codnaturezaoperacao,
                     ':codestado' => $this->NotaFiscal->Pessoa->Cidade->codestado,
                     ':ncm' => $this->ProdutoBarra->Produto->Ncm->ncm,

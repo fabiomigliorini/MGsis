@@ -67,7 +67,7 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codtributacao, codnaturezaoperacao, codcfop, csosn, codtipoproduto, icmscst, piscst, ipicst, cofinscst', 'required'),
+			array('codtributacao, codnaturezaoperacao, codcfop, csosn, codtipoproduto, icmscst, piscst, ipicst, cofinscst, bit', 'required'),
 			array('acumuladordominiovista, acumuladordominioprazo, ncm', 'numerical', 'integerOnly'=>true),
 			array('codtributacao', 'validaChaveUnica'),
 			array('csosn', 'length', 'max'=>4),
@@ -75,7 +75,7 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 			array('historicodominio', 'length', 'max'=>512),
 			array('observacoesnf', 'length', 'max'=>500),
 			array('icmscst, piscst, ipicst, cofinscst', 'length', 'max'=>3),
-			array('csosn, icmscst, piscst, ipicst, cofinscst', 'numerical', 'min'=>1),
+			array('csosn, piscst, ipicst, cofinscst', 'numerical', 'min'=>1),
 			array('ncm', 'length', 'max'=>10),
 			array('icmsbase, icmslpbase', 'length', 'max'=>6),
 			array('codestado, movimentacaofisica, movimentacaocontabil, alteracao,
@@ -124,6 +124,9 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 			$parametros['codestado'] = $this->codestado;
 		}
 
+		$condicao .= ' AND bit = :bit';
+		$parametros['bit'] = $this->bit;
+
 		if (empty($this->ncm))
 		{
 			$condicao .= ' AND ncm IS NULL';
@@ -143,7 +146,7 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 
 		if (sizeof($regs) > 0)
 			if ($regs[0]->codtributacaonaturezaoperacao <> $this->codtributacaonaturezaoperacao)
-				$this->addError($attribute, "Já existe uma combinação de Tributação, Tipo de Produto, Estado e NCM igual à essa cadastrada!");
+				$this->addError($attribute, "Já existe uma combinação de Tributação, Tipo de Produto, Estado, BIT e NCM igual à essa cadastrada!");
 	}
 
 	/**
@@ -197,6 +200,7 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 			'csllpercentual' => 'CSLL %',
 			'irpjpercentual' => 'IRPJ %',
 			'ncm' => 'NCM',
+			'bit' => 'BIT',
 			'icmslpbase' => 'ICMS Base',
 			'icmslppercentual' => 'ICMS %',
 			'certidaosefazmt' => 'Certidão sefaz MT',

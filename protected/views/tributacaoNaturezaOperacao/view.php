@@ -83,13 +83,19 @@ $(document).ready(function(){
 								'value'=>(isset($model->TipoProduto))?CHtml::link(CHtml::encode($model->TipoProduto->tipoproduto),array('tipoProduto/view','id'=>$model->codtipoproduto)):null,
 								'type'=>'raw',
 								),
+					//'BIT',
+					array(
+								'name'=>'bit',
+								'value'=>($model->bit)?CHtml::encode('BIT - Bens de Informática e Telecomunicação'):'Não',
+								'type'=>'raw',
+								),
+					'ncm',
 					//'codestado',
 					array(
 								'name'=>'codestado',
 								'value'=>(isset($model->Estado))?CHtml::link(CHtml::encode($model->Estado->estado),array('estado/view','id'=>$model->codestado)):null,
 								'type'=>'raw',
 								),
-					'ncm',
 					//'codcfop',
 					array(
 								'name'=>'codcfop',
