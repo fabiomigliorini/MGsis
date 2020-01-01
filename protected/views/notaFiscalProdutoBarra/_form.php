@@ -64,6 +64,7 @@
 				<div class="row-fluid">
 					<div class="span3">
 						<?php
+						  echo $form->textFieldRow($model,'icmsbasepercentual',array('class'=>'input-small text-right','maxlength'=>6, 'prepend' => '%'));
 							echo $form->textFieldRow($model,'icmsbase',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
 							echo $form->textFieldRow($model,'icmspercentual',array('class'=>'input-small text-right','maxlength'=>14, 'append' => '%'));
 							echo $form->textFieldRow($model,'icmsvalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
@@ -216,14 +217,20 @@ function atualizaBaseImposto (imposto, totalNovo, totalAntigo)
 	var valorbase = $(campobase).autoNumeric('get');
 	var valorpercentual = $(campopercentual).autoNumeric('get');
 
-	if (valorbase <= 0 && valorpercentual <= 0)
+	if (valorbase <= 0 && valorpercentual <= 0) {
 		return;
+	}
 
-	if (valorbase == totalAntigo || valorbase == 0)
-		valorbase = totalNovo;
-	else
-	{
-		valorbase = (totalNovo/totalAntigo) * valorbase;
+	if (imposto == 'icms') {
+		var campobasepercentual = '#NotaFiscalProdutoBarra_' + imposto + 'basepercentual';
+		var valorbasepercentual = $(campobasepercentual).autoNumeric('get');
+		valorbase = (totalNovo * valorbasepercentual)/100;
+	} else {
+		if (valorbase == totalAntigo || valorbase == 0) {
+			valorbase = totalNovo;
+		} else {
+			valorbase = (totalNovo/totalAntigo) * valorbase;
+		}
 	}
 
 	$(campobase).autoNumeric('set', valorbase);
@@ -270,23 +277,30 @@ function atualizaImposto (imposto, campoalterado)
 			break;
 	}
 
-
 	var campobase = '#NotaFiscalProdutoBarra_' + imposto + 'base';
+	if (imposto == 'icms') {
+		var campobasepercentual = '#NotaFiscalProdutoBarra_' + imposto + 'basepercentual';
+	}
 	var campopercentual = '#NotaFiscalProdutoBarra_' + imposto + 'percentual';
 	var campovalor = '#NotaFiscalProdutoBarra_' + imposto + 'valor';
 
 	var valorprodutos = $("#NotaFiscalProdutoBarra_valortotal").autoNumeric('get');
 
 	var base = (temBase)?$(campobase).autoNumeric('get'):valorprodutos;
+	var basepercentual = (imposto == 'icms')?$(campobasepercentual).autoNumeric('get'):100;
 	var percentual = $(campopercentual).autoNumeric('get');
 	var valor = $(campovalor).autoNumeric('get');
 
-
 	switch(campoalterado)
 	{
+		case 'basepercentual':
+			if (basepercentual > 0) {
+				base = (valorprodutos * basepercentual)/100;
+			}
+
 		case 'percentual':
 			if (base == 0 && percentual > 0) {
-				base = valorprodutos;
+				base = (valorprodutos * basepercentual)/100;
 			}
 
 		case 'base':
@@ -311,6 +325,9 @@ function atualizaImposto (imposto, campoalterado)
 
 	if (temBase) {
 		$(campobase).autoNumeric('set', base);
+	}
+	if (imposto == 'icms') {
+		$(campobasepercentual).autoNumeric('set', basepercentual);
 	}
 	$(campopercentual).autoNumeric('set', percentual);
 	$(campovalor).autoNumeric('set', valor);
@@ -369,6 +386,7 @@ $(document).ready(function() {
 	$('#NotaFiscalProdutoBarra_valortotal').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 
 	$('#NotaFiscalProdutoBarra_icmsbase').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+	$('#NotaFiscalProdutoBarra_icmsbasepercentual').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#NotaFiscalProdutoBarra_icmspercentual').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#NotaFiscalProdutoBarra_icmsvalor').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 
@@ -413,6 +431,7 @@ $(document).ready(function() {
 	$('#NotaFiscalProdutoBarra_valortotal').change(function() { atualizaUnitario(); });
 
 	$('#NotaFiscalProdutoBarra_icmsbase').change(function() { atualizaImposto('icms', 'base'); });
+	$('#NotaFiscalProdutoBarra_icmsbasepercentual').change(function() { atualizaImposto('icms', 'basepercentual'); });
 	$('#NotaFiscalProdutoBarra_icmspercentual').change(function() { atualizaImposto('icms', 'percentual'); });
 	$('#NotaFiscalProdutoBarra_icmsvalor').change(function() { atualizaImposto('icms', 'valor'); });
 

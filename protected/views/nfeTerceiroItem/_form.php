@@ -14,8 +14,9 @@
 				<div class="span6">
 					<?php
 						echo $form->textFieldRow($model,'cean',array('class'=>'input-medium text-center','maxlength'=>30, 'disabled'=>true));
-						if (!empty($model->ceantrib) && $model->cean != $model->ceantrib || true)
+						if (!empty($model->ceantrib) && $model->cean != $model->ceantrib || true) {
 							echo $form->textFieldRow($model,'ceantrib',array('class'=>'input-medium text-center','maxlength'=>30, 'disabled'=>true));
+						}
 						echo $form->textFieldRow($model,'qcom',array('class'=>'input-small text-right','maxlength'=>14,'disabled'=>true, 'append'=>$model->ucom));
 						echo $form->textFieldRow($model,'vuncom',array('class'=>'input-small text-right','maxlength'=>14,'disabled'=>true));
 						echo $form->textFieldRow($model,'margem',array('class'=>'input-mini text-right','maxlength'=>6, 'append'=>'%'));

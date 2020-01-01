@@ -96,6 +96,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
             array('codnotafiscal, codprodutobarra, codcfop, quantidade, valorunitario, valortotal', 'required'),
             array('descricaoalternativa', 'length', 'max'=>100),
             array('quantidade, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, icmsstbase, icmsstpercentual, icmsstvalor, pisbase, pisvalor, cofinsbase, cofinsvalor, csllbase, csllvalor, irpjbase, irpjvalor', 'length', 'max'=>14),
+            array('icmsbasepercentual', 'length', 'max'=>5),
             array('valorunitario', 'length', 'max'=>23),
             array('csosn', 'length', 'max'=>4),
             array('pedido', 'length', 'max'=>15),
@@ -182,6 +183,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
             'csosn' => 'CSOSN',
             'icmscst' => 'ICMS CST',
             'icmsbase' => 'ICMS Base',
+            'icmsbasepercentual' => '% ICMS Base',
             'icmspercentual' => 'ICMS %',
             'icmsvalor' => 'ICMS Valor',
 
@@ -453,7 +455,8 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
             if (!empty($this->valortotal) && ($this->NotaFiscal->emitida)) {
                 //Calcula ICMS
                 if (!empty($trib->icmslpbase)) {
-                    $this->icmsbase = round(($trib->icmslpbase * $this->valortotal)/100, 2);
+                    $this->icmsbasepercentual = $trib->icmslpbase;
+                    $this->icmsbase = round(($this->icmsbasepercentual * $this->valortotal)/100, 2);
                 }
 
                 $this->icmspercentual = $trib->icmslppercentual;
