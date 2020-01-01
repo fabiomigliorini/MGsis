@@ -469,21 +469,10 @@ class Negocio extends MGActiveRecord
             $notaItem->quantidade = $quantidade;
             $notaItem->valorunitario = $negocioItem->valorunitario;
             $notaItem->valortotal = round($quantidade * $negocioItem->valorunitario, 2);
-            $valorDesconto += round($percDesconto * $notaItem->valortotal, 2);
+            $notaItem->valordesconto = round($percDesconto * $notaItem->valortotal, 2);
 
             if (!$notaItem->save()) {
                 $this->addErrors($notaItem->getErrors());
-                return false;
-            }
-        }
-
-        //acumula o valor de desconto
-        if (abs($valorDesconto) > 0) {
-            $nota->refresh();
-            $nota->valordesconto += $valorDesconto;
-            $nota->setScenario('geracaoAutomatica');
-            if (!$nota->save()) {
-                $this->addErrors($nota->getErrors());
                 return false;
             }
         }

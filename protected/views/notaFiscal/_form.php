@@ -75,14 +75,14 @@
 		</div>
 		<div class="span3">
 			<?php
-			echo $form->textFieldRow($model,'valorprodutos',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14, 'disabled'=>true));
-			echo $form->textFieldRow($model,'icmsstvalor',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14, 'disabled'=>true));
-			echo $form->textFieldRow($model,'ipivalor',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14, 'disabled'=>true));
-			echo $form->textFieldRow($model,'valorfrete',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14));
-			echo $form->textFieldRow($model,'valorseguro',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14));
-			echo $form->textFieldRow($model,'valordesconto',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14));
-			echo $form->textFieldRow($model,'valoroutras',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14));
-			echo $form->textFieldRow($model,'valortotal',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14, 'disabled'=>true));
+			// echo $form->textFieldRow($model,'valorprodutos',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14, 'disabled'=>true));
+			// echo $form->textFieldRow($model,'icmsstvalor',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14, 'disabled'=>true));
+			// echo $form->textFieldRow($model,'ipivalor',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14, 'disabled'=>true));
+			// echo $form->textFieldRow($model,'valorfrete',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14));
+			// echo $form->textFieldRow($model,'valorseguro',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14));
+			// echo $form->textFieldRow($model,'valordesconto',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14));
+			// echo $form->textFieldRow($model,'valoroutras',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14));
+			// echo $form->textFieldRow($model,'valortotal',array('prepend' => 'R$', 'class'=>'input-small text-right','maxlength'=>14, 'disabled'=>true));
 			?>
 		</div>
 	</div>

@@ -31,31 +31,40 @@
 						<?php
 							echo $form->textFieldRow($model,'quantidade',array('class'=>'input-small text-right','maxlength'=>14));
 							echo $form->textFieldRow($model,'valorunitario',array('class'=>'input-medium text-right','maxlength'=>14, 'prepend' => 'R$'));
-							echo $form->textFieldRow($model,'valortotal',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+							echo $form->textFieldRow($model,'valortotal',array('class'=>'input-medium text-right','maxlength'=>14, 'prepend' => 'R$'));
+							echo $form->textFieldRow($model,'valordesconto',array('class'=>'input-medium text-right','maxlength'=>14, 'prepend' => 'R$'));
+							echo $form->textFieldRow($model,'valorfrete',array('class'=>'input-medium text-right','maxlength'=>14, 'prepend' => 'R$'));
+							echo $form->textFieldRow($model,'valorseguro',array('class'=>'input-medium text-right','maxlength'=>14, 'prepend' => 'R$'));
+							echo $form->textFieldRow($model,'valoroutras',array('class'=>'input-medium text-right','maxlength'=>14, 'prepend' => 'R$'));
+							echo $form->textFieldRow($model,'valortotalfinal',array('class'=>'input-medium text-right','maxlength'=>14, 'prepend' => 'R$', 'disabled'=>true));
 						?>
 					</div>
-					<div class="span3">
-						<?php
-						echo $form->textFieldRow($model,'codcfop',array('class'=>'input-mini text-center'));
-						echo $form->textFieldRow($model,'csosn',array('class'=>'input-mini text-center','maxlength'=>4));
-						?>
-					</div>
-					<div class="span4">
-						<?php
-							echo $form->textFieldRow($model,'descricaoalternativa',array('class'=>'input-xlarge','maxlength'=>100));
-							echo $form->textFieldRow($model,'pedido',array('class'=>'input-medium','maxlength'=>15));
-							echo $form->textFieldRow($model,'pedidoitem',array('class'=>'input-mini text-right'));
-						?>
+					<div class="span7">
+						<div class="row-fluid">
+							<div class="span5">
+								<?php
+								echo $form->textFieldRow($model,'codcfop',array('class'=>'input-mini text-center'));
+								echo $form->textFieldRow($model,'csosn',array('class'=>'input-mini text-center','maxlength'=>4));
+								?>
+							</div>
+							<div class="span7">
+								<?php
+									echo $form->textFieldRow($model,'descricaoalternativa',array('class'=>'input-xlarge','maxlength'=>100));
+									echo $form->textFieldRow($model,'pedido',array('class'=>'input-medium','maxlength'=>15));
+									echo $form->textFieldRow($model,'pedidoitem',array('class'=>'input-mini text-right'));
+								?>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="span12">
+								<?php
+									echo $form->textAreaRow($model,'observacoes',array('class'=>'span12', 'rows'=>'11','maxlength'=>500));
+								?>
+							</div>
+						</div>
 					</div>
 				</div>
 
-				<div class="row-fluid">
-					<div class="span12">
-						<?php
-							echo $form->textAreaRow($model,'observacoes',array('class'=>'span12', 'rows'=>'5','maxlength'=>500));
-						?>
-					</div>
-				</div>
 
 	    </div>
 
@@ -190,8 +199,8 @@
 function atualizaBaseImpostos ()
 {
 
-	var totalAntigo = $("#NotaFiscalProdutoBarra_valortotal").data("previous-value");
-	var totalNovo   = $("#NotaFiscalProdutoBarra_valortotal").autoNumeric('get');
+	var totalAntigo = $("#NotaFiscalProdutoBarra_valortotalfinal").data("previous-value");
+	var totalNovo   = $("#NotaFiscalProdutoBarra_valortotalfinal").autoNumeric('get');
 
 	atualizaBaseImposto ('icms', totalNovo, totalAntigo);
 	atualizaBaseImposto ('icmsst', totalNovo, totalAntigo);
@@ -240,16 +249,12 @@ function atualizaBaseImposto (imposto, totalNovo, totalAntigo)
 
 function atualizaTotal ()
 {
-	$("#NotaFiscalProdutoBarra_valortotal").data("previous-value",
-		$("#NotaFiscalProdutoBarra_valortotal").autoNumeric('get')
-	);
-
 	$('#NotaFiscalProdutoBarra_valortotal').autoNumeric('set',
 		$('#NotaFiscalProdutoBarra_quantidade').autoNumeric('get') *
 		$('#NotaFiscalProdutoBarra_valorunitario').autoNumeric('get')
 	);
 
-	atualizaBaseImpostos ();
+	atualizaTotalFinal();
 }
 
 function atualizaUnitario ()
@@ -261,6 +266,29 @@ function atualizaUnitario ()
 		$('#NotaFiscalProdutoBarra_valortotal').autoNumeric('get') /
 		$('#NotaFiscalProdutoBarra_quantidade').autoNumeric('get')
 	);
+	atualizaTotalFinal();
+}
+
+function atualizaTotalFinal ()
+{
+	$("#NotaFiscalProdutoBarra_valortotalfinal").data("previous-value",
+		$("#NotaFiscalProdutoBarra_valortotalfinal").autoNumeric('get')
+	);
+
+	console.log(Number($('#NotaFiscalProdutoBarra_valordesconto').autoNumeric('get')));
+	console.log(Number($('#NotaFiscalProdutoBarra_valorfrete').autoNumeric('get')));
+	console.log(Number($('#NotaFiscalProdutoBarra_valorseguro').autoNumeric('get')));
+	console.log(Number($('#NotaFiscalProdutoBarra_valoroutras').autoNumeric('get')));
+
+	$('#NotaFiscalProdutoBarra_valortotalfinal').autoNumeric('set',
+		Number($('#NotaFiscalProdutoBarra_valortotal').autoNumeric('get'))
+		- Number($('#NotaFiscalProdutoBarra_valordesconto').autoNumeric('get'))
+		+ Number($('#NotaFiscalProdutoBarra_valorfrete').autoNumeric('get'))
+		+ Number($('#NotaFiscalProdutoBarra_valorseguro').autoNumeric('get'))
+		+ Number($('#NotaFiscalProdutoBarra_valoroutras').autoNumeric('get'))
+	);
+
+	atualizaBaseImpostos();
 }
 
 
@@ -284,7 +312,7 @@ function atualizaImposto (imposto, campoalterado)
 	var campopercentual = '#NotaFiscalProdutoBarra_' + imposto + 'percentual';
 	var campovalor = '#NotaFiscalProdutoBarra_' + imposto + 'valor';
 
-	var valorprodutos = $("#NotaFiscalProdutoBarra_valortotal").autoNumeric('get');
+	var valorprodutos = $("#NotaFiscalProdutoBarra_valortotalfinal").autoNumeric('get');
 
 	var base = (temBase)?$(campobase).autoNumeric('get'):valorprodutos;
 	var basepercentual = (imposto == 'icms')?$(campobasepercentual).autoNumeric('get'):100;
@@ -369,10 +397,10 @@ function atualizaImpostoKg (imposto, campoalterado)
 
 $(document).ready(function() {
 
-	$("#NotaFiscalProdutoBarra_valortotal").focus(function () {
+	$("#NotaFiscalProdutoBarra_valortotalfinal").focus(function () {
 		$(this).data("previous-value", $(this).autoNumeric('get'));
 	});
-	$("#NotaFiscalProdutoBarra_valortotal").blur(function () {
+	$("#NotaFiscalProdutoBarra_valortotalfinal").blur(function () {
 		atualizaBaseImpostos();
 	});
 
@@ -384,6 +412,12 @@ $(document).ready(function() {
 	$('#NotaFiscalProdutoBarra_quantidade').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#NotaFiscalProdutoBarra_valorunitario').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.', mDec:10 });
 	$('#NotaFiscalProdutoBarra_valortotal').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+
+	$('#NotaFiscalProdutoBarra_valorfrete').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+	$('#NotaFiscalProdutoBarra_valorseguro').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+	$('#NotaFiscalProdutoBarra_valordesconto').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+	$('#NotaFiscalProdutoBarra_valoroutras').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+	$('#NotaFiscalProdutoBarra_valortotalfinal').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 
 	$('#NotaFiscalProdutoBarra_icmsbase').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#NotaFiscalProdutoBarra_icmsbasepercentual').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
@@ -429,6 +463,11 @@ $(document).ready(function() {
 	$('#NotaFiscalProdutoBarra_quantidade').change(function() { atualizaTotal(); });
 	$('#NotaFiscalProdutoBarra_valorunitario').change(function() { atualizaTotal(); });
 	$('#NotaFiscalProdutoBarra_valortotal').change(function() { atualizaUnitario(); });
+
+	$('#NotaFiscalProdutoBarra_valordesconto').change(function() { atualizaTotalFinal(); });
+	$('#NotaFiscalProdutoBarra_valorfrete').change(function() { atualizaTotalFinal(); });
+	$('#NotaFiscalProdutoBarra_valorseguro').change(function() { atualizaTotalFinal(); });
+	$('#NotaFiscalProdutoBarra_valoroutras').change(function() { atualizaTotalFinal(); });
 
 	$('#NotaFiscalProdutoBarra_icmsbase').change(function() { atualizaImposto('icms', 'base'); });
 	$('#NotaFiscalProdutoBarra_icmsbasepercentual').change(function() { atualizaImposto('icms', 'basepercentual'); });
