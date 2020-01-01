@@ -97,7 +97,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
             array('codnotafiscal, codprodutobarra, codcfop, quantidade, valorunitario, valortotal', 'required'),
             array('descricaoalternativa', 'length', 'max'=>100),
             array('quantidade, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, icmsstbase, icmsstpercentual, icmsstvalor, pisbase, pisvalor, cofinsbase, cofinsvalor, csllbase, csllvalor, irpjbase, irpjvalor', 'length', 'max'=>14),
-            array('icmsbasepercentual', 'length', 'max'=>5),
+            array('icmsbasepercentual', 'length', 'max'=>6),
             array('valorunitario, valordesconto, valorfrete, valorseguro, valoroutras', 'length', 'max'=>23),
             array('csosn', 'length', 'max'=>4),
             array('pedido', 'length', 'max'=>15),
