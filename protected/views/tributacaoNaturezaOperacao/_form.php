@@ -21,6 +21,7 @@
 				echo $form->select2Row($model, 'codtributacao', Tributacao::getListaCombo(), array('prompt' => '', 'class' => 'input-large'));
 				echo $form->select2Row($model, 'codnaturezaoperacao', NaturezaOperacao::getListaCombo(), array('prompt' => '', 'class' => 'input-xlarge'));
 				echo $form->select2Row($model, 'codtipoproduto', TipoProduto::getListaCombo(), array('prompt' => '', 'class' => 'input-xlarge'));
+				echo $form->toggleButtonRow($model,'bit', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 				echo $form->select2Row($model, 'codestado', Estado::getListaCombo(), array('prompt' => '', 'class' => 'input-medium'));
 				echo $form->textFieldRow($model,'ncm',array('class'=>'input-small','maxlength'=>10));
 				echo '<hr>';

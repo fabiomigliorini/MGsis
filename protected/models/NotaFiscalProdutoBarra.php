@@ -76,6 +76,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
     public $saida_de;
     public $saida_ate;
     public $codnaturezaoperacao;
+    public $valortotalfinal;
 
     /**
      * @return string the associated database table name
@@ -96,7 +97,8 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
             array('codnotafiscal, codprodutobarra, codcfop, quantidade, valorunitario, valortotal', 'required'),
             array('descricaoalternativa', 'length', 'max'=>100),
             array('quantidade, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, icmsstbase, icmsstpercentual, icmsstvalor, pisbase, pisvalor, cofinsbase, cofinsvalor, csllbase, csllvalor, irpjbase, irpjvalor', 'length', 'max'=>14),
-            array('valorunitario', 'length', 'max'=>23),
+            array('icmsbasepercentual', 'length', 'max'=>6),
+            array('valorunitario, valordesconto, valorfrete, valorseguro, valoroutras', 'length', 'max'=>23),
             array('csosn', 'length', 'max'=>4),
             array('pedido', 'length', 'max'=>15),
             array('pedidoitem', 'numerical', 'integerOnly'=>true),
@@ -129,11 +131,11 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
     //verifica se o numero tem pelo menos 10 digitos
     public function validaCst($attribute, $params)
     {
-        if ($this->NotaFiscal->Filial->crt == Filial::CRT_REGIME_NORMAL && empty($this->$attribute)) {
+        if ($this->NotaFiscal->Filial->crt == Filial::CRT_REGIME_NORMAL && strlen($this->$attribute) == 0) {
             $this->addError($attribute, 'CST deve ser preenchido!');
         }
 
-        if ($this->NotaFiscal->Filial->crt != Filial::CRT_REGIME_NORMAL && !empty($this->$attribute)) {
+        if ($this->NotaFiscal->Filial->crt != Filial::CRT_REGIME_NORMAL && strlen($this->$attribute) != 0) {
             $this->addError($attribute, 'CST não deve ser preenchido!');
         }
     }
@@ -171,7 +173,14 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
             'descricaoalternativa' => 'Descrição Alternativa',
             'quantidade' => 'Quantidade',
             'valorunitario' => 'Preço',
-            'valortotal' => 'Total',
+            'valortotal' => 'Total Produto',
+
+            'valordesconto' => 'Desconto',
+            'valorfrete' => 'Frete',
+            'valorseguro' => 'Seguro',
+            'valoroutras' => 'Outras Despesas',
+
+            'valortotalfinal' => 'Total Final',
 
             'codnegocioprodutobarra' => 'Negócio',
             'alteracao' => 'Alteração',
@@ -182,6 +191,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
             'csosn' => 'CSOSN',
             'icmscst' => 'ICMS CST',
             'icmsbase' => 'ICMS Base',
+            'icmsbasepercentual' => '% ICMS Base',
             'icmspercentual' => 'ICMS %',
             'icmsvalor' => 'ICMS Valor',
 
@@ -390,14 +400,16 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
             array(
                 'condition' =>
                     '   codtributacao = :codtributacao
-					AND codtipoproduto = :codtipoproduto
-					AND codnaturezaoperacao = :codnaturezaoperacao
-					AND ' . $filtroEstado . '
-					AND (:ncm ilike ncm || \'%\' or ncm is null)
-					',
+          					AND codtipoproduto = :codtipoproduto
+          					AND bit = :bit
+          					AND codnaturezaoperacao = :codnaturezaoperacao
+          					AND ' . $filtroEstado . '
+          					AND (:ncm ilike ncm || \'%\' or ncm is null)
+          					',
                 'params' => array(
                     ':codtributacao' => $this->ProdutoBarra->Produto->codtributacao,
                     ':codtipoproduto' => $this->ProdutoBarra->Produto->codtipoproduto,
+                    ':bit' => $this->ProdutoBarra->Produto->bit,
                     ':codnaturezaoperacao' => $this->NotaFiscal->codnaturezaoperacao,
                     ':codestado' => $this->NotaFiscal->Pessoa->Cidade->codestado,
                     ':ncm' => $this->ProdutoBarra->Produto->Ncm->ncm,
@@ -413,6 +425,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 
         //Traz codigos de tributacao
         $this->codcfop = $trib->codcfop;
+        $this->calcularValorTotalFinal();
 
         if ($this->NotaFiscal->Filial->crt == Filial::CRT_REGIME_NORMAL) {
 
@@ -436,22 +449,23 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 
 						if (!empty($trib->funruralpercentual)) {
 							$this->funruralpercentual = $trib->funruralpercentual;
-							$this->funruralvalor = ($this->funruralpercentual * $this->valortotal) / 100;
+							$this->funruralvalor = ($this->funruralpercentual * $this->valortotalfinal) / 100;
 						}
 
 						if (!empty($trib->senarpercentual)) {
 							$this->senarpercentual = $trib->senarpercentual;
-							$this->senarvalor = ($this->senarpercentual * $this->valortotal) / 100;
+							$this->senarvalor = ($this->senarpercentual * $this->valortotalfinal) / 100;
 						}
 
             if (!empty($trib->observacoesnf)) {
               $this->observacoes = $trib->observacoesnf;
             }
 
-            if (!empty($this->valortotal) && ($this->NotaFiscal->emitida)) {
+            if (!empty($this->valortotalfinal) && ($this->NotaFiscal->emitida)) {
                 //Calcula ICMS
                 if (!empty($trib->icmslpbase)) {
-                    $this->icmsbase = round(($trib->icmslpbase * $this->valortotal)/100, 2);
+                    $this->icmsbasepercentual = $trib->icmslpbase;
+                    $this->icmsbase = round(($this->icmsbasepercentual * $this->valortotalfinal)/100, 2);
                 }
 
                 $this->icmspercentual = $trib->icmslppercentual;
@@ -462,28 +476,28 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 
                 //Calcula PIS
                 if ($trib->pispercentual > 0) {
-                    $this->pisbase = $this->valortotal;
+                    $this->pisbase = $this->valortotalfinal;
                     $this->pispercentual = $trib->pispercentual;
                     $this->pisvalor = round(($this->pisbase * $this->pispercentual)/100, 2);
                 }
 
                 //Calcula Cofins
                 if ($trib->cofinspercentual > 0) {
-                    $this->cofinsbase = $this->valortotal;
+                    $this->cofinsbase = $this->valortotalfinal;
                     $this->cofinspercentual = $trib->cofinspercentual;
                     $this->cofinsvalor = round(($this->cofinsbase * $this->cofinspercentual)/100, 2);
                 }
 
                 //Calcula CSLL
                 if ($trib->csllpercentual > 0) {
-                    $this->csllbase = $this->valortotal;
+                    $this->csllbase = $this->valortotalfinal;
                     $this->csllpercentual = $trib->csllpercentual;
                     $this->csllvalor = round(($this->csllbase * $this->csllpercentual)/100, 2);
                 }
 
                 //Calcula IRPJ
                 if ($trib->irpjpercentual > 0) {
-                    $this->irpjbase = $this->valortotal;
+                    $this->irpjbase = $this->valortotalfinal;
                     $this->irpjpercentual = $trib->irpjpercentual;
                     $this->irpjvalor = round(($this->irpjbase * $this->irpjpercentual)/100, 2);
                 }
@@ -492,9 +506,9 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
             $this->csosn = $trib->csosn;
 
             //Calcula ICMSs
-            if (!empty($this->valortotal) && ($this->NotaFiscal->emitida)) {
+            if (!empty($this->valortotalfinal) && ($this->NotaFiscal->emitida)) {
                 if (!empty($trib->icmsbase)) {
-                    $this->icmsbase = round(($trib->icmsbase * $this->valortotal)/100, 2);
+                    $this->icmsbase = round(($trib->icmsbase * $this->valortotalfinal)/100, 2);
                 }
 
                 $this->icmspercentual = $trib->icmspercentual;
@@ -505,4 +519,19 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
             }
         }
     }
+
+    protected function calcularValorTotalFinal()
+    {
+      $this->valortotalfinal = $this->valortotal
+        - $this->valordesconto
+        + $this->valorfrete
+        + $this->valorseguro
+        + $this->valoroutras;
+    }
+
+    protected function afterFind()
+  	{
+      $this->calcularValorTotalFinal();
+  		return parent::afterFind();
+  	}
 }

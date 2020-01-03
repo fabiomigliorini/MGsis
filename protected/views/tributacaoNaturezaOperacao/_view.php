@@ -15,6 +15,7 @@
 		</b>
 		<b class="span3">
 			<?php echo CHtml::encode($data->ncm); ?>
+			<?php echo CHtml::encode($data->bit?'BIT':null); ?>
 		</b>
 	</div>
 
