@@ -731,6 +731,7 @@ class NfeTerceiro extends MGActiveRecord
 
         $nf = new NotaFiscal();
 
+        $nf->codoperacao = $this->NaturezaOperacao->codoperacao;
         $nf->codnaturezaoperacao = $this->codnaturezaoperacao;
         $nf->emitida = false;
         $nf->nfechave = $this->nfechave;
@@ -784,12 +785,12 @@ class NfeTerceiro extends MGActiveRecord
 
         if ($geraNegocio) {
             $n = new Negocio();
+            $n->codoperacao = $this->NaturezaOperacao->codoperacao;
             $n->codnaturezaoperacao = $this->codnaturezaoperacao;
             $n->codpessoa = $this->codpessoa;
             $n->codfilial = $this->codfilial;
             $n->codestoquelocal = $this->Filial->EstoqueLocals[0]->codestoquelocal;
             $n->lancamento = $this->entrada;
-            $n->codoperacao = $this->codoperacao;
             $n->codnegociostatus = NegocioStatus::ABERTO;
             $n->codusuario = Yii::app()->user->id;
             $n->valordesconto = $this->valordesconto;
