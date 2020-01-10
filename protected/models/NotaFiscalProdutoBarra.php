@@ -366,7 +366,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 
     public function calculaTributacao($somenteVazios = true)
     {
-        if ((!empty($this->codcfop) && (!empty($this->csosn) || !empty($this->icmscst))) || !$somenteVazios) {
+        if ((!empty($this->codcfop) && (!empty($this->csosn) || ($this->icmscst != ''))) || !$somenteVazios) {
             return true;
         }
 
@@ -400,12 +400,12 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
             array(
                 'condition' =>
                     '   codtributacao = :codtributacao
-          					AND codtipoproduto = :codtipoproduto
-          					AND bit = :bit
-          					AND codnaturezaoperacao = :codnaturezaoperacao
-          					AND ' . $filtroEstado . '
-          					AND (:ncm ilike ncm || \'%\' or ncm is null)
-          					',
+                    AND codtipoproduto = :codtipoproduto
+                    AND bit = :bit
+                    AND codnaturezaoperacao = :codnaturezaoperacao
+                    AND ' . $filtroEstado . '
+                    AND (:ncm ilike ncm || \'%\' or ncm is null)
+                    ',
                 'params' => array(
                     ':codtributacao' => $this->ProdutoBarra->Produto->codtributacao,
                     ':codtipoproduto' => $this->ProdutoBarra->Produto->codtipoproduto,
