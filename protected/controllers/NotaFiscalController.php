@@ -71,50 +71,51 @@ class NotaFiscalController extends Controller
                     $prod_novo->codnotafiscalprodutobarra = null;
                     $prod_novo->codnotafiscal = $model->codnotafiscal;
 
-                    if (!empty($inverter)) {
-                        $prod_novo->codnotafiscalprodutobarraorigem = $prod_orig->codnotafiscalprodutobarra;
-                    }
-
                     $prod_novo->codcfop = null;
-
                     $prod_novo->csosn = null;
                     $prod_novo->icmscst = null;
                     $prod_novo->ipicst = null;
                     $prod_novo->piscst = null;
                     $prod_novo->cofinscst = null;
 
-                    $prod_novo->icmsbase = null;
-                    $prod_novo->icmspercentual = null;
-                    $prod_novo->icmsvalor = null;
+                    if (!empty($inverter)) {
+                        $prod_novo->codnotafiscalprodutobarraorigem = $prod_orig->codnotafiscalprodutobarra;
+                    } else {
+                      $prod_novo->icmsbase = null;
+                      $prod_novo->icmsbasepercentual = null;
+                      $prod_novo->icmspercentual = null;
+                      $prod_novo->icmsvalor = null;
 
-                    $prod_novo->icmsstbase = null;
-                    $prod_novo->icmsstpercentual = null;
-                    $prod_novo->icmsstvalor = null;
+                      $prod_novo->icmsstbase = null;
+                      $prod_novo->icmsstpercentual = null;
+                      $prod_novo->icmsstvalor = null;
 
-                    $prod_novo->ipibase = null;
-                    $prod_novo->ipipercentual = null;
-                    $prod_novo->ipivalor = null;
+                      $prod_novo->ipibase = null;
+                      $prod_novo->ipipercentual = null;
+                      $prod_novo->ipivalor = null;
 
-                    $prod_novo->pisbase = null;
-                    $prod_novo->pispercentual = null;
-                    $prod_novo->pisvalor = null;
+                      $prod_novo->pisbase = null;
+                      $prod_novo->pispercentual = null;
+                      $prod_novo->pisvalor = null;
 
-                    $prod_novo->cofinsbase = null;
-                    $prod_novo->cofinspercentual = null;
-                    $prod_novo->cofinsvalor = null;
+                      $prod_novo->cofinsbase = null;
+                      $prod_novo->cofinspercentual = null;
+                      $prod_novo->cofinsvalor = null;
 
-                    $prod_novo->csllbase = null;
-                    $prod_novo->csllpercentual = null;
-                    $prod_novo->csllvalor = null;
+                      $prod_novo->csllbase = null;
+                      $prod_novo->csllpercentual = null;
+                      $prod_novo->csllvalor = null;
 
-                    $prod_novo->irpjbase = null;
-                    $prod_novo->irpjpercentual = null;
-                    $prod_novo->irpjvalor = null;
+                      $prod_novo->irpjbase = null;
+                      $prod_novo->irpjpercentual = null;
+                      $prod_novo->irpjvalor = null;
+                    }
 
                     $prod_novo->criacao = null;
                     $prod_novo->codusuariocriacao = null;
                     $prod_novo->alteracao = null;
                     $prod_novo->codusuarioalteracao = null;
+
                     if (!$prod_novo->save()) {
                         $erro = true;
                         $model->addError('codnotafiscal', 'Erro ao duplicar NotaFiscalProdutoBarra #' . $prod_orig->codnotafiscalprodutobarra);
