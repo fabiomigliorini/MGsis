@@ -117,6 +117,18 @@ foreach ($model->NfeTerceiroItems as $item)
 						<small class="muted">Desc</small>
 						<b class="text-success"><?php echo CHtml::encode(Yii::app()->format->formatNumber($item->vdesc)); ?></b>
 					<?php } ?>
+					<?php if (!empty($item->vfrete)) { ?>
+						<small class="muted">Frete</small>
+						<b class="text-success"><?php echo CHtml::encode(Yii::app()->format->formatNumber($item->vfrete)); ?></b>
+					<?php } ?>
+					<?php if (!empty($item->vseg)) { ?>
+						<small class="muted">Seguro</small>
+						<b class="text-success"><?php echo CHtml::encode(Yii::app()->format->formatNumber($item->vseg)); ?></b>
+					<?php } ?>
+					<?php if (!empty($item->voutro)) { ?>
+						<small class="muted">Outro</small>
+						<b class="text-success"><?php echo CHtml::encode(Yii::app()->format->formatNumber($item->voutro)); ?></b>
+					<?php } ?>
 				</div>
 				<?php
 
