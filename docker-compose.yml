@@ -11,9 +11,11 @@ services:
             && chmod -R a+w /opt/www/MGsis/yii-1.1.14.f0fee9
             && ln -sf /opt/www/MGsis/yii-1.1.14.f0fee9 /opt/www/yii-1.1.14.f0fee9
             && service nginx start
-            && service memcached start 
+            && service memcached start
             && service php5.6-fpm start
             && /bin/bash"
         volumes:
             - ./:/opt/www/MGsis
+            - /media/publico:/media/publico
+            - ../NFePHP/:/opt/www/NFePHP
         network_mode: host

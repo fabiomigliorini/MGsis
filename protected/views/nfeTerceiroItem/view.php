@@ -180,6 +180,30 @@ $(document).ready(function(){
             ];
         }
 
+        if (!empty($model->vfrete)) {
+            $attr[] = [
+                'name'=>'vfrete',
+                'label'=>'Frete',
+                'value'=>Yii::app()->format->formatNumber($model->vfrete) . ' (' . Yii::app()->format->formatNumber($model->vfrete/$model->quantidade) . ')',
+            ];
+        }
+
+        if (!empty($model->vseg)) {
+            $attr[] = [
+                'name'=>'vseg',
+                'label'=>'Seguro',
+                'value'=>Yii::app()->format->formatNumber($model->vseg) . ' (' . Yii::app()->format->formatNumber($model->vseg/$model->quantidade) . ')',
+            ];
+        }
+
+        if (!empty($model->voutro)) {
+            $attr[] = [
+                'name'=>'voutro',
+                'label'=>'Outro',
+                'value'=>Yii::app()->format->formatNumber($model->voutro) . ' (' . Yii::app()->format->formatNumber($model->voutro/$model->quantidade) . ')',
+            ];
+        }
+
         if (!empty($model->vicmscredito) && empty($model->vicmsstutilizado)) {
             $attr[] = [
                 'name'=>'vicmscredito',

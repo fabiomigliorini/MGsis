@@ -250,6 +250,9 @@ class NfeTerceiroItem extends MGActiveRecord
           + (double) $this->complemento
           + (double) $this->vicmsgarantido
           - (double) $this->vdesc
+          + (double) $this->vfrete
+          + (double) $this->vseg
+          + (double) $this->voutro
           ;
 
         if (empty($this->vicmsstutilizado)) {
@@ -291,8 +294,12 @@ class NfeTerceiroItem extends MGActiveRecord
         }
         $this->vicmsstutilizado = $this->vicmsst;
         $base = (double) $this->vprod
-        + (double) $this->ipivipi
-        - (double) $this->vdesc;
+          + (double) $this->ipivipi
+          - (double) $this->vdesc
+          + (double) $this->vfrete
+          + (double) $this->vseg
+          + (double) $this->voutro
+          ;
         $this->vicmsgarantido = $base * (self::PERCENTUAL_ICMS_GARANTIDO/100);
         $this->vicmsgarantido -= (double) $this->vicmsstutilizado;
         if ($this->vicmsgarantido < 0) {
@@ -329,7 +336,7 @@ class NfeTerceiroItem extends MGActiveRecord
 
         // Credito ICMS, no maximo 17% para compra interestadual
         if ($interestadual) {
-            $max_vicmscredito = ((double)$this->vprod -  (double)$this->vdesc) * 0.07;
+            $max_vicmscredito = ((double)$this->vprod - (double)$this->vdesc + (double)$this->vfrete + (double)$this->vseg + (double)$this->voutro) * 0.07;
             $this->vicmscredito = min([$max_vicmscredito, (double) $this->vicms]);
         } else {
             $this->vicmscredito = (double) $this->vicms;
@@ -358,6 +365,9 @@ class NfeTerceiroItem extends MGActiveRecord
                 $base = (double) $this->vprod
                     + (double) $this->ipivipi
                     - (double) $this->vdesc
+                    + (double) $this->vfrete
+                    + (double) $this->vseg
+                    + (double) $this->voutro
                     ;
                 $base = $base * (1+$this->mva/100);
                 // echo $base ;

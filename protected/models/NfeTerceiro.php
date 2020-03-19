@@ -561,7 +561,12 @@ class NfeTerceiro extends MGActiveRecord
             $nfitem->qcom = $item->prod->qCom->__toString();
             $nfitem->vuncom = $item->prod->vUnCom->__toString();
             $nfitem->vprod = $item->prod->vProd->__toString();
+
+            $nfitem->vfrete = $item->prod->vFrete->__toString();
+            $nfitem->vseg = $item->prod->vSeg->__toString();
             $nfitem->vdesc = $item->prod->vDesc->__toString();
+            $nfitem->voutro = $item->prod->vOutro->__toString();
+
             $nfitem->infadprod = $item->infAdProd->__toString();
             //echo "<pre>";
             //print_r($nfitem);
@@ -754,10 +759,13 @@ class NfeTerceiro extends MGActiveRecord
         //$nf->nfedataenvio =
         //$nf->nfeautorizacao =
         //$nf->nfedataautorizacao =
-        $nf->valorfrete = $this->valorfrete;
-        $nf->valorseguro = $this->valorseguro;
-        $nf->valordesconto = $this->valordesconto;
-        $nf->valoroutras = $this->valoroutras;
+
+        // Passado para Produtos
+        // $nf->valorfrete = $this->valorfrete;
+        // $nf->valorseguro = $this->valorseguro;
+        // $nf->valordesconto = $this->valordesconto;
+        // $nf->valoroutras = $this->valoroutras;
+
         //$nf->nfecancelamento =
         //$nf->nfedatacancelamento =
         //$nf->nfeinutilizacao =
@@ -793,7 +801,7 @@ class NfeTerceiro extends MGActiveRecord
             $n->lancamento = $this->entrada;
             $n->codnegociostatus = NegocioStatus::ABERTO;
             $n->codusuario = Yii::app()->user->id;
-            $n->valordesconto = $this->valordesconto;
+            // $n->valordesconto = $this->valordesconto; Passasdo para produtos
             $n->valorprodutos = $this->valorprodutos;
 
             if (!$n->save()) {
@@ -912,32 +920,19 @@ class NfeTerceiro extends MGActiveRecord
         }
 
         foreach ($this->NfeTerceiroItems as $nti) {
-            /*
-            if (empty($nti->vsugestaovenda) && $nti->vprod > 0) {
-                $this->addError("codnfeterceiro", "Não foi informado os detalhes para todos os itens!");
-                $transaction->rollBack();
-                return false;
-            }
-            */
 
             if ($geraNegocio) {
                 $npb = new NegocioProdutoBarra();
                 $npb->codnegocio = $n->codnegocio;
                 $npb->codprodutobarra = $nti->codprodutobarra;
                 $npb->quantidade = $nti->qcom;
-                $npb->valortotal = $nti->vprod + $nti->ipivipi + $nti->vicmsst;
-
-                if ($this->valorfrete > 0) {
-                    $npb->valortotal += ($this->valorfrete / $this->valorprodutos) * $nti->vprod;
-                }
-
-                if ($this->valorseguro > 0) {
-                    $npb->valortotal += ($this->valorseguro / $this->valorprodutos) * $nti->vprod;
-                }
-
-                if ($this->valoroutras > 0) {
-                    $npb->valortotal += ($this->valoroutras / $this->valorprodutos) * $nti->vprod;
-                }
+                $npb->valortotal = $nti->vprod
+                    + $nti->ipivipi
+                    + $nti->vicmsst
+                    - $nti->vdesc
+                    + $nti->vfrete
+                    + $nti->vseg
+                    + $nti->voutro;
 
                 $npb->valortotal = round($npb->valortotal, 2);
 
@@ -962,9 +957,41 @@ class NfeTerceiro extends MGActiveRecord
             $nfpb->quantidade = $nti->qcom;
             $nfpb->valorunitario = $nti->vuncom;
             $nfpb->valortotal = $nti->vprod;
-            $nfpb->icmsbase = $nti->vbc;
-            $nfpb->icmspercentual = $nti->picms;
-            $nfpb->icmsvalor = $nti->vicms;
+            if (!empty($nti->vbc)) {
+                $baseCalculada = $nti->vprod
+                      - $nti->vdesc
+                      + $nti->vfrete
+                      + $nti->vseg
+                      + $nti->voutro;
+
+                $pCalculado = (double) $nti->vbc;
+                if ($this->Pessoa->Cidade->codestado != $this->Filial->Pessoa->Cidade->codestado) {
+                    $pCalculado = min([$pCalculado, 7]);
+                }
+
+                //BIT - Redução para 41.17
+                if ($nti->ProdutoBarra->Produto->Ncm->bit && $nti->ProdutoBarra->Produto->codtributacao = Tributacao::TRIBUTADO) {
+                    $nfpb->icmscst = 20;
+                    $nfpb->icmsbasepercentual = 41.17;
+                    $nfpb->icmsbase = round($baseCalculada * ((double)$nfpb->icmsbasepercentual / 100), 2);
+                    $nfpb->icmspercentual = $nti->picms;
+                    $nfpb->icmsvalor = round($nfpb->icmsbase * ((double)$nti->vicms / 100), 2);
+
+                // Fora do Estado, Maximo 7% de ICMS
+                } elseif ($this->Pessoa->Cidade->codestado != $this->Filial->Pessoa->Cidade->codestado) {
+                    $nfpb->icmsbasepercentual = ((double)$nti->vbc / $baseCalculada) * 100;
+                    $nfpb->icmsbase =
+                    $nfpb->icmspercentual = $nti->picms;
+                    $nfpb->icmsvalor = $nti->vicms;
+
+                // Usa o que veio na nota
+                } else ($this->Pessoa->Cidade->codestado != $this->Filial->Pessoa->Cidade->codestado) {
+                    $nfpb->icmsbasepercentual = ((double)$nti->vbc / $baseCalculada) * 100;
+                    $nfpb->icmsbase = min([(double)$nti->vbc, 7]);
+                    $nfpb->icmspercentual = $nti->picms;
+                    $nfpb->icmsvalor = $nti->vicms;
+                }
+            }
             $nfpb->ipibase = $nti->ipivbc;
             $nfpb->ipipercentual = $nti->ipipipi;
             $nfpb->ipivalor = $nti->ipivipi;
@@ -972,12 +999,11 @@ class NfeTerceiro extends MGActiveRecord
             $nfpb->icmsstpercentual = $nti->picmsst;
             $nfpb->icmsstvalor = $nti->vicmsst;
             $nfpb->codnegocioprodutobarra = $npb->codnegocioprodutobarra;
-            //$nfpb->csosn =
-            //$nfpb->codnegocioprodutobarra =
-            //$nfpb->alteracao =
-            //$nfpb->codusuarioalteracao =
-            //$nfpb->criacao =
-            //$nfpb->codusuariocriacao =
+
+            $nfpb->valordesconto = $nti->vdesc;
+            $nfpb->valorfrete = $nti->vfrete;
+            $nfpb->valorseguro = $nti->vseg;
+            $nfpb->valoroutras = $nti->voutro;
 
             if (!$nfpb->save()) {
                 $this->addErrors($nfpb->getErrors());
