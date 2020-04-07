@@ -970,6 +970,7 @@ class NfeTerceiro extends MGActiveRecord
                 }
 
                 //BIT - Redução para 41.17
+		/*
                 if ($nti->ProdutoBarra->Produto->Ncm->bit && $nti->ProdutoBarra->Produto->codtributacao = Tributacao::TRIBUTADO) {
                     $nfpb->icmscst = 20;
                     $nfpb->icmsbasepercentual = 41.17;
@@ -980,7 +981,7 @@ class NfeTerceiro extends MGActiveRecord
                 // Fora do Estado, Maximo 7% de ICMS
                 } elseif ($this->Pessoa->Cidade->codestado != $this->Filial->Pessoa->Cidade->codestado) {
                     $nfpb->icmsbasepercentual = ((double)$nti->vbc / $baseCalculada) * 100;
-                    $nfpb->icmsbase =
+                    //$nfpb->icmsbase =
                     $nfpb->icmspercentual = $nti->picms;
                     $nfpb->icmsvalor = $nti->vicms;
 
@@ -989,8 +990,9 @@ class NfeTerceiro extends MGActiveRecord
                     $nfpb->icmsbasepercentual = ((double)$nti->vbc / $baseCalculada) * 100;
                     $nfpb->icmsbase = min([(double)$nti->vbc, 7]);
                     $nfpb->icmspercentual = $nti->picms;
-                    $nfpb->icmsvalor = $nti->vicms;
-                }
+		    $nfpb->icmsvalor = $nti->vicms;
+		}
+		*/
             }
             $nfpb->ipibase = $nti->ipivbc;
             $nfpb->ipipercentual = $nti->ipipipi;

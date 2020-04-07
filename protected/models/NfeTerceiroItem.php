@@ -56,6 +56,7 @@ class NfeTerceiroItem extends MGActiveRecord
     public $quantidade;
     public $margemvenda;
     public $picmsvenda;
+    public $picmsbasereducao;
     public $vicmsvenda;
     public $margeminversa;
     public $vmargem;
@@ -265,13 +266,13 @@ class NfeTerceiroItem extends MGActiveRecord
         }
         $this->margeminversa = 100 - $this->margem;
         if (empty($this->vicmsstutilizado)) {
-          $this->margeminversa -= (double) $this->picmsvenda;
+          $this->margeminversa -= (double) $this->picmsvenda * $this->picmsbasereducao;
         }
         if ($this->margeminversa == 0) {
             return;
         }
         $this->vsugestaovenda = round($this->vcustounitario / ($this->margeminversa/100), 6);
-        $this->vicmsvenda =  round($this->vsugestaovenda * ($this->picmsvenda / 100), 6);
+        $this->vicmsvenda =  round($this->vsugestaovenda * (($this->picmsvenda * $this->picmsbasereducao) / 100), 6);
         $this->vmargem =  round($this->vsugestaovenda * ($this->margem / 100), 6);
     }
 
@@ -334,25 +335,31 @@ class NfeTerceiroItem extends MGActiveRecord
             }
         }
 
+        $this->picmsvenda = 17;
+        $this->picmsbasereducao = 1.0;
+        // MVA Média das vendas 2018 e 2019
+        $this->mva = 57.97;
+
+        if (!empty($this->codprodutobarra)) {
+            if (!empty($this->ProdutoBarra->Produto->codcest)) {
+                $this->mva = $this->ProdutoBarra->Produto->Cest->mva;
+            }
+            if ($this->ProdutoBarra->Produto->Ncm->bit) {
+                $this->picmsbasereducao = 0.4117;
+            }       
+        }
+
         // Credito ICMS, no maximo 17% para compra interestadual
         if ($interestadual) {
-            $max_vicmscredito = ((double)$this->vprod - (double)$this->vdesc + (double)$this->vfrete + (double)$this->vseg + (double)$this->voutro) * 0.07;
-            $this->vicmscredito = min([$max_vicmscredito, (double) $this->vicms]);
+            $max_vicmscredito = ((double)$this->vprod - (double)$this->vdesc + (double)$this->vfrete + (double)$this->vseg + (double)$this->voutro) * 0.07 * $this->picmsbasereducao;
+            $this->vicmscredito = min([$max_vicmscredito, (double) $this->vicms * $this->picmsbasereducao]);
         } else {
-            $this->vicmscredito = (double) $this->vicms;
+            $this->vicmscredito = (double) $this->vicms * $this->picmsbasereducao;
         }
-        $this->picmsvenda = 17;
+
 
         // se for ICMS ST
         if ($codtributacao == Tributacao::SUBSTITUICAO) {
-
-        // MVA Média das vendas 2018 e 2019
-            $this->mva = 57.97;
-            if (!empty($this->codprodutobarra)) {
-                if (!empty($this->ProdutoBarra->Produto->codcest)) {
-                    $this->mva = $this->ProdutoBarra->Produto->Cest->mva;
-                }
-            }
 
             // se ST já está destacada na nota, fim de papo
             if ($this->vicmsst > 0) {
@@ -369,7 +376,7 @@ class NfeTerceiroItem extends MGActiveRecord
                     + (double) $this->vseg
                     + (double) $this->voutro
                     ;
-                $base = $base * (1+$this->mva/100);
+                $base = $base * (1+($this->mva)/100) * $this->picmsbasereducao;
                 // echo $base ;
                 // die();
                 $this->vicmsstutilizado = ($base * ($this->picmsvenda / 100)) - $this->vicmscredito;

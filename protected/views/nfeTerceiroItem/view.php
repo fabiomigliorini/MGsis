@@ -145,7 +145,7 @@ $(document).ready(function(){
             }
             $str = Yii::app()->format->formatNumber($model->vicmsstutilizado) . ' (' . Yii::app()->format->formatNumber($model->vicmsstutilizado/$model->quantidade) . ')';
             if (!empty($model->mva)) {
-                $str .= ' - MVA ' . Yii::app()->format->formatNumber($model->mva) . '%';
+                $str .= ' - MVA ' . Yii::app()->format->formatNumber($model->mva) . '% @ ' . Yii::app()->format->formatNumber($model->picmsbasereducao * 100, 2) . '%';
             }
             $attr[] =
                 array(
@@ -208,7 +208,7 @@ $(document).ready(function(){
             $attr[] = [
                 'name'=>'vicmscredito',
                 'label'=>'Credito ICMS',
-                'value'=>'-' . Yii::app()->format->formatNumber($model->vicmscredito) . ' (-' . Yii::app()->format->formatNumber($model->vicmscredito/$model->quantidade) . ')',
+                'value'=>'-' . Yii::app()->format->formatNumber($model->vicmscredito) . ' (-' . Yii::app()->format->formatNumber($model->vicmscredito/$model->quantidade) . ') @ ' . Yii::app()->format->formatNumber($model->picmsbasereducao * 100, 2) . '%',
             ];
         }
 
@@ -248,7 +248,7 @@ $(document).ready(function(){
         if (!empty($model->vicmsvenda) && empty($model->vicmsstutilizado)) {
             $attr[] = [
                 'label'=>'ICMS Venda',
-                'value'=>Yii::app()->format->formatNumber($model->vicmsvenda) . ' (' . Yii::app()->format->formatNumber($model->picmsvenda, 2) . '%)',
+                'value'=>Yii::app()->format->formatNumber($model->vicmsvenda) . ' (' . Yii::app()->format->formatNumber($model->picmsvenda, 2) . '% @ ' . Yii::app()->format->formatNumber($model->picmsbasereducao * 100, 2) . '%)',
             ];
         }
 
@@ -451,7 +451,7 @@ $(document).ready(function(){
         ?>
 	</small>
 	<small class="span3">
-		<?php
+    <?php
         $this->widget('bootstrap.widgets.TbDetailView', array(
             'data'=>$model,
             'attributes'=>array(
