@@ -27,7 +27,7 @@ class MGEscPrint
 
 
         $this->impressora = $impressora;
-        if (!empty($this->impressora) && isset(Yii::app()->user->impressoraMatricial)) {
+        if (empty($this->impressora) && isset(Yii::app()->user->impressoraMatricial)) {
             $this->impressora = Yii::app()->user->impressoraMatricial;
         }
 
