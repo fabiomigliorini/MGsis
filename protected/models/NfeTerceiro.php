@@ -568,11 +568,6 @@ class NfeTerceiro extends MGActiveRecord
             $nfitem->voutro = $item->prod->vOutro->__toString();
 
             $nfitem->infadprod = $item->infAdProd->__toString();
-            //echo "<pre>";
-            //print_r($nfitem);
-            //echo "<hr>";
-            //print_r($item);
-            //die('aqui');
             $nfitem->ceantrib = $item->prod->cEANTrib->__toString();
             $nfitem->utrib = $item->prod->uTrib->__toString();
             $nfitem->qtrib = $item->prod->qTrib->__toString();
@@ -957,42 +952,38 @@ class NfeTerceiro extends MGActiveRecord
             $nfpb->quantidade = $nti->qcom;
             $nfpb->valorunitario = $nti->vuncom;
             $nfpb->valortotal = $nti->vprod;
-            if (!empty($nti->vbc)) {
+            if (!empty($nti->vicms)) {
+
                 $baseCalculada = $nti->vprod
                       - $nti->vdesc
                       + $nti->vfrete
                       + $nti->vseg
                       + $nti->voutro;
 
-                $pCalculado = (double) $nti->vbc;
-                if ($this->Pessoa->Cidade->codestado != $this->Filial->Pessoa->Cidade->codestado) {
-                    $pCalculado = min([$pCalculado, 7]);
-                }
-
-                //BIT - Redução para 41.17
-		/*
-                if ($nti->ProdutoBarra->Produto->Ncm->bit && $nti->ProdutoBarra->Produto->codtributacao = Tributacao::TRIBUTADO) {
+                // Redução para 41.17% da Base de Calculo, pros BITs
+                if ($nti->ProdutoBarra->Produto->Ncm->bit) {
                     $nfpb->icmscst = 20;
                     $nfpb->icmsbasepercentual = 41.17;
                     $nfpb->icmsbase = round($baseCalculada * ((double)$nfpb->icmsbasepercentual / 100), 2);
-                    $nfpb->icmspercentual = $nti->picms;
-                    $nfpb->icmsvalor = round($nfpb->icmsbase * ((double)$nti->vicms / 100), 2);
-
-                // Fora do Estado, Maximo 7% de ICMS
-                } elseif ($this->Pessoa->Cidade->codestado != $this->Filial->Pessoa->Cidade->codestado) {
+                } else {
                     $nfpb->icmsbasepercentual = ((double)$nti->vbc / $baseCalculada) * 100;
-                    //$nfpb->icmsbase =
-                    $nfpb->icmspercentual = $nti->picms;
-                    $nfpb->icmsvalor = $nti->vicms;
+                    $nfpb->icmsbase = (double) $baseCalculada;
+                }
 
-                // Usa o que veio na nota
-                } else ($this->Pessoa->Cidade->codestado != $this->Filial->Pessoa->Cidade->codestado) {
-                    $nfpb->icmsbasepercentual = ((double)$nti->vbc / $baseCalculada) * 100;
-                    $nfpb->icmsbase = min([(double)$nti->vbc, 7]);
-                    $nfpb->icmspercentual = $nti->picms;
-		    $nfpb->icmsvalor = $nti->vicms;
-		}
-		*/
+                // Aliquota Maxima de 7% para Interestadual
+                if ($this->Pessoa->Cidade->codestado != $this->Filial->Pessoa->Cidade->codestado) {
+                    $nfpb->icmspercentual = min([(double)$nti->picms, 7]);
+                } else {
+                    $nfpb->icmspercentual = (double) $nti->picms;
+                }
+
+                // se não tem reducao, e percentual igual da nota, usa valor calculado pelo emitente
+                if ($nfpb->icmsbasepercentual == 100 && $nfpb->icmspercentual == $nti->picms) {
+                    $nfpb->icmsvalor = (double) $nti->vicms;
+                } else {
+                    $nfpb->icmsvalor = round($nfpb->icmsbase * ($nfpb->icmspercentual/100), 2);
+                }
+
             }
             $nfpb->ipibase = $nti->ipivbc;
             $nfpb->ipipercentual = $nti->ipipipi;
