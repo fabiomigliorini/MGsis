@@ -480,7 +480,13 @@ class NfeTerceiro extends MGActiveRecord
             $cnpj = $infNFe->dest->CPF;
         }
 
-        if ($pessoa = Pessoa::model()->find("cnpj = :cnpj", array(":cnpj" => $cnpj))) {
+	if (!empty($infNFe->dest->IE)) {
+            if ($pessoa = Pessoa::model()->find("cnpj = :cnpj AND ie = :ie", array(":cnpj" => $cnpj, ":ie" => $infNFe->dest->IE))) {
+                if ($filial = Filial::model()->find("codpessoa = :codpessoa", array(":codpessoa" => $pessoa->codpessoa))) {
+                    $this->codfilial = $filial->codfilial;
+                }
+            }
+	} elseif ($pessoa = Pessoa::model()->find("cnpj = :cnpj", array(":cnpj" => $cnpj))) {
             if ($filial = Filial::model()->find("codpessoa = :codpessoa", array(":codpessoa" => $pessoa->codpessoa))) {
                 $this->codfilial = $filial->codfilial;
             }
@@ -954,20 +960,20 @@ class NfeTerceiro extends MGActiveRecord
             $nfpb->valortotal = $nti->vprod;
             if (!empty($nti->vicms)) {
 
-                $baseCalculada = $nti->vprod
-                      - $nti->vdesc
-                      + $nti->vfrete
-                      + $nti->vseg
-                      + $nti->voutro;
+                $baseCalculada = (double) $nti->vprod
+                      - (double) $nti->vdesc
+                      + (double) $nti->vfrete
+                      + (double) $nti->vseg
+                      + (double) $nti->voutro;
 
                 // Redução para 41.17% da Base de Calculo, pros BITs
                 if ($nti->ProdutoBarra->Produto->Ncm->bit) {
                     $nfpb->icmscst = 20;
                     $nfpb->icmsbasepercentual = 41.17;
                     $nfpb->icmsbase = round($baseCalculada * ((double)$nfpb->icmsbasepercentual / 100), 2);
-                } else {
-                    $nfpb->icmsbasepercentual = ((double)$nti->vbc / $baseCalculada) * 100;
-                    $nfpb->icmsbase = (double) $baseCalculada;
+		} else {
+                    $nfpb->icmsbasepercentual = round(((double)$nti->vbc / $baseCalculada) * 100, 2);
+                    $nfpb->icmsbase = round($baseCalculada, 2);
                 }
 
                 // Aliquota Maxima de 7% para Interestadual

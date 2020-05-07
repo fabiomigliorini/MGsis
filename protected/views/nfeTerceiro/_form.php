@@ -16,6 +16,7 @@
 		//echo $form->textFieldRow($model,'nfedataautorizacao',array('class'=>'span5'));
 		//echo $form->textFieldRow($model,'codoperacao',array('class'=>'span5'));
 		//echo $form->textFieldRow($model,'valortotal',array('class'=>'span5','maxlength'=>14));
+                echo $form->select2Row($model, 'codfilial', Filial::getListaCombo(), array('class'=>'input-medium'));
 		echo $form->select2PessoaRow($model,'codpessoa', array('class'=>'input-xlarge'));
 		echo $form->select2Row($model,'indsituacao', NfeTerceiro::getIndSituacaoListaCombo(), array('class'=>'input-medium'));
 		echo $form->select2Row($model,'codnaturezaoperacao', NaturezaOperacao::getListaCombo(), array('class'=>'input-xlarge'));
