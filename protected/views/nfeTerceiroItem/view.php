@@ -306,15 +306,20 @@ $(document).ready(function(){
                         $cssVenda = 'text-warning';
                     }
 
+                    $str = Yii::app()->format->formatNumber($sugestao); 
+                    //$str .= ' (' . Yii::app()->format->formatNumber($sugestao / $pe->quantidade, 2) . ')';
                     $attr[]=
                             array(
                                 'label'=>'Sugestão',
-                                'value'=>Yii::app()->format->formatNumber($sugestao),
+                                'value'=>$str,
                             );
+
+                    $str = Yii::app()->format->formatNumber($venda);
+                    $str .= ' (' . Yii::app()->format->formatNumber($venda / $pe->quantidade, 2) . ')';
                     $attr[]=
                         array(
                             'label'=>$pe->UnidadeMedida->sigla . ' ' . $pe->descricao,
-                            'value'=>Yii::app()->format->formatNumber($venda),
+                            'value'=>$str,
                             'cssClass'=>$cssVenda,
                         );
                 }
