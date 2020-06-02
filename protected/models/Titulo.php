@@ -675,13 +675,13 @@ class Titulo extends MGActiveRecord
 			{
 				//senao, pega a diferenca dos valores
 				if ($this->debito > $old->debito)
-					$debito = $this->debito - $old->debito;
+					$debito = round($this->debito - $old->debito, 2);
 				if ($this->debito < $old->debito)
-					$credito = $old->debito - $this->debito;
+					$credito = round($old->debito - $this->debito, 2);
 				if ($this->credito > $old->credito)
-					$credito = $this->credito - $old->credito;
+					$credito = round($this->credito - $old->credito, 2);
 				if ($this->credito < $old->credito)
-					$debito = $old->credito - $this->credito;
+					$debito = round($old->credito - $this->credito, 2);
 				$codtipomovimento = TipoMovimentoTitulo::TIPO_AJUSTE;
 			}
 
