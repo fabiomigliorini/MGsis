@@ -126,7 +126,7 @@ $(document).ready(function() {
 	$('#NfeTerceiroItem_ipivipi').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#NfeTerceiroItem_vicmsst').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	// $('#NfeTerceiroItem_vicmsgarantido').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
-	$('#NfeTerceiroItem_complemento').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+	$('#NfeTerceiroItem_complemento').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.', vMin: -9999999.99 });
 	$('#NfeTerceiroItem_vcusto').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#NfeTerceiroItem_margem').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 
