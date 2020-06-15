@@ -297,11 +297,9 @@ $(document).ready(function() {
 		$(this).val($(this).val().replace(/\s+/g, ''));
 	});
 
-	/*
 	$('#NotaFiscal_placa').change(function(e){
-		$(this).val($(this).val().toUpperCase());
+            $(this).val($(this).val().toUpperCase());
 	});
-	*/
 
 	$('#NotaFiscal_codnaturezaoperacao').change(function(e){ atualizaObservacoes(); });
 

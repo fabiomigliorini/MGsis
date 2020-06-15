@@ -169,11 +169,11 @@ class NotaFiscal extends MGActiveRecord
 	        return;
         }
         // Padrao Placa Mercosul Carro
-        if (preg_match('/^[a-zA-Z]{3}[0-9]{1}[a-zA-Z]{1}[0-9]{2}$/', $this->placa)) {
+        if (preg_match('/^[A-Z]{3}[0-9]{1}[A-Z]{1}[0-9]{2}$/', $this->placa)) {
             return;
         }
         // Padrao Placa Mercosul Moto
-        if (preg_match('/^[a-zA-Z]{3}[0-9]{2}[a-zA-Z]{1}[0-9]{1}$/', $this->placa)) {
+        if (preg_match('/^[A-Z]{3}[0-9]{2}[A-Z]{1}[0-9]{1}$/', $this->placa)) {
             return;
         }
         $this->addError($attribute, "Placa inválida!");
