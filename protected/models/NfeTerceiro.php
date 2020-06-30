@@ -722,6 +722,7 @@ class NfeTerceiro extends MGActiveRecord
 
     public function importar()
     {
+
         if (!$this->podeImportar()) {
             return false;
         }
@@ -734,6 +735,28 @@ class NfeTerceiro extends MGActiveRecord
         }
 
         $codnegocioformapagamento = null;
+
+        $totalEsperado =
+          $this->valorprodutos
+          + $this->ipivalor
+          + $this->icmsstvalor
+          + $this->valorfrete
+          + $this->valorseguro
+          - $this->valordesconto
+          + $this->valoroutras;
+
+        // Gambiarra para solucionar problema ICMS Desonerado que alguns
+        // fornecedores estão descontando do valor total da nota
+        // Ex. NFe 5120 0609 5900 1800 0408 5500 1000 0079 6219 0581 7124 - Impacto
+        $descontoRatear = 0;
+        $outrasRatear = 0;
+        if ($totalEsperado != $this->valortotal) {
+            if ($totalEsperado > $this->valortotal){
+                $descontoRatear = $totalEsperado - $this->valortotal;
+            } else {
+                $descontoRatear = $this->valortotal - $totalEsperado;
+            }
+        }
 
         $nf = new NotaFiscal();
 
@@ -920,7 +943,22 @@ class NfeTerceiro extends MGActiveRecord
             }
         }
 
+        $quantidadeItens = count($this->NfeTerceiroItems);
+        $nItem = 0;
+        $descontoRateado = 0;
+        $outrasRateado = 0;
+
         foreach ($this->NfeTerceiroItems as $nti) {
+
+            $nItem++;
+
+            if ($nItem == $quantidadeItens) {
+                $descontoRateado = $descontoRatear - (round(($descontoRatear / $this->valorprodutos) * $nti->vprod, 2) * ($quantidadeItens-1));
+                $outrasRateado = $outrasRatear - (round(($outrasRatear / $this->valorprodutos) * $nti->vprod, 2) * ($quantidadeItens-1));
+            } else {
+                $descontoRateado = round(($descontoRatear / $this->valorprodutos) * $nti->vprod, 2);
+                $outrasRateado = round(($outrasRatear / $this->valorprodutos) * $nti->vprod, 2);
+            }
 
             if ($geraNegocio) {
                 $npb = new NegocioProdutoBarra();
@@ -933,7 +971,10 @@ class NfeTerceiro extends MGActiveRecord
                     - $nti->vdesc
                     + $nti->vfrete
                     + $nti->vseg
-                    + $nti->voutro;
+                    + $nti->voutro
+                    + $outrasRateado
+                    - $descontoRateado
+                    ;
 
                 $npb->valortotal = round($npb->valortotal, 2);
 
@@ -971,7 +1012,7 @@ class NfeTerceiro extends MGActiveRecord
                     $nfpb->icmscst = 20;
                     $nfpb->icmsbasepercentual = 41.17;
                     $nfpb->icmsbase = round($baseCalculada * ((double)$nfpb->icmsbasepercentual / 100), 2);
-		} else {
+                } else {
                     $nfpb->icmsbasepercentual = round(((double)$nti->vbc / $baseCalculada) * 100, 2);
                     $nfpb->icmsbase = round($baseCalculada, 2);
                 }
@@ -999,10 +1040,10 @@ class NfeTerceiro extends MGActiveRecord
             $nfpb->icmsstvalor = $nti->vicmsst;
             $nfpb->codnegocioprodutobarra = $npb->codnegocioprodutobarra;
 
-            $nfpb->valordesconto = $nti->vdesc;
+            $nfpb->valordesconto = $nti->vdesc + $descontoRateado;
             $nfpb->valorfrete = $nti->vfrete;
             $nfpb->valorseguro = $nti->vseg;
-            $nfpb->valoroutras = $nti->voutro;
+            $nfpb->valoroutras = $nti->voutro + $outrasRateado;
 
             if (!$nfpb->save()) {
                 $this->addErrors($nfpb->getErrors());
