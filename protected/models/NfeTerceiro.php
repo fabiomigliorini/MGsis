@@ -737,13 +737,13 @@ class NfeTerceiro extends MGActiveRecord
         $codnegocioformapagamento = null;
 
         $totalEsperado =
-          $this->valorprodutos
-          + $this->ipivalor
-          + $this->icmsstvalor
-          + $this->valorfrete
-          + $this->valorseguro
-          - $this->valordesconto
-          + $this->valoroutras;
+            $this->valorprodutos
+            + $this->ipivalor
+            + $this->icmsstvalor
+            + $this->valorfrete
+            + $this->valorseguro
+            - $this->valordesconto
+            + $this->valoroutras;
 
         // Gambiarra para solucionar problema ICMS Desonerado que alguns
         // fornecedores estão descontando do valor total da nota
