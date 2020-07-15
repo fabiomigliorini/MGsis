@@ -95,24 +95,24 @@
 				)
 			),
 
-			array(
-				'label' => 'Estoque',
-				'url'=>'#',
-				'items'=>array(
-					//array('label' => 'Consulta de Preço', 'url' => Yii::app()->createUrl('produto/quiosqueConsulta')),
-					//array('label' => 'Produtos', 'url' => Yii::app()->createUrl('produto')),
-					//'---',
-					array('label' => 'Etiquetas de Produto', 'url' => Yii::app()->createUrl('etiquetaProduto')),
-					//'---',
-					//array('label' => 'Histórico de Preços', 'url' => Yii::app()->createUrl('produtoHistoricoPreco')),
-					//'---',
-					//array('label' => 'Grupos de Produtos', 'url' => Yii::app()->createUrl('grupoProduto')),
-					//array('label' => 'Marcas', 'url' => Yii::app()->createUrl('marca')),
-					//array('label' => 'NCM', 'url' => Yii::app()->createUrl('ncm')),
-					//array('label' => 'Tipos de Produtos', 'url' => Yii::app()->createUrl('tipoProduto')),
-					//array('label' => 'Unidades de Medida', 'url' => Yii::app()->createUrl('unidadeMedida')),
-				)
-			),
+			// array(
+			// 	'label' => 'Estoque',
+			// 	'url'=>'#',
+			// 	'items'=>array(
+			// 		//array('label' => 'Consulta de Preço', 'url' => Yii::app()->createUrl('produto/quiosqueConsulta')),
+			// 		//array('label' => 'Produtos', 'url' => Yii::app()->createUrl('produto')),
+			// 		//'---',
+			// 		// array('label' => 'Etiquetas de Produto', 'url' => Yii::app()->createUrl('etiquetaProduto')),
+			// 		//'---',
+			// 		//array('label' => 'Histórico de Preços', 'url' => Yii::app()->createUrl('produtoHistoricoPreco')),
+			// 		//'---',
+			// 		//array('label' => 'Grupos de Produtos', 'url' => Yii::app()->createUrl('grupoProduto')),
+			// 		//array('label' => 'Marcas', 'url' => Yii::app()->createUrl('marca')),
+			// 		//array('label' => 'NCM', 'url' => Yii::app()->createUrl('ncm')),
+			// 		//array('label' => 'Tipos de Produtos', 'url' => Yii::app()->createUrl('tipoProduto')),
+			// 		//array('label' => 'Unidades de Medida', 'url' => Yii::app()->createUrl('unidadeMedida')),
+			// 	)
+			// ),
 			//Fiscal
 			array(
 				'label' => 'Fiscal',

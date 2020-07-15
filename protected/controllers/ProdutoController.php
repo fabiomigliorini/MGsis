@@ -14,7 +14,7 @@ class ProdutoController extends Controller
 	*/
 	public function actionView($id)
 	{
-                $this->redirect(MGLARA_URL . "produto/$id");
+    $this->redirect(MGLARA_URL . "produto/$id");
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 			));
