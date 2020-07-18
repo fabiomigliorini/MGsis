@@ -216,7 +216,7 @@ class NfeTerceiro extends MGActiveRecord
                     . ' AND (indmanifestacao IS NULL OR indmanifestacao NOT IN (' . self::INDMANIFESTACAO_DESCONHECIDA . ', ' . self::INDMANIFESTACAO_NAOREALIZADA . '))'
                     . ' AND indsituacao = ' . self::INDSITUACAO_AUTORIZADA
                     . ' AND ignorada = FALSE '
-                    );
+                );
                 break;
 
             case 2: // Importadas
@@ -480,13 +480,13 @@ class NfeTerceiro extends MGActiveRecord
             $cnpj = $infNFe->dest->CPF;
         }
 
-	if (!empty($infNFe->dest->IE)) {
+        if (!empty($infNFe->dest->IE)) {
             if ($pessoa = Pessoa::model()->find("cnpj = :cnpj AND ie = :ie", array(":cnpj" => $cnpj, ":ie" => $infNFe->dest->IE))) {
                 if ($filial = Filial::model()->find("codpessoa = :codpessoa", array(":codpessoa" => $pessoa->codpessoa))) {
                     $this->codfilial = $filial->codfilial;
                 }
             }
-	} elseif ($pessoa = Pessoa::model()->find("cnpj = :cnpj", array(":cnpj" => $cnpj))) {
+        } elseif ($pessoa = Pessoa::model()->find("cnpj = :cnpj", array(":cnpj" => $cnpj))) {
             if ($filial = Filial::model()->find("codpessoa = :codpessoa", array(":codpessoa" => $pessoa->codpessoa))) {
                 $this->codfilial = $filial->codfilial;
             }
@@ -688,18 +688,18 @@ class NfeTerceiro extends MGActiveRecord
     public function podeImportar()
     {
         if (empty($this->codnaturezaoperacao)) {
-          $this->addError("codnaturezaoperacao", "Você deve informar a natureza de Operação!");
-          return false;
+            $this->addError("codnaturezaoperacao", "Você deve informar a natureza de Operação!");
+            return false;
         }
 
         if (empty($this->entrada)) {
-          $this->addError("entrada", "Você deve informar a data de Entrada/Saída!");
-          return false;
+            $this->addError("entrada", "Você deve informar a data de Entrada/Saída!");
+            return false;
         }
 
         if (empty($this->codpessoa)) {
-          $this->addError("codpessoa", "Você deve informar a Pessoa!");
-          return false;
+            $this->addError("codpessoa", "Você deve informar a Pessoa!");
+            return false;
         }
 
         $command = Yii::app()->db->createCommand('
@@ -708,10 +708,10 @@ class NfeTerceiro extends MGActiveRecord
   				 WHERE codnfeterceiro = :codnfeterceiro
   				   AND codprodutobarra is null
   			');
-  			$command->params = [
-  				"codnfeterceiro" => $this->codnfeterceiro,
-  			];
-  			$ret = $command->queryRow();
+        $command->params = [
+                "codnfeterceiro" => $this->codnfeterceiro,
+            ];
+        $ret = $command->queryRow();
 
         if ($ret['count'] > 0) {
             $this->addError("codnfeterceiro", "Não foi informado o produto relacionado de todos os itens!");
@@ -722,7 +722,6 @@ class NfeTerceiro extends MGActiveRecord
 
     public function importar()
     {
-
         if (!$this->podeImportar()) {
             return false;
         }
@@ -751,7 +750,7 @@ class NfeTerceiro extends MGActiveRecord
         $descontoRatear = 0;
         $outrasRatear = 0;
         if ($totalEsperado != $this->valortotal) {
-            if ($totalEsperado > $this->valortotal){
+            if ($totalEsperado > $this->valortotal) {
                 $descontoRatear = $totalEsperado - $this->valortotal;
             } else {
                 $descontoRatear = $this->valortotal - $totalEsperado;
@@ -949,7 +948,6 @@ class NfeTerceiro extends MGActiveRecord
         $outrasRateado = 0;
 
         foreach ($this->NfeTerceiroItems as $nti) {
-
             $nItem++;
 
             if ($nItem == $quantidadeItens) {
@@ -1000,7 +998,6 @@ class NfeTerceiro extends MGActiveRecord
             $nfpb->valorunitario = $nti->vuncom;
             $nfpb->valortotal = $nti->vprod;
             if (!empty($nti->vicms)) {
-
                 $baseCalculada = (double) $nti->vprod
                       - (double) $nti->vdesc
                       + (double) $nti->vfrete
@@ -1030,7 +1027,6 @@ class NfeTerceiro extends MGActiveRecord
                 } else {
                     $nfpb->icmsvalor = round($nfpb->icmsbase * ($nfpb->icmspercentual/100), 2);
                 }
-
             }
             $nfpb->ipibase = $nti->ipivbc;
             $nfpb->ipipercentual = $nti->ipipipi;
