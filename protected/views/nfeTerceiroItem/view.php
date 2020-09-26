@@ -122,12 +122,15 @@ $(document).ready(function(){
         //
         // }
 
-        $attr[] =
-            array(
-                'name'=>'vprod',
-                'label'=>'Custo Produto',
-                'value'=>Yii::app()->format->formatNumber($model->vprod) . ' (' . Yii::app()->format->formatNumber($model->vprod/$model->quantidade) . ')',
-            );
+        if ($model->quantidade > 0) {
+
+               $attr[] =
+                      array(
+                             'name'=>'vprod',
+                             'label'=>'Custo Produto',
+                             'value'=>Yii::app()->format->formatNumber($model->vprod) . ' (' . Yii::app()->format->formatNumber($model->vprod/$model->quantidade) . ')',
+                             );
+	}
 
         if (!empty($model->ipivipi)) {
             $attr[] =
