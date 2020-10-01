@@ -356,7 +356,8 @@ class NotaFiscal extends MGActiveRecord
             '05599253000147', // RO
             '87958674000181', // RS
 	    '03507415000578', // MT
-	    '12200192000169'  // AL
+	    '12200192000169', // AL
+	    '16907746000113', // MG
 	];
 	if (in_array($cnpj, $cnpjsSefaz)) {
             return;
