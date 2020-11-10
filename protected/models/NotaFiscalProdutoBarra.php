@@ -469,6 +469,9 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
                 }
 
                 $this->icmspercentual = $trib->icmslppercentual;
+		if ($this->icmspercentual == 12 && $this->ProdutoBarra->Produto->importado) {
+			$this->icmspercentual = 4;
+		}
 
                 if ((!empty($this->icmsbase)) and (!empty($this->icmspercentual))) {
                     $this->icmsvalor = round(($this->icmsbase * $this->icmspercentual)/100, 2);
