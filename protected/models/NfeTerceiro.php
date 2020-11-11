@@ -945,18 +945,22 @@ class NfeTerceiro extends MGActiveRecord
         $quantidadeItens = count($this->NfeTerceiroItems);
         $nItem = 0;
         $descontoRateado = 0;
+	$descontoRateadoTotal = 0;
         $outrasRateado = 0;
+	$outrasRateadoTotal = 0;
 
         foreach ($this->NfeTerceiroItems as $nti) {
             $nItem++;
 
             if ($nItem == $quantidadeItens) {
-                $descontoRateado = $descontoRatear - (round(($descontoRatear / $this->valorprodutos) * $nti->vprod, 2) * ($quantidadeItens-1));
-                $outrasRateado = $outrasRatear - (round(($outrasRatear / $this->valorprodutos) * $nti->vprod, 2) * ($quantidadeItens-1));
+                $descontoRateado = $descontoRatear - $descontoRateadoTotal;
+                $outrasRateado = $outrasRatear - $outrasRateadoTotal;
             } else {
                 $descontoRateado = round(($descontoRatear / $this->valorprodutos) * $nti->vprod, 2);
                 $outrasRateado = round(($outrasRatear / $this->valorprodutos) * $nti->vprod, 2);
             }
+            $descontoRateadoTotal += $descontoRateado;
+            $outrasRateadoTotal += $outrasRateado;
 
             if ($geraNegocio) {
                 $npb = new NegocioProdutoBarra();
