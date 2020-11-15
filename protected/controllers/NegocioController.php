@@ -432,6 +432,17 @@ class NegocioController extends Controller
 
 	}
 
+	public function actionAtualizaValorDesconto($codnegocio, $valordesconto)
+	{
+		$negocio = $this->loadModel($codnegocio);
+		if ($negocio->codnegociostatus != 1) {
+			throw new \Exception("Negócio não está mais aberto!", 1);
+		}
+		$negocio->valordesconto = $valordesconto;
+		$negocio->save();
+		return $valordesconto;
+	}
+
 	public function actionFecharNegocio($codnegocio)
 	{
 

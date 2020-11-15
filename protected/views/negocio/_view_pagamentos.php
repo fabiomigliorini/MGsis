@@ -14,7 +14,7 @@
 						if (!empty($model->Pessoa))
 							if (!empty($model->Pessoa->codformapagamento))
 								$codformapagamento = $model->Pessoa->codformapagamento;
-							
+
 						$this->widget(
 							'booster.widgets.TbSelect2',
 							array(
@@ -25,7 +25,7 @@
 									'allowClear'=>true,
 								),
 							)
-						);			
+						);
 					?>
 					&nbsp;
 					<div class="input-append">
@@ -42,7 +42,7 @@
 		$this->renderPartial('_view_pagamentos_listagem',
 			array(
 				'model'=>$model,
-			));		
+			));
 		?>
 		</div>
 		<span class="row-fluid" id="diferenca">
@@ -50,7 +50,7 @@
 				Diferença
 			</b>
 			<b class="span4 text-right" id="diferencavalor">
-				
+
 			</b>
 		</span>
 	</div>
@@ -73,7 +73,7 @@ function atualizaListagemPagamentos()
 		error: function (xhr, status) {
 			bootbox.alert("Erro ao atualizar listagem de pagamentos!");
 		},
-	});				
+	});
 }
 
 function atualizaValorPagamento(foco)
@@ -81,22 +81,22 @@ function atualizaValorPagamento(foco)
 	var valorpagamento = $("#totalvalorpagamento").val();
 	var valortotal = $("#Negocio_valortotal").autoNumeric('get');
 	var valordiferenca = valortotal - valorpagamento;
-	
+
 	$('#diferencavalor').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
-	
+
 	if (valordiferenca > 0)
 	{
 		$('#diferencalabel').html("Faltando");
 		$('#diferencavalor').autoNumeric('set', Math.abs(valordiferenca));
 		$('#valorpagamento').autoNumeric('set', Math.abs(valordiferenca));
 		$('#diferenca').show()
-		if (foco) 
+		if (foco)
 			$('#codformapagamento').select2('focus');
 	}
 	else
 	{
 		$('#valorpagamento').autoNumeric('set', 0);
-		if (foco) 
+		if (foco)
 			$('.btn-primary').focus();
 		if (valordiferenca < 0)
 		{
@@ -119,10 +119,10 @@ function adicionaFormaPagamento()
 {
 	var codformapagamento = $("#codformapagamento").val();
 	var valorpagamento = $('#valorpagamento').autoNumeric('get');
-	
+
 	if (valorpagamento == 0)
 		return false;
-	
+
 	$.ajax({
 		url: "<?php echo Yii::app()->createUrl('negocio/adicionaformapagamento') ?>",
 		data: {
@@ -157,39 +157,39 @@ $(document).ready(function() {
 
 	$('#valorpagamento').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#Negocio_valortotal').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
-	
-    $("#btnAdicionar").click(function(e){ 
+
+    $("#btnAdicionar").click(function(e){
 		e.preventDefault();
-		adicionaFormaPagamento (); 
+		adicionaFormaPagamento ();
 	});
-	
+
 	atualizaValorPagamento();
 
 	// botão delete da embalagem
 	jQuery(document).on('click','a.delete-pagamento',function(e) {
-	
+
 		//evita redirecionamento da pagina
 		e.preventDefault();
-		
+
 		// pega url para delete
 		var url = jQuery(this).attr('href');
-		
+
 		//pede confirmacao
 		bootbox.confirm("Excluir este Item?", function(result) {
-			
+
 			// se confirmou
 			if (result) {
-				
+
 				//faz post
 				jQuery.ajax({
 					type: 'POST',
 					url: url,
-					
+
 					//se sucesso, atualiza listagem de embalagens
 					success: function(){
 						atualizaTela();
 					},
-					
+
 					//caso contrário mostra mensagem com erro
 					error: function (XHR, textStatus) {
 						var err;
@@ -221,10 +221,10 @@ $(document).ready(function() {
 						}
 					}
 				});
-			}	
+			}
 		});
-	});			
-	
+	});
+
 });
-	
+
 </script>
