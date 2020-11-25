@@ -187,7 +187,7 @@ function salvaDesconto(valorDesconto)
 	$.ajax({
 		url: "<?php echo Yii::app()->createUrl('negocio/atualizavalordesconto') ?>",
 		data: {
-			codnegocio: <?php echo $model->codnegocio; ?>,
+			codnegocio: "<?php echo $model->codnegocio; ?>",
 			valordesconto: valorDesconto,
 		},
 		type: "GET",
