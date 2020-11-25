@@ -295,11 +295,19 @@ class NegocioController extends Controller
 	*/
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='negocio-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
+		if(!isset($_POST['ajax'])) {
+			return;
 		}
+		if($_POST['ajax']!=='negocio-form') {
+			return;
+		}
+		echo CActiveForm::validate($model);
+		// Gambiarra pra salvar os dados enquanto usuario edita
+		if ($model->codnegociostatus == 1) {
+			$model->attributes=$_POST['Negocio'];
+			$model->save();
+		}
+		Yii::app()->end();
 	}
 
 	public function actionAdicionaProduto($codnegocio, $barras, $quantidade=1)
@@ -430,17 +438,6 @@ class NegocioController extends Controller
 
 		echo CJSON::encode($retorno);
 
-	}
-
-	public function actionAtualizaValorDesconto($codnegocio, $valordesconto)
-	{
-		$negocio = $this->loadModel($codnegocio);
-		if ($negocio->codnegociostatus != 1) {
-			throw new \Exception("Negócio não está mais aberto!", 1);
-		}
-		$negocio->valordesconto = $valordesconto;
-		$negocio->save();
-		return $valordesconto;
 	}
 
 	public function actionFecharNegocio($codnegocio)

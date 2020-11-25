@@ -174,6 +174,9 @@ function atualizaValorDesconto()
 
 	//Recalcula Desconto
 	valorDesconto = valorProdutos - valorTotal;
+  if (valorDesconto < 0.01) {
+    valorDesconto = '';
+  }
 
 	//Altera campo tela
 	$('#Negocio_valordesconto').autoNumeric('set', valorDesconto);
@@ -182,35 +185,22 @@ function atualizaValorDesconto()
 	atualizaPercentualDesconto();
 }
 
-function salvaDesconto(valorDesconto)
-{
-	$.ajax({
-		url: "<?php echo Yii::app()->createUrl('negocio/atualizavalordesconto') ?>",
-		data: {
-			codnegocio: "<?php echo $model->codnegocio; ?>",
-			valordesconto: valorDesconto,
-		},
-		type: "GET",
-		dataType: "json",
-		async: false,
-		error: function (xhr, status) {
-			bootbox.alert("Erro ao salvar desconto!");
-		},
-	});
-}
-
 function atualizaPercentualDesconto()
 {
 	var percentualDesconto = 0;
   var valorDesconto = $('#Negocio_valordesconto').autoNumeric('get');
 
-	if ($('#Negocio_valorprodutos').autoNumeric('get') > 0)
-		percentualDesconto =
-			valorDesconto * 100 /
-			$('#Negocio_valorprodutos').autoNumeric('get');
+	if ($('#Negocio_valorprodutos').autoNumeric('get') > 0) {
+    percentualDesconto =
+      valorDesconto * 100 /
+      $('#Negocio_valorprodutos').autoNumeric('get');
+  }
+
+  if (percentualDesconto < 0.01) {
+    percentualDesconto = '';
+  }
 
 	$('#Negocio_percentualdesconto').autoNumeric('set', percentualDesconto);
-  salvaDesconto(valorDesconto);
 	atualizaValorTotal();
 }
 
@@ -263,11 +253,11 @@ $(document).ready(function() {
 
 	$('#Negocio_percentualdesconto').change(function() {
 		atualizaValorDesconto();
-    });
+  });
 
 	$('#Negocio_valordesconto').change(function() {
 		atualizaPercentualDesconto();
-    });
+  });
 
 	$("#Negocio_observacoes").RemoveAcentos();
 
