@@ -122,6 +122,9 @@ class NegocioController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
+		if ($model->codnegociostatus != 1) {
+			$this->redirect(array('view','id'=>$model->codnegocio));
+		}
 
 		$fechar = 0;
 		if (isset($_POST["fechar"]))
@@ -303,7 +306,7 @@ class NegocioController extends Controller
 		}
 		echo CActiveForm::validate($model);
 		// Gambiarra pra salvar os dados enquanto usuario edita
-		if ($model->codnegociostatus == 1) {
+		if (!empty($model->codnegocio) && $model->codnegociostatus == 1) {
 			$model->attributes=$_POST['Negocio'];
 			$model->save();
 		}
@@ -542,6 +545,21 @@ class NegocioController extends Controller
 		$this->render('devolucao',array(
 			'model'=>$model,
 			));
+	}
+
+	public function actionStatus ($id)
+	{
+		$model = $this->loadModel($id);
+		echo CJSON::encode([
+			'codnegociostatus' => $model->codnegociostatus,
+			'codnegocio' => $model->codnegocio,
+			'valorprodutos' => (float) $model->valorprodutos,
+			'valordesconto' => (float) $model->valordesconto,
+			'valortotal' => (float) $model->valortotal,
+			'valoravista' => (float) $model->valoravista,
+			'valoraprazo' => (float) $model->valoraprazo,
+		]);
+
 	}
 
 

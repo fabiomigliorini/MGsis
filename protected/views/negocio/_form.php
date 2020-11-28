@@ -249,7 +249,46 @@ function mostraMensagemVenda()
 	});
 }
 
+var negocioStatus = {};
+function verificarStatusNegocio ()
+{
+  console.log(negocioStatus);
+  $.ajax({
+		url: "<?php echo Yii::app()->createUrl('negocio/status') ?>",
+		data: {
+			id: "<?php echo $model->codnegocio ?>"
+		},
+		type: "GET",
+		dataType: "JSON",
+		// async: true,
+		success: function (data) {
+      if (negocioStatus.codnegociostatus === undefined) {
+        negocioStatus = data;
+      }
+      if (
+        negocioStatus.codnegociostatus != data.codnegociostatus ||
+        negocioStatus.valoraprazo != data.valoraprazo ||
+        negocioStatus.valoravista != data.valoravista ||
+        negocioStatus.valortotal != data.valortotal
+      ) {
+        location.reload();
+      }
+		},
+		error: function (xhr, status) {
+		},
+	});
+
+}
+
 $(document).ready(function() {
+
+  <?php if (!empty($model->codnegocio)): ?>
+  verificarStatusNegocio();
+  setInterval(function() {
+    verificarStatusNegocio();
+    // your code goes here...
+  }, 3.5 * 1000); // 60 * 1000 milse
+  <?php endif; ?>
 
 	$('#Negocio_percentualdesconto').change(function() {
 		atualizaValorDesconto();
