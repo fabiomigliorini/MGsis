@@ -11,7 +11,7 @@
 					<br>
 					<?php
 						$codformapagamento = FormaPagamento::DINHEIRO;
-						if (!empty($model->Pessoa))
+						if (!empty($model->codpessoa))
 							if (!empty($model->Pessoa->codformapagamento))
 								$codformapagamento = $model->Pessoa->codformapagamento;
 

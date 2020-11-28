@@ -719,13 +719,17 @@ class Negocio extends MGActiveRecord
         return true;
     }
 
-    /*
-    protected function afterSave()
+    public function valorPagamentoLio()
     {
-        if ($this->_codnegociostatus_original != $this->codnegociostatus) {
-            $this->movimentaEstoque();
-        }
+      if (empty($this->codnegocio)) {
+        return 0;
+      }
+      $sql = "
+        select sum(valorpagamento)
+        from mgsis.tblnegocioformapagamento
+        where codnegocio = {$this->codnegocio}
+        and codliopedido is not null
+      ";
+      return (float) Yii::app()->db->createCommand($sql)->queryScalar();
     }
-     *
-     */
 }

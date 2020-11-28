@@ -249,7 +249,11 @@ function mostraMensagemVenda()
 	});
 }
 
-var negocioStatus = {};
+var negocioStatus = {
+  codnegociostatus: <?php echo $model->codnegociostatus ?>,
+  valorpagamentolio: <?php echo $model->valorPagamentoLio() ?>,
+};
+
 function verificarStatusNegocio ()
 {
   console.log(negocioStatus);
@@ -262,17 +266,18 @@ function verificarStatusNegocio ()
 		dataType: "JSON",
 		// async: true,
 		success: function (data) {
-      if (negocioStatus.codnegociostatus === undefined) {
-        negocioStatus = data;
+
+      // Se Fechou negocio redireciona para tela visualização perguntando da nota
+      if (negocioStatus.codnegociostatus != data.codnegociostatus) {
+        window.location.href = '<?php echo Yii::app()->createUrl('negocio/view', ['id'=>$model->codnegocio, 'perguntarNota'=>true]) ?>';
       }
-      if (
-        negocioStatus.codnegociostatus != data.codnegociostatus ||
-        negocioStatus.valoraprazo != data.valoraprazo ||
-        negocioStatus.valoravista != data.valoravista ||
-        negocioStatus.valortotal != data.valortotal
-      ) {
-        location.reload();
+
+      // se alterou pagamento atualiza listagem de pagamentos
+      if (negocioStatus.valorpagamentolio != data.valorpagamentolio) {
+        atualizaListagemPagamentos()
       }
+
+      negocioStatus = data;
 		},
 		error: function (xhr, status) {
 		},

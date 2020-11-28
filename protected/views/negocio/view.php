@@ -146,9 +146,8 @@ $(document).ready(function(){
 		<?
 	}
 
-	if (Yii::app()->session['UltimoCodNegocioFechado'] == $model->codnegocio)
+	if ($perguntarNota)
 	{
-		unset(Yii::app()->session['UltimoCodNegocioFechado']);
 
 		$documento = null;
 

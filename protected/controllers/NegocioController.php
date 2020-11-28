@@ -12,10 +12,11 @@ class NegocioController extends Controller
     * Displays a particular model.
     * @param integer $id the ID of the model to be displayed
     */
-    public function actionView($id)
+    public function actionView($id, $perguntarNota = false)
     {
         $this->render('view', array(
             'model'=>$this->loadModel($id),
+            'perguntarNota'=>$perguntarNota
             ));
     }
 
@@ -114,6 +115,7 @@ class NegocioController extends Controller
             $this->redirect(array('view','id'=>$model->codnegocio));
         }
 
+        $perguntarNota = false;
         $fechar = 0;
         if (isset($_POST["fechar"])) {
             $fechar = $_POST["fechar"];
@@ -131,11 +133,11 @@ class NegocioController extends Controller
             }
 
             if ($salvo && $fechar == 1) {
-                Yii::app()->session['UltimoCodNegocioFechado'] = $model->codnegocio;
+                $perguntarNota = true;
             }
 
             if ($salvo) {
-                $this->redirect(array('view','id'=>$model->codnegocio));
+                $this->redirect(array('view', 'id'=>$model->codnegocio, 'perguntarNota'=>$perguntarNota));
             }
         }
 
@@ -522,12 +524,7 @@ class NegocioController extends Controller
         $model = $this->loadModel($id);
         echo CJSON::encode([
             'codnegociostatus' => $model->codnegociostatus,
-            'codnegocio' => $model->codnegocio,
-            'valorprodutos' => (float) $model->valorprodutos,
-            'valordesconto' => (float) $model->valordesconto,
-            'valortotal' => (float) $model->valortotal,
-            'valoravista' => (float) $model->valoravista,
-            'valoraprazo' => (float) $model->valoraprazo,
+            'valorpagamentolio' => (float) $model->valorPagamentoLio(),
         ]);
     }
 }
