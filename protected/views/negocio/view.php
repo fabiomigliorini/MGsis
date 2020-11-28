@@ -204,6 +204,7 @@ $(document).ready(function(){
 		if (!empty($documento))
 		{
 			?>
+			window.history.pushState({page: null}, null, '<?php echo Yii::app()->createUrl('negocio/view', ['id'=>$model->codnegocio, 'perguntarNota'=>false]) ?>');
 			bootbox.confirm("<?php echo $pergunta; ?>", function(result) {
 				if (result)
 					<?php echo $funcao; ?>
