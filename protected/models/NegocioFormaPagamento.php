@@ -13,6 +13,7 @@
  * @property string $criacao
  * @property string $codusuariocriacao
  * @property string $codliopedido
+ * @property string $codpixcob
  *
  * The followings are the available model relations:
  * @property FormaPagamento $FormaPagamento
@@ -20,6 +21,7 @@
  * @property Usuario $UsuarioAlteracao
  * @property Usuario $UsuarioCriacao
  * @property LioPedido $codliopedido
+ * @property PixCob $codpixcob
  * @property Titulo[] $Titulos
  */
 class NegocioFormaPagamento extends MGActiveRecord
@@ -45,10 +47,10 @@ class NegocioFormaPagamento extends MGActiveRecord
             array('codnegocio, codformapagamento, valorpagamento', 'required'),
             array('codformapagamento', 'validaCieloLio'),
             array('valorpagamento', 'length', 'max'=>14),
-            array('alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
+            array('alteracao, codusuarioalteracao, criacao, codusuariocriacao, codliopedido, codpixcob', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('codnegocioformapagamento, codnegocio, codformapagamento, valorpagamento, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
+            array('codnegocioformapagamento, codnegocio, codformapagamento, valorpagamento, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codliopedido, codpixcob', 'safe', 'on'=>'search'),
         );
     }
 
@@ -76,6 +78,7 @@ class NegocioFormaPagamento extends MGActiveRecord
             'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
             'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
             'LioPedido' => array(self::BELONGS_TO, 'LioPedido', 'codliopedido'),
+            'PixCob' => array(self::BELONGS_TO, 'PixCob', 'codpixcob'),
             'Titulos' => array(self::HAS_MANY, 'Titulo', 'codnegocioformapagamento', 'order'=>'vencimentooriginal ASC'),
         );
     }
@@ -95,6 +98,7 @@ class NegocioFormaPagamento extends MGActiveRecord
             'criacao' => 'Criação',
             'codusuariocriacao' => 'Usuário Criação',
             'codliopedido' => 'Pedido Lio',
+            'codpixcob' => 'Cobrança Pix',
         );
     }
 
@@ -124,7 +128,9 @@ class NegocioFormaPagamento extends MGActiveRecord
         $criteria->compare('codusuarioalteracao', $this->codusuarioalteracao, true);
         $criteria->compare('criacao', $this->criacao, true);
         $criteria->compare('codusuariocriacao', $this->codusuariocriacao, true);
-
+        $criteria->compare('codliopedido',$this->codliopedido,true);
+    		$criteria->compare('codpixcob',$this->codpixcob,true);
+        
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
         ));

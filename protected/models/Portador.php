@@ -21,6 +21,8 @@
  * @property string $codusuarioalteracao
  * @property string $criacao
  * @property string $codusuariocriacao
+ * @property string $inativo
+ * @property string $pixdict
  *
  * The followings are the available model relations:
  * @property MovimentoTitulo[] $MovimentoTitulos
@@ -36,9 +38,9 @@
  */
 class Portador extends MGActiveRecord
 {
-	
+
 	const CARTEIRA = 999;
-	
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -60,6 +62,7 @@ class Portador extends MGActiveRecord
 			array('portador', 'length', 'max'=>50),
 			array('convenio', 'length', 'max'=>20),
 			array('diretorioremessa, diretorioretorno', 'length', 'max'=>100),
+			array('pixdict', 'length', 'max'=>77),
 			array('codbanco, agencia, conta, emiteboleto, codfilial, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -75,6 +78,8 @@ class Portador extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'PixCobs' => array(self::HAS_MANY, 'PixCob', 'codportador'),
+			'Pixs' => array(self::HAS_MANY, 'Pix', 'codportador'),
 			'MovimentoTitulos' => array(self::HAS_MANY, 'MovimentoTitulo', 'codportador'),
 			'Titulos' => array(self::HAS_MANY, 'Titulo', 'codportador'),
 			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
@@ -111,6 +116,7 @@ class Portador extends MGActiveRecord
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
 			'codusuariocriacao' => 'Usuário Criação',
+			'pixdict' => 'Pix DICT',
 		);
 	}
 
@@ -174,8 +180,8 @@ class Portador extends MGActiveRecord
 	{
 		return parent::model($className);
 	}
-	
-	public function scopes () 
+
+	public function scopes ()
 	{
 		return array(
 			'combo'=>array(
@@ -189,6 +195,6 @@ class Portador extends MGActiveRecord
 	{
 		$lista = self::model()->combo()->findAll();
 		return CHtml::listData($lista, 'codportador', 'portador');
-	}	
+	}
 
 }
