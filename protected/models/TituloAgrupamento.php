@@ -119,16 +119,19 @@ class TituloAgrupamento extends MGActiveRecord
 		//percorre todos títulos selecionados, verificando se os valores calculados estão corretos
 		foreach($this->GridTitulos["codtitulo"] as $codtitulo)
 		{
+			$calculado = 0.0;
+			$calculado += (float) str_replace(",", ".", str_replace(".", "", $this->GridTitulos["saldo"][$codtitulo]));
+			$calculado += (float) str_replace(",", ".", str_replace(".", "", $this->GridTitulos["multa"][$codtitulo]));
+			$calculado += (float) str_replace(",", ".", str_replace(".", "", $this->GridTitulos["juros"][$codtitulo]));
+			$calculado -= (float) str_replace(",", ".", str_replace(".", "", $this->GridTitulos["desconto"][$codtitulo]));
+
+			$informado = 0.0;
+			$informado += (float) str_replace(",", ".", str_replace(".", "", $this->GridTitulos["total"][$codtitulo]));
+
 			//valida total selecionado
-			if (($this->GridTitulos["saldo"][$codtitulo] + 
-				 $this->GridTitulos["multa"][$codtitulo] + 
-				 $this->GridTitulos["juros"][$codtitulo] - 
-				 $this->GridTitulos["desconto"][$codtitulo] - 
-				 $this->GridTitulos["total"][$codtitulo])
-				> 0.005
-				)
-				$this->addError($attribute, 'Total incorreto para o título ' . CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($codtitulo)),array('titulo/view','id'=>$codtitulo)) . "!");
-			
+			if (($calculado - $informado) > 0.005) {
+				$this->addError($attribute, 'Total incorreto para o título ' . CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($codtitulo)),array('titulo/view','id'=>$codtitulo)) . "! ({$calculado} != {$informado})!");
+			}
 		}
 	}
 	
