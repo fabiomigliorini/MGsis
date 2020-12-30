@@ -1,6 +1,7 @@
 <?php
 
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.hotkeys.js');
+// Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.ba-throttle-debounce.min.js');
 
 Yii::app()->clientScript->registerScript("hotkeys", <<<EOF
 function redireciona (btn)
@@ -43,9 +44,13 @@ function acaoF7()
 
 function acaoF8()
 {
-		if (typeof criarPixCob === 'function') {
-			criarPixCob();
-		}
+	$.debounce(250, function(e) {
+		console.log('F8 Devounce');
+	});
+	console.log('F8 Fora');
+	// if (typeof consultarPixCob === 'function') {
+	// 	consultarPixCob();
+	// }
 }
 
 
