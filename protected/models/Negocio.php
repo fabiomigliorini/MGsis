@@ -123,7 +123,7 @@ class Negocio extends MGActiveRecord
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'PixCobs' => array(self::HAS_MANY, 'PixCob', 'codnegocio'),
+            'PixCobs' => array(self::HAS_MANY, 'PixCob', 'codnegocio', 'order'=>'criacao DESC'),
             'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
             'EstoqueLocal' => array(self::BELONGS_TO, 'EstoqueLocal', 'codestoquelocal'),
             'NegocioStatus' => array(self::BELONGS_TO, 'NegocioStatus', 'codnegociostatus'),

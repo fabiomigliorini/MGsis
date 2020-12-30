@@ -71,7 +71,8 @@
             echo $form->textFieldRow($model, 'percentualdesconto', array('class'=>'input-small text-right','maxlength'=>14, 'append'=>'%'));
             echo $form->textFieldRow($model, 'valordesconto', array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
             echo $form->textFieldRow($model, 'valortotal', array('class'=>'input-small text-right','maxlength'=>14, "readOnly"=>true, "tabindex"=>-1, 'prepend' => 'R$'));
-            $this->renderPartial('_view_pagamentos', array('model'=>$model))
+            $this->renderPartial('_view_pagamentos', array('model'=>$model));
+            $this->renderPartial('_view_pix_cob', array('model'=>$model));
             ?>
 		</div>
 	</div>
@@ -290,8 +291,7 @@ $(document).ready(function() {
   <?php if (!empty($model->codnegocio)): ?>
   verificarStatusNegocio();
   setInterval(function() {
-    verificarStatusNegocio();
-    // your code goes here...
+    //verificarStatusNegocio();
   }, 3.5 * 1000); // 60 * 1000 milse
   <?php endif; ?>
 

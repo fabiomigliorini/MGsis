@@ -14,7 +14,7 @@ foreach ($model->NegocioFormaPagamentos as $nfp)
 				<?php echo Yii::app()->format->formatNumber($nfp->valorpagamento); ?>
 			</span>
 			<span class="span1 text-right">
-				<?php if ($model->codnegociostatus == 1 && !$nfp->FormaPagamento->lio): ?>
+				<?php if ($model->codnegociostatus == 1 && !$nfp->FormaPagamento->lio && !$nfp->FormaPagamento->pix): ?>
 					<div class="pull-right">
 						<a class="delete-pagamento" href="<?php echo Yii::app()->createUrl('negocioFormaPagamento/delete', array('id'=>$nfp->codnegocioformapagamento, 'ajax'=>'ajax')); ?>"><i class="icon-trash"></i></a>
 					</div>

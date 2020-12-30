@@ -38,20 +38,6 @@
 						</div>
 					</div>
 				</div>
-				<div class="row-fluid">
-					<a href="#" onclick="criarPixCob()">
-						<?php
-							echo CHtml::image(
-								Yii::app()->baseUrl . '/images/pix-bc-logo.png',
-								'',
-								array(
-									'style' => 'max-width: 120px',
-									'class'=>"",
-								)
-							);
-						?>
-					</a>
-				</div>
 			<br>
 			<?php
 		}
@@ -74,47 +60,6 @@
 	</div>
 </div>
 <script>
-
-var pix = {}
-
-function transmitirPixCob(codpixcob)
-{
-	$.ajax({
-		type: 'POST',
-		url: "<?php echo MGSPA_API_URL; ?>pix/cob/"+codpixcob+"/transmitir",
-		dataType: "json",
-		headers: {
-			"X-Requested-With":"XMLHttpRequest"
-		},
-	}).done(function(resp) {
-		pix = resp.data;
-		$.notify("Cobrança " + resp.data.txid + " Registrada! Status: " + resp.data.status, { position:"right bottom", className:"success", autoHideDelay: 15000 });
-	}).fail(function( jqxhr, textStatus, error ) {
-		$.notify("Erro ao transmitir cobrança "+ codpixcob +"!", { position:"right bottom", className:"error", autoHideDelay: 15000 });
-	});
-}
-
-function criarPixCob()
-{
-	bootbox.confirm('Criar Cobrança via PIX?', function(result) {
-		$.ajax({
-		  type: 'POST',
-		  url: "<?php echo MGSPA_API_URL; ?>pix/cob/criar-negocio/<?php echo $model->codnegocio ?>",
-			dataType: "json",
-		  headers: {
-				"X-Requested-With":"XMLHttpRequest"
-			},
-		}).done(function(resp) {
-			pix = resp.data;
-			$.notify("Cobrança " + resp.data.txid + " Criada!", { position:"right bottom", className:"success"});
-			transmitirPixCob(resp.data.codpixcob);
-		}).fail(function( jqxhr, textStatus, error ) {
-			$.notify("Erro ao Criar Cobrança via PIX!!", { position:"right bottom", className:"error"});
-			var resp = jQuery.parseJSON(jqxhr.responseText);
-			bootbox.alert(resp.message);
-		});
-	});
-}
 
 function atualizaListagemPagamentos()
 {

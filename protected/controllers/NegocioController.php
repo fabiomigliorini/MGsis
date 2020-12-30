@@ -285,6 +285,15 @@ class NegocioController extends Controller
         return $model;
     }
 
+    public function loadModelPixCob($id)
+    {
+        $model=PixCob::model()->findByPk($id);
+        if ($model===null) {
+            throw new CHttpException(404, 'The requested page does not exist.');
+        }
+        return $model;
+    }
+
     /**
     * Performs the AJAX validation.
     * @param CModel the model to be validated
@@ -365,10 +374,24 @@ class NegocioController extends Controller
             ));
     }
 
+    public function actionAtualizaListagemPixCob($codnegocio)
+    {
+        $this->renderPartial('_view_pix_cob_listagem', array(
+            'model'=>$this->loadModel($codnegocio),
+            ));
+    }
+
     public function actionAtualizaTotais($codnegocio)
     {
         $this->renderPartial('_view_totais', array(
             'model'=>$this->loadModel($codnegocio),
+            ));
+    }
+
+    public function actionQrCodePixCob($codpixcob)
+    {
+        $this->renderPartial('_view_pix_cob_qr_code', array(
+            'model'=>$this->loadModelPixCob($codpixcob),
             ));
     }
 
