@@ -19,7 +19,7 @@ foreach ($model->PixCobs as $cob)
 						</button>
 					</div>
 				<?php endif; ?>
-				<?php if ($cob->PixCobStatus->pixcobstatus == 'ATIVA'): ?>
+				<?php if (1==1 || $cob->PixCobStatus->pixcobstatus == 'ATIVA'): ?>
 					<div class="pull-right">
 						<button class="btn" type="button" onclick="buscarBrCodePixCob(<?php echo $cob->codpixcob ?>)">
 							<i class="icon-qrcode"></i>

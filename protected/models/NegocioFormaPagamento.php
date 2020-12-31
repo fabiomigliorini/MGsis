@@ -62,6 +62,9 @@ class NegocioFormaPagamento extends MGActiveRecord
         if ($this->FormaPagamento->lio) {
             $this->addError($attribute, 'Não é permitido adição manual de pagamento via cielo Lio!');
         }
+        if ($this->FormaPagamento->pix) {
+            $this->addError($attribute, 'Não é permitido adição manual de pagamento via PIX!');
+        }
     }
 
 
@@ -130,7 +133,7 @@ class NegocioFormaPagamento extends MGActiveRecord
         $criteria->compare('codusuariocriacao', $this->codusuariocriacao, true);
         $criteria->compare('codliopedido',$this->codliopedido,true);
     		$criteria->compare('codpixcob',$this->codpixcob,true);
-        
+
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
         ));

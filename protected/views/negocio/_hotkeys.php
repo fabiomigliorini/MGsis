@@ -29,12 +29,13 @@ function fechaJanelas()
 
 function acaoF3 ()
 {
-	if (redireciona ("#btnFechar"))
+	if (redireciona ("#btnFechar")) {
 		return true;
-
-	adicionaFormaPagamento();
+	}
+	if (typeof adicionaFormaPagamento === 'function') {
+		adicionaFormaPagamento();
+	}
 	$("#btnSalvarFechar").trigger( "click" );
-
 }
 
 function acaoF7()
@@ -44,13 +45,9 @@ function acaoF7()
 
 function acaoF8()
 {
-	$.debounce(250, function(e) {
-		console.log('F8 Devounce');
-	});
-	console.log('F8 Fora');
-	// if (typeof consultarPixCob === 'function') {
-	// 	consultarPixCob();
-	// }
+	if (typeof criarConsultarPixCob === 'function') {
+		criarConsultarPixCob();
+	}
 }
 
 

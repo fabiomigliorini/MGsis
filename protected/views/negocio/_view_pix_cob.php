@@ -28,20 +28,20 @@
 	<div class="modal-header">
 		<div class="pull-right">
 			<button class="btn" type="button" onclick="copiarBrCode()">Copiar BR Code</button>
-			<button class="btn" type="button" onclick="consultarPixCob()">Consultar Pagamento</button>
+			<button class="btn" type="button" onclick="consultarPixCobAberto()">Consultar Pagamento</button>
 			<button class="btn" data-dismiss="modal">Fechar</button>
 		</div>
 		<h3>Cobrança PIX</h3>
 	</div>
-	<div class="modal-body">
+	<div class="modal-body" id="modalPixCobBody">
 		<div id="divPixCob">
 			<div
 			<div class="text-center">
 				<div class="row-fluid">
-					<div class="span4">
-						<img id="pixCobQrcode" src="">
+					<div class="span6">
+						<img id="pixCobQrcode" style="min-width: 80%; max-height: 100%" >
 					</div>
-					<div class="span8">
+					<div class="span5">
 						<table class="detail-view table table-striped table-condensed" id="yw1">
 							<tbody>
 								<tr class="odd"><th>#</th><td id="pixCobCodpixcob"></td></tr>
@@ -51,19 +51,15 @@
 								<tr class="odd"><th>Portador</th><td id="pixCobPortador"></td></tr>
 								<tr class="even">
 									<th>BR Code</th>
-									<td id="pixCobBrcode" style="word-break: break-all;">
-										<textarea class="input-block-level" rows="4" readonly id="pixCobBrcodeTextArea" type="text"></textarea>
+									<td style="word-break: break-all;">
+										<span id="pixCobBrcode"></span>
+										<textarea class="input-block-level hidden" rows="4" readonly id="pixCobBrcodeTextArea" type="text"></textarea>
 									</td>
 								</tr>
 							</tbody>
 						</table>
-
-
 					</div>
 				</div>
-				<br />
-				<br />
-				<br />
 			</div>
 		</div>
 	</div>
@@ -77,28 +73,59 @@ function copiarBrCode()
 	document.execCommand('copy');
 }
 
-var pixCob = {}
+// window.pixCob = {}
+
+<?php if (sizeof($model->PixCobs) > 0): ?>
+window.pixCob = <?php echo json_encode($model->PixCobs[0]->attributes) ?>;
+<?php else: ?>
+window.pixCob = {};
+<?php endif; ?>
+
 
 function atualizaCamposPixCob ()
 {
 	$('#pixCobCodpixcob').html(pixCob.codpixcob);
 	$('#pixCobStatus').html(pixCob.status);
 	$('#pixCobTxid').html(pixCob.txid);
-	$('#pixCobValororiginal').html(pixCob.valororiginal);
+	if (pixCob.valororiginal != undefined) {
+		$('#pixCobValororiginal').html(pixCob.valororiginal.toLocaleString('pt-br', {minimumFractionDigits: 2}));
+	}
 	if (pixCob.Portador != undefined) {
 		$('#pixCobPortador').html(pixCob.Portador.portador);
 	}
+	$('#pixCobBrcode').html(pixCob.brcode);
 	$('#pixCobBrcodeTextArea').val(pixCob.brcode);
-	$('#pixCobQrcode').attr('src', 'https://gerarqrcodepix.com.br/api/v1?tamanho=250&brcode=' + pixCob.brcode);
+	if (pixCob.brcode != '' && pixCob.brcode != null) {
+		$('#pixCobQrcode').attr('src', 'https://gerarqrcodepix.com.br/api/v1?tamanho=250&brcode=' + pixCob.brcode);
+	} else {
+		$('#pixCobQrcode').attr('src', 'https://dummyimage.com/250x250/000000/fff.jpg&text=N%C3%A3o+Registrada!');
+	}
 }
 
-function consultarPixCob ()
+function criarConsultarPixCob ()
 {
+	if (window.rodandoConsultaPixCob) {
+		return;
+	}
 	if (pixCob.codpixcob === undefined) {
 		criarPixCob();
 		return;
 	}
-	const codpixcob = pixCob.codpixcob;
+	consultarPixCobAberto();
+}
+
+function consultarPixCobAberto ()
+{
+	if (!pixCob.codpixcob) {
+		return;
+	}
+	consultarPixCob(pixCob.codpixcob);
+}
+
+function consultarPixCob (codpixcob)
+{
+	window.rodandoConsultaPixCob = true;
+	abrirModalPixCob();
 	$.ajax({
 		type: 'POST',
 		url: "<?php echo MGSPA_API_URL; ?>pix/cob/"+codpixcob+"/consultar",
@@ -107,11 +134,13 @@ function consultarPixCob ()
 			"X-Requested-With":"XMLHttpRequest"
 		},
 	}).done(function(resp) {
-		pixCob = resp.data;
+		window.rodandoConsultaPixCob = false;
+		window.pixCob = resp.data;
 		atualizaCamposPixCob();
 		$.notify("Cobrança " + resp.data.txid + " Consultada! Status: " + resp.data.status, { position:"right bottom", className:"success", autoHideDelay: 15000 });
 		atualizaListagemPixCob();
 	}).fail(function( jqxhr, textStatus, error ) {
+		window.rodandoConsultaPixCob = false;
 		$.notify("Erro ao consultar cobrança "+ codpixcob +"!", { position:"right bottom", className:"error", autoHideDelay: 15000 });
 		atualizaListagemPixCob();
 		var resp = jQuery.parseJSON(jqxhr.responseText);
@@ -121,6 +150,8 @@ function consultarPixCob ()
 
 function transmitirPixCob(codpixcob)
 {
+	window.rodandoConsultaPixCob = true;
+	abrirModalPixCob();
 	$.ajax({
 		type: 'POST',
 		url: "<?php echo MGSPA_API_URL; ?>pix/cob/"+codpixcob+"/transmitir",
@@ -129,11 +160,13 @@ function transmitirPixCob(codpixcob)
 			"X-Requested-With":"XMLHttpRequest"
 		},
 	}).done(function(resp) {
-		pixCob = resp.data;
+		window.rodandoConsultaPixCob = false;
+		window.pixCob = resp.data;
 		$.notify("Cobrança " + resp.data.txid + " Registrada! Status: " + resp.data.status, { position:"right bottom", className:"success", autoHideDelay: 15000 });
 		atualizaListagemPixCob();
 		buscarBrCodePixCob(codpixcob);
 	}).fail(function( jqxhr, textStatus, error ) {
+		window.rodandoConsultaPixCob = false;
 		$.notify("Erro ao transmitir cobrança "+ codpixcob +"!", { position:"right bottom", className:"error", autoHideDelay: 15000 });
 		atualizaListagemPixCob();
 		var resp = jQuery.parseJSON(jqxhr.responseText);
@@ -143,10 +176,19 @@ function transmitirPixCob(codpixcob)
 
 function criarPixCob()
 {
+	console.log(window.aguardandoConfirmacaoCriarPìxCob);
+	if (window.aguardandoConfirmacaoCriarPìxCob || window.rodandoConsultaPixCob) {
+		return;
+	}
+	window.aguardandoConfirmacaoCriarPìxCob = true;
 	bootbox.confirm('Criar Cobrança via PIX?', function(result) {
+		window.pixCob = {};
+		abrirModalPixCob();
+		window.aguardandoConfirmacaoCriarPìxCob = false;
 		if (!result) {
 			return
 		}
+		window.rodandoConsultaPixCob = true;
 		$.ajax({
 		  type: 'POST',
 		  url: "<?php echo MGSPA_API_URL; ?>pix/cob/criar-negocio/<?php echo $model->codnegocio ?>",
@@ -155,10 +197,11 @@ function criarPixCob()
 				"X-Requested-With":"XMLHttpRequest"
 			},
 		}).done(function(resp) {
-			pixCob = resp.data;
+			window.pixCob = resp.data;
 			$.notify("Cobrança " + resp.data.txid + " Criada!", { position:"right bottom", className:"success"});
 			transmitirPixCob(resp.data.codpixcob);
 		}).fail(function( jqxhr, textStatus, error ) {
+			window.rodandoConsultaPixCob = false;
 			$.notify("Erro ao Criar Cobrança via PIX!!", { position:"right bottom", className:"error"});
 			atualizaListagemPixCob();
 			var resp = jQuery.parseJSON(jqxhr.responseText);
@@ -190,16 +233,15 @@ function buscarBrCodePixCob (codpixcob)
 {
 	$('#brCode').html('Carregando...');
 	$('#qrCode').attr('src', '');
+	abrirModalPixCob();
 	$.ajax({
 		url: "<?php echo MGSPA_API_URL ?>pix/cob/" + codpixcob,
 		type: "GET",
 		dataType: "json",
 		async: false,
 		success: function (data) {
-			pixCob = data.data;
+			window.pixCob = data.data;
 			atualizaCamposPixCob();
-			$('#modalPixCob').modal({show:true});
-			$('#modalPixCob').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
 		},
 		error: function (xhr, status) {
 			bootbox.alert("Erro ao buscar BR Code da Cobrança PIX!");
@@ -207,10 +249,19 @@ function buscarBrCodePixCob (codpixcob)
 	});
 }
 
+function abrirModalPixCob ()
+{
+	atualizaCamposPixCob();
+	$('#modalPixCob').modal({show:true});
+	var height = $( window ).height();
+	var bodyHeight = height*.96-100;
+	$('#modalPixCob').css({'width': '96%', 'height': '96%', 'margin-left':'auto', 'margin-right':'auto', 'left':'2%', 'top': '2%'});
+	$('#modalPixCobBody').css({'height': bodyHeight, 'max-height': bodyHeight, 'overflow-y': 'hidden'});
+}
+
 $(document).ready(function() {
 	$('#modalPixCob').on('hidden', function () {
-		console.log('limpando pixCob = {}');
-		pixCob = {};
+		// pixCob = {};
 	});
 });
 
