@@ -12,8 +12,12 @@
 		?>
 	</label>
 	<div class="controls">
-		<button class="btn" type="button" onclick="criarPixCob()">Criar Cobrança PIX (F8)</button>
-		<button class="btn" type="button" onclick="atualizaListagemPixCob()">Atualizar Listagem</button>
+		<div style="margin-bottom: 20px">
+
+			<button class="btn" type="button" onclick="criarPixCob()">Criar Cobrança PIX (F8)</button>
+			<button class="btn" type="button" onclick="atualizaListagemPixCob()">Atualizar Listagem</button>
+
+		</div>
 		<div id="listagemPixCob">
 			<?php
 			$this->renderPartial('_view_pix_cob_listagem',
@@ -27,9 +31,22 @@
 <div id="modalPixCob" class="modal hide fade" tabindex="-1" role="dialog">
 	<div class="modal-header">
 		<div class="pull-right">
-			<button class="btn" type="button" onclick="copiarBrCode()">Copiar BR Code</button>
-			<button class="btn" type="button" onclick="consultarPixCobAberto()">Consultar Pagamento</button>
-			<button class="btn" data-dismiss="modal">Fechar</button>
+			<button class="btn" type="button" onclick="copiarBrCode()">
+				<i class="icon-share"></i>
+				Copiar BR Code
+			</button>
+			<button class="btn" type="button" onclick="consultarPixCobAberto()">
+				<i class="icon-refresh"></i>
+				Consultar Pagamento (F8)
+			</button>
+			<button class="btn" type="button" onclick="transmitirPixCobAberto()">
+				<i class="icon-upload"></i>
+				Transmitir
+			</button>
+			<button class="btn" data-dismiss="modal">
+				<i class="icon-remove"></i>
+				Fechar
+			</button>
 		</div>
 		<h3>Cobrança PIX</h3>
 	</div>
@@ -52,8 +69,8 @@
 								<tr class="even">
 									<th>BR Code</th>
 									<td style="word-break: break-all;">
-										<span id="pixCobBrcode"></span>
-										<textarea class="input-block-level hidden" rows="4" readonly id="pixCobBrcodeTextArea" type="text"></textarea>
+										<span class="hidden" id="pixCobBrcode"></span>
+										<textarea class="input-block-level" readonly rows="4" id="pixCobBrcodeTextArea" type="text"></textarea>
 									</td>
 								</tr>
 							</tbody>
@@ -122,6 +139,14 @@ function consultarPixCobAberto ()
 	consultarPixCob(pixCob.codpixcob);
 }
 
+function transmitirPixCobAberto ()
+{
+	if (!pixCob.codpixcob) {
+		return;
+	}
+	transmitirPixCob(pixCob.codpixcob);
+}
+
 function consultarPixCob (codpixcob)
 {
 	window.rodandoConsultaPixCob = true;
@@ -134,6 +159,7 @@ function consultarPixCob (codpixcob)
 			"X-Requested-With":"XMLHttpRequest"
 		},
 	}).done(function(resp) {
+		verificarStatusNegocio();
 		window.rodandoConsultaPixCob = false;
 		window.pixCob = resp.data;
 		atualizaCamposPixCob();
@@ -183,11 +209,11 @@ function criarPixCob()
 	window.aguardandoConfirmacaoCriarPìxCob = true;
 	bootbox.confirm('Criar Cobrança via PIX?', function(result) {
 		window.pixCob = {};
-		abrirModalPixCob();
 		window.aguardandoConfirmacaoCriarPìxCob = false;
 		if (!result) {
 			return
 		}
+		abrirModalPixCob();
 		window.rodandoConsultaPixCob = true;
 		$.ajax({
 		  type: 'POST',

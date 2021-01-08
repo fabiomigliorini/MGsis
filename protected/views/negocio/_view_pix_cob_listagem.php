@@ -3,31 +3,36 @@ foreach ($model->PixCobs as $cob)
 {
 	?>
 	<div class="registro">
-		<span class="row-fluid">
-			<span class="span7">
-				<?php echo CHtml::encode($cob->codpixcob) ?>
-				<?php echo CHtml::encode($cob->PixCobStatus->pixcobstatus) ?>
-			</span>
-			<span class="span3 text-right">
-				<?php echo Yii::app()->format->formatNumber($cob->valororiginal); ?>
-			</span>
-			<span class="span2 text-right">
-				<?php if ($cob->PixCobStatus->pixcobstatus == 'NOVA'): ?>
-					<div class="pull-right">
-						<button class="btn" type="button" onclick="transmitirPixCob(<?php echo $cob->codpixcob ?>)">
-							<i class="icon-upload"></i>
-						</button>
-					</div>
-				<?php endif; ?>
-				<?php if (1==1 || $cob->PixCobStatus->pixcobstatus == 'ATIVA'): ?>
-					<div class="pull-right">
-						<button class="btn" type="button" onclick="buscarBrCodePixCob(<?php echo $cob->codpixcob ?>)">
-							<i class="icon-qrcode"></i>
-						</button>
-					</div>
-				<?php endif; ?>
-			</span>
-		</span>
+		<div class="row-fluid">
+			<div class="pull-right">
+				<button class="btn" type="button" onclick="buscarBrCodePixCob(<?php echo $cob->codpixcob ?>)">
+					<i class="icon-qrcode"></i>
+				</button>
+			</div>
+			<div>
+				<b>
+					Valor Cobrança: <?php echo Yii::app()->format->formatNumber($cob->valororiginal); ?>
+					<?php echo CHtml::encode($cob->PixCobStatus->pixcobstatus); ?>
+				</b>
+			</div>
+			<div>
+				<abbr title="<?php echo CHtml::encode($cob->location); ?>">
+					<?php echo CHtml::encode($cob->txid); ?>
+				</abbr>
+			</div>
+			<div>
+				<?php echo CHtml::encode($cob->nome); ?>
+			</div>
+			<div>
+				<?php if (!empty($cob->cpf)): ?>
+					<?php echo Yii::app()->format->formataCnpjCpf($cob->cpf); ?>
+				<?php endif ?>
+				<?php if (!empty($cob->cnpj)): ?>
+					<?php echo Yii::app()->format->formataCnpjCpf($cob->cnpj); ?>
+				<?php endif ?>
+			</div>
+		</div>
+
 	</div>
 	<?
 }

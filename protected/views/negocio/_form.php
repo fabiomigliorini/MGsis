@@ -291,7 +291,7 @@ $(document).ready(function() {
   <?php if (!empty($model->codnegocio)): ?>
   verificarStatusNegocio();
   setInterval(function() {
-    //verificarStatusNegocio();
+    verificarStatusNegocio();
   }, 3.5 * 1000); // 60 * 1000 milse
   <?php endif; ?>
 

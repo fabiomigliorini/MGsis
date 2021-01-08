@@ -38,6 +38,8 @@ foreach ($model->NegocioFormaPagamentos as $nfp)
 				<?php endif ?>
 			</div>
 			<div class="span7">
+
+				<!-- LIO -->
 				<?php
 				if (!empty($nfp->codliopedido)) {
 					?>
@@ -83,6 +85,9 @@ foreach ($model->NegocioFormaPagamentos as $nfp)
 						<?php
 					}
 				}
+				?>
+				<!-- Titulos -->
+				<?php
 				foreach ($nfp->Titulos as $titulo)
 				{
 					?>
@@ -105,6 +110,66 @@ foreach ($model->NegocioFormaPagamentos as $nfp)
 						</div>
 					</div>
 					<?php
+				}
+				?>
+				<!-- PixCob -->
+				<?php
+				if (!empty($nfp->codpixcob))
+				{
+					?>
+					<div class="row-fluid">
+						<div>
+							<b>
+								Valor Cobrança: <?php echo Yii::app()->format->formatNumber($nfp->PixCob->valororiginal); ?>
+								<?php echo CHtml::encode($nfp->PixCob->PixCobStatus->pixcobstatus); ?>
+							</b>
+						</div>
+						<div>
+							<abbr title="<?php echo CHtml::encode($nfp->PixCob->location); ?>">
+								<?php echo CHtml::encode($nfp->PixCob->txid); ?>
+							</abbr>
+						</div>
+						<div>
+							<?php echo CHtml::encode($nfp->PixCob->nome); ?>
+						</div>
+						<div>
+							<?php if (!empty($nfp->PixCob->cpf)): ?>
+								<?php echo Yii::app()->format->formataCnpjCpf($nfp->PixCob->cpf); ?>
+							<?php endif ?>
+							<?php if (!empty($nfp->PixCob->cnpj)): ?>
+								<?php echo Yii::app()->format->formataCnpjCpf($nfp->PixCob->cnpj); ?>
+							<?php endif ?>
+						</div>
+					</div>
+					<?php
+					foreach ($nfp->PixCob->Pixs as $pix) {
+						?>
+						<div class="row-fluid">
+							<div>
+								<b>
+									Valor Pago: <?php echo Yii::app()->format->formatNumber($pix->valor); ?>
+									<?php echo CHtml::encode($pix->Portador->portador); ?>
+								</b>
+							</div>
+							<div>
+								<abbr title="<?php echo CHtml::encode($pix->txid); ?>">
+									<?php echo CHtml::encode($pix->e2eid); ?>
+								</abbr>
+							</div>
+							<div>
+								<?php echo CHtml::encode($pix->nome); ?>
+							</div>
+							<div>
+								<?php if (!empty($pix->cpf)): ?>
+									<?php echo Yii::app()->format->formataCnpjCpf($pix->cpf); ?>
+								<?php endif ?>
+								<?php if (!empty($pix->cnpj)): ?>
+									<?php echo Yii::app()->format->formataCnpjCpf($pix->cnpj); ?>
+								<?php endif ?>
+							</div>
+						</div>
+						<?php
+					}
 				}
 				?>
 			</div>
