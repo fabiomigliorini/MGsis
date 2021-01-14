@@ -11,6 +11,13 @@ $this->breadcrumbs=array(
 	$model->nfechave,
 );
 
+$interestadual = false;
+if ($model->codpessoa && $model->codfilial) {
+	if ($model->Pessoa->Cidade->codestado != $model->Filial->Pessoa->Cidade->codestado) {
+		$interestadual = true;
+	}
+}
+
 $this->menu=array(
 	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 	//array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
@@ -18,6 +25,7 @@ $this->menu=array(
 	array('label'=>'Informar Detalhes', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codnfeterceiro), 'visible'=>$model->podeEditar()),
 	array('label'=>'Importar', 'icon'=>'icon-thumbs-up', 'url'=>'#', 'visible'=>$model->podeEditar(), 'linkOptions'=>	array('id'=>'btnImportar')),
 	array('label'=>'Ver Arquivo XML', 'icon'=>' icon-file', 'url'=>array('NFePHPNovo/visualizaXml','codnfeterceiro'=>$model->codnfeterceiro), 'linkOptions'=>	array('id'=>'btnArquivoXml')),
+	array('label'=>'ICMS ST', 'icon'=>'icon-thumbs-down', 'url'=>array('icmsst','id'=>$model->codnfeterceiro), 'visible'=>$interestadual),
 	//array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );

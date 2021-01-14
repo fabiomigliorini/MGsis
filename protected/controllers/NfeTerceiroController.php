@@ -433,6 +433,67 @@ class NfeTerceiroController extends Controller
 
 	}
 
+	public function actionIcmsst($id)
+	{
+		$model = $this->loadModel($id);
+		$sql = "
+			with final as (
+				with itens as (
+					select
+						nti.codnfeterceiroitem,
+						nti.nitem,
+						nti.cprod,
+						nti.xprod,
+						--nti.cean,
+						nti.ncm as ncmnota,
+						n.ncm as ncmproduto,
+						nti.cest as cestnota,
+						c.cest as cestproduto,
+						round(1 + (c.mva / 100), 4) as mva,
+						coalesce(vprod, 0) + coalesce(vfrete, 0) + coalesce(vseg, 0) + coalesce(voutro, 0) + coalesce(ipivipi, 0) - coalesce(vdesc, 0) as valor,
+						case when coalesce(n.bit, false) then
+							0.4117
+						else
+							1.0
+						end as reducao,
+						case when coalesce(picms, 0) > 7 then
+							(coalesce(vprod, 0) + coalesce(vfrete, 0) + coalesce(vseg, 0) + coalesce(voutro, 0) - coalesce(vdesc, 0)) * 0.07
+						else
+							case when coalesce(vicms, 0) = 0 then
+								case when p.importado then
+									(coalesce(vprod, 0) + coalesce(vfrete, 0) + coalesce(vseg, 0) + coalesce(voutro, 0) - coalesce(vdesc, 0)) * 0.04
+								else
+									(coalesce(vprod, 0) + coalesce(vfrete, 0) + coalesce(vseg, 0) + coalesce(voutro, 0) - coalesce(vdesc, 0)) * 0.07
+								end
+							else
+								coalesce(vicms, 0)
+							end
+						end as vicms,
+						vicmsst
+					from tblnfeterceiroitem nti
+					left join tblprodutobarra pb on (pb.codprodutobarra = nti.codprodutobarra)
+					left join tblproduto p on (p.codproduto = pb.codproduto)
+					left join tblncm n on (n.codncm = p.codncm)
+					left join tblcest c on (c.codcest = p.codcest)
+					where nti.codnfeterceiro = {$model->codnfeterceiro}
+					order by nti.ncm, nti.xprod
+				)
+				select *, round((valor * reducao * mva * 0.17) - (vicms * reducao), 2) as vicmsstcalculado from itens
+			)
+			select
+				*,
+				coalesce(vicmsstcalculado, 0) - coalesce(vicmsst, 0) as diferenca
+			from final
+		";
+
+		$command = Yii::app()->db->createCommand($sql);
+		$itens = $command->queryAll();
+		$this->render('icmsst',[
+			'model'=>$model,
+			'itens'=>$itens,
+		]);
+	}
+
 
 	/**
 	* Returns the data model based on the primary key given in the GET variable.
