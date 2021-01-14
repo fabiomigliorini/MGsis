@@ -240,15 +240,15 @@ $(document).ready(function(){
       ?>
       <tr class='<?php echo $classCest; ?>'>
         <td style="text-align: center !important">
-          <?php echo CHtml::encode($item['ncmnota']); ?>
+          <?php echo CHtml::encode(Yii::app()->format->formataNcm($item['ncmnota'])); ?>
           <?php if ($item['ncmnota']!=$item['ncmproduto']): ?>
-            <?php echo CHtml::encode($item['ncmproduto']); ?>
+            <?php echo CHtml::encode(Yii::app()->format->formataNcm($item['ncmproduto'])); ?>
           <?php endif; ?>
         </td>
         <td style="text-align: center !important">
-          <?php echo CHtml::encode($item['cestnota']); ?>
+          <?php echo CHtml::encode(Yii::app()->format->formataCest($item['cestnota'])); ?>
           <?php if ($item['cestnota']!=$item['cestproduto']): ?>
-            <?php echo CHtml::encode($item['cestproduto']); ?>
+            <?php echo CHtml::encode(Yii::app()->format->formataCest($item['cestproduto'])); ?>
           <?php endif; ?>
         </td>
         <td>
