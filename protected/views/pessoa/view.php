@@ -211,7 +211,7 @@ $(document).ready(function(){
 					),
 				array(
 					'name'=>'fornecedor',
-					'value'=>($model->cliente)?'Sim':'Não',
+					'value'=>($model->fornecedor)?'Sim':'Não',
 					)
 				));
 
