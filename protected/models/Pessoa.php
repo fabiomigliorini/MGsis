@@ -117,6 +117,9 @@ class Pessoa extends MGActiveRecord
 			array('fantasia, complemento, bairro, complementocobranca, bairrocobranca, telefone1, telefone2, telefone3', 'length', 'max'=>50),
 			array('notafiscal, toleranciaatraso', 'numerical', 'integerOnly'=>true),
 			array('credito', 'length', 'max'=>14),
+			array('rntrc', 'length', 'max'=>8),
+			array('rntrc', 'length', 'min'=>8),
+			array('tipotransportador', 'numerical', 'integerOnly'=>true),
 			array('telefone1, telefone2, telefone3', 'validaTelefone'),
 			array('ie', 'length', 'max'=>20),
 			array('numero, numerocobranca', 'length', 'max'=>10),
@@ -330,6 +333,8 @@ class Pessoa extends MGActiveRecord
 			'criacao' => 'Criação',
 			'codusuariocriacao' => 'Usuario Criação',
 			'cobrancanomesmoendereco' => 'Cobrança no Mesmo Endereço.',
+			'rntrc' => 'RNTRC',
+			'tipotransportador' => 'Tipo Transportador',
 		);
 	}
 

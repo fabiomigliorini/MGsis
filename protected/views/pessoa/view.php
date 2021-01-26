@@ -41,6 +41,12 @@ $(document).ready(function(){
 <div class="row-fluid">
 	<div class="span6">
 		<?php
+		$tipos = [
+			1 => 'ETC - Empresa',
+			2 => 'TAC - Autônomo',
+			3 => 'CTC - Cooperativa',
+		];
+		$tipoTransportador = empty($model->tipotransportador)?null:$tipos[$model->tipotransportador];
 
 		$attributes =
 			array(
@@ -62,6 +68,13 @@ $(document).ready(function(){
 				array(
 					'name'=>'ie',
 					'value'=>(isset($model->ie))?Yii::app()->format->formataInscricaoEstadual($model->ie, $model->Cidade->Estado->sigla):null,
+					),
+				array(
+					'name'=>'rntrc',
+					),
+				array(
+					'name'=>'tipotransportador',
+					'value'=>$tipoTransportador,
 					),
 				array(
 					'name'=>'endereco',

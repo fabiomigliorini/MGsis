@@ -24,6 +24,19 @@
             $model->ie = Yii::app()->format->formataInscricaoEstadual($model->ie, $model->Cidade->Estado->sigla);
         }
         echo $form->textFieldRow($model, 'ie', array('class'=>'input-medium','maxlength'=>20));
+        echo $form->textFieldRow($model, 'rntrc', array('class'=>'input-small text-center','maxlength'=>8));
+        echo $form->select2Row(
+            $model,
+            'tipotransportador',
+            [
+              1 => 'ETC - Empresa',
+              2 => 'TAC - Autônomo',
+              3 => 'CTC - Cooperativa',
+            ],
+            array('prompt'=>'', 'class' => 'input-large')
+        );
+
+
     ?>
 	<div class="bootstrap-widget bootstrap-widget-table" id="CamposPessoaFisica">
 		<div class="bootstrap-widget-header">
@@ -160,7 +173,7 @@
     ?>
 </fieldset>
 <div class="form-actions">
-	
+
     <?php
         $this->widget(
         'bootstrap.widgets.TbButton',
