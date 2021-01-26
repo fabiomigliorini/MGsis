@@ -357,6 +357,12 @@ class NotaFiscalController extends Controller
         if (isset($_GET['NotaFiscal'])) {
             Yii::app()->session['FiltroNotaFiscalIndex'] = $_GET['NotaFiscal'];
         }
+        if (!isset(Yii::app()->session['FiltroNotaFiscalIndex'])) {
+    			Yii::app()->session['FiltroNotaFiscalIndex'] = array(
+    				'saida_de' => date('d/m/y', strtotime('-7 days')),
+            'codfilial' => Yii::app()->user->codfilial,
+    			);
+    		}
         if (isset(Yii::app()->session['FiltroNotaFiscalIndex'])) {
             $model->attributes=Yii::app()->session['FiltroNotaFiscalIndex'];
         }
@@ -732,8 +738,26 @@ class NotaFiscalController extends Controller
     }
     */
 
+    public function validarFiltro()
+  	{
+  		if (isset(Yii::app()->session['FiltroNotaFiscalIndex'])) {
+  			foreach (Yii::app()->session['FiltroNotaFiscalIndex'] as $key => $val) {
+  				if (!empty($val)) {
+  					return;
+  				}
+  			}
+  		}
+  		die ('Faça pelo menos um filtro!');
+  	}
+
     public function actionRelatorio()
     {
+        // WORKAROUND: Cache Chrome salvando sempre o mesmo relatorio!
+    		// Ate mostrava em tela diferente, mas ao salvar, salvava a primeira versao emitida
+    		if (!isset($_GET['__pdfdate'])) {
+    				header('Location: ' . $_SERVER['REQUEST_URI'] . '&__pdfdate=' . date('c'));
+    		}
+
         $model=new NotaFiscal('search');
 
         $model->unsetAttributes();  // clear any default values
@@ -741,6 +765,8 @@ class NotaFiscalController extends Controller
         if (isset($_GET['NotaFiscal'])) {
             Yii::app()->session['FiltroNotaFiscalIndex'] = $_GET['NotaFiscal'];
         }
+
+        $this->validarFiltro();
 
         if (isset(Yii::app()->session['FiltroNotaFiscalIndex'])) {
             $model->attributes=Yii::app()->session['FiltroNotaFiscalIndex'];

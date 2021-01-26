@@ -35,11 +35,11 @@ class TituloAgrupamentoController extends Controller
 			$model->attributes=$_POST['TituloAgrupamento'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->codtituloagrupamento));
-			
+
 		}
 		else
 		{
-			$model->emissao  = date('d/m/Y');	
+			$model->emissao  = date('d/m/Y');
 			$model->parcelas = 1;
 			$model->primeira = 15;
 			$model->demais   = 30;
@@ -48,7 +48,7 @@ class TituloAgrupamentoController extends Controller
 		$this->render('create',array(
 			'model'=>$model,
 			));
-		
+
 	}
 
 	/**
@@ -75,7 +75,7 @@ class TituloAgrupamentoController extends Controller
 			'model'=>$model,
 			));
 	}
-	 * 
+	 *
 	 */
 
 	/**
@@ -111,7 +111,7 @@ class TituloAgrupamentoController extends Controller
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 	*/
-	
+
 	public function actionEstorna($id)
 	{
 		if(Yii::app()->request->isPostRequest)
@@ -122,28 +122,28 @@ class TituloAgrupamentoController extends Controller
 				Yii::app()->user->setFlash("error", "Erro ao estornar Agrupamento de Títulos!");
 			else
 				Yii::app()->user->setFlash("success", "Agrupamento de Títulos Estornado!");
-			
+
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('view','id'=>$model->codtituloagrupamento));
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
-	
+
 	/**
 	* Lists all models.
 	*/
 	public function actionIndex()
 	{
 		$model=new TituloAgrupamento('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['TituloAgrupamento']))
 			Yii::app()->session['FiltroTituloAgrupamentoIndex'] = $_GET['TituloAgrupamento'];
-		
+
 		if (isset(Yii::app()->session['FiltroTituloAgrupamentoIndex']))
 			$model->attributes=Yii::app()->session['FiltroTituloAgrupamentoIndex'];
-		
+
 		$this->render('index',array(
 			'dataProvider'=>$model->search(),
 			'model'=>$model,
@@ -155,11 +155,11 @@ class TituloAgrupamentoController extends Controller
 	*/
 	public function actionAdmin()
 	{
-	
+
 		$model=new TituloAgrupamento('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['TituloAgrupamento']))
 			$model->attributes=$_GET['TituloAgrupamento'];
 
@@ -193,21 +193,26 @@ class TituloAgrupamentoController extends Controller
 			Yii::app()->end();
 		}
 	}
-	
+
 	public function actionRelatorio($id)
 	{
+		// WORKAROUND: Cache Chrome salvando sempre o mesmo relatorio!
+		// Ate mostrava em tela diferente, mas ao salvar, salvava a primeira versao emitida
+		if (!isset($_GET['__pdfdate'])) {
+				header('Location: ' . $_SERVER['REQUEST_URI'] . '&__pdfdate=' . date('c'));
+		}
 		$model = $this->loadModel($id);
 		$rel = new MGRelatorioTituloAgrupamento($model);
 		$rel->montaRelatorio();
 		$rel->Output();
 	}
-	
+
 	public function actionGerarNotaFiscal($id, $modelo = null, $codnotafiscal = null)
 	{
 
 		$model = $this->loadModel($id);
-		
-		$command = Yii::app()->db->createCommand(' 
+
+		$command = Yii::app()->db->createCommand('
 			SELECT distinct nfp.codnegocio
 			  FROM tbltituloagrupamento ta
 			 INNER JOIN tblmovimentotitulo mt ON (mt.codtituloagrupamento = ta.codtituloagrupamento)
@@ -219,7 +224,7 @@ class TituloAgrupamentoController extends Controller
 		$command->params = array("codtituloagrupamento" => $id);
 
 		$codnegocios = $command->queryAll();
-		
+
 		if (empty($codnegocios))
 		{
 			$retorno["Retorno"] = 0;
@@ -229,7 +234,7 @@ class TituloAgrupamentoController extends Controller
 		foreach ($codnegocios as $codnegocio)
 		{
 			$negocio = Negocio::model()->findByPk($codnegocio);
-			
+
 			$retorno = array("Retorno"=>1, "Mensagem"=>"", "codnotafiscal" =>$codnotafiscal);
 
 			$codnotafiscal = $negocio->gerarNotaFiscal($codnotafiscal, $modelo, false);
@@ -237,7 +242,7 @@ class TituloAgrupamentoController extends Controller
 			$retorno["codnotafiscal"] = $codnotafiscal;
 		}
 
-		if ((!empty($codnegocio)) && (empty($codnotafiscal))) 
+		if ((!empty($codnegocio)) && (empty($codnotafiscal)))
 		{
 			$retorno["Retorno"] = 0;
                         $erros = $negocio->getErrors();
@@ -246,8 +251,8 @@ class TituloAgrupamentoController extends Controller
                                 foreach($mensagens as $mensagem)
                                         $erro .= " " . $mensagem;
                         $retorno["Mensagem"] = $erro;
-		}	
-		
+		}
+
 		if (!empty($codnotafiscal))
 		{
 			foreach ($model->Titulos as $tit)
@@ -265,9 +270,9 @@ class TituloAgrupamentoController extends Controller
 				}
 			}
 		}
-		
+
 		echo CJSON::encode($retorno);
-		
+
 	}
-	
+
 }

@@ -219,13 +219,15 @@ class NegocioController extends Controller
             Yii::app()->session['FiltroNegocioIndex'] = $_GET['Negocio'];
         }
 
+        if (!isset(Yii::app()->session['FiltroNegocioIndex'])) {
+    			Yii::app()->session['FiltroNegocioIndex'] = array(
+    				'codusuario' => Yii::app()->user->id,
+    				'lancamento_de' => date('d/m/y', strtotime('-7 days')) . ' 00:00',
+    			);
+    		}
+
         if (isset(Yii::app()->session['FiltroNegocioIndex'])) {
             $model->attributes=Yii::app()->session['FiltroNegocioIndex'];
-        } else {
-            $model->codusuario = Yii::app()->user->id;
-            //$model->lancamento_de = date("d/m/y", strtotime( '-30 days' ) );
-            //$model->horario_de = "00:00";
-            //$model->codnegociostatus = NegocioStatus::ABERTO; //Aberto
         }
 
         $this->render('index', array(
@@ -474,8 +476,26 @@ class NegocioController extends Controller
         echo CJSON::encode($retorno);
     }
 
+    public function validarFiltro()
+  	{
+  		if (isset(Yii::app()->session['FiltroNegocioIndex'])) {
+  			foreach (Yii::app()->session['FiltroNegocioIndex'] as $key => $val) {
+  				if (!empty($val)) {
+  					return;
+  				}
+  			}
+  		}
+  		die ('Faça pelo menos um filtro!');
+  	}
+
     public function actionRelatorio()
     {
+        // WORKAROUND: Cache Chrome salvando sempre o mesmo relatorio!
+    		// Ate mostrava em tela diferente, mas ao salvar, salvava a primeira versao emitida
+    		if (!isset($_GET['__pdfdate'])) {
+    				header('Location: ' . $_SERVER['REQUEST_URI'] . '&__pdfdate=' . date('c'));
+    		}
+
         $model=new Negocio('search');
 
         $model->unsetAttributes();  // clear any default values
@@ -483,6 +503,8 @@ class NegocioController extends Controller
         if (isset($_GET['Negocio'])) {
             Yii::app()->session['FiltroNegocioIndex'] = $_GET['Negocio'];
         }
+
+        $this->validarFiltro();
 
         if (isset(Yii::app()->session['FiltroNegocioIndex'])) {
             $model->attributes=Yii::app()->session['FiltroNegocioIndex'];
@@ -496,6 +518,12 @@ class NegocioController extends Controller
     }
     public function actionRelatorioOrcamento($id)
     {
+        // WORKAROUND: Cache Chrome salvando sempre o mesmo relatorio!
+    		// Ate mostrava em tela diferente, mas ao salvar, salvava a primeira versao emitida
+    		if (!isset($_GET['__pdfdate'])) {
+    				header('Location: ' . $_SERVER['REQUEST_URI'] . '&__pdfdate=' . date('c'));
+    		}
+
         $model = $this->loadModel($id);
         $rel = new MGRelatorioOrcamento($model);
         $rel->montaRelatorio();

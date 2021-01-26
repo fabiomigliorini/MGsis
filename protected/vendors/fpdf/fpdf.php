@@ -990,7 +990,7 @@ function Output($name='', $dest='')
 	{
 		if($name=='')
 		{
-			$name = 'doc.pdf';
+			$name = uniqid() . '.pdf';
 			$dest = 'I';
 		}
 		else
@@ -1007,6 +1007,7 @@ function Output($name='', $dest='')
 				header('Content-Type: application/pdf');
 				header('Content-Disposition: inline; filename="'.$name.'"');
 				header('Cache-Control: private, max-age=0, must-revalidate');
+				header('Expires: '.gmdate('D, d M Y H:i:s', time()).' GMT');
 				header('Pragma: public');
 			}
 			echo $this->buffer;
@@ -1017,6 +1018,7 @@ function Output($name='', $dest='')
 			header('Content-Type: application/x-download');
 			header('Content-Disposition: attachment; filename="'.$name.'"');
 			header('Cache-Control: private, max-age=0, must-revalidate');
+			header('Expires: '.gmdate('D, d M Y H:i:s', time()).' GMT');
 			header('Pragma: public');
 			echo $this->buffer;
 			break;

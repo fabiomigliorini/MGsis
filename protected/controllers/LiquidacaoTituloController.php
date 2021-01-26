@@ -38,7 +38,7 @@ class LiquidacaoTituloController extends Controller
 		}
 		else
 		{
-			$model->transacao = date('d/m/Y');	
+			$model->transacao = date('d/m/Y');
 			if (!empty(Yii::app()->user->codportador))
 				$model->codportador = Yii::app()->user->codportador;
 		}
@@ -72,7 +72,7 @@ class LiquidacaoTituloController extends Controller
 			'model'=>$model,
 			));
 	}
-	 * 
+	 *
 	 */
 
 	/**
@@ -107,9 +107,9 @@ class LiquidacaoTituloController extends Controller
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
-	 * 
+	 *
 	 */
-	
+
 	public function actionEstorna($id)
 	{
 		if(Yii::app()->request->isPostRequest)
@@ -120,7 +120,7 @@ class LiquidacaoTituloController extends Controller
 				Yii::app()->user->setFlash("error", "Erro ao estornar Liquidação de Títulos!");
 			else
 				Yii::app()->user->setFlash("success", "Liquidação de Títulos Estornada!");
-			
+
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('view','id'=>$model->codliquidacaotitulo));
 		}
 		else
@@ -133,20 +133,24 @@ class LiquidacaoTituloController extends Controller
 	public function actionIndex()
 	{
 		$model=new LiquidacaoTitulo('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
-		if(isset($_GET['LiquidacaoTitulo']))
+
+		if (isset($_GET['LiquidacaoTitulo'])) {
 			Yii::app()->session['FiltroLiquidacaoTituloIndex'] = $_GET['LiquidacaoTitulo'];
-		
-		if (isset(Yii::app()->session['FiltroLiquidacaoTituloIndex']))
-			$model->attributes=Yii::app()->session['FiltroLiquidacaoTituloIndex'];
-		else
-			$model->attributes = array(
+		}
+
+		if (!isset(Yii::app()->session['FiltroLiquidacaoTituloIndex'])) {
+			Yii::app()->session['FiltroLiquidacaoTituloIndex'] = array(
 				'codusuariocriacao' => Yii::app()->user->id,
-				//'criacao_de' => date('d/m/y'),
+				'criacao_de' => date('d/m/y', strtotime('-7 days')),
 			);
-		
+		}
+
+		if (isset(Yii::app()->session['FiltroLiquidacaoTituloIndex'])) {
+			$model->attributes=Yii::app()->session['FiltroLiquidacaoTituloIndex'];
+		}
+
 		$this->render('index',array(
 			'dataProvider'=>$model->search(),
 			'model'=>$model,
@@ -158,11 +162,11 @@ class LiquidacaoTituloController extends Controller
 	*/
 	public function actionAdmin()
 	{
-	
+
 		$model=new LiquidacaoTitulo('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['LiquidacaoTitulo']))
 			$model->attributes=$_GET['LiquidacaoTitulo'];
 
@@ -196,45 +200,64 @@ class LiquidacaoTituloController extends Controller
 			Yii::app()->end();
 		}
 	}
-	
+
 	public function actionImprimeRecibo($id, $imprimir = false)
 	{
-		
+
 		$model = $this->loadModel($id);
-		
+
 		if (!empty($model->estornado))
 			throw new CHttpException(400,'Liquidação de Títulos estornada!');
-		
+
 		$rel = new MGEscPrintRecibo($model);
 		$rel->prepara();
-		
+
 		if ($imprimir)
 			$rel->imprimir();
-		
+
 		echo $rel->converteHtml();
 
 	}
 
+	public function validarFiltro()
+	{
+		if (isset(Yii::app()->session['FiltroLiquidacaoTituloIndex'])) {
+			foreach (Yii::app()->session['FiltroLiquidacaoTituloIndex'] as $key => $val) {
+				if (!empty($val)) {
+					return;
+				}
+			}
+		}
+		die ('Faça pelo menos um filtro!');
+	}
+
 	public function actionRelatorio()
 	{
-		
+		// WORKAROUND: Cache Chrome salvando sempre o mesmo relatorio!
+		// Ate mostrava em tela diferente, mas ao salvar, salvava a primeira versao emitida
+		if (!isset($_GET['__pdfdate'])) {
+				header('Location: ' . $_SERVER['REQUEST_URI'] . '&__pdfdate=' . date('c'));
+		}
+
 		$model=new LiquidacaoTitulo('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['LiquidacaoTitulo']))
 			Yii::app()->session['FiltroLiquidacaoTituloIndex'] = $_GET['LiquidacaoTitulo'];
-		
+
+		$this->validarFiltro();
+
 		if (isset(Yii::app()->session['FiltroLiquidacaoTituloIndex']))
 			$model->attributes=Yii::app()->session['FiltroLiquidacaoTituloIndex'];
-		
+
 		$liqs = $model->search(false);
-		
+
 		$rel = new MGRelatorioLiquidacaoTitulo($liqs);
 		$rel->montaRelatorio();
 		$rel->Output();
-		
+
 	}
-	
-	
+
+
 }
