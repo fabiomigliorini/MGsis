@@ -472,7 +472,7 @@ $(document).ready(function(){
 	<thead>
 		<tr>
 			<th colspan="4">Produto</th>
-			<th colspan="4">Valores</th>
+			<th colspan="5">Valores</th>
 			<th rowspan="2">CFOP</th>
 			<th colspan="2">ICMS</th>
 			<th colspan="1">ST</th>
@@ -493,6 +493,7 @@ $(document).ready(function(){
 			<th>UM</th>
 			<th>Preço</th>
 			<th>Total</th>
+                        <th>Desc</th>
 			<th>CST</th>
 			<th>Valor</th>
 			<th>Valor</th>
@@ -578,6 +579,11 @@ $(document).ready(function(){
 						<b><?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->valortotal)); ?></b>
 					</div>
 				</td>
+                                <td>
+                                        <div class="text-right">
+                                                <small><?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->valordesconto)); ?></small>
+                                        </div>
+                                </td>
 				<td>
 					<small class='muted'>
 						<?php echo CHtml::link(CHtml::encode($prod->codcfop), array("cfop/view", "id"=>$prod->codcfop)); ?>
