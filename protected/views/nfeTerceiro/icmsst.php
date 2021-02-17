@@ -236,7 +236,9 @@ $(document).ready(function(){
     </tr>
     <?php foreach($itens as $item): ?>
       <?php
-      $classCest = $item['cestnota']!=$item['cestproduto']?'error':''
+	$cestnota = intval($item['cestnota']);
+	$cestproduto = intval($item['cestproduto']);
+	$classCest = ($cestnota!=$cestproduto)?'error':''
       ?>
       <tr class='<?php echo $classCest; ?>'>
         <td style="text-align: center !important">
@@ -247,7 +249,7 @@ $(document).ready(function(){
         </td>
         <td style="text-align: center !important">
           <?php echo CHtml::encode(Yii::app()->format->formataCest($item['cestnota'])); ?>
-          <?php if ($item['cestnota']!=$item['cestproduto']): ?>
+          <?php if ($cestnota!=$cestproduto): ?>
             <?php echo CHtml::encode(Yii::app()->format->formataCest($item['cestproduto'])); ?>
           <?php endif; ?>
         </td>
