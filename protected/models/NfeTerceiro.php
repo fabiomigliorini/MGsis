@@ -753,7 +753,7 @@ class NfeTerceiro extends MGActiveRecord
             if ($totalEsperado > $this->valortotal) {
                 $descontoRatear = $totalEsperado - $this->valortotal;
             } else {
-                $descontoRatear = $this->valortotal - $totalEsperado;
+                $outrasRatear = $this->valortotal - $totalEsperado;
             }
         }
 
