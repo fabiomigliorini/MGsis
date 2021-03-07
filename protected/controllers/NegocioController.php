@@ -74,6 +74,15 @@ class NegocioController extends Controller
                         break;
                     }
                 }
+
+                $model->refresh();
+                $model->valorfrete = $original->valorfrete;
+                $model->codpessoatransportador = $original->codpessoatransportador;
+                $model->valordesconto = $original->valordesconto;
+                if (!$model->save()) {
+                    $erro = true;
+                }
+              
             }
 
             if (!$erro) {

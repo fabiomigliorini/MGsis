@@ -72,7 +72,7 @@ class Negocio extends MGActiveRecord
         return array(
             array('codpessoa, codfilial, codestoquelocal, lancamento, codoperacao, codnegociostatus, codusuario, codnaturezaoperacao', 'required'),
             array('observacoes', 'length', 'max'=>500),
-            array('valordesconto, valorfrete, valorprodutos, valortotal, valoraprazo, valoravista', 'numerical'),
+            array('codestoquelocal, codfilial, valordesconto, valorfrete, valorprodutos, valortotal, valoraprazo, valoravista', 'numerical'),
             array('valordesconto', 'validaDesconto'),
             array('codestoquelocal', 'validaEstoqueLocal'),
             //array('codnegociostatus', 'validaStatus'),
@@ -93,11 +93,11 @@ class Negocio extends MGActiveRecord
 
     public function validaEstoqueLocal($attribute, $params)
     {
-        if (!isset($this->EstoqueLocal)) {
+        if (empty($this->codestoquelocal)) {
             return;
         }
 
-        if (!isset($this->Filial)) {
+        if (empty($this->codfilial)) {
             return;
         }
 
@@ -202,7 +202,7 @@ class Negocio extends MGActiveRecord
         $criteria->compare('codestoquelocal', $this->codestoquelocal, false);
         $criteria->compare('lancamento', $this->lancamento, true);
         $criteria->compare('codpessoavendedor', $this->codpessoavendedor, false);
-	$criteria->compare('codpessoatransportador', $this->codpessoatransportador, false);
+        $criteria->compare('codpessoatransportador', $this->codpessoatransportador, false);
         $criteria->compare('codoperacao', $this->codoperacao, false);
         $criteria->compare('codnegociostatus', $this->codnegociostatus, false);
         $criteria->compare('observacoes', $this->observacoes, true);
@@ -390,7 +390,13 @@ class Negocio extends MGActiveRecord
                 $nota->observacoes .= $this->NaturezaOperacao->observacoesnf;
             }
 
-            $nota->frete = NotaFiscal::FRETE_SEM;
+            if ($this->valorfrete > 0) {
+              $nota->frete = NotaFiscal::FRETE_EMITENTE;
+            } elseif (!empty($nota->codpessoatransportador)) {
+              $nota->frete = NotaFiscal::FRETE_DESTINATARIO;
+            } else {
+              $nota->frete = NotaFiscal::FRETE_SEM;
+            }
             $nota->codoperacao = $this->NaturezaOperacao->codoperacao;
         }
 
@@ -416,8 +422,11 @@ class Negocio extends MGActiveRecord
         $notaReferenciada = [];
 
         //percorre os itens do negocio e adiciona na nota
-        $valorDesconto = 0;
         $percDesconto = ($this->valordesconto / $this->valorprodutos);
+        $percFrete = ($this->valorfrete / $this->valorprodutos);
+        $totalProduto = 0;
+        $totalFrete = 0;
+        $totalDesconto = 0;
         foreach ($this->NegocioProdutoBarras as $negocioItem) {
             $quantidade = $negocioItem->quantidade - $negocioItem->devolucaoTotal;
 
@@ -473,13 +482,36 @@ class Negocio extends MGActiveRecord
             $notaItem->codprodutobarra = $negocioItem->codprodutobarra;
             $notaItem->quantidade = $quantidade;
             $notaItem->valorunitario = $negocioItem->valorunitario;
-            $notaItem->valortotal = round($quantidade * $negocioItem->valorunitario, 2);
+
+            if ($negocioItem->quantidade != $quantidade) {
+              $notaItem->valortotal = round($quantidade * $negocioItem->valorunitario, 2);
+            } else {
+              $notaItem->valortotal = $negocioItem->valortotal;
+            }
             $notaItem->valordesconto = round($percDesconto * $notaItem->valortotal, 2);
+            $notaItem->valorfrete = round($percFrete * $notaItem->valortotal, 2);
+
+            $totalProduto += $notaItem->valortotal;
+            $totalFrete += $notaItem->valorfrete;
+            $totalDesconto += $notaItem->valordesconto;
 
             if (!$notaItem->save()) {
                 $this->addErrors($notaItem->getErrors());
                 return false;
             }
+        }
+
+        // se adicionou todos os itens do negocio na nota
+        if (abs(floatval($totalProduto) - floatval($this->valorprodutos)) < 0.01) {
+          // se o total do frete e do desconto nao bate por causa de arredondamento
+          if ($totalFrete != $this->valorfrete || $totalDesconto != $this->valordesconto) {
+            $notaItem->valordesconto += $this->valordesconto - $totalDesconto;
+            $notaItem->valorfrete += $this->valorfrete - $totalFrete;
+            if (!$notaItem->save()) {
+                $this->addErrors($notaItem->getErrors());
+                return false;
+            }
+          }
         }
 
         foreach ($notaReferenciada as $cod => $chave) {

@@ -38,14 +38,14 @@
             $style = '';
             $focoCpf = true;
             if ($model->codpessoa != Pessoa::CONSUMIDOR) {
-              $style = 'display: none;';
-              $focoCpf = false;
+                $style = 'display: none;';
+                $focoCpf = false;
             }
       ?>
       <div id="CampoCpf" style="<?php echo $style; ?>">
         <?php
             if (!empty($model->cpf)) {
-              $model->cpf = Yii::app()->format->formataPorMascara($model->cpf, '###########');
+                $model->cpf = Yii::app()->format->formataPorMascara($model->cpf, '###########');
             }
             echo $form->textFieldRow($model, 'cpf', array('class'=>'input-medium text-center', 'maxlength'=>11));
         ?>
@@ -66,20 +66,20 @@
 		</div>
 		<?php if (!$model->isNewRecord): ?>
 		<div class="span6">
-			<?php
-            echo $form->textFieldRow($model, 'valorprodutos', array('class'=>'input-small text-right','maxlength'=>14, "readOnly"=>true, "tabindex"=>-1, 'prepend' => 'R$'));
-            echo $form->textFieldRow($model, 'percentualdesconto', array('class'=>'input-small text-right','maxlength'=>14, 'append'=>'%'));
-            echo $form->textFieldRow($model, 'valordesconto', array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-	?>
-	<?php
-	    echo $form->textFieldRow($model, 'valorfrete', array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+      <?php
+        echo $form->textFieldRow($model, 'valorprodutos', array('class'=>'input-small text-right','maxlength'=>14, "readOnly"=>true, "tabindex"=>-1, 'prepend' => 'R$'));
+        echo $form->textFieldRow($model, 'percentualdesconto', array('class'=>'input-small text-right','maxlength'=>14, 'append'=>'%'));
+        echo $form->textFieldRow($model, 'valordesconto', array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+      ?>
+      <?php
+        echo $form->textFieldRow($model, 'valorfrete', array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
             echo $form->select2PessoaRow(
-			$model,
-			'codpessoatransportador',
-			array(
-				'class' => 'span12'
-			)
-		);
+                $model,
+                'codpessoatransportador',
+                array(
+                'class' => 'span12'
+            )
+            );
 
             echo $form->textFieldRow($model, 'valortotal', array('class'=>'input-small text-right','maxlength'=>14, "readOnly"=>true, "tabindex"=>-1, 'prepend' => 'R$'));
             $this->renderPartial('_view_pagamentos', array('model'=>$model));
@@ -331,7 +331,7 @@ $(document).ready(function() {
 	$('#Negocio_valorprodutos').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#Negocio_percentualdesconto').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#Negocio_valordesconto').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
-        $('#Negocio_valorfrete').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });	
+  $('#Negocio_valorfrete').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#Negocio_valortotal').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 
 	$('#Negocio_codpessoa').on("change", function(e) {
@@ -343,9 +343,9 @@ $(document).ready(function() {
 
   <?php
   if ($focoCpf) {
-    echo '$(\'#Negocio_cpf\').focus();';
+      echo '$(\'#Negocio_cpf\').focus();';
   } else {
-    echo '$(\'.btn-primary\').focus();';
+      echo '$(\'.btn-primary\').focus();';
   }
   ?>
 

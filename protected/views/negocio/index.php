@@ -8,9 +8,9 @@ $this->menu=array(
 	array('label'=>'Novo (F2)', 'icon'=>'icon-plus', 'url'=>array('create'), 'linkOptions'=> array('id'=>'btnNovo')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 	array(
-		'label'=>'Relatório', 
-		'icon'=>'icon-print', 
-		'url'=>array('relatorio'), 
+		'label'=>'Relatório',
+		'icon'=>'icon-print',
+		'url'=>array('relatorio'),
 		'linkOptions'=>array('id'=>'btnMostrarRelatorio'),
 		),
 	);
@@ -22,7 +22,7 @@ $this->renderPartial("_hotkeys");
 <script type='text/javascript'>
 
 $(document).ready(function(){
-	
+
 	//abre janela Relatorio
 	var frameSrcRelatorio = $('#btnMostrarRelatorio').attr('href');
 	$('#btnMostrarRelatorio').click(function(event){
@@ -32,7 +32,7 @@ $(document).ready(function(){
 		});
 		$('#modalRelatorio').modal({show:true});
 		$('#modalRelatorio').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
-	});	
+	});
 
 
 	$('#search-form').change(function(){
@@ -58,12 +58,12 @@ $(document).ready(function(){
 </script>
 
 <div id="modalRelatorio" class="modal hide fade" tabindex="-1" role="dialog">
-	<div class="modal-header">  
+	<div class="modal-header">
 		<div class="pull-right">
 			<button class="btn" data-dismiss="modal">Fechar</button>
 		</div>
-		<h3>Relatório de Negocios</h3>  
-	</div>  
+		<h3>Relatório de Negocios</h3>
+	</div>
 	<div class="modal-body">
       <iframe src="" id="frameRelatorio" name="frameRelatorio" width="99.6%" height="400" frameborder="0"></iframe>
 	</div>
@@ -78,49 +78,47 @@ $(document).ready(function(){
 	'id' => 'search-form',
 	'type' => 'inline',
 	'method'=>'get',
-)); 
+));
 
 ?>
 <div class="well well-small">
-	<div class="">
+	<div class="row-fluid">
 		<?php echo $form->textField($model, 'codnegocio', array('placeholder' => '#', 'class'=>'input-mini')); ?>
+		<?php
+		echo $form->datetimepickerRow(
+			$model,
+			'lancamento_de',
+			array(
+				'class' => 'input-medium text-center',
+				'options' => array(
+					'format' => 'dd/mm/yy hh:ii',
+				),
+				'placeholder' => 'Data Inicial',
+				'prepend' => 'De',
+			)
+		);
 
-		<?php 
-
-			echo $form->datetimepickerRow(
-				$model,
-				'lancamento_de',
-				array(
-					'class' => 'input-medium text-center', 
-					'options' => array(
-						'format' => 'dd/mm/yy hh:ii',
-					),
-					'placeholder' => 'Data Inicial',
-					'prepend' => 'De',
-				)
-			);
-
-			echo $form->datetimepickerRow(
-				$model,
-				'lancamento_ate',
-				array(
-					'class' => 'input-medium text-center', 
-					'options' => array(
-						'format' => 'dd/mm/yy hh:ii',
-					),
-					'placeholder' => 'Data',
-					'prepend' => 'Até',
-				)
-			);
+		echo $form->datetimepickerRow(
+			$model,
+			'lancamento_ate',
+			array(
+				'class' => 'input-medium text-center',
+				'options' => array(
+					'format' => 'dd/mm/yy hh:ii',
+				),
+				'placeholder' => 'Data',
+				'prepend' => 'Até',
+			)
+		);
 		?>
 		<?php echo $form->select2($model, 'codfilial', Filial::getListaCombo(), array('placeholder'=>'Filial', 'class' => 'input-medium')); ?>
 		<?php echo $form->select2($model, 'codnegociostatus', NegocioStatus::getListaCombo(), array('placeholder'=>'Status', 'class' => 'input-medium')); ?>
 		<?php echo $form->select2($model, 'pagamento', array("a"=> "A Vista", "p"=> "A Prazo"), array('placeholder'=>'Pagamento', 'class' => 'input-medium')); ?>
-	</div>
-	<div class="">
 		<?php echo $form->select2($model, 'codnaturezaoperacao', NaturezaOperacao::getListaCombo(), array('placeholder'=>'Natureza', 'class' => 'input-xlarge')); ?>
-		<?php echo $form->select2Pessoa($model, 'codpessoa', array('class' => 'span5', 'inativo'=>true)); ?> 
-		<?php echo $form->select2($model, 'codusuario', Usuario::getListaCombo(), array('placeholder'=>'Usuario', 'class' => 'input-medium')); ?>
+		<?php echo $form->select2Pessoa($model, 'codpessoa', array('class' => 'input-xlarge', 'placeholder'=>'Pessoa', 'inativo'=>true)); ?>
+		<?php echo $form->select2Pessoa($model, 'codpessoavendedor', array('class' => 'input-xlarge', 'placeholder'=>'Vendedor', 'inativo'=>true)); ?>
+		<?php echo $form->select2Pessoa($model, 'codpessoatransportador', array('class' => 'input-xlarge', 'placeholder'=>'Transportador', 'inativo'=>true)); ?>
+		<?php echo $form->select2($model, 'codusuario', Usuario::getListaCombo(), array('class' => 'input-medium', 'placeholder'=>'Usuario', 'class' => 'input-medium')); ?>
 		<?php
 			$this->widget('bootstrap.widgets.TbButton'
 				, array(
@@ -129,27 +127,27 @@ $(document).ready(function(){
 					//'label'=>'',
 					'htmlOptions' => array('class'=>'pull-right btn btn-info')
 					)
-				); 
+				);
 		?>
-	</div>	
+	</div>
 </div>
 
 <?php $this->endWidget(); ?>
 
 
 <?php
- 
+
 $this->widget(
-	'zii.widgets.CListView', 
+	'zii.widgets.CListView',
 	array(
 		'id' => 'Listagem',
 		'dataProvider' => $dataProvider,
 		'itemView' => '_view',
 		'template' => '{items} {pager}',
 		'pager' => array(
-			'class' => 'ext.infiniteScroll.IasPager', 
-			'rowSelector'=>'.registro', 
-			'listViewId' => 'Listagem', 
+			'class' => 'ext.infiniteScroll.IasPager',
+			'rowSelector'=>'.registro',
+			'listViewId' => 'Listagem',
 			'header' => '',
 			'loaderText'=>'Carregando...',
 			'options' => array('history' => false, 'triggerPageTreshold' => 10, 'trigger'=>'Carregar mais registros'),

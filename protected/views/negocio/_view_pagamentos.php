@@ -1,5 +1,5 @@
 <div class="control-group ">
-	<label class="control-label" for="codformapagamento">
+	<label class="control-label" for="valorpagamento">
 		Pagamento
 	</label>
 	<div class="controls">
@@ -8,34 +8,34 @@
 		{
 			?>
 				<div class="row-fluid">
-					<div class="span7">
-						<?php
-							$codformapagamento = FormaPagamento::DINHEIRO;
-							if (!empty($model->codpessoa)) {
-								if (!empty($model->Pessoa->codformapagamento)) {
-									$codformapagamento = $model->Pessoa->codformapagamento;
-								}
-							}
-
-							$this->widget(
-								'booster.widgets.TbSelect2',
-								array(
-									'name' => 'codformapagamento',
-									'value' => $codformapagamento,
-									'data' => FormaPagamento::getListaCombo(),
-									'options' => array (
-										'allowClear'=>true,
-										'width' => '100%',
-									),
-								)
-							);
-						?>
+					<div class="span3">
+							<input class="span12 text-right" id="valorpagamento" type="text" value="1">
 					</div>
-					<div class="span5">
-						<div class="input-append">
-							<input class="input-small text-right" id="valorpagamento" type="text" value="1">
-							<button class="btn" type="button" id="btnAdicionar">Ok</button>
-						</div>
+					<div class="span7">
+							<?php
+								$codformapagamento = FormaPagamento::DINHEIRO;
+								if (!empty($model->codpessoa)) {
+									if (!empty($model->Pessoa->codformapagamento)) {
+										$codformapagamento = $model->Pessoa->codformapagamento;
+									}
+								}
+
+								$this->widget(
+									'booster.widgets.TbSelect2',
+									array(
+										'name' => 'codformapagamento',
+										'value' => $codformapagamento,
+										'data' => FormaPagamento::getListaCombo(),
+										'options' => array (
+											'allowClear'=>true,
+											'width' => '100%',
+										),
+									)
+								);
+							?>
+					</div>
+					<div class="span2">
+						<button class="btn span12" type="button" id="btnAdicionar">Ok</button>
 					</div>
 				</div>
 			<br>
@@ -94,8 +94,11 @@ function atualizaValorPagamento(foco)
 		$('#diferencavalor').autoNumeric('set', Math.abs(valordiferenca));
 		$('#valorpagamento').autoNumeric('set', Math.abs(valordiferenca));
 		$('#diferenca').show()
-		if (foco)
-			$('#codformapagamento').select2('focus');
+		if (foco){
+			// $('#codformapagamento').select2('focus');
+			$('#valorpagamento').focus();
+
+		}
 	}
 	else
 	{
