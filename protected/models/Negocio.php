@@ -390,12 +390,13 @@ class Negocio extends MGActiveRecord
                 $nota->observacoes .= $this->NaturezaOperacao->observacoesnf;
             }
 
-            if ($this->valorfrete > 0) {
-              $nota->frete = NotaFiscal::FRETE_EMITENTE;
-            } elseif (!empty($nota->codpessoatransportador)) {
-              $nota->frete = NotaFiscal::FRETE_DESTINATARIO;
-            } else {
-              $nota->frete = NotaFiscal::FRETE_SEM;
+            $nota->frete = NotaFiscal::FRETE_SEM;
+            if ($nota->modelo == NotaFiscal::MODELO_NFE) {
+                if ($this->valorfrete > 0) {
+                    $nota->frete = NotaFiscal::FRETE_EMITENTE;
+                } elseif (!empty($nota->codpessoatransportador)) {
+                    $nota->frete = NotaFiscal::FRETE_DESTINATARIO;
+                }
             }
             $nota->codoperacao = $this->NaturezaOperacao->codoperacao;
         }
