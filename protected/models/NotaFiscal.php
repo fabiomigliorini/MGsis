@@ -73,12 +73,12 @@ class NotaFiscal extends MGActiveRecord
     const CODSTATUS_INUTILIZADA   = 302;
     const CODSTATUS_CANCELADA     = 303;
 
-    const FRETE_EMITENTE             = 0;
-    const FRETE_DESTINATARIO         = 1;
-    const FRETE_TERCEIROS            = 2;
-    const FRETE_EMITENTE_PROPRIO     = 3;
-    const FRETE_DESTINATARIO_PROPRIO = 4;
-    const FRETE_SEM                  = 9;
+    const FRETE_EMITENTE             = '0';
+    const FRETE_DESTINATARIO         = '1';
+    const FRETE_TERCEIROS            = '2';
+    const FRETE_EMITENTE_PROPRIO     = '3';
+    const FRETE_DESTINATARIO_PROPRIO = '4';
+    const FRETE_SEM                  = '9';
 
     const TPEMIS_NORMAL           = 1; // Emissão normal (não em contingência);
     const TPEMIS_FS_IA            = 2; // Contingência FS-IA, com impressão do DANFE em formulário de segurança;
