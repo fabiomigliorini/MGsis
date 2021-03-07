@@ -179,10 +179,12 @@ class MGRelatorioOrcamento extends FPDF
 				
 		//Totais
 		$this->SetFont('Arial','B',8);
-		$this->Cell(32, 3, ("Subtotal:"));
-		$this->Cell(42, 3, (Yii::app()->format->formatNumber($negocio->valorprodutos)));
-		$this->Cell(32, 3, ("Desconto:"));
-		$this->Cell(41, 3, (Yii::app()->format->formatNumber($negocio->valordesconto)));
+		$this->Cell(15, 3, ("Subtotal:"));
+		$this->Cell(34, 3, (Yii::app()->format->formatNumber($negocio->valorprodutos)));
+		$this->Cell(15, 3, ("Desconto:"));
+		$this->Cell(34, 3, (Yii::app()->format->formatNumber($negocio->valordesconto)));
+                $this->Cell(15, 3, ("Frete:"));
+		$this->Cell(34, 3, (Yii::app()->format->formatNumber($negocio->valorfrete)));
 		$this->SetTextColor(0, 0, 0);
 		$this->SetFont('Arial','B',10);
 		$this->Cell(31, 3, ("Total:"));

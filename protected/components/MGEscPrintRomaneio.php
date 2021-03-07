@@ -228,10 +228,12 @@ class MGEscPrintRomaneio extends MGEscPrint
 		//linha com totais
 		$this->adicionaTexto("<DblStrikeOn>");
 		$this->adicionaTexto("Subtotal:");
-		$this->adicionaTexto(Yii::app()->format->formatNumber($model->valorprodutos), "documento", 20, STR_PAD_LEFT);
-		$this->adicionaTexto("Desconto:", "documento", 35, STR_PAD_LEFT);
-		$this->adicionaTexto(Yii::app()->format->formatNumber($model->valordesconto), "documento", 20, STR_PAD_LEFT);
-		$this->adicionaTexto("Total...:", "documento", 35, STR_PAD_LEFT);
+		$this->adicionaTexto(Yii::app()->format->formatNumber($model->valorprodutos), "documento", 27, STR_PAD_LEFT);
+		$this->adicionaTexto("Desconto:", "documento", 10, STR_PAD_LEFT);
+		$this->adicionaTexto(Yii::app()->format->formatNumber($model->valordesconto), "documento", 27, STR_PAD_LEFT);
+                $this->adicionaTexto("Frete...:", "documento", 10, STR_PAD_LEFT);
+                $this->adicionaTexto(Yii::app()->format->formatNumber($model->valorfrete), "documento", 26, STR_PAD_LEFT);
+		$this->adicionaTexto("Total...:", "documento", 10, STR_PAD_LEFT);
 		$this->adicionaTexto(Yii::app()->format->formatNumber($model->valortotal), "documento", 18, STR_PAD_LEFT);
 		$this->adicionaLinha("<DblStrikeOff>");
 				

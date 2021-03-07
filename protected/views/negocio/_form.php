@@ -70,6 +70,17 @@
             echo $form->textFieldRow($model, 'valorprodutos', array('class'=>'input-small text-right','maxlength'=>14, "readOnly"=>true, "tabindex"=>-1, 'prepend' => 'R$'));
             echo $form->textFieldRow($model, 'percentualdesconto', array('class'=>'input-small text-right','maxlength'=>14, 'append'=>'%'));
             echo $form->textFieldRow($model, 'valordesconto', array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+	?>
+	<?php
+	    echo $form->textFieldRow($model, 'valorfrete', array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+            echo $form->select2PessoaRow(
+			$model,
+			'codpessoatransportador',
+			array(
+				'class' => 'span12'
+			)
+		);
+
             echo $form->textFieldRow($model, 'valortotal', array('class'=>'input-small text-right','maxlength'=>14, "readOnly"=>true, "tabindex"=>-1, 'prepend' => 'R$'));
             $this->renderPartial('_view_pagamentos', array('model'=>$model));
             $this->renderPartial('_view_pix_cob', array('model'=>$model));
@@ -207,10 +218,17 @@ function atualizaPercentualDesconto()
 
 function atualizaValorTotal()
 {
-	$('#Negocio_valortotal').autoNumeric('set',
-		$('#Negocio_valorprodutos').autoNumeric('get') -
-		$('#Negocio_valordesconto').autoNumeric('get')
-	);
+	var prod = parseFloat($('#Negocio_valorprodutos').autoNumeric('get'));
+	var desc = parseFloat($('#Negocio_valordesconto').autoNumeric('get'));
+	if (isNaN(desc)) {
+		desc = 0;
+	}
+	var frete = parseFloat($('#Negocio_valorfrete').autoNumeric('get'));
+	if (isNaN(frete)) {
+		frete = 0;
+	}
+	var total = prod - desc + frete;
+	$('#Negocio_valortotal').autoNumeric('set', total);
 	atualizaValorPagamento(false);
 }
 
@@ -297,17 +315,23 @@ $(document).ready(function() {
 
 	$('#Negocio_percentualdesconto').change(function() {
 		atualizaValorDesconto();
-  });
+	});
 
 	$('#Negocio_valordesconto').change(function() {
 		atualizaPercentualDesconto();
-  });
+	});
+
+        $('#Negocio_valorfrete').change(function() {
+		atualizaValorTotal();
+	});
+
 
 	$("#Negocio_observacoes").RemoveAcentos();
 
 	$('#Negocio_valorprodutos').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#Negocio_percentualdesconto').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#Negocio_valordesconto').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+        $('#Negocio_valorfrete').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });	
 	$('#Negocio_valortotal').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 
 	$('#Negocio_codpessoa').on("change", function(e) {

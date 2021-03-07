@@ -72,15 +72,15 @@ class Negocio extends MGActiveRecord
         return array(
             array('codpessoa, codfilial, codestoquelocal, lancamento, codoperacao, codnegociostatus, codusuario, codnaturezaoperacao', 'required'),
             array('observacoes', 'length', 'max'=>500),
-            array('valordesconto, valorprodutos, valortotal, valoraprazo, valoravista', 'numerical'),
+            array('valordesconto, valorfrete, valorprodutos, valortotal, valoraprazo, valoravista', 'numerical'),
             array('valordesconto', 'validaDesconto'),
             array('codestoquelocal', 'validaEstoqueLocal'),
             //array('codnegociostatus', 'validaStatus'),
             array('cpf', 'ext.validators.CnpjCpfValidator'),
-            array('codpessoa, codpessoavendedor, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
+            array('codpessoa, codpessoatransportador, codpessoavendedor, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('pagamento, lancamento_de, lancamento_ate, codnegocio, codpessoa, codfilial, codestoquelocal, lancamento, codpessoavendedor, codoperacao, codnegociostatus, observacoes, codusuario, valordesconto, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnaturezaoperacao, valorprodutos, valortotal, valoraprazo, valoravista', 'safe', 'on'=>'search'),
+            array('pagamento, lancamento_de, lancamento_ate, codnegocio, codpessoa, codfilial, codestoquelocal, lancamento, codpessoatransportador, codpessoavendedor, codoperacao, codnegociostatus, observacoes, codusuario, valorfrete, valordesconto, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnaturezaoperacao, valorprodutos, valortotal, valoraprazo, valoravista', 'safe', 'on'=>'search'),
         );
     }
 
@@ -130,6 +130,7 @@ class Negocio extends MGActiveRecord
             'Operacao' => array(self::BELONGS_TO, 'Operacao', 'codoperacao'),
             'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
             'PessoaVendedor' => array(self::BELONGS_TO, 'Pessoa', 'codpessoavendedor'),
+            'PessoaTransportador' => array(self::BELONGS_TO, 'Pessoa', 'codpessoatransportador'),
             'Usuario' => array(self::BELONGS_TO, 'Usuario', 'codusuario'),
             'UsuarioAcertoEntrega' => array(self::BELONGS_TO, 'Usuario', 'codusuarioacertoentrega'),
             'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
@@ -153,11 +154,13 @@ class Negocio extends MGActiveRecord
             'codestoquelocal' => 'Local Estoque',
             'lancamento' => 'Lançamento',
             'codpessoavendedor' => 'Vendedor',
+	    'codpessoatransportador' => 'Transportador',
             'codoperacao' => 'Operação',
             'codnegociostatus' => 'Status',
             'observacoes' => 'Observações',
             'codusuario' => 'Usuário',
             'valordesconto' => 'Desconto',
+	    'valorfrete' => 'Frete',
             'percentualdesconto' => 'Desconto %',
             'entrega' => 'Entrega',
             'acertoentrega' => 'Acerto Entrega',
@@ -199,6 +202,7 @@ class Negocio extends MGActiveRecord
         $criteria->compare('codestoquelocal', $this->codestoquelocal, false);
         $criteria->compare('lancamento', $this->lancamento, true);
         $criteria->compare('codpessoavendedor', $this->codpessoavendedor, false);
+	$criteria->compare('codpessoatransportador', $this->codpessoatransportador, false);
         $criteria->compare('codoperacao', $this->codoperacao, false);
         $criteria->compare('codnegociostatus', $this->codnegociostatus, false);
         $criteria->compare('observacoes', $this->observacoes, true);

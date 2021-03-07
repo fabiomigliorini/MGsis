@@ -36,6 +36,30 @@
 	<?php
 	endif;
 	?>	
+        <?php
+        if ($model->valorfrete > 0):
+        ?>
+        <div class=" muted">
+                <div class="span5">
+                        Frete
+			<?php
+			if (!empty($model->codpessoatransportador)):
+			?>
+			<div class="badge pull-right" style="max-width: 50%; text-overflow: ellipsis; overflow: hidden;">
+                                <?php echo $model->PessoaTransportador->fantasia;     ?>
+                        </div>
+			<?php
+			endif;
+			?>
+                </div>
+                <strong class="span7 text-right" style="font-size: x-large">
+                        R$
+                        <?php echo Yii::app()->format->formatNumber($model->valorfrete); ?>
+                </strong>
+        </div>
+        <?php
+        endif;
+        ?>
 	<?php
 	if ($model->valorprodutos != $model->valortotal):
 	?>
