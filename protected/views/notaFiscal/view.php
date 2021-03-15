@@ -343,6 +343,38 @@ $(document).ready(function(){
 	if (!empty($model->justificativa))
 		$attr[] = 'justificativa';
 
+	if ($model->codstatus == NotaFiscal::CODSTATUS_AUTORIZADA)
+	{
+		$attr[] = [
+			'label' => 'MDFe',
+			'value' => "<a href='" . MGSPA_URL . "mdfe/create-nfechave/{$model->nfechave}' target='_blank'>Criar nova MDFe</a>" ,
+			'type' => 'raw'
+		];
+	}
+
+	$arrCorStatusMdfe = [
+		1 => 'label-warning',
+		2 => 'label-warning',
+		3 => 'label-info',
+		4 => 'label-important',
+		5 => 'label-inverse',
+		9 => 'label-important',
+	];
+
+	foreach ($model->MdfeNfes as $mdfeNfe) {
+		$cormdfestatus = @$arrCorStatusMdfe[$mdfeNfe->Mdfe->codmdfestatus];
+		if (!empty($mdfeNfe->Mdfe->chmdfe)) {
+			$texto = Yii::app()->format->formataChaveNfe($mdfeNfe->Mdfe->chmdfe);
+		} else {
+			$texto = Yii::app()->format->formataCodigo($mdfeNfe->codmdfe);
+		}
+		$attr[] = [
+			'label' => 'MDFe Gerado',
+			'value' => "<small><a href='" . MGSPA_URL . "mdfe/{$mdfeNfe->codmdfe}' target='_blank'><small class='label {$cormdfestatus}'>{$mdfeNfe->Mdfe->MdfeStatus->mdfestatus}</small><br />" . $texto . "</a> </small>",
+			'type' => 'raw'
+		];
+	}
+
 	$this->widget('bootstrap.widgets.TbDetailView',array(
 		'data'=>$model,
 		'attributes'=> $attr,
