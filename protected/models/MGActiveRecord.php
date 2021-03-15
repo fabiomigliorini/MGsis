@@ -55,7 +55,8 @@ abstract class MGActiveRecord extends CActiveRecord
 					Yii::app()->locale->getDateFormat('medium')));
 			}
 			/* DATA HORA */
-			elseif ($column->dbType == 'timestamp without time zone')
+			//elseif ($column->dbType == 'timestamp without time zone')
+			elseif (preg_match('/timestamp(?s)(.*)without time zone/i', $column->dbType))
 			{
 				$this->$columnName = date('Y-m-d H:i:s',
 					CDateTimeParser::parse($this->$columnName,
@@ -87,7 +88,8 @@ abstract class MGActiveRecord extends CActiveRecord
 					);
 			}
 			/* DATA HORA */
-			elseif ($column->dbType == 'timestamp without time zone')
+			//elseif ($column->dbType == 'timestamp without time zone')
+			elseif (preg_match('/timestamp(?s)(.*)without time zone/i', $column->dbType))
 			{
 				$this->$columnName = Yii::app()->dateFormatter->formatDateTime(
 						CDateTimeParser::parse(
