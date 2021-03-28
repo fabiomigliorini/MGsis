@@ -24,7 +24,7 @@
             $model->ie = Yii::app()->format->formataInscricaoEstadual($model->ie, $model->Cidade->Estado->sigla);
         }
         echo $form->textFieldRow($model, 'ie', array('class'=>'input-medium','maxlength'=>20));
-        echo $form->textFieldRow($model, 'rntrc', array('class'=>'input-small text-center','maxlength'=>8));
+        echo $form->textFieldRow($model, 'rntrc', array('class'=>'input-small text-center','maxlength'=>9));
         echo $form->select2Row(
             $model,
             'tipotransportador',
