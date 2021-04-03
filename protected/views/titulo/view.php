@@ -199,6 +199,11 @@ $(document).ready(function(){
 			'value'=>CHtml::link(CHtml::encode(Yii::app()->format->formataChaveNfe($tituloNfeTerceiro->NfeTerceiro->nfechave)),array('nfeTerceiro/icmsst','id'=>$tituloNfeTerceiro->codnfeterceiro)),
 			'type'=>'raw'
 		];
+		$attributes[] = [
+			'label'=>'Guia ICMS/ST',
+			'value'=>CHtml::link('Abrir Guia <i class="icon-file"></i>', array("NfeTerceiro/guiaSt", "codtitulonfeterceiro"=>$tituloNfeTerceiro->codtitulonfeterceiro)),
+			'type'=>'raw'
+		];
 	}
 	$this->widget('bootstrap.widgets.TbDetailView',array(
 		'data'=>$model,
