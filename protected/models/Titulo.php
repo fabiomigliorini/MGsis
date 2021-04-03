@@ -56,7 +56,7 @@
  */
 class Titulo extends MGActiveRecord
 {
-	
+
 	public $vencimento_de;
 	public $vencimento_ate;
 	public $emissao_de;
@@ -67,7 +67,7 @@ class Titulo extends MGActiveRecord
 	public $operacao;
 	public $valor;
 	public $gerado_automaticamente;
-	
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -113,7 +113,7 @@ class Titulo extends MGActiveRecord
 		if (!$this->isNewRecord)
 		{
 			$old = self::findByPk($this->codtitulo);
-			if ($old->saldo == 0 
+			if ($old->saldo == 0
                 && $old->credito != $this->credito
                 && $old->debito != $this->debito
                 )
@@ -138,7 +138,7 @@ class Titulo extends MGActiveRecord
 			}
 		}
 	}
-	
+
 	public function validaFilialPortador($attribute, $params)
 	{
 		if (!empty($this->codfilial))
@@ -151,27 +151,27 @@ class Titulo extends MGActiveRecord
 	{
 		if (!$this->boleto)
 			return;
-		
+
 		if (empty($this->codportador))
 		{
 			$this->addError($attribute, "Selecione um portador!");
 			return;
 		}
-		
+
 		if (!$this->Portador->emiteboleto)
 			$this->addError($attribute, "O portador selecionado não permite boletos!");
 	}
-	
+
 	public function validaNumero($attribute, $params)
 	{
 		//se nao tem numero
 		if (empty($this->numero))
 			return;
-		
+
 		//se nao tem tipo
 		if (empty($this->codtipotitulo))
 			return;
-		
+
 		//se nao alterou numero
 		if (!$this->isNewRecord)
 		{
@@ -179,7 +179,7 @@ class Titulo extends MGActiveRecord
 			if ($old->numero == $this->numero)
 				return;
 		}
-		
+
 		$outro = false;
 		if ($this->TipoTitulo->pagar)
 		{
@@ -190,7 +190,7 @@ class Titulo extends MGActiveRecord
 					'params'=>array(':codpessoa'=>$this->codpessoa, ':numero'=>$this->numero, ':codtitulo' => (empty($this->codtitulo)?-1:$this->codtitulo))
 				)
 			);
-			
+
 		}
 		elseif ($this->TipoTitulo->receber)
 		{
@@ -202,29 +202,29 @@ class Titulo extends MGActiveRecord
 				)
 			);
 		}
-		
+
 		if ($outro)
 		{
 			$this->addError($attribute, "Numero {$this->numero} já utilizado no título " . CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($outro->codtitulo)),array('view','id'=>$outro->codtitulo)) . "!");
 		}
 	}
-	
+
 	public function validaDataTransacao ($attribute, $params)
 	{
 		if (!$this->isNewRecord)
 			return;
-		
+
 		$pg = ParametrosGerais::model()->findByPK(1);
-		
+
 		if($pg===null)
 			return;
-		
+
 		if ($pg->validaDataTransacao($this->transacao))
 			return;
-		
+
 		$this->addError($attribute, "Data de transação inválida, deve ser entre '{$pg->transacaoinicial}' e '{$pg->transacaofinal}'!");
 	}
-	
+
 	/**
 	 * @return array relational rules.
 	 */
@@ -235,6 +235,7 @@ class Titulo extends MGActiveRecord
 		return array(
 			'MovimentoTitulos' => array(self::HAS_MANY, 'MovimentoTitulo', 'codtitulo', 'order'=>'criacao ASC, sistema ASC, codmovimentotitulo ASC'),
 			'MovimentoTitulosRelacionados' => array(self::HAS_MANY, 'MovimentoTitulo', 'codtitulorelacionado'),
+			'TituloNfeTerceiros' => array(self::HAS_MANY, 'TituloNfeTerceiro', 'codtitulo'),
 			'ContaContabil' => array(self::BELONGS_TO, 'ContaContabil', 'codcontacontabil'),
 			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
 			'NegocioFormaPagamento' => array(self::BELONGS_TO, 'NegocioFormaPagamento', 'codnegocioformapagamento'),
@@ -351,9 +352,9 @@ class Titulo extends MGActiveRecord
 			$criteria->addCondition('t.criacao <= :criacao_ate');
 			$criteria->params = array_merge($criteria->params, array(':criacao_ate' => $criacao_ate->format('Y-m-d').' 23:59:59.9'));
 		}
-		
-		
-		switch ($this->saldo) 
+
+
+		switch ($this->saldo)
 		{
 			case 9:
 				break;
@@ -363,9 +364,9 @@ class Titulo extends MGActiveRecord
 			default:
 				$criteria->addCondition('t.saldo <> 0');
 				break;
-		}		
-		
-		switch ($this->credito) 
+		}
+
+		switch ($this->credito)
 		{
 			case 2:
 				$criteria->addCondition('t.debito > 0');
@@ -374,7 +375,7 @@ class Titulo extends MGActiveRecord
 				$criteria->addCondition('t.credito > 0');
 				break;
 		}
-		
+
 		switch ($this->boleto)
 		{
 			case 2:
@@ -391,11 +392,11 @@ class Titulo extends MGActiveRecord
 			$criteria->addCondition('t.nossonumero ILIKE :nossonumero');
 			$criteria->params = array_merge($criteria->params, array(':nossonumero' => '%'.$texto.'%'));
 		}
-		
+
 		$criteria->compare('t.codportador',$this->codportador,false);
 		$criteria->compare('t.codcontacontabil',$this->codcontacontabil,false);
 		$criteria->compare('t.codtipotitulo',$this->codtipotitulo,false);
-		
+
 		switch ($this->gerencial)
 		{
 			case 2:
@@ -406,7 +407,7 @@ class Titulo extends MGActiveRecord
 				break;
 		}
 		$criteria->compare('t.codusuariocriacao',$this->codusuariocriacao,false);
-		
+
         $criteria->with = array(
 				'Pessoa' => array('select' => '"Pessoa".fantasia'),
 				'Filial' => array('select' => '"Filial".filial'),
@@ -416,16 +417,16 @@ class Titulo extends MGActiveRecord
 				'ContaContabil' => array('select' => '"ContaContabil".contacontabil'),
 				'TipoTitulo' => array('select' => '"TipoTitulo".tipotitulo'),
 			);
-	
+
 		$criteria->select = 't.codtitulo, t.vencimento, t.emissao, t.codfilial, t.numero, t.codportador, t.credito, t.debito, t.saldo, t.codtipotitulo, t.codcontacontabil, t.codusuariocriacao, t.nossonumero, t.gerencial, t.codpessoa, t.codusuarioalteracao, t.estornado';
 
 		$criteria->order = $order;
-        
+
         if (!empty($limit))
         {
             $criteria->limit = $limit;
         }
-		
+
 		if ($comoDataProvider)
 		{
 			$params = array(
@@ -437,7 +438,7 @@ class Titulo extends MGActiveRecord
 		{
 			return $this->findAll($criteria);
 		}
-		
+
 	}
 
 	/**
@@ -457,19 +458,19 @@ class Titulo extends MGActiveRecord
 		$this->Juros = new MGJuros(array("de" => $this->vencimento,	"valorOriginal" => $this->saldo));
 		$this->operacao = ($this->saldo<0 || $this->credito>$this->debito)?"CR":"DB";
 		$this->valor = abs($this->debito-$this->credito);
-		
+
 		if (!empty($this->codnegocioformapagamento) || !empty($this->codtituloagrupamento))
 			$this->gerado_automaticamente = true;
 		else
 			$this->gerado_automaticamente = false;
-			
+
 		return $ret;
 	}
-	
+
 	public function adicionaMultaJurosDesconto(
-		$multa = 0, 
-		$juros = 0, 
-		$desconto = 0, 
+		$multa = 0,
+		$juros = 0,
+		$desconto = 0,
 		$transacao = null,
 		$codportador = null,
 		$codtituloagrupamento = null,
@@ -480,9 +481,9 @@ class Titulo extends MGActiveRecord
 		$historico = null
 		)
 	{
-		
+
 		$ret = true;
-		
+
 		if ($ret && ($juros > 0))
 		{
 			$ret = $this->adicionaMovimento(
@@ -497,9 +498,9 @@ class Titulo extends MGActiveRecord
 				$codcobranca,
 				$codtitulorelacionado,
 				$historico
-			);	
+			);
 		}
-		
+
 		if ($ret && ($multa > 0))
 		{
 			$ret = $this->adicionaMovimento(
@@ -516,7 +517,7 @@ class Titulo extends MGActiveRecord
 				$historico
 			);
 		}
-		
+
 		if ($ret && ($desconto > 0))
 		{
 			$ret = $this->adicionaMovimento(
@@ -531,12 +532,12 @@ class Titulo extends MGActiveRecord
 				$codcobranca,
 				$codtitulorelacionado,
 				$historico
-			);	
+			);
 		}
-		
+
 		return $ret;
 	}
-	
+
 	public function adicionaMovimento(
 		$codtipomovimentotitulo,
 		$debito = null,
@@ -554,14 +555,14 @@ class Titulo extends MGActiveRecord
 
 		//inicializa transacao
 		$trans = $this->dbConnection->beginTransaction();
-		
+
 		// preenche data de transacao
 		if ($transacao == null)
 			$transacao = date('d/m/Y');
-			
-		//instancia 
+
+		//instancia
 		$mov = new MovimentoTitulo('insert');
-		
+
 		//passa parametros
 		$mov->codtitulo              = $this->codtitulo;
 		$mov->codtipomovimentotitulo = $codtipomovimentotitulo;
@@ -576,10 +577,10 @@ class Titulo extends MGActiveRecord
 		$mov->codtitulorelacionado   = $codtitulorelacionado;
 		$mov->historico              = $historico;
 		$mov->sistema                = date('Y-m-d H:i:s');
-		
+
 		//salva
 		$ret = $mov->save();
-		
+
 		//se deu erro adiciona erro
 		if ($ret)
 		{
@@ -592,21 +593,21 @@ class Titulo extends MGActiveRecord
 			$this->addErrors($mov->getErrors());
 			$trans->rollback();
 		}
-		
+
 		//retorna
 		return $ret;
 	}
-	
+
 	protected function beforeSave()
 	{
 		$ret = parent::beforeSave();
-		
+
 		if (empty($this->sistema))
 			$this->sistema = $this->criacao;
-		
+
 		if (empty($this->numero))
 			$this->numero = $this->codtitulo;
-		
+
 		if ($this->TipoTitulo->credito)
 		{
 			$this->credito = Yii::app()->format->unformatNumber($this->valor);
@@ -634,25 +635,25 @@ class Titulo extends MGActiveRecord
 				$this->nossonumero = Yii::app()->db->createCommand("SELECT NEXTVAL('$sequence')")->queryScalar();
 			}
 		}
-		
+
 		return $ret;
-		
+
 	}
-	
-	
+
+
 	public function save($runValidation=true, $attributes=NULL)
 	{
 		//variaveis do registro novo x antigo
 		$novo = $this->isNewRecord;
 		if (!$novo)
 			$old = Titulo::model()->findByPk($this->codtitulo);
-		
+
 		//comeca transacao
 		$trans = $this->dbConnection->beginTransaction();
-		
+
 		//salva registro do titulo
 		$ret = parent::save($runValidation, $attributes);
-		
+
 		//se salvou o titulo
 		if ($ret)
 		{
@@ -660,7 +661,7 @@ class Titulo extends MGActiveRecord
 			$debito = 0;
 			$credito = 0;
 			$data = date('d/m/Y');
-			
+
 			//se registro novo
 			if ($novo)
 			{
@@ -688,10 +689,10 @@ class Titulo extends MGActiveRecord
 			//se teve diferenca, um registro de movimento
 			if ($debito >0 || $credito >0)
 			{
-				
+
 				$ret = $this->adicionamovimento(
-					$codtipomovimento, 
-					$debito, 
+					$codtipomovimento,
+					$debito,
 					$credito,
 					$data,
 					$this->codportador,
@@ -705,28 +706,28 @@ class Titulo extends MGActiveRecord
 			$trans->commit();
 		else
 			$trans->rollback();
-		
+
 		//retorna
 		return $ret;
 	}
-	
+
 	public function estorna()
 	{
-		
+
 		if ($this->debito - $this->credito <> $this->saldo)
 		{
 			$this->addError("saldo", "Impossivel estornar um título movimentado!");
 			return false;
 		}
-		
+
 		return $this->adicionaMovimento(
 			TipoMovimentoTitulo::TIPO_ESTORNO_IMPLANTACAO,
-			$this->creditosaldo, 
-			$this->debitosaldo, 
-			date('d/m/Y'), 
-			$this->codportador, 
+			$this->creditosaldo,
+			$this->debitosaldo,
+			date('d/m/Y'),
+			$this->codportador,
 			$this->codtituloagrupamento
 		);
 	}
-		
+
 }
