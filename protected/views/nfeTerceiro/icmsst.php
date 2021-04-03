@@ -191,6 +191,7 @@ Yii::app()->clientScript->registerCoreScript('yii');
 
 <?php
 $tituloNfeTerceiros = $model->TituloNfeTerceiros;
+$diferenca = array_sum(array_column($itens, 'diferenca'));
 ?>
 <h3>Guias de ST</h3>
 <table class="detail-view table table-striped table-condensed">
@@ -216,6 +217,9 @@ $tituloNfeTerceiros = $model->TituloNfeTerceiros;
       </th>
     </tr>
     <?php foreach($tituloNfeTerceiros as $tituloNfeTerceiro): ?>
+      <?php
+      $diferenca -= $tituloNfeTerceiro->Titulo->valor;
+      ?>
       <tr class=''>
         <td style="text-align: center !important">
           <?php echo CHtml::link(Yii::app()->format->formataCodigo($tituloNfeTerceiro->codtitulo), array("titulo/view", "id"=>$tituloNfeTerceiro->codtitulo)); ?>
@@ -240,6 +244,12 @@ $tituloNfeTerceiros = $model->TituloNfeTerceiros;
   </tbody>
 </table>
 
+<?php
+if ($diferenca <= 0) {
+  $diferenca = 0;
+}
+?>
+
 <div class="row">
   <div class="span12">
     <div class="input-prepend">
@@ -248,7 +258,7 @@ $tituloNfeTerceiros = $model->TituloNfeTerceiros;
     </div>
     <div class="input-prepend input-append">
       <span class="add-on">R$</span>
-      <input class="span2 text-right" id="valorGuiaSt" type="text" value="<?php echo array_sum(array_column($itens, 'diferenca')) ?>">
+      <input class="span2 text-right" id="valorGuiaSt" type="text" value="<?php echo $diferenca ?>">
       <button class="btn btn-primary" id="btnGerarGuia" type="button">Gerar Guia de ST</button>
     </div>
   </div>
@@ -261,6 +271,10 @@ $tituloNfeTerceiros = $model->TituloNfeTerceiros;
 
 function gerarGuiaSt () {
   var valorGuiaSt = $('#valorGuiaSt').autoNumeric('get');
+  if (valorGuiaSt <= 0.01) {
+    bootbox.alert("Valor inferior à R$ 0,01! Ignorando!");
+    return;
+  }
   var vencimentoGuiaSt = $('#vencimentoGuiaSt').val();
   $.getJSON("<?php echo Yii::app()->createUrl('NfeTerceiro/gerarGuiaSt')?>", {
     id: <?php echo $model->codnfeterceiro ?>,
@@ -273,7 +287,9 @@ function gerarGuiaSt () {
     });
   })
   .fail(function( jqxhr, textStatus, error ) {
-    $.notify("Falha ao gerar Guia de ST!", { position:"right bottom", className:"error", autoHideDelay: 15000 });
+    bootbox.alert("Falha ao gerar Guia de ST!", function() {
+      location.reload();
+    });
   });
 }
 
