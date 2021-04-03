@@ -520,4 +520,224 @@ class NfeTerceiroController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+	public function actionGerarGuiaSt ($id, $valor, $vencimento)
+	{
+
+		// Validacao Valor
+		$valor = floatval($valor);
+		if ($valor <= 0.01) {
+			throw new \Exception("Valor Não Informado!", 1);
+		}
+
+		// Carrega NFE Terceiro
+		$model = $this->loadModel($id);
+
+		// Variaveis para Requisicao
+		$periodoReferencia = DateTime::createFromFormat('d/m/Y H:i:s', $model->emissao)->format("m/Y");
+		$numrDocumentoDestinatario = $model->Filial->Pessoa->ie;
+		$numrNota1 = $model->nfechave;
+		$numrInscEstadual = $model->Filial->Pessoa->ie;
+		$numrDocumento = $model->Filial->Pessoa->cnpj;
+		$valorFormatado = number_format($valor, 2, ",", ".");
+
+		// CNAE
+		$arrCodgCnae = [
+			101 => '4751201',
+		];
+		if (!isset($arrCodgCnae[$model->codfilial])) {
+			throw new \Exception("Impossível determinar Cnae!", 1);
+		}
+		$codgCnae = $arrCodgCnae[$model->codfilial];
+
+		// Numero do numrContribuinte
+		$arrNumrContribuinte = [
+			101 => '611107',
+		];
+		if (!isset($arrNumrContribuinte[$model->codfilial])) {
+			throw new \Exception("Impossível determinar Número do Contribuinte!", 1);
+		}
+		$numrContribuinte = $arrNumrContribuinte[$model->codfilial];
+
+		// Requisicao CURL
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, "https://www.sefaz.mt.gov.br/arrecadacao/darlivre/pj/gerardar");
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_POST, true);
+		$data = [
+			'periodoReferencia' => $periodoReferencia,
+			'tipoVenda' => '1',
+			'tributo' => '1538',
+			'cnpjBeneficiario' => '',
+			'numrDuimp' => '',
+			'numrDocumentoDestinatario' => $numrDocumentoDestinatario,
+			'txtCaminhoArquivo' => '(binary)',
+			'isNFE1' => 'on',
+			'numrNota1' => $numrNota1,
+			'isNFE2' => 'on',
+			'numrNota2' => '',
+			'isNFE3' => 'on',
+			'numrNota3' => '',
+			'isNFE4' => 'on',
+			'numrNota4' => '',
+			'isNFE5' => 'on',
+			'numrNota5' => '',
+			'isNFE6' => 'on',
+			'numrNota6' => '',
+			'isNFE7' => 'on',
+			'numrNota7' => '',
+			'isNFE8' => 'on',
+			'numrNota8' => '',
+			'isNFE9' => 'on',
+			'numrNota9' => '',
+			'isNFE10' => 'on',
+			'numrNota10' => '',
+			'numrPessoaDestinatario' => $numrContribuinte,
+			'statInscricaoEstadual' => 'Ativo',
+			'notas' => '1',
+			'nfeNota1' => '',
+			'nfeNota2' => '',
+			'nfeNota3' => '',
+			'nfeNota4' => '',
+			'nfeNota5' => '',
+			'nfeNota6' => '',
+			'nfeNota7' => '',
+			'nfeNota8' => '',
+			'nfeNota9' => '',
+			'nfeNota10' => '',
+			'numrParcela' => '',
+			'totalParcela' => '',
+			'numrNai' => '',
+			'numrTad' => '',
+			'multaCovid' => '',
+			'numeroNob' => '',
+			'codgConvDesc' => '',
+			'dataVencimento' => $vencimento,
+			'qtd' => '',
+			'qtdUnMedida' => '',
+			'valorUnitario' => '',
+			'valorCampo' => $valorFormatado,
+			'valorCorrecao' => '',
+			'diasAtraso' => '',
+			'juros' => '',
+			'tipoDocumento' => '2',
+			'nota1' => '',
+			'nota2' => '',
+			'nota3' => '',
+			'nota4' => '',
+			'nota5' => '',
+			'nota6' => '',
+			'nota7' => '',
+			'nota8' => '',
+			'nota9' => '',
+			'nota10' => '',
+			'informacaoPrevista' => '',
+			'informacaoPrevista2' => '',
+			'municipio' => '255009',
+			'numrContribuinte' => $numrContribuinte,
+			'pagn' => 'emitir',
+			'numrDocumento' => $numrDocumento,
+			'numrInscEstadual' => $numrInscEstadual,
+			'tipoContribuinte' => '1',
+			'codgCnae' => $codgCnae,
+			'tipoTributoH' => '',
+			'codgOrgao' => '',
+			'valor' => $valorFormatado,
+			'valorPadrao' => '0',
+			'valorMulta' => '',
+			'tributoTad' => '1538',
+			'tipoVendaX' => '',
+			'tipoUniMedida' => '',
+			'valorUnit' => '',
+			'upfmtFethab' => '',
+		];
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+		$output = curl_exec($ch);
+		$info = curl_getinfo($ch);
+		curl_close($ch);
+
+		// valida se veio um PDF
+		if ($info['content_type'] != 'application/pdf') {
+			@$doc = new DOMDocument();
+			@$doc->loadHTML($output);
+			$xpath = new DomXPath($doc);
+			$nodeList = $xpath->query("//font[@class='SEFAZ-FONT-MensagemErro']");
+			if ($node = $nodeList->item(0)) {
+				throw new \Exception(trim($node->nodeValue), 1);
+			}
+			throw new \Exception("Falha ao gerar PDF da DAR!", 1);
+		}
+
+		// Cria diretorio pra salvar o PDF
+		$arquivo = "/opt/www/GuiaST/" . DateTime::createFromFormat('d/m/Y H:i:s', $model->emissao)->format("Y/m") . "/";
+		if (!file_exists($arquivo)) {
+			mkdir($arquivo, 0755, true);
+		}
+
+		// Reserva Codtitulo
+		$codtitulo = Yii::app()->db->createCommand("SELECT NEXTVAL('tbltitulo_codtitulo_seq')")->queryScalar();
+
+		// Cria o Titulo
+		$titulo = new Titulo();
+		$titulo->codtitulo = $codtitulo;
+		$titulo->codfilial = $model->codfilial;
+		$titulo->numero = "ICMS ST {$codtitulo}";
+		$titulo->codtipotitulo = 928; // Boleto a Pagar
+		$titulo->valor = $valor;
+		$titulo->codpessoa = 3899; // sefaz
+		$titulo->codcontacontabil = 147; // ICMS ST
+		$titulo->transacao = date('d/m/Y');
+		$titulo->emissao = date('d/m/Y');
+		$titulo->vencimento = $vencimento;
+		$titulo->vencimentooriginal = $vencimento;
+		$titulo->observacao = "ICMS ST NFe {$model->numero} - {$model->Pessoa->fantasia}\n{$model->nfechave}";
+		if (!$titulo->save()) {
+			$errors = $titulo->getErrors();
+			foreach ($errors as $error) {
+				throw new \Exception($error[0], 1);
+			}
+		};
+
+		// Salva PDF
+		$arquivo .= "{$model->nfechave}-{$titulo->codtitulo}.pdf" ;
+		file_put_contents($arquivo, $output);
+
+		// Amarra titulo a NfeTerceiro
+		$tituloNfeTerceiro = new TituloNfeTerceiro();
+		$tituloNfeTerceiro->codtitulo = $titulo->codtitulo;
+		$tituloNfeTerceiro->codnfeterceiro = $model->codnfeterceiro;
+		if (!$tituloNfeTerceiro->save()) {
+			$errors = $tituloNfeTerceiro->getErrors();
+			foreach ($errors as $error) {
+				throw new \Exception($error[0], 1);
+			}
+		};
+
+		echo CJSON::encode(
+			array(
+				'id' => $id,
+				'valor' => $valor,
+				'vencimento' => $vencimento,
+				'codtitulo' => $titulo->codtitulo,
+				'codtitulonfeterceiro' => $tituloNfeTerceiro->codtitulonfeterceiro,
+			)
+		);
+
+	}
+
+	public function actionGuiaSt($codtitulonfeterceiro)
+	{
+			$tituloNfeTerceiro=TituloNfeTerceiro::model()->findByPk($codtitulonfeterceiro);
+			if($tituloNfeTerceiro===null) {
+				throw new CHttpException(404,'The requested page does not exist.');
+			}
+			$arquivo = "/opt/www/GuiaST/" . DateTime::createFromFormat('d/m/Y H:i:s', $tituloNfeTerceiro->NfeTerceiro->emissao)->format("Y/m") . "/";
+			$arquivo .= "{$tituloNfeTerceiro->NfeTerceiro->nfechave}-{$tituloNfeTerceiro->codtitulo}.pdf" ;
+			if (!file_exists($arquivo)) {
+				throw new CHttpException(404,'The requested page does not exist.');
+			}
+			header('Content-type: application/pdf');
+			header('Content-Disposition: inline; filename="' . basename($arquivo) . '"');
+			readfile($arquivo);
+	}
 }

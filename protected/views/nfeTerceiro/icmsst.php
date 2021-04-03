@@ -16,128 +16,11 @@ $this->menu=array(
     array('label'=>'Detalhes', 'icon'=>'icon-eye-open', 'url'=>array('view','id'=>$model->codnfeterceiro)),
 );
 
+Yii::app()->clientScript->registerScriptFile(Yii::app()->bootstrap->getAssetsUrl() . '/js/bootstrap-datepicker.min.js');
+Yii::app()->clientScript->registerCSSFile(Yii::app()->bootstrap->getAssetsUrl() . '/css/bootstrap-datepicker.min.css');
 Yii::app()->clientScript->registerCoreScript('yii');
 
 ?>
-<script type="text/javascript">
-/*<![CDATA[*/
-
-function gerarDar()
-{
-  var data = {
-    periodoReferencia:'12/2020',
-    tipoVenda:1,
-    tributo:1538,
-    cnpjBeneficiario:null,
-    numrDuimp:null,
-    numrDocumentoDestinatario:132030470,
-    txtCaminhoArquivo:'(binary)',
-    isNFE1:'on',
-    numrNota1:13201204402277000100550170002223641629469490,
-    isNFE2:'on',
-    numrNota2:null,
-    isNFE3:'on',
-    numrNota3:null,
-    isNFE4:'on',
-    numrNota4:null,
-    isNFE5:'on',
-    numrNota5:null,
-    isNFE6:'on',
-    numrNota6:null,
-    isNFE7:'on',
-    numrNota7:null,
-    isNFE8:'on',
-    numrNota8:null,
-    isNFE9:'on',
-    numrNota9:null,
-    isNFE10:'on',
-    numrNota10:null,
-    numrPessoaDestinatario:611107,
-    statInscricaoEstadual:'Ativo',
-    notas:1,
-    nfeNota1:null,
-    nfeNota2:null,
-    nfeNota3:null,
-    nfeNota4:null,
-    nfeNota5:null,
-    nfeNota6:null,
-    nfeNota7:null,
-    nfeNota8:null,
-    nfeNota9:null,
-    nfeNota10:null,
-    numrParcela:null,
-    totalParcela:null,
-    numrNai:null,
-    numrTad:null,
-    multaCovid:null,
-    numeroNob:null,
-    codgConvDesc:null,
-    dataVencimento:15/01/2021,
-    qtd:null,
-    qtdUnMedida:null,
-    valorUnitario:null,
-    valorCampo:'719,00',
-    valorCorrecao:null,
-    diasAtraso:null,
-    juros:null,
-    tipoDocumento:2,
-    nota1:null,
-    nota2:null,
-    nota3:null,
-    nota4:null,
-    nota5:null,
-    nota6:null,
-    nota7:null,
-    nota8:null,
-    nota9:null,
-    nota10:null,
-    informacaoPrevista:null,
-    informacaoPrevista2:null,
-    municipio:255009,
-    numrContribuinte:611107,
-    pagn:'emitir',
-    numrDocumento:4576775000160,
-    numrInscEstadual:132030470,
-    tipoContribuinte:1,
-    codgCnae:4751201,
-    tipoTributoH:null,
-    codgOrgao:null,
-    valor:'719,00',
-    valorPadrao:0,
-    valorMulta:null,
-    tributoTad:1538,
-    tipoVendaX:null,
-    tipoUniMedida:null,
-    valorUnit:null,
-    upfmtFethab:null,
-  };
-
-  $.ajax({
-      type: "POST",
-      crossDomaisssn: true,
-      url: "https://www.sefaz.mt.gov.br/arrecadacao/darlivre/pj/gerardar",
-      data: data,
-      cache: false,
-      success: function(response)
-      {
-          alert('got response');
-          window.open(response);
-      },
-      error: function (XMLHttpRequest, textStatus, errorThrown)
-      {
-          alert('Error occurred while opening fax template'
-                + getAjaxErrorString(textStatus, errorThrown));
-      }
-  });
-
-}
-
-$(document).ready(function(){
-
-});
-
-/*]]>*/
-</script>
 
 <h1>
 	Cálculo ICMS ST NFe <?php echo Yii::app()->format->formataChaveNfe($model->nfechave); ?>
@@ -307,5 +190,109 @@ $(document).ready(function(){
 </table>
 
 <?php
-$this->widget('UsuarioCriacao', array('model'=>$model));
+$tituloNfeTerceiros = $model->TituloNfeTerceiros;
 ?>
+<h3>Guias de ST</h3>
+<table class="detail-view table table-striped table-condensed">
+  <tbody>
+    <tr>
+      <th style="text-align: center !important">
+       # Título
+      </th>
+      <th style="text-align: center !important">
+        Emissão
+      </th>
+      <th style="text-align: center !important">
+        Vencimento
+      </th>
+      <th style="text-align: center !important">
+        Valor
+      </th>
+      <th style="text-align: center !important">
+        Saldo
+      </th>
+      <th style="text-align: center !important">
+        Arquivo
+      </th>
+    </tr>
+    <?php foreach($tituloNfeTerceiros as $tituloNfeTerceiro): ?>
+      <tr class=''>
+        <td style="text-align: center !important">
+          <?php echo CHtml::link(Yii::app()->format->formataCodigo($tituloNfeTerceiro->codtitulo), array("titulo/view", "id"=>$tituloNfeTerceiro->codtitulo)); ?>
+        </td>
+        <td style="text-align: center !important">
+          <?php echo CHtml::encode($tituloNfeTerceiro->Titulo->emissao); ?>
+        </td>
+        <td style="text-align: center !important">
+          <?php echo CHtml::encode($tituloNfeTerceiro->Titulo->vencimento); ?>
+        </td>
+        <td style="text-align: center !important">
+          <?php echo CHtml::encode(Yii::app()->format->formatNumber($tituloNfeTerceiro->Titulo->valor, 2)); ?>
+        </td>
+        <td style="text-align: center !important">
+          <?php echo CHtml::encode(Yii::app()->format->formatNumber($tituloNfeTerceiro->Titulo->saldo, 2)); ?>
+        </td>
+        <td style="text-align: center !important">
+          <?php echo CHtml::link('Abrir Guia <i class="icon-file"></i>', array("NfeTerceiro/guiaSt", "codtitulonfeterceiro"=>$tituloNfeTerceiro->codtitulonfeterceiro)); ?>
+        </td>
+      </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+
+<div class="row">
+  <div class="span12">
+    <div class="input-prepend">
+      <span class="add-on">Vencimento</span>
+      <input class="span2 text-center" id="vencimentoGuiaSt" type="text" value="<?php echo date("d/m/Y", strtotime("+7 days")) ?>">
+    </div>
+    <div class="input-prepend input-append">
+      <span class="add-on">R$</span>
+      <input class="span2 text-right" id="valorGuiaSt" type="text" value="<?php echo array_sum(array_column($itens, 'diferenca')) ?>">
+      <button class="btn btn-primary" id="btnGerarGuia" type="button">Gerar Guia de ST</button>
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+/*<![CDATA[*/
+
+function gerarGuiaSt () {
+  var valorGuiaSt = $('#valorGuiaSt').autoNumeric('get');
+  var vencimentoGuiaSt = $('#vencimentoGuiaSt').val();
+  $.getJSON("<?php echo Yii::app()->createUrl('NfeTerceiro/gerarGuiaSt')?>", {
+    id: <?php echo $model->codnfeterceiro ?>,
+    valor: valorGuiaSt,
+    vencimento: vencimentoGuiaSt,
+  })
+  .done(function(data) {
+    bootbox.alert("Guia de ST Gerada!", function() {
+      location.reload();
+    });
+  })
+  .fail(function( jqxhr, textStatus, error ) {
+    $.notify("Falha ao gerar Guia de ST!", { position:"right bottom", className:"error", autoHideDelay: 15000 });
+  });
+}
+
+$(document).ready(function(){
+
+  $('#valorGuiaSt').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+  $('#vencimentoGuiaSt').datepicker({'format':'dd/mm/yyyy','language':'pt'});
+
+  $('#btnGerarGuia').click(function(e) {
+		e.preventDefault();
+    bootbox.confirm("Deseja Gerar a Guia de ST?", function(result) {
+			if (!result) {
+        return
+      }
+      gerarGuiaSt();
+		});
+	});
+
+});
+
+/*]]>*/
+</script>

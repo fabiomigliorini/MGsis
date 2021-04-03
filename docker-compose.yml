@@ -18,4 +18,5 @@ services:
             - ./:/opt/www/MGsis
             - /media/publico:/media/publico
             - ../NFePHP/:/opt/www/NFePHP
+            - ../GuiaST/:/opt/www/GuiaST
         network_mode: host

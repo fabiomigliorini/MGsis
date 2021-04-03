@@ -10,23 +10,23 @@ $this->menu=array(
 	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
 	array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codtitulo)),
 	array(
-		'label'=>'Imprimir Vale', 
-		'icon'=>'icon-print', 
-		'url'=>array('imprimevale','id'=>$model->codtitulo), 
+		'label'=>'Imprimir Vale',
+		'icon'=>'icon-print',
+		'url'=>array('imprimevale','id'=>$model->codtitulo),
 		'linkOptions'=>array('id'=>'btnMostrarVale'),
 		'visible'=>$model->saldo < 0
 	),
 	array(
-		'label'=>'Imprimir Boleto', 
-		'icon'=>'icon-barcode', 
-		'url'=>array('imprimeboleto', 'id'=>$model->codtitulo), 
+		'label'=>'Imprimir Boleto',
+		'icon'=>'icon-barcode',
+		'url'=>array('imprimeboleto', 'id'=>$model->codtitulo),
 		'linkOptions'=>array('id'=>'btnMostrarBoleto'),
 		'visible'=>($model->boleto && ($model->saldo>0))
 	),
 	array(
-		'label'=>'Estornar', 
-		'icon'=>'icon-thumbs-down', 
-		'url'=>'#', 
+		'label'=>'Estornar',
+		'icon'=>'icon-thumbs-down',
+		'url'=>'#',
 		'linkOptions'=>array('id'=>'btnEstornar'),
 		'visible'=>(empty($model->codtituloagrupamento) && ($model->saldo <> 0))
 		),
@@ -37,16 +37,16 @@ $this->menu=array(
 
 Yii::app()->clientScript->registerCoreScript('yii');
 
-if ($model->saldo == 0) 
+if ($model->saldo == 0)
 	$css_vencimento = "muted";
 else
 	if ($model->Juros->diasAtraso > 0)
 	{
-		if ($model->Juros->diasAtraso <= $model->Juros->diasTolerancia) 
+		if ($model->Juros->diasAtraso <= $model->Juros->diasTolerancia)
 		{
 			$css_vencimento = "text-warning";
 		}
-		else 
+		else
 		{
 			$css_vencimento = "text-error";
 		}
@@ -66,7 +66,7 @@ else
 <script type="text/javascript">
 /*<![CDATA[*/
 $(document).ready(function(){
-	
+
 	//abre janela boleto
 	var frameSrcBoleto = $('#btnMostrarBoleto').attr('href');
 	$('#btnMostrarBoleto').click(function(event){
@@ -76,7 +76,7 @@ $(document).ready(function(){
 		});
 		$('#modalBoleto').modal({show:true})
 		$('#modalBoleto').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
-	});	
+	});
 
 	//abre janela vale
 	var frameSrcVale = $('#btnMostrarVale').attr('href');
@@ -87,25 +87,25 @@ $(document).ready(function(){
 		});
 		$('#modalVale').modal({show:true})
 		$('#modalVale').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
-	});	
-		
+	});
+
 	//imprimir Boleto
 	$('#btnImprimirBoleto').click(function(event){
 		window.frames["frameBoleto"].focus();
 		window.frames["frameBoleto"].print();
 	});
-	
+
 	//imprimir Vale
 	$('#btnImprimirVale').click(function(event){
 		window.frames["frameVale"].focus();
 		window.frames["frameVale"].print();
 	});
-	
+
 	//imprimir Vale Matricial
 	$('#btnImprimirValeMatricial').click(function(event){
 		$('#frameVale').attr("src",frameSrcVale + "&imprimir=true");
 	});
-	
+
 	//botao excluir
 	jQuery('body').on('click','#btnEstornar',function() {
 		bootbox.confirm("Estornar este título?", function(result) {
@@ -113,19 +113,19 @@ $(document).ready(function(){
 				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('titulo/estorna', array('id' => $model->codtitulo))?>",{});
 		});
 	});
-	
+
 });
 /*]]>*/
 </script>
 
 <div id="modalBoleto" class="modal hide fade" tabindex="-1" role="dialog">
-	<div class="modal-header">  
+	<div class="modal-header">
 		<div class="pull-right">
 			<button class="btn btn-primary" id="btnImprimirBoleto">Imprimir</button>
 			<button class="btn" data-dismiss="modal">Fechar</button>
 		</div>
-		<h3>Boleto</h3>  
-	</div>  
+		<h3>Boleto</h3>
+	</div>
 	<div class="modal-body">
       <iframe src="" id="frameBoleto" name="frameBoleto" width="99.6%" height="400" frameborder="0"></iframe>
 	</div>
@@ -140,7 +140,7 @@ $(document).ready(function(){
 
 			<button class="btn" data-dismiss="modal">Fechar</button>
 		</div>
-		<h3>Vale</h3>  
+		<h3>Vale</h3>
 	</div>
 	<div class="modal-body">
       <iframe src="" id="frameVale" name="frameVale" width="99.6%" height="400" frameborder="0"></iframe>
@@ -158,45 +158,56 @@ $(document).ready(function(){
 
 <div class="row-fluid">
 	<div class="span4">
-	<?php 
+	<?php
+	$attributes = [
+		array(
+			'name'=>'codtitulo',
+			'value'=>Yii::app()->format->formataCodigo($model->codtitulo),
+			),
+		'fatura',
+		array(
+			'name'=>'codtipotitulo',
+			'value'=>(isset($model->TipoTitulo))?$model->TipoTitulo->tipotitulo:null,
+			),
+		array(
+			'name'=>'codcontacontabil',
+			'value'=>(isset($model->ContaContabil))?$model->ContaContabil->contacontabil:null,
+			),
+		array(
+			'name'=>'observacao',
+			'value'=>(!empty($model->observacao))?nl2br(CHtml::encode($model->observacao)):null,
+			'type'=>'raw'
+			),
+	];
+	if (!empty($model->codnegocioformapagamento)) {
+			$attributes[] = [
+				'label'=>'Negócio',
+				'value'=>CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($model->NegocioFormaPagamento->codnegocio)),array('negocio/view','id'=>$model->NegocioFormaPagamento->codnegocio)),
+				'type'=>'raw'
+			];
+	}
+	if (!empty($model->codtituloagrupamento)) {
+			$attributes[] = [
+				'label'=>'Agrupamento',
+				'value'=>CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($model->codtituloagrupamento)),array('tituloAgrupamento/view','id'=>$model->codtituloagrupamento)),
+				'type'=>'raw'
+			];
+	}
+	foreach ($model->TituloNfeTerceiros as $tituloNfeTerceiro) {
+		$attributes[] = [
+			'label'=>'NFe Terceiro',
+			'value'=>CHtml::link(CHtml::encode(Yii::app()->format->formataChaveNfe($tituloNfeTerceiro->NfeTerceiro->nfechave)),array('nfeTerceiro/icmsst','id'=>$tituloNfeTerceiro->codnfeterceiro)),
+			'type'=>'raw'
+		];
+	}
 	$this->widget('bootstrap.widgets.TbDetailView',array(
 		'data'=>$model,
-		'attributes'=>array(
-			array(
-				'name'=>'codtitulo',
-				'value'=>Yii::app()->format->formataCodigo($model->codtitulo),
-				),
-			'fatura',
-			array(
-				'name'=>'codtipotitulo',
-				'value'=>(isset($model->TipoTitulo))?$model->TipoTitulo->tipotitulo:null,
-				),
-			array(
-				'name'=>'codcontacontabil',
-				'value'=>(isset($model->ContaContabil))?$model->ContaContabil->contacontabil:null,
-				),
-			array(
-				'name'=>'observacao',
-				'value'=>(!empty($model->observacao))?nl2br(CHtml::encode($model->observacao)):null,
-				'type'=>'raw'
-				),
-			array(
-				'label'=>'Negócio',
-//				'value'=>(isset($model->NegocioFormaPagamento))?Yii::app()->format->formataCodigo($model->NegocioFormaPagamento->codnegocio):"Não",
-				'value'=>(!empty($model->codnegocioformapagamento))?CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($model->NegocioFormaPagamento->codnegocio)),array('negocio/view','id'=>$model->NegocioFormaPagamento->codnegocio)):null,
-				'type'=>'raw'
-				),
-			array(
-				'label'=>'Agrupamento',
-				'value'=>(!empty($model->codtituloagrupamento))?CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($model->codtituloagrupamento)),array('tituloAgrupamento/view','id'=>$model->codtituloagrupamento)):null,
-				'type'=>'raw'
-				),
-			),
-	)); 
+		'attributes'=>$attributes,
+	));
 	?>
 	</div>
 	<div class="span4">
-	<?php 
+	<?php
 	$this->widget('bootstrap.widgets.TbDetailView',array(
 		'data'=>$model,
 		'attributes'=>array(
@@ -218,8 +229,8 @@ $(document).ready(function(){
 			'remessa',
 			'transacaoliquidacao',
 		),
-	)); 
-	?>		
+	));
+	?>
 	</div>
 	<div class="span4">
 	<?php
@@ -232,7 +243,7 @@ $(document).ready(function(){
 				),
 			array(
 				'name'=>'vencimento',
-				'cssClass' => $css_vencimento 
+				'cssClass' => $css_vencimento
 			),
 			array(
 				'name'=>'vencimentooriginal',
@@ -303,7 +314,7 @@ foreach ($model->MovimentoTitulos as $mov)
 				?>
 			</div>
 		</small>
-	</div>	
+	</div>
 	<?php
 }
 
@@ -347,7 +358,7 @@ foreach ($model->BoletoRetornos as $ret)
 				<?php
 					$this->widget('UsuarioCriacao', array('model'=>$ret));
 				?>
-			</div>		
+			</div>
 		</small>
 		<small class="row-fluid">
 			<small class="span4 muted">
