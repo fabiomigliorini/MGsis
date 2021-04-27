@@ -149,12 +149,14 @@ class TituloAgrupamento extends MGActiveRecord
 
 	public function calculaTotalValores()
 	{
-		if (empty($this->valores))
+		if (empty($this->valores)) {
 			return 0;
+		}
 		
 		$total = 0;
-		foreach($this->valores as $valor)
-			$total += Yii::app()->format->unformatNumber($valor);
+		foreach($this->valores as $valor) {
+			$total += floatval(Yii::app()->format->unformatNumber($valor));
+		}
 		
 		return $total;
 	}
