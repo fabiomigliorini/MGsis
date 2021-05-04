@@ -3,6 +3,8 @@
 // Pessoa
 
 $model_titulo = new Titulo;
+$model_titulo->credito = 2;
+$model->codpessoa = 1;
 
 ?>
 <div class="row-fluid" style="padding-top: 4px">
@@ -11,7 +13,7 @@ $model_titulo = new Titulo;
             echo $form->select2Pessoa($model, 'codpessoa');
         ?>
     </div>
-    <div class="span2">
+    <div class="span3">
         <?php 
             echo $form->datepickerRow(
                     $model_titulo,
@@ -41,7 +43,7 @@ $model_titulo = new Titulo;
                     ); 	
         ?>
     </div>
-    <div class="span1">
+    <div class="span2">
         <?php echo $form->dropDownList($model_titulo, 'credito', array('' => '', 1 => 'Credito', 2 => 'Debito'), array('placeholder' => 'Operação', 'class'=>'span12')); ?>
     </div>
 </div>
@@ -57,6 +59,7 @@ $model_titulo = new Titulo;
             'campo'		  => 'GridTitulos',
             'GridTitulos' => $model->GridTitulos,
             'codpessoa'   => $model->codpessoa,
+	    'codoperacao' => $model_titulo->credito
         )
     );
     ?>

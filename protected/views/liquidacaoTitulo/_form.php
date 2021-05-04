@@ -56,7 +56,7 @@ $(document).ready(function() {
 	$('#Titulo_credito').on("change", function(e) { 
 		buscaTitulos();
 	});
-	$('#Titulo_credito').select2();
+	$('#Titulo_credito').select2({allowClear: true});
 	$('#Titulo_vencimento_de').on("change", function(e) { 
 		buscaTitulos();
 	});
