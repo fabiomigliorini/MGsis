@@ -42,6 +42,11 @@ $(document).ready(function() {
 	$('#liquidacao-titulo-form').submit(function(e) {
         var currentForm = this;
         e.preventDefault();
+	var selecionados = $('.codtitulo:checked').size();
+        if (selecionados <= 0) {
+            bootbox.alert("Erro: Nenhum título foi selecionado para liquidar!");
+            return;
+        }
         bootbox.confirm("Tem certeza que deseja salvar?", function(result) {
             if (result) {
                 currentForm.submit();
