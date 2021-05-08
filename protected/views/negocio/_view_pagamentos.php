@@ -20,12 +20,14 @@
 									}
 								}
 
+								$opfp = FormaPagamento::getListaComboNaoIntegracao();
+
 								$this->widget(
 									'booster.widgets.TbSelect2',
 									array(
 										'name' => 'codformapagamento',
 										'value' => $codformapagamento,
-										'data' => FormaPagamento::getListaCombo(),
+										'data' => $opfp,
 										'options' => array (
 											'allowClear'=>true,
 											'width' => '100%',

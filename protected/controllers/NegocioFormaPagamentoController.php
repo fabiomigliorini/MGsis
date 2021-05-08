@@ -77,8 +77,8 @@ class NegocioFormaPagamentoController extends Controller
             // we only allow deletion via POST request
             try {
                 $model = $this->loadModel($id);
-                if ($model->FormaPagamento->lio) {
-                    throw new CHttpException(409, 'Não é permitida exclusão manual de pagamento via cielo Lio!');
+                if ($model->FormaPagamento->integracao) {
+                    throw new CHttpException(409, 'Não é permitida exclusão manual de pagamento via integracao!');
                 }
                 $model->delete();
                 // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser

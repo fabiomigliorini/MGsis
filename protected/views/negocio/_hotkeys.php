@@ -50,6 +50,12 @@ function acaoF8()
 	}
 }
 
+function acaoF9()
+{
+	if (typeof acaoF9Stone === 'function') {
+		acaoF9Stone();
+	}
+}
 
 $(document).ready(function() {
 	$("*").bind('keydown.f1',function (e){ e.preventDefault(); return redireciona ("#btnListagem"); });
@@ -58,8 +64,10 @@ $(document).ready(function() {
 	$("*").bind('keydown.f4',function (e){ e.preventDefault(); return redireciona ("#btnDetalhes"); });
 	$("*").bind('keydown.f7',function (e){ e.preventDefault(); return acaoF7(); });
 	$("*").bind('keydown.f8',function (e){ e.preventDefault(); return acaoF8(); });
+	$("*").bind('keydown.f9',function (e){ e.preventDefault(); return acaoF9(); });
 	$("*").bind('keydown.esc',function (e){ return fechaJanelas(); });
 });
+
 
 EOF
 	);

@@ -167,12 +167,23 @@ class FormaPagamento extends MGActiveRecord
                 'select'=>array('codformapagamento', 'formapagamento'),
                 'order'=>'formapagamento ASC',
                 ),
+            'comboNaoIntegracao'=>array(
+                'select'=>array('codformapagamento', 'formapagamento'),
+                'condition'=>'integracao = false',
+                'order'=>'formapagamento ASC',
+                ),
             );
     }
 
     public function getListaCombo()
     {
         $lista = self::model()->combo()->findAll();
+        return CHtml::listData($lista, 'codformapagamento', 'formapagamento');
+    }
+
+    public function getListaComboNaoIntegracao()
+    {
+        $lista = self::model()->comboNaoIntegracao()->findAll();
         return CHtml::listData($lista, 'codformapagamento', 'formapagamento');
     }
 }

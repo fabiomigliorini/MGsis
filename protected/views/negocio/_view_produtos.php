@@ -127,7 +127,6 @@ function atualizaTela()
 
 function adicionaProdutoPrancheta(barras)
 {
-    console.log('adicionaProdutoPrancheta');
     $("#barras").val(barras);
     adicionaProduto();
     fechaPrancheta();

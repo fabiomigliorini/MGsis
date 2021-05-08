@@ -83,6 +83,7 @@ class NegocioFormaPagamento extends MGActiveRecord
             'LioPedido' => array(self::BELONGS_TO, 'LioPedido', 'codliopedido'),
             'PixCob' => array(self::BELONGS_TO, 'PixCob', 'codpixcob'),
             'Titulos' => array(self::HAS_MANY, 'Titulo', 'codnegocioformapagamento', 'order'=>'vencimentooriginal ASC'),
+            'StoneTransacao' => array(self::BELONGS_TO, 'StoneTransacao', 'codstonetransacao'),
         );
     }
 

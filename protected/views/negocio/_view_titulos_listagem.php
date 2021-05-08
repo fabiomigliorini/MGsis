@@ -70,8 +70,6 @@ foreach ($model->NegocioFormaPagamentos as $nfp)
 								}
 								?>
 								<br />
-								<b>
-								</b>
 								<small class="muted">
 									<?php echo CHtml::encode($lpp->criacao); ?> |
 									Cartão: <?php echo CHtml::encode($lpp->cartao); ?> |
@@ -172,6 +170,53 @@ foreach ($model->NegocioFormaPagamentos as $nfp)
 					}
 				}
 				?>
+				<!-- Stone -->
+				<?php
+				if (!empty($nfp->codstonetransacao))
+				{
+					?>
+					<div class="row-fluid">
+						<div>
+							<b>
+								<?php echo CHtml::encode($nfp->StoneTransacao->pagador); ?> |
+								<?php echo CHtml::encode($nfp->StoneTransacao->StoneBandeira->bandeira); ?> |
+								<?php echo CHtml::encode($nfp->StoneTransacao->numerocartao); ?> |
+							</b>
+							R$ <?php echo Yii::app()->format->formatNumber($nfp->StoneTransacao->valor); ?>
+							<?php if ($nfp->StoneTransacao->status != 1): ?>
+								Cancelada
+							<?php endif; ?>
+						</div>
+						<div>
+							<small class="muted">
+								<?php echo CHtml::encode($nfp->StoneTransacao->criacao); ?> |
+								<?php echo CHtml::encode($nfp->StoneTransacao->autorizacao); ?> |
+								<?php echo CHtml::encode($nfp->StoneTransacao->stonetransactionid); ?>
+							</small>
+						</div>
+					</div>
+					<?php
+					foreach ($nfp->StoneTransacao->StoneTransacaoParcelas as $stp) {
+						?>
+						<div class="row-fluid">
+							<div>
+									Parcela <?php echo Yii::app()->format->formatNumber($stp->numero, 0); ?> |
+									R$ <?php echo Yii::app()->format->formatNumber($stp->valor); ?>
+									<small class="muted">(<?php echo Yii::app()->format->formatNumber($stp->valorliquido); ?>) </small> |
+									<?php echo $stp->vencimento ?>
+							</div>
+							<div>
+							</div>
+							<div>
+							</div>
+							<div>
+							</div>
+						</div>
+						<?php
+					}
+				}
+				?>
+
 			</div>
 		</span>
 	</div>

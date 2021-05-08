@@ -84,6 +84,9 @@
             echo $form->textFieldRow($model, 'valortotal', array('class'=>'input-small text-right','maxlength'=>14, "readOnly"=>true, "tabindex"=>-1, 'prepend' => 'R$'));
             $this->renderPartial('_view_pagamentos', array('model'=>$model));
             $this->renderPartial('_view_pix_cob', array('model'=>$model));
+            if (count($model->Filial->StoneFilials) > 0) {
+              $this->renderPartial('_view_stone', array('model'=>$model));
+            }
             ?>
 		</div>
 	</div>
@@ -275,7 +278,6 @@ var negocioStatus = {
 
 function verificarStatusNegocio ()
 {
-  console.log(negocioStatus);
   $.ajax({
 		url: "<?php echo Yii::app()->createUrl('negocio/status') ?>",
 		data: {

@@ -202,7 +202,6 @@ function transmitirPixCob(codpixcob)
 
 function criarPixCob()
 {
-	console.log(window.aguardandoConfirmacaoCriarPìxCob);
 	if (window.aguardandoConfirmacaoCriarPìxCob || window.rodandoConsultaPixCob) {
 		return;
 	}

@@ -82,7 +82,7 @@ class NegocioController extends Controller
                 if (!$model->save()) {
                     $erro = true;
                 }
-              
+
             }
 
             if (!$erro) {
@@ -379,6 +379,13 @@ class NegocioController extends Controller
     public function actionAtualizaListagemPixCob($codnegocio)
     {
         $this->renderPartial('_view_pix_cob_listagem', array(
+            'model'=>$this->loadModel($codnegocio),
+            ));
+    }
+
+    public function actionAtualizaListagemStonePreTransacao($codnegocio)
+    {
+        $this->renderPartial('_view_stone_listagem', array(
             'model'=>$this->loadModel($codnegocio),
             ));
     }
