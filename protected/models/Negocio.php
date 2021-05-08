@@ -44,6 +44,7 @@
  * @property NegocioFormaPagamento[] $NegocioFormaPagamentos
  * @property NegocioProdutoBarra[] $NegocioProdutoBarras
  * @property NfeTerceiro[] $NfeTerceiros
+ * @property StonePreTransacao[] $StonePreTransacaos
  */
 class Negocio extends MGActiveRecord
 {
@@ -139,6 +140,7 @@ class Negocio extends MGActiveRecord
             'NegocioFormaPagamentos' => array(self::HAS_MANY, 'NegocioFormaPagamento', 'codnegocio'),
             'NegocioProdutoBarras' => array(self::HAS_MANY, 'NegocioProdutoBarra', 'codnegocio', 'order'=>'alteracao DESC, codnegocioprodutobarra DESC'),
             'NfeTerceiros' => array(self::HAS_MANY, 'NfeTerceiro', 'codnegocio'),
+            'StonePreTransacaos' => array(self::HAS_MANY, 'StonePreTransacao', 'codnegocio'),
         );
     }
 

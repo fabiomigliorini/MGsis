@@ -43,17 +43,18 @@
  * @property Negocio[] $Negocios
  * @property EstoqueSaldo[] $EstoqueSaldos
  * @property EstoqueLocal[] $EstoqueLocals
+ * @property StoneFilial[] $StoneFilials 
  */
 class Filial extends MGActiveRecord
 {
 	const CRT_SIMPLES = 1;
 	const CRT_SIMPLES_EXCESSO = 2;
 	const CRT_REGIME_NORMAL = 3;
-	
+
 	const NFEAMBIENTE_PRODUCAO = 1;
 	const NFEAMBIENTE_HOMOLOGACAO = 2;
-	
-	
+
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -113,6 +114,7 @@ class Filial extends MGActiveRecord
 			'Negocios' => array(self::HAS_MANY, 'Negocio', 'codfilial'),
 			'EstoqueSaldos' => array(self::HAS_MANY, 'EstoqueSaldo', 'codfilial'),
 			'EstoqueLocals' => array(self::HAS_MANY, 'EstoqueLocal', 'codfilial'),
+			'StoneFilials' => array(self::HAS_MANY, 'StoneFilial', 'codfilial'),
 		);
 	}
 
@@ -209,7 +211,7 @@ class Filial extends MGActiveRecord
 		return parent::model($className);
 	}
 
-	public function scopes () 
+	public function scopes ()
 	{
 		return array(
 			'combo'=>array(
@@ -218,11 +220,11 @@ class Filial extends MGActiveRecord
 				),
 			);
 	}
-	
+
 	public function getListaCombo ()
 	{
 		$lista = self::model()->combo()->findAll();
 		return CHtml::listData($lista, 'codfilial', 'filial');
-	}	
-	
+	}
+
 }
