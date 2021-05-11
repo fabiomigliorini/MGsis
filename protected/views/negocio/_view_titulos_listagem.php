@@ -179,12 +179,22 @@ foreach ($model->NegocioFormaPagamentos as $nfp)
 						<div>
 							<b>
 								<?php echo CHtml::encode($nfp->StoneTransacao->pagador); ?> |
-								<?php echo CHtml::encode($nfp->StoneTransacao->StoneBandeira->bandeira); ?> |
+                                <?php echo CHtml::encode($nfp->StoneTransacao->StoneBandeira->bandeira); ?>
+                                <?php if ($nfp->StoneTransacao->tipo == 1): ?>
+                                    Débito
+                                <?php elseif ($nfp->StoneTransacao->tipo == 2): ?>
+                                    Crédito
+                                <?php else: ?>
+                                    Tipo <?php echo CHtml::encode($nfp->StoneTransacao->tipo); ?>
+                                <?php endif; ?>
+                                 |
 								<?php echo CHtml::encode($nfp->StoneTransacao->numerocartao); ?> |
 							</b>
-							R$ <?php echo Yii::app()->format->formatNumber($nfp->StoneTransacao->valor); ?>
+							R$ <?php echo Yii::app()->format->formatNumber($nfp->StoneTransacao->valor); ?> |
 							<?php if ($nfp->StoneTransacao->status != 1): ?>
 								Cancelada
+                            <?php else: ?>
+                                Aprovada
 							<?php endif; ?>
 						</div>
 						<div>
@@ -204,12 +214,6 @@ foreach ($model->NegocioFormaPagamentos as $nfp)
 									R$ <?php echo Yii::app()->format->formatNumber($stp->valor); ?>
 									<small class="muted">(<?php echo Yii::app()->format->formatNumber($stp->valorliquido); ?>) </small> |
 									<?php echo $stp->vencimento ?>
-							</div>
-							<div>
-							</div>
-							<div>
-							</div>
-							<div>
 							</div>
 						</div>
 						<?php
