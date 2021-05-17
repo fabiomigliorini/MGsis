@@ -64,7 +64,7 @@ class StoneFilial extends MGActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'StonePreTransacaos' => array(self::HAS_MANY, 'StonePreTransacao', 'codstonefilial'),
-			'StonePoss' => array(self::HAS_MANY, 'StonePos', 'codstonefilial'),
+			'StonePoss' => array(self::HAS_MANY, 'StonePos', 'codstonefilial', 'order'=>'apelido asc'),
 			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
