@@ -55,14 +55,14 @@
 
 		<div class="control-group ">
 			<label class="control-label" for="stoneTipo">Tipo</label>
-			<div class="controls">
+			<!-- <div class="controls">
 				<select name="stoneTipo" id="stoneTipo" class="input-small text-center">
 				  <option value='1'>Debito</option>
 				  <option value='2'>Crédito</option>
 				  <option value='3'>Voucher</option>
 				</select>
-			</div>
-			<!-- <div class="controls">
+			</div> -->
+			<div class="controls">
 				<label class="radio">
 				  <input type="radio" name="stoneTipo" id="stoneTipoDebito" value="1" checked>
 				  Débito
@@ -75,7 +75,7 @@
 				  <input type="radio" name="stoneTipo" id="stoneTipoCredito" value="3">
 				  Voucher
 				</label>
-			</div> -->
+			</div>
 		</div>
 
 		<div class="control-group ">
@@ -91,6 +91,20 @@
 				</select>
 			</div>
 		</div>
+
+		<div class="control-group ">
+			<label class="control-label" for="codstonepos">Maquineta</label>
+			<div class="controls">
+				<?php foreach($model->Filial->StoneFilials[0]->StonePoss as $pos): ?>
+					<label class="radio">
+						<input type="radio" name="codstonepos" id="codstonepos" value="<?php echo $pos->codstonepos; ?>">
+						<?php echo $pos->apelido; ?>
+					</label>
+				<?php endforeach; ?>
+				<hr />
+			</div>
+		</div>
+
   </div>
   <div class="modal-footer">
 		<button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
@@ -175,9 +189,15 @@ function criarStonePreTransacao()
 		return
 	}
 	var valor = parseFloat($('#stoneValor').autoNumeric('get'));
-	// var tipo = parseInt($("input:radio[name ='stoneTipo']:checked").val());
-	var tipo = parseInt($('#stoneTipo').val());
+	var tipo = parseInt($("input:radio[name ='stoneTipo']:checked").val());
+	// var tipo = parseInt($('#stoneTipo').val());
 	var parcelas = parseInt($('#stoneParcelas').val());
+	var codstonepos = parseInt($("input:radio[name ='codstonepos']:checked").val());
+	if (isNaN(codstonepos)) {
+		codstonepos = null
+		// $.notify("Selecione a Maquineta!", { position:"right bottom", className:"error"});
+		// return;
+	}
 	$('#modalStone').modal('hide');
 
 	window.rodandoStonePreTransacao = true;
@@ -189,6 +209,7 @@ function criarStonePreTransacao()
 	    valor: valor,
 	    titulo: "Negocio <?php echo $model->codnegocio; ?>",
 	    codnegocio: <?php echo $model->codnegocio; ?>,
+	    codstonepos: codstonepos,
 	    tipo: tipo,
 	    parcelas: parcelas,
 	    tipoparcelamento: 1
@@ -267,8 +288,40 @@ function acaoF9Stone ()
 	criarStonePreTransacao();
 }
 
+function setCookie(cname, cvalue) {
+  document.cookie = cname + "=" + cvalue + ";path=/";
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
 $(document).ready(function() {
 	$('#stoneValor').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+
+	$("input:radio[name='codstonepos']").change(function (){
+		var codstonepos = parseInt($("input:radio[name ='codstonepos']:checked").val());
+		setCookie('codstonepos', codstonepos);
+		console.log(codstonepos);
+		console.log('mudou pos');
+	});
+
+	var codstonepos = getCookie('codstonepos');
+	$("input:radio[name='codstonepos'][value='"+ codstonepos +"']").attr('checked', true);
+
+	console.log(codstonepos)
+
 	$('#modalStone').on('shown', function (e) {
 	    $('#stoneValor').focus();
 	})

@@ -17,17 +17,23 @@ foreach ($model->StonePreTransacaos as $spt)
 			<div>
 				<b>
 					R$ <?php echo Yii::app()->format->formatNumber($spt->valor); ?>
-					<?php echo CHtml::encode($spt->status); ?>
 				</b>
+				<!-- <?php echo CHtml::encode($spt->status); ?> -->
+				<?php if (!empty($spt->codstonepos)): ?>
+					| Maquineta
+					<?php echo CHtml::encode($spt->StonePos->apelido); ?>
+				<?php endif; ?>
+				| Código
 				<abbr title="<?php echo CHtml::encode($spt->pretransactionid); ?>">
 					<?php echo CHtml::encode($spt->token); ?>
 				</abbr>
 			</div>
 			<div>
-				<?php echo CHtml::encode($stonePreTransacaoTipo[$spt->tipo]); ?>
+				Tipo <?php echo CHtml::encode($stonePreTransacaoTipo[$spt->tipo]); ?>
 				<?php if ($spt->parcelas > 1): ?>
-				<?php echo CHtml::encode($spt->parcelas); ?> Parcelas
+					<?php echo CHtml::encode($spt->parcelas); ?> Parcelas
 				<?php endif; ?>
+				|
 				<?php if ($spt->processada): ?>
 					Processada
 				<?php else: ?>
