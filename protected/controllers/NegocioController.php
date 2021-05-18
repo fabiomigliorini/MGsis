@@ -575,7 +575,7 @@ class NegocioController extends Controller
         $model = $this->loadModel($id);
         echo CJSON::encode([
             'codnegociostatus' => $model->codnegociostatus,
-            'valorpagamentolio' => (float) $model->valorPagamentoLio(),
+            'valorpagamento' => (float) $model->valorPagamento(),
         ]);
     }
 }

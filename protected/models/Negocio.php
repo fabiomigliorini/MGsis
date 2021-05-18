@@ -760,7 +760,7 @@ class Negocio extends MGActiveRecord
         return true;
     }
 
-    public function valorPagamentoLio()
+    public function valorPagamento()
     {
       if (empty($this->codnegocio)) {
         return 0;
@@ -769,7 +769,6 @@ class Negocio extends MGActiveRecord
         select sum(valorpagamento)
         from mgsis.tblnegocioformapagamento
         where codnegocio = {$this->codnegocio}
-        and codliopedido is not null
       ";
       return (float) Yii::app()->db->createCommand($sql)->queryScalar();
     }

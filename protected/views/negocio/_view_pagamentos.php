@@ -75,6 +75,7 @@ function atualizaListagemPagamentos()
 		async: false,
 		success: function (data) {
 			$('#listagemPagamentos').html(data);
+			atualizaValorPagamento(false);
 		},
 		error: function (xhr, status) {
 			bootbox.alert("Erro ao atualizar listagem de pagamentos!");

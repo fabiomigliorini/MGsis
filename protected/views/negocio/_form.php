@@ -273,7 +273,7 @@ function mostraMensagemVenda()
 
 var negocioStatus = {
   codnegociostatus: <?php echo $model->codnegociostatus ?>,
-  valorpagamentolio: <?php echo $model->valorPagamentoLio() ?>,
+  valorpagamento: <?php echo $model->valorPagamento() ?>,
 };
 
 function verificarStatusNegocio ()
@@ -294,8 +294,10 @@ function verificarStatusNegocio ()
       }
 
       // se alterou pagamento atualiza listagem de pagamentos
-      if (negocioStatus.valorpagamentolio != data.valorpagamentolio) {
-        atualizaListagemPagamentos()
+      if (negocioStatus.valorpagamento != data.valorpagamento) {
+        atualizaListagemPagamentos();
+        atualizaListagemPixCob();
+        atualizaListagemStonePreTransacao();
       }
 
       negocioStatus = data;
