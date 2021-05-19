@@ -31,9 +31,13 @@
 <div id="modalPixCob" class="modal hide fade" tabindex="-1" role="dialog">
 	<div class="modal-header">
 		<div class="pull-right">
+			<button class="btn" type="button" onclick="imprimirQrCode()">
+				<i class="icon-print"></i>
+				Imprimir QR Code
+			</button>
 			<button class="btn" type="button" onclick="copiarQrCode()">
 				<i class="icon-share"></i>
-				Copiar BR Code
+				Copiar QR Code
 			</button>
 			<button class="btn" type="button" onclick="consultarPixCobAberto()">
 				<i class="icon-refresh"></i>
@@ -67,7 +71,7 @@
 								<tr class="even"><th>Valor</th><td id="pixCobValororiginal"></td></tr>
 								<tr class="odd"><th>Portador</th><td id="pixCobPortador"></td></tr>
 								<tr class="even">
-									<th>BR Code</th>
+									<th>QR Code</th>
 									<td style="word-break: break-all;">
 										<span class="hidden" id="pixCobQrCodeSpan"></span>
 										<textarea class="input-block-level" readonly rows="4" id="pixCobQrcodeTextArea" type="text"></textarea>
@@ -172,6 +176,36 @@ function consultarPixCob (codpixcob)
 		atualizaListagemPixCob();
 		var resp = jQuery.parseJSON(jqxhr.responseText);
 		bootbox.alert(resp.message);
+	});
+}
+
+function imprimirQrCode ()
+{
+	if (pixCob.codpixcob === undefined) {
+		return;
+	}
+	window.rodandoConsultaPixCob = true;
+	var impressora = "<?php echo Yii::app()->user->getState('impressoraTermica') ?>";
+	var codpixcob = pixCob.codpixcob;
+	console.log(codpixcob);
+	console.log(impressora);
+	$.ajax({
+		type: 'POST',
+		url: "<?php echo MGSPA_API_URL; ?>pix/cob/" + codpixcob + "/imprimir-qr-code",
+		data: {
+			impressora: impressora
+		},
+		dataType: "json",
+		headers: {
+			"X-Requested-With":"XMLHttpRequest"
+		},
+	}).done(function(resp) {
+		window.rodandoConsultaPixCob = false;
+		$.notify("QR Code Impresso!", { position:"right bottom", className:"success", autoHideDelay: 15000 });
+		atualizaListagemPixCob();
+	}).fail(function( jqxhr, textStatus, error ) {
+		window.rodandoConsultaPixCob = false;
+		$.notify("Erro ao Imprimir QR Code "+ codpixcob +"!", { position:"right bottom", className:"error", autoHideDelay: 15000 });
 	});
 }
 
