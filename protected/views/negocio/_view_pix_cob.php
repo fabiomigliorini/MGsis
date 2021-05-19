@@ -31,7 +31,7 @@
 <div id="modalPixCob" class="modal hide fade" tabindex="-1" role="dialog">
 	<div class="modal-header">
 		<div class="pull-right">
-			<button class="btn" type="button" onclick="copiarBrCode()">
+			<button class="btn" type="button" onclick="copiarQrCode()">
 				<i class="icon-share"></i>
 				Copiar BR Code
 			</button>
@@ -56,7 +56,7 @@
 			<div class="text-center">
 				<div class="row-fluid">
 					<div class="span6">
-						<img id="pixCobQrcode" style="min-width: 80%; max-height: 100%" >
+						<img id="pixCobQrCodeImg" style="min-width: 80%; max-height: 100%" >
 					</div>
 					<div class="span5">
 						<table class="detail-view table table-striped table-condensed" id="yw1">
@@ -69,8 +69,8 @@
 								<tr class="even">
 									<th>BR Code</th>
 									<td style="word-break: break-all;">
-										<span class="hidden" id="pixCobBrcode"></span>
-										<textarea class="input-block-level" readonly rows="4" id="pixCobBrcodeTextArea" type="text"></textarea>
+										<span class="hidden" id="pixCobQrCodeSpan"></span>
+										<textarea class="input-block-level" readonly rows="4" id="pixCobQrcodeTextArea" type="text"></textarea>
 									</td>
 								</tr>
 							</tbody>
@@ -83,10 +83,10 @@
 </div>
 <script>
 
-function copiarBrCode()
+function copiarQrCode()
 {
-	const pixCobBrcodeTextArea = document.querySelector("#pixCobBrcodeTextArea");
-	pixCobBrcodeTextArea.select();
+	const pixCobQrCodeTextArea = document.querySelector("#pixCobQrCodeTextArea");
+	pixCobQrCodeTextArea.select();
 	document.execCommand('copy');
 }
 
@@ -110,12 +110,13 @@ function atualizaCamposPixCob ()
 	if (pixCob.Portador != undefined) {
 		$('#pixCobPortador').html(pixCob.Portador.portador);
 	}
-	$('#pixCobBrcode').html(pixCob.brcode);
-	$('#pixCobBrcodeTextArea').val(pixCob.brcode);
-	if (pixCob.brcode != '' && pixCob.brcode != null) {
-		$('#pixCobQrcode').attr('src', 'https://gerarqrcodepix.com.br/api/v1?tamanho=250&brcode=' + pixCob.brcode);
+	$('#pixCobQrcodeSpan').html(pixCob.qrcode);
+	$('#pixCobQrcodeTextArea').val(pixCob.qrcode);
+	console.log(pixCob.qrcodeimagem);
+	if (pixCob.qrcodeimagem != '' && pixCob.qrcodeimagem != null) {
+		$('#pixCobQrCodeImg').attr('src', pixCob.qrcodeimagem);
 	} else {
-		$('#pixCobQrcode').attr('src', 'https://dummyimage.com/250x250/000000/fff.jpg&text=N%C3%A3o+Registrada!');
+		$('#pixCobQrCodeImg').attr('src', 'https://dummyimage.com/250x250/000000/fff.jpg&text=Carregando...');
 	}
 }
 
@@ -149,8 +150,8 @@ function transmitirPixCobAberto ()
 
 function consultarPixCob (codpixcob)
 {
-	window.rodandoConsultaPixCob = true;
 	abrirModalPixCob();
+	window.rodandoConsultaPixCob = true;
 	$.ajax({
 		type: 'POST',
 		url: "<?php echo MGSPA_API_URL; ?>pix/cob/"+codpixcob+"/consultar",
@@ -176,8 +177,8 @@ function consultarPixCob (codpixcob)
 
 function transmitirPixCob(codpixcob)
 {
-	window.rodandoConsultaPixCob = true;
 	abrirModalPixCob();
+	window.rodandoConsultaPixCob = true;
 	$.ajax({
 		type: 'POST',
 		url: "<?php echo MGSPA_API_URL; ?>pix/cob/"+codpixcob+"/transmitir",
@@ -190,7 +191,7 @@ function transmitirPixCob(codpixcob)
 		window.pixCob = resp.data;
 		$.notify("Cobrança " + resp.data.txid + " Registrada! Status: " + resp.data.status, { position:"right bottom", className:"success", autoHideDelay: 15000 });
 		atualizaListagemPixCob();
-		buscarBrCodePixCob(codpixcob);
+		buscarQrCodePixCob(codpixcob);
 	}).fail(function( jqxhr, textStatus, error ) {
 		window.rodandoConsultaPixCob = false;
 		$.notify("Erro ao transmitir cobrança "+ codpixcob +"!", { position:"right bottom", className:"error", autoHideDelay: 15000 });
@@ -207,12 +208,12 @@ function criarPixCob()
 	}
 	window.aguardandoConfirmacaoCriarPìxCob = true;
 	bootbox.confirm('Criar Cobrança via PIX?', function(result) {
+		abrirModalPixCob();
 		window.pixCob = {};
 		window.aguardandoConfirmacaoCriarPìxCob = false;
 		if (!result) {
 			return
 		}
-		abrirModalPixCob();
 		window.rodandoConsultaPixCob = true;
 		$.ajax({
 		  type: 'POST',
@@ -254,13 +255,14 @@ function atualizaListagemPixCob()
 	});
 }
 
-function buscarBrCodePixCob (codpixcob)
+function buscarQrCodePixCob (codpixcob)
 {
-	$('#brCode').html('Carregando...');
-	$('#qrCode').attr('src', '');
+	console.log('buscando');
 	abrirModalPixCob();
+	$('#pixCobQrcodeSpan').html('Carregando...');
+	$('#pixCobQrcodeImg').attr('src', '');
 	$.ajax({
-		url: "<?php echo MGSPA_API_URL ?>pix/cob/" + codpixcob,
+		url: "<?php echo MGSPA_API_URL ?>pix/cob/" + codpixcob + "/detalhes",
 		type: "GET",
 		dataType: "json",
 		async: false,
@@ -276,12 +278,12 @@ function buscarBrCodePixCob (codpixcob)
 
 function abrirModalPixCob ()
 {
-	atualizaCamposPixCob();
 	$('#modalPixCob').modal({show:true});
 	var height = $( window ).height();
 	var bodyHeight = height*.96-100;
 	$('#modalPixCob').css({'width': '96%', 'height': '96%', 'margin-left':'auto', 'margin-right':'auto', 'left':'2%', 'top': '2%'});
 	$('#modalPixCobBody').css({'height': bodyHeight, 'max-height': bodyHeight, 'overflow-y': 'hidden'});
+	atualizaCamposPixCob();
 }
 
 $(document).ready(function() {

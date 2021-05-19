@@ -5,7 +5,7 @@ foreach ($model->PixCobs as $cob)
 	<div class="registro">
 		<div class="row-fluid">
 			<div class="pull-right">
-				<button class="btn" type="button" onclick="buscarBrCodePixCob(<?php echo $cob->codpixcob ?>)">
+				<button class="btn" type="button" onclick="buscarQrCodePixCob(<?php echo $cob->codpixcob ?>)">
 					<i class="icon-qrcode"></i>
 				</button>
 			</div>
