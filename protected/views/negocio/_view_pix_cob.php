@@ -33,7 +33,11 @@
 		<div class="pull-right">
 			<button class="btn" type="button" onclick="imprimirQrCode()">
 				<i class="icon-print"></i>
-				Imprimir QR Code
+				Imprimir
+			</button>
+			<button class="btn" type="button" onclick="copiarMensagemComURLLandingPage()">
+				<i class="icon-share"></i>
+				Copiar Mensagem
 			</button>
 			<button class="btn" type="button" onclick="copiarQrCode()">
 				<i class="icon-share"></i>
@@ -41,7 +45,7 @@
 			</button>
 			<button class="btn" type="button" onclick="consultarPixCobAberto()">
 				<i class="icon-refresh"></i>
-				Consultar Pagamento (F8)
+				Consultar (F8)
 			</button>
 			<button class="btn" type="button" onclick="transmitirPixCobAberto()">
 				<i class="icon-upload"></i>
@@ -73,8 +77,7 @@
 								<tr class="even">
 									<th>QR Code</th>
 									<td style="word-break: break-all;">
-										<span class="hidden" id="pixCobQrCodeSpan"></span>
-										<textarea class="input-block-level" readonly rows="4" id="pixCobQrcodeTextArea" type="text"></textarea>
+										<span id="pixCobQrCodeSpan"></span>
 									</td>
 								</tr>
 							</tbody>
@@ -89,9 +92,17 @@
 
 function copiarQrCode()
 {
-	const pixCobQrCodeTextArea = document.querySelector("#pixCobQrCodeTextArea");
-	pixCobQrCodeTextArea.select();
-	document.execCommand('copy');
+	navigator.clipboard.writeText(pixCob.qrcode);
+}
+
+function copiarMensagemComURLLandingPage()
+{
+	var mensagem = 'Olá,\n\n';
+	mensagem += 'Você está recebendo um link para pagamento via PIX de sua compra na MG Papelaria!\n\n';
+	mensagem += 'Abra e siga as instruções!\n\n';
+	mensagem += 'https://pix.mgpapelaria.com.br/' + pixCob.codpixcob + '\n\n';
+	mensagem += 'Obrigado pela confiança!';
+	navigator.clipboard.writeText(mensagem);
 }
 
 // window.pixCob = {}
@@ -114,8 +125,7 @@ function atualizaCamposPixCob ()
 	if (pixCob.Portador != undefined) {
 		$('#pixCobPortador').html(pixCob.Portador.portador);
 	}
-	$('#pixCobQrcodeSpan').html(pixCob.qrcode);
-	$('#pixCobQrcodeTextArea').val(pixCob.qrcode);
+	$('#pixCobQrCodeSpan').html(pixCob.qrcode);
 	console.log(pixCob.qrcodeimagem);
 	if (pixCob.qrcodeimagem != '' && pixCob.qrcodeimagem != null) {
 		$('#pixCobQrCodeImg').attr('src', pixCob.qrcodeimagem);
@@ -292,7 +302,7 @@ function buscarQrCodePixCob (codpixcob)
 {
 	console.log('buscando');
 	abrirModalPixCob();
-	$('#pixCobQrcodeSpan').html('Carregando...');
+	$('#pixCobQrCodeSpan').html('Carregando...');
 	$('#pixCobQrcodeImg').attr('src', '');
 	$.ajax({
 		url: "<?php echo MGSPA_API_URL ?>pix/cob/" + codpixcob + "/detalhes",
