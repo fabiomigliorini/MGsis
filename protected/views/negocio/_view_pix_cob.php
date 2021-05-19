@@ -195,7 +195,6 @@ function imprimirQrCode ()
 		data: {
 			impressora: impressora
 		},
-		dataType: "json",
 		headers: {
 			"X-Requested-With":"XMLHttpRequest"
 		},
@@ -205,7 +204,7 @@ function imprimirQrCode ()
 		atualizaListagemPixCob();
 	}).fail(function( jqxhr, textStatus, error ) {
 		window.rodandoConsultaPixCob = false;
-		$.notify("Erro ao Imprimir QR Code "+ codpixcob +"!", { position:"right bottom", className:"error", autoHideDelay: 15000 });
+		$.notify("Erro ao Imprimir QR Code!", { position:"right bottom", className:"error", autoHideDelay: 15000 });
 	});
 }
 
