@@ -98,10 +98,9 @@ function copiarQrCode()
 function copiarMensagemComURLLandingPage()
 {
 	var mensagem = 'Olá,\n\n';
-	mensagem += 'Você está recebendo um link para pagamento via PIX de sua compra na MG Papelaria!\n\n';
-	mensagem += 'Abra e siga as instruções!\n\n';
-	mensagem += 'https://pix.mgpapelaria.com.br/' + pixCob.codpixcob + '\n\n';
-	mensagem += 'Obrigado pela confiança!';
+	mensagem += 'Você está recebendo um link para pagamento via PIX de sua compra na *MG Papelaria* no valor de R$ *' + pixCob.valororiginal.toLocaleString('pt-br', {minimumFractionDigits: 2}) + '*!\n\n';
+	mensagem += 'Abra https://pix.mgpapelaria.com.br/' + pixCob.codpixcob + ' e siga as instruções:\n\n';
+	mensagem += '*Obrigado* pela confiança!';
 	navigator.clipboard.writeText(mensagem);
 }
 
