@@ -194,10 +194,17 @@ function criarStonePreTransacao()
 	var parcelas = parseInt($('#stoneParcelas').val());
 	var codstonepos = parseInt($("input:radio[name ='codstonepos']:checked").val());
 	if (isNaN(codstonepos)) {
-		codstonepos = null
-		// $.notify("Selecione a Maquineta!", { position:"right bottom", className:"error"});
-		// return;
+		codstonepos = null;
+		$.notify("Selecione a Maquineta!", { position:"right bottom", className:"error"});
+		return;
 	}
+  console.log(valor);
+  if (isNaN(valor) || valor <= 0) {
+    $.notify("Preencha o valor!", { position:"right bottom", className:"error"});
+    return;
+  }
+
+  
 	$('#modalStone').modal('hide');
 
 	window.rodandoStonePreTransacao = true;
