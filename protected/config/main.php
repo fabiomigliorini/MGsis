@@ -154,6 +154,7 @@ return array(
 				*/
 			),
 		),
+		/*
 		'cache'=>array(
 				'class'=>'CMemCache',
 				'servers'=>array(
@@ -168,7 +169,8 @@ return array(
 						// 		'weight'=>40,
 						// ),
 				),
-		),
+			),
+		 */
 	),
 
 	// application-level parameters that can be accessed
