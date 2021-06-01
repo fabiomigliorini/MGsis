@@ -189,7 +189,6 @@ function criarStonePreTransacao()
     return;
   }
 
-
 	$('#modalStone').modal('hide');
 
 	window.rodandoStonePreTransacao = true;
@@ -312,6 +311,12 @@ $(document).ready(function() {
 
 	$('#modalStone').on('shown', function (e) {
 	    $('#stoneValor').focus();
+	});
+
+	$('#modalStone').on('hidden', function (e) {
+	    setTimeout(function() {
+					$('.modal-backdrop').remove();
+	    }, 500); // meio segundo
 	});
 
 	$('#btnOkModalStone').bind("click", function(e) {
