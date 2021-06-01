@@ -113,20 +113,6 @@
 </div>
 <script>
 
-$('#btnOkModalStone').bind("click", function(e) {
-	e.preventDefault();
-	criarStonePreTransacao();
-});
-
-function copiarBrCode()
-{
-	const StonePreTransacaoBrcodeTextArea = document.querySelector("#StonePreTransacaoBrcodeTextArea");
-	StonePreTransacaoBrcodeTextArea.select();
-	document.execCommand('copy');
-}
-
-// window.StonePreTransacao = {}
-
 <?php if (sizeof($model->StonePreTransacaos) > 0): ?>
 window.StonePreTransacao = <?php echo json_encode($model->StonePreTransacaos[0]->attributes) ?>;
 <?php else: ?>
@@ -198,13 +184,12 @@ function criarStonePreTransacao()
 		$.notify("Selecione a Maquineta!", { position:"right bottom", className:"error"});
 		return;
 	}
-  console.log(valor);
   if (isNaN(valor) || valor <= 0) {
     $.notify("Preencha o valor!", { position:"right bottom", className:"error"});
     return;
   }
 
-  
+
 	$('#modalStone').modal('hide');
 
 	window.rodandoStonePreTransacao = true;
@@ -320,18 +305,20 @@ $(document).ready(function() {
 	$("input:radio[name='codstonepos']").change(function (){
 		var codstonepos = parseInt($("input:radio[name ='codstonepos']:checked").val());
 		setCookie('codstonepos', codstonepos);
-		console.log(codstonepos);
-		console.log('mudou pos');
 	});
 
 	var codstonepos = getCookie('codstonepos');
 	$("input:radio[name='codstonepos'][value='"+ codstonepos +"']").attr('checked', true);
 
-	console.log(codstonepos)
-
 	$('#modalStone').on('shown', function (e) {
 	    $('#stoneValor').focus();
-	})
+	});
+
+	$('#btnOkModalStone').bind("click", function(e) {
+		e.preventDefault();
+		criarStonePreTransacao();
+	});
+
 });
 
 </script>
