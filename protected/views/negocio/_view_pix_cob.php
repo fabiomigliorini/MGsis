@@ -125,7 +125,6 @@ function atualizaCamposPixCob ()
 		$('#pixCobPortador').html(pixCob.Portador.portador);
 	}
 	$('#pixCobQrCodeSpan').html(pixCob.qrcode);
-	console.log(pixCob.qrcodeimagem);
 	if (pixCob.qrcodeimagem != '' && pixCob.qrcodeimagem != null) {
 		$('#pixCobQrCodeImg').attr('src', pixCob.qrcodeimagem);
 	} else {
@@ -196,8 +195,6 @@ function imprimirQrCode ()
 	window.rodandoConsultaPixCob = true;
 	var impressora = "<?php echo Yii::app()->user->getState('impressoraTermica') ?>";
 	var codpixcob = pixCob.codpixcob;
-	console.log(codpixcob);
-	console.log(impressora);
 	$.ajax({
 		type: 'POST',
 		url: "<?php echo MGSPA_API_URL; ?>pix/cob/" + codpixcob + "/imprimir-qr-code",
@@ -299,7 +296,6 @@ function atualizaListagemPixCob()
 
 function buscarQrCodePixCob (codpixcob)
 {
-	console.log('buscando');
 	abrirModalPixCob();
 	$('#pixCobQrCodeSpan').html('Carregando...');
 	$('#pixCobQrcodeImg').attr('src', '');
