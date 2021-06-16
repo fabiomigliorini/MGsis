@@ -5,7 +5,7 @@
 <?php echo $form->errorSummary($model); ?>
 
 <fieldset>
-	<?php 	
+	<?php
 		echo $form->textFieldRow($model,'portador',array('class'=>'input-large','maxlength'=>50));
 		//echo $form->textFieldRow($model,'codbanco',array('class'=>'span5'));
 		echo $form->select2Row($model, 'codbanco', Banco::getListaCombo(), array('prompt' => '', 'class' => 'input-large'));
@@ -18,16 +18,17 @@
 		//echo $form->textFieldRow($model,'codfilial',array('class'=>'span5'));
 		echo $form->select2Row($model, 'codfilial', Filial::getListaCombo(), array('prompt' => '', 'class' => 'input-large'));
 		echo $form->textFieldRow($model,'convenio',array('class'=>'input-large','maxlength'=>20));
-		echo $form->textFieldRow($model,'diretorioremessa',array('class'=>'input-large','maxlength'=>100));
-		echo $form->textFieldRow($model,'diretorioretorno',array('class'=>'input-large','maxlength'=>100));
+		// echo $form->textFieldRow($model,'diretorioremessa',array('class'=>'input-large','maxlength'=>100));
+		// echo $form->textFieldRow($model,'diretorioretorno',array('class'=>'input-large','maxlength'=>100));
 		echo $form->textFieldRow($model,'carteira',array('class'=>'input-large'));
+		echo $form->textFieldRow($model,'carteiravariacao',array('class'=>'input-large'));
 	?>
 </fieldset>
 <div class="form-actions">
 
-    
-    <?php 
-	
+
+    <?php
+
 
         $this->widget(
             'bootstrap.widgets.TbButton',
@@ -37,15 +38,15 @@
                 'label' => 'Salvar',
                 'icon' => 'icon-ok',
                 )
-            ); 
+            );
 	?>
-	
+
 </div>
 
 <?php $this->endWidget(); ?>
 
 <script type='text/javascript'>
-	
+
 $(document).ready(function() {
 
 	$("#Portador_portador").Setcase();
@@ -59,7 +60,7 @@ $(document).ready(function() {
             }
         });
     });
-	
+
 });
 
 </script>

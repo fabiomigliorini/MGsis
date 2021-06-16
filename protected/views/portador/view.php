@@ -31,7 +31,7 @@ $(document).ready(function(){
 
 <h1><?php echo $model->portador; ?></h1>
 
-<?php 
+<?php
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
@@ -63,11 +63,10 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 			'type'=>'raw',
 			),
 		'convenio',
-		'diretorioremessa',
-		'diretorioretorno',
 		'carteira',
+		'carteiravariacao',
 		),
-	)); 
+	));
 
 	$this->widget('UsuarioCriacao', array('model'=>$model));
 

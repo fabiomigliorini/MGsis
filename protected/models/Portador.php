@@ -58,9 +58,8 @@ class Portador extends MGActiveRecord
 		// will receive user inputs.
 		return array(
 			array('portador', 'required'),
-			array('agenciadigito, contadigito, carteira', 'numerical', 'integerOnly'=>true),
+			array('agenciadigito, contadigito, carteira, carteiravariacao, convenio', 'numerical', 'integerOnly'=>true),
 			array('portador', 'length', 'max'=>50),
-			array('convenio', 'length', 'max'=>20),
 			array('diretorioremessa, diretorioretorno', 'length', 'max'=>100),
 			array('pixdict', 'length', 'max'=>77),
 			array('codbanco, agencia, conta, emiteboleto, codfilial, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
@@ -112,6 +111,7 @@ class Portador extends MGActiveRecord
 			'diretorioremessa' => 'Diretório Remessa',
 			'diretorioretorno' => 'Diretório Retorno',
 			'carteira' => 'Carteira',
+			'carteiravariacao' => 'Variação da Carteira',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
 			'criacao' => 'Criação',
