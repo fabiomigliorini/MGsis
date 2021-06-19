@@ -149,17 +149,22 @@ class Titulo extends MGActiveRecord
 
 	public function validaBoleto($attribute, $params)
 	{
-		if (!$this->boleto)
+		if (!$this->boleto) {
 			return;
+		}
 
-		if (empty($this->codportador))
-		{
+		if (empty($this->codportador)) {
 			$this->addError($attribute, "Selecione um portador!");
 			return;
 		}
 
-		if (!$this->Portador->emiteboleto)
+		if ($this->Portador->codbanco == 1) {
+			return;
+		}
+
+		if (!$this->Portador->emiteboleto) {
 			$this->addError($attribute, "O portador selecionado não permite boletos!");
+		}
 	}
 
 	public function validaNumero($attribute, $params)
@@ -248,6 +253,7 @@ class Titulo extends MGActiveRecord
 			'BoletoRetornos' => array(self::HAS_MANY, 'BoletoRetorno', 'codtitulo', 'order'=>'criacao asc, codboletoretorno ASC'),
 			'Cobrancas' => array(self::HAS_MANY, 'Cobranca', 'codtitulo'),
 			'CobrancaHistoricoTitulos' => array(self::HAS_MANY, 'CobrancaHistoricoTitulo', 'codtitulo'),
+			'TituloBoletos' => array(self::HAS_MANY, 'TituloBoleto', 'codtitulo', 'order'=>'criacao DESC'),
 		);
 	}
 

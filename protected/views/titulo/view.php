@@ -5,6 +5,8 @@ $this->breadcrumbs=array(
 	$model->numero,
 );
 
+$visibleBoletoBradesco = ($model->boleto && ($model->saldo>0) && ($model->Portador->codbanco != 1));
+
 $this->menu=array(
 	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
@@ -21,7 +23,7 @@ $this->menu=array(
 		'icon'=>'icon-barcode',
 		'url'=>array('imprimeboleto', 'id'=>$model->codtitulo),
 		'linkOptions'=>array('id'=>'btnMostrarBoleto'),
-		'visible'=>($model->boleto && ($model->saldo>0))
+		'visible'=>$visibleBoletoBradesco
 	),
 	array(
 		'label'=>'Estornar',
@@ -65,6 +67,85 @@ else
 
 <script type="text/javascript">
 /*<![CDATA[*/
+
+function abrirBoletoBB (codtituloboleto) {
+	var frameSrcBoleto = "<?php echo MGSPA_API_URL ?>titulo/<?php echo $model->codtitulo ?>/boleto-bb/" + codtituloboleto + "/pdf";
+	console.log(frameSrcBoleto);
+	event.preventDefault();
+	$('#modalBoletoBB').on('show', function () {
+		$('#frameBoletoBB').attr("src",frameSrcBoleto);
+	});
+	$('#modalBoletoBB').modal({show:true})
+	$('#modalBoletoBB').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
+}
+
+function baixarBoletoBB (codtituloboleto) {
+	bootbox.confirm("Deseja mesmo baixar (cancelar) esse boleto?", function(result) {
+		if (result) {
+			$.ajax({
+				type: 'POST',
+				url: "<?php echo MGSPA_API_URL ?>titulo/<?php echo $model->codtitulo ?>/boleto-bb/" + codtituloboleto + "/baixar",
+				headers: {
+					"X-Requested-With":"XMLHttpRequest"
+				},
+			}).done(function(resp) {
+				bootbox.alert('Boleto Baixado (Cancelado)!', function() {
+					location.reload();
+				});
+			}).fail(function(jqxhr, textStatus, error) {
+				$.notify("Falha ao baixar Boleto!", { position:"right bottom", className:"error", autoHideDelay: 15000 });
+				var resp = jQuery.parseJSON(jqxhr.responseText);
+				bootbox.alert(resp.message);
+			});
+		}
+	});
+}
+
+function consultarBoletoBB (codtituloboleto) {
+	bootbox.confirm("Deseja mesmo consultar esse boleto?", function(result) {
+		if (result) {
+			$.ajax({
+				type: 'POST',
+				url: "<?php echo MGSPA_API_URL ?>titulo/<?php echo $model->codtitulo ?>/boleto-bb/" + codtituloboleto + "/consultar",
+				headers: {
+					"X-Requested-With":"XMLHttpRequest"
+				},
+			}).done(function(resp) {
+				bootbox.alert('Boleto Consultado!', function() {
+					location.reload();
+				});
+			}).fail(function(jqxhr, textStatus, error) {
+				$.notify("Falha ao consultar Boleto!", { position:"right bottom", className:"error", autoHideDelay: 15000 });
+				var resp = jQuery.parseJSON(jqxhr.responseText);
+				bootbox.alert(resp.message);
+			});
+		}
+	});
+}
+
+function criarBoletoBB (event) {
+	event.preventDefault();
+	bootbox.confirm("Deseja mesmo criar um boleto?", function(result) {
+		if (result) {
+			$.ajax({
+				type: 'POST',
+				url: "<?php echo MGSPA_API_URL ?>titulo/<?php echo $model->codtitulo ?>/boleto-bb/",
+				headers: {
+					"X-Requested-With":"XMLHttpRequest"
+				},
+			}).done(function(resp) {
+				bootbox.alert('Boleto Criado!', function() {
+					location.reload();
+				});
+			}).fail(function(jqxhr, textStatus, error) {
+				$.notify("Falha ao criar Boleto!", { position:"right bottom", className:"error", autoHideDelay: 15000 });
+				var resp = jQuery.parseJSON(jqxhr.responseText);
+				bootbox.alert(resp.message);
+			});
+		}
+	});
+}
+
 $(document).ready(function(){
 
 	//abre janela boleto
@@ -321,6 +402,22 @@ foreach ($model->MovimentoTitulos as $mov)
 		</small>
 	</div>
 	<?php
+}
+
+?>
+<br>
+<h2>
+	Boleto BB
+	<small>
+		<a href="#" id="btnCriarBoletoBB" onClick="criarBoletoBB(event)">
+			<i class="icon-plus"></i> Novo
+		</a>
+	</small>
+</h2>
+<?php
+
+if (!empty($model->TituloBoletos)) {
+	$this->renderPartial('_view_boleto_bb',array('model'=>$model, 'css_vencimento'=>$css_vencimento));
 }
 
 //Retornos do Boleto

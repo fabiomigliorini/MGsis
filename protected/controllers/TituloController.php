@@ -52,7 +52,8 @@ class TituloController extends Controller
         $model->fatura = $original->fatura;
         $model->codtipotitulo = $original->codtipotitulo;
         $model->valor = $original->valor;
-        $model->boleto = $original->boleto;
+        $model->codportador = $original->codportador;
+        // $model->boleto = $original->boleto;
         $model->vencimento = $original->vencimento;
         $model->vencimentooriginal = $original->vencimentooriginal;
         $model->emissao = $original->emissao;
