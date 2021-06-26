@@ -158,7 +158,7 @@ class Titulo extends MGActiveRecord
 			return;
 		}
 
-		if ($this->Portador->codbanco == 1) {
+		if ($this->Portador->codbanco != 237) {
 			return;
 		}
 
@@ -635,10 +635,14 @@ class Titulo extends MGActiveRecord
 				$old = Titulo::model()->findByPk($this->codtitulo);
 				$codportador_antigo = $old->codportador;
 			}
-			if (empty($this->nossonumero) || $this->codportador <> $codportador_antigo)
-			{
-				$sequence = "tbltitulo_nossonumero_{$this->codportador}_seq";
-				$this->nossonumero = Yii::app()->db->createCommand("SELECT NEXTVAL('$sequence')")->queryScalar();
+
+			if ($this->Portador->codbanco == 237) {
+				if (empty($this->nossonumero) || $this->codportador <> $codportador_antigo) {
+					$sequence = "tbltitulo_nossonumero_{$this->codportador}_seq";
+					$this->nossonumero = Yii::app()->db->createCommand("SELECT NEXTVAL('$sequence')")->queryScalar();
+				}
+			} elseif ($this->Portador->codbanco == 1) {
+				$this->nossonumero = null;
 			}
 		}
 
