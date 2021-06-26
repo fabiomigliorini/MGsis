@@ -5,7 +5,12 @@ $this->breadcrumbs=array(
 	$model->numero,
 );
 
-$visibleBoletoBradesco = ($model->boleto && ($model->saldo>0) && ($model->Portador->codbanco != 1));
+$visibleBoletoBradesco = false;
+if (!empty($model->codportador)) {
+	if ($model->Portador->codbanco == 237 && $model->boleto) {
+		$visibleBoletoBradesco = true;
+	}
+}
 
 $this->menu=array(
 	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),

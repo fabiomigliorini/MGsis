@@ -194,11 +194,11 @@ class NegocioFormaPagamento extends MGActiveRecord
             $titulo->gerencial = true;
 
             //se for boleto pega o primeiro portador bancario da filial
-            if ($titulo->boleto) {
-                if ($portador = Portador::model()->find("codfilial = :codfilial and emiteboleto = true", array(":codfilial" => $titulo->codfilial))) {
-                    $titulo->codportador = $portador->codportador;
-                }
-            }
+            // if ($titulo->boleto) {
+            //     if ($portador = Portador::model()->find("codfilial = :codfilial and emiteboleto = true", array(":codfilial" => $titulo->codfilial))) {
+            //         $titulo->codportador = $portador->codportador;
+            //     }
+            // }
 
             //se nao achou tenta pegar portador do usuario
             if (empty($titulo->codportador)) {

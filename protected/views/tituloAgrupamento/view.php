@@ -8,34 +8,34 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
-	array(
-		'label'=>'Imprimir Boletos', 
-		'icon'=>'icon-barcode', 
-		'url'=>array('titulo/imprimeboleto', 'codtituloagrupamento'=>$model->codtituloagrupamento), 
-		'linkOptions'=>array('id'=>'btnMostrarBoleto'),
-		'visible'=>(empty($model->cancelamento))
-	),
+	// array(
+	// 	'label'=>'Imprimir Boletos',
+	// 	'icon'=>'icon-barcode',
+	// 	'url'=>array('titulo/imprimeboleto', 'codtituloagrupamento'=>$model->codtituloagrupamento),
+	// 	'linkOptions'=>array('id'=>'btnMostrarBoleto'),
+	// 	'visible'=>(empty($model->cancelamento))
+	// ),
 	//array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codtituloagrupamento)),
 	//array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 	array(
-		'label'=>'Gerar Nota Fiscal', 
-		'icon'=>'icon-globe', 
-		'url'=>'#', 
+		'label'=>'Gerar Nota Fiscal',
+		'icon'=>'icon-globe',
+		'url'=>'#',
 		'linkOptions'=>array('id'=>'btnGerarNotaFiscal'),
 		//'visible'=>($model->codnegociostatus == NegocioStatus::FECHADO)
 	),
 	array(
-		'label'=>'Relatório', 
-		'icon'=>'icon-print', 
-		'url'=>array('relatorio', 'id'=>$model->codtituloagrupamento), 
+		'label'=>'Relatório',
+		'icon'=>'icon-print',
+		'url'=>array('relatorio', 'id'=>$model->codtituloagrupamento),
 		'linkOptions'=>array('id'=>'btnMostrarRelatorio'),
 		'visible'=>(empty($model->cancelamento))
 	),
 	array(
-		'label'=>'Estornar', 
-		'icon'=>'icon-thumbs-down', 
-		'url'=>'#', 
+		'label'=>'Estornar',
+		'icon'=>'icon-thumbs-down',
+		'url'=>'#',
 		'linkOptions'=>array('id'=>'btnExcluir'),
 		'visible'=>(empty($model->cancelamento))
 		),
@@ -49,29 +49,29 @@ Yii::app()->clientScript->registerCoreScript('yii');
 
 function gerarNotaFiscal(modelo)
 {
-	
-	$.getJSON("<?php echo Yii::app()->createUrl('tituloAgrupamento/gerarNotaFiscal')?>", 
-		{ 
+
+	$.getJSON("<?php echo Yii::app()->createUrl('tituloAgrupamento/gerarNotaFiscal')?>",
+		{
 			id: <?php echo $model->codtituloagrupamento ?>,
 			modelo: modelo,
 		})
-		.done(function(data) 
+		.done(function(data)
 		{
-			
+
 			if (data.Retorno != 1)
 			{
 				bootbox.alert(data.Mensagem);
 				return false;
 			}
-			
+
 			location.reload();
 
 		})
-		.fail(function( jqxhr, textStatus, error ) 
+		.fail(function( jqxhr, textStatus, error )
 		{
 			var err = textStatus + ", " + error;
 			bootbox.alert(err);
-		});	
+		});
 }
 
 $(document).ready(function(){
@@ -85,8 +85,8 @@ $(document).ready(function(){
 		});
 		$('#modalBoleto').modal({show:true})
 		$('#modalBoleto').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
-	});	
-	
+	});
+
 	//imprimir Boleto
 	$('#btnImprimirBoleto').click(function(event){
 		window.frames["frameBoleto"].focus();
@@ -102,15 +102,15 @@ $(document).ready(function(){
 		});
 		$('#modalRelatorio').modal({show:true})
 		$('#modalRelatorio').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
-	});	
-	
+	});
+
 	jQuery('body').on('click','#btnExcluir',function() {
 		bootbox.confirm("Estornar este Agrupamento?", function(result) {
 			if (result)
 				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('tituloAgrupamento/estorna', array('id' => $model->codtituloagrupamento))?>",{});
 		});
 	});
-	
+
 	$('#btnGerarNotaFiscal').click(function(event){
 		event.preventDefault();
 		$('#modalModeloNotaFiscal').modal({show:true, keyboard:true})
@@ -125,45 +125,45 @@ $(document).ready(function(){
 		event.preventDefault();
 		gerarNotaFiscal(<?php echo NotaFiscal::MODELO_NFE; ?>);
 	});
-	
+
 });
 /*]]>*/
 </script>
 
 <div id="modalBoleto" class="modal hide fade" tabindex="-1" role="dialog">
-	<div class="modal-header">  
+	<div class="modal-header">
 		<div class="pull-right">
 			<button class="btn btn-primary" id="btnImprimirBoleto">Imprimir</button>
 			<button class="btn" data-dismiss="modal">Fechar</button>
 		</div>
-		<h3>Boleto</h3>  
-	</div>  
+		<h3>Boleto</h3>
+	</div>
 	<div class="modal-body">
       <iframe src="" id="frameBoleto" name="frameBoleto" width="99.6%" height="400" frameborder="0"></iframe>
 	</div>
 </div>
 
 <div id="modalModeloNotaFiscal" class="modal hide fade" tabindex="-1" role="dialog">
-	<div class="modal-header">  
-		<h3>Gerar qual modelo de nota Fiscal?</h3>  
-	</div>  
+	<div class="modal-header">
+		<h3>Gerar qual modelo de nota Fiscal?</h3>
+	</div>
 	<div class="modal-body">
 		<div class="pull-right">
 			<button class="btn" data-dismiss="modal"  id="btnGerarNfce">NFC-e (Cupom)</button>
 			<button class="btn btn-primary" data-dismiss="modal" id="btnGerarNfe">NF-e (Nota)</button>
 			<button class="btn" data-dismiss="modal" id="">Cancelar</button>
-		</div>		
+		</div>
 	</div>
 </div>
 
 
 <div id="modalRelatorio" class="modal hide fade" tabindex="-1" role="dialog">
-	<div class="modal-header">  
+	<div class="modal-header">
 		<div class="pull-right">
 			<button class="btn" data-dismiss="modal">Fechar</button>
 		</div>
-		<h3>Relatório de Fechamento</h3>  
-	</div>  
+		<h3>Relatório de Fechamento</h3>
+	</div>
 	<div class="modal-body">
       <iframe src="" id="frameRelatorio" name="frameRelatorio" width="99.6%" height="400" frameborder="0"></iframe>
 	</div>
@@ -178,7 +178,7 @@ $(document).ready(function(){
 	</div>
 <?php endif; ?>
 
-<?php 
+<?php
 
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
@@ -195,12 +195,12 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 		),
 		'observacao',
 	),
-)); 
+));
 
 $this->widget('UsuarioCriacao', array('model'=>$model));
 
 
-$command = Yii::app()->db->createCommand(' 
+$command = Yii::app()->db->createCommand('
 	SELECT distinct nfpb.codnotafiscal
 	  FROM tbltituloagrupamento ta
 	 INNER JOIN tblmovimentotitulo mt ON (mt.codtituloagrupamento = ta.codtituloagrupamento)
@@ -226,7 +226,7 @@ if (!empty($codnotas))
 foreach ($codnotas as $codnota)
 {
 	$nota = NotaFiscal::model()->findByPk($codnota);
-	
+
 	$css_label = "";
 	$staus = "&nbsp";
 	$css = "";
@@ -265,12 +265,12 @@ foreach ($codnotas as $codnota)
 			$staus = "C";
 			break;
 
-	}	
+	}
 	?>
 	<div class="registro <?php echo $css; ?>">
 		<span class="row-fluid">
 			<small class="span1 muted">
-				<?php echo CHtml::encode($nota->Filial->filial); ?> 
+				<?php echo CHtml::encode($nota->Filial->filial); ?>
 			</small>
 			<div class="span2">
 				<?php echo CHtml::link(CHtml::encode(Yii::app()->format->formataNumeroNota($nota->emitida, $nota->serie, $nota->numero, $nota->modelo)),array('notaFiscal/view','id'=>$nota->codnotafiscal)); ?>
@@ -280,19 +280,19 @@ foreach ($codnotas as $codnota)
 			</div>
 			<small class="span2 muted">
 				<?php echo CHtml::encode($nota->emissao); ?> &nbsp;&nbsp;
-				<?php echo CHtml::encode($nota->NaturezaOperacao->naturezaoperacao); ?> 
+				<?php echo CHtml::encode($nota->NaturezaOperacao->naturezaoperacao); ?>
 			</small>
 			<small class="span4">
 				<?php echo CHtml::link(
 					CHtml::encode($nota->Pessoa->fantasia)
-					, array('pessoa/view', 'id'=> $nota->codpessoa)); 
-				?> 
+					, array('pessoa/view', 'id'=> $nota->codpessoa));
+				?>
 				<small class="label <?php echo $css_label; ?> pull-right">
 					<?php echo $nota->status; ?>
 				</small>
 			</small>
 			<div class="span2">
-				<?php $this->widget('MGNotaFiscalBotoes', array('model'=>$nota)); ?>		
+				<?php $this->widget('MGNotaFiscalBotoes', array('model'=>$nota)); ?>
 			</div>
 		</span>
 	</div>
@@ -306,15 +306,15 @@ foreach ($codnotas as $codnota)
 
 foreach ($model->Titulos as $titulo)
 {
-	$css_valor = ($titulo->operacao == "DB")?"text-success":"text-warning";	
+	$css_valor = ($titulo->operacao == "DB")?"text-success":"text-warning";
 	?>
 	<div class="registro">
 		<small class="row-fluid">
 			<span class="span1 <?php echo ($titulo->gerencial)?"text-warning":"text-success"; ?>">
-				<?php echo CHtml::encode($titulo->Filial->filial); ?> 
+				<?php echo CHtml::encode($titulo->Filial->filial); ?>
 			</span>
 			<span class="span2 muted">
-				<?php echo CHtml::link(CHtml::encode($titulo->numero),array('titulo/view','id'=>$titulo->codtitulo)); ?> 
+				<?php echo CHtml::link(CHtml::encode($titulo->numero),array('titulo/view','id'=>$titulo->codtitulo)); ?>
 			</span>
 			<b class="span2 text-right <?php echo $css_valor; ?>">
 				<?php echo Yii::app()->format->formatNumber($titulo->valor); ?>
@@ -324,7 +324,7 @@ foreach ($model->Titulos as $titulo)
 				<?php echo $titulo->vencimento; ?>
 			</b>
 			<span class="span3 muted">
-				<?php echo CHtml::link($titulo->Pessoa->fantasia,array('pessoa/view','id'=>$titulo->codpessoa)); ?> 
+				<?php echo CHtml::link($titulo->Pessoa->fantasia,array('pessoa/view','id'=>$titulo->codpessoa)); ?>
 			</span>
 			<span class="span1">
 				<?php echo (isset($titulo->Portador))?CHtml::encode($titulo->Portador->portador):""; ?>
@@ -348,23 +348,23 @@ foreach ($model->MovimentoTitulos as $mov)
 {
 	if ($mov->Titulo->codtituloagrupamento == $model->codtituloagrupamento)
 		continue;
-	
+
 	if ($mov->TipoMovimentoTitulo->estorno)
 		continue;
-	
+
 	$operacao = ($mov->credito > $mov->debito)?"CR":"DB";
-	$css_valor = ($operacao == "DB")?"text-success":"text-warning";	
+	$css_valor = ($operacao == "DB")?"text-success":"text-warning";
 	?>
 	<div class="registro">
 		<small class="row-fluid">
 			<span class="span1 <?php echo ($mov->Titulo->gerencial)?"text-warning":"text-success"; ?>">
-				<?php echo CHtml::encode($mov->Titulo->Filial->filial); ?> 
+				<?php echo CHtml::encode($mov->Titulo->Filial->filial); ?>
 			</span>
 			<span class="span2 muted">
-				<?php echo CHtml::link(CHtml::encode($mov->Titulo->numero),array('titulo/view','id'=>$mov->Titulo->codtitulo)); ?> 
+				<?php echo CHtml::link(CHtml::encode($mov->Titulo->numero),array('titulo/view','id'=>$mov->Titulo->codtitulo)); ?>
 			</span>
 			<small class="span1 muted text-right">
-				<?php echo CHtml::encode($mov->TipoMovimentoTitulo->tipomovimentotitulo); ?> 
+				<?php echo CHtml::encode($mov->TipoMovimentoTitulo->tipomovimentotitulo); ?>
 			</small>
 			<b class="span1 text-right <?php echo $css_valor; ?>">
 				<?php echo Yii::app()->format->formatNumber(abs($mov->debito-$mov->credito)); ?>
@@ -374,7 +374,7 @@ foreach ($model->MovimentoTitulos as $mov)
 				<?php echo $mov->Titulo->vencimento; ?>
 			</b>
 			<span class="span3 muted">
-				<?php echo CHtml::link(CHtml::encode($mov->Titulo->Pessoa->fantasia),array('pessoa/view','id'=>$mov->Titulo->codpessoa)); ?> 
+				<?php echo CHtml::link(CHtml::encode($mov->Titulo->Pessoa->fantasia),array('pessoa/view','id'=>$mov->Titulo->codpessoa)); ?>
 			</span>
 			<span class="span1">
 				<?php echo (isset($mov->Titulo->Portador))?CHtml::encode($mov->Titulo->Portador->portador):""; ?>

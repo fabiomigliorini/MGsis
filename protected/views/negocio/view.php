@@ -34,13 +34,13 @@ $this->menu=array(
 		'visible'=>($model->codnegociostatus != NegocioStatus::CANCELADO)
 		),
 	array('label'=>'Duplicar', 'icon'=>'icon-retweet', 'url'=>array('create','duplicar'=>$model->codnegocio)),
-	array(
-		'label'=>'Boletos',
-		'icon'=>'icon-barcode',
-		'url'=>array('titulo/imprimeboleto', 'codnegocio'=>$model->codnegocio),
-		'linkOptions'=>array('id'=>'btnMostrarBoleto'),
-		'visible'=>($model->codnegociostatus == NegocioStatus::FECHADO && $model->NaturezaOperacao->codoperacao == Operacao::SAIDA)
-	),
+	// array(
+	// 	'label'=>'Boletos',
+	// 	'icon'=>'icon-barcode',
+	// 	'url'=>array('titulo/imprimeboleto', 'codnegocio'=>$model->codnegocio),
+	// 	'linkOptions'=>array('id'=>'btnMostrarBoleto'),
+	// 	'visible'=>($model->codnegociostatus == NegocioStatus::FECHADO && $model->NaturezaOperacao->codoperacao == Operacao::SAIDA)
+	// ),
 	array(
 		'label'=>'Orçamento',
 		'icon'=>'icon-print',
