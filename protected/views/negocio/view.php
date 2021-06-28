@@ -138,28 +138,10 @@ function mostrarRomaneio(imprimir)
 $(document).ready(function(){
 
 	<?php
-	if (Yii::app()->session['MostrarBoletoCodNegocio'] == $model->codnegocio)
-	{
-		unset(Yii::app()->session['MostrarBoletoCodNegocio']);
-		?>
-		mostrarBoleto();
-		<?
-	}
-
 	if ($perguntarNota)
 	{
 
 		$documento = null;
-
-		// se gerou boleto, gerar NFE
-		foreach ($model->NegocioFormaPagamentos as $nfp)
-		{
-			if ($nfp->FormaPagamento->boleto)
-			{
-				$documento = "NFE";
-				Yii::app()->session['MostrarBoletoCodNegocio'] = $model->codnegocio;
-			}
-		}
 
 		// Decide qual documento
 		if (empty($documento))
