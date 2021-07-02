@@ -29,7 +29,7 @@ else
 			<div class="row-fluid">
 
 				<div class="span6">
-					<small class="muted">
+					<small>
 						<?php echo CHtml::link(CHtml::encode($data->numero),array('titulo/view','id'=>$data->codtitulo), array ("tabindex"=>-1)); ?>
 						<?php echo CHtml::encode($data->fatura); ?>
 					</small>

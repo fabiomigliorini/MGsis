@@ -312,7 +312,7 @@ class Titulo extends MGActiveRecord
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
-	public function search($comoDataProvider = true, $limit = null, $order = '"Pessoa".fantasia ASC, t.vencimento DESC, t.saldo ASC')
+	public function search($comoDataProvider = true, $limit = null, $order = '"Pessoa".fantasia ASC, t.vencimento ASC, t.saldo ASC')
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
