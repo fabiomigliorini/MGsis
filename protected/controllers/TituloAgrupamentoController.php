@@ -33,16 +33,20 @@ class TituloAgrupamentoController extends Controller
 		if(isset($_POST['TituloAgrupamento']))
 		{
 			$model->attributes=$_POST['TituloAgrupamento'];
-			if($model->save())
+			if($model->save()){
 				$this->redirect(array('view','id'=>$model->codtituloagrupamento));
-
+			}
 		}
 		else
 		{
 			$model->emissao  = date('d/m/Y');
 			$model->parcelas = 1;
-			$model->primeira = 15;
+			$model->primeira = 30;
 			$model->demais   = 30;
+			if (!empty(Yii::app()->user->codportador)) {
+				$model->codportador = Yii::app()->user->codportador;
+			}
+
 		}
 
 		$this->render('create',array(

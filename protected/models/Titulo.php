@@ -424,7 +424,7 @@ class Titulo extends MGActiveRecord
 				'TipoTitulo' => array('select' => '"TipoTitulo".tipotitulo'),
 			);
 
-		$criteria->select = 't.codtitulo, t.vencimento, t.emissao, t.codfilial, t.numero, t.codportador, t.credito, t.debito, t.saldo, t.codtipotitulo, t.codcontacontabil, t.codusuariocriacao, t.nossonumero, t.gerencial, t.codpessoa, t.codusuarioalteracao, t.estornado';
+		$criteria->select = 't.codtitulo, t.vencimento, t.emissao, t.codfilial, t.numero, t.fatura, t.codportador, t.credito, t.debito, t.saldo, t.codtipotitulo, t.codcontacontabil, t.codusuariocriacao, t.nossonumero, t.gerencial, t.codpessoa, t.codusuarioalteracao, t.estornado';
 
 		$criteria->order = $order;
 
