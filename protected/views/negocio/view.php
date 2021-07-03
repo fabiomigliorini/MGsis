@@ -34,13 +34,13 @@ $this->menu=array(
 		'visible'=>($model->codnegociostatus != NegocioStatus::CANCELADO)
 		),
 	array('label'=>'Duplicar', 'icon'=>'icon-retweet', 'url'=>array('create','duplicar'=>$model->codnegocio)),
-	// array(
-	// 	'label'=>'Boletos',
-	// 	'icon'=>'icon-barcode',
-	// 	'url'=>array('titulo/imprimeboleto', 'codnegocio'=>$model->codnegocio),
-	// 	'linkOptions'=>array('id'=>'btnMostrarBoleto'),
-	// 	'visible'=>($model->codnegociostatus == NegocioStatus::FECHADO && $model->NaturezaOperacao->codoperacao == Operacao::SAIDA)
-	// ),
+	array(
+		'label'=>'Boletos',
+		'icon'=>'icon-barcode',
+		'url'=>'#',
+		'linkOptions'=>array('onclick'=>'mostrarBoleto(event)'),
+		'visible'=>($model->codnegociostatus == NegocioStatus::FECHADO && $model->NaturezaOperacao->codoperacao == Operacao::SAIDA)
+	),
 	array(
 		'label'=>'Comanda',
 		'icon'=>'icon-print',
@@ -148,10 +148,12 @@ function gerarNotaFiscal(modelo, enviar)
 		});
 }
 
-function mostrarBoleto()
+function mostrarBoleto(event)
 {
+	event.preventDefault();
 	$('#modalBoleto').on('show', function () {
-		$('#frameBoleto').attr("src",$('#btnMostrarBoleto').attr('href'));
+		var url = "<?php echo MGSPA_API_URL; ?>negocio/<?php echo $model->codnegocio; ?>/boleto-bb/pdf";
+		$('#frameBoleto').attr("src", url);
 	});
 	$('#modalBoleto').modal({show:true})
 	$('#modalBoleto').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
@@ -334,7 +336,7 @@ $(document).ready(function(){
 		<h3>Boletos</h3>
 	</div>
 	<div class="modal-body">
-      <iframe src="" id="frameBoleto" name="frameBoleto" width="99.6%" height="400" frameborder="0"></iframe>
+  	<iframe src="" id="frameBoleto" name="frameBoleto" width="99.6%" height="400" frameborder="0"></iframe>
 	</div>
 </div>
 
@@ -347,7 +349,7 @@ $(document).ready(function(){
 		<h3>Comanda</h3>
 	</div>
 	<div class="modal-body">
-      <iframe src="" id="farmeComanda" name="farmeComanda" width="99.6%" height="400" frameborder="0"></iframe>
+    <iframe src="" id="farmeComanda" name="farmeComanda" width="99.6%" height="400" frameborder="0"></iframe>
 	</div>
 </div>
 
@@ -368,7 +370,7 @@ $(document).ready(function(){
 	<div class="modal-header">
 		<div class="pull-right">
 			<button class="btn btn-primary" id="btnImprimirRomaneioMatricial"><i class="icon-print icon-white"></i>&nbsp;Matricial</button>
-                        <button class="btn btn-primary" id="btnImprimirRomaneio"><i class="icon-print icon-white"></i>&nbsp;Laser</button>
+			<button class="btn btn-primary" id="btnImprimirRomaneio"><i class="icon-print icon-white"></i>&nbsp;Laser</button>
 			<button class="btn" data-dismiss="modal">Fechar</button>
 		</div>
 		<h3>Romaneio</h3>
