@@ -42,6 +42,13 @@ $this->menu=array(
 	// 	'visible'=>($model->codnegociostatus == NegocioStatus::FECHADO && $model->NaturezaOperacao->codoperacao == Operacao::SAIDA)
 	// ),
 	array(
+		'label'=>'Comanda',
+		'icon'=>'icon-print',
+		'url'=>'#',
+		'linkOptions'=>array('onclick'=>'imprimirComanda(event)'),
+		'visible'=>($model->codnegociostatus == NegocioStatus::ABERTO)
+	),
+	array(
 		'label'=>'Orçamento',
 		'icon'=>'icon-print',
 		'url'=>array('relatorioOrcamento','id'=>$model->codnegocio),
@@ -65,6 +72,47 @@ $this->renderPartial("_hotkeys");
 ?>
 
 <script type="text/javascript">
+
+function imprimirComanda (event)
+{
+	event.preventDefault();
+	mostrarComanda();
+	window.rodandoConsultaPixCob = true;
+	var impressora = '<?php echo Yii::app()->user->getState('impressoraTermica') ?>';
+	var codnegocio = '<?php echo $model->codnegocio ?>';
+	if (impressora == '') {
+		bootbox.alert('Nenhuma Impressora Termica Associada ao Usuário!');
+		return;
+	}
+	$.ajax({
+		type: 'POST',
+		url: "<?php echo MGSPA_API_URL; ?>negocio/" + codnegocio + "/comanda/imprimir",
+		data: {
+			impressora: impressora
+		},
+		headers: {
+			"X-Requested-With":"XMLHttpRequest"
+		},
+	}).done(function(resp) {
+		$.notify("Comanda enviada para impressão na impressora '" + impressora + "'!", { position:"right bottom", className:"success", autoHideDelay: 15000 });
+	}).fail(function( jqxhr, textStatus, error ) {
+		$.notify("Erro ao Imprimir Comanda!", { position:"right bottom", className:"error", autoHideDelay: 15000 });
+	});
+}
+
+function mostrarComanda()
+{
+	if ($("#modalComanda").hasClass('in')) {
+		return;
+	}
+	$('#modalComanda').on('show', function () {
+		$('#farmeComanda').attr("src","<?php echo MGSPA_API_URL; ?>negocio/" + <?php echo $model->codnegocio ?> + "/comanda");
+	});
+	$('#modalComanda').modal({show:true})
+	$('#modalComanda').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
+}
+
+
 
 function gerarNotaFiscal(modelo, enviar)
 {
@@ -282,6 +330,19 @@ $(document).ready(function(){
 	</div>
 	<div class="modal-body">
       <iframe src="" id="frameBoleto" name="frameBoleto" width="99.6%" height="400" frameborder="0"></iframe>
+	</div>
+</div>
+
+<div id="modalComanda" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">
+		<div class="pull-right">
+			<button class="btn btn-primary" onclick='imprimirComanda(event)'>Imprimir</button>
+			<button class="btn" data-dismiss="modal">Fechar</button>
+		</div>
+		<h3>Comanda</h3>
+	</div>
+	<div class="modal-body">
+      <iframe src="" id="farmeComanda" name="farmeComanda" width="99.6%" height="400" frameborder="0"></iframe>
 	</div>
 </div>
 
