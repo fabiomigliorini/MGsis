@@ -292,6 +292,11 @@ $(document).ready(function(){
 		$('#frameRomaneio').attr("src",$('#btnMostrarRomaneio').attr('href') + "&imprimir=true");
 	});
 
+	$('#modalComanda').on('hidden', function () {
+		var url = '<?php echo Yii::app()->createUrl('negocio') ?>';
+		window.location.href = url;
+	})
+
 	$('body').on('click','#btnCancelar',function() {
 		bootbox.confirm("Cancelar este negócio?", function(result) {
 			if (result)

@@ -139,10 +139,27 @@ function fechaPrancheta()
 
 function redirecinarComanda(comanda)
 {
-		bootbox.confirm("Deseja redirecionar para o negócio #" + comanda + "?", function(result) {
+		bootbox.confirm("Deseja adicionar itens da comanda #" + comanda + "?", function(result) {
 			if (result) {
-				var url = '<?php echo Yii::app()->createUrl('negocio/view', ['id'=>'']) ?>';
-				window.location.href = url + comanda;
+				var codnegocio = '<?php echo $model->codnegocio; ?>';
+				$.ajax({
+					type: 'POST',
+					url: "<?php echo MGSPA_API_URL; ?>negocio/" + codnegocio + "/unificar/" + comanda,
+					headers: {
+						"X-Requested-With":"XMLHttpRequest"
+					},
+				}).done(function(resp) {
+					var url = '<?php echo Yii::app()->createUrl('negocio/view', ['id'=>'']) ?>';
+					window.location.href = url + resp.codnegocio;
+					$.notify("Comanda adicionada '" + impressora + "'!", { position:"right bottom", className:"success", autoHideDelay: 15000 });
+				}).fail(function(jqxhr, textStatus, error) {
+					$.notify("Erro ao adicionar Comanda!", { position:"right bottom", className:"error", autoHideDelay: 15000 });
+					resp = JSON.parse(jqxhr.responseText);
+					bootbox.alert(resp.message, function () {
+						tocarSirene();
+						$("#barras").focus();
+					});
+				});
 			}
 		});
 }
