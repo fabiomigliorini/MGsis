@@ -137,12 +137,31 @@ function fechaPrancheta()
     $('#modalPrancheta').modal('hide');
 }
 
+function redirecinarComanda(comanda)
+{
+		bootbox.confirm("Deseja redirecionar para o negócio #" + comanda + "?", function(result) {
+			if (result) {
+				var url = '<?php echo Yii::app()->createUrl('negocio/view', ['id'=>'']) ?>';
+				window.location.href = url + comanda;
+			}
+		});
+}
+
 function adicionaProduto()
 {
 
 	var barras = $("#barras").val();
 	var quantidade = $('#quantidade').autoNumeric('get');
 	$("#barras").val("");
+
+	const regexComanda = /^[Nn][Ee][Gg][0-9]{8}$/;
+	if(regexComanda.test(barras)){
+		var comanda = barras.replace(/\D/g, '');
+		$.notify("Comanda #" + comanda + " identificada!", { position:"right bottom", className:"success", autoHideDelay: 15000 });
+		redirecinarComanda(comanda);
+		return;
+	}
+
 	$.ajax({
 		url: "<?php echo Yii::app()->createUrl('negocio/adicionaproduto') ?>",
 		data: {
