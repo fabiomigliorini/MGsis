@@ -96,8 +96,14 @@
 			<label class="control-label" for="codstonepos">Maquineta</label>
 			<div class="controls">
 				<?php foreach($model->Filial->StoneFilials[0]->StonePoss as $pos): ?>
+					<?php
+					if (!empty($pos->inativo)) {
+						continue;
+					}
+					?>
 					<label class="radio">
 						<input type="radio" name="codstonepos" id="codstonepos" value="<?php echo $pos->codstonepos; ?>">
+						<?php echo $pos->StoneFilial->Filial->filial ;?> - 
 						<?php echo $pos->apelido; ?>
 					</label>
 				<?php endforeach; ?>
