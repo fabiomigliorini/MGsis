@@ -81,24 +81,49 @@ function formataMensagem(data)
 
 function enviarEventoManifestacao(indManifestacao, justificativa)
 {
-
-	$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/manifesta')?>", {
-		codnfeterceiro: <?php echo $model->codnfeterceiro; ?>,
-		indmanifestacao: indManifestacao,
-		justificativa: justificativa
-	})
-		.done(function(data) {
-			var mensagem = formataMensagem(data);
-			bootbox.alert(mensagem, function() {
-				location.reload();
-			});
-		})
-		.fail(function( jqxhr, textStatus, error ) {
-			bootbox.alert(error, function() {
-				location.reload();
-			});
+  var codnfeterceiro = '<?php echo $model->codnfeterceiro ?>';
+  var url = "<?php echo MGSPA_API_URL; ?>nfe-terceiro/" + codnfeterceiro + "/manifestacao";
+  var data = {
+    indmanifestacao: indManifestacao,
+  };
+  if (justificativa != null) {
+    data.justificativa = justificativa;
+  }
+  console.log(data);
+  $.ajax({
+		type: 'POST',
+		url: url,
+		data: data,
+		headers: {
+			"X-Requested-With":"XMLHttpRequest"
+		},
+	}).done(function(resp) {
+    if (resp.xMotivo != undefined) {
+      bootbox.alert(resp.cStat + ' - ' + resp.xMotivo, function() {
+  			location.reload();
+  		});
+      return;
+    }
+		bootbox.alert("NFe Manifestada!", function() {
+			location.reload();
 		});
-
+	}).fail(function( jqxhr, textStatus, error ) {
+    var mensagem = 'Falha ao Manifestar NFe!';
+    var resp = jQuery.parseJSON(jqxhr.responseText);
+    if (resp.message != undefined) {
+      mensagem += '<br>' + resp.message;
+    }
+    if (resp.errors != undefined) {
+      for (var field in resp.errors) {
+        resp.errors[field].forEach((error, i) => {
+          mensagem += '<BR>' + error;
+        });
+      }
+    }
+    bootbox.alert(mensagem, function() {
+			location.reload();
+		});
+	});
 }
 
 function downloadNfe ()

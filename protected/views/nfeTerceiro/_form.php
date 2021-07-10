@@ -16,7 +16,7 @@
         //echo $form->textFieldRow($model,'nfedataautorizacao',array('class'=>'span5'));
         //echo $form->textFieldRow($model,'codoperacao',array('class'=>'span5'));
         //echo $form->textFieldRow($model,'valortotal',array('class'=>'span5','maxlength'=>14));
-                echo $form->select2Row($model, 'codfilial', Filial::getListaCombo(), array('class'=>'input-medium'));
+        echo $form->select2Row($model, 'codfilial', Filial::getListaCombo(), array('class'=>'input-medium'));
         echo $form->select2PessoaRow($model, 'codpessoa', array('class'=>'input-xlarge'));
         echo $form->select2Row($model, 'indsituacao', NfeTerceiro::getIndSituacaoListaCombo(), array('class'=>'input-medium'));
         echo $form->select2Row($model, 'codnaturezaoperacao', NaturezaOperacao::getListaCombo(), array('class'=>'input-xlarge'));
@@ -40,7 +40,7 @@
 </fieldset>
 <div class="form-actions">
 
-    
+
     <?php
 
 
@@ -54,13 +54,13 @@
                 )
         );
     ?>
-    
+
 </div>
 
 <?php $this->endWidget(); ?>
 
 <script type='text/javascript'>
-	
+
 $(document).ready(function() {
 
 	//$("#Pessoa_fantasia").Setcase();
@@ -74,7 +74,7 @@ $(document).ready(function() {
             }
         });
     });
-	
+
 });
 
 </script>
