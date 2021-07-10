@@ -1,8 +1,8 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Nova NFe de Terceiro';
 $this->breadcrumbs=array(
-	'NFe de Terceiros'=>array('index'),
-	'Nova',
+    'NFe de Terceiros'=>array('index'),
+    'Nova',
 );
 
 $this->menu=array(

@@ -1,8 +1,8 @@
 <?php
 $this->pagetitle = Yii::app()->name . ' - Carregar NFe de Terceiro Via Arquivo XML';
 $this->breadcrumbs=array(
-	'NFe de Terceiros'=>array('index'),
-	'Carregar NFe de Terceiro Via Arquivo XML',
+    'NFe de Terceiros'=>array('index'),
+    'Carregar NFe de Terceiro Via Arquivo XML',
 );
 
 $this->menu=array(
@@ -29,33 +29,35 @@ array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
 <div class="row-fluid">
 	<div class="row-fluid">
 		<div class="span4">
-			<?php 
-			$form=$this->beginWidget('MGActiveForm',
-				array(
-					'id'=>'nfe-terceiro-form',
-					'enableAjaxValidation' => false,
-					'htmlOptions' => array('enctype' => 'multipart/form-data')
-				)
-			); 
-			?>
-			<?php 	
+			<?php
+            $form=$this->beginWidget(
+                'MGActiveForm',
+                array(
+                    'id'=>'nfe-terceiro-form',
+                    'enableAjaxValidation' => false,
+                    'htmlOptions' => array('enctype' => 'multipart/form-data')
+                )
+            );
+            ?>
+			<?php
 
-				if (empty($model->arquivoxml))
-					$model->arquivoxml = '/media/publico/Arquivos/XML/Importar/';
+                if (empty($model->arquivoxml)) {
+                    $model->arquivoxml = '/media/publico/Arquivos/XML/Importar/';
+                }
 
-				 echo $form->textField($model, 'arquivoxml', array('placeholder' => 'Chave', 'class'=>'input-xlarge'));
-			?>
-			<?php 
-				$this->widget(
-					'bootstrap.widgets.TbButton',
-					array(
-						'buttonType' => 'submit',
-						'type' => 'primary',
-						'label' => 'Procurar',
-						'icon' => 'icon-ok',
-						)
-					); 
-			?>
+                 echo $form->textField($model, 'arquivoxml', array('placeholder' => 'Chave', 'class'=>'input-xlarge'));
+            ?>
+			<?php
+                $this->widget(
+                    'bootstrap.widgets.TbButton',
+                    array(
+                        'buttonType' => 'submit',
+                        'type' => 'primary',
+                        'label' => 'Procurar',
+                        'icon' => 'icon-ok',
+                        )
+                );
+            ?>
 			<?php $this->endWidget(); ?>
 		</div>
 		<div class="span8" id="divResultadoProcura">

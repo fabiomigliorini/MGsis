@@ -5,27 +5,27 @@
 
 $css = '';
 if (
-	in_array($data->indmanifestacao, array(NfeTerceiro::INDMANIFESTACAO_NAOREALIZADA, NfeTerceiro::INDMANIFESTACAO_DESCONHECIDA))
-	|| in_array($data->indsituacao, array(NfeTerceiro::INDSITUACAO_CANCELADA, NfeTerceiro::INDSITUACAO_CANCELADA))
-	)
-	$css = 'alert-danger';
-	
+    in_array($data->indmanifestacao, array(NfeTerceiro::INDMANIFESTACAO_NAOREALIZADA, NfeTerceiro::INDMANIFESTACAO_DESCONHECIDA))
+    || in_array($data->indsituacao, array(NfeTerceiro::INDSITUACAO_CANCELADA, NfeTerceiro::INDSITUACAO_CANCELADA))
+    ) {
+    $css = 'alert-danger';
+}
+
 
 $cssmanif = '';
-switch ($data->indmanifestacao)
-{
-	case NfeTerceiro::INDMANIFESTACAO_CIENCIA:
-		$cssmanif = 'badge-warning';
-		break;
-	case NfeTerceiro::INDMANIFESTACAO_REALIZADA:
-		$cssmanif = 'badge-success';
-		break;
-	case NfeTerceiro::INDMANIFESTACAO_DESCONHECIDA:
-	case NfeTerceiro::INDMANIFESTACAO_NAOREALIZADA:
-		$cssmanif = 'badge-important';
-		break;
+switch ($data->indmanifestacao) {
+    case NfeTerceiro::INDMANIFESTACAO_CIENCIA:
+        $cssmanif = 'badge-warning';
+        break;
+    case NfeTerceiro::INDMANIFESTACAO_REALIZADA:
+        $cssmanif = 'badge-success';
+        break;
+    case NfeTerceiro::INDMANIFESTACAO_DESCONHECIDA:
+    case NfeTerceiro::INDMANIFESTACAO_NAOREALIZADA:
+        $cssmanif = 'badge-important';
+        break;
 }
-	
+
 
 ?>
 
@@ -39,13 +39,14 @@ switch ($data->indmanifestacao)
 		</small>
 	</div>
 	<small class="span5 muted">
-		<?php echo CHtml::link(CHtml::encode(Yii::app()->format->formataChaveNfe($data->nfechave)),array('view','id'=>$data->codnfeterceiro)); ?>
+		<?php echo CHtml::link(CHtml::encode(Yii::app()->format->formataChaveNfe($data->nfechave)), array('view','id'=>$data->codnfeterceiro)); ?>
 		<span class='badge <?php echo $cssmanif; ?>'>&nbsp;</span>
 		<div class="pull-right">
-			<?php 
-			if (isset($data->NotaFiscal))
-				echo CHtml::link(CHtml::encode(Yii::app()->format->formataNumeroNota($data->NotaFiscal->emitida, $data->NotaFiscal->serie, $data->NotaFiscal->numero, $data->NotaFiscal->modelo)),array('notaFiscal/view','id'=>$data->codnotafiscal)); 
-			?>
+			<?php
+            if (isset($data->NotaFiscal)) {
+                echo CHtml::link(CHtml::encode(Yii::app()->format->formataNumeroNota($data->NotaFiscal->emitida, $data->NotaFiscal->serie, $data->NotaFiscal->numero, $data->NotaFiscal->modelo)), array('notaFiscal/view','id'=>$data->codnotafiscal));
+            }
+            ?>
 		</div>
 		<br>
 		NSU: <?php echo CHtml::encode($data->nsu); ?> |
@@ -55,7 +56,7 @@ switch ($data->indmanifestacao)
 	<div class="span3">
 		<b>
 			<?php if (isset($data->Pessoa)): ?>
-				<?php echo CHtml::link(CHtml::encode($data->Pessoa->fantasia),array('pessoa/view','id'=>$data->codpessoa)); ?>
+				<?php echo CHtml::link(CHtml::encode($data->Pessoa->fantasia), array('pessoa/view','id'=>$data->codpessoa)); ?>
 			<?php else: ?>
 				<?php echo CHtml::encode($data->emitente); ?>
 			<?php endif; ?>
@@ -73,10 +74,11 @@ switch ($data->indmanifestacao)
 		</b>
 		<br>
 		<small class="muted">
-			<?php 
-			if (isset($data->Operacao))
-				echo CHtml::encode($data->Operacao->operacao); 
-			?>
+			<?php
+            if (isset($data->Operacao)) {
+                echo CHtml::encode($data->Operacao->operacao);
+            }
+            ?>
 		</small>
 	</div>
 	
@@ -91,11 +93,11 @@ switch ($data->indmanifestacao)
 
 	<?php /*
 
-	<small class="span2 muted"><?php echo CHtml::encode($data->indsituacao); ?></small>
+    <small class="span2 muted"><?php echo CHtml::encode($data->indsituacao); ?></small>
 
-	<small class="span2 muted"><?php echo CHtml::encode($data->indmanifestacao); ?></small>
+    <small class="span2 muted"><?php echo CHtml::encode($data->indmanifestacao); ?></small>
 
-	<small class="span2 muted"><?php echo CHtml::encode($data->codpessoa); ?></small>
+    <small class="span2 muted"><?php echo CHtml::encode($data->codpessoa); ?></small>
 
-	*/ ?>
+    */ ?>
 </div>

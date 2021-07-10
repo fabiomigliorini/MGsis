@@ -46,12 +46,12 @@ Yii::app()->clientScript->registerCoreScript('yii');
             'attributes'=>array(
                 array(
                     'name'=>'codfilial',
-                    'value'=>isset($model->Filial)?CHtml::link(CHtml::encode($model->Filial->filial), array("filial/view", "id"=>$model->codfilial)):null,
+                    'value'=>isset($model->Filial) ? CHtml::link(CHtml::encode($model->Filial->filial), array("filial/view", "id"=>$model->codfilial)) : null,
                     'type'=>"raw",
                 ),
                 array(
                     'name'=>'codpessoa',
-                    'value'=>isset($model->Pessoa)?CHtml::link(CHtml::encode($model->Pessoa->fantasia), array("pessoa/view", "id"=>$model->codpessoa)):null,
+                    'value'=>isset($model->Pessoa) ? CHtml::link(CHtml::encode($model->Pessoa->fantasia), array("pessoa/view", "id"=>$model->codpessoa)) : null,
                     'type'=>"raw",
                 ),
             ),
@@ -117,11 +117,11 @@ Yii::app()->clientScript->registerCoreScript('yii');
         Diferença
       </th>
     </tr>
-    <?php foreach($itens as $item): ?>
+    <?php foreach ($itens as $item): ?>
       <?php
-	$cestnota = intval($item['cestnota']);
-	$cestproduto = intval($item['cestproduto']);
-	$classCest = ($cestnota!=$cestproduto)?'error':''
+    $cestnota = intval($item['cestnota']);
+    $cestproduto = intval($item['cestproduto']);
+    $classCest = ($cestnota!=$cestproduto) ? 'error' : ''
       ?>
       <tr class='<?php echo $classCest; ?>'>
         <td style="text-align: center !important">
@@ -216,7 +216,7 @@ $diferenca = array_sum(array_column($itens, 'diferenca'));
         Arquivo
       </th>
     </tr>
-    <?php foreach($tituloNfeTerceiros as $tituloNfeTerceiro): ?>
+    <?php foreach ($tituloNfeTerceiros as $tituloNfeTerceiro): ?>
       <?php
       $diferenca -= $tituloNfeTerceiro->Titulo->valor;
       ?>
@@ -246,8 +246,8 @@ $diferenca = array_sum(array_column($itens, 'diferenca'));
 
 <?php
 if ($diferenca <= 0) {
-  $diferenca = 0;
-}
+          $diferenca = 0;
+      }
 ?>
 
 <div class="row">

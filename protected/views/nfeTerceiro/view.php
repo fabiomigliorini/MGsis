@@ -7,27 +7,27 @@
 
 $this->pagetitle = Yii::app()->name . ' - Detalhes da NFe de Terceiro';
 $this->breadcrumbs=array(
-	'NFe de Terceiros'=>array('index'),
-	$model->nfechave,
+    'NFe de Terceiros'=>array('index'),
+    $model->nfechave,
 );
 
 $interestadual = false;
 if ($model->codpessoa && $model->codfilial) {
-	if ($model->Pessoa->Cidade->codestado != $model->Filial->Pessoa->Cidade->codestado) {
-		$interestadual = true;
-	}
+    if ($model->Pessoa->Cidade->codestado != $model->Filial->Pessoa->Cidade->codestado) {
+        $interestadual = true;
+    }
 }
 
 $this->menu=array(
-	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
-	//array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
-	array('label'=>'Download Nfe', 'icon'=>'icon-download-alt', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnDownloadNfe'), 'visible'=>empty($model->codnotafiscal) ),
-	array('label'=>'Informar Detalhes', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codnfeterceiro), 'visible'=>$model->podeEditar()),
-	array('label'=>'Importar', 'icon'=>'icon-thumbs-up', 'url'=>'#', 'visible'=>$model->podeEditar(), 'linkOptions'=>	array('id'=>'btnImportar')),
-	array('label'=>'Ver Arquivo XML', 'icon'=>' icon-file', 'url'=>array('NFePHPNovo/visualizaXml','codnfeterceiro'=>$model->codnfeterceiro), 'linkOptions'=>	array('id'=>'btnArquivoXml')),
-	array('label'=>'ICMS ST', 'icon'=>'icon-thumbs-down', 'url'=>array('icmsst','id'=>$model->codnfeterceiro), 'visible'=>$interestadual),
-	//array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
-	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
+    array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
+    //array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
+    array('label'=>'Download Nfe', 'icon'=>'icon-download-alt', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnDownloadNfe'), 'visible'=>empty($model->codnotafiscal) ),
+    array('label'=>'Informar Detalhes', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codnfeterceiro), 'visible'=>$model->podeEditar()),
+    array('label'=>'Importar', 'icon'=>'icon-thumbs-up', 'url'=>'#', 'visible'=>$model->podeEditar(), 'linkOptions'=>	array('id'=>'btnImportar')),
+    array('label'=>'Ver Arquivo XML', 'icon'=>' icon-file', 'url'=>array('NFePHPNovo/visualizaXml','codnfeterceiro'=>$model->codnfeterceiro), 'linkOptions'=>	array('id'=>'btnArquivoXml')),
+    array('label'=>'ICMS ST', 'icon'=>'icon-thumbs-down', 'url'=>array('icmsst','id'=>$model->codnfeterceiro), 'visible'=>$interestadual),
+    //array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
+    //array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
 
 Yii::app()->clientScript->registerCoreScript('yii');
@@ -175,7 +175,7 @@ $(document).ready(function(){
 		e.preventDefault();
 		bootbox.confirm("Importar essa NFe de Terceiro?", function(result) {
 			if (result)
-				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('nfeTerceiro/importar',array('id'=>$model->codnfeterceiro))?>",{});
+				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('nfeTerceiro/importar', array('id'=>$model->codnfeterceiro))?>",{});
 		});
 	});
 
@@ -191,21 +191,20 @@ $(document).ready(function(){
 </script>
 
 <?php
-	$manifestacao = $model->getIndManifestacaoDescricao();
-	$cssmanif = '';
-	switch ($model->indmanifestacao)
-	{
-		case NfeTerceiro::INDMANIFESTACAO_CIENCIA:
-			$cssmanif = 'btn-warning';
-			break;
-		case NfeTerceiro::INDMANIFESTACAO_REALIZADA:
-			$cssmanif = 'btn-success';
-			break;
-		case NfeTerceiro::INDMANIFESTACAO_DESCONHECIDA:
-		case NfeTerceiro::INDMANIFESTACAO_NAOREALIZADA:
-			$cssmanif = 'btn-danger';
-			break;
-	}
+    $manifestacao = $model->getIndManifestacaoDescricao();
+    $cssmanif = '';
+    switch ($model->indmanifestacao) {
+        case NfeTerceiro::INDMANIFESTACAO_CIENCIA:
+            $cssmanif = 'btn-warning';
+            break;
+        case NfeTerceiro::INDMANIFESTACAO_REALIZADA:
+            $cssmanif = 'btn-success';
+            break;
+        case NfeTerceiro::INDMANIFESTACAO_DESCONHECIDA:
+        case NfeTerceiro::INDMANIFESTACAO_NAOREALIZADA:
+            $cssmanif = 'btn-danger';
+            break;
+    }
 
 ?>
 
@@ -217,7 +216,7 @@ $(document).ready(function(){
 			<span class="caret"></span>
 		</a>
 		<ul class="dropdown-menu">
-			<?php if($model->indmanifestacao != NfeTerceiro::INDMANIFESTACAO_CIENCIA): ?>
+			<?php if ($model->indmanifestacao != NfeTerceiro::INDMANIFESTACAO_CIENCIA): ?>
 				<li>
 					<a href='#' class='' id="btnManifestacaoCiencia">
 						<span class='badge badge-warning'>&nbsp;</span>
@@ -225,7 +224,7 @@ $(document).ready(function(){
 					</a>
 				</li>
 			<?php endif; ?>
-			<?php if($model->indmanifestacao != NfeTerceiro::INDMANIFESTACAO_REALIZADA): ?>
+			<?php if ($model->indmanifestacao != NfeTerceiro::INDMANIFESTACAO_REALIZADA): ?>
 				<li>
 					<a href='#' class='' id="btnManifestacaoRealizada">
 						<span class='badge badge-success'>&nbsp;</span>
@@ -233,7 +232,7 @@ $(document).ready(function(){
 					</a>
 				</li>
 			<?php endif; ?>
-			<?php if($model->indmanifestacao != NfeTerceiro::INDMANIFESTACAO_DESCONHECIDA): ?>
+			<?php if ($model->indmanifestacao != NfeTerceiro::INDMANIFESTACAO_DESCONHECIDA): ?>
 				<li>
 					<a class='' href='#' id="btnManifestacaoDesconhecida">
 						<span class='badge badge-important'>&nbsp;</span>
@@ -241,7 +240,7 @@ $(document).ready(function(){
 					</a>
 				</li>
 			<?php endif; ?>
-			<?php if($model->indmanifestacao != NfeTerceiro::INDMANIFESTACAO_NAOREALIZADA): ?>
+			<?php if ($model->indmanifestacao != NfeTerceiro::INDMANIFESTACAO_NAOREALIZADA): ?>
 				<li>
 					<a class='' href='#' id="btnManifestacaoNaoRealizada">
 						<span class='badge badge-important'>&nbsp;</span>
@@ -257,50 +256,50 @@ $(document).ready(function(){
 <div class="row-fluid">
 	<div class="span3">
 		<?php
-		$this->widget('bootstrap.widgets.TbDetailView',array(
-			'data'=>$model,
-			'attributes'=>array(
-				'serie',
-				'numero',
-			),
-		));
+        $this->widget('bootstrap.widgets.TbDetailView', array(
+            'data'=>$model,
+            'attributes'=>array(
+                'serie',
+                'numero',
+            ),
+        ));
 
-		?>
+        ?>
 	</div>
 	<div class="span6">
 		<?php
-		$this->widget('bootstrap.widgets.TbDetailView',array(
-			'data'=>$model,
-			'attributes'=>array(
-				array(
-					'name'=>'codfilial',
-					'value'=>isset($model->Filial)?CHtml::link(CHtml::encode($model->Filial->filial), array("filial/view", "id"=>$model->codfilial)):null,
-					'type'=>"raw",
-				),
-				array(
-					'name'=>'codpessoa',
-					'value'=>isset($model->Pessoa)?CHtml::link(CHtml::encode($model->Pessoa->fantasia), array("pessoa/view", "id"=>$model->codpessoa)):null,
-					'type'=>"raw",
-				),
-			),
-		));
+        $this->widget('bootstrap.widgets.TbDetailView', array(
+            'data'=>$model,
+            'attributes'=>array(
+                array(
+                    'name'=>'codfilial',
+                    'value'=>isset($model->Filial) ? CHtml::link(CHtml::encode($model->Filial->filial), array("filial/view", "id"=>$model->codfilial)) : null,
+                    'type'=>"raw",
+                ),
+                array(
+                    'name'=>'codpessoa',
+                    'value'=>isset($model->Pessoa) ? CHtml::link(CHtml::encode($model->Pessoa->fantasia), array("pessoa/view", "id"=>$model->codpessoa)) : null,
+                    'type'=>"raw",
+                ),
+            ),
+        ));
 
-		?>
+        ?>
 	</div>
 	<div class="span3">
 		<?php
-		$this->widget('bootstrap.widgets.TbDetailView',array(
-			'data'=>$model,
-			'attributes'=>array(
-				'emissao',
-				array(
-					'name'=>'valortotal',
-					'value'=>Yii::app()->format->formatNumber($model->valortotal),
-				),
-			),
-		));
+        $this->widget('bootstrap.widgets.TbDetailView', array(
+            'data'=>$model,
+            'attributes'=>array(
+                'emissao',
+                array(
+                    'name'=>'valortotal',
+                    'value'=>Yii::app()->format->formatNumber($model->valortotal),
+                ),
+            ),
+        ));
 
-		?>
+        ?>
 	</div>
 </div>
 
@@ -309,8 +308,8 @@ $(document).ready(function(){
 <h3>Itens</h3>
 <div id="ListagemItens">
 	<?php
-	$this->renderPartial("_view_itens", array("model"=>$model))
-	?>
+    $this->renderPartial("_view_itens", array("model"=>$model))
+    ?>
 </div>
 <br>
 <?php endif; ?>
@@ -319,136 +318,136 @@ $(document).ready(function(){
 <small class="row-fluid">
 	<div class="span4">
 		<?php
-		$this->widget('bootstrap.widgets.TbDetailView',array(
-			'data'=>$model,
-			'attributes'=>array(
-				array(
-					'name' => 'codnfeterceiro',
-					'value' => Yii::app()->format->formataCodigo($model->codnfeterceiro),
-				),
-				array(
-					'name'=>'codnaturezaoperacao',
-					'value'=>isset($model->NaturezaOperacao)?CHtml::encode($model->NaturezaOperacao->naturezaoperacao):null,
-					'type'=>"raw",
-				),
-				array (
-					'name'=>'codnotafiscal',
-					'value'=>isset($model->NotaFiscal)?CHtml::link(CHtml::encode(Yii::app()->format->formataNumeroNota($model->NotaFiscal->emitida, $model->NotaFiscal->serie, $model->NotaFiscal->numero, $model->NotaFiscal->modelo)), array("notaFiscal/view", "id"=>$model->codnotafiscal)):null,
-					'type'=>"raw",
+        $this->widget('bootstrap.widgets.TbDetailView', array(
+            'data'=>$model,
+            'attributes'=>array(
+                array(
+                    'name' => 'codnfeterceiro',
+                    'value' => Yii::app()->format->formataCodigo($model->codnfeterceiro),
+                ),
+                array(
+                    'name'=>'codnaturezaoperacao',
+                    'value'=>isset($model->NaturezaOperacao) ? CHtml::encode($model->NaturezaOperacao->naturezaoperacao) : null,
+                    'type'=>"raw",
+                ),
+                array(
+                    'name'=>'codnotafiscal',
+                    'value'=>isset($model->NotaFiscal) ? CHtml::link(CHtml::encode(Yii::app()->format->formataNumeroNota($model->NotaFiscal->emitida, $model->NotaFiscal->serie, $model->NotaFiscal->numero, $model->NotaFiscal->modelo)), array("notaFiscal/view", "id"=>$model->codnotafiscal)) : null,
+                    'type'=>"raw",
 
-				),
-				array (
-					'name'=>'codnegocio',
-					'value'=>(!empty($model->codnegocio))?CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($model->codnegocio)), array("negocio/view", "id"=>$model->codnegocio)) . ' - ' . $model->Negocio->NegocioStatus->negociostatus:null,
-					'type'=>"raw",
+                ),
+                array(
+                    'name'=>'codnegocio',
+                    'value'=>(!empty($model->codnegocio)) ? CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($model->codnegocio)), array("negocio/view", "id"=>$model->codnegocio)) . ' - ' . $model->Negocio->NegocioStatus->negociostatus : null,
+                    'type'=>"raw",
 
-				),
-				'entrada',
-			),
-		));
+                ),
+                'entrada',
+            ),
+        ));
 
-		?>
+        ?>
 	</div>
 	<div class="span5">
 		<?php
 
-		$this->widget('bootstrap.widgets.TbDetailView',array(
-			'data'=>$model,
-			'attributes'=>array(
-				'emitente',
-				array(
-					'name' => 'cnpj',
-					'value' => Yii::app()->format->formataCnpjCpf($model->cnpj, false)
-				),
-				'ie',
-				'nfedataautorizacao',
-				'nsu',
-				array(
-					'name' => 'ignorada',
-					'value' => ($model->ignorada)?'Sim':'Não',
-				),
-				array(
-					'name' => 'indsituacao',
-					'value' => $model->getIndSituacaoDescricao(),
-				),
-				array(
-					'name' => 'indmanifestacao',
-					'value' => $manifestacao,
-				),
-				array(
-					'name' => 'justificativa',
-					'value' => nl2br(CHtml::encode($model->justificativa)),
-					'type' => 'raw',
-				),
+        $this->widget('bootstrap.widgets.TbDetailView', array(
+            'data'=>$model,
+            'attributes'=>array(
+                'emitente',
+                array(
+                    'name' => 'cnpj',
+                    'value' => Yii::app()->format->formataCnpjCpf($model->cnpj, false)
+                ),
+                'ie',
+                'nfedataautorizacao',
+                'nsu',
+                array(
+                    'name' => 'ignorada',
+                    'value' => ($model->ignorada) ? 'Sim' : 'Não',
+                ),
+                array(
+                    'name' => 'indsituacao',
+                    'value' => $model->getIndSituacaoDescricao(),
+                ),
+                array(
+                    'name' => 'indmanifestacao',
+                    'value' => $manifestacao,
+                ),
+                array(
+                    'name' => 'justificativa',
+                    'value' => nl2br(CHtml::encode($model->justificativa)),
+                    'type' => 'raw',
+                ),
 
-			),
-		));
+            ),
+        ));
 
-		?>
+        ?>
 	</div>
 	<div class="span3 pull-right">
 		<?php
-		$outros = $model->totalComplemento();
-		$totalgeral = $model->valortotal + $outros;
-		$this->widget('bootstrap.widgets.TbDetailView',array(
-			'data'=>$model,
-			'attributes'=>array(
-				array(
-						'name' => 'valorprodutos',
-						'value' => Yii::app()->format->formatNumber($model->valorprodutos),
-				),
-				array(
-						'name' => 'valorfrete',
-						'value' => Yii::app()->format->formatNumber($model->valorfrete),
-				),
-				array(
-						'name' => 'valorseguro',
-						'value' => Yii::app()->format->formatNumber($model->valorseguro),
-				),
-				array(
-						'name' => 'valordesconto',
-						'value' => Yii::app()->format->formatNumber($model->valordesconto),
-				),
-				array(
-						'name' => 'valoroutras',
-						'value' => Yii::app()->format->formatNumber($model->valoroutras),
-				),
-				array(
-						'name' => 'icmsbase',
-						'value' => Yii::app()->format->formatNumber($model->icmsbase),
-				),
-				array(
-						'name' => 'icmsvalor',
-						'value' => Yii::app()->format->formatNumber($model->icmsvalor),
-				),
-				array(
-						'name' => 'icmsstbase',
-						'value' => Yii::app()->format->formatNumber($model->icmsstbase),
-				),
-				array(
-						'name' => 'icmsstvalor',
-						'value' => Yii::app()->format->formatNumber($model->icmsstvalor),
-				),
-				array(
-						'name' => 'ipivalor',
-						'value' => Yii::app()->format->formatNumber($model->ipivalor),
-				),
-				array(
-					'name'=>'valortotal',
-					'value'=>Yii::app()->format->formatNumber($model->valortotal),
-				),
-				array(
-					'label'=>'Outros Custos',
-					'value'=>Yii::app()->format->formatNumber($outros),
-				),
-				array(
-					'label'=>'Total Geral',
-					'value'=>Yii::app()->format->formatNumber($totalgeral),
-				),
-			),
-		));
+        $outros = $model->totalComplemento();
+        $totalgeral = $model->valortotal + $outros;
+        $this->widget('bootstrap.widgets.TbDetailView', array(
+            'data'=>$model,
+            'attributes'=>array(
+                array(
+                        'name' => 'valorprodutos',
+                        'value' => Yii::app()->format->formatNumber($model->valorprodutos),
+                ),
+                array(
+                        'name' => 'valorfrete',
+                        'value' => Yii::app()->format->formatNumber($model->valorfrete),
+                ),
+                array(
+                        'name' => 'valorseguro',
+                        'value' => Yii::app()->format->formatNumber($model->valorseguro),
+                ),
+                array(
+                        'name' => 'valordesconto',
+                        'value' => Yii::app()->format->formatNumber($model->valordesconto),
+                ),
+                array(
+                        'name' => 'valoroutras',
+                        'value' => Yii::app()->format->formatNumber($model->valoroutras),
+                ),
+                array(
+                        'name' => 'icmsbase',
+                        'value' => Yii::app()->format->formatNumber($model->icmsbase),
+                ),
+                array(
+                        'name' => 'icmsvalor',
+                        'value' => Yii::app()->format->formatNumber($model->icmsvalor),
+                ),
+                array(
+                        'name' => 'icmsstbase',
+                        'value' => Yii::app()->format->formatNumber($model->icmsstbase),
+                ),
+                array(
+                        'name' => 'icmsstvalor',
+                        'value' => Yii::app()->format->formatNumber($model->icmsstvalor),
+                ),
+                array(
+                        'name' => 'ipivalor',
+                        'value' => Yii::app()->format->formatNumber($model->ipivalor),
+                ),
+                array(
+                    'name'=>'valortotal',
+                    'value'=>Yii::app()->format->formatNumber($model->valortotal),
+                ),
+                array(
+                    'label'=>'Outros Custos',
+                    'value'=>Yii::app()->format->formatNumber($outros),
+                ),
+                array(
+                    'label'=>'Total Geral',
+                    'value'=>Yii::app()->format->formatNumber($totalgeral),
+                ),
+            ),
+        ));
 
-		?>
+        ?>
 	</div>
 
 
@@ -458,8 +457,8 @@ $(document).ready(function(){
 <h3>Duplicatas</h3>
 <div id="ListagemDuplicatas">
 	<?php
-	$this->renderPartial("_view_duplicatas", array("model"=>$model))
-	?>
+    $this->renderPartial("_view_duplicatas", array("model"=>$model))
+    ?>
 </div>
 <br>
 <?php endif; ?>
