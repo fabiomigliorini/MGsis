@@ -205,186 +205,186 @@ class NfeTerceiroController extends Controller
 		);
 	}
 
-	public function actionPesquisarSefaz($codfilial = null, $nsu = null)
-	{
-		$model = new NfeTerceiro('search');
-
-		$model->codfilial = $codfilial;
-		$model->nsu = $nsu;
-
-		if(isset($_POST['NfeTerceiro']))
-		{
-			$model->attributes=$_POST['NfeTerceiro'];
-		}
-
-		$nsu = $model->nsu;
-
-		/*
-		if (!empty($model->codfilial))
-		{
-			$acbr = new MGAcbrNfeMonitor(null, $model);
-
-			$leituras = 0;
-
-			$nsuinicial = $nsu;
-			$fim = false;
-
-			$importadas = array();
-
-			do {
-
-				$leituras++;
-
-				if ($leituras > 100)
-					break;
-
-				//echo "<hr>Pesquisando $nsu <br>";
-
-				if (!$acbr->consultaNfeDest($nsu))
-				{
-					//echo "<h1>Erro ao enviar comando</h1>";
-				}
-				usleep(500000);
-				//echo "<pre>";
-				//print_r($acbr->retorno);
-				//echo "</pre>";
-
-
-				//if ($acbr->retornoMonitor["Mensagem"][0] != "OK")
-				//	break;
-
-				for ($i=1; $i<1000; $i++)
-				{
-					$chave = "RESNFE" . str_pad($i, 3, 0, STR_PAD_LEFT);
-
-					if (!isset($acbr->retornoMonitor[$chave]))
-						break;
-
-					$arr = $acbr->retornoMonitor[$chave];
-
-					$nfe = NfeTerceiro::model()->find("nfechave = :nfechave", array("nfechave"=>$arr["chNFe"]));
-
-					if ($nfe === null)
-						$nfe = new NfeTerceiro();
-
-					$nfe->codfilial = $model->codfilial;
-
-					//[NSU] => 10220440943
-					$nfe->nsu = $arr["NSU"];
-
-					//[chNFe] => 51140628053619009644550010000146501273515829
-					$nfe->nfechave = $arr["chNFe"];
-
-					//[CNPJ] => 28053619009644
-					if (isset($arr["CNPJ"]))
-						$nfe->cnpj = $arr["CNPJ"];
-
-					//[xNome] => Chocolates Garoto S.A.
-					if (isset($arr["xNome"]))
-						$nfe->emitente = MGFormatter::removeAcentos(utf8_encode($arr["xNome"]));
-					else
-						$nfe->emitente = "<Vazio>";
-
-					//[IE] => 134342763
-					if (isset($arr["IE"]))
-						$nfe->ie = $arr["IE"];
-
-					//[dEmi] => 24/06/2014
-					if (isset($arr["dEmi"]))
-						$nfe->emissao = $arr["dEmi"];
-
-					//[tpNF] => 1
-					if (isset($arr["tpNF"]))
-						$nfe->codoperacao = $arr["tpNF"]+1;
-
-					//[vNF] => 222,84
-					if (isset($arr["vNF"]))
-						$nfe->valortotal = Yii::app()->format->unformatNumber($arr["vNF"]);
-
-					//[digVal] => WAFS3wPj/69U7sJI412ygTDk7+I=
-					//[dhRecbto] => 24/06/2014 07:25:09
-					if (isset($arr["dhRecbto"]))
-						$nfe->nfedataautorizacao = $arr["dhRecbto"];
-
-					//[cSitNFe] => 1
-					if (isset($arr["cSitNFe"]))
-						$nfe->indsituacao = $arr["cSitNFe"];
-
-					//[cSitConf] => 0
-					if (isset($arr["cSitConf"]))
-						$nfe->indmanifestacao = $arr["cSitConf"];
-
-					$importadas[] = $arr["chNFe"];
-
-					$nfe->save();
-
-				}
-
-				//echo "</pre>";
-
-				if (isset($acbr->retornoMonitor[""]["ultNSU"]))
-				{
-					if ($nsu == $acbr->retornoMonitor[""]["ultNSU"])
-					{
-						//echo "<h1>Repetiu ult nsu</h1>";
-						break;
-					}
-					$nsu = $acbr->retornoMonitor[""]["ultNSU"];
-				}
-				else
-				{
-					//echo "<h1>Nao achou ult nsu</h1>";
-					break;
-				}
-
-
-				if (isset($acbr->retornoMonitor[""]["indCont"]))
-				{
-					if ($acbr->retornoMonitor[""]["indCont"] != 1)
-					{
-						$fim = true;
-						break;
-					}
-				}
-
-			} while (true);
-
-			$model->nsu = $nsu;
-
-			$lidas = Yii::app()->format->formatNumber($model->nsu - $nsuinicial, 0);
-
-			if ($acbr->retornoMonitor["Mensagem"][0] != "OK")
-			{
-				$class = "error";
-				$mensagem = $acbr->retorno;
-			}
-			else
-			{
-				$mensagem = "Lidos {$lidas} NSU's ({$nsuinicial} ao {$model->nsu}).";
-
-				$mensagem .= "<br>Importadas <b>" . sizeof($importadas) . "</b> Chaves (" . implode(", ", $importadas) . ")";
-
-				if ($fim)
-				{
-					$mensagem .= "<br>Lidas todas as notas!";
-					$class = "success";
-				}
-				else
-				{
-					$mensagem .= "<br>Existem mais registros para ler, <b>continue</b>!";
-					$class = "info";
-				}
-			}
-			Yii::app()->user->setFlash($class, $mensagem);
-
-		}
-		*/
-
-		$this->render('pesquisar_sefaz',array(
-			'model'=>$model,
-			));
-
-	}
+	// public function actionPesquisarSefaz($codfilial = null, $nsu = null)
+	// {
+	// 	$model = new NfeTerceiro('search');
+	//
+	// 	$model->codfilial = $codfilial;
+	// 	$model->nsu = $nsu;
+	//
+	// 	if(isset($_POST['NfeTerceiro']))
+	// 	{
+	// 		$model->attributes=$_POST['NfeTerceiro'];
+	// 	}
+	//
+	// 	$nsu = $model->nsu;
+	//
+	// 	/*
+	// 	if (!empty($model->codfilial))
+	// 	{
+	// 		$acbr = new MGAcbrNfeMonitor(null, $model);
+	//
+	// 		$leituras = 0;
+	//
+	// 		$nsuinicial = $nsu;
+	// 		$fim = false;
+	//
+	// 		$importadas = array();
+	//
+	// 		do {
+	//
+	// 			$leituras++;
+	//
+	// 			if ($leituras > 100)
+	// 				break;
+	//
+	// 			//echo "<hr>Pesquisando $nsu <br>";
+	//
+	// 			if (!$acbr->consultaNfeDest($nsu))
+	// 			{
+	// 				//echo "<h1>Erro ao enviar comando</h1>";
+	// 			}
+	// 			usleep(500000);
+	// 			//echo "<pre>";
+	// 			//print_r($acbr->retorno);
+	// 			//echo "</pre>";
+	//
+	//
+	// 			//if ($acbr->retornoMonitor["Mensagem"][0] != "OK")
+	// 			//	break;
+	//
+	// 			for ($i=1; $i<1000; $i++)
+	// 			{
+	// 				$chave = "RESNFE" . str_pad($i, 3, 0, STR_PAD_LEFT);
+	//
+	// 				if (!isset($acbr->retornoMonitor[$chave]))
+	// 					break;
+	//
+	// 				$arr = $acbr->retornoMonitor[$chave];
+	//
+	// 				$nfe = NfeTerceiro::model()->find("nfechave = :nfechave", array("nfechave"=>$arr["chNFe"]));
+	//
+	// 				if ($nfe === null)
+	// 					$nfe = new NfeTerceiro();
+	//
+	// 				$nfe->codfilial = $model->codfilial;
+	//
+	// 				//[NSU] => 10220440943
+	// 				$nfe->nsu = $arr["NSU"];
+	//
+	// 				//[chNFe] => 51140628053619009644550010000146501273515829
+	// 				$nfe->nfechave = $arr["chNFe"];
+	//
+	// 				//[CNPJ] => 28053619009644
+	// 				if (isset($arr["CNPJ"]))
+	// 					$nfe->cnpj = $arr["CNPJ"];
+	//
+	// 				//[xNome] => Chocolates Garoto S.A.
+	// 				if (isset($arr["xNome"]))
+	// 					$nfe->emitente = MGFormatter::removeAcentos(utf8_encode($arr["xNome"]));
+	// 				else
+	// 					$nfe->emitente = "<Vazio>";
+	//
+	// 				//[IE] => 134342763
+	// 				if (isset($arr["IE"]))
+	// 					$nfe->ie = $arr["IE"];
+	//
+	// 				//[dEmi] => 24/06/2014
+	// 				if (isset($arr["dEmi"]))
+	// 					$nfe->emissao = $arr["dEmi"];
+	//
+	// 				//[tpNF] => 1
+	// 				if (isset($arr["tpNF"]))
+	// 					$nfe->codoperacao = $arr["tpNF"]+1;
+	//
+	// 				//[vNF] => 222,84
+	// 				if (isset($arr["vNF"]))
+	// 					$nfe->valortotal = Yii::app()->format->unformatNumber($arr["vNF"]);
+	//
+	// 				//[digVal] => WAFS3wPj/69U7sJI412ygTDk7+I=
+	// 				//[dhRecbto] => 24/06/2014 07:25:09
+	// 				if (isset($arr["dhRecbto"]))
+	// 					$nfe->nfedataautorizacao = $arr["dhRecbto"];
+	//
+	// 				//[cSitNFe] => 1
+	// 				if (isset($arr["cSitNFe"]))
+	// 					$nfe->indsituacao = $arr["cSitNFe"];
+	//
+	// 				//[cSitConf] => 0
+	// 				if (isset($arr["cSitConf"]))
+	// 					$nfe->indmanifestacao = $arr["cSitConf"];
+	//
+	// 				$importadas[] = $arr["chNFe"];
+	//
+	// 				$nfe->save();
+	//
+	// 			}
+	//
+	// 			//echo "</pre>";
+	//
+	// 			if (isset($acbr->retornoMonitor[""]["ultNSU"]))
+	// 			{
+	// 				if ($nsu == $acbr->retornoMonitor[""]["ultNSU"])
+	// 				{
+	// 					//echo "<h1>Repetiu ult nsu</h1>";
+	// 					break;
+	// 				}
+	// 				$nsu = $acbr->retornoMonitor[""]["ultNSU"];
+	// 			}
+	// 			else
+	// 			{
+	// 				//echo "<h1>Nao achou ult nsu</h1>";
+	// 				break;
+	// 			}
+	//
+	//
+	// 			if (isset($acbr->retornoMonitor[""]["indCont"]))
+	// 			{
+	// 				if ($acbr->retornoMonitor[""]["indCont"] != 1)
+	// 				{
+	// 					$fim = true;
+	// 					break;
+	// 				}
+	// 			}
+	//
+	// 		} while (true);
+	//
+	// 		$model->nsu = $nsu;
+	//
+	// 		$lidas = Yii::app()->format->formatNumber($model->nsu - $nsuinicial, 0);
+	//
+	// 		if ($acbr->retornoMonitor["Mensagem"][0] != "OK")
+	// 		{
+	// 			$class = "error";
+	// 			$mensagem = $acbr->retorno;
+	// 		}
+	// 		else
+	// 		{
+	// 			$mensagem = "Lidos {$lidas} NSU's ({$nsuinicial} ao {$model->nsu}).";
+	//
+	// 			$mensagem .= "<br>Importadas <b>" . sizeof($importadas) . "</b> Chaves (" . implode(", ", $importadas) . ")";
+	//
+	// 			if ($fim)
+	// 			{
+	// 				$mensagem .= "<br>Lidas todas as notas!";
+	// 				$class = "success";
+	// 			}
+	// 			else
+	// 			{
+	// 				$mensagem .= "<br>Existem mais registros para ler, <b>continue</b>!";
+	// 				$class = "info";
+	// 			}
+	// 		}
+	// 		Yii::app()->user->setFlash($class, $mensagem);
+	//
+	// 	}
+	// 	*/
+	//
+	// 	$this->render('pesquisar_sefaz',array(
+	// 		'model'=>$model,
+	// 		));
+	//
+	// }
 
 	/**
 	 * Efetua Download de uma NFE e Carrega os dados na tabela do sistema
