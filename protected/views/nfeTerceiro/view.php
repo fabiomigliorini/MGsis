@@ -306,6 +306,9 @@ $(document).ready(function(){
       <?php if (!empty($model->codusuariorevisao)): ?>
         por <?php echo $model->UsuarioRevisao->usuario; ?>
       <?php endif; ?>
+      <?php if (!empty($model->revisao)): ?>
+        em <?php echo $model->revisao; ?>
+      <?php endif; ?>
       <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">

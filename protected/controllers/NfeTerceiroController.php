@@ -102,7 +102,7 @@ class NfeTerceiroController extends Controller
 	{
 		$model = $this->loadModel($id);
 		if ($_GET['revisada'] == 'true') {
-			$model->revisao = date('Y-m-d H:i:s');
+			$model->revisao = date('d/m/Y H:i:s');
 			$model->codusuariorevisao = Yii::app()->user->id;
 		} else {
 			$model->revisao = null;
