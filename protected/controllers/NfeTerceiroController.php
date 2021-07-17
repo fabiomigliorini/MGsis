@@ -98,6 +98,19 @@ class NfeTerceiroController extends Controller
 		}
 	}
 
+	public function actionRevisao($id)
+	{
+		$model = $this->loadModel($id);
+		if ($_GET['revisada'] == 'true') {
+			$model->revisao = date('Y-m-d H:i:s');
+			$model->codusuariorevisao = Yii::app()->user->id;
+		} else {
+			$model->revisao = null;
+			$model->codusuariorevisao = null;
+		}
+		$model->save();
+	}
+
 	/**
 	* Deletes a particular model.
 	* If deletion is successful, the browser will be redirected to the 'admin' page.

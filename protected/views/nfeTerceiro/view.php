@@ -21,12 +21,12 @@ if ($model->codpessoa && $model->codfilial) {
 $this->menu=array(
     array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
     //array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
-    array('label'=>'Download Nfe', 'icon'=>'icon-download-alt', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnDownloadNfe'), 'visible'=>empty($model->codnotafiscal) ),
+    array('label'=>'Download Nfe', 'icon'=>'icon-download-alt', 'url'=>'#', 'linkOptions'=>  array('id'=>'btnDownloadNfe'), 'visible'=>empty($model->codnotafiscal) ),
     array('label'=>'Informar Detalhes', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codnfeterceiro), 'visible'=>$model->podeEditar()),
-    array('label'=>'Importar', 'icon'=>'icon-thumbs-up', 'url'=>'#', 'visible'=>$model->podeEditar(), 'linkOptions'=>	array('id'=>'btnImportar')),
-    array('label'=>'Ver Arquivo XML', 'icon'=>' icon-file', 'url'=>array('NFePHPNovo/visualizaXml','codnfeterceiro'=>$model->codnfeterceiro), 'linkOptions'=>	array('id'=>'btnArquivoXml')),
+    array('label'=>'Importar', 'icon'=>'icon-thumbs-up', 'url'=>'#', 'visible'=>$model->podeEditar(), 'linkOptions'=>  array('id'=>'btnImportar')),
+    array('label'=>'Ver Arquivo XML', 'icon'=>' icon-file', 'url'=>array('NFePHPNovo/visualizaXml','codnfeterceiro'=>$model->codnfeterceiro), 'linkOptions'=>  array('id'=>'btnArquivoXml')),
     array('label'=>'ICMS ST', 'icon'=>'icon-thumbs-down', 'url'=>array('icmsst','id'=>$model->codnfeterceiro), 'visible'=>$interestadual),
-    //array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
+    //array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>  array('id'=>'btnExcluir')),
     //array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
 
@@ -38,44 +38,44 @@ Yii::app()->clientScript->registerCoreScript('yii');
 
 function formataMensagem(data)
 {
-	var mensagem = '';
+  var mensagem = '';
 
-	if (data.retorno)
-		classe = 'alert alert-success';
-	else
-		classe = 'alert alert-error';
+  if (data.retorno)
+    classe = 'alert alert-success';
+  else
+    classe = 'alert alert-error';
 
-	if (data.xMotivo == null)
-		data.xMotivo = 'Erro';
+  if (data.xMotivo == null)
+    data.xMotivo = 'Erro';
 
-	mensagem += '<h3 class="' + classe + '">';
+  mensagem += '<h3 class="' + classe + '">';
 
-	if (data.cStat != null)
-		mensagem += data.cStat + ' - ';
+  if (data.cStat != null)
+    mensagem += data.cStat + ' - ';
 
-	mensagem += data.xMotivo + '</h3>';
+  mensagem += data.xMotivo + '</h3>';
 
-	if (data.ex != null)
-		mensagem += '<pre>' + data.ex + '</pre>';
+  if (data.ex != null)
+    mensagem += '<pre>' + data.ex + '</pre>';
 
-	if (!$.isEmptyObject(data.aResposta))
-		mensagem +=
-			'<div class="accordion" id="accordion2"> ' +
-			'  <div class="accordion-group"> ' +
-			'	<div class="accordion-heading"> ' +
-			'	  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"> ' +
-			'		Mostrar mais detalhes... ' +
-			'	  </a> ' +
-			'	</div> ' +
-			'	<div id="collapseOne" class="accordion-body collapse"> ' +
-			'	  <div class="accordion-inner"> ' +
-			'		<pre>' + JSON.stringify(data.aResposta, null, '\t') + '</pre>' +
-			'	  </div> ' +
-			'	</div> ' +
-			' </div> ' +
-			'</div> ';
+  if (!$.isEmptyObject(data.aResposta))
+    mensagem +=
+      '<div class="accordion" id="accordion2"> ' +
+      '  <div class="accordion-group"> ' +
+      '  <div class="accordion-heading"> ' +
+      '    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"> ' +
+      '    Mostrar mais detalhes... ' +
+      '    </a> ' +
+      '  </div> ' +
+      '  <div id="collapseOne" class="accordion-body collapse"> ' +
+      '    <div class="accordion-inner"> ' +
+      '    <pre>' + JSON.stringify(data.aResposta, null, '\t') + '</pre>' +
+      '    </div> ' +
+      '  </div> ' +
+      ' </div> ' +
+      '</div> ';
 
-	return mensagem;
+  return mensagem;
 }
 
 
@@ -91,23 +91,23 @@ function enviarEventoManifestacao(indManifestacao, justificativa)
   }
   console.log(data);
   $.ajax({
-		type: 'POST',
-		url: url,
-		data: data,
-		headers: {
-			"X-Requested-With":"XMLHttpRequest"
-		},
-	}).done(function(resp) {
+    type: 'POST',
+    url: url,
+    data: data,
+    headers: {
+      "X-Requested-With":"XMLHttpRequest"
+    },
+  }).done(function(resp) {
     if (resp.xMotivo != undefined) {
       bootbox.alert(resp.cStat + ' - ' + resp.xMotivo, function() {
-  			location.reload();
-  		});
+        location.reload();
+      });
       return;
     }
-		bootbox.alert("NFe Manifestada!", function() {
-			location.reload();
-		});
-	}).fail(function( jqxhr, textStatus, error ) {
+    bootbox.alert("NFe Manifestada!", function() {
+      location.reload();
+    });
+  }).fail(function( jqxhr, textStatus, error ) {
     var mensagem = 'Falha ao Manifestar NFe!';
     var resp = jQuery.parseJSON(jqxhr.responseText);
     if (resp.message != undefined) {
@@ -121,102 +121,124 @@ function enviarEventoManifestacao(indManifestacao, justificativa)
       }
     }
     bootbox.alert(mensagem, function() {
-			location.reload();
-		});
-	});
+      location.reload();
+    });
+  });
 }
 
 function downloadNfe ()
 {
 
-	$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/download')?>", {
-		codnfeterceiro: <?php echo $model->codnfeterceiro; ?>
-	})
-		.done(function(data) {
-			var mensagem = formataMensagem(data);
-			bootbox.alert(mensagem, function() {
-				location.reload();
-			});
-		})
-		.fail(function( jqxhr, textStatus, error ) {
-			bootbox.alert(error, function() {
-				location.reload();
-			});
-		});
+  $.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/download')?>", {
+    codnfeterceiro: <?php echo $model->codnfeterceiro; ?>
+  })
+    .done(function(data) {
+      var mensagem = formataMensagem(data);
+      bootbox.alert(mensagem, function() {
+        location.reload();
+      });
+    })
+    .fail(function( jqxhr, textStatus, error ) {
+      bootbox.alert(error, function() {
+        location.reload();
+      });
+    });
 
+}
+
+function btnRevisaoClick(revisada) {
+  bootbox.confirm("Tem Certeza?", function(result) {
+    if (!result) {
+      return;
+    }
+    $.ajax({
+      url: "<?php echo Yii::app()->createUrl('nfeTerceiro/revisao')?>",
+      data: {
+        id: <?php echo $model->codnfeterceiro ?>,
+        revisada: revisada
+      },
+    }).done(function(resp) {
+      location.reload();
+    }).fail(function( jqxhr, textStatus, error ) {
+      $.notify("Erro ao marcar revisão da NFe!", { position:"right bottom", className:"error", autoHideDelay: 15000 });
+    });
+  });
 }
 
 $(document).ready(function(){
 
-	$('#btnManifestacaoCiencia').click(function(e) {
-		e.preventDefault();
-		bootbox.confirm("Enviar à Sefaz a <b class='lead text-warning'>Ciência da Operação</b>?<br><br>Tenha cuidado ao confirmar, pois esta ação <b>não poderá ser desfeita</b>!", function(result) {
-			if (result)
-				enviarEventoManifestacao (<?php echo NfeTerceiro::INDMANIFESTACAO_CIENCIA; ?>, null);
-		});
-	});
+  $('#btnManifestacaoCiencia').click(function(e) {
+    e.preventDefault();
+    bootbox.confirm("Enviar à Sefaz a <b class='lead text-warning'>Ciência da Operação</b>?<br><br>Tenha cuidado ao confirmar, pois esta ação <b>não poderá ser desfeita</b>!", function(result) {
+      if (result)
+        enviarEventoManifestacao (<?php echo NfeTerceiro::INDMANIFESTACAO_CIENCIA; ?>, null);
+    });
+  });
 
-	$('#btnManifestacaoRealizada').click(function(e) {
-		e.preventDefault();
-		bootbox.confirm("Enviar à Sefaz a <b class='lead text-success'>Confirmação da Operação</b>?<br><br>Tenha cuidado ao confirmar, pois esta ação <b>não poderá ser desfeita</b>!", function(result) {
-			if (result)
-				enviarEventoManifestacao (<?php echo NfeTerceiro::INDMANIFESTACAO_REALIZADA; ?>, null);
-		});
-	});
+  $('#btnManifestacaoRealizada').click(function(e) {
+    e.preventDefault();
+    bootbox.confirm("Enviar à Sefaz a <b class='lead text-success'>Confirmação da Operação</b>?<br><br>Tenha cuidado ao confirmar, pois esta ação <b>não poderá ser desfeita</b>!", function(result) {
+      if (result)
+        enviarEventoManifestacao (<?php echo NfeTerceiro::INDMANIFESTACAO_REALIZADA; ?>, null);
+    });
+  });
 
-	$('#btnManifestacaoDesconhecida').click(function(e) {
-		e.preventDefault();
-		bootbox.confirm("Enviar à Sefaz o comunidado de <b class='lead text-error'>Desconhecimento da Operação</b>?<br><br>Tenha cuidado ao confirmar, pois esta ação <b>não poderá ser desfeita</b>!", function(result) {
-			if (result)
-				enviarEventoManifestacao (<?php echo NfeTerceiro::INDMANIFESTACAO_DESCONHECIDA; ?>, null);
-		});
-	});
+  $('#btnManifestacaoDesconhecida').click(function(e) {
+    e.preventDefault();
+    bootbox.confirm("Enviar à Sefaz o comunidado de <b class='lead text-error'>Desconhecimento da Operação</b>?<br><br>Tenha cuidado ao confirmar, pois esta ação <b>não poderá ser desfeita</b>!", function(result) {
+      if (result)
+        enviarEventoManifestacao (<?php echo NfeTerceiro::INDMANIFESTACAO_DESCONHECIDA; ?>, null);
+    });
+  });
 
-	$('#btnManifestacaoNaoRealizada').click(function(e) {
-		e.preventDefault();
-		bootbox.confirm("Enviar à Sefaz o comunidado de <b class='lead text-error'>Operação não Realizada</b>?<br><br>Tenha cuidado ao confirmar, pois esta ação <b>não poderá ser desfeita</b>!", function(result) {
-			if (result)
-			{
-				bootbox.prompt("Digite a justificativa:", "Cancelar", "OK", function(result)
-				{
-					if (result === null)
-						return;
-					enviarEventoManifestacao (<?php echo NfeTerceiro::INDMANIFESTACAO_NAOREALIZADA; ?>, result);
-				});
-				//console.log('btnManifestacaoNaoRealizada');
-			}
-		});
-	});
+  $('#btnManifestacaoNaoRealizada').click(function(e) {
+    e.preventDefault();
+    bootbox.confirm("Enviar à Sefaz o comunidado de <b class='lead text-error'>Operação não Realizada</b>?<br><br>Tenha cuidado ao confirmar, pois esta ação <b>não poderá ser desfeita</b>!", function(result) {
+      if (result)
+      {
+        bootbox.prompt("Digite a justificativa:", "Cancelar", "OK", function(result)
+        {
+          if (result === null)
+            return;
+          enviarEventoManifestacao (<?php echo NfeTerceiro::INDMANIFESTACAO_NAOREALIZADA; ?>, result);
+        });
+        //console.log('btnManifestacaoNaoRealizada');
+      }
+    });
+  });
 
-	jQuery('body').on('click','#btnExcluir',function(e) {
-		e.preventDefault();
-		bootbox.confirm("Excluir este registro?", function(result) {
-			if (result)
-				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('nfeTerceiro/delete', array('id' => $model->codnfeterceiro))?>",{});
-		});
-	});
+  jQuery('body').on('click','#btnExcluir',function(e) {
+    e.preventDefault();
+    bootbox.confirm("Excluir este registro?", function(result) {
+      if (result)
+        jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('nfeTerceiro/delete', array('id' => $model->codnfeterceiro))?>",{});
+    });
+  });
 
-	jQuery('body').on('click','#btnImportar',function(e) {
-		e.preventDefault();
-		bootbox.confirm("Importar essa NFe de Terceiro?", function(result) {
-			if (result)
-				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('nfeTerceiro/importar', array('id'=>$model->codnfeterceiro))?>",{});
-		});
-	});
+  jQuery('body').on('click','#btnImportar',function(e) {
+    e.preventDefault();
+    bootbox.confirm("Importar essa NFe de Terceiro?", function(result) {
+      if (result)
+        jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('nfeTerceiro/importar', array('id'=>$model->codnfeterceiro))?>",{});
+    });
+  });
 
-	jQuery('body').on('click','#btnDownloadNfe',function(e) {
-		e.preventDefault();
-		bootbox.confirm("Efetuar o Download da NFe?", function(result) {
-			if (result)
-				downloadNfe();
-		});
-	});
+  jQuery('body').on('click','#btnDownloadNfe',function(e) {
+    e.preventDefault();
+    bootbox.confirm("Efetuar o Download da NFe?", function(result) {
+      if (result)
+        downloadNfe();
+    });
+  });
 });
 /*]]>*/
 </script>
 
 <?php
     $manifestacao = $model->getIndManifestacaoDescricao();
+    if (empty($manifestacao)) {
+      $manifestacao = 'Sem Manifestação';
+    }
     $cssmanif = '';
     switch ($model->indmanifestacao) {
         case NfeTerceiro::INDMANIFESTACAO_CIENCIA:
@@ -234,53 +256,82 @@ $(document).ready(function(){
 ?>
 
 <h1>
-	<?php echo Yii::app()->format->formataChaveNfe($model->nfechave); ?>
-	<div class="btn-group">
-		<a class="btn dropdown-toggle <?php echo $cssmanif; ?>" data-toggle="dropdown" href="#">
-			<?php echo $manifestacao; ?>
-			<span class="caret"></span>
-		</a>
-		<ul class="dropdown-menu">
-			<?php if ($model->indmanifestacao != NfeTerceiro::INDMANIFESTACAO_CIENCIA): ?>
-				<li>
-					<a href='#' class='' id="btnManifestacaoCiencia">
-						<span class='badge badge-warning'>&nbsp;</span>
-						Ciência da Operação
-					</a>
-				</li>
-			<?php endif; ?>
-			<?php if ($model->indmanifestacao != NfeTerceiro::INDMANIFESTACAO_REALIZADA): ?>
-				<li>
-					<a href='#' class='' id="btnManifestacaoRealizada">
-						<span class='badge badge-success'>&nbsp;</span>
-						Operação Realizada
-					</a>
-				</li>
-			<?php endif; ?>
-			<?php if ($model->indmanifestacao != NfeTerceiro::INDMANIFESTACAO_DESCONHECIDA): ?>
-				<li>
-					<a class='' href='#' id="btnManifestacaoDesconhecida">
-						<span class='badge badge-important'>&nbsp;</span>
-						Desconhecida
-					</a>
-				</li>
-			<?php endif; ?>
-			<?php if ($model->indmanifestacao != NfeTerceiro::INDMANIFESTACAO_NAOREALIZADA): ?>
-				<li>
-					<a class='' href='#' id="btnManifestacaoNaoRealizada">
-						<span class='badge badge-important'>&nbsp;</span>
-						Não Realizada
-					</a>
-				</li>
-			<?php endif; ?>
-		</ul>
-	</div>
-
+  <?php echo Yii::app()->format->formataChaveNfe($model->nfechave); ?>
 </h1>
+<div style="margin-bottom: 15px">
+  <div class="btn-group">
+    <a class="btn dropdown-toggle <?php echo $cssmanif; ?>" data-toggle="dropdown" href="#">
+      <?php echo $manifestacao; ?>
+      &nbsp
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <?php if ($model->indmanifestacao != NfeTerceiro::INDMANIFESTACAO_CIENCIA): ?>
+        <li>
+          <a href='#' class='' id="btnManifestacaoCiencia">
+            <span class='badge badge-warning'>C</span>
+            Ciência da Operação
+          </a>
+        </li>
+      <?php endif; ?>
+      <?php if ($model->indmanifestacao != NfeTerceiro::INDMANIFESTACAO_REALIZADA): ?>
+        <li>
+          <a href='#' class='' id="btnManifestacaoRealizada">
+            <span class='badge badge-success'>R</span>
+            Operação Realizada
+          </a>
+        </li>
+      <?php endif; ?>
+      <?php if ($model->indmanifestacao != NfeTerceiro::INDMANIFESTACAO_DESCONHECIDA): ?>
+        <li>
+          <a class='' href='#' id="btnManifestacaoDesconhecida">
+            <span class='badge badge-important'>D</span>
+            Desconhecida
+          </a>
+        </li>
+      <?php endif; ?>
+      <?php if ($model->indmanifestacao != NfeTerceiro::INDMANIFESTACAO_NAOREALIZADA): ?>
+        <li>
+          <a class='' href='#' id="btnManifestacaoNaoRealizada">
+            <span class='badge badge-important'>N</span>
+            Não Realizada
+          </a>
+        </li>
+      <?php endif; ?>
+    </ul>
+  </div>
+  <div class="btn-group">
+    <a class="btn dropdown-toggle <?php echo (empty($model->revisao)?'btn-warning':'btn-success') ?>" data-toggle="dropdown" href="#">
+      <?php echo (empty($model->revisao)?'Não Revisada':'Revisada'); ?>
+      <?php if (!empty($model->codusuariorevisao)): ?>
+        por <?php echo $model->UsuarioRevisao->usuario; ?>
+      <?php endif; ?>
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <?php if (empty($model->revisao)): ?>
+        <li>
+          <a href='#' class='' id="btnRevisaoTrue" onclick="btnRevisaoClick(true)">
+            <span class='badge badge-success'>&#10004;</span>
+            Marcar como revisada
+          </a>
+        </li>
+      <?php else: ?>
+        <li>
+          <a href='#' class='' id="btnRevisaoFalse" onclick="btnRevisaoClick(false)">
+            <span class='badge badge-warning'>?</span>
+            Marcar como não revisada
+          </a>
+        </li>
+      <?php endif; ?>
+    </ul>
+  </div>
+</div>
+
 
 <div class="row-fluid">
-	<div class="span3">
-		<?php
+  <div class="span3">
+    <?php
         $this->widget('bootstrap.widgets.TbDetailView', array(
             'data'=>$model,
             'attributes'=>array(
@@ -290,9 +341,9 @@ $(document).ready(function(){
         ));
 
         ?>
-	</div>
-	<div class="span6">
-		<?php
+  </div>
+  <div class="span6">
+    <?php
         $this->widget('bootstrap.widgets.TbDetailView', array(
             'data'=>$model,
             'attributes'=>array(
@@ -310,9 +361,9 @@ $(document).ready(function(){
         ));
 
         ?>
-	</div>
-	<div class="span3">
-		<?php
+  </div>
+  <div class="span3">
+    <?php
         $this->widget('bootstrap.widgets.TbDetailView', array(
             'data'=>$model,
             'attributes'=>array(
@@ -325,14 +376,14 @@ $(document).ready(function(){
         ));
 
         ?>
-	</div>
+  </div>
 </div>
 
 
 <?php if (!empty($model->NfeTerceiroItems)): ?>
 <h3>Itens</h3>
 <div id="ListagemItens">
-	<?php
+  <?php
     $this->renderPartial("_view_itens", array("model"=>$model))
     ?>
 </div>
@@ -341,8 +392,8 @@ $(document).ready(function(){
 <h3>Detalhes</h3>
 
 <small class="row-fluid">
-	<div class="span4">
-		<?php
+  <div class="span4">
+    <?php
         $this->widget('bootstrap.widgets.TbDetailView', array(
             'data'=>$model,
             'attributes'=>array(
@@ -372,9 +423,9 @@ $(document).ready(function(){
         ));
 
         ?>
-	</div>
-	<div class="span5">
-		<?php
+  </div>
+  <div class="span5">
+    <?php
 
         $this->widget('bootstrap.widgets.TbDetailView', array(
             'data'=>$model,
@@ -409,9 +460,9 @@ $(document).ready(function(){
         ));
 
         ?>
-	</div>
-	<div class="span3 pull-right">
-		<?php
+  </div>
+  <div class="span3 pull-right">
+    <?php
         $outros = $model->totalComplemento();
         $totalgeral = $model->valortotal + $outros;
         $this->widget('bootstrap.widgets.TbDetailView', array(
@@ -473,7 +524,7 @@ $(document).ready(function(){
         ));
 
         ?>
-	</div>
+  </div>
 
 
 </small>
@@ -481,7 +532,7 @@ $(document).ready(function(){
 <?php if (!empty($model->NfeTerceiroDuplicatas)): ?>
 <h3>Duplicatas</h3>
 <div id="ListagemDuplicatas">
-	<?php
+  <?php
     $this->renderPartial("_view_duplicatas", array("model"=>$model))
     ?>
 </div>
