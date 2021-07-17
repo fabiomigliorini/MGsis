@@ -104,7 +104,7 @@ class NfeTerceiro extends MGActiveRecord
             array('codpessoa, emissao, nfedataautorizacao, codoperacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnotafiscal, codnaturezaoperacao, entrada, ignorada, codnegocio, informacoes, observacoes, revisao, codusuariorevisao', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('codnfeterceiro, nsu, nfechave, cnpj, ie, emitente, codpessoa, emissao, nfedataautorizacao, codoperacao, valortotal, indsituacao, indmanifestacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codfilial, codnotafiscal, codnaturezaoperacao, serie, numero, entrada, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipivalor, valorprodutos, valorfrete, valorseguro, valordesconto, valoroutras, justificativa, ignorada, codnegocio, natureza, modelo, finalidade, informacoes, observacoes, tipo, revisao, codusuariorevisao', 'safe', 'on'=>'search'),
+            array('emissao_de, emissao_ate, valor_de, valor_ate, codnfeterceiro, nsu, nfechave, cnpj, ie, emitente, codpessoa, emissao, nfedataautorizacao, codoperacao, valortotal, indsituacao, indmanifestacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codfilial, codnotafiscal, codnaturezaoperacao, serie, numero, entrada, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipivalor, valorprodutos, valorfrete, valorseguro, valordesconto, valoroutras, justificativa, ignorada, codnegocio, natureza, modelo, finalidade, informacoes, observacoes, tipo, revisao, codusuariorevisao', 'safe', 'on'=>'search'),
         );
     }
 
