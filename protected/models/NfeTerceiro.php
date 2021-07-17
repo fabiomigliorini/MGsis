@@ -177,6 +177,7 @@ class NfeTerceiro extends MGActiveRecord
             'valoroutras' => 'Valor Outras',
             'justificativa' => 'Justificativa',
             'arquivoxml' => 'Arquivo XML',
+            'informacoes' => 'Informações Complementares',
         );
     }
 

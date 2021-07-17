@@ -397,7 +397,7 @@ $(document).ready(function(){
 <h3>Detalhes</h3>
 
 <small class="row-fluid">
-  <div class="span4">
+  <div class="span5">
     <?php
         $this->widget('bootstrap.widgets.TbDetailView', array(
             'data'=>$model,
@@ -429,12 +429,13 @@ $(document).ready(function(){
 
                 ),
                 'entrada',
+                'informacoes',
             ),
         ));
 
         ?>
   </div>
-  <div class="span5">
+  <div class="span4">
     <?php
 
         $this->widget('bootstrap.widgets.TbDetailView', array(
