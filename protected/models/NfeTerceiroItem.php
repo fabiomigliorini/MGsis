@@ -85,17 +85,21 @@ class NfeTerceiroItem extends MGActiveRecord
         return array(
             array('codnfeterceiro', 'required'),
             array('modalidadeicmsgarantido', 'boolean'),
-            array('nitem, cfop', 'numerical', 'integerOnly'=>true),
+            array('nitem, cfop, orig, modbc, modbcst, ipicst, piscst, cofinscst', 'numerical', 'integerOnly'=>true),
             array('cprod, cean, ceantrib', 'length', 'max'=>30),
             array('xprod', 'length', 'max'=>200),
-            array('ncm, ucom, cst, csosn', 'length', 'max'=>10),
+            array('ncm, ucom, utrib, cst, csosn, cest', 'length', 'max'=>10),
             array('vuncom, vuntrib', 'length', 'max'=>25),
-            array('qcom, vprod, utrib, qtrib, vbc, picms, vicms, vbcst, picmsst, vicmsst, ipivbc, ipipipi, ipivipi, complemento', 'length', 'max'=>14),
+            array('qcom, vuncom, vprod, qtrib, vuntrib, vbc, picms, vicms, vbcst, picmsst, vicmsst, ipivbc, ipipipi, ipivipi, complemento, vdesc, vfrete, vseg, voutro', 'length', 'max'=>14),
             array('margem', 'length', 'max'=>6),
-            array('codprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
+            array('infadprod', 'length', 'max'=>1000),
+            array('predbc, predbcst, pmvast', 'length', 'max'=>5),
+            array('pisvbc, pisvpis, cofinsvbc, cofinsvcofins', 'length', 'max'=>15),
+            array('pisppis, cofinspcofins', 'length', 'max'=>7),
+            array('codprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao, modalidadeicmsgarantido, compoetotal', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('codnfeterceiroitem, codnfeterceiro, nitem, cprod, xprod, cean, ncm, cfop, ucom, qcom, vuncom, vprod, ceantrib, utrib, qtrib, vuntrib, cst, csosn, vbc, picms, vicms, vbcst, picmsst, vicmsst, ipivbc, ipipipi, ipivipi, codprodutobarra, margem, complemento, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
+            array('codnfeterceiroitem, codnfeterceiro, nitem, cprod, xprod, cean, ncm, cfop, ucom, qcom, vuncom, vprod, ceantrib, utrib, qtrib, vuntrib, cst, csosn, vbc, picms, vicms, vbcst, picmsst, vicmsst, ipivbc, ipipipi, ipivipi, codprodutobarra, margem, complemento, alteracao, codusuarioalteracao, criacao, codusuariocriacao, vdesc, infadprod, modalidadeicmsgarantido, cest, vfrete, vseg, voutro, orig, modbc, predbc, modbcst, predbcst, pmvast, ipicst, piscst, pisvbc, pisppis, pisvpis, cofinscst, cofinsvbc, cofinspcofins, cofinsvcofins, compoetotal', 'safe', 'on'=>'search'),
         );
     }
 
@@ -166,6 +170,26 @@ class NfeTerceiroItem extends MGActiveRecord
             'picmsvenda' => '% ICMS Venda',
             'margeminversa' => 'Margem Inversa',
             'modalidadeicmsgarantido' => 'Modalidade ICMS',
+            'cest' => 'Cest',
+            'vfrete' => 'Vfrete',
+            'vseg' => 'Vseg',
+            'voutro' => 'Voutro',
+            'orig' => 'Orig',
+            'modbc' => 'modBC',
+            'predbc' => 'Predbc',
+            'modbcst' => 'modBCST',
+            'predbcst' => 'pRedBCST',
+            'pmvast' => 'pMVAST',
+            'ipicst' => 'CST',
+            'piscst' => 'CST',
+            'pisvbc' => 'vBC',
+            'pisppis' => 'pPIS',
+            'pisvpis' => 'vPIS',
+            'cofinscst' => 'CST',
+            'cofinsvbc' => 'vBC',
+            'cofinspcofins' => 'pCOFINS',
+            'cofinsvcofins' => 'vCOFINS',
+            'compoetotal' => 'Compoetotal',
         );
     }
 
@@ -346,7 +370,7 @@ class NfeTerceiroItem extends MGActiveRecord
             }
             if ($this->ProdutoBarra->Produto->Ncm->bit) {
                 $this->picmsbasereducao = 0.4117;
-            }       
+            }
         }
 
         // Credito ICMS, no maximo 17% para compra interestadual
