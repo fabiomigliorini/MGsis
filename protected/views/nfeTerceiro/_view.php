@@ -57,7 +57,7 @@ switch ($data->indmanifestacao) {
 		<span class='badge <?php echo $cssmanif; ?>'><?php echo $labelmanif ?></span>
 
     <!-- Revisao -->
-    <?php if (empty($model->revisao)): ?>
+    <?php if (empty($data->revisao)): ?>
 		    <span class='badge badge-warning'>?</span>
     <?php else: ?>
         <span class='badge badge-success'>&#10004;</span>
