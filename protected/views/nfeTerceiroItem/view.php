@@ -309,7 +309,7 @@ $(document).ready(function(){
                         $cssVenda = 'text-warning';
                     }
 
-                    $str = Yii::app()->format->formatNumber($sugestao); 
+                    $str = Yii::app()->format->formatNumber($sugestao);
                     //$str .= ' (' . Yii::app()->format->formatNumber($sugestao / $pe->quantidade, 2) . ')';
                     $attr[]=
                             array(
@@ -380,6 +380,43 @@ $(document).ready(function(){
             'value'=>$cst,
             'type'=>'raw',
         ];
+
+        if ($model->orig !== null) {
+          $arrOrig = [
+            0	=> 'Nacional, exceto as indicadas nos códigos 3, 4, 5 e 8.',
+            1 => 'Estrangeira – Importação direta, exceto a indicada no código 6',
+            2 => 'Estrangeira – Adquirida no mercado interno, exceto a indicada no código 7.',
+            3 => 'Nacional, mercadoria ou bem com Conteúdo de Importação superior a 40% (quarenta por cento) e inferior ou igual a 70% (setenta por cento).',
+            4 => 'Nacional, cuja produção tenha sido feita em conformidade com os processos produtivos básicos (PPB) de que tratam o Decreto-Lei nº 288/1967, e as Leis nºs 8.248/1991, 8.387/1991, 10.176/2001 e 11.484/2007.',
+            5 => 'Nacional, mercadoria ou bem com Conteúdo de Importação inferior ou igual a 40% (quarenta por cento).',
+            6 => 'Estrangeira – Importação direta, sem similar nacional, constante em lista de Resolução CAMEX e gás natural.',
+            7 => 'Estrangeira – Adquirida no mercado interno, sem similar nacional, constante em lista de Resolução CAMEX e gás natural.',
+            8 => 'Nacional, mercadoria ou bem com Conteúdo de Importação superior a 70% (setenta por cento).',
+          ];
+
+          $orig = isset($arrOrig[$model->orig])?$arrOrig[$model->orig]:'';
+          $orig = "{$model->orig} - {$orig}";
+
+          $css = '';
+          if (!empty($model->codprodutobarra)) {
+            $importado = false;
+            if (in_array($model->orig, [1, 2, 6, 7])) {
+              $importado = true;
+            }
+            $css = 'text-error';
+            if ($importado == $model->ProdutoBarra->Produto->importado) {
+              $css = 'text-success';
+            }
+          }
+
+          $attr[] =	[
+            'name'=>'orig',
+            'value'=>$orig,
+            'cssClass'=>$css,
+            'type'=>'raw',
+          ];
+        }
+
 
         $css = '';
         if (!empty($model->codprodutobarra)) {

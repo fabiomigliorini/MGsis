@@ -174,7 +174,7 @@ class NfeTerceiroItem extends MGActiveRecord
             'vfrete' => 'Vfrete',
             'vseg' => 'Vseg',
             'voutro' => 'Voutro',
-            'orig' => 'Orig',
+            'orig' => 'Origem',
             'modbc' => 'modBC',
             'predbc' => 'Predbc',
             'modbcst' => 'modBCST',

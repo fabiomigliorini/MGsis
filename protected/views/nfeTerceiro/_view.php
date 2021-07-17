@@ -13,24 +13,24 @@ if (
 
 
 $cssmanif = '';
-$labelmanif = 'S';
+$labelmanif = 'Sem';
 switch ($data->indmanifestacao) {
     case NfeTerceiro::INDMANIFESTACAO_CIENCIA:
         $cssmanif = 'badge-warning';
-        $labelmanif = 'C';
+        $labelmanif = 'Ciência';
         break;
     case NfeTerceiro::INDMANIFESTACAO_REALIZADA:
         $cssmanif = 'badge-success';
-        $labelmanif = 'R';
+        $labelmanif = 'Realizada';
         break;
     case NfeTerceiro::INDMANIFESTACAO_DESCONHECIDA:
         $cssmanif = 'badge-important';
-        $labelmanif = 'D';
+        $labelmanif = 'Desconhecida';
         break;
 
     case NfeTerceiro::INDMANIFESTACAO_NAOREALIZADA:
         $cssmanif = 'badge-important';
-        $labelmanif = 'N';
+        $labelmanif = 'Nâo Realizada';
         break;
 }
 
@@ -46,31 +46,14 @@ switch ($data->indmanifestacao) {
 			<?php echo CHtml::encode(Yii::app()->format->formataCodigo($data->codnfeterceiro)); ?>
 		</small>
 	</div>
-	<div class="span5">
+	<div class="span4">
 
     <!-- Chave -->
     <small class="muted">
 		    <?php echo CHtml::link(CHtml::encode(Yii::app()->format->formataChaveNfe($data->nfechave)), array('view','id'=>$data->codnfeterceiro)); ?>
     </small>
 
-    <!-- Manifestacao -->
-		<span class='badge <?php echo $cssmanif; ?>'><?php echo $labelmanif ?></span>
 
-    <!-- Revisao -->
-    <?php if (empty($data->revisao)): ?>
-		    <span class='badge badge-warning'>?</span>
-    <?php else: ?>
-        <span class='badge badge-success'>&#10004;</span>
-    <?php endif; ?>
-
-    <!-- Link Nota Fiscal -->
-		<div class="pull-right">
-			<?php
-          if (isset($data->NotaFiscal)) {
-              echo CHtml::link(CHtml::encode(Yii::app()->format->formataNumeroNota($data->NotaFiscal->emitida, $data->NotaFiscal->serie, $data->NotaFiscal->numero, $data->NotaFiscal->modelo)), array('notaFiscal/view','id'=>$data->codnotafiscal));
-          }
-      ?>
-		</div>
 		<br>
     <small class="muted">
   		NSU: <?php echo CHtml::encode($data->nsu); ?> |
@@ -78,7 +61,16 @@ switch ($data->indmanifestacao) {
   		<?php echo CHtml::encode($data->getIndManifestacaoDescricao()); ?>
     </small>
 	</div>
-	<div class="span3">
+	<div class="span4">
+    <!-- Link Nota Fiscal -->
+    <small class="pull-right">
+      <?php
+          if (isset($data->NotaFiscal)) {
+              echo CHtml::link(CHtml::encode(Yii::app()->format->formataNumeroNota($data->NotaFiscal->emitida, $data->NotaFiscal->serie, $data->NotaFiscal->numero, $data->NotaFiscal->modelo)), array('notaFiscal/view','id'=>$data->codnotafiscal));
+          }
+      ?>
+    </small>
+
 		<b>
 			<?php if (isset($data->Pessoa)): ?>
 				<?php echo CHtml::link(CHtml::encode($data->Pessoa->fantasia), array('pessoa/view','id'=>$data->codpessoa)); ?>
@@ -87,6 +79,7 @@ switch ($data->indmanifestacao) {
 			<?php endif; ?>
 		</b><br>
 		<small class="muted">
+			<?php echo CHtml::encode($data->natureza); ?> |
 			<?php echo CHtml::encode(Yii::app()->format->formataCnpjCpf($data->cnpj)); ?> |
 			<?php echo CHtml::encode($data->ie); ?>
 		</small>
@@ -108,11 +101,18 @@ switch ($data->indmanifestacao) {
 	</div>
 
 	<div class="span2">
-		<b>
-			<?php echo CHtml::encode($data->emissao); ?>
-		</b><br>
+    <!-- Manifestacao -->
+		<span class='badge <?php echo $cssmanif; ?>'><?php echo $labelmanif ?></span>
+
+    <!-- Revisao -->
+    <?php if (empty($data->revisao)): ?>
+		    <span class='badge badge-warning'>Revisar</span>
+    <?php else: ?>
+        <span class='badge badge-success'>Revisada</span>
+    <?php endif; ?>
+    <br>
 		<small class="muted">
-			<?php echo CHtml::encode($data->nfedataautorizacao); ?>
+			<?php echo CHtml::encode($data->emissao); ?>
 		</small>
 	</div>
 

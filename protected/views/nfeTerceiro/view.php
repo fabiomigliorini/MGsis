@@ -405,6 +405,11 @@ $(document).ready(function(){
                     'value' => Yii::app()->format->formataCodigo($model->codnfeterceiro),
                 ),
                 array(
+                    'name'=>'natureza',
+                    'value'=>$model->natureza,
+                    // 'type'=>"raw",
+                ),
+                array(
                     'name'=>'codnaturezaoperacao',
                     'value'=>isset($model->NaturezaOperacao) ? CHtml::encode($model->NaturezaOperacao->naturezaoperacao) : null,
                     'type'=>"raw",

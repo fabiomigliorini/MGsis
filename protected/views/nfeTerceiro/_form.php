@@ -19,6 +19,7 @@
         echo $form->select2Row($model, 'codfilial', Filial::getListaCombo(), array('class'=>'input-medium'));
         echo $form->select2PessoaRow($model, 'codpessoa', array('class'=>'input-xlarge'));
         echo $form->select2Row($model, 'indsituacao', NfeTerceiro::getIndSituacaoListaCombo(), array('class'=>'input-medium'));
+        echo $form->textFieldRow($model,'natureza',array('class'=>'span5','maxlength'=>14, 'disabled'=>true));
         echo $form->select2Row($model, 'codnaturezaoperacao', NaturezaOperacao::getListaCombo(), array('class'=>'input-xlarge'));
         echo $form->toggleButtonRow($model, 'ignorada', array('options' => array('width' => 150,  'enabledLabel' => 'Ignorada', 'disabledLabel' => 'Não')));
 
