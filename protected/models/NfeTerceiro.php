@@ -214,6 +214,16 @@ class NfeTerceiro extends MGActiveRecord
         $criteria->compare('criacao', $this->criacao, true);
         $criteria->compare('codusuariocriacao', $this->codusuariocriacao, true);
 
+        switch ($this->revisao) {
+          case 'R':
+            $criteria->addCondition('revisao IS NOT NULL');
+            break;
+
+          case 'N':
+            $criteria->addCondition('revisao IS NULL');
+            break;
+        }
+
         switch ($this->codnotafiscal) {
             case 1: // Pendentes
                 $criteria->addCondition(

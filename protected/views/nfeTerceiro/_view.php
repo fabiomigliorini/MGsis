@@ -72,9 +72,11 @@ switch ($data->indmanifestacao) {
       ?>
 		</div>
 		<br>
-		NSU: <?php echo CHtml::encode($data->nsu); ?> |
-		<?php echo CHtml::encode($data->getIndSituacaoDescricao()); ?> |
-		<?php echo CHtml::encode($data->getIndManifestacaoDescricao()); ?>
+    <small class="muted">
+  		NSU: <?php echo CHtml::encode($data->nsu); ?> |
+  		<?php echo CHtml::encode($data->getIndSituacaoDescricao()); ?> |
+  		<?php echo CHtml::encode($data->getIndManifestacaoDescricao()); ?>
+    </small>
 	</div>
 	<div class="span3">
 		<b>
