@@ -128,7 +128,7 @@ function atualizaCamposPixCob ()
 	if (pixCob.qrcodeimagem != '' && pixCob.qrcodeimagem != null) {
 		$('#pixCobQrCodeImg').attr('src', pixCob.qrcodeimagem);
 	} else {
-		$('#pixCobQrCodeImg').attr('src', 'https://dummyimage.com/250x250/000000/fff.jpg&text=Carregando...');
+		$('#pixCobQrCodeImg').attr('src', 'https://dummyimage.com/250x250/000000/fff.jpg&text=Carregando');
 	}
 }
 
