@@ -125,11 +125,13 @@ function atualizaCamposPixCob ()
 		$('#pixCobPortador').html(pixCob.Portador.portador);
 	}
 	$('#pixCobQrCodeSpan').html(pixCob.qrcode);
+	var url = 'https://dummyimage.com/250x250/000000/fff.jpg&text=Carregando';
 	if (pixCob.qrcodeimagem != '' && pixCob.qrcodeimagem != null) {
-		$('#pixCobQrCodeImg').attr('src', pixCob.qrcodeimagem);
-	} else {
-		$('#pixCobQrCodeImg').attr('src', 'https://dummyimage.com/250x250/000000/fff.jpg&text=Carregando');
+		url = pixCob.qrcodeimagem;
+	} else if (pixCob.qrcode != '' && pixCob.qrcode != null) {
+		url = 'https://chart.googleapis.com/chart?chs=513x513&cht=qr&chl=' + escape(pixCob.qrcode);
 	}
+	$('#pixCobQrCodeImg').attr('src', url);
 }
 
 function criarConsultarPixCob ()
