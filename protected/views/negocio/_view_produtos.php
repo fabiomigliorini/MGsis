@@ -164,6 +164,27 @@ function redirecinarComanda(comanda)
 		});
 }
 
+function identificarVendedor(codpessoavendedor)
+{
+		var codnegocio = '<?php echo $model->codnegocio; ?>';
+		$.ajax({
+			type: 'POST',
+			url: "<?php echo MGSPA_API_URL; ?>negocio/" + codnegocio + "/identificar-vendedor/" + codpessoavendedor,
+			headers: {
+				"X-Requested-With":"XMLHttpRequest"
+			},
+		}).done(function(resp) {
+			$.notify("Vendedor '" + resp.vendedor + " informado'!", { position:"right bottom", className:"success", autoHideDelay: 15000 });
+		}).fail(function(jqxhr, textStatus, error) {
+			$.notify("Erro ao Informar Vendedor!", { position:"right bottom", className:"error", autoHideDelay: 15000 });
+			resp = JSON.parse(jqxhr.responseText);
+			bootbox.alert(resp.message, function () {
+				tocarSirene();
+				$("#barras").focus();
+			});
+		});
+}
+
 function adicionaProduto()
 {
 
@@ -176,6 +197,14 @@ function adicionaProduto()
 		var comanda = barras.replace(/\D/g, '');
 		$.notify("Comanda #" + comanda + " identificada!", { position:"right bottom", className:"success", autoHideDelay: 15000 });
 		redirecinarComanda(comanda);
+		return;
+	}
+
+	const regexComandaVendedor = /^[Vv][Dd][Dd][0-9]{8}$/;
+	if(regexComandaVendedor.test(barras)){
+		var codpessoavendedor = barras.replace(/\D/g, '');
+		$.notify("Comanda de Vendedor #" + codpessoavendedor + " identificada!", { position:"right bottom", className:"success", autoHideDelay: 15000 });
+		identificarVendedor(codpessoavendedor);
 		return;
 	}
 
