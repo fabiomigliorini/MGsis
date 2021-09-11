@@ -6,20 +6,75 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
-array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create')),
-array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codpessoa)),
-array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
-array('label'=>'Títulos', 'icon'=>'icon-tasks', 'url'=>array('titulo/index','Titulo[codpessoa]'=>$model->codpessoa)),
+	array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('index')),
+	array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create')),
+	array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codpessoa)),
+	array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
+	array('label'=>'Títulos', 'icon'=>'icon-tasks', 'url'=>array('titulo/index','Titulo[codpessoa]'=>$model->codpessoa)),
 );
+
+if ($model->vendedor) {
+	$this->menu[] =
+		array('label'=>'Comanda Vendedor', 'icon'=>'icon-print', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnComandaVendedor'));
+}
 
 Yii::app()->clientScript->registerCoreScript('yii');
 
 ?>
 
+<div id="modalComandaVendedor" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">
+		<h3>Impressão de Comanda de Vendedor</h3>
+	</div>
+	<div class="modal-body">
+		<div class="row">
+			<div class="span-12 text-center">
+				<div class="input-prepend input-append">
+					<label class="add-on" for="copiasComandaVendedor">Cópias</label>
+					<input class="input-small text-right" id="copiasComandaVendedor" type="text" value="20">
+					<button class="btn" type="submit" id="btnImprimirComandaVendedor" tabindex="-1">Imprimir</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script type="text/javascript">
 /*<![CDATA[*/
 $(document).ready(function(){
+
+	$("#btnImprimirComandaVendedor").click(function(e){
+		e.preventDefault();
+		var impressora = '<?php echo Yii::app()->user->getState('impressoraTermica') ?>';
+		var codpessoa = '<?php echo $model->codpessoa ?>';
+		var copias = $("#copiasComandaVendedor").val();
+		$('#modalComandaVendedor').modal('hide')
+		if (impressora == '') {
+			bootbox.alert('Nenhuma Impressora Termica Associada ao Usuário!');
+			return;
+		}
+		$.ajax({
+			type: 'POST',
+			url: "<?php echo MGSPA_API_URL; ?>pessoa/" + codpessoa + "/comanda-vendedor/imprimir",
+			data: {
+				impressora: impressora,
+				copias: copias
+			},
+			headers: {
+				"X-Requested-With":"XMLHttpRequest"
+			},
+		}).done(function(resp) {
+			$.notify("Comanda enviada para impressão na impressora '" + impressora + "'!", { position:"right bottom", className:"success", autoHideDelay: 15000 });
+		}).fail(function( jqxhr, textStatus, error ) {
+			$.notify("Erro ao Imprimir Comanda!", { position:"right bottom", className:"error", autoHideDelay: 15000 });
+		});
+	});
+
+	$("#btnComandaVendedor").click(function(e){
+		e.preventDefault();
+		$('#modalComandaVendedor').modal({show:true})
+	});
+
 	jQuery('body').on('click','#btnExcluir',function() {
 		bootbox.confirm("Excluir este registro?", function(result) {
 			if (result)

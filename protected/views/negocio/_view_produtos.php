@@ -307,7 +307,7 @@ $(document).ready(function() {
 	$("#barras").focus();
 	$('#quantidade').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 
-    $("#btnAdicionar").click(function(e){
+  $("#btnAdicionar").click(function(e){
 		e.preventDefault();
 		adicionaProduto ();
 	});
