@@ -216,7 +216,7 @@
 ?>
 </div>
 <div class="container-fluid">
-    <?php if (! in_array($_SERVER['SERVER_ADDR'], ['192.168.3.202', 'sistema.mgpapelaria.com.br', 'sistema.mgpapelaria.com', 'netuno.mgpapelaria.com.br', 'netuno.mgpapelaria.com']) ): ?>
+    <?php if (! in_array($_SERVER['SERVER_ADDR'], ['192.168.2.202', 'sistema.mgpapelaria.com.br', 'sistema.mgpapelaria.com', 'netuno.mgpapelaria.com.br', 'netuno.mgpapelaria.com']) ): ?>
 			<div class="row-fluid">
 			<div class="span12">
 
