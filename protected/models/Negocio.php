@@ -273,7 +273,7 @@ class Negocio extends MGActiveRecord
 
     protected function afterFind()
     {
-        if ($this->valortotal >0 and $this->valordesconto>0) {
+        if ($this->valortotal >0 and $this->valordesconto>0 and $this->valorprodutos>0) {
             $this->percentualdesconto = 100 * ($this->valordesconto / $this->valorprodutos);
         } else {
             $this->percentualdesconto = 0;
