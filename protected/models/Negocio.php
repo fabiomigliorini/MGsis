@@ -414,6 +414,11 @@ class Negocio extends MGActiveRecord
         if (isset($this->PessoaVendedor)) {
             $nota->observacoes .= " - Vendedor: {$this->PessoaVendedor->fantasia}";
         }
+        if (isset($this->Usuario)) {
+            if (isset($this->Usuario->Pessoa)) {
+                $nota->observacoes .= " - Caixa: {$this->Usuario->Pessoa->fantasia}";
+            }
+        }
         if (!empty($this->observacoes)) {
             $nota->observacoes .= " - {$this->observacoes}";
         }
