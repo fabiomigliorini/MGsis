@@ -15,8 +15,8 @@ $this->menu=array(
 	array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codnotafiscal), 'visible' => !$bloqueado),
 	array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir'), 'visible' => !$bloqueado),
 	array('label'=>'Duplicar', 'icon'=>'icon-retweet', 'url'=>array('create','duplicar'=>$model->codnotafiscal)),
-	array('label'=>'Operacao Inversa', 'icon'=>'icon-random', 'url'=>array('create','inverter'=>$model->codnotafiscal)),
 	array('label'=>'Ver Arquivo XML', 'icon'=>' icon-file', 'url'=> MGSPA_NFEPHP_URL . "{$model->codnotafiscal}/xml", 'linkOptions'=>	array('id'=>'btnArquivoXml'), 'visible' => $bloqueado),
+    array('label'=>'Operacao Inversa', 'icon'=>'icon-random', 'url'=>array('create','inverter'=>$model->codnotafiscal)),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );
 
