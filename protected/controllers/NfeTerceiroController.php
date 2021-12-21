@@ -547,7 +547,8 @@ class NfeTerceiroController extends Controller
 		$model = $this->loadModel($id);
 
 		// Variaveis para Requisicao
-		$periodoReferencia = DateTime::createFromFormat('d/m/Y H:i:s', $model->emissao)->format("m/Y");
+		//$periodoReferencia = DateTime::createFromFormat('d/m/Y H:i:s', $model->emissao)->format("m/Y");
+		$periodoReferencia = date("m/Y");
 		$numrDocumentoDestinatario = $model->Filial->Pessoa->ie;
 		$numrNota1 = $model->nfechave;
 		$numrInscEstadual = $model->Filial->Pessoa->ie;
@@ -685,6 +686,14 @@ class NfeTerceiroController extends Controller
 			@$doc->loadHTML($output);
 			$xpath = new DomXPath($doc);
 			$nodeList = $xpath->query("//font[@class='SEFAZ-FONT-MensagemErro']");
+			echo '<pre>';
+			print_r($data);
+			print_r($nodeList);
+			print_r($error);
+			print_r($info);
+			print_r($output);
+			echo '</pre>';
+			die();
 			if ($node = $nodeList->item(0)) {
 				throw new \Exception(trim($node->nodeValue), 1);
 			}
