@@ -101,12 +101,32 @@ class NfeTerceiro extends MGActiveRecord
             //array('arquivoxml', 'file', 'types'=>'xml'),
             array('cnpj, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipivalor, valorprodutos, valorfrete, valorseguro, valordesconto, valoroutras', 'length', 'max'=>14),
             array('justificativa', 'length', 'max'=>200),
+            array('entrada', 'validaEntrada'),            
             array('codpessoa, emissao, nfedataautorizacao, codoperacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnotafiscal, codnaturezaoperacao, entrada, ignorada, codnegocio, informacoes, observacoes, revisao, codusuariorevisao', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('emissao_de, emissao_ate, valor_de, valor_ate, codnfeterceiro, nsu, nfechave, cnpj, ie, emitente, codpessoa, emissao, nfedataautorizacao, codoperacao, valortotal, indsituacao, indmanifestacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codfilial, codnotafiscal, codnaturezaoperacao, serie, numero, entrada, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipivalor, valorprodutos, valorfrete, valorseguro, valordesconto, valoroutras, justificativa, ignorada, codnegocio, natureza, modelo, finalidade, informacoes, observacoes, tipo, revisao, codusuariorevisao', 'safe', 'on'=>'search'),
         );
     }
+
+    public function validaEntrada($attribute, $params)
+    {
+        if (empty($this->entrada)) {
+            return;
+        }
+        $entrada = DateTime::createFromFormat("d/m/Y H:i:s", $this->entrada);
+        $emissao = DateTime::createFromFormat("d/m/Y H:i:s", $this->emissao);
+        if ($entrada < $emissao) {
+            $this->addError($attribute, 'A data de entrada não pode ser anterior à data de emissão!');
+            return;
+        }
+        $hoje = new DateTime('now');
+        if ($entrada > $hoje) {
+            $this->addError($attribute, 'A data de entrada não pode ser posterior à data atual!');
+            return;
+        }
+
+    }	
 
     /**
      * @return array relational rules.

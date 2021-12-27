@@ -33,6 +33,7 @@
                         'format' => 'dd/mm/yyyy hh:ii:ss',
                         ),
                     'prepend' => '<i class="icon-calendar"></i>',
+                    'append' => '<i class="icon-repeat" style="cursor: pointer;" id="btnCopiarEmissao"></i>',
                     )
         );
 
@@ -65,6 +66,10 @@
 $(document).ready(function() {
 
 	//$("#Pessoa_fantasia").Setcase();
+    $('#btnCopiarEmissao').click(function(e) {
+        e.preventDefault();
+        $('#NfeTerceiro_entrada').val('<?php echo $model->emissao; ?>');
+    });
 
 	$('#nfe-terceiro-form').submit(function(e) {
         var currentForm = this;
