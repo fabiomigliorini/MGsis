@@ -1,22 +1,12 @@
-version: '3.6'
+version: '3.7'
 services:
     mgsis:
         build:
             './.docker'
-        working_dir: /opt/www/MGsis
-        tty: true
-        command: >
-            bash -c "chmod -R a+w /opt/www/MGsis/protected
-            && chmod -R a+w /opt/www/MGsis/assets
-            && chmod -R a+w /opt/www/MGsis/yii-1.1.14.f0fee9
-            && ln -sf /opt/www/MGsis/yii-1.1.14.f0fee9 /opt/www/yii-1.1.14.f0fee9
-            && service nginx start
-            && service memcached start
-            && service php5.6-fpm start
-            && /bin/bash"
         volumes:
-            - ./:/opt/www/MGsis
+            - /opt/www:/opt/www
+            - /tmp:/tmp/host
+            - .docker/config/php/php.ini:/usr/local/etc/php/php.ini
             - /media/publico:/media/publico
-            - ../NFePHP/:/opt/www/NFePHP
-            - ../GuiaST/:/opt/www/GuiaST
-        network_mode: host
+        ports:
+            - "9000:9000"
