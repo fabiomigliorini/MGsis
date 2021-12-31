@@ -2,11 +2,11 @@ version: '3.7'
 services:
     mgsis:
         build:
-            './.docker'
+            '.'
         volumes:
             - /opt/www:/opt/www
             - /tmp:/tmp/host
-            - .docker/config/php/php.ini:/usr/local/etc/php/php.ini
+            - ./php.ini:/usr/local/etc/php/php.ini
             - /media/publico:/media/publico
         extra_hosts:
             - "host.docker.internal:host-gateway"              
