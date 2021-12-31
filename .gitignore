@@ -1,5 +1,4 @@
 /nbproject/private/
 /assets/
-/protected/runtime/*.log
-/protected/runtime/*.log.*
+/protected/runtine/
 /protected/vendors/nfephp/
