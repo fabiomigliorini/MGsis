@@ -1,8 +1,1 @@
-FROM php:5.6-fpm-alpine
-
-MAINTAINER mgpapelaria.com.br
-
-RUN apk upgrade --update --no-cache
-RUN apk add --no-cache bash-completion coreutils postgresql-dev libpng-dev libxml2-dev curl-dev
-RUN docker-php-ext-install pgsql gd soap curl mbstring xml pdo pdo_pgsql
-
+Dockerfile.alpine

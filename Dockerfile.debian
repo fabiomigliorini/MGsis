@@ -1,0 +1,8 @@
+FROM php:5.6-fpm
+
+MAINTAINER mgpapelaria.com.br
+
+RUN apt update && apt full-upgrade --yes
+RUN apt install bash-completion coreutils libpq-dev libpng-dev libxml2-dev tzdata --yes
+RUN apt install curl libcurl3-dev --yes
+RUN docker-php-ext-install pgsql gd soap curl mbstring xml pdo pdo_pgsql
