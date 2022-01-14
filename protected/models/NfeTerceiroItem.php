@@ -93,7 +93,7 @@ class NfeTerceiroItem extends MGActiveRecord
             array('qcom, vuncom, vprod, qtrib, vuntrib, vbc, picms, vicms, vbcst, picmsst, vicmsst, ipivbc, ipipipi, ipivipi, complemento, vdesc, vfrete, vseg, voutro', 'length', 'max'=>14),
             array('margem', 'length', 'max'=>6),
             array('infadprod', 'length', 'max'=>1000),
-            array('predbc, predbcst, pmvast', 'length', 'max'=>5),
+            array('predbc, predbcst, pmvast', 'numerical', 'max'=>100),
             array('pisvbc, pisvpis, cofinsvbc, cofinsvcofins', 'length', 'max'=>15),
             array('pisppis, cofinspcofins', 'length', 'max'=>7),
             array('codprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao, modalidadeicmsgarantido, compoetotal', 'safe'),
