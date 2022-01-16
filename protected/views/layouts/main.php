@@ -216,14 +216,14 @@
 ?>
 </div>
 <div class="container-fluid">
-    <?php if (! in_array($_SERVER['SERVER_ADDR'], ['192.168.2.202', 'sistema.mgpapelaria.com.br', 'sistema.mgpapelaria.com', 'netuno.mgpapelaria.com.br', 'netuno.mgpapelaria.com']) ): ?>
+    <?php if (! in_array($_SERVER['HTTP_HOST'], ['192.168.2.203', 'sistema.mgpapelaria.com.br', 'sistema.mgpapelaria.com', 'mercurio.mgpapelaria.com.br', 'mercurio.mgpapelaria.com']) ): ?>
 			<div class="row-fluid">
 			<div class="span12">
 
         <h4 class="alert alert-error">
             <center>
                 <blink>
-                BASE DE TESTES
+		BASE DE TESTES <?php print_r($_SERVER['HTTP_HOST']) ?>
                 </blink>
             </center>
         </h4>
