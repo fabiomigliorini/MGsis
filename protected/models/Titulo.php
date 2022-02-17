@@ -186,8 +186,8 @@ class Titulo extends MGActiveRecord
 		}
 
 		$outro = false;
-		if ($this->TipoTitulo->pagar)
-		{
+		//if ($this->TipoTitulo->pagar)
+		//{
 			$outro = Titulo::model()->find(
 				array(
 					'select'=>'codtitulo',
@@ -196,17 +196,17 @@ class Titulo extends MGActiveRecord
 				)
 			);
 
-		}
-		elseif ($this->TipoTitulo->receber)
-		{
-			$outro = Titulo::model()->find(
-				array(
-					'select'=>'codtitulo',
-					'condition'=>'codfilial = :codfilial AND numero = :numero AND codtitulo <> :codtitulo',
-					'params'=>array(':codfilial'=>$this->codfilial, ':numero'=>$this->numero, ':codtitulo' => (empty($this->codtitulo)?-1:$this->codtitulo))
-				)
-			);
-		}
+		//}
+		//elseif ($this->TipoTitulo->receber)
+		//{
+			//$outro = Titulo::model()->find(
+				//array(
+					//'select'=>'codtitulo',
+					//'condition'=>'codfilial = :codfilial AND numero = :numero AND codtitulo <> :codtitulo',
+					//'params'=>array(':codfilial'=>$this->codfilial, ':numero'=>$this->numero, ':codtitulo' => (empty($this->codtitulo)?-1:$this->codtitulo))
+				//)
+			//);
+		//}
 
 		if ($outro)
 		{
