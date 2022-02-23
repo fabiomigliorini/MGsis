@@ -20,7 +20,7 @@
                 NaturezaOperacao::getListaCombo(),
                 array(
                     //'placeholder'=>'Tributação',
-                    'class' => 'input-xlarge'
+                    'class' => 'span12'
                 )
             );
 
