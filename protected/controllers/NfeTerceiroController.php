@@ -589,7 +589,7 @@ class NfeTerceiroController extends Controller
 		curl_setopt($ch, CURLOPT_POST, true);
 		$data = [
 			'periodoReferencia' => $periodoReferencia,
-			'tipoVenda' => '1',
+			'tipoVenda' => '2',
 			'tributo' => '1538',
 			'cnpjBeneficiario' => '',
 			'numrDuimp' => '',
