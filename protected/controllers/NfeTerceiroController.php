@@ -555,6 +555,7 @@ class NfeTerceiroController extends Controller
 		$numrDocumento = $model->Filial->Pessoa->cnpj;
 		$valorFormatado = number_format($valor, 2, ",", ".");
 
+		/*
 		// CNAE
 		$arrCodgCnae = [
 			101 => '4761003',
@@ -566,11 +567,23 @@ class NfeTerceiroController extends Controller
 			throw new \Exception("Impossível determinar Cnae!", 1);
 		}
 		$codgCnae = $arrCodgCnae[$model->codfilial];
+		*/
 
-		// Numero do numrContribuinte
-		$arrNumrContribuinte = [
+		// Numero do numrPessoaDestinatario
+		// Um Por IE
+		$arrNumrPessoaDestinatario = [
 			101 => '611107',
 			103 => '126206917',
+		];
+		if (!isset($arrNumrPessoaDestinatario[$model->codfilial])) {
+			throw new \Exception("Impossível determinar Número da pessoa Destinatario!", 1);
+		}
+		$numrPessoaDestinatario = $arrNumrPessoaDestinatario[$model->codfilial];
+
+		// Numero do numrContribuinte
+		// Um Por CNPJ (Sem IE)
+		$arrNumrContribuinte = [
+			101 => '4432657',
 		];
 		if (!isset($arrNumrContribuinte[$model->codfilial])) {
 			throw new \Exception("Impossível determinar Número do Contribuinte!", 1);
@@ -615,7 +628,7 @@ class NfeTerceiroController extends Controller
 			'numrNota9' => '',
 			'isNFE10' => 'on',
 			'numrNota10' => '',
-			'numrPessoaDestinatario' => $numrContribuinte,
+			'numrPessoaDestinatario' => $numrPessoaDestinatario,
 			'statInscricaoEstadual' => 'Ativo',
 			'notas' => '1',
 			'nfeNota1' => '',
@@ -660,9 +673,12 @@ class NfeTerceiroController extends Controller
 			'numrContribuinte' => $numrContribuinte,
 			'pagn' => 'emitir',
 			'numrDocumento' => $numrDocumento,
-			'numrInscEstadual' => $numrInscEstadual,
-			'tipoContribuinte' => '1',
-			'codgCnae' => $codgCnae,
+			//'numrInscEstadual' => $numrInscEstadual,
+			'numrInscEstadual' => '0',
+			//'tipoContribuinte' => '1',
+			'tipoContribuinte' => '2',
+			//'codgCnae' => $codgCnae,
+            'codgCnae' => '',
 			'tipoTributoH' => '',
 			'codgOrgao' => '',
 			'valor' => $valorFormatado,
