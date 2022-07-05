@@ -7,9 +7,9 @@
 <fieldset>
 	<?php 	
 		//echo $form->textFieldRow($model,'codnegocio',array('class'=>'span5'));
-		echo $form->textFieldRow($model,'quantidade',array('class'=>'input-small text-right','maxlength'=>14));
-		echo $form->textFieldRow($model,'valorunitario',array('class'=>'input-small text-right','maxlength'=>14));
-		echo $form->textFieldRow($model,'valortotal',array('class'=>'input-small text-right','maxlength'=>14));
+		echo $form->textFieldRow($model,'quantidade',array('class'=>'input-medium text-right','maxlength'=>14));
+		echo $form->textFieldRow($model,'valorunitario',array('class'=>'input-medium text-right','maxlength'=>22));
+		echo $form->textFieldRow($model,'valortotal',array('class'=>'input-medium text-right','maxlength'=>14));
 		//echo $form->textFieldRow($model,'codprodutobarra',array('class'=>'span5'));
 	?>
 </fieldset>
@@ -57,7 +57,7 @@ $(document).ready(function() {
 
 	$("#NegocioProdutoBarra_quantidade").focus();
 	$('#NegocioProdutoBarra_quantidade').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
-	$('#NegocioProdutoBarra_valorunitario').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+	$('#NegocioProdutoBarra_valorunitario').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.', mDec:10 });
 	$('#NegocioProdutoBarra_valortotal').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 
 	$('#NegocioProdutoBarra_quantidade').change(function() {

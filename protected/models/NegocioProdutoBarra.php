@@ -58,7 +58,8 @@ class NegocioProdutoBarra extends MGActiveRecord
 			array('codnegocio, quantidade, valorunitario, valortotal, codprodutobarra', 'required'),
 			array('valorunitario, valortotal', 'numerical', 'min' => 0.01),
 			array('codnegocio', 'validaStatusNegocio'),
-			array('quantidade, valorunitario, valortotal', 'length', 'max'=>14),
+			array('quantidade, valortotal', 'length', 'max'=>14),
+			array('valorunitario', 'length', 'max'=>22),
 			array('alteracao, codnegocioprodutobarradevolucao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
