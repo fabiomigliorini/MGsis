@@ -34,11 +34,11 @@ class MGEscPrintRomaneio extends MGEscPrint
 		$filial = $model->Filial;
 		
 		// Fantasia e NUMERO do Negocio
-		$this->adicionaTexto("<DblStrikeOn>", "cabecalho");
-		$this->adicionaTexto($filial->Pessoa->fantasia . " " . $filial->Pessoa->telefone1, "cabecalho", 68);
-		$this->adicionaTexto("Negocio:           " . Yii::app()->format->formataCodigo($model->codnegocio), "cabecalho", 69, STR_PAD_LEFT);
-		$this->adicionaTexto("<DblStrikeOff>", "cabecalho");
-		$this->adicionaLinha("", "cabecalho");
+		$this->adicionaTexto("<DblStrikeOn><CondensedOff>", "cabecalho");
+		$this->adicionaTexto($filial->Pessoa->fantasia . " " . $filial->Pessoa->telefone1, "cabecalho", 62);
+		$this->adicionaTexto("Negocio: " . Yii::app()->format->formataCodigo($model->codnegocio), "cabecalho", 18, STR_PAD_LEFT);
+		$this->adicionaTexto("<CondensedOn><DblStrikeOff>", "cabecalho");
+		//$this->adicionaLinha("", "cabecalho");
 
 		
 		// Usuario e Data
@@ -60,12 +60,10 @@ class MGEscPrintRomaneio extends MGEscPrint
 		
 		$this->adicionaTexto("<CondensedOff><DblStrikeOn>");
 		
-        $linha = 'Natureza: ' . $model->NaturezaOperacao->naturezaoperacao;
-        //$linha = str_pad($linha, 80, " ", STR_PAD_BOTH);
-		$this->adicionaLinha(
-				$linha
-				, "documento", 80);
-        //die($linha);
+		$linha = 'Natureza: ' . $model->NaturezaOperacao->naturezaoperacao;
+		//$linha = str_pad($linha, 80, " ", STR_PAD_BOTH);
+		$this->adicionaLinha($linha, "documento", 80);
+		//die($linha);
         
         if ($model->codpessoa != Pessoa::CONSUMIDOR)
         {

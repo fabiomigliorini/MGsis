@@ -43,9 +43,9 @@ class MGEscPrint
                 "NLQSansSerif"    => array(Chr(27)."k1",   ""     ), //Fonte NLQ "SansSerif"
                 "10cpp"           => array(Chr(27)."P",    ""     ), //Espaçamento horizontal em 10cpp
                 "12cpp"           => array(Chr(27)."M",    ""     ), //Espaçamento horizontal em 12cpp
-                "CondensedOn"     => array(Chr(15),        "<p style='font-size:0.58em'>"     ), //Ativa o modo condensado
+                "CondensedOn"     => array(Chr(15),        "<p style='font-size:0.58em; margin:0px'>"     ), //Ativa o modo condensado
                 "CondensedOff"    => array(Chr(18),        "</p>"     ), //Desativa o modo condensado
-                "LargeOn"         => array(Chr(27)."W1",   "<p style='font-size:2em'>"     ), //Ativa o modo expandido
+                "LargeOn"         => array(Chr(27)."W1",   "<p style='font-size:2em; margin:0px'>"     ), //Ativa o modo expandido
                 "LargeOff"        => array(Chr(27)."W0",   "</p>"     ), //Desativa o modo expandido
                 "BoldOn"          => array(Chr(27)."E",   "<b>"   ), //Ativa o modo negrito
                 "BoldOff"         => array(Chr(27)."F",   "</b>"  ), //Desativa o modo negrito
@@ -137,6 +137,11 @@ class MGEscPrint
 				hr:last-child
 				{
 					page-break-after: avoid;
+				}
+				pre
+				{
+                                        font-size: 150%;
+
 				}
 			</style>
 			<body>
