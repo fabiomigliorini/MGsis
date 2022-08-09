@@ -134,7 +134,11 @@ class NegocioController extends Controller
         $this->performAjaxValidation($model);
 
         if (isset($_POST['Negocio'])) {
-            $model->attributes=$_POST['Negocio'];
+            $arr = $_POST['Negocio'];
+            if (isset($arr['percentualdesconto'])) {
+                unset($arr['percentualdesconto']);
+            }
+            $model->attributes = $arr;
             $salvo = $model->save();
 
             if ($salvo && $fechar == 1) {
