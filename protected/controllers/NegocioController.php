@@ -119,6 +119,9 @@ class NegocioController extends Controller
     */
     public function actionUpdate($id)
     {
+        if (isset($_POST['Negocio']['percentualdesconto'])) {
+            unset($_POST['Negocio']['percentualdesconto']);
+        }
         $model=$this->loadModel($id);
         if ($model->codnegociostatus != 1) {
             $this->redirect(array('view','id'=>$model->codnegocio));
@@ -134,11 +137,7 @@ class NegocioController extends Controller
         $this->performAjaxValidation($model);
 
         if (isset($_POST['Negocio'])) {
-            $arr = $_POST['Negocio'];
-            if (isset($arr['percentualdesconto'])) {
-                unset($arr['percentualdesconto']);
-            }
-            $model->attributes = $arr;
+            $model->attributes = $_POST['Negocio'];
             $salvo = $model->save();
 
             if ($salvo && $fechar == 1) {
@@ -315,7 +314,7 @@ class NegocioController extends Controller
         echo CActiveForm::validate($model);
         // Gambiarra pra salvar os dados enquanto usuario edita
         if (!empty($model->codnegocio) && $model->codnegociostatus == 1) {
-            $model->attributes=$_POST['Negocio'];
+            $model->attributes = $_POST['Negocio'];
             $model->save();
         }
         Yii::app()->end();
