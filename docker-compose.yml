@@ -2,7 +2,7 @@ version: '3.7'
 services:
     mgsis:
         build: ./
-        restart: always        
+        restart: always
         volumes:
             - /opt/www:/opt/www
             - /tmp:/tmp/host
@@ -12,9 +12,10 @@ services:
             - /etc/localtime:/etc/localtime:ro
             - /usr/share/zoneinfo:/usr/share/zoneinfo
         extra_hosts:
-            - "host.docker.internal:host-gateway"              
+            - "host.docker.internal:host-gateway"
             - "sistema.mgpapelaria.com.br:host-gateway"
             - "api.mgspa.mgpapelaria.com.br:host-gateway"
+            - "api-mgspa.mgpapelaria.com.br:host-gateway"
             - "mgspa.mgpapelaria.com.br:host-gateway"
         ports:
             - "9000:9000"
