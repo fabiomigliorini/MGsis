@@ -419,7 +419,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
         );
 
         if ($trib === null) {
-            $this->addError('codprodutobarra', 'Erro ao calcular tributação. Impossível localizar tributação para o produto informado!');
+            $this->addError('codprodutobarra', 'Erro ao calcular tributação. Impossível localizar tributação para o produto informado! ' . $this->codprodutobarra);
             return false;
         }
 
