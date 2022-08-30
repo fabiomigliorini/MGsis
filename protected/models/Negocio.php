@@ -615,7 +615,7 @@ class Negocio extends MGActiveRecord
     public function gerarDevolucao($arrQuantidadeDevolucao)
     {
 
-            //inicia Transacao
+	//inicia Transacao
         $trans = $this->dbConnection->beginTransaction();
 
         //monta array com itens devolvidos
@@ -667,7 +667,7 @@ class Negocio extends MGActiveRecord
 
         foreach ($arr as $codnegocioprodutobarra => $quantidadedevolucao) {
 
-                    /* @var $npb_original NegocioProdutoBarra */
+            /* @var $npb_original NegocioProdutoBarra */
 
             //busca item a ser devolvido
             $npb_original =  NegocioProdutoBarra::model()->findByPk($codnegocioprodutobarra);
@@ -682,7 +682,7 @@ class Negocio extends MGActiveRecord
             $npb->codnegocio = $negocio->codnegocio;
             $npb->quantidade = $quantidadedevolucao;
             $npb->valorunitario = $npb_original->valorunitario;
-            $npb->valortotal = $npb->quantidade * $npb->valorunitario;
+            $npb->valortotal = round($npb->quantidade * $npb->valorunitario, 2);
             $npb->codprodutobarra = $npb_original->codprodutobarra;
             $npb->codnegocioprodutobarradevolucao = $npb_original->codnegocioprodutobarra;
 
