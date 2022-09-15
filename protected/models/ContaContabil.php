@@ -42,7 +42,7 @@ class ContaContabil extends MGActiveRecord
 		// will receive user inputs.
 		return array(
 			array('contacontabil', 'required'),
-			array('contacontabil', 'length', 'max'=>50),
+			array('contacontabil', 'length', 'max'=>100),
 			array('numero', 'length', 'max'=>15),
 			array('inativo, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
@@ -117,7 +117,7 @@ class ContaContabil extends MGActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
-			'sort'=>array('defaultOrder'=>'t.codcontacontabil ASC'),
+			'sort'=>array('defaultOrder'=>'t.contacontabil ASC'),
 			'pagination'=>array('pageSize'=>20)
 		));
 	}
@@ -138,6 +138,7 @@ class ContaContabil extends MGActiveRecord
 		return array(
 			'combo'=>array(
 				'select'=>array('codcontacontabil', 'contacontabil'),
+				'condition'=>'inativo=false',
 				'order'=>'contacontabil ASC',
 				),
 			);
