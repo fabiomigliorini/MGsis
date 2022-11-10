@@ -484,13 +484,34 @@ $(document).ready(function(){
 				if (!empty($model->observacoes)) {
 					$attr[] = 'observacoes';
 				}
-        foreach($model->NfeTerceiros as $nfet)
-            $attr[] =
-                array(
-                    'label' => 'NF-e Terceiro',
-                    'value' => CHtml::link('Abrir', array("nfeTerceiro/view", "id" => $nfet->codnfeterceiro)),
-                    'type' => 'raw',
-                );
+        foreach($model->NfeTerceiros as $nfet) {
+					$attr[] = [
+						'label' => 'NF-e Terceiro',
+						'value' => CHtml::link('Abrir', array("nfeTerceiro/view", "id" => $nfet->codnfeterceiro)),
+						'type' => 'raw',
+					];
+				}
+				foreach ($model->MercosPedidos as $ped) {
+					$str = "#{$ped->numero} ({$ped->pedidoid})";
+					$attr[] = [
+						'label' => 'Mercos ID',
+						'value' => CHtml::link($str, MERCOS_URL_ADM . "pedidos/{$ped->pedidoid}/detalhar/", ['target' => '_blank']),
+						// 'value' => CHtml::link($ped->pedidoid, array("nfeTerceiro/view", "id" => $ped->pedidoid)),
+						'type' => 'raw',
+					];
+					if (!empty($ped->condicaopagamento)) {
+						$attr[] = [
+							'label' => 'Condição',
+							'value' => $ped->condicaopagamento,
+						];
+					}
+					if (!empty($ped->enderecoentrega)) {
+						$attr[] = [
+							'label' => 'Entrega',
+							'value' => $ped->enderecoentrega,
+						];
+					}
+				}
 
 		$this->widget('bootstrap.widgets.TbDetailView',array('data'=>$model, 'attributes'=>$attr));
 

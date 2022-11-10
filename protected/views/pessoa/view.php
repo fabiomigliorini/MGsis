@@ -283,11 +283,18 @@ $(document).ready(function(){
 					)
 				));
 
+				foreach ($model->MercosClientes as $cli) {
+					$attributes[] = [
+						'name'=>'Mercos ID',
+						'value' => CHtml::link($cli->clienteid, MERCOS_URL_ADM . "clientes/{$cli->clienteid}/", ['target' => '_blank']),
+						'type'=>'raw',
+					];
+				}
+
 		$this->widget('bootstrap.widgets.TbDetailView',array(
 			'data'=>$model,
 			'attributes'=>$attributes));
 		?>
-
 	</div>
 </div>
 

@@ -141,6 +141,7 @@ class Negocio extends MGActiveRecord
             'NegocioProdutoBarras' => array(self::HAS_MANY, 'NegocioProdutoBarra', 'codnegocio', 'order'=>'alteracao DESC, codnegocioprodutobarra DESC'),
             'NfeTerceiros' => array(self::HAS_MANY, 'NfeTerceiro', 'codnegocio'),
             'StonePreTransacaos' => array(self::HAS_MANY, 'StonePreTransacao', 'codnegocio'),
+            'MercosPedidos' => array(self::HAS_MANY, 'MercosPedido', 'codnegocio'),
         );
     }
 

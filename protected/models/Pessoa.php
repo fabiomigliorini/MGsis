@@ -267,6 +267,7 @@ class Pessoa extends MGActiveRecord
 			'NotaFiscals' => array(self::HAS_MANY, 'NotaFiscal', 'codpessoa'),
 			'NegociosVendedors' => array(self::HAS_MANY, 'Negocio', 'codpessoavendedor'),
       'PessoaCertidaos' => array(self::HAS_MANY, 'PessoaCertidao', 'codpessoa'),
+      'MercosClientes' => array(self::HAS_MANY, 'MercosCliente', 'codpessoa'),
 			'GrupoCliente' => array(self::BELONGS_TO, 'GrupoCliente', 'codgrupocliente'),
             'inclusaoSpc'=>array(
 				self::STAT,
