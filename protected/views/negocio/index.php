@@ -7,6 +7,12 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Novo (F2)', 'icon'=>'icon-plus', 'url'=>array('create'), 'linkOptions'=> array('id'=>'btnNovo')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
+	[
+		'label'=>'Importar Pedidos Mercos',
+		'icon'=>' icon-arrow-down',
+		'url'=>'#',
+		'linkOptions'=>array('id'=>'btnImportarMercos'),
+	],
 	array(
 		'label'=>'Relatório',
 		'icon'=>'icon-print',
@@ -32,6 +38,27 @@ $(document).ready(function(){
 		});
 		$('#modalRelatorio').modal({show:true});
 		$('#modalRelatorio').css({'width': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'10%'});
+	});
+
+	$('#btnImportarMercos').click(function(event){
+		event.preventDefault();
+		console.log('aqui');
+		// return;
+		$.ajax({
+		  type: 'GET',
+		  url: "<?php echo MGLARA_URL ; ?>mercos/pedido/apos/ultima",
+		}).done(function(resp) {
+			var msg = "Importados " + resp.importados + " Pedidos com " + resp.erros + " erros até " + resp.ate  + "!";
+			console.log(resp);
+			bootbox.alert('<h3 class="text-success">' + msg + '</h3>', function() {
+				location.reload();
+			});
+		}).fail(function( jqxhr, textStatus, error ) {
+			bootbox.alert('<h3 class="text-error">' + error + '</h3>');
+			console.log(jqxhr);
+			console.log(textStatus);
+			console.log(error);
+		});
 	});
 
 
