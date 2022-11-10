@@ -392,22 +392,25 @@ class NfeTerceiroItem extends MGActiveRecord
                 return;
             }
 
-            // se nao calcula st que deveria ser para quando comprado fora do estado
-            if ($interestadual) {
-                $base = (double) $this->vprod
-                    + (double) $this->ipivipi
-                    - (double) $this->vdesc
-                    + (double) $this->vfrete
-                    + (double) $this->vseg
-                    + (double) $this->voutro
-                    ;
-                $base = $base * (1+($this->mva)/100) * $this->picmsbasereducao;
-                // echo $base ;
-                // die();
-                $this->vicmsstutilizado = ($base * ($this->picmsvenda / 100)) - $this->vicmscredito;
-                // $this->vicmsstutilizado = ((double)$this->vprod - (double)$this->vdesc) * 0.17;
+            // se nao for interestadual, considera que ICMS ST ja foi recolhida pelo fornecedor
+            if (!$interestadual) {
+                $this->picmsvenda = 0;		   
                 return;
             }
+
+            // se nao calcula ST que deveria ser para quando comprado fora do estado
+            $base = (double) $this->vprod
+                + (double) $this->ipivipi
+                - (double) $this->vdesc
+                + (double) $this->vfrete
+                + (double) $this->vseg
+                + (double) $this->voutro
+            ;
+            $base = $base * (1+($this->mva)/100) * $this->picmsbasereducao;
+            // echo $base ;
+            // die();
+            $this->vicmsstutilizado = ($base * ($this->picmsvenda / 100)) - $this->vicmscredito;
+            // $this->vicmsstutilizado = ((double)$this->vprod - (double)$this->vdesc) * 0.17;
             return;
         }
     }

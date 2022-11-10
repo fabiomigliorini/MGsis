@@ -6,7 +6,7 @@
 
 <fieldset>
 	<?php 	
-		echo $form->textFieldRow($model,'contacontabil',array('class'=>'input-xlarge','maxlength'=>50));
+		echo $form->textFieldRow($model,'contacontabil',array('class'=>'input-xlarge','maxlength'=>100));
 		echo $form->textFieldRow($model,'numero',array('class'=>'input-mini text-right','maxlength'=>15));
 		echo $form->toggleButtonRow($model,'inativo', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
 	?>
