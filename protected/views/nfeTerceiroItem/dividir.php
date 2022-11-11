@@ -13,7 +13,9 @@ $this->menu=array(
 );
 ?>
 
-<h1>Dividir <?php echo $model->xprod; ?></h1>
+<h1>
+	Abrir Kit Item <?php echo $model->xprod; ?>
+</h1>
 <br>
 
 <?php
@@ -34,6 +36,17 @@ $form=$this->beginWidget('MGActiveForm', array(
 		<div class="span8">
 			<div class="row-fluid">
 				<div class="span6">
+					<div class="control-group ">
+						<label class="control-label" for="NfeTerceiroItem_margem">
+							Produto
+						</label>
+						<div class="controls">
+							<?php echo $model->xprod; ?>  <br />
+							<?php echo $model->cprod; ?> <br />
+							<?php echo $model->cean; ?> <br />
+							<?php echo $model->ceantrib; ?> <br />
+						</div>
+					</div>
 					<div class="control-group ">
 						<label class="control-label" for="NfeTerceiroItem_margem">
 							Quantidade de Tamanhos
