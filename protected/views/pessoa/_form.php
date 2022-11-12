@@ -146,7 +146,7 @@
         echo $form->textFieldRow($model, 'emailnfe', array('class'=>'input-large','maxlength'=>100, 'prepend' => '<i class="icon-envelope"></i>'));
         echo $form->textFieldRow($model, 'emailcobranca', array('class'=>'input-large','maxlength'=>100, 'prepend' => '<i class="icon-envelope"></i>'));
 
-        echo $form->textAreaRow($model, 'observacoes', array('class'=>'input-xxlarge', 'rows'=>'5','maxlength'=>255));
+        echo $form->textAreaRow($model, 'observacoes', array('class'=>'input-xxlarge', 'rows'=>'5','maxlength'=>500));
 
         //echo $form->checkBoxRow($model,'fornecedor');
         echo $form->toggleButtonRow($model, 'fornecedor', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));

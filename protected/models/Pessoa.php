@@ -124,7 +124,7 @@ class Pessoa extends MGActiveRecord
 			array('ie', 'length', 'max'=>20),
 			array('numero, numerocobranca', 'length', 'max'=>10),
 			array('cep, cepcobranca', 'length', 'max'=>10),
-			array('observacoes', 'length', 'max'=>255),
+			array('observacoes', 'length', 'max'=>500),
 			array('mensagemvenda', 'length', 'max'=>500),
 			array('rg', 'length', 'max'=>30),
 			array('desconto', 'numerical', 'max'=>50),
