@@ -42,6 +42,9 @@ $(document).ready(function(){
             case 'B':
                 $label = 'label-warning';
                 break;
+            case 'C':
+                $label = 'label-info';
+                break;
             default:
                 $label = 'label-important';
                 break;

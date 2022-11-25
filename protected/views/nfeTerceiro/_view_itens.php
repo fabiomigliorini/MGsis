@@ -60,6 +60,9 @@ foreach ($model->NfeTerceiroItems as $item) {
                                         case 'B':
                                             $label = 'label-warning';
                                             break;
+                                        case 'C':
+                                            $label = 'label-info';
+                                            break;
                                         default:
                                             $label = 'label-important';
                                             break;
