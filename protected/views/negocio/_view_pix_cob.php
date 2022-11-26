@@ -10,8 +10,8 @@
 				)
 			);
 		?>
-		<button class="btn" type="button" onclick="criarPixCob()">Criar Cobrança PIX (F8)</button>
-		<button class="btn" type="button" onclick="atualizaListagemPixCob()">Atualizar Listagem</button>
+		<button class="btn" type="button" onclick="criarPixCob()">Criar PIX (F8)</button>
+		<button class="btn" type="button" onclick="atualizaListagemPixCob()">Atualizar</button>
 	</div>
 	<div class="row-fluid">
 		<div id="listagemPixCob">
