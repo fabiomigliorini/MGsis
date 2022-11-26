@@ -38,7 +38,7 @@
 						<input class="input-valor-pagamento text-right" id="valorpagamento" type="text" value="1">
 					</div>
 					<div class="span3">
-						<button class="input-valor-pagamento pull-right btn" type="button" id="btnAdicionar">OK</button>
+						<button class="input-valor-pagamento pull-right btn" type="button" id="btnAdicionar"  tabindex="-1">OK</button>
 					</div>
 				</div>
 			<br>

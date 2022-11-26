@@ -10,8 +10,8 @@
 				)
 			);
 		?>
-		<button class="btn" type="button" onclick="abrirModalStone()">Criar Stone (F9)</button>
-		<button class="btn" type="button" onclick="atualizaListagemStonePreTransacao()">Atualizar</button>
+		<button class="btn" type="button" onclick="abrirModalStone()" tabindex="-1">Criar Stone (F9)</button>
+		<button class="btn" type="button" onclick="atualizaListagemStonePreTransacao()" tabindex="-1">Atualizar</button>
 	</div>
 	<div class="row-fluid">
 		<div id="listagemStonePreTransacao">

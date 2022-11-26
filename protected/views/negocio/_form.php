@@ -99,7 +99,7 @@
             $model,
             'codpessoatransportador',
             array(
-              // 'class' => 'input-medium//',
+              'tabindex'=>-1,
               'placeholder'=>'Transportador',
               'style' => 'width: 100%'
             )
