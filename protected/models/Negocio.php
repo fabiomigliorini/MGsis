@@ -308,6 +308,11 @@ class Negocio extends MGActiveRecord
             }
         }
 
+        if (($this->valortotal >= 1000) && (empty($this->Pessoa->cnpj)) && ($this->NaturezaOperacao->venda == true)) {
+            $this->addError("cpf", "Obrigatório Identificar CPF para compras acima de R$ 1.000,00!");
+            return false;
+        }
+
         //Calcula total pagamentos à vista e à prazo
         $valorPagamentos = 0;
         $valorPagamentosPrazo = 0;
