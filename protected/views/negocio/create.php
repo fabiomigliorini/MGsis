@@ -14,6 +14,8 @@ $this->renderPartial("_hotkeys");
 
 ?>
 
+	<div class="span4">
+	</div>
 <h1>Novo Negócio</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

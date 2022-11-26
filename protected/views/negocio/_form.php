@@ -10,7 +10,12 @@
 <input type="hidden" name="fechar" id="fechar" value="0">
 
 <fieldset>
-  <div class="row-fluid">
+  <div class="row-fluid justify-content-center">
+
+    <?php if ($model->isNewRecord): ?>
+      <div class="span3">
+      </div>
+    <?php endif; ?>
 
     <!-- COLUNA 1 -->
     <div class="span5">
@@ -135,7 +140,10 @@
   </div>
 </fieldset>
 <div class="form-actions">
-
+  <?php if ($model->isNewRecord): ?>
+    <div class="span4">
+    </div>
+  <?php endif; ?>
     <?php
 
     if ($model->isNewRecord) {

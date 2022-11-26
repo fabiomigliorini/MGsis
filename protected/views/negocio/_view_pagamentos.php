@@ -1,6 +1,6 @@
 <div class="control-group ">
 
-	<label for="valorpagamento">Pagamento</label>
+	<label for="codformapagamento">Adicionar Forma de Pagamento</label>
 	<div class="row-fluid">
 		<?php
 		if ($model->codnegociostatus == 1)
