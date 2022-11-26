@@ -1,46 +1,54 @@
-<?php $form=$this->beginWidget('MGActiveForm', array(
-    'id'=>'negocio-form',
-)); ?>
+<?php
+  $form = $this->beginWidget('MGActiveForm', array(
+      'id'=>'negocio-form',
+  ));
+
+  $form->type = 'vertical';
+?>
 
 <?php echo $form->errorSummary($model); ?>
+<input type="hidden" name="fechar" id="fechar" value="0">
 
 <fieldset>
-	<div class="row-fluid">
-		<div class="span6">
-			<input type="hidden" name="fechar" id="fechar" value="0">
-			<?php
+  <div class="row-fluid">
 
-            // codfilial
-            echo $form->select2Row($model, 'codfilial', Filial::getListaCombo(), array('prompt' => '', 'class' => 'input-medium'));
-            echo $form->select2Row($model, 'codestoquelocal', EstoqueLocal::getListaCombo(), array('prompt' => '', 'class' => 'input-medium'));
-
-            echo $form->select2Row(
-                $model,
-                'codnaturezaoperacao',
-                NaturezaOperacao::getListaCombo(),
-                array(
-                    //'placeholder'=>'Tributação',
-                    'class' => 'span12'
-                )
-            );
-
-
-            // codpessoa
-            echo $form->select2PessoaRow(
-                $model,
-                'codpessoa',
-                array(
-                        //'placeholder'=>'Tributação',
-                        'class' => 'span12'
-                        )
-            );
-
-            $style = '';
-            $focoCpf = true;
-            if ($model->codpessoa != Pessoa::CONSUMIDOR) {
-                $style = 'display: none;';
-                $focoCpf = false;
-            }
+    <!-- COLUNA 1 -->
+    <div class="span5">
+      <div class="row-fluid">
+        <div class="span6">
+          <?php
+            echo $form->select2Row($model, 'codfilial', Filial::getListaCombo(), array('prompt' => '', 'style' => 'width: 100%'));
+          ?>
+        </div>
+        <div class="span6">
+          <?php
+            echo $form->select2Row($model, 'codestoquelocal', EstoqueLocal::getListaCombo(), array('prompt' => '', 'style' => 'width: 100%'));
+          ?>
+        </div>
+      </div>
+      <?php
+        echo $form->select2Row(
+            $model,
+            'codnaturezaoperacao',
+            NaturezaOperacao::getListaCombo(),
+            array(
+                'placeholder'=>'Natureza de Operação',
+                'style' => 'width: 100%'
+            )
+        );
+        echo $form->select2PessoaRow(
+            $model,
+            'codpessoa',
+            array(
+              'style' => 'width: 100%'
+            )
+        );
+        $style = '';
+        $focoCpf = true;
+        if ($model->codpessoa != Pessoa::CONSUMIDOR) {
+            $style = 'display: none;';
+            $focoCpf = false;
+        }
       ?>
       <div id="CampoCpf" style="<?php echo $style; ?>">
         <?php
@@ -51,49 +59,82 @@
         ?>
       </div>
       <?php
-
-            // codpessoavendedor
-            echo $form->select2PessoaRow(
-                $model,
-                'codpessoavendedor',
-                array(
-                        'vendedor' => true,
-                        'class' => 'span12'
-                        )
-            );
-            echo $form->textAreaRow($model, 'observacoes', array('class'=>'span12', 'rows'=>'6','maxlength'=>500, 'tabindex'=>-1));
-            ?>
-		</div>
-		<?php if (!$model->isNewRecord): ?>
-		<div class="span6">
-      <?php
-        echo $form->textFieldRow($model, 'valorprodutos', array('class'=>'input-small text-right','maxlength'=>14, "readOnly"=>true, "tabindex"=>-1, 'prepend' => 'R$'));
-        echo $form->textFieldRow($model, 'percentualdesconto', array('class'=>'input-small text-right','maxlength'=>14, 'append'=>'%'));
-        echo $form->textFieldRow($model, 'valordesconto', array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+        // codpessoavendedor
+        echo $form->select2PessoaRow(
+          $model,
+          'codpessoavendedor',
+          array(
+            'vendedor' => true,
+            'style' => 'width: 100%'
+          )
+        );
+        echo $form->textAreaRow($model, 'observacoes', array('class'=>'span12', 'rows'=>'6','maxlength'=>500, 'tabindex'=>-1));
       ?>
-      <?php
-        echo $form->textFieldRow($model, 'valorfrete', array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
-            echo $form->select2PessoaRow(
-                $model,
-                'codpessoatransportador',
-                array(
-                'class' => 'span12'
-            )
-            );
 
-            echo $form->textFieldRow($model, 'valortotal', array('class'=>'input-small text-right','maxlength'=>14, "readOnly"=>true, "tabindex"=>-1, 'prepend' => 'R$'));
-            $this->renderPartial('_view_pagamentos', array('model'=>$model));
-            $this->renderPartial('_view_pix_cob', array('model'=>$model));
-            if (count($model->Filial->StoneFilials) > 0) {
-              $this->renderPartial('_view_stone', array('model'=>$model));
-            }
+    </div>
+
+
+    <?php if (!$model->isNewRecord): ?>
+
+      <!-- COLUNA 2 -->
+      <div class="span3">
+        <?php
+          echo $form->textFieldRow($model, 'valorprodutos', array('class'=>'text-right input-valor','maxlength'=>14, "readOnly"=>true, "tabindex"=>-1));
+        ?>
+        <div class="row-fluid">
+          <div class="span5" style='padding-right: 15px'>
+            <?php
+              echo $form->textFieldRow($model, 'percentualdesconto', array('label'=> 'teste', 'class'=>'text-right input-valor','maxlength'=>14));
             ?>
-		</div>
-	</div>
-	<?php endif; ?>
+          </div>
+          <div class="span7">
+            <?php
+              echo $form->textFieldRow($model, 'valordesconto', array('class'=>'text-right input-valor','maxlength'=>14));
+            ?>
+          </div>
+        </div>
+        <?php
+          echo $form->textFieldRow($model, 'valorfrete', array('class'=>'text-right input-valor','maxlength'=>14));
+          echo $form->select2PessoaRow(
+            $model,
+            'codpessoatransportador',
+            array(
+              // 'class' => 'input-medium//',
+              'placeholder'=>'Transportador',
+              'style' => 'width: 100%'
+            )
+          );
+          echo $form->textFieldRow(
+            $model,
+            'valortotal',
+            array(
+              'class'=>'input-medium text-right input-valor',
+              'maxlength'=>14,
+              'readOnly'=>true,
+              'tabindex'=>-1,
+              // 'prepend' => 'R$',
+              // 'style'=>'max-width: 60%; font-size: 15pt; height: 120%'
+            )
+          );
+        ?>
+      </div>
+
+      <!-- COLUNA 3 -->
+      <div class="span4">
+        <?php
+          $this->renderPartial('_view_pagamentos', array('model'=>$model));
+          $this->renderPartial('_view_pix_cob', array('model'=>$model));
+          if (count($model->Filial->StoneFilials) > 0) {
+            $this->renderPartial('_view_stone', array('model'=>$model));
+          }
+        ?>
+      </div>
+
+    <?php endif; ?>
+
+  </div>
 </fieldset>
 <div class="form-actions">
-
 
     <?php
 
@@ -332,11 +373,12 @@ $(document).ready(function() {
 
 	$("#Negocio_observacoes").RemoveAcentos();
 
-	$('#Negocio_valorprodutos').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
-	$('#Negocio_percentualdesconto').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
-	$('#Negocio_valordesconto').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
-  $('#Negocio_valorfrete').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
-	$('#Negocio_valortotal').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+	$('#Negocio_valorprodutos').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.'});
+	$('#Negocio_percentualdesconto').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.', mDec:'0', aSign: '%', pSign: 's' });
+	// $('#Negocio_percentualdesconto').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.', aSign: '%', pSign: 's' });
+	$('#Negocio_valordesconto').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.'});
+  $('#Negocio_valorfrete').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.'});
+	$('#Negocio_valortotal').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.'});
 
 	$('#Negocio_codpessoa').on("change", function(e) {
     escondeCpf();
@@ -386,9 +428,6 @@ $(document).ready(function() {
 });
 
 </script>
-
-
-
 <?php
 
 if (!$model->isNewRecord) {
@@ -401,3 +440,29 @@ JS
     , CClientScript::POS_READY);
 }
 ?>
+<style>
+
+  label {
+    margin-top: 12px;
+    margin-bottom: 2px;
+  }
+
+  input.input-valor {
+    font-size: 23pt;
+    height: 47px;
+    width: 100%;
+  }
+
+  input.input-valor-pagamento {
+    font-size: 23pt;
+    height: 47px;
+    width: 100%;
+  }
+
+  button.input-valor-pagamento {
+    font-size: 23pt;
+    height: 56px;
+    width: 100%;
+  }
+
+</style>

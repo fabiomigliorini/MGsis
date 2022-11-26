@@ -1,5 +1,5 @@
 <div class="control-group ">
-	<label class="control-label" for="codformapagamento">
+	<div class="row-fluid" style="margin-bottom: 10px">
 		<?php
 			echo CHtml::image(
 				Yii::app()->baseUrl . '/images/pix-bc-logo.png',
@@ -10,14 +10,10 @@
 				)
 			);
 		?>
-	</label>
-	<div class="controls">
-		<div style="margin-bottom: 20px">
-
-			<button class="btn" type="button" onclick="criarPixCob()">Criar Cobrança PIX (F8)</button>
-			<button class="btn" type="button" onclick="atualizaListagemPixCob()">Atualizar Listagem</button>
-
-		</div>
+		<button class="btn" type="button" onclick="criarPixCob()">Criar Cobrança PIX (F8)</button>
+		<button class="btn" type="button" onclick="atualizaListagemPixCob()">Atualizar Listagem</button>
+	</div>
+	<div class="row-fluid">
 		<div id="listagemPixCob">
 			<?php
 			$this->renderPartial('_view_pix_cob_listagem',

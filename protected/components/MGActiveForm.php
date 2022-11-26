@@ -31,8 +31,8 @@ class MGActiveForm extends TbActiveForm
 		);
 		return $widget;
 	}
-	
-	
+
+
 	public function select2PessoaRow($model, $attribute, $htmlOptions = array())
 	{
 		$widget = $this->select2Pessoa($model, $attribute, $htmlOptions);
@@ -48,10 +48,10 @@ class MGActiveForm extends TbActiveForm
 				'attribute' => $attribute,
 				'htmlOptions' => $htmlOptions,
 			),
-			true);		
+			true);
 		return $widget;
 	}
-	
+
 	public function select2NcmRow($model, $attribute, $htmlOptions = array())
 	{
 		$widget = $this->select2Ncm($model, $attribute, $htmlOptions);
@@ -67,7 +67,7 @@ class MGActiveForm extends TbActiveForm
 				'attribute' => $attribute,
 				'htmlOptions' => $htmlOptions,
 			),
-			true);		
+			true);
 		return $widget;
 	}
 
@@ -86,7 +86,7 @@ class MGActiveForm extends TbActiveForm
 				'attribute' => $attribute,
 				'htmlOptions' => $htmlOptions,
 			),
-			true);		
+			true);
 		return $widget;
 	}
 
@@ -105,10 +105,10 @@ class MGActiveForm extends TbActiveForm
 				'attribute' => $attribute,
 				'htmlOptions' => $htmlOptions,
 			),
-			true);		
+			true);
 		return $widget;
 	}
-	
+
 	public function select2ProdutoBarraRow($model, $attribute, $htmlOptions = array())
 	{
 		$widget = $this->select2ProdutoBarra($model, $attribute, $htmlOptions);
@@ -124,9 +124,9 @@ class MGActiveForm extends TbActiveForm
 				'attribute' => $attribute,
 				'htmlOptions' => $htmlOptions,
 			),
-			true);		
+			true);
 		return $widget;
 	}
-	
-	
+
+
 }

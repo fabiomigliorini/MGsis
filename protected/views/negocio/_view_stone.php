@@ -1,5 +1,5 @@
 <div class="control-group ">
-	<label class="control-label" for="codformapagamento">
+	<div class="row-fluid" style="margin-bottom: 10px">
 		<?php
 			echo CHtml::image(
 				Yii::app()->baseUrl . '/images/stone-logo.png',
@@ -10,14 +10,10 @@
 				)
 			);
 		?>
-	</label>
-	<div class="controls">
-		<div style="margin-bottom: 20px">
-
-			<button class="btn" type="button" onclick="abrirModalStone()">Criar Cobrança Stone (F9)</button>
-			<button class="btn" type="button" onclick="atualizaListagemStonePreTransacao()">Atualizar Listagem</button>
-
-		</div>
+		<button class="btn" type="button" onclick="abrirModalStone()">Criar Cobrança Stone (F9)</button>
+		<button class="btn" type="button" onclick="atualizaListagemStonePreTransacao()">Atualizar Listagem</button>
+	</div>
+	<div class="row-fluid">
 		<div id="listagemStonePreTransacao">
 			<?php
 			$this->renderPartial('_view_stone_listagem',
@@ -103,7 +99,7 @@
 					?>
 					<label class="radio">
 						<input type="radio" name="codstonepos" id="codstonepos" value="<?php echo $pos->codstonepos; ?>">
-						<?php echo $pos->StoneFilial->Filial->filial ;?> - 
+						<?php echo $pos->StoneFilial->Filial->filial ;?> -
 						<?php echo $pos->apelido; ?>
 					</label>
 				<?php endforeach; ?>

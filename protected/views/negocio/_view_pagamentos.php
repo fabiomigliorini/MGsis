@@ -1,17 +1,13 @@
 <div class="control-group ">
-	<label class="control-label" for="valorpagamento">
-		Pagamento
-	</label>
-	<div class="controls">
+
+	<label for="valorpagamento">Pagamento</label>
+	<div class="row-fluid">
 		<?php
 		if ($model->codnegociostatus == 1)
 		{
 			?>
 				<div class="row-fluid">
-					<div class="span3">
-							<input class="span12 text-right" id="valorpagamento" type="text" value="1">
-					</div>
-					<div class="span7">
+					<div class="span12">
 							<?php
 								$codformapagamento = FormaPagamento::DINHEIRO;
 								if (!empty($model->codpessoa)) {
@@ -36,30 +32,36 @@
 								);
 							?>
 					</div>
-					<div class="span2">
-						<button class="btn span12" type="button" id="btnAdicionar">Ok</button>
+				</div>
+				<div class="row-fluid" style="margin-top: 4px">
+					<div class="span9" style='padding-right: 15px'>
+						<input class="input-valor-pagamento text-right" id="valorpagamento" type="text" value="1">
+					</div>
+					<div class="span3">
+						<button class="input-valor-pagamento pull-right btn" type="button" id="btnAdicionar">OK</button>
 					</div>
 				</div>
 			<br>
 			<?php
 		}
 		?>
-		<div id="listagemPagamentos">
-		<?php
-		$this->renderPartial('_view_pagamentos_listagem',
-			array(
-				'model'=>$model,
-			));
-		?>
-		</div>
-		<span class="row-fluid" id="diferenca">
-			<b class="span7" id="diferencalabel">
-				Diferença
-			</b>
-			<b class="span4 text-right" id="diferencavalor">
-			</b>
-		</span>
 	</div>
+
+	<div id="listagemPagamentos">
+	<?php
+	$this->renderPartial('_view_pagamentos_listagem',
+		array(
+			'model'=>$model,
+		));
+	?>
+	</div>
+	<span class="row-fluid" id="diferenca">
+		<b class="span7" id="diferencalabel">
+			Diferença
+		</b>
+		<b class="span4 text-right" id="diferencavalor">
+		</b>
+	</span>
 </div>
 <script>
 
