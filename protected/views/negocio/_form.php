@@ -366,10 +366,9 @@ $(document).ready(function() {
 		atualizaPercentualDesconto();
 	});
 
-        $('#Negocio_valorfrete').change(function() {
+  $('#Negocio_valorfrete').change(function() {
 		atualizaValorTotal();
 	});
-
 
 	$("#Negocio_observacoes").RemoveAcentos();
 

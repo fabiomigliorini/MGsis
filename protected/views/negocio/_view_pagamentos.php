@@ -100,8 +100,8 @@ function atualizaValorPagamento(foco)
 		$('#valorpagamento').autoNumeric('set', Math.abs(valordiferenca));
 		$('#diferenca').show()
 		if (foco){
-			// $('#codformapagamento').select2('focus');
-			$('#valorpagamento').focus();
+			$('#codformapagamento').select2('focus');
+			// $('#valorpagamento').focus();
 
 		}
 	}
@@ -149,8 +149,8 @@ function adicionaFormaPagamento()
 			if (!data.Adicionado)
 			{
 				bootbox.alert(data.Mensagem, function() {
-								$("#codformapagamento").select2('focus');
-							});
+					$("#codformapagamento").select2('focus');
+				});
 				$.notify("Erro ao Adicionar Pagamento", { className:"error" });
 			}
 			else
@@ -170,10 +170,17 @@ $(document).ready(function() {
 	$('#valorpagamento').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#Negocio_valortotal').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 
-    $("#btnAdicionar").click(function(e){
+  $("#btnAdicionar").click(function(e){
 		e.preventDefault();
 		adicionaFormaPagamento ();
 	});
+
+	$('#valorpagamento').keypress(function(e) {
+    if (e.which == 13) {
+			e.preventDefault();
+			adicionaFormaPagamento ();
+    }
+  });
 
 	atualizaValorPagamento();
 
