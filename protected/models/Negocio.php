@@ -142,6 +142,7 @@ class Negocio extends MGActiveRecord
             'NfeTerceiros' => array(self::HAS_MANY, 'NfeTerceiro', 'codnegocio'),
             'StonePreTransacaos' => array(self::HAS_MANY, 'StonePreTransacao', 'codnegocio'),
             'MercosPedidos' => array(self::HAS_MANY, 'MercosPedido', 'codnegocio'),
+            'PagarMePedidos' => array(self::HAS_MANY, 'PagarMePedido', 'codnegocio'),
         );
     }
 

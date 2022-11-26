@@ -115,6 +115,9 @@ class Filial extends MGActiveRecord
 			'EstoqueSaldos' => array(self::HAS_MANY, 'EstoqueSaldo', 'codfilial'),
 			'EstoqueLocals' => array(self::HAS_MANY, 'EstoqueLocal', 'codfilial'),
 			'StoneFilials' => array(self::HAS_MANY, 'StoneFilial', 'codfilial'),
+			'PagarMePoss' => array(self::HAS_MANY, 'PagarMePos', 'codfilial'),
+			'PagarMePagamentos' => array(self::HAS_MANY, 'PagarMePagamento', 'codfilial'),
+			'PagarMePedidos' => array(self::HAS_MANY, 'PagarMePedido', 'codfilial'),
 		);
 	}
 
@@ -148,6 +151,8 @@ class Filial extends MGActiveRecord
 			'nfeambiente' => 'Ambiente NFe',
 			'ultimonsu' => 'Último NSU Consultado na Sefaz',
 			'tokenibpt' => 'Token IBPT',
+			'pagarmesk' => 'Pagarme Secret Key',
+			'pagarmeid' => 'Pagarme ID',
 		);
 	}
 
