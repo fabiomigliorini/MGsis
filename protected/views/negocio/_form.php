@@ -132,6 +132,9 @@
           if (count($model->Filial->StoneFilials) > 0) {
             $this->renderPartial('_view_stone', array('model'=>$model));
           }
+          if (!empty($model->Filial->pagarmesk)) {
+            $this->renderPartial('_view_pagar_me', array('model'=>$model));
+          }
         ?>
       </div>
 
@@ -347,6 +350,7 @@ function verificarStatusNegocio ()
         atualizaListagemPagamentos();
         atualizaListagemPixCob();
         atualizaListagemStonePreTransacao();
+        atualizaListagemPagarMePedido();
       }
 
       negocioStatus = data;

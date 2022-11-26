@@ -10,7 +10,8 @@
 				)
 			);
 		?>
-		<button class="btn" type="button" onclick="criarPixCob()" tabindex="-1">Criar PIX (F8)</button>
+		&nbsp
+		<button class="btn" type="button" onclick="criarPixCob()" tabindex="-1">Criar (F8)</button>
 		<button class="btn" type="button" onclick="atualizaListagemPixCob()" tabindex="-1">Atualizar</button>
 	</div>
 	<div class="row-fluid">

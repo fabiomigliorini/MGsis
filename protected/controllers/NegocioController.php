@@ -393,6 +393,13 @@ class NegocioController extends Controller
             ));
     }
 
+    public function actionAtualizaListagemPagarMePedido($codnegocio)
+    {
+        $this->renderPartial('_view_pagar_me_listagem', array(
+            'model'=>$this->loadModel($codnegocio),
+            ));
+    }
+
     public function actionAtualizaTotais($codnegocio)
     {
         $this->renderPartial('_view_totais', array(

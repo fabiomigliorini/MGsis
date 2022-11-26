@@ -40,7 +40,9 @@ function acaoF3 ()
 
 function acaoF7()
 {
-    mostrarPrancheta();
+	if (typeof acaoF7PagarMe === 'function') {
+		acaoF7PagarMe();
+	}
 }
 
 function acaoF8()
