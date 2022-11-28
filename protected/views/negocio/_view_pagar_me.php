@@ -38,7 +38,6 @@
 			);
 		?>
   </div>
-	<form id="formPagarMe">
   <div class="modal-body">
 
 		<div class="control-group ">
@@ -108,8 +107,8 @@
 		<button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
     <button class="btn btn-success" id="btnOkModalPagarMe">OK (F7)</button>
 	</div>
-	</form>
 </div>
+
 <script>
 
 <?php if (sizeof($model->PagarMePedidos) > 0): ?>
