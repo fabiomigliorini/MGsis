@@ -347,10 +347,18 @@ function verificarStatusNegocio ()
 
       // se alterou pagamento atualiza listagem de pagamentos
       if (negocioStatus.valorpagamento != data.valorpagamento) {
-        atualizaListagemPagamentos();
-        atualizaListagemPixCob();
-        atualizaListagemStonePreTransacao();
-        atualizaListagemPagarMePedido();
+        if (typeof atualizaListagemPagamentos === 'function') {
+      		atualizaListagemPagamentos();
+      	}
+        if (typeof atualizaListagemPixCob === 'function') {
+      		atualizaListagemPixCob();
+      	}
+        if (typeof atualizaListagemStonePreTransacao === 'function') {
+      		atualizaListagemStonePreTransacao();
+      	}
+        if (typeof atualizaListagemPagarMePedido === 'function') {
+      		atualizaListagemPagarMePedido();
+      	}
       }
 
       negocioStatus = data;
