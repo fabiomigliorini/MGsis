@@ -1,4 +1,11 @@
 <?php
+$pagarMePedidoStatus = [
+	1 => 'Pendente',
+	2 => 'Pago',
+	3 => 'Cancelado',
+	4 => 'Falha',
+];
+
 /*
  * @var Titulo $titulo
  */
@@ -215,6 +222,87 @@ foreach ($model->NegocioFormaPagamentos as $nfp)
 									<small class="muted">(<?php echo Yii::app()->format->formatNumber($stp->valorliquido); ?>) </small> |
 									<?php echo $stp->vencimento ?>
 							</div>
+						</div>
+						<?php
+					}
+				}
+				?>
+				<!-- PagarMe -->
+				<?php
+				if (!empty($nfp->codpagarmepedido))
+				{
+					?>
+					<div class="row-fluid">
+						<div>
+							<b>
+                <?php if ($nfp->PagarMePedido->tipo == 1): ?>
+                    Débito
+                <?php elseif ($nfp->PagarMePedido->tipo == 2): ?>
+                    Crédito
+                <?php else: ?>
+                    Tipo <?php echo CHtml::encode($nfp->PagarMePedido->tipo); ?>
+                <?php endif; ?>
+								<?php if ($nfp->PagarMePedido->parcelas > 1): ?>
+									<?php echo CHtml::encode($nfp->PagarMePedido->parcelas); ?> parcelas
+								<?php endif; ?>
+							</b>
+						</div>
+						<div>
+							<small class="muted">
+								<?php if ($nfp->PagarMePedido->valorpago != $nfp->valorpagamento): ?>
+									Original R$ <?php echo Yii::app()->format->formatNumber($nfp->PagarMePedido->valorpago); ?>
+								<?php endif; ?>
+								<?php if ($nfp->PagarMePedido->valorcancelado > 0): ?>
+									| Cancelado R$ <?php echo Yii::app()->format->formatNumber($nfp->PagarMePedido->valorcancelado); ?>
+								<?php endif; ?>
+								<?php if ($nfp->PagarMePedido->valorpago != $nfp->PagarMePedido->valorpagoliquido): ?>
+									| Líquido R$ <?php echo Yii::app()->format->formatNumber($nfp->PagarMePedido->valorpagoliquido); ?>
+								<?php endif; ?>
+							</small>
+						</div>
+						<div>
+							<small class="muted">
+								<?php echo CHtml::encode($pagarMePedidoStatus[$nfp->PagarMePedido->status]); ?> |
+								<?php echo CHtml::encode($nfp->PagarMePedido->idpedido); ?> |
+								<?php echo CHtml::encode($nfp->PagarMePedido->criacao); ?>
+							</small>
+						</div>
+					</div>
+					<?php
+					foreach ($nfp->PagarMePedido->PagarMePagamentos as $pag) {
+						?>
+						<div>
+							<b>
+								<?php if (!empty($pag->valorpagamento)): ?>
+									<span class="text-success">
+										<?php echo Yii::app()->format->formatNumber($pag->valorpagamento, 2); ?> Pago
+									</span>
+								<?php endif; ?>
+								<?php if (!empty($pag->valorcancelamento)): ?>
+									<span class="text-error">
+										<?php echo Yii::app()->format->formatNumber($pag->valorcancelamento, 2); ?> Cancelado
+									</span>
+								<?php endif; ?>
+								<?php if (!empty($pag->codpagarmebandeira)): ?>
+									| <?php echo CHtml::encode($pag->PagarMeBandeira->bandeira); ?>
+								<?php endif; ?>
+								<?php if (!empty($pag->nome)): ?>
+									| <?php echo CHtml::encode($pag->nome); ?>
+								<?php endif; ?>
+							</b>
+						</div>
+						<div class="muted">
+							<small>
+								StoneId <?php echo $pag->nsu ?> |
+								Autorização <?php echo $pag->autorizacao ?> |
+								<?php echo $pag->transacao ?>
+								<br>
+								<?php echo $pag->identificador ?> |
+								<?php if (!empty($pag->codpagarmepos)): ?>
+									Maquineta <?php echo CHtml::encode($pag->PagarMePos->apelido); ?>
+									<?php echo CHtml::encode($pag->PagarMePos->serial); ?>
+								<?php endif; ?>
+							</small>
 						</div>
 						<?php
 					}
