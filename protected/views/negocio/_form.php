@@ -128,12 +128,12 @@
       <div class="span4">
         <?php
           $this->renderPartial('_view_pagamentos', array('model'=>$model));
+          if (!empty($model->Filial->pagarmesk)) {
+            $this->renderPartial('_view_pagar_me', array('model'=>$model));
+          }
           $this->renderPartial('_view_pix_cob', array('model'=>$model));
           if (count($model->Filial->StoneFilials) > 0) {
             $this->renderPartial('_view_stone', array('model'=>$model));
-          }
-          if (!empty($model->Filial->pagarmesk)) {
-            $this->renderPartial('_view_pagar_me', array('model'=>$model));
           }
         ?>
       </div>
@@ -347,10 +347,18 @@ function verificarStatusNegocio ()
 
       // se alterou pagamento atualiza listagem de pagamentos
       if (negocioStatus.valorpagamento != data.valorpagamento) {
-        atualizaListagemPagamentos();
-        atualizaListagemPixCob();
-        atualizaListagemStonePreTransacao();
-        atualizaListagemPagarMePedido();
+        if (typeof atualizaListagemPagamentos === 'function') {
+      		atualizaListagemPagamentos();
+      	}
+        if (typeof atualizaListagemPixCob === 'function') {
+      		atualizaListagemPixCob();
+      	}
+        if (typeof atualizaListagemStonePreTransacao === 'function') {
+      		atualizaListagemStonePreTransacao();
+      	}
+        if (typeof atualizaListagemPagarMePedido === 'function') {
+      		atualizaListagemPagarMePedido();
+      	}
       }
 
       negocioStatus = data;
@@ -476,4 +484,22 @@ JS
     width: 100%;
   }
 
+  .bs-docs-example {
+    position: relative;
+    margin: 0;
+    padding: 8px;
+    /* *padding-top: 19px; */
+    /* background-color: #fff; */
+    border: 1px solid #ddd;
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
+  }
+
+  .logo-pagamento {
+    /* border: 1px solid blue; */
+    margin-left: 5px;
+    margin-bottom: 15px;
+
+  }
 </style>

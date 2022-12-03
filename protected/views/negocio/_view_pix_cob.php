@@ -1,18 +1,19 @@
-<div class="control-group ">
-	<div class="row-fluid" style="margin-bottom: 10px">
+<div class="bs-docs-example" style="margin-bottom: 10px">
+	<div class="row-fluid">
 		<?php
 			echo CHtml::image(
 				Yii::app()->baseUrl . '/images/pix-bc-logo.png',
 				'',
 				array(
 					'style' => 'max-width: 120px',
-					'class'=>"",
+					'class'=> "logo-pagamento",
 				)
 			);
 		?>
-		&nbsp
-		<button class="btn" type="button" onclick="criarPixCob()" tabindex="-1">Criar (F8)</button>
-		<button class="btn" type="button" onclick="atualizaListagemPixCob()" tabindex="-1">Atualizar</button>
+		<div class="pull-right">
+			<button class="btn" type="button" onclick="criarPixCob()" tabindex="-1">Novo (F8)</button>
+			<button class="btn" type="button" onclick="atualizaListagemPixCob()" tabindex="-1">Atualizar</button>
+		</div>
 	</div>
 	<div class="row-fluid">
 		<div id="listagemPixCob">
@@ -173,6 +174,8 @@ function consultarPixCob (codpixcob)
 	}).done(function(resp) {
 		verificarStatusNegocio();
 		window.rodandoConsultaPixCob = false;
+		console.log(window.pixCob);
+		console.log(resp.data);
 		window.pixCob = resp.data;
 		atualizaCamposPixCob();
 		$.notify("Cobrança " + resp.data.txid + " Consultada! Status: " + resp.data.status, { position:"right bottom", className:"success", autoHideDelay: 15000 });
@@ -241,17 +244,15 @@ function transmitirPixCob(codpixcob)
 
 function criarPixCob()
 {
-	if (window.aguardandoConfirmacaoCriarPìxCob || window.rodandoConsultaPixCob) {
+	if (window.rodandoConsultaPixCob) {
 		return;
 	}
-	window.aguardandoConfirmacaoCriarPìxCob = true;
 	bootbox.confirm('Criar Cobrança via PIX?', function(result) {
-		abrirModalPixCob();
 		window.pixCob = {};
-		window.aguardandoConfirmacaoCriarPìxCob = false;
 		if (!result) {
 			return
 		}
+		abrirModalPixCob();
 		window.rodandoConsultaPixCob = true;
 		$.ajax({
 		  type: 'POST',

@@ -1,18 +1,19 @@
-<div class="control-group ">
-	<div class="row-fluid" style="margin-bottom: 10px">
+<div class="bs-docs-example" style="margin-bottom: 10px">
+	<div class="row-fluid">
 		<?php
 			echo CHtml::image(
 				Yii::app()->baseUrl . '/images/pagar-me-logo.svg',
 				'',
 				array(
 					'style' => 'max-width: 120px',
-					'class'=>"",
+					'class'=> "logo-pagamento",
 				)
 			);
 		?>
-		&nbsp
-		<button class="btn" type="button" onclick="abrirModalPagarMe()" tabindex="-1">Criar (F7)</button>
-		<button class="btn" type="button" onclick="atualizaListagemPagarMePedido()" tabindex="-1">Atualizar</button>
+		<div class="pull-right">
+			<button class="btn" type="button" onclick="abrirModalPagarMe()" tabindex="-1">Novo (F7)</button>
+			<button class="btn" type="button" onclick="atualizaListagemPagarMePedido()" tabindex="-1">Atualizar</button>
+		</div>
 	</div>
 	<div class="row-fluid">
 		<div id="listagemPagarMePedido">
@@ -148,21 +149,23 @@ function consultarPagarMePedido (codPagarMePedido)
 	}
 	window.rodandoPagarMePedido = true;
 	$.ajax({
-		type: 'GET',
-		url: "<?php echo MGSPA_API_URL; ?>pagar-me/pedido/"+codPagarMePedido,
+		type: 'POST',
+		url: "<?php echo MGSPA_API_URL; ?>pagar-me/pedido/"+codPagarMePedido+"/consultar",
 		dataType: "json",
 		headers: {
 			"X-Requested-With":"XMLHttpRequest"
 		},
 	}).done(function(resp) {
 		verificarStatusNegocio();
+		atualizaListagemPagamentos();
 		window.rodandoPagarMePedido = false;
-		$.notify("Cobrança " + resp.token + " Consultada! Status: " + resp.status, { position:"right bottom", className:"success", autoHideDelay: 15000 });
+		$.notify("Cobrança " + resp.pedido.idpedido + " Consultado! Valor pago: " + resp.pedido.valorpagoliquido, { position:"right bottom", className:"success", autoHideDelay: 15000 });
 		atualizaListagemPagarMePedido();
 	}).fail(function( jqxhr, textStatus, error ) {
 		window.rodandoPagarMePedido = false;
 		$.notify("Erro ao consultar cobrança "+ codPagarMePedido +"!", { position:"right bottom", className:"error", autoHideDelay: 15000 });
 		atualizaListagemPagarMePedido();
+		atualizaListagemPagamentos();
 		var resp = jQuery.parseJSON(jqxhr.responseText);
 		bootbox.alert(resp.message);
 	});
