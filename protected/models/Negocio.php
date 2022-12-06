@@ -308,7 +308,7 @@ class Negocio extends MGActiveRecord
             }
         }
 
-        if (($this->valortotal >= 1000) && (empty($this->Pessoa->cnpj)) && ($this->NaturezaOperacao->venda == true)) {
+        if (($this->valortotal >= 1000) && (empty($this->Pessoa->cnpj)) && (empty($this->cpf)) && ($this->NaturezaOperacao->venda == true)) {
             $this->addError("cpf", "Obrigatório Identificar CPF para compras acima de R$ 1.000,00!");
             return false;
         }
