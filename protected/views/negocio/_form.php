@@ -127,14 +127,30 @@
       <!-- COLUNA 3 -->
       <div class="span4">
         <?php
+
+          // Pagamentos
           $this->renderPartial('_view_pagamentos', array('model'=>$model));
+
+          // PagarMe
           if (!empty($model->Filial->pagarmesk)) {
             $this->renderPartial('_view_pagar_me', array('model'=>$model));
           }
+
+          // PIX
           $this->renderPartial('_view_pix_cob', array('model'=>$model));
-          if (count($model->Filial->StoneFilials) > 0) {
+
+          // Stone
+          $sql = "
+            select count(*)
+            from mgsis.tblstonefilial
+            where codfilial = {$model->codfilial}
+            and inativo is null
+          ";
+          $sf = Yii::app()->db->createCommand($sql)->queryScalar();
+          if ($sf > 0) {
             $this->renderPartial('_view_stone', array('model'=>$model));
           }
+          
         ?>
       </div>
 
