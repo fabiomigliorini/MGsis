@@ -139,6 +139,7 @@ function fechaPrancheta()
 
 function redirecinarComanda(comanda)
 {
+		bootbox.hideAll();
 		bootbox.confirm("Deseja adicionar itens da comanda #" + comanda + "?", function(result) {
 			if (result) {
 				var codnegocio = '<?php echo $model->codnegocio; ?>';
@@ -221,6 +222,7 @@ function adicionaProduto()
 		success: function(data) {
 			if (!data.Adicionado)
 			{
+				bootbox.hideAll();
 				bootbox.dialog(data.Mensagem,
 					[{
 						"label" : "Fechar",
@@ -335,6 +337,7 @@ $(document).ready(function() {
 		var url = jQuery(this).attr('href');
 
 		//pede confirmacao
+		bootbox.hideAll();
 		bootbox.confirm("Excluir este Item?", function(result) {
 
 			// se confirmou

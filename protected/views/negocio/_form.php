@@ -150,7 +150,7 @@
           if ($sf > 0) {
             $this->renderPartial('_view_stone', array('model'=>$model));
           }
-          
+
         ?>
       </div>
 
@@ -315,6 +315,7 @@ function mostraMensagemVenda()
 		async: true,
 		success: function (data) {
 			if (data.mensagemvenda != null)
+        bootbox.hideAll();
 				bootbox.dialog("<pre>" + data.mensagemvenda + "</pre>",
 					[{
 						"label" : "Fechar",
@@ -449,6 +450,7 @@ $(document).ready(function() {
 			msg = "Tem certeza que deseja FECHAR o negócio?";
 
 		e.preventDefault();
+    bootbox.hideAll();
 		bootbox.confirm(msg, function(result) {
 			if (result)
 			{

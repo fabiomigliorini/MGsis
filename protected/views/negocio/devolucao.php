@@ -42,16 +42,16 @@ $this->renderPartial("_hotkeys");
 	{
 		var valorprodutosdevolucao = 0;
 		var percentualdesconto = <?php echo $model->valordesconto / $model->valorprodutos; ?>;
-	
+
 		$.each($('.quantidadedevolucao'),function(){
-			
+
 			var codnegocioprodutobarra = $(this).data("codnegocioprodutobarra");
 			var quantidadedevolucao = parseFloat($('#quantidadedevolucao\\[' + codnegocioprodutobarra + '\\]').autoNumeric('get'));
 			var maximodevolucao = parseFloat($('#maximodevolucao\\[' + codnegocioprodutobarra + '\\]').val());
-            
+
             if (isNaN(quantidadedevolucao))
                 quantidadedevolucao = 0;
-			
+
 			if (quantidadedevolucao > maximodevolucao)
 			{
 				bootbox.alert('Quantidade máxima para este item é <b class="text-error">' + maximodevolucao + '</b>!', function() {
@@ -60,7 +60,7 @@ $this->renderPartial("_hotkeys");
 				quantidadedevolucao = '';
 				$('#quantidadedevolucao\\[' + codnegocioprodutobarra + '\\]').autoNumeric('set', quantidadedevolucao);
 			}
-			
+
 			var valorunitario = $('#valorunitario\\[' + codnegocioprodutobarra + '\\]').val();
 			var totaldevolucao = quantidadedevolucao * valorunitario;
 			valorprodutosdevolucao += totaldevolucao;
@@ -71,26 +71,27 @@ $this->renderPartial("_hotkeys");
 		$('#valordescontodevolucao').autoNumeric('set', valordescontodevolucao);
 		var valortotaldevolucao = valorprodutosdevolucao - valordescontodevolucao;
 		$('#valortotaldevolucao').autoNumeric('set', valortotaldevolucao);
-		
+
 	}
-	
+
 	$(document).ready(function(){
-		
+
 		$('.quantidadedevolucao').on('change', function() { calculaTotais(); });
 		$('#marcarTodos').on('click', function(e) { e.preventDefault(); marcaTodos(); });
-		
+
 		$('.quantidadedevolucao').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 		$('.totaldevolucao').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 		$('#valorprodutosdevolucao').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 		$('#valordescontodevolucao').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 		$('#valortotaldevolucao').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 		$('.quantidadedevolucao:visible:first').focus();
-		
+
 		calculaTotais();
-		
+
 		$('#devolucao-form').submit(function(e) {
 			var currentForm = this;
 			e.preventDefault();
+			bootbox.hideAll();
 			bootbox.confirm("Tem certeza que deseja confirmar a <b>devolução</b> dos itens selecionados?", function(result) {
 				if (result) {
 					currentForm.submit();
@@ -101,15 +102,15 @@ $this->renderPartial("_hotkeys");
 	});
 /*]]>*/
 </script>
-<?php 
-$form = 
+<?php
+$form =
 	$this->beginWidget(
-		'bootstrap.widgets.TbActiveForm', 
+		'bootstrap.widgets.TbActiveForm',
 		array(
 			'id'=>'devolucao-form',
 			'enableClientValidation' => false,
 		)
-	); 
+	);
 ?>
 
 <?php echo $form->errorSummary($model); ?>
@@ -153,35 +154,35 @@ $form =
 					?>
 					<tr>
 						<td>
-							<?php echo CHtml::encode($i) ?> 
+							<?php echo CHtml::encode($i) ?>
 						</td>
 						<td>
-							<?php echo CHtml::encode($npb->ProdutoBarra->barras) ?> 
+							<?php echo CHtml::encode($npb->ProdutoBarra->barras) ?>
 						</td>
 						<td>
-							<?php echo CHtml::link(CHtml::encode($npb->ProdutoBarra->descricao), array('produto/view', 'id'=>$npb->ProdutoBarra->codproduto), array ("tabindex"=>-1)); ?> 
+							<?php echo CHtml::link(CHtml::encode($npb->ProdutoBarra->descricao), array('produto/view', 'id'=>$npb->ProdutoBarra->codproduto), array ("tabindex"=>-1)); ?>
 						</td>
 						<td>
 							<div class="text-center">
-								<input 
-									type="hidden" 
-									class="input-mini" 
-									name="maximodevolucao[<?php echo $npb->codnegocioprodutobarra; ?>]" 
-									id="maximodevolucao[<?php echo $npb->codnegocioprodutobarra; ?>]" 
+								<input
+									type="hidden"
+									class="input-mini"
+									name="maximodevolucao[<?php echo $npb->codnegocioprodutobarra; ?>]"
+									id="maximodevolucao[<?php echo $npb->codnegocioprodutobarra; ?>]"
 									value="<?php echo $disp; ?>"
 								>
-								<input 
-									type="hidden" 
-									class="input-mini" 
-									name="valorunitario[<?php echo $npb->codnegocioprodutobarra; ?>]" 
-									id="valorunitario[<?php echo $npb->codnegocioprodutobarra; ?>]" 
+								<input
+									type="hidden"
+									class="input-mini"
+									name="valorunitario[<?php echo $npb->codnegocioprodutobarra; ?>]"
+									id="valorunitario[<?php echo $npb->codnegocioprodutobarra; ?>]"
 									value="<?php echo $npb->valorunitario; ?>"
 								>
-								<input 
-									type="text" 
-									class="input-mini text-right quantidadedevolucao" 
-									name="quantidadedevolucao[<?php echo $npb->codnegocioprodutobarra; ?>]" 
-									id="quantidadedevolucao[<?php echo $npb->codnegocioprodutobarra; ?>]" 
+								<input
+									type="text"
+									class="input-mini text-right quantidadedevolucao"
+									name="quantidadedevolucao[<?php echo $npb->codnegocioprodutobarra; ?>]"
+									id="quantidadedevolucao[<?php echo $npb->codnegocioprodutobarra; ?>]"
 									value="<?php echo (isset($_POST['quantidadedevolucao'][$npb->codnegocioprodutobarra]))?Yii::app()->format->unformatNumber($_POST['quantidadedevolucao'][$npb->codnegocioprodutobarra]):''; ?>"
 									data-codnegocioprodutobarra="<?php echo $npb->codnegocioprodutobarra; ?>"
                                     <?php echo $bloqueado; ?>
@@ -193,7 +194,7 @@ $form =
 						</td>
 						<td>
 							<div class="pull-right">
-								<?php echo Yii::app()->format->formatNumber($npb->quantidade); ?>  
+								<?php echo Yii::app()->format->formatNumber($npb->quantidade); ?>
                                 <?php if (abs($dev) > 0): ?>
                                     <small class="muted pull-left">
                                         <?php echo Yii::app()->format->formatNumber($dev); ?>  já devolvido anteriormente! &nbsp;
@@ -203,17 +204,17 @@ $form =
 						</td>
 						<td>
 							<div class="pull-right">
-								<?php echo CHtml::encode($npb->ProdutoBarra->UnidadeMedida->sigla); ?> 
+								<?php echo CHtml::encode($npb->ProdutoBarra->UnidadeMedida->sigla); ?>
 							</div>
 						</td>
 						<td>
 							<div class="pull-right">
-								<?php echo Yii::app()->format->formatNumber($npb->valorunitario); ?> 
+								<?php echo Yii::app()->format->formatNumber($npb->valorunitario); ?>
 							</div>
 						</td>
 						<td>
 							<div class="pull-right">
-								<?php echo Yii::app()->format->formatNumber($npb->valortotal); ?> 
+								<?php echo Yii::app()->format->formatNumber($npb->valortotal); ?>
 							</div>
 						</td>
 					</tr>
@@ -221,54 +222,54 @@ $form =
 					<?
 				}
 			?>
-			
-			
+
+
 		</tbody>
 		<tfoot>
 			<tr>
 				<th rowspan="3" colspan="3">Total</th>
 				<th>
-					Produtos 
+					Produtos
 				</th>
 				<th>
 					<div class="pull-right" id="valorprodutosdevolucao">
 						0,00
-					</div>					
+					</div>
 				</th>
 				<th colspan="4">
 					<div class="pull-right" id="valorprodutos">
 						<?php echo $model->valorprodutos; ?>
-					</div>					
+					</div>
 				</th>
 			</tr>
 			<tr>
 				<th>
-					Desconto 
+					Desconto
 				</th>
 				<th>
 					<div class="pull-right" id="valordescontodevolucao">
 						0,00
-					</div>					
+					</div>
 				</th>
 				<th colspan="4">
 					<div class="pull-right" id="valordesconto">
 						<?php echo $model->valordesconto; ?>
-					</div>					
+					</div>
 				</th>
 			</tr>
 			<tr>
 				<th>
-					Total 
+					Total
 				</th>
 				<th>
 					<div class="pull-right" id="valortotaldevolucao">
 						0,00
-					</div>					
+					</div>
 				</th>
 				<th colspan="4">
 					<div class="pull-right" id="valortotal">
 						<?php echo $model->valortotal; ?>
-					</div>					
+					</div>
 				</th>
 			</tr>
 		</tfoot>
@@ -276,7 +277,7 @@ $form =
 </fieldset>
 
 <div class="form-actions text-center">
-    <?php 
+    <?php
         $this->widget(
             'bootstrap.widgets.TbButton',
             array(
@@ -285,7 +286,7 @@ $form =
                 'label' => 'Confirmar',
                 'icon' => 'icon-ok',
                 )
-            ); 
+            );
 	?>
 </div>
 

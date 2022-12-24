@@ -162,6 +162,9 @@ function transmitirPixCobAberto ()
 
 function consultarPixCob (codpixcob)
 {
+	if (window.rodandoConsultaPixCob) {
+		return;
+	}
 	abrirModalPixCob();
 	window.rodandoConsultaPixCob = true;
 	$.ajax({
@@ -174,8 +177,8 @@ function consultarPixCob (codpixcob)
 	}).done(function(resp) {
 		verificarStatusNegocio();
 		window.rodandoConsultaPixCob = false;
-		console.log(window.pixCob);
-		console.log(resp.data);
+		// console.log(window.pixCob);
+		// console.log(resp.data);
 		window.pixCob = resp.data;
 		atualizaCamposPixCob();
 		$.notify("Cobrança " + resp.data.txid + " Consultada! Status: " + resp.data.status, { position:"right bottom", className:"success", autoHideDelay: 15000 });
@@ -191,6 +194,9 @@ function consultarPixCob (codpixcob)
 
 function imprimirQrCode ()
 {
+	if (window.rodandoConsultaPixCob) {
+		return;
+	}
 	if (pixCob.codpixcob === undefined) {
 		return;
 	}
@@ -218,6 +224,9 @@ function imprimirQrCode ()
 
 function transmitirPixCob(codpixcob)
 {
+	if (window.rodandoConsultaPixCob) {
+		return;
+	}
 	abrirModalPixCob();
 	window.rodandoConsultaPixCob = true;
 	$.ajax({
@@ -247,13 +256,17 @@ function criarPixCob()
 	if (window.rodandoConsultaPixCob) {
 		return;
 	}
+	bootbox.hideAll();
 	bootbox.confirm('Criar Cobrança via PIX?', function(result) {
-		window.pixCob = {};
 		if (!result) {
 			return
 		}
-		abrirModalPixCob();
+		if (window.rodandoConsultaPixCob) {
+			return;
+		}
 		window.rodandoConsultaPixCob = true;
+		window.pixCob = {};
+		abrirModalPixCob();
 		$.ajax({
 		  type: 'POST',
 		  url: "<?php echo MGSPA_API_URL; ?>pix/cob/criar-negocio/<?php echo $model->codnegocio ?>",
@@ -262,6 +275,7 @@ function criarPixCob()
 				"X-Requested-With":"XMLHttpRequest"
 			},
 		}).done(function(resp) {
+			window.rodandoConsultaPixCob = false;
 			window.pixCob = resp.data;
 			$.notify("Cobrança " + resp.data.txid + " Criada!", { position:"right bottom", className:"success"});
 			transmitirPixCob(resp.data.codpixcob);

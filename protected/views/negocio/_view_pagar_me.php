@@ -175,6 +175,7 @@ function cancelarPagarMePedido (codPagarMePedido)
 	if (window.rodandoPagarMePedido) {
 		return
 	}
+	bootbox.hideAll();
 	bootbox.confirm('Tem certeza que deseja cancelar?', function(result) {
 		if (result)
 		{

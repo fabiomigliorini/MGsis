@@ -77,7 +77,6 @@ function imprimirComanda (event)
 {
 	event.preventDefault();
 	mostrarComanda();
-	window.rodandoConsultaPixCob = true;
 	var impressora = '<?php echo Yii::app()->user->getState('impressoraTermica') ?>';
 	var codnegocio = '<?php echo $model->codnegocio ?>';
 	if (impressora == '') {
@@ -259,6 +258,7 @@ $(document).ready(function(){
 		{
 			?>
 			window.history.pushState({page: null}, null, '<?php echo Yii::app()->createUrl('negocio/view', ['id'=>$model->codnegocio, 'perguntarNota'=>false]) ?>');
+			bootbox.hideAll();
 			bootbox.confirm("<?php echo $pergunta; ?>", function(result) {
 				if (result)
 					<?php echo $funcao; ?>
@@ -322,6 +322,7 @@ $(document).ready(function(){
 	})
 
 	$('body').on('click','#btnCancelar',function() {
+		bootbox.hideAll();
 		bootbox.confirm("Cancelar este negócio?", function(result) {
 			if (result)
 				jQuery.yii.submitForm(document.body.childNodes[0], "<?php echo Yii::app()->createUrl('negocio/cancelar', array('id' => $model->codnegocio))?>",{});

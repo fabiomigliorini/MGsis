@@ -194,6 +194,7 @@ $(document).ready(function() {
 		var url = jQuery(this).attr('href');
 
 		//pede confirmacao
+		bootbox.hideAll();
 		bootbox.confirm("Excluir este Item?", function(result) {
 
 			// se confirmou
