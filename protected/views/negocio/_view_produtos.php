@@ -349,7 +349,11 @@ $(document).ready(function() {
 					url: url,
 
 					//se sucesso, atualiza listagem de embalagens
-					success: function(){
+					success: function(response){
+						console.log(response);
+						if (response) {
+							bootbox.alert(response);
+						}
 						atualizaTela();
 					},
 

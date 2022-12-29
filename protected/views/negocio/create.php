@@ -18,4 +18,4 @@ $this->renderPartial("_hotkeys");
 	</div>
 <h1>Novo Negócio</h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model, 'itens'=>$itens, 'codnegocioprodutobarraduplicar'=>$codnegocioprodutobarraduplicar)); ?>

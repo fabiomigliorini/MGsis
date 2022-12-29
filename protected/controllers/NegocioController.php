@@ -27,6 +27,7 @@ class NegocioController extends Controller
     public function actionCreate($duplicar = null)
     {
         $model=new Negocio;
+        $itens = [];
 
         // Uncomment the following line if AJAX validation is needed
         $this->performAjaxValidation($model);
@@ -41,7 +42,13 @@ class NegocioController extends Controller
         $model->codnaturezaoperacao = NaturezaOperacao::VENDA;
         $model->codpessoa = Pessoa::CONSUMIDOR;
 
+        $codnegocioprodutobarraduplicar = [];
+        if (isset($_POST['codnegocioprodutobarraduplicar'])) {
+            $codnegocioprodutobarraduplicar = $_POST['codnegocioprodutobarraduplicar'];
+        }
+
         if (isset($_POST['Negocio'])) {
+
             $transaction = Yii::app()->db->beginTransaction();
 
             $erro = false;
@@ -53,11 +60,18 @@ class NegocioController extends Controller
                 $erro = true;
             }
 
-            if (!$erro && !empty($duplicar)) {
+            if (!empty($duplicar)) {
                 $original = $this->loadModel($duplicar);
+            }
+
+            if (!$erro && !empty($duplicar)) {
+
 
                 //duplica produtos
                 foreach ($original->NegocioProdutoBarras as $prod_orig) {
+                    if (!isset($codnegocioprodutobarraduplicar[$prod_orig->codnegocioprodutobarra])) {
+                      continue;
+                    }
                     $prod_novo = new NegocioProdutoBarra;
                     $prod_novo->attributes = $prod_orig->attributes;
                     $prod_novo->codnegocioprodutobarra = null;
@@ -90,13 +104,14 @@ class NegocioController extends Controller
                 $this->redirect(array('view','id'=>$model->codnegocio));
             } else {
                 $transaction->rollBack();
+                if (isset($original)) {
+                    $itens = $this->itensDuplicar($original);
+                }
             }
         } else {
             if (!empty($duplicar)) {
                 $original = $this->loadModel($duplicar);
-
                 $model->attributes = $original->attributes;
-
                 $model->codusuariocriacao = null;
                 $model->criacao = null;
                 $model->codusuarioalteracao = null;
@@ -104,13 +119,38 @@ class NegocioController extends Controller
                 $model->codnegociostatus = NegocioStatus::ABERTO;
                 $model->codusuario = Yii::app()->user->id;
                 $model->lancamento = date('d/m/Y H:i:s');
+                $model->observacoes = 'Duplicado de ' . Yii::app()->format->formataCodigo($duplicar, 8) . "\n" . $model->observacoes;
+                $itens = $this->itensDuplicar($original);
+                foreach ($itens as $item) {
+                    $codnegocioprodutobarraduplicar[$item->codnegocioprodutobarra] = true;
+                }
             }
         }
 
         $this->render('create', array(
             'model'=>$model,
-            ));
+            'itens'=>$itens,
+            'codnegocioprodutobarraduplicar'=>$codnegocioprodutobarraduplicar
+        ));
     }
+
+    public function itensDuplicar($original)
+    {
+        $itens = [];
+        foreach ($original->NegocioProdutoBarras as $npb) {
+            $itens[] = (object) [
+                'codnegocioprodutobarra' => $npb->codnegocioprodutobarra,
+                'codprodutobarra' => $npb->codprodutobarra,
+                'descricao' => $npb->ProdutoBarra->descricao,
+                'barras' => $npb->ProdutoBarra->barras,
+                'quantidade' => $npb->quantidade,
+                'valorunitario' => $npb->valorunitario,
+                'valortotal' => $npb->valortotal,
+            ];
+        }
+        return $itens;
+    }
+
 
     /**
     * Updates a particular model.
@@ -155,6 +195,8 @@ class NegocioController extends Controller
 
         $this->render('update', array(
             'model'=>$model,
+            'itens'=>[],
+            'codnegocioprodutobarraduplicar'=>[]
             ));
     }
 

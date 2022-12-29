@@ -20,5 +20,5 @@ $this->renderPartial('_hotkeys');
 <h1>Detalhes Negócio <?php echo CHtml::encode(Yii::app()->format->formataCodigo($model->codnegocio)); ?></h1>
 <br>
 
-<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form',array('model'=>$model, 'itens'=>$itens, 'codnegocioprodutobarraduplicar'=>$codnegocioprodutobarraduplicar)); ?>
 <?php $this->widget('UsuarioCriacao', array('model'=>$model)); ?>

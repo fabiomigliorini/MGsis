@@ -75,6 +75,9 @@
         );
         echo $form->textAreaRow($model, 'observacoes', array('class'=>'span12', 'rows'=>'6','maxlength'=>500, 'tabindex'=>-1));
       ?>
+      <div>
+        <?php echo $this->renderPartial('_form_itens', array('model'=>$model, 'itens'=>$itens, 'codnegocioprodutobarraduplicar'=>$codnegocioprodutobarraduplicar)); ?>
+      </div>
 
     </div>
 
