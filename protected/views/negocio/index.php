@@ -5,7 +5,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Novo (F2)', 'icon'=>'icon-plus', 'url'=>array('create'), 'linkOptions'=> array('id'=>'btnNovo')),
+	array('label'=>'Novo (F2)', 'icon'=>'icon-plus', 'url'=>array('createOrEmpty'), 'linkOptions'=> array('id'=>'btnNovo')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 	[
 		'label'=>'Importar Pedidos Mercos',

@@ -21,6 +21,33 @@ class NegocioController extends Controller
     }
 
     /**
+     * Verifica se já existe um negocio zerado e redireciona para ele
+     * caso contrario redireciona pra tela de criacao
+     */
+    public function actionCreateOrEmpty()
+    {
+        $sql = '
+            select codnegocio
+            from tblnegocio
+            where codnegociostatus = 1
+            and valortotal = 0
+            and codpessoa = 1
+            and codusuario = :codusuario
+            order by criacao
+            limit 1
+        ';
+        $cmd = Yii::app()->db->createCommand($sql);
+        $cmd->params = [
+            'codusuario' => Yii::app()->user->id
+        ];
+        $res = $cmd->queryAll();
+        if (isset($res[0])) {
+            return $this->redirect(array('view','id'=>$res[0]['codnegocio']));
+        }
+        return $this->redirect(array('create'));
+    }
+
+    /**
     * Creates a new model.
     * If creation is successful, the browser will be redirected to the 'view' page.
     */
