@@ -413,6 +413,10 @@ class NegocioController extends Controller
             }
             $npb->valortotal = $npb->quantidade * $npb->valorunitario;
 
+            $n = $npb->Negocio;
+            $n->lancamento = date('d/m/Y H:i:s');
+            $n->save();
+
             if (!$npb->save()) {
                 $retorno["Adicionado"] = false;
                 $erros = $npb->getErrors();
