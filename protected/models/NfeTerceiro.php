@@ -101,8 +101,8 @@ class NfeTerceiro extends MGActiveRecord
             //array('arquivoxml', 'file', 'types'=>'xml'),
             array('cnpj, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipivalor, valorprodutos, valorfrete, valorseguro, valordesconto, valoroutras', 'length', 'max'=>14),
             array('justificativa', 'length', 'max'=>200),
-            array('entrada', 'validaEntrada'),            
-            array('codpessoa, emissao, nfedataautorizacao, codoperacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnotafiscal, codnaturezaoperacao, entrada, ignorada, codnegocio, informacoes, observacoes, revisao, codusuariorevisao', 'safe'),
+            array('entrada', 'validaEntrada'),
+            array('codpessoa, emissao, nfedataautorizacao, codoperacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnotafiscal, codnaturezaoperacao, entrada, ignorada, codnegocio, informacoes, observacoes, revisao, codusuariorevisao, conferencia, codusuarioconferencia', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('emissao_de, emissao_ate, valor_de, valor_ate, codnfeterceiro, nsu, nfechave, cnpj, ie, emitente, codpessoa, emissao, nfedataautorizacao, codoperacao, valortotal, indsituacao, indmanifestacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codfilial, codnotafiscal, codnaturezaoperacao, serie, numero, entrada, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipivalor, valorprodutos, valorfrete, valorseguro, valordesconto, valoroutras, justificativa, ignorada, codnegocio, natureza, modelo, finalidade, informacoes, observacoes, tipo, revisao, codusuariorevisao', 'safe', 'on'=>'search'),
@@ -126,7 +126,7 @@ class NfeTerceiro extends MGActiveRecord
             return;
         }
 
-    }	
+    }
 
     /**
      * @return array relational rules.
@@ -141,14 +141,15 @@ class NfeTerceiro extends MGActiveRecord
             'DistribuicaoDfes' => array(self::HAS_MANY, 'DistribuicaoDfe', 'codnfeterceiro'),
             'NfeTerceiroDuplicatas' => array(self::HAS_MANY, 'NfeTerceiroDuplicata', 'codnfeterceiro', 'order'=>'dvenc ASC'),
             'Negocio' => array(self::BELONGS_TO, 'Negocio', 'codnegocio'),
-            'UsuarioRevisao' => array(self::BELONGS_TO, 'Usuario', 'codusuariorevisao'),
             'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
             'NaturezaOperacao' => array(self::BELONGS_TO, 'NaturezaOperacao', 'codnaturezaoperacao'),
             'NotaFiscal' => array(self::BELONGS_TO, 'NotaFiscal', 'codnotafiscal'),
             'Operacao' => array(self::BELONGS_TO, 'Operacao', 'codoperacao'),
             'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
-            'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
             'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+            'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
+            'UsuarioRevisao' => array(self::BELONGS_TO, 'Usuario', 'codusuariorevisao'),
+            'UsuarioConferencia' => array(self::BELONGS_TO, 'Usuario', 'codusuarioconferencia'),
             'NfeTerceiroItems' => array(self::HAS_MANY, 'NfeTerceiroItem', 'codnfeterceiro', 'order'=>'nitem ASC'),
         );
     }
@@ -198,6 +199,9 @@ class NfeTerceiro extends MGActiveRecord
             'justificativa' => 'Justificativa',
             'arquivoxml' => 'Arquivo XML',
             'informacoes' => 'Informações Complementares',
+            'observacoes' => 'Observações',
+            'conferencia' => 'Data Conferencia',
+            'codusuarioconferencia' => 'Usuário Conferencia',
         );
     }
 

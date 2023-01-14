@@ -12,15 +12,18 @@ foreach ($model->NfeTerceiroItems as $item) {
 			<div class="span1">
 				<span>
 					<?php echo CHtml::encode($item->cean); ?>
-					<?php if ($item->cean !== $item->ceantrib) {
-        echo CHtml::encode($item->ceantrib);
-    } ?>
+					<?php if ($item->cean !== $item->ceantrib) { echo CHtml::encode($item->ceantrib); } ?>
 				</span><br>
 				<span class="muted">
 					<?php echo CHtml::encode($item->cprod); ?>
 				</span>
 			</div>
 			<div class="span3">
+                <?php if (!empty($item->conferencia)): ?>
+                    <span class='label label-success'>OK</span>
+                <?php else: ?>
+                    <span class='label label-warning'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <?php endif; ?>
 				<?php echo CHtml::link(CHtml::encode($item->xprod), array("nfeTerceiroItem/view", "id"=>$item->codnfeterceiroitem)); ?>
 				<?php
                 if (!empty($item->infadprod)) {

@@ -167,6 +167,25 @@ function btnRevisaoClick(revisada) {
   });
 }
 
+function btnConferenciaClick(conferencia) {
+  bootbox.confirm("Tem Certeza?", function(result) {
+    if (!result) {
+      return;
+    }
+    $.ajax({
+      url: "<?php echo Yii::app()->createUrl('nfeTerceiro/conferencia')?>",
+      data: {
+        id: <?php echo $model->codnfeterceiro ?>,
+        conferencia: conferencia
+      },
+    }).done(function(resp) {
+      location.reload();
+    }).fail(function( jqxhr, textStatus, error ) {
+      $.notify("Erro ao marcar NFe como conferida!", { position:"right bottom", className:"error", autoHideDelay: 15000 });
+    });
+  });
+}
+
 $(document).ready(function(){
 
   $('#btnManifestacaoCiencia').click(function(e) {
@@ -326,6 +345,35 @@ $(document).ready(function(){
           <a href='#' class='' id="btnRevisaoFalse" onclick="btnRevisaoClick(false)">
             <span class='badge badge-warning'>?</span>
             Marcar como não revisada
+          </a>
+        </li>
+      <?php endif; ?>
+    </ul>
+  </div>
+  <div class="btn-group">
+    <a class="btn dropdown-toggle <?php echo (empty($model->conferencia)?'btn-warning':'btn-success') ?>" data-toggle="dropdown" href="#">
+      <?php echo (empty($model->conferencia)?'Não Conferida':'Conferida'); ?>
+      <?php if (!empty($model->codusuarioconferencia)): ?>
+        por <?php echo $model->UsuarioConferencia->usuario; ?>
+      <?php endif; ?>
+      <?php if (!empty($model->conferencia)): ?>
+        em <?php echo $model->conferencia; ?>
+      <?php endif; ?>
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <?php if (empty($model->conferencia)): ?>
+        <li>
+          <a href='#' class='' id="btnConferenciaTrue" onclick="btnConferenciaClick(true)">
+            <span class='badge badge-success'>&#10004;</span>
+            Marcar como Conferida
+          </a>
+        </li>
+      <?php else: ?>
+        <li>
+          <a href='#' class='' id="btnConferenciaFalse" onclick="btnConferenciaClick(false)">
+            <span class='badge badge-warning'>?</span>
+            Marcar como não conferida
           </a>
         </li>
       <?php endif; ?>

@@ -297,4 +297,41 @@ class NfeTerceiroItemController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+	public function actionConferencia($id)
+    {
+        $model = $this->loadModel($id);
+        if ($_GET['conferencia'] == 'true') {
+            $model->conferencia = date('d/m/Y H:i:s');
+            $model->codusuarioconferencia = Yii::app()->user->id;
+        } else {
+            $model->conferencia = null;
+            $model->codusuarioconferencia = null;
+        }
+        $model->save();
+        $sql = '
+            select count(*) as count
+            from tblnfeterceiroitem
+            where codnfeterceiro = :codnfeterceiro
+            and conferencia is null
+        ';
+        $cmd = Yii::app()->db->createCommand($sql);
+        $cmd->params = [
+            'codnfeterceiro' => $model->codnfeterceiro
+        ];
+        $res = $cmd->queryAll();
+        if ($res[0]['count'] == 0) {
+            $model->NfeTerceiro->conferencia = date('d/m/Y H:i:s');
+            $model->NfeTerceiro->codusuarioconferencia = Yii::app()->user->id;
+            $model->NfeTerceiro->save();
+        }
+        header('Content-type: application/json');
+        echo CJSON::encode([
+            'codnfeterceiroitem' => $model->codnfeterceiroitem,
+            'conferencia' => $model->conferencia,
+            'codusuarioconferencia' => $model->codusuarioconferencia,
+            'res' => $res,
+        ]);
+    }
+
 }

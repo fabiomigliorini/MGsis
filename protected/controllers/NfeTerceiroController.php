@@ -20,31 +20,6 @@ class NfeTerceiroController extends Controller
     }
 
     /**
-    * Creates a new model.
-    * If creation is successful, the browser will be redirected to the 'view' page.
-    */
-    /*
-    public function actionCreate()
-    {
-        $model=new NfeTerceiro;
-
-        // Uncomment the following line if AJAX validation is needed
-        $this->performAjaxValidation($model);
-
-        if(isset($_POST['NfeTerceiro']))
-        {
-            $model->attributes=$_POST['NfeTerceiro'];
-            if($model->save())
-                $this->redirect(array('view','id'=>$model->codnfeterceiro));
-        }
-
-        $this->render('create',array(
-            'model'=>$model,
-            ));
-    }
-    */
-
-    /**
     * Updates a particular model.
     * If update is successful, the browser will be redirected to the 'view' page.
     * @param integer $id the ID of the model to be updated
@@ -109,42 +84,13 @@ class NfeTerceiroController extends Controller
             $model->codusuariorevisao = null;
         }
         $model->save();
+        header('Content-type: application/json');
+        echo CJSON::encode([
+            'codnfeterceiro' => $model->codnfeterceiro,
+            'revisao' => $model->revisao,
+            'codusuariorevisao' => $model->codusuariorevisao,
+        ]);
     }
-
-    /**
-    * Deletes a particular model.
-    * If deletion is successful, the browser will be redirected to the 'admin' page.
-    * @param integer $id the ID of the model to be deleted
-    */
-    /*
-    public function actionDelete($id)
-    {
-        if(Yii::app()->request->isPostRequest)
-        {
-            // we only allow deletion via POST request
-            try
-            {
-                $this->loadModel($id)->delete();
-                // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-                if(!isset($_GET['ajax']))
-                    $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
-            }
-            catch(CDbException $e)
-            {
-                // Cannot delete or update a parent row: a foreign key constraint fails
-                if($e->errorInfo[1] == 7)
-                {
-                    throw new CHttpException(409, 'Registro em uso, você não pode excluir.');
-                }
-                else
-                    throw $e;
-            }
-        }
-        else
-            throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-    }
-     *
-     */
 
     /**
     * Lists all models.
@@ -172,43 +118,12 @@ class NfeTerceiroController extends Controller
             ));
     }
 
-    /**
-    * Manages all models.
-    */
-    /*
-    public function actionAdmin()
-    {
-
-        $model=new NfeTerceiro('search');
-
-        $model->unsetAttributes();  // clear any default values
-
-        if(isset($_GET['NfeTerceiro']))
-            $model->attributes=$_GET['NfeTerceiro'];
-
-        $this->render('admin',array(
-            'model'=>$model,
-            ));
-    }
-     *
-     */
-
     public function actionUpload()
     {
         /**
          * @var NfeTerceiro
          */
         $model=new NfeTerceiro;
-
-        /*
-        if(isset($_POST['NfeTerceiro']))
-        {
-            $model->attributes=$_POST['NfeTerceiro'];
-            $model->arquivoxml=CUploadedFile::getInstance($model,'arquivoxml');
-            if ($model->importarXmlViaArquivo())
-                $this->redirect(array('view','id'=>$model->codnfeterceiro));
-        }
-        */
 
         $this->render(
             'upload',
@@ -217,187 +132,6 @@ class NfeTerceiroController extends Controller
             )
         );
     }
-
-    // public function actionPesquisarSefaz($codfilial = null, $nsu = null)
-    // {
-    //     $model = new NfeTerceiro('search');
-    //
-    //     $model->codfilial = $codfilial;
-    //     $model->nsu = $nsu;
-    //
-    //     if(isset($_POST['NfeTerceiro']))
-    //     {
-    //         $model->attributes=$_POST['NfeTerceiro'];
-    //     }
-    //
-    //     $nsu = $model->nsu;
-    //
-    //     /*
-    //     if (!empty($model->codfilial))
-    //     {
-    //         $acbr = new MGAcbrNfeMonitor(null, $model);
-    //
-    //         $leituras = 0;
-    //
-    //         $nsuinicial = $nsu;
-    //         $fim = false;
-    //
-    //         $importadas = array();
-    //
-    //         do {
-    //
-    //             $leituras++;
-    //
-    //             if ($leituras > 100)
-    //                 break;
-    //
-    //             //echo "<hr>Pesquisando $nsu <br>";
-    //
-    //             if (!$acbr->consultaNfeDest($nsu))
-    //             {
-    //                 //echo "<h1>Erro ao enviar comando</h1>";
-    //             }
-    //             usleep(500000);
-    //             //echo "<pre>";
-    //             //print_r($acbr->retorno);
-    //             //echo "</pre>";
-    //
-    //
-    //             //if ($acbr->retornoMonitor["Mensagem"][0] != "OK")
-    //             //    break;
-    //
-    //             for ($i=1; $i<1000; $i++)
-    //             {
-    //                 $chave = "RESNFE" . str_pad($i, 3, 0, STR_PAD_LEFT);
-    //
-    //                 if (!isset($acbr->retornoMonitor[$chave]))
-    //                     break;
-    //
-    //                 $arr = $acbr->retornoMonitor[$chave];
-    //
-    //                 $nfe = NfeTerceiro::model()->find("nfechave = :nfechave", array("nfechave"=>$arr["chNFe"]));
-    //
-    //                 if ($nfe === null)
-    //                     $nfe = new NfeTerceiro();
-    //
-    //                 $nfe->codfilial = $model->codfilial;
-    //
-    //                 //[NSU] => 10220440943
-    //                 $nfe->nsu = $arr["NSU"];
-    //
-    //                 //[chNFe] => 51140628053619009644550010000146501273515829
-    //                 $nfe->nfechave = $arr["chNFe"];
-    //
-    //                 //[CNPJ] => 28053619009644
-    //                 if (isset($arr["CNPJ"]))
-    //                     $nfe->cnpj = $arr["CNPJ"];
-    //
-    //                 //[xNome] => Chocolates Garoto S.A.
-    //                 if (isset($arr["xNome"]))
-    //                     $nfe->emitente = MGFormatter::removeAcentos(utf8_encode($arr["xNome"]));
-    //                 else
-    //                     $nfe->emitente = "<Vazio>";
-    //
-    //                 //[IE] => 134342763
-    //                 if (isset($arr["IE"]))
-    //                     $nfe->ie = $arr["IE"];
-    //
-    //                 //[dEmi] => 24/06/2014
-    //                 if (isset($arr["dEmi"]))
-    //                     $nfe->emissao = $arr["dEmi"];
-    //
-    //                 //[tpNF] => 1
-    //                 if (isset($arr["tpNF"]))
-    //                     $nfe->codoperacao = $arr["tpNF"]+1;
-    //
-    //                 //[vNF] => 222,84
-    //                 if (isset($arr["vNF"]))
-    //                     $nfe->valortotal = Yii::app()->format->unformatNumber($arr["vNF"]);
-    //
-    //                 //[digVal] => WAFS3wPj/69U7sJI412ygTDk7+I=
-    //                 //[dhRecbto] => 24/06/2014 07:25:09
-    //                 if (isset($arr["dhRecbto"]))
-    //                     $nfe->nfedataautorizacao = $arr["dhRecbto"];
-    //
-    //                 //[cSitNFe] => 1
-    //                 if (isset($arr["cSitNFe"]))
-    //                     $nfe->indsituacao = $arr["cSitNFe"];
-    //
-    //                 //[cSitConf] => 0
-    //                 if (isset($arr["cSitConf"]))
-    //                     $nfe->indmanifestacao = $arr["cSitConf"];
-    //
-    //                 $importadas[] = $arr["chNFe"];
-    //
-    //                 $nfe->save();
-    //
-    //             }
-    //
-    //             //echo "</pre>";
-    //
-    //             if (isset($acbr->retornoMonitor[""]["ultNSU"]))
-    //             {
-    //                 if ($nsu == $acbr->retornoMonitor[""]["ultNSU"])
-    //                 {
-    //                     //echo "<h1>Repetiu ult nsu</h1>";
-    //                     break;
-    //                 }
-    //                 $nsu = $acbr->retornoMonitor[""]["ultNSU"];
-    //             }
-    //             else
-    //             {
-    //                 //echo "<h1>Nao achou ult nsu</h1>";
-    //                 break;
-    //             }
-    //
-    //
-    //             if (isset($acbr->retornoMonitor[""]["indCont"]))
-    //             {
-    //                 if ($acbr->retornoMonitor[""]["indCont"] != 1)
-    //                 {
-    //                     $fim = true;
-    //                     break;
-    //                 }
-    //             }
-    //
-    //         } while (true);
-    //
-    //         $model->nsu = $nsu;
-    //
-    //         $lidas = Yii::app()->format->formatNumber($model->nsu - $nsuinicial, 0);
-    //
-    //         if ($acbr->retornoMonitor["Mensagem"][0] != "OK")
-    //         {
-    //             $class = "error";
-    //             $mensagem = $acbr->retorno;
-    //         }
-    //         else
-    //         {
-    //             $mensagem = "Lidos {$lidas} NSU's ({$nsuinicial} ao {$model->nsu}).";
-    //
-    //             $mensagem .= "<br>Importadas <b>" . sizeof($importadas) . "</b> Chaves (" . implode(", ", $importadas) . ")";
-    //
-    //             if ($fim)
-    //             {
-    //                 $mensagem .= "<br>Lidas todas as notas!";
-    //                 $class = "success";
-    //             }
-    //             else
-    //             {
-    //                 $mensagem .= "<br>Existem mais registros para ler, <b>continue</b>!";
-    //                 $class = "info";
-    //             }
-    //         }
-    //         Yii::app()->user->setFlash($class, $mensagem);
-    //
-    //     }
-    //     */
-    //
-    //     $this->render('pesquisar_sefaz',array(
-    //         'model'=>$model,
-    //         ));
-    //
-    // }
 
     /**
      * Efetua Download de uma NFE e Carrega os dados na tabela do sistema
@@ -581,7 +315,7 @@ class NfeTerceiroController extends Controller
         // Numero do numrContribuinte
         $arrNumrContribuinte = [
             101 => '611107', // Com IE
-            103 => '126206917',                
+            103 => '126206917',
             //101 => '4432657', (Sem IE)
         ];
         if (!isset($arrNumrContribuinte[$model->codfilial])) {
@@ -699,7 +433,7 @@ class NfeTerceiroController extends Controller
         if ($error) {
             throw new \Exception("Falha ao gerar PDF da DAR! - {$error}", 1);
         }
-        
+
         /*
         echo "<pre>";
         print_r($info);
@@ -712,7 +446,7 @@ class NfeTerceiroController extends Controller
         */
 
         if ($info['content_type'] == 'application/pdf') {
-            $pdf = $output;                
+            $pdf = $output;
         } else {
             $ch = curl_init();
 	        curl_setopt($ch, CURLOPT_URL, 'https://www.sefaz.mt.gov.br/arrecadacao/darlivre/impirmirdar?chavePix=true');
@@ -832,4 +566,24 @@ class NfeTerceiroController extends Controller
             header('Content-Disposition: inline; filename="' . basename($arquivo) . '"');
             readfile($arquivo);
     }
+
+    public function actionConferencia($id)
+    {
+        $model = $this->loadModel($id);
+        if ($_GET['conferencia'] == 'true') {
+            $model->conferencia = date('d/m/Y H:i:s');
+            $model->codusuarioconferencia = Yii::app()->user->id;
+        } else {
+            $model->conferencia = null;
+            $model->codusuarioconferencia = null;
+        }
+        $model->save();
+        header('Content-type: application/json');
+        echo CJSON::encode([
+            'codnfeterceiro' => $model->codnfeterceiro,
+            'conferencia' => $model->conferencia,
+            'codusuarioconferencia' => $model->codusuarioconferencia,
+        ]);
+    }
+
 }
