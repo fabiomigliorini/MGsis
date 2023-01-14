@@ -26,6 +26,9 @@
 				<div class="span6">
 					<?php
 						echo $form->textFieldRow($model,'cprod',array('class'=>'input-medium text-center','maxlength'=>30, 'disabled'=>true));
+						echo $form->textFieldRow($model,'ncm',array('class'=>'input-medium text-center','maxlength'=>30, 'disabled'=>true));
+						echo $form->textFieldRow($model,'cest',array('class'=>'input-medium text-center','maxlength'=>30, 'disabled'=>true));
+                        echo $form->textAreaRow($model, 'observacoes', array('class'=>'span12', 'rows'=>'6','maxlength'=>500, 'tabindex'=>-1));
 					?>
 				</div>
 			</div>

@@ -40,7 +40,7 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
-  <?php echo $form->textField($model, 'nfechave', array('placeholder' => 'Chave', 'class'=>'input-xlarge')); ?>
+    <?php echo $form->textField($model, 'nfechave', array('placeholder' => 'Chave', 'class'=>'input-xlarge', 'autofocus'=>true)); ?>
 	<?php echo $form->select2($model, 'codfilial', Filial::getListaCombo(), array('placeholder' => 'Filial', 'class'=>'input-medium')); ?>
 	<?php echo $form->select2Pessoa($model, 'codpessoa', array('placeholder' => 'Pessoa', 'class'=>'input-xlarge')); ?>
 	<?php
@@ -72,7 +72,8 @@ $(document).ready(function(){
         );
     ?>
 	<?php echo $form->select2($model, 'indmanifestacao', NfeTerceiro::getIndManifestacaoListaCombo(), array('placeholder' => 'Manifestação', 'class'=>'input-xlarge')); ?>
-  <?php echo $form->select2($model, 'revisao', ['R' => 'Revisadas', 'N' => 'Não Revisadas'], array('placeholder' => 'Revisão', 'class'=>'input-medium')); ?>
+    <?php echo $form->select2($model, 'revisao', ['R' => 'Revisadas', 'N' => 'Não Revisadas'], array('placeholder' => 'Revisão', 'class'=>'input-medium')); ?>
+    <?php echo $form->select2($model, 'conferencia', ['C' => 'Conferidas', 'N' => 'Não Conferidas'], array('placeholder' => 'Conferência', 'class'=>'input-medium')); ?>
 	<?php echo $form->select2($model, 'indsituacao', NfeTerceiro::getIndSituacaoListaCombo(), array('placeholder' => 'Situação', 'class'=>'input-medium')); ?>
 	<?php
         echo $form->select2(

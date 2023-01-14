@@ -586,4 +586,41 @@ class NfeTerceiroController extends Controller
         ]);
     }
 
+    public function actionBuscarItem($id, $barras)
+    {
+        $sql = '
+            select nti.codnfeterceiroitem, nti.cprod, nti.xprod, nti.cean, nti.ceantrib, nti.qcom, nti.vprod
+            from tblnfeterceiroitem nti
+            left join tblprodutobarra pb on (pb.codprodutobarra = nti.codprodutobarra)
+            left join tblprodutobarra pbs on (pbs.codprodutovariacao = pb.codprodutovariacao)
+            where nti.codnfeterceiro = :codnfeterceiro
+            and pbs.barras = :barras
+            union
+            select nti.codnfeterceiroitem, nti.cprod, nti.xprod, nti.cean, nti.ceantrib, nti.qcom, nti.vprod
+            from tblnfeterceiroitem nti
+            left join tblprodutobarra pb on (pb.codprodutobarra = nti.codprodutobarra)
+            where nti.codnfeterceiro = :codnfeterceiro
+            and :barras in (nti.cean, nti.ceantrib)
+            union
+            select nti.codnfeterceiroitem, nti.cprod, nti.xprod, nti.cean, nti.ceantrib, nti.qcom, nti.vprod
+            from tblnfeterceiroitem nti
+            left join tblprodutobarra pb on (pb.codprodutobarra = nti.codprodutobarra)
+            where nti.codnfeterceiro = :codnfeterceiro
+            and cprod ilike :cprod
+        ';
+        $command = Yii::app()->db->createCommand($sql);
+        $barras = trim($barras);
+        $command->params = [
+            'codnfeterceiro' => $id,
+            'barras' => $barras,
+            'cprod' => "%{$barras}%",
+        ];
+        $items = $command->queryAll();
+        header('Content-type: application/json');
+        echo CJSON::encode([
+            'codnfeterceiro' => $id,
+            'items' => $items
+        ]);
+    }
+
 }

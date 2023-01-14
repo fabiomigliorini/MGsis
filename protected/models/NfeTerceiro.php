@@ -250,6 +250,16 @@ class NfeTerceiro extends MGActiveRecord
             break;
         }
 
+        switch ($this->conferencia) {
+            case 'C':
+            $criteria->addCondition('conferencia IS NOT NULL');
+            break;
+
+          case 'N':
+            $criteria->addCondition('conferencia IS NULL');
+            break;
+        }
+
         switch ($this->codnotafiscal) {
             case 1: // Pendentes
                 $criteria->addCondition(

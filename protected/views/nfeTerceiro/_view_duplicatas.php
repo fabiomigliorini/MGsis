@@ -22,12 +22,11 @@
 		<?php
     }
     ?>
-    
-    <?php if ($total != $model->valortotal): ?>
+    <?php if (abs($total - $model->valortotal) >= 0.01): ?>
 		<small class="span1 text-center alert-error">
 			<b>
                 Diferente <br> da Nota: <br>
-                <?php echo CHtml::encode(Yii::app()->format->formatNumber($model->valortotal)); ?>
+                <?php echo CHtml::encode(Yii::app()->format->formatNumber($total)); ?>
             </b>
 		</small>
     <?php endif; ?>

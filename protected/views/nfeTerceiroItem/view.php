@@ -16,7 +16,55 @@ $this->menu=array(
 
 Yii::app()->clientScript->registerCoreScript('yii');
 
+$quantidade = $model->quantidade;
+if ($quantidade == 0) {
+    $quantidade = 1;
+}
+
+$embs = [];
+if (!empty($model->codprodutobarra)) {
+    foreach ($model->ProdutoBarra->ProdutoVariacao->ProdutoBarraS as $pb) {
+        if (empty($pb->codprodutoembalagem)) {
+            $emb = 1;
+            $sigla = $pb->Produto->UnidadeMedida->sigla;
+            $preco = floatval($pb->Produto->preco);
+        } else {
+            $emb = floatval($pb->ProdutoEmbalagem->quantidade);
+            $sigla = $pb->ProdutoEmbalagem->UnidadeMedida->sigla;
+            $preco = floatval($pb->ProdutoEmbalagem->preco);
+            if (empty($preco)) {
+                $preco = floatval($pb->Produto->preco) * $emb;
+            }
+        }
+        if (!isset($embs[$emb])) {
+            $cssVenda = 'success';
+            $sugestao = floatval($model->vsugestaovenda) * $emb;
+            if ($preco <= $sugestao * 0.97) {
+                $cssVenda = 'error';
+            }
+            if ($preco >= $sugestao * 1.05) {
+                $cssVenda = 'warning';
+            }
+            $embs[$emb] = (object)[
+                'quantidade' => $quantidade / $emb,
+                'embalagem' => $emb,
+                'sigla' => $sigla,
+                'vsugestaovenda' => $sugestao,
+                'preco' => $preco,
+                'css' => $cssVenda,
+                'barras' => []
+            ];
+        }
+        $embs[$emb]->barras[] = $pb->barras;
+    }
+}
+ksort($embs);
+
 ?>
+<!-- <pre>
+    <?php print_r($embs); ?>
+</pre> -->
+
 <script type="text/javascript">
 /*<![CDATA[*/
 function btnConferenciaClick(conferencia) {
@@ -53,37 +101,38 @@ $(document).ready(function(){
 <?php if (!empty($model->ProdutoBarra)) {
     ?>
 	<h3>
-		<?php
-        switch ($model->ProdutoBarra->Produto->abc) {
-            case 'A':
-                $label = 'label-success';
-                break;
-            case 'B':
-                $label = 'label-warning';
-                break;
-            case 'C':
-                $label = 'label-info';
-                break;
-            default:
-                $label = 'label-important';
-                break;
-        }
-    $produto = '<B>' . CHtml::link(CHtml::encode($model->ProdutoBarra->Produto->produto), array('produto/view', 'id'=>$model->ProdutoBarra->codproduto));
-    if (!empty($model->ProdutoBarra->ProdutoVariacao->variacao)) {
-        $produto .= ' | ' . $model->ProdutoBarra->ProdutoVariacao->variacao;
-    }
-    $produto .= "</B> <span class='label {$label}'>{$model->ProdutoBarra->Produto->abc}</span>";
+        <?php
+            switch ($model->ProdutoBarra->Produto->abc) {
+                case 'A':
+                    $label = 'label-success';
+                    break;
+                case 'B':
+                    $label = 'label-warning';
+                    break;
+                case 'C':
+                    $label = 'label-info';
+                    break;
+                default:
+                    $label = 'label-important';
+                    break;
+            }
+            $produto = '<B>' . CHtml::link(CHtml::encode($model->ProdutoBarra->Produto->produto), array('produto/view', 'id'=>$model->ProdutoBarra->codproduto));
+            if (!empty($model->ProdutoBarra->ProdutoVariacao->variacao)) {
+                $produto .= ' | ' . $model->ProdutoBarra->ProdutoVariacao->variacao;
+            }
+            $produto .= "</B> <span class='label {$label}'>{$model->ProdutoBarra->Produto->abc}</span>";
 
 
 
-    if (!empty($model->ProdutoBarra->Produto->inativo)) {
-        $produto .= "
-				<span class='label label-important pull-center'>
-				Inativado em {$model->ProdutoBarra->Produto->inativo}
-				</span>
-				";
-    }
-    echo $produto; ?>
+            if (!empty($model->ProdutoBarra->Produto->inativo)) {
+                $produto .= "
+        				<span class='label label-important pull-center'>
+        				Inativado em {$model->ProdutoBarra->Produto->inativo}
+        				</span>
+        				";
+            }
+            echo $produto;
+        ?>
 	</h3>
 <?php
 } ?>
@@ -126,70 +175,94 @@ $(document).ready(function(){
 
 
 <div class="row-fluid">
-	<div class="span5">
+
+    <div class="span4">
+
+        <table class="table table-hover table-condensed">
+            <tr>
+                <th style="text-align: right">
+                    Quantidade
+                </th>
+                <th style="text-align: center">
+                    Embalagem
+                </th>
+                <th>
+                    Barras
+                </th>
+                <th style="text-align: right">
+                    Venda
+                </th>
+                <th style="text-align: right">
+                    Sugestão
+                </th>
+            </tr>
+            <?php foreach ($embs as $emb): ?>
+                <tr class="<?php echo $emb->css ?>">
+                    <td style="text-align: right">
+                        <b>
+                            <?php echo Yii::app()->format->formatNumber($emb->quantidade, 1) ?>
+                        </b>
+                    </td>
+                    <td style="text-align: center">
+                        <?php echo $emb->sigla; ?>
+                        <b>
+                            <?php if ($emb->embalagem > 1): ?>
+                                C/<?php echo $emb->embalagem; ?>
+                            <?php endif; ?>
+                        </b>
+                    </td>
+                    <td>
+                        <?php foreach ($emb->barras as $barras): ?>
+                            <?php if (substr($barras, 0, 3) == '234'): ?>
+                                <b class="text-error">
+                                    <?php echo $barras ?>
+                                </b>
+                            <?php else: ?>
+                                <b class="text-success">
+                                    <?php echo $barras ?>
+                                </b>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </td>
+                    <td style="text-align: right">
+                        <b>
+                            <?php echo Yii::app()->format->formatNumber($emb->preco, 2) ?>
+                        </b>
+                    </td>
+                    <td style="text-align: right" class="muted">
+                        <?php echo Yii::app()->format->formatNumber($emb->vsugestaovenda, 2) ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+        <?php if (!empty($model->observacoes)): ?>
+            <div class="span12">
+                <b>Observações</b><br />
+                <?php echo nl2br($model->observacoes); ?>
+            </div>
+        <?php endif; ?>
+
+
+    </div>
+	<div class="span3">
 	<?php
 
         $attr = [];
-        // if (isset($model->ProdutoBarra))
-        // {
-        // 	switch ($model->ProdutoBarra->Produto->abc) {
-        // 		case 'A':
-        // 			$badge = 'badge-success';
-        // 			break;
-        // 		case 'B':
-        // 			$badge = 'badge-warning';
-        // 			break;
-        // 		default:
-        // 			$badge = 'badge-important';
-        // 			break;
-        // 	}
-        // 	$produto = '<B>' . CHtml::link(CHtml::encode($model->ProdutoBarra->Produto->produto), array('produto/view', 'id'=>$model->ProdutoBarra->codproduto));
-        // 	$produto .= " <span class='badge {$badge}'>{$model->ProdutoBarra->Produto->abc}</span>";
-        //
-        //
-        // 	if (!empty($model->ProdutoBarra->ProdutoVariacao->variacao)) {
-        // 			$produto .= '<BR>' . $model->ProdutoBarra->ProdutoVariacao->variacao . '</B>';
-        // 	} else {
-        // 			$produto .= '<BR>{ Sem Variação }</B>';
-        // 	}
-        //
-        //
-        //
-        // 	if (!empty($model->ProdutoBarra->Produto->inativo))
-        // 	{
-        // 		$produto .= "
-        // 			<span class='label label-important pull-center'>
-        // 			Inativado em {$model->ProdutoBarra->Produto->inativo}
-        // 			</span>
-        // 			";
-        // 	}
-        //
-        // 	$attr[]=
-        // 		array(
-        // 			'name'=>'codprodutobarra',
-        // 			'value'=>$produto,
-        // 			'type'=>'raw',
-        // 		);
-        //
-        // }
 
         if ($model->quantidade > 0) {
-
-               $attr[] =
-                      array(
-                             'name'=>'vprod',
-                             'label'=>'Custo Produto',
-                             'value'=>Yii::app()->format->formatNumber($model->vprod) . ' (' . Yii::app()->format->formatNumber($model->vprod/$model->quantidade) . ')',
-                             );
-	}
+            $attr[] = array(
+                'name'=>'vprod',
+                'label'=>'Custo Produto',
+                'value'=>Yii::app()->format->formatNumber($model->vprod) . ' (' . Yii::app()->format->formatNumber($model->vprod/$quantidade) . ')',
+            );
+        }
 
         if (!empty($model->ipivipi)) {
-            $attr[] =
-                array(
-                    'name'=>'ipivipi',
-                    'label'=>'IPI',
-                    'value'=>Yii::app()->format->formatNumber($model->ipivipi) . ' (' . Yii::app()->format->formatNumber($model->ipivipi/$model->quantidade) . ')',
-                );
+            $attr[] = array(
+                'name'=>'ipivipi',
+                'label'=>'IPI',
+                'value'=>Yii::app()->format->formatNumber($model->ipivipi) . ' (' . Yii::app()->format->formatNumber($model->ipivipi/$quantidade) . ')',
+            );
         }
 
         if (!empty($model->vicmsstutilizado)) {
@@ -197,7 +270,7 @@ $(document).ready(function(){
             if ($model->vicmsst != $model->vicmsstutilizado) {
                 $cssSt = 'text-error';
             }
-            $str = Yii::app()->format->formatNumber($model->vicmsstutilizado) . ' (' . Yii::app()->format->formatNumber($model->vicmsstutilizado/$model->quantidade) . ')';
+            $str = Yii::app()->format->formatNumber($model->vicmsstutilizado) . ' (' . Yii::app()->format->formatNumber($model->vicmsstutilizado/$quantidade) . ')';
             if (!empty($model->mva)) {
                 $str .= ' - MVA ' . Yii::app()->format->formatNumber($model->mva) . '% @ ' . Yii::app()->format->formatNumber($model->picmsbasereducao * 100, 2) . '%';
             }
@@ -214,7 +287,7 @@ $(document).ready(function(){
             $attr[] =
                 array(
                     'name'=>'vicmsgarantido',
-                    'value'=>Yii::app()->format->formatNumber($model->vicmsgarantido) . ' (' . Yii::app()->format->formatNumber($model->vicmsgarantido/$model->quantidade) . ')',
+                    'value'=>Yii::app()->format->formatNumber($model->vicmsgarantido) . ' (' . Yii::app()->format->formatNumber($model->vicmsgarantido/$quantidade) . ')',
                 );
         }
 
@@ -222,7 +295,7 @@ $(document).ready(function(){
             $attr[] =
                 array(
                     'name'=>'complemento',
-                    'value'=>Yii::app()->format->formatNumber($model->complemento) . ' (' . Yii::app()->format->formatNumber($model->complemento/$model->quantidade) . ')',
+                    'value'=>Yii::app()->format->formatNumber($model->complemento) . ' (' . Yii::app()->format->formatNumber($model->complemento/$quantidade) . ')',
                 );
         }
 
@@ -230,7 +303,7 @@ $(document).ready(function(){
             $attr[] = [
                 'name'=>'vdesc',
                 'label'=>'Desconto',
-                'value'=>'-' . Yii::app()->format->formatNumber($model->vdesc) . ' (-' . Yii::app()->format->formatNumber($model->vdesc/$model->quantidade) . ')',
+                'value'=>'-' . Yii::app()->format->formatNumber($model->vdesc) . ' (-' . Yii::app()->format->formatNumber($model->vdesc/$quantidade) . ')',
             ];
         }
 
@@ -238,7 +311,7 @@ $(document).ready(function(){
             $attr[] = [
                 'name'=>'vfrete',
                 'label'=>'Frete',
-                'value'=>Yii::app()->format->formatNumber($model->vfrete) . ' (' . Yii::app()->format->formatNumber($model->vfrete/$model->quantidade) . ')',
+                'value'=>Yii::app()->format->formatNumber($model->vfrete) . ' (' . Yii::app()->format->formatNumber($model->vfrete/$quantidade) . ')',
             ];
         }
 
@@ -246,7 +319,7 @@ $(document).ready(function(){
             $attr[] = [
                 'name'=>'vseg',
                 'label'=>'Seguro',
-                'value'=>Yii::app()->format->formatNumber($model->vseg) . ' (' . Yii::app()->format->formatNumber($model->vseg/$model->quantidade) . ')',
+                'value'=>Yii::app()->format->formatNumber($model->vseg) . ' (' . Yii::app()->format->formatNumber($model->vseg/$quantidade) . ')',
             ];
         }
 
@@ -254,7 +327,7 @@ $(document).ready(function(){
             $attr[] = [
                 'name'=>'voutro',
                 'label'=>'Outro',
-                'value'=>Yii::app()->format->formatNumber($model->voutro) . ' (' . Yii::app()->format->formatNumber($model->voutro/$model->quantidade) . ')',
+                'value'=>Yii::app()->format->formatNumber($model->voutro) . ' (' . Yii::app()->format->formatNumber($model->voutro/$quantidade) . ')',
             ];
         }
 
@@ -262,14 +335,14 @@ $(document).ready(function(){
             $attr[] = [
                 'name'=>'vicmscredito',
                 'label'=>'Credito ICMS',
-                'value'=>'-' . Yii::app()->format->formatNumber($model->vicmscredito) . ' (-' . Yii::app()->format->formatNumber($model->vicmscredito/$model->quantidade) . ') @ ' . Yii::app()->format->formatNumber($model->picmsbasereducao * 100, 2) . '%',
+                'value'=>'-' . Yii::app()->format->formatNumber($model->vicmscredito) . ' (-' . Yii::app()->format->formatNumber($model->vicmscredito/$quantidade) . ') @ ' . Yii::app()->format->formatNumber($model->picmsbasereducao * 100, 2) . '%',
             ];
         }
 
         if (!empty($model->vcusto)) {
             $attr[] = [
                 'name'=>'vcusto',
-                'value'=>Yii::app()->format->formatNumber($model->vcusto) . ' (' . Yii::app()->format->formatNumber($model->vcusto/$model->quantidade) . ')',
+                'value'=>Yii::app()->format->formatNumber($model->vcusto) . ' (' . Yii::app()->format->formatNumber($model->vcusto/$quantidade) . ')',
             ];
         }
 
@@ -388,7 +461,7 @@ $(document).ready(function(){
 
         ?>
 	</div>
-	<small class="span4">
+	<small class="span3">
 	<?php
 
         $ncm = CHtml::encode(Yii::app()->format->formataNCM($model->ncm));
@@ -546,7 +619,7 @@ $(document).ready(function(){
 
         ?>
 	</small>
-	<small class="span3">
+	<small class="span2">
     <?php
         $this->widget('bootstrap.widgets.TbDetailView', array(
             'data'=>$model,

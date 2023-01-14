@@ -38,30 +38,50 @@ switch ($data->indmanifestacao) {
 ?>
 
 <div class="row-fluid registro <?php echo $css; ?>">
-	<div class="span1">
-		<b>
-			<?php echo CHtml::encode($data->Filial->filial); ?>
-		</b>
-		<small class="muted">
-			<?php echo CHtml::encode(Yii::app()->format->formataCodigo($data->codnfeterceiro)); ?>
-		</small>
-	</div>
-	<div class="span4">
+    <div class="span1">
+        <b>
+            <?php echo CHtml::encode($data->Filial->filial); ?>
+        </b>
+        <small class="muted">
+            <?php echo CHtml::encode(Yii::app()->format->formataCodigo($data->codnfeterceiro)); ?>
+        </small>
+    </div>
+    <div class="span4">
+        <!-- Revisao -->
+        <?php if (empty($data->revisao)): ?>
+            <span class='label label-warning'>
+                <i class="icon-remove"></i>
+            </span>
+        <?php else: ?>
+            <span class='label label-success'>
+                <i class="icon-ok"></i>
+            </span>
+        <?php endif; ?>
 
-    <!-- Chave -->
-    <small class="muted">
-		    <?php echo CHtml::link(CHtml::encode(Yii::app()->format->formataChaveNfe($data->nfechave)), array('view','id'=>$data->codnfeterceiro)); ?>
-    </small>
+        <?php if (empty($data->conferencia)): ?>
+            <span class='label label-warning'>
+                <i class="icon-remove"></i>
+            </span>
+        <?php else: ?>
+            <span class='label label-success'>
+                <i class="icon-ok"></i>
+            </span>
+        <?php endif; ?>
+
+        <!-- Chave -->
+        <small class="muted">
+            <?php echo CHtml::link(CHtml::encode(Yii::app()->format->formataChaveNfe($data->nfechave)), array('view','id'=>$data->codnfeterceiro)); ?>
+        </small>
 
 
-		<br>
-    <small class="muted">
-  		NSU: <?php echo CHtml::encode($data->nsu); ?> |
-  		<?php echo CHtml::encode($data->getIndSituacaoDescricao()); ?> |
-  		<?php echo CHtml::encode($data->getIndManifestacaoDescricao()); ?>
-    </small>
-	</div>
-	<div class="span4">
+        <br>
+        <small class="muted">
+            NSU: <?php echo CHtml::encode($data->nsu); ?> |
+            <?php echo CHtml::encode($data->getIndSituacaoDescricao()); ?> |
+            <!-- <?php echo CHtml::encode($data->getIndManifestacaoDescricao()); ?> -->
+        </small>
+    </div>
+    <div class="span4">
     <!-- Link Nota Fiscal -->
     <small class="pull-right">
       <?php
@@ -70,53 +90,47 @@ switch ($data->indmanifestacao) {
           }
       ?>
     </small>
+        <b>
+            <?php if (isset($data->Pessoa)): ?>
+                <?php echo CHtml::link(CHtml::encode($data->Pessoa->fantasia), array('pessoa/view','id'=>$data->codpessoa)); ?>
+            <?php else: ?>
+                <?php echo CHtml::encode($data->emitente); ?>
+            <?php endif; ?>
+        </b>
+        <br>
+        <small class="muted">
+            <?php echo CHtml::encode($data->natureza); ?> |
+            <?php echo CHtml::encode(Yii::app()->format->formataCnpjCpf($data->cnpj)); ?> |
+            <?php echo CHtml::encode($data->ie); ?>
+        </small>
 
-		<b>
-			<?php if (isset($data->Pessoa)): ?>
-				<?php echo CHtml::link(CHtml::encode($data->Pessoa->fantasia), array('pessoa/view','id'=>$data->codpessoa)); ?>
-			<?php else: ?>
-				<?php echo CHtml::encode($data->emitente); ?>
-			<?php endif; ?>
-		</b><br>
-		<small class="muted">
-			<?php echo CHtml::encode($data->natureza); ?> |
-			<?php echo CHtml::encode(Yii::app()->format->formataCnpjCpf($data->cnpj)); ?> |
-			<?php echo CHtml::encode($data->ie); ?>
-		</small>
+    </div>
 
-	</div>
-
-	<div class="span1 text-right">
-		<b>
-			<?php echo CHtml::encode(Yii::app()->format->formatNumber($data->valortotal)); ?>
-		</b>
-		<br>
-		<small class="muted">
-			<?php
+    <div class="span1 text-right">
+        <b>
+            <?php echo CHtml::encode(Yii::app()->format->formatNumber($data->valortotal)); ?>
+        </b>
+        <br>
+        <small class="muted">
+            <?php
             if (isset($data->Operacao)) {
                 echo CHtml::encode($data->Operacao->operacao);
             }
             ?>
-		</small>
-	</div>
+        </small>
+    </div>
 
-	<div class="span2">
-    <!-- Manifestacao -->
-		<span class='badge <?php echo $cssmanif; ?>'><?php echo $labelmanif ?></span>
+    <div class="span2">
+        <!-- Manifestacao -->
+        <span class='badge <?php echo $cssmanif; ?>'><?php echo $labelmanif ?></span>
 
-    <!-- Revisao -->
-    <?php if (empty($data->revisao)): ?>
-		    <span class='badge badge-warning'>Revisar</span>
-    <?php else: ?>
-        <span class='badge badge-success'>Revisada</span>
-    <?php endif; ?>
-    <br>
-		<small class="muted">
-			<?php echo CHtml::encode($data->emissao); ?>
-		</small>
-	</div>
+        <br>
+        <small class="muted">
+            <?php echo CHtml::encode($data->emissao); ?>
+        </small>
+    </div>
 
-	<?php /*
+    <?php /*
 
     <small class="span2 muted"><?php echo CHtml::encode($data->indsituacao); ?></small>
 

@@ -94,10 +94,10 @@ class NfeTerceiroItem extends MGActiveRecord
             array('margem', 'length', 'max'=>6),
             array('infadprod', 'length', 'max'=>1000),
             array('predbc, predbcst', 'numerical', 'max'=>100),
-	    array('pmvast', 'numerical', 'max'=>1000),
+    	    array('pmvast', 'numerical', 'max'=>1000),
             array('pisvbc, pisvpis, cofinsvbc, cofinsvcofins', 'length', 'max'=>15),
             array('pisppis, cofinspcofins', 'length', 'max'=>7),
-            array('codprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao, modalidadeicmsgarantido, compoetotal, codusuarioconferencia, conferencia', 'safe'),
+            array('codprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao, modalidadeicmsgarantido, compoetotal, codusuarioconferencia, conferencia, observacoes', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('codnfeterceiroitem, codnfeterceiro, nitem, cprod, xprod, cean, ncm, cfop, ucom, qcom, vuncom, vprod, ceantrib, utrib, qtrib, vuntrib, cst, csosn, vbc, picms, vicms, vbcst, picmsst, vicmsst, ipivbc, ipipipi, ipivipi, codprodutobarra, margem, complemento, alteracao, codusuarioalteracao, criacao, codusuariocriacao, vdesc, infadprod, modalidadeicmsgarantido, cest, vfrete, vseg, voutro, orig, modbc, predbc, modbcst, predbcst, pmvast, ipicst, piscst, pisvbc, pisppis, pisvpis, cofinscst, cofinsvbc, cofinspcofins, cofinsvcofins, compoetotal', 'safe', 'on'=>'search'),

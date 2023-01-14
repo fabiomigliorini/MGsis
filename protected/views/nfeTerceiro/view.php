@@ -34,6 +34,9 @@ $this->menu=array(
 
 Yii::app()->clientScript->registerCoreScript('yii');
 
+$outros = $model->totalComplemento();
+$totalgeral = $model->valortotal + $outros;
+
 ?>
 <script type="text/javascript">
 /*<![CDATA[*/
@@ -187,6 +190,67 @@ function btnConferenciaClick(conferencia) {
 }
 
 $(document).ready(function(){
+
+    $('#buscar-form').on('submit', function(e) {
+        e.preventDefault();
+        var barras = $("#barras").val();
+        $("#barras").val('');
+        $("#barras").focus();
+
+        if (barras == "") {
+            $.notify("Preencha o código de barras ou referência!", { position:"right bottom", className:"error", autoHideDelay: 15000 });
+            return;
+        }
+        $.ajax({
+          url: "<?php echo Yii::app()->createUrl('nfeTerceiro/buscarItem')?>",
+          data: {
+            id: <?php echo $model->codnfeterceiro ?>,
+            barras: barras
+          },
+        }).done(function(resp) {
+            var url = "<?php echo Yii::app()->createUrl('nfeTerceiroItem/view')?>&id=";
+            if (resp.items.length == 0) {
+                $.notify("Não localizei o código de barras " + barras + "!", { position:"right bottom", className:"error", autoHideDelay: 15000 });
+            } else if (resp.items.length == 1) {
+                console.log(resp.items[0]);
+                window.location.href = url + resp.items[0].codnfeterceiroitem;
+            } else {
+                var msg = '<h4 class="text-error">Qual desses itens você deseja abrir?</h4>';
+                msg += '<ul>';
+                resp.items.forEach(function(item){
+                    msg += '<li style="padding-top:20px">';
+                    msg += '<a href="' + url + item.codnfeterceiroitem + '">';
+                    msg += item.xprod;
+                    msg += '<br>';
+                    msg += item.cprod;
+                    msg += ' | ';
+                    msg += item.cean;
+                    msg += ' | ';
+                    msg += item.ceantrib;
+                    msg += ' | ';
+                    msg += parseFloat(item.qcom);
+                    msg += ' | ';
+                    msg += item.vprod;
+                    msg += '</a>';
+                    msg += '</li>';
+                });
+                msg += '</ul>';
+                bootbox.alert(msg, function() {
+                    $("#barras").focus();
+                });
+                $.notify("Localizei " + resp.items.length + " itens! Não sei qual você deseja!", { position:"right bottom", className:"error", autoHideDelay: 15000 });
+            }
+            // console.log(resp.items.length);
+            // location.reload();
+        }).fail(function( jqxhr, textStatus, error ) {
+            $.notify("Erro ao localizar barras: " + error + "!", { position:"right bottom", className:"error", autoHideDelay: 15000 });
+        });
+
+        // var codnfeterceiroitem = 499419;
+        // console.log(url);
+        // console.log(barras); //use the console for debugging, F12 in Chrome, not alerts
+
+    });
 
   $('#btnManifestacaoCiencia').click(function(e) {
     e.preventDefault();
@@ -349,38 +413,37 @@ $(document).ready(function(){
         </li>
       <?php endif; ?>
     </ul>
-  </div>
-  <div class="btn-group">
-    <a class="btn dropdown-toggle <?php echo (empty($model->conferencia)?'btn-warning':'btn-success') ?>" data-toggle="dropdown" href="#">
-      <?php echo (empty($model->conferencia)?'Não Conferida':'Conferida'); ?>
-      <?php if (!empty($model->codusuarioconferencia)): ?>
-        por <?php echo $model->UsuarioConferencia->usuario; ?>
-      <?php endif; ?>
-      <?php if (!empty($model->conferencia)): ?>
-        em <?php echo $model->conferencia; ?>
-      <?php endif; ?>
-      <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu">
-      <?php if (empty($model->conferencia)): ?>
-        <li>
-          <a href='#' class='' id="btnConferenciaTrue" onclick="btnConferenciaClick(true)">
-            <span class='badge badge-success'>&#10004;</span>
-            Marcar como Conferida
-          </a>
-        </li>
-      <?php else: ?>
-        <li>
-          <a href='#' class='' id="btnConferenciaFalse" onclick="btnConferenciaClick(false)">
-            <span class='badge badge-warning'>?</span>
-            Marcar como não conferida
-          </a>
-        </li>
-      <?php endif; ?>
-    </ul>
-  </div>
+    </div>
+    <div class="btn-group">
+        <a class="btn dropdown-toggle <?php echo (empty($model->conferencia)?'btn-warning':'btn-success') ?>" data-toggle="dropdown" href="#">
+          <?php echo (empty($model->conferencia)?'Não Conferida':'Conferida'); ?>
+          <?php if (!empty($model->codusuarioconferencia)): ?>
+            por <?php echo $model->UsuarioConferencia->usuario; ?>
+          <?php endif; ?>
+          <?php if (!empty($model->conferencia)): ?>
+            em <?php echo $model->conferencia; ?>
+          <?php endif; ?>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <?php if (empty($model->conferencia)): ?>
+            <li>
+              <a href='#' class='' id="btnConferenciaTrue" onclick="btnConferenciaClick(true)">
+                <span class='badge badge-success'>&#10004;</span>
+                Marcar como Conferida
+              </a>
+            </li>
+          <?php else: ?>
+            <li>
+              <a href='#' class='' id="btnConferenciaFalse" onclick="btnConferenciaClick(false)">
+                <span class='badge badge-warning'>?</span>
+                Marcar como não conferida
+              </a>
+            </li>
+          <?php endif; ?>
+        </ul>
+    </div>
 </div>
-
 
 <div class="row-fluid">
   <div class="span3">
@@ -390,6 +453,16 @@ $(document).ready(function(){
             'attributes'=>array(
                 'serie',
                 'numero',
+                array(
+                    'label'=>'Natureza de Operação',
+                    'value'=>$model->natureza,
+                    // 'type'=>"raw",
+                ),
+                array(
+                    'label'=>'Nossa Natureza',
+                    'value'=>isset($model->NaturezaOperacao) ? CHtml::encode($model->NaturezaOperacao->naturezaoperacao) : null,
+                    'type'=>"raw",
+                ),
             ),
         ));
 
@@ -410,6 +483,11 @@ $(document).ready(function(){
                     'value'=>isset($model->Pessoa) ? CHtml::link(CHtml::encode($model->Pessoa->fantasia), array("pessoa/view", "id"=>$model->codpessoa)) : null,
                     'type'=>"raw",
                 ),
+                array(
+                    'name'=>'observacoes',
+                    'value'=>nl2br($model->observacoes),
+                    'type'=>"raw",
+                ),
             ),
         ));
 
@@ -422,8 +500,16 @@ $(document).ready(function(){
             'attributes'=>array(
                 'emissao',
                 array(
-                    'name'=>'valortotal',
+                    'label'=>'Valor Nota',
                     'value'=>Yii::app()->format->formatNumber($model->valortotal),
+                ),
+                array(
+                    'label'=>'Outros Custos',
+                    'value'=>Yii::app()->format->formatNumber($outros),
+                ),
+                array(
+                    'label'=>'Custo Total',
+                    'value'=>Yii::app()->format->formatNumber($totalgeral),
                 ),
             ),
         ));
@@ -432,15 +518,33 @@ $(document).ready(function(){
   </div>
 </div>
 
+<?php if (!empty($model->NfeTerceiroDuplicatas)): ?>
+    <h3>Duplicatas</h3>
+    <div id="ListagemDuplicatas">
+      <?php
+        $this->renderPartial("_view_duplicatas", array("model"=>$model))
+        ?>
+    </div>
+    <br>
+<?php endif; ?>
+
 
 <?php if (!empty($model->NfeTerceiroItems)): ?>
-<h3>Itens</h3>
-<div id="ListagemItens">
-  <?php
-    $this->renderPartial("_view_itens", array("model"=>$model))
-    ?>
-</div>
-<br>
+    <h3>Itens</h3>
+    <form id="buscar-form">
+        <div class="input-append">
+            <input class="span2" id="barras" type="text" placeholder="Barras" autofocus>
+            <button class="btn" type="submit">
+                Buscar
+            </button>
+        </div>
+    </form>
+    <div id="ListagemItens">
+      <?php
+        $this->renderPartial("_view_itens", array("model"=>$model))
+        ?>
+    </div>
+    <br>
 <?php endif; ?>
 <h3>Detalhes</h3>
 
@@ -453,16 +557,6 @@ $(document).ready(function(){
                 array(
                     'name' => 'codnfeterceiro',
                     'value' => Yii::app()->format->formataCodigo($model->codnfeterceiro),
-                ),
-                array(
-                    'name'=>'natureza',
-                    'value'=>$model->natureza,
-                    // 'type'=>"raw",
-                ),
-                array(
-                    'name'=>'codnaturezaoperacao',
-                    'value'=>isset($model->NaturezaOperacao) ? CHtml::encode($model->NaturezaOperacao->naturezaoperacao) : null,
-                    'type'=>"raw",
                 ),
                 array(
                     'name'=>'codnotafiscal',
@@ -522,8 +616,6 @@ $(document).ready(function(){
   </div>
   <div class="span3 pull-right">
     <?php
-        $outros = $model->totalComplemento();
-        $totalgeral = $model->valortotal + $outros;
         $this->widget('bootstrap.widgets.TbDetailView', array(
             'data'=>$model,
             'attributes'=>array(
@@ -587,16 +679,6 @@ $(document).ready(function(){
 
 
 </small>
-
-<?php if (!empty($model->NfeTerceiroDuplicatas)): ?>
-<h3>Duplicatas</h3>
-<div id="ListagemDuplicatas">
-  <?php
-    $this->renderPartial("_view_duplicatas", array("model"=>$model))
-    ?>
-</div>
-<br>
-<?php endif; ?>
 
 <?php
 
