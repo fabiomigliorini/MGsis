@@ -3,6 +3,7 @@ $pagarMePedidoTipo = [
 	1 => 'Débito',
 	2 => 'Crédito',
 	3 => 'Voucher',
+	4 => 'Tipo 4',
 ];
 
 $pagarMePedidoStatus = [
