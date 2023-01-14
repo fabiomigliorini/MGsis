@@ -225,7 +225,7 @@ $(document).ready(function(){
                         <?php endforeach; ?>
                     </td>
                     <td style="text-align: right">
-                        <b>
+                        <b class="text-<?php echo $emb->css ?>">
                             <?php echo Yii::app()->format->formatNumber($emb->preco, 2) ?>
                         </b>
                     </td>
