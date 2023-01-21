@@ -524,9 +524,9 @@ JS
   }
 
   label.labelPagarmeParcela {
-      font-size: 18pt;
+      font-size: 15pt;
       /* margin-top: 30px; */
-      margin-bottom: 20px;
+      margin-bottom: 5px;
   }
 
   input.input-valor-pagamento {

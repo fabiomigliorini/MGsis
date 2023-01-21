@@ -39,7 +39,7 @@
             );
         ?>
     </div>
-    <div class="modal-body" id="modalPagarMeBody" style="padding-left: 5%; padding-right: 5%; padding-top: 0%" tabindex="-1">
+    <div class="modal-body" id="modalPagarMeBody" tabindex="-1" style="padding-left: 5%; padding-right: 5%; padding-top: 0px">
         <div class="row-fluid">
             <div class="span6">
                 <div style="margin-bottom: 20px">
@@ -400,10 +400,10 @@ function abrirModalPagarMe ()
     $('#pagarmeParcelas').val(1);
     $('#modalPagarMe').modal({show:true, keyboard:true});
 
+    $('#modalPagarMe').css({'width': '75%', 'height': '90%', 'margin-left':'auto', 'margin-right':'auto', 'left':'7.5%', 'top':'5%'});
     var height = $( window ).height();
-    var bodyHeight = height*.80-140;
-    $('#modalPagarMe').css({'width': '75%', 'height': '80%', 'margin-left':'auto', 'margin-right':'auto', 'left':'7.5%', 'top': '10%'});
-    $('#modalPagarMeBody').css({'height': bodyHeight, 'max-height': bodyHeight, 'overflow-y': 'hidden'});
+    var bodyHeight = (height*.90)-140;
+    $('#modalPagarMeBody').css({'height': bodyHeight, 'max-height': bodyHeight});
 
     calcularParcelas();
 }
