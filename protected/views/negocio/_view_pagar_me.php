@@ -74,7 +74,7 @@
                             ?>
                             <label class="radio pagar-me-enter labelPagarmeParcela">
                                 <input type="radio" name="codpagarmepos" id="codpagarmepos" value="<?php echo $pos->codpagarmepos; ?>"  tabindex="-1">
-                                <?php echo $pos->Filial->filial ;?> -
+                                <?php echo $model->Filial->filial ;?> -
                                 <?php echo $pos->serial; ?> -
                                 <?php echo $pos->apelido; ?>
                             </label>

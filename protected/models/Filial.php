@@ -43,7 +43,7 @@
  * @property Negocio[] $Negocios
  * @property EstoqueSaldo[] $EstoqueSaldos
  * @property EstoqueLocal[] $EstoqueLocals
- * @property StoneFilial[] $StoneFilials 
+ * @property StoneFilial[] $StoneFilials
  */
 class Filial extends MGActiveRecord
 {
@@ -115,7 +115,7 @@ class Filial extends MGActiveRecord
 			'EstoqueSaldos' => array(self::HAS_MANY, 'EstoqueSaldo', 'codfilial'),
 			'EstoqueLocals' => array(self::HAS_MANY, 'EstoqueLocal', 'codfilial'),
 			'StoneFilials' => array(self::HAS_MANY, 'StoneFilial', 'codfilial'),
-			'PagarMePoss' => array(self::HAS_MANY, 'PagarMePos', 'codfilial'),
+			'PagarMePoss' => array(self::HAS_MANY, 'PagarMePos', 'codfilial', 'order'=>'apelido ASC, serial ASC, codpagarmepos ASC'),
 			'PagarMePagamentos' => array(self::HAS_MANY, 'PagarMePagamento', 'codfilial'),
 			'PagarMePedidos' => array(self::HAS_MANY, 'PagarMePedido', 'codfilial'),
 		);
