@@ -224,7 +224,7 @@ class NegocioController extends Controller
             'model'=>$model,
             'itens'=>[],
             'codnegocioprodutobarraduplicar'=>[]
-            ));
+        ));
     }
 
     /**
@@ -658,6 +658,8 @@ class NegocioController extends Controller
         $model = $this->loadModel($id);
         echo CJSON::encode([
             'codnegociostatus' => $model->codnegociostatus,
+            'valorprodutos' => (float) $model->valorprodutos,
+            'valorjuros' => (float) $model->valorjuros,
             'valorpagamento' => (float) $model->valorPagamento(),
         ]);
     }

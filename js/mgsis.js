@@ -1,8 +1,13 @@
+function formataValor(valor, casas) {
+    return Intl.NumberFormat('pt-BR', { style: "currency", currency: "BRL" }).format(valor);
+}
+
 function formataCodigo(numero)
 {
-    if (numero > 99999999)
-        return numero;
-    
+    if (numero > 99999999){
+      return numero;
+    }
+
     numero = new String("00000000" + numero);
     numero = numero.substring(numero.length-8, numero.length);
     return numero;
@@ -17,7 +22,7 @@ function formataCnpjCpf(numero)
         numero = numero.substring(numero.length-14, numero.length);
         // 01 234 567 8901 23
         // 04.576.775/0001-60
-        numero = numero.substring(0, 2) 
+        numero = numero.substring(0, 2)
                  + "."
                  + numero.substring(2, 5)
                  + "."
@@ -36,7 +41,7 @@ function formataCnpjCpf(numero)
         // 012 345 678 90
         // 123 456 789 01
         // 803.452.710.68
-        numero = numero.substring(0, 3) 
+        numero = numero.substring(0, 3)
                  + "."
                  + numero.substring(3, 6)
                  + "."
@@ -50,10 +55,10 @@ function formataCnpjCpf(numero)
 }
 
 /*
- * 
+ *
  * Funcao para fazer o ENTER funcionar como TAB
- * 
- * 
+ *
+ *
 $(document).ready(function(){
 	bootbox.setLocale("br");
 	$("input").not( $(":button") ).keypress(function (evt) {

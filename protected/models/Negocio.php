@@ -73,7 +73,7 @@ class Negocio extends MGActiveRecord
         return array(
             array('codpessoa, codfilial, codestoquelocal, lancamento, codoperacao, codnegociostatus, codusuario, codnaturezaoperacao', 'required'),
             array('observacoes', 'length', 'max'=>500),
-            array('codestoquelocal, codfilial, valordesconto, valorfrete, valorprodutos, valortotal, valoraprazo, valoravista', 'numerical'),
+            array('codestoquelocal, codfilial, valordesconto, valorfrete', 'numerical'),
             array('valordesconto', 'validaDesconto'),
             array('codestoquelocal', 'validaEstoqueLocal'),
             //array('codnegociostatus', 'validaStatus'),
@@ -81,7 +81,7 @@ class Negocio extends MGActiveRecord
             array('codpessoa, codpessoatransportador, codpessoavendedor, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('pagamento, lancamento_de, lancamento_ate, codnegocio, codpessoa, codfilial, codestoquelocal, lancamento, codpessoatransportador, codpessoavendedor, codoperacao, codnegociostatus, observacoes, codusuario, valorfrete, valordesconto, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnaturezaoperacao, valorprodutos, valortotal, valoraprazo, valoravista', 'safe', 'on'=>'search'),
+            array('pagamento, lancamento_de, lancamento_ate, codnegocio, codpessoa, codfilial, codestoquelocal, lancamento, codpessoatransportador, codpessoavendedor, codoperacao, codnegociostatus, observacoes, codusuario, valorfrete, valorjuros, valordesconto, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnaturezaoperacao, valorprodutos, valortotal, valoraprazo, valoravista', 'safe', 'on'=>'search'),
         );
     }
 
@@ -165,6 +165,7 @@ class Negocio extends MGActiveRecord
           'codusuario' => 'Usuário',
           'valordesconto' => 'Desconto',
           'valorfrete' => 'Frete',
+          'valorjuros' => 'Juros',
           'percentualdesconto' => '%',
           'entrega' => 'Entrega',
           'acertoentrega' => 'Acerto Entrega',
@@ -441,8 +442,10 @@ class Negocio extends MGActiveRecord
         //percorre os itens do negocio e adiciona na nota
         $percDesconto = ($this->valordesconto / $this->valorprodutos);
         $percFrete = ($this->valorfrete / $this->valorprodutos);
+        $percJuros = ($this->valorjuros / $this->valorprodutos);
         $totalProduto = 0;
         $totalFrete = 0;
+        $totalOutras = 0;
         $totalDesconto = 0;
         foreach ($this->NegocioProdutoBarras as $negocioItem) {
             $quantidade = $negocioItem->quantidade - $negocioItem->devolucaoTotal;
@@ -507,9 +510,11 @@ class Negocio extends MGActiveRecord
             }
             $notaItem->valordesconto = round($percDesconto * $notaItem->valortotal, 2);
             $notaItem->valorfrete = round($percFrete * $notaItem->valortotal, 2);
+            $notaItem->valoroutras = round($percJuros * $notaItem->valortotal, 2);
 
             $totalProduto += $notaItem->valortotal;
             $totalFrete += $notaItem->valorfrete;
+            $totalOutras += $notaItem->valoroutras;
             $totalDesconto += $notaItem->valordesconto;
 
             if (!$notaItem->save()) {
@@ -524,6 +529,7 @@ class Negocio extends MGActiveRecord
           if ($totalFrete != $this->valorfrete || $totalDesconto != $this->valordesconto) {
             $notaItem->valordesconto += $this->valordesconto - $totalDesconto;
             $notaItem->valorfrete += $this->valorfrete - $totalFrete;
+            $notaItem->valoroutras += $this->valorjuros - $totalOutras;
             if (!$notaItem->save()) {
                 $this->addErrors($notaItem->getErrors());
                 return false;

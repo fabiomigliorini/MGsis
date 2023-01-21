@@ -87,7 +87,7 @@
       <!-- COLUNA 2 -->
       <div class="span3">
         <?php
-          echo $form->textFieldRow($model, 'valorprodutos', array('class'=>'text-right input-valor','maxlength'=>14, "readOnly"=>true, "tabindex"=>-1));
+          echo $form->textFieldRow($model, 'valorprodutos', array('class'=>'text-right input-valor','maxlength'=>14, "disabled"=>true, "tabindex"=>-1));
         ?>
         <div class="row-fluid">
           <div class="span5" style='padding-right: 15px'>
@@ -97,7 +97,7 @@
           </div>
           <div class="span7">
             <?php
-              echo $form->textFieldRow($model, 'valordesconto', array('class'=>'text-right input-valor','maxlength'=>14));
+              echo $form->textFieldRow($model, 'valordesconto', array('class'=>'text-right input-valor', 'maxlength'=>14));
             ?>
           </div>
         </div>
@@ -113,6 +113,16 @@
             )
           );
           echo $form->textFieldRow(
+              $model,
+              'valorjuros',
+              array(
+                  'class'=>'text-right input-valor',
+                  'maxlength'=>14,
+                  "readOnly"=>true,
+                  "tabindex"=>-1
+              ));
+
+          echo $form->textFieldRow(
             $model,
             'valortotal',
             array(
@@ -120,8 +130,6 @@
               'maxlength'=>14,
               'readOnly'=>true,
               'tabindex'=>-1,
-              // 'prepend' => 'R$',
-              // 'style'=>'max-width: 60%; font-size: 15pt; height: 120%'
             )
           );
         ?>
@@ -293,6 +301,9 @@ function atualizaPercentualDesconto()
 function atualizaValorTotal()
 {
 	var prod = parseFloat($('#Negocio_valorprodutos').autoNumeric('get'));
+    if (isNaN(prod)) {
+		prod = 0;
+	}
 	var desc = parseFloat($('#Negocio_valordesconto').autoNumeric('get'));
 	if (isNaN(desc)) {
 		desc = 0;
@@ -301,7 +312,11 @@ function atualizaValorTotal()
 	if (isNaN(frete)) {
 		frete = 0;
 	}
-	var total = prod - desc + frete;
+    var juros = parseFloat($('#Negocio_valorjuros').autoNumeric('get'));
+	if (isNaN(juros)) {
+		juros = 0;
+	}
+	var total = prod - desc + frete + juros;
 	$('#Negocio_valortotal').autoNumeric('set', total);
 	atualizaValorPagamento(false);
 }
@@ -359,43 +374,50 @@ function verificarStatusNegocio ()
 		dataType: "JSON",
 		// async: true,
 		success: function (data) {
+            // Se Fechou negocio redireciona para tela visualização perguntando da nota
+            if (negocioStatus.codnegociostatus != data.codnegociostatus) {
+                window.location.href = '<?php echo Yii::app()->createUrl('negocio/view', ['id'=>$model->codnegocio, 'perguntarNota'=>true]) ?>';
+            }
+            console.log(data);
+            let valorprodutos = $('#Negocio_valorprodutos').autoNumeric('get');
+            let valorjuros = $('#Negocio_valorjuros').autoNumeric('get');
 
-      // Se Fechou negocio redireciona para tela visualização perguntando da nota
-      if (negocioStatus.codnegociostatus != data.codnegociostatus) {
-        window.location.href = '<?php echo Yii::app()->createUrl('negocio/view', ['id'=>$model->codnegocio, 'perguntarNota'=>true]) ?>';
-      }
+            if (valorjuros != data.valorjuros || valorprodutos != data.valorprodutos) {
+                $('#Negocio_valorprodutos').autoNumeric('set', data.valorprodutos);
+                $('#Negocio_valorjuros').autoNumeric('set', data.valorjuros);
+                atualizaValorTotal();
+            }
 
-      // se alterou pagamento atualiza listagem de pagamentos
-      if (negocioStatus.valorpagamento != data.valorpagamento) {
-        if (typeof atualizaListagemPagamentos === 'function') {
-      		atualizaListagemPagamentos();
-      	}
-        if (typeof atualizaListagemPixCob === 'function') {
-      		atualizaListagemPixCob();
-      	}
-        if (typeof atualizaListagemStonePreTransacao === 'function') {
-      		atualizaListagemStonePreTransacao();
-      	}
-        if (typeof atualizaListagemPagarMePedido === 'function') {
-      		atualizaListagemPagarMePedido();
-      	}
-      }
-
-      negocioStatus = data;
-		},
-		error: function (xhr, status) {
-		},
-	});
+            // se alterou pagamento atualiza listagem de pagamentos
+            if (negocioStatus.valorpagamento != data.valorpagamento) {
+                if (typeof atualizaListagemPagamentos === 'function') {
+                    atualizaListagemPagamentos();
+                }
+                if (typeof atualizaListagemPixCob === 'function') {
+                    atualizaListagemPixCob();
+                }
+                if (typeof atualizaListagemStonePreTransacao === 'function') {
+                    atualizaListagemStonePreTransacao();
+                }
+                if (typeof atualizaListagemPagarMePedido === 'function') {
+                    atualizaListagemPagarMePedido();
+                }
+            }
+            negocioStatus = data;
+    	},
+    	error: function (xhr, status) {
+    	},
+    });
 
 }
 
 $(document).ready(function() {
 
   <?php if (!empty($model->codnegocio)): ?>
-  verificarStatusNegocio();
-  setInterval(function() {
-    verificarStatusNegocio();
-  }, 3.5 * 1000); // 60 * 1000 milse
+      verificarStatusNegocio();
+      setInterval(function() {
+        verificarStatusNegocio();
+      }, 3.5 * 1000); // 60 * 1000 milse
   <?php endif; ?>
 
 	$('#Negocio_percentualdesconto').change(function() {
@@ -406,7 +428,11 @@ $(document).ready(function() {
 		atualizaPercentualDesconto();
 	});
 
-  $('#Negocio_valorfrete').change(function() {
+    $('#Negocio_valorfrete').change(function() {
+		atualizaValorTotal();
+	});
+
+    $('#Negocio_valorjuros').change(function() {
 		atualizaValorTotal();
 	});
 
@@ -416,7 +442,8 @@ $(document).ready(function() {
 	$('#Negocio_percentualdesconto').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.', mDec:'0', aSign: '%', pSign: 's' });
 	// $('#Negocio_percentualdesconto').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.', aSign: '%', pSign: 's' });
 	$('#Negocio_valordesconto').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.'});
-  $('#Negocio_valorfrete').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.'});
+    $('#Negocio_valorfrete').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.'});
+    $('#Negocio_valorjuros').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.'});
 	$('#Negocio_valortotal').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.'});
 
 	$('#Negocio_codpessoa').on("change", function(e) {
@@ -491,6 +518,15 @@ JS
     font-size: 23pt;
     height: 47px;
     width: 100%;
+  }
+
+  span.spanPagarmeParcela {
+  }
+
+  label.labelPagarmeParcela {
+      font-size: 18pt;
+      /* margin-top: 30px; */
+      margin-bottom: 20px;
   }
 
   input.input-valor-pagamento {

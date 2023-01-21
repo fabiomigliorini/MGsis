@@ -47,7 +47,7 @@ class NegocioFormaPagamento extends MGActiveRecord
             array('codnegocio, codformapagamento, valorpagamento', 'required'),
             array('codformapagamento', 'validaCieloLio'),
             array('valorpagamento', 'length', 'max'=>14),
-            array('alteracao, codusuarioalteracao, criacao, codusuariocriacao, codliopedido, codpixcob', 'safe'),
+            array('alteracao, codusuarioalteracao, criacao, codusuariocriacao, codliopedido, codpixcob, valorjuros', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('codnegocioformapagamento, codnegocio, codformapagamento, valorpagamento, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codliopedido, codpixcob', 'safe', 'on'=>'search'),
@@ -98,6 +98,7 @@ class NegocioFormaPagamento extends MGActiveRecord
             'codnegocio' => 'Negócio',
             'codformapagamento' => 'Forma de Pagamento',
             'valorpagamento' => 'Valor',
+            'valorjuros' => 'Juros',
             'alteracao' => 'Alteração',
             'codusuarioalteracao' => 'Usuário Alteração',
             'criacao' => 'Criação',

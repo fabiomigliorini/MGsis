@@ -44,7 +44,8 @@ $pmps = $model->PagarMePedidos;
 						<?php echo CHtml::encode($pagarMePedidoTipo[$pmp->tipo]); ?>
 						<?php if ($pmp->parcelas > 1): ?>
 							<br>
-							<?php echo CHtml::encode($pmp->parcelas); ?> Parcelas
+							<?php echo CHtml::encode($pmp->parcelas); ?> Parcelas de R$
+                            <?php echo Yii::app()->format->formatNumber($pmp->valorparcela); ?>
 						<?php endif; ?>
 					</td>
 					<td>
