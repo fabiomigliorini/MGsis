@@ -158,6 +158,42 @@
                             12x
                         </span>
                     </label>
+                    <label class="radio pagar-me-enter labelPagarmeParcela">
+                        <input type="radio" name="pagarmeParcelas" id="pagarmeParcelas13" value="13" disabled>
+                        <span id="pagarmeParcelasLabel13" class="spanPagarmeParcela">
+                            13x
+                        </span>
+                    </label>
+                    <label class="radio pagar-me-enter labelPagarmeParcela">
+                        <input type="radio" name="pagarmeParcelas" id="pagarmeParcelas14" value="14" disabled>
+                        <span id="pagarmeParcelasLabel14" class="spanPagarmeParcela">
+                            14x
+                        </span>
+                    </label>
+                    <label class="radio pagar-me-enter labelPagarmeParcela">
+                        <input type="radio" name="pagarmeParcelas" id="pagarmeParcelas15" value="15" disabled>
+                        <span id="pagarmeParcelasLabel15" class="spanPagarmeParcela">
+                            15x
+                        </span>
+                    </label>
+                    <label class="radio pagar-me-enter labelPagarmeParcela">
+                        <input type="radio" name="pagarmeParcelas" id="pagarmeParcelas16" value="16" disabled>
+                        <span id="pagarmeParcelasLabel16" class="spanPagarmeParcela">
+                            16x
+                        </span>
+                    </label>
+                    <label class="radio pagar-me-enter labelPagarmeParcela">
+                        <input type="radio" name="pagarmeParcelas" id="pagarmeParcelas17" value="17" disabled>
+                        <span id="pagarmeParcelasLabel17" class="spanPagarmeParcela">
+                            17x
+                        </span>
+                    </label>
+                    <label class="radio pagar-me-enter labelPagarmeParcela">
+                        <input type="radio" name="pagarmeParcelas" id="pagarmeParcelas18" value="18" disabled>
+                        <span id="pagarmeParcelasLabel18" class="spanPagarmeParcela">
+                            18x
+                        </span>
+                    </label>
                 </div>
             </div>
         </div>
@@ -355,7 +391,7 @@ function calcularParcelas()
         $("#pagarmeParcelas1").attr('checked', true);
     }
 
-    for (let i = 1; i <= 12; i++) {
+    for (let i = 1; i <= 18; i++) {
         var text = '<b>' + i + '</b>' + ' vez';
         var valorJuros = 0;
         var valorParcela = Math.round(((valor + valorJuros)/i) * 100) / 100;
