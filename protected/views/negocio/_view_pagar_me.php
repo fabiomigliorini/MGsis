@@ -413,7 +413,7 @@ function calcularParcelas()
         var habilitado = false;
         if (i == 1) {
             habilitado = true;
-        } else if (tipo == 2 && valorParcela >= valorMinimoParcela) {
+        } else if (tipo == 2 && valorParcela >= valorMinimoParcela && i<=12) {
             habilitado = true;
         }
         $('#pagarmeParcelas' + i).attr('data-valor-juros', valorJuros);
@@ -430,6 +430,9 @@ function calcularParcelas()
 
 function abrirModalPagarMe ()
 {
+    if (!TemCPFInformado()) {
+        return false;
+    }
     var valor = $('#valorpagamento').autoNumeric('get');
     $('#pagarMeValor').autoNumeric('set', valor);
     // $('#pagarmeTipo').val(1);

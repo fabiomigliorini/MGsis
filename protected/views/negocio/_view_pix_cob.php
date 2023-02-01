@@ -256,6 +256,9 @@ function criarPixCob()
 	if (window.rodandoConsultaPixCob) {
 		return;
 	}
+	if (!TemCPFInformado()) {
+        return false;
+    }
 	bootbox.hideAll();
 	bootbox.confirm('Criar Cobrança via PIX?', function(result) {
 		if (!result) {
