@@ -488,18 +488,19 @@ class Pessoa extends MGActiveRecord
 	{
 
 		$command = Yii::app()->db->createCommand('
-			SELECT SUM(saldo) AS saldo, MIN(vencimento) AS vencimento
+            SELECT SUM(saldo) AS saldo,
+                   MIN(case when debito > 0 then vencimento else null end) AS vencimento
 			  FROM tbltitulo
 			 WHERE codpessoa = :codpessoa
 			   AND saldo <> 0
-			');
+		');
 
 		$command->params = array("codpessoa" => $this->codpessoa);
 
 		$ret = $command->queryRow();
 		$ret["vencimentodias"] = 0;
 
-		if ($venc = DateTime::createFromFormat("Y-m-d",$ret["vencimento"]))
+		if ($venc = DateTime::createFromFormat("Y-m-d", $ret["vencimento"]))
 		{
 			$ret["vencimento"] = $venc->format("d/m/Y");
 			$hoje = new DateTime("NOW");
@@ -513,8 +514,9 @@ class Pessoa extends MGActiveRecord
 	public function avaliaLimiteCredito($valorAvaliar = 0)
 	{
 		//se esta com o credito marcado como bloqueado
-		if ($this->creditobloqueado)
-			return false;
+		if ($this->creditobloqueado) {
+            return false;
+        }
 
 		//busca no banco total dos titulos
 		$total = $this->totalTitulos();
@@ -523,13 +525,14 @@ class Pessoa extends MGActiveRecord
 		$creditototal = $total["saldo"] + $valorAvaliar;
 
 		//vefica o valor do credito
-		if ((!empty($this->credito)) && (($this->credito * 1.05) < $creditototal))
-			return false;
+		if ((!empty($this->credito)) && (($this->credito * 1.05) < $creditototal)) {
+            return false;
+        }
 
 		//verifica o atraso
-		if (($total["vencimentodias"] <= 0) && (abs($total["vencimentodias"]) > $this->toleranciaatraso))
-			return false;
-
+		if (($total["vencimentodias"] <= 0) && (abs($total["vencimentodias"]) > $this->toleranciaatraso)) {
+            return false;
+        }
 
 		return true;
 
