@@ -4,35 +4,35 @@
  * Condensado: 137 Colunas
  * Normal:      80 Colunas
  * Large:       40 Colunas
- * 
+ *
  * @property Negocio $_model
  */
 
 class MGEscPrintRomaneio extends MGEscPrint
 {
-	
+
 	private $_model;
-	
+
 	/*
 	 * @parameter Negocio $model
 	 */
-	
-	function __construct(Negocio $model, $impressora = null, $linhas = null) 
+
+	function __construct(Negocio $model, $impressora = null, $linhas = null)
 	{
 		$this->_model = $model;
 		parent::__construct($impressora, $linhas);
-		
+
 		$this->adicionaTexto("<Reset><6lpp><Draft><CondensedOn>", "cabecalho");
-		
+
 		//linha divisoria
 		$this->adicionaLinha("", "cabecalho", 137, STR_PAD_RIGHT, "=");
-		
+
 		//$negocio = new Negocio::model()->findByPk($model->codnegocio);
 		// TODO: Corrigir para nao buscar duplamente no banco de dados
 		$model = Negocio::model()->findByPk($model->codnegocio);
 
 		$filial = $model->Filial;
-		
+
 		// Fantasia e NUMERO do Negocio
 		$this->adicionaTexto("<DblStrikeOn><CondensedOff>", "cabecalho");
 		$this->adicionaTexto($filial->Pessoa->fantasia . " " . $filial->Pessoa->telefone1, "cabecalho", 62);
@@ -40,7 +40,7 @@ class MGEscPrintRomaneio extends MGEscPrint
 		$this->adicionaTexto("<CondensedOn><DblStrikeOff>", "cabecalho");
 		//$this->adicionaLinha("", "cabecalho");
 
-		
+
 		// Usuario e Data
 		$usuario = $model->Usuario->usuario;
 		if (!empty($model->codpessoavendedor))
@@ -51,24 +51,24 @@ class MGEscPrintRomaneio extends MGEscPrint
 		$this->adicionaTexto("Vendedor: " . $usuario, "cabecalho", 68);
 		$this->adicionaTexto("Data...: " . $model->lancamento, "cabecalho", 69, STR_PAD_LEFT);
 		$this->adicionaLinha("", "cabecalho");
-		
+
 		//linha divisoria
 		$this->adicionaLinha("", "cabecalho", 137, STR_PAD_RIGHT, "=");
-		
+
 		//Rodape
 		$this->adicionaTexto("", "rodape", 137, STR_PAD_RIGHT, "=");
-		
+
 		$this->adicionaTexto("<CondensedOff><DblStrikeOn>");
-		
+
 		$linha = 'Natureza: ' . $model->NaturezaOperacao->naturezaoperacao;
 		//$linha = str_pad($linha, 80, " ", STR_PAD_BOTH);
 		$this->adicionaLinha($linha, "documento", 80);
 		//die($linha);
-        
+
         if ($model->codpessoa != Pessoa::CONSUMIDOR)
         {
-            
-            $linha = "Cliente.: " 
+
+            $linha = "Cliente.: "
                     . Yii::app()->format->formataCodigo($model->codpessoa)
                     . " "
                     . $model->Pessoa->fantasia;
@@ -102,15 +102,15 @@ class MGEscPrintRomaneio extends MGEscPrint
                     $linha
                     , "documento", 137);
 
-            $endereco = 
-                "End....: " 
-                .$model->Pessoa->endereco 
+            $endereco =
+                "End....: "
+                .$model->Pessoa->endereco
                 .", "
                 .$model->Pessoa->numero
                 ." - ";
 
             if (!empty($model->Pessoa->complemento))
-                $endereco .= 
+                $endereco .=
                     $model->Pessoa->complemento
                     ." - ";
 
@@ -127,7 +127,7 @@ class MGEscPrintRomaneio extends MGEscPrint
         }
 
         $this->adicionaTexto("<DblStrikeOff><CondensedOn>");
-		
+
 		if ($model->valoraprazo > 0 && $model->codnaturezaoperacao != NaturezaOperacao::DEVOLUCAO_VENDA)
 		{
 			$this->adicionaLinha("", "documento", 137, STR_PAD_LEFT, "-");
@@ -161,7 +161,7 @@ class MGEscPrintRomaneio extends MGEscPrint
 			}
 
 			$labelVencimentos = "Vencimentos | ";
-			
+
 			foreach ($vencimentos as $linha)
 			{
 				$this->adicionaTexto($labelVencimentos);
@@ -171,13 +171,13 @@ class MGEscPrintRomaneio extends MGEscPrint
 				foreach ($linha as $coluna)
 				{
 					$this->adicionaTexto($coluna["vencimento"], "documento", 8);
-					$this->adicionaTexto($coluna["valor"], "documento", 10, STR_PAD_LEFT);				
+					$this->adicionaTexto($coluna["valor"], "documento", 10, STR_PAD_LEFT);
 					if ($i <= 5)
 						$this->adicionaTexto(" | ", "documento", 3);
 					$i++;
 				}
 				$this->adicionaLinha();
-				
+
 				$this->adicionaTexto($labelVencimentos);
 
 				$i = 1;
@@ -204,10 +204,10 @@ class MGEscPrintRomaneio extends MGEscPrint
 		$this->adicionaTexto("Total", "documento", 15, STR_PAD_LEFT);
 		$this->adicionaTexto("<DblStrikeOff>");
 		$this->adicionaLinha();
-		
+
 		//$this->adicionaTexto("", "documento", 137, STR_PAD_LEFT, "-");
 		//$this->adicionaLinha();
-		
+
 		//percorre produtos
 		foreach ($model->NegocioProdutoBarras as $npb)
 		{
@@ -219,10 +219,10 @@ class MGEscPrintRomaneio extends MGEscPrint
 			$this->adicionaTexto(Yii::app()->format->formatNumber($npb->valortotal), "documento", 15, STR_PAD_LEFT);
 			$this->adicionaLinha();
 		}
-		
+
 		//linha divisoria
 		$this->adicionaLinha("", "documento", 137, STR_PAD_LEFT, "-");
-		
+
 		//linha com totais
 		$this->adicionaTexto("<DblStrikeOn>");
 		$this->adicionaTexto("Subtotal:");
@@ -234,7 +234,7 @@ class MGEscPrintRomaneio extends MGEscPrint
 		$this->adicionaTexto("Total...:", "documento", 10, STR_PAD_LEFT);
 		$this->adicionaTexto(Yii::app()->format->formatNumber($model->valortotal), "documento", 18, STR_PAD_LEFT);
 		$this->adicionaLinha("<DblStrikeOff>");
-				
+
 		//total a prazo
         if ($model->codnaturezaoperacao == NaturezaOperacao::VENDA)
         {
@@ -259,19 +259,6 @@ class MGEscPrintRomaneio extends MGEscPrint
 
                 //$this->adicionaLinha("Observação");
 
-                if (!empty($model->observacoes))
-                {
-                    $observacoes = "Observacoes: ";
-                    $observacoes .= $model->observacoes;
-
-                    $observacoes = str_split($observacoes, 137);
-
-                    foreach($observacoes as $linha)
-                        $this->adicionaLinha($linha);
-
-                    $this->adicionaLinha();
-
-                }
 
                 $this->adicionaLinha("Confissao de Divida: Confesso(amos) e me(nos) constituo(imos) devedor(es) do valor descrito nesse negocio, obrigando-me(nos) a pagar em");
                 $this->adicionaTexto("moeda corrente do pais, conforme vencimento. Declaro(amos) ainda, ter recebido o servico e/ou produto aqui descrito, sem nada a reclamar.");
@@ -292,11 +279,10 @@ class MGEscPrintRomaneio extends MGEscPrint
                         .$model->Pessoa->pessoa
                         , "documento"
                         , 80);
-                $this->adicionaTexto("<DblStrikeOff>");
-
+                $this->adicionaLinha("<DblStrikeOff>");
             }
         }
-        
+
         if ($model->codnaturezaoperacao == NaturezaOperacao::DEVOLUCAO_VENDA && $model->codpessoa == Pessoa::CONSUMIDOR)
         {
             $this->adicionaLinha("", "documento");
@@ -317,7 +303,18 @@ class MGEscPrintRomaneio extends MGEscPrint
             //$this->adicionaTexto(Yii::app()->format->formatNumber($model->valoraprazo), "documento", 18, STR_PAD_LEFT);
         }
 
+		if (!empty($model->observacoes))
+		{
+			$this->adicionaLinha();
+			$observacoes = "Observacoes: ";
+			$observacoes .= $model->observacoes;
+			$observacoes = str_split($observacoes, 137);
+			foreach($observacoes as $linha)
+			{
+				$this->adicionaLinha($linha);
+			}
+		}
+
 	}
-	
-	
+
 }
