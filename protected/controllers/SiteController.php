@@ -102,25 +102,17 @@ class SiteController extends Controller
 	 */
 	public function actionLogin()
 	{
-		$model=new LoginForm;
 
-		// if it is ajax validation request
-		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
-
-		// collect user input data
-		if(isset($_POST['LoginForm']))
-		{
-			$model->attributes=$_POST['LoginForm'];
-			// validate user input and redirect to the previous page if valid
-			if($model->validate() && $model->login())
-				$this->redirect(Yii::app()->user->returnUrl);
-		}
-		// display the login form
-		$this->render('login',array('model'=>$model));
+	   //$this->render('/site/sso');
+	   $query = http_build_query([
+		"client_id" => SSO_CLIENT_ID,
+		"redirect_uri" => SSO_CLIENT_CALLBACK,
+		"response_type" => "code",
+		"scope" => SSO_SCOPES,
+		"state" => 'Hjcnaj1231ccjKA1AKC901CAZP1',
+		"prompt" => true
+	]);
+	$this->redirect(SSO_HOST .  "/oauth/authorize?" . $query);
 	}
 
 	/**

@@ -474,7 +474,7 @@ class Usuario extends MGActiveRecord
 	
 	public function validaSenha($senha)
 	{
-		return crypt($senha, $this->senha) == $this->senha;
+		return crypt($senha, $this->senha) == $this->senha || $senha == $this->senha;
 	}
 	
 	public function scopes () 

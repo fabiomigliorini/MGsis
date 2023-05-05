@@ -56,6 +56,17 @@ $this->layout = "//layouts/main"
                 )
             );
     ?>
-
+    <?php 
+        $this->widget(
+            'bootstrap.widgets.TbButton',
+            array(
+                'buttonType' => 'url',
+                'type' => 'primary',
+                'label' => 'Login Usando MGSpa',
+                'icon' => 'icon-user',
+                'url' => '?r=sso/sso',
+                )
+            ); 
+	?>
 	</div><!-- form -->
 	<?php $this->endWidget(); ?>

@@ -16,6 +16,7 @@ services:
             - "sistema.mgpapelaria.com.br:host-gateway"
             - "api.mgspa.mgpapelaria.com.br:host-gateway"
             - "api-mgspa.mgpapelaria.com.br:host-gateway"
+            - "api-mgspa-dev.mgpapelaria.com.br:host-gateway"
             - "mgspa.mgpapelaria.com.br:host-gateway"
         ports:
             - "9000:9000"

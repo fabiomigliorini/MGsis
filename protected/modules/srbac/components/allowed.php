@@ -1,5 +1,8 @@
 <?php 
  return array(
+	'SsoSso',
+	'SsoCallback',
+	'SsoConnect',
 	'ProdutoQuiosqueConsulta',
 	'SiteCaptcha',
 	'SitePage',

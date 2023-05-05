@@ -171,7 +171,7 @@
 						'items'=>
 							array(
 								array('label'=>'Perfil', 'url'=>array('usuario/view', 'id'=>Yii::app()->user->id)),
-								array('label'=>'Sair', 'url'=>array('site/logout')),
+								array('label'=>'Sair', 'url'=> SSO_HOST . ('/logout')),
 							)
 					),
 				),
