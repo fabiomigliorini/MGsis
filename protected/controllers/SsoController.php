@@ -58,6 +58,8 @@ class SsoController extends Controller
       $headr[] = 'Authorization: Bearer '.$access_token;
       curl_setopt($crl, CURLOPT_RETURNTRANSFER, 1);
       curl_setopt($crl, CURLOPT_HTTPHEADER,$headr);
+      curl_setopt($crl, CURLOPT_SSL_VERIFYHOST, 0);
+      curl_setopt($crl, CURLOPT_SSL_VERIFYPEER, 0);
       $rest = curl_exec($crl);
       //$info = curl_getinfo($crl);
       //$error = curl_error($crl);
