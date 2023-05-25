@@ -266,10 +266,10 @@ class Pessoa extends MGActiveRecord
 			'Negocios' => array(self::HAS_MANY, 'Negocio', 'codpessoa'),
 			'NotaFiscals' => array(self::HAS_MANY, 'NotaFiscal', 'codpessoa'),
 			'NegociosVendedors' => array(self::HAS_MANY, 'Negocio', 'codpessoavendedor'),
-      'PessoaCertidaos' => array(self::HAS_MANY, 'PessoaCertidao', 'codpessoa'),
-      'MercosClientes' => array(self::HAS_MANY, 'MercosCliente', 'codpessoa'),
+			'PessoaCertidaos' => array(self::HAS_MANY, 'PessoaCertidao', 'codpessoa', 'order'=>'codpessoacertidao DESC'),
+			'MercosClientes' => array(self::HAS_MANY, 'MercosCliente', 'codpessoa'),
 			'GrupoCliente' => array(self::BELONGS_TO, 'GrupoCliente', 'codgrupocliente'),
-      'inclusaoSpc'=>array(self::STAT, 'RegistroSpc', 'codpessoa', 'select'=>'to_char(min(inclusao), \'DD/MM/YYYY\')', 'condition'=>'baixa is null'),
+			'inclusaoSpc'=>array(self::STAT, 'RegistroSpc', 'codpessoa', 'select'=>'to_char(min(inclusao), \'DD/MM/YYYY\')', 'condition'=>'baixa is null'),
 			'PagarMePedidos' => array(self::HAS_MANY, 'PagarMePedido', 'codpessoa'),
 		);
 	}

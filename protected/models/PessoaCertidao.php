@@ -119,6 +119,7 @@ class PessoaCertidao extends MGActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array('defaultOrder'=>'t.validade DESC'),
 		));
 	}
 
