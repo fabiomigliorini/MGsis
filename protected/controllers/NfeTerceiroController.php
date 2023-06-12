@@ -292,9 +292,10 @@ class NfeTerceiroController extends Controller
         // CNAE
         $arrCodgCnae = [
             101 => '4761003',
-            //102 => '4761003',
+            //102 => '',
             103 => '4761003',
-            //104 => '4761003',
+            //104 => '',
+	    105 => '4751201'
         ];
         if (!isset($arrCodgCnae[$model->codfilial])) {
             throw new \Exception("Impossível determinar Cnae!", 1);
@@ -306,6 +307,7 @@ class NfeTerceiroController extends Controller
         $arrNumrPessoaDestinatario = [
             101 => '611107',
             103 => '126206917',
+	    105 => '128413022',
         ];
         if (!isset($arrNumrPessoaDestinatario[$model->codfilial])) {
             throw new \Exception("Impossível determinar Número da pessoa Destinatario!", 1);
@@ -317,6 +319,7 @@ class NfeTerceiroController extends Controller
             101 => '611107', // Com IE
             103 => '126206917',
             //101 => '4432657', (Sem IE)
+	    105 => '128413022'
         ];
         if (!isset($arrNumrContribuinte[$model->codfilial])) {
             throw new \Exception("Impossível determinar Número do Contribuinte!", 1);
