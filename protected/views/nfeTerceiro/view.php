@@ -202,6 +202,18 @@ function salvarOutros () {
   });
 }
 
+function marcarImobilizado(codtipoproduto) {
+  $.ajax({
+    url: "<?php echo Yii::app()->createUrl('nfeTerceiro/marcarImobilizado')?>",
+    data: {
+      codtipoproduto: codtipoproduto,
+      codnfeterceiro: '<?php echo $model->codnfeterceiro ?>',
+    }
+  }).done(function(resp) {
+    location.reload();
+  });
+}
+
 $(document).ready(function(){
 
     $('#inputOutros').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
@@ -334,15 +346,7 @@ $(document).ready(function(){
   $('#usoeconsumo').click(function(event){
     bootbox.confirm("Tem certeza que deseja marcar todos os itens como Uso e Consumo?", function(result){
       if(result){
-        $.ajax({
-          url: "<?php echo Yii::app()->createUrl('nfeTerceiro/UsoeConsumo')?>",
-          data: {
-            codtipoproduto: '7',
-            codnfeterceiro: '<?php echo $model->codnfeterceiro ?>',
-          }
-        }).done(function(resp) {
-          location.reload();
-        });
+        marcarImobilizado(7);
       }
     });
   });
@@ -350,15 +354,7 @@ $(document).ready(function(){
   $('#imobilizado').click(function(event){
     bootbox.confirm("Tem certeza que deseja marcar todos os itens como imobilizado?", function(result){
       if(result){
-        $.ajax({
-          url: "<?php echo Yii::app()->createUrl('nfeTerceiro/MarcarImobilizado')?>",
-          data: {
-            codtipoproduto: '8',
-            codnfeterceiro: '<?php echo $model->codnfeterceiro ?>',
-          }
-        }).done(function(resp) {
-          location.reload();
-        });
+        marcarImobilizado(8);
       }
     });
   });

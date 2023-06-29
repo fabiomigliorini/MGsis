@@ -628,6 +628,14 @@ class NfeTerceiroController extends Controller
 
     public function actionInformaComplemento($id, $valor)
     {
+        $model = $this->loadModel($id);
+        if (!$model->podeEditar()) {
+            header('Content-type: application/json');
+            echo CJSON::encode([
+                'codnfeterceiro' => $id,
+                'erro' => 'Nota não permite edição!'
+            ]);
+        }
         $params = [
             'codnfeterceiro' => $id,
         ];
@@ -656,66 +664,46 @@ class NfeTerceiroController extends Controller
         $result = $command->queryAll();
         header('Content-type: application/json');
         echo CJSON::encode([
-            'codnfeterceiro' => $_GET['id'],
+            'codnfeterceiro' => $id,
             'result' => $result
         ]);
 
     }
 
-    public function actionMarcarImobilizado()
+    public function actionMarcarImobilizado($codnfeterceiro, $codtipoproduto)
     {
-        $sql = 'update tblnfeterceiroitem
-        set codprodutobarra = (
-                select min(pb.codprodutobarra)
-                from tblncm n
-                inner join tblproduto p on (p.codncm = n.codncm)
-                inner join tblprodutobarra pb on (pb.codproduto = p.codproduto)
-                where n.ncm = tblnfeterceiroitem.ncm
-                and p.codtipoproduto = :codtipoproduto
-            ),
-            complemento = null,
-            margem = null
-        where tblnfeterceiroitem.codnfeterceiro = :codnfeterceiro';
-
+        $model = $this->loadModel($codnfeterceiro);
+        if (!$model->podeEditar()) {
+            header('Content-type: application/json');
+            echo CJSON::encode([
+                'codnfeterceiro' => $codnfeterceiro,
+                'erro' => 'Nota não permite edição!'
+            ]);
+        }
+        $sql = '
+            update tblnfeterceiroitem
+            set codprodutobarra = (
+                    select min(pb.codprodutobarra)
+                    from tblncm n
+                    inner join tblproduto p on (p.codncm = n.codncm)
+                    inner join tblprodutobarra pb on (pb.codproduto = p.codproduto)
+                    where n.ncm = tblnfeterceiroitem.ncm
+                    and p.codtipoproduto = :codtipoproduto
+                ),
+                complemento = null,
+                margem = null
+            where tblnfeterceiroitem.codnfeterceiro = :codnfeterceiro
+            returning codnfeterceiroitem, codprodutobarra
+        ';
         $command = Yii::app()->db->createCommand($sql);
-       
         $command->params = [
-            'codtipoproduto' => $_GET['codtipoproduto'],
-            'codnfeterceiro'    => $_GET['codnfeterceiro']
+            'codtipoproduto' => $codtipoproduto,
+            'codnfeterceiro' => $codnfeterceiro
         ];
         $items = $command->queryAll();
         header('Content-type: application/json');
         echo CJSON::encode([
-            'codnfeterceiro' => $_GET['codnfeterceiro'],
-            'items' => $items
-        ]);
-    }
-
-    public function actionUsoeConsumo()
-    {
-        $sql = 'update tblnfeterceiroitem
-        set codprodutobarra = (
-                select min(pb.codprodutobarra)
-                from tblncm n
-                inner join tblproduto p on (p.codncm = n.codncm)
-                inner join tblprodutobarra pb on (pb.codproduto = p.codproduto)
-                where n.ncm = tblnfeterceiroitem.ncm
-                and p.codtipoproduto = :codtipoproduto
-            ),
-            complemento = null,
-            margem = null
-        where tblnfeterceiroitem.codnfeterceiro = :codnfeterceiro';
-
-        $command = Yii::app()->db->createCommand($sql);
-       
-        $command->params = [
-            'codtipoproduto' => $_GET['codtipoproduto'],
-            'codnfeterceiro'    => $_GET['codnfeterceiro']
-        ];
-        $items = $command->queryAll();
-        header('Content-type: application/json');
-        echo CJSON::encode([
-            'codnfeterceiro' => $_GET['codnfeterceiro'],
+            'codnfeterceiro' => $codnfeterceiro,
             'items' => $items
         ]);
     }
