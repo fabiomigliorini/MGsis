@@ -17,7 +17,8 @@
 						if (!empty($model->ceantrib) && $model->cean != $model->ceantrib || true) {
 							echo $form->textFieldRow($model,'ceantrib',array('class'=>'input-medium text-center','maxlength'=>30, 'disabled'=>true));
 						}
-						echo $form->textFieldRow($model,'qcom',array('class'=>'input-small text-right','maxlength'=>14,'disabled'=>true, 'append'=>$model->ucom));
+						echo $form->textFieldRow($model,'qcom',array('class'=>'input-small text-right','maxlength'=>14,'disabled'=>false));
+						echo $form->textFieldRow($model,'ucom',array('class'=>'input-small text-center','maxlength'=>3,'disabled'=>false));
 						echo $form->textFieldRow($model,'vuncom',array('class'=>'input-small text-right','maxlength'=>14,'disabled'=>true));
 						echo $form->textFieldRow($model,'margem',array('class'=>'input-mini text-right','maxlength'=>6, 'append'=>'%'));
 						echo $form->toggleButtonRow($model,'modalidadeicmsgarantido', array('options' => array('width' => 400,  'enabledLabel' => 'Garantido (até 2019)', 'disabledLabel' => 'Apuração (partir 2020)')));

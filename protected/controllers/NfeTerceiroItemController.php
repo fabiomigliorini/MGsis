@@ -186,6 +186,9 @@ class NfeTerceiroItemController extends Controller
 		if(isset($_POST['NfeTerceiroItem']))
 		{
 			$model->attributes=$_POST['NfeTerceiroItem'];
+			$calculopreco = ($model->vprod/$_POST['NfeTerceiroItem']['qcom']); 
+			$model->vuncom = $calculopreco;
+		
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->codnfeterceiroitem));
 		}

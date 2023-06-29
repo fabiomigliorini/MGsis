@@ -189,7 +189,22 @@ function btnConferenciaClick(conferencia) {
   });
 }
 
+function salvarOutros () {
+  var valor = $('#inputOutros').autoNumeric('get');
+  $.ajax({
+    url: "<?php echo Yii::app()->createUrl('nfeTerceiro/InformaComplemento')?>",
+    data: {
+    id: <?php echo $model->codnfeterceiro ?>,
+    valor: valor
+    }
+  }).done(function(resp) {
+    location.reload();
+  });
+}
+
 $(document).ready(function(){
+
+    $('#inputOutros').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 
     $('#buscar-form').on('submit', function(e) {
         e.preventDefault();
@@ -315,6 +330,55 @@ $(document).ready(function(){
         downloadNfe();
     });
   });
+
+  $('#usoeconsumo').click(function(event){
+    bootbox.confirm("Tem certeza que deseja marcar todos os itens como Uso e Consumo?", function(result){
+      if(result){
+        $.ajax({
+          url: "<?php echo Yii::app()->createUrl('nfeTerceiro/UsoeConsumo')?>",
+          data: {
+            codtipoproduto: '7',
+            codnfeterceiro: '<?php echo $model->codnfeterceiro ?>',
+          }
+        }).done(function(resp) {
+          location.reload();
+        });
+      }
+    });
+  });
+
+  $('#imobilizado').click(function(event){
+    bootbox.confirm("Tem certeza que deseja marcar todos os itens como imobilizado?", function(result){
+      if(result){
+        $.ajax({
+          url: "<?php echo Yii::app()->createUrl('nfeTerceiro/MarcarImobilizado')?>",
+          data: {
+            codtipoproduto: '8',
+            codnfeterceiro: '<?php echo $model->codnfeterceiro ?>',
+          }
+        }).done(function(resp) {
+          location.reload();
+        });
+      }
+    });
+  });
+
+  $("#inputOutros").keypress(function(e) {
+    if(e.which == 13) {
+      salvarOutros();
+    }
+  });
+
+  $('#btnSalvarOutros').click(function(event){
+    console.log('aqui');
+    event.preventDefault();
+    salvarOutros();
+  });
+
+  $('#ModalOutros').on('shown', function () {
+    $("#inputOutros").focus();
+  });
+
 });
 /*]]>*/
 </script>
@@ -494,7 +558,13 @@ $(document).ready(function(){
         ?>
   </div>
   <div class="span3">
+
+
     <?php
+        $outrosValue = Yii::app()->format->formatNumber($outros);
+        if ($model->podeEditar()){
+          $outrosValue .= '&nbsp;<a href="#ModalOutros" role="button" data-toggle="modal"><i class="icon-pencil"></i></a>';
+        }
         $this->widget('bootstrap.widgets.TbDetailView', array(
             'data'=>$model,
             'attributes'=>array(
@@ -505,16 +575,37 @@ $(document).ready(function(){
                 ),
                 array(
                     'label'=>'Outros Custos',
-                    'value'=>Yii::app()->format->formatNumber($outros),
+                    'value'=>$outrosValue, 
+                    'type'=>"raw",
                 ),
+                // array(
+                  // 'label'=>'Outros Custos' . '<a href="#" onclick="Complemento()"> <i class="icon-pencil"></i></a>',
+                  // 'value'=>Yii::app()->format->formatNumber($outros),
+                  // 'visible'=>$model->podeEditar()  
+              // ),
                 array(
                     'label'=>'Custo Total',
                     'value'=>Yii::app()->format->formatNumber($totalgeral),
                 ),
             ),
         ));
-
         ?>
+
+   
+    <!-- Modal -->
+    <div id="ModalOutros" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModalLabel">Informe o valor para ratear</h3>
+        </div>
+        <div class="modal-body text-center">
+          <input class="input-small text-right" maxlength="14" name="inputOutros" id="inputOutros" type="text" value="<?echo $outros?>">
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+          <button class="btn btn-primary" id="btnSalvarOutros" type="submit">Salvar</button>
+        </div>
+    </div>
   </div>
 </div>
 
@@ -531,6 +622,17 @@ $(document).ready(function(){
 
 <?php if (!empty($model->NfeTerceiroItems)): ?>
     <h3>Itens</h3>
+    <?php if (!empty($model->podeEditar())): ?>
+    <div class="input-group">
+      <button class="btn" id="usoeconsumo">
+        Marcar Todos Itens Como Uso e Consumo
+      </button>
+      <button class="btn" id="imobilizado">
+        Marcar Todos Itens Como Imobilizado
+      </button>
+      <?php endif; ?>
+    </div>
+    <br>
     <form id="buscar-form">
         <div class="input-append">
             <input class="span2" id="barras" type="text" placeholder="Barras" autofocus>

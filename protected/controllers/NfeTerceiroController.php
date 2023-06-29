@@ -626,4 +626,98 @@ class NfeTerceiroController extends Controller
         ]);
     }
 
+    public function actionInformaComplemento($id, $valor)
+    {
+        $params = [
+            'codnfeterceiro' => $id,
+        ];
+        if (empty($valor)) {
+            $sql = '
+                update tblnfeterceiroitem 
+                set complemento = null
+                from tblnfeterceiro n
+                where n.codnfeterceiro = tblnfeterceiroitem.codnfeterceiro  
+                and tblnfeterceiroitem.codnfeterceiro = :codnfeterceiro
+                returning codnfeterceiroitem, complemento
+            ';
+        } else {
+            $sql = '
+                update tblnfeterceiroitem 
+                set complemento = round(( :complemento / n.valorprodutos) * vprod, 2)
+                from tblnfeterceiro n
+                where n.codnfeterceiro = tblnfeterceiroitem.codnfeterceiro  
+                and tblnfeterceiroitem.codnfeterceiro = :codnfeterceiro
+                returning codnfeterceiroitem, complemento
+            ';
+            $params['complemento'] = $valor;
+        }
+        $command = Yii::app()->db->createCommand($sql);
+        $command->params = $params;
+        $result = $command->queryAll();
+        header('Content-type: application/json');
+        echo CJSON::encode([
+            'codnfeterceiro' => $_GET['id'],
+            'result' => $result
+        ]);
+
+    }
+
+    public function actionMarcarImobilizado()
+    {
+        $sql = 'update tblnfeterceiroitem
+        set codprodutobarra = (
+                select min(pb.codprodutobarra)
+                from tblncm n
+                inner join tblproduto p on (p.codncm = n.codncm)
+                inner join tblprodutobarra pb on (pb.codproduto = p.codproduto)
+                where n.ncm = tblnfeterceiroitem.ncm
+                and p.codtipoproduto = :codtipoproduto
+            ),
+            complemento = null,
+            margem = null
+        where tblnfeterceiroitem.codnfeterceiro = :codnfeterceiro';
+
+        $command = Yii::app()->db->createCommand($sql);
+       
+        $command->params = [
+            'codtipoproduto' => $_GET['codtipoproduto'],
+            'codnfeterceiro'    => $_GET['codnfeterceiro']
+        ];
+        $items = $command->queryAll();
+        header('Content-type: application/json');
+        echo CJSON::encode([
+            'codnfeterceiro' => $_GET['codnfeterceiro'],
+            'items' => $items
+        ]);
+    }
+
+    public function actionUsoeConsumo()
+    {
+        $sql = 'update tblnfeterceiroitem
+        set codprodutobarra = (
+                select min(pb.codprodutobarra)
+                from tblncm n
+                inner join tblproduto p on (p.codncm = n.codncm)
+                inner join tblprodutobarra pb on (pb.codproduto = p.codproduto)
+                where n.ncm = tblnfeterceiroitem.ncm
+                and p.codtipoproduto = :codtipoproduto
+            ),
+            complemento = null,
+            margem = null
+        where tblnfeterceiroitem.codnfeterceiro = :codnfeterceiro';
+
+        $command = Yii::app()->db->createCommand($sql);
+       
+        $command->params = [
+            'codtipoproduto' => $_GET['codtipoproduto'],
+            'codnfeterceiro'    => $_GET['codnfeterceiro']
+        ];
+        $items = $command->queryAll();
+        header('Content-type: application/json');
+        echo CJSON::encode([
+            'codnfeterceiro' => $_GET['codnfeterceiro'],
+            'items' => $items
+        ]);
+    }
+
 }
