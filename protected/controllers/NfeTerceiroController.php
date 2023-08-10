@@ -474,8 +474,9 @@ class NfeTerceiroController extends Controller
             if ($error) {
                 throw new \Exception("Falha ao gerar PDF da DAR! - {$error}", 1);
             }
-	        curl_close($ch);
-            $pdf = gzdecode($output);
+            curl_close($ch);
+            //$pdf = gzdecode($output);
+            $pdf = $output;
         }
 
         // valida se veio um PDF
