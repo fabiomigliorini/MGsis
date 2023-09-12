@@ -11,6 +11,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Listagem (F1)', 'icon'=>'icon-list-alt', 'url'=>array('index'), 'linkOptions'=> array('id'=>'btnListagem')),
 	array('label'=>'Novo (F2)', 'icon'=>'icon-plus', 'url'=>array('createOrEmpty'), 'linkOptions'=> array('id'=>'btnNovo')),
+	array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('Alterar', 'id'=>$model->codnegocio), 'visible'=>($model->codnegociostatus ==2), 'linkOptions'=> array('id'=>'btnAlterarVendedor')),
 	array('label'=>'Fechar Negócio (F3)', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codnegocio), 'visible'=>($model->codnegociostatus==1), 'linkOptions'=>	array('id'=>'btnFechar')),
 	array(
 		'label'=>'Romaneio',
@@ -20,7 +21,7 @@ $this->menu=array(
 		'visible'=>($model->codnegociostatus == NegocioStatus::FECHADO)
 	),
 	array(
-		'label'=>'Gerar Nota Fiscal',
+		'label'=>'Gerar NFe',
 		'icon'=>'icon-globe',
 		'url'=>'#',
 		'linkOptions'=>array('id'=>'btnGerarNotaFiscal'),

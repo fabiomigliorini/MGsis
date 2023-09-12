@@ -1,11 +1,11 @@
 <?php 
  return array(
+	'NegocioAlterar',
 	'SsoSso',
 	'SsoCallback',
 	'SsoConnect',
 	'NfeTerceiroInformaComplemento',
 	'NfeTerceiroMarcarImobilizado',
-	'NfeTerceiroUsoeConsumo',
 	'ProdutoQuiosqueConsulta',
 	'SiteCaptcha',
 	'SitePage',

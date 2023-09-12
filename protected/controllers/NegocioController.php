@@ -3,21 +3,21 @@
 class NegocioController extends Controller
 {
     /**
-    * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
-    * using two-column layout. See 'protected/views/layouts/column2.php'.
-    */
-    public $layout='//layouts/column2';
+     * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
+     * using two-column layout. See 'protected/views/layouts/column2.php'.
+     */
+    public $layout = '//layouts/column2';
 
     /**
-    * Displays a particular model.
-    * @param integer $id the ID of the model to be displayed
-    */
+     * Displays a particular model.
+     * @param integer $id the ID of the model to be displayed
+     */
     public function actionView($id, $perguntarNota = false)
     {
         $this->render('view', array(
-            'model'=>$this->loadModel($id),
-            'perguntarNota'=>$perguntarNota
-            ));
+            'model' => $this->loadModel($id),
+            'perguntarNota' => $perguntarNota
+        ));
     }
 
     /**
@@ -42,18 +42,18 @@ class NegocioController extends Controller
         ];
         $res = $cmd->queryAll();
         if (isset($res[0])) {
-            return $this->redirect(array('view','id'=>$res[0]['codnegocio']));
+            return $this->redirect(array('view', 'id' => $res[0]['codnegocio']));
         }
         return $this->redirect(array('create'));
     }
 
     /**
-    * Creates a new model.
-    * If creation is successful, the browser will be redirected to the 'view' page.
-    */
+     * Creates a new model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     */
     public function actionCreate($duplicar = null)
     {
-        $model=new Negocio;
+        $model = new Negocio;
         $itens = [];
 
         // Uncomment the following line if AJAX validation is needed
@@ -79,7 +79,7 @@ class NegocioController extends Controller
             $transaction = Yii::app()->db->beginTransaction();
 
             $erro = false;
-            $model->attributes=$_POST['Negocio'];
+            $model->attributes = $_POST['Negocio'];
             if (!empty($model->NaturezaOperacao)) {
                 $model->codoperacao = $model->NaturezaOperacao->codoperacao;
             }
@@ -97,7 +97,7 @@ class NegocioController extends Controller
                 //duplica produtos
                 foreach ($original->NegocioProdutoBarras as $prod_orig) {
                     if (!isset($codnegocioprodutobarraduplicar[$prod_orig->codnegocioprodutobarra])) {
-                      continue;
+                        continue;
                     }
                     $prod_novo = new NegocioProdutoBarra;
                     $prod_novo->attributes = $prod_orig->attributes;
@@ -123,12 +123,11 @@ class NegocioController extends Controller
                 if (!$model->save()) {
                     $erro = true;
                 }
-
             }
 
             if (!$erro) {
                 $transaction->commit();
-                $this->redirect(array('view','id'=>$model->codnegocio));
+                $this->redirect(array('view', 'id' => $model->codnegocio));
             } else {
                 $transaction->rollBack();
                 if (isset($original)) {
@@ -155,9 +154,74 @@ class NegocioController extends Controller
         }
 
         $this->render('create', array(
-            'model'=>$model,
-            'itens'=>$itens,
-            'codnegocioprodutobarraduplicar'=>$codnegocioprodutobarraduplicar
+            'model' => $model,
+            'itens' => $itens,
+            'codnegocioprodutobarraduplicar' => $codnegocioprodutobarraduplicar
+        ));
+    }
+
+    public function actionAlterar($id)
+    {
+
+        $model = $this->loadModel($id);
+
+        $itens = [];
+
+        $this->performAjaxValidation($model);
+
+        if ($model->codnegociostatus !== 2) {
+            Yii::app()->user->setFlash("error", "Só é possivel alterar negócio fechado!");
+            $this->redirect(array('view', 'id' => $model->codnegocio));
+            return;
+        }
+
+        $model->codusuario = Yii::app()->user->id;
+        $model->lancamento = date('d/m/Y H:i:s');
+        $model->codfilial = Yii::app()->user->getState("codfilial");
+        if (sizeof($model->Filial->EstoqueLocals) > 0) {
+            $model->codestoquelocal = $model->Filial->EstoqueLocals[0]->codestoquelocal;
+        }
+
+
+        if (isset($_POST['Negocio'])) {
+            $natNova = NaturezaOperacao::model()->findByPk($_POST['Negocio']['codnaturezaoperacao']);
+
+            if ($model->NaturezaOperacao->codoperacao !== $natNova->codoperacao) {
+                Yii::app()->user->setFlash("error", "Natureza de Operação diferente");
+                $this->redirect(array('alterar', 'id' => $model->codnegocio));
+                return;
+            }
+
+            $transaction = Yii::app()->db->beginTransaction();
+           
+            $model->attributes = $_POST['Negocio'];
+            $salvo = $model->save();
+
+            foreach ($model->NegocioFormaPagamentos as $nfp) {
+                foreach ($nfp->Titulos as $titulo) {
+                    $titulo->codpessoa = $model->codpessoa;
+                    $titulo->codtipotitulo = $natNova->codtipotitulo;
+                    $titulo->codcontacontabil = $natNova->codcontacontabil;
+                    $titulo->save();
+                }
+            }
+
+            if ($salvo) {
+                // $model->movimentaEstoque();
+                $transaction->commit();
+                Yii::app()->user->setFlash("success", "Negócio Alterado!");
+                $this->redirect(array('view', 'id' => $model->codnegocio));
+            }
+
+            if (!$model->save()) {
+                $transaction->rollBack();
+                Yii::app()->user->setFlash("error", "Erro ao alterar negócio!");
+            }
+        }
+
+        $this->render('alterar', array(
+            'model' => $model,
+            'itens' => $itens
         ));
     }
 
@@ -180,18 +244,18 @@ class NegocioController extends Controller
 
 
     /**
-    * Updates a particular model.
-    * If update is successful, the browser will be redirected to the 'view' page.
-    * @param integer $id the ID of the model to be updated
-    */
+     * Updates a particular model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id the ID of the model to be updated
+     */
     public function actionUpdate($id)
     {
         if (isset($_POST['Negocio']['percentualdesconto'])) {
             unset($_POST['Negocio']['percentualdesconto']);
         }
-        $model=$this->loadModel($id);
+        $model = $this->loadModel($id);
         if ($model->codnegociostatus != 1) {
-            $this->redirect(array('view','id'=>$model->codnegocio));
+            $this->redirect(array('view', 'id' => $model->codnegocio));
         }
 
         $perguntarNota = false;
@@ -216,22 +280,22 @@ class NegocioController extends Controller
             }
 
             if ($salvo) {
-                $this->redirect(array('view', 'id'=>$model->codnegocio, 'perguntarNota'=>$perguntarNota));
+                $this->redirect(array('view', 'id' => $model->codnegocio, 'perguntarNota' => $perguntarNota));
             }
         }
 
         $this->render('update', array(
-            'model'=>$model,
-            'itens'=>[],
-            'codnegocioprodutobarraduplicar'=>[]
+            'model' => $model,
+            'itens' => [],
+            'codnegocioprodutobarraduplicar' => []
         ));
     }
 
     /**
-    * Deletes a particular model.
-    * If deletion is successful, the browser will be redirected to the 'admin' page.
-    * @param integer $id the ID of the model to be deleted
-    */
+     * Deletes a particular model.
+     * If deletion is successful, the browser will be redirected to the 'admin' page.
+     * @param integer $id the ID of the model to be deleted
+     */
     /*
     public function actionDelete($id)
     {
@@ -280,7 +344,7 @@ class NegocioController extends Controller
                 Yii::app()->user->setFlash("success", "Negócio Cancelado!");
             }
 
-            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('view','id'=>$model->codnegocio));
+            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('view', 'id' => $model->codnegocio));
         } else {
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
         }
@@ -288,11 +352,11 @@ class NegocioController extends Controller
 
 
     /**
-    * Lists all models.
-    */
+     * Lists all models.
+     */
     public function actionIndex()
     {
-        $model=new Negocio('search');
+        $model = new Negocio('search');
 
         $model->unsetAttributes();  // clear any default values
 
@@ -301,38 +365,38 @@ class NegocioController extends Controller
         }
 
         if (!isset(Yii::app()->session['FiltroNegocioIndex'])) {
-    			Yii::app()->session['FiltroNegocioIndex'] = array(
-    				'codusuario' => Yii::app()->user->id,
-    				'lancamento_de' => date('d/m/y', strtotime('-7 days')) . ' 00:00',
-    			);
-    		}
+            Yii::app()->session['FiltroNegocioIndex'] = array(
+                'codusuario' => Yii::app()->user->id,
+                'lancamento_de' => date('d/m/y', strtotime('-7 days')) . ' 00:00',
+            );
+        }
 
         if (isset(Yii::app()->session['FiltroNegocioIndex'])) {
-            $model->attributes=Yii::app()->session['FiltroNegocioIndex'];
+            $model->attributes = Yii::app()->session['FiltroNegocioIndex'];
         }
 
         $this->render('index', array(
-            'dataProvider'=>$model->search(),
-            'model'=>$model,
-            ));
+            'dataProvider' => $model->search(),
+            'model' => $model,
+        ));
     }
 
     /**
-    * Manages all models.
-    */
+     * Manages all models.
+     */
     public function actionAdmin()
     {
-        $model=new Negocio('search');
+        $model = new Negocio('search');
 
         $model->unsetAttributes();  // clear any default values
 
         if (isset($_GET['Negocio'])) {
-            $model->attributes=$_GET['Negocio'];
+            $model->attributes = $_GET['Negocio'];
         }
 
         $this->render('admin', array(
-            'model'=>$model,
-            ));
+            'model' => $model,
+        ));
     }
 
     public function actionImprimeRomaneio($id, $imprimir = false)
@@ -354,30 +418,30 @@ class NegocioController extends Controller
     }
 
     /**
-    * Returns the data model based on the primary key given in the GET variable.
-    * If the data model is not found, an HTTP exception will be raised.
-    * @param integer the ID of the model to be loaded
-    * @return Negocio
-    */
+     * Returns the data model based on the primary key given in the GET variable.
+     * If the data model is not found, an HTTP exception will be raised.
+     * @param integer the ID of the model to be loaded
+     * @return Negocio
+     */
     public function loadModel($id)
     {
-        $model=Negocio::model()->findByPk($id);
-        if ($model===null) {
+        $model = Negocio::model()->findByPk($id);
+        if ($model === null) {
             throw new CHttpException(404, 'The requested page does not exist.');
         }
         return $model;
     }
 
     /**
-    * Performs the AJAX validation.
-    * @param CModel the model to be validated
-    */
+     * Performs the AJAX validation.
+     * @param CModel the model to be validated
+     */
     protected function performAjaxValidation($model)
     {
         if (!isset($_POST['ajax'])) {
             return;
         }
-        if ($_POST['ajax']!=='negocio-form') {
+        if ($_POST['ajax'] !== 'negocio-form') {
             return;
         }
         echo CActiveForm::validate($model);
@@ -389,11 +453,11 @@ class NegocioController extends Controller
         Yii::app()->end();
     }
 
-    public function actionAdicionaProduto($codnegocio, $barras, $quantidade=1)
+    public function actionAdicionaProduto($codnegocio, $barras, $quantidade = 1)
     {
-        $model=$this->loadModel($codnegocio);
+        $model = $this->loadModel($codnegocio);
 
-        $retorno = array("Adicionado"=>true, "Mensagem"=>"");
+        $retorno = array("Adicionado" => true, "Mensagem" => "");
 
         if ($pb = ProdutoBarra::model()->findByBarras($barras)) {
             if ($npb = NegocioProdutoBarra::model()->find(
@@ -401,7 +465,7 @@ class NegocioController extends Controller
                 array(
                     ":codnegocio" => $model->codnegocio,
                     ":codprodutobarra" => $pb->codprodutobarra
-                    )
+                )
             )) {
                 $npb->quantidade += $quantidade;
             } else {
@@ -441,50 +505,50 @@ class NegocioController extends Controller
     public function actionAtualizaListagemProdutos($codnegocio)
     {
         $this->renderPartial('_view_produtos_listagem', array(
-            'model'=>$this->loadModel($codnegocio),
-            ));
+            'model' => $this->loadModel($codnegocio),
+        ));
     }
 
     public function actionAtualizaListagemPagamentos($codnegocio)
     {
         $this->renderPartial('_view_pagamentos_listagem', array(
-            'model'=>$this->loadModel($codnegocio),
-            ));
+            'model' => $this->loadModel($codnegocio),
+        ));
     }
 
     public function actionAtualizaListagemPixCob($codnegocio)
     {
         $this->renderPartial('_view_pix_cob_listagem', array(
-            'model'=>$this->loadModel($codnegocio),
-            ));
+            'model' => $this->loadModel($codnegocio),
+        ));
     }
 
     public function actionAtualizaListagemStonePreTransacao($codnegocio)
     {
         $this->renderPartial('_view_stone_listagem', array(
-            'model'=>$this->loadModel($codnegocio),
-            ));
+            'model' => $this->loadModel($codnegocio),
+        ));
     }
 
     public function actionAtualizaListagemPagarMePedido($codnegocio)
     {
         $this->renderPartial('_view_pagar_me_listagem', array(
-            'model'=>$this->loadModel($codnegocio),
-            ));
+            'model' => $this->loadModel($codnegocio),
+        ));
     }
 
     public function actionAtualizaTotais($codnegocio)
     {
         $this->renderPartial('_view_totais', array(
-            'model'=>$this->loadModel($codnegocio),
-            ));
+            'model' => $this->loadModel($codnegocio),
+        ));
     }
 
     public function actionAdicionaFormaPagamento($codnegocio, $codformapagamento, $valorpagamento)
     {
-        $model=$this->loadModel($codnegocio);
+        $model = $this->loadModel($codnegocio);
 
-        $retorno = array("Adicionado"=>true, "Mensagem"=>"");
+        $retorno = array("Adicionado" => true, "Mensagem" => "");
 
         if ($valorpagamento <= 0) {
             $retorno["Adicionado"] = false;
@@ -495,7 +559,7 @@ class NegocioController extends Controller
                 array(
                     ":codnegocio" => $model->codnegocio,
                     ":codformapagamento" => $fp->codformapagamento
-                    )
+                )
             )) {
                 $nfp->valorpagamento += $valorpagamento;
             } else {
@@ -530,7 +594,7 @@ class NegocioController extends Controller
     {
         $negocio = $this->loadModel($codnegocio);
 
-        $retorno = array("Retorno"=>true, "Mensagem"=>"");
+        $retorno = array("Retorno" => true, "Mensagem" => "");
 
         if (!$negocio->fecharNegocio()) {
             $retorno["Retorno"] = false;
@@ -551,7 +615,7 @@ class NegocioController extends Controller
     {
         $negocio = $this->loadModel($id);
 
-        $retorno = array("Retorno"=>1, "Mensagem"=>"", "codnotafiscal" =>$codnotafiscal);
+        $retorno = array("Retorno" => 1, "Mensagem" => "", "codnotafiscal" => $codnotafiscal);
 
         $transaction = Yii::app()->db->beginTransaction();
 
@@ -576,26 +640,26 @@ class NegocioController extends Controller
     }
 
     public function validarFiltro()
-  	{
-  		if (isset(Yii::app()->session['FiltroNegocioIndex'])) {
-  			foreach (Yii::app()->session['FiltroNegocioIndex'] as $key => $val) {
-  				if (!empty($val)) {
-  					return;
-  				}
-  			}
-  		}
-  		die ('Faça pelo menos um filtro!');
-  	}
+    {
+        if (isset(Yii::app()->session['FiltroNegocioIndex'])) {
+            foreach (Yii::app()->session['FiltroNegocioIndex'] as $key => $val) {
+                if (!empty($val)) {
+                    return;
+                }
+            }
+        }
+        die('Faça pelo menos um filtro!');
+    }
 
     public function actionRelatorio()
     {
         // WORKAROUND: Cache Chrome salvando sempre o mesmo relatorio!
-    		// Ate mostrava em tela diferente, mas ao salvar, salvava a primeira versao emitida
-    		if (!isset($_GET['__pdfdate'])) {
-    				header('Location: ' . $_SERVER['REQUEST_URI'] . '&__pdfdate=' . date('c'));
-    		}
+        // Ate mostrava em tela diferente, mas ao salvar, salvava a primeira versao emitida
+        if (!isset($_GET['__pdfdate'])) {
+            header('Location: ' . $_SERVER['REQUEST_URI'] . '&__pdfdate=' . date('c'));
+        }
 
-        $model=new Negocio('search');
+        $model = new Negocio('search');
 
         $model->unsetAttributes();  // clear any default values
 
@@ -606,7 +670,7 @@ class NegocioController extends Controller
         $this->validarFiltro();
 
         if (isset(Yii::app()->session['FiltroNegocioIndex'])) {
-            $model->attributes=Yii::app()->session['FiltroNegocioIndex'];
+            $model->attributes = Yii::app()->session['FiltroNegocioIndex'];
         }
 
         $negocios = $model->search(false);
@@ -618,10 +682,10 @@ class NegocioController extends Controller
     public function actionRelatorioOrcamento($id)
     {
         // WORKAROUND: Cache Chrome salvando sempre o mesmo relatorio!
-    		// Ate mostrava em tela diferente, mas ao salvar, salvava a primeira versao emitida
-    		if (!isset($_GET['__pdfdate'])) {
-    				header('Location: ' . $_SERVER['REQUEST_URI'] . '&__pdfdate=' . date('c'));
-    		}
+        // Ate mostrava em tela diferente, mas ao salvar, salvava a primeira versao emitida
+        if (!isset($_GET['__pdfdate'])) {
+            header('Location: ' . $_SERVER['REQUEST_URI'] . '&__pdfdate=' . date('c'));
+        }
 
         $model = $this->loadModel($id);
         $rel = new MGRelatorioOrcamento($model);
@@ -644,13 +708,13 @@ class NegocioController extends Controller
         if (isset($_POST['quantidadedevolucao'])) {
             $codnegociodevolucao = $model->gerarDevolucao($_POST['quantidadedevolucao']);
             if ($codnegociodevolucao !== false) {
-                $this->redirect(array('view','id'=>$codnegociodevolucao));
+                $this->redirect(array('view', 'id' => $codnegociodevolucao));
             }
         }
 
         $this->render('devolucao', array(
-            'model'=>$model,
-            ));
+            'model' => $model,
+        ));
     }
 
     public function actionStatus($id)
