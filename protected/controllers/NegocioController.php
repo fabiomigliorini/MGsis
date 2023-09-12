@@ -187,7 +187,7 @@ class NegocioController extends Controller
             $natNova = NaturezaOperacao::model()->findByPk($_POST['Negocio']['codnaturezaoperacao']);
 
             if ($model->NaturezaOperacao->codoperacao !== $natNova->codoperacao) {
-                Yii::app()->user->setFlash("error", "Natureza de Operação diferente");
+                Yii::app()->user->setFlash("error", "Não é permitiro alterar uma operação de Saída para Entrada ou vice-versa!");
                 $this->redirect(array('alterar', 'id' => $model->codnegocio));
                 return;
             }
