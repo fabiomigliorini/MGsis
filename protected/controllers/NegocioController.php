@@ -211,12 +211,11 @@ class NegocioController extends Controller
                 $transaction->commit();
                 Yii::app()->user->setFlash("success", "Negócio Alterado!");
                 $this->redirect(array('view', 'id' => $model->codnegocio));
-            }
-
-            if (!$model->save()) {
+            }else {
                 $transaction->rollBack();
                 Yii::app()->user->setFlash("error", "Erro ao alterar negócio!");
             }
+
         }
 
         $this->render('alterar', array(
