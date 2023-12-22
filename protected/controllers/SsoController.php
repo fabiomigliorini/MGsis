@@ -65,7 +65,7 @@ class SsoController extends Controller
       curl_close($crl);
       $json = json_decode($rest, true);
       $model=new LoginForm;
-      $model->attributes=['username' => $json['usuario'], 'password' => $json['senha']];
+      $model->attributes=['username' => $json['data']['usuario'], 'password' => $json['data']['senha']];
       $model->login();  
       $this->redirect(Yii::app()->user->returnUrl);
      }
