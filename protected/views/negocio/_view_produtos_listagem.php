@@ -35,6 +35,18 @@ foreach ($model->NegocioProdutoBarras as $npb)
 						<?php
 					}
 
+					if (!empty($npb->inativo))
+                    {
+						?>
+							<div class="label label-warning">
+								Excluido em
+								<?php echo $npb->inativo ?>
+							</div>
+						<?php
+
+                    }
+
+
 				?>
 			</span>
 			<span class="span2 text-right">
