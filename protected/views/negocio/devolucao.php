@@ -149,8 +149,9 @@ $form =
                     $dev = $npb->devolucaoTotal;
                     $disp = $npb->quantidade - $dev;
                     $bloqueado = '';
-                    if ($disp == 0)
+                    if ($disp == 0 || !empty($npb->inativo)) {
                         $bloqueado = 'disabled=disabled';
+                    }
 					?>
 					<tr>
 						<td>
@@ -161,6 +162,13 @@ $form =
 						</td>
 						<td>
 							<?php echo CHtml::link(CHtml::encode($npb->ProdutoBarra->descricao), array('produto/view', 'id'=>$npb->ProdutoBarra->codproduto), array ("tabindex"=>-1)); ?>
+                            <?php
+                            if (!empty($npb->inativo)) {
+                                ?>
+                                <b>Excluído</b>
+                                <?php
+                            }
+                            ?>
 						</td>
 						<td>
 							<div class="text-center">

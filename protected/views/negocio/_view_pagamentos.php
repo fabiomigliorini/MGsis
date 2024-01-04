@@ -3,7 +3,7 @@
 	<label for="codformapagamento">Adicionar Forma de Pagamento</label>
 	<div class="row-fluid">
 		<?php
-		if ($model->codnegociostatus == 1)
+		if ($model->podeEditar())
 		{
 			?>
 				<div class="row-fluid">

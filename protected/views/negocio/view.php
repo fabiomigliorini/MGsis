@@ -12,7 +12,7 @@ $this->menu=array(
 	array('label'=>'Listagem (F1)', 'icon'=>'icon-list-alt', 'url'=>array('index'), 'linkOptions'=> array('id'=>'btnListagem')),
 	array('label'=>'Novo (F2)', 'icon'=>'icon-plus', 'url'=>array('createOrEmpty'), 'linkOptions'=> array('id'=>'btnNovo')),
 	array('label'=>'Alterar', 'icon'=>'icon-pencil', 'url'=>array('Alterar', 'id'=>$model->codnegocio), 'visible'=>($model->codnegociostatus ==2), 'linkOptions'=> array('id'=>'btnAlterarVendedor')),
-	array('label'=>'Fechar Negócio (F3)', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codnegocio), 'visible'=>($model->codnegociostatus==1), 'linkOptions'=>	array('id'=>'btnFechar')),
+	array('label'=>'Fechar Negócio (F3)', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codnegocio), 'visible'=>($model->podeEditar()), 'linkOptions'=>	array('id'=>'btnFechar')),
 	array(
 		'label'=>'Romaneio',
 		'icon'=>'icon-print',
@@ -508,7 +508,16 @@ $(document).ready(function(){
 				if (!empty($model->observacoes)) {
 					$attr[] = 'observacoes';
 				}
-        foreach($model->NfeTerceiros as $nfet) {
+                if (!empty($model->codpdv)) {
+                    $attr[] = [
+                        'name'=>'codpdv',
+                        'value'=>$model->Pdv->apelido . '<br>' . $model->Pdv->uuid . '<br>' . $model->Pdv->ip,
+                        'type'=>'raw',
+
+                    ];
+
+                }
+                foreach($model->NfeTerceiros as $nfet) {
 					$attr[] = [
 						'label' => 'NF-e Terceiro',
 						'value' => CHtml::link('Abrir', array("nfeTerceiro/view", "id" => $nfet->codnfeterceiro)),

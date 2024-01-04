@@ -78,10 +78,10 @@ class Negocio extends MGActiveRecord
             array('codestoquelocal', 'validaEstoqueLocal'),
             //array('codnegociostatus', 'validaStatus'),
             array('cpf', 'ext.validators.CnpjCpfValidator'),
-            array('codpessoa, codpessoatransportador, codpessoavendedor, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
+            array('codpessoa, codpessoatransportador, codpessoavendedor, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codpdv', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('pagamento, lancamento_de, lancamento_ate, codnegocio, codpessoa, codfilial, codestoquelocal, lancamento, codpessoatransportador, codpessoavendedor, codoperacao, codnegociostatus, observacoes, codusuario, valorfrete, valorjuros, valordesconto, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnaturezaoperacao, valorprodutos, valortotal, valoraprazo, valoravista', 'safe', 'on'=>'search'),
+            array('pagamento, lancamento_de, lancamento_ate, codnegocio, codpessoa, codfilial, codestoquelocal, lancamento, codpessoatransportador, codpessoavendedor, codoperacao, codnegociostatus, observacoes, codusuario, valorfrete, valorjuros, valordesconto, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnaturezaoperacao, valorprodutos, valortotal, valoraprazo, valoravista, codpdv', 'safe', 'on'=>'search'),
         );
     }
 
@@ -131,6 +131,7 @@ class Negocio extends MGActiveRecord
             'Operacao' => array(self::BELONGS_TO, 'Operacao', 'codoperacao'),
             'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
             'PessoaVendedor' => array(self::BELONGS_TO, 'Pessoa', 'codpessoavendedor'),
+            'Pdv' => array(self::BELONGS_TO, 'Pdv', 'codpdv'),
             'PessoaTransportador' => array(self::BELONGS_TO, 'Pessoa', 'codpessoatransportador'),
             'Usuario' => array(self::BELONGS_TO, 'Usuario', 'codusuario'),
             'UsuarioAcertoEntrega' => array(self::BELONGS_TO, 'Usuario', 'codusuarioacertoentrega'),
@@ -158,6 +159,7 @@ class Negocio extends MGActiveRecord
           'codestoquelocal' => 'Local Estoque',
           'lancamento' => 'Lançamento',
           'codpessoavendedor' => 'Vendedor',
+          'codpdv' => 'PDV',
           'codpessoatransportador' => 'Transportador',
           'codoperacao' => 'Operação',
           'codnegociostatus' => 'Status',
@@ -207,6 +209,7 @@ class Negocio extends MGActiveRecord
         $criteria->compare('codestoquelocal', $this->codestoquelocal, false);
         $criteria->compare('lancamento', $this->lancamento, true);
         $criteria->compare('codpessoavendedor', $this->codpessoavendedor, false);
+        $criteria->compare('codpdv', $this->codpdv, false);
         $criteria->compare('codpessoatransportador', $this->codpessoatransportador, false);
         $criteria->compare('codoperacao', $this->codoperacao, false);
         $criteria->compare('codnegociostatus', $this->codnegociostatus, false);
@@ -628,7 +631,7 @@ class Negocio extends MGActiveRecord
     public function gerarDevolucao($arrQuantidadeDevolucao)
     {
 
-	//inicia Transacao
+	    //inicia Transacao
         $trans = $this->dbConnection->beginTransaction();
 
         //monta array com itens devolvidos
@@ -809,5 +812,16 @@ class Negocio extends MGActiveRecord
         where codnegocio = {$this->codnegocio}
       ";
       return (float) Yii::app()->db->createCommand($sql)->queryScalar();
+    }
+
+    public function podeEditar()
+    {
+        if ($this->codnegociostatus != 1) {
+            return false;
+        }
+        if (!empty($this->codpdv)) {
+            return false;
+        }
+        return true;
     }
 }

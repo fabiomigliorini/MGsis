@@ -205,12 +205,12 @@ class MGEscPrintRomaneio extends MGEscPrint
 		$this->adicionaTexto("<DblStrikeOff>");
 		$this->adicionaLinha();
 
-		//$this->adicionaTexto("", "documento", 137, STR_PAD_LEFT, "-");
-		//$this->adicionaLinha();
-
 		//percorre produtos
 		foreach ($model->NegocioProdutoBarras as $npb)
 		{
+            if (!empty($npb->inativo)) {
+                continue;
+            }
 			$this->adicionaTexto($npb->ProdutoBarra->barras, "documento", 20);
 			$this->adicionaTexto($npb->ProdutoBarra->descricao, "documento", 65);
 			$this->adicionaTexto($npb->ProdutoBarra->UnidadeMedida->sigla, "documento", 7, STR_PAD_LEFT);
