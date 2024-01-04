@@ -175,12 +175,12 @@ class NegocioController extends Controller
             return;
         }
 
-        $model->codusuario = Yii::app()->user->id;
-        $model->lancamento = date('d/m/Y H:i:s');
-        $model->codfilial = Yii::app()->user->getState("codfilial");
-        if (sizeof($model->Filial->EstoqueLocals) > 0) {
-            $model->codestoquelocal = $model->Filial->EstoqueLocals[0]->codestoquelocal;
-        }
+        //$model->codusuario = Yii::app()->user->id;
+        //$model->lancamento = date('d/m/Y H:i:s');
+        //$model->codfilial = Yii::app()->user->getState("codfilial");
+        //if (sizeof($model->Filial->EstoqueLocals) > 0) {
+            //$model->codestoquelocal = $model->Filial->EstoqueLocals[0]->codestoquelocal;
+        //}
 
 
         if (isset($_POST['Negocio'])) {

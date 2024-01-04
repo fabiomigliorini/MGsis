@@ -11,6 +11,7 @@ services:
             - /etc/timezone:/etc/timezone:ro
             - /etc/localtime:/etc/localtime:ro
             - /usr/share/zoneinfo:/usr/share/zoneinfo
+            - ./www.conf:/usr/local/etc/php-fpm.d/www.conf
         extra_hosts:
             - "host.docker.internal:host-gateway"
             - "sistema.mgpapelaria.com.br:host-gateway"
