@@ -147,9 +147,13 @@ $form =
 				{
                     $i++;
                     $dev = $npb->devolucaoTotal;
-                    $disp = $npb->quantidade - $dev;
+                    if (empty($npb->inativo)) {
+                        $disp = $npb->quantidade - $dev;
+                    } else {
+                        $disp = 0;
+                    }
                     $bloqueado = '';
-                    if ($disp == 0 || !empty($npb->inativo)) {
+                    if ($disp == 0) {
                         $bloqueado = 'disabled=disabled';
                     }
 					?>
