@@ -451,12 +451,19 @@ class Negocio extends MGActiveRecord
         $totalOutras = 0;
         $totalDesconto = 0;
         foreach ($this->NegocioProdutoBarras as $negocioItem) {
-            $quantidade = $negocioItem->quantidade - $negocioItem->devolucaoTotal;
 
+            // ignora inativos
+            if (!empty($negocioItem->inativo)) {
+                continue;
+            }
+
+            // ignora devolvidos
+            $quantidade = $negocioItem->quantidade - $negocioItem->devolucaoTotal;
             if ($quantidade <= 0) {
                 continue;
             }
 
+            // se o item já está em outra nota
             foreach ($negocioItem->NotaFiscalProdutoBarras as $notaItem) {
                 if (!in_array($notaItem->NotaFiscal->codstatus, array(NotaFiscal::CODSTATUS_INUTILIZADA, NotaFiscal::CODSTATUS_CANCELADA))) {
                     continue(2); // vai para proximo item
