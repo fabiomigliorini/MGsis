@@ -127,7 +127,8 @@ function atualizaCamposPixCob ()
 	if (pixCob.qrcodeimagem != '' && pixCob.qrcodeimagem != null) {
 		url = pixCob.qrcodeimagem;
 	} else if (pixCob.qrcode != '' && pixCob.qrcode != null) {
-		url = 'https://chart.googleapis.com/chart?chs=513x513&cht=qr&chl=' + escape(pixCob.qrcode);
+		// url = 'https://chart.googleapis.com/chart?chs=513x513&cht=qr&chl=' + escape(pixCob.qrcode);
+		url = 'https://api.qrserver.com/v1/create-qr-code/?size=513x513&data=' + escape(pixCob.qrcode);
 	}
 	$('#pixCobQrCodeImg').attr('src', url);
 }
