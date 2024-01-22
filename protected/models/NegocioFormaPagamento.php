@@ -62,7 +62,7 @@ class NegocioFormaPagamento extends MGActiveRecord
         if ($this->FormaPagamento->lio) {
             $this->addError($attribute, 'Não é permitido adição manual de pagamento via cielo Lio!');
         }
-        if ($this->FormaPagamento->pix) {
+        if ($this->FormaPagamento->pix && $this->FormaPagamento->integracao) {
             $this->addError($attribute, 'Não é permitido adição manual de pagamento via PIX!');
         }
     }
