@@ -154,6 +154,7 @@ class Negocio extends MGActiveRecord
     {
         return array(
           'codnegocio' => '#',
+          'uuid' => 'Offline #',
           'codpessoa' => 'Pessoa',
           'codfilial' => 'Filial',
           'codestoquelocal' => 'Local Estoque',
