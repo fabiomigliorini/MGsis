@@ -390,7 +390,10 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
             return false;
         }
 
-        if ($this->NotaFiscal->Pessoa->Cidade->Estado == $this->NotaFiscal->Filial->Pessoa->Cidade->Estado) {
+        $codestadoFilial = $this->NotaFiscal->Filial->Pessoa->EnderecoFiscal[0]->Cidade->codestado;
+        $codestadoDest = $this->NotaFiscal->Pessoa->EnderecoFiscal[0]->Cidade->codestado;
+        if ($codestadoFilial == $codestadoDest) {
+        // if ($this->NotaFiscal->Pessoa->Cidade->Estado == $this->NotaFiscal->Filial->Pessoa->Cidade->Estado) {
             $filtroEstado = 'codestado = :codestado';
         } else {
             $filtroEstado = '(codestado = :codestado or codestado is null)';
@@ -411,7 +414,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
                     ':codtipoproduto' => $this->ProdutoBarra->Produto->codtipoproduto,
                     ':bit' => $this->ProdutoBarra->Produto->Ncm->bit,
                     ':codnaturezaoperacao' => $this->NotaFiscal->codnaturezaoperacao,
-                    ':codestado' => $this->NotaFiscal->Pessoa->Cidade->codestado,
+                    ':codestado' => $codestadoFilial,
                     ':ncm' => $this->ProdutoBarra->Produto->Ncm->ncm,
                 ),
                 'order' => 'codestado nulls last, char_length(ncm) desc nulls last',

@@ -68,10 +68,10 @@ class PessoaEndereco extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'codcidade' => array(self::BELONGS_TO, 'Tblcidade', 'codcidade'),
-			'codpessoa' => array(self::BELONGS_TO, 'Tblpessoa', 'codpessoa'),
-			'codusuariocriacao' => array(self::BELONGS_TO, 'Tblusuario', 'codusuariocriacao'),
-			'codusuarioalteracao' => array(self::BELONGS_TO, 'Tblusuario', 'codusuarioalteracao'),
+			'Cidade' => array(self::BELONGS_TO, 'Cidade', 'codcidade'),
+			'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
+			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
+			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 		);
 	}
 

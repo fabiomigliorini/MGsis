@@ -13,15 +13,15 @@
 	<?php if ($model->codstatus == NotaFiscal::CODSTATUS_AUTORIZADA): ?>
 		<input type="button" class="btn btn-small btn-block btn-primary btnAbrirDanfe" data-modelo="<?php echo $model->modelo; ?>" value="Danfe" data-codnotafiscal="<?php echo $model->codnotafiscal; ?>" id="btnAbrirDanfe">
 		<?php
-			$email = $model->Pessoa->emailnfe;
-			if (empty($email))
-				$email = $model->Pessoa->email;
-			if (empty($email))
-				$email = $model->Pessoa->emailcobranca;
+            $emails = [];
+            foreach ($model->Pessoa->PessoaEmails as $pe) {
+                if (!$pe->nfe) {
+                    continue;
+                }
+                $emails[] = $pe->email;
+            }
+            $email = implode(',', $emails);
 		?>
-        <pre>
-            <?php print_r($email); ?>
-    </pre>
 		<input type="button" class="btn btn-small btn-block btn-primary btnEnviarEmail" value="Email" data-codnotafiscal="<?php echo $model->codnotafiscal; ?>" data-email="<?php echo $email; ?>" id="btnEnviarEmail">
 		<input type="button" class="btn btn-small btn-block btn-danger btnCancelarNfe" value="Cancelar" data-codnotafiscal="<?php echo $model->codnotafiscal; ?>" id="btnCancelarNfe">
 	<?php endif; ?>
