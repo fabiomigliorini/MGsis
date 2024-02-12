@@ -3,15 +3,15 @@ class MGFormatter extends CFormatter
 {
     /**
      * @var array the format used to format a number with PHP number_format() function.
-     * Three elements may be specified: "decimals", "decimalSeparator" and 
-     * "thousandSeparator". They correspond to the number of digits after 
+     * Three elements may be specified: "decimals", "decimalSeparator" and
+     * "thousandSeparator". They correspond to the number of digits after
      * the decimal point, the character displayed as the decimal point,
      * and the thousands separator character.
-     * new: override default value: 2 decimals, a comma (,) before the decimals 
+     * new: override default value: 2 decimals, a comma (,) before the decimals
      * and no separator between groups of thousands
     */
     public $numberFormat=array('decimals'=>2, 'decimalSeparator'=>',', 'thousandSeparator'=>'.');
- 
+
     /**
      * Formats the value as a number using PHP number_format() function.
      * new: if the given $value is null/empty, return null/empty string
@@ -19,22 +19,22 @@ class MGFormatter extends CFormatter
      * @return string the formatted result
      * @see numberFormat
      */
-	public function formatNumber($value, $decimals = null) 
+	public function formatNumber($value, $decimals = null)
 	{
 		if ($value === null) return null;    // new
 		if ($value === '') return '';        // new
 		if ($decimals === null) $decimals = $this->numberFormat['decimals'];
 		return number_format($value, $decimals, $this->numberFormat['decimalSeparator'], $this->numberFormat['thousandSeparator']);
 	}
- 
+
     /*
      * new function unformatNumber():
      * turns the given formatted number (string) into a float
-     * @param string $formatted_number A formatted number 
+     * @param string $formatted_number A formatted number
      * (usually formatted with the formatNumber() function)
      * @return float the 'unformatted' number
      */
-    public function unformatNumber($formatted_number) 
+    public function unformatNumber($formatted_number)
 	{
         if ($formatted_number === null) return null;
         if ($formatted_number === '') return '';
@@ -43,17 +43,17 @@ class MGFormatter extends CFormatter
 
         $value = str_replace($this->numberFormat['thousandSeparator'], '', $formatted_number);
         $value = str_replace($this->numberFormat['decimalSeparator'], '.', $value);
-		
+
 		//if (!preg_match('/^[0-9,]+$/i', $formatted_number)) return $formatted_number; // only unformat if parameter includes numbers or comma
-		
+
         return (float) $value;
     }
-	
-	public function numeroLimpo($string)
+
+	public static function numeroLimpo($string)
 	{
 		 return preg_replace( '/[^0-9]/', '', $string);
 	}
-	
+
 	function formataCnpjCpf ($string, $fisica = '?')
 	{
 		if ($fisica == '?') {
@@ -69,7 +69,7 @@ class MGFormatter extends CFormatter
 		else
 			return self::formataPorMascara($string, '##.###.###/####-##');
 	}
-	
+
 	function formataPorMascara($string, $mascara, $somenteNumeros = true)
 	{
 		if ($somenteNumeros)
@@ -82,9 +82,9 @@ class MGFormatter extends CFormatter
 			if ($mascara[$i]=='#') $mascara[$i] = $string[++$indice];
 		endfor;
 		return $mascara;
-		
+
 	}
-	
+
 	function formataInscricaoEstadual ($string, $siglaestado)
 	{
 		$mascara = array(
@@ -114,97 +114,97 @@ class MGFormatter extends CFormatter
 			'SC' => '###.###.###',
 			'SP' => '###.###.###.###',
 			'SE' => '#########-#',
-			'TO' => '###########',			
+			'TO' => '###########',
 		);
-		
+
 		if (!array_key_exists($siglaestado, $mascara))
 			return $string;
 		else
 			return self::formataPorMascara($string, $mascara[$siglaestado]);
 	}
-	
+
 	public function formataCep ($string)
 	{
 		return self::formataPorMascara($string, "##.###-###");
 	}
-	
+
 	public function formataNumeroNota ($emitida, $serie, $numero, $modelo)
 	{
 		return (($emitida)?"N-":"T-") . $serie . "-" . (!empty($modelo)?$modelo . "-":"") . self::formataPorMascara($numero, "########");
 	}
-	
+
 	public function formataChaveNfe ($chave)
 	{
 		return self::formataPorMascara($chave, "#### #### #### #### #### #### #### #### #### #### ####");
 	}
-	
+
 	public function formataNcm ($string)
 	{
 		//$string = str_pad(self::numeroLimpo($string), 8, "0", STR_PAD_LEFT);
 		$string = str_pad(self::numeroLimpo($string), 8, "-", STR_PAD_RIGHT);
 		return self::formataPorMascara($string, "####.##.##", false);
 	}
-	
+
 	public function formataCest ($string)
 	{
 		$string = str_pad(self::numeroLimpo($string), 7, "-", STR_PAD_RIGHT);
 		return self::formataPorMascara($string, "##.###.##", false);
 	}
-	
+
 	public function formataCodigo ($string, $digitos = 8)
 	{
 		return "#" . str_pad($string, $digitos, "0", STR_PAD_LEFT);
 	}
-	
+
 	public function formataEndereco($endereco = null, $numero = null, $complemento = null, $bairro = null, $cidade = null, $estado = null, $cep = null, $multilinha = false)
 	{
-		
+
 		$retorno = $endereco;
-		
+
 		if (!empty($numero))
 			$retorno .= ', ' . $numero;
-		
+
 		$q = $retorno;
-		
+
 		if (!empty($complemento))
 			$retorno .= ' - ' . $complemento;
-		
+
 		if (!empty($bairro))
 			$retorno .= ' - ' . $bairro;
-		
+
 		if (!empty($cidade))
 		{
 			$retorno .= ' - ' . $cidade;
 			$q .= ' - ' . $cidade;
 		}
-		
+
 		if (!empty($estado))
 		{
 			$retorno .= ' / ' . $estado;
 			$q .= ' / ' . $estado;
 		}
-		
+
 		if (!empty($cep))
 			$retorno .= ' - ' . self::formataCep($cep);
-		
+
 		$q = urlencode($q);
-		
+
 		$retorno = CHtml::encode($retorno);
-		
+
 		if ($multilinha)
 			$retorno = str_replace (" - ", "<br>", $retorno);
-		
+
 		return "<a href='http://maps.google.com/maps?q=$q' target='_blank'>$retorno</a>";
 	}
-	
+
 	public function removeAcentos ($string)
 	{
-		$array1 = array( "á", "à", "â", "ã", "ä", "é", "è", "ê", "ë", "í", "ì", "î", "ï", "ó", "ò", "ô", "õ", "ö", "ú", "ù", "û", "ü", "ç", "Á", "À", "Â", "Ã", "Ä", "É", "È", "Ê", "Ë", "Í", "Ì", "Î", "Ï", "Ó", "Ò", "Ô", "Õ", "Ö", "Ú", "Ù", "Û", "Ü", "Ç" ); 
-		$array2 = array( "a", "a", "a", "a", "a", "e", "e", "e", "e", "i", "i", "i", "i", "o", "o", "o", "o", "o", "u", "u", "u", "u", "c", "A", "A", "A", "A", "A", "E", "E", "E", "E", "I", "I", "I", "I", "O", "O", "O", "O", "O", "U", "U", "U", "U", "C" ); 
-		return str_replace( $array1, $array2, $string); 	
+		$array1 = array( "á", "à", "â", "ã", "ä", "é", "è", "ê", "ë", "í", "ì", "î", "ï", "ó", "ò", "ô", "õ", "ö", "ú", "ù", "û", "ü", "ç", "Á", "À", "Â", "Ã", "Ä", "É", "È", "Ê", "Ë", "Í", "Ì", "Î", "Ï", "Ó", "Ò", "Ô", "Õ", "Ö", "Ú", "Ù", "Û", "Ü", "Ç" );
+		$array2 = array( "a", "a", "a", "a", "a", "e", "e", "e", "e", "i", "i", "i", "i", "o", "o", "o", "o", "o", "u", "u", "u", "u", "c", "A", "A", "A", "A", "A", "E", "E", "E", "E", "I", "I", "I", "I", "O", "O", "O", "O", "O", "U", "U", "U", "U", "C" );
+		return str_replace( $array1, $array2, $string);
 	}
-	
-	function formataValorPorExtenso($valor = 0, $maiusculas = false) 
+
+	function formataValorPorExtenso($valor = 0, $maiusculas = false)
 	{
 
 		$singular = array("centavo", "real", "mil", "milhao", "bilhao", "trilhao", "quatrilhao");
@@ -225,7 +225,7 @@ class MGFormatter extends CFormatter
 				$inteiro[$i] = "0".$inteiro[$i];
 
 		$fim = count($inteiro) - ($inteiro[count($inteiro)-1] > 0 ? 1 : 2);
-		for ($i=0;$i<count($inteiro);$i++) 
+		for ($i=0;$i<count($inteiro);$i++)
 		{
 			$valor = $inteiro[$i];
 			$rc = (($valor > 100) && ($valor < 200)) ? "cento" : $c[$valor[0]];
@@ -243,7 +243,7 @@ class MGFormatter extends CFormatter
 		}
 
 		$rt = trim($rt);
-		
+
 		if(!$maiusculas){
 			return($rt ? $rt : "zero");
 		} else {
@@ -253,10 +253,10 @@ class MGFormatter extends CFormatter
 		}
 
 	}
-	
+
 	function formataDataPorExtenso ($data = false)
 	{
-		
+
 		if ($data)
 		{
 			$data = date('Y-m-d', CDateTimeParser::parse($data, Yii::app()->locale->getDateFormat('medium')));
@@ -294,5 +294,5 @@ class MGFormatter extends CFormatter
 		);
 		return $dias[date('w', strtotime($data))] . ', ' . date('d', strtotime($data)) . ' de ' . $meses[$mes] . ' de ' . date('Y', strtotime($data));
 	}
-	
+
 }

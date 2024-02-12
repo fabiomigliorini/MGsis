@@ -47,9 +47,9 @@ $body = '<ns1:ReqEnvioLoteRPS xmlns:ns1="http://localhost:8080/WsNFe2/lote" xmln
 		<Versao>1</Versao>
 		<MetodoEnvio>WS</MetodoEnvio>
 	</Cabecalho>
-	
+
 	<Lote Id="lote:1">';
-		
+
 		/* Dados Tomador Editaveis */
 		$NumeroRPS_ = 1;
 		$CpfCnpjTomador_ = '25475485423';
@@ -64,14 +64,14 @@ $body = '<ns1:ReqEnvioLoteRPS xmlns:ns1="http://localhost:8080/WsNFe2/lote" xmln
 		$BairroTomador = 'Castelo';
 		$CidadeTomador = '0007225';
 		$CEPTomador = '13070727';
-		
-		
+
+
 		$Tributacao_ = 'H';
 		$CodAtividade_ = '951180000';
 		$AliquotaAtividade = '2.79';
 		/* Fim Dados Tomador Editaveis */
-		
-		
+
+
 		/* Montagem de assinatura Não mexer */
 		$CpfCnpjTomador = str_pad($CpfCnpjTomador_, 14, "0", STR_PAD_LEFT);
 		$NumeroRPS = str_pad($NumeroRPS_, 12, "0", STR_PAD_LEFT);
@@ -82,8 +82,8 @@ $body = '<ns1:ReqEnvioLoteRPS xmlns:ns1="http://localhost:8080/WsNFe2/lote" xmln
 		$DataEmissao = date('Ymd');
 		$SituacaoRPS = 'N';
 		$TipoRecolhimento = 'N';
-		$ValorServicoSubtraindoDeducao = str_pad(str_replace('.', ''￼, $ValorServicoSubtraindoDeducao), 15, "0", STR_PAD_LEFT);
-		$ValorDeducao = str_pad(str_replace('.', ''￼, $ValorDeducao), 15, "0", STR_PAD_LEFT);
+		$ValorServicoSubtraindoDeducao = str_pad(str_replace('.', '', $ValorServicoSubtraindoDeducao), 15, "0", STR_PAD_LEFT);
+		$ValorDeducao = str_pad(str_replace('.', '', $ValorDeducao), 15, "0", STR_PAD_LEFT);
 		$assinatura = sha1($InscricaoMunicipalPrestador
 						.$SerieRPS
 						.$NumeroRPS
@@ -96,11 +96,11 @@ $body = '<ns1:ReqEnvioLoteRPS xmlns:ns1="http://localhost:8080/WsNFe2/lote" xmln
 						.$CodAtividade
 						.$CpfCnpjTomador);
 		/* Fim Montagem de assinatura Não mexer */
-		
-				
+
+
 		$body .= '
 		<RPS Id="rps:'.$NumeroRPS_.'">
-	
+
 		<Assinatura>'.$assinatura.'</Assinatura>
 		<InscricaoMunicipalPrestador>'.$InscricaoMunicipalPrestador_.'</InscricaoMunicipalPrestador>
 		<RazaoSocialPrestador>'.$RazaoSocialRemetente.'</RazaoSocialPrestador>
@@ -122,17 +122,17 @@ $body = '<ns1:ReqEnvioLoteRPS xmlns:ns1="http://localhost:8080/WsNFe2/lote" xmln
 		<CidadeTomadorDescricao/>
 		<CEPTomador>'.$CEPTomador.'</CEPTomador>
 		<EmailTomador>'.$EmailTomador.'</EmailTomador>
-		
+
 		<CodigoAtividade>'.$CodAtividade_.'</CodigoAtividade>
 		<AliquotaAtividade>'.$AliquotaAtividade.'</AliquotaAtividade>
-		
+
 		<TipoRecolhimento>A</TipoRecolhimento>
 		<MunicipioPrestacao>0006291</MunicipioPrestacao>
 		<MunicipioPrestacaoDescricao>CAMPINAS</MunicipioPrestacaoDescricao>
 		<Operacao>A</Operacao>
-		
+
 		<Tributacao>'.$Tributacao_.'</Tributacao>
-		
+
 		<ValorPIS>0.00</ValorPIS>
 		<ValorCOFINS>0.00</ValorCOFINS>
 		<ValorINSS>0.00</ValorINSS>
@@ -144,14 +144,14 @@ $body = '<ns1:ReqEnvioLoteRPS xmlns:ns1="http://localhost:8080/WsNFe2/lote" xmln
 		<AliquotaIR>0.00</AliquotaIR>
 		<AliquotaCSLL>0.00</AliquotaCSLL>
 		<DescricaoRPS>Servicos Prestados por '.$RazaoSocialTomador.'</DescricaoRPS>
-		
+
 		<DDDPrestador>'.$DDDPrestador.'</DDDPrestador>
 		<TelefonePrestador>'.$TelefonePrestador.'</TelefonePrestador>
 		<DDDTomador>'.$DDDTomador.'</DDDTomador>
 		<TelefoneTomador>'.$TelefoneTomador.'</TelefoneTomador>
-		
+
 		<Deducoes></Deducoes>
-		
+
 		<Itens>
 			<Item>
 			<DiscriminacaoServico>Teste</DiscriminacaoServico>
@@ -160,7 +160,7 @@ $body = '<ns1:ReqEnvioLoteRPS xmlns:ns1="http://localhost:8080/WsNFe2/lote" xmln
 			<ValorTotal>100.00</ValorTotal>
 			</Item>
 		</Itens>
-	
+
 		</RPS>
 	</Lote>
 	';
@@ -169,7 +169,7 @@ $body = '<ns1:ReqEnvioLoteRPS xmlns:ns1="http://localhost:8080/WsNFe2/lote" xmln
 $body .='</ns1:ReqEnvioLoteRPS>';
 $sXmlAssinado = $tools->signXML($body, 'Lote');
 
-$client = new SoapClient('http://issdigital.campinas.sp.gov.br/WsNFe2/LoteRps.jws?wsdl'); 
+$client = new SoapClient('http://issdigital.campinas.sp.gov.br/WsNFe2/LoteRps.jws?wsdl');
 $result = $client->__soapCall('enviar', array($sXmlAssinado));
- 
+
 print_r($result);
