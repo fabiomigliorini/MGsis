@@ -15,6 +15,7 @@ class PessoaController extends Controller
 	*/
 	public function actionView($id)
 	{
+		$this->redirect(APP_PESSOAS_URL . '/pessoa/' . $id);
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 			));
@@ -26,6 +27,7 @@ class PessoaController extends Controller
 	*/
 	public function actionCreate()
 	{
+		$this->redirect(APP_PESSOAS_URL . '/pessoa');
 		$model=new Pessoa;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -50,6 +52,7 @@ class PessoaController extends Controller
 	*/
 	public function actionUpdate($id)
 	{
+		$this->redirect(APP_PESSOAS_URL . '/pessoa/' . $id);
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -79,6 +82,7 @@ class PessoaController extends Controller
 	*/
 	public function actionDelete($id)
 	{
+		$this->redirect(APP_PESSOAS_URL . '/pessoa/' . $id);
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -109,6 +113,7 @@ class PessoaController extends Controller
 	*/
 	public function actionIndex()
 	{
+		$this->redirect(APP_PESSOAS_URL . '/pessoa');
 		$model=new Pessoa('search');
 
 		$model->unsetAttributes();  // clear any default values
@@ -130,7 +135,7 @@ class PessoaController extends Controller
 	*/
 	public function actionAdmin()
 	{
-
+		$this->redirect(APP_PESSOAS_URL . '/pessoa');
 		$model=new Pessoa('search');
 
 		$model->unsetAttributes();  // clear any default values

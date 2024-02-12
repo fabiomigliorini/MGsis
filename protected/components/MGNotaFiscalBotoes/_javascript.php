@@ -139,7 +139,9 @@ function NFePHPMail(codnotafiscal, modelo, destinatario)
 function NFePHPMailPerguntar (codnotafiscal, email)
 {
 	bootbox.prompt("Digite o endereço de e-mail:", "Cancelar", "OK", function(result) {
-		NFePHPMail (codnotafiscal, null, result);
+        if (result) {
+            NFePHPMail (codnotafiscal, null, result);
+        }
 	}, email);
 
 }

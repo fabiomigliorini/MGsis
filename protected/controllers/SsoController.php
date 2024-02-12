@@ -60,8 +60,15 @@ class SsoController extends Controller
         curl_setopt($crl, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($crl, CURLOPT_SSL_VERIFYPEER, 0);
         $rest = curl_exec($crl);
-        //$info = curl_getinfo($crl);
-        //$error = curl_error($crl);
+        if (!$rest) {
+            $info = curl_getinfo($crl);
+            $error = curl_error($crl);
+            echo "<pre>";
+            print_r($info);
+            print_r($error);
+            echo "</pre>";
+            die();
+        }
         curl_close($crl);
         $json = json_decode($rest, true);
         $model = new LoginForm;

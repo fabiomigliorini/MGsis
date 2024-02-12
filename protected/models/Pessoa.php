@@ -249,6 +249,9 @@ class Pessoa extends MGActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+            'PessoaEnderecos' => array(self::HAS_MANY, 'PessoaEndereco', 'codpessoa'),
+			'PessoaTelefones' => array(self::HAS_MANY, 'PessoaTelefone', 'codpessoa'),
+			'PessoaEmails' => array(self::HAS_MANY, 'PessoaEmail', 'codpessoa'),
 			'Titulos' => array(self::HAS_MANY, 'Titulo', 'codpessoa'),
 			'RegistroSpcs' => array(self::HAS_MANY, 'RegistroSpc', 'codpessoa'),
 			'TituloAgrupamentos' => array(self::HAS_MANY, 'TituloAgrupamento', 'codpessoa'),
