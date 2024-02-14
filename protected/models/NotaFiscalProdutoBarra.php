@@ -414,7 +414,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
                     ':codtipoproduto' => $this->ProdutoBarra->Produto->codtipoproduto,
                     ':bit' => $this->ProdutoBarra->Produto->Ncm->bit,
                     ':codnaturezaoperacao' => $this->NotaFiscal->codnaturezaoperacao,
-                    ':codestado' => $codestadoFilial,
+                    ':codestado' => $codestadoDest,
                     ':ncm' => $this->ProdutoBarra->Produto->Ncm->ncm,
                 ),
                 'order' => 'codestado nulls last, char_length(ncm) desc nulls last',
