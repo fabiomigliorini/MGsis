@@ -179,7 +179,7 @@ class NegocioController extends Controller
         //$model->lancamento = date('d/m/Y H:i:s');
         //$model->codfilial = Yii::app()->user->getState("codfilial");
         //if (sizeof($model->Filial->EstoqueLocals) > 0) {
-            //$model->codestoquelocal = $model->Filial->EstoqueLocals[0]->codestoquelocal;
+        //    $model->codestoquelocal = $model->Filial->EstoqueLocals[0]->codestoquelocal;
         //}
 
 
@@ -193,7 +193,6 @@ class NegocioController extends Controller
             }
 
             $transaction = Yii::app()->db->beginTransaction();
-           
             $model->attributes = $_POST['Negocio'];
             $salvo = $model->save();
 
@@ -211,11 +210,10 @@ class NegocioController extends Controller
                 $transaction->commit();
                 Yii::app()->user->setFlash("success", "Negócio Alterado!");
                 $this->redirect(array('view', 'id' => $model->codnegocio));
-            }else {
+            } else {
                 $transaction->rollBack();
                 Yii::app()->user->setFlash("error", "Erro ao alterar negócio!");
             }
-
         }
 
         $this->render('alterar', array(
@@ -702,6 +700,10 @@ class NegocioController extends Controller
 
         if ($model->codnaturezaoperacao != NaturezaOperacao::VENDA) {
             throw new CHttpException(409, 'Negócio não é uma venda!');
+        }
+
+        if ($model->codpessoa == 1) {
+            throw new CHttpException(409, 'Primeiro informe o cliente para depois efetuar a devolução!');
         }
 
         if (isset($_POST['quantidadedevolucao'])) {
