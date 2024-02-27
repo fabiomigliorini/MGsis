@@ -706,6 +706,10 @@ class NegocioController extends Controller
             throw new CHttpException(409, 'Primeiro informe o cliente para depois efetuar a devolução!');
         }
 
+        if (empty($model->Pessoa->codcidade)) {
+            throw new CHttpException(409, 'O cliente não tem endereço cadastrado!');
+        }
+
         if (isset($_POST['quantidadedevolucao'])) {
             $codnegociodevolucao = $model->gerarDevolucao($_POST['quantidadedevolucao']);
             if ($codnegociodevolucao !== false) {
