@@ -1006,6 +1006,9 @@ class NfeTerceiro extends MGActiveRecord
             if ($nItem == $quantidadeItens) {
                 $descontoRateado = $descontoRatear - $descontoRateadoTotal;
                 $outrasRateado = $outrasRatear - $outrasRateadoTotal;
+            } elseif ($this->valorprodutos == 0) {
+                $descontoRateado = 0;
+                $outrasRateado = 0;
             } else {
                 $descontoRateado = round(($descontoRatear / $this->valorprodutos) * $nti->vprod, 2);
                 $outrasRateado = round(($outrasRatear / $this->valorprodutos) * $nti->vprod, 2);
@@ -1064,6 +1067,9 @@ class NfeTerceiro extends MGActiveRecord
                     $nfpb->icmscst = 20;
                     $nfpb->icmsbasepercentual = 41.17;
                     $nfpb->icmsbase = round($baseCalculada * ((double)$nfpb->icmsbasepercentual / 100), 2);
+                } elseif ($baseCalculada == 0) {
+                    $nfpb->icmsbasepercentual = 100;
+                    $nfpb->icmsbase = round($baseCalculada, 2);
                 } else {
                     $nfpb->icmsbasepercentual = round(((double)$nti->vbc / $baseCalculada) * 100, 2);
                     $nfpb->icmsbase = round($baseCalculada, 2);
