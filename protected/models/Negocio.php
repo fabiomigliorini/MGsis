@@ -72,7 +72,7 @@ class Negocio extends MGActiveRecord
         // will receive user inputs.
         return array(
             array('codpessoa, codfilial, codestoquelocal, lancamento, codoperacao, codnegociostatus, codusuario, codnaturezaoperacao', 'required'),
-            array('observacoes', 'length', 'max'=>500),
+            array('observacoes', 'length', 'max' => 500),
             array('codestoquelocal, codfilial, valordesconto, valorfrete', 'numerical'),
             array('valordesconto', 'validaDesconto'),
             array('codestoquelocal', 'validaEstoqueLocal'),
@@ -81,7 +81,7 @@ class Negocio extends MGActiveRecord
             array('codpessoa, codpessoatransportador, codpessoavendedor, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codpdv', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('pagamento, lancamento_de, lancamento_ate, codnegocio, codpessoa, codfilial, codestoquelocal, lancamento, codpessoatransportador, codpessoavendedor, codoperacao, codnegociostatus, observacoes, codusuario, valorfrete, valorjuros, valordesconto, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnaturezaoperacao, valorprodutos, valortotal, valoraprazo, valoravista, codpdv', 'safe', 'on'=>'search'),
+            array('pagamento, lancamento_de, lancamento_ate, codnegocio, codpessoa, codfilial, codestoquelocal, lancamento, codpessoatransportador, codpessoavendedor, codoperacao, codnegociostatus, observacoes, codusuario, valorfrete, valorjuros, valordesconto, entrega, acertoentrega, codusuarioacertoentrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnaturezaoperacao, valorprodutos, valortotal, valoraprazo, valoravista, codpdv', 'safe', 'on' => 'search'),
         );
     }
 
@@ -124,7 +124,7 @@ class Negocio extends MGActiveRecord
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'PixCobs' => array(self::HAS_MANY, 'PixCob', 'codnegocio', 'order'=>'criacao DESC'),
+            'PixCobs' => array(self::HAS_MANY, 'PixCob', 'codnegocio', 'order' => 'criacao DESC'),
             'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
             'EstoqueLocal' => array(self::BELONGS_TO, 'EstoqueLocal', 'codestoquelocal'),
             'NegocioStatus' => array(self::BELONGS_TO, 'NegocioStatus', 'codnegociostatus'),
@@ -139,11 +139,11 @@ class Negocio extends MGActiveRecord
             'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
             'NaturezaOperacao' => array(self::BELONGS_TO, 'NaturezaOperacao', 'codnaturezaoperacao'),
             'NegocioFormaPagamentos' => array(self::HAS_MANY, 'NegocioFormaPagamento', 'codnegocio'),
-            'NegocioProdutoBarras' => array(self::HAS_MANY, 'NegocioProdutoBarra', 'codnegocio', 'order'=>'alteracao DESC, codnegocioprodutobarra DESC'),
+            'NegocioProdutoBarras' => array(self::HAS_MANY, 'NegocioProdutoBarra', 'codnegocio', 'order' => 'alteracao DESC, codnegocioprodutobarra DESC'),
             'NfeTerceiros' => array(self::HAS_MANY, 'NfeTerceiro', 'codnegocio'),
             'StonePreTransacaos' => array(self::HAS_MANY, 'StonePreTransacao', 'codnegocio'),
             'MercosPedidos' => array(self::HAS_MANY, 'MercosPedido', 'codnegocio'),
-            'PagarMePedidos' => array(self::HAS_MANY, 'PagarMePedido', 'codnegocio', 'order'=>'criacao DESC, codpagarmepedido ASC'),
+            'PagarMePedidos' => array(self::HAS_MANY, 'PagarMePedido', 'codnegocio', 'order' => 'criacao DESC, codpagarmepedido ASC'),
         );
     }
 
@@ -153,36 +153,36 @@ class Negocio extends MGActiveRecord
     public function attributeLabels()
     {
         return array(
-          'codnegocio' => '#',
-          'uuid' => 'Offline #',
-          'codpessoa' => 'Pessoa',
-          'codfilial' => 'Filial',
-          'codestoquelocal' => 'Local Estoque',
-          'lancamento' => 'Lançamento',
-          'codpessoavendedor' => 'Vendedor',
-          'codpdv' => 'PDV',
-          'codpessoatransportador' => 'Transportador',
-          'codoperacao' => 'Operação',
-          'codnegociostatus' => 'Status',
-          'observacoes' => 'Observações',
-          'codusuario' => 'Usuário',
-          'valordesconto' => 'Desconto',
-          'valorfrete' => 'Frete',
-          'valorjuros' => 'Juros',
-          'percentualdesconto' => '%',
-          'entrega' => 'Entrega',
-          'acertoentrega' => 'Acerto Entrega',
-          'codusuarioacertoentrega' => 'Usuário Acerto Entrega',
-          'alteracao' => 'Alteração',
-          'codusuarioalteracao' => 'Usuário Alteração',
-          'criacao' => 'Criação',
-          'codusuariocriacao' => 'Usuário Criação',
-          'codnaturezaoperacao' => 'Natureza de Operação',
-          'valorprodutos' => 'Produtos',
-          'valortotal' => 'Total',
-          'valoraprazo' => 'À Prazo',
-          'valoravista' => 'À Vista',
-          'cpf' => 'CPF',
+            'codnegocio' => '#',
+            'uuid' => 'Offline #',
+            'codpessoa' => 'Pessoa',
+            'codfilial' => 'Filial',
+            'codestoquelocal' => 'Local Estoque',
+            'lancamento' => 'Lançamento',
+            'codpessoavendedor' => 'Vendedor',
+            'codpdv' => 'PDV',
+            'codpessoatransportador' => 'Transportador',
+            'codoperacao' => 'Operação',
+            'codnegociostatus' => 'Status',
+            'observacoes' => 'Observações',
+            'codusuario' => 'Usuário',
+            'valordesconto' => 'Desconto',
+            'valorfrete' => 'Frete',
+            'valorjuros' => 'Juros',
+            'percentualdesconto' => '%',
+            'entrega' => 'Entrega',
+            'acertoentrega' => 'Acerto Entrega',
+            'codusuarioacertoentrega' => 'Usuário Acerto Entrega',
+            'alteracao' => 'Alteração',
+            'codusuarioalteracao' => 'Usuário Alteração',
+            'criacao' => 'Criação',
+            'codusuariocriacao' => 'Usuário Criação',
+            'codnaturezaoperacao' => 'Natureza de Operação',
+            'valorprodutos' => 'Produtos',
+            'valortotal' => 'Total',
+            'valoraprazo' => 'À Prazo',
+            'valoravista' => 'À Vista',
+            'cpf' => 'CPF',
         );
     }
 
@@ -202,7 +202,7 @@ class Negocio extends MGActiveRecord
     {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
-        $criteria=new CDbCriteria;
+        $criteria = new CDbCriteria;
 
         $criteria->compare('codnegocio', $this->codnegocio, false);
         $criteria->compare('codpessoa', $this->codpessoa, false);
@@ -232,11 +232,11 @@ class Negocio extends MGActiveRecord
 
         if ($lancamento_de = DateTime::createFromFormat("d/m/y H:i", $this->lancamento_de)) {
             $criteria->addCondition('t.lancamento >= :lancamento_de');
-            $criteria->params = array_merge($criteria->params, array(':lancamento_de' => $lancamento_de->format('Y-m-d H:i').':00.0'));
+            $criteria->params = array_merge($criteria->params, array(':lancamento_de' => $lancamento_de->format('Y-m-d H:i') . ':00.0'));
         }
         if ($lancamento_ate = DateTime::createFromFormat("d/m/y H:i", $this->lancamento_ate)) {
             $criteria->addCondition('t.lancamento <= :lancamento_ate');
-            $criteria->params = array_merge($criteria->params, array(':lancamento_ate' => $lancamento_ate->format('Y-m-d H:i').':59.9'));
+            $criteria->params = array_merge($criteria->params, array(':lancamento_ate' => $lancamento_ate->format('Y-m-d H:i') . ':59.9'));
         }
 
         switch ($this->pagamento) {
@@ -258,8 +258,8 @@ class Negocio extends MGActiveRecord
 
         if ($comoDataProvider) {
             $params = array(
-                'criteria'=>$criteria,
-                'pagination'=>array('pageSize'=>20)
+                'criteria' => $criteria,
+                'pagination' => array('pageSize' => 20)
             );
             return new CActiveDataProvider($this, $params);
         } else {
@@ -273,14 +273,14 @@ class Negocio extends MGActiveRecord
      * @param string $className active record class name.
      * @return Negocio the static model class
      */
-    public static function model($className=__CLASS__)
+    public static function model($className = __CLASS__)
     {
         return parent::model($className);
     }
 
     protected function afterFind()
     {
-        if ($this->valortotal >0 and $this->valordesconto>0 and $this->valorprodutos>0) {
+        if ($this->valortotal > 0 and $this->valordesconto > 0 and $this->valorprodutos > 0) {
             $this->percentualdesconto = 100 * ($this->valordesconto / $this->valorprodutos);
         } else {
             $this->percentualdesconto = 0;
@@ -467,7 +467,7 @@ class Negocio extends MGActiveRecord
             // se o item já está em outra nota
             foreach ($negocioItem->NotaFiscalProdutoBarras as $notaItem) {
                 if (!in_array($notaItem->NotaFiscal->codstatus, array(NotaFiscal::CODSTATUS_INUTILIZADA, NotaFiscal::CODSTATUS_CANCELADA))) {
-                    continue(2); // vai para proximo item
+                    continue (2); // vai para proximo item
                 }
             }
 
@@ -488,11 +488,12 @@ class Negocio extends MGActiveRecord
             $notaItem->codnegocioprodutobarra = $negocioItem->codnegocioprodutobarra;
             if (isset($negocioItem->NegocioProdutoBarraDevolucao)) {
                 foreach ($negocioItem->NegocioProdutoBarraDevolucao->NotaFiscalProdutoBarras as $nfpb) {
-                    if (!empty($nfpb->NotaFiscal->nfechave) &&
+                    if (
+                        !empty($nfpb->NotaFiscal->nfechave) &&
                         ($nfpb->NotaFiscal->codstatus == NotaFiscal::CODSTATUS_AUTORIZADA
-                        ||$nfpb->NotaFiscal->codstatus == NotaFiscal::CODSTATUS_LANCADA)
+                            || $nfpb->NotaFiscal->codstatus == NotaFiscal::CODSTATUS_LANCADA)
                         && ($nfpb->NotaFiscal->codnaturezaoperacao == $nfpb->NegocioProdutoBarra->Negocio->codnaturezaoperacao)
-                        ) {
+                    ) {
                         $notaReferenciada[$nfpb->NotaFiscal->nfechave] = $nfpb->NotaFiscal->nfechave;
 
                         // Caso a nota sendo devolvida tenha sido emitida por outra filial
@@ -515,9 +516,9 @@ class Negocio extends MGActiveRecord
             $notaItem->valorunitario = $negocioItem->valorunitario;
 
             if ($negocioItem->quantidade != $quantidade) {
-              $notaItem->valortotal = round($quantidade * $negocioItem->valorunitario, 2);
+                $notaItem->valortotal = round($quantidade * $negocioItem->valorunitario, 2);
             } else {
-              $notaItem->valortotal = $negocioItem->valortotal;
+                $notaItem->valortotal = $negocioItem->valortotal;
             }
             $notaItem->valordesconto = round($percDesconto * $notaItem->valortotal, 2);
             $notaItem->valorfrete = round($percFrete * $notaItem->valortotal, 2);
@@ -536,16 +537,16 @@ class Negocio extends MGActiveRecord
 
         // se adicionou todos os itens do negocio na nota
         if (abs(floatval($totalProduto) - floatval($this->valorprodutos)) < 0.01) {
-          // se o total do frete e do desconto nao bate por causa de arredondamento
-          if ($totalFrete != $this->valorfrete || $totalDesconto != $this->valordesconto) {
-            $notaItem->valordesconto += $this->valordesconto - $totalDesconto;
-            $notaItem->valorfrete += $this->valorfrete - $totalFrete;
-            $notaItem->valoroutras += $this->valorjuros - $totalOutras;
-            if (!$notaItem->save()) {
-                $this->addErrors($notaItem->getErrors());
-                return false;
+            // se o total do frete e do desconto nao bate por causa de arredondamento
+            if ($totalFrete != $this->valorfrete || $totalDesconto != $this->valordesconto) {
+                $notaItem->valordesconto += $this->valordesconto - $totalDesconto;
+                $notaItem->valorfrete += $this->valorfrete - $totalFrete;
+                $notaItem->valoroutras += $this->valorjuros - $totalOutras;
+                if (!$notaItem->save()) {
+                    $this->addErrors($notaItem->getErrors());
+                    return false;
+                }
             }
-          }
         }
 
         foreach ($notaReferenciada as $cod => $chave) {
@@ -639,7 +640,7 @@ class Negocio extends MGActiveRecord
     public function gerarDevolucao($arrQuantidadeDevolucao)
     {
 
-	    //inicia Transacao
+        //inicia Transacao
         $trans = $this->dbConnection->beginTransaction();
 
         //monta array com itens devolvidos
@@ -695,7 +696,7 @@ class Negocio extends MGActiveRecord
 
             //busca item a ser devolvido
             $npb_original =  NegocioProdutoBarra::model()->findByPk($codnegocioprodutobarra);
-            if ($npb_original===null) {
+            if ($npb_original === null) {
                 $this->addError('codnegocio', 'NegocioProdutoBarra Original não localizado!');
                 $trans->rollback();
                 return false;
@@ -781,10 +782,10 @@ class Negocio extends MGActiveRecord
         // Chama MGLara para fazer movimentacao do estoque com delay de 10 segundos
         $url = MGLARA_URL . "estoque/gera-movimento-negocio/{$this->codnegocio}?delay=10";
         $ret = json_decode(file_get_contents($url, false, stream_context_create([
-                "ssl" => [
-                        "verify_peer"=>false,
-                        "verify_peer_name"=>false,
-                ]
+            "ssl" => [
+                "verify_peer" => false,
+                "verify_peer_name" => false,
+            ]
         ])));
         if (@$ret->response !== 'Agendado') {
             echo '<pre>';
@@ -812,15 +813,15 @@ class Negocio extends MGActiveRecord
 
     public function valorPagamento()
     {
-      if (empty($this->codnegocio)) {
-        return 0;
-      }
-      $sql = "
+        if (empty($this->codnegocio)) {
+            return 0;
+        }
+        $sql = "
         select sum(valorpagamento)
         from mgsis.tblnegocioformapagamento
         where codnegocio = {$this->codnegocio}
       ";
-      return (float) Yii::app()->db->createCommand($sql)->queryScalar();
+        return (float) Yii::app()->db->createCommand($sql)->queryScalar();
     }
 
     public function podeEditar()

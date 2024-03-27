@@ -3,30 +3,30 @@
 class NfeTerceiroController extends Controller
 {
     /**
-    * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
-    * using two-column layout. See 'protected/views/layouts/column2.php'.
-    */
-    public $layout='//layouts/column2';
+     * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
+     * using two-column layout. See 'protected/views/layouts/column2.php'.
+     */
+    public $layout = '//layouts/column2';
 
     /**
-    * Displays a particular model.
-    * @param integer $id the ID of the model to be displayed
-    */
+     * Displays a particular model.
+     * @param integer $id the ID of the model to be displayed
+     */
     public function actionView($id)
     {
-        $this->render('view',array(
-            'model'=>$this->loadModel($id),
-            ));
+        $this->render('view', array(
+            'model' => $this->loadModel($id),
+        ));
     }
 
     /**
-    * Updates a particular model.
-    * If update is successful, the browser will be redirected to the 'view' page.
-    * @param integer $id the ID of the model to be updated
-    */
+     * Updates a particular model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id the ID of the model to be updated
+     */
     public function actionUpdate($id)
     {
-        $model=$this->loadModel($id);
+        $model = $this->loadModel($id);
 
         if (!$model->podeEditar())
             throw new CHttpException(409, 'Registro não permite edição.');
@@ -34,30 +34,26 @@ class NfeTerceiroController extends Controller
         // Uncomment the following line if AJAX validation is needed
         $this->performAjaxValidation($model);
 
-        if(isset($_POST['NfeTerceiro']))
-        {
-            $model->attributes=$_POST['NfeTerceiro'];
-            if($model->save())
-                $this->redirect(array('view','id'=>$model->codnfeterceiro));
+        if (isset($_POST['NfeTerceiro'])) {
+            $model->attributes = $_POST['NfeTerceiro'];
+            if ($model->save())
+                $this->redirect(array('view', 'id' => $model->codnfeterceiro));
         }
 
-        $this->render('update',array(
-            'model'=>$model,
-            ));
+        $this->render('update', array(
+            'model' => $model,
+        ));
     }
 
     public function actionImportar($id)
     {
-        $model=$this->loadModel($id);
+        $model = $this->loadModel($id);
 
-        if ($model->importar())
-        {
+        if ($model->importar()) {
             Yii::app()->user->setFlash("success", "NFe de Terceiro Importada com sucesso!");
-            $this->redirect(array('view','id'=>$model->codnfeterceiro));
+            $this->redirect(array('view', 'id' => $model->codnfeterceiro));
             // $this->redirect(array('index'));
-        }
-        else
-        {
+        } else {
             $erros = $model->getErrors();
 
             $msgs = array("Erro(s) ao Importar:");
@@ -69,7 +65,7 @@ class NfeTerceiroController extends Controller
             $msgs = implode("<BR>", $msgs);
 
             Yii::app()->user->setFlash("error", $msgs);
-            $this->redirect(array('view','id'=>$model->codnfeterceiro));
+            $this->redirect(array('view', 'id' => $model->codnfeterceiro));
         }
     }
 
@@ -93,29 +89,28 @@ class NfeTerceiroController extends Controller
     }
 
     /**
-    * Lists all models.
-    */
+     * Lists all models.
+     */
     public function actionIndex()
     {
-        $model=new NfeTerceiro('search');
+        $model = new NfeTerceiro('search');
 
         $model->unsetAttributes();  // clear any default values
 
-        if(isset($_GET['NfeTerceiro']))
+        if (isset($_GET['NfeTerceiro']))
             Yii::app()->session['FiltroNfeTerceiroIndex'] = $_GET['NfeTerceiro'];
 
         if (isset(Yii::app()->session['FiltroNfeTerceiroIndex']))
-            $model->attributes=Yii::app()->session['FiltroNfeTerceiroIndex'];
-        else
-        {
+            $model->attributes = Yii::app()->session['FiltroNfeTerceiroIndex'];
+        else {
             //$model->indsituacao = NfeTerceiro::INDSITUACAO_AUTORIZADA;
             $model->codnotafiscal = 1;
         }
 
-        $this->render('index',array(
-            'dataProvider'=>$model->search(),
-            'model'=>$model,
-            ));
+        $this->render('index', array(
+            'dataProvider' => $model->search(),
+            'model' => $model,
+        ));
     }
 
     public function actionUpload()
@@ -123,12 +118,12 @@ class NfeTerceiroController extends Controller
         /**
          * @var NfeTerceiro
          */
-        $model=new NfeTerceiro;
+        $model = new NfeTerceiro;
 
         $this->render(
             'upload',
             array(
-                'model'=>$model,
+                'model' => $model,
             )
         );
     }
@@ -158,7 +153,6 @@ class NfeTerceiroController extends Controller
                 'retorno' => htmlentities($acbr->retorno),
             )
         );
-
     }
 
     public function actionEnviarEventoManifestacao($id, $indManifestacao, $justificativa = "")
@@ -177,7 +171,6 @@ class NfeTerceiroController extends Controller
                 'retorno' => htmlentities($acbr->retorno),
             )
         );
-
     }
 
     public function actionIcmsst($id)
@@ -235,40 +228,39 @@ class NfeTerceiroController extends Controller
 
         $command = Yii::app()->db->createCommand($sql);
         $itens = $command->queryAll();
-        $this->render('icmsst',[
-            'model'=>$model,
-            'itens'=>$itens,
+        $this->render('icmsst', [
+            'model' => $model,
+            'itens' => $itens,
         ]);
     }
 
 
     /**
-    * Returns the data model based on the primary key given in the GET variable.
-    * If the data model is not found, an HTTP exception will be raised.
-    * @param integer the ID of the model to be loaded
-    */
+     * Returns the data model based on the primary key given in the GET variable.
+     * If the data model is not found, an HTTP exception will be raised.
+     * @param integer the ID of the model to be loaded
+     */
     public function loadModel($id)
     {
-        $model=NfeTerceiro::model()->findByPk($id);
-        if($model===null)
-            throw new CHttpException(404,'The requested page does not exist.');
+        $model = NfeTerceiro::model()->findByPk($id);
+        if ($model === null)
+            throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
     }
 
     /**
-    * Performs the AJAX validation.
-    * @param CModel the model to be validated
-    */
+     * Performs the AJAX validation.
+     * @param CModel the model to be validated
+     */
     protected function performAjaxValidation($model)
     {
-        if(isset($_POST['ajax']) && $_POST['ajax']==='nfe-terceiro-form')
-        {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'nfe-terceiro-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
     }
 
-    public function actionGerarGuiaSt ($id, $valor, $vencimento)
+    public function actionGerarGuiaSt($id, $valor, $vencimento)
     {
 
         // Validacao Valor
@@ -295,7 +287,7 @@ class NfeTerceiroController extends Controller
             //102 => '',
             103 => '4761003',
             //104 => '',
-	    105 => '4751201'
+            105 => '4751201'
         ];
         if (!isset($arrCodgCnae[$model->codfilial])) {
             throw new \Exception("Impossível determinar Cnae!", 1);
@@ -307,7 +299,7 @@ class NfeTerceiroController extends Controller
         $arrNumrPessoaDestinatario = [
             101 => '611107',
             103 => '126206917',
-	    105 => '128413022',
+            105 => '128413022',
         ];
         if (!isset($arrNumrPessoaDestinatario[$model->codfilial])) {
             throw new \Exception("Impossível determinar Número da pessoa Destinatario!", 1);
@@ -319,7 +311,7 @@ class NfeTerceiroController extends Controller
             101 => '611107', // Com IE
             103 => '126206917',
             //101 => '4432657', (Sem IE)
-	    105 => '128413022'
+            105 => '128413022'
         ];
         if (!isset($arrNumrContribuinte[$model->codfilial])) {
             throw new \Exception("Impossível determinar Número do Contribuinte!", 1);
@@ -452,23 +444,23 @@ class NfeTerceiroController extends Controller
             $pdf = $output;
         } else {
             $ch = curl_init();
-	        curl_setopt($ch, CURLOPT_URL, 'https://www.sefaz.mt.gov.br/arrecadacao/darlivre/impirmirdar?chavePix=true');
-	        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-	        $headers = array();
-	        $headers[] = 'User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:107.0) Gecko/20100101 Firefox/107.0';
-	        $headers[] = 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp;q=0.8';
-	        $headers[] = 'Accept-Language: pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3';
-	        $headers[] = 'Accept-Encoding: gzip, deflate, br';
-	        $headers[] = 'Connection: keep-alive';
-	        $headers[] = 'Referer: https://www.sefaz.mt.gov.br/arrecadacao/darlivre/pj/gerardar';
-	        $headers[] = 'Upgrade-Insecure-Requests: 1';
-	        $headers[] = 'Sec-Fetch-Dest: iframe';
-	        $headers[] = 'Sec-Fetch-Mode: navigate';
-	        $headers[] = 'Sec-Fetch-Site: same-origin';
-	        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-	        curl_setopt($ch, CURLOPT_COOKIEFILE, '/tmp/cookies.txt');
-	        $output = curl_exec($ch);
+            curl_setopt($ch, CURLOPT_URL, 'https://www.sefaz.mt.gov.br/arrecadacao/darlivre/impirmirdar?chavePix=true');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+            $headers = array();
+            $headers[] = 'User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:107.0) Gecko/20100101 Firefox/107.0';
+            $headers[] = 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp;q=0.8';
+            $headers[] = 'Accept-Language: pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3';
+            $headers[] = 'Accept-Encoding: gzip, deflate, br';
+            $headers[] = 'Connection: keep-alive';
+            $headers[] = 'Referer: https://www.sefaz.mt.gov.br/arrecadacao/darlivre/pj/gerardar';
+            $headers[] = 'Upgrade-Insecure-Requests: 1';
+            $headers[] = 'Sec-Fetch-Dest: iframe';
+            $headers[] = 'Sec-Fetch-Mode: navigate';
+            $headers[] = 'Sec-Fetch-Site: same-origin';
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_COOKIEFILE, '/tmp/cookies.txt');
+            $output = curl_exec($ch);
             $info = curl_getinfo($ch);
             $error = curl_error($ch);
             if ($error) {
@@ -529,7 +521,7 @@ class NfeTerceiroController extends Controller
         };
 
         // Salva PDF
-        $arquivo .= "{$model->nfechave}-{$titulo->codtitulo}.pdf" ;
+        $arquivo .= "{$model->nfechave}-{$titulo->codtitulo}.pdf";
         file_put_contents($arquivo, $pdf);
 
         // Amarra titulo a NfeTerceiro
@@ -552,23 +544,22 @@ class NfeTerceiroController extends Controller
                 'codtitulonfeterceiro' => $tituloNfeTerceiro->codtitulonfeterceiro,
             )
         );
-
     }
 
     public function actionGuiaSt($codtitulonfeterceiro)
     {
-            $tituloNfeTerceiro=TituloNfeTerceiro::model()->findByPk($codtitulonfeterceiro);
-            if($tituloNfeTerceiro===null) {
-                throw new CHttpException(404,'The requested page does not exist.');
-            }
-            $arquivo = "/opt/www/GuiaST/" . DateTime::createFromFormat('d/m/Y H:i:s', $tituloNfeTerceiro->NfeTerceiro->emissao)->format("Y/m") . "/";
-            $arquivo .= "{$tituloNfeTerceiro->NfeTerceiro->nfechave}-{$tituloNfeTerceiro->codtitulo}.pdf" ;
-            if (!file_exists($arquivo)) {
-                throw new CHttpException(404,'The requested page does not exist.');
-            }
-            header('Content-type: application/pdf');
-            header('Content-Disposition: inline; filename="' . basename($arquivo) . '"');
-            readfile($arquivo);
+        $tituloNfeTerceiro = TituloNfeTerceiro::model()->findByPk($codtitulonfeterceiro);
+        if ($tituloNfeTerceiro === null) {
+            throw new CHttpException(404, 'The requested page does not exist.');
+        }
+        $arquivo = "/opt/www/GuiaST/" . DateTime::createFromFormat('d/m/Y H:i:s', $tituloNfeTerceiro->NfeTerceiro->emissao)->format("Y/m") . "/";
+        $arquivo .= "{$tituloNfeTerceiro->NfeTerceiro->nfechave}-{$tituloNfeTerceiro->codtitulo}.pdf";
+        if (!file_exists($arquivo)) {
+            throw new CHttpException(404, 'The requested page does not exist.');
+        }
+        header('Content-type: application/pdf');
+        header('Content-Disposition: inline; filename="' . basename($arquivo) . '"');
+        readfile($arquivo);
     }
 
     public function actionConferencia($id)
@@ -642,19 +633,19 @@ class NfeTerceiroController extends Controller
         ];
         if (empty($valor)) {
             $sql = '
-                update tblnfeterceiroitem 
+                update tblnfeterceiroitem
                 set complemento = null
                 from tblnfeterceiro n
-                where n.codnfeterceiro = tblnfeterceiroitem.codnfeterceiro  
+                where n.codnfeterceiro = tblnfeterceiroitem.codnfeterceiro
                 and tblnfeterceiroitem.codnfeterceiro = :codnfeterceiro
                 returning codnfeterceiroitem, complemento
             ';
         } else {
             $sql = '
-                update tblnfeterceiroitem 
+                update tblnfeterceiroitem
                 set complemento = round(( :complemento / n.valorprodutos) * vprod, 2)
                 from tblnfeterceiro n
-                where n.codnfeterceiro = tblnfeterceiroitem.codnfeterceiro  
+                where n.codnfeterceiro = tblnfeterceiroitem.codnfeterceiro
                 and tblnfeterceiroitem.codnfeterceiro = :codnfeterceiro
                 returning codnfeterceiroitem, complemento
             ';
@@ -668,7 +659,6 @@ class NfeTerceiroController extends Controller
             'codnfeterceiro' => $id,
             'result' => $result
         ]);
-
     }
 
     public function actionMarcarImobilizado($codnfeterceiro, $codtipoproduto)
@@ -708,5 +698,4 @@ class NfeTerceiroController extends Controller
             'items' => $items
         ]);
     }
-
 }
