@@ -1022,17 +1022,19 @@ class NfeTerceiro extends MGActiveRecord
                 $npb->codnegocio = $n->codnegocio;
                 $npb->codprodutobarra = $nti->codprodutobarra;
                 $npb->quantidade = $nti->qcom;
-                $npb->valortotal = $nti->vprod
-                    + $nti->ipivipi
-                    + $nti->vicmsst
-                    - $nti->vdesc
-                    + $nti->vfrete
-                    + $nti->vseg
-                    + $nti->voutro
-                    + $outrasRateado
-                    - $descontoRateado;
-
-                $npb->valortotal = round($npb->valortotal, 2);
+                $npb->valorprodutos = round(
+                    $nti->vprod
+                        + $nti->ipivipi
+                        + $nti->vicmsst
+                        - $nti->vdesc
+                        + $nti->vfrete
+                        + $nti->vseg
+                        + $nti->voutro
+                        + $outrasRateado
+                        - $descontoRateado,
+                    2
+                );
+                $npb->valortotal = $npb->valorprodutos;
 
                 $npb->valorunitario = $npb->valortotal;
                 if ($npb->quantidade > 0) {
