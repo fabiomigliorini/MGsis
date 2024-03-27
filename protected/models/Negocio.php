@@ -706,7 +706,8 @@ class Negocio extends MGActiveRecord
             $npb->codnegocio = $negocio->codnegocio;
             $npb->quantidade = $quantidadedevolucao;
             $npb->valorunitario = $npb_original->valorunitario;
-            $npb->valortotal = round($npb->quantidade * $npb->valorunitario, 2);
+            $npb->valorprodutos = round($npb->quantidade * $npb->valorunitario, 2);
+            $npb->valortotal = $npb->valorprodutos;
             $npb->codprodutobarra = $npb_original->codprodutobarra;
             $npb->codnegocioprodutobarradevolucao = $npb_original->codnegocioprodutobarra;
 
