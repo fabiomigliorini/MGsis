@@ -95,17 +95,17 @@ class NfeTerceiro extends MGActiveRecord
         // will receive user inputs.
         return array(
             array('emitente, codfilial', 'required'),
-            array('indsituacao, indmanifestacao, serie, numero, modelo, finalidade, tipo', 'numerical', 'integerOnly'=>true),
-            array('nsu, ie', 'length', 'max'=>20),
-            array('nfechave, emitente, natureza', 'length', 'max'=>100),
+            array('indsituacao, indmanifestacao, serie, numero, modelo, finalidade, tipo', 'numerical', 'integerOnly' => true),
+            array('nsu, ie', 'length', 'max' => 20),
+            array('nfechave, emitente, natureza', 'length', 'max' => 100),
             //array('arquivoxml', 'file', 'types'=>'xml'),
-            array('cnpj, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipivalor, valorprodutos, valorfrete, valorseguro, valordesconto, valoroutras', 'length', 'max'=>14),
-            array('justificativa', 'length', 'max'=>200),
+            array('cnpj, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipivalor, valorprodutos, valorfrete, valorseguro, valordesconto, valoroutras', 'length', 'max' => 14),
+            array('justificativa', 'length', 'max' => 200),
             array('entrada', 'validaEntrada'),
             array('codpessoa, emissao, nfedataautorizacao, codoperacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnotafiscal, codnaturezaoperacao, entrada, ignorada, codnegocio, informacoes, observacoes, revisao, codusuariorevisao, conferencia, codusuarioconferencia', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('emissao_de, emissao_ate, valor_de, valor_ate, codnfeterceiro, nsu, nfechave, cnpj, ie, emitente, codpessoa, emissao, nfedataautorizacao, codoperacao, valortotal, indsituacao, indmanifestacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codfilial, codnotafiscal, codnaturezaoperacao, serie, numero, entrada, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipivalor, valorprodutos, valorfrete, valorseguro, valordesconto, valoroutras, justificativa, ignorada, codnegocio, natureza, modelo, finalidade, informacoes, observacoes, tipo, revisao, codusuariorevisao', 'safe', 'on'=>'search'),
+            array('emissao_de, emissao_ate, valor_de, valor_ate, codnfeterceiro, nsu, nfechave, cnpj, ie, emitente, codpessoa, emissao, nfedataautorizacao, codoperacao, valortotal, indsituacao, indmanifestacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codfilial, codnotafiscal, codnaturezaoperacao, serie, numero, entrada, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipivalor, valorprodutos, valorfrete, valorseguro, valordesconto, valoroutras, justificativa, ignorada, codnegocio, natureza, modelo, finalidade, informacoes, observacoes, tipo, revisao, codusuariorevisao', 'safe', 'on' => 'search'),
         );
     }
 
@@ -125,7 +125,6 @@ class NfeTerceiro extends MGActiveRecord
             $this->addError($attribute, 'A data de entrada não pode ser posterior à data atual!');
             return;
         }
-
     }
 
     /**
@@ -139,7 +138,7 @@ class NfeTerceiro extends MGActiveRecord
             'NfeTerceiroPagamentos' => array(self::HAS_MANY, 'NfeTerceiroPagamento', 'codnfeterceiro'),
             'TituloNfeTerceiros' => array(self::HAS_MANY, 'TituloNfeTerceiro', 'codnfeterceiro'),
             'DistribuicaoDfes' => array(self::HAS_MANY, 'DistribuicaoDfe', 'codnfeterceiro'),
-            'NfeTerceiroDuplicatas' => array(self::HAS_MANY, 'NfeTerceiroDuplicata', 'codnfeterceiro', 'order'=>'dvenc ASC'),
+            'NfeTerceiroDuplicatas' => array(self::HAS_MANY, 'NfeTerceiroDuplicata', 'codnfeterceiro', 'order' => 'dvenc ASC'),
             'Negocio' => array(self::BELONGS_TO, 'Negocio', 'codnegocio'),
             'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
             'NaturezaOperacao' => array(self::BELONGS_TO, 'NaturezaOperacao', 'codnaturezaoperacao'),
@@ -150,7 +149,7 @@ class NfeTerceiro extends MGActiveRecord
             'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
             'UsuarioRevisao' => array(self::BELONGS_TO, 'Usuario', 'codusuariorevisao'),
             'UsuarioConferencia' => array(self::BELONGS_TO, 'Usuario', 'codusuarioconferencia'),
-            'NfeTerceiroItems' => array(self::HAS_MANY, 'NfeTerceiroItem', 'codnfeterceiro', 'order'=>'nitem ASC'),
+            'NfeTerceiroItems' => array(self::HAS_MANY, 'NfeTerceiroItem', 'codnfeterceiro', 'order' => 'nitem ASC'),
         );
     }
 
@@ -221,7 +220,7 @@ class NfeTerceiro extends MGActiveRecord
     {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
-        $criteria=new CDbCriteria;
+        $criteria = new CDbCriteria;
 
         $criteria->compare('codnfeterceiro', $this->codnfeterceiro, true);
         $criteria->compare('nsu', $this->nsu, true);
@@ -241,32 +240,32 @@ class NfeTerceiro extends MGActiveRecord
         $criteria->compare('codusuariocriacao', $this->codusuariocriacao, true);
 
         switch ($this->revisao) {
-          case 'R':
-            $criteria->addCondition('revisao IS NOT NULL');
-            break;
+            case 'R':
+                $criteria->addCondition('revisao IS NOT NULL');
+                break;
 
-          case 'N':
-            $criteria->addCondition('revisao IS NULL');
-            break;
+            case 'N':
+                $criteria->addCondition('revisao IS NULL');
+                break;
         }
 
         switch ($this->conferencia) {
             case 'C':
-            $criteria->addCondition('conferencia IS NOT NULL');
-            break;
+                $criteria->addCondition('conferencia IS NOT NULL');
+                break;
 
-          case 'N':
-            $criteria->addCondition('conferencia IS NULL');
-            break;
+            case 'N':
+                $criteria->addCondition('conferencia IS NULL');
+                break;
         }
 
         switch ($this->codnotafiscal) {
             case 1: // Pendentes
                 $criteria->addCondition(
                     'codnotafiscal IS NULL '
-                    . ' AND (indmanifestacao IS NULL OR indmanifestacao NOT IN (' . self::INDMANIFESTACAO_DESCONHECIDA . ', ' . self::INDMANIFESTACAO_NAOREALIZADA . '))'
-                    . ' AND indsituacao = ' . self::INDSITUACAO_AUTORIZADA
-                    . ' AND ignorada = FALSE '
+                        . ' AND (indmanifestacao IS NULL OR indmanifestacao NOT IN (' . self::INDMANIFESTACAO_DESCONHECIDA . ', ' . self::INDMANIFESTACAO_NAOREALIZADA . '))'
+                        . ' AND indsituacao = ' . self::INDSITUACAO_AUTORIZADA
+                        . ' AND ignorada = FALSE '
                 );
                 break;
 
@@ -277,8 +276,8 @@ class NfeTerceiro extends MGActiveRecord
             case 3: //
                 $criteria->addCondition(
                     'indmanifestacao IN (' . self::INDMANIFESTACAO_DESCONHECIDA . ', ' . self::INDMANIFESTACAO_NAOREALIZADA . ')'
-                    . ' OR indsituacao != ' . self::INDSITUACAO_AUTORIZADA
-                    . ' OR ignorada = TRUE '
+                        . ' OR indsituacao != ' . self::INDSITUACAO_AUTORIZADA
+                        . ' OR ignorada = TRUE '
                 );
                 break;
 
@@ -300,9 +299,9 @@ class NfeTerceiro extends MGActiveRecord
         }
 
         return new CActiveDataProvider($this, array(
-            'criteria'=>$criteria,
-            'sort'=>array('defaultOrder'=>'t.emissao ASC, t.valortotal asc'),
-                        'pagination'=>array('pageSize'=>20)
+            'criteria' => $criteria,
+            'sort' => array('defaultOrder' => 't.emissao ASC, t.valortotal asc'),
+            'pagination' => array('pageSize' => 20)
         ));
     }
 
@@ -312,7 +311,7 @@ class NfeTerceiro extends MGActiveRecord
      * @param string $className active record class name.
      * @return NfeTerceiro the static model class
      */
-    public static function model($className=__CLASS__)
+    public static function model($className = __CLASS__)
     {
         return parent::model($className);
     }
@@ -434,7 +433,7 @@ class NfeTerceiro extends MGActiveRecord
         */
 
         $arquivo = "/opt/www/NFePHP/Arquivos/NFe/{$this->codfilial}";
-        $arquivo .= (($this->Filial->nfeambiente == Filial::NFEAMBIENTE_PRODUCAO)?'/producao/':'/homologacao/');
+        $arquivo .= (($this->Filial->nfeambiente == Filial::NFEAMBIENTE_PRODUCAO) ? '/producao/' : '/homologacao/');
         $arquivo .= 'recebidas/' . substr($this->emissao, 6, 4) . substr($this->emissao, 3, 2) . '/';
         $arquivo .= $this->nfechave . '-nfeProc.xml';
 
@@ -476,8 +475,10 @@ class NfeTerceiro extends MGActiveRecord
             return false;
         }
 
-        if (!empty($this->nfechave)
-            && $this->nfechave != Yii::app()->format->NumeroLimpo($this->xml->NFe->infNFe->attributes()->Id->__toString())) {
+        if (
+            !empty($this->nfechave)
+            && $this->nfechave != Yii::app()->format->NumeroLimpo($this->xml->NFe->infNFe->attributes()->Id->__toString())
+        ) {
             $this->addError("arquivoxml", "Arquivo XML não corresponde à NFe selecionada!");
             return false;
         }
@@ -595,8 +596,8 @@ class NfeTerceiro extends MGActiveRecord
             $nfitem = NfeTerceiroItem::model()->find(
                 "codnfeterceiro = :codnfeterceiro AND nitem = :nitem",
                 array(
-                    ":codnfeterceiro"=>$this->codnfeterceiro,
-                    ":nitem"=>$item->attributes()->nItem->__toString(),
+                    ":codnfeterceiro" => $this->codnfeterceiro,
+                    ":nitem" => $item->attributes()->nItem->__toString(),
                 )
             );
 
@@ -672,9 +673,9 @@ class NfeTerceiro extends MGActiveRecord
             $nfdup = NfeTerceiroDuplicata::model()->find(
                 "codnfeterceiro = :codnfeterceiro AND ndup = :ndup AND dvenc = :dvenc AND codnfeterceiroduplicata NOT IN ($notin)",
                 array(
-                    ":codnfeterceiro"=>$this->codnfeterceiro,
-                    ":ndup"=>$dup->nDup->__toString(),
-                    ":dvenc"=>$dup->dVenc->__toString(),
+                    ":codnfeterceiro" => $this->codnfeterceiro,
+                    ":ndup" => $dup->nDup->__toString(),
+                    ":dvenc" => $dup->dVenc->__toString(),
                 )
             );
 
@@ -760,8 +761,8 @@ class NfeTerceiro extends MGActiveRecord
   				   AND codprodutobarra is null
   			');
         $command->params = [
-                "codnfeterceiro" => $this->codnfeterceiro,
-            ];
+            "codnfeterceiro" => $this->codnfeterceiro,
+        ];
         $ret = $command->queryRow();
 
         if ($ret['count'] > 0) {
@@ -913,7 +914,7 @@ class NfeTerceiro extends MGActiveRecord
         if ($totalDupl > $this->valortotal) {
             $percDupl = $this->valortotal / $totalDupl;
             $totalDupl = 0;
-            for ($i=1; $i<=$parcelas; $i++) {
+            for ($i = 1; $i <= $parcelas; $i++) {
                 $valorDupl[$i] = round($valorDupl[$i] * $percDupl, 2);
                 $totalDupl += $valorDupl[$i];
             }
@@ -996,9 +997,9 @@ class NfeTerceiro extends MGActiveRecord
         $quantidadeItens = count($this->NfeTerceiroItems);
         $nItem = 0;
         $descontoRateado = 0;
-	$descontoRateadoTotal = 0;
+        $descontoRateadoTotal = 0;
         $outrasRateado = 0;
-	$outrasRateadoTotal = 0;
+        $outrasRateadoTotal = 0;
 
         foreach ($this->NfeTerceiroItems as $nti) {
             $nItem++;
@@ -1029,8 +1030,7 @@ class NfeTerceiro extends MGActiveRecord
                     + $nti->vseg
                     + $nti->voutro
                     + $outrasRateado
-                    - $descontoRateado
-                    ;
+                    - $descontoRateado;
 
                 $npb->valortotal = round($npb->valortotal, 2);
 
@@ -1056,37 +1056,37 @@ class NfeTerceiro extends MGActiveRecord
             $nfpb->valorunitario = $nti->vuncom;
             $nfpb->valortotal = $nti->vprod;
             if (!empty($nti->vicms)) {
-                $baseCalculada = (double) $nti->vprod
-                      - (double) $nti->vdesc
-                      + (double) $nti->vfrete
-                      + (double) $nti->vseg
-                      + (double) $nti->voutro;
+                $baseCalculada = (float) $nti->vprod
+                    - (float) $nti->vdesc
+                    + (float) $nti->vfrete
+                    + (float) $nti->vseg
+                    + (float) $nti->voutro;
 
                 // Redução para 41.17% da Base de Calculo, pros BITs
                 if ($nti->ProdutoBarra->Produto->Ncm->bit) {
                     $nfpb->icmscst = 20;
                     $nfpb->icmsbasepercentual = 41.17;
-                    $nfpb->icmsbase = round($baseCalculada * ((double)$nfpb->icmsbasepercentual / 100), 2);
+                    $nfpb->icmsbase = round($baseCalculada * ((float)$nfpb->icmsbasepercentual / 100), 2);
                 } elseif ($baseCalculada == 0) {
                     $nfpb->icmsbasepercentual = 100;
                     $nfpb->icmsbase = round($baseCalculada, 2);
                 } else {
-                    $nfpb->icmsbasepercentual = round(((double)$nti->vbc / $baseCalculada) * 100, 2);
+                    $nfpb->icmsbasepercentual = round(((float)$nti->vbc / $baseCalculada) * 100, 2);
                     $nfpb->icmsbase = round($baseCalculada, 2);
                 }
 
                 // Aliquota Maxima de 7% para Interestadual
                 if ($this->Pessoa->Cidade->codestado != $this->Filial->Pessoa->Cidade->codestado) {
-                    $nfpb->icmspercentual = min([(double)$nti->picms, 7]);
+                    $nfpb->icmspercentual = min([(float)$nti->picms, 7]);
                 } else {
-                    $nfpb->icmspercentual = (double) $nti->picms;
+                    $nfpb->icmspercentual = (float) $nti->picms;
                 }
 
                 // se não tem reducao, e percentual igual da nota, usa valor calculado pelo emitente
                 if ($nfpb->icmsbasepercentual == 100 && $nfpb->icmspercentual == $nti->picms) {
-                    $nfpb->icmsvalor = (double) $nti->vicms;
+                    $nfpb->icmsvalor = (float) $nti->vicms;
                 } else {
-                    $nfpb->icmsvalor = round($nfpb->icmsbase * ($nfpb->icmspercentual/100), 2);
+                    $nfpb->icmsvalor = round($nfpb->icmsbase * ($nfpb->icmspercentual / 100), 2);
                 }
             }
             $nfpb->ipibase = $nti->ipivbc;
