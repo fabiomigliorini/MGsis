@@ -9,6 +9,7 @@
  * @property string $quantidade
  * @property string $valorunitario
  * @property string $valortotal
+ * @property string $valorprodutos
  * @property string $codprodutobarra
  * @property string $alteracao
  * @property string $codusuarioalteracao
@@ -37,7 +38,7 @@ class NegocioProdutoBarra extends MGActiveRecord
 	public $codnegociostatus;
 	public $lancamento_de;
 	public $lancamento_ate;
-	
+
 
 	/**
 	 * @return string the associated database table name
@@ -55,28 +56,28 @@ class NegocioProdutoBarra extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codnegocio, quantidade, valorunitario, valortotal, codprodutobarra', 'required'),
-			array('valorunitario, valortotal', 'numerical', 'min' => 0.01),
+			array('codnegocio, quantidade, valorunitario, valortotal, valorprodutos, codprodutobarra', 'required'),
+			array('valorunitario, valortotal, valorprodutos', 'numerical', 'min' => 0.01),
 			array('codnegocio', 'validaStatusNegocio'),
-			array('quantidade, valortotal', 'length', 'max'=>14),
+			array('quantidade, valortotal, valorprodutos', 'length', 'max'=>14),
 			array('valorunitario', 'length', 'max'=>22),
 			array('alteracao, codnegocioprodutobarradevolucao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('lancamento_de, lancamento_ate, codnaturezaoperacao, codpessoa, codfilial, codnegociostatus, codnegocioprodutobarra, codnegocio, quantidade, valorunitario, valortotal, codprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
+			array('lancamento_de, lancamento_ate, codnaturezaoperacao, codpessoa, codfilial, codnegociostatus, codnegocioprodutobarra, codnegocio, quantidade, valorunitario, valortotal, valorprodutos, codprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
 		);
 	}
 
-	
+
 	public function validaStatusNegocio($attribute, $params)
 	{
 		if (empty($this->Negocio))
 			return;
-		
+
 		if ($this->Negocio->codnegociostatus != 1)
 			$this->addError($attribute, 'O status do Negócio não permite alterações!');
 	}
-	
+
 	/**
 	 * @return array relational rules.
 	 */
@@ -95,10 +96,10 @@ class NegocioProdutoBarra extends MGActiveRecord
 			'NegocioProdutoBarraDevolucaos' => array(self::HAS_MANY, 'NegocioProdutoBarra', 'codnegocioprodutobarradevolucao'),
 			'NegocioProdutoBarraDevolucao' => array(self::BELONGS_TO, 'NegocioProdutoBarra', 'codnegocioprodutobarradevolucao'),
 			'devolucaoTotal'=>array(
-				self::STAT,  
-				'NegocioProdutoBarra', 
-				'codnegocioprodutobarradevolucao', 
-				'select' => 'SUM(quantidade)', 
+				self::STAT,
+				'NegocioProdutoBarra',
+				'codnegocioprodutobarradevolucao',
+				'select' => 'SUM(quantidade)',
 				//'with'=>'Negocio'
 				'join' => 'INNER JOIN '. Negocio::Model()->tableName().' AS n USING(codnegocio)',
 				'condition' => 'n.codnegociostatus = ' . NegocioStatus::FECHADO ,
@@ -117,6 +118,7 @@ class NegocioProdutoBarra extends MGActiveRecord
 			'quantidade' => 'Quantidade',
 			'valorunitario' => 'Preço',
 			'valortotal' => 'Total',
+			'valorprodutos' => 'Total',
 			'codprodutobarra' => 'Produto',
 			'alteracao' => 'Alteração',
 			'codusuarioalteracao' => 'Usuário Alteração',
@@ -149,6 +151,7 @@ class NegocioProdutoBarra extends MGActiveRecord
 		$criteria->compare('quantidade',$this->quantidade,true);
 		$criteria->compare('valorunitario',$this->valorunitario,true);
 		$criteria->compare('valortotal',$this->valortotal,true);
+		$criteria->compare('valorprodutos',$this->valorprodutos,true);
 		$criteria->compare('codprodutobarra',$this->codprodutobarra,true);
 		$criteria->compare('alteracao',$this->alteracao,true);
 		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,true);
@@ -161,15 +164,15 @@ class NegocioProdutoBarra extends MGActiveRecord
 			$criteria->compare('"ProdutoBarra".codproduto', $this->codproduto);
 			$criteria->with[] = 'ProdutoBarra';
 		}
-		
+
 		$criteria->with[] = 'Negocio';
 		$criteria->order = '"Negocio".lancamento DESC, "Negocio".codnegocio DESC';
-		
+
 		$criteria->compare('"Negocio".codfilial', $this->codfilial);
 		$criteria->compare('"Negocio".codpessoa', $this->codpessoa);
 		$criteria->compare('"Negocio".codnaturezaoperacao', $this->codnaturezaoperacao);
 		$criteria->compare('"Negocio".codnegociostatus', $this->codnegociostatus);
-		
+
 		if ($lancamento_de = DateTime::createFromFormat("d/m/y",$this->lancamento_de))
 		{
 			$criteria->addCondition('"Negocio".lancamento >= :lancamento_de');
@@ -180,7 +183,7 @@ class NegocioProdutoBarra extends MGActiveRecord
 			$criteria->addCondition('"Negocio".lancamento <= :lancamento_ate');
 			$criteria->params = array_merge($criteria->params, array(':lancamento_ate' => $lancamento_ate->format('Y-m-d')));
 		}
-		
+
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 			'pagination'=>array('pageSize'=>15),

@@ -234,6 +234,7 @@ class NegocioController extends Controller
                 'quantidade' => $npb->quantidade,
                 'valorunitario' => $npb->valorunitario,
                 'valortotal' => $npb->valortotal,
+                'valorprodutos' => $npb->valorprodutos,
             ];
         }
         return $itens;
@@ -472,7 +473,8 @@ class NegocioController extends Controller
                 $npb->quantidade = $quantidade;
                 $npb->valorunitario = $pb->preco;
             }
-            $npb->valortotal = $npb->quantidade * $npb->valorunitario;
+            $npb->valorprodutos = round($npb->quantidade * $npb->valorunitario, 2);
+            $npb->valortotal = $npb->valorprodutos;
 
             $n = $npb->Negocio;
             $n->lancamento = date('d/m/Y H:i:s');

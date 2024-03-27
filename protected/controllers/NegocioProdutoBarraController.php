@@ -33,6 +33,9 @@ class NegocioProdutoBarraController extends Controller
 		if(isset($_POST['NegocioProdutoBarra']))
 		{
 			$model->attributes=$_POST['NegocioProdutoBarra'];
+            if (!isset($_POST['NegocioProdutoBarra']['valorprodutos'])) {
+                $model->valorprodutos = $model->valortotal;
+            }
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->codnegocioprodutobarra));
 		}
@@ -57,6 +60,9 @@ class NegocioProdutoBarraController extends Controller
 		if(isset($_POST['NegocioProdutoBarra']))
 		{
 			$model->attributes=$_POST['NegocioProdutoBarra'];
+            if (!isset($_POST['NegocioProdutoBarra']['valorprodutos'])) {
+                $model->valorprodutos = $model->valortotal;
+            }
 			if($model->save())
 				$this->redirect(array('negocio/view','id'=>$model->codnegocio));
 		}
@@ -104,15 +110,15 @@ class NegocioProdutoBarraController extends Controller
 	public function actionIndex()
 	{
 		$model=new NegocioProdutoBarra('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['NegocioProdutoBarra']))
 			Yii::app()->session['FiltroNegocioProdutoBarraIndex'] = $_GET['NegocioProdutoBarra'];
-		
+
 		if (isset(Yii::app()->session['FiltroNegocioProdutoBarraIndex']))
 			$model->attributes=Yii::app()->session['FiltroNegocioProdutoBarraIndex'];
-		
+
 		$this->render('index',array(
 			'dataProvider'=>$model->search(),
 			'model'=>$model,
@@ -124,11 +130,11 @@ class NegocioProdutoBarraController extends Controller
 	*/
 	public function actionAdmin()
 	{
-	
+
 		$model=new NegocioProdutoBarra('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['NegocioProdutoBarra']))
 			$model->attributes=$_GET['NegocioProdutoBarra'];
 
