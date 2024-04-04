@@ -33,6 +33,7 @@ class NegocioController extends Controller
             and valortotal = 0
             and codpessoa = 1
             and codusuario = :codusuario
+            and codpdv is null
             order by criacao
             limit 1
         ';

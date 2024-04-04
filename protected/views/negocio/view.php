@@ -11,28 +11,41 @@ $this->breadcrumbs = array(
 $this->menu = array(
     array('label' => 'Listagem (F1)', 'icon' => 'icon-list-alt', 'url' => array('index'), 'linkOptions' => array('id' => 'btnListagem')),
     array('label' => 'Novo (F2)', 'icon' => 'icon-plus', 'url' => array('createOrEmpty'), 'linkOptions' => array('id' => 'btnNovo')),
-    array('label' => 'Alterar', 'icon' => 'icon-pencil', 'url' => array('Alterar', 'id' => $model->codnegocio), 'visible' => ($model->codnegociostatus == 2), 'linkOptions' => array('id' => 'btnAlterarVendedor')),
-    array('label' => 'Fechar Negócio (F3)', 'icon' => 'icon-pencil', 'url' => array('update', 'id' => $model->codnegocio), 'visible' => ($model->podeEditar()), 'linkOptions' =>    array('id' => 'btnFechar')),
+    array(
+        'label' => 'Alterar',
+        'icon' => 'icon-pencil',
+        'url' => array('Alterar',
+        'id' => $model->codnegocio),
+        'visible' => ($model->codnegociostatus == 2 && empty($model->codpdv)),
+        'linkOptions' => array('id' => 'btnAlterarVendedor')
+    ),
+    array(
+        'label' => 'Fechar Negócio (F3)',
+        'icon' => 'icon-pencil',
+        'url' => array('update', 'id' => $model->codnegocio),
+        'visible' => ($model->podeEditar() && empty($model->codpdv)),
+        'linkOptions' => array('id' => 'btnFechar'),
+    ),
     array(
         'label' => 'Romaneio',
         'icon' => 'icon-print',
         'url' => array('imprimeromaneio', 'id' => $model->codnegocio),
         'linkOptions' => array('id' => 'btnMostrarRomaneio'),
-        'visible' => ($model->codnegociostatus == NegocioStatus::FECHADO)
+        'visible' => ($model->codnegociostatus == NegocioStatus::FECHADO && empty($model->codpdv))
     ),
     array(
         'label' => 'Gerar NFe',
         'icon' => 'icon-globe',
         'url' => '#',
         'linkOptions' => array('id' => 'btnGerarNotaFiscal'),
-        'visible' => ($model->codnegociostatus == NegocioStatus::FECHADO)
+        'visible' => ($model->codnegociostatus == NegocioStatus::FECHADO && empty($model->codpdv))
     ),
     array(
         'label' => 'Cancelar',
         'icon' => 'icon-thumbs-down',
         'url' => '#',
         'linkOptions' => array('id' => 'btnCancelar'),
-        'visible' => ($model->codnegociostatus != NegocioStatus::CANCELADO)
+        'visible' => ($model->codnegociostatus != NegocioStatus::CANCELADO && empty($model->codpdv))
     ),
     array('label' => 'Duplicar', 'icon' => 'icon-retweet', 'url' => array('create', 'duplicar' => $model->codnegocio)),
     array(
@@ -40,27 +53,27 @@ $this->menu = array(
         'icon' => 'icon-barcode',
         'url' => '#',
         'linkOptions' => array('onclick' => 'mostrarBoleto(event)'),
-        'visible' => ($model->codnegociostatus == NegocioStatus::FECHADO && $model->NaturezaOperacao->codoperacao == Operacao::SAIDA)
+        'visible' => ($model->codnegociostatus == NegocioStatus::FECHADO && $model->NaturezaOperacao->codoperacao == Operacao::SAIDA && empty($model->codpdv))
     ),
     array(
         'label' => 'Comanda',
         'icon' => 'icon-print',
         'url' => '#',
         'linkOptions' => array('onclick' => 'imprimirComanda(event)'),
-        'visible' => ($model->codnegociostatus == NegocioStatus::ABERTO)
+        'visible' => ($model->codnegociostatus == NegocioStatus::ABERTO && empty($model->codpdv))
     ),
     array(
         'label' => 'Orçamento',
         'icon' => 'icon-print',
         'url' => array('relatorioOrcamento', 'id' => $model->codnegocio),
         'linkOptions' => array('id' => 'btnOrcamento'),
-        'visible' => ($model->NaturezaOperacao->codoperacao == Operacao::SAIDA)
+        'visible' => ($model->NaturezaOperacao->codoperacao == Operacao::SAIDA && empty($model->codpdv))
     ),
     array(
         'label' => 'Devolução',
         'icon' => 'icon-thumbs-down',
         'url' => array('devolucao', 'id' => $model->codnegocio),
-        'visible' => ($model->codnegociostatus == NegocioStatus::FECHADO && !empty($model->NaturezaOperacao->codnaturezaoperacaodevolucao))
+        'visible' => ($model->codnegociostatus == NegocioStatus::FECHADO && !empty($model->NaturezaOperacao->codnaturezaoperacaodevolucao) && empty($model->codpdv))
     ),
     //array('label'=>'Cancelar', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnCancelar')),
     //array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
@@ -530,9 +543,10 @@ $this->renderPartial("_hotkeys");
             $attr[] = 'observacoes';
         }
         if (!empty($model->codpdv)) {
+            $str = $model->Pdv->apelido . '<br>' . $model->Pdv->uuid . '<br>' . $model->Pdv->ip;
             $attr[] = [
                 'name' => 'codpdv',
-                'value' => $model->Pdv->apelido . '<br>' . $model->Pdv->uuid . '<br>' . $model->Pdv->ip,
+                'value' => CHtml::link($str, APP_NEGOCIOS_URL . "/negocio/{$model->codnegocio}", ['target' => '_blank']),
                 'type' => 'raw',
 
             ];
