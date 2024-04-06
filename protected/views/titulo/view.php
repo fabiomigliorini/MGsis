@@ -397,6 +397,7 @@ foreach ($model->MovimentoTitulos as $mov)
 					<?php echo (!empty($mov->codcobranca)) ? "Cobranca" :""?>
 					<?php echo (!empty($mov->codliquidacaotitulo)) ? "Liquidação "  . CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($mov->codliquidacaotitulo)),array('liquidacaoTitulo/view','id'=>$mov->codliquidacaotitulo)):""?>
 					<?php echo (!empty($mov->codtituloagrupamento)) ? "Agrupamento " . CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($mov->codtituloagrupamento)),array('tituloAgrupamento/view','id'=>$mov->codtituloagrupamento)) :""?>
+					<?php echo (!empty($mov->codnegocioformapagamento)) ? "Negócio " . CHtml::link(CHtml::encode(Yii::app()->format->formataCodigo($mov->NegocioFormaPagamento->codnegocio)), APP_NEGOCIOS_URL . "/negocio/{$mov->NegocioFormaPagamento->codnegocio}", ['target' => '_blank']) :""?>
 				</span>
 			</span>
 			<div class="span3 pull-right">

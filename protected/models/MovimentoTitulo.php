@@ -37,10 +37,10 @@
  */
 class MovimentoTitulo extends MGActiveRecord
 {
-	
+
 	public $valor;
 	public $operacao;
-	
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -83,6 +83,7 @@ class MovimentoTitulo extends MGActiveRecord
 			'Titulo' => array(self::BELONGS_TO, 'Titulo', 'codtitulo'),
 			'TituloAgrupamento' => array(self::BELONGS_TO, 'TitulAgrupamento', 'codtituloagrupamento'),
 			'TituloRelacionado' => array(self::BELONGS_TO, 'Titulo', 'codtitulorelacionado'),
+			'NegocioFormaPagamento' => array(self::BELONGS_TO, 'NegocioFormaPagamento', 'codnegocioformapagamento'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 		);
@@ -176,50 +177,50 @@ class MovimentoTitulo extends MGActiveRecord
 		$this->valor = abs($this->valor);
 		return $ret;
 	}
-	
+
 	public function estorna()
 	{
 		$mov = new MovimentoTitulo('insert');
-		
+
 		switch ($this->codtipomovimentotitulo)
 		{
 			case TipoMovimentoTitulo::TIPO_IMPLANTACAO:
 				$mov->codtipomovimentotitulo = TipoMovimentoTitulo::TIPO_ESTORNO_IMPLANTACAO;
 				break;
-			
+
 			case TipoMovimentoTitulo::TIPO_AJUSTE:
 				$mov->codtipomovimentotitulo = TipoMovimentoTitulo::TIPO_ESTORNO_AJUSTE;
 				break;
-			
+
 			case TipoMovimentoTitulo::TIPO_AMORTIZACAO:
 				$mov->codtipomovimentotitulo = TipoMovimentoTitulo::TIPO_ESTORNO_AMORTIZACAO;
 				break;
-			
+
 			case TipoMovimentoTitulo::TIPO_JUROS:
 				$mov->codtipomovimentotitulo = TipoMovimentoTitulo::TIPO_ESTORNO_JUROS;
 				break;
-			
+
 			case TipoMovimentoTitulo::TIPO_DESCONTO:
 				$mov->codtipomovimentotitulo = TipoMovimentoTitulo::TIPO_ESTORNO_DESCONTO;
 				break;
-			
+
 			case TipoMovimentoTitulo::TIPO_LIQUIDACAO:
 				$mov->codtipomovimentotitulo = TipoMovimentoTitulo::TIPO_ESTORNO_LIQUIDACAO;
 				break;
-			
+
 			case TipoMovimentoTitulo::TIPO_AGRUPAMENTO:
 				$mov->codtipomovimentotitulo = TipoMovimentoTitulo::TIPO_ESTORNO_AGRUPAMENTO;
 				break;
-			
+
 			case TipoMovimentoTitulo::TIPO_LIQUIDACAO_COBRANCA:
 				$mov->codtipomovimentotitulo = TipoMovimentoTitulo::TIPO_ESTORNO_LIQUIDACAO_COBRANCA;
 				break;
-			
+
 			case TipoMovimentoTitulo::TIPO_MULTA:
 				$mov->codtipomovimentotitulo = TipoMovimentoTitulo::TIPO_ESTORNO_MULTA;
 				break;
 		}
-	
+
   		$mov->codtitulo = $this->codtitulo;
  		$mov->codportador = $this->codportador;
   		$mov->codtitulorelacionado = $this->codtitulorelacionado;
@@ -232,13 +233,13 @@ class MovimentoTitulo extends MGActiveRecord
   		$mov->codtituloagrupamento = $this->codtituloagrupamento;
   		$mov->codboletoretorno = $this->codboletoretorno;
   		$mov->codcobranca = $this->codcobranca;
-		
+
 		$ret = $mov->save();
-		
+
 		if (!$ret)
 			$this->addErrors($mov->getErrors());
-		
+
 		return $ret;
 	}
-	
+
 }
