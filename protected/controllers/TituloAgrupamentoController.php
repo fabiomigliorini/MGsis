@@ -41,7 +41,16 @@ class TituloAgrupamentoController extends Controller
 		{
 			$model->emissao  = date('d/m/Y');
 			$model->parcelas = 1;
-			$model->primeira = 30;
+
+            $today = new DateTime();
+            $lastDayOfThisMonth = new DateTime('last day of this month');
+            $nbOfDaysRemainingThisMonth = $lastDayOfThisMonth->diff($today)->format('%a');
+            if ($nbOfDaysRemainingThisMonth <= 7) {
+                $lastDayOfThisMonth = new DateTime('last day of next month');
+                $nbOfDaysRemainingThisMonth = $lastDayOfThisMonth->diff($today)->format('%a');
+            }
+			$model->primeira = $nbOfDaysRemainingThisMonth;
+
 			$model->demais   = 30;
 			if (!empty(Yii::app()->user->codportador)) {
 				$model->codportador = Yii::app()->user->codportador;

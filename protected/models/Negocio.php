@@ -515,14 +515,32 @@ class Negocio extends MGActiveRecord
             $notaItem->quantidade = $quantidade;
             $notaItem->valorunitario = $negocioItem->valorunitario;
 
-            if ($negocioItem->quantidade != $quantidade) {
-                $notaItem->valortotal = round($quantidade * $negocioItem->valorunitario, 2);
+            if (empty($this->codpdv)) {
+                // Sistema Antigo (MGsis) desconto/frete/outras pelo total
+                if ($negocioItem->quantidade != $quantidade) {
+                    $notaItem->valortotal = round($quantidade * $negocioItem->valorunitario, 2);
+                } else {
+                    $notaItem->valortotal = $negocioItem->valortotal;
+                }
+                $notaItem->valordesconto = round($percDesconto * $notaItem->valortotal, 2);
+                $notaItem->valorfrete = round($percFrete * $notaItem->valortotal, 2);
+                $notaItem->valoroutras = round($percJuros * $notaItem->valortotal, 2);
             } else {
-                $notaItem->valortotal = $negocioItem->valortotal;
+                // sistema novo, desconto/frete/outras já estão rateados nos itens
+                if ($negocioItem->quantidade != $quantidade) {
+                    $notaItem->valortotal = round($negocioItem->valorunitario * $quantidade, 2);
+                    $notaItem->valordesconto = round(($negocioItem->valordesconto / $negocioItem->quantidade) * $quantidade, 2);
+                    $notaItem->valorfrete = round(($negocioItem->valorfrete / $negocioItem->quantidade) * $quantidade, 2);
+                    $notaItem->valorseguro = round(($negocioItem->valorseguro / $negocioItem->quantidade) * $quantidade, 2);
+                    $notaItem->valoroutras = round(($negocioItem->valoroutras / $negocioItem->quantidade) * $quantidade, 2);
+                } else {
+                    $notaItem->valortotal = $negocioItem->valorprodutos;
+                    $notaItem->valordesconto = $negocioItem->valordesconto;
+                    $notaItem->valorfrete = $negocioItem->valorfrete;
+                    $notaItem->valorseguro = $negocioItem->valorseguro;
+                    $notaItem->valoroutras = $negocioItem->valoroutras;
+                }
             }
-            $notaItem->valordesconto = round($percDesconto * $notaItem->valortotal, 2);
-            $notaItem->valorfrete = round($percFrete * $notaItem->valortotal, 2);
-            $notaItem->valoroutras = round($percJuros * $notaItem->valortotal, 2);
 
             $totalProduto += $notaItem->valortotal;
             $totalFrete += $notaItem->valorfrete;

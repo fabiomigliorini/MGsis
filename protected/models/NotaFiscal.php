@@ -100,8 +100,8 @@ class NotaFiscal extends MGActiveRecord
     private $_codfilial_original;
     private $_codpessoa_original;
 
-    const MODELO_NFE			= 55;
-    const MODELO_NFCE			= 65;
+    const MODELO_NFE            = 55;
+    const MODELO_NFCE            = 65;
     /**
      * @return string the associated database table name
      */
@@ -119,8 +119,8 @@ class NotaFiscal extends MGActiveRecord
         // will receive user inputs.
         return array(
             array('codnaturezaoperacao, serie, emissao, saida, codfilial, codestoquelocal, codpessoa', 'required'),
-            array('codpessoatransportador, serie, tpemis, numero, volumes, frete', 'numerical', 'integerOnly'=>true),
-            array('nfechave, nfereciboenvio, nfeautorizacao, nfecancelamento, nfeinutilizacao', 'length', 'max'=>100),
+            array('codpessoatransportador, serie, tpemis, numero, volumes, frete', 'numerical', 'integerOnly' => true),
+            array('nfechave, nfereciboenvio, nfeautorizacao, nfecancelamento, nfeinutilizacao', 'length', 'max' => 100),
             //array('nfechave', 'unique'),
             array('codestoquelocal', 'validaEstoqueLocal'),
             array('nfechave', 'validaChaveNFE'),
@@ -133,29 +133,29 @@ class NotaFiscal extends MGActiveRecord
             array('saida', 'validaSaida'),
             array('placa', 'validaPlaca'),
             array('frete', 'validaFrete'),
-						array('codestadoplaca', 'validaCodEstadoPlaca'),
-            array('observacoes', 'length', 'max'=>1500),
-            array('pesoliquido, pesobruto, valorfrete, valorseguro, valordesconto, valoroutras, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipivalor', 'length', 'max'=>14),
-            array('justificativa', 'length', 'max'=>200),
-            array('volumesespecie, volumesmarca, volumesnumero', 'length', 'max'=>60),
+            array('codestadoplaca', 'validaCodEstadoPlaca'),
+            array('observacoes', 'length', 'max' => 1500),
+            array('pesoliquido, pesobruto, valorfrete, valorseguro, valordesconto, valoroutras, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipivalor', 'length', 'max' => 14),
+            array('justificativa', 'length', 'max' => 200),
+            array('volumesespecie, volumesmarca, volumesnumero', 'length', 'max' => 60),
             array('emitida, nfeimpressa, codoperacao, nfedataenvio, nfedataautorizacao, nfedatacancelamento, nfedatainutilizacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
             array('cpf', 'ext.validators.CnpjCpfValidator'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('codnotafiscal, codnaturezaoperacao, emitida, nfechave, tpemis, nfeimpressa, serie, numero, emissao, modelo, saida, codfilial, codestoquelocal, codpessoa, observacoes, volumes, frete, codoperacao, nfereciboenvio, nfedataenvio, nfeautorizacao, nfedataautorizacao, valorfrete, valorseguro, valordesconto, valoroutras, nfecancelamento, nfedatacancelamento, nfeinutilizacao, nfedatainutilizacao, justificativa, alteracao, codusuarioalteracao, criacao, codusuariocriacao, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipivalor, codstatus, emissao_de, emissao_ate, saida_de, saida_ate', 'safe', 'on'=>'search'),
+            array('codnotafiscal, codnaturezaoperacao, emitida, nfechave, tpemis, nfeimpressa, serie, numero, emissao, modelo, saida, codfilial, codestoquelocal, codpessoa, observacoes, volumes, frete, codoperacao, nfereciboenvio, nfedataenvio, nfeautorizacao, nfedataautorizacao, valorfrete, valorseguro, valordesconto, valoroutras, nfecancelamento, nfedatacancelamento, nfeinutilizacao, nfedatainutilizacao, justificativa, alteracao, codusuarioalteracao, criacao, codusuariocriacao, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipivalor, codstatus, emissao_de, emissao_ate, saida_de, saida_ate', 'safe', 'on' => 'search'),
         );
     }
 
     public function validaFrete($attribute, $params)
     {
-        if ($this->frete == '') {
-          $this->addError($attribute, "Informe a modalidade de Frete!");
+        if ($this->frete === '') {
+            $this->addError($attribute, "Informe a modalidade de Frete!");
         }
         if (empty($this->placa) && empty($this->codpessoatransportador)) {
             return;
         }
         if ($this->frete == self::FRETE_SEM) {
-          $this->addError($attribute, "Quando informada placa ou transportador, não pode selecionar 'Sem Frete'!");
+            $this->addError($attribute, "Quando informada placa ou transportador, não pode selecionar 'Sem Frete'!");
         }
     }
 
@@ -166,7 +166,7 @@ class NotaFiscal extends MGActiveRecord
         }
         // Padrao Placa Modelo Antigo
         if (preg_match('/^[A-Z]{3}[0-9]{4}$/', $this->placa)) {
-	        return;
+            return;
         }
         // Padrao Placa Mercosul Carro
         if (preg_match('/^[A-Z]{3}[0-9]{1}[A-Z]{1}[0-9]{2}$/', $this->placa)) {
@@ -184,9 +184,9 @@ class NotaFiscal extends MGActiveRecord
         if (empty($this->placa)) {
             return;
         }
-				if (empty($this->codestadoplaca)) {
-					$this->addError($attribute, "Informe o estado da Placa!");
-				}
+        if (empty($this->codestadoplaca)) {
+            $this->addError($attribute, "Informe o estado da Placa!");
+        }
     }
 
     public function validaEstoqueLocal($attribute, $params)
@@ -250,7 +250,7 @@ class NotaFiscal extends MGActiveRecord
         $parametros = array(
             "serie" => $this->serie,
             "numero" => $this->numero
-            );
+        );
         if (!$this->isNewRecord) {
             $condicao .= " AND codnotafiscal <> :codnotafiscal ";
             $parametros["codnotafiscal"] = $this->codnotafiscal;
@@ -352,14 +352,14 @@ class NotaFiscal extends MGActiveRecord
         // CNPJ Secretaria SEFAZ RS - Nota Emitida por MEI
         // Exemplo 4317 0287 9586 7400 0181 5589 0014 1416 3114 8458 0590
         // SEFAZ MT - Exemplo 5118 0803 5074 1500 0578 5589 0000 0396 0019 5637 6714
-	$cnpjsSefaz = [
+        $cnpjsSefaz = [
             '05599253000147', // RO
             '87958674000181', // RS
-	    '03507415000578', // MT
-	    '12200192000169', // AL
-	    '16907746000113', // MG
-	];
-	if (in_array($cnpj, $cnpjsSefaz)) {
+            '03507415000578', // MT
+            '12200192000169', // AL
+            '16907746000113', // MG
+        ];
+        if (in_array($cnpj, $cnpjsSefaz)) {
             return;
         }
 
@@ -463,7 +463,7 @@ class NotaFiscal extends MGActiveRecord
             }
 
             //soma os valores mutiplicados
-            $key = $key + (intval(substr($chave, $i-1, 1)) * $c);
+            $key = $key + (intval(substr($chave, $i - 1, 1)) * $c);
 
             $c++;
         }
@@ -484,7 +484,7 @@ class NotaFiscal extends MGActiveRecord
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'NotaFiscalProdutoBarras' => array(self::HAS_MANY, 'NotaFiscalProdutoBarra', 'codnotafiscal', 'order'=>'criacao ASC NULLS LAST, codnotafiscalprodutobarra ASC'),
+            'NotaFiscalProdutoBarras' => array(self::HAS_MANY, 'NotaFiscalProdutoBarra', 'codnotafiscal', 'order' => 'criacao ASC NULLS LAST, codnotafiscalprodutobarra ASC'),
             'NfeTerceiros' => array(self::HAS_MANY, 'NfeTerceiro', 'codnotafiscal'),
             'Operacao' => array(self::BELONGS_TO, 'Operacao', 'codoperacao'),
             'NaturezaOperacao' => array(self::BELONGS_TO, 'NaturezaOperacao', 'codnaturezaoperacao'),
@@ -494,8 +494,8 @@ class NotaFiscal extends MGActiveRecord
             'PessoaTransportador' => array(self::BELONGS_TO, 'Pessoa', 'codpessoatransportador'),
             'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
             'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
-            'NotaFiscalCartaCorrecaos' => array(self::HAS_MANY, 'NotaFiscalCartaCorrecao', 'codnotafiscal', 'order'=>'sequencia DESC'),
-            'NotaFiscalDuplicatass' => array(self::HAS_MANY, 'NotaFiscalDuplicatas', 'codnotafiscal', 'order'=>'vencimento ASC, valor ASC, codnotafiscalduplicatas ASC'),
+            'NotaFiscalCartaCorrecaos' => array(self::HAS_MANY, 'NotaFiscalCartaCorrecao', 'codnotafiscal', 'order' => 'sequencia DESC'),
+            'NotaFiscalDuplicatass' => array(self::HAS_MANY, 'NotaFiscalDuplicatas', 'codnotafiscal', 'order' => 'vencimento ASC, valor ASC, codnotafiscalduplicatas ASC'),
             'NotaFiscalReferenciadas' => array(self::HAS_MANY, 'NotaFiscalReferenciada', 'codnotafiscal'),
             'EstadoPlaca' => array(self::BELONGS_TO, 'Estado', 'codestadoplaca'),
             'MdfeNfes' => array(self::HAS_MANY, 'MdfeNfe', 'codnotafiscal'),
@@ -579,7 +579,7 @@ class NotaFiscal extends MGActiveRecord
     {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
-        $criteria=new CDbCriteria;
+        $criteria = new CDbCriteria;
 
         $criteria->compare('codnotafiscal', $this->codnotafiscal, false);
         $criteria->compare('codnaturezaoperacao', $this->codnaturezaoperacao, false);
@@ -627,7 +627,7 @@ class NotaFiscal extends MGActiveRecord
 
         if ($emissao_de = DateTime::createFromFormat("d/m/y", $this->emissao_de)) {
             $criteria->addCondition('t.emissao >= :emissao_de');
-            $criteria->params = array_merge($criteria->params, array(':emissao_de' => $emissao_de->format('Y-m-d')  . ' 00:00:00.0' ));
+            $criteria->params = array_merge($criteria->params, array(':emissao_de' => $emissao_de->format('Y-m-d')  . ' 00:00:00.0'));
         }
         if ($emissao_ate = DateTime::createFromFormat("d/m/y", $this->emissao_ate)) {
             $criteria->addCondition('t.emissao <= :emissao_ate');
@@ -635,11 +635,11 @@ class NotaFiscal extends MGActiveRecord
         }
         if ($saida_de = DateTime::createFromFormat("d/m/y", $this->saida_de)) {
             $criteria->addCondition('t.saida >= :saida_de');
-            $criteria->params = array_merge($criteria->params, array(':saida_de' => $saida_de->format('Y-m-d').' 00:00:00.0'));
+            $criteria->params = array_merge($criteria->params, array(':saida_de' => $saida_de->format('Y-m-d') . ' 00:00:00.0'));
         }
         if ($saida_ate = DateTime::createFromFormat("d/m/y", $this->saida_ate)) {
             $criteria->addCondition('t.saida <= :saida_ate');
-            $criteria->params = array_merge($criteria->params, array(':saida_ate' => $saida_ate->format('Y-m-d').' 23:59:59.9'));
+            $criteria->params = array_merge($criteria->params, array(':saida_ate' => $saida_ate->format('Y-m-d') . ' 23:59:59.9'));
         }
 
         switch ($this->codstatus) {
@@ -680,8 +680,8 @@ class NotaFiscal extends MGActiveRecord
         if ($comoDataProvider) {
             $criteria->order = 't.saida DESC, t.codfilial ASC, t.numero DESC';
             return new CActiveDataProvider($this, array(
-                'criteria'=>$criteria,
-                'pagination'=>array('pageSize'=>20)
+                'criteria' => $criteria,
+                'pagination' => array('pageSize' => 20)
             ));
         } else {
             $criteria->order = 't.codfilial, t.codnaturezaoperacao, t.emissao, t.saida, t.modelo, t.numero';
@@ -695,7 +695,7 @@ class NotaFiscal extends MGActiveRecord
      * @param string $className active record class name.
      * @return NotaFiscal the static model class
      */
-    public static function model($className=__CLASS__)
+    public static function model($className = __CLASS__)
     {
         return parent::model($className);
     }
@@ -819,9 +819,11 @@ class NotaFiscal extends MGActiveRecord
 
     public function podeEditar()
     {
-        if ($this->codstatus == NotaFiscal::CODSTATUS_AUTORIZADA
+        if (
+            $this->codstatus == NotaFiscal::CODSTATUS_AUTORIZADA
             || $this->codstatus == NotaFiscal::CODSTATUS_INUTILIZADA
-            || $this->codstatus == NotaFiscal::CODSTATUS_CANCELADA) {
+            || $this->codstatus == NotaFiscal::CODSTATUS_CANCELADA
+        ) {
             return false;
         }
 
@@ -842,7 +844,7 @@ class NotaFiscal extends MGActiveRecord
         if (($this->codnaturezaoperacao != $this->_codnaturezaoperacao_original)
             || ($this->codfilial != $this->_codfilial_original)
             || ($this->codpessoa != $this->_codpessoa_original)
-            ) {
+        ) {
             $nfpbs = NotaFiscalProdutoBarra::model()->findAll("codnotafiscal = {$this->codnotafiscal}");
             foreach ($nfpbs as $nfpb) {
                 //Limpa Tributacao Calculada
@@ -898,7 +900,7 @@ class NotaFiscal extends MGActiveRecord
     public function scopes()
     {
         return array(
-            'pendentes'=>array(
+            'pendentes' => array(
                 'condition' => '
 					   t.emitida = true
 						and t.numero > 0
@@ -908,8 +910,8 @@ class NotaFiscal extends MGActiveRecord
 						and t.emissao >= \'2016-01-08\'
 						and t.alteracao <= (current_timestamp - interval \'15 seconds\')
 				',
-                'order'=>'emissao ASC',
-                ),
-            );
+                'order' => 'emissao ASC',
+            ),
+        );
     }
 }
