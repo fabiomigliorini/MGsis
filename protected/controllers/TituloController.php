@@ -25,7 +25,7 @@ class TituloController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Titulo;
+        $model = new Titulo();
 
         // Uncomment the following line if AJAX validation is needed
         $this->performAjaxValidation($model);
@@ -84,8 +84,9 @@ class TituloController extends Controller
 
         if (isset($_POST['Titulo'])) {
             $model->attributes = $_POST['Titulo'];
-            if ($model->save())
+            if ($model->save()) {
                 $this->redirect(array('view', 'id' => $model->codtitulo));
+            }
         }
 
         $this->render('update', array(
@@ -132,14 +133,16 @@ class TituloController extends Controller
         if (Yii::app()->request->isPostRequest) {
             // we only allow estorna via POST request
             $model = $this->loadModel($id);
-            if (!$model->estorna())
+            if (!$model->estorna()) {
                 Yii::app()->user->setFlash("error", "Impossível estornar Título!");
-            else
+            } else {
                 Yii::app()->user->setFlash("success", "Título estornado!");
+            }
 
             $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('view', 'id' => $model->codtitulo));
-        } else
+        } else {
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+        }
     }
 
     /**
@@ -181,8 +184,9 @@ class TituloController extends Controller
 
         $model->unsetAttributes();  // clear any default values
 
-        if (isset($_GET['Titulo']))
+        if (isset($_GET['Titulo'])) {
             $model->attributes = $_GET['Titulo'];
+        }
 
         $this->render('admin', array(
             'model' => $model,
@@ -197,8 +201,9 @@ class TituloController extends Controller
     public function loadModel($id)
     {
         $model = Titulo::model()->findByPk($id);
-        if ($model === null)
+        if ($model === null) {
             throw new CHttpException(404, 'The requested page does not exist.');
+        }
         return $model;
     }
 
@@ -218,11 +223,13 @@ class TituloController extends Controller
     public function geraBoleto($model)
     {
 
-        if (!$model->boleto)
+        if (!$model->boleto) {
             return false;
+        }
 
-        if ($model->saldo <= 0)
+        if ($model->saldo <= 0) {
             return false;
+        }
 
         $boleto = new MGBoleto($model);
 
@@ -238,16 +245,19 @@ class TituloController extends Controller
         } elseif (!empty($codtituloagrupamento)) {
             $ta = TituloAgrupamento::model()->findByPk($codtituloagrupamento);
 
-            if ($ta === null)
+            if ($ta === null) {
                 throw new CHttpException(404, 'The requested page does not exist.');
+            }
 
-            foreach ($ta->Titulos as $model)
+            foreach ($ta->Titulos as $model) {
                 $this->geraBoleto($model);
+            }
         } elseif (!empty($codnegocio)) {
             $neg = Negocio::model()->findByPk($codnegocio);
 
-            if ($neg === null)
+            if ($neg === null) {
                 throw new CHttpException(404, 'The requested page does not exist.');
+            }
 
             foreach ($neg->NegocioFormaPagamentos as $nfp) {
                 foreach ($nfp->Titulos as $tit) {
@@ -272,15 +282,17 @@ class TituloController extends Controller
 
         $model = $this->loadModel($id);
 
-        if ($model->saldo >= 0)
+        if ($model->saldo >= 0) {
             throw new CHttpException(400, 'Título sem saldo.');
+        }
 
         $rel = new MGEscPrintVale($model);
         $rel->quebralaser = 2;
         $rel->prepara();
 
-        if ($imprimir)
+        if ($imprimir) {
             $rel->imprimir();
+        }
 
         echo $rel->converteHtml();
     }
@@ -309,36 +321,46 @@ class TituloController extends Controller
 
         $model->unsetAttributes();  // clear any default values
 
-        if (isset($_GET['Titulo']))
+        if (isset($_GET['Titulo'])) {
             Yii::app()->session['FiltroTituloIndex'] = $_GET['Titulo'];
+        }
 
         $this->validarFiltro();
 
-        if (isset(Yii::app()->session['FiltroTituloIndex']))
+        if (isset(Yii::app()->session['FiltroTituloIndex'])) {
             $model->attributes = Yii::app()->session['FiltroTituloIndex'];
+        }
+
+        $detalhado = false;
+        if (isset($_GET['detalhado'])) {
+            $detalhado = boolval($_GET['detalhado']);
+        }
 
         $titulos = $model->search(false);
 
-        $rel = new MGRelatorioTitulos($titulos);
+        $rel = new MGRelatorioTitulos($titulos, $detalhado);
         $rel->montaRelatorio();
         $rel->Output();
     }
 
     public function actionBuscaOperacaoTipoTitulo()
     {
-        if (!empty($_GET["codtipotitulo"]))
+        if (!empty($_GET["codtipotitulo"])) {
             $codtipotitulo = $_GET["codtipotitulo"];
-        else
+        } else {
             throw new CHttpException(400, 'codtipotitulo não informado.');
+        }
 
         $model = TipoTitulo::model()->findByPk($codtipotitulo);
-        if ($model === null)
+        if ($model === null) {
             throw new CHttpException(404, 'The requested page does not exist.');
+        }
 
-        if ($model->credito)
+        if ($model->credito) {
             $retorno = array("operacao" => "CR");
-        else
+        } else {
             $retorno = array("operacao" => "DB");
+        }
 
         echo json_encode($retorno);
     }
@@ -353,8 +375,9 @@ class TituloController extends Controller
         $codoperacao = null
     ) {
 
-        if (isset($_POST['GridTitulos']))
+        if (isset($_POST['GridTitulos'])) {
             $GridTitulos = $_POST['GridTitulos'];
+        }
 
         $this->widget('MGGridTitulos', array(
             'modelname'   => $modelname,

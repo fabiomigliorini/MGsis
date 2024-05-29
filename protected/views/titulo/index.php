@@ -17,24 +17,48 @@ $this->menu = array(
 ?>
 
 <script type='text/javascript'>
+    function perguntarDetalhado() {
+
+        bootbox.dialog("Deseja o relatório com as informações de Tipo do Título, Conta Contábil e Observações?",
+            [{
+                "label": "Sim, detalhado",
+                "class": "btn-primary",
+                "callback": function() {
+                    abrirRelatorio(1);
+                }
+            }, {
+                "label": "Não, simplificado",
+                "class": "btn-primary",
+                "callback": function() {
+                    abrirRelatorio(0);
+                }
+            }]);
+
+    }
+
+    function abrirRelatorio(detalhado) {
+        var frameSrcRelatorio = $('#btnMostrarRelatorio').attr('href') + "&detalhado=" + detalhado;
+        $('#modalRelatorio').on('show', function() {
+            $('#frameRelatorio').attr("src", frameSrcRelatorio);
+        });
+        $('#modalRelatorio').modal({
+            show: true
+        })
+        $('#modalRelatorio').css({
+            'width': '80%',
+            'margin-left': 'auto',
+            'margin-right': 'auto',
+            'left': '10%'
+        });
+
+    }
+
     $(document).ready(function() {
 
         //abre janela Relatorio
-        var frameSrcRelatorio = $('#btnMostrarRelatorio').attr('href');
         $('#btnMostrarRelatorio').click(function(event) {
             event.preventDefault();
-            $('#modalRelatorio').on('show', function() {
-                $('#frameRelatorio').attr("src", frameSrcRelatorio);
-            });
-            $('#modalRelatorio').modal({
-                show: true
-            })
-            $('#modalRelatorio').css({
-                'width': '80%',
-                'margin-left': 'auto',
-                'margin-right': 'auto',
-                'left': '10%'
-            });
+            perguntarDetalhado();
         });
 
         $('#search-form').change(function() {
