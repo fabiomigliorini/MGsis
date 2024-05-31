@@ -8,9 +8,9 @@ class MGRelatorioTitulos extends FPDF
 {
     private $_titulos;
     private $_titulo;
-    private $_fill = false;
     private $_detalhado = false;
     private $_totais = array();
+    private $_linha = 1;
 
     public function __construct($titulos, $detalhado = false)
     {
@@ -64,10 +64,10 @@ class MGRelatorioTitulos extends FPDF
 
         $this->SetFont('Arial', 'B', 7);
         $this->Cell(12, 6, utf8_decode("Filial"), 'B', 0, 'L');
-        $this->Cell(33, 6, utf8_decode("Título"), 'B', 0, 'L');
-        $this->Cell(18, 6, utf8_decode("Fatura"), 'B', 0, 'L');
-        $this->Cell(7, 6, utf8_decode("BOL"), 'B', 0, 'L');
-        $this->Cell(16, 6, utf8_decode("Portador"), 'B', 0, 'L');
+        $this->Cell(17, 6, utf8_decode("Portador"), 'B', 0, 'L');
+        $this->Cell(6, 6, utf8_decode("BOL"), 'B', 0, 'L');
+        $this->Cell(27, 6, utf8_decode("Título"), 'B', 0, 'L');
+        $this->Cell(24, 6, utf8_decode("Fatura"), 'B', 0, 'L');
         $this->Cell(11, 6, utf8_decode("Emissão"), 'B', 0, 'C');
         $this->Cell(18, 6, utf8_decode("Original"), 'B', 0, 'R');
         $this->Cell(10, 6, utf8_decode("Venc"), 'B', 0, 'C');
@@ -78,7 +78,7 @@ class MGRelatorioTitulos extends FPDF
         $this->Cell(18, 6, utf8_decode("Total"), 'B', 0, 'R');
         $this->Cell(5, 6, utf8_decode("OP"), 'B', 0, 'C');
         $this->Ln();
-        $this->_fill = false;
+        $this->_linha = 1;
 
         $this->_totais["original"][$this->_titulo->codpessoa]   = 0;
         $this->_totais["saldo"][$this->_titulo->codpessoa]      = 0;
@@ -87,10 +87,14 @@ class MGRelatorioTitulos extends FPDF
         $this->_totais["valorTotal"][$this->_titulo->codpessoa] = 0;
     }
 
-    public function imprimeLinhaTitulo()
+    public function imprimeLinhaRegistro()
     {
 
-        $this->SetFillColor(240, 240, 240);
+        if (($this->_linha % 2) == 0) {
+            $this->SetFillColor(235, 235, 235); // cinza
+        } else {
+            $this->SetFillColor(255, 255, 255); // branco
+        }
         $this->SetFont('Arial', '', 7);
 
         // FILIAL
@@ -99,33 +103,33 @@ class MGRelatorioTitulos extends FPDF
         } else {
             $this->SetTextColor(0, 150, 0);
         }
-        $this->Cell(12, 5, utf8_decode($this->_titulo->Filial->filial), '', 0, 'L', $this->_fill);
+        $this->Cell(12, 5, utf8_decode($this->_titulo->Filial->filial), '', 0, 'L', true);
+
+        // PORTADOR
+        $portador = $this->_titulo->codportador ? $this->_titulo->Portador->portador : null;
+        $this->Cell(17, 5, utf8_decode($portador), '', 0, 'L', true);
+
+        // BOLETO
+        $bol = $this->_titulo->boleto ? 'BOL' : null;
+        $this->Cell(6, 5, utf8_decode($bol), '', 0, 'L', true);
 
         // NUMERO
         $this->SetTextColor(0, 0, 0);
-        $this->Cell(33, 5, utf8_decode($this->_titulo->numero), '', 0, 'L', $this->_fill);
+        $this->Cell(27, 5, utf8_decode($this->_titulo->numero), '', 0, 'L', true);
 
         // FATURA
         $this->SetFont('Arial', '', 7);
         $this->SetTextColor(0, 0, 0);
-        $this->Cell(18, 5, utf8_decode($this->_titulo->fatura), '', 0, 'L', $this->_fill);
-
-        // BOLETO
-        $bol = $this->_titulo->boleto ? 'BOL' : null;
-        $this->Cell(7, 5, utf8_decode($bol), '', 0, 'L', $this->_fill);
-
-        // BOLETO
-        $portador = $this->_titulo->codportador ? $this->_titulo->Portador->portador : null;
-        $this->Cell(16, 5, utf8_decode($portador), '', 0, 'L', $this->_fill);
+        $this->Cell(24, 5, utf8_decode($this->_titulo->fatura), '', 0, 'L', true);
 
 
         // EMISSAO
         $this->SetTextColor(0, 0, 0);
         $emiss = DateTime::createFromFormat('d/m/Y', $this->_titulo->emissao)->format('d/m/y');
-        $this->Cell(11, 5, utf8_decode($emiss), '', 0, 'C', $this->_fill);
+        $this->Cell(11, 5, utf8_decode($emiss), '', 0, 'C', true);
 
         // VALOR ORIGINAL
-        $this->Cell(18, 5, utf8_decode(Yii::app()->format->formatNumber(abs($this->_titulo->debito - $this->_titulo->credito))), '', 0, 'R', $this->_fill);
+        $this->Cell(18, 5, utf8_decode(Yii::app()->format->formatNumber(abs($this->_titulo->debito - $this->_titulo->credito))), '', 0, 'R', true);
 
         // VENCIMENTO
         $this->SetFont('Arial', 'B', 7);
@@ -141,7 +145,7 @@ class MGRelatorioTitulos extends FPDF
             $this->SetTextColor(0, 150, 0);
         }
         $vcto = DateTime::createFromFormat('d/m/Y', $this->_titulo->vencimento)->format('d/m/y');
-        $this->Cell(10, 5, utf8_decode($vcto), '', 0, 'C', $this->_fill);
+        $this->Cell(10, 5, utf8_decode($vcto), '', 0, 'C', true);
 
         // SALDO
         if ($this->_titulo->operacao == 'CR') {
@@ -150,44 +154,49 @@ class MGRelatorioTitulos extends FPDF
             $this->SetTextColor(0, 150, 0);
         }
         $this->SetFont('Arial', '', 7);
-        $this->Cell(18, 5, utf8_decode(Yii::app()->format->formatNumber(abs($this->_titulo->saldo))), '', 0, 'R', $this->_fill);
+        $this->Cell(18, 5, utf8_decode(Yii::app()->format->formatNumber(abs($this->_titulo->saldo))), '', 0, 'R', true);
 
         // MULTA
-        $this->Cell(12, 5, utf8_decode(Yii::app()->format->formatNumber(abs($this->_titulo->Juros->valorMulta))), '', 0, 'R', $this->_fill);
+        $this->Cell(12, 5, utf8_decode(Yii::app()->format->formatNumber(abs($this->_titulo->Juros->valorMulta))), '', 0, 'R', true);
 
         // JUROS
-        $this->Cell(12, 5, utf8_decode(Yii::app()->format->formatNumber(abs($this->_titulo->Juros->valorJuros))), '', 0, 'R', $this->_fill);
+        $this->Cell(12, 5, utf8_decode(Yii::app()->format->formatNumber(abs($this->_titulo->Juros->valorJuros))), '', 0, 'R', true);
 
         // VALOR TOTAL
         $this->SetFont('Arial', 'B', 7);
-        $this->Cell(18, 5, utf8_decode(Yii::app()->format->formatNumber(abs($this->_titulo->Juros->valorTotal))), '', 0, 'R', $this->_fill);
+        $this->Cell(18, 5, utf8_decode(Yii::app()->format->formatNumber(abs($this->_titulo->Juros->valorTotal))), '', 0, 'R', true);
 
         // OPERACAO
         $this->SetFont('Arial', '', 7);
-        $this->Cell(5, 5, utf8_decode($this->_titulo->operacao), '', 0, 'C', $this->_fill);
+        $this->Cell(5, 5, utf8_decode($this->_titulo->operacao), '', 0, 'C', true);
         $this->Ln();
 
         if ($this->_detalhado) {
 
-            // CONTA CONTABIL
-            $this->SetFont('Arial', '', 6);
-            $this->SetTextColor(0, 0, 0);
-            $this->Cell(63, 3, utf8_decode($this->_titulo->ContaContabil->contacontabil), '', 0, 'L', $this->_fill);
 
             // TIPO
             $this->SetFont('Arial', '', 6);
             $this->SetTextColor(0, 0, 0);
-            $this->Cell(51, 3, utf8_decode($this->_titulo->TipoTitulo->tipotitulo), '', 0, 'L', $this->_fill);
+            $this->Cell(35, 3, utf8_decode($this->_titulo->TipoTitulo->tipotitulo), '', 0, 'L', true);
+
+            // CONTA CONTABIL
+            $this->SetFont('Arial', '', 6);
+            $this->SetTextColor(0, 0, 0);
+            $this->Cell(51, 3, utf8_decode($this->_titulo->ContaContabil->contacontabil), '', 0, 'L', true);
+            // $this->MultiCell(63, 3, utf8_decode($this->_titulo->ContaContabil->contacontabil), 0, 'L', true);
 
             // OBSERVACOES
             $this->SetFont('Arial', '', 6);
             $this->SetTextColor(0, 0, 0);
-            $this->Cell(76, 3, utf8_decode($this->_titulo->observacao), '', 0, 'L', $this->_fill);
-            $this->Ln();
+            $this->MultiCell(104, 3, utf8_decode($this->_titulo->observacao), 0, 'L', true);
+            // $this->MultiCell(104, 3, 'Teste', 1, 'L', true);
+
+            // $this->Cell(76, 3, utf8_decode($this->_titulo->observacao), '', 0, 'L', true);
+            // $this->Ln();
         }
 
         // troca cor de fundo
-        $this->_fill = !$this->_fill;
+        $this->_linha ++ ;
 
         // ACUMULA TOTAIS
         $this->_totais["original"][$this->_titulo->codpessoa] += $this->_titulo->debito - $this->_titulo->credito;
@@ -259,7 +268,7 @@ class MGRelatorioTitulos extends FPDF
             }
 
             $codpessoa = $this->_titulo->codpessoa;
-            $this->imprimeLinhaTitulo();
+            $this->imprimeLinhaRegistro();
         }
 
         if (!empty($codpessoa)) {

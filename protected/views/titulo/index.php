@@ -50,7 +50,16 @@ $this->menu = array(
             'margin-right': 'auto',
             'left': '10%'
         });
+    }
 
+    function selectAllGrupoCliente() {
+        $("#Titulo_codgrupocliente > option[value!='']").prop("selected", true);
+        $("#Titulo_codgrupocliente").trigger("change");
+    }
+
+    function selectNoneGrupoCliente() {
+        $("#Titulo_codgrupocliente > option[value!='']").prop("selected", false);
+        $("#Titulo_codgrupocliente").trigger("change");
     }
 
     $(document).ready(function() {
@@ -71,7 +80,9 @@ $this->menu = array(
             );
         });
 
-        $("#Titulo_saldo").select2();
+        $("#Titulo_status").select2({
+            allowClear: true
+        });
         $("#Titulo_codportador").select2({
             allowClear: true
         });
@@ -88,6 +99,12 @@ $this->menu = array(
             allowClear: true
         });
         $("#Titulo_codcontacontabil").select2({
+            allowClear: true
+        });
+        $("#Titulo_codgrupocliente").select2({
+            allowClear: true
+        });
+        $("#Titulo_pagarreceber").select2({
             allowClear: true
         });
         $("#Titulo_codtipotitulo").select2({
@@ -123,77 +140,154 @@ $this->menu = array(
 ?>
 <div class="well well-small hidden-print">
     <div class="row-fluid">
+
+        <!-- COLUNA 1 -->
         <div class="span3">
+
+            <!-- CODTITULO E NUMERO -->
             <div class="row-fluid">
-                <?php echo $form->textField($model, 'codtitulo', array('placeholder' => '#', 'class' => 'span6')); ?>
-                <?php echo $form->textField($model, 'numero', array('placeholder' => 'Número', 'class' => 'span6')); ?>
+                <div class="span5">
+                    <?php echo $form->textField($model, 'codtitulo', array('placeholder' => '#', 'class' => 'span12')); ?>
+                </div>
+                <div class="span7">
+                    <?php echo $form->textField($model, 'numero', array('placeholder' => 'Número', 'class' => 'span12')); ?>
+                </div>
+            </div>
+
+            <!-- PORTADOR -->
+            <div class="row-fluid" style="padding-top: 4px">
+                <div class="span5">
+                    <?php
+                    echo $form->dropDownList(
+                        $model,
+                        'boleto',
+                        array(
+                            '' => '',
+                            'B' => 'Com Boleto Emitido',
+                            'BA' => 'Boleto Aberto no Banco',
+                            'BL' => 'Boleto Liquidado no Banco',
+                            'SB' => 'Sem Boleto'
+                        ),
+                        array(
+                            'placeholder' => 'Boleto',
+                            'class' => 'span12'
+                        )
+                    );
+                    ?>
+                </div>
+                <div class="span7">
+                    <?php echo $form->textField($model, 'nossonumero', array('placeholder' => 'Nosso Número', 'class' => 'span12')); ?>
+                </div>
             </div>
             <div class="row-fluid" style="padding-top: 4px">
-                <?php
-                echo $form->dropDownList(
-                    $model,
-                    'codportador',
-                    Portador::getListaCombo(),
-                    array(
-                        'prompt' => '',
-                        'placeholder' => 'Portador',
-                        'class' => 'span12'
-                    )
-                );
-                ?>
+                <div class="span5">
+                    <?php
+                    echo $form->dropDownList(
+                        $model,
+                        'codfilial',
+                        Filial::getListaCombo(),
+                        array(
+                            'prompt' => '',
+                            'placeholder' => 'Filial',
+                            'class' => 'span12'
+                        )
+                    );
+                    ?>
+                </div>
+                <div class="span7">
+                    <?php
+                    echo $form->dropDownList(
+                        $model,
+                        'codportador',
+                        Portador::getListaCombo(),
+                        array(
+                            'prompt' => '',
+                            'placeholder' => 'Portador',
+                            'class' => 'span12'
+                        )
+                    );
+                    ?>
+                </div>
             </div>
             <div class="row-fluid" style="padding-top: 4px">
-                <?php echo $form->dropDownList($model, 'boleto', array('' => '', 1 => 'Com Boleto', 2 => 'Sem Boleto'), array('placeholder' => 'Boleto', 'class' => 'span12')); ?>
+                <div class="span5">
+                    <?php echo $form->dropDownList($model, 'credito', array('' => '', 1 => 'Credito', 2 => 'Debito'), array('placeholder' => 'Operação', 'class' => 'span12')); ?>
+                </div>
+                <div class="span7">
+                    <?php
+                    echo $form->dropDownList(
+                        $model,
+                        'codtipotitulo',
+                        TipoTitulo::getListaCombo(),
+                        array('prompt' => '', 'placeholder' => 'Tipo', 'class' => 'span12')
+                    );
+                    ?>
+                </div>
             </div>
+
             <div class="row-fluid" style="padding-top: 4px">
-                <?php echo $form->textField($model, 'nossonumero', array('placeholder' => 'Nosso Número', 'class' => 'span12')); ?>
+                <div class="span5">
+                    <?php echo $form->dropDownList($model, 'gerencial', array('' => '', 1 => 'Gerencial', 2 => 'Fiscal'), array('placeholder' => 'Gerencial', 'class' => 'span12')); ?>
+                </div>
+                <div class="span7">
+                    <?php
+                    echo $form->dropDownList(
+                        $model,
+                        'codusuariocriacao',
+                        Usuario::getListaCombo(),
+                        array('prompt' => '', 'placeholder' => 'Usuário', 'class' => 'span12')
+                    );
+                    ?>
+                </div>
             </div>
+
         </div>
+
+        <!-- COLUNA 2 -->
         <div class="span5">
             <div class="row-fluid">
                 <?php echo $form->select2Pessoa($model, 'codpessoa', array('class' => 'span12', 'inativo' => true)); ?>
             </div>
             <div class="row-fluid" style="padding-top: 4px">
+                <?php echo $form->select2GrupoEconomico($model, 'codgrupoeconomico', array('class' => 'span12', 'inativo' => true)); ?>
+            </div>
+            <div class="row-fluid" style="padding-top: 4px">
+                <div class="span8">
+                    <?php echo $form->dropDownList($model, 'codgrupocliente', GrupoCliente::getListaCombo(), array('prompt' => '', 'placeholder' => 'Grupo de Cliente', 'class' => 'span12', 'multiple' => true)); ?>
+                </div>
+                <div class="span2">
+                    <input type="button" class="btn span12" onClick="selectAllGrupoCliente()" value="Todos" />
+                </div>
+                <div class="span2">
+                    <input type="button" class="btn span12" onClick="selectNoneGrupoCliente()" value="Nenhum" />
+                </div>
+            </div>
+            <div class="row-fluid" style="padding-top: 6px">
+                <?php echo $form->dropDownList($model, 'codcontacontabil', ContaContabil::getListaCombo(), array('prompt' => '', 'placeholder' => 'Conta', 'class' => 'span12', 'multiple' => true)); ?>
+            </div>
+        </div>
+
+        <!-- COLUNA 3 -->
+        <div class="span2">
+            <div class="row-fluid">
                 <?php
                 echo $form->dropDownList(
                     $model,
-                    'codfilial',
-                    Filial::getListaCombo(),
+                    'status',
                     array(
-                        'prompt' => '',
-                        'placeholder' => 'Filial',
-                        'class' => 'span6'
+                        '' => '',
+                        'A' => 'Abertos',
+                        'AL' => 'Abertos e Liquidados',
+                        'L' => 'Liquidados',
+                        'E' => 'Estornados',
+                        'LE' => 'Estornados e Liquidados',
+                    ),
+                    array(
+                        'placeholder' => 'Saldo',
+                        'class' => 'span12'
                     )
                 );
                 ?>
-                <?php echo $form->dropDownList($model, 'gerencial', array('' => '', 1 => 'Gerencial', 2 => 'Fiscal'), array('placeholder' => 'Gerencial', 'class' => 'span6')); ?>
-            </div>
-            <div class="row-fluid" style="padding-top: 4px">
-                <?php echo $form->dropDownList($model, 'codcontacontabil', ContaContabil::getListaCombo(), array('prompt' => '', 'placeholder' => 'Conta', 'class' => 'span6')); ?>
-                <?php
-                echo $form->dropDownList(
-                    $model,
-                    'codtipotitulo',
-                    TipoTitulo::getListaCombo(),
-                    array('prompt' => '', 'placeholder' => 'Tipo', 'class' => 'span6')
-                );
-                ?>
-            </div>
-            <div class="row-fluid" style="padding-top: 4px">
-                <?php echo $form->dropDownList($model, 'credito', array('' => '', 1 => 'Credito', 2 => 'Debito'), array('placeholder' => 'Operação', 'class' => 'span6')); ?>
-                <?php
-                echo $form->dropDownList(
-                    $model,
-                    'codusuariocriacao',
-                    Usuario::getListaCombo(),
-                    array('prompt' => '', 'placeholder' => 'Usuário', 'class' => 'span6')
-                );
-                ?>
-            </div>
-        </div>
-        <div class="span2">
-            <div class="row-fluid">
-                <?php echo $form->dropDownList($model, 'saldo', array('0' => 'Em Aberto', 1 => 'Liquidados', 9 => 'Todos'), array('placeholder' => 'Saldo', 'class' => 'span12')); ?>
             </div>
             <div class="row-fluid" style="padding-top: 4px">
                 <?php
@@ -286,20 +380,15 @@ $this->menu = array(
                 ?>
             </div>
         </div>
+
+        <!-- COLUNA 4 -->
         <div class="span2">
-            <div class="row-fluid" style="padding-top: 4px">
-                <?php
-                $this->widget(
-                    'bootstrap.widgets.TbButton',
-                    array(
-                        'buttonType' => 'submit',
-                        'icon' => 'icon-search',
-                        //'label'=>'',
-                        'htmlOptions' => array('class' => 'pull-right btn btn-info')
-                    )
-                );
-                ?>
+
+            <div class="row-fluid">
+                <?php echo $form->dropDownList($model, 'pagarreceber', array('' => '', 'R' => 'Contas à Receber', 'P' => 'Contas à Pagar'), array('placeholder' => 'Pagar / Receber', 'class' => 'span12')); ?>
             </div>
+
+            <!-- DEBITO DE/ATE -->
             <div class="row-fluid" style="padding-top: 4px">
                 <?php
                 echo $form->textFieldRow(
@@ -323,6 +412,8 @@ $this->menu = array(
                 );
                 ?>
             </div>
+
+            <!-- CREDITO DE/ATE -->
             <div class="row-fluid" style="padding-top: 4px">
                 <?php
                 echo $form->textFieldRow(
@@ -346,6 +437,8 @@ $this->menu = array(
                 );
                 ?>
             </div>
+
+            <!-- SALDO DE/ATE -->
             <div class="row-fluid" style="padding-top: 4px">
                 <?php
                 echo $form->textFieldRow(
@@ -366,6 +459,21 @@ $this->menu = array(
                         'class' => 'span6 text-right',
                         'maxlength' => 14
                     ]
+                );
+                ?>
+            </div>
+
+            <!-- BOTAO BUSCA -->
+            <div class="row-fluid" style="padding-top: 4px">
+                <?php
+                $this->widget(
+                    'bootstrap.widgets.TbButton',
+                    array(
+                        'buttonType' => 'submit',
+                        'icon' => 'icon-search',
+                        //'label'=>'',
+                        'htmlOptions' => array('class' => 'pull-right btn btn-info')
+                    )
                 );
                 ?>
             </div>

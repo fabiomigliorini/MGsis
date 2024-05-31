@@ -52,6 +52,25 @@ class MGActiveForm extends TbActiveForm
 		return $widget;
 	}
 
+    public function select2GrupoEconomicoRow($model, $attribute, $htmlOptions = array())
+	{
+		$widget = $this->select2GrupoEconomico($model, $attribute, $htmlOptions);
+		return $this->customRow($model, $attribute, $widget);
+	}
+
+    public function select2GrupoEconomico($model, $attribute, $htmlOptions = array())
+	{
+		$widget = $this->widget(
+			'MGSelect2GrupoEconomico',
+			array(
+				'model' => $model,
+				'attribute' => $attribute,
+				'htmlOptions' => $htmlOptions,
+			),
+			true);
+		return $widget;
+	}
+
 	public function select2NcmRow($model, $attribute, $htmlOptions = array())
 	{
 		$widget = $this->select2Ncm($model, $attribute, $htmlOptions);

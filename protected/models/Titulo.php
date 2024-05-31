@@ -69,6 +69,10 @@ class Titulo extends MGActiveRecord
     public $credito_ate;
     public $saldo_de;
     public $saldo_ate;
+    public $codgrupocliente;
+    public $codgrupoeconomico;
+    public $pagarreceber;
+    public $status;
     public $Juros;
     public $operacao;
     public $valor;
@@ -110,7 +114,7 @@ class Titulo extends MGActiveRecord
             // @todo Please remove those attributes that should not be searched.
             //array('sistema','datetime'),
             array('sistema', 'date', 'format' => strtr(Yii::app()->locale->getDateTimeFormat(), array("{0}" => Yii::app()->locale->getTimeFormat('medium'), "{1}" => Yii::app()->locale->getDateFormat('medium')))),
-            array('codtitulo, vencimento_de, vencimento_ate, emissao_de, emissao_ate, criacao_de, criacao_ate, codtipotitulo, codfilial, codportador, codpessoa, codcontacontabil, numero, emissao, vencimento, credito, gerencial, boleto, nossonumero, saldo, criacao, codusuariocriacao, debito_de, debito_ate, credito_de, credito_ate, saldo_de, saldo_ate', 'safe', 'on' => 'search'),
+            array('codtitulo, vencimento_de, vencimento_ate, emissao_de, emissao_ate, criacao_de, criacao_ate, codtipotitulo, codfilial, codportador, codpessoa, codcontacontabil, numero, emissao, vencimento, credito, gerencial, boleto, nossonumero, saldo, criacao, codusuariocriacao, debito_de, debito_ate, credito_de, credito_ate, saldo_de, saldo_ate, codgrupocliente, codgrupoeconomico, pagarreceber, status', 'safe', 'on' => 'search'),
         );
     }
 
@@ -324,8 +328,7 @@ class Titulo extends MGActiveRecord
 
         $criteria = new CDbCriteria;
 
-        //$criteria->compare('t.codtitulo', $this->codtitulo, false);
-        $criteria->compare('codtitulo', Yii::app()->format->numeroLimpo($this->codtitulo), false);
+        $criteria->compare('t.codtitulo', Yii::app()->format->numeroLimpo($this->codtitulo), false);
         $criteria->compare('t.codfilial', $this->codfilial, false);
         $criteria->compare('t.codpessoa', $this->codpessoa, false);
         if (!empty($this->numero)) {
@@ -383,14 +386,27 @@ class Titulo extends MGActiveRecord
         }
 
 
-        switch ($this->saldo) {
-            case 9:
+        switch ($this->status) {
+            case 'A':
+                $criteria->addCondition('t.saldo <> 0');
                 break;
-            case 1:
+            case 'L':
+                $criteria->addCondition('t.saldo = 0 and t.estornado is null');
+                break;
+            case 'AL':
+                $criteria->addCondition('t.estornado is null');
+                break;
+            case 'E':
+                $criteria->addCondition('t.estornado is not null');
+                break;
+            case 'LE':
                 $criteria->addCondition('t.saldo = 0');
                 break;
+            case 'T':
+                break;
+
             default:
-                $criteria->addCondition('t.saldo <> 0');
+                // die($this->status);
                 break;
         }
 
@@ -403,13 +419,57 @@ class Titulo extends MGActiveRecord
                 break;
         }
 
+        /*
+        01 - NORMAL
+        02 - MOVIMENTO CARTORIO
+        03 - EM CARTORIO
+        04 - TITULO COM OCORRENCIA DE CARTORIO
+        05 - PROTESTADO ELETRONICO
+        06 - LIQUIDADO
+        07 - BAIXADO
+        08 - TITULO COM PENDENCIA DE CARTORIO
+        09 - TITULO PROTESTADO MANUAL
+        10 - TITULO BAIXADO/PAGO EM CARTORIO
+        11 - TITULO LIQUIDADO/PROTESTADO
+        12 - TITULO LIQUID/PGCRTO
+        13 - TITULO PROTESTADO AGUARDANDO BAIXA
+        14 - TITULO EM LIQUIDACAO
+        15 - TITULO AGENDADO
+        16 - TITULO CREDITADO
+        17 - PAGO EM CHEQUE - AGUARD.LIQUIDACAO
+        18 - PAGO PARCIALMENTE CREDITADO
+        80 - EM PROCESSAMENTO (ESTADO TRANSITÓRIO)
+        */
+
         switch ($this->boleto) {
-            case 2:
-                $criteria->addCondition('t.boleto = false');
-                break;
-            case 1:
+            case 'B':
                 $criteria->addCondition('t.boleto = true');
                 break;
+            case 'BA':
+                $criteria->addCondition('exists (select codtituloboleto from tbltituloboleto tb where t.codtitulo = tb.codtitulo and estadotitulocobranca not in (6, 7))');
+                break;
+            case 'BL':
+                $criteria->addCondition('
+                    exists (
+                        select codtituloboleto
+                        from tbltituloboleto tb
+                        where t.codtitulo = tb.codtitulo
+                        and estadotitulocobranca in (6, 7)
+                    )
+                    and not exists (
+                        select codtituloboleto
+                        from tbltituloboleto tb
+                        where t.codtitulo = tb.codtitulo
+                        and estadotitulocobranca not in (6, 7)
+                    )
+                ');
+                break;
+            case 'SB':
+                $criteria->addCondition('t.boleto = false');
+                break;
+
+                //
+
         }
 
         if (!empty($this->nossonumero)) {
@@ -441,6 +501,15 @@ class Titulo extends MGActiveRecord
             'ContaContabil' => array('select' => '"ContaContabil".contacontabil'),
             'TipoTitulo' => array('select' => '"TipoTitulo".tipotitulo'),
         );
+
+        $criteria->compare('"Pessoa".codgrupocliente', $this->codgrupocliente, false);
+        $criteria->compare('"Pessoa".codgrupoeconomico', $this->codgrupoeconomico, false);
+
+        if ($this->pagarreceber == 'R') {
+            $criteria->compare('"TipoTitulo".receber', true, false);
+        } elseif ($this->pagarreceber == 'P') {
+            $criteria->compare('"TipoTitulo".pagar', true, false);
+        }
 
         $criteria->select = 't.codtitulo, t.vencimento, t.emissao, t.codfilial, t.numero, t.fatura, t.codportador, t.credito, t.debito, t.saldo, t.codtipotitulo, t.codcontacontabil, t.codusuariocriacao, t.nossonumero, t.gerencial, t.codpessoa, t.codusuarioalteracao, t.estornado, t.boleto, t.observacao';
 
