@@ -100,34 +100,26 @@ class TituloController extends Controller
      * @param integer $id the ID of the model to be deleted
      */
     /*
-  public function actionDelete($id)
-  {
-    if(Yii::app()->request->isPostRequest)
+    public function actionDelete($id)
     {
-      // we only allow deletion via POST request
-      try
-      {
-        $this->loadModel($id)->delete();
-        // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-        if(!isset($_GET['ajax']))
-          $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
-      }
-      catch(CDbException $e)
-      {
-        // Cannot delete or update a parent row: a foreign key constraint fails
-        if($e->errorInfo[1] == 7)
-        {
-          throw new CHttpException(409, 'Registro em uso, você não pode excluir.');
-        }
-        else
-          throw $e;
-      }
+        if (Yii::app()->request->isPostRequest) {
+            // we only allow deletion via POST request
+            try {
+                $this->loadModel($id)->delete();
+                // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+                if (!isset($_GET['ajax']))
+                    $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
+            } catch (CDbException $e) {
+                // Cannot delete or update a parent row: a foreign key constraint fails
+                if ($e->errorInfo[1] == 7) {
+                    throw new CHttpException(409, 'Registro em uso, você não pode excluir.');
+                } else
+                    throw $e;
+            }
+        } else
+            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
-    else
-      throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-  }
-   *
-   */
+    */
     public function actionEstorna($id)
     {
         if (Yii::app()->request->isPostRequest) {
@@ -160,7 +152,7 @@ class TituloController extends Controller
 
         if (!isset(Yii::app()->session['FiltroTituloIndex'])) {
             Yii::app()->session['FiltroTituloIndex'] = array(
-                'saldo' => 0,
+                'status' => 'A',
             );
         }
 
@@ -264,14 +256,6 @@ class TituloController extends Controller
                     $this->geraBoleto($tit);
                 }
             }
-            /*
-      $ta = TituloAgrupamento::model()->findByPk($codtituloagrupamento);
-
-
-      foreach($ta->Titulos as $model)
-        $this->geraBoleto($model);
-       *
-       */
         } else {
             throw new CHttpException(404, 'The requested page does not exist.');
         }
