@@ -502,7 +502,9 @@ class Titulo extends MGActiveRecord
             'TipoTitulo' => array('select' => '"TipoTitulo".tipotitulo'),
         );
 
-        $criteria->compare('"Pessoa".codgrupocliente', $this->codgrupocliente, false);
+        if ($this->codgrupocliente) {
+            $criteria->addInCondition('coalesce("Pessoa".codgrupocliente, -1)', $this->codgrupocliente);
+        }
         $criteria->compare('"Pessoa".codgrupoeconomico', $this->codgrupoeconomico, false);
 
         if ($this->pagarreceber == 'R') {

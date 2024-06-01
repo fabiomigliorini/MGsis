@@ -253,7 +253,21 @@ $this->menu = array(
             </div>
             <div class="row-fluid" style="padding-top: 4px">
                 <div class="span8">
-                    <?php echo $form->dropDownList($model, 'codgrupocliente', GrupoCliente::getListaCombo(), array('prompt' => '', 'placeholder' => 'Grupo de Cliente', 'class' => 'span12', 'multiple' => true)); ?>
+                    <?php
+                    $gruposcliente = GrupoCliente::getListaCombo();
+                    $gruposcliente[-1] = 'Sem Grupo Informado';
+                    echo $form->dropDownList(
+                        $model,
+                        'codgrupocliente',
+                        $gruposcliente,
+                        array(
+                            'prompt' => '',
+                            'placeholder' => 'Grupo de Cliente',
+                            'class' => 'span12',
+                            'multiple' => true
+                        )
+                    );
+                    ?>
                 </div>
                 <div class="span2">
                     <input type="button" class="btn span12" onClick="selectAllGrupoCliente()" value="Todos" />
