@@ -49,7 +49,7 @@
 
 $(document).ready(function() {
 
-	$("#Portador_portador").Setcase();
+	//$("#Portador_portador").Setcase();
 
 	$('#portador-form').submit(function(e) {
         var currentForm = this;
