@@ -3,29 +3,29 @@
 class NotaFiscalController extends Controller
 {
     /**
-    * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
-    * using two-column layout. See 'protected/views/layouts/column2.php'.
-    */
-    public $layout='//layouts/column2';
+     * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
+     * using two-column layout. See 'protected/views/layouts/column2.php'.
+     */
+    public $layout = '//layouts/column2';
 
     /**
-    * Displays a particular model.
-    * @param integer $id the ID of the model to be displayed
-    */
+     * Displays a particular model.
+     * @param integer $id the ID of the model to be displayed
+     */
     public function actionView($id)
     {
         $this->render('view', array(
-            'model'=>$this->loadModel($id),
-            ));
+            'model' => $this->loadModel($id),
+        ));
     }
 
     /**
-    * Creates a new model.
-    * If creation is successful, the browser will be redirected to the 'view' page.
-    */
+     * Creates a new model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     */
     public function actionCreate($duplicar = null, $inverter = null)
     {
-        $model=new NotaFiscal;
+        $model = new NotaFiscal;
 
         // Uncomment the following line if AJAX validation is needed
         $this->performAjaxValidation($model);
@@ -46,7 +46,7 @@ class NotaFiscalController extends Controller
         $model->modelo = NotaFiscal::MODELO_NFE;
 
         if (isset($_POST['NotaFiscal'])) {
-            $model->attributes=$_POST['NotaFiscal'];
+            $model->attributes = $_POST['NotaFiscal'];
 
             $transaction = Yii::app()->db->beginTransaction();
             $erro = false;
@@ -81,34 +81,34 @@ class NotaFiscalController extends Controller
                     if (!empty($inverter)) {
                         $prod_novo->codnotafiscalprodutobarraorigem = $prod_orig->codnotafiscalprodutobarra;
                     } else {
-                      $prod_novo->icmsbase = null;
-                      $prod_novo->icmsbasepercentual = null;
-                      $prod_novo->icmspercentual = null;
-                      $prod_novo->icmsvalor = null;
+                        $prod_novo->icmsbase = null;
+                        $prod_novo->icmsbasepercentual = null;
+                        $prod_novo->icmspercentual = null;
+                        $prod_novo->icmsvalor = null;
 
-                      $prod_novo->icmsstbase = null;
-                      $prod_novo->icmsstpercentual = null;
-                      $prod_novo->icmsstvalor = null;
+                        $prod_novo->icmsstbase = null;
+                        $prod_novo->icmsstpercentual = null;
+                        $prod_novo->icmsstvalor = null;
 
-                      $prod_novo->ipibase = null;
-                      $prod_novo->ipipercentual = null;
-                      $prod_novo->ipivalor = null;
+                        $prod_novo->ipibase = null;
+                        $prod_novo->ipipercentual = null;
+                        $prod_novo->ipivalor = null;
 
-                      $prod_novo->pisbase = null;
-                      $prod_novo->pispercentual = null;
-                      $prod_novo->pisvalor = null;
+                        $prod_novo->pisbase = null;
+                        $prod_novo->pispercentual = null;
+                        $prod_novo->pisvalor = null;
 
-                      $prod_novo->cofinsbase = null;
-                      $prod_novo->cofinspercentual = null;
-                      $prod_novo->cofinsvalor = null;
+                        $prod_novo->cofinsbase = null;
+                        $prod_novo->cofinspercentual = null;
+                        $prod_novo->cofinsvalor = null;
 
-                      $prod_novo->csllbase = null;
-                      $prod_novo->csllpercentual = null;
-                      $prod_novo->csllvalor = null;
+                        $prod_novo->csllbase = null;
+                        $prod_novo->csllpercentual = null;
+                        $prod_novo->csllvalor = null;
 
-                      $prod_novo->irpjbase = null;
-                      $prod_novo->irpjpercentual = null;
-                      $prod_novo->irpjvalor = null;
+                        $prod_novo->irpjbase = null;
+                        $prod_novo->irpjpercentual = null;
+                        $prod_novo->irpjvalor = null;
                     }
 
                     $prod_novo->criacao = null;
@@ -169,7 +169,7 @@ class NotaFiscalController extends Controller
 
             if (!$erro) {
                 $transaction->commit();
-                $this->redirect(array('view','id'=>$model->codnotafiscal));
+                $this->redirect(array('view', 'id' => $model->codnotafiscal));
             } else {
                 $transaction->rollBack();
             }
@@ -258,18 +258,18 @@ class NotaFiscalController extends Controller
         }
 
         $this->render('create', array(
-            'model'=>$model,
-            ));
+            'model' => $model,
+        ));
     }
 
     /**
-    * Updates a particular model.
-    * If update is successful, the browser will be redirected to the 'view' page.
-    * @param integer $id the ID of the model to be updated
-    */
+     * Updates a particular model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id the ID of the model to be updated
+     */
     public function actionUpdate($id)
     {
-        $model=$this->loadModel($id);
+        $model = $this->loadModel($id);
 
         if (!$model->podeEditar()) {
             throw new CHttpException(409, 'Nota Fiscal não permite edição!');
@@ -279,22 +279,22 @@ class NotaFiscalController extends Controller
         $this->performAjaxValidation($model);
 
         if (isset($_POST['NotaFiscal'])) {
-            $model->attributes=$_POST['NotaFiscal'];
+            $model->attributes = $_POST['NotaFiscal'];
             if ($model->save()) {
-                $this->redirect(array('view','id'=>$model->codnotafiscal));
+                $this->redirect(array('view', 'id' => $model->codnotafiscal));
             }
         }
 
         $this->render('update', array(
-            'model'=>$model,
-            ));
+            'model' => $model,
+        ));
     }
 
     /**
-    * Deletes a particular model.
-    * If deletion is successful, the browser will be redirected to the 'admin' page.
-    * @param integer $id the ID of the model to be deleted
-    */
+     * Deletes a particular model.
+     * If deletion is successful, the browser will be redirected to the 'admin' page.
+     * @param integer $id the ID of the model to be deleted
+     */
     public function actionDelete($id)
     {
         if (Yii::app()->request->isPostRequest) {
@@ -347,70 +347,156 @@ class NotaFiscalController extends Controller
         }
     }
 
+    public function actionValorLiquido($id)
+    {
+        // we only allow deletion via POST request
+        if (!Yii::app()->request->isPostRequest) {
+            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+        }
+
+        $model = $this->loadModel($id);
+        if (!$model->emitida) {
+            throw new CHttpException(409, 'Nota Fiscal não é de nossa emissão!');
+        }
+
+        if (!$model->podeEditar()) {
+            throw new CHttpException(409, 'Nota Fiscal não permite edição!');
+        }
+
+        try {
+            $transaction = Yii::app()->db->beginTransaction();
+
+            $totalAntigo = $model->valortotal;
+            $total = 0;
+            foreach ($model->NotaFiscalProdutoBarras as $p) {
+                $p->valorunitario = round(
+                    (
+                        $p->valortotal
+                        + $p->valorfrete
+                        + $p->valorseguro
+                        - $p->valordesconto
+                        + $p->valoroutras
+                    ) / $p->quantidade,
+                    2
+                );
+
+                $p->valortotal = round($p->valorunitario * $p->quantidade, 2);
+                $p->valorfrete = null;
+                $p->valorseguro = null;
+                $p->valordesconto = null;
+                $p->valoroutras = null;
+                $p->recalculaTributacao();
+                $p->save();
+
+                $total += $p->valortotal;
+            }
+
+            if ($total != $totalAntigo) {
+                $dif = round($totalAntigo - $total, 2);
+                foreach ($model->NotaFiscalProdutoBarras as $p) {
+                    if (($dif * 100) % $p->quantidade) {
+                        continue;
+                    }
+                    $p->valorunitario = round(
+                        (
+                            $p->valortotal
+                            + $dif
+                        ) / $p->quantidade,
+                        2
+                    );
+                    $p->valortotal = round($p->valorunitario * $p->quantidade, 2);
+                    $p->valorfrete = null;
+                    $p->valorseguro = null;
+                    $p->valordesconto = null;
+                    $p->valoroutras = null;
+                    $p->recalculaTributacao();
+                    $p->save();
+                    $total += $dif;
+                    break;
+                }
+            }
+
+            $model->valorprodutos = $total;
+            $model->valortotal = $total;
+            $model->valorfrete = null;
+            $model->valorseguro = null;
+            $model->valordesconto = null;
+            $model->valoroutras = null;
+            $model->save();
+
+            $transaction->commit();
+            $this->redirect(array('view', 'id' => $model->codnotafiscal));
+        } catch (CDbException $e) {
+            $transaction->rollBack();
+            throw $e;
+        }
+    }
+
+
     /**
-    * Lists all models.
-    */
+     * Lists all models.
+     */
     public function actionIndex()
     {
-        $model=new NotaFiscal('search');
+        $model = new NotaFiscal('search');
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['NotaFiscal'])) {
             Yii::app()->session['FiltroNotaFiscalIndex'] = $_GET['NotaFiscal'];
         }
         if (!isset(Yii::app()->session['FiltroNotaFiscalIndex'])) {
-    			Yii::app()->session['FiltroNotaFiscalIndex'] = array(
-    				'saida_de' => date('d/m/y', strtotime('-7 days')),
-            'codfilial' => Yii::app()->user->codfilial,
-    			);
-    		}
+            Yii::app()->session['FiltroNotaFiscalIndex'] = array(
+                'saida_de' => date('d/m/y', strtotime('-7 days')),
+                'codfilial' => Yii::app()->user->codfilial,
+            );
+        }
         if (isset(Yii::app()->session['FiltroNotaFiscalIndex'])) {
-            $model->attributes=Yii::app()->session['FiltroNotaFiscalIndex'];
+            $model->attributes = Yii::app()->session['FiltroNotaFiscalIndex'];
         }
         $this->render('index', array(
-            'dataProvider'=>$model->search(),
-            'model'=>$model,
-            ));
+            'dataProvider' => $model->search(),
+            'model' => $model,
+        ));
     }
 
     /**
-    * Manages all models.
-    */
+     * Manages all models.
+     */
     public function actionAdmin()
     {
-        $model=new NotaFiscal('search');
+        $model = new NotaFiscal('search');
 
         $model->unsetAttributes();  // clear any default values
 
         if (isset($_GET['NotaFiscal'])) {
-            $model->attributes=$_GET['NotaFiscal'];
+            $model->attributes = $_GET['NotaFiscal'];
         }
 
         $this->render('admin', array(
-            'model'=>$model,
-            ));
+            'model' => $model,
+        ));
     }
 
     /**
-    * Returns the data model based on the primary key given in the GET variable.
-    * If the data model is not found, an HTTP exception will be raised.
-    * @param integer the ID of the model to be loaded
-    */
+     * Returns the data model based on the primary key given in the GET variable.
+     * If the data model is not found, an HTTP exception will be raised.
+     * @param integer the ID of the model to be loaded
+     */
     public function loadModel($id)
     {
-        $model=NotaFiscal::model()->findByPk($id);
-        if ($model===null) {
+        $model = NotaFiscal::model()->findByPk($id);
+        if ($model === null) {
             throw new CHttpException(404, 'The requested page does not exist.');
         }
         return $model;
     }
 
     /**
-    * Performs the AJAX validation.
-    * @param CModel the model to be validated
-    */
+     * Performs the AJAX validation.
+     * @param CModel the model to be validated
+     */
     protected function performAjaxValidation($model)
     {
-        if (isset($_POST['ajax']) && $_POST['ajax']==='nota-fiscal-form') {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'nota-fiscal-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
@@ -739,26 +825,26 @@ class NotaFiscalController extends Controller
     */
 
     public function validarFiltro()
-  	{
-  		if (isset(Yii::app()->session['FiltroNotaFiscalIndex'])) {
-  			foreach (Yii::app()->session['FiltroNotaFiscalIndex'] as $key => $val) {
-  				if (!empty($val)) {
-  					return;
-  				}
-  			}
-  		}
-  		die ('Faça pelo menos um filtro!');
-  	}
+    {
+        if (isset(Yii::app()->session['FiltroNotaFiscalIndex'])) {
+            foreach (Yii::app()->session['FiltroNotaFiscalIndex'] as $key => $val) {
+                if (!empty($val)) {
+                    return;
+                }
+            }
+        }
+        die('Faça pelo menos um filtro!');
+    }
 
     public function actionRelatorio()
     {
         // WORKAROUND: Cache Chrome salvando sempre o mesmo relatorio!
-    		// Ate mostrava em tela diferente, mas ao salvar, salvava a primeira versao emitida
-    		if (!isset($_GET['__pdfdate'])) {
-    				header('Location: ' . $_SERVER['REQUEST_URI'] . '&__pdfdate=' . date('c'));
-    		}
+        // Ate mostrava em tela diferente, mas ao salvar, salvava a primeira versao emitida
+        if (!isset($_GET['__pdfdate'])) {
+            header('Location: ' . $_SERVER['REQUEST_URI'] . '&__pdfdate=' . date('c'));
+        }
 
-        $model=new NotaFiscal('search');
+        $model = new NotaFiscal('search');
 
         $model->unsetAttributes();  // clear any default values
 
@@ -769,7 +855,7 @@ class NotaFiscalController extends Controller
         $this->validarFiltro();
 
         if (isset(Yii::app()->session['FiltroNotaFiscalIndex'])) {
-            $model->attributes=Yii::app()->session['FiltroNotaFiscalIndex'];
+            $model->attributes = Yii::app()->session['FiltroNotaFiscalIndex'];
         }
 
         $notasfiscais = $model->search(false);
