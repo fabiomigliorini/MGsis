@@ -52,14 +52,28 @@ $this->menu = array(
         });
     }
 
-    function selectAllGrupoCliente() {
+    function selectAllGrupoCliente(e) {
+        e.preventDefault();
         $("#Titulo_codgrupocliente > option[value!='']").prop("selected", true);
         $("#Titulo_codgrupocliente").trigger("change");
     }
 
-    function selectNoneGrupoCliente() {
+    function selectNoneGrupoCliente(e) {
+        e.preventDefault();
         $("#Titulo_codgrupocliente > option[value!='']").prop("selected", false);
         $("#Titulo_codgrupocliente").trigger("change");
+    }
+
+    function selectAllPortador(e) {
+        e.preventDefault();
+        $("#Titulo_codportador > option[value!='']").prop("selected", true);
+        $("#Titulo_codportador").trigger("change");
+    }
+
+    function selectNonePortador(e) {
+        e.preventDefault();
+        $("#Titulo_codportador > option[value!='']").prop("selected", false);
+        $("#Titulo_codportador").trigger("change");
     }
 
     $(document).ready(function() {
@@ -181,6 +195,9 @@ $this->menu = array(
             </div>
             <div class="row-fluid" style="padding-top: 4px">
                 <div class="span5">
+                    <?php echo $form->dropDownList($model, 'gerencial', array('' => '', 1 => 'Gerencial', 2 => 'Fiscal'), array('placeholder' => 'Gerencial', 'class' => 'span12')); ?>
+                </div>
+                <div class="span7">
                     <?php
                     echo $form->dropDownList(
                         $model,
@@ -189,20 +206,6 @@ $this->menu = array(
                         array(
                             'prompt' => '',
                             'placeholder' => 'Filial',
-                            'class' => 'span12'
-                        )
-                    );
-                    ?>
-                </div>
-                <div class="span7">
-                    <?php
-                    echo $form->dropDownList(
-                        $model,
-                        'codportador',
-                        Portador::getListaCombo(),
-                        array(
-                            'prompt' => '',
-                            'placeholder' => 'Portador',
                             'class' => 'span12'
                         )
                     );
@@ -217,28 +220,27 @@ $this->menu = array(
                     <?php
                     echo $form->dropDownList(
                         $model,
-                        'codtipotitulo',
-                        TipoTitulo::getListaCombo(),
-                        array('prompt' => '', 'placeholder' => 'Tipo', 'class' => 'span12')
-                    );
-                    ?>
-                </div>
-            </div>
-
-            <div class="row-fluid" style="padding-top: 4px">
-                <div class="span5">
-                    <?php echo $form->dropDownList($model, 'gerencial', array('' => '', 1 => 'Gerencial', 2 => 'Fiscal'), array('placeholder' => 'Gerencial', 'class' => 'span12')); ?>
-                </div>
-                <div class="span7">
-                    <?php
-                    echo $form->dropDownList(
-                        $model,
                         'codusuariocriacao',
                         Usuario::getListaCombo(),
                         array('prompt' => '', 'placeholder' => 'Usuário', 'class' => 'span12')
                     );
                     ?>
                 </div>
+
+            </div>
+
+            <div class="row-fluid" style="padding-top: 4px">
+                <div class="span12">
+                    <?php
+                    echo $form->dropDownList(
+                        $model,
+                        'codtipotitulo',
+                        TipoTitulo::getListaCombo(),
+                        array('prompt' => '', 'placeholder' => 'Tipo', 'class' => 'span12')
+                    );
+                    ?>
+                </div>
+
             </div>
 
         </div>
@@ -246,13 +248,41 @@ $this->menu = array(
         <!-- COLUNA 2 -->
         <div class="span5">
             <div class="row-fluid">
-                <?php echo $form->select2Pessoa($model, 'codpessoa', array('class' => 'span12', 'inativo' => true)); ?>
+                <div class="span7">
+                    <?php echo $form->select2Pessoa($model, 'codpessoa', array('class' => 'span12', 'inativo' => true)); ?>
+                </div>
+                <div class="span5">
+                    <?php echo $form->select2GrupoEconomico($model, 'codgrupoeconomico', array('class' => 'span12', 'inativo' => true)); ?>
+                </div>
+            </div>
+
+            <div class="row-fluid" style="padding-top: 4px">
+                <div class="span10">
+                    <?php
+                    $portadores = Portador::getListaCombo();
+                    $portadores[-1] = 'Sem Portador Informado';
+                    echo $form->dropDownList(
+                        $model,
+                        'codportador',
+                        $portadores,
+                        array(
+                            'prompt' => '',
+                            'placeholder' => 'Portador',
+                            'class' => 'span12',
+                            'multiple' => true
+                        )
+                    );
+                    ?>
+                </div>
+                <div class="span2">
+                    <div class="btn-group " style="width: 100%;">
+                        <button type="button" class="btn" style="width: 50%; height: 32px" onClick="selectAllPortador(event)"><i class="icon-list"></i></button>
+                        <button type="button" class="btn" style="width: 50%; height: 32px" onClick="selectNonePortador(event)"><i class="icon-remove"></i></button>
+                    </div>
+                </div>
             </div>
             <div class="row-fluid" style="padding-top: 4px">
-                <?php echo $form->select2GrupoEconomico($model, 'codgrupoeconomico', array('class' => 'span12', 'inativo' => true)); ?>
-            </div>
-            <div class="row-fluid" style="padding-top: 4px">
-                <div class="span8">
+                <div class="span10">
                     <?php
                     $gruposcliente = GrupoCliente::getListaCombo();
                     $gruposcliente[-1] = 'Sem Grupo Informado';
@@ -270,10 +300,10 @@ $this->menu = array(
                     ?>
                 </div>
                 <div class="span2">
-                    <input type="button" class="btn span12" onClick="selectAllGrupoCliente()" value="Todos" />
-                </div>
-                <div class="span2">
-                    <input type="button" class="btn span12" onClick="selectNoneGrupoCliente()" value="Nenhum" />
+                    <div class="btn-group " style="width: 100%;">
+                        <button type="button" class="btn" style="width: 50%; height: 32px" onClick="selectAllGrupoCliente(event)"><i class="icon-list"></i></button>
+                        <button type="button" class="btn" style="width: 50%; height: 32px" onClick="selectNoneGrupoCliente(event)"><i class="icon-remove"></i></button>
+                    </div>
                 </div>
             </div>
             <div class="row-fluid" style="padding-top: 6px">

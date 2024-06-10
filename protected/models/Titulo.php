@@ -478,7 +478,10 @@ class Titulo extends MGActiveRecord
             $criteria->params = array_merge($criteria->params, array(':nossonumero' => '%' . $texto . '%'));
         }
 
-        $criteria->compare('t.codportador', $this->codportador, false);
+        // $criteria->compare('t.codportador', $this->codportador, false);
+        if ($this->codportador) {
+            $criteria->addInCondition('coalesce(t.codportador, -1)', $this->codportador);
+        }
         $criteria->compare('t.codcontacontabil', $this->codcontacontabil, false);
         $criteria->compare('t.codtipotitulo', $this->codtipotitulo, false);
 
