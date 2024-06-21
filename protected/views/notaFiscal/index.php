@@ -67,8 +67,8 @@ $(document).ready(function(){
 
 ?>
 <div class="well well-small">
-	<?php echo $form->textField($model, 'codnotafiscal', array('placeholder' => '#', 'class'=>'input-mini')); ?>
-	<?php echo $form->textField($model, 'numero', array('placeholder' => 'Número', 'class'=>'input-mini')); ?>
+	<?php echo $form->numberField($model, 'codnotafiscal', array('placeholder' => '#', 'class'=>'input-small text-center', 'type'=>'number', 'min'=>1, 'step'=>1)); ?>
+	<?php echo $form->numberField($model, 'numero', array('placeholder' => 'Número', 'class'=>'input-small text-center', 'type'=>'number', 'min'=>0, 'step'=>1)); ?>
 	<?php echo $form->select2Pessoa($model, 'codpessoa', array('placeholder' => 'Pessoa', 'class'=>'input-xxlarge')); ?>
 	<?php echo $form->select2($model, 'codfilial', Filial::getListaCombo(), array('placeholder' => 'Filial', 'class'=>'input-medium')); ?>
 	<?php echo $form->select2($model, 'codnaturezaoperacao', NaturezaOperacao::getListaCombo(), array('placeholder' => 'Natureza de Operação', 'class'=>'input-large')); ?>
