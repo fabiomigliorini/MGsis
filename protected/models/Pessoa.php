@@ -251,7 +251,7 @@ class Pessoa extends MGActiveRecord
 		return array(
             'PessoaEnderecos' => array(self::HAS_MANY, 'PessoaEndereco', 'codpessoa'),
             'EnderecoFiscal' => array(self::HAS_MANY, 'PessoaEndereco', 'codpessoa', 'condition' => 'nfe = true', 'order' => 'ordem asc'),
-			'PessoaTelefones' => array(self::HAS_MANY, 'PessoaTelefone', 'codpessoa'),
+			'PessoaTelefones' => array(self::HAS_MANY, 'PessoaTelefone', 'codpessoa', 'order' => 'ordem asc'),
 			'PessoaEmails' => array(self::HAS_MANY, 'PessoaEmail', 'codpessoa'),
 			'Titulos' => array(self::HAS_MANY, 'Titulo', 'codpessoa'),
 			'RegistroSpcs' => array(self::HAS_MANY, 'RegistroSpc', 'codpessoa'),

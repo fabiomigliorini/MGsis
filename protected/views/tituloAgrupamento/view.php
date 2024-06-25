@@ -59,6 +59,20 @@ foreach ($model->Pessoa->PessoaEmails as $pe) {
 }
 $email = implode(',', $emails);
 
+function mensagem($pais, $ddd, $telefone, $email)
+{
+    $texto = urlencode("Olá!
+
+Aqui é do departamento de Cobrança da MG Papelaria!
+
+Acabamos de enviar os documentos do fechamento de(s) sua(s) compra(s) no endereço de e-mail abaixo:
+
+{$email}
+
+Por favor, poderia confirmar se você recebeu?");
+    return "https://wa.me/{$pais}{$ddd}{$telefone}?text={$texto}";
+}
+
 
 ?>
 <script type="text/javascript">
@@ -251,27 +265,57 @@ $email = implode(',', $emails);
     </div>
 <?php endif; ?>
 
+<div class="row-fluid">
+    <div class="span4">
+        <?php
+        $this->widget('bootstrap.widgets.TbDetailView', array(
+            'data' => $model,
+            'attributes' => array(
+                array(
+                    'label' => 'Pessoa',
+                    'value' => CHtml::link(CHtml::encode($model->Pessoa->fantasia), array('pessoa/view', 'id' => $model->codpessoa)),
+                    'type' => 'raw'
+                ),
+                'emissao',
+                array(
+                    'label' => 'Total',
+                    'value' => Yii::app()->format->formatNumber($model->valor) . " " . $model->operacao,
+                ),
+                'observacao',
+            ),
+        ));
+        $this->widget('UsuarioCriacao', array('model' => $model));
+        ?>
+    </div>
+    <div class="span4">
+        <table class="detail-view table table-striped table-condensed" id="yw0">
+            <?php foreach ($model->Pessoa->PessoaTelefones as $tel) : ?>
+                <tr class="odd">
+                    <th>
+                        <?php echo ($tel->tipo == 1) ? "Fixo" : "Celular" ?>
+                    </th>
+                    <td>
+                        <a href="<?php echo mensagem($tel->pais, $tel->ddd, $tel->telefone, $email); ?>" target="WhatsApp">
+                            +<?php echo $tel->pais ?>
+                            (<?php echo $tel->ddd ?>)
+                            <?php echo $tel->telefone ?>
+                            <!-- <img src="https://logodownload.org/wp-content/uploads/2015/04/whatsapp-logo-png.png" style="max-height: 15px" /> -->
+                            <?php echo $tel->apelido ?>
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+        <small class="muted">
+            Clique em um número de telefone acima para enviar a mensagem de confirmação de recebimento dos documentos por email.
+        </small>
+    </div>
+
+</div>
+
+
+
 <?php
-
-$this->widget('bootstrap.widgets.TbDetailView', array(
-    'data' => $model,
-    'attributes' => array(
-        array(
-            'label' => 'Pessoa',
-            'value' => CHtml::link(CHtml::encode($model->Pessoa->fantasia), array('pessoa/view', 'id' => $model->codpessoa)),
-            'type' => 'raw'
-        ),
-        'emissao',
-        array(
-            'label' => 'Total',
-            'value' => Yii::app()->format->formatNumber($model->valor) . " " . $model->operacao,
-        ),
-        'observacao',
-    ),
-));
-
-$this->widget('UsuarioCriacao', array('model' => $model));
-
 
 $command = Yii::app()->db->createCommand('
 	SELECT distinct nfpb.codnotafiscal
