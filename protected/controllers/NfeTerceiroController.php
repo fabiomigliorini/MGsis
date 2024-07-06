@@ -491,7 +491,7 @@ class NfeTerceiroController extends Controller
         }
 
         // Cria diretorio pra salvar o PDF
-        $arquivo = "/opt/www/GuiaST/" . DateTime::createFromFormat('d/m/Y H:i:s', $model->emissao)->format("Y/m") . "/";
+        $arquivo = "/opt/www/Arquivos/GuiaST/" . DateTime::createFromFormat('d/m/Y H:i:s', $model->emissao)->format("Y/m") . "/";
         if (!file_exists($arquivo)) {
             mkdir($arquivo, 0755, true);
         }
@@ -552,7 +552,7 @@ class NfeTerceiroController extends Controller
         if ($tituloNfeTerceiro === null) {
             throw new CHttpException(404, 'The requested page does not exist.');
         }
-        $arquivo = "/opt/www/GuiaST/" . DateTime::createFromFormat('d/m/Y H:i:s', $tituloNfeTerceiro->NfeTerceiro->emissao)->format("Y/m") . "/";
+        $arquivo = "/opt/www/Arquivos/GuiaST/" . DateTime::createFromFormat('d/m/Y H:i:s', $tituloNfeTerceiro->NfeTerceiro->emissao)->format("Y/m") . "/";
         $arquivo .= "{$tituloNfeTerceiro->NfeTerceiro->nfechave}-{$tituloNfeTerceiro->codtitulo}.pdf";
         if (!file_exists($arquivo)) {
             throw new CHttpException(404, 'The requested page does not exist.');
