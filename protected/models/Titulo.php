@@ -77,6 +77,7 @@ class Titulo extends MGActiveRecord
     public $operacao;
     public $valor;
     public $gerado_automaticamente;
+    public $ordem;
 
     /**
      * @return string the associated database table name
@@ -114,7 +115,7 @@ class Titulo extends MGActiveRecord
             // @todo Please remove those attributes that should not be searched.
             //array('sistema','datetime'),
             array('sistema', 'date', 'format' => strtr(Yii::app()->locale->getDateTimeFormat(), array("{0}" => Yii::app()->locale->getTimeFormat('medium'), "{1}" => Yii::app()->locale->getDateFormat('medium')))),
-            array('codtitulo, vencimento_de, vencimento_ate, emissao_de, emissao_ate, criacao_de, criacao_ate, codtipotitulo, codfilial, codportador, codpessoa, codcontacontabil, numero, emissao, vencimento, credito, gerencial, boleto, nossonumero, saldo, criacao, codusuariocriacao, debito_de, debito_ate, credito_de, credito_ate, saldo_de, saldo_ate, codgrupocliente, codgrupoeconomico, pagarreceber, status', 'safe', 'on' => 'search'),
+            array('codtitulo, vencimento_de, vencimento_ate, emissao_de, emissao_ate, criacao_de, criacao_ate, codtipotitulo, codfilial, codportador, codpessoa, codcontacontabil, numero, emissao, vencimento, credito, gerencial, boleto, nossonumero, saldo, criacao, codusuariocriacao, debito_de, debito_ate, credito_de, credito_ate, saldo_de, saldo_ate, codgrupocliente, codgrupoeconomico, pagarreceber, status, ordem', 'safe', 'on' => 'search'),
         );
     }
 
@@ -518,7 +519,21 @@ class Titulo extends MGActiveRecord
 
         $criteria->select = 't.codtitulo, t.vencimento, t.emissao, t.codfilial, t.numero, t.fatura, t.codportador, t.credito, t.debito, t.saldo, t.codtipotitulo, t.codcontacontabil, t.codusuariocriacao, t.nossonumero, t.gerencial, t.codpessoa, t.codusuarioalteracao, t.estornado, t.boleto, t.observacao';
 
-        $criteria->order = $order;
+        switch ($this->ordem) {
+            case 'AE': // 'Alfabética, Emissão'
+                $criteria->order = '"Pessoa".fantasia ASC, t.emissao ASC, t.fatura, t.numero, t.saldo ASC';
+                break;
+            case 'CV': // 'Código da Pessoa, Vencimento',
+                $criteria->order = '"Pessoa".codpessoa ASC, t.vencimento ASC, t.saldo ASC';
+                break;
+            case 'CE': // 'Código da Pessoa, Emissão',
+                $criteria->order = '"Pessoa".codpessoa ASC, t.emissao ASC, t.fatura, t.numero, t.saldo ASC';
+                break;
+            case 'AV': // 'Alfabética, Vencimento'
+            default:
+                $criteria->order = '"Pessoa".fantasia ASC, t.vencimento ASC, t.saldo ASC';
+                break;
+        }
 
         if (!empty($limit)) {
             $criteria->limit = $limit;

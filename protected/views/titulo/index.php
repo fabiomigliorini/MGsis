@@ -97,6 +97,9 @@ $this->menu = array(
         $("#Titulo_status").select2({
             allowClear: true
         });
+        $("#Titulo_ordem").select2({
+            allowClear: true
+        });
         $("#Titulo_codportador").select2({
             allowClear: true
         });
@@ -328,6 +331,25 @@ $this->menu = array(
                     ),
                     array(
                         'placeholder' => 'Saldo',
+                        'class' => 'span12'
+                    )
+                );
+                ?>
+            </div>
+            <div class="row-fluid" style="padding-top: 4px">
+                <?php
+                echo $form->dropDownList(
+                    $model,
+                    'ordem',
+                    array(
+                        '' => '',
+                        'AV' => 'Alfabética, Vencimento',
+                        'AE' => 'Alfabética, Emissão',
+                        'CV' => 'Código da Pessoa, Vencimento',
+                        'CE' => 'Código da Pessoa, Emissão',
+                    ),
+                    array(
+                        'placeholder' => 'Ordem',
                         'class' => 'span12'
                     )
                 );
