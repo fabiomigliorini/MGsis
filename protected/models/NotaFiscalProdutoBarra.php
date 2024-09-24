@@ -20,6 +20,7 @@
  * @property string $ipipercentual
  * @property string $ipivalor
  * @property string $ipidevolucaovalor
+ * @property string $devolucaopercentual
  * @property string $icmsstbase
  * @property string $icmsstpercentual
  * @property string $icmsstvalor
@@ -97,7 +98,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
         return array(
             array('codnotafiscal, codprodutobarra, codcfop, quantidade, valorunitario, valortotal', 'required'),
             array('descricaoalternativa', 'length', 'max' => 100),
-            array('quantidade, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, ipidevolucaovalor, icmsstbase, icmsstpercentual, icmsstvalor, pisbase, pisvalor, cofinsbase, cofinsvalor, csllbase, csllvalor, irpjbase, irpjvalor', 'length', 'max' => 14),
+            array('quantidade, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, ipidevolucaovalor, devolucaopercentual, icmsstbase, icmsstpercentual, icmsstvalor, pisbase, pisvalor, cofinsbase, cofinsvalor, csllbase, csllvalor, irpjbase, irpjvalor', 'length', 'max' => 14),
             array('icmsbasepercentual', 'length', 'max' => 6),
             array('valorunitario, valordesconto, valorfrete, valorseguro, valoroutras', 'length', 'max' => 23),
             array('csosn', 'length', 'max' => 4),
@@ -106,6 +107,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
             array('csosn', 'validaCsosn'),
             array('observacoes', 'length', 'max' => 1500),
             array('icmscst, ipicst, piscst, cofinscst', 'validaCst'),
+            array('devolucaopercentual', 'validaDevolucao'),
             array('pispercentual, cofinspercentual, csllpercentual, irpjpercentual', 'length', 'max' => 5),
             array('icmscst, ipicst, piscst, cofinscst', 'length', 'max' => 3),
             array('codnegocioprodutobarra, alteracao, codusuarioalteracao, criacao,
@@ -113,7 +115,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
             funruralpercentual, funruralvalor, senarpercentual, senarvalor', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('codnaturezaoperacao, saida_de, saida_ate, codpessoa, codfilial, codproduto, codnotafiscalprodutobarra, codnotafiscal, codprodutobarra, codcfop, descricaoalternativa, quantidade, valorunitario, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, ipidevolucaovalor, icmsstbase, icmsstpercentual, icmsstvalor, csosn, codnegocioprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao, icmscst, ipicst, piscst, cofinscst, pispercentual, cofinspercentual, csllpercentual, irpjpercentual, pisbase, pisvalor, cofinsbase, cofinsvalor, csllbase, csllvalor, irpjbase, irpjvalor, observacoes', 'safe', 'on' => 'search'),
+            array('codnaturezaoperacao, saida_de, saida_ate, codpessoa, codfilial, codproduto, codnotafiscalprodutobarra, codnotafiscal, codprodutobarra, codcfop, descricaoalternativa, quantidade, valorunitario, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, ipidevolucaovalor, devolucaopercentual, icmsstbase, icmsstpercentual, icmsstvalor, csosn, codnegocioprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao, icmscst, ipicst, piscst, cofinscst, pispercentual, cofinspercentual, csllpercentual, irpjpercentual, pisbase, pisvalor, cofinsbase, cofinsvalor, csllbase, csllvalor, irpjbase, irpjvalor, observacoes', 'safe', 'on' => 'search'),
         );
     }
 
@@ -138,6 +140,19 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 
         if ($this->NotaFiscal->Filial->crt != Filial::CRT_REGIME_NORMAL && strlen($this->$attribute) != 0) {
             $this->addError($attribute, 'CST não deve ser preenchido!');
+        }
+    }
+
+    //verifica se o numero tem pelo menos 10 digitos
+    public function validaDevolucao($attribute, $params)
+    {
+        if ($this->ipidevolucaovalor > 0) {
+            if ($this->devolucaopercentual <= 0) {
+                $this->addError($attribute, 'Percentual de Devolucao deve ser preenchido!');
+            }
+        }
+        if ($this->devolucaopercentual > 100) {
+            $this->addError($attribute, 'Percentual de Devolucao não pode ser maior que 100%!');
         }
     }
 
@@ -204,7 +219,9 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
             'ipibase' => 'IPI Base',
             'ipipercentual' => 'IPI %',
             'ipivalor' => 'IPI Valor',
+
             'ipidevolucaovalor' => 'IPI Devol Valor',
+            'devolucaopercentual' => '% Devol',
 
             'piscst' => 'PIS CST',
             'pisbase' => 'PIS Base',
@@ -278,6 +295,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
         $criteria->compare('ipipercentual', $this->ipipercentual, false);
         $criteria->compare('ipivalor', $this->ipivalor, false);
         $criteria->compare('ipidevolucaovalor', $this->ipidevolucaovalor, false);
+        $criteria->compare('devolucaopercentual', $this->devolucaopercentual, false);
         $criteria->compare('icmsstbase', $this->icmsstbase, false);
         $criteria->compare('icmsstpercentual', $this->icmsstpercentual, false);
         $criteria->compare('icmsstvalor', $this->icmsstvalor, false);

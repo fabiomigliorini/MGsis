@@ -89,11 +89,16 @@
 					</div>
 					<div class="span3">
 						<?php
-							echo $form->textFieldRow($model,'ipidevolucaovalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
 							echo $form->textFieldRow($model,'ipibase',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
 							echo $form->textFieldRow($model,'ipipercentual',array('class'=>'input-small text-right','maxlength'=>14, 'append' => '%'));
 							echo $form->textFieldRow($model,'ipivalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
 							echo $form->textFieldRow($model,'ipicst',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+						?>
+					</div>
+					<div class="span3">
+						<?php
+							echo $form->textFieldRow($model,'ipidevolucaovalor',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
+							echo $form->textFieldRow($model,'devolucaopercentual',array('class'=>'input-small text-right','maxlength'=>14, 'prepend' => 'R$'));
 						?>
 					</div>
 				</div>
@@ -433,6 +438,7 @@ $(document).ready(function() {
 	$('#NotaFiscalProdutoBarra_ipipercentual').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#NotaFiscalProdutoBarra_ipivalor').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#NotaFiscalProdutoBarra_ipidevolucaovalor').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
+	$('#NotaFiscalProdutoBarra_devolucaopercentual').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 
 	$('#NotaFiscalProdutoBarra_pisbase').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#NotaFiscalProdutoBarra_pispercentual').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
