@@ -46,6 +46,7 @@
  * @property string $icmsstvalor
  * @property string $ipibase
  * @property string $ipivalor
+ * @property string $ipidevolucaovalor
  * @property string $modelo
  *
  * The followings are the available model relations:
@@ -135,14 +136,14 @@ class NotaFiscal extends MGActiveRecord
             array('frete', 'validaFrete'),
             array('codestadoplaca', 'validaCodEstadoPlaca'),
             array('observacoes', 'length', 'max' => 1500),
-            array('pesoliquido, pesobruto, valorfrete, valorseguro, valordesconto, valoroutras, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipivalor', 'length', 'max' => 14),
+            array('pesoliquido, pesobruto, valorfrete, valorseguro, valordesconto, valoroutras, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipidevolucaovalor, ipivalor', 'length', 'max' => 14),
             array('justificativa', 'length', 'max' => 200),
             array('volumesespecie, volumesmarca, volumesnumero', 'length', 'max' => 60),
             array('emitida, nfeimpressa, codoperacao, nfedataenvio, nfedataautorizacao, nfedatacancelamento, nfedatainutilizacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
             array('cpf', 'ext.validators.CnpjCpfValidator'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('codnotafiscal, codnaturezaoperacao, emitida, nfechave, tpemis, nfeimpressa, serie, numero, emissao, modelo, saida, codfilial, codestoquelocal, codpessoa, observacoes, volumes, frete, codoperacao, nfereciboenvio, nfedataenvio, nfeautorizacao, nfedataautorizacao, valorfrete, valorseguro, valordesconto, valoroutras, nfecancelamento, nfedatacancelamento, nfeinutilizacao, nfedatainutilizacao, justificativa, alteracao, codusuarioalteracao, criacao, codusuariocriacao, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipivalor, codstatus, emissao_de, emissao_ate, saida_de, saida_ate', 'safe', 'on' => 'search'),
+            array('codnotafiscal, codnaturezaoperacao, emitida, nfechave, tpemis, nfeimpressa, serie, numero, emissao, modelo, saida, codfilial, codestoquelocal, codpessoa, observacoes, volumes, frete, codoperacao, nfereciboenvio, nfedataenvio, nfeautorizacao, nfedataautorizacao, valorfrete, valorseguro, valordesconto, valoroutras, nfecancelamento, nfedatacancelamento, nfeinutilizacao, nfedatainutilizacao, justificativa, alteracao, codusuarioalteracao, criacao, codusuariocriacao, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipidevolucaovalor, ipivalor, codstatus, emissao_de, emissao_ate, saida_de, saida_ate', 'safe', 'on' => 'search'),
         );
     }
 
@@ -556,6 +557,7 @@ class NotaFiscal extends MGActiveRecord
             'icmsstvalor' => 'ICMS ST Valor',
             'ipibase' => 'IPI Base',
             'ipivalor' => 'IPI Valor',
+            'ipidevolucaovalor' => 'IPI Devol Valor',
             'modelo' => 'Modelo NFE',
             'placa' => 'Placa',
             'codestadoplaca' => 'Estado',
@@ -624,6 +626,7 @@ class NotaFiscal extends MGActiveRecord
         $criteria->compare('icmsstvalor', $this->icmsstvalor, false);
         $criteria->compare('ipibase', $this->ipibase, false);
         $criteria->compare('ipivalor', $this->ipivalor, false);
+        $criteria->compare('ipidevolucaovalor', $this->ipidevolucaovalor, false);
 
         if ($emissao_de = DateTime::createFromFormat("d/m/y", $this->emissao_de)) {
             $criteria->addCondition('t.emissao >= :emissao_de');
@@ -860,6 +863,7 @@ class NotaFiscal extends MGActiveRecord
                 $nfpb->ipibase = null;
                 $nfpb->ipipercentual = null;
                 $nfpb->ipivalor = null;
+                $nfpb->ipidevolucaovalor = null;
 
                 $nfpb->icmsstbase = null;
                 $nfpb->icmsstpercentual = null;

@@ -1,4 +1,4 @@
-<?php 
+<?php
 $css_label = "";
 $staus = "&nbsp";
 $css = "";
@@ -30,19 +30,19 @@ switch ($data->codstatus)
 		$css_label = "label-important";
 		$staus = "I";
 		break;
-	
+
 	case NotaFiscal::CODSTATUS_CANCELADA;
 		$css = "alert-danger";
 		$css_label = "label-important";
 		$staus = "C";
 		break;
-	
+
 }
 
 $modelo = NotaFiscal::getModeloListaCombo();
 if (isset($modelo[$data->modelo]))
 	$modelo = $modelo[$data->modelo];
-else 
+else
 	$modelo = $data->modelo;
 
 
@@ -58,7 +58,7 @@ else
 			</b>
 			<b class="span6">
 				<?php echo CHtml::link(CHtml::encode(Yii::app()->format->formataNumeroNota($data->emitida, $data->serie, $data->numero, $data->modelo)),array('view','id'=>$data->codnotafiscal)); ?>
-				
+
 				<small class="label <?php echo $css_label; ?> pull-right">
 					<?php echo $staus; ?>
 				</small>
@@ -68,24 +68,26 @@ else
 			<b>
 				<?php echo CHtml::link(CHtml::encode($data->Pessoa->fantasia),array('pessoa/view','id'=>$data->codpessoa)); ?>
 			</b>
-			<small class="muted pull-right">
-				<?php echo CHtml::encode($data->Pessoa->Cidade->cidade); ?> -
-				<?php echo CHtml::encode($data->Pessoa->Cidade->Estado->sigla); ?>
-			</small>
+            <?php if ($data->Pessoa->codcidade): ?>
+                <small class="muted pull-right">
+                    <?php echo CHtml::encode($data->Pessoa->Cidade->cidade); ?> -
+                    <?php echo CHtml::encode($data->Pessoa->Cidade->Estado->sigla); ?>
+                </small>
+            <?php endif; ?>
 		</div>
 		<b class="span1 text-right">
 			<?php echo CHtml::encode(Yii::app()->format->formatNumber($data->valortotal)); ?>
 		</b>
 		<div class="span2">
 			<small class="muted span6 text-center">
-				<?php echo CHtml::encode($data->emissao); ?> 
+				<?php echo CHtml::encode($data->emissao); ?>
 			</small>
 			<b class="span6 text-center">
 				<?php echo CHtml::encode(substr($data->saida, 0, 10)); ?>
 			</b>
 		</div>
 		<small class="span2">
-			<?php echo CHtml::encode($data->NaturezaOperacao->naturezaoperacao); ?> 		
+			<?php echo CHtml::encode($data->NaturezaOperacao->naturezaoperacao); ?>
 		</small>
 
 			<?php /*
@@ -97,7 +99,7 @@ else
 			<small class="span2 muted"><?php echo CHtml::encode($data->serie); ?></small>
 
 			<small class="span2 muted"><?php echo CHtml::encode($data->numero); ?></small>
-			 * 
+			 *
 			<small class="span2 muted"><?php echo CHtml::encode($data->emissao); ?></small>
 
 			<small class="span2 muted"><?php echo CHtml::encode($data->saida); ?></small>

@@ -497,6 +497,10 @@ Yii::app()->clientScript->registerCoreScript('yii');
                     'name' => 'ipivalor',
                     'value' => Yii::app()->format->formatNumber($model->ipivalor),
                 ),
+                array(
+                    'name' => 'ipidevolucaovalor',
+                    'value' => Yii::app()->format->formatNumber($model->ipidevolucaovalor),
+                ),
             ),
         ));
         ?>
@@ -654,7 +658,10 @@ Yii::app()->clientScript->registerCoreScript('yii');
                         </td>
                         <td>
                             <small class='muted'>
-                                <div class="text-right"><?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->ipivalor)); ?></div>
+                                <div class="text-right">
+                                    <?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->ipivalor)); ?>
+                                    <?php echo CHtml::encode(Yii::app()->format->formatNumber($prod->ipidevolucaovalor)); ?>
+                                </div>
                             </small>
                         </td>
                         <td>

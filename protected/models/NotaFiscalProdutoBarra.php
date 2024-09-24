@@ -19,6 +19,7 @@
  * @property string $ipibase
  * @property string $ipipercentual
  * @property string $ipivalor
+ * @property string $ipidevolucaovalor
  * @property string $icmsstbase
  * @property string $icmsstpercentual
  * @property string $icmsstvalor
@@ -96,7 +97,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
         return array(
             array('codnotafiscal, codprodutobarra, codcfop, quantidade, valorunitario, valortotal', 'required'),
             array('descricaoalternativa', 'length', 'max' => 100),
-            array('quantidade, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, icmsstbase, icmsstpercentual, icmsstvalor, pisbase, pisvalor, cofinsbase, cofinsvalor, csllbase, csllvalor, irpjbase, irpjvalor', 'length', 'max' => 14),
+            array('quantidade, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, ipidevolucaovalor, icmsstbase, icmsstpercentual, icmsstvalor, pisbase, pisvalor, cofinsbase, cofinsvalor, csllbase, csllvalor, irpjbase, irpjvalor', 'length', 'max' => 14),
             array('icmsbasepercentual', 'length', 'max' => 6),
             array('valorunitario, valordesconto, valorfrete, valorseguro, valoroutras', 'length', 'max' => 23),
             array('csosn', 'length', 'max' => 4),
@@ -112,7 +113,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
             funruralpercentual, funruralvalor, senarpercentual, senarvalor', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('codnaturezaoperacao, saida_de, saida_ate, codpessoa, codfilial, codproduto, codnotafiscalprodutobarra, codnotafiscal, codprodutobarra, codcfop, descricaoalternativa, quantidade, valorunitario, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, icmsstbase, icmsstpercentual, icmsstvalor, csosn, codnegocioprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao, icmscst, ipicst, piscst, cofinscst, pispercentual, cofinspercentual, csllpercentual, irpjpercentual, pisbase, pisvalor, cofinsbase, cofinsvalor, csllbase, csllvalor, irpjbase, irpjvalor, observacoes', 'safe', 'on' => 'search'),
+            array('codnaturezaoperacao, saida_de, saida_ate, codpessoa, codfilial, codproduto, codnotafiscalprodutobarra, codnotafiscal, codprodutobarra, codcfop, descricaoalternativa, quantidade, valorunitario, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, ipidevolucaovalor, icmsstbase, icmsstpercentual, icmsstvalor, csosn, codnegocioprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao, icmscst, ipicst, piscst, cofinscst, pispercentual, cofinspercentual, csllpercentual, irpjpercentual, pisbase, pisvalor, cofinsbase, cofinsvalor, csllbase, csllvalor, irpjbase, irpjvalor, observacoes', 'safe', 'on' => 'search'),
         );
     }
 
@@ -203,6 +204,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
             'ipibase' => 'IPI Base',
             'ipipercentual' => 'IPI %',
             'ipivalor' => 'IPI Valor',
+            'ipidevolucaovalor' => 'IPI Devol Valor',
 
             'piscst' => 'PIS CST',
             'pisbase' => 'PIS Base',
@@ -275,6 +277,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
         $criteria->compare('ipibase', $this->ipibase, false);
         $criteria->compare('ipipercentual', $this->ipipercentual, false);
         $criteria->compare('ipivalor', $this->ipivalor, false);
+        $criteria->compare('ipidevolucaovalor', $this->ipidevolucaovalor, false);
         $criteria->compare('icmsstbase', $this->icmsstbase, false);
         $criteria->compare('icmsstpercentual', $this->icmsstpercentual, false);
         $criteria->compare('icmsstvalor', $this->icmsstvalor, false);
