@@ -81,8 +81,7 @@ Yii::app()->clientScript->registerCoreScript('yii');
                 if (result)
                     jQuery.yii.submitForm(
                         document.body.childNodes[0],
-                        "<?php echo Yii::app()->createUrl('notaFiscal/valorLiquido', array('id' => $model->codnotafiscal)) ?>",
-                        {}
+                        "<?php echo Yii::app()->createUrl('notaFiscal/valorLiquido', array('id' => $model->codnotafiscal)) ?>", {}
                     );
             });
         });
@@ -798,6 +797,96 @@ Yii::app()->clientScript->registerCoreScript('yii');
         </table>
     </div>
 </div>
+<br>
+<h2>
+    Pagamentos
+    <small>
+        <?php echo CHtml::link("<i class=\"icon-plus\"></i> Novo", array("notaFiscalPagamento/create", "codnotafiscal" => $model->codnotafiscal)); ?>
+    </small>
+</h2>
+<?php
+$total = 0;
+$ultima = 0;
+foreach ($model->NotaFiscalPagamentos as $nfp) {
+
+?>
+    <div class="row-fluid">
+        <small class="span4 text-center">
+
+            <div class="row-fluid">
+                <div class="span4 text-center">
+
+                    <!-- VISTA -->
+                    <?php if ($nfp->avista): ?>
+                        À Vista
+                    <?php else: ?>
+                        À Prazo
+                    <?php endif; ?>
+                    <br>
+
+                    <!-- INTEGRADO -->
+                    <?php if ($nfp->integracao): ?>
+                        Integrado
+                    <?php else: ?>
+                        Manual
+                    <?php endif; ?>
+
+                </div>
+
+                <div class="span4 text-center">
+
+                    <!-- TIPO/BANDEIRA -->
+                    <?php echo CHtml::encode(NotaFiscalPagamento::TIPO[$nfp->tipo]); ?>
+                    <?php if ($nfp->bandeira): ?>
+                        <?php echo CHtml::encode(NotaFiscalPagamento::BANDEIRA[$nfp->bandeira]); ?>
+                    <?php endif; ?>
+
+                    <!-- PESSOA INTEGRADOR -->
+                    <?php if ($nfp->codpessoa): ?>
+                        <br>
+                        <?php echo CHtml::encode($nfp->Pessoa->fantasia); ?>
+                    <?php endif; ?>
+
+
+                    <!-- AUTORIZACAO -->
+                    <?php if ($nfp->autorizacao): ?>
+                        <br>
+                        Autorização
+                        <?php echo CHtml::encode($nfp->autorizacao); ?>
+                    <?php endif; ?>
+
+                </div>
+
+                <div class="span2 text-center">
+
+                    <!-- VALOR -->
+                    <b>
+                        <?php echo CHtml::encode(Yii::app()->format->formatNumber($nfp->valorpagamento)); ?>
+                    </b>
+
+                    <!--  TROCO -->
+                    <?php if ($nfp->troco): ?>
+                        <br>
+                        Troco
+                        <?php echo CHtml::encode(Yii::app()->format->formatNumber($nfp->troco)); ?>
+                    <?php endif; ?>
+
+                </div>
+
+                <div class="span2">
+                    <!-- BOTOES DE ACAO -->
+                    <a href="<?php echo Yii::app()->createUrl('notaFiscalPagamento/update', array('id' => $nfp->codnotafiscalpagamento)); ?>"><i class="icon-pencil"></i></a>
+                    <a class="delete" href="<?php echo Yii::app()->createUrl('notaFiscalPagamento/delete', array('id' => $nfp->codnotafiscalpagamento)); ?>"><i class="icon-trash"></i></a>
+                </div>
+
+            </div>
+            <br>
+
+        </small>
+    </div>
+<?php
+}
+?>
 <br>
 <h2>
     Duplicatas

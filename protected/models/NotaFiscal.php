@@ -498,6 +498,7 @@ class NotaFiscal extends MGActiveRecord
             'NotaFiscalCartaCorrecaos' => array(self::HAS_MANY, 'NotaFiscalCartaCorrecao', 'codnotafiscal', 'order' => 'sequencia DESC'),
             'NotaFiscalDuplicatass' => array(self::HAS_MANY, 'NotaFiscalDuplicatas', 'codnotafiscal', 'order' => 'vencimento ASC, valor ASC, codnotafiscalduplicatas ASC'),
             'NotaFiscalReferenciadas' => array(self::HAS_MANY, 'NotaFiscalReferenciada', 'codnotafiscal'),
+			'NotaFiscalPagamentos' => array(self::HAS_MANY, 'NotaFiscalPagamento', 'codnotafiscal', 'order' => 'codnotafiscalpagamento ASC'),
             'EstadoPlaca' => array(self::BELONGS_TO, 'Estado', 'codestadoplaca'),
             'MdfeNfes' => array(self::HAS_MANY, 'MdfeNfe', 'codnotafiscal'),
         );

@@ -29,10 +29,10 @@ class NotaFiscalReferenciadaController extends Controller
 		$model=new NotaFiscalReferenciada;
 
 		$model->codnotafiscal = $codnotafiscal;
-		
+
 		if (!$model->NotaFiscal->podeEditar())
 			throw new CHttpException(409, 'Nota Fiscal não permite edição!');
-		
+
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
 
@@ -59,7 +59,7 @@ class NotaFiscalReferenciadaController extends Controller
 
 		if (!$model->NotaFiscal->podeEditar())
 			throw new CHttpException(409, 'Nota Fiscal não permite edição!');
-		
+
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
 
@@ -72,7 +72,7 @@ class NotaFiscalReferenciadaController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
-			));
+        ));
 	}
 
 	/**
@@ -117,15 +117,15 @@ class NotaFiscalReferenciadaController extends Controller
 	public function actionIndex()
 	{
 		$model=new NotaFiscalReferenciada('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['NotaFiscalReferenciada']))
 			Yii::app()->session['FiltroNotaFiscalReferenciadaIndex'] = $_GET['NotaFiscalReferenciada'];
-		
+
 		if (isset(Yii::app()->session['FiltroNotaFiscalReferenciadaIndex']))
 			$model->attributes=Yii::app()->session['FiltroNotaFiscalReferenciadaIndex'];
-		
+
 		$this->render('index',array(
 			'dataProvider'=>$model->search(),
 			'model'=>$model,
@@ -137,11 +137,11 @@ class NotaFiscalReferenciadaController extends Controller
 	*/
 	public function actionAdmin()
 	{
-	
+
 		$model=new NotaFiscalReferenciada('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['NotaFiscalReferenciada']))
 			$model->attributes=$_GET['NotaFiscalReferenciada'];
 
