@@ -153,6 +153,12 @@ Yii::app()->clientScript->registerCoreScript('yii');
     <div class="span4">
         <?php
         $pessoa = CHtml::link(CHtml::encode($model->Pessoa->fantasia), array("pessoa/view", "id" => $model->codpessoa));
+        if (!empty($model->Pessoa->cnpj)) {
+            $pessoa .= '<br /><small>' . Yii::app()->format->formataCnpjCpf($model->Pessoa->cnpj, $model->Pessoa->fisica) . '</small>';
+        }
+        if (!empty($model->Pessoa->ie) && $model->Pessoa->codcidade) {
+            $pessoa .= '<br /><small>' . Yii::app()->format->formataInscricaoEstadual($model->Pessoa->ie, $model->Pessoa->Cidade->Estado->sigla) . '</small>';
+        }
         if (!empty($model->cpf)) {
             $pessoa .= '<br /><small>' . Yii::app()->format->formataCnpjCpf($model->cpf, true) . '</small>';
         }
