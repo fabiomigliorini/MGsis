@@ -295,4 +295,9 @@ class MGFormatter extends CFormatter
 		return $dias[date('w', strtotime($data))] . ', ' . date('d', strtotime($data)) . ' de ' . $meses[$mes] . ' de ' . date('Y', strtotime($data));
 	}
 
+	function formataData ($data = false, $formato = 'd/m/Y')
+	{
+        return date($formato, strtotime($data));
+	}
+
 }

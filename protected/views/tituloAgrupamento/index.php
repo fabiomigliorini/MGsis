@@ -6,6 +6,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
+	array('label'=>'Fechamentos Pendentes', 'icon'=>'icon-list', 'url'=>array('pendente')),
 	//array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 	);
 ?>
@@ -34,7 +35,7 @@ $(document).ready(function(){
 	'id' => 'search-form',
 	'type' => 'inline',
 	'method'=>'get',
-)); 
+));
 
 ?>
 <div class="well well-small">
@@ -48,85 +49,85 @@ $(document).ready(function(){
 			//'label'=>'',
 			'htmlOptions' => array('class'=>'pull-right btn btn-info')
 			)
-		); 
+		);
 	?>
-	
-	<?php 
+
+	<?php
 		echo $form->datepickerRow(
 				$model,
 				'emissao_de',
 				array(
-					'class' => 'input-mini text-center', 
+					'class' => 'input-mini text-center',
 					'options' => array(
 						'format' => 'dd/mm/yy'
 						),
 					'placeholder' => 'Emissão',
 					'prepend' => 'De',
 					)
-				); 	
+				);
 	?>
-	<?php 
+	<?php
 		echo $form->datepickerRow(
 				$model,
 				'emissao_ate',
 				array(
-					'class' => 'input-mini text-center', 
+					'class' => 'input-mini text-center',
 					'options' => array(
 						'format' => 'dd/mm/yy'
 						),
 					'placeholder' => 'Emissão',
 					'prepend' => 'Até',
 					)
-				); 	
+				);
 	?>
-	
-	<?php 
+
+	<?php
 		echo $form->datepickerRow(
 				$model,
 				'criacao_de',
 				array(
-					'class' => 'input-mini text-center', 
+					'class' => 'input-mini text-center',
 					'options' => array(
 						'format' => 'dd/mm/yy'
 						),
 					'placeholder' => 'Criação',
 					'prepend' => 'De',
 					)
-				); 	
-	?> 
-	<?php 
+				);
+	?>
+	<?php
 		echo $form->datepickerRow(
 				$model,
 				'criacao_ate',
 				array(
-					'class' => 'input-mini text-center', 
+					'class' => 'input-mini text-center',
 					'options' => array(
 						'format' => 'dd/mm/yy'
 						),
 					'placeholder' => 'Criação',
 					'prepend' => 'Até',
 					)
-				); 	
-	?>		
-	
+				);
+	?>
+
 </div>
 
 <?php $this->endWidget(); ?>
 
 
 <?php
- 
+
 $this->widget(
-	'zii.widgets.CListView', 
+	'zii.widgets.CListView',
 	array(
 		'id' => 'Listagem',
 		'dataProvider' => $dataProvider,
 		'itemView' => '_view',
 		'template' => '{items} {pager}',
 		'pager' => array(
-			'class' => 'ext.infiniteScroll.IasPager', 
-			'rowSelector'=>'.registro', 
-			'listViewId' => 'Listagem', 
+			'class' => 'ext.infiniteScroll.IasPager',
+			'rowSelector'=>'.registro',
+			'listViewId' => 'Listagem',
 			'header' => '',
 			'loaderText'=>'Carregando...',
 			'options' => array('history' => false, 'triggerPageTreshold' => 20, 'trigger'=>'Carregar mais registros'),

@@ -437,4 +437,48 @@ class TituloAgrupamento extends MGActiveRecord
 		return $ret;
 	}
 
+    public function pendente ()
+    {
+        $sql = '
+            select
+                ge.codgrupoeconomico,
+                ge.grupoeconomico,
+                p.codpessoa,
+                p.fantasia,
+                gc.codgrupocliente,
+                gc.grupocliente,
+                fp.formapagamento,
+                --t.numero,
+                sum(t.saldo) as saldo,
+                min(t.vencimento) as vencimento
+            from tbltitulo t
+            inner join tblnegocioformapagamento nfp on (nfp.codnegocioformapagamento = t.codnegocioformapagamento)
+            inner join tblnegocio n on (n.codnegocio = nfp.codnegocio)
+            inner join tblnaturezaoperacao nat on (nat.codnaturezaoperacao = n.codnaturezaoperacao)
+            inner join tblpessoa p on (p.codpessoa = t.codpessoa)
+            left join tblgrupocliente gc on (gc.codgrupocliente = p.codgrupocliente)
+            left join tblgrupoeconomico ge on (ge.codgrupoeconomico = p.codgrupoeconomico)
+            left join tblformapagamento fp on (fp.codformapagamento = p.codformapagamento)
+            where t.saldo != 0
+            and (nat.venda or nat.vendadevolucao)
+            group by
+                gc.codgrupocliente,
+                gc.grupocliente,
+                ge.codgrupoeconomico,
+                ge.grupoeconomico,
+                p.codpessoa,
+                p.fantasia,
+                fp.formapagamento,
+                p.codpessoa
+            having sum(saldo) > 0
+            order by gc.grupocliente nulls first, coalesce(ge.grupoeconomico, p.fantasia), p.fantasia
+        ';
+        $cmd = Yii::app()->db->createCommand($sql);
+        // $cmd->params = [
+        //     'codusuario' => Yii::app()->user->id
+        // ];
+        $res = $cmd->queryAll();
+        return $res;
+    }
+
 }
