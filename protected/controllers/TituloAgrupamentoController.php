@@ -202,20 +202,42 @@ class TituloAgrupamentoController extends Controller
     {
         $model = new TituloAgrupamento('search');
 
-        // $model->unsetAttributes();  // clear any default values
+        $model->unsetAttributes();  // clear any default values
 
-        // if (isset($_GET['TituloAgrupamento']))
-        //     Yii::app()->session['FiltroTituloAgrupamentoIndex'] = $_GET['TituloAgrupamento'];
+        if (isset($_GET['TituloAgrupamento'])) {
+            Yii::app()->session['FiltroTituloAgrupamentoPendenteIndex'] = $_GET['TituloAgrupamento'];
+        }
 
-        // if (isset(Yii::app()->session['FiltroTituloAgrupamentoIndex']))
-        //     $model->attributes = Yii::app()->session['FiltroTituloAgrupamentoIndex'];
+        if (isset(Yii::app()->session['FiltroTituloAgrupamentoPendenteIndex'])) {
+            $model->attributes = Yii::app()->session['FiltroTituloAgrupamentoPendenteIndex'];
+        }
 
         $regs = $model->pendente();
-        // var_dump($data);
 
         $this->render('pendente', [
             'regs' => $regs,
             'model' => $model,
         ]);
     }
+
+    public function actionRelatorioPendente()
+    {
+        $model = new TituloAgrupamento('search');
+
+        $model->unsetAttributes();  // clear any default values
+
+        if (isset($_GET['TituloAgrupamento'])) {
+            Yii::app()->session['FiltroTituloAgrupamentoPendenteIndex'] = $_GET['TituloAgrupamento'];
+        }
+
+        if (isset(Yii::app()->session['FiltroTituloAgrupamentoPendenteIndex'])) {
+            $model->attributes = Yii::app()->session['FiltroTituloAgrupamentoPendenteIndex'];
+        }
+
+        $regs = $model->pendente();
+        $rel = new MGRelatorioTituloAgrupamentoPendente($regs);
+        $rel->montaRelatorio();
+        $rel->Output();
+    }
+
 }
