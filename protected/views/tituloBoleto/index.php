@@ -30,7 +30,7 @@ function label($tipoItem)
             return 'Vencer mais de 60 Dias';
             break;
         default:
-            return $tipo;
+            return $tipoItem;
             break;
     }
 }
