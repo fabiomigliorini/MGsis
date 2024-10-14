@@ -37,24 +37,9 @@ function label($tipoItem)
 
 
 ?>
-<h1>Boletos em Aberto</h1>
-<p class="muted">Boletos em <b>aberto</b> no banco.</p>
+<h1>Boletos Baixados </h1>
+<p class="muted">Títulos com Boleto <b>baixado</b>, mas com <b>saldo em aberto</b> no sistema.</p>
 <br>
-
-<ul class="nav nav-tabs" id="myTab">
-    <?php foreach ($abertos as $item): ?>
-        <li class="<?php echo ($item['tipo'] == $tipo)?'active':''; ?>">
-            <a href="<?php echo Yii::app()->createUrl($this->route, array('tipo' => $item['tipo']))?>">
-                <?php echo label($item['tipo']) ?> |
-                R$ <?php echo Yii::app()->format->number($item['valoratual']); ?>
-                <span class="badge">
-                    <?php echo Yii::app()->format->number($item['quantidade'], 0); ?>
-                </span>
-            </a>
-        </li>
-    <?php endforeach; ?>
-</ul>
-
 
 <div class="tab-content">
     <div class="tab-pane active" id="listagem">

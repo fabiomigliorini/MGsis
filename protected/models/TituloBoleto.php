@@ -245,6 +245,7 @@ class TituloBoleto extends MGActiveRecord
                 tb.codtitulo,
                 t.numero,
                 tb.valoratual,
+                abs(t.saldo) as saldo,
                 tb.vencimento,
                 tb.nossonumero,
                 tb.codportador,
@@ -286,6 +287,32 @@ class TituloBoleto extends MGActiveRecord
 
         $sql .= "
             order by tb.vencimento asc, tb.valoratual desc
+        ";
+        $cmd = Yii::app()->db->createCommand($sql);
+        return $cmd->queryAll();
+    }
+
+    public static function boletosBaixados()
+    {
+        $sql = "
+            select
+                t.codpessoa,
+                p.fantasia,
+                tb.codtitulo,
+                t.numero,
+                tb.valoratual,
+                abs(t.saldo) as saldo,
+                tb.vencimento,
+                tb.nossonumero,
+                tb.codportador,
+                po.portador
+            from tbltituloboleto tb
+            inner join tblportador po on (po.codportador = tb.codportador)
+            inner join tbltitulo t on (t.codtitulo = tb.codtitulo)
+            inner join tblpessoa p on (p.codpessoa = t.codpessoa)
+            where tb.estadotitulocobranca = 7 -- BAIXADO
+            and t.saldo != 0
+            order by tb.vencimento desc, tb.valoratual desc
         ";
         $cmd = Yii::app()->db->createCommand($sql);
         return $cmd->queryAll();

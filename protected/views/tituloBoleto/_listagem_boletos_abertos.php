@@ -1,4 +1,4 @@
-<table class="table table-hover table-bordered">
+<table class="table table-hover table-bordered table-striped">
     <thead>
         <tr>
             <th>Vencimento</th>
@@ -23,7 +23,16 @@
                     </div>
                 </td>
                 <td>
+                    <a class="btn pull-right" href="<?php echo Yii::app()->createUrl('titulo/index', ['Titulo[status]' => 'A', 'Titulo[codpessoa]' => $boleto['codpessoa']]); ?>">
+                        <i class="icon-list"></i>
+                    </a>
                     <?php echo CHtml::link(CHtml::encode($boleto['fantasia']), array('pessoa/view', 'id' => $boleto['codpessoa'])); ?>
+                    <?php if ($boleto['valoratual'] != $boleto['saldo']): ?>
+                        <div class="text-error">
+                            * Valor do boleto diverge do saldo do título R$
+                            <b><?php echo Yii::app()->format->number($boleto['saldo'], 2); ?></b>
+                        </div>
+                    <?php endif; ?>
                 </td>
                 <td>
                     <?php echo CHtml::link(CHtml::encode($boleto['numero']), array('titulo/view', 'id' => $boleto['codtitulo'])); ?>
