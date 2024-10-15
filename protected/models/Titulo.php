@@ -63,6 +63,8 @@ class Titulo extends MGActiveRecord
     public $emissao_ate;
     public $criacao_de;
     public $criacao_ate;
+    public $liquidacao_de;
+    public $liquidacao_ate;
     public $debito_de;
     public $debito_ate;
     public $credito_de;
@@ -115,7 +117,7 @@ class Titulo extends MGActiveRecord
             // @todo Please remove those attributes that should not be searched.
             //array('sistema','datetime'),
             array('sistema', 'date', 'format' => strtr(Yii::app()->locale->getDateTimeFormat(), array("{0}" => Yii::app()->locale->getTimeFormat('medium'), "{1}" => Yii::app()->locale->getDateFormat('medium')))),
-            array('codtitulo, vencimento_de, vencimento_ate, emissao_de, emissao_ate, criacao_de, criacao_ate, codtipotitulo, codfilial, codportador, codpessoa, codcontacontabil, numero, emissao, vencimento, credito, gerencial, boleto, nossonumero, saldo, criacao, codusuariocriacao, debito_de, debito_ate, credito_de, credito_ate, saldo_de, saldo_ate, codgrupocliente, codgrupoeconomico, pagarreceber, status, ordem', 'safe', 'on' => 'search'),
+            array('codtitulo, vencimento_de, vencimento_ate, emissao_de, emissao_ate, criacao_de, criacao_ate, liquidacao_de, liquidacao_ate, codtipotitulo, codfilial, codportador, codpessoa, codcontacontabil, numero, emissao, vencimento, credito, gerencial, boleto, nossonumero, saldo, criacao, codusuariocriacao, debito_de, debito_ate, credito_de, credito_ate, saldo_de, saldo_ate, codgrupocliente, codgrupoeconomico, pagarreceber, status, ordem', 'safe', 'on' => 'search'),
         );
     }
 
@@ -384,6 +386,14 @@ class Titulo extends MGActiveRecord
         if ($criacao_ate = DateTime::createFromFormat("d/m/y", $this->criacao_ate)) {
             $criteria->addCondition('t.criacao <= :criacao_ate');
             $criteria->params = array_merge($criteria->params, array(':criacao_ate' => $criacao_ate->format('Y-m-d') . ' 23:59:59.9'));
+        }
+        if ($liquidacao_de = DateTime::createFromFormat("d/m/y", $this->liquidacao_de)) {
+            $criteria->addCondition('t.transacaoliquidacao >= :liquidacao_de');
+            $criteria->params = array_merge($criteria->params, array(':liquidacao_de' => $liquidacao_de->format('Y-m-d') . ' 00:00:00.0'));
+        }
+        if ($liquidacao_ate = DateTime::createFromFormat("d/m/y", $this->liquidacao_ate)) {
+            $criteria->addCondition('t.transacaoliquidacao <= :liquidacao_ate');
+            $criteria->params = array_merge($criteria->params, array(':liquidacao_ate' => $liquidacao_ate->format('Y-m-d') . ' 23:59:59.9'));
         }
 
 

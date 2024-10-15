@@ -143,7 +143,7 @@ class LiquidacaoTituloController extends Controller
 		if (!isset(Yii::app()->session['FiltroLiquidacaoTituloIndex'])) {
 			Yii::app()->session['FiltroLiquidacaoTituloIndex'] = array(
 				'codusuariocriacao' => Yii::app()->user->id,
-				'criacao_de' => date('d/m/y', strtotime('-7 days')),
+				'transacao_de' => date('d/m/y', strtotime('-7 days')),
 			);
 		}
 

@@ -445,6 +445,36 @@ $this->menu = array(
                 );
                 ?>
             </div>
+            <div class="row-fluid" style="padding-top: 4px">
+                <?php
+                echo $form->datepickerRow(
+                    $model,
+                    'liquidacao_de',
+                    array(
+                        'class' => 'span6 text-center',
+                        'options' => array(
+                            'format' => 'dd/mm/yy'
+                        ),
+                        'placeholder' => 'Liquidação',
+                        // 'prepend' => 'De',
+                    )
+                );
+                ?>
+                <?php
+                echo $form->datepickerRow(
+                    $model,
+                    'liquidacao_ate',
+                    array(
+                        'class' => 'span6 text-center',
+                        'options' => array(
+                            'format' => 'dd/mm/yy'
+                        ),
+                        'placeholder' => 'Liquidação',
+                        // 'prepend' => 'Até',
+                    )
+                );
+                ?>
+            </div>
         </div>
 
         <!-- COLUNA 4 -->
