@@ -7,6 +7,7 @@
             <th>Título</th>
             <th>Portador</th>
             <th>Nosso Número</th>
+            <th>Estado</th>
         </tr>
     </thead>
     <tbody>
@@ -42,6 +43,15 @@
                 </td>
                 <td class="muted">
                     <?php echo CHtml::encode($boleto['nossonumero']); ?>
+                </td>
+                <td class="muted">
+                    <?php if ($boleto['estadotitulocobranca']): ?>
+                        <?php echo CHtml::encode(TituloBoleto::ESTADO[$boleto['estadotitulocobranca']]); ?>
+                    <?php endif; ?>
+                    <?php if ($boleto['tipobaixatitulo']): ?>
+                        |
+                        <?php echo CHtml::encode(TituloBoleto::TIPOBAIXA[$boleto['tipobaixatitulo']]); ?>
+                    <?php endif; ?>
                 </td>
             </tr>
         <?php

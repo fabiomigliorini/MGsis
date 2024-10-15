@@ -50,9 +50,3 @@ function label($tipoItem)
         ?>
     </div>
 </div>
-
-<script>
-    $(document).ready(function() {
-
-    });
-</script>

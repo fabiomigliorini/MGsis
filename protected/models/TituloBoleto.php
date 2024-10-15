@@ -46,6 +46,47 @@
  */
 class TituloBoleto extends MGActiveRecord
 {
+
+    const TIPOBAIXA = [
+        1 => 'BAIXADO POR SOLICITACAO',
+        2 => 'ENTREGA FRANCO PAGAMENTO',
+        9 => 'COMANDADA BANCO',
+        10 => 'COMANDADA CLIENTE - ARQUIVO',
+        11 => 'COMANDADA CLIENTE - ON-LINE',
+        12 => 'DECURSO PRAZO - CLIENTE',
+        13 => 'DECURSO PRAZO - BANCO',
+        15 => 'PROTESTADO',
+        31 => 'LIQUIDADO ANTERIORMENTE',
+        32 => 'HABILITADO EM PROCESSO',
+        35 => 'TRANSFERIDO PARA PERDAS',
+        51 => 'REGISTRADO INDEVIDAMENTE',
+        90 => 'BAIXA AUTOMATICA',
+    ];
+
+    const ESTADO = [
+        1 => 'NORMAL',
+        2 => 'MOVIMENTO CARTORIO',
+        3 => 'EM CARTORIO',
+        4 => 'TITULO COM OCORRENCIA DE CARTORIO',
+        5 => 'PROTESTADO ELETRONICO',
+        6 => 'LIQUIDADO',
+        7 => 'BAIXADO',
+        8 => 'TITULO COM PENDENCIA DE CARTORIO',
+        9 => 'TITULO PROTESTADO MANUAL',
+        10 => 'TITULO BAIXADO/PAGO EM CARTORIO',
+        11 => 'TITULO LIQUIDADO/PROTESTADO',
+        12 => 'TITULO LIQUID/PGCRTO',
+        13 => 'TITULO PROTESTADO AGUARDANDO BAIXA',
+        14 => 'TITULO EM LIQUIDACAO',
+        15 => 'TITULO AGENDADO',
+        16 => 'TITULO CREDITADO',
+        17 => 'PAGO EM CHEQUE - AGUARD.LIQUIDACAO',
+        18 => 'PAGO PARCIALMENTE',
+        19 => 'PAGO PARCIALMENTE CREDITADO',
+        21 => 'TITULO AGENDADO COMPE',
+        80 => 'EM PROCESSAMENTO (ESTADO TRANSITÓRIO)',
+    ];
+
     /**
      * @return string the associated database table name
      */
@@ -249,7 +290,9 @@ class TituloBoleto extends MGActiveRecord
                 tb.vencimento,
                 tb.nossonumero,
                 tb.codportador,
-                po.portador
+                po.portador,
+                tb.estadotitulocobranca,
+                tb.tipobaixatitulo
             from tbltituloboleto tb
             inner join tblportador po on (po.codportador = tb.codportador)
             inner join tbltitulo t on (t.codtitulo = tb.codtitulo)
@@ -305,7 +348,9 @@ class TituloBoleto extends MGActiveRecord
                 tb.vencimento,
                 tb.nossonumero,
                 tb.codportador,
-                po.portador
+                po.portador,
+                tb.estadotitulocobranca,
+                tb.tipobaixatitulo
             from tbltituloboleto tb
             inner join tblportador po on (po.codportador = tb.codportador)
             inner join tbltitulo t on (t.codtitulo = tb.codtitulo)
@@ -315,6 +360,161 @@ class TituloBoleto extends MGActiveRecord
             order by tb.vencimento desc, tb.valoratual desc
         ";
         $cmd = Yii::app()->db->createCommand($sql);
+        return $cmd->queryAll();
+    }
+
+    public static function liquidadosPorMes(DateTime $dia)
+    {
+        $labelMeses = [
+            1 => 'Jan',
+            2 => 'Fev',
+            3 => 'Mar',
+            4 => 'Abr',
+            5 => 'Mai',
+            6 => 'Jun',
+            7 => 'Jul',
+            8 => 'Ago',
+            9 => 'Set',
+            10 => 'Out',
+            11 => 'Nov',
+            12 => 'Dez'
+        ];
+        $meses = [];
+        for ($mes = 1; $mes <= 12; $mes++) {
+            $obj = new stdClass();
+            $obj->label = $labelMeses[$mes];
+            $obj->mes = Yii::app()->format->formataPorMascara($mes, '##');
+            $obj->valorpago = null;
+            $obj->quantidade = 0;
+            $meses[$mes] = $obj;
+        }
+
+        $sql = "
+            select
+                extract('month' from tb.datacredito) as mes,
+                sum(valorpago) as valorpago,
+                count(*) as quantidade
+            from tbltituloboleto tb
+            where extract('year' from tb.datacredito) = :ano
+            group by extract('month' from tb.datacredito)
+            order by 1 asc
+        ";
+        $cmd = Yii::app()->db->createCommand($sql);
+        $cmd->params = ['ano' => $dia->format('Y')];
+        $regs = $cmd->queryAll();
+
+        foreach ($regs as $reg) {
+            $meses[$reg['mes']]->valorpago = $reg['valorpago'];
+            $meses[$reg['mes']]->quantidade = $reg['quantidade'];
+        };
+
+        return $meses;
+    }
+
+    public static function liquidadosPorDia(DateTime $dia)
+    {
+        $sql = "
+            select
+                extract('day' from tb.datacredito) as dia,
+                sum(valorpago) as valorpago,
+                count(*) as quantidade
+            from tbltituloboleto tb
+            where date_trunc('month', tb.datacredito) = :mes
+            group by extract('day' from tb.datacredito)
+            order by 1 asc
+        ";
+        $cmd = Yii::app()->db->createCommand($sql);
+        $cmd->params = ['mes' => $dia->format('Y-m') . '-01'];
+        $regs = $cmd->queryAll();
+
+        $dias = [];
+        foreach ($regs as $reg) {
+            $obj = new stdClass();
+            $obj->dia = Yii::app()->format->formataPorMascara($reg['dia'], '##');
+            $obj->valorpago = $reg['valorpago'];
+            $obj->quantidade = $reg['quantidade'];
+            $dias[$reg['dia']] = $obj;
+        };
+
+        return $dias;
+    }
+
+
+    public static function liquidadosPorPortador(DateTime $dia)
+    {
+        $sql = "
+            select
+                p.codportador,
+                p.portador,
+                coalesce(p.conta, p.codportador)::varchar || '-' || coalesce(p.contadigito, 0)::varchar as conta,
+                sum(valorpago) as valorpago,
+                count(*) as quantidade
+            from tbltituloboleto tb
+            inner join tblportador p on (p.codportador = tb.codportador)
+            where tb.datacredito = :dia
+            group by p.codportador, p.portador, p.conta, p.contadigito
+            order by p.portador asc
+        ";
+        $cmd = Yii::app()->db->createCommand($sql);
+        $cmd->params = ['dia' => $dia->format('Y-m-d')];
+        $regs = $cmd->queryAll();
+
+        $dias = [];
+        foreach ($regs as $reg) {
+            $obj = new stdClass();
+            $obj->portador = $reg['portador'];
+            $obj->conta = $reg['conta'];
+            $obj->valorpago = $reg['valorpago'];
+            $obj->quantidade = $reg['quantidade'];
+            $dias[$reg['codportador']] = $obj;
+        };
+
+        return $dias;
+    }
+
+    public static function boletosLiquidados(DateTime $dia, $codportador)
+    {
+        if (empty($codportador)) {
+            return [];
+        }
+        $sql = "
+            select
+                t.codpessoa,
+                p.fantasia,
+                tb.codtitulo,
+                t.numero,
+                tb.valoratual,
+                -- tb.valorpagamentoparcial,
+                -- tb.valorabatimento,
+                tb.valorjuromora,
+                tb.valormulta,
+                --tb.valordesconto,
+                --tb.valorreajuste,
+                tb.valoroutro,
+                tb.valorpago,
+                tb.valorliquido,
+                abs(t.saldo) as saldo,
+                tb.vencimento,
+                tb.datarecebimento,
+                tb.nossonumero,
+                tb.codportador,
+                po.portador,
+                tb.estadotitulocobranca,
+                tb.tipobaixatitulo
+            from tbltituloboleto tb
+            inner join tblportador po on (po.codportador = tb.codportador)
+            inner join tbltitulo t on (t.codtitulo = tb.codtitulo)
+            inner join tblpessoa p on (p.codpessoa = t.codpessoa)
+            where tb.datacredito = :dia
+            and tb.codportador = :codportador
+            order by tb.valorpago desc
+        ";
+        $cmd = Yii::app()->db->createCommand($sql);
+        $cmd->params = [
+            'dia' => $dia->format('Y-m-d'),
+            'codportador' => $codportador,
+        ];
+
         return $cmd->queryAll();
     }
 }
