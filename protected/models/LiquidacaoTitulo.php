@@ -122,9 +122,9 @@ class LiquidacaoTitulo extends MGActiveRecord
         $criteria = new CDbCriteria;
 
         //$criteria->compare('codliquidacaotitulo',$this->codliquidacaotitulo,false);
-        $criteria->compare('codliquidacaotitulo', Yii::app()->format->numeroLimpo($this->codliquidacaotitulo), false);
-        $criteria->compare('codpessoa', $this->codpessoa, false);
-        $criteria->compare('codportador', $this->codportador, false);
+        $criteria->compare('t.codliquidacaotitulo', Yii::app()->format->numeroLimpo($this->codliquidacaotitulo), false);
+        $criteria->compare('t.codpessoa', $this->codpessoa, false);
+        $criteria->compare('t.codportador', $this->codportador, false);
         switch ($this->estornado) {
             case 9:
                 break;
