@@ -29,7 +29,11 @@ class SBaseController extends CController {
    * @return boolean true if access is granted else false
    */
   protected function beforeAction($action) {
-    
+
+    if (!isset($_COOKIE['access_token'])) {
+        $this->redirect(AUTH_API_URL . "/login?redirect_uri=" . SSO_CLIENT_CALLBACK);
+    }
+
     $url = AUTH_API_URL .  "/api/check-token";
 
     $header = array(
@@ -67,7 +71,7 @@ class SBaseController extends CController {
 
     //srbac access
     $mod = $this->module !== null ? $this->module->id . $del : "";
-    
+
     $contrArr = explode("/", $this->id);
     $contrArr[sizeof($contrArr) - 1] = ucfirst($contrArr[sizeof($contrArr) - 1]);
     $controller = implode(".", $contrArr);
@@ -78,7 +82,7 @@ class SBaseController extends CController {
       $controller = ucfirst($controller);
     }
     $access = $mod . $controller . ucfirst($this->action->id);
-   
+
  //   if (Yii::getVersion() >= "1.1.7") {
 //      if (count($this->actionParams) > 0) {
 //        $keys = array_keys($this->actionParams);
@@ -94,18 +98,18 @@ class SBaseController extends CController {
     if (in_array($access, $this->allowedAccess())) {
       return true;
     }
-   
-    
+
+
     //Allow access if srbac is not installed yet
     if (!Yii::app()->getModule('srbac')->isInstalled()) {
       return true;
     }
-   
+
     //Allow access when srbac is in debug mode
     if (Yii::app()->getModule('srbac')->debug) {
       return true;
     }
-    
+
      // Check for srbac access
     if (!Yii::app()->user->checkAccess($access) || Yii::app()->user->isGuest) {
       $this->onUnauthorizedAccess();
