@@ -29,8 +29,43 @@ class SBaseController extends CController {
    * @return boolean true if access is granted else false
    */
   protected function beforeAction($action) {
-    $del = Helper::findModule('srbac')->delimeter;
     
+    $url = AUTH_API_URL .  "/api/check-token";
+
+    if(in_array('access_token',$_COOKIE)){
+      $header = array(
+        'Authorization: Bearer ' . $_COOKIE['access_token']
+      );
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, $url);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_VERBOSE, 1);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+      $response = curl_exec($ch);
+
+      $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+      curl_close($ch);
+      $json = json_decode($response, true);
+
+      if($statusCode == 200){
+        $model = new LoginForm;
+        $model->attributes = [
+            'username' => $json['usuario'],
+            'oauth' => true
+        ];
+        $model->login();
+        // $this->redirect(Yii::app()->user->returnUrl);
+      }else{
+        Yii::app()->user->logout();
+        // return false;
+      }
+    }else{
+      Yii::app()->user->logout();
+    }
+    $del = Helper::findModule('srbac')->delimeter;
+
     //srbac access
     $mod = $this->module !== null ? $this->module->id . $del : "";
     

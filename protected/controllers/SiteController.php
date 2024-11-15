@@ -103,16 +103,58 @@ class SiteController extends Controller
 	public function actionLogin()
 	{
 
-	   //$this->render('/site/sso');
-	   $query = http_build_query([
-		"client_id" => SSO_CLIENT_ID,
-		"redirect_uri" => SSO_CLIENT_CALLBACK,
-		"response_type" => "code",
-		"scope" => SSO_SCOPES,
-		"state" => 'Hjcnaj1231ccjKA1AKC901CAZP1',
-		"prompt" => true
-	]);
-	$this->redirect(SSO_HOST .  "/oauth/authorize?" . $query);
+
+		$this->redirect(AUTH_API_URL . "/login?redirect_uri=" . SSO_CLIENT_CALLBACK); 
+
+		$model=new LoginForm;
+
+		// if it is ajax validation request
+		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+
+		// collect user input data
+		if(isset($_POST['LoginForm']))
+		{
+			$model->attributes=$_POST['LoginForm'];
+
+			$url = AUTH_API_URL .  "/oauth/token";
+			$post = array(
+				"grant_type" => "password",
+				"client_id" => AUTH_API_CLIENT_ID,
+				"client_secret" => AUTH_API_CLIENT_SECRET,
+				"username" => $_POST['LoginForm']['username'],
+				"password" => $_POST['LoginForm']['password'],
+				"scope" => AUTH_API_SCOPES
+				// "code" => $_GET['code']
+			);
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, $url);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_VERBOSE, 1);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+			$response = curl_exec($ch);
+			curl_close($ch);
+			$json = json_decode($response, true);
+
+
+			if(in_array('access_token',$json)){
+				// header('Set-Cookie: access_token=' .  $json['access_token'] . '; SameSite=Lax; Path=/; Expires=' . gmdate('D, d M Y H:i:s \G\M\T', time() + $json['expires_in']));
+
+				// $_COOKIE['access_token'] = $json['access_token'];
+			}
+
+			if($model->validate() && $model->login()) {
+				$this->redirect(Yii::app()->user->returnUrl);
+			}
+
+		}
+		// display the login form
+		$this->render('login',array('model'=>$model));
 	}
 
 	/**
@@ -120,7 +162,29 @@ class SiteController extends Controller
 	 */
 	public function actionLogout()
 	{
-		Yii::app()->user->logout();
-		$this->redirect(Yii::app()->homeUrl);
+
+		$url = AUTH_API_URL .  "/api/logout";
+
+		$header = array(
+			'Authorization: Bearer ' . $_COOKIE['access_token']
+		);
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_VERBOSE, 1);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+		
+		$response = curl_exec($ch);
+
+		$statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+		if($statusCode == 200){
+			Yii::app()->user->logout();
+			$this->redirect(Yii::app()->homeUrl);
+		}
 	}
 }
