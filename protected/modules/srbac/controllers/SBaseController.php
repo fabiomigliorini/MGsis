@@ -61,6 +61,11 @@ class SBaseController extends CController {
       if(Yii::app()->user->isGuest){
         $model->login();
       }
+
+      if(Yii::app()->user->id != $json['user_id']){
+        Yii::app()->user->logout();
+        $model->login();
+      }
       // $this->redirect(Yii::app()->user->returnUrl);
     }else{
       Yii::app()->user->logout();
