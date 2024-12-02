@@ -96,6 +96,9 @@ class NotaFiscal extends MGActiveRecord
     public $emissao_ate;
     public $saida_de;
     public $saida_ate;
+    public $valor_de;
+    public $valor_ate;
+    public $codgrupoeconomico;
 
     private $_codnaturezaoperacao_original;
     private $_codfilial_original;
@@ -143,7 +146,7 @@ class NotaFiscal extends MGActiveRecord
             array('cpf', 'ext.validators.CnpjCpfValidator'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('codnotafiscal, codnaturezaoperacao, emitida, nfechave, tpemis, nfeimpressa, serie, numero, emissao, modelo, saida, codfilial, codestoquelocal, codpessoa, observacoes, volumes, frete, codoperacao, nfereciboenvio, nfedataenvio, nfeautorizacao, nfedataautorizacao, valorfrete, valorseguro, valordesconto, valoroutras, nfecancelamento, nfedatacancelamento, nfeinutilizacao, nfedatainutilizacao, justificativa, alteracao, codusuarioalteracao, criacao, codusuariocriacao, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipidevolucaovalor, ipivalor, codstatus, emissao_de, emissao_ate, saida_de, saida_ate', 'safe', 'on' => 'search'),
+            array('codnotafiscal, codnaturezaoperacao, emitida, nfechave, tpemis, nfeimpressa, serie, numero, emissao, modelo, saida, codfilial, codestoquelocal, codpessoa, observacoes, volumes, frete, codoperacao, nfereciboenvio, nfedataenvio, nfeautorizacao, nfedataautorizacao, valorfrete, valorseguro, valordesconto, valoroutras, nfecancelamento, nfedatacancelamento, nfeinutilizacao, nfedatainutilizacao, justificativa, alteracao, codusuarioalteracao, criacao, codusuariocriacao, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipidevolucaovalor, ipivalor, codstatus, emissao_de, emissao_ate, saida_de, saida_ate, valor_de, valor_ate, codgrupoeconomico', 'safe', 'on' => 'search'),
         );
     }
 
@@ -498,7 +501,7 @@ class NotaFiscal extends MGActiveRecord
             'NotaFiscalCartaCorrecaos' => array(self::HAS_MANY, 'NotaFiscalCartaCorrecao', 'codnotafiscal', 'order' => 'sequencia DESC'),
             'NotaFiscalDuplicatass' => array(self::HAS_MANY, 'NotaFiscalDuplicatas', 'codnotafiscal', 'order' => 'vencimento ASC, valor ASC, codnotafiscalduplicatas ASC'),
             'NotaFiscalReferenciadas' => array(self::HAS_MANY, 'NotaFiscalReferenciada', 'codnotafiscal'),
-			'NotaFiscalPagamentos' => array(self::HAS_MANY, 'NotaFiscalPagamento', 'codnotafiscal', 'order' => 'codnotafiscalpagamento ASC'),
+            'NotaFiscalPagamentos' => array(self::HAS_MANY, 'NotaFiscalPagamento', 'codnotafiscal', 'order' => 'codnotafiscalpagamento ASC'),
             'EstadoPlaca' => array(self::BELONGS_TO, 'Estado', 'codestadoplaca'),
             'MdfeNfes' => array(self::HAS_MANY, 'MdfeNfe', 'codnotafiscal'),
         );
@@ -584,50 +587,50 @@ class NotaFiscal extends MGActiveRecord
 
         $criteria = new CDbCriteria;
 
-        $criteria->compare('codnotafiscal', $this->codnotafiscal, false);
-        $criteria->compare('codnaturezaoperacao', $this->codnaturezaoperacao, false);
-        $criteria->compare('emitida', $this->emitida);
-        $criteria->compare('nfechave', $this->nfechave, false);
-        $criteria->compare('tpemis', $this->tpemis);
-        $criteria->compare('nfeimpressa', $this->nfeimpressa);
-        $criteria->compare('serie', $this->serie);
-        $criteria->compare('numero', $this->numero);
-        $criteria->compare('modelo', $this->modelo);
-        $criteria->compare('emissao', $this->emissao, false);
-        $criteria->compare('saida', $this->saida, false);
-        $criteria->compare('codfilial', $this->codfilial, false);
-        $criteria->compare('codestoquelocal', $this->codestoquelocal, false);
-        $criteria->compare('codpessoa', $this->codpessoa, false);
-        $criteria->compare('observacoes', $this->observacoes, false);
-        $criteria->compare('volumes', $this->volumes);
-        $criteria->compare('frete', $this->frete);
-        $criteria->compare('codoperacao', $this->codoperacao, false);
-        $criteria->compare('nfereciboenvio', $this->nfereciboenvio, false);
-        $criteria->compare('nfedataenvio', $this->nfedataenvio, false);
-        $criteria->compare('nfeautorizacao', $this->nfeautorizacao, false);
-        $criteria->compare('nfedataautorizacao', $this->nfedataautorizacao, false);
-        $criteria->compare('valorfrete', $this->valorfrete, false);
-        $criteria->compare('valorseguro', $this->valorseguro, false);
-        $criteria->compare('valordesconto', $this->valordesconto, false);
-        $criteria->compare('valoroutras', $this->valoroutras, false);
-        $criteria->compare('nfecancelamento', $this->nfecancelamento, false);
-        $criteria->compare('nfedatacancelamento', $this->nfedatacancelamento, false);
-        $criteria->compare('nfeinutilizacao', $this->nfeinutilizacao, false);
-        $criteria->compare('nfedatainutilizacao', $this->nfedatainutilizacao, false);
-        $criteria->compare('justificativa', $this->justificativa, false);
-        $criteria->compare('alteracao', $this->alteracao, false);
-        $criteria->compare('codusuarioalteracao', $this->codusuarioalteracao, false);
-        $criteria->compare('criacao', $this->criacao, false);
-        $criteria->compare('codusuariocriacao', $this->codusuariocriacao, false);
-        $criteria->compare('valorprodutos', $this->valorprodutos, false);
-        $criteria->compare('valortotal', $this->valortotal, false);
-        $criteria->compare('icmsbase', $this->icmsbase, false);
-        $criteria->compare('icmsvalor', $this->icmsvalor, false);
-        $criteria->compare('icmsstbase', $this->icmsstbase, false);
-        $criteria->compare('icmsstvalor', $this->icmsstvalor, false);
-        $criteria->compare('ipibase', $this->ipibase, false);
-        $criteria->compare('ipivalor', $this->ipivalor, false);
-        $criteria->compare('ipidevolucaovalor', $this->ipidevolucaovalor, false);
+        $criteria->compare('t.codnotafiscal', $this->codnotafiscal, false);
+        $criteria->compare('t.codnaturezaoperacao', $this->codnaturezaoperacao, false);
+        $criteria->compare('t.emitida', $this->emitida);
+        $criteria->compare('t.nfechave', $this->nfechave, false);
+        $criteria->compare('t.tpemis', $this->tpemis);
+        $criteria->compare('t.nfeimpressa', $this->nfeimpressa);
+        $criteria->compare('t.serie', $this->serie);
+        $criteria->compare('t.numero', $this->numero);
+        $criteria->compare('t.modelo', $this->modelo);
+        $criteria->compare('t.emissao', $this->emissao, false);
+        $criteria->compare('t.saida', $this->saida, false);
+        $criteria->compare('t.codfilial', $this->codfilial, false);
+        $criteria->compare('t.codestoquelocal', $this->codestoquelocal, false);
+        $criteria->compare('t.codpessoa', $this->codpessoa, false);
+        $criteria->compare('t.observacoes', $this->observacoes, false);
+        $criteria->compare('t.volumes', $this->volumes);
+        $criteria->compare('t.frete', $this->frete);
+        $criteria->compare('t.codoperacao', $this->codoperacao, false);
+        $criteria->compare('t.nfereciboenvio', $this->nfereciboenvio, false);
+        $criteria->compare('t.nfedataenvio', $this->nfedataenvio, false);
+        $criteria->compare('t.nfeautorizacao', $this->nfeautorizacao, false);
+        $criteria->compare('t.nfedataautorizacao', $this->nfedataautorizacao, false);
+        $criteria->compare('t.valorfrete', $this->valorfrete, false);
+        $criteria->compare('t.valorseguro', $this->valorseguro, false);
+        $criteria->compare('t.valordesconto', $this->valordesconto, false);
+        $criteria->compare('t.valoroutras', $this->valoroutras, false);
+        $criteria->compare('t.nfecancelamento', $this->nfecancelamento, false);
+        $criteria->compare('t.nfedatacancelamento', $this->nfedatacancelamento, false);
+        $criteria->compare('t.nfeinutilizacao', $this->nfeinutilizacao, false);
+        $criteria->compare('t.nfedatainutilizacao', $this->nfedatainutilizacao, false);
+        $criteria->compare('t.justificativa', $this->justificativa, false);
+        $criteria->compare('t.alteracao', $this->alteracao, false);
+        $criteria->compare('t.codusuarioalteracao', $this->codusuarioalteracao, false);
+        $criteria->compare('t.criacao', $this->criacao, false);
+        $criteria->compare('t.codusuariocriacao', $this->codusuariocriacao, false);
+        $criteria->compare('t.valorprodutos', $this->valorprodutos, false);
+        $criteria->compare('t.valortotal', $this->valortotal, false);
+        $criteria->compare('t.icmsbase', $this->icmsbase, false);
+        $criteria->compare('t.icmsvalor', $this->icmsvalor, false);
+        $criteria->compare('t.icmsstbase', $this->icmsstbase, false);
+        $criteria->compare('t.icmsstvalor', $this->icmsstvalor, false);
+        $criteria->compare('t.ipibase', $this->ipibase, false);
+        $criteria->compare('t.ipivalor', $this->ipivalor, false);
+        $criteria->compare('t.ipidevolucaovalor', $this->ipidevolucaovalor, false);
 
         if ($emissao_de = DateTime::createFromFormat("d/m/y", $this->emissao_de)) {
             $criteria->addCondition('t.emissao >= :emissao_de');
@@ -644,6 +647,21 @@ class NotaFiscal extends MGActiveRecord
         if ($saida_ate = DateTime::createFromFormat("d/m/y", $this->saida_ate)) {
             $criteria->addCondition('t.saida <= :saida_ate');
             $criteria->params = array_merge($criteria->params, array(':saida_ate' => $saida_ate->format('Y-m-d') . ' 23:59:59.9'));
+        }
+        if ($this->valor_de) {
+            $criteria->addCondition('t.valortotal >= :valor_de');
+            $criteria->params = array_merge($criteria->params, array(':valor_de' => $this->valor_de));
+        }
+        if ($this->valor_ate) {
+            $criteria->addCondition('t.valortotal <= :valor_ate');
+            $criteria->params = array_merge($criteria->params, array(':valor_ate' => $this->valor_ate));
+        }
+        if ($this->codgrupoeconomico) {
+            $criteria->with = array(
+                'Pessoa' => array('select' => '"Pessoa".fantasia'),
+            );
+            $criteria->addCondition('"Pessoa".codgrupoeconomico = :codgrupoeconomico');
+            $criteria->params = array_merge($criteria->params, array(':codgrupoeconomico' => $this->codgrupoeconomico));
         }
 
         switch ($this->codstatus) {

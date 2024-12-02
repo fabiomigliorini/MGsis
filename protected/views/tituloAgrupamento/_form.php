@@ -55,8 +55,10 @@ echo $form->errorSummary($model);
             buscaTitulos();
         });
         $('#Titulo_codgrupoeconomico').on("change", function(e) {
-            $('#TituloAgrupamento_codpessoa').select2('val', null);
-            buscaTitulos();
+            if ($('#Titulo_codgrupoeconomico').select2('val')) {
+                $('#TituloAgrupamento_codpessoa').select2('val', null);
+                buscaTitulos();
+            }
         });
         $('#TituloAgrupamento_codpessoa').on("change", function(e) {
             buscaTitulos();

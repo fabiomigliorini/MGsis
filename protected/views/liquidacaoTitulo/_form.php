@@ -53,8 +53,10 @@ $form = $this->beginWidget('MGActiveForm', array(
             buscaTitulos();
         });
         $('#Titulo_codgrupoeconomico').on("change", function(e) {
-            $('#LiquidacaoTitulo_codpessoa').select2('val', null);
-            buscaTitulos();
+            if ($('#Titulo_codgrupoeconomico').select2('val')) {
+                $('#LiquidacaoTitulo_codpessoa').select2('val', null);
+                buscaTitulos();
+            }
         });
         $('#LiquidacaoTitulo_codpessoa').on("change", function(e) {
             buscaTitulos();
