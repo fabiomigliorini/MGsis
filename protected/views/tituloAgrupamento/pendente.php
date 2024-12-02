@@ -56,6 +56,10 @@ function vencimentoClass($vencimento)
             allowClear: true
         });
 
+        $("#TituloAgrupamento_codformapagamento").select2({
+            allowClear: true
+        });
+
         $('#TituloAgrupamento_valor_de').autoNumeric('init', {
             aSep: '.',
             aDec: ',',
@@ -255,13 +259,23 @@ function vencimentoClass($vencimento)
                 <?php echo $form->select2Pessoa($model, 'codpessoa', array('class' => 'span12')); ?>
             </div>
             <div class="row-fluid" style="padding-top: 4px">
-                <div class="span12">
+                <div class="span6">
                     <?php
                     echo $form->dropDownList(
                         $model,
                         'codtipotitulo',
                         TipoTitulo::getListaCombo(),
                         array('prompt' => '', 'placeholder' => 'Tipo', 'class' => 'span12')
+                    );
+                    ?>
+                </div>
+                <div class="span6">
+                    <?php
+                    echo $form->dropDownList(
+                        $model,
+                        'codformapagamento',
+                        FormaPagamento::getListaComboNaoIntegracao(),
+                        array('prompt' => '', 'placeholder' => 'Forma Pagamento Cliente', 'class' => 'span12')
                     );
                     ?>
                 </div>

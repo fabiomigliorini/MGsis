@@ -53,6 +53,7 @@ class TituloAgrupamento extends MGActiveRecord
     public $codgrupoeconomico;
     public $codtipotitulo;
     public $codgrupocliente;
+    public $codformapagamento;
 
 
     /**
@@ -83,7 +84,7 @@ class TituloAgrupamento extends MGActiveRecord
             array('cancelamento, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('emissao_de, emissao_ate, criacao_de, criacao_ate, codpessoa, codtituloagrupamento, emissao, codgrupocliente, codportador, codgrupoeconomico, codtipotitulo, vencimento_de, vencimento_ate, valor_de, valor_ate', 'safe', 'on' => 'search'),
+            array('emissao_de, emissao_ate, criacao_de, criacao_ate, codpessoa, codtituloagrupamento, emissao, codgrupocliente, codportador, codgrupoeconomico, codtipotitulo, codformapagamento, vencimento_de, vencimento_ate, valor_de, valor_ate', 'safe', 'on' => 'search'),
         );
     }
 
@@ -478,6 +479,11 @@ class TituloAgrupamento extends MGActiveRecord
         if (!empty($this->codtipotitulo)) {
             $sql .= " and t.codtipotitulo = :codtipotitulo ";
             $params['codtipotitulo'] = $this->codtipotitulo;
+        }
+
+        if (!empty($this->codformapagamento)) {
+            $sql .= " and p.codformapagamento = :codformapagamento ";
+            $params['codformapagamento'] = $this->codformapagamento;
         }
 
         if (!empty($this->vencimento_de)) {
