@@ -7,6 +7,8 @@ class MGGridTitulos extends CWidget
     public $campo;
     public $idPrefix;
     public $namePrefix;
+    public $codfilial;
+    public $codgrupoeconomico;
     public $codpessoa;
     public $vencimento_de;
     public $vencimento_ate;
@@ -42,6 +44,15 @@ class MGGridTitulos extends CWidget
         $attr = [
             'status' => 'A'
         ];
+
+        if (!empty($this->codfilial)) {
+            $attr['codfilial'] = $this->codfilial;
+        }
+
+        if (!empty($this->codgrupoeconomico)) {
+            $attr['codgrupoeconomico'] = $this->codgrupoeconomico;
+        }
+
         if (!empty($this->codpessoa)) {
             $attr['codpessoa'] = $this->codpessoa;
         }
@@ -257,6 +268,14 @@ class MGGridTitulos extends CWidget
             function buscaTitulos() {
                 //parametro codpessoa
                 var params = [];
+                params.push({
+                    name: 'codfilial',
+                    value: $('#Titulo_codfilial').val()
+                });
+                params.push({
+                    name: 'codgrupoeconomico',
+                    value: $('#Titulo_codgrupoeconomico').val()
+                });
                 params.push({
                     name: 'codpessoa',
                     value: $('#<?php echo $this->modelname; ?>_codpessoa').val()

@@ -36,6 +36,8 @@ class LiquidacaoTitulo extends MGActiveRecord
     public $transacao_de;
     public $transacao_ate;
 
+    public $codfilial;
+
     public $codgrupoeconomico;
 
     public $GridTitulos;

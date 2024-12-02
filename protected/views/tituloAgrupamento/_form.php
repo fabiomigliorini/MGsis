@@ -51,7 +51,26 @@ echo $form->errorSummary($model);
             });
         });
 
+        $('#Titulo_codfilial').on("change", function(e) {
+            buscaTitulos();
+        });
+        $('#Titulo_codgrupoeconomico').on("change", function(e) {
+            $('#TituloAgrupamento_codpessoa').select2('val', null);
+            buscaTitulos();
+        });
         $('#TituloAgrupamento_codpessoa').on("change", function(e) {
+            buscaTitulos();
+        });
+        $('#Titulo_credito').on("change", function(e) {
+            buscaTitulos();
+        });
+        $('#Titulo_credito').select2({
+            allowClear: true
+        });
+        $('#Titulo_vencimento_de').on("change", function(e) {
+            buscaTitulos();
+        });
+        $('#Titulo_vencimento_ate').on("change", function(e) {
             buscaTitulos();
         });
 

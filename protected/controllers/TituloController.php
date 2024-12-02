@@ -94,32 +94,6 @@ class TituloController extends Controller
         ));
     }
 
-    /**
-     * Deletes a particular model.
-     * If deletion is successful, the browser will be redirected to the 'admin' page.
-     * @param integer $id the ID of the model to be deleted
-     */
-    /*
-    public function actionDelete($id)
-    {
-        if (Yii::app()->request->isPostRequest) {
-            // we only allow deletion via POST request
-            try {
-                $this->loadModel($id)->delete();
-                // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-                if (!isset($_GET['ajax']))
-                    $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
-            } catch (CDbException $e) {
-                // Cannot delete or update a parent row: a foreign key constraint fails
-                if ($e->errorInfo[1] == 7) {
-                    throw new CHttpException(409, 'Registro em uso, você não pode excluir.');
-                } else
-                    throw $e;
-            }
-        } else
-            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
-    }
-    */
     public function actionEstorna($id)
     {
         if (Yii::app()->request->isPostRequest) {
@@ -144,7 +118,7 @@ class TituloController extends Controller
     {
         $model = new Titulo('search');
 
-        $model->unsetAttributes();  // clear any default values
+        $model->unsetAttributes(); // clear any default values
 
         if (isset($_GET['Titulo'])) {
             Yii::app()->session['FiltroTituloIndex'] = $_GET['Titulo'];
@@ -174,7 +148,7 @@ class TituloController extends Controller
 
         $model = new Titulo('search');
 
-        $model->unsetAttributes();  // clear any default values
+        $model->unsetAttributes(); // clear any default values
 
         if (isset($_GET['Titulo'])) {
             $model->attributes = $_GET['Titulo'];
@@ -303,7 +277,7 @@ class TituloController extends Controller
 
         $model = new Titulo('search');
 
-        $model->unsetAttributes();  // clear any default values
+        $model->unsetAttributes(); // clear any default values
 
         if (isset($_GET['Titulo'])) {
             Yii::app()->session['FiltroTituloIndex'] = $_GET['Titulo'];
@@ -353,6 +327,8 @@ class TituloController extends Controller
         $modelname = null,
         $campo = null,
         array $GridTitulos = null,
+        $codfilial = null,
+        $codgrupoeconomico = null,
         $codpessoa = null,
         $vencimento_de = null,
         $vencimento_ate = null,
@@ -364,13 +340,15 @@ class TituloController extends Controller
         }
 
         $this->widget('MGGridTitulos', array(
-            'modelname'   => $modelname,
-            'campo'      => $campo,
+            'modelname' => $modelname,
+            'campo' => $campo,
             'GridTitulos' => $GridTitulos,
-            'codpessoa'   => $codpessoa,
-            'vencimento_de'   => $vencimento_de,
-            'vencimento_ate'   => $vencimento_ate,
-            'codoperacao'   => $codoperacao,
+            'codfilial' => $codfilial,
+            'codgrupoeconomico' => $codgrupoeconomico,
+            'codpessoa' => $codpessoa,
+            'vencimento_de' => $vencimento_de,
+            'vencimento_ate' => $vencimento_ate,
+            'codoperacao' => $codoperacao,
         ));
     }
 }

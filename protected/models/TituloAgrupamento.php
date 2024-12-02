@@ -200,6 +200,7 @@ class TituloAgrupamento extends MGActiveRecord
         return array(
             'codtituloagrupamento' => '#',
             'codpessoa' => 'Pessoa',
+            'codgrupoeconomico' => 'Grupo Econ.',
             'GridTitulos' => 'Titulos',
             'emissao' => 'Emissão',
             'cancelamento' => 'Estornado',
