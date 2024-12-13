@@ -23,6 +23,7 @@ class MGGridTitulos extends CWidget
         $this->namePrefix = $this->modelname . "[" . $this->campo . "]";
 
         $model = new Titulo('search');
+        $model->ordem = 'VS';
 
         $titulos = array();
 

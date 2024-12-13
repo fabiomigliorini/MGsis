@@ -542,6 +542,9 @@ class Titulo extends MGActiveRecord
             case 'CE': // 'Código da Pessoa, Emissão',
                 $criteria->order = '"Pessoa".codpessoa ASC, t.emissao ASC, t.fatura, t.numero, t.saldo ASC';
                 break;
+            case 'VS': // Venciemnto / Saldo
+                $criteria->order = 't.vencimento ASC, t.saldo ASC, t.numero, "Pessoa".codpessoa ASC';
+                break;
             case 'AV': // 'Alfabética, Vencimento'
             default:
                 $criteria->order = '"Pessoa".fantasia ASC, t.vencimento ASC, t.saldo ASC';

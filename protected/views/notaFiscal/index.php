@@ -19,6 +19,12 @@ $this->menu = array(
 <script type='text/javascript'>
     $(document).ready(function() {
 
+        $('#NotaFiscal_codgrupoeconomico').on("change", function(e) {
+            if ($('#NotaFiscal_codgrupoeconomico').select2('val')) {
+                $('#NotaFiscal_codpessoa').select2('val', null);
+            }
+        });
+
         var frameSrcRelatorio = $('#btnMostrarRelatorio').attr('href');
         $('#btnMostrarRelatorio').click(function(event) {
             event.preventDefault();
@@ -176,14 +182,3 @@ $this->widget(
     )
 );
 ?>
-
-<script type='text/javascript'>
-    $(document).ready(function() {
-        $('#NotaFiscal_codgrupoeconomico').on("change", function(e) {
-            if ($('#NotaFiscal_codgrupoeconomico').select2('val')) {
-                $('#NotaFiscal_codpessoa').select2('val', null);
-                buscaTitulos();
-            }
-        });
-    });
-</script>
