@@ -61,7 +61,7 @@ function acaoF9()
 
 $(document).ready(function() {
 	$("*").bind('keydown.f1',function (e){ e.preventDefault(); return redireciona ("#btnListagem"); });
-	$("*").bind('keydown.f2',function (e){ e.preventDefault(); return redireciona ("#btnNovo"); });
+	// $("*").bind('keydown.f2',function (e){ e.preventDefault(); return redireciona ("#btnNovo"); });
 	$("*").bind('keydown.f3',function (e){ e.preventDefault(); return acaoF3(); });
 	$("*").bind('keydown.f4',function (e){ e.preventDefault(); return redireciona ("#btnDetalhes"); });
 	$("*").bind('keydown.f7',function (e){ e.preventDefault(); return acaoF7(); });

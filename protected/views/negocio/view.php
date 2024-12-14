@@ -10,7 +10,7 @@ $this->breadcrumbs = array(
 
 $this->menu = array(
     array('label' => 'Listagem (F1)', 'icon' => 'icon-list-alt', 'url' => array('index'), 'linkOptions' => array('id' => 'btnListagem')),
-    array('label' => 'Novo (F2)', 'icon' => 'icon-plus', 'url' => array('createOrEmpty'), 'linkOptions' => array('id' => 'btnNovo')),
+    // array('label' => 'Novo (F2)', 'icon' => 'icon-plus', 'url' => array('createOrEmpty'), 'linkOptions' => array('id' => 'btnNovo')),
     array(
         'label' => 'Alterar',
         'icon' => 'icon-pencil',
@@ -47,7 +47,7 @@ $this->menu = array(
         'linkOptions' => array('id' => 'btnCancelar'),
         'visible' => ($model->codnegociostatus != NegocioStatus::CANCELADO && empty($model->codpdv))
     ),
-    array('label' => 'Duplicar', 'icon' => 'icon-retweet', 'url' => array('create', 'duplicar' => $model->codnegocio)),
+    // array('label' => 'Duplicar', 'icon' => 'icon-retweet', 'url' => array('create', 'duplicar' => $model->codnegocio)),
     array(
         'label' => 'Boletos',
         'icon' => 'icon-barcode',
@@ -222,26 +222,26 @@ $this->renderPartial("_hotkeys");
     /*<![CDATA[*/
     $(document).ready(function() {
 
-        $('#btnInformarMercos').click(function(event) {
-            event.preventDefault();
-            console.log('aqui');
-            // return;
-            $.ajax({
-                type: 'GET',
-                url: "<?php echo MGLARA_URL; ?>mercos/pedido/<?php echo $model->codnegocio; ?>/faturamento",
-            }).done(function(resp) {
-                var msg = "Faturamento informado ao Mercos com o ID " + resp.join(', ') + "!";
-                console.log(resp);
-                bootbox.alert('<h3 class="text-success">' + msg + '</h3>', function() {
-                    location.reload();
-                });
-            }).fail(function(jqxhr, textStatus, error) {
-                bootbox.alert('<h3 class="text-error">' + error + '</h3>');
-                console.log(jqxhr);
-                console.log(textStatus);
-                console.log(error);
-            });
-        });
+        // $('#btnInformarMercos').click(function(event) {
+        //     event.preventDefault();
+        //     console.log('aqui');
+        //     // return;
+        //     $.ajax({
+        //         type: 'GET',
+        //         url: "<?php echo MGLARA_URL; ?>mercos/pedido/<?php echo $model->codnegocio; ?>/faturamento",
+        //     }).done(function(resp) {
+        //         var msg = "Faturamento informado ao Mercos com o ID " + resp.join(', ') + "!";
+        //         console.log(resp);
+        //         bootbox.alert('<h3 class="text-success">' + msg + '</h3>', function() {
+        //             location.reload();
+        //         });
+        //     }).fail(function(jqxhr, textStatus, error) {
+        //         bootbox.alert('<h3 class="text-error">' + error + '</h3>');
+        //         console.log(jqxhr);
+        //         console.log(textStatus);
+        //         console.log(error);
+        //     });
+        // });
 
 
         <?php
@@ -578,7 +578,8 @@ $this->renderPartial("_hotkeys");
                     'value' => $ped->enderecoentrega,
                 ];
             }
-            $str = "$ped->faturamentoid   <button class='btn btn-mini' type='button' id='btnInformarMercos'>Informar Mercos</button>";
+            // $str = "$ped->faturamentoid   <button class='btn btn-mini' type='button' id='btnInformarMercos'>Informar Mercos</button>";
+            $str = "$ped->faturamentoid   ";
             $attr[] = [
                 'label' => 'Faturamento',
                 'value' => $str,
