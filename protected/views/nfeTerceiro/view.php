@@ -133,22 +133,36 @@ function enviarEventoManifestacao(indManifestacao, justificativa)
 
 function downloadNfe ()
 {
-
-  $.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/download')?>", {
-    codnfeterceiro: <?php echo $model->codnfeterceiro; ?>
-  })
-    .done(function(data) {
-      var mensagem = formataMensagem(data);
-      bootbox.alert(mensagem, function() {
-        location.reload();
-      });
-    })
-    .fail(function( jqxhr, textStatus, error ) {
-      bootbox.alert(error, function() {
-        location.reload();
-      });
+    var codnfeterceiro = '<?php echo $model->codnfeterceiro ?>';
+    var url = "<?php echo MGSPA_API_URL; ?>nfe-terceiro/" + codnfeterceiro + "/download";
+    $.ajax({
+        type: 'POST',
+        url: url,
+        headers: {
+            "X-Requested-With":"XMLHttpRequest"
+        },
+    }).done(function(resp) {
+        bootbox.alert("Download Efetuado!", function() {
+            location.reload();
+        });
+    }).fail(function( jqxhr, textStatus, error ) {
+        console.log([jqxhr, textStatus, error]);
+        var mensagem = 'Falha ao efetuar o Download da NFe!';
+        var resp = jQuery.parseJSON(jqxhr.responseText);
+        if (resp.message != undefined) {
+            mensagem += '<br>' + resp.message;
+        }
+        if (resp.errors != undefined) {
+            for (var field in resp.errors) {
+                resp.errors[field].forEach((error, i) => {
+                    mensagem += '<BR>' + error;
+                });
+            }
+        }
+        bootbox.alert(mensagem, function() {
+            location.reload();
+        });
     });
-
 }
 
 function btnRevisaoClick(revisada) {
@@ -571,13 +585,13 @@ $(document).ready(function(){
                 ),
                 array(
                     'label'=>'Outros Custos',
-                    'value'=>$outrosValue, 
+                    'value'=>$outrosValue,
                     'type'=>"raw",
                 ),
                 // array(
                   // 'label'=>'Outros Custos' . '<a href="#" onclick="Complemento()"> <i class="icon-pencil"></i></a>',
                   // 'value'=>Yii::app()->format->formatNumber($outros),
-                  // 'visible'=>$model->podeEditar()  
+                  // 'visible'=>$model->podeEditar()
               // ),
                 array(
                     'label'=>'Custo Total',
@@ -587,7 +601,7 @@ $(document).ready(function(){
         ));
         ?>
 
-   
+
     <!-- Modal -->
     <div id="ModalOutros" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">

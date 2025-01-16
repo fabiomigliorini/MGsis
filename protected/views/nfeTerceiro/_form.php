@@ -22,7 +22,6 @@
             echo $form->select2PessoaRow($model, 'codpessoa', array('class'=>'input-xlarge'));
             echo $form->textFieldRow($model,'natureza',array('class'=>'span5','maxlength'=>14, 'disabled'=>true));
             echo $form->select2Row($model, 'codnaturezaoperacao', NaturezaOperacao::getListaCombo(), array('class'=>'input-xlarge'));
-
             echo $form->datetimepickerRow(
                 $model,
                 'entrada',

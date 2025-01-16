@@ -98,6 +98,7 @@ class NfeTerceiro extends MGActiveRecord
             array('indsituacao, indmanifestacao, serie, numero, modelo, finalidade, tipo', 'numerical', 'integerOnly' => true),
             array('nsu, ie', 'length', 'max' => 20),
             array('nfechave, emitente, natureza', 'length', 'max' => 100),
+            array('nfechave', 'validaChaveNFE'),
             //array('arquivoxml', 'file', 'types'=>'xml'),
             array('cnpj, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipivalor, valorprodutos, valorfrete, valorseguro, valordesconto, valoroutras', 'length', 'max' => 14),
             array('justificativa', 'length', 'max' => 200),
@@ -107,6 +108,38 @@ class NfeTerceiro extends MGActiveRecord
             // @todo Please remove those attributes that should not be searched.
             array('emissao_de, emissao_ate, valor_de, valor_ate, codnfeterceiro, nsu, nfechave, cnpj, ie, emitente, codpessoa, emissao, nfedataautorizacao, codoperacao, valortotal, indsituacao, indmanifestacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codfilial, codnotafiscal, codnaturezaoperacao, serie, numero, entrada, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipivalor, valorprodutos, valorfrete, valorseguro, valordesconto, valoroutras, justificativa, ignorada, codnegocio, natureza, modelo, finalidade, informacoes, observacoes, tipo, revisao, codusuariorevisao', 'safe', 'on' => 'search'),
         );
+    }
+
+    public function validaChaveNFE($attribute, $params)
+    {
+        if (strlen($this->nfechave) != 44) {
+            $this->addError($attribute, "Chave da NFE é Inválida!");
+            return;
+        }
+
+        $digito = NotaFiscal::calculaDigitoChaveNFE($this->nfechave);
+
+        if ($digito == -1) {
+            $this->addError($attribute, "Chave da NFE Inválida!");
+            return;
+        }
+
+        if (substr($this->nfechave, 43, 1) <> $digito) {
+            $this->addError($attribute, "Dígito da Chave da NFE Inválido!");
+            return;
+        }
+
+        $condicao = "nfechave = :nfechave";
+        $parametros["nfechave"] = $this->nfechave;
+
+        if (!empty($this->codnotafiscal)) {
+            $condicao .= " AND codnotafiscal != :codnotafiscal";
+            $parametros["codnotafiscal"] = $this->codnotafiscal;
+        }
+
+        if (NfeTerceiro::model()->findAll($condicao, $parametros)) {
+            $this->addError($attribute, "Esta Chave já está cadastrada no sistema!");
+        }
     }
 
     public function validaEntrada($attribute, $params)
@@ -318,6 +351,26 @@ class NfeTerceiro extends MGActiveRecord
 
     protected function beforeSave()
     {
+        if (empty($this->cnpj)) {
+            $this->cnpj = substr($this->nfechave, 6, 14);
+            if (empty($this->codpessoa)) {
+                $pessoas = Pessoa::model()->findAll("cnpj = :cnpj", array(":cnpj" => $this->cnpj));
+                foreach ($pessoas as $pessoa) {
+                    if (empty($pessoa->inativo)) {
+                        $this->codpessoa = $pessoa->codpessoa;
+                    }
+                }
+            }
+        }
+
+        if (empty($this->indsituacao)) {
+            $this->indsituacao = self::INDSITUACAO_AUTORIZADA;
+        }
+
+        if (empty($this->emissao)) {
+            $this->emissao = date('d/m/Y H:i:s');
+        }
+
         if (empty($this->codpessoa)) {
             $cnpj = $this->cnpj;
             if (empty($cnpj)) {

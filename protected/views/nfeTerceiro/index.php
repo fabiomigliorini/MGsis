@@ -5,7 +5,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-    //array('label'=>'Novo', 'icon'=>'icon-plus', 'url'=>array('create')),
+    array('label'=>'Nova', 'icon'=>'icon-plus', 'url'=>array('create')),
     // array('label'=>'Pesquisar na Sefaz', 'icon'=>'icon-plus', 'url'=>array('pesquisarSefaz')),
     array('label'=>'Carregar Via Arquivo XML', 'icon'=>'icon-upload', 'url'=>array('upload')),
     //array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
