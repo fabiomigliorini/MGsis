@@ -132,9 +132,9 @@ class NfeTerceiro extends MGActiveRecord
         $condicao = "nfechave = :nfechave";
         $parametros["nfechave"] = $this->nfechave;
 
-        if (!empty($this->codnotafiscal)) {
-            $condicao .= " AND codnotafiscal != :codnotafiscal";
-            $parametros["codnotafiscal"] = $this->codnotafiscal;
+        if (!empty($this->codnfeterceiro)) {
+            $condicao .= " AND codnfeterceiro != :codnfeterceiro";
+            $parametros["codnfeterceiro"] = $this->codnfeterceiro;
         }
 
         if (NfeTerceiro::model()->findAll($condicao, $parametros)) {
