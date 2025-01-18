@@ -268,62 +268,62 @@ class NfeTerceiro extends MGActiveRecord
             // 'TipoTitulo' => array('select' => '"TipoTitulo".tipotitulo'),
         );
 
-        $criteria->compare('codnfeterceiro', $this->codnfeterceiro, false);
-        $criteria->compare('nsu', $this->nsu, true);
-        $criteria->compare('nfechave', $this->nfechave, true);
-        $criteria->compare('cnpj', $this->cnpj, true);
-        $criteria->compare('ie', $this->ie, true);
-        $criteria->compare('emitente', $this->emitente, true);
-        $criteria->compare('codpessoa', $this->codpessoa);
+        $criteria->compare('t.codnfeterceiro', $this->codnfeterceiro, false);
+        $criteria->compare('t.nsu', $this->nsu, true);
+        $criteria->compare('t.nfechave', $this->nfechave, true);
+        $criteria->compare('t.cnpj', $this->cnpj, true);
+        $criteria->compare('t.ie', $this->ie, true);
+        $criteria->compare('t.emitente', $this->emitente, true);
+        $criteria->compare('t.codpessoa', $this->codpessoa);
         $criteria->compare('t.codfilial', $this->codfilial);
-        $criteria->compare('nfedataautorizacao', $this->nfedataautorizacao, true);
-        $criteria->compare('codoperacao', $this->codoperacao, true);
-        $criteria->compare('indsituacao', $this->indsituacao);
-        $criteria->compare('indmanifestacao', $this->indmanifestacao);
-        $criteria->compare('alteracao', $this->alteracao, true);
-        $criteria->compare('codusuarioalteracao', $this->codusuarioalteracao, true);
-        $criteria->compare('criacao', $this->criacao, true);
-        $criteria->compare('codusuariocriacao', $this->codusuariocriacao, true);
+        $criteria->compare('t.nfedataautorizacao', $this->nfedataautorizacao, true);
+        $criteria->compare('t.codoperacao', $this->codoperacao, true);
+        $criteria->compare('t.indsituacao', $this->indsituacao);
+        $criteria->compare('t.indmanifestacao', $this->indmanifestacao);
+        $criteria->compare('t.alteracao', $this->alteracao, true);
+        $criteria->compare('t.codusuarioalteracao', $this->codusuarioalteracao, true);
+        $criteria->compare('t.criacao', $this->criacao, true);
+        $criteria->compare('t.codusuariocriacao', $this->codusuariocriacao, true);
 
         switch ($this->revisao) {
             case 'R':
-                $criteria->addCondition('revisao IS NOT NULL');
+                $criteria->addCondition('t.revisao IS NOT NULL');
                 break;
 
             case 'N':
-                $criteria->addCondition('revisao IS NULL');
+                $criteria->addCondition('t.revisao IS NULL');
                 break;
         }
 
         switch ($this->conferencia) {
             case 'C':
-                $criteria->addCondition('conferencia IS NOT NULL');
+                $criteria->addCondition('t.conferencia IS NOT NULL');
                 break;
 
             case 'N':
-                $criteria->addCondition('conferencia IS NULL');
+                $criteria->addCondition('t.conferencia IS NULL');
                 break;
         }
 
         switch ($this->codnotafiscal) {
             case 1: // Pendentes
                 $criteria->addCondition(
-                    'codnotafiscal IS NULL '
-                        . ' AND (indmanifestacao IS NULL OR indmanifestacao NOT IN (' . self::INDMANIFESTACAO_DESCONHECIDA . ', ' . self::INDMANIFESTACAO_NAOREALIZADA . '))'
-                        . ' AND indsituacao = ' . self::INDSITUACAO_AUTORIZADA
-                        . ' AND ignorada = FALSE '
+                    't.codnotafiscal IS NULL '
+                        . ' AND (t.indmanifestacao IS NULL OR t.indmanifestacao NOT IN (' . self::INDMANIFESTACAO_DESCONHECIDA . ', ' . self::INDMANIFESTACAO_NAOREALIZADA . '))'
+                        . ' AND t.indsituacao = ' . self::INDSITUACAO_AUTORIZADA
+                        . ' AND t.ignorada = FALSE '
                 );
                 break;
 
             case 2: // Importadas
-                $criteria->addCondition('codnotafiscal IS NOT NULL');
+                $criteria->addCondition('t.codnotafiscal IS NOT NULL');
                 break;
 
             case 3: //
                 $criteria->addCondition(
-                    'indmanifestacao IN (' . self::INDMANIFESTACAO_DESCONHECIDA . ', ' . self::INDMANIFESTACAO_NAOREALIZADA . ')'
-                        . ' OR indsituacao != ' . self::INDSITUACAO_AUTORIZADA
-                        . ' OR ignorada = TRUE '
+                    't.indmanifestacao IN (' . self::INDMANIFESTACAO_DESCONHECIDA . ', ' . self::INDMANIFESTACAO_NAOREALIZADA . ')'
+                        . ' OR t.indsituacao != ' . self::INDSITUACAO_AUTORIZADA
+                        . ' OR t.ignorada = TRUE '
                 );
                 break;
 
@@ -331,7 +331,7 @@ class NfeTerceiro extends MGActiveRecord
                 break;
         }
 
-        $criteria->compare('codnegocio', $this->codnegocio);
+        $criteria->compare('t.codnegocio', $this->codnegocio);
 
 
         if ($emissao_de = DateTime::createFromFormat("d/m/y", $this->emissao_de)) {
