@@ -75,6 +75,9 @@ class NfeTerceiro extends MGActiveRecord
     public $valor_de;
     public $valor_ate;
 
+    public $codgrupoeconomico;
+    public $codtipoproduto;
+
     public $arquivoxml;
     public $xml;
 
@@ -106,7 +109,7 @@ class NfeTerceiro extends MGActiveRecord
             array('codpessoa, emissao, nfedataautorizacao, codoperacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codnotafiscal, codnaturezaoperacao, entrada, ignorada, codnegocio, informacoes, observacoes, revisao, codusuariorevisao, conferencia, codusuarioconferencia', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('emissao_de, emissao_ate, valor_de, valor_ate, codnfeterceiro, nsu, nfechave, cnpj, ie, emitente, codpessoa, emissao, nfedataautorizacao, codoperacao, valortotal, indsituacao, indmanifestacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codfilial, codnotafiscal, codnaturezaoperacao, serie, numero, entrada, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipivalor, valorprodutos, valorfrete, valorseguro, valordesconto, valoroutras, justificativa, ignorada, codnegocio, natureza, modelo, finalidade, informacoes, observacoes, tipo, revisao, codusuariorevisao', 'safe', 'on' => 'search'),
+            array('emissao_de, emissao_ate, valor_de, valor_ate, codnfeterceiro, nsu, nfechave, cnpj, ie, emitente, codgrupoeconomico, codpessoa, emissao, nfedataautorizacao, codoperacao, valortotal, indsituacao, indmanifestacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao, codfilial, codnotafiscal, codnaturezaoperacao, serie, numero, entrada, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipivalor, valorprodutos, valorfrete, valorseguro, valordesconto, valoroutras, justificativa, ignorada, codnegocio, natureza, modelo, finalidade, informacoes, observacoes, tipo, revisao, codusuariorevisao', 'safe', 'on' => 'search'),
         );
     }
 
@@ -255,14 +258,24 @@ class NfeTerceiro extends MGActiveRecord
 
         $criteria = new CDbCriteria;
 
-        $criteria->compare('codnfeterceiro', $this->codnfeterceiro, true);
+        $criteria->with = array(
+            'Pessoa' => array('select' => '"Pessoa".fantasia'),
+            'Filial' => array('select' => '"Filial".filial'),
+            // 'Portador' => array('select' => '"Portador".portador'),
+            // 'UsuarioCriacao' => array('select' => '"UsuarioCriacao".usuario'),
+            // 'UsuarioAlteracao' => array('select' => '"UsuarioAlteracao".usuario'),
+            // 'ContaContabil' => array('select' => '"ContaContabil".contacontabil'),
+            // 'TipoTitulo' => array('select' => '"TipoTitulo".tipotitulo'),
+        );
+
+        $criteria->compare('codnfeterceiro', $this->codnfeterceiro, false);
         $criteria->compare('nsu', $this->nsu, true);
         $criteria->compare('nfechave', $this->nfechave, true);
         $criteria->compare('cnpj', $this->cnpj, true);
         $criteria->compare('ie', $this->ie, true);
         $criteria->compare('emitente', $this->emitente, true);
         $criteria->compare('codpessoa', $this->codpessoa);
-        $criteria->compare('codfilial', $this->codfilial);
+        $criteria->compare('t.codfilial', $this->codfilial);
         $criteria->compare('nfedataautorizacao', $this->nfedataautorizacao, true);
         $criteria->compare('codoperacao', $this->codoperacao, true);
         $criteria->compare('indsituacao', $this->indsituacao);
@@ -329,6 +342,20 @@ class NfeTerceiro extends MGActiveRecord
         if ($emissao_ate = DateTime::createFromFormat("d/m/y", $this->emissao_ate)) {
             $criteria->addCondition('t.emissao <= :emissao_ate');
             $criteria->params[':emissao_ate'] = $emissao_ate->format('Y-m-d') . ' 23:59:59.9';
+        }
+
+        if ($this->valor_de) {
+            $criteria->addCondition('t.valortotal >= :valor_de');
+            $criteria->params[':valor_de'] = $this->valor_de;
+        }
+
+        if ($this->valor_ate) {
+            $criteria->addCondition('t.valortotal <= :valor_ate');
+            $criteria->params[':valor_ate'] = $this->valor_ate;
+        }
+
+        if ($this->codgrupoeconomico) {
+            $criteria->compare('"Pessoa".codgrupoeconomico', $this->codgrupoeconomico, false);
         }
 
         return new CActiveDataProvider($this, array(
