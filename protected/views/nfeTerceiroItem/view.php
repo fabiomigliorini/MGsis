@@ -8,8 +8,8 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
     array('label'=>'Listagem', 'icon'=>'icon-list-alt', 'url'=>array('nfeTerceiro/view', 'id'=>$model->codnfeterceiro)),
-    array('label'=>'Abrir Kit', 'icon'=>'icon-plus', 'url'=>array('dividir', 'id'=>$model->codnfeterceiroitem)),
-    array('label'=>'Informar Detalhes', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codnfeterceiroitem), 'visible'=>$model->podeEditar()),
+    array('label'=>'Abrir Kit', 'icon'=>'icon-plus', 'url'=>array('dividir', 'id'=>$model->codnfeterceiroitem), 'visible'=>$model->podeEditar()),
+    array('label'=>'Informar Detalhes', 'icon'=>'icon-pencil', 'url'=>array('update','id'=>$model->codnfeterceiroitem)),
     //array('label'=>'Excluir', 'icon'=>'icon-trash', 'url'=>'#', 'linkOptions'=>	array('id'=>'btnExcluir')),
     //array('label'=>'Gerenciar', 'icon'=>'icon-briefcase', 'url'=>array('admin')),
 );

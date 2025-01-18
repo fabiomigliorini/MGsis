@@ -21,14 +21,24 @@ class NfeTerceiroItemController extends Controller
 
 	public function actionDividir($id)
 	{
+		$model = $this->loadModel($id);
+
+        if (!$model->podeEditar()) {
+			throw new CHttpException(409, 'Registro não permite edição.');
+        }
+
 		$this->render('dividir',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
 			));
 	}
 
 	public function actionDividirSalvar($id)
 	{
 		$model = $this->loadModel($id);
+
+        if (!$model->podeEditar()) {
+			throw new CHttpException(409, 'Registro não permite edição.');
+        }
 
 		// Multiplica por 100 nitem caso seja nova "dividida"
 		$command = Yii::app()->db->createCommand("select max(nitem) as max, count(*) as qtd from tblnfeterceiroitem where codnfeterceiro = {$model->codnfeterceiro}");
@@ -177,8 +187,9 @@ class NfeTerceiroItemController extends Controller
 	{
 		$model=$this->loadModel($id);
 
-		if (!$model->podeEditar())
-			throw new CHttpException(409, 'Registro não permite edição.');
+		// if (!$model->podeEditar()) {
+		// 	throw new CHttpException(409, 'Registro não permite edição.');
+        // }
 
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
@@ -186,9 +197,9 @@ class NfeTerceiroItemController extends Controller
 		if(isset($_POST['NfeTerceiroItem']))
 		{
 			$model->attributes=$_POST['NfeTerceiroItem'];
-			$calculopreco = round($model->vprod/$_POST['NfeTerceiroItem']['qcom'], 2); 
+			$calculopreco = round($model->vprod/$_POST['NfeTerceiroItem']['qcom'], 2);
 			$model->vuncom = $calculopreco;
-		
+
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->codnfeterceiroitem));
 		}
