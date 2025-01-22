@@ -16,7 +16,7 @@ $this->menu = array(
     $(document).ready(function() {
 
         $('#NfeTerceiro_nfechave').change(function(e) {
-            $(this).val($(this).val().replace(/\s+/g, ''));
+            $(this).val($(this).val().replace(/\D/g, ''));
         });
 
         $('#search-form').change(function() {

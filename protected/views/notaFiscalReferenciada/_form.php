@@ -5,15 +5,15 @@
 <?php echo $form->errorSummary($model); ?>
 
 <fieldset>
-	<?php 	
+	<?php
 		echo $form->textFieldRow($model,'nfechave',array('class'=>'span5','maxlength'=>100));
 	?>
 </fieldset>
 <div class="form-actions">
 
-    
-    <?php 
-	
+
+    <?php
+
 
         $this->widget(
             'bootstrap.widgets.TbButton',
@@ -23,19 +23,19 @@
                 'label' => 'Salvar',
                 'icon' => 'icon-ok',
                 )
-            ); 
+            );
 	?>
-    
+
 </div>
 
 <?php $this->endWidget(); ?>
 
 <script type='text/javascript'>
-	
+
 $(document).ready(function() {
 
-	$('#NotaFiscalReferenciada_nfechave').change(function(e){ 
-		$(this).val($(this).val().replace(/\s+/g, ''));
+	$('#NotaFiscalReferenciada_nfechave').change(function(e){
+        $(this).val($(this).val().replace(/\D/g, ''));
 	});
 
 	$('#nota-fiscal-referenciada-form').submit(function(e) {
@@ -47,7 +47,7 @@ $(document).ready(function() {
             }
         });
     });
-	
+
 });
 
 </script>

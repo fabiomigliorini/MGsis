@@ -294,7 +294,7 @@ $(document).ready(function() {
 	$('#NotaFiscal_valoroutras').change(function(e){ calculaTotal(); });
 
 	$('#NotaFiscal_nfechave').change(function(e){
-		$(this).val($(this).val().replace(/\s+/g, ''));
+        $(this).val($(this).val().replace(/\D/g, ''));
 	});
 
 	$('#NotaFiscal_placa').change(function(e){
