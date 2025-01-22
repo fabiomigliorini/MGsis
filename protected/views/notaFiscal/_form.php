@@ -14,7 +14,7 @@
 			echo $form->toggleButtonRow($model,'emitida', array('options' => array('width' => 200,  'enabledLabel' => 'Filial', 'disabledLabel' => 'Contraparte')));
 			echo $form->textFieldRow($model,'serie',array('class'=>'input-mini text-right'));
 			echo $form->textFieldRow($model,'numero',array('class'=>'input-small text-right'));
-			echo $form->textFieldRow($model,'nfechave',array('class'=>'input-xlarge text-center','maxlength'=>100));
+			echo $form->textFieldRow($model,'nfechave',array('class'=>'input-xxlarge','maxlength'=>100));
 			echo $form->select2PessoaRow($model,'codpessoa', array('class'=>'span12'));
 			$style = '';
 			if ($model->codpessoa != Pessoa::CONSUMIDOR) {
