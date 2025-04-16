@@ -416,6 +416,7 @@ class NotaFiscalController extends Controller
                 }
             }
 
+            $model->refresh();
             $model->valorprodutos = $total;
             $model->valortotal = $total;
             $model->valorfrete = null;
