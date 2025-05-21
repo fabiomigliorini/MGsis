@@ -149,5 +149,3 @@ else
 </div>
 
 </small>
-
-</div>
