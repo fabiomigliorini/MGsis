@@ -517,6 +517,14 @@ class Titulo extends MGActiveRecord
             'UsuarioAlteracao' => array('select' => '"UsuarioAlteracao".usuario'),
             'ContaContabil' => array('select' => '"ContaContabil".contacontabil'),
             'TipoTitulo' => array('select' => '"TipoTitulo".tipotitulo'),
+            'NegocioFormaPagamento' => [
+                'select' => '"NegocioFormaPagamento".codnegocioformapagamento, "NegocioFormaPagamento".codnegocio',
+                'with' => [
+                    'Negocio' => [
+                        'select' => '"Negocio".confissao'
+                    ]
+                ]
+            ],
         );
 
         if ($this->codgrupocliente) {
