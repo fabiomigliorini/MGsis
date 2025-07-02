@@ -57,7 +57,7 @@ class NegocioProdutoBarra extends MGActiveRecord
 		// will receive user inputs.
 		return array(
 			array('codnegocio, quantidade, valorunitario, valortotal, valorprodutos, codprodutobarra', 'required'),
-			array('valorunitario, valortotal, valorprodutos', 'numerical', 'min' => 0.01),
+			//array('valorunitario, valortotal, valorprodutos', 'numerical', 'min' => 0.01),
 			array('codnegocio', 'validaStatusNegocio'),
 			array('quantidade, valortotal, valorprodutos', 'length', 'max'=>14),
 			array('valorunitario', 'length', 'max'=>22),

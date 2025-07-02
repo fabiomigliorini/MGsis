@@ -548,7 +548,9 @@ class NfeTerceiroController extends Controller
         // Salva PDF
         $arquivo .= "{$model->nfechave}-{$titulo->codtitulo}.pdf";
         // TODO: Fazer sistema guardar o arquivo compactado (sem o gzdecode)
-        file_put_contents($arquivo, gzdecode($pdf));
+        //file_put_contents($arquivo, gzdecode($pdf));
+        file_put_contents($arquivo, $pdf);
+
 
         // Amarra titulo a NfeTerceiro
         $tituloNfeTerceiro = new TituloNfeTerceiro();
