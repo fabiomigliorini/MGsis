@@ -58,7 +58,7 @@ class Portador extends MGActiveRecord
 		// will receive user inputs.
 		return array(
 			array('portador', 'required'),
-			array('agenciadigito, contadigito, carteira, carteiravariacao, convenio', 'numerical', 'integerOnly'=>true),
+			array('agenciadigito, contadigito, carteira, carteiravariacao, convenio, codpessoa', 'numerical', 'integerOnly'=>true),
 			array('portador', 'length', 'max'=>50),
 			array('diretorioremessa, diretorioretorno', 'length', 'max'=>100),
 			array('pixdict', 'length', 'max'=>77),
@@ -83,6 +83,7 @@ class Portador extends MGActiveRecord
 			'Titulos' => array(self::HAS_MANY, 'Titulo', 'codportador'),
 			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
 			'Banco' => array(self::BELONGS_TO, 'Banco', 'codbanco'),
+			'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
 			'UsuarioAlteracao' => array(self::BELONGS_TO, 'Usuario', 'codusuarioalteracao'),
 			'UsuarioCriacao' => array(self::BELONGS_TO, 'Usuario', 'codusuariocriacao'),
 			'Usuarios' => array(self::HAS_MANY, 'Usuario', 'codportador'),
@@ -101,6 +102,7 @@ class Portador extends MGActiveRecord
 			'codportador' => '#',
 			'portador' => 'Portador',
 			'codbanco' => 'Banco',
+			'codpessoa' => 'Pessoa',
 			'agencia' => 'Agência',
 			'agenciadigito' => 'Dígito',
 			'conta' => 'Conta',
@@ -148,6 +150,7 @@ class Portador extends MGActiveRecord
 			$criteria->params = array_merge($criteria->params, array(':portador' => '%'.$texto.'%'));
 		}
 		$criteria->compare('codbanco',$this->codbanco,false);
+		$criteria->compare('codpessoa',$this->codpessoa,false);
 		$criteria->compare('agencia',$this->agencia,false);
 		$criteria->compare('agenciadigito',$this->agenciadigito);
 		$criteria->compare('conta',$this->conta,false);
