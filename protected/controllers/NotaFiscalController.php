@@ -146,6 +146,26 @@ class NotaFiscalController extends Controller
                 }
             }
 
+            //duplica duplicatas
+            if (!$erro && (!empty($duplicar) || !empty($inverter))) {
+                foreach ($original->NotaFiscalPagamentos as $dupl_orig) {
+                    $dupl_novo = new NotaFiscalPagamento();
+                    $dupl_novo->attributes = $dupl_orig->attributes;
+                    $dupl_novo->codnotafiscal = $model->codnotafiscal;
+                    $dupl_novo->criacao = null;
+                    $dupl_novo->codusuariocriacao = null;
+                    $dupl_novo->alteracao = null;
+                    $dupl_novo->codusuarioalteracao = null;
+                    $dupl_novo->save();
+                    if (!$dupl_novo->save()) {
+                        $erro = true;
+                        $model->addError('codnotafiscal', 'Erro ao duplicar NotaFiscalPagamentos #' . $dupl_orig->codnotafiscalpagamentos);
+                        $model->addErrors($dupl_novo->getErrors());
+                        break;
+                    }
+                }
+            }
+
             //duplica Referenciadas
             if (!$erro && (!empty($duplicar) || !empty($inverter))) {
                 foreach ($original->NotaFiscalReferenciadas as $ref_orig) {
