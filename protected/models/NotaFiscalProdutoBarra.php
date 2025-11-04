@@ -96,7 +96,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('codnotafiscal, codprodutobarra, codcfop, quantidade, valorunitario, valortotal, ordem', 'required'),
+            array('codnotafiscal, codprodutobarra, codcfop, quantidade, valorunitario, valortotal', 'required'),
             array('descricaoalternativa', 'length', 'max' => 100),
             array('quantidade, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, ipidevolucaovalor, devolucaopercentual, icmsstbase, icmsstpercentual, icmsstvalor, pisbase, pisvalor, cofinsbase, cofinsvalor, csllbase, csllvalor, irpjbase, irpjvalor', 'length', 'max' => 14),
             array('icmsbasepercentual', 'length', 'max' => 6),
