@@ -563,7 +563,6 @@ Yii::app()->clientScript->registerCoreScript('yii');
             <tbody>
 
                 <?php
-                $iItem = 0;
                 foreach ($model->NotaFiscalProdutoBarras as $prod) {
                     $linhas = 1;
                     $rural = $prod->isOperacaoRural();
@@ -573,12 +572,11 @@ Yii::app()->clientScript->registerCoreScript('yii');
                     if (!empty($prod->observacoes)) {
                         $linhas = 3;
                     }
-                    $iItem++;
                 ?>
                     <tr>
                         <td rowspan="<?php echo $linhas; ?>">
                             <small class="muted pull-right">
-                                <?php echo $iItem; ?>
+                                <?php echo CHtml::encode($prod->ordem, 6); ?>
                             </small>
                         </td>
                         <td rowspan="<?php echo $linhas; ?>">
