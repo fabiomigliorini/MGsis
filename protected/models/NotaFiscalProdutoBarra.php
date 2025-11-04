@@ -96,14 +96,14 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('codnotafiscal, codprodutobarra, codcfop, quantidade, valorunitario, valortotal', 'required'),
+            array('codnotafiscal, codprodutobarra, codcfop, quantidade, valorunitario, valortotal, ordem', 'required'),
             array('descricaoalternativa', 'length', 'max' => 100),
             array('quantidade, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, ipidevolucaovalor, devolucaopercentual, icmsstbase, icmsstpercentual, icmsstvalor, pisbase, pisvalor, cofinsbase, cofinsvalor, csllbase, csllvalor, irpjbase, irpjvalor', 'length', 'max' => 14),
             array('icmsbasepercentual', 'length', 'max' => 6),
             array('valorunitario, valordesconto, valorfrete, valorseguro, valoroutras', 'length', 'max' => 23),
             array('csosn', 'length', 'max' => 4),
             array('pedido', 'length', 'max' => 15),
-            array('pedidoitem', 'numerical', 'integerOnly' => true),
+            array('pedidoitem, ordem', 'numerical', 'integerOnly' => true),
             array('csosn', 'validaCsosn'),
             array('observacoes', 'length', 'max' => 1500),
             array('icmscst, ipicst, piscst, cofinscst', 'validaCst'),
@@ -243,6 +243,8 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
 
             'pedido' => 'Pedido',
             'pedidoitem' => 'Item do Pedido',
+
+            'ordem' => 'Número do Item',
 
             'certidaosefazmt' => 'Certidão Sefaz MT',
 

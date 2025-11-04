@@ -489,7 +489,7 @@ class NotaFiscal extends MGActiveRecord
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'NotaFiscalProdutoBarras' => array(self::HAS_MANY, 'NotaFiscalProdutoBarra', 'codnotafiscal', 'order' => 'criacao ASC NULLS LAST, codnotafiscalprodutobarra ASC'),
+            'NotaFiscalProdutoBarras' => array(self::HAS_MANY, 'NotaFiscalProdutoBarra', 'codnotafiscal', 'order' => 'ordem ASC NULLS LAST, criacao ASC NULLS LAST, codnotafiscalprodutobarra ASC'),
             'NfeTerceiros' => array(self::HAS_MANY, 'NfeTerceiro', 'codnotafiscal'),
             'Operacao' => array(self::BELONGS_TO, 'Operacao', 'codoperacao'),
             'NaturezaOperacao' => array(self::BELONGS_TO, 'NaturezaOperacao', 'codnaturezaoperacao'),
