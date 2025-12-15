@@ -48,15 +48,15 @@ class NotaFiscalPagamento extends MGActiveRecord
     ];
 
     const BANDEIRA = [
-        01 => 'Visa',
-        02 => 'Mastercard',
-        03 => 'American Express',
-        04 => 'Sorocred',
-        05 => 'Diners Club',
-        06 => 'Elo',
-        07 => 'Hipercard',
-        08 => 'Aura',
-        09 => 'Cabal',
+        1 => 'Visa',
+        2 => 'Mastercard',
+        3 => 'American Express',
+        4 => 'Sorocred',
+        5 => 'Diners Club',
+        6 => 'Elo',
+        7 => 'Hipercard',
+        8 => 'Aura',
+        9 => 'Cabal',
         99 => 'Outros',
     ];
 
