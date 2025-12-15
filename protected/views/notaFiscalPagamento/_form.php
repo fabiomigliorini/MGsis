@@ -17,7 +17,7 @@ echo $form->toggleButtonRow($model, 'integracao', array('options' => array('enab
 
 echo $form->select2PessoaRow($model, 'codpessoa', array('class' => 'input-xxlarge'));
 
-echo $form->textFieldRow($model, 'autorizacao', array('class' => 'input-small text-center', 'maxlength' => 20));
+echo $form->textFieldRow($model, 'autorizacao', array('class' => 'input-xlarge text-left', 'maxlength' => 40));
 
 echo $form->textFieldRow($model, 'valorpagamento', array('class' => 'input-small text-right', 'maxlength' => 14));
 
