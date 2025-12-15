@@ -79,7 +79,7 @@ class NotaFiscalPagamento extends MGActiveRecord
             array('codnotafiscal, tipo, valorpagamento', 'required'),
             array('tipo, bandeira', 'numerical', 'integerOnly' => true),
             array('valorpagamento, troco', 'length', 'max' => 14),
-            array('autorizacao', 'length', 'max' => 20),
+            array('autorizacao', 'length', 'max' => 40),
             array('avista, integracao, codpessoa, criacao, codusuariocriacao, alteracao, codusuarioalteracao', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
