@@ -71,16 +71,16 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 			array('acumuladordominiovista, acumuladordominioprazo, ncm', 'numerical', 'integerOnly'=>true),
 			array('codtributacao', 'validaChaveUnica'),
 			array('csosn', 'length', 'max'=>4),
-			array('icmspercentual, pispercentual, cofinspercentual, csllpercentual, irpjpercentual, icmslppercentual', 'length', 'max'=>5),
+			array('icmspercentual, pispercentual, cofinspercentual, csllpercentual, irpjpercentual, icmslppercentual, ibspercentual, cbspercentual, ispercentual', 'length', 'max'=>9),
 			array('historicodominio', 'length', 'max'=>512),
 			array('observacoesnf', 'length', 'max'=>500),
-			array('icmscst, piscst, ipicst, cofinscst', 'length', 'max'=>3),
+			array('icmscst, piscst, ipicst, cofinscst, ibscst, cbscst, iscst', 'length', 'max'=>3),
 			array('csosn, piscst, ipicst, cofinscst', 'numerical', 'min'=>1),
 			array('ncm', 'length', 'max'=>10),
 			array('icmsbase, icmslpbase', 'length', 'max'=>6),
 			array('codestado, movimentacaofisica, movimentacaocontabil, alteracao,
 			codusuarioalteracao, criacao, codusuariocriacao, certidaosefazmt, fethabkg,
-			iagrokg, funruralpercentual, senarpercentual', 'safe'),
+			iagrokg, funruralpercentual, senarpercentual, ibspercentual, ibscst, cbspercentual, cbscst, ispercentual, iscst', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('codtributacaonaturezaoperacao, codtributacao,
@@ -91,7 +91,7 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 			codusuariocriacao, icmscst, piscst, ipicst, cofinscst, pispercentual,
 			cofinspercentual, csllpercentual, irpjpercentual, ncm, icmslpbase,
 			certidaosefazmt, fethabkg, iagrokg, funruralpercentual, senarpercentual, icmslppercentual,
-			observacoesnf', 'safe', 'on'=>'search'),
+			observacoesnf, ibspercentual, ibscst, cbspercentual, cbscst, ispercentual, iscst', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -197,6 +197,12 @@ class TributacaoNaturezaOperacao extends MGActiveRecord
 			'cofinscst' => 'Cofins CST',
 			'pispercentual' => 'PIS %',
 			'cofinspercentual' => 'Cofins %',
+			'ibspercentual' => 'IBS %',
+			'ibscst' => 'IBS CST',
+			'cbspercentual' => 'CBS %',
+			'cbscst' => 'CBS CST',
+			'ispercentual' => 'IS %',
+			'iscst' => 'IS CST',
 			'csllpercentual' => 'CSLL %',
 			'irpjpercentual' => 'IRPJ %',
 			'ncm' => 'NCM',

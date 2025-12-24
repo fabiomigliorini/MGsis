@@ -98,7 +98,7 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
         return array(
             array('codnotafiscal, codprodutobarra, codcfop, quantidade, valorunitario, valortotal', 'required'),
             array('descricaoalternativa', 'length', 'max' => 100),
-            array('quantidade, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, ipidevolucaovalor, devolucaopercentual, icmsstbase, icmsstpercentual, icmsstvalor, pisbase, pisvalor, cofinsbase, cofinsvalor, csllbase, csllvalor, irpjbase, irpjvalor', 'length', 'max' => 14),
+            array('quantidade, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, ipidevolucaovalor, devolucaopercentual, icmsstbase, icmsstpercentual, icmsstvalor, pisbase, pisvalor, cofinsbase, cofinsvalor, csllbase, csllvalor, irpjbase, irpjvalor, ibsbase, ibspercentual, ibsvalor, cbsbase, cbspercentual, cbsvalor, isbase, ispercentual, isvalor', 'length', 'max' => 14),
             array('icmsbasepercentual', 'length', 'max' => 6),
             array('valorunitario, valordesconto, valorfrete, valorseguro, valoroutras', 'length', 'max' => 23),
             array('csosn', 'length', 'max' => 4),
@@ -108,14 +108,14 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
             array('observacoes', 'length', 'max' => 1500),
             array('icmscst, ipicst, piscst, cofinscst', 'validaCst'),
             array('devolucaopercentual', 'validaDevolucao'),
-            array('pispercentual, cofinspercentual, csllpercentual, irpjpercentual', 'length', 'max' => 5),
-            array('icmscst, ipicst, piscst, cofinscst', 'length', 'max' => 3),
+            array('pispercentual, cofinspercentual, csllpercentual, irpjpercentual, ibspercentual, cbspercentual, ispercentual', 'length', 'max' => 9),
+            array('icmscst, ipicst, piscst, cofinscst, ibscst, cbscst, iscst', 'length', 'max' => 3),
             array('codnegocioprodutobarra, alteracao, codusuarioalteracao, criacao,
             codusuariocriacao, certidaosefazmt, fethabkg, fethabvalor, iagrokg, iagrovalor,
-            funruralpercentual, funruralvalor, senarpercentual, senarvalor', 'safe'),
+            funruralpercentual, funruralvalor, senarpercentual, senarvalor, ibsbase, ibspercentual, ibsvalor, ibscst, cbsbase, cbspercentual, cbsvalor, cbscst, isbase, ispercentual, isvalor, iscst', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('codnaturezaoperacao, saida_de, saida_ate, codpessoa, codfilial, codproduto, codnotafiscalprodutobarra, codnotafiscal, codprodutobarra, codcfop, descricaoalternativa, quantidade, valorunitario, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, ipidevolucaovalor, devolucaopercentual, icmsstbase, icmsstpercentual, icmsstvalor, csosn, codnegocioprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao, icmscst, ipicst, piscst, cofinscst, pispercentual, cofinspercentual, csllpercentual, irpjpercentual, pisbase, pisvalor, cofinsbase, cofinsvalor, csllbase, csllvalor, irpjbase, irpjvalor, observacoes', 'safe', 'on' => 'search'),
+            array('codnaturezaoperacao, saida_de, saida_ate, codpessoa, codfilial, codproduto, codnotafiscalprodutobarra, codnotafiscal, codprodutobarra, codcfop, descricaoalternativa, quantidade, valorunitario, valortotal, icmsbase, icmspercentual, icmsvalor, ipibase, ipipercentual, ipivalor, ipidevolucaovalor, devolucaopercentual, icmsstbase, icmsstpercentual, icmsstvalor, csosn, codnegocioprodutobarra, alteracao, codusuarioalteracao, criacao, codusuariocriacao, icmscst, ipicst, piscst, cofinscst, pispercentual, cofinspercentual, csllpercentual, irpjpercentual, pisbase, pisvalor, cofinsbase, cofinsvalor, csllbase, csllvalor, irpjbase, irpjvalor, observacoes, ibsbase, ibspercentual, ibsvalor, ibscst, cbsbase, cbspercentual, cbsvalor, cbscst, isbase, ispercentual, isvalor, iscst', 'safe', 'on' => 'search'),
         );
     }
 
@@ -232,6 +232,21 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
             'cofinsbase' => 'Cofins Base',
             'cofinspercentual' => 'Cofins %',
             'cofinsvalor' => 'Cofins Valor',
+
+            'ibsbase' => 'IBS Base',
+            'ibspercentual' => 'IBS %',
+            'ibsvalor' => 'IBS Valor',
+            'ibscst' => 'IBS CST',
+
+            'cbsbase' => 'CBS Base',
+            'cbspercentual' => 'CBS %',
+            'cbsvalor' => 'CBS Valor',
+            'cbscst' => 'CBS CST',
+
+            'isbase' => 'IS Base',
+            'ispercentual' => 'IS %',
+            'isvalor' => 'IS Valor',
+            'iscst' => 'IS CST',
 
             'csllbase' => 'CSLL Base',
             'csllpercentual' => 'CSLL %',
@@ -490,6 +505,9 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
             $this->ipicst = $trib->ipicst;
             $this->piscst = $trib->piscst;
             $this->cofinscst = $trib->cofinscst;
+            $this->ibscst = isset($trib->ibscst) ? $trib->ibscst : null;
+            $this->cbscst = isset($trib->cbscst) ? $trib->cbscst : null;
+            $this->iscst = isset($trib->iscst) ? $trib->iscst : null;
 
             $this->certidaosefazmt = $trib->certidaosefazmt;
 
@@ -552,6 +570,27 @@ class NotaFiscalProdutoBarra extends MGActiveRecord
                     $this->csllbase = $this->valortotalfinal;
                     $this->csllpercentual = $trib->csllpercentual;
                     $this->csllvalor = round(($this->csllbase * $this->csllpercentual) / 100, 2);
+                }
+
+                //Calcula IBS
+                if (!empty($trib->ibspercentual) && $trib->ibspercentual > 0) {
+                    $this->ibsbase = $this->valortotalfinal;
+                    $this->ibspercentual = $trib->ibspercentual;
+                    $this->ibsvalor = round(($this->ibsbase * $this->ibspercentual) / 100, 2);
+                }
+
+                //Calcula CBS
+                if (!empty($trib->cbspercentual) && $trib->cbspercentual > 0) {
+                    $this->cbsbase = $this->valortotalfinal;
+                    $this->cbspercentual = $trib->cbspercentual;
+                    $this->cbsvalor = round(($this->cbsbase * $this->cbspercentual) / 100, 2);
+                }
+
+                //Calcula IS (Imposto Seletivo)
+                if (!empty($trib->ispercentual) && $trib->ispercentual > 0) {
+                    $this->isbase = $this->valortotalfinal;
+                    $this->ispercentual = $trib->ispercentual;
+                    $this->isvalor = round(($this->isbase * $this->ispercentual) / 100, 2);
                 }
 
                 //Calcula IRPJ

@@ -10,6 +10,7 @@
         <ul class="nav nav-tabs">
             <li class="active"><a href="#tabProduto" data-toggle="tab">Produto</a></li>
             <li class="hidden-phone"><a href="#tabLp" data-toggle="tab">Lucro Presumido</a></li>
+            <li class="hidden-phone"><a href="#tabRt" data-toggle="tab">Reforma Tributária</a></li>
             <li class="hidden-phone"><a href="#tabPr" data-toggle="tab">Produtor Rural</a></li>
             <li class="hidden-desktop"><a href="#tabLp" data-toggle="tab">Presumido</a></li>
             <li class="hidden-desktop"><a href="#tabPr" data-toggle="tab">Rural</a></li>
@@ -68,6 +69,37 @@
 
 
             </div>
+
+            <!-- Reforma -->
+            <div class="tab-pane" id="tabRt">
+                <div class="row-fluid">
+                    <div class="span4">
+                        <?php
+                        echo $form->textFieldRow($model, 'ibsbase', array('class' => 'input-small text-right', 'maxlength' => 14, 'prepend' => 'R$'));
+                        echo $form->textFieldRow($model, 'ibspercentual', array('class' => 'input-small text-right', 'maxlength' => 14, 'append' => '%'));
+                        echo $form->textFieldRow($model, 'ibsvalor', array('class' => 'input-small text-right', 'maxlength' => 14, 'prepend' => 'R$'));
+                        echo $form->textFieldRow($model, 'ibscst', array('class' => 'input-mini text-center', 'maxlength' => 3));
+                        ?>
+                    </div>
+                    <div class="span4">
+                        <?php
+                        echo $form->textFieldRow($model, 'cbsbase', array('class' => 'input-small text-right', 'maxlength' => 14, 'prepend' => 'R$'));
+                        echo $form->textFieldRow($model, 'cbspercentual', array('class' => 'input-small text-right', 'maxlength' => 14, 'append' => '%'));
+                        echo $form->textFieldRow($model, 'cbsvalor', array('class' => 'input-small text-right', 'maxlength' => 14, 'prepend' => 'R$'));
+                        echo $form->textFieldRow($model, 'cbscst', array('class' => 'input-mini text-center', 'maxlength' => 3));
+                        ?>
+                    </div>
+                    <div class="span4">
+                        <?php
+                        echo $form->textFieldRow($model, 'isbase', array('class' => 'input-small text-right', 'maxlength' => 14, 'prepend' => 'R$'));
+                        echo $form->textFieldRow($model, 'ispercentual', array('class' => 'input-small text-right', 'maxlength' => 14, 'append' => '%'));
+                        echo $form->textFieldRow($model, 'isvalor', array('class' => 'input-small text-right', 'maxlength' => 14, 'prepend' => 'R$'));
+                        echo $form->textFieldRow($model, 'iscst', array('class' => 'input-mini text-center', 'maxlength' => 3));
+                        ?>
+                    </div>
+                </div>
+            </div>
+
 
             <!-- Lucro Presumido -->
             <div class="tab-pane" id="tabLp">
@@ -214,6 +246,9 @@
         atualizaBaseImposto('cofins', totalNovo, totalAntigo);
         atualizaBaseImposto('csll', totalNovo, totalAntigo);
         atualizaBaseImposto('irpj', totalNovo, totalAntigo);
+        atualizaBaseImposto('ibs', totalNovo, totalAntigo);
+        atualizaBaseImposto('cbs', totalNovo, totalAntigo);
+        atualizaBaseImposto('is', totalNovo, totalAntigo);
 
         atualizaImposto('funrural', 'percentual');
         atualizaImposto('senar', 'percentual');
@@ -561,6 +596,60 @@
             altDec: '.'
         });
 
+        // IBS
+        $('#NotaFiscalProdutoBarra_ibsbase').autoNumeric('init', {
+            aSep: '.',
+            aDec: ',',
+            altDec: '.'
+        });
+        $('#NotaFiscalProdutoBarra_ibspercentual').autoNumeric('init', {
+            aSep: '.',
+            aDec: ',',
+            altDec: '.',
+            mDec: 4
+        });
+        $('#NotaFiscalProdutoBarra_ibsvalor').autoNumeric('init', {
+            aSep: '.',
+            aDec: ',',
+            altDec: '.'
+        });
+
+        // CBS
+        $('#NotaFiscalProdutoBarra_cbsbase').autoNumeric('init', {
+            aSep: '.',
+            aDec: ',',
+            altDec: '.'
+        });
+        $('#NotaFiscalProdutoBarra_cbspercentual').autoNumeric('init', {
+            aSep: '.',
+            aDec: ',',
+            altDec: '.',
+            mDec: 4
+        });
+        $('#NotaFiscalProdutoBarra_cbsvalor').autoNumeric('init', {
+            aSep: '.',
+            aDec: ',',
+            altDec: '.'
+        });
+
+        // IS
+        $('#NotaFiscalProdutoBarra_isbase').autoNumeric('init', {
+            aSep: '.',
+            aDec: ',',
+            altDec: '.'
+        });
+        $('#NotaFiscalProdutoBarra_ispercentual').autoNumeric('init', {
+            aSep: '.',
+            aDec: ',',
+            altDec: '.',
+            mDec: 4
+        });
+        $('#NotaFiscalProdutoBarra_isvalor').autoNumeric('init', {
+            aSep: '.',
+            aDec: ',',
+            altDec: '.'
+        });
+
         $('#NotaFiscalProdutoBarra_csllbase').autoNumeric('init', {
             aSep: '.',
             aDec: ',',
@@ -715,6 +804,36 @@
         });
         $('#NotaFiscalProdutoBarra_cofinsvalor').change(function() {
             atualizaImposto('cofins', 'valor');
+        });
+
+        $('#NotaFiscalProdutoBarra_ibsbase').change(function() {
+            atualizaImposto('ibs', 'base');
+        });
+        $('#NotaFiscalProdutoBarra_ibspercentual').change(function() {
+            atualizaImposto('ibs', 'percentual');
+        });
+        $('#NotaFiscalProdutoBarra_ibsvalor').change(function() {
+            atualizaImposto('ibs', 'valor');
+        });
+
+        $('#NotaFiscalProdutoBarra_cbsbase').change(function() {
+            atualizaImposto('cbs', 'base');
+        });
+        $('#NotaFiscalProdutoBarra_cbspercentual').change(function() {
+            atualizaImposto('cbs', 'percentual');
+        });
+        $('#NotaFiscalProdutoBarra_cbsvalor').change(function() {
+            atualizaImposto('cbs', 'valor');
+        });
+
+        $('#NotaFiscalProdutoBarra_isbase').change(function() {
+            atualizaImposto('is', 'base');
+        });
+        $('#NotaFiscalProdutoBarra_ispercentual').change(function() {
+            atualizaImposto('is', 'percentual');
+        });
+        $('#NotaFiscalProdutoBarra_isvalor').change(function() {
+            atualizaImposto('is', 'valor');
         });
 
         $('#NotaFiscalProdutoBarra_csllbase').change(function() {
