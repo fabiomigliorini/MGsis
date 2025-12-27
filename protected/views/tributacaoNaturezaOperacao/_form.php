@@ -107,47 +107,6 @@
 	</div>
 
 	<div class="row-fluid">
-		<div class="span12">
-			<?php
-				$box = $this->beginWidget(
-					'bootstrap.widgets.TbBox',
-					array(
-						'title' => 'Reforma Tributária - IBS / CBS / IS',
-						'headerIcon' => 'icon-th-list',
-						//'htmlOptions' => array('class' => ' pull-left')
-					)
-				);
-
-			?>
-				<div class="row-fluid">
-					<div class="span3">
-						<?php
-							echo $form->textFieldRow($model,'ibscst',array('class'=>'input-mini text-right','maxlength'=>3));
-							echo $form->textFieldRow($model,'ibspercentual',array('class'=>'input-mini text-right','maxlength'=>14));
-						?>
-					</div>
-					<div class="span3">
-						<?php
-							echo $form->textFieldRow($model,'cbscst',array('class'=>'input-mini text-right','maxlength'=>3));
-							echo $form->textFieldRow($model,'cbspercentual',array('class'=>'input-mini text-right','maxlength'=>14));
-						?>
-					</div>
-					<div class="span3">
-						<?php
-							echo $form->textFieldRow($model,'iscst',array('class'=>'input-mini text-right','maxlength'=>3));
-							echo $form->textFieldRow($model,'ispercentual',array('class'=>'input-mini text-right','maxlength'=>14));
-						?>
-					</div>
-				</div>
-			<?php
-				$this->endWidget();
-			?>
-
-		</div>
-
-	</div>
-
-	<div class="row-fluid">
 		<div class="span6">
 			<?php
 				$box = $this->beginWidget(
@@ -243,9 +202,6 @@ $(document).ready(function() {
 	$('#TributacaoNaturezaOperacao_icmslppercentual').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#TributacaoNaturezaOperacao_pispercentual').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#TributacaoNaturezaOperacao_cofinspercentual').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
-	$('#TributacaoNaturezaOperacao_ibspercentual').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.', mDec:4 });
-	$('#TributacaoNaturezaOperacao_cbspercentual').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.', mDec:4 });
-	$('#TributacaoNaturezaOperacao_ispercentual').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.', mDec:4 });
 	$('#TributacaoNaturezaOperacao_csllpercentual').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#TributacaoNaturezaOperacao_irpjpercentual').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.' });
 	$('#TributacaoNaturezaOperacao_fethabkg').autoNumeric('init', {aSep:'.', aDec:',', altDec:'.', mDec:6 });

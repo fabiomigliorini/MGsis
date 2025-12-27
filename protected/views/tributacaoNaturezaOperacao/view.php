@@ -203,62 +203,6 @@ Yii::app()->clientScript->registerCoreScript('yii');
         </div>
     </div>
 
-    <h3>Reforma Tributaria</h3>
-
-    <div class="row-fluid">
-        <div class="span3">
-            <?php
-            $this->widget('bootstrap.widgets.TbDetailView', array(
-                'data' => $model,
-                'attributes' => array(
-                    array(
-                        'name' => 'ibscst',
-                        'value' => CHtml::encode($model->ibscst),
-                    ),
-                    array(
-                        'name' => 'ibspercentual',
-                        'value' => Yii::app()->format->formatNumber($model->ibspercentual, 4),
-                    ),
-                ),
-            ));
-            ?>
-        </div>
-        <div class="span3">
-            <?php
-            $this->widget('bootstrap.widgets.TbDetailView', array(
-                'data' => $model,
-                'attributes' => array(
-                    array(
-                        'name' => 'cbscst',
-                        'value' => CHtml::encode($model->cbscst),
-                    ),
-                    array(
-                        'name' => 'cbspercentual',
-                        'value' => Yii::app()->format->formatNumber($model->cbspercentual, 4),
-                    ),
-                ),
-            ));
-            ?>
-        </div>
-        <div class="span3">
-            <?php
-            $this->widget('bootstrap.widgets.TbDetailView', array(
-                'data' => $model,
-                'attributes' => array(
-                    array(
-                        'name' => 'iscst',
-                        'value' => CHtml::encode($model->iscst),
-                    ),
-                    array(
-                        'name' => 'ispercentual',
-                        'value' => Yii::app()->format->formatNumber($model->ispercentual, 4),
-                    ),
-                ),
-            ));
-            ?>
-        </div>
-    </div>
-
     <div class="row-fluid">
         <div class="span3">
             <h3>Simples</h3>
