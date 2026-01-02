@@ -261,24 +261,25 @@ Yii::app()->clientScript->registerCoreScript('yii');
         $staus = "&nbsp";
         $css = "";
 
-        switch ($model->codstatus) {
-            case NotaFiscal::CODSTATUS_DIGITACAO;
+        switch ($model->status) {
+            case 'DIG': // Em Digitação
                 $css_label = "label-warning";
                 break;
 
-            case NotaFiscal::CODSTATUS_AUTORIZADA;
+            case 'AUT': // Autorizada
                 $css_label = "label-success";
                 break;
 
-            case NotaFiscal::CODSTATUS_LANCADA;
+            case 'LAN': // Lançada
                 $css_label = "label-info";
                 break;
 
-            case NotaFiscal::CODSTATUS_NAOAUTORIZADA;
+            case 'ERR': // Não Autorizada
+                $css_label = "label-default";
                 break;
 
-            case NotaFiscal::CODSTATUS_INUTILIZADA;
-            case NotaFiscal::CODSTATUS_CANCELADA;
+            case 'INU': // Inutilizada
+            case 'CAN': // Cancelada
                 $css_label = "label-important";
                 break;
         }
@@ -304,7 +305,7 @@ Yii::app()->clientScript->registerCoreScript('yii');
             ),
             array(
                 'label' => 'Status',
-                'value' => "<small class='label $css_label'>$model->status</small> $tpEmis",
+                'value' => "<small class='label $css_label'>{$model->getStatusDescricao()}</small> $tpEmis",
                 'type' => 'raw',
             ),
         );
@@ -361,7 +362,7 @@ Yii::app()->clientScript->registerCoreScript('yii');
         if (!empty($model->justificativa))
             $attr[] = 'justificativa';
 
-        if ($model->codstatus == NotaFiscal::CODSTATUS_AUTORIZADA) {
+        if ($model->status == 'AUT') {
             $attr[] = [
                 'label' => 'MDFe',
                 'value' => "<a href='" . MGSPA_URL . "mdfe/create-nfechave/{$model->nfechave}' target='_blank'>Criar nova MDFe</a>",

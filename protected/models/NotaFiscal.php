@@ -48,6 +48,7 @@
  * @property string $ipivalor
  * @property string $ipidevolucaovalor
  * @property string $modelo
+ * @property string $status
  *
  * The followings are the available model relations:
  * @property NotaFiscalProdutoBarra[] $NotaFiscalProdutoBarras
@@ -90,7 +91,6 @@ class NotaFiscal extends MGActiveRecord
     const TPEMIS_SVC_RS           = 7; // Contingência SVC-RS (SEFAZ Virtual de Contingência do RS);
     const TPEMIS_OFFLINE          = 9; // Contingência off-line da NFC-e (as demais opções de contingência são válidas também para a NFC-e);
 
-    public $status;
     public $codstatus;
     public $emissao_de;
     public $emissao_ate;
@@ -125,6 +125,8 @@ class NotaFiscal extends MGActiveRecord
             array('codnaturezaoperacao, serie, emissao, saida, codfilial, codestoquelocal, codpessoa', 'required'),
             array('codpessoatransportador, serie, tpemis, numero, volumes, frete', 'numerical', 'integerOnly' => true),
             array('nfechave, nfereciboenvio, nfeautorizacao, nfecancelamento, nfeinutilizacao', 'length', 'max' => 100),
+            array('status', 'length', 'max' => 3),
+            array('status', 'in', 'range' => array('LAN', 'DIG', 'ERR', 'AUT', 'CAN', 'INU'), 'allowEmpty' => false),
             //array('nfechave', 'unique'),
             array('codestoquelocal', 'validaEstoqueLocal'),
             array('nfechave', 'validaChaveNFE'),
@@ -142,7 +144,7 @@ class NotaFiscal extends MGActiveRecord
             array('pesoliquido, pesobruto, valorfrete, valorseguro, valordesconto, valoroutras, valorprodutos, valortotal, icmsbase, icmsvalor, icmsstbase, icmsstvalor, ipibase, ipidevolucaovalor, ipivalor', 'length', 'max' => 14),
             array('justificativa', 'length', 'max' => 200),
             array('volumesespecie, volumesmarca, volumesnumero', 'length', 'max' => 60),
-            array('emitida, nfeimpressa, codoperacao, nfedataenvio, nfedataautorizacao, nfedatacancelamento, nfedatainutilizacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
+            array('emitida, nfeimpressa, codoperacao, nfedataenvio, nfedataautorizacao, nfedatacancelamento, nfedatainutilizacao, alteracao, codusuarioalteracao, criacao, codusuariocriacao, status', 'safe'),
             array('cpf', 'ext.validators.CnpjCpfValidator'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
@@ -567,6 +569,7 @@ class NotaFiscal extends MGActiveRecord
             'placa' => 'Placa',
             'codestadoplaca' => 'Estado',
             'cpf' => 'CPF',
+            'status' => 'Status',
         );
     }
 
@@ -761,9 +764,66 @@ class NotaFiscal extends MGActiveRecord
 
     public function calculaStatus()
     {
-        $codstatus = $this->calculaCodStatus();
-        $opcoes = $this->getStatusListaCombo();
-        $this->status = $opcoes[$codstatus];
+        $this->calculaCodStatus();
+        $this->status = $this->calculaStatusCampo();
+    }
+
+    /**
+     * Calcula e retorna o status da nota fiscal no formato de 3 caracteres
+     * LAN = Lançada (emitida = false)
+     * DIG = Em Digitação (emitida = true e numero vazio)
+     * ERR = Não Autorizada (emitida = true, tem número, sem autorização)
+     * AUT = Autorizada (nfeautorizacao preenchido e não cancelada/inutilizada)
+     * CAN = Cancelada (nfecancelamento preenchido)
+     * INU = Inutilizada (nfeinutilizacao preenchido)
+     */
+    public function calculaStatusCampo()
+    {
+        // Inutilizada
+        if (!empty($this->nfeinutilizacao)) {
+            return 'INU';
+        }
+
+        // Cancelada
+        if (!empty($this->nfecancelamento)) {
+            return 'CAN';
+        }
+
+        // Notas emitidas
+        if ($this->emitida) {
+            // Em Digitação (emitida = true e numero vazio)
+            if (empty($this->numero)) {
+                return 'DIG';
+            }
+
+            // Autorizada (nfeautorizacao preenchido e não cancelada/inutilizada)
+            if (!empty($this->nfeautorizacao)) {
+                return 'AUT';
+            }
+
+            // Não Autorizada (emitida = true, tem número, sem autorização)
+            return 'ERR';
+        }
+
+        // Lançada (emitida = false)
+        return 'LAN';
+    }
+
+    /**
+     * Retorna a descrição legível do status baseado no campo status
+     */
+    public function getStatusDescricao()
+    {
+        $descricoes = array(
+            'LAN' => 'Lançada',
+            'DIG' => 'Em Digitação',
+            'ERR' => 'Não Autorizada',
+            'AUT' => 'Autorizada',
+            'CAN' => 'Cancelada',
+            'INU' => 'Inutilizada',
+        );
+
+        return isset($descricoes[$this->status]) ? $descricoes[$this->status] : $this->status;
     }
 
     public function getTpEmisListaCombo()
@@ -827,7 +887,7 @@ class NotaFiscal extends MGActiveRecord
         return parent::afterFind();
     }
 
-    //preenche codoperacao
+    //preenche codoperacao e status
     protected function beforeValidate()
     {
         if (!empty($this->codnaturezaoperacao)) {
@@ -835,6 +895,9 @@ class NotaFiscal extends MGActiveRecord
                 $this->codoperacao = $this->NaturezaOperacao->codoperacao;
             }
         }
+
+        // Preenche o campo status automaticamente
+        $this->status = $this->calculaStatusCampo();
 
         return parent::beforeValidate();
     }

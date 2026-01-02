@@ -1,8 +1,8 @@
 <?php
 
-$command = Yii::app()->db->createCommand(' 
+$command = Yii::app()->db->createCommand('
 	SELECT DISTINCT nfpb.codnotafiscal
-	  FROM tblNegocioProdutoBarra npb 
+	  FROM tblNegocioProdutoBarra npb
 	 INNER JOIN tblNotaFiscalProdutoBarra nfpb ON (nfpb.codnegocioprodutobarra = npb.codnegocioprodutobarra)
 	 WHERE npb.codnegocio = :codnegocio
 	 ORDER BY nfpb.codnotafiscal
@@ -18,7 +18,7 @@ if (!empty($codnotas))
 	?>
 	<div class="alert">Nenhuma Nota Fiscal foi gerada para este negócio!</div>
 	<?php
-	 * 
+	 *
 	 */
 	?>
 	<h3>Nota Fiscal</h3>
@@ -28,51 +28,47 @@ if (!empty($codnotas))
 foreach ($codnotas as $codnota)
 {
 	$nota = NotaFiscal::model()->findByPk($codnota);
-	
+
 	$css_label = "";
 	$staus = "&nbsp";
 	$css = "";
 
-	switch ($nota->codstatus)
+	switch ($nota->status)
 	{
-		case NotaFiscal::CODSTATUS_DIGITACAO;
+		case 'DIG': // Em Digitação
 			$css_label = "label-warning";
-			$staus = "D";
 			break;
 
-		case NotaFiscal::CODSTATUS_AUTORIZADA;
+		case 'AUT': // Autorizada
 			$css_label = "label-success";
-			$staus = "A";
 			break;
 
-		case NotaFiscal::CODSTATUS_LANCADA;
+		case 'LAN': // Lançada
 			$css_label = "label-info";
-			$staus = "L";
 			break;
 
-		case NotaFiscal::CODSTATUS_NAOAUTORIZADA;
+		case 'ERR': // Não Autorizada
 			$css = "alert-info";
-			$staus = "E";
 			break;
 
-		case NotaFiscal::CODSTATUS_INUTILIZADA;
+		case 'INU': // Inutilizada
 			$css = "alert-danger";
 			$css_label = "label-important";
-			$staus = "I";
 			break;
 
-		case NotaFiscal::CODSTATUS_CANCELADA;
+		case 'CAN': // Cancelada
 			$css = "alert-danger";
 			$css_label = "label-important";
-			$staus = "C";
 			break;
 
-	}	
+	}
+
+	$staus = $nota->getStatusDescricao();
 	?>
 	<div class="registro <?php echo $css; ?>">
 		<span class="row-fluid">
 			<small class="span1 muted">
-				<?php echo CHtml::encode($nota->Filial->filial); ?> 
+				<?php echo CHtml::encode($nota->Filial->filial); ?>
 			</small>
 			<div class="span2">
 				<?php echo CHtml::link(CHtml::encode(Yii::app()->format->formataNumeroNota($nota->emitida, $nota->serie, $nota->numero, $nota->modelo)),array('notaFiscal/view','id'=>$nota->codnotafiscal)); ?>
@@ -81,10 +77,10 @@ foreach ($codnotas as $codnota)
 			<div class="span4">
 				<?php echo CHtml::link(
 					CHtml::encode($nota->Pessoa->fantasia)
-					, array('pessoa/view', 'id'=> $nota->codpessoa)); 
+					, array('pessoa/view', 'id'=> $nota->codpessoa));
 				?><br>
 				<small class="muted">
-					<?php echo CHtml::encode($nota->NaturezaOperacao->naturezaoperacao); ?> 
+					<?php echo CHtml::encode($nota->NaturezaOperacao->naturezaoperacao); ?>
 				</small>
 			</div>
 			<div class="span1 text-right muted">
@@ -92,11 +88,11 @@ foreach ($codnotas as $codnota)
 			</div>
 			<div class="span2">
 				<div class="label <?php echo $css_label; ?> pull-right">
-					<?php echo $nota->status; ?>
+					<?php echo $staus; ?>
 				</div>
 			</div>
 			<div class="span2">
-				<?php $this->widget('MGNotaFiscalBotoes', array('model'=>$nota)); ?>		
+				<?php $this->widget('MGNotaFiscalBotoes', array('model'=>$nota)); ?>
 			</div>
 		</span>
 	</div>
@@ -104,4 +100,4 @@ foreach ($codnotas as $codnota)
 }
 
 
-?> 
+?>

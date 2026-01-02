@@ -1,8 +1,8 @@
 <?php if ($model->emitida): ?>
 	<?php
-		if ($model->codstatus != NotaFiscal::CODSTATUS_AUTORIZADA
-		&& $model->codstatus != NotaFiscal::CODSTATUS_CANCELADA
-		&& $model->codstatus != NotaFiscal::CODSTATUS_INUTILIZADA
+		if ($model->status != 'AUT'
+		&& $model->status != 'CAN'
+		&& $model->status != 'INU'
 		):
 	?>
 		<input type="button" class="btn btn-small btn-block btn-primary btnEnviarNfe" value="Enviar (F9)" id="btnEnviarNfe" data-codnotafiscal="<?php echo $model->codnotafiscal; ?>" data-modelo="<?php echo $model->modelo; ?>">
@@ -10,7 +10,7 @@
 			<input type="button" class="btn btn-small btn-block btn-danger btnInutilizarNfe" value="Inutilizar" data-codnotafiscal="<?php echo $model->codnotafiscal; ?>" id="btnInutilizarNfe">
 		<?php endif; ?>
 	<?php endif; ?>
-	<?php if ($model->codstatus == NotaFiscal::CODSTATUS_AUTORIZADA): ?>
+	<?php if ($model->status == 'AUT'): ?>
 		<input type="button" class="btn btn-small btn-block btn-primary btnAbrirDanfe" data-modelo="<?php echo $model->modelo; ?>" value="Danfe" data-codnotafiscal="<?php echo $model->codnotafiscal; ?>" id="btnAbrirDanfe">
 		<?php
             $emails = [];

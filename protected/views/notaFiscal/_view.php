@@ -3,41 +3,37 @@ $css_label = "";
 $staus = "&nbsp";
 $css = "";
 
-switch ($data->codstatus)
+switch ($data->status)
 {
-	case NotaFiscal::CODSTATUS_DIGITACAO;
+	case 'DIG': // Em Digitação
 		$css_label = "label-warning";
-		$staus = "D";
 		break;
 
-	case NotaFiscal::CODSTATUS_AUTORIZADA;
+	case 'AUT': // Autorizada
 		$css_label = "label-success";
-		$staus = "A";
 		break;
 
-	case NotaFiscal::CODSTATUS_LANCADA;
+	case 'LAN': // Lançada
 		$css_label = "label-info";
-		$staus = "L";
 		break;
 
-	case NotaFiscal::CODSTATUS_NAOAUTORIZADA;
+	case 'ERR': // Não Autorizada
 		$css = "alert-info";
-		$staus = "E";
 		break;
 
-	case NotaFiscal::CODSTATUS_INUTILIZADA;
+	case 'INU': // Inutilizada
 		$css = "alert-danger";
 		$css_label = "label-important";
-		$staus = "I";
 		break;
 
-	case NotaFiscal::CODSTATUS_CANCELADA;
+	case 'CAN': // Cancelada
 		$css = "alert-danger";
 		$css_label = "label-important";
-		$staus = "C";
 		break;
 
 }
+
+$staus = $data->status;
 
 $modelo = NotaFiscal::getModeloListaCombo();
 if (isset($modelo[$data->modelo]))
