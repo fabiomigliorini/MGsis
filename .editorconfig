@@ -25,8 +25,18 @@ indent_size = 4
 [Makefile]
 indent_style = tab
 
-# Indentation override for all JS under lib directory
-[*.js,*.vue]
+# JavaScript e Vue
+[*.{js,vue}]
+indent_style = space
+indent_size = 2
+
+# Blade templates (Laravel)
+[*.blade.php]
+indent_style = space
+indent_size = 4
+
+# HTML e CSS
+[*.{html,css,scss}]
 indent_style = space
 indent_size = 2
 
