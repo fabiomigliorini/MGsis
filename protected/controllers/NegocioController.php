@@ -14,6 +14,7 @@ class NegocioController extends Controller
      */
     public function actionView($id, $perguntarNota = false)
     {
+		$this->redirect(APP_NEGOCIOS_URL . '/negocio/' . $id);
         $this->render('view', array(
             'model' => $this->loadModel($id),
             'perguntarNota' => $perguntarNota
@@ -26,6 +27,7 @@ class NegocioController extends Controller
      */
     public function actionCreateOrEmpty()
     {
+		$this->redirect(APP_NEGOCIOS_URL . '/negocio');
         $sql = '
             select codnegocio
             from tblnegocio
@@ -165,6 +167,7 @@ class NegocioController extends Controller
 
     public function actionAlterar($id)
     {
+		$this->redirect(APP_NEGOCIOS_URL . '/negocio/' . $id);
 
         $model = $this->loadModel($id);
 
@@ -251,6 +254,8 @@ class NegocioController extends Controller
      */
     public function actionUpdate($id)
     {
+		$this->redirect(APP_NEGOCIOS_URL . '/negocio/' . $id);
+
         if (isset($_POST['Negocio']['percentualdesconto'])) {
             unset($_POST['Negocio']['percentualdesconto']);
         }
@@ -329,6 +334,7 @@ class NegocioController extends Controller
 
     public function actionCancelar($id)
     {
+		$this->redirect(APP_NEGOCIOS_URL . '/negocio/' . $id);
         if (Yii::app()->request->isPostRequest) {
             // we only allow Cancelar via POST request
             $model = $this->loadModel($id);
@@ -387,6 +393,7 @@ class NegocioController extends Controller
      */
     public function actionAdmin()
     {
+		$this->redirect(APP_NEGOCIOS_URL . '/negocio');
         $model = new Negocio('search');
 
         $model->unsetAttributes();  // clear any default values
@@ -456,6 +463,7 @@ class NegocioController extends Controller
 
     public function actionAdicionaProduto($codnegocio, $barras, $quantidade = 1)
     {
+		$this->redirect(APP_NEGOCIOS_URL . '/negocio/' . $codnegocio);
         $model = $this->loadModel($codnegocio);
 
         $retorno = array("Adicionado" => true, "Mensagem" => "");
@@ -548,6 +556,7 @@ class NegocioController extends Controller
 
     public function actionAdicionaFormaPagamento($codnegocio, $codformapagamento, $valorpagamento)
     {
+		$this->redirect(APP_NEGOCIOS_URL . '/negocio/' . $codnegocio);
         $model = $this->loadModel($codnegocio);
 
         $retorno = array("Adicionado" => true, "Mensagem" => "");
@@ -594,6 +603,7 @@ class NegocioController extends Controller
 
     public function actionFecharNegocio($codnegocio)
     {
+		$this->redirect(APP_NEGOCIOS_URL . '/negocio/' . $codnegocio);
         $negocio = $this->loadModel($codnegocio);
 
         $retorno = array("Retorno" => true, "Mensagem" => "");
@@ -615,6 +625,7 @@ class NegocioController extends Controller
 
     public function actionGerarNotaFiscal($id, $modelo = null, $codnotafiscal = null)
     {
+		$this->redirect(APP_NEGOCIOS_URL . '/negocio/' . $id);
         $negocio = $this->loadModel($id);
 
         $retorno = array("Retorno" => 1, "Mensagem" => "", "codnotafiscal" => $codnotafiscal);
@@ -697,6 +708,7 @@ class NegocioController extends Controller
 
     public function actionDevolucao($id)
     {
+		$this->redirect(APP_NEGOCIOS_URL . '/negocio/' . $id);
         $model = $this->loadModel($id);
 
         if ($model->codnegociostatus != NegocioStatus::FECHADO) {

@@ -14,6 +14,7 @@ class NotaFiscalController extends Controller
      */
     public function actionView($id)
     {
+		$this->redirect(APP_NOTAS_URL . '/nota/' . $id);
         $this->render('view', array(
             'model' => $this->loadModel($id),
         ));
@@ -25,6 +26,7 @@ class NotaFiscalController extends Controller
      */
     public function actionCreate($duplicar = null, $inverter = null)
     {
+		$this->redirect(APP_NOTAS_URL . '/nota');
         $model = new NotaFiscal;
 
         // Uncomment the following line if AJAX validation is needed
@@ -289,6 +291,7 @@ class NotaFiscalController extends Controller
      */
     public function actionUpdate($id)
     {
+		$this->redirect(APP_NOTAS_URL . '/nota/' . $id);
         $model = $this->loadModel($id);
 
         if (!$model->podeEditar()) {
@@ -317,6 +320,7 @@ class NotaFiscalController extends Controller
      */
     public function actionDelete($id)
     {
+		$this->redirect(APP_NOTAS_URL . '/nota/' . $id);
         if (Yii::app()->request->isPostRequest) {
             // we only allow deletion via POST request
             $transaction = Yii::app()->db->beginTransaction();
@@ -459,6 +463,7 @@ class NotaFiscalController extends Controller
      */
     public function actionIndex()
     {
+		// $this->redirect(APP_NOTAS_URL . '/nota');
         $model = new NotaFiscal('search');
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['NotaFiscal'])) {
@@ -484,6 +489,7 @@ class NotaFiscalController extends Controller
      */
     public function actionAdmin()
     {
+		$this->redirect(APP_NOTAS_URL . '/nota');
         $model = new NotaFiscal('search');
 
         $model->unsetAttributes();  // clear any default values
