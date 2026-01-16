@@ -14,6 +14,7 @@ class CfopController extends Controller
 	*/
 	public function actionView($id)
 	{
+		$this->redirect(APP_NOTAS_URL . '/cfop/');
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 			));
@@ -25,6 +26,7 @@ class CfopController extends Controller
 	*/
 	public function actionCreate()
 	{
+		$this->redirect(APP_NOTAS_URL . '/cfop/');
 		$model=new Cfop;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -49,6 +51,7 @@ class CfopController extends Controller
 	*/
 	public function actionUpdate($id)
 	{
+		$this->redirect(APP_NOTAS_URL . '/cfop/');
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -73,6 +76,7 @@ class CfopController extends Controller
 	*/
 	public function actionDelete($id)
 	{
+		$this->redirect(APP_NOTAS_URL . '/cfop/');
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -103,16 +107,17 @@ class CfopController extends Controller
 	*/
 	public function actionIndex()
 	{
+		$this->redirect(APP_NOTAS_URL . '/cfop/');
 		$model=new Cfop('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['Cfop']))
 			Yii::app()->session['FiltroCfopIndex'] = $_GET['Cfop'];
-		
+
 		if (isset(Yii::app()->session['FiltroCfopIndex']))
 			$model->attributes=Yii::app()->session['FiltroCfopIndex'];
-		
+
 		$this->render('index',array(
 			'dataProvider'=>$model->search(),
 			'model'=>$model,
@@ -124,11 +129,12 @@ class CfopController extends Controller
 	*/
 	public function actionAdmin()
 	{
-	
+		$this->redirect(APP_NOTAS_URL . '/cfop/');
+
 		$model=new Cfop('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['Cfop']))
 			$model->attributes=$_GET['Cfop'];
 
