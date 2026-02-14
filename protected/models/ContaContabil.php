@@ -7,7 +7,7 @@
  * @property string $codcontacontabil
  * @property string $contacontabil
  * @property string $numero
- * @property boolean $inativo
+ * @property string $inativo
  * @property string $alteracao
  * @property string $codusuarioalteracao
  * @property string $criacao
@@ -109,7 +109,7 @@ class ContaContabil extends MGActiveRecord
 			$criteria->params = array_merge($criteria->params, array(':contacontabil' => '%'.$texto.'%'));
 		}
 		$criteria->compare('numero',$this->numero,true);
-		$criteria->compare('inativo',$this->inativo);
+		$criteria->compare('inativo',$this->inativo,true);
 		$criteria->compare('alteracao',$this->alteracao,false);
 		$criteria->compare('codusuarioalteracao',$this->codusuarioalteracao,false);
 		$criteria->compare('criacao',$this->criacao,false);
@@ -138,7 +138,7 @@ class ContaContabil extends MGActiveRecord
 		return array(
 			'combo'=>array(
 				'select'=>array('codcontacontabil', 'contacontabil'),
-				'condition'=>'inativo=false',
+				'condition'=>'inativo is null',
 				'order'=>'contacontabil ASC',
 				),
 			);

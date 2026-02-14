@@ -8,7 +8,18 @@
 	<?php 	
 		echo $form->textFieldRow($model,'contacontabil',array('class'=>'input-xlarge','maxlength'=>100));
 		echo $form->textFieldRow($model,'numero',array('class'=>'input-mini text-right','maxlength'=>15));
-		echo $form->toggleButtonRow($model,'inativo', array('options' => array('enabledLabel' => 'Sim', 'disabledLabel' => 'Não')));
+		echo $form->datepickerRow(
+			$model,
+			'inativo',
+			array(
+				'class' => 'input-small text-center',
+				'options' => array(
+					'language' => 'pt',
+					'format' => 'dd/mm/yyyy'
+					),
+				'prepend' => '<i class="icon-calendar"></i>',
+				)
+		);
 	?>
 </fieldset>
 <div class="form-actions">
