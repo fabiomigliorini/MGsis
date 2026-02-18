@@ -14,6 +14,7 @@ class TributacaoController extends Controller
 	*/
 	public function actionView($id)
 	{
+        $this->redirect(APP_NOTAS_URL . '/tributacao-cadastro');
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 			));
@@ -25,6 +26,7 @@ class TributacaoController extends Controller
 	*/
 	public function actionCreate()
 	{
+        $this->redirect(APP_NOTAS_URL . '/tributacao-cadastro');
 		$model=new Tributacao;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -49,6 +51,7 @@ class TributacaoController extends Controller
 	*/
 	public function actionUpdate($id)
 	{
+        $this->redirect(APP_NOTAS_URL . '/tributacao-cadastro');
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -73,6 +76,7 @@ class TributacaoController extends Controller
 	*/
 	public function actionDelete($id)
 	{
+        $this->redirect(APP_NOTAS_URL . '/tributacao-cadastro');
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -103,16 +107,17 @@ class TributacaoController extends Controller
 	*/
 	public function actionIndex()
 	{
+        $this->redirect(APP_NOTAS_URL . '/tributacao-cadastro');
 		$model=new Tributacao('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['Tributacao']))
 			Yii::app()->session['FiltroTributacaoIndex'] = $_GET['Tributacao'];
-		
+
 		if (isset(Yii::app()->session['FiltroTributacaoIndex']))
 			$model->attributes=Yii::app()->session['FiltroTributacaoIndex'];
-		
+
 		$this->render('index',array(
 			'dataProvider'=>$model->search(),
 			'model'=>$model,
@@ -124,11 +129,11 @@ class TributacaoController extends Controller
 	*/
 	public function actionAdmin()
 	{
-	
+        $this->redirect(APP_NOTAS_URL . '/tributacao-cadastro');
 		$model=new Tributacao('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['Tributacao']))
 			$model->attributes=$_GET['Tributacao'];
 
@@ -144,6 +149,7 @@ class TributacaoController extends Controller
 	*/
 	public function loadModel($id)
 	{
+        $this->redirect(APP_NOTAS_URL . '/tributacao-cadastro');
 		$model=Tributacao::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
@@ -156,6 +162,7 @@ class TributacaoController extends Controller
 	*/
 	protected function performAjaxValidation($model)
 	{
+        $this->redirect(APP_NOTAS_URL . '/tributacao-cadastro');
 		if(isset($_POST['ajax']) && $_POST['ajax']==='tributacao-form')
 		{
 			echo CActiveForm::validate($model);

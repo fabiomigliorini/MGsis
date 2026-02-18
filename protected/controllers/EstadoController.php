@@ -14,6 +14,7 @@ class EstadoController extends Controller
 	*/
 	public function actionView($id)
 	{
+		$this->redirect(APP_NOTAS_URL . '/cidade');
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 			));
@@ -25,8 +26,9 @@ class EstadoController extends Controller
 	*/
 	public function actionCreate($codpais)
 	{
+		$this->redirect(APP_NOTAS_URL . '/cidade');
 		$model=new Estado;
-		
+
 		$model->codpais = $codpais;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -51,6 +53,7 @@ class EstadoController extends Controller
 	*/
 	public function actionUpdate($id)
 	{
+		$this->redirect(APP_NOTAS_URL . '/cidade');
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -75,6 +78,7 @@ class EstadoController extends Controller
 	*/
 	public function actionDelete($id)
 	{
+		$this->redirect(APP_NOTAS_URL . '/cidade');
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -107,16 +111,17 @@ class EstadoController extends Controller
 	*/
 	public function actionIndex()
 	{
+		$this->redirect(APP_NOTAS_URL . '/cidade');
 		$model=new Estado('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['Estado']))
 			Yii::app()->session['FiltroEstadoIndex'] = $_GET['Estado'];
-		
+
 		if (isset(Yii::app()->session['FiltroEstadoIndex']))
 			$model->attributes=Yii::app()->session['FiltroEstadoIndex'];
-		
+
 		$this->render('index',array(
 			'dataProvider'=>$model->search(),
 			'model'=>$model,
@@ -128,11 +133,12 @@ class EstadoController extends Controller
 	*/
 	public function actionAdmin()
 	{
-	
+		$this->redirect(APP_NOTAS_URL . '/cidade');
+
 		$model=new Estado('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['Estado']))
 			$model->attributes=$_GET['Estado'];
 

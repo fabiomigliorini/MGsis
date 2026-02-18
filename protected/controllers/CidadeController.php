@@ -14,6 +14,7 @@ class CidadeController extends Controller
 	*/
 	public function actionView($id)
 	{
+		$this->redirect(APP_NOTAS_URL . '/cidade');
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 			));
@@ -25,8 +26,9 @@ class CidadeController extends Controller
 	*/
 	public function actionCreate($codestado)
 	{
+		$this->redirect(APP_NOTAS_URL . '/cidade');
 		$model=new Cidade;
-		
+
 		$model->codestado = $codestado;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -51,6 +53,7 @@ class CidadeController extends Controller
 	*/
 	public function actionUpdate($id)
 	{
+		$this->redirect(APP_NOTAS_URL . '/cidade');
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -75,10 +78,11 @@ class CidadeController extends Controller
 	*/
 	public function actionDelete($id)
 	{
+		$this->redirect(APP_NOTAS_URL . '/cidade');
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
-			try 
+			try
 			{
 				$model = $this->loadModel($id);
 				$codestado = $model->codestado;
@@ -86,7 +90,7 @@ class CidadeController extends Controller
 				// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 				if(!isset($_GET['ajax']))
 					$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('estado/view', 'id'=>$codestado));
-			} 
+			}
 			catch (Exception $ex)
 			{
 				// Cannot delete or update a parent row: a foreign key constraint fails
@@ -107,13 +111,14 @@ class CidadeController extends Controller
 	*/
 	public function actionIndex()
 	{
+		$this->redirect(APP_NOTAS_URL . '/cidade');
 		$model=new Cidade('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['Cidade']))
 			Yii::app()->session['FiltroCidadeIndex'] = $_GET['Cidade'];
-		
+
 		if (isset(Yii::app()->session['FiltroCidadeIndex']))
 			$model->attributes=Yii::app()->session['FiltroCidadeIndex'];
 
@@ -128,11 +133,12 @@ class CidadeController extends Controller
 	*/
 	public function actionAdmin()
 	{
-	
+		$this->redirect(APP_NOTAS_URL . '/cidade');
+
 		$model=new Cidade('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['Cidade']))
 			$model->attributes=$_GET['Cidade'];
 
@@ -166,11 +172,12 @@ class CidadeController extends Controller
 			Yii::app()->end();
 		}
 	}
-	
-	public function actionAjaxBuscaCidade() 
-	{
 
-		// variaveis _GET 
+	public function actionAjaxBuscaCidade()
+	{
+		$this->redirect(APP_NOTAS_URL . '/cidade');
+
+		// variaveis _GET
 		$texto  = str_replace(' ', '%', trim(isset($_GET['texto'])?$_GET['texto']:''));
 		$limite = isset($_GET['limite'])?$_GET['limite']:20;
 		$pagina = isset($_GET['pagina'])?$_GET['pagina']:1;
@@ -180,35 +187,35 @@ class CidadeController extends Controller
 
 		// calcula de onde continuar a consulta
 		$offset = ($pagina-1)*$limite;
-		
+
 		// inicializa array com resultados
 		$resultados = array();
 
 		// se o texto foi preenchido
 		if (strlen($texto)>=3)
 		{
-			
-			// busca pelos campos "fantasia" e "pessoa" 
+
+			// busca pelos campos "fantasia" e "pessoa"
 			$condition = 'cidade ILIKE :cidade';
 			$params = array(
 				':cidade'=>'%'.$texto.'%',
 				);
-			
+
 			// busca pessoas
 			$registros = Cidade::model()->findAll(
 					array(
-						'select'=>'codcidade, cidade', 
-						'order'=>'cidade', 
-						'condition'=>$condition, 
+						'select'=>'codcidade, cidade',
+						'order'=>'cidade',
+						'condition'=>$condition,
 						'with'=>array("Estado"=>array("select"=>"sigla")),
 						'params'=>$params,
 						'limit'=>$limite,
 						'offset'=>$offset,
 						)
 					);
-			
+
 			//monta array com resultados
-			foreach ($registros as $registro) 
+			foreach ($registros as $registro)
 			{
 				$resultados[] = array(
 					'id' => $registro->codcidade,
@@ -216,35 +223,35 @@ class CidadeController extends Controller
 					'uf' => $registro->Estado->sigla,
 					);
 			}
-			
-		} 
-		
+
+		}
+
 		// transforma o array em JSON
 		echo CJSON::encode(
 				array(
-					'mais' => count($resultados)==$limite?true:false, 
-					'pagina' => (int) $pagina, 
+					'mais' => count($resultados)==$limite?true:false,
+					'pagina' => (int) $pagina,
 					'itens' => $resultados
 					)
 				);
-		
+
 		// FIM
 		Yii::app()->end();
-	} 
-	
-	public function actionAjaxInicializaCidade() 
+	}
+
+	public function actionAjaxInicializaCidade()
 	{
 		$id = null;
 		$cidade = null;
 		$uf = null;
-		
+
 		if (isset($_GET['cod']))
 		{
 			try {
 				$model = Cidade::model()->findByPk(
 						$_GET['cod'],
 						array(
-							'select'=>'codcidade, cidade', 
+							'select'=>'codcidade, cidade',
 							'with'=>'Estado',
 							)
 						);
@@ -252,13 +259,13 @@ class CidadeController extends Controller
 				$cidade = $model->cidade;
 				$uf = $model->Estado->sigla;
 			} catch (Exception $e) {
-			}			
+			}
 		}
 		echo CJSON::encode(array('id' => $id,'cidade' => $cidade,'uf' => $uf));
 		Yii::app()->end();
-	} 
+	}
 
-	public function actionAjaxBuscaPeloNome() 
+	public function actionAjaxBuscaPeloNome()
 	{
 		$codcidade = null;
 		if (isset($_GET['uf']) and isset($_GET['cidade']))
@@ -272,6 +279,6 @@ class CidadeController extends Controller
 		}
 		echo CJSON::encode(array('codcidade' => $codcidade));
 		Yii::app()->end();
-	} 
-	
+	}
+
 }
