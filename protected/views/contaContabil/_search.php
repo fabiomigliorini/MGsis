@@ -12,7 +12,7 @@
 
 		<?php echo $form->textFieldRow($model,'numero',array('class'=>'span5','maxlength'=>15)); ?>
 
-		<?php echo $form->checkBoxRow($model,'inativo'); ?>
+		<?php echo $form->textFieldRow($model,'inativo',array('class'=>'span5')); ?>
 
 					<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array(

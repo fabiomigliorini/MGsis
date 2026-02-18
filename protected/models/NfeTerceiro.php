@@ -906,6 +906,7 @@ class NfeTerceiro extends MGActiveRecord
             $nf->codestoquelocal = $nf->Filial->EstoqueLocals[0]->codestoquelocal;
         }
         $nf->codpessoa = $this->codpessoa;
+        $nf->status = 'LAN';
         //$nf->observacoes =
         //$nf->volumes =
         //$nf->frete =

@@ -7,6 +7,6 @@
 
 	<small class="span2"><?php echo CHtml::encode($data->numero); ?></small>
 
-	<b class="span1 muted"><?php echo ($data->inativo)?"Inativo":""; ?></b>
+	<b class="span1 muted"><?php echo (!empty($data->inativo))?"Inativo":""; ?></b>
 
 </div>

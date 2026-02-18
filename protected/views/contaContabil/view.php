@@ -42,11 +42,7 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 			),
 		'contacontabil',
 		'numero',
-		//'inativo',
-		array(
-			'name'=>'inativo',
-			'value'=>($model->inativo)?'Sim':'Não',
-			),
+		'inativo',
 		),
 	)); 
 
