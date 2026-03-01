@@ -14,6 +14,7 @@ class PaisController extends Controller
 	*/
 	public function actionView($id)
 	{
+		$this->redirect(APP_NOTAS_URL . '/cidade');
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 			));
@@ -25,6 +26,7 @@ class PaisController extends Controller
 	*/
 	public function actionCreate()
 	{
+		$this->redirect(APP_NOTAS_URL . '/cidade');
 		$model=new Pais;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -49,6 +51,7 @@ class PaisController extends Controller
 	*/
 	public function actionUpdate($id)
 	{
+		$this->redirect(APP_NOTAS_URL . '/cidade');
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -73,6 +76,7 @@ class PaisController extends Controller
 	*/
 	public function actionDelete($id)
 	{
+		$this->redirect(APP_NOTAS_URL . '/cidade');
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -103,16 +107,17 @@ class PaisController extends Controller
 	*/
 	public function actionIndex()
 	{
+		$this->redirect(APP_NOTAS_URL . '/cidade');
 		$model=new Pais('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['Pais']))
 			Yii::app()->session['FiltroPaisIndex'] = $_GET['Pais'];
-		
+
 		if (isset(Yii::app()->session['FiltroPaisIndex']))
 			$model->attributes=Yii::app()->session['FiltroPaisIndex'];
-		
+
 		$this->render('index',array(
 			'dataProvider'=>$model->search(),
 			'model'=>$model,
@@ -124,11 +129,12 @@ class PaisController extends Controller
 	*/
 	public function actionAdmin()
 	{
-	
+		$this->redirect(APP_NOTAS_URL . '/cidade');
+
 		$model=new Pais('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['Pais']))
 			$model->attributes=$_GET['Pais'];
 

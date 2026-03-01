@@ -14,6 +14,7 @@ class CertidaoEmissorController extends Controller
 	*/
 	public function actionView($id)
 	{
+        $this->redirect(APP_PESSOAS_URL . '/certidao-emissor');
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 			));
@@ -25,6 +26,7 @@ class CertidaoEmissorController extends Controller
 	*/
 	public function actionCreate()
 	{
+        $this->redirect(APP_PESSOAS_URL . '/certidao-emissor');
 		$model=new CertidaoEmissor;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -49,6 +51,7 @@ class CertidaoEmissorController extends Controller
 	*/
 	public function actionUpdate($id)
 	{
+        $this->redirect(APP_PESSOAS_URL . '/certidao-emissor');
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -73,6 +76,7 @@ class CertidaoEmissorController extends Controller
 	*/
 	public function actionDelete($id)
 	{
+        $this->redirect(APP_PESSOAS_URL . '/certidao-emissor');
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -103,16 +107,17 @@ class CertidaoEmissorController extends Controller
 	*/
 	public function actionIndex()
 	{
+        $this->redirect(APP_PESSOAS_URL . '/certidao-emissor');
 		$model=new CertidaoEmissor('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['CertidaoEmissor']))
 			Yii::app()->session['FiltroCertidaoEmissorIndex'] = $_GET['CertidaoEmissor'];
-		
+
 		if (isset(Yii::app()->session['FiltroCertidaoEmissorIndex']))
 			$model->attributes=Yii::app()->session['FiltroCertidaoEmissorIndex'];
-		
+
 		$this->render('index',array(
 			'dataProvider'=>$model->search(),
 			'model'=>$model,
@@ -124,11 +129,12 @@ class CertidaoEmissorController extends Controller
 	*/
 	public function actionAdmin()
 	{
-	
+
+        $this->redirect(APP_PESSOAS_URL . '/certidao-emissor');
 		$model=new CertidaoEmissor('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['CertidaoEmissor']))
 			$model->attributes=$_GET['CertidaoEmissor'];
 
@@ -144,6 +150,7 @@ class CertidaoEmissorController extends Controller
 	*/
 	public function loadModel($id)
 	{
+        $this->redirect(APP_PESSOAS_URL . '/certidao-emissor');
 		$model=CertidaoEmissor::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
@@ -156,6 +163,7 @@ class CertidaoEmissorController extends Controller
 	*/
 	protected function performAjaxValidation($model)
 	{
+        $this->redirect(APP_PESSOAS_URL . '/certidao-emissor');
 		if(isset($_POST['ajax']) && $_POST['ajax']==='certidao-emissor-form')
 		{
 			echo CActiveForm::validate($model);

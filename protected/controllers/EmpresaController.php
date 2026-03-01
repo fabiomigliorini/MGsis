@@ -14,6 +14,7 @@ class EmpresaController extends Controller
 	*/
 	public function actionView($id)
 	{
+        $this->redirect(APP_PESSOAS_URL . '/empresa');
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 			));
@@ -25,6 +26,7 @@ class EmpresaController extends Controller
 	*/
 	public function actionCreate()
 	{
+        $this->redirect(APP_PESSOAS_URL . '/empresa');
 		$model=new Empresa;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -49,6 +51,7 @@ class EmpresaController extends Controller
 	*/
 	public function actionUpdate($id)
 	{
+        $this->redirect(APP_PESSOAS_URL . '/empresa');
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -73,6 +76,7 @@ class EmpresaController extends Controller
 	*/
 	public function actionDelete($id)
 	{
+        $this->redirect(APP_PESSOAS_URL . '/empresa');
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -103,16 +107,17 @@ class EmpresaController extends Controller
 	*/
 	public function actionIndex()
 	{
+        $this->redirect(APP_PESSOAS_URL . '/empresa');
 		$model=new Empresa('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['Empresa']))
 			Yii::app()->session['FiltroEmpresaIndex'] = $_GET['Empresa'];
-		
+
 		if (isset(Yii::app()->session['FiltroEmpresaIndex']))
 			$model->attributes=Yii::app()->session['FiltroEmpresaIndex'];
-		
+
 		$this->render('index',array(
 			'dataProvider'=>$model->search(),
 			'model'=>$model,
@@ -124,11 +129,11 @@ class EmpresaController extends Controller
 	*/
 	public function actionAdmin()
 	{
-	
+        $this->redirect(APP_PESSOAS_URL . '/empresa');
 		$model=new Empresa('search');
-		
+
 		$model->unsetAttributes();  // clear any default values
-		
+
 		if(isset($_GET['Empresa']))
 			$model->attributes=$_GET['Empresa'];
 
@@ -144,6 +149,7 @@ class EmpresaController extends Controller
 	*/
 	public function loadModel($id)
 	{
+        $this->redirect(APP_PESSOAS_URL . '/empresa');
 		$model=Empresa::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
