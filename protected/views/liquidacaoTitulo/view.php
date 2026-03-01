@@ -19,11 +19,11 @@ $this->menu=array(
 		'visible'=>(empty($model->estornado))
 	),
 	array(
-		'label'=>'Estornar', 
-		'icon'=>'icon-thumbs-down', 
-		'url'=>'#', 
+		'label'=>'Estornar',
+		'icon'=>'icon-thumbs-down',
+		'url'=>'#',
 		'linkOptions'=>array('id'=>'btnExcluir'),
-		'visible'=>(empty($model->estornado))
+		'visible'=>(empty($model->estornado) && empty($model->codperiodo))
 		),
 	
 );

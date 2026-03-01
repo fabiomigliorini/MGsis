@@ -116,6 +116,8 @@ class LiquidacaoTituloController extends Controller
 		{
 			// we only allow estorna via POST request
 			$model = $this->loadModel($id);
+			if (!empty($model->codperiodo))
+				throw new CHttpException(400, 'Liquidação de Títulos já fechada em um período. Não é possível estornar.');
 			if (!$model->estorna())
 				Yii::app()->user->setFlash("error", "Erro ao estornar Liquidação de Títulos!");
 			else
