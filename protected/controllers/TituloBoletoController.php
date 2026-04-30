@@ -4,6 +4,7 @@ class TituloBoletoController extends Controller
 {
 	public function actionIndex()
 	{
+		$this->redirect(APP_CONTAS_URL . '/boleto/abertos');
         $abertos = TituloBoleto::abertos();
         $tipo = isset($_GET['tipo'])?$_GET['tipo']:'vencidos';
         $boletos = TituloBoleto::boletosAbertos($tipo);
@@ -16,6 +17,7 @@ class TituloBoletoController extends Controller
 
     public function actionLiquidados()
 	{
+		$this->redirect(APP_CONTAS_URL . '/boleto/abertos');
         if (isset($_GET['dia'])) {
             $dia = DateTime::createFromFormat('Y-m-d', $_GET['dia']);
 
@@ -46,6 +48,7 @@ class TituloBoletoController extends Controller
 
     public function actionBaixados()
 	{
+		$this->redirect(APP_CONTAS_URL . '/boleto/abertos');
         $boletos = TituloBoleto::boletosBaixados();
 		$this->render('baixados', [
             'boletos' => $boletos
