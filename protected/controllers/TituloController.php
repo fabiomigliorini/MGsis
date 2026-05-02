@@ -26,6 +26,7 @@ class TituloController extends Controller
      */
     public function actionCreate()
     {
+        $this->redirect(APP_CONTAS_URL . '/titulo/novo');
         $model = new Titulo();
 
         // Uncomment the following line if AJAX validation is needed
@@ -78,6 +79,7 @@ class TituloController extends Controller
      */
     public function actionUpdate($id)
     {
+        $this->redirect(APP_CONTAS_URL . '/titulo/' . $id);
         $model = $this->loadModel($id);
 
         // Uncomment the following line if AJAX validation is needed
