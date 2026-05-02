@@ -14,6 +14,7 @@ class TituloController extends Controller
      */
     public function actionView($id)
     {
+        $this->redirect(APP_CONTAS_URL . '/titulo/' . $id);
         $this->render('view', array(
             'model' => $this->loadModel($id),
         ));
