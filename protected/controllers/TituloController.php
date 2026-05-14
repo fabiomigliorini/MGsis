@@ -119,6 +119,7 @@ class TituloController extends Controller
      */
     public function actionIndex()
     {
+        $this->redirect(APP_CONTAS_URL . '/titulo');
         $model = new Titulo('search');
 
         $model->unsetAttributes(); // clear any default values
@@ -148,7 +149,7 @@ class TituloController extends Controller
      */
     public function actionAdmin()
     {
-
+        $this->redirect(APP_CONTAS_URL . '/titulo');
         $model = new Titulo('search');
 
         $model->unsetAttributes(); // clear any default values
