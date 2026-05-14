@@ -81,10 +81,10 @@
 				'items'=>array(
 					array('label' => 'Pessoas *', 'url' => Yii::app()->createUrl('pessoa')),
 					'---',
-					array('label' => 'Liquidações', 'url' => Yii::app()->createUrl('liquidacaoTitulo')),
+					array('label' => 'Liquidações *', 'url' => Yii::app()->createUrl('liquidacaoTitulo')),
 					array('label' => 'Titulos', 'url' => Yii::app()->createUrl('titulo')),
 					array('label' => 'Boletos *', 'url' => Yii::app()->createUrl('tituloBoleto')),
-					array('label' => 'Agrupamentos', 'url' => Yii::app()->createUrl('tituloAgrupamento')),
+					array('label' => 'Agrupamentos *', 'url' => Yii::app()->createUrl('tituloAgrupamento')),
 					'---',
 					array('label' => 'Bancos *', 'url' => Yii::app()->createUrl('banco')),
 					array('label' => 'Cheques', 'url' => Yii::app()->createUrl('cheque')),
