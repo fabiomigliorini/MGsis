@@ -14,7 +14,7 @@ class LiquidacaoTituloController extends Controller
 	*/
 	public function actionView($id)
 	{
-		$this->redirect(APP_CONTAS_URL . '/liquidacao-titulo');
+		// $this->redirect(APP_CONTAS_URL . '/liquidacao-titulo');
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 			));
@@ -26,7 +26,7 @@ class LiquidacaoTituloController extends Controller
 	*/
 	public function actionCreate()
 	{
-		$this->redirect(APP_CONTAS_URL . '/liquidacao-titulo');
+		// $this->redirect(APP_CONTAS_URL . '/liquidacao-titulo');
 		$model=new LiquidacaoTitulo;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -136,7 +136,7 @@ class LiquidacaoTituloController extends Controller
 	*/
 	public function actionIndex()
 	{
-		$this->redirect(APP_CONTAS_URL . '/liquidacao-titulo');
+		// $this->redirect(APP_CONTAS_URL . '/liquidacao-titulo');
 		$model=new LiquidacaoTitulo('search');
 
 		$model->unsetAttributes();  // clear any default values
@@ -167,7 +167,7 @@ class LiquidacaoTituloController extends Controller
 	*/
 	public function actionAdmin()
 	{
-		$this->redirect(APP_CONTAS_URL . '/liquidacao-titulo');
+		// $this->redirect(APP_CONTAS_URL . '/liquidacao-titulo');
 		$model=new LiquidacaoTitulo('search');
 
 		$model->unsetAttributes();  // clear any default values
