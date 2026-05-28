@@ -162,11 +162,12 @@ class SiteController extends Controller
 	 */
 	public function actionLogout()
 	{
+		// RFC 7009 Token Revocation — POST com body `token` + client_credentials (Basic Auth)
+		$url = AUTH_API_URL . "/oauth/revoke";
 
-		$url = AUTH_API_URL .  "/api/logout";
-
-		$header = array(
-			'Authorization: Bearer ' . $_COOKIE['access_token']
+		$post = array(
+			'token' => isset($_COOKIE['access_token']) ? $_COOKIE['access_token'] : '',
+			'token_type_hint' => 'access_token',
 		);
 
 		$ch = curl_init();
@@ -174,17 +175,19 @@ class SiteController extends Controller
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_VERBOSE, 1);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+		curl_setopt($ch, CURLOPT_USERPWD, SSO_CLIENT_ID . ':' . SSO_CLIENT_SECRET);
+		curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-		
-		$response = curl_exec($ch);
 
+		curl_exec($ch);
 		$statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		curl_close($ch);
 
-		if($statusCode == 200){
-			Yii::app()->user->logout();
-			$this->redirect(Yii::app()->homeUrl);
-		}
+		// RFC 7009 §2.2: server returns 200 mesmo se token era inválido.
+		// Em todos os casos, fazemos logout local e redirecionamos.
+		Yii::app()->user->logout();
+		$this->redirect(Yii::app()->homeUrl);
 	}
 }
