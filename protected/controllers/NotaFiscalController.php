@@ -463,7 +463,7 @@ class NotaFiscalController extends Controller
      */
     public function actionIndex()
     {
-		// $this->redirect(APP_NOTAS_URL . '/nota');
+		$this->redirect(APP_NOTAS_URL . '/nota');
         $model = new NotaFiscal('search');
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['NotaFiscal'])) {

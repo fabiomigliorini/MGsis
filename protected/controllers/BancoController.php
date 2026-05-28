@@ -14,6 +14,7 @@ class BancoController extends Controller
 	*/
 	public function actionView($id)
 	{
+		$this->redirect(APP_CONTAS_URL . '/banco');
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 			));
@@ -25,6 +26,7 @@ class BancoController extends Controller
 	*/
 	public function actionCreate()
 	{
+		$this->redirect(APP_CONTAS_URL . '/banco');
 		$model=new Banco;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -49,6 +51,7 @@ class BancoController extends Controller
 	*/
 	public function actionUpdate($id)
 	{
+		$this->redirect(APP_CONTAS_URL . '/banco');
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -73,6 +76,7 @@ class BancoController extends Controller
 	*/
 	public function actionDelete($id)
 	{
+		$this->redirect(APP_CONTAS_URL . '/banco');
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -103,6 +107,7 @@ class BancoController extends Controller
 	*/
 	public function actionIndex()
 	{
+		$this->redirect(APP_CONTAS_URL . '/banco');
 		$model=new Banco('search');
 		
 		$model->unsetAttributes();  // clear any default values
@@ -124,7 +129,7 @@ class BancoController extends Controller
 	*/
 	public function actionAdmin()
 	{
-	
+		$this->redirect(APP_CONTAS_URL . '/banco');
 		$model=new Banco('search');
 		
 		$model->unsetAttributes();  // clear any default values

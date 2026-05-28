@@ -14,6 +14,7 @@ class ChequeController extends Controller
 	*/
 	public function actionView($id)
 	{
+		$this->redirect(APP_CONTAS_URL . '/cheque');
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 			));
@@ -25,6 +26,7 @@ class ChequeController extends Controller
 	*/
 	public function actionCreate()
 	{
+		$this->redirect(APP_CONTAS_URL . '/cheque');
 		$model=new Cheque;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -103,6 +105,7 @@ class ChequeController extends Controller
 	*/
 	public function actionIndex()
 	{
+		$this->redirect(APP_CONTAS_URL . '/cheque');
 		$model=new Cheque('search');
 		
 		$model->unsetAttributes();  // clear any default values
@@ -128,7 +131,7 @@ class ChequeController extends Controller
 	*/
 	public function actionAdmin()
 	{
-	
+		$this->redirect(APP_CONTAS_URL . '/cheque');
 		$model=new Cheque('search');
 		
 		$model->unsetAttributes();  // clear any default values

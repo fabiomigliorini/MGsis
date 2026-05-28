@@ -448,51 +448,55 @@ class NfeTerceiroController extends Controller
         $output = curl_exec($ch);
         $info = curl_getinfo($ch);
         $error = curl_error($ch);
-        curl_close($ch);
 
         if ($error) {
             throw new \Exception("Falha ao gerar PDF da DAR! - {$error}", 1);
         }
 
-        /*
-        echo "<pre>";
-        print_r($info);
-        echo "<hr>";
-        print_r($error);
-        echo "<hr>";
-        print_r($output);
-        echo "<hr>";
-        //die();
-        */
-
         if ($info['content_type'] == 'application/pdf') {
             $pdf = $output;
         } else {
+            // Etapa intermediaria: SEFAZ-MT passou a devolver uma pagina
+            // "Selecione a Forma de Pagamento" com o numrDar em campo hidden.
+            // Precisamos extrair e submeter POST /formapagamento para obter o PDF.
+            @$doc = new DOMDocument();
+            @$doc->loadHTML($output);
+            $xpath = new DomXPath($doc);
+            $numrDarNode = $xpath->query("//input[@id='numrDar']/@value")->item(0);
+            if ($numrDarNode === null) {
+                $erroNode = $xpath->query("//font[@class='SEFAZ-FONT-MensagemErro']")->item(0);
+                if ($erroNode) {
+                    throw new \Exception(trim($erroNode->nodeValue), 1);
+                }
+                throw new \Exception("Falha ao obter numrDar da SEFAZ-MT!", 1);
+            }
+            $numrDar = $numrDarNode->nodeValue;
+
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'https://www.sefaz.mt.gov.br/arrecadacao/darlivre/impirmirdar?chavePix=true');
+            curl_setopt($ch, CURLOPT_URL, 'https://www.sefaz.mt.gov.br/arrecadacao/darlivre/formapagamento');
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-            $headers = array();
-            $headers[] = 'User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:107.0) Gecko/20100101 Firefox/107.0';
-            $headers[] = 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp;q=0.8';
-            $headers[] = 'Accept-Language: pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3';
-            $headers[] = 'Accept-Encoding: gzip, deflate, br';
-            $headers[] = 'Connection: keep-alive';
-            $headers[] = 'Referer: https://www.sefaz.mt.gov.br/arrecadacao/darlivre/pj/gerardar';
-            $headers[] = 'Upgrade-Insecure-Requests: 1';
-            $headers[] = 'Sec-Fetch-Dest: iframe';
-            $headers[] = 'Sec-Fetch-Mode: navigate';
-            $headers[] = 'Sec-Fetch-Site: same-origin';
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
+                'pagn' => 'emitirDarPdf',
+                'parmEmissao' => '0',
+                'codgLocalEmissao' => '',
+                'numrDar' => $numrDar,
+            ]));
+            curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                'Content-Type: application/x-www-form-urlencoded',
+                'Referer: https://www.sefaz.mt.gov.br/arrecadacao/darlivre/pj/gerardar',
+            ]);
             curl_setopt($ch, CURLOPT_COOKIEFILE, '/tmp/cookies.txt');
+            curl_setopt($ch, CURLOPT_COOKIEJAR, '/tmp/cookies.txt');
             $output = curl_exec($ch);
             $info = curl_getinfo($ch);
             $error = curl_error($ch);
             if ($error) {
                 throw new \Exception("Falha ao gerar PDF da DAR! - {$error}", 1);
             }
-            curl_close($ch);
-            //$pdf = gzdecode($output);
+
             $pdf = $output;
         }
 

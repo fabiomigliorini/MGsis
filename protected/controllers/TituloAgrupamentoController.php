@@ -14,6 +14,7 @@ class TituloAgrupamentoController extends Controller
      */
     public function actionView($id)
     {
+        $this->redirect(APP_CONTAS_URL . '/agrupamento');
         $this->render('view', array(
             'model' => $this->loadModel($id),
         ));
@@ -25,6 +26,7 @@ class TituloAgrupamentoController extends Controller
      */
     public function actionCreate()
     {
+        $this->redirect(APP_CONTAS_URL . '/agrupamento');
         $model = new TituloAgrupamento;
 
         // Uncomment the following line if AJAX validation is needed
@@ -83,6 +85,7 @@ class TituloAgrupamentoController extends Controller
      */
     public function actionIndex()
     {
+        $this->redirect(APP_CONTAS_URL . '/agrupamento');
         $model = new TituloAgrupamento('search');
 
         $model->unsetAttributes();  // clear any default values
