@@ -824,6 +824,11 @@ class Negocio extends MGActiveRecord
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        if (!empty($_COOKIE['access_token'])) {
+            curl_setopt($curl, CURLOPT_HTTPHEADER, [
+                'Authorization: Bearer ' . $_COOKIE['access_token'],
+            ]);
+        }
         $response = curl_exec($curl);
         curl_close($curl);
         return $response;

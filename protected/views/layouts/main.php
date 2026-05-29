@@ -17,6 +17,25 @@
 
 	<script type="text/javascript">
 
+		// API L13 exige Bearer em todas as rotas auth:api. Cookie access_token
+		// (domínio .mgpapelaria.com.br) é populado pelo MGAuth no SSO. Aqui só
+		// lemos e injetamos no Authorization quando a request é pra MGSPA_API_URL.
+		window.MGSPA_API_URL = '<?php echo MGSPA_API_URL; ?>';
+		(function () {
+			function getCookie(name) {
+				var m = document.cookie.match(new RegExp('(?:^|;\\s*)' + name + '=([^;]+)'));
+				return m ? decodeURIComponent(m[1]) : null;
+			}
+			$.ajaxSetup({
+				beforeSend: function (xhr, settings) {
+					if (settings.url && settings.url.indexOf(window.MGSPA_API_URL) === 0) {
+						var token = getCookie('access_token');
+						if (token) xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+					}
+				}
+			});
+		})();
+
 		$(document).ready(function() {
 			$.ytLoad();
 
