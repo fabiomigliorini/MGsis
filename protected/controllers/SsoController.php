@@ -48,7 +48,9 @@ class SsoController extends Controller
 
     public function actionConnect()
     {
-        $urlc = SSO_HOST . "/api/v1/auth/user";
+        // OIDC Core 1.0 §5.3 — /userinfo (raiz) retorna claims OIDC + custom MGspa
+        // num único objeto plano (sem wrapper `data`).
+        $urlc = SSO_HOST . "/userinfo";
         $access_token = $_SESSION['access_token'];
         $crl = curl_init();
         curl_setopt($crl, CURLOPT_URL, $urlc);
@@ -71,9 +73,20 @@ class SsoController extends Controller
         }
         curl_close($crl);
         $json = json_decode($rest, true);
+
+        // preferred_username é o claim OIDC standard; usuario fica como fallback
+        // (custom claim MGspa) caso o backend mude no futuro.
+        if (isset($json['preferred_username'])) {
+            $usuario = $json['preferred_username'];
+        } elseif (isset($json['usuario'])) {
+            $usuario = $json['usuario'];
+        } else {
+            $usuario = null;
+        }
+
         $model = new LoginForm;
         $model->attributes = [
-            'username' => $json['data']['usuario'],
+            'username' => $usuario,
             'oauth' => true
         ];
         $model->login();

@@ -34,16 +34,22 @@ class SBaseController extends CController {
         $this->redirect(AUTH_API_URL . "/login?redirect_uri=" . SSO_CLIENT_CALLBACK);
     }
 
-    $url = AUTH_API_URL .  "/api/check-token";
+    // RFC 7662 Token Introspection — POST com body `token` + client_credentials (Basic Auth)
+    $url = AUTH_API_URL . "/oauth/introspect";
 
-    $header = array(
-      'Authorization: Bearer ' . $_COOKIE['access_token']
+    $post = array(
+      'token' => $_COOKIE['access_token'],
+      'token_type_hint' => 'access_token',
     );
+
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_VERBOSE, 1);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+    curl_setopt($ch, CURLOPT_USERPWD, SSO_CLIENT_ID . ':' . SSO_CLIENT_SECRET);
+    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
     $response = curl_exec($ch);
@@ -52,24 +58,27 @@ class SBaseController extends CController {
     curl_close($ch);
     $json = json_decode($response, true);
 
-    if($statusCode == 200){
+    // RFC 7662 §2.2 — `active` (REQUIRED bool) é o indicador primário.
+    // `sub` (string) e `username` são opcionais mas adicionados pelo nosso backend.
+    if ($statusCode == 200 && !empty($json['active'])) {
+      $username = isset($json['username']) ? $json['username'] : null;
+      $codusuario = isset($json['sub']) ? (int) $json['sub'] : 0;
+
       $model = new LoginForm;
       $model->attributes = [
-          'username' => $json['usuario'],
+          'username' => $username,
           'oauth' => true
       ];
       if(Yii::app()->user->isGuest){
         $model->login();
       }
 
-      if(Yii::app()->user->id != $json['user_id']){
+      if(Yii::app()->user->id != $codusuario){
         Yii::app()->user->logout();
         $model->login();
       }
-      // $this->redirect(Yii::app()->user->returnUrl);
-    }else{
+    } else {
       Yii::app()->user->logout();
-      // return false;
     }
 
     $del = Helper::findModule('srbac')->delimeter;
