@@ -15,7 +15,6 @@
  * @property string $coddfetipo
  * @property string $data
  * @property string $coddistribuicaodfeevento
- * @property string $codnotafiscalterceiro
  * @property string $codnfeterceiro
  *
  * The followings are the available model relations:
@@ -23,7 +22,6 @@
  * @property Distribuicaodfeevento $coddistribuicaodfeevento
  * @property Filial $codfilial
  * @property Nfeterceiro $codnfeterceiro
- * @property Notafiscalterceiro $codnotafiscalterceiro
  */
 class DistribuicaoDfe extends MGActiveRecord
 {
@@ -46,10 +44,10 @@ class DistribuicaoDfe extends MGActiveRecord
 			array('codfilial, nsu, coddfetipo', 'required'),
 			array('nsu', 'length', 'max'=>50),
 			array('nfechave', 'length', 'max'=>100),
-			array('criacao, codusuariocriacao, alteracao, codusuarioalteracao, data, coddistribuicaodfeevento, codnotafiscalterceiro, codnfeterceiro', 'safe'),
+			array('criacao, codusuariocriacao, alteracao, codusuarioalteracao, data, coddistribuicaodfeevento, codnfeterceiro', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('coddistribuicaodfe, codfilial, nsu, criacao, codusuariocriacao, alteracao, codusuarioalteracao, nfechave, coddfetipo, data, coddistribuicaodfeevento, codnotafiscalterceiro, codnfeterceiro', 'safe', 'on'=>'search'),
+			array('coddistribuicaodfe, codfilial, nsu, criacao, codusuariocriacao, alteracao, codusuarioalteracao, nfechave, coddfetipo, data, coddistribuicaodfeevento, codnfeterceiro', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,7 +63,6 @@ class DistribuicaoDfe extends MGActiveRecord
 			'DistribuicaoDfeEvento' => array(self::BELONGS_TO, 'DistribuicaoDfeEvento', 'coddistribuicaodfeevento'),
 			'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
 			'NfeTerceiro' => array(self::BELONGS_TO, 'NfeTerceiro', 'codnfeterceiro'),
-			'NotaFiscalTerceiro' => array(self::BELONGS_TO, 'NotaFiscalTerceiro', 'codnotafiscalterceiro'),
 		);
 	}
 
@@ -86,7 +83,6 @@ class DistribuicaoDfe extends MGActiveRecord
 			'coddfetipo' => 'Coddfetipo',
 			'data' => 'dhevento',
 			'coddistribuicaodfeevento' => 'Coddistribuicaodfeevento',
-			'codnotafiscalterceiro' => 'Codnotafiscalterceiro',
 			'codnfeterceiro' => 'Codnfeterceiro',
 		);
 	}
@@ -120,7 +116,6 @@ class DistribuicaoDfe extends MGActiveRecord
 		$criteria->compare('coddfetipo',$this->coddfetipo,true);
 		$criteria->compare('data',$this->data,true);
 		$criteria->compare('coddistribuicaodfeevento',$this->coddistribuicaodfeevento,true);
-		$criteria->compare('codnotafiscalterceiro',$this->codnotafiscalterceiro,true);
 		$criteria->compare('codnfeterceiro',$this->codnfeterceiro,true);
 
 		return new CActiveDataProvider($this, array(
