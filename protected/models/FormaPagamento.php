@@ -18,7 +18,6 @@
  * @property string $codusuarioalteracao
  * @property string $criacao
  * @property string $codusuariocriacao
- * @property boolean $valecompra
  * @property boolean $lio
  * @property boolean $pix
  * @property boolean $stone
@@ -53,10 +52,10 @@ class FormaPagamento extends MGActiveRecord
             array('formapagamento', 'required'),
             array('formapagamento', 'length', 'max'=>50),
             array('formapagamentoecf', 'length', 'max'=>5),
-            array('boleto, fechamento, notafiscal, parcelas, diasentreparcelas, avista, entrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao, valecompra, lio, pix, stone, integracao', 'safe'),
+            array('boleto, fechamento, notafiscal, parcelas, diasentreparcelas, avista, entrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao, lio, pix, stone, integracao', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('codformapagamento, formapagamento, boleto, fechamento, notafiscal, parcelas, diasentreparcelas, avista, formapagamentoecf, entrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao, valecompra, lio, pix, stone, integracao', 'safe', 'on'=>'search'),
+            array('codformapagamento, formapagamento, boleto, fechamento, notafiscal, parcelas, diasentreparcelas, avista, formapagamentoecf, entrega, alteracao, codusuarioalteracao, criacao, codusuariocriacao, lio, pix, stone, integracao', 'safe', 'on'=>'search'),
         );
     }
 
@@ -95,7 +94,6 @@ class FormaPagamento extends MGActiveRecord
             'codusuarioalteracao' => 'Usuário Alteração',
             'criacao' => 'Criação',
             'codusuariocriacao' => 'Usuário Criação',
-            'valecompra' => 'Habilitado utilização em vale compra',
             'lio' => 'Integração com Cielo Lio',
             'pix' => 'Integração com Pix',
             'stone' => 'Integração com Stone',
