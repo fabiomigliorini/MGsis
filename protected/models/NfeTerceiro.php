@@ -971,6 +971,8 @@ class NfeTerceiro extends MGActiveRecord
                 $nfp->codnegocio = $n->codnegocio;
                 $nfp->codformapagamento = 3010; //Fechamento com boleto
                 $nfp->valorpagamento = $this->valortotal;
+                $nfp->valorjuros = 0;
+                $nfp->valortotal = $nfp->valorpagamento + $nfp->valorjuros;
 
                 if (!$nfp->save()) {
                     $this->addErrors($nfp->getErrors());
@@ -1193,6 +1195,63 @@ class NfeTerceiro extends MGActiveRecord
         }
 
         $n = Negocio::model()->findByPk($n->codnegocio);
+
+        // Recalcula os totais que hoje são mantidos pelas triggers de
+        // tblnegocioprodutobarra, tblnegocioformapagamento e tblnegocio.
+        // Mantém a mesma origem e as mesmas regras: produtos ativos,
+        // classificação à vista/a prazo, juros e os componentes do total.
+        $command = Yii::app()->db->createCommand('
+            WITH produtos AS (
+                SELECT COALESCE(
+                    SUM(COALESCE(npb.valorprodutos, npb.valortotal, 0)),
+                    0
+                ) AS valorprodutos
+                  FROM tblnegocioprodutobarra npb
+                 WHERE npb.codnegocio = :codnegocio
+                   AND npb.inativo IS NULL
+            ), pagamentos AS (
+                SELECT
+                    COALESCE(SUM(CASE
+                        WHEN NOT COALESCE(fp.avista, false) THEN nfp.valorpagamento
+                        ELSE 0
+                    END), 0) AS valoraprazo,
+                    COALESCE(SUM(nfp.valorjuros), 0) AS valorjuros
+                  FROM tblnegocioformapagamento nfp
+                  JOIN tblformapagamento fp
+                    ON fp.codformapagamento = nfp.codformapagamento
+                 WHERE nfp.codnegocio = :codnegocio
+            )
+            SELECT produtos.valorprodutos,
+                   pagamentos.valoraprazo,
+                   pagamentos.valorjuros,
+                   produtos.valorprodutos
+                       - COALESCE(n.valordesconto, 0)
+                       - pagamentos.valoraprazo
+                       + COALESCE(n.valorfrete, 0)
+                       + COALESCE(n.valorseguro, 0)
+                       + COALESCE(n.valoroutras, 0)
+                       + pagamentos.valorjuros AS valoravista,
+                   produtos.valorprodutos
+                       - COALESCE(n.valordesconto, 0)
+                       + COALESCE(n.valorfrete, 0)
+                       + COALESCE(n.valorseguro, 0)
+                       + COALESCE(n.valoroutras, 0)
+                       + pagamentos.valorjuros AS valortotal
+              FROM tblnegocio n
+             CROSS JOIN produtos
+             CROSS JOIN pagamentos
+             WHERE n.codnegocio = :codnegocio
+        ');
+        $command->params = array(
+            'codnegocio' => $n->codnegocio,
+        );
+        $totais = $command->queryRow();
+
+        $n->valorprodutos = $totais['valorprodutos'];
+        $n->valoravista = $totais['valoravista'];
+        $n->valoraprazo = $totais['valoraprazo'];
+        $n->valorjuros = $totais['valorjuros'];
+        $n->valortotal = $totais['valortotal'];
         $n->codnegociostatus = NegocioStatus::FECHADO;
         if (!$n->save()) {
             $this->addErrors($n->getErrors());
