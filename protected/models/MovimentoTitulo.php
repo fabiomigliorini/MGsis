@@ -38,7 +38,15 @@
 class MovimentoTitulo extends MGActiveRecord
 {
 
+	/**
+	 * No banco, valor tem sinal: positivo aumenta o que o titulo tem a receber,
+	 * negativo diminui. Aqui dentro $valor continua sem sinal e debito/credito
+	 * saem dele (afterFind). Sao propriedades, e nao colunas, para o model
+	 * funcionar com ou sem as colunas antigas no banco.
+	 */
 	public $valor;
+	public $debito;
+	public $credito;
 	public $operacao;
 
 	/**
@@ -60,7 +68,7 @@ class MovimentoTitulo extends MGActiveRecord
 			array('codtitulo, codtipomovimentotitulo', 'required'),
 			array('debito, credito', 'length', 'max'=>14),
 			array('historico', 'length', 'max'=>255),
-			array('codtipomovimentotitulo, codtitulo, codportador, codtitulorelacionado, transacao, sistema, codliquidacaotitulo, codtituloagrupamento, codboletoretorno, codcobranca, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
+			array('codtipomovimentotitulo, codtitulo, codportador, codtitulorelacionado, transacao, codliquidacaotitulo, codtituloagrupamento, codboletoretorno, codcobranca, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('codmovimentotitulo, codtipomovimentotitulo, codtitulo, codportador, codtitulorelacionado, debito, credito, historico, transacao, sistema, codliquidacaotitulo, codtituloagrupamento, codboletoretorno, codcobranca, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe', 'on'=>'search'),
@@ -172,10 +180,40 @@ class MovimentoTitulo extends MGActiveRecord
 	protected function afterFind()
 	{
 		$ret = parent::afterFind();
-		$this->valor = $this->debito-$this->credito;
-		$this->operacao = ($this->valor<0)?"CR":"DB";
-		$this->valor = abs($this->valor);
+		// a coluna valor chega com sinal; daqui pra frente $valor e' sem sinal
+		$valor = (float) $this->valor;
+		$this->debito = max($valor, 0);
+		$this->credito = max(-$valor, 0);
+		$this->operacao = ($valor<0)?"CR":"DB";
+		$this->valor = abs($valor);
 		return $ret;
+	}
+
+	protected function beforeSave()
+	{
+		$ret = parent::beforeSave();
+
+		// para o banco o valor vai com sinal; o afterSave devolve o sem sinal
+		$this->valor = (float) $this->debito - (float) $this->credito;
+
+		return $ret;
+	}
+
+	/**
+	 * Todo movimento gravado ou apagado refaz o saldo do titulo. Era o servico
+	 * da trigger fntblmovimentotituloaiauad.
+	 */
+	protected function afterSave()
+	{
+		$this->valor = abs($this->valor);
+		Titulo::recalcula($this->codtitulo);
+		return parent::afterSave();
+	}
+
+	protected function afterDelete()
+	{
+		Titulo::recalcula($this->codtitulo);
+		return parent::afterDelete();
 	}
 
 	public function estorna()
@@ -221,6 +259,7 @@ class MovimentoTitulo extends MGActiveRecord
 				break;
 		}
 
+  		$mov->codmovimentotituloestorno = $this->codmovimentotitulo;
   		$mov->codtitulo = $this->codtitulo;
  		$mov->codportador = $this->codportador;
   		$mov->codtitulorelacionado = $this->codtitulorelacionado;
@@ -228,7 +267,6 @@ class MovimentoTitulo extends MGActiveRecord
   		$mov->credito = $this->debito;
   		$mov->historico = $this->historico;
   		$mov->transacao = date('d/m/Y');
-  		$mov->sistema = date('d/m/Y H:i:s');
   		$mov->codliquidacaotitulo = $this->codliquidacaotitulo;
   		$mov->codtituloagrupamento = $this->codtituloagrupamento;
   		$mov->codboletoretorno = $this->codboletoretorno;

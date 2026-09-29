@@ -77,7 +77,19 @@ class Titulo extends MGActiveRecord
     public $status;
     public $Juros;
     public $operacao;
+
+    /**
+     * No banco, valor e saldo tem sinal: positivo a receber, negativo a pagar.
+     * Aqui dentro $valor continua sendo o numero SEM sinal que as telas usam, e
+     * debito/credito e os saldos saem dele (afterFind). Sao propriedades, e nao
+     * colunas, para o model funcionar com ou sem as colunas antigas no banco.
+     */
     public $valor;
+    public $debito;
+    public $credito;
+    public $debitosaldo;
+    public $creditosaldo;
+
     public $gerado_automaticamente;
     public $ordem;
 
@@ -106,7 +118,7 @@ class Titulo extends MGActiveRecord
             array('numero', 'validaNumero'),
             array('numero, nossonumero', 'length', 'max' => 20),
             array('fatura', 'length', 'max' => 50),
-            array('debito, credito, debitototal, creditototal, saldo, debitosaldo, creditosaldo', 'length', 'max' => 14),
+            array('debito, credito, saldo, debitosaldo, creditosaldo', 'length', 'max' => 14),
             array('vencimento', 'date', 'format' => Yii::app()->locale->getDateFormat('medium')),
             array('vencimentooriginal', 'date', 'format' => Yii::app()->locale->getDateFormat('medium')),
             array('transacao', 'date', 'format' => Yii::app()->locale->getDateFormat('medium')),
@@ -116,7 +128,6 @@ class Titulo extends MGActiveRecord
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             //array('sistema','datetime'),
-            array('sistema', 'date', 'format' => strtr(Yii::app()->locale->getDateTimeFormat(), array("{0}" => Yii::app()->locale->getTimeFormat('medium'), "{1}" => Yii::app()->locale->getDateFormat('medium')))),
             array('codtitulo, vencimento_de, vencimento_ate, emissao_de, emissao_ate, criacao_de, criacao_ate, liquidacao_de, liquidacao_ate, codtipotitulo, codfilial, codportador, codpessoa, codcontacontabil, numero, emissao, vencimento, credito, gerencial, boleto, nossonumero, saldo, criacao, codusuariocriacao, debito_de, debito_ate, credito_de, credito_ate, saldo_de, saldo_ate, codgrupocliente, codgrupoeconomico, pagarreceber, status, ordem', 'safe', 'on' => 'search'),
         );
     }
@@ -141,7 +152,7 @@ class Titulo extends MGActiveRecord
         if (!$this->isNewRecord) {
             $old = self::findByPk($this->codtitulo);
             if ($this->codtipotitulo <> $old->codtipotitulo and !empty($this->codtipotitulo)) {
-                if (($this->TipoTitulo->debito <> $old->TipoTitulo->debito) || ($this->TipoTitulo->credito <> $old->TipoTitulo->credito)) {
+                if ($this->TipoTitulo->natureza <> $old->TipoTitulo->natureza) {
                     $this->addError($attribute, 'Impossível alterar o tipo de título de DB para CR, e vice-versa!');
                 }
             }
@@ -245,7 +256,7 @@ class Titulo extends MGActiveRecord
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'MovimentoTitulos' => array(self::HAS_MANY, 'MovimentoTitulo', 'codtitulo', 'order' => 'criacao ASC, sistema ASC, codmovimentotitulo ASC'),
+            'MovimentoTitulos' => array(self::HAS_MANY, 'MovimentoTitulo', 'codtitulo', 'order' => 'criacao ASC, codmovimentotitulo ASC'),
             'MovimentoTitulosRelacionados' => array(self::HAS_MANY, 'MovimentoTitulo', 'codtitulorelacionado'),
             'TituloNfeTerceiros' => array(self::HAS_MANY, 'TituloNfeTerceiro', 'codtitulo'),
             'ContaContabil' => array(self::BELONGS_TO, 'ContaContabil', 'codcontacontabil'),
@@ -538,7 +549,7 @@ class Titulo extends MGActiveRecord
             $criteria->compare('"TipoTitulo".pagar', true, false);
         }
 
-        $criteria->select = 't.codtitulo, t.vencimento, t.emissao, t.codfilial, t.numero, t.fatura, t.codportador, t.credito, t.debito, t.saldo, t.codtipotitulo, t.codcontacontabil, t.codusuariocriacao, t.nossonumero, t.gerencial, t.codpessoa, t.codusuarioalteracao, t.estornado, t.boleto, t.observacao';
+        $criteria->select = 't.codtitulo, t.vencimento, t.emissao, t.codfilial, t.numero, t.fatura, t.codportador, t.credito, t.debito, t.valor, t.saldo, t.codtipotitulo, t.codcontacontabil, t.codusuariocriacao, t.nossonumero, t.gerencial, t.codpessoa, t.codusuarioalteracao, t.estornado, t.boleto, t.observacao';
 
         switch ($this->ordem) {
             case 'AE': // 'Alfabética, Emissão'
@@ -588,8 +599,15 @@ class Titulo extends MGActiveRecord
     {
         $ret = parent::afterFind();
         $this->Juros = new MGJuros(array("de" => $this->vencimento,    "valorOriginal" => $this->saldo));
+
+        // a coluna valor chega com sinal; daqui pra frente $valor e' sem sinal
+        $valor = (float) $this->valor;
+        $this->debito = max($valor, 0);
+        $this->credito = max(-$valor, 0);
+        $this->debitosaldo = max((float) $this->saldo, 0);
+        $this->creditosaldo = max(-1 * (float) $this->saldo, 0);
         $this->operacao = ($this->saldo < 0 || $this->credito > $this->debito) ? "CR" : "DB";
-        $this->valor = abs($this->debito - $this->credito);
+        $this->valor = abs($valor);
 
         if (!empty($this->codnegocioformapagamento) || !empty($this->codtituloagrupamento))
             $this->gerado_automaticamente = true;
@@ -703,7 +721,6 @@ class Titulo extends MGActiveRecord
         $mov->codportador            = $codportador;
         $mov->codtitulorelacionado   = $codtitulorelacionado;
         $mov->historico              = $historico;
-        $mov->sistema                = date('Y-m-d H:i:s');
 
         //salva
         $ret = $mov->save();
@@ -726,19 +743,20 @@ class Titulo extends MGActiveRecord
     {
         $ret = parent::beforeSave();
 
-        if (empty($this->sistema))
-            $this->sistema = $this->criacao;
-
         if (empty($this->numero))
             $this->numero = $this->codtitulo;
 
-        if ($this->TipoTitulo->credito) {
+        // natureza do tipo: P (a pagar) nasce a credito, R (a receber) a debito
+        if ($this->TipoTitulo->natureza == 'P') {
             $this->credito = Yii::app()->format->unformatNumber($this->valor);
             $this->debito = 0;
         } else {
             $this->credito = 0;
             $this->debito = Yii::app()->format->unformatNumber($this->valor);
         }
+
+        // para o banco o valor vai com sinal; o afterSave devolve o sem sinal
+        $this->valor = $this->debito - $this->credito;
 
         //preenche nossonumero quando for boleto, debito
         if (!empty($this->codportador) && $this->boleto && empty($this->credito)) {
@@ -762,6 +780,54 @@ class Titulo extends MGActiveRecord
         return $ret;
     }
 
+
+    protected function afterSave()
+    {
+        $this->valor = abs($this->valor);
+        return parent::afterSave();
+    }
+
+    /**
+     * Refaz no titulo o que depende dos movimentos: saldo, data de liquidacao
+     * e de estorno (as duas so existem com o saldo zerado). Era o servico da
+     * trigger fntblmovimentotituloaiauad; quem chama e' o MovimentoTitulo, toda
+     * vez que um movimento e' gravado ou apagado.
+     */
+    public static function recalcula($codtitulo)
+    {
+        $sql = '
+            update tbltitulo t
+               set saldo               = m.saldo,
+                   transacaoliquidacao = case when m.saldo = 0 then m.transacao end,
+                   estornado           = case when m.saldo = 0 then m.estornado end';
+
+        // enquanto as colunas antigas existirem, elas andam juntas
+        if (Titulo::model()->getTableSchema()->getColumn('debitosaldo') !== null) {
+            $sql .= ',
+                   debitototal         = m.debitototal,
+                   creditototal        = m.creditototal,
+                   debitosaldo         = greatest(m.saldo, 0),
+                   creditosaldo        = greatest(-m.saldo, 0)';
+        }
+
+        $sql .= '
+              from (
+                    select coalesce(sum(valor), 0) as saldo,
+                           coalesce(sum(greatest(valor, 0)), 0) as debitototal,
+                           coalesce(sum(greatest(-valor, 0)), 0) as creditototal,
+                           max(transacao) as transacao,
+                           max(case when codtipomovimentotitulo = :estorno then criacao end) as estornado
+                      from tblmovimentotitulo
+                     where codtitulo = :codtitulomov
+                   ) m
+             where t.codtitulo = :codtitulo';
+
+        Yii::app()->db->createCommand($sql)->execute(array(
+            ':estorno' => TipoMovimentoTitulo::TIPO_ESTORNO_IMPLANTACAO,
+            ':codtitulomov' => $codtitulo,
+            ':codtitulo' => $codtitulo,
+        ));
+    }
 
     public function save($runValidation = true, $attributes = NULL)
     {
