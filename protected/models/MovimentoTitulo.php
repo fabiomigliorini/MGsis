@@ -39,7 +39,7 @@ class MovimentoTitulo extends MGActiveRecord
 {
 
 	/**
-	 * No banco, valor tem sinal: positivo aumenta o que o titulo tem a receber,
+	 * No banco, principal tem sinal: positivo aumenta o que o titulo tem a receber,
 	 * negativo diminui. Aqui dentro $valor continua sem sinal e debito/credito
 	 * saem dele (afterFind). Sao propriedades, e nao colunas, para o model
 	 * funcionar com ou sem as colunas antigas no banco.
@@ -180,8 +180,8 @@ class MovimentoTitulo extends MGActiveRecord
 	protected function afterFind()
 	{
 		$ret = parent::afterFind();
-		// a coluna valor chega com sinal; daqui pra frente $valor e' sem sinal
-		$valor = (float) $this->valor;
+		// a coluna principal chega com sinal; daqui pra frente $valor e' sem sinal
+		$valor = (float) $this->principal;
 		$this->debito = max($valor, 0);
 		$this->credito = max(-$valor, 0);
 		$this->operacao = ($valor<0)?"CR":"DB";
@@ -193,8 +193,9 @@ class MovimentoTitulo extends MGActiveRecord
 	{
 		$ret = parent::beforeSave();
 
-		// para o banco o valor vai com sinal; o afterSave devolve o sem sinal
-		$this->valor = (float) $this->debito - (float) $this->credito;
+		// para o banco o principal vai com sinal; juros, multa, desconto e
+		// total ficam no default 0 (aqui so' nasce implantacao e ajuste)
+		$this->principal = (float) $this->debito - (float) $this->credito;
 
 		return $ret;
 	}

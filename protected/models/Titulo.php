@@ -812,9 +812,9 @@ class Titulo extends MGActiveRecord
 
         $sql .= '
               from (
-                    select coalesce(sum(valor), 0) as saldo,
-                           coalesce(sum(greatest(valor, 0)), 0) as debitototal,
-                           coalesce(sum(greatest(-valor, 0)), 0) as creditototal,
+                    select coalesce(sum(principal), 0) as saldo,
+                           coalesce(sum(greatest(principal, 0)), 0) as debitototal,
+                           coalesce(sum(greatest(-principal, 0)), 0) as creditototal,
                            max(transacao) as transacao,
                            max(case when codtipomovimentotitulo = :estorno then criacao end) as estornado
                       from tblmovimentotitulo
