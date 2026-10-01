@@ -29,7 +29,7 @@
  * @property string $debitosaldo
  * @property string $creditosaldo
  * @property string $transacaoliquidacao
- * @property string $codnegocioformapagamento
+ * @property string $codnegocioparcela
  * @property string $codtituloagrupamento
  * @property string $remessa
  * @property string $estornado
@@ -43,7 +43,7 @@
  * @property MovimentoTitulo[] $MovimentoTitulosRelacionados
  * @property ContaContabil $ContaContabil
  * @property Filial $Filial
- * @property NegocioFormaPagamento $NegocioFormaPagamento
+ * @property NegocioParcela $NegocioParcela
  * @property Pessoa $Pessoa
  * @property Portador $Portador
  * @property TipoTitulo $TipoTitulo
@@ -124,7 +124,7 @@ class Titulo extends MGActiveRecord
             array('transacao', 'date', 'format' => Yii::app()->locale->getDateFormat('medium')),
             array('emissao', 'date', 'format' => Yii::app()->locale->getDateFormat('medium')),
             array('observacao', 'length', 'max' => 255),
-            array('codportador, gerencial, boleto, transacaoliquidacao, codnegocioformapagamento, codtituloagrupamento, remessa, estornado, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
+            array('codportador, gerencial, boleto, transacaoliquidacao, codnegocioparcela, codtituloagrupamento, remessa, estornado, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             //array('sistema','datetime'),
@@ -261,7 +261,7 @@ class Titulo extends MGActiveRecord
             'TituloNfeTerceiros' => array(self::HAS_MANY, 'TituloNfeTerceiro', 'codtitulo'),
             'ContaContabil' => array(self::BELONGS_TO, 'ContaContabil', 'codcontacontabil'),
             'Filial' => array(self::BELONGS_TO, 'Filial', 'codfilial'),
-            'NegocioFormaPagamento' => array(self::BELONGS_TO, 'NegocioFormaPagamento', 'codnegocioformapagamento'),
+            'NegocioParcela' => array(self::BELONGS_TO, 'NegocioParcela', 'codnegocioparcela'),
             'Pessoa' => array(self::BELONGS_TO, 'Pessoa', 'codpessoa'),
             'Portador' => array(self::BELONGS_TO, 'Portador', 'codportador'),
             'TipoTitulo' => array(self::BELONGS_TO, 'TipoTitulo', 'codtipotitulo'),
@@ -310,7 +310,7 @@ class Titulo extends MGActiveRecord
             'debitosaldo' => 'Saldo Débito',
             'creditosaldo' => 'Saldo Crédito',
             'transacaoliquidacao' => 'Liquidação',
-            'codnegocioformapagamento' => 'Negócio Forma Pagamento',
+            'codnegocioparcela' => 'Parcela do Negócio',
             'codtituloagrupamento' => 'Título Agrupamento',
             'remessa' => 'Remessa',
             'estornado' => 'Estorno',
@@ -528,8 +528,8 @@ class Titulo extends MGActiveRecord
             'UsuarioAlteracao' => array('select' => '"UsuarioAlteracao".usuario'),
             'ContaContabil' => array('select' => '"ContaContabil".contacontabil'),
             'TipoTitulo' => array('select' => '"TipoTitulo".tipotitulo'),
-            'NegocioFormaPagamento' => [
-                'select' => '"NegocioFormaPagamento".codnegocioformapagamento, "NegocioFormaPagamento".codnegocio',
+            'NegocioParcela' => [
+                'select' => '"NegocioParcela".codnegocioparcela, "NegocioParcela".codnegocio',
                 'with' => [
                     'Negocio' => [
                         'select' => '"Negocio".confissao'
@@ -609,7 +609,7 @@ class Titulo extends MGActiveRecord
         $this->operacao = ($this->saldo < 0 || $this->credito > $this->debito) ? "CR" : "DB";
         $this->valor = abs($valor);
 
-        if (!empty($this->codnegocioformapagamento) || !empty($this->codtituloagrupamento))
+        if (!empty($this->codnegocioparcela) || !empty($this->codtituloagrupamento))
             $this->gerado_automaticamente = true;
         else
             $this->gerado_automaticamente = false;

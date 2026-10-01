@@ -852,6 +852,22 @@ class NfeTerceiro extends MGActiveRecord
         return true;
     }
 
+    // parcela do negocio que vira o titulo da duplicata (M4 doc-3 do MGspa)
+    protected function criaParcela($negocio, $numero, $vencimento, $valor)
+    {
+        $parcela = new NegocioParcela();
+        $parcela->codnegocio = $negocio->codnegocio;
+        $parcela->condicao = NegocioParcela::CONDICAO_FECHAMENTO;
+        $parcela->numero = $numero;
+        $parcela->vencimento = $vencimento;
+        $parcela->valor = abs($valor);
+        if (!$parcela->save()) {
+            $this->addErrors($parcela->getErrors());
+            return false;
+        }
+        return $parcela;
+    }
+
     public function importar()
     {
         if (!$this->podeImportar()) {
@@ -864,8 +880,6 @@ class NfeTerceiro extends MGActiveRecord
         if (count($this->Pessoa->Filials) > 0) {
             $geraNegocio = false;
         }
-
-        $codnegocioformapagamento = null;
 
         $totalEsperado =
             $this->valorprodutos
@@ -966,21 +980,9 @@ class NfeTerceiro extends MGActiveRecord
                 return false;
             }
 
-            if ($this->NaturezaOperacao->financeiro) {
-                $nfp = new NegocioFormaPagamento();
-                $nfp->codnegocio = $n->codnegocio;
-                $nfp->codformapagamento = 3010; //Fechamento com boleto
-                $nfp->valorpagamento = $this->valortotal;
-                $nfp->valorjuros = 0;
-                $nfp->valortotal = $nfp->valorpagamento + $nfp->valorjuros;
-
-                if (!$nfp->save()) {
-                    $this->addErrors($nfp->getErrors());
-                    $transaction->rollBack();
-                    return false;
-                }
-                $codnegocioformapagamento = $nfp->codnegocioformapagamento;
-            }
+            // prazo (fechamento): uma parcela do negocio por titulo, com o
+            // vencimento da duplicata, criada junto com o titulo abaixo (M4
+            // do plano doc-3 do MGspa)
         }
 
 
@@ -1023,8 +1025,13 @@ class NfeTerceiro extends MGActiveRecord
             }
 
             if ($geraNegocio && $this->NaturezaOperacao->financeiro) {
+                $parcela = $this->criaParcela($n, $i, $ntd->dvenc, $valorDupl[$i]);
+                if (!$parcela) {
+                    $transaction->rollBack();
+                    return false;
+                }
                 $tit = new Titulo();
-                $tit->codnegocioformapagamento = $codnegocioformapagamento;
+                $tit->codnegocioparcela = $parcela->codnegocioparcela;
                 $tit->codtipotitulo = $n->NaturezaOperacao->codtipotitulo;
                 $tit->codfilial = $this->codfilial;
                 $tit->codpessoa = $this->codpessoa;
@@ -1045,6 +1052,7 @@ class NfeTerceiro extends MGActiveRecord
                     $transaction->rollBack();
                     return false;
                 }
+                NegocioParcela::model()->updateByPk($parcela->codnegocioparcela, array('codtitulo' => $tit->codtitulo));
             }
         }
 
@@ -1052,8 +1060,13 @@ class NfeTerceiro extends MGActiveRecord
             $difDupl = round($this->valortotal - $totalDupl, 2);
 
             if (abs($difDupl) > 0.05) {
+                $parcela = $this->criaParcela($n, $parcelas + 1, substr($this->emissao, 0, 10), $difDupl);
+                if (!$parcela) {
+                    $transaction->rollBack();
+                    return false;
+                }
                 $tit = new Titulo();
-                $tit->codnegocioformapagamento = $codnegocioformapagamento;
+                $tit->codnegocioparcela = $parcela->codnegocioparcela;
                 $tit->codtipotitulo = $n->NaturezaOperacao->codtipotitulo;
                 $tit->codfilial = $this->codfilial;
                 $tit->codpessoa = $this->codpessoa;
@@ -1074,6 +1087,7 @@ class NfeTerceiro extends MGActiveRecord
                     $transaction->rollBack();
                     return false;
                 }
+                NegocioParcela::model()->updateByPk($parcela->codnegocioparcela, array('codtitulo' => $tit->codtitulo));
             }
         }
 
@@ -1197,7 +1211,7 @@ class NfeTerceiro extends MGActiveRecord
         $n = Negocio::model()->findByPk($n->codnegocio);
 
         // Recalcula os totais que hoje são mantidos pelas triggers de
-        // tblnegocioprodutobarra, tblnegocioformapagamento e tblnegocio.
+        // tblnegocioprodutobarra, das parcelas/pagamentos e de tblnegocio.
         // Mantém a mesma origem e as mesmas regras: produtos ativos,
         // classificação à vista/a prazo, juros e os componentes do total.
         $command = Yii::app()->db->createCommand('
@@ -1212,14 +1226,22 @@ class NfeTerceiro extends MGActiveRecord
             ), pagamentos AS (
                 SELECT
                     COALESCE(SUM(CASE
-                        WHEN NOT COALESCE(fp.avista, false) THEN nfp.valorpagamento
+                        WHEN NOT nfp.avista THEN nfp.valorpagamento
                         ELSE 0
                     END), 0) AS valoraprazo,
                     COALESCE(SUM(nfp.valorjuros), 0) AS valorjuros
-                  FROM tblnegocioformapagamento nfp
-                  JOIN tblformapagamento fp
-                    ON fp.codformapagamento = nfp.codformapagamento
-                 WHERE nfp.codnegocio = :codnegocio
+                  FROM (
+                      SELECT np.valor - np.juros AS valorpagamento,
+                             np.juros AS valorjuros,
+                             false AS avista
+                        FROM tblnegocioparcela np
+                       WHERE np.codnegocio = :codnegocio
+                      UNION ALL
+                      SELECT pag.principal, pag.juros, true
+                        FROM tblpagamento pag
+                       WHERE pag.codnegocio = :codnegocio
+                         AND pag.estado <> \'C\'
+                  ) nfp
             )
             SELECT produtos.valorprodutos,
                    pagamentos.valoraprazo,

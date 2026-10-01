@@ -131,11 +131,11 @@ else
                         </div>
                         <b class="span8">
                             <?php echo CHtml::link(CHtml::encode($data->Pessoa->fantasia), array('pessoa/view', 'id' => $data->codpessoa), array("tabindex" => -1)); ?>
-                            <?php if (isset($data->NegocioFormaPagamento->Negocio)): ?>
-                                <?php if (empty($data->NegocioFormaPagamento->Negocio->confissao)): ?>
+                            <?php if (isset($data->NegocioParcela->Negocio)): ?>
+                                <?php if (empty($data->NegocioParcela->Negocio->confissao)): ?>
                                     <span class="text-error">
                                         <br>S/Confiss
-                                        <?php echo CHtml::encode($data->NegocioFormaPagamento->Negocio->confissao); ?>
+                                        <?php echo CHtml::encode($data->NegocioParcela->Negocio->confissao); ?>
                                     </span>
                                 <?php endif; ?>
                             <?php endif; ?>
