@@ -50,6 +50,14 @@ class MovimentoTitulo extends MGActiveRecord
 	public $operacao;
 
 	/**
+	 * A liquidacao virou pagamento no MGspa (M6 da TASK-188) e a coluna
+	 * codliquidacaotitulo saiu de tblmovimentotitulo. Fica como propriedade
+	 * para quem ainda atribui (Titulo::adicionaMovimento) nao quebrar; nao vai
+	 * para o banco.
+	 */
+	public $codliquidacaotitulo;
+
+	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
@@ -85,7 +93,6 @@ class MovimentoTitulo extends MGActiveRecord
 		return array(
 			'BoletoRetorno' => array(self::BELONGS_TO, 'BoletoRetorno', 'codboletoretorno'),
 			'Cobranca' => array(self::BELONGS_TO, 'Cobranca', 'codcobranca'),
-			'LiquidacaoTitulo' => array(self::BELONGS_TO, 'LiquidacaoTitulo', 'codliquidacaotitulo'),
 			'Portador' => array(self::BELONGS_TO, 'Portador', 'codportador'),
 			'TipoMovimentoTitulo' => array(self::BELONGS_TO, 'TipoMovimentoTitulo', 'codtipomovimentotitulo'),
 			'Titulo' => array(self::BELONGS_TO, 'Titulo', 'codtitulo'),
@@ -152,7 +159,6 @@ class MovimentoTitulo extends MGActiveRecord
 		$criteria->compare('historico',$this->historico,true);
 		$criteria->compare('transacao',$this->transacao,true);
 		$criteria->compare('sistema',$this->sistema,true);
-		$criteria->compare('codliquidacaotitulo',$this->codliquidacaotitulo,true);
 		$criteria->compare('codtituloagrupamento',$this->codtituloagrupamento,true);
 		$criteria->compare('codboletoretorno',$this->codboletoretorno,true);
 		$criteria->compare('codcobranca',$this->codcobranca,true);
