@@ -533,7 +533,7 @@ class NfeTerceiroController extends Controller
         $titulo->codtitulo = $codtitulo;
         $titulo->codfilial = $model->codfilial;
         $titulo->numero = "ICMS ST {$codtitulo}";
-        $titulo->codtipotitulo = 928; // Boleto a Pagar
+        $titulo->codtipotitulo = 200; // Duplicata a Pagar (tipos renumerados no MGspa, doc-3 M8.1)
         $titulo->valor = $valor;
         $titulo->codpessoa = 3899; // sefaz
         $titulo->codcontacontabil = 147; // ICMS ST
