@@ -89,7 +89,7 @@
 				'label' => 'Comercial',
 				'url'=>'#',
 				'items'=>array(
-					array('label' => 'Negócios *', 'url' => Yii::app()->createUrl('negocio')),
+					// array('label' => 'Negócios *', 'url' => Yii::app()->createUrl('negocio')),
 					// array('label' => 'Notas Fiscais *', 'url' => Yii::app()->createUrl('notaFiscal')),
 					array('label' => htmlentities("NFe de Terceiros"), 'url' => Yii::app()->createUrl('nfeTerceiro')),
 				)
