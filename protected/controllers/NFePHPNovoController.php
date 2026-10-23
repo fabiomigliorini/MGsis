@@ -1686,19 +1686,21 @@ class NFePHPNovoController extends Controller {
         echo json_encode($aRetorno);
     }
 
-    public function actionImprimirNFCe($codnotafiscal, $impressoraUsuarioCriacao = 0) {
+    public function actionImprimirNFCe($codnotafiscal, $impressora = null) {
 
         $nf = $this->loadModelNotaFiscal($codnotafiscal);
         $config = $this->montarConfiguracao($nf->codfilial, $nf->modelo, $codnotafiscal);
         $aRetorno['retorno'] = false;
 
+        if (empty($impressora)) {
+            $aRetorno['xMotivo'] = 'Informe a impressora!';
+            header('Content-type: text/json; charset=UTF-8');
+            echo json_encode($aRetorno);
+            return;
+        }
+
         if (!is_file($this->arquivoPDF))
             $this->gerarDanfe($codnotafiscal);
-
-        if ($impressoraUsuarioCriacao)
-            $impressora = $nf->UsuarioCriacao->impressoratermica;
-        else
-            $impressora = Yii::app()->user->impressoraTermica;
 
         $cmd = "lpr -P $impressora {$this->arquivoPDF};";
         $aRetorno['xMotivo'] = $cmd;

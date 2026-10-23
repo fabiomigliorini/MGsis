@@ -84,11 +84,6 @@ $this->widget('bootstrap.widgets.TbGridView',array(
 			'htmlOptions'=> array('class'=>'span1'),
 			),
 		array(
-			'name'=>'impressoramatricial',
-			'header'=>'Impr',
-			'htmlOptions'=> array('class'=>'span1'),
-			),
-		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
 			'htmlOptions'=> array('class'=>'span1'),
 			),

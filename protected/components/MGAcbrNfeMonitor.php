@@ -742,23 +742,21 @@ class MGAcbrNfeMonitor extends MGSocket
 		return true;
 	}
 	
-	public function imprimirDanfePdfTermica($impressoraUsuarioCriacao = false)
+	public function imprimirDanfePdfTermica($impressora = null)
 	{
 		if ($this->NotaFiscal->modelo != NotaFiscal::MODELO_NFCE)
 			return false;
 		
-		$arquivo = "{$this->NotaFiscal->nfechave}.pdf";
+		if (empty($impressora))
+			return false;
 		
-		if ($impressoraUsuarioCriacao)
-			$impressora = $this->NotaFiscal->UsuarioCriacao->impressoratermica;
-		else
-			$impressora = Yii::app()->user->impressoraTermica;
+		$arquivo = "{$this->NotaFiscal->nfechave}.pdf";
 		
 		$cmd = "cd /tmp; rm -f $arquivo; wget {$this->urlpdf} ; lpr -P $impressora $arquivo;";
 		return exec($cmd);		
 	}
 	
-	public function imprimirDanfe()
+	public function imprimirDanfe($impressora = null)
 	{
 		
 		if (!$this->NotaFiscal->emitida)
@@ -770,7 +768,7 @@ class MGAcbrNfeMonitor extends MGSocket
 		//Monta Comando
 		$cmd = "NFE.ImprimirDANFE(\"";
 		$cmd .= "{$this->Filial->acbrnfemonitorcaminho}\\Arquivos\\NFe\\$mes\\$chave-nfe.xml";
-		$cmd .= "\", \"". Yii::app()->user->getState('impressoraTermica') ."\")\n.\n";
+		$cmd .= "\", \"". $impressora ."\")\n.\n";
 		
 		//Envia Comando
 		if (!$this->enviaComando($cmd, 5))

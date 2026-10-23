@@ -10,8 +10,9 @@ class NFePHPController extends Controller
 	* Gera um arquivo PDF com a Danfe
 	* @param integer $codnotafiscal o codigo da Nota Fiscal
 	* @param boolean $imprimir o codigo da Nota Fiscal
+	* @param string $impressora a fila de impressao
 	*/
-	public function actionDanfe($codnotafiscal, $imprimir = false)
+	public function actionDanfe($codnotafiscal, $imprimir = false, $impressora = null)
 	{
 		
 		/* 
@@ -30,10 +31,9 @@ class NFePHPController extends Controller
 		$danfe = new DanfeNFCeNFePHP($xml, '/var/www/NFePHP/Imagens/MGPapelariaSeloPretoBranco.jpg', 0, $nf->Filial->nfcetokenid, $nf->Filial->nfcetoken);
 		$id = $danfe->montaDANFE(true);
 		
-		//Decide Impressora
-		$impressora = null;
-		if ($imprimir == 1)
-			$impressora = Yii::app()->user->impressoraTermica;
+		//Decide Impressora (vem de quem chama: o MGsis nao guarda mais impressora do usuario)
+		if ($imprimir != 1)
+			$impressora = null;
 		
 		//Imprime
 		$arquivo = "{$nf->nfechave}.pdf";

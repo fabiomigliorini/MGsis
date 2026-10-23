@@ -163,7 +163,7 @@ function NFePHPEnviarSincrono(codnotafiscal, modelo)
 		if (resp.sucesso == true) {
 			NFePHPMail(codnotafiscal, modelo);
 			if (modelo == <?php echo NotaFiscal::MODELO_NFCE; ?>) {
-				NFePHPImprimir(codnotafiscal, '<?php echo Yii::app()->user->getState('impressoraTermica') ?>');
+				NFePHPImprimir(codnotafiscal);
 			}
 		} else {
 			$('#modalProgressoNfe').modal('hide');
@@ -197,7 +197,7 @@ function NFePHPCriar(codnotafiscal, modelo)
 		// Se offline
 		if (tpEmis == <?php echo NotaFiscal::TPEMIS_OFFLINE; ?>) {
 			NFePHPDanfe(codnotafiscal, modelo, true);
-			NFePHPImprimir(codnotafiscal, '<?php echo Yii::app()->user->getState('impressoraTermica') ?>');
+			NFePHPImprimir(codnotafiscal);
 		} else {
 			NFePHPEnviarSincrono(codnotafiscal, modelo);
 		}
@@ -308,7 +308,7 @@ $(document).ready(function(){
 	//imprimir Danfe Matricial
 	$('#btnImprimirNFCe').click(function(e){
 		e.preventDefault();
-		NFePHPImprimir($(this).data('codnotafiscal'), '<?php echo Yii::app()->user->getState('impressoraTermica') ?>');
+		NFePHPImprimir($(this).data('codnotafiscal'));
 	});
 
 	$("*").bind('keydown.f9',function (e) {

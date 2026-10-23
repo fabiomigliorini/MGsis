@@ -33,7 +33,7 @@ function imprimirNFCe (codnotafiscal)
 
 	$('#divResultado').append('<h3>Imprimindo NFCe<h3>');
 
-	$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/imprimirNFCe')?>", { codnotafiscal: codnotafiscal, impressoraUsuarioCriacao: 1 })
+	$.getJSON("<?php echo Yii::app()->createUrl('NFePHPNovo/imprimirNFCe')?>", { codnotafiscal: codnotafiscal })
 		.done(function(data) {
 			registraNotaSucesso(codnotafiscal);
 			percorreNotas(codnotafiscal);

@@ -20,8 +20,6 @@
 
 		<?php echo $form->textFieldRow($model,'codpessoa',array('class'=>'span5')); ?>
 
-		<?php echo $form->textFieldRow($model,'impressoramatricial',array('class'=>'span5','maxlength'=>100)); ?>
-
 		<?php echo $form->textFieldRow($model,'codportador',array('class'=>'span5')); ?>
 
 					<div class="form-actions">

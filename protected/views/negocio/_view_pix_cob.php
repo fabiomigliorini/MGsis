@@ -202,7 +202,7 @@ function imprimirQrCode ()
 		return;
 	}
 	window.rodandoConsultaPixCob = true;
-	var impressora = "<?php echo Yii::app()->user->getState('impressoraTermica') ?>";
+	var impressora = "";
 	var codpixcob = pixCob.codpixcob;
 	$.ajax({
 		type: 'POST',

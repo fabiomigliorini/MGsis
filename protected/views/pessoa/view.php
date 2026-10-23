@@ -45,7 +45,7 @@ $(document).ready(function(){
 
 	$("#btnImprimirComandaVendedor").click(function(e){
 		e.preventDefault();
-		var impressora = '<?php echo Yii::app()->user->getState('impressoraTermica') ?>';
+		var impressora = '';
 		var codpessoa = '<?php echo $model->codpessoa ?>';
 		var copias = $("#copiasComandaVendedor").val();
 		$('#modalComandaVendedor').modal('hide')

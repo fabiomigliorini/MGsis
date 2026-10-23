@@ -89,7 +89,7 @@ $this->renderPartial("_hotkeys");
     function imprimirComanda(event) {
         event.preventDefault();
         mostrarComanda();
-        var impressora = '<?php echo Yii::app()->user->getState('impressoraTermica') ?>';
+        var impressora = '';
         var codnegocio = '<?php echo $model->codnegocio ?>';
         if (impressora == '') {
             bootbox.alert('Nenhuma Impressora Termica Associada ao Usuário!');

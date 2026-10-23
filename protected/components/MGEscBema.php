@@ -11,7 +11,7 @@ class MGEscBema
 {
 	
 	private $_conteudoSecao = array();
-	public $impressora = "impressoraMatricial";
+	public $impressora = null;
 	private $_comandos = array();
 	private $_linhas = 31;
 	private $_textoFinal = "";
@@ -26,10 +26,7 @@ class MGEscBema
 				"rodape"    => "",
 			);
 		
-		if (!empty($impressora))
-			$this->impressora = $impressora;
-		else
-			$this->impressora = Yii::app()->user->impressoraMatricial;
+		$this->impressora = $impressora;
 		
 		if ($linhas != null)
 			$this->_linhas = $linhas;
@@ -90,6 +87,9 @@ class MGEscBema
 	 */
 	public function imprimir()
 	{
+		if (empty($this->impressora))
+			return false;
+		
 		$arquivo = tempnam(sys_get_temp_dir(), "MGEscPrint");
 		$handle = fopen($arquivo, "w");
 		fwrite($handle, $this->converteEsc());
