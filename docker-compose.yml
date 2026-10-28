@@ -2,14 +2,13 @@ services:
     mgsis:
         build: ./
         restart: unless-stopped
+        environment:
+            TZ: America/Cuiaba
         volumes:
             - /opt/www:/opt/www
             - /tmp:/tmp/host
             - ./php.ini:/usr/local/etc/php/php.ini
             - /media/publico:/media/publico
-            - /etc/timezone:/etc/timezone:ro
-            - /etc/localtime:/etc/localtime:ro
-            - /usr/share/zoneinfo:/usr/share/zoneinfo
             - ./www.conf:/usr/local/etc/php-fpm.d/www.conf
         extra_hosts:
             - "host.docker.internal:host-gateway"
