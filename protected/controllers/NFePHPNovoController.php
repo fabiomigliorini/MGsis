@@ -103,7 +103,7 @@ class NFePHPNovoController extends Controller {
         $filial = $this->loadModelFilial($codfilial);
 
         $conf['atualizacao'] = date('Y-m-d H:i:s');
-        $conf['tpAmb'] = $filial->nfeambiente;
+        $conf['tpAmb'] = Filial::nfeAmbiente();
         //$conf['pathXmlUrlFileNFe'] =  "nfe_ws3_mod$modelo.xml";
         $conf['pathXmlUrlFileNFe'] = "nfe_ws3_mod$modelo.xml";
         $conf['pathXmlUrlFileCTe'] = 'cte_ws2.xml';
@@ -166,7 +166,7 @@ class NFePHPNovoController extends Controller {
             $nf = $this->loadModelNotaFiscal($codnotafiscal);
 
             $diretorioBase = $this->conf['pathNFeFiles']
-                . (($nf->Filial->nfeambiente == Filial::NFEAMBIENTE_PRODUCAO) ? '/producao/' : '/homologacao/');
+                . ((Filial::nfeAmbiente() == Filial::NFEAMBIENTE_PRODUCAO) ? '/producao/' : '/homologacao/');
 
             $this->arquivoXMLAprovada = $diretorioBase
                 . 'enviadas/aprovadas/' . substr($nf->emissao, 6, 4) . substr($nf->emissao, 3, 2) . '/';
@@ -216,7 +216,7 @@ class NFePHPNovoController extends Controller {
             $nft = $this->loadModelNfeTerceiro($codnfeterceiro);
 
             $diretorioBase = $this->conf['pathNFeFiles']
-                . (($nft->Filial->nfeambiente == Filial::NFEAMBIENTE_PRODUCAO) ? '/producao/' : '/homologacao/');
+                . ((Filial::nfeAmbiente() == Filial::NFEAMBIENTE_PRODUCAO) ? '/producao/' : '/homologacao/');
 
             $this->arquivoXMLRecebida = $diretorioBase
                 . 'recebidas/' . substr($nft->emissao, 6, 4) . substr($nft->emissao, 3, 2) . '/';
@@ -301,7 +301,7 @@ class NFePHPNovoController extends Controller {
             //9=Contingência off-line da NFC-e (as demais opções de contingência são válidas também para a NFC-e);
             //Nota: Para a NFC-e somente estão disponíveis e são válidas as opções de contingência 5 e 9.
 
-            $tpAmb = $nf->Filial->nfeambiente; //1=Produção; 2=Homologação
+            $tpAmb = Filial::nfeAmbiente(); //1=Produção; 2=Homologação
             $finNFe = $nf->NaturezaOperacao->finnfe; //1=NF-e normal; 2=NF-e complementar; 3=NF-e de ajuste; 4=Devolução/Retorno.
             $indFinal = ($nf->Pessoa->consumidor) ? '1' : '0'; //0=Não; 1=Consumidor final;
             $indPres = '1'; //0=Não se aplica (por exemplo, Nota Fiscal complementar ou de ajuste);
@@ -1054,7 +1054,7 @@ class NFePHPNovoController extends Controller {
 
         $aResposta = array();
         $chave = $nf->nfechave;
-        $tpAmb = $nf->Filial->nfeambiente;
+        $tpAmb = Filial::nfeAmbiente();
 
         $aRetorno['retorno'] = false;
         $aRetorno['ex'] = null;
@@ -1122,7 +1122,7 @@ class NFePHPNovoController extends Controller {
         $config = $this->montarConfiguracao($nf->codfilial, $nf->modelo, $codnotafiscal);
         $tools = new ToolsNFe($config);
         $tools->setModelo($nf->modelo);
-        $tpAmb = $nf->Filial->nfeambiente;
+        $tpAmb = Filial::nfeAmbiente();
 
         $aRetorno['retorno'] = false;
         $aRetorno['ex'] = null;
@@ -1263,7 +1263,7 @@ class NFePHPNovoController extends Controller {
 
         $chave = $nf->nfechave;
         $nProt = $nf->nfeautorizacao;
-        $tpAmb = $nf->Filial->nfeambiente;
+        $tpAmb = Filial::nfeAmbiente();
         $xJust = $justificativa;
 
         $aRetorno['retorno'] = false;
@@ -1333,7 +1333,7 @@ class NFePHPNovoController extends Controller {
         $nIni = $nf->numero;
         $nFin = $nf->numero;
         $xJust = $justificativa;
-        $tpAmb = $nf->Filial->nfeambiente;
+        $tpAmb = Filial::nfeAmbiente();
 
         $aRetorno['retorno'] = false;
         $aRetorno['ex'] = null;
@@ -1390,7 +1390,7 @@ class NFePHPNovoController extends Controller {
 
         $tools->setModelo($nf->modelo);
         $chave = $nf->nfechave;
-        $tpAmb = $nf->Filial->nfeambiente;
+        $tpAmb = Filial::nfeAmbiente();
         $aResposta = array();
 
         $aRetorno['retorno'] = false;
@@ -1508,7 +1508,7 @@ class NFePHPNovoController extends Controller {
 
         $aResposta = array();
         $chNFe = $nf->nfechave;
-        $tpAmb = $nf->Filial->nfeambiente;
+        $tpAmb = Filial::nfeAmbiente();
         $xCorrecao = $texto;
         $nSeqEvento = $sequencia;
 
@@ -1750,7 +1750,7 @@ class NFePHPNovoController extends Controller {
 
         $aRetorno = array();
 
-        $tools->sefazStatus($filial->Pessoa->Cidade->Estado->sigla, $filial->nfeambiente, $aRetorno);
+        $tools->sefazStatus($filial->Pessoa->Cidade->Estado->sigla, Filial::nfeAmbiente(), $aRetorno);
 
         header('Content-type: text/json; charset=UTF-8');
         echo json_encode($aRetorno);
@@ -1768,7 +1768,7 @@ class NFePHPNovoController extends Controller {
 
         try {
             $tools->sefazDistDFe(
-                $fonte = 'AN', $tpAmb = $filial->nfeambiente, $cnpj = str_pad($filial->Pessoa->cnpj, 14, '0', STR_PAD_LEFT), $ultNSU = $nsu, $numNSU = 0, $aRetorno
+                $fonte = 'AN', $tpAmb = Filial::nfeAmbiente(), $cnpj = str_pad($filial->Pessoa->cnpj, 14, '0', STR_PAD_LEFT), $ultNSU = $nsu, $numNSU = 0, $aRetorno
             );
 
             foreach ($aRetorno['aDoc'] as $doc) {
@@ -1859,7 +1859,7 @@ class NFePHPNovoController extends Controller {
             //210220 – Desconhecimento da Operação
             //210240 – Operação não Realizada ===> é obritatoria uma justificativa para esse caso
             $chave = $nfet->nfechave;
-            $tpAmb = $nfet->Filial->nfeambiente;
+            $tpAmb = Filial::nfeAmbiente();
             $xJust = $justificativa;
             $tpEvento = $indmanifestacao;
             $aResposta = array();
@@ -1899,7 +1899,7 @@ class NFePHPNovoController extends Controller {
             $tools = new ToolsNFe($config);
             $tools->setModelo('55');
             $chNFe = $nfet->nfechave;
-            $tpAmb = $nfet->Filial->nfeambiente;
+            $tpAmb = Filial::nfeAmbiente();
             $cnpj = str_pad($nfet->Filial->Pessoa->cnpj, 14, '0', STR_PAD_LEFT);
             $aResposta = array();
             $resp = $tools->sefazDownload($chNFe, $tpAmb, $cnpj, $aResposta);

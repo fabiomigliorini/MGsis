@@ -55,7 +55,6 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 					),
 		'filial',
 		'crt',
-		'nfeambiente',
 		'nfcetoken',
 		'nfcetokenid',
 		'tokenibpt',

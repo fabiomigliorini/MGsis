@@ -513,7 +513,7 @@ class NfeTerceiro extends MGActiveRecord
         */
 
         $arquivo = "/opt/www/NFePHP/Arquivos/NFe/{$this->codfilial}";
-        $arquivo .= (($this->Filial->nfeambiente == Filial::NFEAMBIENTE_PRODUCAO) ? '/producao/' : '/homologacao/');
+        $arquivo .= ((Filial::nfeAmbiente() == Filial::NFEAMBIENTE_PRODUCAO) ? '/producao/' : '/homologacao/');
         $arquivo .= 'recebidas/' . substr($this->emissao, 6, 4) . substr($this->emissao, 3, 2) . '/';
         $arquivo .= $this->nfechave . '-nfeProc.xml';
 

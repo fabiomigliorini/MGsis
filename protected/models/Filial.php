@@ -27,7 +27,6 @@
  * @property string $codusuarioalteracao
  * @property string $criacao
  * @property string $codusuariocriacao
- * @property integer $nfeambiente Description
  *
  * The followings are the available model relations:
  * @property Titulo[] $Titulos
@@ -54,6 +53,18 @@ class Filial extends MGActiveRecord
 	const NFEAMBIENTE_PRODUCAO = 1;
 	const NFEAMBIENTE_HOMOLOGACAO = 2;
 
+	/**
+	 * Ambiente da SEFAZ do servidor, nao da filial: define('NFE_AMBIENTE', 1) no
+	 * protected/.env.php. Sem ele, ou com outro valor, e homologacao — so emite de
+	 * verdade o servidor que diz 1. Mesma regra do NFE_AMBIENTE do .env do api.
+	 */
+	public static function nfeAmbiente()
+	{
+		return (defined('NFE_AMBIENTE') && NFE_AMBIENTE == 1)
+			? self::NFEAMBIENTE_PRODUCAO
+			: self::NFEAMBIENTE_HOMOLOGACAO;
+	}
+
 
 	/**
 	 * @return string the associated database table name
@@ -71,7 +82,7 @@ class Filial extends MGActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codpessoa, filial, crt, nfeambiente', 'required'),
+			array('codpessoa, filial, crt', 'required'),
 			array('filial, acbrnfemonitorip', 'length', 'max'=>20),
 			array('acbrnfemonitorcaminho, acbrnfemonitorcaminhorede', 'length', 'max'=>100),
 			array('empresadominio', 'length', 'max'=>7),
@@ -82,8 +93,6 @@ class Filial extends MGActiveRecord
 			array('nfcetokenid', 'length', 'min'=>6),
 			array('senhacertificado', 'length', 'max'=>50),
 			array('tokenibpt', 'length', 'max'=>200),
-			array('nfeambiente', 'length', 'max'=>2),
-			array('nfeambiente', 'length', 'min'=>1),
 			array('crt', 'numerical'),
 			array('odbcnumeronotafiscal', 'length', 'max'=>500),
 			array('codempresa, ultimonsu, codpessoa, emitenfe, acbrnfemonitorbloqueado, acbrnfemonitorcodusuario, acbrnfemonitorporta, alteracao, codusuarioalteracao, criacao, codusuariocriacao', 'safe'),
@@ -148,7 +157,6 @@ class Filial extends MGActiveRecord
 			'nfcetoken' => 'Token NFCe',
 			'nfcetokenid' => 'ID Token NFCe',
 			'senhacertificado' => 'Senha Certificado PFX',
-			'nfeambiente' => 'Ambiente NFe',
 			'ultimonsu' => 'Último NSU Consultado na Sefaz',
 			'tokenibpt' => 'Token IBPT',
 			'pagarmesk' => 'Pagarme Secret Key',
